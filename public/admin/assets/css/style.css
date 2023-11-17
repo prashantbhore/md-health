@@ -1,0 +1,26 @@
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+.text-green {
+    color: #4cdb06;
+}
+.nav-link {
+    font-size: 14px;
+    /* letter-spacing: -0.56px; */
+}
+.sidebar-menu {
+    width: 250px;
+    border-right: 1px solid #fff;
+    bottom: 0;
+    margin-top: 0;
+    position: fixed;
+    top: 0;
+    -webkit-box-shadow: 0 2px 4px rgba(15, 34, 58, 0.12);
+    box-shadow: 0 2px 4px rgba(15, 34, 58, 0.12);
+    padding: 0 0 calc(70px + 25px) 0;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+.main-content {
+  margin-left: 250px;
+}
