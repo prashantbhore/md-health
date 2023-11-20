@@ -1,5 +1,5 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark">
-    <div class="container">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{{URL::asset('admin/assets/img/MDHealth_light.svg')}}" alt="">
         </a>
