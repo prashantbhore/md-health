@@ -1,0 +1,299 @@
+@font-face {
+    font-family: "Campton";
+    src: url("../fonts/campton/CamptonBook.otf");
+}
+
+.body {
+    scroll-behavior: smooth;
+    font-family: "Campton", sans-serif;
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+table,
+.card,
+.nav-link,
+.navbar {
+    font-family: "Campton", sans-serif;
+}
+
+.md-bold {
+    font-weight: 700 !important;
+}
+.form-control,
+.form-select {
+    width: 195px;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #ededed;
+    font-family: "Campton", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: center;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #cecdcd;
+    box-shadow: none;
+}
+.form-control::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #979797;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #979797;
+}
+
+.form-control::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #979797;
+}
+
+.form-select {
+    background-image: none;
+}
+.nice-select:after {
+    height: 8px;
+    width: 8px;
+}
+.nice-select .list {
+    width: 100%;
+}
+/* SIMPLE SCROLLBAr */
+[data-simplebar] {
+    width: 100%;
+}
+
+.simplebar-scrollbar::before {
+    background-color: #4cdb06;
+}
+.text-green {
+    color: #4cdb06;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #000;
+}
+
+/* BS TABLE */
+.table > :not(caption) > * > * {
+    padding-left: 0;
+}
+table thead tr th {
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    color: #9a9a9a;
+}
+
+.top-cards .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: -0.04em;
+    color: #000;
+}
+
+table th {
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.04em;
+    text-align: left;
+}
+table td {
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.04em;
+    text-align: left;
+}
+/* SIDEBAR */
+
+.sidebar-menu {
+    width: 205px;
+    height: 100%;
+    border-right: 1px solid #fff;
+    bottom: 0;
+    /* margin-top: 0; */
+    margin-top: 80px;
+    position: fixed;
+    top: 0;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    padding: 0 0 calc(70px + 25px) 0;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+.main-content {
+    margin-left: 220px;
+    margin-top: 80px;
+    margin-right: 1rem;
+}
+
+.main-content .container {
+    border-radius: 5px;
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    min-height: calc(100vh - 100px);
+    padding: 1rem;
+}
+.md-sidebar {
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+}
+
+.nav-link.md-active {
+    color: #4cdb06;
+    padding-left: 1.5rem;
+    font-weight: bold;
+}
+
+.activeClass {
+    position: relative;
+}
+
+.nav-pills .activeClass::before {
+    content: "";
+    width: 16px;
+    height: 6px;
+    background-color: #4cdb06;
+    position: absolute;
+    top: 15px;
+    /* left: -4px; */
+}
+
+.nav-link {
+    padding-left: 0;
+    padding-right: 0;
+    transition: 0.15s all;
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+.nav-link:hover {
+    color: #4cdb06;
+}
+
+.top-cards .card {
+    /* min-height: 65px; */
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.11);
+}
+
+.top-cards .card .card-text p {
+    color: #4cdb06;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.56px;
+    margin-bottom: 0;
+}
+
+.top-cards .card .card-text h4 {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -1.36px;
+    margin-bottom: 0;
+}
+
+.page-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: -0.04em;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.viewAll a {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+}
+
+table .completed,
+table .pending,
+table .in-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 94px;
+    height: 19px;
+    border-radius: 2px;
+    color: #000;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12px;
+    letter-spacing: -0.04em;
+}
+
+table .completed {
+    background: #4cdb06;
+}
+table .pending {
+    background: #f3771d;
+}
+table .in-progress {
+    background: #f4d100;
+}
+
+.link-open {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+}
+.page-link {
+    color: #a0a0a0;
+    border: none;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    font-family: "Campton", sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.04em;
+}
+
+.page-link:focus {
+    box-shadow: none;
+    color: #000;
+    font-weight: 600;
+    border: 1px solid #4cdb06;
+    border-radius: 3px;
+    background: transparent;
+}
+.page-link:hover {
+    color: #000;
+    background-color: transparent;
+    border: 1px solid #4cdb06;
+    font-weight: 500;
+}

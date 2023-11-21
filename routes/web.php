@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// DASHBOARD
+Route::view('dashboard', 'admin/dashboard/dashboard');
+
+// SALES
+Route::view('sales', 'admin/sales/sales');
