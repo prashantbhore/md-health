@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- FavIcon -->
+    <link rel="shortcut icon" href="{{URL::asset('admin/assets/img/favicon.ico')}}" type="image/x-icon">
 
+    <!-- Simplebar Scrollbar -->
     <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
 
     <!-- Bootstrap CSS -->
@@ -14,14 +17,14 @@
     <!-- Sidebar CSS -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/sidebar.css')}}">
 
+    <!-- Nice Select -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/nice-select.css')}}">
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/style.css')}}">
 
-    <title>MDHealth</title>
+    <title>MDHealth Admin</title>
 
-    
 </head>
 
 <body>
