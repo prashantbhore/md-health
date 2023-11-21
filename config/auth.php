@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'md_customer_registration' => [
+            'driver' => 'session',
+            'provider' => 'md_customer_registration',
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'md_customer_registration' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Master\CustomerRegistration::class,
         ],
 
         // 'users' => [

@@ -25,6 +25,7 @@ Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']
 
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
+
 // get city list
 Route::post('md-city-list', [CommonController::class, 'get_cities_list']);
 
