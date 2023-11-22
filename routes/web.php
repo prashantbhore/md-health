@@ -35,10 +35,10 @@ Route::view('md-profit', 'admin/sales/md-profit');
 Route::view('md-booking-sales', 'admin/sales/md-booking-sales');
 
 // MANAGE CUSTOMERS
-Route::view('customers', 'admin/manage-customers/customers');
-Route::view('customer-details', 'admin/manage-customers/customer-details');
+Route::view('customers', 'admin/customers/customers');
+Route::view('customer-details', 'admin/customers/customer-details');
 
 // MANAGE VENDORS
-Route::view('vendors', 'admin/manage-vendors/vendors');
-Route::view('vendor-details', 'admin/manage-vendors/vendor-details');
-Route::view('products-on-sale', 'admin/manage-vendors/products-on-sale');
+Route::view('vendors', 'admin/vendors/vendors');
+Route::view('vendor-details', 'admin/vendors/vendor-details');
+Route::view('products-on-sale', 'admin/vendors/products-on-sale');

@@ -729,6 +729,10 @@ table td {
 
 .save-btn {
     background: #4CDB06;
+    transition: 0.15s all;
+}
+.save-btn:hover {
+    background: #4ee902;
 }
 
 .deactivate-btn {
@@ -959,12 +963,13 @@ table td {
 .signInCard {
     font-family: "Campton", sans-serif;
     width: 463px;
-    height: 487px;
+    height: 520px;
     border-radius: 10px;
     border: 1px solid #D6D6D6
 }
 
 .signIn-head {
+    font-family: "CamptonBold", sans-serif;
     color: #4CDB06;
     font-size: 24px;
     font-weight: 700;
@@ -972,7 +977,8 @@ table td {
     letter-spacing: -0.04em;
 }
 
-.head-text span {
+.signIn-head span {
+    font-family: "Campton", sans-serif;
     font-size: 26px;
     font-weight: 500;
     line-height: 30px;
@@ -1019,4 +1025,16 @@ table td {
     text-align: center;
     border-radius: 25px;
     height: 42px;
+}
+
+.backto {
+    color: #000002;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    text-decoration-line: underline;
+}
+
+.backto:hover {
+    color: #000002;
 }

@@ -7,7 +7,7 @@
                 <div class="df-center flex-column mb-3">
                     <img src="{{URL::asset('admin/assets/img/MDHealth.svg')}}" alt="" style="height: 32px;" class="my-3" />
 
-                    <h4 class="signIn-head mb-3">Sign In to MDhealth</h4>
+                    <h4 class="signIn-head mb-3">Sign In to MD<span>health</span></h4>
 
                     <p class="signIn-para text-center">The device is not yours? Use private or
                         incognito mode to log in.</p>
@@ -31,7 +31,9 @@
                         </div>
                     </div>
                     <a href="{{URL('dashboard')}}" type="submit" class="btn save-btn w-100 df-center">Continue</a>
+                    <div class="text-center mt-3">
                     <a href="#" class="mt-3 backto">Back to MDhealth.co</a>
+                    </div>
                 </form>
 
 
