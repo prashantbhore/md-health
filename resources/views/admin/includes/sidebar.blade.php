@@ -1,10 +1,10 @@
 <!-- Sidebar -->
 <main data-simplebar>
-    <div class="flex-shrink-0 p-3 md-sidebar" >
+    <div class="flex-shrink-0 p-3 md-sidebar">
 
-        <a href="/" class="pb-3  link-dark text-decoration-none">
+        <p class="mb-0 link-dark text-decoration-none">
             <span class="sidebar-title">Super Admin Panel</span>
-        </a>
+        </p>
 
         <ul class="nav nav-pills flex-column mb-auto mt-3 ">
             <li class="dashboardLi">
