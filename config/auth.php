@@ -42,7 +42,7 @@ return [
         ],
         'md_customer_registration' => [
             'driver' => 'session',
-            'provider' => 'md_customer_registration',
+            'provider' => 'customer_registration',
         ],
     ],
 
@@ -68,9 +68,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'md_customer_registration' => [
+        'customer_registration' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Master\CustomerRegistration::class,
+            'model' => App\Models\CustomerRegistration::class,
         ],
 
         // 'users' => [

@@ -14,25 +14,34 @@ class LoginControllers extends Controller
     // customer login
     public function customer_login(Request $request)
     {
+        // return 'asdsad';
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
-            'fcm_token' => 'required'
+            'phone' => 'required',
+            'password' => 'required'
         ]);
 
         $validation_message = '';
 
-        if ($request->email == '') {
-            $validation_message .= 'email field required';
+        if (empty($request->phone)) {
+            $validation_message .= 'phone field';
+        }
+        if (empty($request->password)) {
+            $validation_message .= 'password field';
         }
        
 
         if ($validator->fails()) {
-            return $this->sendError($validation_message . ' is required.');
+            // return $this->sendError($validation_message . ' is required.');
+            return response()->json([
+                'status' => 404,
+                'message' => $validation_message. ' is required.',
+            ]);
         }
 
 
         if (Auth::guard('md_customer_registration')->attempt([
-            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => $request->password,
             'status' => 'active',
         ])) {
             $customer = Auth::guard('md_customer_registration')->user();
@@ -54,7 +63,17 @@ class LoginControllers extends Controller
                 'success_token' => $success,
             ]);
         } else {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return response()->json([
+                'status' => 404,
+                'message' => 'Unauthorised.',
+            ]);
         }
+    }
+
+
+    public function customer_logout()
+    {
+        Auth::user()->tokens()->delete();
+        return $this->sendResponse($success = NULL, 'User logout successfully.');
     }
 }
