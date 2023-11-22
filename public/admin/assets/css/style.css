@@ -951,8 +951,8 @@ table td {
 
 .inner-text {
     position: absolute;
-    top: 48px;
-    right: 185px;
+    top: 32px;
+    left: 111px;
     width: 46px;
 }
 

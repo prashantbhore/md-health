@@ -31,6 +31,7 @@
                         </div>
                     </div>
                     <a href="{{URL('dashboard')}}" type="submit" class="btn save-btn w-100 df-center">Continue</a>
+                    <a href="#" class="mt-3 backto">Back to MDhealth.co</a>
                 </form>
 
 
