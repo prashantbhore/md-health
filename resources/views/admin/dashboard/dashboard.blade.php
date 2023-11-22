@@ -1,4 +1,5 @@
-@extends('admin.layout.layout') @section("content")
+@extends('admin.layout.layout') 
+@section("content")
 <section class="main-content">
     <div class="content-wrapper">
         <div class="page-title">Dashboard</div>

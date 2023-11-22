@@ -105,9 +105,9 @@
                             <input type="text" class="form-control" placeholder="Search">
                             <select class="form-select form-select-sm">
                                 <option selected>All Platform</option>
-                                <option value="1"><span class="md-bold">MD</span>health</option>
-                                <option value="2"><span class="md-bold">MD</span>shop</option>
-                                <option value="3"><span class="md-bold">MD</span>booking</option>
+                                <option value="1"><span class="md-fw-bold">MD</span>health</option>
+                                <option value="2"><span class="md-fw-bold">MD</span>shop</option>
+                                <option value="3"><span class="md-fw-bold">MD</span>booking</option>
                             </select>
 
                         </div>

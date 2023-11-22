@@ -1,38 +1,45 @@
 @extends('admin.layout.layout') @section("content")
 <section class="main-content">
-    <div class="container2 pb-5">
-        <div class="d-flex align-items-center justify-content-between">
-            <div class="page-title">Manage Vendors</div>
-            <a href="{{URL::asset('/customers')}}" class="page-title">
-                <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn"> Back Customers
-            </a>
-        </div>
+    <div class="content-wrapper pb-5">
+        <div class="page-title">Manage Vendors</div>
         <div class="row top-cards">
             <div class="col-md-12 mb-3">
-    
-
-
-                <!-- Logs Activity -->
-                <div class="card card-details mb-3" style="min-height: 380px;">
+                <!-- Pending Vendors -->
+                <div class="card card-details mb-3">
                     <div class="card-body">
-                        <p class="card-title mb-3">Logs Activity</p>
+                        <p class="card-title mb-3">Pending Vendors</p>
                         <div class="table-responsive">
                             <table class="table">
-                                <tr>
-                                    <td scope="row">Login</td>
-                                    <td class="log-success">Successful</td>
-                                    <td class="text-end">12 Dec 2023 - 15:31:08</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">Login</td>
-                                    <td class="log-unsuccess">Unsuccessful</td>
-                                    <td class="text-end">12 Dec 2023 - 15:31:08</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">Sign Up</td>
-                                    <td class="log-success">Successful</td>
-                                    <td class="text-end">12 Dec 2023 - 15:31:08</td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th>Company</th>
+                                        <th>Membership Type</th>
+                                        <th>City</th>
+                                        <th>Country</th>
+                                        <th>Contact Number</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">#MD7384</th>
+                                        <td>Company Name A.S.</td>
+                                        <td>Gold</td>
+                                        <td>Istanbul</td>
+                                        <td>Turkiye</td>
+                                        <td>+90 578 555 21 21</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -40,7 +47,151 @@
                 <!-- END -->
             </div>
 
-        
+            <!-- Active Vendors -->
+            <div class="col-md-12 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Active Vendors</div>
+                        <!-- Filters -->
+                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <input type="text" class="form-control" placeholder="Search">
+
+                            <select class="form-select form-select-sm">
+                                <option selected disabled hidden>Membership Type</option>
+                                <option value="1">Silver Members</option>
+                                <option value="2">Gold Members</option>
+                                <option value="3">Platinium Members</option>
+                            </select>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th>Company</th>
+                                        <th>Membership Type</th>
+                                        <th>City</th>
+                                        <th>Country</th>
+                                        <th>Contact Number</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">#MD7384</th>
+                                        <td>Company Name A.S.</td>
+                                        <td>Gold</td>
+                                        <td>Istanbul</td>
+                                        <td>Turkiye</td>
+                                        <td>+90 578 555 21 21</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#MD7384</th>
+                                        <td>Company Name Ltd. Sti.</td>
+                                        <td>Silver</td>
+                                        <td>Ankara</td>
+                                        <td>Turkiye</td>
+                                        <td>+90 578 555 21 21</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#MD7384</th>
+                                        <td>Company Name A.S.</td>
+                                        <td>Platinum</td>
+                                        <td>Kocaeli</td>
+                                        <td>Turkiye</td>
+                                        <td>+90 578 555 21 21</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#MD7384</th>
+                                        <td>Company Name A.S.</td>
+                                        <td>Gold</td>
+                                        <td>Istanbul</td>
+                                        <td>Turkiye</td>
+                                        <td>+90 578 555 21 21</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#MD7384</th>
+                                        <td>Company Name Ltd. Sti.</td>
+                                        <td>Silver</td>
+                                        <td>Ankara</td>
+                                        <td>Turkiye</td>
+                                        <td>+90 578 555 21 21</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#MD7384</th>
+                                        <td>Company Name A.S.</td>
+                                        <td>Platinum</td>
+                                        <td>Kocaeli</td>
+                                        <td>Turkiye</td>
+                                        <td>+90 578 555 21 21</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
     </div>

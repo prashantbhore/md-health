@@ -14,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('admin.authentication.sign-in');
+});
+Route::get('/dashboard', function () {
     return view('admin.dashboard.dashboard');
 });
+
+
+
+// AUTHENTICATION
+Route::view('sign-in', 'admin/authentication/sign-in');
 
 // DASHBOARD
 Route::view('dashboard', 'admin/dashboard/dashboard');
@@ -32,3 +40,5 @@ Route::view('customer-details', 'admin/manage-customers/customer-details');
 
 // MANAGE VENDORS
 Route::view('vendors', 'admin/manage-vendors/vendors');
+Route::view('vendor-details', 'admin/manage-vendors/vendor-details');
+Route::view('products-on-sale', 'admin/manage-vendors/products-on-sale');
