@@ -17,13 +17,13 @@
                     Sales
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="manageCustomersLi">
+                <a href="{{URL::asset('/customers')}}" class="nav-link link-dark manageCustomers">
                     Manage Customers
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="manageVendorsLi">
+                <a href="{{URL::asset('/vendors')}}" class="nav-link link-dark manageVendors">
                     Manage Vendors
                 </a>
             </li>
