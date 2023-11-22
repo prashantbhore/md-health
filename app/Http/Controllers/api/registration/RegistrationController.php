@@ -80,13 +80,35 @@ class RegistrationController extends Controller
                 $customer_input['otp_expiring_time'] = time()+20;
                 $customer_input['modified_ip_address'] = $request->ip();
                 $customer_registration = CustomerRegistration::create($customer_input);
+
+                if (Auth::guard('md_customer_registration')->attempt([
+                'phone' => $request->phone,
+                'status' => 'active',
+                'password' => $request->password
+                ])) {
+                $customer = Auth::guard('md_customer_registration')->user();
+                // return $customer;
+                $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                CustomerRegistration::where('id', $customer->id)->update([
+                    'access_token' => $success['token']
+                ]);
+
+            }else{
+                // return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Unauthorised.',
+                ]);
+
+            }
                 if (!empty($customer_registration)) {
                     return response()->json([
                         'status' => 200,
                         'message' => 'Profile created successfully.',
                         'data' => [
                             'id'=>$customer_registration->id,
-                            'otp' => $customer_input['registration_otp'] 
+                            'otp' => $customer_input['registration_otp'] ,
+                        'access_token' => $success['token']
                         ],
                     ]);
                 } else {

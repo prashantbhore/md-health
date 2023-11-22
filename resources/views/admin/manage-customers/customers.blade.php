@@ -1,6 +1,6 @@
 @extends('admin.layout.layout') @section("content")
 <section class="main-content">
-    <div class="container">
+    <div class="content-wrapper">
         <div class="page-title">Manage Customers</div>
         <div class="row top-cards">
             <div class="col-md-12 my-3">

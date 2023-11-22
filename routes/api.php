@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\registration\RegistrationController;
+use App\Http\Controllers\api\login\LoginControllers;
 use App\Http\Controllers\API\CommonController;
 
 /*
@@ -35,7 +36,12 @@ Route::post('md-customer-register', [RegistrationController::class, 'customer_re
 //otp-verify-for-register
 Route::post('md-otp-verify-for-register', [RegistrationController::class, 'otp_verify_for_register']);
 
+//otp-verify-for-register
+Route::post('md-customer-login', [LoginControllers::class, 'customer_login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->group(function () {
+
+
+
 });

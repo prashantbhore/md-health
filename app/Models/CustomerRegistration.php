@@ -4,10 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Storage;
 
-class CustomerRegistration extends Model
+
+class CustomerRegistration extends Authenticatable
 {
-    use HasFactory;
+    // use HasFactory;
+    // protected $table = 'md_customer_registration';
+    use HasFactory, Notifiable, HasApiTokens;
+    protected $guard = 'md_health_admins';
     protected $table = 'md_customer_registration';
 
     protected $fillable = [
