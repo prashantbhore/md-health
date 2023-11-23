@@ -27,33 +27,33 @@
                     Manage Vendors
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="medicalTourismLi">
+                <a href="{{URL::asset('/service-provider')}}" class="nav-link link-dark medicalTourism">
                     Manage Medical Tourism
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="citiesLi">
+                <a href="{{URL::asset('/add-cities')}}" class="nav-link link-dark cities">
                     Manage Cities
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="adminsLi">
+                <a href="{{URL::asset('/add-admins')}}" class="nav-link link-dark admins">
                     Manage Admins
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="mlmLi">
+                <a href="{{URL::asset('/multi-level-marketing')}}" class="nav-link link-dark mlm">
                     MLM
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="brandsLi">
+                <a href="{{URL::asset('/brands')}}" class="nav-link link-dark brands">
                     Manage Brands
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="productsNcategoriesLi">
+                <a href="{{URL::asset('/products-and-categories')}}" class="nav-link link-dark productsNcategories"> 
                     Manage Products & Catagories
                 </a>
             </li>

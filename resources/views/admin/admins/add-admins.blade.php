@@ -1,0 +1,148 @@
+@extends('admin.layout.layout') @section("content")
+<section class="main-content">
+    <div class="content-wrapper">
+        <div class="page-title">Manage Admins & Roles</div>
+        <div class="row top-cards ">
+            <div class="col-md-12 my-3">
+                <div class="card addCity">
+                    <div class="card-body">
+                        <div class="card-title">Add New Admins</div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" placeholder="E-mail">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <select name="adminRole" id="adminRole" class="form-select form-select-sm w-100">
+                                    <option selected disabled hidden>Role</option>
+                                    <option value="superAdmin">Super Admin</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <button type="submit" class="btn deactivate-btn w-100">Add New Admin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 my-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Admins</div>
+                        <!-- Filters -->
+                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <input type="text" class="form-control" placeholder="Search">
+
+                            <select class="form-select form-select-sm">
+                                <option selected disabled hidden>Active Admins</option>
+                                <option value="1">Active Orders</option>
+                                <option value="2">Denied Orders</option>
+                                <option value="3">Completed Orders</option>
+                            </select>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">E-mail</th>
+                                        <th>Full Name</th>
+                                        <th>Role</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">info@mdhealth.io</td>
+                                        <td>Gokhan Arslan</td>
+                                        <td>Super Admin</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/edit-admins')}}">
+                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">info@mdhealth.io</td>
+                                        <td>Abdul Ghaffar</td>
+                                        <td>Super Admin</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/edit-admins')}}">
+                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">11111@hotmail.com</td>
+                                        <td>Mert Akin</td>
+                                        <td>Finance</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/edit-admins')}}">
+                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">22322@gmail.com</td>
+                                        <td>Semra Bayir</td>
+                                        <td>Customer Support</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/edit-admins')}}">
+                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Customer Support</td>
+                                        <td>Koray Ildes</td>
+                                        <td>Admin</td>
+                                        <td class="text-end d-flex justify-content-end gap-2">
+                                            <a href="{{URL::asset('/edit-admins')}}">
+                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                     
+                                
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
+@section('script')
+<script>
+    $(".adminsLi").addClass("activeClass");
+    $(".admins").addClass("md-active");
+</script>
+@endsection
