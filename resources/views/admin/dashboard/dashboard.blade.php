@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <!--    Best Sales -->
+            <!-- Best Sales -->
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
@@ -138,7 +138,7 @@
                                         <td>₺ 34.382,90</td>
                                         <td>₺ 402.383,91</td>
                                         <td class="text-end">
-                                            <a href="#">
+                                             <a href="{{URL('/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -150,7 +150,7 @@
                                         <td>₺ 29.382,90</td>
                                         <td>₺ 389.986,49</td>
                                         <td class="text-end">
-                                            <a href="#">
+                                             <a href="{{URL('/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -163,7 +163,7 @@
                                         <td>₺ 34.382,90</td>
                                         <td>₺ 345.363,73</td>
                                         <td class="text-end">
-                                            <a href="#">
+                                             <a href="{{URL('/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -175,7 +175,7 @@
                                         <td>₺ 29.382,90</td>
                                         <td>₺ 263.442,54</td>
                                         <td class="text-end">
-                                            <a href="#">
+                                             <a href="{{URL('/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>

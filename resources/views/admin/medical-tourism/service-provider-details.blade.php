@@ -3,7 +3,7 @@
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Medical Service Provider ID #273929</div>
-            <a href="{{URL::asset('/tourism-provider')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Service Provider </a>
+            <a href="{{URL::asset('/service-provider')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Service Provider </a>
         </div>
         <div class="row top-cards">
             <div class="col-md-6">

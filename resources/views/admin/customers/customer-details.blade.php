@@ -97,7 +97,7 @@
                                         <div class="card-ls">
                                             <h6>Hearth Valve Replacement Surgery</h6>
                                             <p>12 Dec 2023</p>
-                                            <p class="mt-auto">Platform: <span class="fw-bold ms-1">MD</span>health</p>
+                                            <p class="mt-auto">Platform: <span class="md-fw-bold ms-1">MD</span>health</p>
                                         </div>
                                         <div class="card-rs text-end">
                                       <a href="{{URL::asset('/sales-details')}}">

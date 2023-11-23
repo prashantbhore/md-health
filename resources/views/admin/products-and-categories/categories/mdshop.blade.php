@@ -22,16 +22,16 @@
                 </a>
             </div>
             <div class="col mb-3">
-                    <div class="card bg-green position-relative">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="card-text d-flex flex-column">
-                                    <p class="text-black">MDshop</p>
-                                    <h4>123</h4>
-                                </div>
+                <div class="card bg-green position-relative">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="card-text d-flex flex-column">
+                                <p class="text-black">MDshop</p>
+                                <h4>123</h4>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             <div class="col mb-3">
                 <a href="{{URL('/category-mdfood')}}" class="text-decoration-none text-dark">
@@ -94,9 +94,9 @@
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">MDshop Categories</div>
-                               <!-- Filters -->
-                               <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                        <!-- Filters -->
+                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <div class="card-title me-auto">MDshop Categories</div>
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">

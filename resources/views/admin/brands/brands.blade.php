@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div class="">
-                            <label for="totalEarnings">Total Earnings</label>
+                            <label for="totalEarnings">Total Brands</label>
                             <h4 class="mb-0">212</h4>
                         </div>
                         <div class="add-brands-btn">
@@ -20,17 +20,25 @@
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">Top Earners Monthly</div>
+                        <!-- Filters -->
+                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <div class="card-title me-auto">Brands</div>
+                            <input type="text" class="form-control" placeholder="Search">
+
+                            <select class="form-select form-select-sm">
+                                <option selected disabled hidden>All Brands</option>
+                                <option value="1">Active Orders</option>
+                                <option value="2">Denied Orders</option>
+                                <option value="3">Completed Orders</option>
+                            </select>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th>Full Name</th>
-                                        <th>Network</th>
-                                        <th>City</th>
-                                        <th>Country</th>
-                                        <th>Payment Request</th>
+                                        <th>Brands</th>
+                                        <th>Category</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -38,11 +46,8 @@
                                 <tbody>
                                     <tr>
                                         <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
+                                        <td>Mercedes Benz</th>
+                                        <td>Vehicle</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
@@ -54,11 +59,8 @@
                                     </tr>
                                     <tr>
                                         <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
+                                        <td>Volkswagen</th>
+                                        <td>Vehicle</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
@@ -70,11 +72,8 @@
                                     </tr>
                                     <tr>
                                         <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
+                                        <td>BMW</th>
+                                        <td>Vehicle</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
@@ -86,11 +85,8 @@
                                     </tr>
                                     <tr>
                                         <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
+                                        <td>Ferrari</th>
+                                        <td>Vehicle</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
@@ -102,11 +98,8 @@
                                     </tr>
                                     <tr>
                                         <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
+                                        <td>Lincoln</th>
+                                        <td>Vehicle</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
@@ -118,11 +111,8 @@
                                     </tr>
                                     <tr>
                                         <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
+                                        <td>Cadillac</th>
+                                        <td>Vehicle</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
@@ -134,11 +124,8 @@
                                     </tr>
                                     <tr>
                                         <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
+                                        <td>Honda</th>
+                                        <td>Vehicle</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
@@ -148,22 +135,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Ali Danish</th>
-                                        <td>47</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>1.980,00 ₺</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
+
 
 
                                 </tbody>

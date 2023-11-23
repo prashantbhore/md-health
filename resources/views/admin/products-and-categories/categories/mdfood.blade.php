@@ -8,33 +8,35 @@
         <div class="row top-cards productsPage">
             <div class="col mb-3">
                 <a href="{{URL('/category-mdhealth')}}" class="text-decoration-none text-dark">
-                <div class="card position-relative">
-                    <div class="card-body">
-                        <div class="card-text d-flex flex-column">
-                            <p>MDhealth</p>
-                            <h4 class="mb-0">3</h4>
-                        </div>
-                        <span class="link-open">
-                            <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
-                        </span>
-                    </div>
-                </div></a>
-            </div>
-            <div class="col mb-3">
-                <a href="{{URL('/category-mdshop')}}" class="text-decoration-none text-dark">
-                <div class="card position-relative">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2">
+                    <div class="card position-relative">
+                        <div class="card-body">
                             <div class="card-text d-flex flex-column">
-                                <p>MDshop</p>
-                                <h4>123</h4>
+                                <p>MDhealth</p>
+                                <h4 class="mb-0">3</h4>
                             </div>
                             <span class="link-open">
                                 <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
                             </span>
                         </div>
                     </div>
-                </div></a>
+                </a>
+            </div>
+            <div class="col mb-3">
+                <a href="{{URL('/category-mdshop')}}" class="text-decoration-none text-dark">
+                    <div class="card position-relative">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="card-text d-flex flex-column">
+                                    <p>MDshop</p>
+                                    <h4>123</h4>
+                                </div>
+                                <span class="link-open">
+                                    <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="col mb-3">
                 <div class="card bg-green position-relative">
@@ -51,35 +53,37 @@
             </div>
             <div class="col mb-3">
                 <a href="{{URL('/category-mdbooking')}}" class="text-decoration-none text-dark">
-                <div class="card position-relative">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="card-text d-flex flex-column">
-                                <p>MDbooking</p>
-                                <h4>3</h4>
+                    <div class="card position-relative">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="card-text d-flex flex-column">
+                                    <p>MDbooking</p>
+                                    <h4>3</h4>
+                                </div>
+                                <span class="link-open">
+                                    <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
+                                </span>
                             </div>
-                            <span class="link-open">
-                                <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
-                            </span>
                         </div>
                     </div>
-                </div></a>
+                </a>
             </div>
             <div class="col mb-3">
                 <a href="{{URL('/category-home-service')}}" class="text-decoration-none text-dark">
-                <div class="card position-relative">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="card-text d-flex flex-column">
-                                <p>Home Service</p>
-                                <h4>3</h4>
+                    <div class="card position-relative">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="card-text d-flex flex-column">
+                                    <p>Home Service</p>
+                                    <h4>3</h4>
+                                </div>
+                                <span class="link-open">
+                                    <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
+                                </span>
                             </div>
-                            <span class="link-open">
-                                <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
-                            </span>
                         </div>
                     </div>
-                </div></a>
+                </a>
             </div>
             <div class="col mb-3">
                 <div class="add-brands-btn h-100">
@@ -91,9 +95,9 @@
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">MDfood Categories</div>
-                               <!-- Filters -->
-                               <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                        <!-- Filters -->
+                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <div class="card-title me-auto">MDfood Categories</div>
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">

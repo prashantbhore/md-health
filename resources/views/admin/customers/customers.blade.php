@@ -4,9 +4,24 @@
         <div class="page-title">Manage Customers</div>
         <div class="row top-cards">
             <div class="col-md-12 my-3">
-                <div class="card">
+                <div class="card" style="min-height: calc(100vh - 250px);">
                     <div class="card-body">
-                        <div class="card-title">Customers</div>
+
+                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <div class="card-title me-auto">Customers</div>
+                            <input type="text" class="form-control" placeholder="Search">
+                            <select class="form-select form-select-sm">
+                                <option selected>All Orders</option>
+                                <option value="1"><span class="md-fw-bold">MD</span>health</option>
+                                <option value="2"><span class="md-fw-bold">MD</span>shop</option>
+                                <option value="3"><span class="md-fw-bold">MD</span>booking</option>
+                            </select>
+                            <select class="form-select form-select-sm">
+                                <option selected>Active Orders</option>
+                                <option value="2">Completed Orders</option>
+                                <option value="3">Denied Orders</option>
+                            </select>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -121,6 +136,16 @@
 
                                 </tbody>
                             </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                </ul>
+                            </nav>
 
 
                         </div>

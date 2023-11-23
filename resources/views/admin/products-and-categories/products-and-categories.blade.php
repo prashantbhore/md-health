@@ -40,7 +40,17 @@
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">Recent Categories & Products</div>
+                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <div class="card-title me-auto">Recent Categories & Products</div>
+                            <input type="text" class="form-control" placeholder="Search">
+
+                            <select class="form-select form-select-sm">
+                                <option selected disabled hidden>Active</option>
+                                <option value="1">Active Orders</option>
+                                <option value="2">Denied Orders</option>
+                                <option value="3">Completed Orders</option>
+                            </select>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -59,8 +69,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
@@ -73,8 +83,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
@@ -87,8 +97,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
@@ -101,8 +111,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="activateLink mt-0">Activate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
@@ -115,8 +125,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="activateLink mt-0">Activate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
@@ -129,8 +139,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
@@ -143,8 +153,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
@@ -157,8 +167,8 @@
                                         <td>12/12/2023 - 15:34</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">

@@ -26,9 +26,9 @@
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">Cities</div>
                         <!-- Filters -->
                         <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <div class="card-title me-auto">Cities</div>
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">
@@ -42,8 +42,8 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">City Name</th>
-                                        <th>Country</th>
+                                        <th scope="col" class="w-25">City Name</th>
+                                        <th class="w-25">Country</th>
                                         <th></th>
                                     </tr>
                                 </thead>
