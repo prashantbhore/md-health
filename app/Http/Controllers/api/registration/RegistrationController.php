@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\registration;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CustomerRegistration;
+use App\Models\MedicalProviderRegistrater;
 use Validator;
 use Auth;
 use App\Traits\MediaTrait;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends Controller
 {
+    use MediaTrait;
+
     public function customer_register(request $request){
 
         $validator = Validator::make($request->all(), [
@@ -170,6 +173,103 @@ public function otp_verify_for_register(request $request)
             return response()->json(['message' => 'Invalid OTP or expired'], 404);
         }
 }
+
+
+    public function md_register_medical_provider(request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required',
+            'city_id' => 'required',
+            'email' => 'required',
+            'mobile_no' => 'required',
+            'tax_no' => 'required',
+            'company_address' => 'required',
+            'password' => 'required',
+            'company_logo_image_path' => 'required',
+            'company_licence_image_path' => 'required',
+        ]);
+
+        $email_exist = MedicalProviderRegistrater::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
+
+        if (!empty($email_exist)) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'email id already exist.',
+            ]);
+        } else {
+            $phone_exist = MedicalProviderRegistrater::where('status', 'active')
+                ->where('mobile_no', $request->mobile_no)
+                ->first();
+
+            if (!empty($phone_exist)) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'mobile number already exist.',
+                ]);
+            }
+        }
+
+        $md_provider_input = [];
+        $md_provider_input['company_name'] = $request->company_name;
+        $md_provider_input['city_id'] = $request->city_id;
+        $md_provider_input['email'] = $request->email;
+        $md_provider_input['mobile_no'] = $request->mobile_no;
+        $md_provider_input['tax_no'] = $request->tax_no;
+        $md_provider_input['company_address'] = $request->company_address;
+        $md_provider_input['password'] = Hash::make($request->password);
+        if ($request->has('company_logo_image_path')) {
+            if ($request->file('company_logo_image_path')) {
+                $md_provider_input['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+                $md_provider_input['company_logo_image_name'] = $original_name;
+            }
+        }
+        if ($request->has('company_licence_image_path')) {
+            if ($request->file('company_licence_image_path')) {
+                $md_provider_input['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
+                $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
+                $md_provider_input['company_licence_image_name'] = $original_name;
+            }
+        }
+        $md_provider_input['modified_ip_address'] = $request->ip();
+        $md_provider_registration = MedicalProviderRegistrater::create($md_provider_input);
+        if (Auth::guard('md_health_medical_providers_registers')->attempt([
+            'mobile_no' => $request->mobile_no,
+            'status' => 'active',
+            'password' => $request->password
+        ])) {
+            $customer = Auth::guard('md_health_medical_providers_registers')->user();
+            // return $customer;
+            $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+            MedicalProviderRegistrater::where('id', $customer->id)->update([
+                'access_token' => $success['token']
+            ]);
+        } else {
+            // return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return response()->json([
+                'status' => 404,
+                'message' => 'Unauthorised.',
+            ]);
+        }
+
+        if (!empty($md_provider_registration)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Profile created successfully.',
+                'data' => [
+                    'id' => $md_provider_registration->id,
+                    'access_token' => $success['token']
+                ],
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Profile not completed.',
+            ]);
+        }
+    }
 
 
 }

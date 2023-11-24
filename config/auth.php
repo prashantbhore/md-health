@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'customer_registration',
         ],
+        'md_health_medical_providers_registers' => [
+            'driver' => 'session',
+            'provider' => 'md_medical_provider_register',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'customer_registration' => [
             'driver' => 'eloquent',
             'model' => App\Models\CustomerRegistration::class,
+        ],
+        'md_medical_provider_register' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MedicalProviderRegistrater::class,
         ],
 
         // 'users' => [
