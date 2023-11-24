@@ -7,7 +7,7 @@
 @yield('content')
 
 
-<!-- @include('admin.includes.footer') -->
+@include('admin.includes.footer')
 @include('admin.includes.js-files')
 
 @yield('script')

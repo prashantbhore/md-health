@@ -99,15 +99,15 @@
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">Profits</div>
                         <!-- Filters -->
-                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3">
+                        <div class="w-100 d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                            <div class="card-title me-auto">Profits</div>
                             <input type="text" class="form-control" placeholder="Search">
                             <select class="form-select form-select-sm">
                                 <option selected>All Platform</option>
-                                <option value="1"><span class="md-bold">MD</span>health</option>
-                                <option value="2"><span class="md-bold">MD</span>shop</option>
-                                <option value="3"><span class="md-bold">MD</span>booking</option>
+                                <option value="1"><span class="md-fw-bold">MD</span>health</option>
+                                <option value="2"><span class="md-fw-bold">MD</span>shop</option>
+                                <option value="3"><span class="md-fw-bold">MD</span>booking</option>
                             </select>
 
                         </div>
@@ -230,8 +230,8 @@
                                             </a>
                                         </td>
                                     </tr>
-                            
-                           
+
+
                                 </tbody>
                             </table>
                             <nav aria-label="Page navigation example">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- FavIcon -->
-    <link rel="shortcut icon" href="{{URL::asset('admin/assets/img/favicon.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{URL::asset('admin/assets/img/FavIcon.svg')}}" type="image/x-icon">
 
     <!-- Simplebar Scrollbar -->
     <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
@@ -20,10 +20,13 @@
     <!-- Nice Select -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/nice-select.css')}}">
 
+    <!-- GLightbox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/style.css')}}">
 
-    <title>MDHealth Admin</title>
+    <title>MDhealth | Admin</title>
 
 </head>
 

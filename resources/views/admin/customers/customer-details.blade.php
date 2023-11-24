@@ -81,13 +81,13 @@
             <div class="col-md-6">
                 <div class="card card-details" style="min-height: 776px;">
                     <div class="card-body">
-                        <div class="mb-3 d-flex align-items-center justify-content-between w-full">
+                        <div class="mb-3 d-flex align-items-center justify-content-between w-full filters">
                             <p class="card-title ">Order History</p>
                             <select class="form-select form-select-sm w-25">
                                 <option selected>All Orders</option>
-                                <option value="1"><span class="md-bold">MD</span>health</option>
-                                <option value="2"><span class="md-bold">MD</span>shop</option>
-                                <option value="3"><span class="md-bold">MD</span>booking</option>
+                                <option value="1"><span class="md-fw-bold">MD</span>health</option>
+                                <option value="2"><span class="md-fw-bold">MD</span>shop</option>
+                                <option value="3"><span class="md-fw-bold">MD</span>booking</option>
                             </select>
                         </div>
                         <div class="row">
@@ -97,7 +97,7 @@
                                         <div class="card-ls">
                                             <h6>Hearth Valve Replacement Surgery</h6>
                                             <p>12 Dec 2023</p>
-                                            <p class="mt-auto">Platform: <span class="fw-bold ms-1">MD</span>health</p>
+                                            <p class="mt-auto">Platform: <span class="md-fw-bold ms-1">MD</span>health</p>
                                         </div>
                                         <div class="card-rs text-end">
                                       <a href="{{URL::asset('/sales-details')}}">
