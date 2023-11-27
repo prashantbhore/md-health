@@ -71,7 +71,28 @@ Route::view('category-mdbooking', 'admin/products-and-categories/categories/mdbo
 Route::view('category-home-service', 'admin/products-and-categories/categories/home-service');
 # Products
 Route::view('product-mdhealth', 'admin/products-and-categories/products/mdhealth');
+Route::view('product-details', 'admin/products-and-categories/products/product-details');
+
 Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
 Route::view('product-mdfood', 'admin/products-and-categories/products/mdfood');
 Route::view('product-mdbooking', 'admin/products-and-categories/products/mdbooking');
 Route::view('product-home-service', 'admin/products-and-categories/products/home-service');
+
+// PAYMENTS
+Route::view('payments', 'admin/payments/payments');
+Route::view('completed-payments', 'admin/payments/completed-payments');
+Route::view('bank-accounts', 'admin/payments/bank-accounts');
+Route::view('payment-requests', 'admin/payments/payment-requests');
+
+// REVIEWS
+Route::view('pending-reviews', 'admin/reviews/pending-reviews');
+Route::view('published-reviews', 'admin/reviews/published-reviews');
+
+// NOTIFICATIONS
+Route::view('notifications', 'admin/notifications/notifications');
+
+// ADS & PROMO
+Route::view('ads', 'admin/ads/ads');
+
+
+

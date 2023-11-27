@@ -57,23 +57,23 @@
                     Manage Products & Catagories
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="paymentsLi">
+                <a href="{{URL::asset('/payments')}}" class="nav-link link-dark payments">
                     Payments
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="reviewsLi">
+                <a href="{{URL::asset('/pending-reviews')}}" class="nav-link link-dark reviews">
                     Reviews
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="notificationsLi">
+                <a href="{{URL::asset('/notifications')}}" class="nav-link link-dark notifications">
                     Notifications
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="adsLi">
+                <a href="{{URL::asset('/ads')}}" class="nav-link link-dark ads">
                     Ads & Promo
                 </a>
             </li>

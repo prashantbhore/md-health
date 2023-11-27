@@ -48,7 +48,7 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function (){
     //update-medical-profile-list
     Route::get('md-update-medical-profile-list', [UpdateMedicalProfileController::class, 'update_medical_profile_list']);
 

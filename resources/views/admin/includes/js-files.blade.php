@@ -13,6 +13,9 @@
 <!-- Sidebar JS -->
 <script src="{{URL::asset('admin/assets/js/sidebar.js')}}"></script>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('select').niceSelect();
@@ -26,6 +29,16 @@
         autoplayVideos: true
     });
 </script>
+
+<!-- COPY TO CLIPBOARD -->
+<script>
+    function copyToClipboard() {
+        var textBox = document.getElementById("ibanNo");
+        textBox.select();
+        document.execCommand("copy");
+    }
+</script>
+
 
 <noscript>
     <style>

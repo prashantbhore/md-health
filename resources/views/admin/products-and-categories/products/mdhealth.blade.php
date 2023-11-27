@@ -117,7 +117,7 @@
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#">
+                                            <a href="{{URL('/product-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -133,7 +133,7 @@
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#">
+                                            <a href="{{URL('/product-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -149,7 +149,7 @@
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#">
+                                            <a href="{{URL('/product-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">

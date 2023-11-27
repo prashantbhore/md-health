@@ -41,7 +41,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -57,7 +57,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -73,7 +73,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -89,7 +89,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -105,7 +105,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -121,7 +121,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -137,7 +137,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -153,7 +153,7 @@
                                         <td>Turkiye</td>
                                         <td>1.980,00 ₺</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/top-earners')}}">
+                                            <a href="#">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
