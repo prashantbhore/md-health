@@ -1,5 +1,6 @@
 @extends('admin.layout.layout2')
 @section("content")
+
 <section>
     <div class="container df-center" style="height: 100vh;">
         <div class="card signInCard">

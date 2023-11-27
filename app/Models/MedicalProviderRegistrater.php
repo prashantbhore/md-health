@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Storage;
 
 class MedicalProviderRegistrater extends Authenticatable
 {
@@ -26,6 +27,8 @@ class MedicalProviderRegistrater extends Authenticatable
         'company_licence_image_path',
         'company_licence_image_name',
         'registration_otp',
+        'authorisation_full_name',
+        'company_overview',
         'login_otp',
         'access_token',
         'fcm_token',

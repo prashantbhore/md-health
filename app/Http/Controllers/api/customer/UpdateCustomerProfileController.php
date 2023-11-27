@@ -1,42 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\MedicalProvider;
+namespace App\Http\Controllers\api\customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\api\BaseController as BaseController;
 use App\Models\MedicalProviderRegistrater;
+use App\Models\CustomerRegistration;
 use App\Models\Country;
 use App\Models\Cities;
 use Validator;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UpdateMedicalProfileController extends BaseController
+
+class UpdateCustomerProfileController extends BaseController
 {
-    //update_medical_profile_list
-    public function update_medical_profile_list()
+    //
+    public function update_customer_list()
     {
-       $medical_provider_list= MedicalProviderRegistrater::where('status','active')
-       ->select('company_name', 'city_id', 'email', 'mobile_no','tax_no', 'company_address','password')
-        ->where('id',Auth::user()->id)
-        ->first();
+        $customer_list = CustomerRegistration::where('status', 'active')
+            ->select('first_name','last_name','city_id', 'email', 'mobile_no', 'company_address', 'password')
+            ->where('id', Auth::user()->id)
+            ->first();
 
         $countries = Country::where('status', 'active')
-        ->select('id', 'country_name')
-        ->orderBy('country_name')
-        ->get();
+            ->select('id', 'country_name')
+            ->orderBy('country_name')
+            ->get();
 
         $cities = Cities::where('status', 'active')
             ->orderBy('city_name')
             ->select('id', 'city_name')
             ->get();
 
-        if (!empty($medical_provider_list)) {
+        if (!empty($customer_list)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Account details found.',
-                'account_details' => $medical_provider_list,
+                'account_details' => $customer_list,
                 'countries' => $countries,
                 'cities' => $cities,
             ]);
@@ -48,10 +50,9 @@ class UpdateMedicalProfileController extends BaseController
         }
     }
 
-    
 
-    public function update_medical_provider_profile(Request $request){
-
+    public function update_customer_profile(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
             'mobile_no' => 'required',
@@ -64,24 +65,24 @@ class UpdateMedicalProfileController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $medical_provider_input = [];
-        $medical_provider_input['first_name'] = $request->first_name;
-        $medical_provider_input['last_name'] = $request->last_name;
-        $medical_provider_input['email'] = $request->email;
-        $medical_provider_input['mobile_no'] = $request->mobile_no;
-        $medical_provider_input['company_address'] = $request->address;
-        $medical_provider_input['country_id'] = $request->country_id;
-        $medical_provider_input['city_id'] = $request->city_id;
-        $medical_provider_input['modified_ip_address'] = $request->ip();
+        $customer_input = [];
+        $customer_input['first_name'] = $request->first_name;
+        $customer_input['last_name'] = $request->last_name;
+        $customer_input['email'] = $request->email;
+        $customer_input['mobile_no'] = $request->mobile_no;
+        $customer_input['address'] = $request->address;
+        $customer_input['country_id'] = $request->country_id;
+        $customer_input['city_id'] = $request->city_id;
+        $customer_input['modified_ip_address'] = $request->ip();
 
-        $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::user()->id)->update($medical_provider_input);
+        $customer_update = CustomerRegistration::where('id', Auth::user()->id)->update($customer_input);
 
-        if(!empty($medical_provider_update)){
+        if (!empty($customer_update)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Profile details updated successfully.',
             ]);
-        }else{
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. Details not updated.',
@@ -89,10 +90,11 @@ class UpdateMedicalProfileController extends BaseController
         }
     }
 
+
     //check_password_exist
     public function check_password_exist(Request $request)
     {
-        if (Auth::guard('md_health_medical_providers_registers')->attempt([
+        if (Auth::guard('md_customer_registration')->attempt([
             'status' => 'active',
             'id' => Auth::user()->id,
             'password' => $request->password
@@ -109,7 +111,7 @@ class UpdateMedicalProfileController extends BaseController
         }
     }
 
-    public function update_medical_provider_password(Request $request)
+    public function update_customer_password(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'new_password' => 'required',
@@ -120,31 +122,30 @@ class UpdateMedicalProfileController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        if($request->new_password==$request->retype_new_password){
-        $medical_provider_input = [];
-        $medical_provider_input['password'] = Hash::make($request->new_password);
-        $medical_provider_input['modified_ip_address'] = $request->ip();
+        if ($request->new_password == $request->retype_new_password) {
+            $medical_provider_input = [];
+            $medical_provider_input['password'] = Hash::make($request->new_password);
+            $medical_provider_input['modified_ip_address'] = $request->ip();
 
-        $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::user()->id)->update($medical_provider_input);
+            $medical_provider_update = CustomerRegistration::where('id', Auth::user()->id)->update($medical_provider_input);
 
-        if (!empty($medical_provider_update)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Password updated successfully.',
-            ]);
+            if (!empty($medical_provider_update)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Password updated successfully.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong. Password not updated.',
+                ]);
+            }
         } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong. Password not updated.',
-            ]);
-        }
-    }else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. new password and re-type password does not matched.',
             ]);
-    }
-
+        }
     }
 
 
