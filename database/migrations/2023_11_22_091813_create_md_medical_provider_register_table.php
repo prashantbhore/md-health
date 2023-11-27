@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::create('md_medical_provider_register', function (Blueprint $table) 
         {
             $table->id();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('country_id')->nullable();
             $table->string('company_name')->nullable();
             $table->string('city_id')->nullable();
             $table->string('email')->nullable();
@@ -28,6 +25,8 @@ return new class extends Migration
             $table->string('company_logo_image_name')->nullable();
             $table->string('company_licence_image_path')->nullable();
             $table->string('company_licence_image_name')->nullable();
+            $table->string('authorisation_full_name')->nullable();
+            $table->string('company_overview')->nullable();
             $table->string('registration_otp')->nullable();
             $table->string('login_otp')->nullable();
             $table->string('access_token')->nullable();

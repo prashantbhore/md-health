@@ -6,7 +6,9 @@ use App\Http\Controllers\api\registration\RegistrationController;
 use App\Http\Controllers\api\login\LoginControllers;
 use App\Http\Controllers\API\CommonController;
 use App\Http\Controllers\api\AppConfigController;
-use App\Http\Controllers\MedicalProvider\UpdateMedicalProfileController;
+use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
+use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +52,23 @@ Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_prov
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     //update-medical-profile-list
-    Route::get('md-update-medical-profile-list', [UpdateMedicalProfileController::class, 'update_medical_profile_list']);
+    Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 
     //check-password-medical-provider 
-    Route::post('md-check-password-exist', [UpdateMedicalProfileController::class, 'check_password_exist']);
+    Route::post('md-check-password-exist', [UpdateCustomerProfileController::class, 'check_password_exist']);
 
-    //update-medical-provider-profile
-    Route::post('md-update-medical-provider-profile', [UpdateMedicalProfileController::class, 'update_medical_provider_profile']);
+    //update-customer-profile
+    Route::post('md-update-customer-profile', [UpdateCustomerProfileController::class, 'update_customer_profile']);
 
-    //update-medical-provider-profile
-    Route::post('md-update-medical-provider-password', [UpdateMedicalProfileController::class, 'update_medical_provider_password']);
+    //update-customer-password
+    Route::post('md-update-customer-password', [UpdateCustomerProfileController::class, 'update_customer_password']);
+
+    //update-medical-profile-list
+    Route::get('md-update-medical-profile-list', [UpdateMedicalProfileController::class, 'update_medical_profile_list']);
+
+    //update-medical-profile
+    Route::post('md-update-medical-profile', [UpdateMedicalProfileController::class, 'update_medical_provider_profile']);
+
+    //delete-provider-images-videos
+    Route::post('md-delete-provider-images-videos', [UpdateMedicalProfileController::class, 'delete_provider_images_videos']);
 });
