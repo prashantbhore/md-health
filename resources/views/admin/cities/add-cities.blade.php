@@ -7,18 +7,29 @@
                 <div class="card addCity">
                     <div class="card-body">
                         <div class="card-title">Add New Cities</div>
+                        <form>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <select class="form-control" id="countrySelect" name="country">
+                                    <option value="" selected disabled>Select Country</option>
+                                    <option value="usa">USA</option>
+                                    <option value="canada">Canada</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <!-- Add more options as needed -->
+                                </select>
+                            </div>
+                            
+
+                            <div class="col-md-6 mb-3">
                                 <input type="text" class="form-control" placeholder="City Name">
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="Country Name">
-                            </div>
+                          
                             <div class="col-md-12 mb-3">
                                 <button type="submit" class="btn deactivate-btn w-100">Add City</button>
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
             </div>

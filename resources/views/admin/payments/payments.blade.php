@@ -19,7 +19,7 @@
                 <!-- </a> -->
             </div>
             <div class="col-md-3 mb-3">
-                <a href="{{URL('/completed-payments')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/completed-payments')}}" class="text-decoration-none text-dark">
                     <div class="card bg-green position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -36,7 +36,7 @@
                 </a>
             </div>
             <div class="col-md-3 mb-3 ms-auto">
-                <a href="{{URL('/bank-accounts')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/bank-accounts')}}" class="text-decoration-none text-dark">
                     <div class="card bg-black position-relative" style="min-height: 89px;">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -84,7 +84,7 @@
                                         <td>4</td>
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-2">
-                                            <a href="{{URL('/payment-requests')}}">
+                                            <a href="{{URL('admin/payment-requests')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -98,7 +98,7 @@
                                         <td>5</td>
                                         <td>23.979.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-2">
-                                            <a href="{{URL('/payment-requests')}}">
+                                            <a href="{{URL('admin/payment-requests')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -112,7 +112,7 @@
                                         <td>4</td>
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-2">
-                                            <a href="{{URL('/payment-requests')}}">
+                                            <a href="{{URL('admin/payment-requests')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">

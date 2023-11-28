@@ -3,7 +3,7 @@
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Ali Danish</div>
-            <a href="{{URL::asset('/multi-level-marketing')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back MLM </a>
+            <a href="{{URL::asset('admin/multi-level-marketing')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back MLM </a>
         </div>
         <div class="row top-cards">
             <div class="col-md-12 my-3 earners">

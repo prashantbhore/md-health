@@ -3,7 +3,7 @@
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Products</div>
-            <a href="{{URL::asset('/products-and-categories')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Products & Categories</a>
+            <a href="{{URL::asset('admin/products-and-categories')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Products & Categories</a>
         </div>
 
         <div class="row top-cards productsPage">
@@ -19,7 +19,7 @@
             </div>
 
             <div class="col mb-3">
-                <a href="{{URL('/product-mdshop')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/product-mdshop')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -37,7 +37,7 @@
             </div>
 
             <div class="col mb-3">
-                <a href="{{URL('/product-mdfood')}}" class="text-decoration-none text-dark position-relative">
+                <a href="{{URL('admin/product-mdfood')}}" class="text-decoration-none text-dark position-relative">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -54,7 +54,7 @@
                 </a>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('/product-mdbooking')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/product-mdbooking')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -117,7 +117,7 @@
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="{{URL('/product-details')}}">
+                                            <a href="{{URL('admin/product-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -133,7 +133,7 @@
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="{{URL('/product-details')}}">
+                                            <a href="{{URL('admin/product-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -149,7 +149,7 @@
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="{{URL('/product-details')}}">
+                                            <a href="{{URL('admin/product-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">

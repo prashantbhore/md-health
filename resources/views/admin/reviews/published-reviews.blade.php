@@ -4,7 +4,7 @@
         <div class="page-title">Reviews</div>
         <div class="row top-cards productsPage">
             <div class="col-md-3 mb-3">
-                <a href="{{URL('/pending-reviews')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/pending-reviews')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative bg-yellow">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">

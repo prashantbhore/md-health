@@ -3,7 +3,7 @@
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Manage Admins & Roles</div>
-            <a href="{{URL::asset('/add-admins')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Admins</a>
+            <a href="{{URL::asset('admin/add-admins')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Admins</a>
         </div>
 
         <div class="row top-cards">

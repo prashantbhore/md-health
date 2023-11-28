@@ -3,7 +3,7 @@
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">#MD8739</div>
-            <a href="{{URL::asset('/sales')}}" class="page-title">
+            <a href="{{URL::asset('admin/sales')}}" class="page-title">
                 <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn"> Back Sales
             </a>
         </div>

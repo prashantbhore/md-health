@@ -4,7 +4,7 @@
         <div class="page-title">Manage Products & Categories</div>
         <div class="row top-cards productsPage">
             <div class="col-md-3 mb-3">
-                <a href="{{URL('/category-mdhealth')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/category-mdhealth')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div class="col-md-3 mb-3">
-                <a href="{{URL('/product-mdhealth')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/product-mdhealth')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -29,7 +29,7 @@
                                     <p>Total Products</p>
                                     <h4>4.873</h4>
                                 </div>
-                                <span href="{{URL('/category-mdhealth')}}" class="link-open">
+                                <span href="{{URL('admin/category-mdhealth')}}" class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
                                 </span>
                             </div>

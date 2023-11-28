@@ -3,11 +3,11 @@
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Categories</div>
-            <a href="{{URL::asset('/products-and-categories')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Products & Categories</a>
+            <a href="{{URL::asset('admin/products-and-categories')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Products & Categories</a>
         </div>
         <div class="row top-cards productsPage">
             <div class="col mb-3">
-                <a href="{{URL('/category-mdhealth')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/category-mdhealth')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="card-text d-flex flex-column">
@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('/category-mdshop')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/category-mdshop')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('/category-mdbooking')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/category-mdbooking')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -69,7 +69,7 @@
                 </a>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('/category-home-service')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/category-home-service')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
