@@ -1,12 +1,11 @@
 <!-- Sidebar -->
 <main data-simplebar>
     <div class="flex-shrink-0 p-3 md-sidebar">
-
         <p class="mb-0 link-dark text-decoration-none">
             <span class="sidebar-title">Super Admin Panel</span>
         </p>
 
-        <ul class="nav nav-pills flex-column mb-auto mt-3 ">
+        <ul class="nav nav-pills flex-column mb-auto mt-3">
             <li class="dashboardLi">
                 <a href="{{URL::asset('admin/dashboard')}}" class="nav-link link-dark dashboard" aria-current="page">
                     Dashboard
@@ -77,12 +76,16 @@
                     Ads & Promo
                 </a>
             </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
+            <li class="manageRequestLi">
+                <a href="{{URL::asset('/manage-request')}}" class="nav-link link-dark manageRequest">
                     Manage Request
                 </a>
             </li>
-
+            <li class="manageMDfoodsLi"> 
+                <a href="{{URL::asset('/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
+                    Manage MDFoods
+                </a>
+            </li>
         </ul>
     </div>
 </main>
