@@ -6,13 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "brian2694/laravel-toastr": "^5.58",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/passport": "^11.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "lcobucci/jwt": "^5.1",
-        "league/oauth2-server": "8.5.4"
+        "league/oauth2-server": "8.5.4",
+        "yajra/laravel-datatables": "10.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

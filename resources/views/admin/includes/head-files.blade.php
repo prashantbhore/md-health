@@ -30,9 +30,12 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/style.css')}}">
-
+    <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}">
+    
+   
     <title>MDhealth | Admin</title>
 
 </head>
 
 <body>
+ <input type="hidden" value="{{url('/')}}" id="base_url"/>   

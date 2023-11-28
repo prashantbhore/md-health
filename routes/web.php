@@ -54,8 +54,10 @@ Route::group(['prefix' => 'admin'], function () {
 
     // MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function () {
-        Route::get('add-cities', 'index');
+    Route::controller(CityController::class)->group(function (){
+        Route::get('/add-cities', 'index');
+        Route::post('/add-cities', 'store')->name('add-city');
+        Route::get('/city-data-table','data_table');
     });
 
 
