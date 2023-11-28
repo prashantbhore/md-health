@@ -4,7 +4,7 @@
         <div class="page-title">Reviews</div>
         <div class="row top-cards productsPage">
             <div class="col-md-3 mb-3">
-                <!-- <a href="{{URL('/category-mdhealth')}}" class="text-decoration-none text-dark"> -->
+                <!-- <a href="{{URL('admin/category-mdhealth')}}" class="text-decoration-none text-dark"> -->
                 <div class="card position-relative bg-yellow">
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">
@@ -18,7 +18,7 @@
                 <!-- </a> -->
             </div>
             <div class="col-md-3 mb-3">
-                <a href="{{URL('/published-reviews')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/published-reviews')}}" class="text-decoration-none text-dark">
                     <div class="card bg-green position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">

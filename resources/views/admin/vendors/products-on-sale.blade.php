@@ -3,7 +3,7 @@
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Products</div>
-            <a href="{{URL::asset('/vendors')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors </a>
+            <a href="{{URL::asset('admin/vendors')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors </a>
         </div>
         <div class="row top-cards">
             <div class="col-md-12">

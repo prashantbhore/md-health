@@ -3,11 +3,11 @@
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Products</div>
-            <a href="{{URL::asset('/products-and-categories')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Products & Categories</a>
+            <a href="{{URL::asset('admin/products-and-categories')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Products & Categories</a>
         </div>
         <div class="row top-cards productsPage">
             <div class="col mb-3">
-                <a href="{{URL('/product-mdhealth')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/product-mdhealth')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="card-text d-flex flex-column">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('/product-mdfood')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/product-mdfood')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -51,7 +51,7 @@
                 </a>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('/product-mdbooking')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/product-mdbooking')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -112,7 +112,7 @@
                                         <td>299,00 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="{{URL('/products-on-sale')}}">
+                                            <a href="{{URL('admin/products-on-sale')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -128,7 +128,7 @@
                                         <td>299,00 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="{{URL('/products-on-sale')}}">
+                                            <a href="{{URL('admin/products-on-sale')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -144,7 +144,7 @@
                                         <td>299,00 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
                                             <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="{{URL('/products-on-sale')}}">
+                                            <a href="{{URL('admin/products-on-sale')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">

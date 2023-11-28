@@ -3,7 +3,7 @@
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Vendors ID #273929</div>
-            <a href="{{URL::asset('/vendors')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors </a>
+            <a href="{{URL::asset('admin/vendors')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors </a>
         </div>
         <div class="row top-cards">
             <div class="col-md-6">
@@ -54,7 +54,7 @@
                                     <div class="col-md-6 d-flex flex-column">
                                         <label for="license" class="mb-2">License</label>
                                         <div>
-                                            <img src="{{URL::asset('admin/assets/img/previewImage.png')}}" alt="" />
+                                            <img src="{{URL::asset('admin/assets/img/previewImage.png')}}" alt=""/>
                                         </div>
                                         <a href="#"><span class="deleteImg">Delete License</span></a>
                                     </div>
@@ -183,7 +183,7 @@
                                         </div>
                                         <div class="card-rs df-end">
                                             <div class="mb-3">
-                                                <a href="{{URL::asset('/sales-details')}}" class="text-decoration-none mb-3">
+                                                <a href="{{URL::asset('admin/sales-details')}}" class="text-decoration-none mb-3">
                                                     <span class="deleteCard">Delete Product</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />
@@ -192,7 +192,7 @@
                                                 </a>
                                             </div>
                                             <h6>34.893,90 ₺</h6>
-                                            <a href="{{URL::asset('/products-on-sale')}}" class="completed text-decoration-none">On Sale</a>
+                                            <a href="{{URL::asset('admin/products-on-sale')}}" class="completed text-decoration-none">On Sale</a>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
                                         </div>
                                         <div class="card-rs df-end">
                                             <div class="mb-3">
-                                                <a href="{{URL::asset('/sales-details')}}" class="text-decoration-none mb-3">
+                                                <a href="{{URL::asset('admin/sales-details')}}" class="text-decoration-none mb-3">
                                                     <span class="deleteCard">Delete Product</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />

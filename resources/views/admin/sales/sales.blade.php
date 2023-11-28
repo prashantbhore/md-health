@@ -4,7 +4,7 @@
         <div class="page-title">Sales</div>
         <div class="row top-cards">
             <div class="col mb-3 pe-0">
-                <a href="{{URL('/md-profit')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/md-profit')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -48,7 +48,7 @@
                 </a>
             </div>
             <div class="col mb-3 pe-0">
-                <a href="{{URL('/md-booking-sales')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/md-booking-sales')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -164,7 +164,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -181,7 +181,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -198,7 +198,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -215,7 +215,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -233,7 +233,7 @@
 
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -250,7 +250,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -267,7 +267,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -284,7 +284,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -301,7 +301,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
@@ -318,7 +318,7 @@
                                             </div>
                                         </td>
                                         <td class="text-end">
-                                            <a href="{{URL('/sales-details')}}">
+                                            <a href="{{URL('admin/sales-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>

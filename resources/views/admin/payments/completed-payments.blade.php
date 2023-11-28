@@ -3,7 +3,7 @@
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Completed Payments</div>
-            <a href="{{URL::asset('/payments')}}" class="page-title">
+            <a href="{{URL::asset('admin/payments')}}" class="page-title">
                 <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn"> Back Payments
             </a>
         </div>
