@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\master\CityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,91 +18,96 @@ Route::get('/', function () {
     return view('admin.authentication.sign-in');
 });
 
-Route::get('/dashboard', function (){
-    return view('admin.dashboard.dashboard');
+
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard.dashboard');
+    });
+
+
+
+    // AUTHENTICATION
+    Route::view('sign-in', 'admin/authentication/sign-in');
+
+    // DASHBOARD
+    Route::view('dashboard', 'admin/dashboard/dashboard');
+
+    // SALES
+    Route::view('sales', 'admin/sales/sales');
+    Route::view('sales-details', 'admin/sales/sales-details');
+    Route::view('md-profit', 'admin/sales/md-profit');
+    Route::view('md-booking-sales', 'admin/sales/md-booking-sales');
+
+    // MANAGE CUSTOMERS
+    Route::view('customers', 'admin/customers/customers');
+    Route::view('customer-details', 'admin/customers/customer-details');
+
+    // MANAGE VENDORS
+    Route::view('vendors', 'admin/vendors/vendors');
+    Route::view('vendor-details', 'admin/vendors/vendor-details');
+    Route::view('products-on-sale', 'admin/vendors/products-on-sale');
+
+    // MEDICAL TOURISM
+    Route::view('service-provider', 'admin/medical-tourism/service-provider');
+    Route::view('service-provider-details', 'admin/medical-tourism/service-provider-details');
+
+    // MANAGE CITIES
+
+    Route::controller(CityController::class)->group(function () {
+        Route::get('add-cities', 'index');
+    });
+
+
+    // Route::view('add-cities', 'admin/cities/add-cities');
+
+    // MANAGE CITIES
+    Route::view('add-admins', 'admin/admins/add-admins');
+    Route::view('edit-admins', 'admin/admins/edit-admins');
+
+    // MLM
+    Route::view('multi-level-marketing', 'admin/multi-level-marketing/multi-level-marketing');
+    Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
+
+    // BRANDS
+    Route::view('brands', 'admin/brands/brands');
+
+    // PRODUCTS AND CATEGORIES
+    Route::view('products-and-categories', 'admin/products-and-categories/products-and-categories');
+    # Categories
+    Route::view('category-mdhealth', 'admin/products-and-categories/categories/mdhealth');
+    Route::view('category-mdshop', 'admin/products-and-categories/categories/mdshop');
+    Route::view('category-mdfood', 'admin/products-and-categories/categories/mdfood');
+    Route::view('category-mdbooking', 'admin/products-and-categories/categories/mdbooking');
+    Route::view('category-home-service', 'admin/products-and-categories/categories/home-service');
+    # Products
+    Route::view('product-mdhealth', 'admin/products-and-categories/products/mdhealth');
+    Route::view('product-details', 'admin/products-and-categories/products/product-details');
+
+    Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
+    Route::view('product-mdfood', 'admin/products-and-categories/products/mdfood');
+    Route::view('product-mdbooking', 'admin/products-and-categories/products/mdbooking');
+    Route::view('product-home-service', 'admin/products-and-categories/products/home-service');
+
+    // PAYMENTS
+    Route::view('payments', 'admin/payments/payments');
+    Route::view('completed-payments', 'admin/payments/completed-payments');
+    Route::view('bank-accounts', 'admin/payments/bank-accounts');
+    Route::view('payment-requests', 'admin/payments/payment-requests');
+
+    // REVIEWS
+    Route::view('pending-reviews', 'admin/reviews/pending-reviews');
+    Route::view('published-reviews', 'admin/reviews/published-reviews');
+
+    // NOTIFICATIONS
+    Route::view('notifications', 'admin/notifications/notifications');
+
+    // ADS & PROMO
+    Route::view('ads', 'admin/ads/ads');
+    // MANAGE REQUEST
+    Route::view('manage-request', 'admin/manage-request/manage-request');
+
+    // MANAGE MD FOODS
+    Route::view('food-suppliers', 'admin/manage-md-foods/food-suppliers');
+    Route::view('food-supplier-details', 'admin/manage-md-foods/food-supplier-details');
 });
-
-
-
-// AUTHENTICATION
-Route::view('sign-in', 'admin/authentication/sign-in');
-
-// DASHBOARD
-Route::view('dashboard', 'admin/dashboard/dashboard');
-
-// SALES
-Route::view('sales', 'admin/sales/sales');
-Route::view('sales-details', 'admin/sales/sales-details');
-Route::view('md-profit', 'admin/sales/md-profit');
-Route::view('md-booking-sales', 'admin/sales/md-booking-sales');
-
-// MANAGE CUSTOMERS
-Route::view('customers', 'admin/customers/customers');
-Route::view('customer-details', 'admin/customers/customer-details');
-
-// MANAGE VENDORS
-Route::view('vendors', 'admin/vendors/vendors');
-Route::view('vendor-details', 'admin/vendors/vendor-details');
-Route::view('products-on-sale', 'admin/vendors/products-on-sale');
-
-// MEDICAL TOURISM
-Route::view('service-provider', 'admin/medical-tourism/service-provider');
-Route::view('service-provider-details', 'admin/medical-tourism/service-provider-details');
-
-// MANAGE CITIES
-Route::view('add-cities', 'admin/cities/add-cities');
-
-// MANAGE CITIES
-Route::view('add-admins', 'admin/admins/add-admins');
-Route::view('edit-admins', 'admin/admins/edit-admins');
-
-// MLM
-Route::view('multi-level-marketing', 'admin/multi-level-marketing/multi-level-marketing');
-Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
-
-// BRANDS
-Route::view('brands', 'admin/brands/brands');
-
-// PRODUCTS AND CATEGORIES
-Route::view('products-and-categories', 'admin/products-and-categories/products-and-categories');
-# Categories
-Route::view('category-mdhealth', 'admin/products-and-categories/categories/mdhealth');
-Route::view('category-mdshop', 'admin/products-and-categories/categories/mdshop');
-Route::view('category-mdfood', 'admin/products-and-categories/categories/mdfood');
-Route::view('category-mdbooking', 'admin/products-and-categories/categories/mdbooking');
-Route::view('category-home-service', 'admin/products-and-categories/categories/home-service');
-# Products
-Route::view('product-mdhealth', 'admin/products-and-categories/products/mdhealth');
-Route::view('product-details', 'admin/products-and-categories/products/product-details');
-
-Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
-Route::view('product-mdfood', 'admin/products-and-categories/products/mdfood');
-Route::view('product-mdbooking', 'admin/products-and-categories/products/mdbooking');
-Route::view('product-home-service', 'admin/products-and-categories/products/home-service');
-
-// PAYMENTS
-Route::view('payments', 'admin/payments/payments');
-Route::view('completed-payments', 'admin/payments/completed-payments');
-Route::view('bank-accounts', 'admin/payments/bank-accounts');
-Route::view('payment-requests', 'admin/payments/payment-requests');
-
-// REVIEWS
-Route::view('pending-reviews', 'admin/reviews/pending-reviews');
-Route::view('published-reviews', 'admin/reviews/published-reviews');
-
-// NOTIFICATIONS
-Route::view('notifications', 'admin/notifications/notifications');
-
-// ADS & PROMO
-Route::view('ads', 'admin/ads/ads');
-
-// MANAGE REQUEST
-Route::view('manage-request', 'admin/manage-request/manage-request');
-
-// MANAGE MD FOODS
-Route::view('food-suppliers', 'admin/manage-md-foods/food-suppliers');
-Route::view('food-supplier-details', 'admin/manage-md-foods/food-supplier-details');
-
-
-
-
