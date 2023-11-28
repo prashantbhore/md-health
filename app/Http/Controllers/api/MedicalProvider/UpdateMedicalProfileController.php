@@ -18,6 +18,7 @@ use Str;
 class UpdateMedicalProfileController extends BaseController
 {
     use MediaTrait;
+    
     //update_medical_profile_list
     public function update_medical_profile_list()
     {

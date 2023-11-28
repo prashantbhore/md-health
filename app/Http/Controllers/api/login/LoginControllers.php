@@ -11,8 +11,6 @@ use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderRegistrater;
 use App\Http\Controllers\api\BaseController as BaseController;
 
-
-
 class LoginControllers extends BaseController
 {
     // customer login

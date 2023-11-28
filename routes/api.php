@@ -8,7 +8,8 @@ use App\Http\Controllers\API\CommonController;
 use App\Http\Controllers\api\AppConfigController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
-
+use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
+use App\Http\Controllers\api\MedicalProvider\TransportationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,4 +72,27 @@ Route::middleware('auth:sanctum')->group(function (){
 
     //delete-provider-images-videos
     Route::post('md-delete-provider-images-videos', [UpdateMedicalProfileController::class, 'delete_provider_images_videos']);
+
+
+    //other-services
+
+    //add-new-acommodition-hotel
+    Route::post('md-add-new-acommodition', [AddNewAcommoditionController::class, 'add_new_acommodition']);
+
+    //hotel-list
+    Route::get('md-hotel-list', [AddNewAcommoditionController::class, 'hotel_list']);
+
+    //edit-hotel-list
+    Route::post('md-edit-hotel-list', [AddNewAcommoditionController::class, 'edit_hotel_list']);
+
+    //delete-hotel
+    Route::post('md-delete-hotel', [AddNewAcommoditionController::class, 'delete_hotel']);
+
+    //Transportation
+    
+    //add-transportation-details
+    Route::post('md-add-transportation-details', [TransportationController::class, 'add_transportation_details']);
+
+    //edit-transportation-details
+    Route::post('md-edit-transportation-details', [TransportationController::class, 'edit_transportation_details']);
 });
