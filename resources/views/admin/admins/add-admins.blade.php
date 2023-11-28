@@ -84,7 +84,7 @@
                                         <td>Mert Akin</td>
                                         <td>Finance</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/edit-admins')}}">
+                                            <a href="{{URL::asset('admin/edit-admins')}}">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -97,7 +97,7 @@
                                         <td>Semra Bayir</td>
                                         <td>Customer Support</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/edit-admins')}}">
+                                            <a href="{{URL::asset('admin/edit-admins')}}">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">
@@ -111,7 +111,7 @@
                                         <td>Koray Ildes</td>
                                         <td>Admin</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('/edit-admins')}}">
+                                            <a href="{{URL::asset('admin/edit-admins')}}">
                                                 <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">

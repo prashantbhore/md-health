@@ -30,7 +30,7 @@
                                         <td>Turkiye</td>
                                         <td>+90 563 363 36 34</td>
                                         <td class="df-center-end gap-2">
-                                            <a href="{{URL('/food-supplier-details')}}">
+                                            <a href="{{URL('admin/food-supplier-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -72,7 +72,7 @@
                                         <td>Turkiye</td>
                                         <td>+90 563 363 36 34</td>
                                         <td class="df-center-end gap-2">
-                                            <a href="{{URL('/food-supplier-details')}}">
+                                            <a href="{{URL('admin/food-supplier-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -88,7 +88,7 @@
                                         <td>Turkiye</td>
                                         <td>+90 563 363 36 34</td>
                                         <td class="df-center-end gap-2">
-                                            <a href="{{URL('/food-supplier-details')}}">
+                                            <a href="{{URL('admin/food-supplier-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">
@@ -104,7 +104,7 @@
                                         <td>Turkiye</td>
                                         <td>+90 563 363 36 34</td>
                                         <td class="df-center-end gap-2">
-                                            <a href="{{URL('/food-supplier-details')}}">
+                                            <a href="{{URL('admin/food-supplier-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
                                             <a href="#">

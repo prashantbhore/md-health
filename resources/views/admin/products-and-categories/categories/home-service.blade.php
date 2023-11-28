@@ -39,7 +39,7 @@
                 </a>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('/category-mdfood')}}" class="text-decoration-none text-dark">
+                <a href="{{URL('admin/category-mdfood')}}" class="text-decoration-none text-dark">
                     <div class="card  position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">

@@ -3,7 +3,7 @@
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">Food Suplier ID #273929</div>
-            <a href="{{URL::asset('/food-suppliers')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Food Suppliers </a>
+            <a href="{{URL::asset('admin/food-suppliers')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Food Suppliers </a>
         </div>
         <div class="row top-cards">
             <div class="col-md-6">

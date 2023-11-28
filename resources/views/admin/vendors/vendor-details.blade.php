@@ -54,7 +54,7 @@
                                     <div class="col-md-6 d-flex flex-column">
                                         <label for="license" class="mb-2">License</label>
                                         <div>
-                                            <img src="{{URL::asset('admin/assets/img/previewImage.png')}}" alt="" />
+                                            <img src="{{URL::asset('admin/assets/img/previewImage.png')}}" alt=""/>
                                         </div>
                                         <a href="#"><span class="deleteImg">Delete License</span></a>
                                     </div>
