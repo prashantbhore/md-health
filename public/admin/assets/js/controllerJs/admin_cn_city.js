@@ -42,8 +42,10 @@ $(function (){
     var table = $("#example").DataTable({
         processing: true,
         serverSide: true,
-        paging: false,
-        searching: false,
+        paging: true,
+        searching: true,
+        destroy: true,
+        clear: true,
         ajax: base_url + "/admin/city-data-table",
         method:'get',
         columns: [
@@ -62,6 +64,10 @@ $(function (){
                 name: "country_name",
             },
           
+            {
+                data: "action",
+                name: "action",
+            },
         ],
     });
 

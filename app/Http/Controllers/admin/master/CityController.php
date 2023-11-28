@@ -39,69 +39,41 @@ class CityController extends Controller
     }
 
 
-   
     public function data_table(Request $request)
     {
-       
-         dd('hh');
-        // $cities = Cities::with('country')->where('status', '!=', 'delete')->get();
-
-        $cities = Cities::where('status', '!=', 'delete')->get();
-
- 
-
-   
-        if ($request->ajax($$cities)){
-            return DataTables::of()
+        $cities = Cities::with('country')->where('status', '!=', 'delete')->get();
+    
+        if ($request->ajax()) {
+            return DataTables::of($cities)
                 ->addIndexColumn()
-
                 ->addColumn('city_name', function ($row) {
-                    if (!empty($row->city_name)) {
-                        return ucfirst($row->city_name);
+                    if(!empty($row->city_name)){
+                    return ucfirst($row->city_name);
+                    }
+                })
+                ->addColumn('country_name', function ($row) {
+                    if(!empty($row->city_name)){
+                    return ucfirst($row->country->country_name);
                     }
                 })
 
-                ->addColumn('country_name', function ($row){
-                    if (!empty($row->country->country_name)) {
-                        return ucfirst($row->country->country_name);
-                    }
+                ->addColumn('action', function ($row) {
+                    $editUrl = url('admin/cities/' . Crypt::encrypt($row->id) . '/edit');
+                    $actionBtn = '<a href="' . $editUrl . '">
+                        <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit">
+                            <img src="' . asset('admin/assets/img/editEntry.png') . '" alt="">
+                        </button>
+                    </a>
+                    <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="athletekar_event" data-flash="Event Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete">
+                        <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
+                    </a>';
+    
+                    return $actionBtn;
                 })
-
-          
-           
-
-
-
-
-        
-
-                // ->addColumn('status', function ($row) {
-                //     if ($row->status == 'active') {
-                //         $statusActiveBtn = '<a href="javascript:void(0)"   data-id="' . Crypt::encrypt($row->id) . '" data-table="athletekar_student" data-flash="Status Changed Successfully!"  class="change-status"  ><i class="fa fa-toggle-on tgle-on  status_button" aria-hidden="true" title=""></i></a>';
-                //         return $statusActiveBtn;
-                //     } else {
-                //         $statusBlockBtn = '<a href="javascript:void(0)"   data-id="' . Crypt::encrypt($row->id) . '" data-table="athletekar_student" data-flash="Status Changed Successfully!" class="change-status" ><i class="fa fa-toggle-off tgle-off  status_button" aria-hidden="true" title=""></></a>';
-                //         return $statusBlockBtn;
-                //     }
-                // })
-
-
-                // ->addColumn('action', function ($row) {
-                //     $actionBtn = '<a href="javascript:void(0)" data-id="' . $row->id . '" data-table="athletekar_student" data-flash="Event Deleted Successfully!" class="btn btn-danger athlete-delete btn-xs" title="Delete"><i class="fa fa-trash"></i></a>
-                //               <a href="' . url('/admin/athlete/' . Crypt::encrypt($row->id) . '/athlete-view') . '"> <button type="button" data-id="' . $row->id . '"  class="btn btn-dark btn-xs"  title="View"> <i class="fa fa-eye"></i>   </a>';
-                //     return $actionBtn;
-                // })
-
-
-                // ->rawColumns(['action', 'status'])
-
-                ->rawColumns()
+                ->rawColumns(['city_name', 'country_name','action'])
                 ->make(true);
         }
     }
-
-
-
-
+    
 
 }

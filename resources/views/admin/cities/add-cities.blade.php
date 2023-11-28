@@ -67,7 +67,6 @@
 
                                         <th scope="col" class="w-25">City Name</th>
                                         <th class="w-25">Country</th>
-                                        <th>status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
