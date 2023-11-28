@@ -95,5 +95,13 @@ Route::view('notifications', 'admin/notifications/notifications');
 // ADS & PROMO
 Route::view('ads', 'admin/ads/ads');
 
+// MANAGE REQUEST
+Route::view('manage-request', 'admin/manage-request/manage-request');
+
+// MANAGE MD FOODS
+Route::view('food-suppliers', 'admin/manage-md-foods/food-suppliers');
+Route::view('food-supplier-details', 'admin/manage-md-foods/food-supplier-details');
+
+
 
 

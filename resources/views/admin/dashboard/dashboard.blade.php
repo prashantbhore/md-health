@@ -4,7 +4,7 @@
     <div class="content-wrapper">
         <div class="page-title">Dashboard</div>
         <div class="row top-cards">
-            <div class="col mb-3 pe-0">
+            <div class="col mb-3 pe-md-0">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-3 pe-0">
+            <div class="col mb-3 pe-md-0">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-3 pe-0">
+            <div class="col mb-3 pe-md-0">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-3 pe-0">
+            <div class="col mb-3 pe-md-0">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">

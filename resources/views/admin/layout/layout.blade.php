@@ -2,7 +2,7 @@
 @include('admin.includes.navbar')
 
 <main class="sidebar-menu">
-    
+
     @include('admin.includes.sidebar')
 </main>
 @yield('content')
