@@ -16,11 +16,23 @@ use Illuminate\Support\Facades\Hash;
 
 class UpdateCustomerProfileController extends BaseController
 {
-    //
+    //update_customer_list
     public function update_customer_list()
     {
         $customer_list = CustomerRegistration::where('status', 'active')
-            ->select('first_name','last_name','city_id', 'email', 'mobile_no', 'company_address', 'password')
+            ->select('first_name',
+            'last_name',
+            'full_name',
+            'email',
+            'phone',
+            'gender',
+            'country_id',
+            'city_id',
+            'address',
+            'password',
+            'user_type')
+            // ->join('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
+            // ->join('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
             ->where('id', Auth::user()->id)
             ->first();
 
@@ -50,10 +62,12 @@ class UpdateCustomerProfileController extends BaseController
         }
     }
 
-
+    //update_customer_profile
     public function update_customer_profile(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required',
             'mobile_no' => 'required',
             'address' => 'required',
@@ -69,7 +83,7 @@ class UpdateCustomerProfileController extends BaseController
         $customer_input['first_name'] = $request->first_name;
         $customer_input['last_name'] = $request->last_name;
         $customer_input['email'] = $request->email;
-        $customer_input['mobile_no'] = $request->mobile_no;
+        $customer_input['phone'] = $request->mobile_no;
         $customer_input['address'] = $request->address;
         $customer_input['country_id'] = $request->country_id;
         $customer_input['city_id'] = $request->city_id;
@@ -111,6 +125,7 @@ class UpdateCustomerProfileController extends BaseController
         }
     }
 
+    //update_customer_password
     public function update_customer_password(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -122,7 +137,8 @@ class UpdateCustomerProfileController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        if ($request->new_password == $request->retype_new_password) {
+        if ($request->new_password == $request->retype_new_password) 
+        {
             $medical_provider_input = [];
             $medical_provider_input['password'] = Hash::make($request->new_password);
             $medical_provider_input['modified_ip_address'] = $request->ip();

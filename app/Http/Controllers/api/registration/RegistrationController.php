@@ -270,6 +270,4 @@ public function otp_verify_for_register(request $request)
             ]);
         }
     }
-
-
 }

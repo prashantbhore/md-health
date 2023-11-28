@@ -77,12 +77,12 @@
                 </a>
             </li>
             <li class="manageRequestLi">
-                <a href="{{URL::asset('/manage-request')}}" class="nav-link link-dark manageRequest">
+                <a href="{{URL::asset('admin/manage-request')}}" class="nav-link link-dark manageRequest">
                     Manage Request
                 </a>
             </li>
             <li class="manageMDfoodsLi"> 
-                <a href="{{URL::asset('/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
+                <a href="{{URL::asset('admin/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
                     Manage MDFoods
                 </a>
             </li>
