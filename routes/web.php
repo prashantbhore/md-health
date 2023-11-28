@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\master\CityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.authentication.sign-in');
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/dashboard', function (){
     return view('admin.dashboard.dashboard');
@@ -49,7 +53,13 @@ Route::view('service-provider', 'admin/medical-tourism/service-provider');
 Route::view('service-provider-details', 'admin/medical-tourism/service-provider-details');
 
 // MANAGE CITIES
-Route::view('add-cities', 'admin/cities/add-cities');
+
+Route::controller(CityController::class)->group(function (){
+    Route::get('add-cities','index');
+});
+
+
+// Route::view('add-cities', 'admin/cities/add-cities');
 
 // MANAGE CITIES
 Route::view('add-admins', 'admin/admins/add-admins');
@@ -95,5 +105,5 @@ Route::view('notifications', 'admin/notifications/notifications');
 // ADS & PROMO
 Route::view('ads', 'admin/ads/ads');
 
-
+});
 
