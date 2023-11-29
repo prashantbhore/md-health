@@ -7,22 +7,29 @@
                 <div class="card addCity">
                     <div class="card-body">
                         <div class="card-title">Add New Cities</div>
-                        <form>
+
+                        <form id="yourFormId" action="{{route('add-city')}}" method="post">
+                            @csrf
+
+                            <input type="hidden" name="id" value="{{!empty($city->id)?$city->id:''}}">
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <select class="form-control" id="countrySelect" name="country">
-                                    <option value="" selected disabled>Select Country</option>
-                                    <option value="usa">USA</option>
-                                    <option value="canada">Canada</option>
-                                    <option value="uk">United Kingdom</option>
-                                    <!-- Add more options as needed -->
+                                <select class="form-control w-100" id="countrySelect" name="country">
+                                    <option value="" disabled>Select Country</option>
+                                    @if(!empty($countries))
+                                        @foreach ($countries as $country_data)
+                                            <option value="{{ $country_data->id }}" @if(!empty($city->country->id)&&($country_data->id == $city->country->idss)) selected @endif>
+                                                {{ $country_data->country_name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             
 
                             <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="City Name">
+                            <input type="text" name="city" class="form-control" placeholder="City Name" value="{{!empty($city->city_name)?$city->city_name:''}}">
                             </div>
                           
                             <div class="col-md-12 mb-3">
@@ -30,6 +37,8 @@
                             </div>
                         </div>
                     </form>
+
+
                     </div>
                 </div>
             </div>
@@ -44,75 +53,36 @@
 
                             <select class="form-select form-select-sm">
                                 <option selected disabled hidden>Active Cities</option>
-                                <option value="1">Active Orders</option>
-                                <option value="2">Denied Orders</option>
-                                <option value="3">Completed Orders</option>
+                             
+                                    <option value="1">Active Orders</option>
+                                    <option value="2">Denied Orders</option>
+                                    <option value="3">Completed Orders</option>
+                             
                             </select>
                         </div>
+
+
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
+                                        <th scope="col" class="w-25">id</th>
+
                                         <th scope="col" class="w-25">City Name</th>
                                         <th class="w-25">Country</th>
-                                        <th></th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td scope="row">Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td class="text-end">
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">Ankara</td>
-                                        <td>Turkiye</td>
-                                        <td class="text-end">
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">Izmir</td>
-                                        <td>Turkiye</td>
-                                        <td class="text-end">
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">Antalya</td>
-                                        <td>Turkiye</td>
-                                        <td class="text-end">
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-
-
-
-
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                </ul>
-                            </nav>
+
                         </div>
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -121,7 +91,20 @@
 </section>
 @endsection
 @section('script')
+
+	<script>
+ $(document).ready(function() {
+        $('#example').DataTable();
+    });
+    </script>
+
+<script src="{{url('admin\assets\js\controllerJs\admin_cn_city.js')}}"></script>
+
+
+
 <script>
+
+
     $(".citiesLi").addClass("activeClass");
     $(".cities").addClass("md-active");
 </script>
