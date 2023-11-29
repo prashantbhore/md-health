@@ -11,19 +11,18 @@
                         <form id="yourFormId" action="{{route('add-city')}}" method="post">
                             @csrf
 
-                            <input type="hidden" name="id" value="{{!empty($city->id)?$city->id:''}}">
+                        <input type="hidden" name="id" value="{{!empty($city->id)?$city->id:''}}">
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <select class="form-control w-100" id="countrySelect" name="country">
-                                    <option value="" disabled>Select Country</option>
+                                    <option value="" selected disabled>Select Country</option>
                                     @if(!empty($countries))
-                                        @foreach ($countries as $country_data)
-                                            <option value="{{ $country_data->id }}" @if(!empty($city->country->id)&&($country_data->id == $city->country->idss)) selected @endif>
-                                                {{ $country_data->country_name }}
-                                            </option>
-                                        @endforeach
+                                    @foreach ($countries as $country_data)
+                                      <option value="{{$country_data->id}}" @if(!empty($city)&&($country_data->id == $city->country->id)) selected @endif>{{$country_data->country_name}}</option>
+                                    @endforeach
                                     @endif
+                                    <!-- Add more options as needed -->
                                 </select>
                             </div>
                             
@@ -98,9 +97,7 @@
     });
     </script>
 
-<script src="{{url('admin\assets\js\controllerJs\admin_cn_city.js')}}"></script>
-
-
+<script src="{{url('admin\controller_js\admin_cn_city.js')}}"></script>
 
 <script>
 
