@@ -28,13 +28,26 @@ class CityController extends Controller
 
     public function store(Request $request){
 
+         
+
           $input['country_id'] = $request->country;
           $input['city_name'] = $request->city;
-          $input['created_ip_address'] = $request->ip();
-      
-          $cities=Cities::create($input);
+        //   $input['created_ip_address'] = $request->ip();
+        //   $cities=Cities::create($input);
 
-          return redirect('admin/add-cities')->with('success', 'City added successfully!');
+          if (!empty($id)){
+            $input['modified_ip_address'] = $request->ip();
+            $cities=Cities::find($id)->update($input);
+            return redirect('admin/add-cities')->with('success', 'City Updated successfully!');
+          }  
+
+          if(empty($id)){
+            $input['created_ip_address'] = $request->ip();
+            $cities=Cities::create($input);
+            return redirect('admin/add-cities')->with('success', 'City added successfully!');
+          }
+
+       
        
     }
 
@@ -64,7 +77,7 @@ class CityController extends Controller
                             <img src="' . asset('admin/assets/img/editEntry.png') . '" alt="">
                         </button>
                     </a>
-                    <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="athletekar_event" data-flash="Event Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete">
+                    <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_master_cities" data-flash="City Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete">
                         <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
                     </a>';
     
@@ -73,6 +86,21 @@ class CityController extends Controller
                 ->rawColumns(['city_name', 'country_name','action'])
                 ->make(true);
         }
+    }
+
+
+
+    public function edit_city(Request $request){
+
+        $id=Crypt::decrypt($request->id);
+        $city= Cities::with('country')->where('status', '!=', 'delete')->where('id',$id)->first();
+
+        $countries = Country::where('status', 'active')
+        ->orderBy('country_name', 'asc')
+        ->get();
+
+        return view('admin.cities.add-cities',compact('countries','city'));
+
     }
     
 

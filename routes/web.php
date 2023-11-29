@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table','data_table');
+        Route::get('/cities/{id}/edit','edit_city');
     });
 
 
