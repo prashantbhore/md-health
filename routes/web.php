@@ -58,9 +58,11 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 
 
-Route::group(['prefix' => 'admin'], function () {
+// Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/dashboard', function () {
+    Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
+
+    Route::get('/dashboard', function (){
         return view('admin.dashboard.dashboard');
     });
 

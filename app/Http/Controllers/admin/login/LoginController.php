@@ -66,7 +66,7 @@ class LoginController extends Controller
     {
         Auth::logout();
         Session::flush();
-        return redirect('superadmin')->with('success', 'Logged out Successfully!');
+        return redirect('/')->with('success', 'Logged out Successfully!');
     }
     
 

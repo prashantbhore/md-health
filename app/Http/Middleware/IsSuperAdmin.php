@@ -5,6 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\SuperAdmin;
+use Session;
+use Auth;
 
 class IsSuperAdmin
 {
@@ -20,7 +23,7 @@ class IsSuperAdmin
         }
         Auth::logout();
         Session::flush();
-        return redirect('superadmin');
+        return redirect('/');
     }
 
     // public function handle(Request $request, Closure $next): Response
