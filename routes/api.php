@@ -4,12 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\registration\RegistrationController;
 use App\Http\Controllers\api\login\LoginControllers;
-use App\Http\Controllers\API\CommonController;
+use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\AppConfigController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
+use App\Http\Controllers\api\MedicalProvider\ToursController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -89,10 +91,36 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::post('md-delete-hotel', [AddNewAcommoditionController::class, 'delete_hotel']);
 
     //Transportation
-    
+
+    //master-brands
+    Route::get('md-master-brands', [TransportationController::class, 'master_brands']);
+
+    //comfort-levels-master
+    Route::get('md-comfort-levels-master', [TransportationController::class, 'comfort_levels_master']);
+
     //add-transportation-details
     Route::post('md-add-transportation-details', [TransportationController::class, 'add_transportation_details']);
 
+    //transportation-list
+    Route::get('md-transportation-list', [TransportationController::class, 'transportation_list']);
+
     //edit-transportation-details
     Route::post('md-edit-transportation-details', [TransportationController::class, 'edit_transportation_details']);
+
+    //delete-transportation
+    Route::post('md-delete-transportation', [TransportationController::class, 'delete_transportation']);
+
+    //Tour
+    //add-tour
+    Route::post('md-add-tour', [ToursController::class, 'add_tour']);
+
+    //tour-list
+    Route::get('md-tour-list', [ToursController::class, 'tour_list']);
+
+    //edit-tour-list
+    Route::post('md-edit-tour-list', [ToursController::class, 'edit_tour_list']);
+
+    //delete-tour
+    Route::post('md-delete-tour', [ToursController::class, 'delete_tour']);
+
 });

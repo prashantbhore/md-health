@@ -8,8 +8,9 @@ use App\Models\Country;
 use App\Models\Cities;
 use Validator;
 use Auth;
+use App\Http\Controllers\api\BaseController as BaseController;
 
-class CommonController extends Controller
+class CommonController extends BaseController
 {
     //
     // country List
@@ -35,21 +36,24 @@ class CommonController extends Controller
     public function get_cities_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'state_id' => 'required',
+            'country_id' => 'required',
         ]);
 
-        $validation_message = '';
+        // $validation_message = '';
 
-        if ($request->state_id == ''
-        ) {
-            $validation_message .= 'State field';
-        }
+        // if ($request->state_id == ''
+        // ) {
+        //     $validation_message .= 'State field';
+        // }
 
+        // if ($validator->fails()) {
+        //    return response()->json([
+        //         'status' => 404,
+        //         'message' =>  $validation_message .' is required.',
+        //     ]);
+        // }
         if ($validator->fails()) {
-           return response()->json([
-                'status' => 404,
-                'message' =>  $validation_message .' is required.',
-            ]);
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $cities = Cities::where('status', 'active')

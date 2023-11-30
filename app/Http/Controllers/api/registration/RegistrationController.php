@@ -12,9 +12,11 @@ use App\Traits\MediaTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\api\BaseController as BaseController;
 
 
-class RegistrationController extends Controller
+
+class RegistrationController extends BaseController
 {
     use MediaTrait;
 
@@ -32,11 +34,15 @@ class RegistrationController extends Controller
             'password' => 'required',
         ]);
 
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' =>'Validation Error.', $validator->errors(),
+        //     ]);
+        // }
+        
         if ($validator->fails()) {
-            return response()->json([
-                'status' => 404,
-                'message' =>'Validation Error.', $validator->errors(),
-            ]);
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $appkey=!empty($request->api_key)? $request->api_key:"-";
@@ -188,6 +194,10 @@ public function otp_verify_for_register(request $request)
             'company_logo_image_path' => 'required',
             'company_licence_image_path' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
 
         $email_exist = MedicalProviderRegistrater::where('status', 'active')
             ->where('email', $request->email)

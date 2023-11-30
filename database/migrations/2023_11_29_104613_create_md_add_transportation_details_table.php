@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('md_add_transportation_details', function (Blueprint $table) {
             $table->id();
-            $table->string('vehicle_brand_id')->nullable();
+            $table->bigInteger('vehicle_brand_id')->nullable();
             $table->string('vehicle_model_id')->nullable();
-            $table->string('comfort_level_id')->nullable();
+            $table->bigInteger('comfort_level_id')->nullable();
             $table->string('vehicle_per_day_price')->nullable();
             $table->string('other_services')->nullable();
+            $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();

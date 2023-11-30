@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_add_new_acommodition', function (Blueprint $table) {
+        Schema::create('md_tours', function (Blueprint $table) {
             $table->id();
-            $table->string('hotel_name')->nullable();
-            $table->string('hotel_address')->nullable();
-            $table->string('hotel_stars')->nullable();
-            $table->string('hotel_image_path')->nullable();
-            $table->string('hotel_image_name')->nullable();
-            $table->string('hotel_per_night_price')->nullable();
-            $table->string('hotel_other_services')->nullable();
-            $table->string('service_provider_id')->nullable();
+            $table->string('tour_name')->nullable();
+            $table->longText('tour_description')->nullable();
+            $table->string('tour_days')->nullable();
+            $table->string('tour_image_path')->nullable();
+            $table->string('tour_image_name')->nullable();
+            $table->string('tour_price')->nullable();
+            $table->string('tour_other_services')->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('md_add_new_acommodition');
+        Schema::dropIfExists('md_tours');
     }
 };
