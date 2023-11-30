@@ -1,7 +1,12 @@
 <?php
 
-use App\Http\Controllers\admin\master\CityController;
+
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\admin\master\CityController;
+
+use App\Http\Controllers\admin\BaseController;
+use App\Http\Controllers\admin\login\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +19,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.authentication.sign-in');
+// Laravel Development Admin
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+    return 'storage linked';
 });
+
+Route::get('clear', function (){
+    \Artisan::call('route:clear');
+    \Artisan::call('cache:clear');
+    \Artisan::call('view:clear');
+    \Artisan::call('config:clear');
+    return 'clear';
+});
+
+Route::get('common-delete', [BaseController::class, 'delete']);
+
+Route::post('change-status', [BaseController::class, 'status'])->name('change-status');
+
+// Route::get('/', function (){
+//     return view('admin.authentication.sign-in');
+// });
+
+
+
+// Super Admin authentication 
+
+Route::get('/', [LoginController::class, 'index']);
+
+Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
+
+Route::get('logout', [LoginController::class, 'logout']);
+
+
+
+
+
+
 
 
 Route::group(['prefix' => 'admin'], function () {
@@ -28,6 +67,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     // AUTHENTICATION
+
+
+
     Route::view('sign-in', 'admin/authentication/sign-in');
 
     // DASHBOARD
@@ -59,6 +101,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table','data_table');
         Route::get('/cities/{id}/edit','edit_city');
+        Route::get('city-delete','delete_city');
     });
 
 

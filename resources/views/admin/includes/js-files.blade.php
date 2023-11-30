@@ -30,6 +30,21 @@
    
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="{{URL::asset('admin\js\common\common_function.js')}}"></script>
+
+    <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
+
+    
+
+    <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
+
+  
+
+
+
+
 
 
 <script>

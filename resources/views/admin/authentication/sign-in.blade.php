@@ -14,15 +14,20 @@
                         incognito mode to log in.</p>
                 </div>
 
-                <form class="container-sm px-5">
+              
+                    
+                 <form action="{{url('super-admin-login')}}" method="post" id="loginForm"   class="container-sm px-5">
+                   @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email" aria-describedby="email">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" aria-describedby="email">
                     </div>
+
                     <div class="mb-3">
                         <label for="Password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="Password" placeholder="Password">
+                        <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
                     </div>
+
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="rememberMe">
@@ -31,7 +36,9 @@
                             </label>
                         </div>
                     </div>
-                    <a href="{{URL('admin/dashboard')}}" type="submit" class="btn save-btn w-100 df-center">Continue</a>
+
+                    {{-- <a href="{{URL('admin/dashboard')}}" type="submit" class="btn save-btn w-100 df-center">Continue</a> --}}
+                    <button type="submit" class="btn save-btn w-100 df-center">Continue</button>
                     <div class="text-center mt-3">
                     <a href="#" class="mt-3 backto">Back to MDhealth.co</a>
                     </div>

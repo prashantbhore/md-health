@@ -22,8 +22,7 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="MDhealth URL" class="mb-2">MDhealth URL</label>
-                                <!-- <input type="text" class="form-control" placeholder="MDhealth URL"> -->
-                                <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" class="form-control" />
+                                <input type="text" class="form-control" placeholder="URL">
 
                             </div>
 

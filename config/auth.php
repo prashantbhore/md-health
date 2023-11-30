@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'md_medical_provider_register',
         ],
+        'superadmin' => [
+            'driver' => 'session',
+            'provider' => 'md_super_admin',
+        ],
     ],
 
     /*
@@ -79,6 +83,11 @@ return [
         'md_medical_provider_register' => [
             'driver' => 'eloquent',
             'model' => App\Models\MedicalProviderRegistrater::class,
+        ],
+
+        'md_super_admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\SuperAdmin::class,
         ],
 
         // 'users' => [
