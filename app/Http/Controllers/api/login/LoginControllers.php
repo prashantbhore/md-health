@@ -29,13 +29,13 @@ class LoginControllers extends BaseController
         if (empty($request->password)) {
             $validation_message .= 'password field';
         }
-       
+
 
         if ($validator->fails()) {
             // return $this->sendError($validation_message . ' is required.');
             return response()->json([
                 'status' => 404,
-                'message' => $validation_message. ' is required.',
+                'message' => $validation_message . ' is required.',
             ]);
         }
 
@@ -51,8 +51,8 @@ class LoginControllers extends BaseController
 
             CustomerRegistration::where('id', $customer->id)->update([
                 // 'shop_owner_last_login' => Carbon::now(),
-                'otp_expiring_time'=> time() + 20,
-                'login_otp' => $otp,
+                'otp_expiring_time' => time() + 20,
+                // 'login_otp' => $otp,
                 'fcm_token' => $request->fcm_token,
                 'access_token' => $success['token']
             ]);
@@ -60,7 +60,7 @@ class LoginControllers extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'Login successfull.',
-                'otp'=> $otp,
+                'mobile_number' => $request->phone,
                 'success_token' => $success,
             ]);
         } else {
@@ -126,6 +126,7 @@ class LoginControllers extends BaseController
                 'status' => 200,
                 'message' => 'Login successfull.',
                 'success_token' => $success,
+                'mobile_no' => $request->mobile_no,
             ]);
         } else {
             return response()->json([
@@ -133,8 +134,5 @@ class LoginControllers extends BaseController
                 'message' => 'Unauthorised.',
             ]);
         }
-
     }
-
-
 }
