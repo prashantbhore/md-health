@@ -15,32 +15,33 @@
                 </div>
 
               
-                    
-                 <form action="{{url('super-admin-login')}}" method="post" id="loginForm"   class="container-sm px-5">
-                   @csrf
+                <form action="{{ url('super-admin-login') }}" method="post" id="loginForm" class="container-sm px-5">
+                    @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" class="form-control" name="email" id="email" placeholder="Email" aria-describedby="email">
                     </div>
-
+                
                     <div class="mb-3">
                         <label for="Password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
+                        <div class="input-group">
+                            <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
+                            <button type="button" id="togglePassword" class="btn btn-outline-secondary">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
                     </div>
-
+                
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">
-                               Remember Me
-                            </label>
+                            <label class="form-check-label" for="rememberMe">Remember Me</label>
                         </div>
                     </div>
-
-                    {{-- <a href="{{URL('admin/dashboard')}}" type="submit" class="btn save-btn w-100 df-center">Continue</a> --}}
+                
                     <button type="submit" class="btn save-btn w-100 df-center">Continue</button>
                     <div class="text-center mt-3">
-                    <a href="#" class="mt-3 backto">Back to MDhealth.co</a>
+                        <a href="#" class="mt-3 backto">Back to MDhealth.co</a>
                     </div>
                 </form>
 
@@ -54,5 +55,20 @@
 
 @endsection
 @section('script')
+<script>
+    // jQuery is assumed to be loaded in your project
+
+    $(document).ready(function () {
+        $("#togglePassword").click(function () {
+            var passwordField = $("#Password");
+            var passwordFieldType = passwordField.attr("type");
+            if (passwordFieldType === "password") {
+                passwordField.attr("type", "text");
+            } else {
+                passwordField.attr("type", "password");
+            }
+        });
+    });
+</script>
 
 @endsection
