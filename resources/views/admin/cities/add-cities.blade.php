@@ -91,11 +91,11 @@
 @endsection
 @section('script')
 
-	<script>
+	{{-- <script>
  $(document).ready(function() {
         $('#example').DataTable();
     });
-    </script>
+    </script> --}}
 
 <script src="{{url('admin\controller_js\admin_cn_city.js')}}"></script>
 

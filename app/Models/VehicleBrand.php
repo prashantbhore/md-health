@@ -10,6 +10,8 @@ class VehicleBrand extends Model
     use HasFactory;
     protected $table = 'md_master_brand';
     protected $fillable = [
+
+        'brand_category_id',
         'brand_name',
         'status',
         'created_ip_address',
@@ -17,4 +19,9 @@ class VehicleBrand extends Model
         'created_by',
         'modified_by',
     ];
+
+    public function brand_category()
+    {
+        return $this->belongsTo(BrnadCategory::class, 'brand_category_id');
+    }
 }

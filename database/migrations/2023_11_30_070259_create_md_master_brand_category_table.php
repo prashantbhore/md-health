@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_master_brand', function (Blueprint $table) {
+        Schema::create('md_master_brand_category', function (Blueprint $table) {
             $table->id();
-            $table->string('brand_unique_id')->nullable();
-            $table->string('brand_category_id')->nullable();
-            $table->string('brand_name')->nullable();
+            $table->string('category_name')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('md_master_brand');
+        Schema::dropIfExists('md_master_brand_category');
     }
 };

@@ -27,7 +27,7 @@
                         <div class="input-group">
                             <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
                             <button type="button" id="togglePassword" class="btn btn-outline-secondary">
-                                <i class="bi bi-eye"></i>
+                                <i class="fa fa-eye" style="font-size:20px"></i>
                             </button>
                         </div>
                     </div>

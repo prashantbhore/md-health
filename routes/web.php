@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\master\CityController;
 
 use App\Http\Controllers\admin\BaseController;
 use App\Http\Controllers\admin\login\LoginController;
+use App\Http\Controllers\admin\master\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,7 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 // Route::group(['prefix' => 'admin'], function () {
 
-    Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
 
     Route::get('/dashboard', function (){
         return view('admin.dashboard.dashboard');
@@ -118,7 +119,18 @@ Route::get('logout', [LoginController::class, 'logout']);
     Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
 
     // BRANDS
-    Route::view('brands', 'admin/brands/brands');
+
+    Route::controller(BrandController::class)->group(function (){
+        Route::get('brands', 'index');
+        Route::post('/add-brands', 'store')->name('add-brand');
+        Route::get('/brand-data-table','data_table');
+        Route::get('brand-delete','delete_brand');
+        Route::get('/brand/{id}/edit','edit_brand');
+    
+    });
+
+
+   
 
     // PRODUCTS AND CATEGORIES
     Route::view('products-and-categories', 'admin/products-and-categories/products-and-categories');
