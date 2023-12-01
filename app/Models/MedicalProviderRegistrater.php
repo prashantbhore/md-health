@@ -40,4 +40,9 @@ class MedicalProviderRegistrater extends Authenticatable
         'modified_by',
     ];
 
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
+    }
+
 }
