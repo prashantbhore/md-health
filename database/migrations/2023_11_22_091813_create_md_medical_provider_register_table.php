@@ -15,7 +15,7 @@ return new class extends Migration
         {
             $table->id();
             $table->string('company_name')->nullable();
-            $table->string('city_id')->nullable();
+            $table->bigInteger('city_id')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();
             $table->string('tax_no')->nullable();
