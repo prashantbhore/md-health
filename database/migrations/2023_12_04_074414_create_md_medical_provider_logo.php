@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medical_provider_account_multiple_images_videos', function (Blueprint $table) {
+        Schema::create('md_medical_provider_logo', function (Blueprint $table) {
             $table->id();
-            $table->string('provider_id')->nullable();
-            $table->string('provider_image_path')->nullable();
-            $table->string('provider_image_name')->nullable();
-            $table->string('provider_file_type')->nullable();
+            $table->bigInteger('medical_provider_id')->nullable();
+            $table->string('company_logo_image_path')->nullable();
+            $table->string('company_logo_image_name')->nullable();
+            
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medical_provider_account_multiple_images_videos');
+        Schema::dropIfExists('md_medical_provider_logo');
     }
 };

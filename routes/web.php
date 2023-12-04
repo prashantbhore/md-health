@@ -114,6 +114,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::get('service-provider', 'index');
 
         Route::get('service-provider-details','show');
+
+        Route::get('medical-tourism-data-table','data_table');
+
+        Route::get('admin/medical-tourism-details/{id}','show')->name('medical_tourism.details');
+
+        Route::get('medical-tourism-delete','delete_medical_tourism');
+
+        Route::get('medical-tourism-delete-logo','delete_logo');
+
+        Route::get('medical-tourism-delete-license','delete_license');
+
+        Route::get('medical-tourism-delete-gallery','delete_gallery');
+
+
     
      });
  
