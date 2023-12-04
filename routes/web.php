@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\master\CityController;
 
 use App\Http\Controllers\admin\BaseController;
+use App\Http\Controllers\admin\customer\CustomerController;
 use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
+use App\Http\Controllers\admin\medical_tourism\MedicalTourismController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +87,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('md-booking-sales', 'admin/sales/md-booking-sales');
 
     // MANAGE CUSTOMERS
-    Route::view('customers', 'admin/customers/customers');
+    
+    Route::controller(CustomerController::class)->group(function (){
+        
+       Route::get('customers', 'index');
+       Route::get('/customer-data-table','data_table');
+       Route::get('admin/customer-details/{id}','show')->name('customer.details');
+       Route::get('customer-delete','delete_customer');
+       Route::get('customer-details/{id}','show');
+    });
+
+
+
     Route::view('customer-details', 'admin/customers/customer-details');
 
     // MANAGE VENDORS
@@ -94,8 +107,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
 
     // MEDICAL TOURISM
-    Route::view('service-provider', 'admin/medical-tourism/service-provider');
-    Route::view('service-provider-details', 'admin/medical-tourism/service-provider-details');
+
+
+    Route::controller(MedicalTourismController::class)->group(function (){
+
+        Route::get('service-provider', 'index');
+
+        Route::get('service-provider-details','show');
+    
+     });
+ 
+
+
+  
+   
 
     // MANAGE CITIES
 

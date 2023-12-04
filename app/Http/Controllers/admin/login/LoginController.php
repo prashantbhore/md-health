@@ -15,7 +15,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return !empty(Session::has('md_super_admin*%')) ? redirect('superadmin/dashboard') :  view('admin.authentication.sign-in');
+        return !empty(Session::has('md_super_admin*%')) ? redirect('admin/dashboard') :  view('admin.authentication.sign-in');
     }
 
     //already admin lagin in browser then direct show dashboard using session

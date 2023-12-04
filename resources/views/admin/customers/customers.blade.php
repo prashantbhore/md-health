@@ -23,7 +23,7 @@
                             </select>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example"  class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Name</th>
@@ -37,115 +37,10 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">Ali Danish</th>
-                                        <td>Male</td>
-                                        <td>42</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/customer-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Koray İldeş</th>
-                                        <td>Male</td>
-                                        <td>30</td>
-                                        <td>Ankara</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/customer-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Sena Solmaz</th>
-                                        <td>female</td>
-                                        <td>26</td>
-                                        <td>Kocaeli</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/customer-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Ali Danish</th>
-                                        <td>Male</td>
-                                        <td>42</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/customer-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Koray İldeş</th>
-                                        <td>Male</td>
-                                        <td>30</td>
-                                        <td>Ankara</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/customer-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Sena Solmaz</th>
-                                        <td>female</td>
-                                        <td>26</td>
-                                        <td>Kocaeli</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/customer-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
 
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                </ul>
-                            </nav>
+                    
 
 
                         </div>
@@ -157,6 +52,7 @@
 </section>
 @endsection
 @section('script')
+<script src="{{url('admin\controller_js\admin_cn_customer.js')}}"></script>
 <script>
     $(".manageCustomersLi").addClass("activeClass");
     $(".manageCustomers").addClass("md-active");
