@@ -11,6 +11,8 @@ use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
+use App\Http\Controllers\api\MedicalProvider\PackageControllers;
+
 
 
 /*
@@ -123,4 +125,13 @@ Route::middleware('auth:sanctum')->group(function ()
     //delete-tour
     Route::post('md-delete-tour', [ToursController::class, 'delete_tour']);
 
+    //packages
+    //add-packages
+    Route::post('md-add-packages', [PackageControllers::class, 'add_packages']);
+
+    Route::get('md-packages-active-list', [PackageControllers::class, 'packages_active_list']);
+
+    Route::get('md-packages-deactive-list', [PackageControllers::class, 'packages_deactive_list']);
+
+    Route::post('md-edit-packages', [PackageControllers::class, 'add_packages']);
 });
