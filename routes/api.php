@@ -57,10 +57,12 @@ Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_prov
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function ()
 {
-    //update-medical-profile-list
+    //customers
+
+    //update-customer-list
     Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 
-    //check-password-medical-provider 
+    //check-password-exist 
     Route::post('md-check-password-exist', [UpdateCustomerProfileController::class, 'check_password_exist']);
 
     //update-customer-profile
@@ -69,6 +71,8 @@ Route::middleware('auth:sanctum')->group(function ()
     //update-customer-password
     Route::post('md-update-customer-password', [UpdateCustomerProfileController::class, 'update_customer_password']);
 
+
+    //medical-provider
     //update-medical-profile-list
     Route::get('md-update-medical-profile-list', [UpdateMedicalProfileController::class, 'update_medical_profile_list']);
 
@@ -80,7 +84,6 @@ Route::middleware('auth:sanctum')->group(function ()
 
 
     //other-services
-
     //add-new-acommodition-hotel
     Route::post('md-add-new-acommodition', [AddNewAcommoditionController::class, 'add_new_acommodition']);
 
@@ -142,5 +145,11 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-packages-view-deactive-list', [PackageControllers::class, 'packages_view_deactive_list']);
 
     //edit-packages
-    Route::post('md-edit-packages', [PackageControllers::class, 'add_packages']);
+    Route::post('md-edit-packages', [PackageControllers::class, 'edit_packages']);
+
+    //activate-to-deactivate-packages
+    Route::post('md-activate-to-deactivate-packages', [PackageControllers::class, 'activate_to_deactivate_packages']);
+
+    //deactivate-to-activate-packages
+    Route::post('md-deactivate-to-activate-packages', [PackageControllers::class, 'deactivate_to_activate_packages']);
 });

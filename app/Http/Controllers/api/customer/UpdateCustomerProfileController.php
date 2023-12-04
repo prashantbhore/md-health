@@ -19,20 +19,25 @@ class UpdateCustomerProfileController extends BaseController
     //update_customer_list
     public function update_customer_list()
     {
-        $customer_list = CustomerRegistration::where('status', 'active')
-            ->select('first_name',
-            'last_name',
-            'full_name',
-            'email',
-            'phone',
-            'gender',
-            'country_id',
-            'city_id',
-            'address',
-            'password',
-            'user_type')
-            // ->join('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
-            // ->join('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
+        $customer_list = CustomerRegistration::where('md_customer_registration.status', 'active')
+            ->select(
+                'md_customer_registration.id',
+                'md_customer_registration.first_name',
+                'md_customer_registration.last_name',
+                'md_customer_registration.full_name',
+                'md_customer_registration.email',
+                'md_customer_registration.phone',
+                'md_customer_registration.gender',
+                'md_master_country.country_name',
+                'md_master_cities.city_name',
+                'md_customer_registration.country_id',
+                'md_customer_registration.city_id',
+                'md_customer_registration.address',
+                'md_customer_registration.password',
+                'md_customer_registration.user_type'
+            )
+            ->join('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
+            ->join('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
             ->where('id', Auth::user()->id)
             ->first();
 
@@ -69,7 +74,7 @@ class UpdateCustomerProfileController extends BaseController
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'mobile_no' => 'required',
+            'phone' => 'required',
             'address' => 'required',
             'country_id' => 'required',
             'city_id' => 'required',
@@ -83,7 +88,7 @@ class UpdateCustomerProfileController extends BaseController
         $customer_input['first_name'] = $request->first_name;
         $customer_input['last_name'] = $request->last_name;
         $customer_input['email'] = $request->email;
-        $customer_input['phone'] = $request->mobile_no;
+        $customer_input['phone'] = $request->phone;
         $customer_input['address'] = $request->address;
         $customer_input['country_id'] = $request->country_id;
         $customer_input['city_id'] = $request->city_id;

@@ -178,33 +178,10 @@ class PackageControllers extends BaseController
         ->select(
             'md_packages.id',
             'md_packages.package_unique_no',
-            // 'md_packages.city_id',
             'md_packages.package_name',
-            // 'md_packages.treatment_category_id',
-            // 'md_packages.treatment_id',
-            // 'md_packages.other_services',
-            // 'md_packages.treatment_period_in_days',
-            // 'md_packages.treatment_price',
-            // 'md_packages.hotel_id',
-            // 'md_packages.hotel_in_time',
-            // 'md_packages.hotel_out_time',
-            // 'md_packages.hotel_acommodition_price',
-            // 'md_packages.vehicle_id',
-            // 'md_packages.vehicle_in_time',
-            // 'md_packages.vehicle_out_time',
-            // 'md_packages.transportation_acommodition_price',
-            // 'md_packages.visa_details',
-            // 'md_packages.visa_service_price',
-            // 'md_packages.package_discount',
-            // 'md_packages.package_price',
-            // 'md_packages.sale_price',
-            // 'md_packages.platform_type',
             'md_packages.status',
-            // 'md_add_new_acommodition.hotel_name',
-            // 'md_add_transportation_details.vehicle_model_id',
         )
-        // ->join('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
-        // ->join('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
+        // ->where('created_by', Auth::user()->id)
         ->get();
 
        
@@ -228,33 +205,10 @@ class PackageControllers extends BaseController
         ->select(
             'md_packages.id',
             'md_packages.package_unique_no',
-            // 'md_packages.city_id',
             'md_packages.package_name',
-            // 'md_packages.treatment_category_id',
-            // 'md_packages.treatment_id',
-            // 'md_packages.other_services',
-            // 'md_packages.treatment_period_in_days',
-            // 'md_packages.treatment_price',
-            // 'md_packages.hotel_id',
-            // 'md_packages.hotel_in_time',
-            // 'md_packages.hotel_out_time',
-            // 'md_packages.hotel_acommodition_price',
-            // 'md_packages.vehicle_id',
-            // 'md_packages.vehicle_in_time',
-            // 'md_packages.vehicle_out_time',
-            // 'md_packages.transportation_acommodition_price',
-            // 'md_packages.visa_details',
-            // 'md_packages.visa_service_price',
-            // 'md_packages.package_discount',
-            // 'md_packages.package_price',
-            // 'md_packages.sale_price',
-            // 'md_packages.platform_type',
             'md_packages.status',
-            // 'md_add_new_acommodition.hotel_name',
-            // 'md_add_transportation_details.vehicle_model_id',
         )
-        // ->join('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
-        // ->join('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
+        // ->where('created_by', Auth::user()->id)
         ->get();
 
         if (!empty($packages_deactive_list)) {
@@ -383,10 +337,70 @@ class PackageControllers extends BaseController
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Something went wrong. Details not found.',
+                'message' => 'Something went wrong. details not found.',
             ]);
         }
     }
+
+    public function activate_to_deactivate_packages(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $status_update['status'] = 'inactive';
+        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_ip_address'] = $request->ip();
+
+        $activate_to_deactive_packages = Packages::where('id', $request->id)->update($status_update);
+        if (!empty($activate_to_deactive_packages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'package is added in deactive list.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. package not added.',
+            ]);
+        }
+    }
+
+
+    public function deactivate_to_activate_packages(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $status_update['status'] = 'active';
+        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_ip_address'] = $request->ip();
+
+        $activate_to_deactive_packages = Packages::where('id', $request->id)->update($status_update);
+        if (!empty($activate_to_deactive_packages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'package is added in active list.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. package not added.',
+            ]);
+        }
+    }
+
+
+
 
 }
 

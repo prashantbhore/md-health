@@ -185,7 +185,7 @@ class RegistrationController extends BaseController
             'company_name' => 'required',
             'city_id' => 'required',
             'email' => 'required',
-            'mobile_no' => 'required',
+            'phone' => 'required',
             'tax_no' => 'required',
             'company_address' => 'required',
             'password' => 'required',
@@ -208,7 +208,7 @@ class RegistrationController extends BaseController
             ]);
         } else {
             $phone_exist = MedicalProviderRegistrater::where('status', 'active')
-                ->where('mobile_no', $request->mobile_no)
+                ->where('mobile_no', $request->phone)
                 ->first();
 
             if (!empty($phone_exist)) {
@@ -223,7 +223,7 @@ class RegistrationController extends BaseController
         $md_provider_input['company_name'] = $request->company_name;
         $md_provider_input['city_id'] = $request->city_id;
         $md_provider_input['email'] = $request->email;
-        $md_provider_input['mobile_no'] = $request->mobile_no;
+        $md_provider_input['mobile_no'] = $request->phone;
         $md_provider_input['tax_no'] = $request->tax_no;
         $md_provider_input['company_address'] = $request->company_address;
         $md_provider_input['password'] = Hash::make($request->password);
@@ -244,7 +244,7 @@ class RegistrationController extends BaseController
         $md_provider_input['modified_ip_address'] = $request->ip();
         $md_provider_registration = MedicalProviderRegistrater::create($md_provider_input);
         if (Auth::guard('md_health_medical_providers_registers')->attempt([
-            'mobile_no' => $request->mobile_no,
+            'mobile_no' => $request->phone,
             'status' => 'active',
             'password' => $request->password
         ])) {
