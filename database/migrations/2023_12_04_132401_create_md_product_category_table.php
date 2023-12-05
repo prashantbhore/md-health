@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('md_product_category', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('main_product_category_id')->nullable();
+            $table->string('product_unique_id')->nullable();
             $table->string('product_category_name')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
