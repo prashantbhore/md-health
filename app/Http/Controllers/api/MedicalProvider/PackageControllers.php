@@ -32,9 +32,9 @@ class PackageControllers extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-        $package_exist_or_not=Packages::where('status','active')
+        $package_exist_or_not = Packages::where('status', '!=', 'delete')
         ->where('package_name', $request->package_name)
-        ->first();
+            ->first();
 
        if(empty($package_exist_or_not)){
             if (!empty($request->button_type)) {
@@ -340,6 +340,107 @@ class PackageControllers extends BaseController
                 'message' => 'Something went wrong. details not found.',
             ]);
         }
+    }
+
+
+    public function edit_packages(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'button_type' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        
+
+        // if (empty($package_exist_or_not)) {
+            if (!empty($request->button_type)) {
+                if ($request->button_type == 'active') {
+                    $package_input = [];
+                    $package_input['package_name'] = $request->package_name;
+                    $package_input['treatment_category_id'] = $request->treatment_category_id;
+                    $package_input['treatment_id'] = $request->treatment_id;
+                    $package_input['other_services'] = $request->other_services;
+                    $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
+                    $package_input['treatment_price'] = $request->treatment_price;
+                    $package_input['hotel_id'] = $request->hotel_id;
+                    $package_input['hotel_in_time'] = $request->hotel_in_time;
+                    $package_input['hotel_out_time'] = $request->hotel_out_time;
+                    $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
+                    $package_input['vehicle_id'] = $request->vehicle_id;
+                    $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                    $package_input['vehicle_out_time'] = $request->vehicle_out_time;
+                    $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
+                    $package_input['visa_details'] = $request->visa_details;
+                    $package_input['visa_service_price'] = $request->visa_service_price;
+                    $package_input['package_discount'] = $request->package_discount;
+                    $package_input['package_price'] = $request->package_price;
+                    $package_input['sale_price'] = $request->sale_price;
+                    $package_input['platform_type'] = $request->platform_type;
+                    $package_input['created_by'] = Auth::user()->id;
+                    $edit_packages= Packages::where('id', $request->id)->update($package_input);
+                    if (!empty($edit_packages)) {
+                        return response()->json([
+                            'status' => 200,
+                            'message' => 'Package updated successfully.',
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 404,
+                            'message' => 'Package not updated.something went wrong',
+                        ]);
+                    }
+                } else {
+                    $package_input = [];
+                    $package_input['package_name'] = $request->package_name;
+                    $package_input['treatment_category_id'] = $request->treatment_category_id;
+                    $package_input['treatment_id'] = $request->treatment_id;
+                    $package_input['other_services'] = $request->other_services;
+                    $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
+                    $package_input['treatment_price'] = $request->treatment_price;
+                    $package_input['hotel_id'] = $request->hotel_id;
+                    $package_input['hotel_in_time'] = $request->hotel_in_time;
+                    $package_input['hotel_out_time'] = $request->hotel_out_time;
+                    $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
+                    $package_input['vehicle_id'] = $request->vehicle_id;
+                    $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                    $package_input['vehicle_out_time'] = $request->vehicle_out_time;
+                    $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
+                    $package_input['visa_details'] = $request->visa_details;
+                    $package_input['visa_service_price'] = $request->visa_service_price;
+                    $package_input['package_discount'] = $request->package_discount;
+                    $package_input['package_price'] = $request->package_price;
+                    $package_input['sale_price'] = $request->sale_price;
+                    $package_input['platform_type'] = $request->platform_type;
+                    $package_input['status'] = $request->button_type;
+                    $package_input['created_by'] = Auth::user()->id;
+                    $edit_packages = Packages::where('id', $request->id)->update($package_input);
+                    if (!empty($edit_packages)) {
+                        return response()->json([
+                            'status' => 200,
+                            'message' => 'Package updated successfully.',
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 404,
+                            'message' => 'Package not updated.something went wrong',
+                        ]);
+                    }
+                }
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'please click button type either active or inactive',
+                ]);
+            }
+        // } else {
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' => 'package name already exist',
+        //     ]);
+        // }
     }
 
     public function activate_to_deactivate_packages(Request $request)
