@@ -13,6 +13,7 @@ class ProductCategory extends Model
 
     protected $fillable = [
           'main_product_category_id',
+          'product_unique_id',
           'product_category_name',
            'status',
           'created_ip_address',

@@ -10,6 +10,12 @@ use App\Http\Controllers\admin\customer\CustomerController;
 use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
 use App\Http\Controllers\admin\medical_tourism\MedicalTourismController;
+use App\Http\Controllers\admin\product\MDfoodController;
+use App\Http\Controllers\admin\product\MDhealthController;
+use App\Http\Controllers\admin\product\MDHomeServiceController;
+use App\Http\Controllers\admin\product\MDshopController;
+use App\Http\Controllers\admin\product\ProductCategoryController;
+use App\Http\Controllers\admin\product\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,26 +116,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
     Route::controller(MedicalTourismController::class)->group(function (){
-
         Route::get('service-provider', 'index');
-
         Route::get('service-provider-details','show');
-
         Route::get('medical-tourism-data-table','data_table');
-
         Route::get('admin/medical-tourism-details/{id}','show')->name('medical_tourism.details');
-
         Route::get('medical-tourism-delete','delete_medical_tourism');
-
         Route::get('medical-tourism-delete-logo','delete_logo');
-
         Route::get('medical-tourism-delete-license','delete_license');
-
         Route::get('medical-tourism-delete-gallery','delete_gallery');
-
-
-    
-     });
+ });
  
 
 
@@ -172,13 +167,57 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
    
 
     // PRODUCTS AND CATEGORIES
-    Route::view('products-and-categories', 'admin/products-and-categories/products-and-categories');
+
+    Route::controller(ProductController::class)->group(function (){
+        Route::get('products-and-categories','index');
+    
+    });
+
+
+ 
+
     # Categories
-    Route::view('category-mdhealth', 'admin/products-and-categories/categories/mdhealth');
-    Route::view('category-mdshop', 'admin/products-and-categories/categories/mdshop');
-    Route::view('category-mdfood', 'admin/products-and-categories/categories/mdfood');
+
+
+    
+    Route::controller(MDhealthController::class)->group(function (){
+        Route::get('category-mdhealth','index');
+
+        Route::post('category-mdhealth-store','store')->name('category.mdhealth.store');
+    });
+
+
+    Route::controller(MDshopController::class)->group(function (){
+        Route::get('category-mdshop','index');
+    });
+
+
+    Route::controller(MDfoodController::class)->group(function (){
+        Route::get('category-mdfood', 'index');
+    });
+
+
+
+    Route::controller(MDHomeServiceController::class)->group(function (){
+        Route::get('category-home-service', 'index');
+    });
+
+
+
+
+
+
+
+
+
+
+   
+
+
+    
+
     Route::view('category-mdbooking', 'admin/products-and-categories/categories/mdbooking');
-    Route::view('category-home-service', 'admin/products-and-categories/categories/home-service');
+   
     # Products
     Route::view('product-mdhealth', 'admin/products-and-categories/products/mdhealth');
     Route::view('product-details', 'admin/products-and-categories/products/product-details');

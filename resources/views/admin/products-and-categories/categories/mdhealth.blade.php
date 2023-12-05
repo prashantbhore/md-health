@@ -1,4 +1,23 @@
 @extends('admin.layout.layout') @section("content")
+
+<style>
+    .remove-treatment {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #fff;
+        background-color: #dc3545;
+        border: 1px solid #dc3545;
+        border-radius: 0.25rem;
+    }
+
+.error {
+    color: red;
+  }
+</style>
 <section class="main-content">
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
@@ -7,6 +26,7 @@
         </div>
 
         <div class="row top-cards productsPage">
+
             <div class="col mb-3">
                 <div class="card bg-green position-relative">
                     <div class="card-body">
@@ -53,7 +73,8 @@
                     </div>
                 </a>
             </div>
-            <div class="col mb-3">
+
+            <!-- <div class="col mb-3">
                 <a href="{{URL('admin/category-mdbooking')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
@@ -69,7 +90,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
+
+
             <div class="col mb-3">
                 <a href="{{URL('admin/category-home-service')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
@@ -87,6 +110,8 @@
                     </div>
                 </a>
             </div>
+
+
             <div class="col mb-3">
                 <div class="add-brands-btn h-100">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#addNewCategoryModal" class="btn add-brand-btn">
@@ -180,17 +205,23 @@
                 <div class="modal-body px-4">
                     <h4 class="mb-4 md-fw-bold">Add New Category for MD<span class="fw-light">health</span></h4>
 
-                    <form>
+                    <form action="{{route('category.mdhealth.store')}}" method="post">
+                        @csrf
+
+                        <input type="hidden"  name="main_category_id" value="1">
+
+
                         <div class="mb-3">
                             <label for="brand" class="form-label">*Category Name</label>
-                            <input type="text" class="form-control" placeholder="Category Name" />
+                            <input type="text" name="category_name" class="form-control" placeholder="Category Name" />
                         </div>
+
                         <div class="mb-3 treatmentsAdd">
                             <label for="brand" class="form-label">*Treatments</label>
-                            <input type="text" class="form-control" placeholder="Treatments" />
-                            <input type="text" class="form-control" placeholder="Treatments" />
+                            <input type="text" name="treatments[]" class="form-control" placeholder="Treatments" />
+                            <input type="text" name="treatments[]" class="form-control" placeholder="Treatments" />
                             <div class="input-group">
-                                <input type="text" class="form-control border-end-0" placeholder="Treatments" aria-label="Treatments" aria-describedby="addTreatment" />
+                                <input type="text" name="treatments[]" class="form-control border-end-0" placeholder="Treatments" aria-label="Treatments" aria-describedby="addTreatment" />
                                 <span class="input-group-text border-start-0" id="addTreatment">+</span>
                             </div>
                         </div>
@@ -205,6 +236,7 @@
     </div>
 </section>
 @endsection @section('script')
+<script src="{{url('admin\controller_js\admin_cn_product_md_health.js')}}"></script>
 <script>
     $(".productsNcategoriesLi").addClass("activeClass");
     $(".productsNcategories").addClass("md-active");
