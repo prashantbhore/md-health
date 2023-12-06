@@ -1,5 +1,5 @@
 @extends('admin.layout.layout') @section("content")
-<section class="main-content">
+<section class="main-content cityPage">
     <div class="content-wrapper">
         <div class="page-title">Manage Cities</div>
         <div class="row top-cards ">
@@ -11,31 +11,31 @@
                         <form id="yourFormId" action="{{route('add-city')}}" method="post">
                             @csrf
 
-                        <input type="hidden" name="id" value="{{!empty($city->id)?$city->id:''}}">
+                            <input type="hidden" name="id" value="{{!empty($city->id)?$city->id:''}}">
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <select class="form-control w-100" id="countrySelect" name="country">
-                                    <option value="" selected disabled>Select Country</option>
-                                    @if(!empty($countries))
-                                    @foreach ($countries as $country_data)
-                                      <option value="{{$country_data->id}}" @if(!empty($city)&&($country_data->id == $city->country->id)) selected @endif>{{$country_data->country_name}}</option>
-                                    @endforeach
-                                    @endif
-                                    <!-- Add more options as needed -->
-                                </select>
-                            </div>
-                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <select class="form-control w-100" id="countrySelect" name="country">
+                                        <option value="" selected disabled>Select Country</option>
+                                        @if(!empty($countries))
+                                        @foreach ($countries as $country_data)
+                                        <option value="{{$country_data->id}}" @if(!empty($city)&&($country_data->id == $city->country->id)) selected @endif>{{$country_data->country_name}}</option>
+                                        @endforeach
+                                        @endif
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
 
-                            <div class="col-md-6 mb-3">
-                            <input type="text" name="city" class="form-control" placeholder="City Name" value="{{!empty($city->city_name)?$city->city_name:''}}">
+
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" name="city" class="form-control" placeholder="City Name" value="{{!empty($city->city_name)?$city->city_name:''}}">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <button type="submit" class="btn deactivate-btn w-100">Add City</button>
+                                </div>
                             </div>
-                          
-                            <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn deactivate-btn w-100">Add City</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
 
 
                     </div>
@@ -52,11 +52,11 @@
 
                             <select class="form-select form-select-sm">
                                 <option selected disabled hidden>Active Cities</option>
-                             
-                                    <option value="1">Active Orders</option>
-                                    <option value="2">Denied Orders</option>
-                                    <option value="3">Completed Orders</option>
-                             
+
+                                <option value="1">Active Orders</option>
+                                <option value="2">Denied Orders</option>
+                                <option value="3">Completed Orders</option>
+
                             </select>
                         </div>
 
@@ -91,7 +91,7 @@
 @endsection
 @section('script')
 
-	{{-- <script>
+{{-- <script>
  $(document).ready(function() {
         $('#example').DataTable();
     });
@@ -100,8 +100,6 @@
 <script src="{{url('admin\controller_js\admin_cn_city.js')}}"></script>
 
 <script>
-
-
     $(".citiesLi").addClass("activeClass");
     $(".cities").addClass("md-active");
 </script>

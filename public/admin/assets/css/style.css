@@ -125,6 +125,7 @@ table,
     align-items: center;
     justify-content: center;
 }
+
 .df-center-end {
     display: flex;
     align-items: center;
@@ -238,6 +239,7 @@ table,
     font-size: 14px;
     background-color: #fff;
 }
+
 .navbar {
     background: #000002;
 }
@@ -417,13 +419,14 @@ table td {
 .main-content .container2 {
     min-height: calc(100vh - 100px);
 }
+
 .md-sidebar {
     border-radius: 5px;
     background: #fff;
     /* box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25); */
     padding-bottom: 0rem !important;
     height: 83vh;
-} 
+}
 
 .sidebar-title {
     font-size: 16px;
@@ -1369,4 +1372,67 @@ table td {
     font-weight: 500;
     line-height: 14px;
     letter-spacing: -0.07em;
+}
+
+.table>:not(caption)>*>*,
+.table>:not(:last-child)>:last-child>*,
+table.dataTable.no-footer {
+    border-color: #d6d6d6 !important;
+    padding-left: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+}
+
+.dataTable thead tr th {
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    color: #9a9a9a;
+}
+
+.dataTable .btn {
+    padding: 0;
+    border: unset;
+}
+
+.dataTable .btn-warning {
+    background-color: unset;
+    border-color: unset;
+    /* border: unset; */
+}
+
+.dataTable .btn-warning:hover,
+.dataTable .btn-warning:focus,
+.dataTable .btn-danger:hover,
+.dataTable .btn-danger:focus .dataTable .btn-success:hover,
+.dataTable .btn-success:focus {
+    background-color: unset;
+    box-shadow: none;
+}
+
+
+.cityPage table.dataTable tbody th:nth-child(4),
+.cityPage table.dataTable tbody td:nth-child(4) {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    width: 195px;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #ededed;
+    font-family: "Campton", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: center;
 }
