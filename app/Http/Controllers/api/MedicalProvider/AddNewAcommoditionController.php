@@ -10,7 +10,7 @@ use App\Traits\MediaTrait;
 use Str;
 use Auth;
 use App\Models\AddNewAcommodition;
-
+use Storage;
 
 class AddNewAcommoditionController extends BaseController
 {
@@ -77,6 +77,18 @@ class AddNewAcommoditionController extends BaseController
             'status',
             )
             ->get();
+
+        if (!empty($AcommoditionHotelList)) {
+            foreach ($AcommoditionHotelList as $key => $value) {
+                $AcommoditionHotelList[$key]['hotel_name'] = ($value->hotel_name);
+                $AcommoditionHotelList[$key]['hotel_address'] = ($value->hotel_address);
+                $AcommoditionHotelList[$key]['hotel_stars'] = ($value->hotel_stars);
+                $AcommoditionHotelList[$key]['hotel_image_path'] = url('/') . Storage::url($value->hotel_image_path);
+                $AcommoditionHotelList[$key]['hotel_per_night_price'] = ($value->hotel_per_night_price);
+                $AcommoditionHotelList[$key]['hotel_other_services'] = ($value->hotel_other_services);
+            }
+        }
+            
 
         if (!empty($AcommoditionHotelList)) {
             return response()->json([

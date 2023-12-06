@@ -21,26 +21,26 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" /> --}}
-    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-   
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" /> --}}
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-    <script src="{{URL::asset('admin\js\common\common_function.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
+<script src="{{URL::asset('admin\js\common\common_function.js')}}"></script>
 
-    
+<script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
 
-    <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
 
-  
+
+<script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
+
+
 
 
 
@@ -48,99 +48,111 @@
 
 
 <script>
-    // $(document).ready(function() {
-    //     $('select').niceSelect();
-    // });
+  // $(document).ready(function() {
+  //     $('select').niceSelect();
+  // });
+</script>
+
+<script>
+  var titleElement = document.getElementById("example_filter");
+  var titleChildren = titleElement.getElementsByTagName("label");
+
+  // Do something with children.
+  // In your example code, you'll only have one element returned
+  console.log(titleChildren[0].innerHTML);
+
+  // To change the text, simply access the innerHTML property
+  titleChildren[0].innerHTML = " ";
 </script>
 
 <script type="text/javascript">
-    const lightbox = GLightbox({
-        touchNavigation: true,
-        // loop: true,
-        autoplayVideos: true
-    });
+  const lightbox = GLightbox({
+    touchNavigation: true,
+    // loop: true,
+    autoplayVideos: true
+  });
 </script>
 
 <!-- COPY TO CLIPBOARD -->
 <script>
-    function copyToClipboard() {
-        var textBox = document.getElementById("ibanNo");
-        textBox.select();
-        document.execCommand("copy");
-    }
+  function copyToClipboard() {
+    var textBox = document.getElementById("ibanNo");
+    textBox.select();
+    document.execCommand("copy");
+  }
 </script>
 
 
 <noscript>
-    <style>
-        /**
+  <style>
+    /**
     * Reinstate scrolling for non-JS clients
     */
-        .simplebar-content-wrapper {
-            scrollbar-width: auto;
-            -ms-overflow-style: auto;
-        }
+    .simplebar-content-wrapper {
+      scrollbar-width: auto;
+      -ms-overflow-style: auto;
+    }
 
-        .simplebar-content-wrapper::-webkit-scrollbar,
-        .simplebar-hide-scrollbar::-webkit-scrollbar {
-            display: initial;
-            width: initial;
-            height: initial;
-        }
-    </style>
+    .simplebar-content-wrapper::-webkit-scrollbar,
+    .simplebar-hide-scrollbar::-webkit-scrollbar {
+      display: initial;
+      width: initial;
+      height: initial;
+    }
+  </style>
 </noscript>
 
 
 <script>
-    @if(Session::has('success'))
-    toastr.options = {
-      "closeButton": true,
-      "progressBar": true,
-      "positionClass": "toast-bottom-right",
-    }
-    toastr.success("{{ session('success') }}");
-    @endif
-  
-    @if(Session::has('error'))
-    toastr.options = {
-      "closeButton": true,
-      "progressBar": true,
-      "positionClass": "toast-bottom-right",
-    }
-    toastr.error("{{ session('error') }}");
-    @endif
-  </script>
+  @if(Session::has('success'))
+  toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+  }
+  toastr.success("{{ session('success') }}");
+  @endif
+
+  @if(Session::has('error'))
+  toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+  }
+  toastr.error("{{ session('error') }}");
+  @endif
+</script>
 
 <script>
-    function success_toast(title = '', message = '') {
-      $.toast({
-        heading: title,
-        text: message,
-        icon: 'success',
-        loader: true, // Change it to false to disable loader
-        loaderBg: '#9EC600', // To change the background,
-        position: "bottom-right"
-      });
-    }
-  
-    function fail_toast(title = '', message = '') {
-      $.toast({
-        heading: title,
-        text: message,
-        icon: 'error',
-        loader: true, // Change it to false to disable loader
-        loaderBg: '#9EC600', // To change the background,
-        position: "bottom-right"
-      });
-    }
-  </script>
+  function success_toast(title = '', message = '') {
+    $.toast({
+      heading: title,
+      text: message,
+      icon: 'success',
+      loader: true, // Change it to false to disable loader
+      loaderBg: '#9EC600', // To change the background,
+      position: "bottom-right"
+    });
+  }
+
+  function fail_toast(title = '', message = '') {
+    $.toast({
+      heading: title,
+      text: message,
+      icon: 'error',
+      loader: true, // Change it to false to disable loader
+      loaderBg: '#9EC600', // To change the background,
+      position: "bottom-right"
+    });
+  }
+</script>
 
 <script>
-var base_url = $("#base_url").val();
+  var base_url = $("#base_url").val();
 </script>
 
 <script>
   $(document).ready(function() {
-         $('#example').DataTable();
-     });
-  </script>
+    $('#example').DataTable();
+  });
+</script>

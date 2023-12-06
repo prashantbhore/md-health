@@ -15,7 +15,7 @@ class ProductCategory extends Model
           'main_product_category_id',
           'product_unique_id',
           'product_category_name',
-           'status',
+          'status',
           'created_ip_address',
           'modified_ip_address',
           'created_by',

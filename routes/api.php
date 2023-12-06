@@ -129,6 +129,12 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-delete-tour', [ToursController::class, 'delete_tour']);
 
     //packages
+    //treatment-category-list
+    Route::get('md-treatment-category-list', [PackageControllers::class, 'treatment_category_list']);
+
+    //treatment-list
+    Route::post('md-treatment-list', [PackageControllers::class, 'treatment_list']);
+
     //add-packages
     Route::post('md-add-packages', [PackageControllers::class, 'add_packages']);
 

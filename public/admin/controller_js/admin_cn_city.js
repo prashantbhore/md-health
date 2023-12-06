@@ -38,7 +38,7 @@
 
 $(function (){
     var table = $("#example").DataTable({
-        processing: true,
+        processing: false,
         serverSide: true,
         paging: true,
         searching: true,
