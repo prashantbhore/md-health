@@ -328,6 +328,8 @@ class PackageControllers extends BaseController
         )
         ->join('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
         ->join('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
+        ->join('md_product_category', 'md_product_category.id', '=', 'md_packages.treatment_category_id')
+        ->join('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
         ->where('md_packages.id',$request->id)
         ->first();
 
@@ -385,8 +387,8 @@ class PackageControllers extends BaseController
             'md_add_new_acommodition.hotel_name',
             'md_add_transportation_details.vehicle_model_id',
         )
-            ->join('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
-            ->join('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
+            ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
+            ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
             ->where('md_packages.id', $request->id)
             ->first();
 
@@ -563,7 +565,134 @@ class PackageControllers extends BaseController
     }
 
 
+    public function packages_active_list_search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'package_search' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $packages_active_list_search = Packages::where('md_packages.status', 'active')
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+        )
+            ->where('md_packages.package_name', 'like', '%' . $request->package_search . '%')
+            // ->where('created_by', Auth::user()->id)
+            ->get();
+
+        if (!empty($packages_active_list_search)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'package list found.',
+                'packages_deactive_list' => $packages_active_list_search,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. list not found.',
+            ]);
+        }
+    }
+
+
+    public function packages_inactive_list_search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'package_search' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $packages_inactive_list_search = Packages::where('md_packages.status', 'inactive')
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+        )
+            ->where('md_packages.package_name', 'like', '%' . $request->package_search . '%')
+            // ->where('created_by', Auth::user()->id)
+            ->get();
+
+        if (!empty($packages_inactive_list_search)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'package list found.',
+                'packages_deactive_list' => $packages_inactive_list_search,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. list not found.',
+            ]);
+        }
+    }
+
+
+    public function get_acommodition_price(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $hotel_price=AddNewAcommodition::where('status','active')
+        ->select('id','hotel_per_night_price')
+        ->where('id',$request->id)
+        ->first();
+
+        if (!empty($hotel_price)) {
+            return response()->json([
+                'status' => 200,
+                'price' => $hotel_price,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+        
+    }
+
+    public function get_transportation_price(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $hotel_price = TransportationDetails::where('status', 'active')
+            ->select('id', 'vehicle_per_day_price')
+            ->where('id', $request->id)
+            ->first();
+
+        if (!empty($hotel_price)) {
+            return response()->json([
+                'status' => 200,
+                'price' => $hotel_price,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
 
 }
 

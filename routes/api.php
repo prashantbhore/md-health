@@ -58,7 +58,6 @@ Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_prov
 Route::middleware('auth:sanctum')->group(function ()
 {
     //customers
-
     //update-customer-list
     Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 
@@ -71,7 +70,6 @@ Route::middleware('auth:sanctum')->group(function ()
     //update-customer-password
     Route::post('md-update-customer-password', [UpdateCustomerProfileController::class, 'update_customer_password']);
 
-
     //medical-provider
     //update-medical-profile-list
     Route::get('md-update-medical-profile-list', [UpdateMedicalProfileController::class, 'update_medical_profile_list']);
@@ -81,7 +79,6 @@ Route::middleware('auth:sanctum')->group(function ()
 
     //delete-provider-images-videos
     Route::post('md-delete-provider-images-videos', [UpdateMedicalProfileController::class, 'delete_provider_images_videos']);
-
 
     //other-services
     //add-new-acommodition-hotel
@@ -138,6 +135,12 @@ Route::middleware('auth:sanctum')->group(function ()
     //add-packages
     Route::post('md-add-packages', [PackageControllers::class, 'add_packages']);
 
+    //get-acommodition-price
+    Route::post('md-get-acommodition-price', [PackageControllers::class, 'get_acommodition_price']);
+
+    //get-transportation-price
+    Route::post('md-get-transportation-price', [PackageControllers::class, 'get_transportation_price']);
+
     //packages-active-list
     Route::get('md-packages-active-list', [PackageControllers::class, 'packages_active_list']);
 
@@ -158,4 +161,13 @@ Route::middleware('auth:sanctum')->group(function ()
 
     //deactivate-to-activate-packages
     Route::post('md-deactivate-to-activate-packages', [PackageControllers::class, 'deactivate_to_activate_packages']);
+
+    //packages-active-list-count
+    Route::get('md-packages-active-list-count', [PackageControllers::class, 'packages_active_list_count']);
+
+    //packages-active-list-search
+    Route::post('md-packages-active-list-search', [PackageControllers::class, 'packages_active_list_search']);
+
+    //packages-inactive-list-search
+    Route::post('md-packages-inactive-list-search', [PackageControllers::class, 'packages_inactive_list_search']);
 });

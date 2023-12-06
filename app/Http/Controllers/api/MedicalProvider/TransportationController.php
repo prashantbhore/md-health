@@ -67,6 +67,9 @@ class TransportationController extends BaseController
             'md_add_transportation_details.id',
             'md_add_transportation_details.status',
             'md_master_brand.brand_name',
+            'md_add_transportation_details.vehicle_model_id',
+            'md_add_transportation_details.vehicle_per_day_price',
+            'md_add_transportation_details.other_services',
             'md_master_vehicle_comfort_levels.vehicle_level_name'
         )
         ->join(
@@ -97,7 +100,7 @@ class TransportationController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'vehicle_brand_id' => 'required',
-            'vehicle_model_id' => 'required',
+            'vehicle_model_name' => 'required',
             'comfort_level_id' => 'required',
             'vehicle_per_day_price' => 'required',
             'other_services' => 'required',
@@ -109,7 +112,7 @@ class TransportationController extends BaseController
 
         $vehicle_input = [];
         $vehicle_input['vehicle_brand_id'] = $request->vehicle_brand_id;
-        $vehicle_input['vehicle_model_id'] = $request->vehicle_model_id;
+        $vehicle_input['vehicle_model_id'] = $request->vehicle_model_name;
         $vehicle_input['comfort_level_id'] = $request->comfort_level_id;
         $vehicle_input['vehicle_per_day_price'] = $request->vehicle_per_day_price;
         $vehicle_input['other_services'] = $request->other_services;
@@ -142,7 +145,7 @@ class TransportationController extends BaseController
 
         $vehicle_input = [];
         $vehicle_input['vehicle_brand_id'] = $request->vehicle_brand_id;
-        $vehicle_input['vehicle_model_id'] = $request->vehicle_model_id;
+        $vehicle_input['vehicle_model_id'] = $request->vehicle_model_name;
         $vehicle_input['comfort_level_id'] = $request->comfort_level_id;
         $vehicle_input['vehicle_per_day_price'] = $request->vehicle_per_day_price;
         $vehicle_input['other_services'] = $request->other_services;
