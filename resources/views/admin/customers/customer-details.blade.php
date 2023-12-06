@@ -15,33 +15,33 @@
                         <p class="card-title mb-3">Patient Details</p>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">First Name</label>
+                                <label for="firstName">{{!empty($customer->first_name)?$customer->first_name:''}}</label>
                                 <p>Ali</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Last Name</label>
-                                <p>Danish</p>
+                                <p>{{!empty($customer->last_name)?$customer->last_name:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Contact Number</label>
-                                <p>+44 4444 44 44</p>
+                                <p>{{!empty($customer->phone)?$customer->phone:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email">E-mail</label>
-                                <p>ali.danish@mdhealth.io</p>
+                                <p>{{!empty($customer->email)?$customer->email:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="address">Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </span>
-                                    <span>City / Country</span>
+                                    <span>{{!empty($customer->address)?$customer->address:''}}</span>
+                                    <span>{{!empty($customer->city->city_name)?$customer->city->city_name:''}}/ {{!empty($customer->country->country_name)?$customer->country->country_name:''}}</span>
                                 </p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="address">Invoice Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </span>
-                                    <span>City / Country</span>
+                                    <span>{{!empty($customer->address)?$customer->address:''}}</span>
+                                    <span>{{!empty($customer->city->city_name)?$customer->city->city_name:''}}/ {{!empty($customer->country->country_name)?$customer->country->country_name:''}}</span>
                                 </p>
                             </div>
                         </div>

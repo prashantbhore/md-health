@@ -13,33 +13,37 @@
                         <p class="card-title mb-3">Service Provider Details</p>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">First Name</label>
-                                <p>Ali</p>
+                                <label for="firstName">Hospital Name</label>
+                                <p>{{ !empty($medical_provider->company_name) ? ucfirst($medical_provider->company_name) : '' }}</p>
+
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="lastName">Last Name</label>
-                                <p>Danish</p>
+                                <label for="lastName">TAX No</label>
+                                <p>{{ !empty($medical_provider->tax_no) ?$medical_provider->tax_no: '' }}</p>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Contact Number</label>
-                                <p>+44 4444 44 44</p>
+                                 <p>{{ !empty($medical_provider->mobile_no) ?$medical_provider->mobile_no: '' }}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email">E-mail</label>
-                                <p>ali.danish@mdhealth.io</p>
+                                <p>{{ !empty($medical_provider->email) ?$medical_provider->email: '' }}</p>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="address">Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </span>
-                                    <span>City / Country</span>
+                                    <span>{{ !empty($medical_provider->company_address) ?ucfirst($medical_provider->company_address): '' }}</span>
+                                    <span>{{ !empty($medical_provider->city->city_name) ?ucfirst($medical_provider->city->city_name): '' }}</span>
                                 </p>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="address">Invoice Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </span>
-                                    <span>City / Country</span>
+                                    <span>{{ !empty($medical_provider->company_address) ?ucfirst($medical_provider->company_address): '' }}</span>
+                                    <span>{{ !empty($medical_provider->city->city_name) ?ucfirst($medical_provider->city->city_name): '' }}</span>
                                 </p>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -47,16 +51,39 @@
                                     <div class="col-md-6 d-flex flex-column">
                                         <label for="logo" class="mb-2">Logo</label>
                                         <div>
-                                            <img src="{{URL::asset('admin/assets/img/packageImg.png')}}" alt="" style="height: 75px;" />
+                                            <img src="{{!empty($medical_provider_logo->company_logo_image_path)?url('/').Storage::url($medical_provider_logo->company_logo_image_path):''}}" alt="" style="height: 75px;" />
+                                           
+    
                                         </div>
-                                        <a href="#"><span class="deleteImg">Delete Logo</span></a>
+                                        @if(!empty($medical_provider_logo->company_logo_image_path))
+
+                                        <a class="medical-provier-logo-delete" href="javascript:void(0)" data-id="{{!empty($medical_provider_logo->id)?$medical_provider_logo->id:''}}" data-table="md_medical_provider_logo" data-flash="Logo Deleted Succesfully">
+                                            <span class="deleteImg">Delete Logo</span>
+                                        </a>
+                                       @endif
+                                          
+                                        
+
+                                        {{-- <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Medical Tourism Deleted Successfully!" class="btn btn-danger medical-tourism-delete btn-xs" title="Delete">
+                                            <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
+                                        </a> --}}
+                                        
                                     </div>
                                     <div class="col-md-6 d-flex flex-column">
                                         <label for="license" class="mb-2">License</label>
                                         <div>
-                                            <img src="{{URL::asset('admin/assets/img/licenseFile.png')}}" alt="" />
+                                            <img src="{{!empty($medical_provider_license->company_licence_image_path)?url('/').Storage::url($medical_provider_license->company_licence_image_path):''}}" alt="" style="height: 75px;" />
+                                         
                                         </div>
-                                        <a href="#"><span class="deleteImg">Delete License</span></a>
+
+
+                                        @if(!empty($medical_provider_license->company_licence_image_path))
+
+                                        <a class="medical-provier-license-delete" href="javascript:void(0)" data-id="{{!empty($medical_provider_license->id)?$medical_provider_license->id:''}}" data-table="md_medical_provider_license" data-flash="License Deleted Succesfully">
+                                            <span class="deleteImg">Delete License</span>
+                                        </a>
+                                       @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -92,49 +119,52 @@
 
                                 <label for="">Photos & Videos</label>
                                 <div class="d-flex flex-wrap gap-3 mt-3">
+
+
+                                    @if(!empty($gallary))
+                                    @foreach ($gallary as $gallary_data)
+
+                                  
+                                    
+                                    @if(in_array(strtolower($gallary_data->provider_file_type), ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp']))
                                     <div class="d-flex flex-column">
-                                        <a href="{{URL::asset('admin/assets/img/servicesGallery/512/1.mp4')}}" class="glightbox">
-                                            <img src="{{URL::asset('admin/assets/img/servicesGallery/img5.png')}}" alt="" class="uploadedImg" />
-                                            
+                                        <a href="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" class="glightbox">
+                                            <img src="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" alt="" class="uploadedImg" />
                                         </a>
-                                        <a href="#"><span class="deleteImg">Delete Photo</span></a>
+                                        <a class="medical-provier-gallary-delete" href="javascript:void(0)" data-id="{{!empty($gallary_data->id)?$gallary_data->id:''}}" data-table="medical_provider_account_multiple_images_videos" data-flash="Image Deleted Succesfully">
+                                            <span class="deleteImg">Delete Logo</span>
+                                        </a>
                                     </div>
+                                   @endif
+
+
+                                   @if(in_array(strtolower($gallary_data->provider_file_type), ['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm']))
                                     <div class="d-flex flex-column">
-                                        <a href="{{URL::asset('admin/assets/img/servicesGallery/512/2.png')}}" class="glightbox">
-                                            <img src="{{URL::asset('admin/assets/img/servicesGallery/img3.png')}}" alt="" class="uploadedImg" />
+                                        <a href="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" class="glightbox">
+                                            <video width="320" height="240" poster="/images/w3schools_green.jpg" controls>
+                                                <source src="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" type="video/mp4">
+                                               
+                                             </video>
                                         </a>
-                                        <a href="#"><span class="deleteImg">Delete Photo</span></a>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="{{URL::asset('admin/assets/img/servicesGallery/512/3.png')}}" class="glightbox">
-                                            <img src="{{URL::asset('admin/assets/img/servicesGallery/img2.png')}}" alt="" class="uploadedImg" />
+                                        <a class="medical-provier-gallary-delete" href="javascript:void(0)" data-id="{{!empty($gallary_data->id)?$gallary_data->id:''}}" data-table="medical_provider_account_multiple_images_videos" data-flash="Video Deleted Succesfully">
+                                            <span class="deleteImg">Delete Video</span>
                                         </a>
-                                        <a href="#"><span class="deleteImg">Delete Photo</span></a>
                                     </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="{{URL::asset('admin/assets/img/servicesGallery/512/4.png')}}" class="glightbox">
-                                            <img src="{{URL::asset('admin/assets/img/servicesGallery/img4.png')}}" alt="" class="uploadedImg" />
-                                        </a>
-                                        <a href="#"><span class="deleteImg">Delete Photo</span></a>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="{{URL::asset('admin/assets/img/servicesGallery/512/5.png')}}" class="glightbox">
-                                            <img src="{{URL::asset('admin/assets/img/servicesGallery/img6.png')}}" alt="" class="uploadedImg" />
-                                        </a>
-                                        <a href="#"><span class="deleteImg">Delete Photo</span></a>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <a href="{{URL::asset('admin/assets/img/servicesGallery/512/4.png')}}" class="glightbox">
-                                            <img src="{{URL::asset('admin/assets/img/servicesGallery/img4.png')}}" alt="" class="uploadedImg" />
-                                        </a>
-                                        <a href="#"><span class="deleteImg">Delete Photo</span></a>
-                                    </div>
+                                @endif
+
+                                
+
+                                    @endforeach
+                                    @endif
+
+
+                            
                                 </div>
                             </div>
 
                             <div class="col-md-12 my-3">
                                 <label for="overview" class="mb-2">Overview</label>
-                                <textarea name="" id="" cols="30" rows="10" class="form-control overviewText">************ Hospital is a family owned business and Trudi Scrivener, the founder is Buckinghamshire based, Trudi has over 30 years of care experience and provides a key leadership role to her team. Ashridge Home Care provide a multi award winning specialist live in care or hourly care service, depending on the needs of the client. Most people want to stay in their own home, and having a carer either living in or visiting from time to time means choosing to enjoy life on your own terms and being able to maintain your independence. Staff pride themselves on delivering quality person-centred care with compassion, choice, dignity and respect.
+                                <textarea name="" id="" cols="30" rows="10" class="form-control overviewText">{{ !empty($medical_provider->company_overview) ?ucfirst($medical_provider->company_overview): '' }}
                                 </textarea>
                             </div>
 
@@ -242,6 +272,7 @@
     </div>
 </section>
 @endsection @section('script')
+<script src="{{url('admin\controller_js\admin_cn_medical_tourism.js')}}"></script>
 <script>
     $(".medicalTourismLi").addClass("activeClass");
     $(".medicalTourism").addClass("md-active");

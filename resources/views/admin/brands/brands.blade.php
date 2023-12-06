@@ -8,7 +8,7 @@
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div class="">
                             <label for="totalEarnings">Total Brands</label>
-                            <h4 class="mb-0">212</h4>
+                            <h4 class="mb-0">{{!empty($brandCount)?$brandCount:0 }}</h4>
                         </div>
                         <div class="add-brands-btn">
                             <button type="button" data-bs-toggle="modal" data-bs-target="#addNewBrandModal" class="btn save-btn"><span>+</span> <br> Add New Brand</button>
@@ -23,17 +23,20 @@
                         <!-- Filters -->
                         <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
                             <div class="card-title me-auto">Brands</div>
-                            <input type="text" class="form-control" placeholder="Search">
+                            {{-- <input type="text" class="form-control" placeholder="Search"> --}}
 
                             <select class="form-select form-select-sm">
                                 <option selected disabled hidden>All Brands</option>
-                                <option value="1">Active Orders</option>
-                                <option value="2">Denied Orders</option>
-                                <option value="3">Completed Orders</option>
+                                @if($brand_category)
+                                @foreach ($brand_category as $brand_category_data)
+                                 <option value="{{$brand_category_data->id}}">{{ $brand_category_data->category_name}}</option>
+                                @endforeach
+                             
+                                @endif
                             </select>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -44,112 +47,12 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Mercedes Benz</th>
-                                        <td>Vehicle</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Volkswagen</th>
-                                        <td>Vehicle</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>BMW</th>
-                                        <td>Vehicle</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Ferrari</th>
-                                        <td>Vehicle</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Lincoln</th>
-                                        <td>Vehicle</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Cadillac</th>
-                                        <td>Vehicle</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Honda</th>
-                                        <td>Vehicle</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addNewBrandModal">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
+
 
 
 
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -158,6 +61,8 @@
     </div>
     <!-- Add New Brand Modal -->
     <div class="modal fade " id="addNewBrandModal" tabindex="-1" aria-labelledby="addNewBrandModalLabel" aria-hidden="true">
+
+      
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
                 <div class="modal-header border-0 pb-0">
@@ -167,26 +72,41 @@
                 <div class="modal-body px-4">
                     <h4 class="mb-4">Add New Brand</h4>
 
-                    <form>
+
+
+                    <form id="brandformId" action="{{route('add-brand')}}" method="post">
+                            @csrf
+                           
+                            <input type="hidden" name="id" id="id" value="">
+                            
+                            
+                            <div class="mb-3">
+                                <label for="brandCategory">*Brand Category</label>
+                                <select name="brand_category" id="brand_category" class="form-select w-100 mb-5">
+                                    <option value="" selected disabled>Choose</option>
+                                    @if($brand_category)
+                                    @foreach ($brand_category as $brand_category_data)
+                                     <option value="{{$brand_category_data->id}}">{{ $brand_category_data->category_name}}</option>
+                                    @endforeach
+                                 
+                                    @endif
+                                    
+                                </select>
+                            </div>
+
                         <div class="mb-3">
                             <label for="brand" class="form-label">*Brand</label>
-                            <input type="text" class="form-control" placeholder="Brand Name">
+                            <input type="text" name="brand_name" id="brand_name" class="form-control" value="{{!empty($brand->brand_name)?$brand->brand_name:''}}" placeholder="Brand Name">
                         </div>
-                        <div class="mb-3">
-                            <label for="brandCategory">*Brand Category</label>
-                            <select name="" id="" class="form-select w-100 mb-5">
-                                <option value="" selected disabled>Choose</option>
-                                <option value="vehicle">Vehicle</option>
-                                <option value="flight">Flight</option>
-                                <option value="hotel">Hotel</option>
-                                <option value="mdShop">MDshop</option>
-                            </select>
-                        </div>
+
+                       
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn save-btn w-75">Add Brand</button>
                         </div>
 
                     </form>
+
+
                 </div>
             </div>
         </div>
@@ -195,8 +115,11 @@
 </section>
 @endsection
 @section('script')
+<script src="{{url('admin\controller_js\admin_cn_brand.js')}}"></script>
+
 <script>
     $(".brandsLi").addClass("activeClass");
     $(".brands").addClass("md-active");
 </script>
+
 @endsection

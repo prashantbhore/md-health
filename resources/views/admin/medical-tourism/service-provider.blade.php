@@ -19,21 +19,22 @@
                             </select>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th>Hospital Name</th>
                                         <th>TAX No</th>
                                         <th>City</th>
-                                        <th>Country</th>
+                                        {{-- <th>Country</th> --}}
                                         <th>Contact Number</th>
                                         <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
+
+                                    {{-- <tr>
                                         <th scope="row">#MD7384</th>
                                         <td>Memorial Hastaneleri</td>
                                         <td>3834938493</td>
@@ -129,13 +130,13 @@
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                  
 
                            
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
+                            {{-- <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -144,7 +145,7 @@
                                     <li class="page-item"><a class="page-link" href="#">5</a></li>
                                     <li class="page-item"><a class="page-link" href="#">6</a></li>
                                 </ul>
-                            </nav>
+                            </nav> --}}
                         </div>
                     </div>
                 </div>
@@ -154,6 +155,7 @@
 </section>
 @endsection
 @section('script')
+<script src="{{url('admin\controller_js\admin_cn_medical_tourism.js')}}"></script>
 <script>
     $(".medicalTourismLi").addClass("activeClass");
     $(".medicalTourism").addClass("md-active");

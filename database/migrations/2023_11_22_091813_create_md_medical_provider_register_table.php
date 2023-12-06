@@ -15,7 +15,7 @@ return new class extends Migration
         {
             $table->id();
             $table->string('company_name')->nullable();
-            $table->string('city_id')->nullable();
+            $table->bigInteger('city_id')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();
             $table->string('tax_no')->nullable();
@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('access_token')->nullable();
             $table->string('fcm_token')->nullable();
             $table->string('otp_expiring_time')->nullable();
+            $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();

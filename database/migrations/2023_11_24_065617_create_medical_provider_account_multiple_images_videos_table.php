@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('provider_id')->nullable();
             $table->string('provider_image_path')->nullable();
             $table->string('provider_image_name')->nullable();
+            $table->string('provider_file_type')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();

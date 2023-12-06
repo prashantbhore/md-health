@@ -4,12 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\registration\RegistrationController;
 use App\Http\Controllers\api\login\LoginControllers;
-use App\Http\Controllers\API\CommonController;
+use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\AppConfigController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
+use App\Http\Controllers\api\MedicalProvider\ToursController;
+use App\Http\Controllers\api\MedicalProvider\PackageControllers;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,11 +55,14 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-Route::middleware('auth:sanctum')->group(function (){
-    //update-medical-profile-list
+Route::middleware('auth:sanctum')->group(function ()
+{
+    //customers
+
+    //update-customer-list
     Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 
-    //check-password-medical-provider 
+    //check-password-exist 
     Route::post('md-check-password-exist', [UpdateCustomerProfileController::class, 'check_password_exist']);
 
     //update-customer-profile
@@ -64,6 +71,8 @@ Route::middleware('auth:sanctum')->group(function (){
     //update-customer-password
     Route::post('md-update-customer-password', [UpdateCustomerProfileController::class, 'update_customer_password']);
 
+
+    //medical-provider
     //update-medical-profile-list
     Route::get('md-update-medical-profile-list', [UpdateMedicalProfileController::class, 'update_medical_profile_list']);
 
@@ -75,7 +84,6 @@ Route::middleware('auth:sanctum')->group(function (){
 
 
     //other-services
-
     //add-new-acommodition-hotel
     Route::post('md-add-new-acommodition', [AddNewAcommoditionController::class, 'add_new_acommodition']);
 
@@ -89,10 +97,65 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::post('md-delete-hotel', [AddNewAcommoditionController::class, 'delete_hotel']);
 
     //Transportation
-    
+    //master-brands
+    Route::get('md-master-brands', [TransportationController::class, 'master_brands']);
+
+    //comfort-levels-master
+    Route::get('md-comfort-levels-master', [TransportationController::class, 'comfort_levels_master']);
+
     //add-transportation-details
     Route::post('md-add-transportation-details', [TransportationController::class, 'add_transportation_details']);
 
+    //transportation-list
+    Route::get('md-transportation-list', [TransportationController::class, 'transportation_list']);
+
     //edit-transportation-details
     Route::post('md-edit-transportation-details', [TransportationController::class, 'edit_transportation_details']);
+
+    //delete-transportation
+    Route::post('md-delete-transportation', [TransportationController::class, 'delete_transportation']);
+
+    //Tour
+    //add-tour
+    Route::post('md-add-tour', [ToursController::class, 'add_tour']);
+
+    //tour-list
+    Route::get('md-tour-list', [ToursController::class, 'tour_list']);
+
+    //edit-tour-list
+    Route::post('md-edit-tour-list', [ToursController::class, 'edit_tour_list']);
+
+    //delete-tour
+    Route::post('md-delete-tour', [ToursController::class, 'delete_tour']);
+
+    //packages
+    //treatment-category-list
+    Route::get('md-treatment-category-list', [PackageControllers::class, 'treatment_category_list']);
+
+    //treatment-list
+    Route::post('md-treatment-list', [PackageControllers::class, 'treatment_list']);
+
+    //add-packages
+    Route::post('md-add-packages', [PackageControllers::class, 'add_packages']);
+
+    //packages-active-list
+    Route::get('md-packages-active-list', [PackageControllers::class, 'packages_active_list']);
+
+    //packages-deactive-list
+    Route::get('md-packages-deactive-list', [PackageControllers::class, 'packages_deactive_list']);
+
+    //packages-view-active-list
+    Route::post('md-packages-view-active-list', [PackageControllers::class, 'packages_view_active_list']);
+
+    //packages-view-deactive-list
+    Route::post('md-packages-view-deactive-list', [PackageControllers::class, 'packages_view_deactive_list']);
+
+    //edit-packages
+    Route::post('md-edit-packages', [PackageControllers::class, 'edit_packages']);
+
+    //activate-to-deactivate-packages
+    Route::post('md-activate-to-deactivate-packages', [PackageControllers::class, 'activate_to_deactivate_packages']);
+
+    //deactivate-to-activate-packages
+    Route::post('md-deactivate-to-activate-packages', [PackageControllers::class, 'deactivate_to_activate_packages']);
 });

@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-3">
+            {{-- <div class="col mb-3">
                 <a href="{{URL('admin/category-mdbooking')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
             <div class="col mb-3">
                 <a href="{{URL('admin/category-home-service')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">

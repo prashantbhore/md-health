@@ -119,7 +119,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{URL('sign-in')}}">
+                            <a class="dropdown-item" href="{{url('logout')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 11 12" fill="none">
                                     <circle cx="5.5" cy="5.5" r="5.5" fill="#D9D9D9" />
                                     <path d="M7.78148 8H6.54148L5.27148 6.35L3.98148 8H2.75148L4.57148 5.63L2.76148 3.29H4.03148L5.26148 4.88L6.49148 3.29H7.76148L5.96148 5.63L5.95148 5.64L7.78148 8Z" fill="black" />

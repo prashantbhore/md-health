@@ -8,12 +8,15 @@ use App\Models\Cities;
 use App\Models\Country;
 use DataTables;
 use Crypt;
+use DB;
+use App\Library\LogActivity;
 
 class CityController extends Controller
 {
 
     public function index(){
 
+    
         $countries = Country::where('status', 'active')
         ->orderBy('country_name', 'asc')
         ->get();
@@ -26,31 +29,42 @@ class CityController extends Controller
     }
 
 
-    public function store(Request $request){
-
-         
-
-          $input['country_id'] = $request->country;
-          $input['city_name'] = $request->city;
-        //   $input['created_ip_address'] = $request->ip();
-        //   $cities=Cities::create($input);
-
-          if (!empty($id)){
+    public function store(Request $request)
+    {
+        $request->validate([
+            'country' => 'required',
+            'city' => 'required',
+        ]);
+    
+     
+        $existingCity = Cities::where('country_id', $request->country)
+                                ->where('city_name', $request->city)
+                                ->first();
+    
+        if ($existingCity) {
+            return redirect('admin/add-cities')->with('error', 'City already exists for this country!');
+        }
+    
+        $input = [
+            'country_id' => $request->country,
+            'city_name' => $request->city,
+        ];
+    
+        if (!empty($request->id)) {
             $input['modified_ip_address'] = $request->ip();
-            $cities=Cities::find($id)->update($input);
-            return redirect('admin/add-cities')->with('success', 'City Updated successfully!');
-          }  
-
-          if(empty($id)){
-            $input['created_ip_address'] = $request->ip();
-            $cities=Cities::create($input);
-            return redirect('admin/add-cities')->with('success', 'City added successfully!');
-          }
-
-       
-       
+    
+            Cities::find($request->id)->update($input);
+    
+            return redirect('admin/add-cities')->with('success', 'City updated successfully!');
+        }
+    
+        $input['created_ip_address'] = $request->ip();
+        Cities::create($input);
+    
+        return redirect('admin/add-cities')->with('success', 'City added successfully!');
     }
-
+    
+    
 
     public function data_table(Request $request)
     {
@@ -77,7 +91,7 @@ class CityController extends Controller
                             <img src="' . asset('admin/assets/img/editEntry.png') . '" alt="">
                         </button>
                     </a>
-                    <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_master_cities" data-flash="City Deleted Successfully!" class="btn btn-danger delete btn-xs" title="Delete">
+                    <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_master_cities" data-flash="City Deleted Successfully!" class="btn btn-danger city-delete btn-xs" title="Delete">
                         <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
                     </a>';
     
@@ -101,6 +115,24 @@ class CityController extends Controller
 
         return view('admin.cities.add-cities',compact('countries','city'));
 
+    }
+
+
+    // public function delete_city()
+
+    public function delete_city(Request $request)
+    {
+        $id = !empty($request->id) ? $request->id : '';
+        
+        $old_data =Cities::where('id', $id)->first();
+
+        $new_data = Cities::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+
+       // LogActivity::AdminLog(json_encode($new_data), json_encode($old_data), $request->table, 'delete', 'admin');
+        return response()->json(['message' => $request->flash, 'status' => 'true']);
     }
     
 

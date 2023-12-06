@@ -29,13 +29,13 @@ class LoginControllers extends BaseController
         if (empty($request->password)) {
             $validation_message .= 'password field';
         }
-       
+
 
         if ($validator->fails()) {
             // return $this->sendError($validation_message . ' is required.');
             return response()->json([
                 'status' => 404,
-                'message' => $validation_message. ' is required.',
+                'message' => $validation_message . ' is required.',
             ]);
         }
 
@@ -51,8 +51,8 @@ class LoginControllers extends BaseController
 
             CustomerRegistration::where('id', $customer->id)->update([
                 // 'shop_owner_last_login' => Carbon::now(),
-                'otp_expiring_time'=> time() + 20,
-                'login_otp' => $otp,
+                'otp_expiring_time' => time() + 20,
+                // 'login_otp' => $otp,
                 'fcm_token' => $request->fcm_token,
                 'access_token' => $success['token']
             ]);
@@ -60,7 +60,7 @@ class LoginControllers extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'Login successfull.',
-                'otp'=> $otp,
+                'mobile_number' => $request->phone,
                 'success_token' => $success,
             ]);
         } else {
@@ -82,7 +82,7 @@ class LoginControllers extends BaseController
     public function medical_provider_login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'mobile_no' => 'required',
+            'phone' => 'required',
             'password' => 'required'
         ]);
 
@@ -93,7 +93,7 @@ class LoginControllers extends BaseController
         if ($request->password == '') {
             $validation_message .= 'Password field';
         }
-        if ($request->mobile_no == '') {
+        if ($request->phone == '') {
             if ($validation_message == '') {
                 $validation_message .= 'Mobile Number field';
             } else {
@@ -107,7 +107,7 @@ class LoginControllers extends BaseController
         }
 
         if (Auth::guard('md_health_medical_providers_registers')->attempt([
-            'mobile_no' => $request->mobile_no,
+            'mobile_no' => $request->phone,
             'password' => $request->password,
             'status' => 'active',
         ])) {
@@ -126,6 +126,7 @@ class LoginControllers extends BaseController
                 'status' => 200,
                 'message' => 'Login successfull.',
                 'success_token' => $success,
+                'mobile_no' => $request->phone,
             ]);
         } else {
             return response()->json([
@@ -133,8 +134,5 @@ class LoginControllers extends BaseController
                 'message' => 'Unauthorised.',
             ]);
         }
-
     }
-
-
 }

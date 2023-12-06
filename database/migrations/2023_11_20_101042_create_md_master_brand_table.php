@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('md_master_brand', function (Blueprint $table) {
             $table->id();
+            $table->string('brand_unique_id')->nullable();
+            $table->string('brand_category_id')->nullable();
             $table->string('brand_name')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
