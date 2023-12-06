@@ -45,31 +45,29 @@
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <!-- Filters -->
-                        <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
-                            <div class="card-title me-auto">Cities</div>
-                            <input type="text" class="form-control" placeholder="Search">
-
-                            <select class="form-select form-select-sm">
-                                <option selected disabled hidden>Active Cities</option>
-
-                                <option value="1">Active Orders</option>
-                                <option value="2">Denied Orders</option>
-                                <option value="3">Completed Orders</option>
-
-                            </select>
-                        </div>
-
 
                         <div class="table-responsive">
+                            <!-- Filters -->
+                            <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
+                                <div class="card-title me-auto">Cities</div>
+                                <!-- <input type="text" class="form-control" placeholder="Search"> -->
+
+                                <select class="form-select form-select-sm">
+                                    <option selected disabled hidden>Active Cities</option>
+
+                                    <option value="1">Active Orders</option>
+                                    <option value="2">Denied Orders</option>
+                                    <option value="3">Completed Orders</option>
+
+                                </select>
+                            </div>
                             <table id="example" class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="w-25">id</th>
-
+                                        <th scope="col" class="w-25">ID</th>
                                         <th scope="col" class="w-25">City Name</th>
                                         <th class="w-25">Country</th>
-                                        <th>Action</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 

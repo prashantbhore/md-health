@@ -1436,3 +1436,19 @@ div.dataTables_wrapper div.dataTables_filter input {
     display: flex;
     align-items: center;
 }
+
+.dataTables_length,
+.dataTables_info,
+#example_previous,
+#example_next {
+    display: none;
+}
+
+.dataTables_filter {
+    position: absolute;
+    top: -51px;
+    right: 211px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.5em 0em;
+}
