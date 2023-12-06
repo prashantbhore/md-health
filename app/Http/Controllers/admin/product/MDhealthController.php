@@ -149,7 +149,7 @@ public function data_table(Request $request)
                                 <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_product_category" data-flash="Product Category Deleted Successfully!" class="btn btn-danger product-category-delete btn-xs" title="Delete">
                                     <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
                                 </a>
-                            </div>';
+                        </div>';
 
             return $actionBtn;
         })

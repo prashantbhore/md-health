@@ -96,6 +96,8 @@ $(function (){
             {
                 data: "action",
                 name: "action",
+                orderable: false,
+                searchable: false,
             },
           ],
       });

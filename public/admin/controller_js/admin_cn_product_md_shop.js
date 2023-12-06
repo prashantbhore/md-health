@@ -90,8 +90,11 @@ $(function (){
                 data: "created_at",
                 name: "created_at",
             },
-          
-          
+
+            {
+                data: "status",
+                name: "status",
+            },
           
             {
                 data: "action",
@@ -146,3 +149,45 @@ $(function (){
         });
     }
 });
+
+
+
+
+
+function editProductCategory(id){
+    $.ajax({
+        url: base_url + '/admin/product-category/' + id + '/edit',
+        type: 'GET',
+        success: function (data) {
+            $('#addNewBrandModalBody').html(data);
+            $('#id').val(data.id);
+            $('#product_category_name').val(data.product_category_name);
+
+            $('.static-treatments').hide();
+            $('.treatments-container').empty();
+
+          
+            if (data.product_subcategory_names && data.product_subcategory_names.length > 0) {
+                data.product_subcategory_names.forEach(function (subcategoryName, index) {
+                    let treatmentInputField;
+                    if (index === data.product_subcategory_names.length - 1) {
+                       
+                        treatmentInputField = `
+                            <div class="input-group">
+                                <input type="text" name="treatments[]" class="form-control border-end-0" placeholder="Treatments" value="${subcategoryName}" aria-label="Treatments" aria-describedby="addTreatment" />
+                                <span class="input-group-text border-start-0 addTreatment" id="addTreatment">+</span>
+                            </div>`;
+                    } else {
+                        treatmentInputField = `<input type="text" name="treatments[]" class="form-control" placeholder="Treatments" value="${subcategoryName}" />`;
+                    }
+                    $('#sub_category').append(treatmentInputField);
+                });
+            }
+            
+            $('#addNewBrandModal').modal('show');
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}

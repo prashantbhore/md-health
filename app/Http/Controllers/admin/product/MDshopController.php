@@ -114,17 +114,25 @@ class MDshopController extends Controller
             })
 
 
+            ->addColumn('status', function ($row){
+              $status = $row->status;
+  
+              if ($status == 'active') {
+                  $statusBtn = '<a href="javascript:void(0)"   data-id="' .  Crypt::encrypt($row->id) . '" data-table="md_product_category" data-flash="Status Changed Successfully!"  class="md-change-status activateLink mt-0"  >Activate</a>';
+                } else {
+                  $statusBtn = '<a href="javascript:void(0)"   data-id="' .  Crypt::encrypt($row->id) . '" data-table="md_product_category" data-flash="Status Changed Successfully!"  class="md-change-status deleteImg mt-0"  >Deactivate</a>';
+              }
+  
+              return $statusBtn;
+  
+          })
+  
+
+
 
           ->addColumn('action', function ($row){
-            $status = $row->status;
-
-            if ($status == 'active') {
-                $actionBtn = '<a href="javascript:void(0)"   data-id="' .  Crypt::encrypt($row->id) . '" data-table="md_product_category" data-flash="Status Changed Successfully!"  class="md-change-status activateLink mt-0"  >Activate</a>';
-              } else {
-                $actionBtn = '<a href="javascript:void(0)"   data-id="' .  Crypt::encrypt($row->id) . '" data-table="md_product_category" data-flash="Status Changed Successfully!"  class="md-change-status deleteImg mt-0"  >Deactivate</a>';
-            }
-
-            $actionBtn .= '<div class="text-end d-flex align-items-center justify-content-end gap-3">
+       
+            $actionBtn= '<div class="text-end d-flex align-items-center justify-content-end gap-3">
                               
                                 <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_product_category" data-flash="Product Category Deleted Successfully!" class="btn btn-danger product-category-delete btn-xs" title="Delete">
                                     <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
@@ -134,7 +142,9 @@ class MDshopController extends Controller
             return $actionBtn;
         })
 
-       ->rawColumns(['action'])
+        
+
+       ->rawColumns(['action','status'])
         ->make(true);
     }
 }
