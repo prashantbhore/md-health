@@ -95,6 +95,7 @@
                                     <div class="d-flex flex-column">
                                         <a href="{{URL::asset('admin/assets/img/servicesGallery/512/1.mp4')}}" class="glightbox">
                                             <img src="{{URL::asset('admin/assets/img/servicesGallery/img5.png')}}" alt="" class="uploadedImg" />
+                                            
                                         </a>
                                         <a href="#"><span class="deleteImg">Delete Photo</span></a>
                                     </div>
