@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\ProductSubCategory;
+use DataTables;
+use Crypt;
+use DB;
+use App\Library\LogActivity;
 
 class MDhealthController extends Controller
 {
     public function  index(){
-      return view('admin.products-and-categories.categories.mdhealth');
+      $md_health_category_count = ProductCategory::where('status', 'active')->where('main_product_category_id', 1)->count();
+      $md_shop_category_count = ProductCategory::where('status', 'active')->where('main_product_category_id', 2)->count();
+      $md_food_category_count = ProductCategory::where('status', 'active')->where('main_product_category_id', 3)->count();
+      $md_home_service_category_count = ProductCategory::where('status', 'active')->where('main_product_category_id', 4)->count();
+      return view('admin.products-and-categories.categories.mdhealth',compact('md_health_category_count','md_shop_category_count','md_food_category_count','md_home_service_category_count'));
     }
 
 
@@ -54,85 +62,142 @@ class MDhealthController extends Controller
 public function data_table(Request $request)
 {
   
+      $porodcut_category = ProductCategory::where('status', '!=', 'delete')
+      ->where('main_product_category_id', 1)
+      ->with('subcategories')
+      ->orderBy('created_at', 'desc')
+      ->get();
 
-    $customers=CustomerRegistration::with('country')->with('city')->where('status','!=','delete')->get();
 
-
-    if ($request->ajax()) {
-        return DataTables::of($customers)
+    if ($request->ajax()){
+        return DataTables::of($porodcut_category)
             
 
-        ->addColumn('name', function ($row) {
-            $fullName = '';
-        
-            if (!empty($row->first_name)) {
-                $fullName .= ucfirst($row->first_name);
-            }
-        
-            if (!empty($row->last_name)) {
-                $fullName .= ' ' . ucfirst($row->last_name);
-            }
-        
-            return $fullName;
-        })
-        
           
-            ->addColumn('gender', function ($row){
-                if(!empty($row->gender)){
-                return ucfirst($row->gender);
+            ->addColumn('id', function ($row){
+                if(!empty($row->product_unique_id)){
+                return ucfirst($row->product_unique_id);
                 }
             })
 
 
-            ->addColumn('age', function ($row){
-                return ucfirst(0);
+            ->addColumn('product_category_name', function ($row){
+              if(!empty($row->product_category_name)){
+              return ucfirst($row->product_category_name);
+              }
+             })
+
+
+       
+             ->addColumn('subcategories', function ($row) {
+              $subcategories = $row->subcategories;
+          
+              $nonEmptySubcategories = $subcategories->filter(function ($subcategory) {
+                  return trim($subcategory->product_sub_category_name) !== '';
+              });
+          
+              if ($nonEmptySubcategories->isNotEmpty()) {
+                  $subcategoryNames = $nonEmptySubcategories->pluck('product_sub_category_name')->map(function ($name) {
+                      return ucfirst($name);
+                  })->implode(', ');
+          
+                  return $subcategoryNames;
+              } else {
+                  return '-'; 
+              }
+          })
+          
+
+          
+          ->addColumn('created_at', function ($row){
+                if(!empty($row->created_at)){
+                return ucfirst($row->created_at);
+                }
             })
 
 
             
-            ->addColumn('country', function ($row){
-                if(!empty($row->country->country_name)){
-                return ucfirst($row->country->country_name);
-                }
-            })
+          
+          ->addColumn('status', function ($row){
+            $status = $row->status;
 
+            if ($status == 'active') {
+                $statusBtn = '<a href="javascript:void(0)"   data-id="' .  Crypt::encrypt($row->id) . '" data-table="md_product_category" data-flash="Status Changed Successfully!"  class="md-change-status activateLink mt-0"  >Activate</a>';
+              } else {
+                $statusBtn = '<a href="javascript:void(0)"   data-id="' .  Crypt::encrypt($row->id) . '" data-table="md_product_category" data-flash="Status Changed Successfully!"  class="md-change-status deleteImg mt-0"  >Deactivate</a>';
+            }
 
-            ->addColumn('city', function ($row){
-                if(!empty($row->city->city_name)){
-                return ucfirst($row->city->city_name);
-                }
-            })
+            return $statusBtn;
 
-            ->addColumn('phone', function ($row){
-                if(!empty($row->phone)){
-                return ucfirst($row->phone);
-                }
-            })
+        })
 
 
 
 
 
-            ->addColumn('action', function ($row) {
-                $actionBtn = '<a href="' . route('customer.details', ['id' => Crypt::encrypt($row->id)]) . '" class="btn btn-info btn-xs" title="View">
-                    <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
-                </a>
-                
-                <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Customer Deleted Successfully!" class="btn btn-danger customer-delete btn-xs" title="Delete">
-                    <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
-                </a>';
-            
+
+          ->addColumn('action', function ($row){
+      
+
+            $actionBtn= '<div class="text-end d-flex align-items-center justify-content-end gap-3">
+                     
+                        <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button"  data-bs-toggle="modal" data-bs-target="#addNewCategoryModal" title="Edit" onclick="editProductCategory(' . $row->id . ')">
+                            <img src="' . asset('admin/assets/img/editEntry.png') . '" alt="">
+                        </button>
+                   
+                              
+                                <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_product_category" data-flash="Product Category Deleted Successfully!" class="btn btn-danger product-category-delete btn-xs" title="Delete">
+                                    <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
+                                </a>
+                        </div>';
 
             return $actionBtn;
         })
-            
+
 
 
            
-            ->rawColumns(['action'])
+            ->rawColumns(['action','status'])
             ->make(true);
     }
 }
+
+
+public function delete_product_category(Request $request){
+
+  $id = !empty($request->id) ? $request->id : '';
+    
+  $old_data =ProductCategory::where('id', $id)->first();
+
+  ProductSubCategory::where('product_category_id', $id)->update([
+    'status' => 'delete',
+    'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+  ]);
+
+  $new_data = ProductCategory::where('id', $id)->update([
+      'status' => 'delete',
+      'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+  ]);
+  return response()->json(['message' => $request->flash, 'status' => 'true']);
+
+}
+public function edit_product(Request $request)
+{
+    $productCategoryId = $request->id;
+
+    $productCategory = ProductCategory::with('subcategories')->find($productCategoryId);
+
+    $productSubcategoryNames = $productCategory->subcategories->pluck('product_sub_category_name')->toArray();
+
+
+
+    return response()->json([
+        'id' => $productCategory->id,
+        'product_category_name' => $productCategory->product_category_name,
+        'product_subcategory_names' => $productSubcategoryNames,
+    ]);
+}
+
 
 
 

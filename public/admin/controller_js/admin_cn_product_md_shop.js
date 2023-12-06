@@ -1,42 +1,37 @@
 
 //Dynamic input  field js
 
-    $(document).ready(function (){
-       var counter = 1;
+$(document).ready(function () {
+    var counter = 1;
 
-        function addInputField() {
-            var newInput = '<div class="input-group mb-3">' +
-                '<input type="text" name="treatments[]" class="form-control border-end-0 dynamic-input" placeholder="Treatment" aria-label="Dynamic Treatment" aria-describedby="addTreatment" />' +
-                '<span class="input-group-text border-start-0 remove-treatment" data-counter="' + counter + '">-</span>' +
-                '</div>';
-            $('.treatmentsAdd').find('.input-group:first').before(newInput);
-            counter++;
-        }
+    function addInputField() {
+        var newInput = '<div class="input-group mb-3">' +
+            '<input type="text" name="subcategory[]" class="form-control border-end-0 dynamic-input" placeholder="subcategory" aria-label="Dynamic Treatment" aria-describedby="addTreatment" />' +
+            '<span class="input-group-text border-start-0 remove-treatment" data-counter="' + counter + '">-</span>' +
+            '</div>';
+        $('.treatmentsAdd').find('.input-group:first').before(newInput);
+        counter++;
+    }
 
-        $('.addTreatment').on('click', function (){
-            
-            addInputField();
-        });
-
-        $('.treatmentsAdd').on('click', '.remove-treatment', function () {
-            var counterToRemove = $(this).data('counter');
-            $(this).closest('.input-group').remove();
-        });
-
-      
-        $('form').on('submit', function (e) {
-            
-        });
+    $('#addTreatment').on('click', function () {
+        addInputField();
     });
 
+    $('.treatmentsAdd').on('click', '.remove-treatment', function () {
+        var counterToRemove = $(this).data('counter');
+        $(this).closest('.input-group').remove();
+    });
 
-
-
+  
+    $('form').on('submit', function (e) {
+        
+    });
+});
 
 
 //validation code 
 
-$(document).ready(function (){
+$(document).ready(function () {
     $('form').validate({
         rules: {
             category_name: {
@@ -60,7 +55,6 @@ $(document).ready(function (){
 
 //datatable js  
 
-
 $(function (){
     var table = $("#example").DataTable({
         ordering: false,
@@ -72,7 +66,7 @@ $(function (){
         clear: true,
         deferRender: true,
           ajax: {
-              url: base_url + "/admin/md-health-data-table",
+              url: base_url + "/admin/md-shop-data-table",
              
           },
           columns: [
@@ -96,12 +90,11 @@ $(function (){
                 data: "created_at",
                 name: "created_at",
             },
-          
+
             {
                 data: "status",
                 name: "status",
             },
-          
           
             {
                 data: "action",
@@ -117,8 +110,11 @@ $(function (){
 
 
 
-
+  
   $(document).on("click", ".product-category-delete", function (){
+
+    
+
     var id = $(this).data("id");
     var table = $(this).data("table");
     var flash = $(this).data("flash");
@@ -156,29 +152,6 @@ $(function (){
 
 
 
-// function editProductCategory(id){
-//    $.ajax({
-//         url: base_url+'/admin/product-category/' + id + '/edit', 
-//         type: 'GET',
-//         success: function(data){
-
-            
-
-//               $('#addNewBrandModalBody').html(data);
-//               $('#id').val(data.id);
-
-              
-//               $('#product_category_name').val(data.product_category_name);
-//               $('#brand_name').val(data.brand_name);
-//               $('#addNewBrandModal').modal('show');
-
-//         },
-//         error: function(error){
-//             console.error('Error fetching data:', error);
-//         }
-//     });
-// }
-
 
 
 function editProductCategory(id){
@@ -201,11 +174,11 @@ function editProductCategory(id){
                        
                         treatmentInputField = `
                             <div class="input-group">
-                                <input type="text" name="treatments[]" class="form-control border-end-0 static-treatments" placeholder="Treatments" value="${subcategoryName}" aria-label="Treatments" aria-describedby="addTreatment" />
+                                <input type="text" name="treatments[]" class="form-control border-end-0" placeholder="Treatments" value="${subcategoryName}" aria-label="Treatments" aria-describedby="addTreatment" />
                                 <span class="input-group-text border-start-0 addTreatment" id="addTreatment">+</span>
                             </div>`;
                     } else {
-                        treatmentInputField = `<input type="text" name="treatments[]" class="form-control static-treatments" placeholder="Treatments" value="${subcategoryName}" />`;
+                        treatmentInputField = `<input type="text" name="treatments[]" class="form-control" placeholder="Treatments" value="${subcategoryName}" />`;
                     }
                     $('#sub_category').append(treatmentInputField);
                 });
@@ -218,4 +191,3 @@ function editProductCategory(id){
         }
     });
 }
-
