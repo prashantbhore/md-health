@@ -13,11 +13,73 @@ use App\Models\AddNewAcommodition;
 use App\Models\Packages;
 use App\Models\ToursDetails;
 use App\Models\TransportationDetails;
-
+use App\Models\ProductCategory;
+use App\Models\ProductSubCategory;
 
 class PackageControllers extends BaseController
 {
-    //
+
+    public function treatment_category_list()
+    {
+        $treatment_category_list = ProductCategory::where('status', 'active')
+        ->select(
+            'id',
+            'product_category_name',
+            'status'
+        )
+        ->where('main_product_category_id',1)
+        ->get();
+
+
+        if (!empty($treatment_category_list)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'treatment details found.',
+                'packages_active_list' => $treatment_category_list,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+    }
+
+    public function treatment_list(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        
+        $treatment_category_list = ProductSubCategory::where('status', 'active')
+            ->select(
+                'id',
+                'product_sub_category_name',
+                'status'
+            )
+            ->where('product_category_id', $request->id)
+            ->get();
+
+
+        if (!empty($treatment_category_list)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'treatment details found.',
+                'packages_active_list' => $treatment_category_list,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+    }
+
+
+    //add_packages
     public function add_packages(Request $request)
     {
         $validator = Validator::make($request->all(), [
