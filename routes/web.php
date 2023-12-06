@@ -44,7 +44,7 @@ Route::get('clear', function (){
 
 Route::get('common-delete', [BaseController::class, 'delete']);
 
-Route::post('change-status', [BaseController::class, 'status'])->name('change-status');
+Route::post('change-status', [BaseController::class,'status'])->name('change-status');
 
 // Route::get('/', function (){
 //     return view('admin.authentication.sign-in');
@@ -95,7 +95,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     // MANAGE CUSTOMERS
     
     Route::controller(CustomerController::class)->group(function (){
-        
        Route::get('customers', 'index');
        Route::get('/customer-data-table','data_table');
        Route::get('admin/customer-details/{id}','show')->name('customer.details');
@@ -182,24 +181,32 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     
     Route::controller(MDhealthController::class)->group(function (){
         Route::get('category-mdhealth','index');
-
         Route::post('category-mdhealth-store','store')->name('category.mdhealth.store');
+        Route::get('/md-health-data-table','data_table');
+        Route::get('product-category-delete','delete_product_category');
+        Route::get('/product-category/{id}/edit','edit_product');
     });
 
 
     Route::controller(MDshopController::class)->group(function (){
         Route::get('category-mdshop','index');
+        Route::post('category-mdshop-store','store')->name('category.mdshop.store');
+        Route::get('/md-shop-data-table','data_table');
     });
 
 
     Route::controller(MDfoodController::class)->group(function (){
         Route::get('category-mdfood', 'index');
+        Route::post('category-mdfood-store','store')->name('category.mdfood.store');
+        Route::get('/md-food-data-table','data_table');
     });
 
 
 
     Route::controller(MDHomeServiceController::class)->group(function (){
         Route::get('category-home-service', 'index');
+        Route::post('category-md-home-service-store','store')->name('category.md.home.service.store');
+        Route::get('/md-home-service-data-table','data_table');
     });
 
 

@@ -10,7 +10,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="card-text d-flex flex-column">
                                     <p>Total Categories</p>
-                                    <h4 class="mb-0">272</h4>
+                                    <h4 class="mb-0">{{$category_count}}</h4>
                                 </div>
                                 <span class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
@@ -27,7 +27,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="card-text d-flex flex-column">
                                     <p>Total Products</p>
-                                    <h4>4.873</h4>
+                                    <h4>{{$product_count}}</h4>
                                 </div>
                                 <span href="{{URL('admin/category-mdhealth')}}" class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">

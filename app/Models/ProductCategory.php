@@ -21,4 +21,14 @@ class ProductCategory extends Model
           'created_by',
           'modified_by',
     ];
+
+
+    public function subcategories()
+    {
+        return $this->hasMany(ProductSubCategory::class);
+    }
+
+
+
+
 }
