@@ -249,3 +249,36 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
         });
     }
 });
+
+
+
+    $(document).ready(function () {
+        $('.verifiedcheckbox').click(function (){
+           
+            var id = $(this).data("id");
+            var isChecked = $(this).prop('checked');
+
+            $.ajax({
+                method: 'POST',
+
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            
+                data: { 
+                    status: isChecked ? 'yes' : 'no',
+                    id:id,
+                     
+                },
+                url: base_url + "/admin/verification-status-chnage",
+                success: function (data){
+
+                    success_toast("Success", data.message);
+                },
+                error: function (error) {
+                    // Handle the error response if needed
+                    console.error(error);
+                }
+            });
+        });
+    });

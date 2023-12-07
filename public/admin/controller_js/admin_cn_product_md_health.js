@@ -7,7 +7,7 @@
         function addInputField() {
             var newInput = '<div class="input-group mb-3">' +
                 '<input type="text" name="treatments[]" class="form-control border-end-0 dynamic-input" placeholder="Treatment" aria-label="Dynamic Treatment" aria-describedby="addTreatment" />' +
-                '<span class="input-group-text border-start-0 remove-treatment" data-counter="' + counter + '">-</span>' +
+                '<span class="input-group-text border-start-0 remove-treatment aa" data-counter="' + counter + '">-</span>' +
                 '</div>';
             $('.treatmentsAdd').find('.input-group:first').before(newInput);
             counter++;
@@ -17,6 +17,12 @@
             
             addInputField();
         });
+
+        
+        $('#sub_category').on('click', '.addTreatment', function () {
+            addInputField();
+        });
+
 
         $('.treatmentsAdd').on('click', '.remove-treatment', function () {
             var counterToRemove = $(this).data('counter');
@@ -28,10 +34,6 @@
             
         });
     });
-
-
-
-
 
 
 //validation code 
@@ -154,30 +156,21 @@ $(function (){
     }
 });
 
+// Function to initialize the modal
 
 
-// function editProductCategory(id){
-//    $.ajax({
-//         url: base_url+'/admin/product-category/' + id + '/edit', 
-//         type: 'GET',
-//         success: function(data){
+$(".add-brand-btn").click(function(){
 
-            
+ $('#main_category_id').empty();
 
-//               $('#addNewBrandModalBody').html(data);
-//               $('#id').val(data.id);
+ $('.dynamic-treatments').hide();
 
-              
-//               $('#product_category_name').val(data.product_category_name);
-//               $('#brand_name').val(data.brand_name);
-//               $('#addNewBrandModal').modal('show');
+ $('.static-treatments').show();
 
-//         },
-//         error: function(error){
-//             console.error('Error fetching data:', error);
-//         }
-//     });
-// }
+ $('#product_category_name').val('');
+
+});
+
 
 
 
@@ -186,31 +179,33 @@ function editProductCategory(id){
         url: base_url + '/admin/product-category/' + id + '/edit',
         type: 'GET',
         success: function (data) {
+            $('#addNewBrandModalBody').html('');
+            $('#id').val('');
+            $('#product_category_name').val('');
+            $('.static-treatments').hide();
+            $('.static-treatments').remove();
+            $('.treatments-container').empty();
+            $('#sub_category').empty();  
             $('#addNewBrandModalBody').html(data);
             $('#id').val(data.id);
             $('#product_category_name').val(data.product_category_name);
 
-            $('.static-treatments').hide();
-            $('.treatments-container').empty();
-
-          
             if (data.product_subcategory_names && data.product_subcategory_names.length > 0) {
                 data.product_subcategory_names.forEach(function (subcategoryName, index) {
                     let treatmentInputField;
                     if (index === data.product_subcategory_names.length - 1) {
-                       
                         treatmentInputField = `
                             <div class="input-group">
-                                <input type="text" name="treatments[]" class="form-control border-end-0 static-treatments" placeholder="Treatments" value="${subcategoryName}" aria-label="Treatments" aria-describedby="addTreatment" />
-                                <span class="input-group-text border-start-0 addTreatment" id="addTreatment">+</span>
+                                <input type="text" name="treatments[]" class="form-control border-end-0 dynamic-treatments" placeholder="Treatments" value="${subcategoryName}" aria-label="Treatments" aria-describedby="addTreatment" />
+                                <span class="input-group-text border-start-0 addTreatment dynamic-treatments" id="addTreatment">+</span>
                             </div>`;
                     } else {
-                        treatmentInputField = `<input type="text" name="treatments[]" class="form-control static-treatments" placeholder="Treatments" value="${subcategoryName}" />`;
+                        treatmentInputField = `<input type="text" name="treatments[]" class="form-control dynamic-treatments" placeholder="Treatments" value="${subcategoryName}" />`;
                     }
                     $('#sub_category').append(treatmentInputField);
                 });
             }
-            
+
             $('#addNewBrandModal').modal('show');
         },
         error: function (error) {
@@ -218,4 +213,5 @@ function editProductCategory(id){
         }
     });
 }
+
 

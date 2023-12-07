@@ -194,7 +194,7 @@
                             <input type="text" name="treatments[]" class="form-control static-treatments" placeholder="Treatments" />
                             <div class="input-group static-treatments">
                                 <input type="text" name="treatments[]" class="form-control border-end-0 static-treatments" placeholder="Treatments" aria-label="Treatments" aria-describedby="addTreatment" />
-                                <span class="input-group-text border-start-0 addTreatment" id="addTreatment">+</span>
+                                <span class="input-group-text border-start-0 addTreatment static-treatments" id="addTreatment">+</span>
                             </div>
                         </div>
                         

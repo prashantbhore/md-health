@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('access_token')->nullable();
             $table->string('fcm_token')->nullable();
             $table->string('otp_expiring_time')->nullable();
+            $table->enum('verified', ['yes', 'no'])->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();

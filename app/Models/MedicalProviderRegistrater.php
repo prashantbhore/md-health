@@ -29,6 +29,7 @@ class MedicalProviderRegistrater extends Authenticatable
         'registration_otp',
         'authorisation_full_name',
         'company_overview',
+        'verified',
         'login_otp',
         'access_token',
         'fcm_token',

@@ -90,15 +90,18 @@
                             <div class="col-md-6 mb-3">
                                 <div class="mb-3">
                                     <label for="membershipType">Membership Type</label>
-                                    <input type="text" class="form-control" placeholder="Silver" />
+                                    <p>Silver</p>
+                                    {{-- <input type="text" class="form-control" placeholder="Silver" /> --}}
                                 </div>
 
                                 <!--  -->
+                           
                                 <label for="verified">Verified</label>
                                 <div class="form-check mt-2 d-flex align-items-center gap-2">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                    <img src="{{URL::asset('admin/assets/img/verifiedBy.png')}}" alt="" />
+                                    <input class="form-check-input verifiedcheckbox" type="checkbox" value="" id="flexCheckDefault"  data-id="{{!empty($medical_provider->id)?$medical_provider->id:''}}" {{(!empty($medical_provider->verified) && $medical_provider->verified == 'yes') ? 'checked' : ''}} />
+                                    <img src="{{ URL::asset('admin/assets/img/verifiedBy.png') }}" alt=""/>
                                 </div>
+                                
                             </div>
 
                             <!-- Reviews -->
@@ -162,15 +165,21 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 my-3">
-                                <label for="overview" class="mb-2">Overview</label>
-                                <textarea name="" id="" cols="30" rows="10" class="form-control overviewText">{{ !empty($medical_provider->company_overview) ?ucfirst($medical_provider->company_overview): '' }}
-                                </textarea>
-                            </div>
-
-                            <div class="col-md-12 mb-3">
-                                <div class="d-flex flex-wrap justify-content-between">
-                                    <button type="submit" class="btn md-btn save-btn">Save Changes</button>
+                            <form action="{{ route('medical.tourism.store') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ !empty($medical_provider->id) ? $medical_provider->id: '' }}">
+                                <div class="col-md-12 my-3">
+                                    <label for="overview" class="mb-2">Overview</label>
+                                    <textarea name="overview" id="" cols="30" rows="10" class="form-control overviewText">{{ !empty($medical_provider->company_overview) ? ucfirst($medical_provider->company_overview) : '' }}
+                                    </textarea>
+                                </div>
+                            
+                                <div class="col-md-12 mb-3">
+                                    <div class="d-flex flex-wrap justify-content-between">
+                                        <button type="submit" class="btn md-btn save-btn">Save Changes</button>
+                                
+                            </form>
+                                 
                                     <button type="submit" class="btn md-btn deactivate-btn">Deactivate Vendors</button>
                                     <button type="submit" class="btn md-btn delete-btn">Delete Vendors</button>
                                 </div>

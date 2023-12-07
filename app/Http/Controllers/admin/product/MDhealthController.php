@@ -25,36 +25,111 @@ class MDhealthController extends Controller
 
 
 
-    public function store(Request $request){
-      $category_input = [
-        'main_product_category_id' => $request->main_category_id,
-        'product_category_name' => $request->category_name,
-        'created_ip_address'=> $request->ip()
+//     public function store(Request $request){
+
+
+//         dd($request->id);
+
+//       $category_input = [
+//         'main_product_category_id' => $request->main_category_id,
+//         'product_category_name' => $request->category_name,
+//         'created_ip_address'=> $request->ip()
        
-    ];
+//     ];
      
-    $product_category= ProductCategory::create($category_input);
+//     $product_category= ProductCategory::create($category_input);
 
 
-    $brand_unique_id = "MD" . sprintf('%04d', $product_category->id);
+//     $brand_unique_id = "MD" . sprintf('%04d', $product_category->id);
 
-    ProductCategory::where('id', $product_category->id)->update(['product_unique_id' =>  $brand_unique_id]);
+//     ProductCategory::where('id', $product_category->id)->update(['product_unique_id' =>  $brand_unique_id]);
 
 
 
-    if(!empty($request->treatments)&&!empty($product_category)){
-       foreach($request->treatments as $treatment){
-        $sub_category_input = [
-          'product_category_id' => $product_category->id,
-          'product_sub_category_name' => $treatment,
-          'created_ip_address'=> $request->ip()
-        ];
+//     if(!empty($request->treatments)&&!empty($product_category)){
+//        foreach($request->treatments as $treatment){
+//         $sub_category_input = [
+//           'product_category_id' => $product_category->id,
+//           'product_sub_category_name' => $treatment,
+//           'created_ip_address'=> $request->ip()
+//         ];
    
-     $product_sub_category= ProductSubCategory::create($sub_category_input);
-    }
-    }
-   return redirect('admin/category-mdhealth')->with('success', 'MDhealth Category added successfully!');
+//      $product_sub_category= ProductSubCategory::create($sub_category_input);
+//     }
+//     }
+//    return redirect('admin/category-mdhealth')->with('success', 'MDhealth Category added successfully!');
+
+
+// }
+
+
+public function store(Request $request){
+
+  if (!empty($request->id)) {
+  
+      $existingCategory = ProductCategory::find($request->id);
+
+      if ($existingCategory) {
+          $existingCategory->update([
+              'main_product_category_id' => $request->main_category_id,
+              'product_category_name' => $request->category_name,
+              'modified_ip_address' => $request->ip()
+          ]);
+
+          if (!empty($request->treatments)){
+              ProductSubCategory::where('product_category_id', $existingCategory->id)->delete();
+              foreach ($request->treatments as $treatment){
+                  $sub_category_input = [
+                      'product_category_id' => $existingCategory->id,
+                      'product_sub_category_name' => $treatment,
+                      'created_ip_address' => $request->ip()
+                  ];
+
+                  ProductSubCategory::create($sub_category_input);
+              }
+          }
+
+          return redirect('admin/category-mdhealth')->with('success', 'MDhealth Category updated successfully!');
+      } else {
+          return redirect()->back()->with('error', 'Category with ID ' . $request->id . ' not found.');
+      }
+  } else {
+      $category_input = [
+          'main_product_category_id' => $request->main_category_id,
+          'product_category_name' => $request->category_name,
+          'created_ip_address' => $request->ip()
+      ];
+
+      $product_category = ProductCategory::create($category_input);
+
+      $brand_unique_id = "MD" . sprintf('%04d', $product_category->id);
+
+      ProductCategory::where('id', $product_category->id)->update(['product_unique_id' => $brand_unique_id]);
+
+      if (!empty($request->treatments) && !empty($product_category)) {
+          foreach ($request->treatments as $treatment) {
+              $sub_category_input = [
+                  'product_category_id' => $product_category->id,
+                  'product_sub_category_name' => $treatment,
+                  'created_ip_address' => $request->ip()
+              ];
+
+              ProductSubCategory::create($sub_category_input);
+          }
+      }
+
+      return redirect('admin/category-mdhealth')->with('success', 'MDhealth Category added successfully!');
+  }
 }
+
+
+
+
+
+
+
+
+
 
 
 

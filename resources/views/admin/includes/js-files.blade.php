@@ -41,6 +41,11 @@
 <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
 
 
+<script src="{{ URL::asset('admin/js/jquery.toast.min.js')}}"></script>
+
+
+
+
 
 
 
@@ -124,6 +129,7 @@
 </script>
 
 <script>
+
   function success_toast(title = '', message = '') {
     $.toast({
       heading: title,

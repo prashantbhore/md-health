@@ -115,7 +115,7 @@ $(document).ready(() => {
 
 
 
-$(document).off("click", ".md-change-status").on("click", ".md-change-status", function () {
+$(document).off("click", ".md-change-status").on("click", ".md-change-status", function (){
 
     var id = $(this).data("id");
 
