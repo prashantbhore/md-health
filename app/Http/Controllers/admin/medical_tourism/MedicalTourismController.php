@@ -266,6 +266,58 @@ class MedicalTourismController extends Controller
     }
 
 
+    // public function status(Request $request){
+
+    //     dd($request->all());
+
+    // }
+
+
+
+    public function status(Request $request)
+    {
+        $id = !empty($request->id) ? $request->id: '';
+
+        $old_data = MedicalProviderRegistrater::where('id', $id)->first();
+        $status =MedicalProviderRegistrater::where('id', $id)->value('status');
+
+        if ($status == 'active') {
+            $block_status = MedicalProviderRegistrater::where('id', $id)->update([
+                'status' => 'inactive',
+                'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+            ]);
+            return response()->json(['message' =>'Vendor Status Change To Inactive' , 'status' => 'true']);
+        } else {
+
+            $active_status = MedicalProviderRegistrater::where('id', $id)->update([
+                'status' => 'active',
+                 'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+            ]);
+
+            return response()->json(['message' =>'Vendor Status Change To Active' , 'status' => 'true']);
+          
+        }
+       
+        
+    }
+
+
+
+    
+
+
+    public function vendor_delete(Request $request)
+    {
+        $id = !empty($request->id) ? $request->id : '';
+        $old_data = MedicalProviderRegistrater::where('id', $id)->first();
+        $new_data = MedicalProviderRegistrater::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+        return response()->json(['message' =>'Vendor Is Deleted', 'status' => 'true']);
+    }
+
+
 
 
 

@@ -125,6 +125,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::get('medical-tourism-delete-gallery','delete_gallery');
         Route::post('medical-tourism-store','store')->name('medical.tourism.store');
         Route::post('verification-status-chnage','verification_status');
+        Route::post('vendor-status-chnage','status');
+        Route::post('vendor-delete','vendor_delete');
  });
  
 

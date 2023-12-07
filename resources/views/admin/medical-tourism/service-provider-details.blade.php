@@ -177,11 +177,17 @@
                                 <div class="col-md-12 mb-3">
                                     <div class="d-flex flex-wrap justify-content-between">
                                         <button type="submit" class="btn md-btn save-btn">Save Changes</button>
-                                
-                            </form>
+                              </form>
+
+                             
                                  
-                                    <button type="submit" class="btn md-btn deactivate-btn">Deactivate Vendors</button>
-                                    <button type="submit" class="btn md-btn delete-btn">Delete Vendors</button>
+                              <button type="button" data-id="{{ !empty($medical_provider->id) ? $medical_provider->id : '' }}" class="btn md-btn deactivate-btn">
+                                {{ $medical_provider->status == 'active' ? 'Deactivate Vendors' : 'Activate Vendors' }}
+                              </button>
+                            
+
+                              <button type="button" data-id="{{ !empty($medical_provider->id) ? $medical_provider->id : '' }}" class="btn md-btn delete-btn"> {{ $medical_provider->status == 'delete' ? 'Deleted' : 'Delete Vendor' }}</button>
+
                                 </div>
                             </div>
                         </div>

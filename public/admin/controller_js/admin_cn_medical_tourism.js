@@ -282,3 +282,63 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
             });
         });
     });
+
+
+    $(document).ready(function (){
+        $('.deactivate-btn').click(function () {
+            var button = $(this); 
+            var id = button.data("id");
+    
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    id: id,
+                },
+                url: base_url + "/admin/vendor-status-chnage",
+                success: function (data){
+
+                    var newText = (button.text() === 'Activate Vendors') ? 'Deactivate Vendors' : 'Activate Vendors';
+                    button.text(newText);
+    
+                    success_toast("Success", data.message);
+                },
+                error: function (error){
+                    console.error(error);
+                }
+            });
+        });
+    });
+    
+
+$(document).ready(function (){
+        $('.delete-btn').click(function (){
+            var button = $(this); 
+            var id = button.data("id");
+    
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    id: id,
+                },
+                url: base_url + "/admin/vendor-delete",
+                success: function (data){
+                    // Update the button text based on the current text
+                    var newText = (button.text() === 'Delete Vendors') ? 'Deleted Vendors' : 'Delete Vendors';
+                    button.text(newText);
+    
+                    success_toast("Success", data.message);
+                },
+                error: function (error){
+                    console.error(error);
+                }
+            });
+        });
+    });
+    
+        
