@@ -252,7 +252,7 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
 
 
 
-    $(document).ready(function () {
+    $(document).ready(function (){
         $('.verifiedcheckbox').click(function (){
            
             var id = $(this).data("id");
@@ -284,8 +284,8 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
     });
 
 
-    $(document).ready(function (){
-        $('.deactivate-btn').click(function () {
+    $(document).ready(function(){
+        $('.deactivate-btn').click(function (){
             var button = $(this); 
             var id = button.data("id");
     
@@ -313,9 +313,9 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
     });
     
 
-$(document).ready(function (){
+    $(document).ready(function (){
         $('.delete-btn').click(function (){
-            var button = $(this); 
+            var button = $(this);
             var id = button.data("id");
     
             $.ajax({
@@ -327,18 +327,23 @@ $(document).ready(function (){
                     id: id,
                 },
                 url: base_url + "/admin/vendor-delete",
-                success: function (data){
-                    // Update the button text based on the current text
-                    var newText = (button.text() === 'Delete Vendors') ? 'Deleted Vendors' : 'Delete Vendors';
-                    button.text(newText);
-    
+                success: function (data) {
                     success_toast("Success", data.message);
+    
+                    // Replace the current history entry with the current URL
+                    var currentUrl = window.location.href;
+                    window.history.replaceState({}, document.title, currentUrl);
+    
+                    // Redirect to your desired route
+                    window.location.href = base_url + "/admin/service-provider";
                 },
-                error: function (error){
+                error: function (error) {
                     console.error(error);
                 }
             });
         });
     });
+    
+    
     
         

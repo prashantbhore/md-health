@@ -256,6 +256,8 @@ public function delete_product_category(Request $request){
   return response()->json(['message' => $request->flash, 'status' => 'true']);
 
 }
+
+
 public function edit_product(Request $request)
 {
     $productCategoryId = $request->id;

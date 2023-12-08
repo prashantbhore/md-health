@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\master\CityController;
@@ -228,8 +229,24 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('category-mdbooking', 'admin/products-and-categories/categories/mdbooking');
    
     # Products
-    Route::view('product-mdhealth', 'admin/products-and-categories/products/mdhealth');
-    Route::view('product-details', 'admin/products-and-categories/products/product-details');
+
+
+    Route::controller(ProductMDhealthPackageController::class)->group(function(){
+       Route::get('product-mdhealth','index');
+       Route::get('/md-health-package-data-table','data_table');
+       Route::get('md-health-package-delete','delete_md_health_package_delete');
+       Route::get('product-details/{id}','show');
+       Route::post('package-status-chnage','status');
+       Route::post('package-delete','package_delete');
+       Route::post('package-store','store')->name('package.store');
+    });
+
+
+
+
+   
+
+    
 
     Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
     Route::view('product-mdfood', 'admin/products-and-categories/products/mdfood');
