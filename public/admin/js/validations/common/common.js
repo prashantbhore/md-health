@@ -115,7 +115,7 @@ $(document).ready(() => {
 
 
 
-$(document).off("click", ".md-change-status").on("click", ".md-change-status", function () {
+$(document).off("click", ".md-change-status").on("click", ".md-change-status", function (){
 
     var id = $(this).data("id");
 
@@ -173,6 +173,7 @@ $(document).off("click", ".md-change-status").on("click", ".md-change-status", f
 
 
 $(document).on("click", ".delete", function (){
+
     var id = $(this).data("id");
     var table = $(this).data("table");
     var flash = $(this).data("flash");

@@ -133,6 +133,7 @@
                                         <th>SubCategories</th>
                                         <th>Created</th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
@@ -162,7 +163,7 @@
                 <div class="modal-body px-4">
                     <h4 class="mb-4 md-fw-bold">Add New Category for MD<span class="fw-light">Home Service</span></h4>
 
-                    <form action="{{route('category.md.home.service.store')}}" method="post">
+                    {{-- <form action="{{route('category.md.home.service.store')}}" method="post">
                         @csrf
 
                         <input type="hidden"  name="main_category_id" value="4">
@@ -186,7 +187,44 @@
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn save-btn w-75">Add Category</button>
                         </div>
+                    </form> --}}
+
+
+                    <form action="{{route('category.md.home.service.store')}}" method="post">
+                        @csrf
+
+                        <input type="hidden"   name="main_category_id" value="4">
+
+                        <input type="hidden"  id="id" name="id">
+
+
+                        <div class="mb-3">
+                            <label for="brand" class="form-label">*Category Name</label>
+                            <input type="text" name="category_name" id="product_category_name" class="form-control" placeholder="Category Name" />
+                        </div>
+
+                        <div class="mb-3 treatmentsAdd">
+                            <label for="brand"  class="form-label">*Treatments</label>
+                            <span id="sub_category" ></span>
+
+                            <input type="text" name="subcategory[]" class="form-control static-treatments" placeholder="Subcategory"/>
+                            <input type="text"name="subcategory[]" class="form-control static-treatments" placeholder="Subcategory"/>
+                            <div class="input-group static-treatments">
+                                <input type="text" name="subcategory[]" class="form-control border-end-0 static-treatments" placeholder="Subcategory" aria-label="Treatments" aria-describedby="addTreatment" />
+                                <span class="input-group-text border-start-0 addTreatment static-treatments" id="addTreatment">+</span>
+                            </div>
+                        </div>
+                        
+
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn save-btn w-75">Add Category</button>
+                        </div>
+
                     </form>
+
+
+
+
 
                 </div>
             </div>

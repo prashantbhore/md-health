@@ -38,4 +38,26 @@ class Packages extends Model
         'created_by',
         'modified_by',
     ];
+
+    public function provider()
+    {
+        return $this->belongsTo(MedicalProviderRegistrater::class,'created_by');
+    }
+
+    public function provider_logo()
+    {
+       return $this->belongsTo(MedicalProviderLogo::class, 'created_by','medical_provider_id')
+                ->where('status','active');
+    }
+
+
+    public function product_category()
+    {
+       return $this->belongsTo(ProductCategory::class,'treatment_id');
+            
+    }
+
+    
+
+
 }

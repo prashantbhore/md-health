@@ -59,6 +59,7 @@ class BaseController extends Controller
            // LogActivity::AdminLog(json_encode($active_status), json_encode($old_data), $request->table, 'status', 'admin');
         }
         return response()->json(['message' => $request->flash, 'status' => 'true']);
+        
     }
 
 

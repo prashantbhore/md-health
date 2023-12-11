@@ -96,7 +96,7 @@
                             </select>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -105,10 +105,13 @@
                                         <th>Category</th>
                                         <th>Price</th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+
+{{--                                     
                                     <tr>
                                         <td>#MD7384</td>
                                         <td>Hearth Valve Replacement Surgery</td>
@@ -132,7 +135,7 @@
                                         <td>Cardiology</td>
                                         <td>34.879.97 ₺</td>
                                         <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
+                                            
                                             <a href="{{URL('admin/product-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="" />
                                             </a>
@@ -156,7 +159,7 @@
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="" />
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
 
                                 </tbody>
                             </table>
@@ -203,6 +206,7 @@
     </div>
 </section>
 @endsection @section('script')
+<script src="{{url('admin\controller_js\admin_cn_product_md_health_package.js')}}"></script>
 <script>
     $(".productsNcategoriesLi").addClass("activeClass");
     $(".productsNcategories").addClass("md-active");

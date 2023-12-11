@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\master\CityController;
@@ -116,13 +117,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::controller(MedicalTourismController::class)->group(function (){
         Route::get('service-provider', 'index');
-        Route::get('service-provider-details','show');
+       // Route::get('service-provider-details','show');
         Route::get('medical-tourism-data-table','data_table');
-        Route::get('admin/medical-tourism-details/{id}','show')->name('medical_tourism.details');
+        Route::get('medical-tourism-details/{id}','show')->name('medical_tourism.details');
         Route::get('medical-tourism-delete','delete_medical_tourism');
         Route::get('medical-tourism-delete-logo','delete_logo');
         Route::get('medical-tourism-delete-license','delete_license');
         Route::get('medical-tourism-delete-gallery','delete_gallery');
+        Route::post('medical-tourism-store','store')->name('medical.tourism.store');
+        Route::post('verification-status-chnage','verification_status');
+        Route::post('vendor-status-chnage','status');
+        Route::post('vendor-delete','vendor_delete');
  });
  
 
@@ -159,7 +164,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::get('/brand-data-table','data_table');
         Route::get('brand-delete','delete_brand');
         Route::get('/brand/{id}/edit','edit_brand');
-    
     });
 
 
@@ -169,7 +173,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::controller(ProductController::class)->group(function (){
         Route::get('products-and-categories','index');
-    
     });
 
 
@@ -226,8 +229,24 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('category-mdbooking', 'admin/products-and-categories/categories/mdbooking');
    
     # Products
-    Route::view('product-mdhealth', 'admin/products-and-categories/products/mdhealth');
-    Route::view('product-details', 'admin/products-and-categories/products/product-details');
+
+
+    Route::controller(ProductMDhealthPackageController::class)->group(function(){
+       Route::get('product-mdhealth','index');
+       Route::get('/md-health-package-data-table','data_table');
+       Route::get('md-health-package-delete','delete_md_health_package_delete');
+       Route::get('product-details/{id}','show');
+       Route::post('package-status-chnage','status');
+       Route::post('package-delete','package_delete');
+       Route::post('package-store','store')->name('package.store');
+    });
+
+
+
+
+   
+
+    
 
     Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
     Route::view('product-mdfood', 'admin/products-and-categories/products/mdfood');
