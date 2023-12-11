@@ -52,7 +52,7 @@ class BrandController extends Controller
 
     $existingBrand = VehicleBrand::where('status','active')->where('brand_name', $request->brand_name)->first();
 
-    if ($existingBrand) {
+    if ($existingBrand){
         return redirect()->back()->with('error', 'Brand with the same name already exists.');
     }
 

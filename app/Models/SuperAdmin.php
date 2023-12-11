@@ -14,7 +14,7 @@ class SuperAdmin extends Authenticatable
     protected $guard = 'superadmin';
     protected $table = 'md_super_admin';
     protected $fillable = [
-        'email', 'password',
+        'name', 'userType', 'privileges','email', 'password',
     ];
     protected $hidden = [
         'password', 'remember_token',
