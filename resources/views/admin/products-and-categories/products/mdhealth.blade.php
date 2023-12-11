@@ -7,7 +7,7 @@
         </div>
 
         <div class="row top-cards productsPage">
-            <div class="col mb-3">
+            <div class="col mb-4">
                 <div class="card bg-green position-relative">
                     <div class="card-body">
                         <div class="card-text d-flex flex-column">
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="col mb-3">
+            <div class="col mb-4">
                 <a href="{{URL('admin/product-mdshop')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
@@ -36,7 +36,7 @@
                 </a>
             </div>
 
-            <div class="col mb-3">
+            <div class="col mb-4">
                 <a href="{{URL('admin/product-mdfood')}}" class="text-decoration-none text-dark position-relative">
                     <div class="card">
                         <div class="card-body">
@@ -53,8 +53,9 @@
                     </div>
                 </a>
             </div>
-            <div class="col mb-3">
-                <a href="{{URL('admin/product-mdbooking')}}" class="text-decoration-none text-dark">
+
+             <div class="col mb-3">
+                {{-- <a href="{{URL('admin/product-mdbooking')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -68,17 +69,20 @@
                             </div>
                         </div>
                     </div>
-                </a>
-            </div>
+                </a> --}}
+            </div> 
+
+
 
             <div class="col mb-3">
-                <div class="add-brands-btn h-100">
+                {{-- <div class="add-brands-btn h-100">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#addNewCategoryModal" class="btn add-brand-btn">
                         <span>+</span> <br />
                         Add New Category
                     </button>
-                </div>
+                </div> --}}
             </div>
+            
 
             <!--  -->
             <div class="col-md-12 my-3">

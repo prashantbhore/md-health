@@ -17,7 +17,7 @@
                                 <a href="{{!empty($package->provider_logo->company_logo_image_path)?url('/').Storage::url($package->provider_logo->company_logo_image_path):''}}" class="glightbox">
                                     <img src="{{!empty($package->provider_logo->company_logo_image_path)?url('/').Storage::url($package->provider_logo->company_logo_image_path):''}}" alt="" class="uploadedImg" />
                                 </a>
-                                <span class="deleteImg">Delete Picture</span>
+                                {{-- <span class="deleteImg">Delete Picture</span> --}}
                             </div>
 
                         </div>
@@ -27,34 +27,25 @@
                             @csrf
                          <input type="hidden" name="id" value="{{!empty($package->id)?$package->id:''}}">   
                         <div class="row mt-3">
+
                             <div class="col-md-12 mb-3">
                                 <label for="name">Package Name</label>
-                                <input type="text" class="form-control" name="package_name" placeholder="Package Name" value="{{!empty($package->package_name)?$package->package_name:''}}">
+                                <input type="text" class="form-control" name="package_name" placeholder="Package Name" value="{{!empty($package->package_name)?$package->package_name:''}}" disabled>
                             </div>
 
-
-                            {{-- <div class="col-md-12 mb-3">
-                                <label for="name">Treatment Category</label>
-                                <input type="text" class="form-control" name="treatment_category_id" placeholder="Treatment Category" value="{{!empty($package->product_category->product_category_name)?$package->product_category->product_category_name:''}}">
-                            </div> --}}
 
                             <div class="col-md-12 mb-3">
                                 <label for="name">Treatment Category</label>
-                                <select class="form-control" name="treatment_category_id">
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" {{ !empty($package->product_category) && $package->product_category->id == $category->id ? 'selected' : '' }}>
-                                            {{ $category->product_category_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" name="treatment_category_id" placeholder="Treatment Category" value="{{!empty($package->product_category->product_category_name)?$package->product_category->product_category_name:''}}"  disabled >
                             </div>
-                            
+
+                         
 
 
 
                             <div class="col-md-12 mb-3">
                                 <label for="name">Treatment Period</label>
-                                <input type="text" class="form-control" name="treatment_period_in_days" placeholder="Treatment Period" value="{{!empty($package->treatment_id)?$package->treatment_id:''}}">
+                                <input type="text" class="form-control" name="treatment_period_in_days" placeholder="Treatment Period" value="{{!empty($package->treatment_id)?$package->treatment_id:''}}"  disabled>
                             </div>
 
 
@@ -82,42 +73,42 @@
 
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="accommodation" id="Accommodation" {{ in_array("accommodation", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="accommodation" id="Accommodation" {{ in_array("accommodation", $otherServicesArray) ? 'checked' : '' }}  disabled>
                                         <label class="form-check-label" for="Accommodation">
                                             Accommodation
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"  name="other_services[]" value="transportation" id="Transportation" {{ in_array("transportation", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox"  name="other_services[]" value="transportation" id="Transportation" {{ in_array("transportation", $otherServicesArray) ? 'checked' : '' }}  disabled>
                                         <label class="form-check-label" for="Transportation">
                                             Transportation
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"  name="other_services[]" value="tour" id="Tour" {{ in_array("tour", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox"  name="other_services[]" value="tour" id="Tour" {{ in_array("tour", $otherServicesArray) ? 'checked' : '' }}  disabled>
                                         <label class="form-check-label" for="Tour">
                                             Tour
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="translation" id="Translation" {{ in_array("translation", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="translation" id="Translation" {{ in_array("translation", $otherServicesArray) ? 'checked' : '' }}  disabled>
                                         <label class="form-check-label" for="Translation">
                                             Translation
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="visaServices" id="VisaServices" {{ in_array("visaServices", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="visaServices" id="VisaServices" {{ in_array("visaServices", $otherServicesArray) ? 'checked' : '' }}  disabled>
                                         <label class="form-check-label" for="VisaServices">
                                             Visa Services
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="other_services[]"  value="ticketServices" id="TicketServices" {{ in_array("ticketServices", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]"  value="ticketServices" id="TicketServices" {{ in_array("ticketServices", $otherServicesArray) ? 'checked' : '' }}  disabled>
                                         <label class="form-check-label" for="TicketServices">
                                             Ticket Services
                                         </label>

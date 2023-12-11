@@ -51,7 +51,7 @@
                 </a>
             </div>
             <div class="col mb-3">
-                <a href="{{URL('admin/product-mdbooking')}}" class="text-decoration-none text-dark">
+                {{-- <a href="{{URL('admin/product-mdbooking')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -65,13 +65,13 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </a> --}}
             </div>
 
             <div class="col mb-3">
-                <div class="add-brands-btn h-100">
+                {{-- <div class="add-brands-btn h-100">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#addNewCategoryModal" class="btn add-brand-btn"><span>+</span> <br> Add New Category</button>
-                </div>
+                </div> --}}
             </div>
 
             <!--  -->

@@ -249,7 +249,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     
 
     Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
+
     Route::view('product-mdfood', 'admin/products-and-categories/products/mdfood');
+    
     Route::view('product-mdbooking', 'admin/products-and-categories/products/mdbooking');
     Route::view('product-home-service', 'admin/products-and-categories/products/home-service');
 

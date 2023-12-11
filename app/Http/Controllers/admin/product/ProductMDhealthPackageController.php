@@ -143,11 +143,11 @@ public function show(Request $request){
     // Check if other_services is not empty before exploding
     $otherServicesArray = !empty($package->other_services) ? explode(',', $package->other_services) : [];
 
-    $categories=ProductCategory::where('status','active')->get();
+    // $categories=ProductCategory::where('status','active')->get();
 
     //dd($otherServicesArray);
 
-    return view('admin.products-and-categories.products.product-details', compact('package','otherServicesArray','categories'));
+    return view('admin.products-and-categories.products.product-details', compact('package','otherServicesArray'));
 }
 
 
@@ -194,21 +194,15 @@ public function package_delete(Request $request)
 
 public function store(Request $request)
 {
-    $otherServicesArray = $request->other_services;
-    $otherServicesString = implode(',', $otherServicesArray);
     $package_input = [
-        'package_name' => $request->package_name,
-        'treatment_category_id' => $request->treatment_category_id,
         'package_discount' => $request->package_discount,
         'package_price' => $request->package_price,
-        'other_services' => $otherServicesString,
-        'treatment_period_in_days' => $request->treatment_period_in_days,
     ];
      
-    $packages=Packages::where('id', $request->id)->update($package_input);
-    return redirect()->back();
-}
+    $packages = Packages::where('id', $request->id)->update($package_input);
 
+    return redirect('admin/product-details/' . Crypt::encrypt($request->id))->with('success', 'MDhealth Package Updated Successfully!');
+}
   
 
 
