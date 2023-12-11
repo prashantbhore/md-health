@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\api\BaseController as BaseController;
 
+use App\Models\CustomerLogs;
 
 class RegistrationController extends BaseController
 {
@@ -83,6 +84,7 @@ class RegistrationController extends BaseController
             $customer_input['otp_expiring_time'] = time() + 20;
             $customer_input['modified_ip_address'] = $request->ip();
             $customer_registration = CustomerRegistration::create($customer_input);
+          
             $CustomerRegistration = CustomerRegistration::select('id')->get();
             if (!empty($CustomerRegistration)) {
                 foreach ($CustomerRegistration as $key => $value) {
@@ -126,6 +128,12 @@ class RegistrationController extends BaseController
                 ]);
             }
             if (!empty($customer_registration)) {
+                $customer_logs = [];
+                $customer_logs['customer_id'] = !empty($customer_registration->id) ? $customer_registration->id : '';
+                $customer_logs['status'] = 'active';
+                $customer_logs['type'] = 'signup';
+                CustomerLogs::create($customer_logs);
+
                 return response()->json([
                     'status' => 200,
                     'message' => 'Profile created successfully.',
@@ -136,6 +144,11 @@ class RegistrationController extends BaseController
                     ],
                 ]);
             } else {
+                $customer_logs = [];
+                $customer_logs['customer_id'] = !empty($customer_registration->id) ? $customer_registration->id : '';
+                $customer_logs['status'] = 'inactive';
+                $customer_logs['type'] = 'signup';
+                CustomerLogs::create($customer_logs);
                 return response()->json([
                     'status' => 404,
                     'message' => 'Profile not completed.',

@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderRegistrater;
 use App\Http\Controllers\api\BaseController as BaseController;
-
+use App\Models\CustomerLogs;
 class LoginControllers extends BaseController
 {
     // customer login
@@ -58,6 +58,12 @@ class LoginControllers extends BaseController
                 'access_token' => $success['token']
             ]);
 
+            $customer_logs=[];
+            $customer_logs['customer_id']=!empty($customer->id)? $customer->id:'';
+            $customer_logs['status'] = 'active';
+            $customer_logs['type'] = 'login';
+            CustomerLogs::create($customer_logs);
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Login successfull.',
@@ -66,6 +72,12 @@ class LoginControllers extends BaseController
                 'success_token' => $success,
             ]);
         } else {
+            $customer = Auth::guard('md_customer_registration')->user();
+            $customer_logs = [];
+            $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+            $customer_logs['status'] = 'inactive';
+            $customer_logs['type'] = 'login';
+            CustomerLogs::create($customer_logs);
             return response()->json([
                 'status' => 404,
                 'message' => 'Unauthorised.',
