@@ -15,6 +15,7 @@ class MedicalProviderRegistrater extends Authenticatable
     protected $guard = 'md_health_medical_providers_registers';
     protected $table = 'md_medical_provider_register';
     protected $fillable = [
+        'provider_unique_id',
         'company_name',
         'city_id',
         'email',

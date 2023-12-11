@@ -17,14 +17,14 @@ class LoginControllers extends BaseController
     public function customer_login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'phone' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
         $validation_message = '';
 
-        if (empty($request->phone)) {
-            $validation_message .= 'phone field';
+        if (empty($request->email)) {
+            $validation_message .= 'email field';
         }
         if (empty($request->password)) {
             $validation_message .= 'password field';
@@ -41,10 +41,11 @@ class LoginControllers extends BaseController
 
 
         if (Auth::guard('md_customer_registration')->attempt([
-            'phone' => $request->phone,
+            'email' => $request->email,
             'password' => $request->password,
             'status' => 'active',
         ])) {
+
             $customer = Auth::guard('md_customer_registration')->user();
             $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
             $otp = rand(111111, 999999);
@@ -60,7 +61,8 @@ class LoginControllers extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'Login successfull.',
-                'mobile_number' => $request->phone,
+                'mobile_number' => $customer->phone,
+                'full_name' => $customer->full_name,
                 'success_token' => $success,
             ]);
         } else {

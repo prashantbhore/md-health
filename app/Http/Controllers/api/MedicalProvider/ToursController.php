@@ -12,21 +12,23 @@ use App\Models\ToursDetails;
 use App\Models\VehicleBrand;
 use App\Models\ComfortLevels;
 use Auth;
+use Storage;
 
 class ToursController extends BaseController
 {
     use MediaTrait;
     //
-    public function add_tour(Request $request){
+    public function add_tour(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'tour_name' => 'required',
             'tour_description' => 'required',
             'tour_days' => 'required',
-            'tour_image_path' => 'required',
+            // 'tour_image_path' => 'required',
             'tour_price' => 'required',
             'tour_other_services' => 'required',
-            'platform_type' => 'required',
+            // 'platform_type' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -46,12 +48,13 @@ class ToursController extends BaseController
         $tour_input['tour_other_services'] = $request->tour_other_services;
         $tour_input['platform_type'] = $request->platform_type;
 
-        $tour_input['created_by'] = Auth::user()->id;
-        $AddNewAcommodition = ToursDetails::create($tour_input);
-        if (!empty($AddNewAcommodition)) {
+        $tour_input['created_by'] = 1;
+        $ToursDetails = ToursDetails::create($tour_input);
+        if (!empty($ToursDetails)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Tour created successfully.',
+                'ToursDetails' => $ToursDetails,
             ]);
         } else {
             return response()->json([
@@ -64,20 +67,31 @@ class ToursController extends BaseController
     public function tour_list()
     {
         $ToursDetails = ToursDetails::where('status', 'active')
-        ->select(
-            'id',
-            'tour_name',
-            'tour_description',
-            'tour_days',
-            'tour_image_path',
-            'tour_image_name',
-            'tour_price',
-            'tour_other_services',
-            'platform_type',
-            'status',
-            'created_by'
-        )
+            ->select(
+                'id',
+                'tour_name',
+                'tour_description',
+                'tour_days',
+                'tour_image_path',
+                'tour_image_name',
+                'tour_price',
+                'tour_other_services',
+                'platform_type',
+                'status',
+                'created_by'
+            )
             ->get();
+
+        if (!empty($ToursDetails)) {
+            foreach ($ToursDetails as $key => $value) {
+                $ToursDetails[$key]['tour_name'] = ($value->tour_name);
+                $ToursDetails[$key]['tour_description'] = ($value->tour_description);
+                $ToursDetails[$key]['tour_days'] = ($value->tour_days);
+                $ToursDetails[$key]['tour_image_path'] = url('/') . Storage::url($value->tour_image_path);
+                $ToursDetails[$key]['tour_price'] = ($value->tour_price);
+                $ToursDetails[$key]['tour_other_services'] = ($value->tour_other_services);
+            }
+        }
 
         if (!empty($ToursDetails)) {
             return response()->json([
@@ -116,7 +130,7 @@ class ToursController extends BaseController
         $tour_input['tour_other_services'] = $request->tour_other_services;
         $tour_input['platform_type'] = $request->platform_type;
 
-        $tour_input['created_by'] = Auth::user()->id;
+        $tour_input['created_by'] = 1;
         $edit_tour = ToursDetails::where('id', $request->tour_id)->update($tour_input);
 
         if (!empty($edit_tour)) {
@@ -130,7 +144,6 @@ class ToursController extends BaseController
                 'message' => 'Something went wrong. Details not updated.',
             ]);
         }
-
     }
 
     public function delete_tour(Request $request)
@@ -142,8 +155,9 @@ class ToursController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+        
         $status_update['status'] = 'delete';
-        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_by'] = 1;
         $status_update['modified_ip_address'] = $request->ip();
 
         $delete_tour = ToursDetails::where('id', $request->tour_id)->update($status_update);
@@ -159,6 +173,4 @@ class ToursController extends BaseController
             ]);
         }
     }
-
-
 }
