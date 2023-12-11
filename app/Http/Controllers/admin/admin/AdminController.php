@@ -23,6 +23,26 @@ class AdminController extends Controller
 
 
     public function store(Request $request){
+       // dd($request->all());
+ 
+     if(!empty($request->id)){
+        $input = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'userType' => $request->adminRole,
+            'privileges' => $request->adminRole,
+        ];
+
+       // $admin = Admin::create($input);
+
+        $admin= Admin::find($request->id)->update($input);
+
+        return redirect()->back()->with('success', 'Admin Updated Successfully');
+
+        //return redirect('admin/add-admins')->with('success', 'Admin Updated Successfully');
+
+     }else{
+
      $input = [
             'name' => $request->name,
             'email' => $request->email,
@@ -35,7 +55,8 @@ class AdminController extends Controller
 
         $admin = Admin::create($input);
 
-        return redirect('admin/add-admins')->with('success', 'Admin added successfully');
+        return redirect('admin/add-admins')->with('success', 'Admin Added Successfully');
+    }  
     }
 
 
@@ -95,7 +116,7 @@ class AdminController extends Controller
        
         $id=!empty($request->id)?Crypt::decrypt($request->id):'';
         $admin= Admin::where('id',$id)->first();
-        
+
         return view('admin.admins.edit-admins',compact('admin'));
 
     }

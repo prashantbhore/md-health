@@ -151,6 +151,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     // MANAGE CITIES
 
     Route::controller(AdminController::class)->group(function (){
+        
         Route::get('add-admins', 'index');
         Route::post('admin-store', 'store')->name('admin.store');
         Route::get('/admin-data-table','data_table');
