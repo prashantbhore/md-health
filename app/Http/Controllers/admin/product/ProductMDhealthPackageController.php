@@ -143,9 +143,11 @@ public function show(Request $request){
     // Check if other_services is not empty before exploding
     $otherServicesArray = !empty($package->other_services) ? explode(',', $package->other_services) : [];
 
+    $categories=ProductCategory::where('status','active')->get();
+
     //dd($otherServicesArray);
 
-    return view('admin.products-and-categories.products.product-details', compact('package','otherServicesArray'));
+    return view('admin.products-and-categories.products.product-details', compact('package','otherServicesArray','categories'));
 }
 
 
@@ -190,39 +192,22 @@ public function package_delete(Request $request)
 }
 
 
-public function store(Request $request){
-
-    dd($request->all());
-
-
-                   $package_input['package_name'] = $request->package_name;
-                    $package_input['treatment_category_id'] = $request->treatment_category_id;
-                    $package_input['treatment_id'] = $request->treatment_id;
-                    $package_input['other_services'] = $request->other_services;
-                    $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
-                    $package_input['treatment_price'] = $request->treatment_price;
-                    $package_input['hotel_id'] = $request->hotel_id;
-                    $package_input['hotel_in_time'] = $request->hotel_in_time;
-                    $package_input['hotel_out_time'] = $request->hotel_out_time;
-                    $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
-                    $package_input['vehicle_id'] = $request->vehicle_id;
-                    $package_input['vehicle_in_time'] = $request->vehicle_in_time;
-                    $package_input['vehicle_out_time'] = $request->vehicle_out_time;
-                    $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
-                    $package_input['visa_details'] = $request->visa_details;
-                    $package_input['visa_service_price'] = $request->visa_service_price;
-                    $package_input['package_discount'] = $request->package_discount;
-                    $package_input['package_price'] = $request->package_price;
-                    $package_input['sale_price'] = $request->sale_price;
-                    $package_input['platform_type'] = $request->platform_type;
-                    $edit_packages= Packages::where('id', $request->id)->update($package_input);
-
-
-
-
-
+public function store(Request $request)
+{
+    $otherServicesArray = $request->other_services;
+    $otherServicesString = implode(',', $otherServicesArray);
+    $package_input = [
+        'package_name' => $request->package_name,
+        'treatment_category_id' => $request->treatment_category_id,
+        'package_discount' => $request->package_discount,
+        'package_price' => $request->package_price,
+        'other_services' => $otherServicesString,
+        'treatment_period_in_days' => $request->treatment_period_in_days,
+    ];
+     
+    $packages=Packages::where('id', $request->id)->update($package_input);
+    return redirect()->back();
 }
-
 
   
 
