@@ -31,72 +31,93 @@
                                 <label for="name">Package Name</label>
                                 <input type="text" class="form-control" name="package_name" placeholder="Package Name" value="{{!empty($package->package_name)?$package->package_name:''}}">
                             </div>
-                            <div class="col-md-12 mb-3">
+
+
+                            {{-- <div class="col-md-12 mb-3">
                                 <label for="name">Treatment Category</label>
                                 <input type="text" class="form-control" name="treatment_category_id" placeholder="Treatment Category" value="{{!empty($package->product_category->product_category_name)?$package->product_category->product_category_name:''}}">
+                            </div> --}}
+
+                            <div class="col-md-12 mb-3">
+                                <label for="name">Treatment Category</label>
+                                <select class="form-control" name="treatment_category_id">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ !empty($package->product_category) && $package->product_category->id == $category->id ? 'selected' : '' }}>
+                                            {{ $category->product_category_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
+                            
+
+
+
                             <div class="col-md-12 mb-3">
                                 <label for="name">Treatment Period</label>
-                                <input type="text" class="form-control" placeholder="Treatment Period" value="{{!empty($package->treatment_id)?$package->treatment_id:''}}">
+                                <input type="text" class="form-control" name="treatment_period_in_days" placeholder="Treatment Period" value="{{!empty($package->treatment_id)?$package->treatment_id:''}}">
                             </div>
+
+
 
                             <div class="col-md-12 mb-3">
                                 <label for="name">Discount (%)</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control border-end-0" placeholder="Discount Price" aria-label="Discount Price" aria-describedby="discountPrice" value="{{!empty($package->package_discount)?$package->package_discount:''}}">
+                                    <input type="text" name="package_discount" class="form-control border-end-0" placeholder="Discount Price" aria-label="Discount Price" aria-describedby="discountPrice" value="{{!empty($package->package_discount)?$package->package_discount:''}}">
                                     <span class="input-group-text border-start-0" id="discountPrice">%</span>
                                 </div>
                             </div>
 
+
                             <div class="col-md-12 mb-3">
                                 <label for="price">Package Price</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control border-end-0" placeholder="Package Price" aria-label="Package Price" aria-describedby="packagePrice" value="{{!empty($package->package_price)?$package->package_price:''}}">
+                                    <input type="text" name="package_price" class="form-control border-end-0" placeholder="Package Price" aria-label="Package Price" aria-describedby="packagePrice" value="{{!empty($package->package_price)?$package->package_price:''}}">
                                     <span class="input-group-text border-start-0" id="packagePrice">₺</span>
                                 </div>
                             </div>
+
 
                             <div class="col-md-12 mb-5">
                                 <div class="d-flex align-items-center gap-3">
 
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="Accommodation" {{ in_array("accommodation", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="accommodation" id="Accommodation" {{ in_array("accommodation", $otherServicesArray) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="Accommodation">
                                             Accommodation
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="Transportation" {{ in_array("transportation", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox"  name="other_services[]" value="transportation" id="Transportation" {{ in_array("transportation", $otherServicesArray) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="Transportation">
                                             Transportation
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="Tour" {{ in_array("tour", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox"  name="other_services[]" value="tour" id="Tour" {{ in_array("tour", $otherServicesArray) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="Tour">
                                             Tour
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="Translation" {{ in_array("translation", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="translation" id="Translation" {{ in_array("translation", $otherServicesArray) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="Translation">
                                             Translation
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="VisaServices" {{ in_array("visaServices", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]" value="visaServices" id="VisaServices" {{ in_array("visaServices", $otherServicesArray) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="VisaServices">
                                             Visa Services
                                         </label>
                                     </div>
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="TicketServices" {{ in_array("ticketServices", $otherServicesArray) ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="checkbox" name="other_services[]"  value="ticketServices" id="TicketServices" {{ in_array("ticketServices", $otherServicesArray) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="TicketServices">
                                             Ticket Services
                                         </label>
