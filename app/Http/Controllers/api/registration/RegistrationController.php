@@ -15,14 +15,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\api\BaseController as BaseController;
 
 
-
 class RegistrationController extends BaseController
 {
     use MediaTrait;
 
     public function customer_register(request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -33,14 +31,8 @@ class RegistrationController extends BaseController
             'city_id' => 'required',
             'address' => 'required',
             'password' => 'required',
+            'platform_type' => 'required',
         ]);
-
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 404,
-        //         'message' =>'Validation Error.', $validator->errors(),
-        //     ]);
-        // }
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
@@ -91,6 +83,29 @@ class RegistrationController extends BaseController
             $customer_input['otp_expiring_time'] = time() + 20;
             $customer_input['modified_ip_address'] = $request->ip();
             $customer_registration = CustomerRegistration::create($customer_input);
+            $CustomerRegistration = CustomerRegistration::select('id')->get();
+            if (!empty($CustomerRegistration)) {
+                foreach ($CustomerRegistration as $key => $value) {
+
+                    $length = strlen($value->id);
+
+                    if ($length == 1) {
+                        $customer_unique_id = '#MDCUST00000' . $value->id;
+                    } elseif ($length == 2) {
+                        $customer_unique_id = '#MDCUST0000' . $value->id;
+                    } elseif ($length == 3) {
+                        $customer_unique_id = '#MDCUST000' . $value->id;
+                    } elseif ($length == 4) {
+                        $customer_unique_id = '#MDCUST00' . $value->id;
+                    } elseif ($length == 5) {
+                        $customer_unique_id = '#MDCUST0' . $value->id;
+                    } else {
+                        $customer_unique_id = '#MDCUST' . $value->id;
+                    }
+
+                    $update_unique_id = CustomerRegistration::where('id', $value->id)->update(['customer_unique_no' => $customer_unique_id]);
+                }
+            }
 
             if (Auth::guard('md_customer_registration')->attempt([
                 'phone' => $request->phone,
@@ -243,6 +258,27 @@ class RegistrationController extends BaseController
         }
         $md_provider_input['modified_ip_address'] = $request->ip();
         $md_provider_registration = MedicalProviderRegistrater::create($md_provider_input);
+        $MedicalProviderRegistrater = MedicalProviderRegistrater::select('id')->get();
+        if (!empty($MedicalProviderRegistrater)) {
+            foreach ($MedicalProviderRegistrater as $key => $value) {
+                $length = strlen($value->id);
+                if ($length == 1) {
+                    $provider_unique_id = '#MDPRVDR00000' . $value->id;
+                } elseif ($length == 2) {
+                    $provider_unique_id = '#MDPRVDR0000' . $value->id;
+                } elseif ($length == 3) {
+                    $provider_unique_id = '#MDPRVDR000' . $value->id;
+                } elseif ($length == 4) {
+                    $provider_unique_id = '#MDPRVDR00' . $value->id;
+                } elseif ($length == 5) {
+                    $provider_unique_id = '#MDPRVDR0' . $value->id;
+                } else {
+                    $provider_unique_id = '#MDPRVDR' . $value->id;
+                }
+
+                $update_unique_id = MedicalProviderRegistrater::where('id', $value->id)->update(['provider_unique_no' => $provider_unique_id]);
+            }
+        }
         if (Auth::guard('md_health_medical_providers_registers')->attempt([
             'mobile_no' => $request->phone,
             'status' => 'active',

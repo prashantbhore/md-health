@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('md_medical_provider_register', function (Blueprint $table) 
         {
             $table->id();
+            $table->string('provider_unique_no')->nullable();
             $table->string('company_name')->nullable();
             $table->bigInteger('city_id')->nullable();
             $table->string('email')->nullable();

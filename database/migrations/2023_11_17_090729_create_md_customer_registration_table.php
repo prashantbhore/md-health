@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('md_customer_registration', function (Blueprint $table) {
             $table->id();
+            $table->string('customer_unique_no')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('full_name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
+            $table->string('date_of_birth')->nullable();
             $table->string('country_id')->nullable();
             $table->string('city_id')->nullable();
             $table->longText('address')->nullable();
