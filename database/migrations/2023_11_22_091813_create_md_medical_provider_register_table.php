@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('provider_unique_no')->nullable();
             $table->string('company_name')->nullable();
+            $table->bigInteger('country_id')->nullable();
             $table->bigInteger('city_id')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();

@@ -72,12 +72,19 @@ class LoginControllers extends BaseController
                 'success_token' => $success,
             ]);
         } else {
-            $customer = Auth::guard('md_customer_registration')->user();
-            $customer_logs = [];
-            $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
-            $customer_logs['status'] = 'inactive';
-            $customer_logs['type'] = 'login';
-            CustomerLogs::create($customer_logs);
+            $customer=CustomerRegistration::where('status','active')
+            ->select('id')
+            ->where('email',$request->email)
+            ->first();
+            if($customer){
+                $customer_logs = [];
+                $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                $customer_logs['status'] = 'inactive';
+                $customer_logs['type'] = 'login';
+                CustomerLogs::create($customer_logs);
+            }
+
+        
             return response()->json([
                 'status' => 404,
                 'message' => 'Unauthorised.',

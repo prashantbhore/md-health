@@ -14,6 +14,7 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\MediaTrait;
 use Str;
+use Storage;
 
 class UpdateMedicalProfileController extends BaseController
 {
@@ -40,6 +41,21 @@ class UpdateMedicalProfileController extends BaseController
         )
         ->where('id',Auth::user()->id)
         ->first();
+
+        if (!empty($medical_provider_list)) {
+
+            $medical_provider_list['company_name'] = ($medical_provider_list->company_name);
+            $medical_provider_list['city_id'] = ($medical_provider_list->city_id);
+            $medical_provider_list['email'] = ($medical_provider_list->email);
+            $medical_provider_list['mobile_no'] = ($medical_provider_list->mobile_no);
+            $medical_provider_list['tax_no'] = ($medical_provider_list->tax_no);
+            $medical_provider_list['company_address'] = ($medical_provider_list->company_address);
+            $medical_provider_list['company_overview'] = ($medical_provider_list->company_overview);
+            $medical_provider_list['company_logo_image_path'] = url('/') . Storage::url($medical_provider_list->company_logo_image_path);
+            $medical_provider_list['company_licence_image_path'] = url('/') . Storage::url($medical_provider_list->company_licence_image_path);
+            $medical_provider_list['authorisation_full_name'] = ($medical_provider_list->authorisation_full_name);
+            $medical_provider_list['password'] = ($medical_provider_list->password);
+        }
 
         $ProviderImagesVideos= ProviderImagesVideos::where('status','active')
         ->select('id','provider_id', 'provider_image_path', 'provider_image_name')

@@ -17,6 +17,7 @@ class MedicalProviderRegistrater extends Authenticatable
     protected $fillable = [
         'provider_unique_id',
         'company_name',
+        'country_id',
         'city_id',
         'email',
         'mobile_no',

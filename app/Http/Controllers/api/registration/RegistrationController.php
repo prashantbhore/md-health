@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\api\BaseController as BaseController;
 
+use App\Models\MedicalProviderLicense;
+use App\Models\MedicalProviderLogo;
 use App\Models\CustomerLogs;
 
 class RegistrationController extends BaseController
@@ -25,7 +27,7 @@ class RegistrationController extends BaseController
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users',
             'phone' => 'required',
             'gender' => 'required',
             'country_id' => 'required',
@@ -255,22 +257,23 @@ class RegistrationController extends BaseController
         $md_provider_input['tax_no'] = $request->tax_no;
         $md_provider_input['company_address'] = $request->company_address;
         $md_provider_input['password'] = Hash::make($request->password);
-        if ($request->has('company_logo_image_path')) {
-            if ($request->file('company_logo_image_path')) {
-                $md_provider_input['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
-                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
-                $md_provider_input['company_logo_image_name'] = $original_name;
-            }
-        }
-        if ($request->has('company_licence_image_path')) {
-            if ($request->file('company_licence_image_path')) {
-                $md_provider_input['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
-                $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
-                $md_provider_input['company_licence_image_name'] = $original_name;
-            }
-        }
+        // if ($request->has('company_logo_image_path')) {
+        //     if ($request->file('company_logo_image_path')) {
+        //         $md_provider_input['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+        //         $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+        //         $md_provider_input['company_logo_image_name'] = $original_name;
+        //     }
+        // }
+        // if ($request->has('company_licence_image_path')) {
+        //     if ($request->file('company_licence_image_path')) {
+        //         $md_provider_input['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
+        //         $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
+        //         $md_provider_input['company_licence_image_name'] = $original_name;
+        //     }
+        // }
         $md_provider_input['modified_ip_address'] = $request->ip();
         $md_provider_registration = MedicalProviderRegistrater::create($md_provider_input);
+        
         $MedicalProviderRegistrater = MedicalProviderRegistrater::select('id')->get();
         if (!empty($MedicalProviderRegistrater)) {
             foreach ($MedicalProviderRegistrater as $key => $value) {
@@ -289,7 +292,7 @@ class RegistrationController extends BaseController
                     $provider_unique_id = '#MDPRVDR' . $value->id;
                 }
 
-                $update_unique_id = MedicalProviderRegistrater::where('id', $value->id)->update(['provider_unique_no' => $provider_unique_id]);
+                $update_unique_id = MedicalProviderRegistrater::where('id', $value->id)->update(['provider_unique_id' => $provider_unique_id]);
             }
         }
         if (Auth::guard('md_health_medical_providers_registers')->attempt([
@@ -310,6 +313,28 @@ class RegistrationController extends BaseController
                 'message' => 'Unauthorised.',
             ]);
         }
+
+        if ($request->has('company_logo_image_path')) {
+            if ($request->file('company_logo_image_path')) {
+                $md_provider_input_image_logo['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+                $md_provider_input_image_logo['company_logo_image_name'] = $original_name;
+            }
+        }
+        MedicalProviderLogo::create($md_provider_input_image_logo);
+
+
+        if ($request->has('company_licence_image_path')) {
+            if ($request->file('company_licence_image_path')) {
+                $md_provider_input_image_license['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
+                $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
+                $md_provider_input_image_license['company_licence_image_name'] = $original_name;
+            }
+        }
+
+        MedicalProviderLicense::create($md_provider_input_image_license);
+
+        
 
         if (!empty($md_provider_registration)) {
             return response()->json([
