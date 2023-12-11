@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\admin\admin\AdminController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use Illuminate\Support\Facades\Route;
 
@@ -149,8 +149,24 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     // Route::view('add-cities', 'admin/cities/add-cities');
 
     // MANAGE CITIES
-    Route::view('add-admins', 'admin/admins/add-admins');
-    Route::view('edit-admins', 'admin/admins/edit-admins');
+
+    Route::controller(AdminController::class)->group(function (){
+        
+        Route::get('add-admins', 'index');
+        Route::post('admin-store', 'store')->name('admin.store');
+        Route::get('/admin-data-table','data_table');
+        Route::get('/edit-admins/{id}/edit','edit_admin');
+        
+
+    });
+
+
+
+
+   
+
+
+    // Route::view('edit-admins', 'admin/admins/edit-admins');
 
     // MLM
     Route::view('multi-level-marketing', 'admin/multi-level-marketing/multi-level-marketing');

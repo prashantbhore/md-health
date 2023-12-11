@@ -15,8 +15,8 @@
                         <p class="card-title mb-3">Patient Details</p>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">{{!empty($customer->first_name)?$customer->first_name:''}}</label>
-                                <p>Ali</p>
+                                <label for="firstName">First Name</label>
+                                <p>{{!empty($customer->first_name)?$customer->first_name:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Last Name</label>
@@ -56,21 +56,18 @@
                         <p class="card-title mb-3">Logs Activity</p>
                         <div class="table-responsive">
                             <table class="table">
+                            @if(!empty($logs))
+                               @foreach ($logs as $log)
                                 <tr>
-                                    <td scope="row">Login</td>
-                                    <td class="log-success">Successful</td>
-                                    <td class="text-end">12 Dec 2023 - 15:31:08</td>
+                                    <td scope="row">{{!empty($log->type)?ucfirst($log->type):''}}</td>
+                                    <td class="log-success">{{!empty($log->status)&&$log->status=='active'?'Successful':'Unsuccessful'}}</td>
+                                    <td class="text-end">{{!empty($log->created_at)?$log->created_at:''}}</td>
                                 </tr>
-                                <tr>
-                                    <td scope="row">Login</td>
-                                    <td class="log-unsuccess">Unsuccessful</td>
-                                    <td class="text-end">12 Dec 2023 - 15:31:08</td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">Sign Up</td>
-                                    <td class="log-success">Successful</td>
-                                    <td class="text-end">12 Dec 2023 - 15:31:08</td>
-                                </tr>
+                               @endforeach 
+                            @endif   
+
+                              
+
                             </table>
                         </div>
                     </div>

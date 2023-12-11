@@ -14,16 +14,27 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
+                                <form action="{{route('admin.store')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{!empty($admin->id)?$admin->id:''}}">
                                     <div class="col-md-12 mb-3">
-                                        <input type="text" class="form-control" placeholder="E-mail" />
+                                        <input type="text" name="name" value="{{!empty($admin->name)?$admin->name:''}}" class="form-control" placeholder="Name"/>
+                                    </div>
+                                  
+                                    <div class="col-md-12 mb-3">
+                                        <input type="text" name="email" value="{{!empty($admin->email)?$admin->email:''}}" class="form-control" placeholder="E-mail" />
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <select name="adminRole" id="adminRole" class="form-select form-select-sm w-100">
-                                            <option selected disabled hidden>Role</option>
-                                            <option value="superAdmin">Super Admin</option>
-                                            <option value="Admin">Admin</option>
+                                            <option value="" disabled hidden>Select Role</option>
+                                            <option value="superadmin" {{ old('adminRole', $admin->userType) == 'superadmin' ? 'selected' : '' }}>Super Admin</option>
+                                            <option value="admin" {{ old('adminRole', $admin->userType) == 'admin' ? 'selected' : '' }}>Admin</option>
                                         </select>
                                     </div>
+                                    
+
+
+                                   
                                 </div>
                             </div>
 
@@ -31,6 +42,7 @@
                                 <button type="submit" class="btn save-btn fw-bold fs-14">Save Changes</button>
                                 <button type="submit" class="btn delete-btn fw-bold fs-14">Delete Admin</button>
                             </div>
+                        </form>  
                         </div>
                     </div>
                 </div>
