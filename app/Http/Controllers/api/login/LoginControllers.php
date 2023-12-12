@@ -11,13 +11,15 @@ use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderRegistrater;
 use App\Http\Controllers\api\BaseController as BaseController;
 use App\Models\CustomerLogs;
+
 class LoginControllers extends BaseController
 {
     // customer login
     public function customer_login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
+            // 'email' => 'required',
+            'platform_type' => 'required',
             'password' => 'required'
         ]);
 
@@ -39,49 +41,107 @@ class LoginControllers extends BaseController
             ]);
         }
 
+        if ($request->platform_type == 'web') {
+            if (Auth::guard('md_customer_registration')->attempt([
+                'email' => $request->email,
+                'password' => $request->password,
+                'status' => 'active',
+            ])) {
+                $customer = Auth::guard('md_customer_registration')->user();
+                $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                $otp = rand(111111, 999999);
 
-        if (Auth::guard('md_customer_registration')->attempt([
-            'email' => $request->email,
-            'password' => $request->password,
-            'status' => 'active',
-        ])) {
+                CustomerRegistration::where('id', $customer->id)->update([
+                    // 'shop_owner_last_login' => Carbon::now(),
+                    'otp_expiring_time' => time() + 20,
+                    // 'login_otp' => $otp,
+                    'fcm_token' => $request->fcm_token,
+                    'access_token' => $success['token']
+                ]);
 
-            $customer = Auth::guard('md_customer_registration')->user();
-            $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
-            $otp = rand(111111, 999999);
+                $customer_logs = [];
+                $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                $customer_logs['status'] = 'active';
+                $customer_logs['type'] = 'login';
+                CustomerLogs::create($customer_logs);
 
-            CustomerRegistration::where('id', $customer->id)->update([
-                // 'shop_owner_last_login' => Carbon::now(),
-                'otp_expiring_time' => time() + 20,
-                // 'login_otp' => $otp,
-                'fcm_token' => $request->fcm_token,
-                'access_token' => $success['token']
-            ]);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Login successfull.',
+                    'mobile_number' => $customer->phone,
+                    'full_name' => $customer->full_name,
+                    'success_token' => $success,
+                ]);
+            } else {
+                $customer = CustomerRegistration::where('status', 'active')
+                    ->select('id')
+                    ->where('email', $request->email)
+                    ->first();
+                if ($customer) {
+                    $customer_logs = [];
+                    $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    $customer_logs['status'] = 'inactive';
+                    $customer_logs['type'] = 'login';
+                    CustomerLogs::create($customer_logs);
+                }
 
-            $customer_logs=[];
-            $customer_logs['customer_id']=!empty($customer->id)? $customer->id:'';
-            $customer_logs['status'] = 'active';
-            $customer_logs['type'] = 'login';
-            CustomerLogs::create($customer_logs);
 
-            return response()->json([
-                'status' => 200,
-                'message' => 'Login successfull.',
-                'mobile_number' => $customer->phone,
-                'full_name' => $customer->full_name,
-                'success_token' => $success,
-            ]);
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Unauthorised.',
+                ]);
+            }
         } else {
-            $customer = Auth::guard('md_customer_registration')->user();
-            $customer_logs = [];
-            $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
-            $customer_logs['status'] = 'inactive';
-            $customer_logs['type'] = 'login';
-            CustomerLogs::create($customer_logs);
-            return response()->json([
-                'status' => 404,
-                'message' => 'Unauthorised.',
-            ]);
+            if (Auth::guard('md_customer_registration')->attempt([
+                'phone' => $request->phone,
+                'password' => $request->password,
+                'status' => 'active',
+            ])) {
+
+                $customer = Auth::guard('md_customer_registration')->user();
+                $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                $otp = rand(111111, 999999);
+
+                CustomerRegistration::where('id', $customer->id)->update([
+                    // 'shop_owner_last_login' => Carbon::now(),
+                    'otp_expiring_time' => time() + 20,
+                    // 'login_otp' => $otp,
+                    'fcm_token' => $request->fcm_token,
+                    'access_token' => $success['token']
+                ]);
+
+                $customer_logs = [];
+                $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                $customer_logs['status'] = 'active';
+                $customer_logs['type'] = 'login';
+                CustomerLogs::create($customer_logs);
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Login successfull.',
+                    'mobile_number' => $customer->phone,
+                    'full_name' => $customer->full_name,
+                    'success_token' => $success,
+                ]);
+            } else {
+                $customer = CustomerRegistration::where('status', 'active')
+                    ->select('id')
+                    ->where('email', $request->email)
+                    ->first();
+                if ($customer) {
+                    $customer_logs = [];
+                    $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    $customer_logs['status'] = 'inactive';
+                    $customer_logs['type'] = 'login';
+                    CustomerLogs::create($customer_logs);
+                }
+
+
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Unauthorised.',
+                ]);
+            }
         }
     }
 
@@ -96,7 +156,7 @@ class LoginControllers extends BaseController
     public function medical_provider_login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'phone' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
@@ -107,11 +167,11 @@ class LoginControllers extends BaseController
         if ($request->password == '') {
             $validation_message .= 'Password field';
         }
-        if ($request->phone == '') {
+        if ($request->email == '') {
             if ($validation_message == '') {
-                $validation_message .= 'Mobile Number field';
+                $validation_message .= 'email  field';
             } else {
-                $validation_message .= ' & Mobile Number field';
+                $validation_message .= ' & email  field';
             }
         }
 
@@ -121,7 +181,7 @@ class LoginControllers extends BaseController
         }
 
         if (Auth::guard('md_health_medical_providers_registers')->attempt([
-            'mobile_no' => $request->phone,
+            'email' => $request->email,
             'password' => $request->password,
             'status' => 'active',
         ])) {
@@ -140,7 +200,8 @@ class LoginControllers extends BaseController
                 'status' => 200,
                 'message' => 'Login successfull.',
                 'success_token' => $success,
-                'mobile_no' => $request->phone,
+                'mobile_no' => $provider_id->mobile_no,
+                'company_name' => $provider_id->company_name,
             ]);
         } else {
             return response()->json([

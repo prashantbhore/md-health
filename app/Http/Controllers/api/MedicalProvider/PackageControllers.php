@@ -88,7 +88,7 @@ class PackageControllers extends BaseController
             'package_name' => 'required',
             'treatment_category_id' => 'required',
             'treatment_id' => 'required',
-            'package_price' => 'required',
+            // 'package_price' => 'required',
             'platform_type' => 'required',
             'button_type' => 'required',
         ]);
@@ -445,6 +445,7 @@ class PackageControllers extends BaseController
                 $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
+                $package_input['status'] = 'active';
                 $package_input['platform_type'] = $request->platform_type;
                 $package_input['created_by'] = 1;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);
@@ -481,7 +482,7 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
-                $package_input['status'] = $request->button_type;
+                $package_input['status'] = 'inactive';
                 $package_input['created_by'] = 1;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);
                 if (!empty($edit_packages)) {

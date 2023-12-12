@@ -176,6 +176,9 @@ Route::post('md-packages-inactive-list-search', [PackageControllers::class, 'pac
 
 //customer-package-search-filter
 Route::post('md-customer-package-search-filter', [CustomerPackageController::class, 'customer_package_search_filter']);
+
+//customer-package-purchase-details
+Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 // });
 
 

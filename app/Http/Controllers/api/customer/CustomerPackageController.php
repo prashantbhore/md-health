@@ -50,7 +50,7 @@ class CustomerPackageController extends BaseController
                 ->join('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
                 ->join('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
                 ->join('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-                
+
             if (!empty($request->treatment_name)) {
                 $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
             }
@@ -105,6 +105,7 @@ class CustomerPackageController extends BaseController
     }
 
 
+
     
     public function packages_view_on_search_result(Request $request)
     {
@@ -136,8 +137,43 @@ class CustomerPackageController extends BaseController
                 'message' => 'Something went wrong. package not found.',
             ]);
     }
-
 }
+
+
+    public function customer_package_purchase_details(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'package_id' => 'required',
+            // 'city_name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $purchase_details = Packages::where('md_packages.status', 'active')
+            ->where('md_packages.id', $request->package_id)
+            ->select('md_packages.id', 'md_packages.package_name', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
+            ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
+            ->first();
+
+        if (!empty($purchase_details)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your purchase details.',
+                'purchase_details' => $purchase_details
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'your purchase details list is empty.',
+                'purchase_details' => $purchase_details
+            ]);
+        }
+    }
 
 
 
