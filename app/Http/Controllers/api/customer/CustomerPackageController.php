@@ -103,4 +103,42 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
+
+
+    
+    public function packages_view_on_search_result(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(),[
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $id = $request->id;
+
+
+        $packages_view = Packages::with(['provider', 'providerGallery','city'])->where('id', $id)->get();
+        
+        if(!empty($packages_view)){
+            return response()->json([
+                'status' => 200,
+                'message' => 'package found.',
+                'packages_deactive_list' => $packages_view
+            ]);
+    
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. package not found.',
+            ]);
+    }
+
+}
+
+
+
 }
