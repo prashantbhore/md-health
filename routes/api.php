@@ -172,14 +172,13 @@ Route::post('md-packages-active-list-search', [PackageControllers::class, 'packa
 //packages-inactive-list-search
 Route::post('md-packages-inactive-list-search', [PackageControllers::class, 'packages_inactive_list_search']);
 
-
-
 //customer-package-search-filter
 Route::post('md-customer-package-search-filter', [CustomerPackageController::class, 'customer_package_search_filter']);
 
 //customer-package-purchase-details
 Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 
+Route::post('md-change-patient-information', [CustomerPackageController::class, 'change_patient_information']);
 
 //customer-package-purchase-details
 Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);

@@ -19,7 +19,7 @@ class AppConfigController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        if ($request->app_key == "%MDHealth*app#key%") {
+        if ($request->app_key == "%mdhealth-development*app#key%") {
             $data = array(
                 'app_main_url' => url('/') . "/api/",
             );

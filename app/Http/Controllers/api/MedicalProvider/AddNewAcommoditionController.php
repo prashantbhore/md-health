@@ -111,7 +111,7 @@ class AddNewAcommoditionController extends BaseController
                 'service_provider_id',
                 'status',
             )
-            ->where('created_by',Auth::user()->id)
+            // ->where('created_by',Auth::user()->id)
             ->get();
 
         if (!empty($AcommoditionHotelList)) {
