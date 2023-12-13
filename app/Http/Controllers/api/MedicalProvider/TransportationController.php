@@ -198,12 +198,12 @@ class TransportationController extends BaseController
             $vehicle_input['created_by'] = 1;
             $TransportationDetails = TransportationDetails::where('id', $request->transportation_id)->update($vehicle_input);
 
-            if (!empty($TransportationDetails)) {
+            if (!empty($TransportationDetails)){
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details updated successfully.',
                 ]);
-            } else {
+            } else{
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',

@@ -188,8 +188,11 @@ Route::post('md-packages-view-search', [CustomerPackageController::class, 'packa
 //Medical Provider Add Reports
 Route::post('md-provider-add-reports', [ReportsController::class,'add_new_report']);
 
+//Medical Provider All Reports List
+Route::get('md-provider-all-reports-list', [ReportsController::class,'provider_all_reports_list']);
+
 //Medical Provider Patient list
-Route::get('md-patient-list', [ReportsController::class,'patient_list']);
+Route::get('md-customer-package-purchage-list', [ReportsController::class,'patient_package_purchage_list']);
 
 
 // });

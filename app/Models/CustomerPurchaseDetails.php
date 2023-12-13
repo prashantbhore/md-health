@@ -25,4 +25,35 @@ class CustomerPurchaseDetails extends Model
         'created_by',
         'modified_by',
     ];
+
+
+    public function customer()
+    {
+        return $this->belongsTo(CustomerRegistration::class, 'customer_id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Packages::class, 'package_id');
+    }
+    // public function report()
+    // {
+    //     return $this->hasMany(MedicalProviderReports::class, 'customer_package_purchage_id', 'id');
+    // }
+    
+
+    public function report()
+    {
+        return $this->hasMany(MedicalProviderReports::class, 'customer_package_purchage_id', 'id');
+    }
+
+
+    public function provider()
+    {
+        return $this->belongsTo(MedicalProviderRegistrater::class,'created_by');
+    }
+    
+
+
+
 }

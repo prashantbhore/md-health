@@ -122,7 +122,7 @@ class CustomerPackageController extends BaseController
         $id = $request->id;
 
 
-        $packages_view = Packages::with(['provider', 'providerGallery','city'])->where('id', $id)->get();
+        $packages_view = Packages::with(['provider', 'providerGallery','city'])->where('id', $id)->first();
         
         if(!empty($packages_view)){
             return response()->json([
