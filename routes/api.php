@@ -179,6 +179,9 @@ Route::post('md-customer-package-search-filter', [CustomerPackageController::cla
 
 //customer-package-purchase-details
 Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
+
+//customer-package-purchase-details
+Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);
 // });
 
 

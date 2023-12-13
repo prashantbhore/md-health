@@ -15,6 +15,9 @@ use App\Models\ToursDetails;
 use App\Models\TransportationDetails;
 use App\Models\ProductCategory;
 use App\Models\ProductSubCategory;
+use App\Models\CustomerPaymentDetails;
+use App\Models\CustomerPurchaseDetails;
+
 
 class CustomerPackageController extends BaseController
 {
@@ -152,7 +155,7 @@ class CustomerPackageController extends BaseController
 
         $purchase_details = Packages::where('md_packages.status', 'active')
             ->where('md_packages.id', $request->package_id)
-            ->select('md_packages.id', 'md_packages.package_name', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id')
+        ->select('md_packages.id', 'md_packages.package_name', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
@@ -170,6 +173,36 @@ class CustomerPackageController extends BaseController
                 'status' => 404,
                 'message' => 'your purchase details list is empty.',
                 'purchase_details' => $purchase_details
+            ]);
+        }
+    }
+
+
+    public function customer_purchase_package(Request $request){
+        $validator = Validator::make($request->all(), [
+            'package_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        $purchase_details = [];
+
+        $purchase_details['customer_id'] = $request->order_id;
+
+        $AddNewAcommodition = CustomerPurchaseDetails::create($purchase_details);
+
+        $AddNewAcommodition = CustomerPaymentDetails::create($hotel_input);
+        if (!empty($AddNewAcommodition)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Hotel Acommodition created successfully.',
+                'AddNewAcommodition' => $AddNewAcommodition,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Acommodition not created.',
             ]);
         }
     }
