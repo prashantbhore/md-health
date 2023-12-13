@@ -13,8 +13,8 @@ use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
-
-
+use App\Http\Controllers\api\MedicalProvider\ReportsController;
+use App\Models\MedicalProviderReports;
 
 /*
 |--------------------------------------------------------------------------
@@ -172,9 +172,24 @@ Route::post('md-packages-active-list-search', [PackageControllers::class, 'packa
 //packages-inactive-list-search
 Route::post('md-packages-inactive-list-search', [PackageControllers::class, 'packages_inactive_list_search']);
 
+
+
 //customer-package-search-filter
 Route::post('md-customer-package-search-filter', [CustomerPackageController::class, 'customer_package_search_filter']);
 
 //customer-package-purchase-details
 Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 // });
+
+
+//customer-package-view-search
+Route::post('md-packages-view-search', [CustomerPackageController::class, 'packages_view_on_search_result']);
+
+
+
+//Medical Provider Add Reports
+Route::post('md-provider-add-reports', [ReportsController::class,'add_new_report']);
+
+//Medical Provider Patient list
+Route::get('md-patient-list', [ReportsController::class,'patient_list']);
+
