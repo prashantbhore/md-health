@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_customer_payment_details', function (Blueprint $table) {
+        Schema::create('md_customer_purchase_details', function (Blueprint $table) {
             $table->id();
             $table->string('order_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('md_customer_payment_details');
+        Schema::dropIfExists('md_customer_purchase_details');
     }
 };

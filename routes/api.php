@@ -185,8 +185,6 @@ Route::post('md-customer-package-purchase-details', [CustomerPackageController::
 //customer-package-view-search
 Route::post('md-packages-view-search', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
-
-
 //Medical Provider Add Reports
 Route::post('md-provider-add-reports', [ReportsController::class,'add_new_report']);
 
