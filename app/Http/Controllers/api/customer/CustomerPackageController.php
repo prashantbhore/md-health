@@ -139,9 +139,8 @@ class CustomerPackageController extends BaseController
     }
 }
 
-
-    public function customer_package_purchase_details(Request $request)
-    {
+  public function customer_package_purchase_details(Request $request)
+  {
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             // 'city_name' => 'required',
