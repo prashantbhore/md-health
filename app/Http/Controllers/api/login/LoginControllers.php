@@ -25,20 +25,23 @@ class LoginControllers extends BaseController
 
         $validation_message = '';
 
-        if (empty($request->email)) {
-            $validation_message .= 'email field';
-        }
-        if (empty($request->password)) {
-            $validation_message .= 'password field';
-        }
+        // // if (empty($request->email)) {
+        // //     $validation_message .= 'email field';
+        // // }
+        // // if (empty($request->password)) {
+        // //     $validation_message .= 'password field';
+        // // }
 
 
+        // if ($validator->fails()) {
+        //     // return $this->sendError($validation_message . ' is required.');
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' => $validation_message . ' is required.',
+        //     ]);
+        // }
         if ($validator->fails()) {
-            // return $this->sendError($validation_message . ' is required.');
-            return response()->json([
-                'status' => 404,
-                'message' => $validation_message . ' is required.',
-            ]);
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         if ($request->platform_type == 'web') {
@@ -160,24 +163,24 @@ class LoginControllers extends BaseController
             'password' => 'required'
         ]);
 
-        $validation_message = '';
+        // $validation_message = '';
 
-        $validation_message = '';
+        // $validation_message = '';
 
-        if ($request->password == '') {
-            $validation_message .= 'Password field';
-        }
-        if ($request->email == '') {
-            if ($validation_message == '') {
-                $validation_message .= 'email  field';
-            } else {
-                $validation_message .= ' & email  field';
-            }
-        }
+        // if ($request->password == '') {
+        //     $validation_message .= 'Password field';
+        // }
+        // if ($request->email == '') {
+        //     if ($validation_message == '') {
+        //         $validation_message .= 'email  field';
+        //     } else {
+        //         $validation_message .= ' & email  field';
+        //     }
+        // }
 
 
         if ($validator->fails()) {
-            return $this->sendError($validation_message . ' is required.');
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         if (Auth::guard('md_health_medical_providers_registers')->attempt([

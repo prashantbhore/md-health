@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string('order_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
             $table->bigInteger('package_id')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->string('package_treatment_price')->nullable();
             $table->string('package_hotel_price')->nullable();
             $table->string('package_transportation_price')->nullable();
             $table->string('package_total_price')->nullable();
             $table->string('package_payment_plan')->nullable();
+            $table->enum('payment_method', ['card', 'bank', 'md_coin'])->nullable();
+            $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
             $table->bigInteger('created_by')->nullable();

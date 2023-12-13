@@ -38,7 +38,7 @@ class UpdateCustomerProfileController extends BaseController
             )
             ->join('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
             ->join('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
-            ->where('id', Auth::user()->id)
+            ->where('id', 1)
             ->first();
 
         $countries = Country::where('status', 'active')
@@ -94,7 +94,7 @@ class UpdateCustomerProfileController extends BaseController
         $customer_input['city_id'] = $request->city_id;
         $customer_input['modified_ip_address'] = $request->ip();
 
-        $customer_update = CustomerRegistration::where('id', Auth::user()->id)->update($customer_input);
+        $customer_update = CustomerRegistration::where('id', 1)->update($customer_input);
 
         if (!empty($customer_update)) {
             return response()->json([
@@ -148,7 +148,7 @@ class UpdateCustomerProfileController extends BaseController
             $medical_provider_input['password'] = Hash::make($request->new_password);
             $medical_provider_input['modified_ip_address'] = $request->ip();
 
-            $medical_provider_update = CustomerRegistration::where('id', Auth::user()->id)->update($medical_provider_input);
+            $medical_provider_update = CustomerRegistration::where('id', 1)->update($medical_provider_input);
 
             if (!empty($medical_provider_update)) {
                 return response()->json([

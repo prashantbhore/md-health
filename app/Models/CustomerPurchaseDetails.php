@@ -19,6 +19,8 @@ class CustomerPurchaseDetails extends Model
         'package_transportation_price',
         'package_total_price',
         'package_payment_plan',
+        'transaction_id',
+        'payment_method',
         'status',
         'created_ip_address',
         'modified_ip_address',
