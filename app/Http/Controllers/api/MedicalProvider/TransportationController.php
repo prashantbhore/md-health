@@ -78,7 +78,7 @@ class TransportationController extends BaseController
                 'md_add_transportation_details.comfort_level_id'
             )
             ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
-            ->where('md_add_transportation_details.created_by', 1) // Assuming user_id is the column containing the user's ID
+            ->where('md_add_transportation_details.created_by',Auth::user()->id) // Assuming user_id is the column containing the user's ID
             ->get();
 
         if (!empty($TransportationDetails)) {
