@@ -80,13 +80,13 @@ class ReportsController extends Controller
 
           
 
-        if (!empty($patientList)) {
+        if (!empty($patientList)){
             return response()->json([
                 'status' => 200,
                 'message' => 'Patient list found.',
-                'hotel_details' => $patientList,
+                'patient_list' => $patientList,
             ]);
-        } else {
+        } else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. Patient list not found.',

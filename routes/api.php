@@ -180,9 +180,11 @@ Route::post('md-customer-package-search-filter', [CustomerPackageController::cla
 //customer-package-purchase-details
 Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 
+
 //customer-package-purchase-details
 Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);
 // });
+
 
 
 //customer-package-view-search
@@ -193,4 +195,8 @@ Route::post('md-provider-add-reports', [ReportsController::class,'add_new_report
 
 //Medical Provider Patient list
 Route::get('md-patient-list', [ReportsController::class,'patient_list']);
+
+
+// });
+
 
