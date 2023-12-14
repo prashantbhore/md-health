@@ -15,6 +15,7 @@ use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
+use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Models\MedicalProviderReports;
 
 /*
@@ -218,6 +219,10 @@ Route::post('md-customer-report-search', [CustomerReportController::class,'custo
 
 //Customer All Reports List
 Route::get('md-customer-all-reports-list', [CustomerReportController::class,'customer_all_reports_list']);
+
+
+//Customer All Reports List
+Route::get('md-provider-active-treatment-list', [SalesController::class,'active_treatment_list']);
 
 
 
