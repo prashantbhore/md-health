@@ -20,11 +20,6 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\PatientInformation;
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 8c67013f77da0aeed208a67aa4b57c98c7c52fa3
 class CustomerPackageController extends BaseController
 {
     //
