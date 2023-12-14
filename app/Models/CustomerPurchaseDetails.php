@@ -20,6 +20,7 @@ class CustomerPurchaseDetails extends Model
         'package_total_price',
         'package_payment_plan',
         'transaction_id',
+        'purchase_type',
         'payment_method',
         'status',
         'created_ip_address',
