@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('md_medical_provider_register', function (Blueprint $table) 
         {
             $table->id();
+            $table->string('provider_unique_no')->nullable();
             $table->string('company_name')->nullable();
+            $table->bigInteger('country_id')->nullable();
             $table->bigInteger('city_id')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();
@@ -32,6 +34,7 @@ return new class extends Migration
             $table->string('access_token')->nullable();
             $table->string('fcm_token')->nullable();
             $table->string('otp_expiring_time')->nullable();
+            $table->enum('verified', ['yes', 'no'])->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();

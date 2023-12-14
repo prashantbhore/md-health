@@ -19,6 +19,7 @@ class CustomerRegistration extends Authenticatable
     protected $table = 'md_customer_registration';
 
     protected $fillable = [
+        'customer_unique_no',
         'first_name',
         'last_name',
         'full_name',
@@ -26,6 +27,7 @@ class CustomerRegistration extends Authenticatable
         'phone',
         'gender',
         'country_id',
+        'date_of_birth',
         'city_id',
         'address',
         'password',

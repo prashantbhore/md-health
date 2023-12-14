@@ -1,4 +1,22 @@
 @extends('admin.layout.layout') @section("content")
+<style>
+    .remove-treatment {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #fff;
+        background-color: #dc3545;
+        border: 1px solid #dc3545;
+        border-radius: 0.25rem;
+    }
+
+.error {
+    color: red;
+  }
+</style>
 <section class="main-content">
     <div class="content-wrapper">
         <div class="d-flex align-items-center justify-content-between">
@@ -12,7 +30,7 @@
                         <div class="card-body">
                             <div class="card-text d-flex flex-column">
                                 <p>MDhealth</p>
-                                <h4 class="mb-0">3</h4>
+                                <h4 class="mb-0">{{$md_health_category_count}}</h4>
                             </div>
                             <span class="link-open">
                                 <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
@@ -27,7 +45,7 @@
                         <div class="d-flex align-items-center gap-2">
                             <div class="card-text d-flex flex-column">
                                 <p class="text-black">MDshop</p>
-                                <h4>123</h4>
+                                <h4>{{ $md_shop_category_count}}</h4>
                             </div>
                         </div>
                     </div>
@@ -40,7 +58,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="card-text d-flex flex-column">
                                     <p>MDfood</p>
-                                    <h4>2</h4>
+                                    <h4>{{$md_food_category_count}}</h4>
                                 </div>
                                 <span class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
@@ -74,7 +92,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="card-text d-flex flex-column">
                                     <p>Home Service</p>
-                                    <h4>3</h4>
+                                    <h4>{{$md_home_service_category_count}}</h4>
                                 </div>
                                 <span class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
@@ -107,109 +125,27 @@
                             </select>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th>Categories</th>
+                                        <th>SubCategories</th>
                                         <th>Created</th>
+                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Medical</th>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Medical</th>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Home Appliance</th>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="activateLink mt-0">Activate</a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Baby & Mother</th>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="activateLink mt-0">Activate</a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Electronics</th>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Home Electronics</th>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
 
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Home Electronics</th>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
 
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-
+                                 
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                </ul>
-                            </nav>
+
+                          
+
                         </div>
                     </div>
                 </div>
@@ -227,27 +163,42 @@
 
                 <div class="modal-body px-4">
                     <h4 class="mb-4 md-fw-bold">Add New Category for MD<span class="fw-light">shop</span></h4>
+                    
+                    <form action="{{route('category.mdshop.store')}}" method="post">
+                        @csrf
 
-                    <form>
+                        <input type="hidden"   name="main_category_id" value="2">
+
+                        <input type="hidden"  id="id" name="id">
+
+
                         <div class="mb-3">
                             <label for="brand" class="form-label">*Category Name</label>
-                            <input type="text" class="form-control" placeholder="Category Name">
+                            <input type="text" name="category_name" id="product_category_name" class="form-control" placeholder="Category Name" />
                         </div>
+
                         <div class="mb-3 treatmentsAdd">
-                            <label for="brand" class="form-label">*Subcategory (Optional)</label>
-                            <input type="text" class="form-control" placeholder="Subcategory">
-                            <input type="text" class="form-control" placeholder="Subcategory">
-                            <div class="input-group">
-                                <input type="text" class="form-control border-end-0" placeholder="Subcategory" aria-label="Subcategory" aria-describedby="addTreatment">
-                                <span class="input-group-text border-start-0" id="addTreatment">+</span>
+                            <label for="brand"  class="form-label">*Treatments</label>
+                            <span id="sub_category" ></span>
+
+                            <input type="text" name="subcategory[]" class="form-control static-treatments" placeholder="Subcategory"/>
+                            <input type="text"name="subcategory[]" class="form-control static-treatments" placeholder="Subcategory"/>
+                            <div class="input-group static-treatments">
+                                <input type="text" name="subcategory[]" class="form-control border-end-0 static-treatments" placeholder="Subcategory" aria-label="Treatments" aria-describedby="addTreatment" />
+                                <span class="input-group-text border-start-0 addTreatment static-treatments" id="addTreatment">+</span>
                             </div>
                         </div>
+                        
 
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn save-btn w-75">Add Category</button>
                         </div>
 
                     </form>
+
+
+
+
                 </div>
             </div>
         </div>
@@ -255,6 +206,7 @@
 </section>
 @endsection
 @section('script')
+<script src="{{url('admin\controller_js\admin_cn_product_md_shop.js')}}"></script>
 <script>
     $(".productsNcategoriesLi").addClass("activeClass");
     $(".productsNcategories").addClass("md-active");

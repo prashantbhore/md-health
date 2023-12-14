@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('md_master_country', function (Blueprint $table) {
             $table->id();
             $table->string('country_name')->nullable();
+            $table->string('country_code')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();

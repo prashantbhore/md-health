@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="card-text d-flex flex-column">
                             <p class="text-black">MDhealth</p>
-                            <h4 class="mb-0">3</h4>
+                            <h4 class="mb-0">{{$md_health_category_count}}</h4>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="card-text d-flex flex-column">
                                     <p>MDshop</p>
-                                    <h4>123</h4>
+                                    <h4>{{$md_shop_category_count}}</h4>
                                 </div>
                                 <span class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="" />
@@ -63,7 +63,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="card-text d-flex flex-column">
                                     <p>MDfood</p>
-                                    <h4>2</h4>
+                                    <h4>{{$md_food_category_count}}</h4>
                                 </div>
                                 <span class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="" />
@@ -100,7 +100,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <div class="card-text d-flex flex-column">
                                     <p>Home Service</p>
-                                    <h4>3</h4>
+                                    <h4>{{$md_home_service_category_count}}</h4>
                                 </div>
                                 <span class="link-open">
                                     <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="" />
@@ -138,53 +138,21 @@
                             </select>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th>Categories</th>
+                                        <th>Sub Categories</th>
                                         <th>Created</th>
+                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Treatments</td>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
 
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Packages</td>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
 
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#MD7384</td>
-                                        <td>Home Service</td>
-                                        <td>12/12/2023 - 15:34</td>
-                                        <td class="text-end d-flex align-items-center justify-content-end gap-3">
-                                            <a href="#" class="deleteImg mt-0">Deactivate</a>
-
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntryBlack.png')}}" alt="" />
-                                            </a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -208,32 +176,39 @@
                     <form action="{{route('category.mdhealth.store')}}" method="post">
                         @csrf
 
-                        <input type="hidden"  name="main_category_id" value="1">
+                        <input type="hidden"   name="main_category_id" value="1">
+
+                        <input type="hidden"  id="id" name="id">
 
 
                         <div class="mb-3">
                             <label for="brand" class="form-label">*Category Name</label>
-                            <input type="text" name="category_name" class="form-control" placeholder="Category Name" />
+                            <input type="text" name="category_name" id="product_category_name" class="form-control" placeholder="Category Name" />
                         </div>
 
                         <div class="mb-3 treatmentsAdd">
-                            <label for="brand" class="form-label">*Treatments</label>
-                            <input type="text" name="treatments[]" class="form-control" placeholder="Treatments" />
-                            <input type="text" name="treatments[]" class="form-control" placeholder="Treatments" />
-                            <div class="input-group">
-                                <input type="text" name="treatments[]" class="form-control border-end-0" placeholder="Treatments" aria-label="Treatments" aria-describedby="addTreatment" />
-                                <span class="input-group-text border-start-0" id="addTreatment">+</span>
+                            <label for="brand"  class="form-label">*Treatments</label>
+                            <span id="sub_category" ></span>
+
+                            <input type="text" name="treatments[]" class="form-control static-treatments" placeholder="Treatments" />
+                            <input type="text" name="treatments[]" class="form-control static-treatments" placeholder="Treatments" />
+                            <div class="input-group static-treatments">
+                                <input type="text" name="treatments[]" class="form-control border-end-0 static-treatments" placeholder="Treatments" aria-label="Treatments" aria-describedby="addTreatment" />
+                                <span class="input-group-text border-start-0 addTreatment static-treatments" id="addTreatment">+</span>
                             </div>
                         </div>
+                        
 
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn save-btn w-75">Add Category</button>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 @endsection @section('script')
 <script src="{{url('admin\controller_js\admin_cn_product_md_health.js')}}"></script>

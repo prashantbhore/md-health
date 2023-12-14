@@ -15,7 +15,9 @@ class MedicalProviderRegistrater extends Authenticatable
     protected $guard = 'md_health_medical_providers_registers';
     protected $table = 'md_medical_provider_register';
     protected $fillable = [
+        'provider_unique_id',
         'company_name',
+        'country_id',
         'city_id',
         'email',
         'mobile_no',
@@ -29,6 +31,7 @@ class MedicalProviderRegistrater extends Authenticatable
         'registration_otp',
         'authorisation_full_name',
         'company_overview',
+        'verified',
         'login_otp',
         'access_token',
         'fcm_token',

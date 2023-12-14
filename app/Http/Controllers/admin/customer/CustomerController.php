@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin\customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CustomerRegistration;
+use App\Models\CustomerLogs;
 use DataTables;
 use Crypt;
 use DB;
@@ -132,10 +133,14 @@ class CustomerController extends Controller
 
         $customer=CustomerRegistration::with('country')->with('city')->where('id', $id)->first();
 
+        $logs=CustomerLogs::where('customer_id',$id)->get();
+
+       //dd($logs);
+
         // dd($customer);
 
        
-         return view('admin.customers.customer-details',compact('customer'));
+         return view('admin.customers.customer-details',compact('customer','logs'));
         
 
        

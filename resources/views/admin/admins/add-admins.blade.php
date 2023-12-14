@@ -1,4 +1,9 @@
 @extends('admin.layout.layout') @section("content")
+<style>
+    .error {
+        color: red;
+    }
+</style>
 <section class="main-content">
     <div class="content-wrapper">
         <div class="page-title">Manage Admins & Roles</div>
@@ -8,21 +13,37 @@
                     <div class="card-body">
                         <div class="card-title">Add New Admins</div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <input type="text" class="form-control" placeholder="E-mail">
+                        <form id="adminForm" action="{{ route('admin.store') }}" method="post">
+                            @csrf
+                        
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" name="name" class="form-control" placeholder="Name">
+                                </div>
+                        
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" name="email" class="form-control" placeholder="E-mail">
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <select name="adminRole" id="adminRole" class="form-select form-select-sm w-100">
-                                    <option selected disabled hidden>Role</option>
-                                    <option value="superAdmin">Super Admin</option>
-                                    <option value="Admin">Admin</option>
-                                </select>
+                        
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="password" name="password" class="form-control" placeholder="Password">
+                                </div>
+                        
+                                <div class="col-md-6 mb-3">
+                                    <select name="adminRole" id="adminRole" class="form-select form-select-sm w-100">
+                                        <option selected disabled hidden>Role</option>
+                                        <option value="superAdmin">Super Admin</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                        
+                                <div class="col-md-12 mb-3">
+                                    <button type="submit" class="btn deactivate-btn w-100">Add New Admin</button>
+                                </div>
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn deactivate-btn w-100">Add New Admin</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -43,17 +64,20 @@
                             </select>
                         </div>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">E-mail</th>
                                         <th>Full Name</th>
                                         <th>Role</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
+
+
+                                    {{-- <tr>
                                         <td scope="row">info@mdhealth.io</td>
                                         <td>Gokhan Arslan</td>
                                         <td>Super Admin</td>
@@ -118,12 +142,12 @@
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                      
                                 
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
+                            {{-- <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -132,7 +156,7 @@
                                     <li class="page-item"><a class="page-link" href="#">5</a></li>
                                     <li class="page-item"><a class="page-link" href="#">6</a></li>
                                 </ul>
-                            </nav>
+                            </nav> --}}
                         </div>
                     </div>
                 </div>
@@ -142,6 +166,7 @@
 </section>
 @endsection
 @section('script')
+<script src="{{url('admin\controller_js\admin_cn_admin.js')}}"></script>
 <script>
     $(".adminsLi").addClass("activeClass");
     $(".admins").addClass("md-active");

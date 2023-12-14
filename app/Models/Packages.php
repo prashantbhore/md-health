@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use NunoMaduro\Collision\Provider;
 
 class Packages extends Model
 {
@@ -38,4 +39,37 @@ class Packages extends Model
         'created_by',
         'modified_by',
     ];
+
+    public function provider()
+    {
+        return $this->belongsTo(MedicalProviderRegistrater::class,'created_by');
+    }
+
+    public function provider_logo()
+    {
+       return $this->belongsTo(MedicalProviderLogo::class, 'created_by','medical_provider_id')
+                ->where('status','active');
+    }
+
+
+    public function product_category()
+    {
+       return $this->belongsTo(ProductCategory::class,'treatment_id');
+            
+    }
+
+    public function providerGallery()
+    {
+        return $this->hasMany(ProviderImagesVideos::class, 'provider_id', 'created_by')
+                    ->where('status', 'active');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
+    }
+    
+    
+
+
 }

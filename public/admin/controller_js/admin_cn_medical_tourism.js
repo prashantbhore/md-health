@@ -249,3 +249,101 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
         });
     }
 });
+
+
+
+    $(document).ready(function (){
+        $('.verifiedcheckbox').click(function (){
+           
+            var id = $(this).data("id");
+            var isChecked = $(this).prop('checked');
+
+            $.ajax({
+                method: 'POST',
+
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            
+                data: { 
+                    status: isChecked ? 'yes' : 'no',
+                    id:id,
+                     
+                },
+                url: base_url + "/admin/verification-status-chnage",
+                success: function (data){
+
+                    success_toast("Success", data.message);
+                },
+                error: function (error) {
+                    // Handle the error response if needed
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function(){
+        $('.deactivate-btn').click(function (){
+            var button = $(this); 
+            var id = button.data("id");
+    
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    id: id,
+                },
+                url: base_url + "/admin/vendor-status-chnage",
+                success: function (data){
+
+                    var newText = (button.text() === 'Activate Vendors') ? 'Deactivate Vendors' : 'Activate Vendors';
+                    button.text(newText);
+    
+                    success_toast("Success", data.message);
+                },
+                error: function (error){
+                    console.error(error);
+                }
+            });
+        });
+    });
+    
+
+    $(document).ready(function (){
+        $('.delete-btn').click(function (){
+            var button = $(this);
+            var id = button.data("id");
+    
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    id: id,
+                },
+                url: base_url + "/admin/vendor-delete",
+                success: function (data) {
+                    success_toast("Success", data.message);
+    
+                    // Replace the current history entry with the current URL
+                    var currentUrl = window.location.href;
+                    window.history.replaceState({}, document.title, currentUrl);
+    
+                    // Redirect to your desired route
+                    window.location.href = base_url + "/admin/service-provider";
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+    
+    
+    
+        

@@ -15,7 +15,7 @@ use Storage;
 class AddNewAcommoditionController extends BaseController
 {
     use MediaTrait;
-    
+
     //add_new_acommodition
     public function add_new_acommodition(Request $request)
     {
@@ -23,59 +23,95 @@ class AddNewAcommoditionController extends BaseController
             'hotel_name' => 'required',
             'hotel_address' => 'required',
             'hotel_stars' => 'required',
-            'hotel_image_path' => 'required',
+            // 'hotel_image_path' => 'required',
             'hotel_per_night_price' => 'required',
             'hotel_other_services' => 'required',
+            'button_type' => 'required',
         ]);
+
+
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $hotel_input = [];
-        $hotel_input['hotel_name'] = $request->hotel_name;
-        $hotel_input['hotel_address'] = $request->hotel_address;
-        $hotel_input['hotel_stars'] = $request->hotel_stars;
-        if ($request->has('hotel_image_path')) {
-            $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
-            $original_name = $request->file('hotel_image_path')->getClientOriginalName();
-            $hotel_input['hotel_image_name'] = $original_name;
-        }
-        $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
-        $hotel_input['hotel_other_services'] = $request->hotel_other_services;
-        $hotel_input['service_provider_id'] =  Auth::user()->id;
-        $hotel_input['created_by'] = Auth::user()->id;
-        $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
-        if (!empty($AddNewAcommodition)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Hotel Acommodition created successfully.',
-            ]);
+        if ($request->button_type == 'active') {
+            $hotel_input = [];
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->has('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
+            $hotel_input['hotel_other_services'] = $request->hotel_other_services;
+            $hotel_input['status'] = 'active';
+            $hotel_input['service_provider_id'] =  1;
+            $hotel_input['created_by'] = 1;
+            $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
+            if (!empty($AddNewAcommodition)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Hotel Acommodition created successfully.',
+                    'AddNewAcommodition' => $AddNewAcommodition,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Acommodition not created.',
+                ]);
+            }
         } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Acommodition not created.',
-            ]);
-        }
 
+            $hotel_input = [];
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->has('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
+            $hotel_input['hotel_other_services'] = $request->hotel_other_services;
+            $hotel_input['status'] = 'inactive';
+            $hotel_input['service_provider_id'] =  1;
+            $hotel_input['created_by'] = 1;
+            $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
+            if (!empty($AddNewAcommodition)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Hotel Acommodition created successfully.',
+                    'AddNewAcommodition' => $AddNewAcommodition,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Acommodition not created.',
+                ]);
+            }
+        }
     }
 
 
     public function hotel_list()
     {
-        $AcommoditionHotelList = AddNewAcommodition::where('status', 'active')
+        $AcommoditionHotelList = AddNewAcommodition::where('status', '!=', 'delete')
             ->select(
-            'id',
-            'hotel_name',
-            'hotel_address',
-            'hotel_stars',
-            'hotel_image_path',
-            'hotel_image_name',
-            'hotel_per_night_price',
-            'hotel_other_services',
-            'service_provider_id',
-            'status',
+                'id',
+                'hotel_name',
+                'hotel_address',
+                'hotel_stars',
+                'hotel_image_path',
+                'hotel_image_name',
+                'hotel_per_night_price',
+                'hotel_other_services',
+                'service_provider_id',
+                'status',
             )
+            // ->where('created_by',Auth::user()->id)
             ->get();
 
         if (!empty($AcommoditionHotelList)) {
@@ -88,7 +124,7 @@ class AddNewAcommoditionController extends BaseController
                 $AcommoditionHotelList[$key]['hotel_other_services'] = ($value->hotel_other_services);
             }
         }
-            
+
 
         if (!empty($AcommoditionHotelList)) {
             return response()->json([
@@ -114,41 +150,71 @@ class AddNewAcommoditionController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        if(empty($request->hotel_id)){
+        if (empty($request->hotel_id)) {
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. Details not updated.',
             ]);
         }
+        if ($request->button_type == 'active') {
+            $hotel_input = [];
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->has('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
+            $hotel_input['hotel_other_services'] = $request->hotel_other_services;
+            $hotel_input['status'] = 'active';
+            $hotel_input['service_provider_id'] = 1;
+            $hotel_input['created_by'] = 1;
 
-        $hotel_input = [];
-        $hotel_input['hotel_name'] = $request->hotel_name;
-        $hotel_input['hotel_address'] = $request->hotel_address;
-        $hotel_input['hotel_stars'] = $request->hotel_stars;
-        if ($request->has('hotel_image_path')) {
-            $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
-            $original_name = $request->file('hotel_image_path')->getClientOriginalName();
-            $hotel_input['hotel_image_name'] = $original_name;
-        }
-        $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
-        $hotel_input['hotel_other_services'] = $request->hotel_other_services;
-        $hotel_input['service_provider_id'] =  Auth::user()->id;
-        $hotel_input['created_by'] = Auth::user()->id;
+            $edit_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($hotel_input);
 
-        $edit_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($hotel_input);
-
-        if (!empty($edit_hotel)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Hotel details updated successfully.',
-            ]);
+            if (!empty($edit_hotel)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Hotel details updated successfully.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong. Details not updated.',
+                ]);
+            }
         } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong. Details not updated.',
-            ]);
-        }
+            $hotel_input = [];
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->has('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
+            $hotel_input['hotel_other_services'] = $request->hotel_other_services;
+            $hotel_input['status'] = 'inactive';
+            $hotel_input['service_provider_id'] = 1;
+            $hotel_input['created_by'] = 1;
 
+            $edit_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($hotel_input);
+
+            if (!empty($edit_hotel)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Hotel details updated successfully.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong. Details not updated.',
+                ]);
+            }
+        }
     }
 
     public function delete_hotel(Request $request)
@@ -161,7 +227,7 @@ class AddNewAcommoditionController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $status_update['status'] = 'delete';
-        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_by'] = 1;
         $status_update['modified_ip_address'] = $request->ip();
 
         $delete_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($status_update);
