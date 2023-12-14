@@ -331,7 +331,7 @@ public function customer_purchase_package_active_list()
         ->select(
             'md_customer_purchase_details.id',
             'md_customer_purchase_details.status',
-            'md_packages.id',
+            // 'md_packages.id',
             'md_packages.package_unique_no',
             'md_packages.package_name',
             'md_packages.treatment_period_in_days',
@@ -385,7 +385,7 @@ public function customer_purchase_package_active_list()
         ->select(
             'md_customer_purchase_details.id',
             'md_customer_purchase_details.purchase_type',
-            'md_packages.id',
+            // 'md_packages.id',
             'md_packages.package_unique_no',
             'md_packages.package_name',
             'md_packages.treatment_period_in_days',
@@ -439,7 +439,7 @@ public function customer_purchase_package_active_list()
         ->select(
             'md_customer_purchase_details.id',
             'md_customer_purchase_details.purchase_type',
-            'md_packages.id',
+            // 'md_packages.id',
             'md_packages.package_unique_no',
             'md_packages.package_name',
             'md_packages.treatment_period_in_days',
@@ -486,4 +486,37 @@ public function customer_purchase_package_active_list()
         }
     }
 
+
+    public function customer_change_package_list_active_cancelled(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $status_update['purchase_type'] = 'cancelled';
+        $status_update['modified_by'] = 1;
+        $status_update['modified_ip_address'] = $request->ip();
+
+        $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->id)->update($status_update);
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'package details cancelled successfully.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not cancelled.',
+            ]);
+        }
+    }
+
+    public function change_patient_information_list()
+    {
+        
+    }
 }
