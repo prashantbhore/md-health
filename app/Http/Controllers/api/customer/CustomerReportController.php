@@ -75,96 +75,6 @@ class CustomerReportController extends Controller
     }
 
 
-
-
-    // public function customer_reports_search(Request $request)
-    // {
-    //     // Validate the incoming search parameters
-    //     $validator = Validator::make($request->all(), [
-    //         'search_query' => 'required|string',
-    //     ]);
-    
-    //     if ($validator->fails()) {
-    //         return $this->sendError('Validation Error.', $validator->errors());
-    //     }
-    
-    //     // Extract the search query from the request
-    //     $searchQuery = $request->input('search_query');
-    
-    //     // Perform the search in the database
-    //     $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
-    //         $query->where('report_title', 'like', '%' . $searchQuery . '%')
-    //             ->orWhere('report_name', 'like', '%' . $searchQuery . '%');
-    //         // Add more search criteria as needed
-    //     })
-    //         ->orWhereHas('customerPackagePurchase.customer', function ($query) use ($searchQuery) {
-    //             $query->where('first_name', 'like', '%' . $searchQuery . '%')
-    //                 ->orWhere('last_name', 'like', '%' . $searchQuery . '%');
-    //         })
-    //         ->orWhereHas('customerPackagePurchase.package', function ($query) use ($searchQuery) {
-    //             $query->where('package_name', 'like', '%' . $searchQuery . '%');
-    //         })
-    //         ->orWhereHas('provider', function ($query) use ($searchQuery) {
-    //             $query->where('company_name', 'like', '%' . $searchQuery . '%');
-    //         })
-    //         ->where('status', 'active')
-    //         ->get();
-    
-    //     // Format the search results
-    //     $formattedResults = [];
-    
-    //     foreach ($searchResults as $result) {
-    //         $customerPurchasePackage = $result->customerPackagePurchase;
-    //         $providerData = $result->provider;
-    //         $providerLogo = $result->provider_logo;
-    //         $customerData = $customerPurchasePackage->customer;
-    
-    //         $providerId = $providerData->id;
-    
-    //         if (!isset($formattedResults[$providerId])) {
-    //             $formattedResults[$providerId] = [
-    //                 'provider_data' => [
-    //                     'logo_path' => isset($providerLogo) ? $providerLogo->company_logo_image_path : null,
-    //                     'provider_name' => $providerData->company_name,
-    //                 ],
-    //                 'customer_data' => [
-    //                     'name' => $customerData->first_name . ' ' . $customerData->last_name,
-    //                 ],
-    //                 'report_count' => 0,
-    //                 'reports' => [],
-    //             ];
-    //         }
-    
-    //         $formattedResults[$providerId]['reports'][] = [
-    //             'id' => $result->id,
-    //             'report_title' => $result->report_title,
-    //             'report_path' => $result->report_path,
-    //             'report_name' => $result->report_name,
-    //             'created_at' => $result->created_at,
-    //         ];
-    
-    //         $formattedResults[$providerId]['report_count']++;
-    //     }
-    
-    //     $formattedResults = array_values($formattedResults);
-    
-    //     if (!empty($formattedResults)) {
-    //         return response()->json([
-    //             'status' => 200,
-    //             'message' => 'Search results found.',
-    //             'search_results' => $formattedResults,
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'status' => 404,
-    //             'message' => 'No matching reports found for the given search query.',
-    //         ]);
-    //     }
-    // }
-
-
-
-
     public function customer_reports_search(Request $request)
    {
    
@@ -190,7 +100,8 @@ class CustomerReportController extends Controller
     })
         ->orWhereHas('customerPackagePurchase.customer', function ($query) use ($searchQuery) {
             $query->where('first_name', 'like', '%' . $searchQuery . '%')
-                ->orWhere('last_name', 'like', '%' . $searchQuery . '%');
+                ->orWhere('last_name', 'like', '%' . $searchQuery . '%')
+                ->orWhere('full_name', 'like', '%' . $searchQuery . '%');
         })
         ->orWhereHas('customerPackagePurchase.package', function ($query) use ($searchQuery) {
             $query->where('package_name', 'like', '%' . $searchQuery . '%');
