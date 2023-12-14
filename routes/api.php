@@ -208,6 +208,13 @@ Route::get('md-provider-all-reports-list', [ReportsController::class,'provider_a
 //Medical Provider Patient list
 Route::get('md-customer-package-purchage-list', [ReportsController::class,'patient_package_purchage_list']);
 
+//Medical Provider Report Search
+Route::post('md-medical-provider-report-search', [ReportsController::class,'provider_reports_search']);
+
+
+//Customer Report Search
+Route::post('md-customer-report-search', [CustomerReportController::class,'customer_reports_search']);
+
 
 //Customer All Reports List
 Route::get('md-customer-all-reports-list', [CustomerReportController::class,'customer_all_reports_list']);
