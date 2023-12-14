@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('package_transportation_price')->nullable();
             $table->string('package_total_price')->nullable();
             $table->string('package_payment_plan')->nullable();
+            $table->enum('purchase_type', ['active', 'completed', 'cancelled'])->nullable();
             $table->enum('payment_method', ['card', 'bank', 'md_coin'])->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->string('created_ip_address')->nullable();

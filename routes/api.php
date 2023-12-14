@@ -183,6 +183,15 @@ Route::post('md-change-patient-information', [CustomerPackageController::class, 
 
 //customer-package-purchase-details
 Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);
+
+//customer-purchase-package-active-list
+Route::get('md-customer-purchase-package-active-list', [CustomerPackageController::class, 'customer_purchase_package_active_list']);
+
+//customer-purchase-package-completed-list
+Route::get('md-customer-purchase-package-completed-list', [CustomerPackageController::class, 'customer_purchase_package_completed_list']);
+
+//customer-purchase-package-cancelled-list
+Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
 // });
 
 

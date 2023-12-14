@@ -20,8 +20,11 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\PatientInformation;
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8c67013f77da0aeed208a67aa4b57c98c7c52fa3
 class CustomerPackageController extends BaseController
 {
     //
@@ -115,8 +118,6 @@ class CustomerPackageController extends BaseController
     
     public function packages_view_on_search_result(Request $request)
     {
-
-
         $validator = Validator::make($request->all(),[
             'id' => 'required',
         ]);
@@ -245,7 +246,6 @@ class CustomerPackageController extends BaseController
    }
 
     public function customer_purchase_package(Request $request){
-        // return 'asds';
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'package_treatment_price' => 'required',
@@ -270,6 +270,7 @@ class CustomerPackageController extends BaseController
         $purchase_details['package_payment_plan'] = $request->package_payment_plan;
         $purchase_details['transaction_id'] = $request->transaction_id;
         $purchase_details['payment_method'] = $request->payment_method;
+        $purchase_details['purchase_type'] = 'active';
         $purchase_details['created_by'] = 1;
 
         $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
@@ -324,13 +325,91 @@ class CustomerPackageController extends BaseController
 
 
 
+public function customer_purchase_package_active_list()
+    {
+        $customer_purchase_package_active_list=CustomerPurchaseDetails::where('md_customer_purchase_details.status','active')
+        ->select(
+            'md_customer_purchase_details.id',
+            'md_customer_purchase_details.status',
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.treatment_period_in_days',
+            'md_packages.other_services',
+            'md_packages.package_price',
+            'md_packages.sale_price',
+            'md_product_category.product_category_name',
+            'md_product_sub_category.product_sub_category_name',
+            'md_master_cities.city_name',
+            'md_medical_provider_register.company_name',
+            'md_medical_provider_logo.company_logo_image_path'
+        )
+        ->leftjoin('md_packages', 'md_packages.id','md_customer_purchase_details.package_id')
+        ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+        ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+        ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+        // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
+        ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+        ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
+        ->where('md_customer_purchase_details.customer_id','1')
+        ->get();
+
+        if (!empty($customer_purchase_package_active_list)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your active purchase list.',
+                'customer_purchase_package_active_list' => $customer_purchase_package_active_list
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong .package is empty.',
+            ]);
+        }
+    }
 
 
+    public function customer_purchase_package_cancelled_list()
+    {
+        $customer_purchase_package_cancelled_list = CustomerPurchaseDetails::where('md_customer_purchase_details.status', 'cancelled')
+        ->select(
+            'md_customer_purchase_details.id',
+            'md_customer_purchase_details.status',
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.treatment_period_in_days',
+            'md_packages.other_services',
+            'md_packages.package_price',
+            'md_packages.sale_price',
+            'md_product_category.product_category_name',
+            'md_product_sub_category.product_sub_category_name',
+            'md_master_cities.city_name',
+            'md_medical_provider_register.company_name',
+            'md_medical_provider_logo.company_logo_image_path'
+        )
+            ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->where('md_customer_purchase_details.customer_id', '1')
+            ->get();
 
-
-
-
-
-
+        if (!empty($customer_purchase_package_cancelled_list)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your cancelled list.',
+                'customer_purchase_package_cancelled_list' => $customer_purchase_package_cancelled_list
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong .package is empty.',
+            ]);
+        }
+    }
 
 }
