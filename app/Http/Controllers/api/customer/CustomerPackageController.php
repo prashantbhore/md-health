@@ -21,6 +21,7 @@ use App\Models\PatientInformation;
 
 
 
+
 class CustomerPackageController extends BaseController
 {
     //
@@ -320,4 +321,16 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }
