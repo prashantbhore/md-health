@@ -319,7 +319,9 @@ class CustomerPackageController extends BaseController
         }
     }
 
-    public function customer_purchase_package_active_list()
+
+
+public function customer_purchase_package_active_list()
     {
         $customer_purchase_package_active_list=CustomerPurchaseDetails::where('md_customer_purchase_details.status','active')
         ->where(function ($query) {
@@ -483,4 +485,5 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
+
 }

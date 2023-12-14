@@ -11,19 +11,19 @@ class MedicalProviderReports extends Model
 
     protected $table = 'md_medical_provider_reports';
     protected $fillable = [
-       'report_title',
-      'customer_package_purchage_id',
-       'custome_id',
-        'purchage_id',
-       'report_path',
-       'report_name',
-        'medical_provider_id',
-       'created_ip_address',
-       'modified_ip_address',
-      'platform_type', 
-        'created_by',
-        'modified_by',
-        'status',
+           'report_title',
+           'customer_package_purchage_id',
+           'custome_id',
+           'package_id',
+           'report_path',
+           'report_name',
+           'medical_provider_id',
+           'created_ip_address',
+           'modified_ip_address',
+            'platform_type',
+           'created_by',
+           'modified_by',
+           'status', 
     ];
 
     public function provider()

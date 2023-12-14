@@ -9,6 +9,7 @@ use App\Http\Controllers\api\AppConfigController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
+use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
@@ -206,6 +207,12 @@ Route::get('md-provider-all-reports-list', [ReportsController::class,'provider_a
 
 //Medical Provider Patient list
 Route::get('md-customer-package-purchage-list', [ReportsController::class,'patient_package_purchage_list']);
+
+
+//Customer All Reports List
+Route::get('md-customer-all-reports-list', [CustomerReportController::class,'customer_all_reports_list']);
+
+
 
 
 // });
