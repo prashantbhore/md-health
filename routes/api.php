@@ -180,6 +180,7 @@ Route::post('md-customer-package-search-filter', [CustomerPackageController::cla
 //customer-package-purchase-details
 Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 
+//md-change-patient-information
 Route::post('md-change-patient-information', [CustomerPackageController::class, 'change_patient_information']);
 
 //customer-package-purchase-details
@@ -193,6 +194,12 @@ Route::get('md-customer-purchase-package-completed-list', [CustomerPackageContro
 
 //customer-purchase-package-cancelled-list
 Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
+
+//customer-change-package-list-active-cancelled
+Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);
+
+Route::get('md-change-patient-information-list', [CustomerPackageController::class, 'change_patient_information_list']);
+
 // });
 
 
