@@ -4,7 +4,7 @@
     }
 </style>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar" style="background-color: black;">
     <div class="container">
         <a class="navbar-brand" href="{{URL('admin/dashboard')}}">
             <img src="{{URL::asset('admin/assets/img/MDHealth_light.svg')}}" alt="" />

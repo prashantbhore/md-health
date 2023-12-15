@@ -19,6 +19,18 @@
 }
 
 /* UTILITY CLASSES */
+
+.btn-text {
+    color: #000002;
+    text-align: center;
+    font-family: CamptonBold;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+}
+
 ::-webkit-file-upload-button {
     display: none;
 }
@@ -53,6 +65,14 @@ input[type="file"] {
 
 .text-green {
     color: #4cdb06;
+}
+
+.bg-green {
+    background-color: #4CDB06;
+}
+
+.bg-black {
+    background-color: #000;
 }
 
 .banner-section {
@@ -336,13 +356,13 @@ input[type="file"] {
     letter-spacing: -0.8px;
 }
 
-.registration .nav-tabs {
+.authentication .nav-tabs {
     justify-content: center;
     gap: 32px;
     border-bottom: none;
 }
 
-.registration .nav-tabs .nav-link {
+.authentication .nav-tabs .nav-link {
     border: none;
     color: #000;
     font-family: CamptonBook;
@@ -355,7 +375,7 @@ input[type="file"] {
     transition: 0.15s all;
 }
 
-.registration .nav-tabs .nav-link.active {
+.authentication .nav-tabs .nav-link.active {
     border-bottom: 2px solid #4CDB06;
     font-weight: 700;
 
@@ -373,7 +393,8 @@ input[type="file"] {
     text-align: left;
 }
 
-.registration .tab-content label {
+.sign-in-form label,
+.authentication .tab-content label {
     color: #000002;
     font-family: Campton;
     font-size: 16px;
@@ -383,15 +404,16 @@ input[type="file"] {
     letter-spacing: -0.64px;
 }
 
-.registration .tab-content input,
-.registration .tab-content select {
+.authentication .tab-content input,
+.authentication .tab-content select {
     height: 48px;
 
 }
 
-.registration .tab-content input,
-.registration .tab-content textarea,
-.registration .tab-content select {
+.sign-in-form input,
+.authentication .tab-content input,
+.authentication .tab-content textarea,
+.authentication .tab-content select {
     /* width: 189px; */
     flex-shrink: 0;
     border-radius: 5px;
@@ -426,6 +448,141 @@ input[type="file"] {
     letter-spacing: -1.32px;
 }
 
-.registration .tab-content .form-check-input {
+.authentication .tab-content .form-check-input {
     height: 1em;
+}
+
+.panel-left.card,
+.for-cards .card {
+    border: 0;
+    flex-shrink: 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.panel-left.card {
+    min-height: 467px;
+}
+
+
+.panel-left .card-header,
+.for-cards .card-header {
+    border-bottom: 0;
+    background-color: #fff;
+    padding: 18px 30px;
+    padding-bottom: 0;
+}
+
+.for-cards .card-body {
+    padding: 18px 30px;
+
+}
+
+.panel-left .nav-link {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    transition: 0.15s all;
+    padding: .5rem 0;
+}
+
+.panel-left .nav-link:hover {
+    color: #4CDB06;
+}
+
+.activeClass {
+    position: relative;
+}
+
+.nav-stuff .activeClass::before {
+    content: "";
+    width: 16px;
+    height: 6px;
+    background-color: #4cdb06;
+    position: absolute;
+    top: 15px;
+    /* left: -4px; */
+}
+
+.nav-link.md-active {
+    color: #4cdb06;
+    padding-left: 1.5rem;
+    font-weight: bold;
+}
+
+.green-plate,
+.black-plate {
+    height: 58px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    padding: 0 1rem;
+}
+
+
+.green-plate p {
+    color: #000002;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.green-plate h3 {
+    color: #000;
+    text-align: right;
+    font-family: Campton;
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -1.08px;
+}
+
+.sign-in-form .card {
+    width: 563px;
+    min-height: 600px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+
+}
+
+.sign-in-form h2 {
+    color: #4CDB06;
+    text-align: center;
+    font-family: Campton;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.04px;
+}
+
+.sign-in-form h2 span {
+    font-weight: 500;
+
+}
+
+.sign-in-form p {
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.68px;
+    padding: 0 100px;
+}
+
+.sign-in-form .form-control {
+    width: 404px;
+    height: 48px;
 }
