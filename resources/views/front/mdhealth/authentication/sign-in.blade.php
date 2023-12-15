@@ -15,14 +15,16 @@
                 <h2 class="mb-0">Sign In to MD<span>health</span></h2>
                 <p>The device is not yours? Use private or incognito mode to log in.</p>
                 <div class="w-100 df-center">
-                    <form>
+                    <form action="{{url('api/md-medical-provider-login')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="platform_type" value="web">
                         <div class="mb-3">
                             <label for="E-mail" class="form-label">E-mail</label>
-                            <input type="text" class="form-control" placeholder="E-mail">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="E-mail">
                         </div>
                         <div class="mb-3">
                             <label for="Password" class="form-label">Password</label>
-                            <input type="text" class="form-control" placeholder="Password">
+                            <input type="text" class="form-control" name="password" id="password" placeholder="Password">
                         </div>
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">

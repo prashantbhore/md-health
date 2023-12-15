@@ -11,13 +11,8 @@ class MedicalProviderRegistrationController extends Controller
 {
     public function index()
     {
-        $countries=Country::get();
-        $cities=Cities::get();
-        // dd($countries);
-return view('front/mdhealth/authentication/user-account',compact('countries','cities'));
-
-
-
-
+        $countries = Country::get();
+        $cities = Cities::get();
+        return view('front/mdhealth/authentication/user-account', compact('countries', 'cities'));
     }
 }
