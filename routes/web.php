@@ -52,7 +52,7 @@ Route::get('/', function () {
 
 
 
-// Super Admin authentication 
+// Super Admin authentication
 
 Route::get('/admin-panel', [LoginController::class, 'index']);
 
@@ -93,7 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('md-booking-sales', 'admin/sales/md-booking-sales');
 
     // MANAGE CUSTOMERS
-    
+
     Route::controller(CustomerController::class)->group(function (){
        Route::get('customers', 'index');
        Route::get('/customer-data-table','data_table');
@@ -128,7 +128,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('vendor-status-chnage','status');
         Route::post('vendor-delete','vendor_delete');
  });
- 
+
 
 
 
@@ -148,19 +148,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     // MANAGE CITIES
 
     Route::controller(AdminController::class)->group(function (){
-        
+
         Route::get('add-admins', 'index');
         Route::post('admin-store', 'store')->name('admin.store');
         Route::get('/admin-data-table','data_table');
         Route::get('/edit-admins/{id}/edit','edit_admin');
-        
+
 
     });
 
 
 
 
-   
+
 
 
     // Route::view('edit-admins', 'admin/admins/edit-admins');
@@ -194,7 +194,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     # Categories
 
 
-    
+
     Route::controller(MDhealthController::class)->group(function (){
         Route::get('category-mdhealth','index');
         Route::post('category-mdhealth-store','store')->name('category.mdhealth.store');
@@ -257,14 +257,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
-   
 
-    
+
+
 
     Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
 
     Route::view('product-mdfood', 'admin/products-and-categories/products/mdfood');
-    
+
     Route::view('product-mdbooking', 'admin/products-and-categories/products/mdbooking');
     Route::view('product-home-service', 'admin/products-and-categories/products/home-service');
 
@@ -293,3 +293,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 // FRONT ROUTES
 Route::view('user-account', 'front/mdhealth/registration/user-account');
+
+Route::view('dummy-page', 'front/mdhealth/make-request');
