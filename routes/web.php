@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\admin\AdminController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
+use App\Http\Controllers\Front\Registration\MedicalProviderRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\master\CityController;
@@ -269,9 +270,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 // FRONT ROUTES
 
+
+
+Route::controller(MedicalProviderRegistrationController::class)->group(function (){
+    Route::get('user-account', 'index');
+    // Route::get('/customer-data-table','data_table');
+    // Route::get('admin/customer-details/{id}','show')->name('customer.details');
+    // Route::get('customer-delete','delete_customer');
+    // Route::get('customer-details/{id}','show');
+ });
+// Route::view('', 'front/mdhealth/registration/user-account');
 // AUTHENTICATION
 #User Account
-Route::view('user-account', 'front/mdhealth/authentication/user-account');
+// Route::view('user-account', 'front/mdhealth/authentication/user-account');
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
 #SMS Code
