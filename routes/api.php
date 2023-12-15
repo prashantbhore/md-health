@@ -198,8 +198,21 @@ Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageContro
 //customer-change-package-list-active-cancelled
 Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);
 
-Route::get('md-change-patient-information-list', [CustomerPackageController::class, 'change_patient_information_list']);
+Route::post('md-change-patient-information-list', [CustomerPackageController::class, 'change_patient_information_list']);
 
+Route::post('md-update-patient-information', [CustomerPackageController::class, 'update_patient_information']);
+
+Route::post('md-customer-package-details', [CustomerPackageController::class, 'customer_package_details']);
+
+Route::post('md-customer-my-details', [CustomerPackageController::class, 'customer_my_details']);
+
+Route::post('md-customer-upload-documents', [CustomerPackageController::class, 'customer_upload_documents']);
+
+Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_pay_now']);
+
+Route::post('md-customer-acommodition-details-view', [CustomerPackageController::class, 'customer_acommodition_details_view']);
+
+Route::post('md-customer-transporatation-details-view', [CustomerPackageController::class, 'customer_transporatation_details_view']);
 // });
 
 

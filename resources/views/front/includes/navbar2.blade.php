@@ -18,17 +18,17 @@
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
-                <!-- <li class="nav-item dropdown">
+
+                <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                             <path d="M15.4375 6.33366C16.9654 6.33366 18.2083 5.09074 18.2083 3.56283C18.2083 2.03491 16.9654 0.791992 15.4375 0.791992C13.9096 0.791992 12.6667 2.03491 12.6667 3.56283C12.6667 5.09074 13.9096 6.33366 15.4375 6.33366ZM16.625 12.667V7.75074C16.2292 7.86158 15.8333 7.91699 15.4375 7.91699H15.0417V12.667C15.0417 13.9812 13.9808 15.042 12.6667 15.042H6.33333C5.01917 15.042 3.95833 13.9812 3.95833 12.667V6.33366C3.95833 5.01949 5.01917 3.95866 6.33333 3.95866H11.0833V3.56283C11.0833 3.16699 11.1387 2.77116 11.2496 2.37533H6.33333C4.14833 2.37533 2.375 4.14866 2.375 6.33366V12.667C2.375 14.852 4.14833 16.6253 6.33333 16.6253H12.6667C14.8517 16.6253 16.625 14.852 16.625 12.667Z" fill="#4CDB06" />
                         </svg>
                     </a>
-                </li> -->
-
+                </li>
 
                 <!-- This dropdown appears after user login [User Profile] -->
-                <!-- <li class="nav-item dropdown me-auto">
+                <li class="nav-item dropdown ms-auto">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span class="text-green me-1">MDhealth</span> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
                             <path d="M1 1.00042L6.5 6.35449L12 1.00042" stroke="#4CDB06" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg></a>
@@ -134,11 +134,12 @@
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
             </ul>
         </div>
-        <a href="{{url('sign-in-web')}}" class="nav-link underline text-white text-underline">Sign In</a>
+        <!-- <a href="{{url('sign-in-web')}}" class="nav-link underline text-white text-underline">Sign In</a>
 
-        <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
+        <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a> -->
+
     </div>
 </nav>

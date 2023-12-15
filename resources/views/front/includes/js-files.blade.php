@@ -153,18 +153,3 @@
   var base_url = $("#base_url").val();
 </script>
 
-<script>
-  $(document).ready(function() {
-    $('#example').DataTable();
-  });
-
-  // $(function() {
-  //   $('input[type="file"]').change(function() {
-  //     if ($(this).val() != "") {
-  //       $(this).css('color', '#333');
-  //     } else {
-  //       $(this).css('color', 'transparent');
-  //     }
-  //   });
-  // })
-</script>
