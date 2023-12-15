@@ -110,37 +110,70 @@ class CustomerPackageController extends BaseController
     }
 
 
+public function packages_view_on_search_result(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'id' => 'required',
+    ]);
 
-    
-    public function packages_view_on_search_result(Request $request)
-    {
-        $validator = Validator::make($request->all(),[
-            'id' => 'required',
-        ]);
+    if ($validator->fails()) {
+        return $this->sendError('Validation Error.', $validator->errors());
+    }
 
-        if ($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
+    $id = $request->id;
+
+    $packages_view = Packages::with(['provider', 'providerGallery', 'provider.city'])->where('id', $id)->first();
+
+   
+    if (!empty($packages_view)) {
+      
+        $provider_gallery = [];
+        foreach ($packages_view->providerGallery as $val) {
+            $provider_gallery[] = !empty($val->provider_image_path) ? url(Storage::url($val->provider_image_path)) : '';
         }
 
-        $id = $request->id;
+     
+        $packageDetails = [
 
-
-        $packages_view = Packages::with(['provider', 'providerGallery','city'])->where('id', $id)->first();
+            "id"=> !empty($packages_view->id)?$packages_view->id:'',
+            "package_unique_no"=> !empty($packages_view->package_unique_no)?$packages_view->package_unique_no:'',
+            "city_id"=> !empty($packages_view->provider->city->id)?$packages_view->provider->city->id:'',
+            "review_stars" => !empty($packages_view->review->start)?$packages_view->review->start:'',
+            "total_reviews" => !empty($packages_view->review_count)?$packages_view->review_count:'',
+            "verbose_review" => !empty($packages_view->review_words)?$packages_view->review_words:'',
+            "overview" => !empty($packages_view->provider->company_overview)?$packages_view->provider->company_overview:'',
+            "package_name"=> !empty($packages_view->package_name)?$packages_view->package_name:'',
+            "treatment_category_id"=> !empty($packages_view->treatment_category_id)?$packages_view->treatment_category_id:'',
+            "treatment_id"=> !empty($packages_view->treatment_id)?$packages_view->treatment_id:'',
+            "other_services"=> !empty($packages_view->other_services)?explode(',', $packages_view->other_services):'',
+            "treatment_period_in_days"=> !empty($packages_view->treatment_period_in_days)?$packages_view->treatment_period_in_days:'',
+            "treatment_price"=> !empty($packages_view->treatment_price)?$packages_view->treatment_price:'',
         
-        if(!empty($packages_view)){
-            return response()->json([
-                'status' => 200,
-                'message' => 'package found.',
-                'packages_deactive_list' => $packages_view
-            ]);
-    
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong. package not found.',
-            ]);
+
+            "city_name"=>!empty($packages_view->provider->city->city_name)?$packages_view->provider->city->city_name:'',
+        ];
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Package found.',
+            'packages_details' => $packageDetails,
+            'provider_gallery' => $provider_gallery,
+        ]);
+
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Something went wrong. Package not found.',
+        ]);
     }
 }
+
+
+
+
+
+
+
 
   public function customer_package_purchase_details(Request $request)
   {

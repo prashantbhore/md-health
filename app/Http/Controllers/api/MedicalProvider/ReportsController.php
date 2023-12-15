@@ -183,7 +183,6 @@ class ReportsController extends Controller
     public function provider_reports_search(Request $request)
     {
 
-       // Validate the incoming search parameters
     $validator = Validator::make($request->all(), [
         'search_query' => 'required|string',
     ]);
@@ -192,14 +191,13 @@ class ReportsController extends Controller
         return $this->sendError('Validation Error.', $validator->errors());
     }
 
-    // Extract the search query from the request
+  
     $searchQuery = $request->input('search_query');
 
-    // Perform the search in the database
+   
     $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
         $query->where('report_title', 'like', '%' . $searchQuery . '%')
             ->orWhere('report_name', 'like', '%' . $searchQuery . '%');
-        // Add more search criteria as needed
     })
     ->orWhereHas('customerPackagePurchase.customer', function ($query) use ($searchQuery) {
         $query->where(function ($query) use ($searchQuery) {
@@ -218,7 +216,6 @@ class ReportsController extends Controller
     ->get();
 
 
-    // Format the search results
     $formattedResults = [];
 
     foreach ($searchResults as $result) {
@@ -262,7 +259,7 @@ class ReportsController extends Controller
                     [
                         'id' => $result->id,
                         'report_title' => $result->report_title,
-                        'report_path' => $result->report_path,
+                        'report_path' => isset($result->report_path) ? url(Storage::url($result->report_path)) : null,
                         'report_name' => $result->report_name,
                         'created_at' => $result->created_at,
                     ],
@@ -285,4 +282,7 @@ class ReportsController extends Controller
         ]);
     }
     }
+
+
+
 }
