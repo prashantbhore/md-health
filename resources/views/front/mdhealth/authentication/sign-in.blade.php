@@ -32,7 +32,9 @@
                                 Remember Me
                             </label>
                         </div>
-                        <button class="btn btn-md btn-text w-100 mb-3" style="height: 47px;">Sign In</button>
+                        <div>
+                            <a href="{{url('sms-code')}}" class="btn btn-md btn-text w-100 mb-3 df-center" style="height: 47px;">Sign In</a>
+                        </div>
                         <div class="text-center">
                             <a href="#" class="btn-text">Back to MDhealth.co</a>
                         </div>
