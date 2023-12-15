@@ -285,10 +285,18 @@ Route::controller(MedicalProviderRegistrationController::class)->group(function 
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
+#SMS Code
+Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 
 
 
 // MEDICAL PROVIDER
+#Dashboard
 Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
-// SALES
+#Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
+
+
+// USER PANEL
+#User Profile
+Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');

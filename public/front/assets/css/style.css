@@ -394,6 +394,7 @@ input[type="file"] {
 }
 
 .sign-in-form label,
+.user-profile-form label,
 .authentication .tab-content label {
     color: #000002;
     font-family: Campton;
@@ -404,12 +405,14 @@ input[type="file"] {
     letter-spacing: -0.64px;
 }
 
+.user-profile-form input,
 .authentication .tab-content input,
 .authentication .tab-content select {
     height: 48px;
-
 }
 
+.user-profile-form input,
+.user-profile-form textarea,
 .sign-in-form input,
 .authentication .tab-content input,
 .authentication .tab-content textarea,
@@ -585,4 +588,18 @@ input[type="file"] {
 .sign-in-form .form-control {
     width: 404px;
     height: 48px;
+}
+
+.sms-input .form-control {
+    width: 60px;
+    height: 100px;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.8px;
 }
