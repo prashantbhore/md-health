@@ -1,37 +1,30 @@
-
 <div class="card panel-left">
-    <h5 class="card-header">Service Provider Panel</h5>
+    <h5 class="card-header">User Panel</h5>
     <div class="card-body">
         <ul class="nav flex-column nav-stuff">
-            <li class="nav-item mpDashboardLi">
-                <a class="nav-link mpDashboard" aria-current="page" href="{{url('medical-provider-dashboard')}}">Dashboard</a>
-            </li>
-            <li class="nav-item mpSalesLi">
-                <a class="nav-link mpSales" href="{{url('medical-provider-sales')}}">Sales</a>
+            <li class="nav-item upProfileLi">
+                <a class="nav-link upProfile" aria-current="page" href="{{url('user-profile')}}">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Packages</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Payment Information</a>
+                <a class="nav-link" href="#">Reservations</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Messages</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Roles</a>
+                <a class="nav-link" href="#">Orders</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Other Services</a>
+                <a class="nav-link" href="#">Wallets</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
+                <a class="nav-link" href="#">My Reports</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Reports</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Membership</a>
+                <a class="nav-link" href="#">Favorites</a>
             </li>
 
             <li class="nav-item">
