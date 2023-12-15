@@ -394,6 +394,7 @@ input[type="file"] {
 }
 
 .sign-in-form label,
+.user-profile-form label,
 .authentication .tab-content label {
     color: #000002;
     font-family: Campton;
@@ -404,12 +405,14 @@ input[type="file"] {
     letter-spacing: -0.64px;
 }
 
+.user-profile-form input,
 .authentication .tab-content input,
 .authentication .tab-content select {
     height: 48px;
-
 }
 
+.user-profile-form input,
+.user-profile-form textarea,
 .sign-in-form input,
 .authentication .tab-content input,
 .authentication .tab-content textarea,
