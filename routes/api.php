@@ -15,6 +15,7 @@ use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
+use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Models\MedicalProviderReports;
 
 /*
@@ -179,6 +180,7 @@ Route::post('md-customer-package-search-filter', [CustomerPackageController::cla
 //customer-package-purchase-details
 Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 
+//md-change-patient-information
 Route::post('md-change-patient-information', [CustomerPackageController::class, 'change_patient_information']);
 
 //customer-package-purchase-details
@@ -192,6 +194,14 @@ Route::get('md-customer-purchase-package-completed-list', [CustomerPackageContro
 
 //customer-purchase-package-cancelled-list
 Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
+
+//customer-change-package-list-active-cancelled
+Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);
+
+Route::post('md-change-patient-information-list', [CustomerPackageController::class, 'change_patient_information_list']);
+
+Route::post('md-update-patient-information', [CustomerPackageController::class, 'update_patient_information']);
+
 // });
 
 
@@ -208,9 +218,20 @@ Route::get('md-provider-all-reports-list', [ReportsController::class,'provider_a
 //Medical Provider Patient list
 Route::get('md-customer-package-purchage-list', [ReportsController::class,'patient_package_purchage_list']);
 
+//Medical Provider Report Search
+Route::post('md-medical-provider-report-search', [ReportsController::class,'provider_reports_search']);
+
+
+//Customer Report Search
+Route::post('md-customer-report-search', [CustomerReportController::class,'customer_reports_search']);
+
 
 //Customer All Reports List
 Route::get('md-customer-all-reports-list', [CustomerReportController::class,'customer_all_reports_list']);
+
+
+//Customer All Reports List
+Route::get('md-provider-active-treatment-list', [SalesController::class,'active_treatment_list']);
 
 
 
