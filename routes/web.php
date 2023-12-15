@@ -274,6 +274,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 Route::view('user-account', 'front/mdhealth/authentication/user-account');
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
+#SMS Code
+Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 
 
 
