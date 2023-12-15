@@ -106,40 +106,39 @@ class ReportsController extends Controller
         }
     }
 
-
     public function provider_all_reports_list()
     {
         $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
             ->where('created_by', 1)
             ->where('status', 'active')
             ->get();
-
+    
         $formatted_data = [];
-
+    
         foreach ($provider_report_list as $report) {
             $customerPurchasePackage = $report->customerPackagePurchase;
             $providerData = $report->provider;
             $providerLogo = $report->provider_logo;
             $customerData = $customerPurchasePackage->customer;
-
+    
             $packageIndex = null;
-
+    
             foreach ($formatted_data as $index => $formattedItem) {
                 if ($formattedItem['customer_purchased_package']['order_id'] == $customerPurchasePackage->order_id) {
                     $packageIndex = $index;
                     break;
                 }
             }
-
+    
             if ($packageIndex !== null) {
                 $formatted_data[$packageIndex]['reports'][] = [
                     'id' => $report->id,
                     'report_title' => $report->report_title,
-                    'report_path' => $report->report_path,
+                    'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
                     'report_name' => $report->report_name,
                     'created_at' => $report->created_at,
                 ];
-
+    
                 $formatted_data[$packageIndex]['report_count']++;
             } else {
                 $formatted_data[] = [
@@ -147,7 +146,7 @@ class ReportsController extends Controller
                         'order_id' => $customerPurchasePackage->order_id,
                     ],
                     'provider_data' => [
-                        'logo_path' => isset($providerLogo) ? $providerLogo->company_logo_image_path : null,
+                        'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
                     ],
                     'customer_data' => [
                         'name' => $customerData->first_name . ' ' . $customerData->last_name,
@@ -156,7 +155,7 @@ class ReportsController extends Controller
                         [
                             'id' => $report->id,
                             'report_title' => $report->report_title,
-                            'report_path' => $report->report_path,
+                            'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
                             'report_name' => $report->report_name,
                             'created_at' => $report->created_at,
                         ],
@@ -165,7 +164,7 @@ class ReportsController extends Controller
                 ];
             }
         }
-
+    
         if (!empty($formatted_data)) {
             return response()->json([
                 'status' => 200,
@@ -179,8 +178,7 @@ class ReportsController extends Controller
             ]);
         }
     }
-
-
+    
 
     public function provider_reports_search(Request $request)
     {
@@ -242,7 +240,7 @@ class ReportsController extends Controller
             $formattedResults[$packageIndex]['reports'][] = [
                 'id' => $result->id,
                 'report_title' => $result->report_title,
-                'report_path' => $result->report_path,
+                'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
                 'report_name' => $result->report_name,
                 'created_at' => $result->created_at,
             ];
@@ -254,7 +252,7 @@ class ReportsController extends Controller
                     'order_id' => $customerPurchasePackage->order_id,
                 ],
                 'provider_data' => [
-                    'logo_path' => isset($providerLogo) ? $providerLogo->company_logo_image_path : null,
+                    'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
                     'provider_name' => $providerData->provider_name,
                 ],
                 'customer_data' => [

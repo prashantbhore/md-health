@@ -39,7 +39,7 @@ class CustomerReportController extends Controller
                 $formatted_data[$providerId] = [
                     'provider_data' => [
                         'company_name' => $providerData->company_name,
-                        'logo_path' => isset($providerLogo) ? $providerLogo->company_logo_image_path : null,
+                        'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
                     ],
                     'customer_data' => [
                         'name' => $customerData->first_name . ' ' . $customerData->last_name,
@@ -52,7 +52,7 @@ class CustomerReportController extends Controller
             $formatted_data[$providerId]['reports'][] = [
                 'id' => $report->id,
                 'report_title' => $report->report_title,
-                'report_path' => $report->report_path,
+                'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
                 'report_name' => $report->report_name,
                 'created_at' => $report->created_at,
             ];
@@ -128,7 +128,7 @@ class CustomerReportController extends Controller
         if (!isset($formattedResults[$providerId])) {
             $formattedResults[$providerId] = [
                 'provider_data' => [
-                    'logo_path' => isset($providerLogo) ? $providerLogo->company_logo_image_path : null,
+                    'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
                     'provider_name' => $providerData->company_name,
                 ],
                 'customer_data' => [
@@ -142,7 +142,7 @@ class CustomerReportController extends Controller
         $formattedResults[$providerId]['reports'][] = [
             'id' => $result->id,
             'report_title' => $result->report_title,
-            'report_path' => $result->report_path,
+            'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
             'report_name' => $result->report_name,
             'created_at' => $result->created_at,
         ];
