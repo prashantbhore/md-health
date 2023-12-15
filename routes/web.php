@@ -293,6 +293,9 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // MEDICAL PROVIDER
 #Dashboard
 Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
+#Treatment Details
+Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
+
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 
