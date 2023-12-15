@@ -158,7 +158,7 @@ class CustomerPackageController extends BaseController
                 $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                 $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
                 $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? $value->other_services : '';
+                $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',',$value->other_services) : '';
                 $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
                 $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
                 $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
@@ -603,6 +603,13 @@ public function customer_purchase_package_active_list()
 
     public function change_patient_information_list(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
         // return $request->id;
         $PatientInformation=PatientInformation::where('status','active')
         ->select(
@@ -698,6 +705,8 @@ public function customer_purchase_package_active_list()
             'md_packages.other_services',
             'md_packages.package_price',
             'md_packages.sale_price',
+            'md_packages.hotel_id',
+            'md_packages.vehicle_id',
             'md_product_category.product_category_name',
             'md_product_sub_category.product_sub_category_name',
             'md_master_cities.city_name',
@@ -883,6 +892,99 @@ public function customer_purchase_package_active_list()
                 'message' => 'something went wrong.list not found',
             ]);
         }
+    }
 
+    public function customer_acommodition_details_view(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'hotel_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $AddNewAcommodition= AddNewAcommodition::where('status','active')
+        ->select(
+            'id',
+            'hotel_name',
+            'hotel_address',
+            'hotel_stars',
+            'hotel_image_path',
+            'hotel_image_name',
+            'hotel_per_night_price',
+            'hotel_other_services',
+            'service_provider_id',
+        )
+        ->where('id',$request->hotel_id)
+        ->first();
+        // return $AddNewAcommodition;
+        $acommodation=[];
+
+        if(!empty($AddNewAcommodition))
+        {
+            $acommodation['id']=!empty($AddNewAcommodition->id)? $AddNewAcommodition->id:0;
+            $acommodation['hotel_name'] = !empty($AddNewAcommodition->hotel_name) ? $AddNewAcommodition->hotel_name : '';
+            $acommodation['hotel_address'] = !empty($AddNewAcommodition->hotel_address) ? $AddNewAcommodition->hotel_address : '';
+            $acommodation['hotel_image_path'] = !empty($AddNewAcommodition->hotel_image_path) ? url('/') . Storage::url($AddNewAcommodition->hotel_image_path) : '';
+            $acommodation['hotel_other_services'] = !empty($AddNewAcommodition->hotel_other_services) ? explode(',',$AddNewAcommodition->hotel_other_services) : '';
+        }
+
+        if (!empty($acommodation)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your hotel list.',
+                'hotel_list' => $acommodation,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'something went wrong.list not found',
+            ]);
+        }
+
+    }
+
+    public function customer_transporatation_details_view(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'transportation_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', '=', 'active')
+        ->select(
+            'md_add_transportation_details.id',
+            'md_add_transportation_details.status',
+            'md_master_brand.brand_name',
+            'md_add_transportation_details.vehicle_model_id',
+            'md_add_transportation_details.vehicle_per_day_price',
+            'md_add_transportation_details.other_services',
+            'md_master_vehicle_comfort_levels.vehicle_level_name'
+        )
+            ->leftjoin(
+                'md_master_vehicle_comfort_levels',
+                'md_master_vehicle_comfort_levels.id',
+                'md_add_transportation_details.comfort_level_id'
+            )
+            ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
+            ->where('md_add_transportation_details.id', $request->transportation_id)
+             // Assuming user_id is the column containing the user's ID
+            ->first();
+
+        if (!empty($TransportationDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Transportation Details list found.',
+                'data' => $TransportationDetails,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Transportation Details list is empty.',
+            ]);
+        }
     }
 }
