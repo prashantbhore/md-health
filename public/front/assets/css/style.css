@@ -23,7 +23,7 @@
     display: none;
 }
 
-input[type="file"]{
+input[type="file"] {
     color: transparent !important;
 }
 
@@ -39,6 +39,10 @@ input[type="file"]{
 
 .bod-bot {
     border-bottom: 2px solid #D0D0D0
+}
+
+.bod-right {
+    border-right: 1px solid #4CDB06;
 }
 
 .df-center {
@@ -320,6 +324,18 @@ input[type="file"]{
 }
 
 /* REGISTRATION */
+
+.form-heading {
+    color: #000;
+    font-family: Campton;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 25px;
+    /* 125% */
+    letter-spacing: -0.8px;
+}
+
 .registration .nav-tabs {
     justify-content: center;
     gap: 32px;

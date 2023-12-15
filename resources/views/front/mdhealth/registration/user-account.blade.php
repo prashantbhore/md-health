@@ -7,7 +7,7 @@
 </style>
 <div class="content-wrapper">
     <div class="container text-center my-5 registration">
-        <h3 class="mb-3">Select Account Type</h3>
+        <h3 class="mb-3 form-heading">Select Account Type</h3>
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -28,10 +28,12 @@
         <!-- Tab panes -->
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
-                <div class="row">
-                    <div class="col-md-6 ">
+                <div class="row pt-4">
+                    <div class="col-md-6 bod-right pt-4">
                         <div class="d-flex align-items-center gap-3 pt-5 pb-4">
-                            <img src="{{('front/assets/img/back.svg')}}" alt="">
+                            <a href="{{url('/')}}">
+                                <img src="{{('front/assets/img/back.svg')}}" alt="">
+                            </a>
                             <h1 class="reg-title mb-0">Create User Account</h1>
                         </div>
                         <div class="form text-start px-5">
@@ -119,10 +121,10 @@
 
             </div>
             <div class="tab-pane fade" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
-                <div class="row">
-                    <div class="col-md-6 ">
+                <div class="row pt-4">
+                    <div class="col-md-6 bod-right pt-4">
                         <div class="d-flex align-items-center gap-3 pt-5 pb-4">
-                            <img src="{{('front/assets/img/back.svg')}}" alt="">
+                            <a href="{{url('/')}}"><img src="{{('front/assets/img/back.svg')}}" alt=""></a>
                             <h1 class="reg-title mb-0">Create Provider Account</h1>
                         </div>
                         <div class="form text-start px-5">
@@ -226,24 +228,30 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="vendor-tab">
-                <div class="row">
-                    <div class="col-md-6 ">
+                <div class="row pt-4">
+                    <div class="col-md-6 bod-right pt-4">
                         <div class="d-flex align-items-center gap-3 pt-5 pb-4">
-                            <img src="{{('front/assets/img/back.svg')}}" alt="">
-                            <h1 class="reg-title mb-0">Create User Account</h1>
+                            <a href="{{url('/')}}">
+                                <img src="{{('front/assets/img/back.svg')}}" alt="">
+                            </a>
+                            <h1 class="reg-title mb-0">Create Provider Account</h1>
                         </div>
                         <div class="form text-start px-5">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="firstName" class="form-label">*First Name</label>
-                                        <input type="text" class="form-control" placeholder="First Name">
+                                        <label for="CompanyName" class="form-label">*Company Name</label>
+                                        <input type="text" class="form-control" placeholder="Company Name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="lastName" class="form-label">*Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name">
+                                        <label for="city" class="form-label">*City</label>
+                                        <select name="city" id="city" class="form-select">
+                                            <option value="">Choose</option>
+                                            <option value="">Istanbul</option>
+                                            <option value="">Ankara</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -260,10 +268,16 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
+                                        <label for="TAXNumber" class="form-label">*TAX Number</label>
+                                        <input type="text" class="form-control" placeholder="TAX Number">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-12">
+                                    <div class="mb-3">
                                         <label for="gender" class="form-label">*Gender</label>
                                         <input type="text" class="form-control" placeholder="Gender">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="gender" class="form-label">*Country</label>
@@ -276,8 +290,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label for="address" class="form-label">*Address</label>
-                                        <textarea name="" id="" cols="" rows="5" class="form-control" placeholder="Enter Address"></textarea>
+                                        <label for="*Company Address" class="form-label">*Company Address</label>
+                                        <textarea name="" id="" cols="" rows="5" class="form-control" placeholder="Company Address"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -290,6 +304,27 @@
                                     <div class="mb-3">
                                         <label for="re-password" class="form-label">*Re-Password</label>
                                         <input type="text" class="form-control" placeholder="Minimum 8 characters">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="*Upload Company Logo" class="form-label">*Upload Company Logo</label>
+                                        <input type="file" class="form-control" placeholder="*Upload Company Logo">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="*Upload Company License" class="form-label">*Upload Company License</label>
+                                        <input type="file" class="form-control" placeholder="*Upload Company License">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault">
+                                        <label class="form-check-label" for="UserflexCheckDefault">
+                                            I accept <a href="#">Terms and Condition</a> & I agree to the <a href="#">User Data Consent</a>.
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
