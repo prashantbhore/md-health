@@ -4,7 +4,7 @@
     }
 </style>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar" style="background-color: black;">
     <div class="container">
         <a class="navbar-brand" href="{{URL('admin/dashboard')}}">
             <img src="{{URL::asset('admin/assets/img/MDHealth_light.svg')}}" alt="" />
@@ -137,7 +137,7 @@
                 </li> -->
             </ul>
         </div>
-        <a href="" class="nav-link underline text-white text-underline">Sign In</a>
+        <a href="{{url('sign-in-web')}}" class="nav-link underline text-white text-underline">Sign In</a>
 
         <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
     </div>

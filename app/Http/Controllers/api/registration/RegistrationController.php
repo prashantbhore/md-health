@@ -211,6 +211,8 @@ class RegistrationController extends BaseController
 
     public function md_register_medical_provider(request $request)
     {
+
+        // return $_FILES;
         $validator = Validator::make($request->all(), [
             'company_name' => 'required',
             'city_id' => 'required',
@@ -232,6 +234,9 @@ class RegistrationController extends BaseController
             ->first();
 
         if (!empty($email_exist)) {
+            if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+                return redirect('/user-account')->with('error',"Email id already exist.");
+               }
             return response()->json([
                 'status' => 404,
                 'message' => 'email id already exist.',
@@ -242,6 +247,9 @@ class RegistrationController extends BaseController
                 ->first();
 
             if (!empty($phone_exist)) {
+                if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+                    return redirect('/user-account')->with('error',"Mobile number already exist.");
+                   }
                 return response()->json([
                     'status' => 404,
                     'message' => 'mobile number already exist.',
@@ -337,6 +345,9 @@ class RegistrationController extends BaseController
         
 
         if (!empty($md_provider_registration)) {
+            if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+            return redirect('/medical-provider-dashboard')->with('success',"Profile created successfully.");
+           }
             return response()->json([
                 'status' => 200,
                 'message' => 'Profile created successfully.',
@@ -346,6 +357,9 @@ class RegistrationController extends BaseController
                 ],
             ]);
         } else {
+            if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+                return redirect('/user-account')->with('success',"Profile not completed.");
+               }
             return response()->json([
                 'status' => 404,
                 'message' => 'Profile not completed.',
