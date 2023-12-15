@@ -273,7 +273,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 #User Account
 Route::view('user-account', 'front/mdhealth/authentication/user-account');
 #Sign In
-Route::view('sign-in', 'front/mdhealth/authentication/sign-in');
+Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
 
 
 
