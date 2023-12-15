@@ -6,7 +6,7 @@
     }
 </style>
 <div class="content-wrapper">
-    <div class="container text-center my-5 registration">
+    <div class="container text-center my-5 authentication">
         <h3 class="mb-3 form-heading">Select Account Type</h3>
 
         <!-- Nav tabs -->
@@ -27,6 +27,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content" id="myTabContent">
+            <!-- 1. USER ACCOUNT -->
             <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
                 <div class="row pt-4">
                     <div class="col-md-6 bod-right pt-4">
@@ -116,6 +117,7 @@
                 </div>
 
             </div>
+            <!-- 2. PROVIDER ACCOUNT -->
             <div class="tab-pane fade" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
                 <div class="row pt-4">
                     <div class="col-md-6 bod-right pt-4">
@@ -215,7 +217,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-md w-100" style="height: 47px;">Create Account</button>
+                                    <a href="{{url('medical-provider-dashboard')}}" class="btn btn-md w-100" style="height: 47px;">Create Account</a>
                                 </div>
                             </div>
                         </div>
@@ -223,6 +225,7 @@
                     <div class="col-md-6"></div>
                 </div>
             </div>
+            <!-- 3. VENDOR ACCOUNT -->
             <div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="vendor-tab">
                 <div class="row pt-4">
                     <div class="col-md-6 bod-right pt-4">
@@ -230,7 +233,7 @@
                             <a href="{{url('/')}}">
                                 <img src="{{('front/assets/img/back.svg')}}" alt="">
                             </a>
-                            <h1 class="reg-title mb-0">Create Provider Account</h1>
+                            <h1 class="reg-title mb-0">Create Vendor Account</h1>
                         </div>
                         <div class="form text-start px-5">
                             <div class="row">
