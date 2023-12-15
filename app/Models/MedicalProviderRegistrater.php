@@ -48,4 +48,10 @@ class MedicalProviderRegistrater extends Authenticatable
         return $this->belongsTo(Cities::class, 'city_id');
     }
 
+    public function provider_logo()
+    {
+        return $this->belongsTo(MedicalProviderLogo::class, 'id','medical_provider_id')
+            ->where('status', 'active');
+    }
+
 }
