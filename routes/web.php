@@ -53,7 +53,7 @@ Route::get('/', function () {
 
 
 
-// Super Admin authentication 
+// Super Admin authentication
 
 Route::get('/admin-panel', [LoginController::class, 'index']);
 
