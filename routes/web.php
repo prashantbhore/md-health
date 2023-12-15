@@ -282,7 +282,7 @@ Route::controller(MedicalProviderRegistrationController::class)->group(function 
 // Route::view('', 'front/mdhealth/registration/user-account');
 // AUTHENTICATION
 #User Account
-Route::view('user-account', 'front/mdhealth/authentication/user-account');
+// Route::view('user-account', 'front/mdhealth/authentication/user-account');
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
 

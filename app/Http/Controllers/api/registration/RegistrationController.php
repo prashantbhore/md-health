@@ -346,7 +346,7 @@ class RegistrationController extends BaseController
 
         if (!empty($md_provider_registration)) {
             if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-            return redirect('/')->with('success',"Profile created successfully.");
+            return redirect('/medical-provider-dashboard')->with('success',"Profile created successfully.");
            }
             return response()->json([
                 'status' => 200,
@@ -358,7 +358,7 @@ class RegistrationController extends BaseController
             ]);
         } else {
             if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-                return redirect('/')->with('success',"Profile not completed.");
+                return redirect('/user-account')->with('success',"Profile not completed.");
                }
             return response()->json([
                 'status' => 404,
