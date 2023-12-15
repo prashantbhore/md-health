@@ -515,8 +515,71 @@ public function customer_purchase_package_active_list()
         }
     }
 
-    public function change_patient_information_list()
+    public function change_patient_information_list(Request $request)
     {
-        
+        // return $request->id;
+        $PatientInformation=PatientInformation::where('status','active')
+        ->select(
+            'id',
+            'patient_unique_id',
+            'customer_id',
+            'package_id',
+            'patient_full_name',
+            'patient_relation',
+            'patient_email',
+            'patient_contact_no',
+            'patient_country_id',
+            'patient_city_id'
+        )
+        ->where('package_id',$request->id)
+        ->where('customer_id',1)
+        ->first();
+
+        if (!empty($PatientInformation)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your Patient Information list.',
+                'PatientInformation' => $PatientInformation ,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Patient Information list .',
+            ]);
+        }
+    }
+
+    public function update_patient_information(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $patient_information=[];
+        $patient_information['patient_full_name'] = $request->patient_full_name;
+        $patient_information['patient_relation'] = $request->patient_relation;
+        $patient_information['patient_email'] = $request->patient_email;
+        $patient_information['patient_contact_no'] = $request->patient_contact_no;
+        $patient_information['patient_country_id'] = $request->patient_country_id;
+        $patient_information['patient_city_id'] = $request->patient_city_id;
+        $patient_information['created_by'] = 1;
+
+        $PatientInformation = PatientInformation::where('id', $request->id)->update($patient_information);
+
+        if (!empty($PatientInformation)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Patient Information updated successfully.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not updated.',
+            ]);
+        }
     }
 }

@@ -35,63 +35,66 @@
                             <h1 class="reg-title mb-0">Create User Account</h1>
                         </div>
                         <div class="form text-start px-5">
+                <form action="{{ url('api/md-customer-register') }}" method="post" id="myForm">
+                    @csrf
+                    <input type="hidden" name="platform_type" value="web">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="firstName" class="form-label">*First Name</label>
-                                        <input type="text" class="form-control" placeholder="First Name">
+                                        <input type="text" class="form-control" name="first_name" placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="lastName" class="form-label">*Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name">
+                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">*E-mail</label>
-                                        <input type="text" class="form-control" placeholder="E-mail">
+                                        <input type="text" class="form-control" name="email" placeholder="E-mail">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">*Phone</label>
-                                        <input type="text" class="form-control" placeholder="Phone">
+                                        <input type="text" class="form-control" name="phone" placeholder="Phone">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="gender" class="form-label">*Gender</label>
-                                        <input type="text" class="form-control" placeholder="Gender">
+                                        <input type="text" class="form-control" name="gender" placeholder="Gender">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label for="gender" class="form-label">*Country</label>
-                                        <select name="country" id="country" class="form-select">
+                                        <label for="country_id" class="form-label">*Country</label>
+                                        <select name="country_id" id="country_id" class="form-select">
                                             <option value="">Choose</option>
-                                            <option value="">Istanbul</option>
-                                            <option value="">Ankara</option>
+                                            <option value="1">Istanbul</option>
+                                            <option value="2">Ankara</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="address" class="form-label">*Address</label>
-                                        <textarea name="" id="" cols="" rows="5" class="form-control" placeholder="Enter Address"></textarea>
+                                        <textarea name="address" id="address" cols="" rows="5" class="form-control" placeholder="Enter Address"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="password" class="form-label">*Password</label>
-                                        <input type="text" class="form-control" placeholder="Minimum 8 characters">
+                                        <input type="password" name="password" class="form-control" placeholder="Minimum 8 characters">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="re-password" class="form-label">*Re-Password</label>
-                                        <input type="text" class="form-control" placeholder="Minimum 8 characters">
+                                        <input type="password" name="password" class="form-control" placeholder="Minimum 8 characters">
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -103,11 +106,12 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                    <button class="btn btn-md w-100" style="height: 47px;">Create Account</button>
+                                    <button type="submit" class="btn btn-md w-100" style="height: 47px;">Create Account</button>
                                     <label for="" class="mt-auto">Already have an account?</label>
                                     <a href="#" class="text-black fw-bold">Sign In</a>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-md-6"></div>
@@ -188,7 +192,7 @@
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="re-password" class="form-label">*Re-Password</label>
-                                        <input type="text" class="form-control" placeholder="Minimum 8 characters">
+                                        <input type="password" class="form-control" placeholder="Minimum 8 characters">
                                     </div>
                                 </div>
                                 <hr>
@@ -304,5 +308,39 @@
 </div>
 @endsection
 @section('script')
+<script>  
+  $(document).ready(function() {
+    // Validation rules and messages
+    $("#myForm").validate({
+      rules: {
+        first_name: "required",
+        last_name: "required",
+        email: {
+          required: true,
+          email: true
+        },
+        phone: "required",
+        gender: "required",
+        country_id: "required",
+        address: "required",
+        password: {
+          required: true,
+          minlength: 8
+        },
+        're-password': {
+          required: true,
+          equalTo: "#password"
+        },
+        UserflexCheckDefault: "required"
+      },
+      messages: {
+        // Define error messages for each field
+      },
+      submitHandler: function(form) {
+        form.submit();
+      }
+    });
+  });
+</script>
 
 @endsection
