@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('report_title')->nullable();
             $table->bigInteger('customer_package_purchage_id')->nullable();
             $table->bigInteger('custome_id')->nullable();
-            $table->bigInteger('purchage_id')->nullable();
+            $table->bigInteger('package_id')->nullable();
             $table->string('report_path')->nullable();
             $table->string('report_name')->nullable();
             $table->bigInteger('medical_provider_id')->nullable();

@@ -20,6 +20,8 @@ class CustomerPurchaseDetails extends Model
         'package_total_price',
         'package_payment_plan',
         'transaction_id',
+        'treatment_start_date',
+        'purchase_type',
         'payment_method',
         'status',
         'created_ip_address',
@@ -54,6 +56,19 @@ class CustomerPurchaseDetails extends Model
     {
         return $this->belongsTo(MedicalProviderRegistrater::class,'created_by');
     }
+
+
+    public function paymentDetails()
+    {
+        return $this->belongsTo(CustomerPaymentDetails::class,'id','order_id');
+    }
+
+
+
+ 
+
+
+   
     
 
 
