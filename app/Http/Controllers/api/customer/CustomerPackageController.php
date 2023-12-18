@@ -20,6 +20,7 @@ use App\Models\CustomerPaymentDetails;
 use App\Models\CustomerPurchaseDetails;
 use App\Models\PatientInformation;
 use App\Models\CustomerDocuments;
+use App\Models\CustomerReviews;
 
 class CustomerPackageController extends BaseController
 {
@@ -298,7 +299,8 @@ public function packages_view_on_search_result(Request $request)
         }
     }
 
-   public function change_patient_information(Request $request){
+   public function change_patient_information(Request $request)
+   {
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'patient_full_name' => 'required',
@@ -307,6 +309,7 @@ public function packages_view_on_search_result(Request $request)
             'patient_contact_no' => 'required',
             'patient_country_id' => 'required',
             'patient_city_id' => 'required',
+            'package_buy_for'=> 'required',
             'platform_type'=>'required'
         ]);
 
@@ -314,53 +317,105 @@ public function packages_view_on_search_result(Request $request)
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $PatientInformation = [];
+        if($request->package_buy_for=='myself')
+        {
+            $PatientInformation = [];
+            $PatientInformation['customer_id'] = 1;
+            $PatientInformation['package_id'] = $request->package_id;
+            $PatientInformation['address'] = $request->address;
+            $PatientInformation['patient_full_name'] = $request->patient_full_name;
+            $PatientInformation['patient_country_id'] = $request->patient_country_id;
+            $PatientInformation['patient_city_id'] = $request->patient_city_id;
+            $PatientInformation['birth_date'] = $request->birth_date;
+            $PatientInformation['package_buy_for'] = 'myself';
+            $PatientInformation['created_by'] = 1;
+            $purchase_details_data = PatientInformation::create($PatientInformation);
+            $PatientInformation = PatientInformation::select('id')->get();
+            if (!empty($PatientInformation)) {
+                foreach ($PatientInformation as $key => $value) {
+                    $length = strlen($value->id);
+                    if ($length == 1) {
+                        $patient_unique_id = '#MD00000' . $value->id;
+                    } elseif ($length == 2) {
+                        $patient_unique_id = '#MD0000' . $value->id;
+                    } elseif ($length == 3) {
+                        $patient_unique_id = '#MD000' . $value->id;
+                    } elseif ($length == 4) {
+                        $patient_unique_id = '#MD00' . $value->id;
+                    } elseif ($length == 5) {
+                        $patient_unique_id = '#MD0' . $value->id;
+                    } else {
+                        $patient_unique_id = '#MD' . $value->id;
+                    }
 
-        $PatientInformation['customer_id'] = 1;
-        $PatientInformation['package_id'] = $request->package_id;
-        $PatientInformation['patient_full_name'] = $request->patient_full_name;
-        $PatientInformation['patient_relation'] = $request->patient_relation;
-        $PatientInformation['package_transportation_price'] = $request->package_transportation_price;
-        $PatientInformation['patient_email'] = $request->patient_email;
-        $PatientInformation['patient_contact_no'] = $request->patient_contact_no;
-        $PatientInformation['patient_country_id'] = $request->patient_country_id;
-        $PatientInformation['patient_city_id'] = $request->patient_city_id;
-        $PatientInformation['created_by'] = 1;
-        $purchase_details_data = PatientInformation::create($PatientInformation);
-        $PatientInformation = PatientInformation::select('id')->get();
-        if (!empty($PatientInformation)) {
-            foreach ($PatientInformation as $key => $value) {
-                $length = strlen($value->id);
-                if ($length == 1) {
-                    $patient_unique_id = '#MD00000' . $value->id;
-                } elseif ($length == 2) {
-                    $patient_unique_id = '#MD0000' . $value->id;
-                } elseif ($length == 3) {
-                    $patient_unique_id = '#MD000' . $value->id;
-                } elseif ($length == 4) {
-                    $patient_unique_id = '#MD00' . $value->id;
-                } elseif ($length == 5) {
-                    $patient_unique_id = '#MD0' . $value->id;
-                } else {
-                    $patient_unique_id = '#MD' . $value->id;
+                    $update_unique_id = PatientInformation::where('id', $value->id)->update(['patient_unique_id' => $patient_unique_id]);
                 }
+            }
 
-                $update_unique_id = PatientInformation::where('id', $value->id)->update(['patient_unique_id' => $patient_unique_id]);
+            if (!empty($update_unique_id)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'patient information stored successfully in myself.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong .',
+                ]);
+            }
+
+        }
+        else{
+            $PatientInformation = [];
+            $PatientInformation['customer_id'] = 1;
+            $PatientInformation['package_id'] = $request->package_id;
+            $PatientInformation['patient_full_name'] = $request->patient_full_name;
+            $PatientInformation['patient_relation'] = $request->patient_relation;
+            $PatientInformation['package_transportation_price'] = $request->package_transportation_price;
+            $PatientInformation['patient_email'] = $request->patient_email;
+            $PatientInformation['patient_contact_no'] = $request->patient_contact_no;
+            $PatientInformation['patient_country_id'] = $request->patient_country_id;
+            $PatientInformation['patient_city_id'] = $request->patient_city_id;
+            $PatientInformation['package_buy_for'] = 'others';
+            $PatientInformation['created_by'] = 1;
+            $purchase_details_data = PatientInformation::create($PatientInformation);
+            $PatientInformation = PatientInformation::select('id')->get();
+            if (!empty($PatientInformation)) {
+                foreach ($PatientInformation as $key => $value) {
+                    $length = strlen($value->id);
+                    if ($length == 1) {
+                        $patient_unique_id = '#MD00000' . $value->id;
+                    } elseif ($length == 2) {
+                        $patient_unique_id = '#MD0000' . $value->id;
+                    } elseif ($length == 3) {
+                        $patient_unique_id = '#MD000' . $value->id;
+                    } elseif ($length == 4) {
+                        $patient_unique_id = '#MD00' . $value->id;
+                    } elseif ($length == 5) {
+                        $patient_unique_id = '#MD0' . $value->id;
+                    } else {
+                        $patient_unique_id = '#MD' . $value->id;
+                    }
+
+                    $update_unique_id = PatientInformation::where('id', $value->id)->update(['patient_unique_id' => $patient_unique_id]);
+                }
+            }
+
+            if (!empty($update_unique_id)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'patient information stored successfully in other.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong .',
+                ]);
             }
         }
-
-        if (!empty($update_unique_id)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'patient information stored successfully.',
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong .',
-            ]);
-        }
    }
+
+    
 
     public function customer_purchase_package(Request $request)
     {
@@ -659,7 +714,8 @@ public function customer_purchase_package_active_list()
             'patient_email',
             'patient_contact_no',
             'patient_country_id',
-            'patient_city_id'
+            'patient_city_id',
+            'package_buy_for'
         )
         ->where('package_id',$request->id)
         ->where('customer_id',1)
@@ -696,6 +752,8 @@ public function customer_purchase_package_active_list()
         $patient_information['patient_contact_no'] = $request->patient_contact_no;
         $patient_information['patient_country_id'] = $request->patient_country_id;
         $patient_information['patient_city_id'] = $request->patient_city_id;
+        $patient_information['address'] = $request->address;
+        $patient_information['birth_date'] = $request->birth_date;
         $patient_information['created_by'] = 1;
 
         $PatientInformation = PatientInformation::where('id', $request->id)->update($patient_information);
@@ -985,12 +1043,13 @@ public function customer_purchase_package_active_list()
     public function customer_transporatation_details_view(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'transportation_id' => 'required',
+            'vehicle_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+        
         $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', '=', 'active')
         ->select(
             'md_add_transportation_details.id',
@@ -1007,8 +1066,7 @@ public function customer_purchase_package_active_list()
                 'md_add_transportation_details.comfort_level_id'
             )
             ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
-            ->where('md_add_transportation_details.id', $request->transportation_id)
-             // Assuming user_id is the column containing the user's ID
+            ->where('md_add_transportation_details.id', $request->vehicle_id)
             ->first();
 
         if (!empty($TransportationDetails)) {
@@ -1021,6 +1079,87 @@ public function customer_purchase_package_active_list()
             return response()->json([
                 'status' => 404,
                 'message' => 'Transportation Details list is empty.',
+            ]);
+        }
+    }
+
+    public function customer_tour_details_view(Request $request)
+    {
+        $ToursDetails = ToursDetails::where('status', '=', 'active')
+            ->select(
+                'id',
+                'tour_name',
+                'tour_description',
+                'tour_days',
+                'tour_image_path',
+                'tour_image_name',
+                'tour_price',
+                'tour_other_services',
+                'platform_type',
+                'status',
+                'created_by'
+            )
+            ->where('id', $request->tour_id)
+            ->first();
+
+        if (!empty($ToursDetails)) {
+            // foreach ($ToursDetails as $key => $value) {
+                $ToursDetails['tour_name'] = !empty($ToursDetails->tour_name)? $ToursDetails->tour_name:'';
+                $ToursDetails['tour_description'] = !empty($ToursDetails->tour_description)? $ToursDetails->tour_description:'';
+                $ToursDetails['tour_days'] = !empty($ToursDetails->tour_days)? $ToursDetails->tour_days:'';
+                $ToursDetails['tour_image_path'] = url('/') . Storage::url($ToursDetails->tour_image_path);
+                $ToursDetails['tour_price'] = !empty($ToursDetails->tour_price)? $ToursDetails->tour_price:'';
+                $ToursDetails['tour_other_services'] = !empty($ToursDetails->tour_other_services)? explode(',',$ToursDetails->tour_other_services):'';
+            // }
+        }
+
+        if (!empty($ToursDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Tours Details found.',
+                'tour_details' => $ToursDetails,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+
+    }
+
+    public function customer_reviews(Request $request)
+    {
+            $validator = Validator::make($request->all(), [
+                'package_id' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+
+            $customer_reviews = [];
+            $customer_reviews['customer_id'] = 1;
+            $customer_reviews['package_id'] = $request->package_id;
+            $customer_reviews['treatment_reviews'] = $request->treatment_reviews;
+            $customer_reviews['acommodation_reviews'] = $request->acommodation_reviews;
+            $customer_reviews['transporatation_reviews'] = $request->transporatation_reviews;
+            $customer_reviews['behaviour_reviews'] = $request->behaviour_reviews;
+            $customer_reviews['provider_reviews'] = $request->provider_reviews;
+            $customer_reviews['extra_notes'] = $request->extra_notes;
+            $customer_reviews['created_by'] = 1;
+            $customer_reviews_data=CustomerReviews::create($customer_reviews);
+
+        if (!empty($customer_reviews_data)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Your Reviews Added Successfully.',
+                'customer_reviews_data' => $customer_reviews_data,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
             ]);
         }
     }
