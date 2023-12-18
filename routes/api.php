@@ -14,6 +14,7 @@ use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
+use App\Http\Controllers\api\MedicalProvider\PaymentController;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Models\MedicalProviderReports;
@@ -259,6 +260,23 @@ Route::post('md-provider-patient-details', [SalesController::class,'patient_deta
 //Patient Details
 Route::post('md-provider-treatment-date-status', [SalesController::class,'treatement_date_status']);
 
+//Provider Case Manager Listing
+Route::get('md-provider-case-manager-list', [SalesController::class,'case_manager_list']);
+
+//Provider sales treatment package details
+Route::post('md-provider-package-details', [SalesController::class,'package_details']);
+
+//Provider sales treatment package details chnages and assign case manger
+Route::post('md-provider-assign-treatment-case-manager', [SalesController::class,'store_package_details_changes']);
+
+
+
+//Provider sales treatment search
+Route::post('md-provider-treatment-search', [SalesController::class,'treatment_search']);
+
+
+//Provider account details saved 
+Route::post('md-provider-add-bank-account', [PaymentController::class,'add_provider_account']);
 
 
 // });
