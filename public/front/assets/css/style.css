@@ -18,6 +18,26 @@
     font-family: "CamptonBook", sans-serif;
 }
 
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.bg-f6{
+    background-color: #f6f6f6;
+}
+
+.bg-e6{
+    background-color: #e6e6e6;
+}
+
+.clr-grey{
+    color: #979797;
+}
+
+.clr-white{
+    color: #fff;
+}
 /* UTILITY CLASSES */
 
 .btn-text {
@@ -370,6 +390,14 @@ input, select{
     border-bottom: none;
 }
 
+.camptonBook {
+    font-family: CamptonBook;
+}
+
+.camptonBold {
+    font-family: CamptonBold;
+}
+
 .authentication .nav-tabs .nav-link {
     border: none;
     color: #000;
@@ -476,6 +504,9 @@ input, select{
     min-height: 467px;
 }
 
+.text-white{
+    color: #fff;
+}
 
 .panel-left .card-header,
 .for-cards .card-header {
@@ -1056,3 +1087,72 @@ select option {
     color: #000;
     font-weight: 700;
 }
+
+/* Treatment Section */
+
+.treatment-section .arrow{
+    right: -25px;
+}
+
+.treatment-section .treatment-price{
+    margin-right: 80px;
+}
+
+.treatment-section .stars{
+    display: flex;
+    gap: 14px;
+}
+
+/* Treatment Section */
+
+/* Download Section */
+
+.download-section{
+    padding: 8rem 0;
+}
+
+.fs3{
+    font-size: 3rem;
+    line-height: 60px;
+}
+
+.download-section .part2{
+    max-width: 465px;
+    padding: 2rem 0;
+}
+
+/* Download Section */
+
+/* Medical Package */
+
+.medical-pckg{
+    padding-top: 18rem;
+    padding-bottom: 10rem;
+}
+
+.medical-pckg p{
+    line-height: 50px;
+}
+
+.section6{
+    overflow: hidden;
+}
+
+.section6 img{
+    left: 50%;
+    bottom: 0;
+}
+
+/* Medical Package */
+
+/* Testimonial */
+
+.testimonial{
+    height: 100vh;
+    padding: 8rem 0;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+/* Testimonial */

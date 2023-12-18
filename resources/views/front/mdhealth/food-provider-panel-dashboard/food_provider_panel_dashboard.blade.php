@@ -47,7 +47,7 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>
@@ -122,6 +122,6 @@
 @section('script')
 <script>
     $(".mpDashboardLi").addClass("activeClass");
-    $(".mpDashboard").addClass("md-active ");
+    $(".mpDashboard").addClass("md-active");
 </script>
 @endsection
