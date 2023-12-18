@@ -53,7 +53,7 @@ Route::get('/', function () {
 
 
 
-// Super Admin authentication 
+// Super Admin authentication
 
 Route::get('/admin-panel', [LoginController::class, 'index']);
 
@@ -293,6 +293,9 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // MEDICAL PROVIDER
 #Dashboard
 Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
+#Treatment Details
+Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
+
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 
@@ -300,3 +303,11 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // USER PANEL
 #User Profile
 Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+
+// Shubham
+// Vendor Panel
+Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
+Route::view('vendor-products', 'front/mdhealth/vendor/vendor_products');
+Route::view('vendor-add-products', 'front/mdhealth/vendor/vendor_add_products');
+Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
+Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');

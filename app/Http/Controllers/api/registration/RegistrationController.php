@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\registration;
 
 use App\Http\Controllers\Controller;
+use App\Models\CommonUserLoginTable;
 use Illuminate\Http\Request;
 use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderRegistrater;
@@ -232,8 +233,11 @@ class RegistrationController extends BaseController
         $email_exist = MedicalProviderRegistrater::where('status', 'active')
             ->where('email', $request->email)
             ->first();
+        $email_exist_common = CommonUserLoginTable::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
 
-        if (!empty($email_exist)) {
+        if (!empty($email_exist||$email_exist_common)) {
             if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
                 return redirect('/user-account')->with('error',"Email id already exist.");
                }
@@ -245,8 +249,11 @@ class RegistrationController extends BaseController
             $phone_exist = MedicalProviderRegistrater::where('status', 'active')
                 ->where('mobile_no', $request->phone)
                 ->first();
+            $phone_exist_common = CommonUserLoginTable::where('status', 'active')
+                ->where('mobile_no', $request->phone)
+                ->first();
 
-            if (!empty($phone_exist)) {
+            if (!empty($phone_exist||$phone_exist_common)) {
                 if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
                     return redirect('/user-account')->with('error',"Mobile number already exist.");
                    }
@@ -256,6 +263,15 @@ class RegistrationController extends BaseController
                 ]);
             }
         }
+
+        $commonData = [];
+        $commonData['email'] = $request->email;
+        $commonData['mobile_no'] = $request->phone;
+        $commonData['user_type'] = 'medicalprovider';
+        $commonData['password'] = Hash::make($request->password);
+        $common_data_registration = CommonUserLoginTable::create($commonData);
+
+        $common_data_registrator = CommonUserLoginTable::select('id')->get();
 
         $md_provider_input = [];
         $md_provider_input['company_name'] = $request->company_name;

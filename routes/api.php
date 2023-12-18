@@ -241,9 +241,23 @@ Route::post('md-customer-report-search', [CustomerReportController::class,'custo
 Route::get('md-customer-all-reports-list', [CustomerReportController::class,'customer_all_reports_list']);
 
 
-//Customer All Reports List
+//active treatment list
 Route::get('md-provider-active-treatment-list', [SalesController::class,'active_treatment_list']);
 
+
+//completed treatment list
+Route::get('md-provider-completed-treatment-list', [SalesController::class,'completed_treatment_list']);
+
+
+//Cancelled treatment list
+Route::get('md-provider-cancelled-treatment-list', [SalesController::class,'cancelled_treatment_list']);
+
+//Patient Details
+Route::post('md-provider-patient-details', [SalesController::class,'patient_details']);
+
+
+//Patient Details
+Route::post('md-provider-treatment-date-status', [SalesController::class,'treatement_date_status']);
 
 
 
