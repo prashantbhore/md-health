@@ -311,3 +311,7 @@ Route::view('vendor-products', 'front/mdhealth/vendor/vendor_products');
 Route::view('vendor-add-products', 'front/mdhealth/vendor/vendor_add_products');
 Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
+Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
+
+// MDFood Provider Panel
+Route::view('food-provider-panel-dashboard', 'front/mdhealth/food_provider_panel_dashboard/food_provider_panel_dashboard');
