@@ -948,12 +948,13 @@ public function customer_purchase_package_active_list()
     public function customer_transporatation_details_view(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'transportation_id' => 'required',
+            'vehicle_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+        
         $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', '=', 'active')
         ->select(
             'md_add_transportation_details.id',
@@ -970,8 +971,7 @@ public function customer_purchase_package_active_list()
                 'md_add_transportation_details.comfort_level_id'
             )
             ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
-            ->where('md_add_transportation_details.id', $request->transportation_id)
-             // Assuming user_id is the column containing the user's ID
+            ->where('md_add_transportation_details.id', $request->vehicle_id)
             ->first();
 
         if (!empty($TransportationDetails)) {
