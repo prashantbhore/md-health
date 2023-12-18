@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_other_patient_information', function (Blueprint $table) {
+        Schema::create('md_other_patient_information', function (Blueprint $table) 
+        {
             $table->id();
             $table->string('patient_unique_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
@@ -22,10 +23,13 @@ return new class extends Migration
             $table->string('patient_contact_no')->nullable();
             $table->string('patient_country_id')->nullable();
             $table->string('patient_city_id')->nullable();
+            $table->string('birth_date')->nullable();
+            $table->string('address')->nullable();
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('modified_by')->nullable();
+            $table->enum('package_buy_for', ['myself', 'other'])->default('myself');
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->timestamps();
