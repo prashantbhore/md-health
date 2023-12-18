@@ -314,4 +314,8 @@ Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
 
 // MDFood Provider Panel
-Route::view('food-provider-panel-dashboard', 'front/mdhealth/food_provider_panel_dashboard/food_provider_panel_dashboard');
+Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
+Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
+Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
+Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
+Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
