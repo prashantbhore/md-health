@@ -183,6 +183,9 @@ Route::post('md-customer-package-purchase-details', [CustomerPackageController::
 //md-change-patient-information
 Route::post('md-change-patient-information', [CustomerPackageController::class, 'change_patient_information']);
 
+//change-patient-information-for-myself
+Route::post('md-change-patient-information-for-myself', [CustomerPackageController::class, 'change_patient_information_for_myself']);
+
 //customer-package-purchase-details
 Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);
 
@@ -213,6 +216,11 @@ Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_
 Route::post('md-customer-acommodition-details-view', [CustomerPackageController::class, 'customer_acommodition_details_view']);
 
 Route::post('md-customer-transporatation-details-view', [CustomerPackageController::class, 'customer_transporatation_details_view']);
+
+Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 'customer_tour_details_view']);
+
+Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
+
 // });
 
 
