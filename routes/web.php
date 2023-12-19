@@ -292,6 +292,9 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // MEDICAL PROVIDER
 #Dashboard
 Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
+#Treatment Details
+Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
+
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 
@@ -300,7 +303,28 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 #User Profile
 Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 
+<<<<<<< HEAD
 // MD BOOKING PAGE
 Route::view('md-booking-home-page', 'front/mdhealth/md-booking-home-page');
 //MD FOOD PAGE
 Route::view('md-food-home-page', 'front/mdhealth/md-food-page');
+=======
+// Shubham
+// Vendor Panel
+Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
+Route::view('vendor-products', 'front/mdhealth/vendor/vendor_products');
+Route::view('vendor-add-products', 'front/mdhealth/vendor/vendor_add_products');
+Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
+Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
+Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
+
+// MDFood Provider Panel
+Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
+Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
+Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
+Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
+Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
+
+// Medical Provider Panel
+Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
+>>>>>>> ffb76bd0d1fcee5591212272fdec351354b6a8d2

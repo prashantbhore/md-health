@@ -118,6 +118,10 @@ class PackageControllers extends BaseController
                     $package_input['vehicle_in_time'] = $request->vehicle_in_time;
                     $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                     $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
+                    $package_input['tour_id'] = $request->tour_id;
+                    $package_input['tour_in_time'] = $request->tour_in_time;
+                    $package_input['tour_out_time'] = $request->tour_out_time;
+                    $package_input['tour_price'] = $request->tour_price;
                     $package_input['visa_details'] = $request->visa_details;
                     $package_input['visa_service_price'] = $request->visa_service_price;
                     $package_input['package_discount'] = $request->package_discount;
@@ -695,19 +699,4 @@ class PackageControllers extends BaseController
             ]);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -11,22 +11,30 @@ class CustomerPurchaseDetails extends Model
     protected $table = 'md_customer_purchase_details';
 
     protected $fillable = [
-        'order_id',
-        'customer_id',
-        'package_id',
-        'package_treatment_price',
-        'package_hotel_price',
-        'package_transportation_price',
-        'package_total_price',
-        'package_payment_plan',
-        'transaction_id',
-        'purchase_type',
-        'payment_method',
-        'status',
-        'created_ip_address',
-        'modified_ip_address',
-        'created_by',
-        'modified_by',
+          'order_id',
+          'customer_id',
+          'package_id',
+          'transaction_id',
+          'case_no',
+          'case_manager_id',
+          'hotel_id',
+          'vehicle_id',
+          'tour_id',
+          'package_treatment_price',
+          'package_hotel_price',
+          'package_transportation_price',
+          'package_total_price',
+          'treatment_start_date',
+          'package_payment_plan',
+          'pending_payment',
+           'purchase_type', 
+           'payment_method',
+           'platform_type',
+          'created_ip_address',
+          'modified_ip_address',
+          'created_by',
+          'modified_by',
+           'status',
     ];
 
 
@@ -39,6 +47,7 @@ class CustomerPurchaseDetails extends Model
     {
         return $this->belongsTo(Packages::class, 'package_id');
     }
+    
     // public function report()
     // {
     //     return $this->hasMany(MedicalProviderReports::class, 'customer_package_purchage_id', 'id');
@@ -55,6 +64,29 @@ class CustomerPurchaseDetails extends Model
     {
         return $this->belongsTo(MedicalProviderRegistrater::class,'created_by');
     }
+
+
+    public function paymentDetails()
+    {
+        return $this->belongsTo(CustomerPaymentDetails::class,'id','order_id');
+    }
+
+
+
+    public function provider_logo()
+    {
+        return $this->belongsTo(MedicalProviderLogo::class, 'provider_id','medical_provider_id')
+            ->where('status', 'active');
+    }
+
+
+
+
+
+ 
+
+
+   
     
 
 
