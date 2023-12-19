@@ -674,6 +674,7 @@ input, select{
 
 .pending {
     width: 130px;
+    height: 25px;
     /* width: 94px;
     height: 19px; */
     flex-shrink: 0;
@@ -830,6 +831,13 @@ input, select{
 }
 .fw-900{
     font-weight: 900 !important;
+}
+.fsb-1{
+    font-family: 'Campton' !important;
+    font-weight: 800;
+}
+.fsb-2{
+    font-family: 'CamptonBook' !important;
 }
 
 .tab-div .nav-link.active{
@@ -1029,6 +1037,7 @@ select option {
   }
   .dashboard-card-title span.active {
     width: 130px;
+    height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
     background: #4CDB06;
@@ -1045,6 +1054,7 @@ select option {
 }
   .dashboard-card-title span.in-progress {
     width: 130px;
+    height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
     background: #F4D100;
@@ -1170,4 +1180,10 @@ select option {
   .bar-graph > div[data-pourcent="100"] {
     width: 100%;
   }
+  .treatment-card .trmt-card-body h5:first-child{
+    font-size: 18px;
+}
+.treatment-card .trmt-card-body h5:last-child{
+    font-size: 17px;
+}
 /* Shubham */
