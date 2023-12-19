@@ -31,6 +31,10 @@
     background-color: #e6e6e6;
 }
 
+.bg-grey {
+    background-color: #979797;
+}
+
 .clr-grey{
     color: #979797;
 }
@@ -38,7 +42,190 @@
 .clr-white{
     color: #fff;
 }
+
+.smallFont {
+    font-size: 14px;
+}
+
+.boldRed {
+    font-weight: bold;
+    color: red;
+}
 /* UTILITY CLASSES */
+
+#treatmentForModal .modal-content, #treatmentForModal2 .modal-content{
+    border-radius: 0.5rem;
+    border: none;
+    position: relative;
+}
+
+#treatmentForModal .modal-dialog{
+    max-width: 600px;
+}
+
+#treatmentForModal2 .modal-dialog{
+    max-width: 700px;
+}
+
+#treatmentForModal .closeModal, #treatmentForModal2 .closeModal{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* Home Service Page */
+
+.homeServicePage .section-2{
+    padding: 12rem 0;
+}
+
+#homeService .nav-link{
+    font-family: "CamptonBook";
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+}
+
+#homeService .signIn{
+    text-decoration: underline;
+}
+
+.homeServiceTitle{
+    margin-bottom: 3rem;
+}
+
+#homeServiceBanner, .searchBar{
+    /* height: 100vh; */
+    /* padding-top: 57.8px; */
+    padding-top: 6rem;
+}
+
+#homeServiceBanner .banner-content h6 {
+    color: #000;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.36em;
+}
+
+.packageFilter{
+    background-color: white;
+    padding: 1.25rem;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    /* margin-bottom: 2rem; */
+}
+
+.packageFilter .filter{
+    font-size: 14px;
+    font-family: CamptonBook;
+}
+
+.tab-card{
+    background-color: white;
+    padding: 1.25rem;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+}
+
+.tab-card a{
+    font-family: CamptonBook;
+    color: #000;
+}
+
+.tab-card .nav-pills .nav-link.active{
+    font-weight: bold;
+    color: #000;
+    background-color: transparent;
+    text-decoration: underline;
+    text-decoration-color: #4cdb06;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 3px;
+}
+
+.tab-card .nav-link:hover{
+    color: #000;
+}
+
+.tab-card ul{
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 1.6rem;
+}
+
+.tab-card .nav-link{
+    margin-right: 2rem;
+    padding: 0;
+}
+
+.tab-card .overview img{
+    width: 100%;
+    height: auto;
+    /* object-fit: cover; */
+    border-radius: 20px;
+}
+
+.tab-card .review {
+    padding: 8px;
+    border-bottom: 1.5px solid #4cdb06;
+}
+
+.tab-card .gallery{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.tab-card .gallery a{
+    width: 19%;
+    margin-bottom: 1rem;
+}
+
+.tab-card .gallery a img{
+    width: 100%;
+}
+
+.tab-card .overview p{
+    font-family: CamptonBook;
+    font-size: 15px;
+}
+
+.homeServicePackage, .packageResult{
+    background-color: white;
+    padding: 1.25rem;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    gap: 1.25rem;
+    /* margin-bottom: 2rem; */
+    justify-content: space-between;
+    align-items: end;
+}
+
+.backBtn a{
+    text-decoration: none;
+    color: #000;
+}
+
+.packageResult .red-strike{
+    text-decoration: line-through;
+    text-decoration-color: red;
+}
+
+.packageResult .lctn{
+    font-size: 15px;
+}
+
+.packageResult .brdr-right, .homeServicePackage .brdr-right{
+    border-right: 1px solid #e1e1e1;
+    padding-right: 2rem;
+}
+
+.homeServicePackage a, .packageResult a {
+    color: #000;
+    font-family: CamptonBold;
+}
+
+/* Home Service Page */
 
 .btn-text {
     color: #000002;
@@ -135,7 +322,8 @@ input, select{
 
 .btn-md {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
+    font-family: CamptonBook;
     line-height: 16px;
     letter-spacing: -0.04em;
     width: 149px;
@@ -146,14 +334,34 @@ input, select{
     transition: 0.15s all;
 }
 
+.whiteBtn{
+    font-size: 14px;
+    font-weight: 600;
+    font-family: CamptonBook;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    width: 149px;
+    height: 35px;
+    border-radius: 70px;
+    background-color: #fff;
+    border-color: #000;
+    transition: 0.15s all;
+}
+
+.whiteBtn:hover{
+    background-color: #e1e1e1;
+}
+
 .btn-md:hover {
     background-color: #3db303;
     border-color: #3db303;
 }
 
-.banner-content {
+.banner-content, #homeServiceBanner .banner-content {
     font-family: "CamptonBook", sans-serif;
 }
+
+
 
 .banner-content h6 {
     color: #ffffff;
@@ -207,6 +415,34 @@ input, select{
     line-height: 19px;
     letter-spacing: -0.07em;
     transition: 0.15s all;
+}
+
+.purchaseBtn{
+    height: 45px;
+    padding: 0 2rem;
+    border-radius: 3px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+}
+
+.deleteAll{
+    color: #f31d1d;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.favouriteBtn{
+    background-color: #f55c5c; 
+    border: none; 
+    height: 45px; 
+    border-radius: 3px;
+    padding: 12px;
 }
 
 .btn-search-pill:hover {
@@ -1203,4 +1439,90 @@ select option {
 .treatment-card .trmt-card-body h5:last-child{
     font-size: 17px;
 }
+
+.medical-pckg p{
+    line-height: 50px;
+}
+
+.medical-pckg .bookButton{
+    border: 1.5px solid #4cdb06;
+    padding: 8px 60px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-family: CamptonBold;
+    text-decoration: none;
+    color: #fff;
+}
+
+.section6{
+    overflow: hidden;
+}
+
+.section6 img{
+    left: 50%;
+    bottom: 0;
+}
+
+/* Medical Package */
+
+/* Testimonial */
+
+.testimonial{
+    height: 100vh;
+    padding: 8rem 0;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+.testimonial .heading{
+    font-size: 50px;
+    line-height: 55px;
+}
+
+.mySwiper .swiper-slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mySwiper .swiper-slide p:first-child{
+    width: 60%;
+}
+
+.mySwiper .swiper-button-next:after, .mySwiper .swiper-button-prev:after{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.mySwiper .swiper-button-next, .mySwiper .swiper-button-prev{
+    background-color: #979797;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Testimonial */
+
+/* Scan QR */
+
+.scanQr{
+    height: 80vh;
+    width: 100%;
+    position: relative;
+}
+
+.scanQr img{
+    height: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Scan QR */
 /* Shubham */

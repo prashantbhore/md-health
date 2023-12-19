@@ -35,7 +35,9 @@
                             </select>
                             <label for="floatingSelect">Treatment Date</label>
                         </div>
-                        <button class="btn btn-search-pill">Search</button>
+                        <a href="{{url('health-search-result')}}">
+                            <button class="btn btn-search-pill">Search</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -89,12 +91,11 @@
         <img src="{{ 'front/assets/img/add.png' }}" alt="">
     </div>
 
-
     <!-- SECTION 3: TOP TREATMENT CARDS -->
     <div class="bg-f6">
         <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
             <h1><span class="text-green">TOP 5</span> treatments</h1>
-            <div class="d-flex justify-content-around align-items-center">
+            <div class="d-flex justify-content-between me-4 align-items-center">
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
@@ -108,7 +109,7 @@
                         <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
                     </div>
                 </div>
-                <div>
+                <div class="brdr-right">
                     <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{('front/assets/img/star-green.svg')}}" alt="">
@@ -119,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-around align-items-center">
+            <div class="d-flex justify-content-between me-4 align-items-center">
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
@@ -144,7 +145,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-around align-items-center">
+            <div class="d-flex justify-content-between me-4 align-items-center">
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
@@ -169,7 +170,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-around align-items-center">
+            <div class="d-flex justify-content-between me-4 align-items-center">
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
@@ -194,7 +195,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-around align-items-center">
+            <div class="d-flex justify-content-between me-4 align-items-center">
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
@@ -254,30 +255,34 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+=======
     </div>
 
     <!-- SECTION 6 -->
     <div class="bg-black position-relative section6">
         <div class="container medical-pckg">
             <p class="fs-1 camptonBold clr-white mb-0">Find your <span class="text-green">medical</span> package <span class="fw-normal camptonBook">&</span></p>
-            <p class="fs-1 camptonBook clr-white mb-0">flight to Turkiye!</p>
-            <div class="bg-black">
-                <p class="clr-white">Book Now</p>
-            </div>
+            <p class="fs-1 camptonBook clr-white mb-5">flight to Turkiye!</p>
+                <a class="bookButton">Book Now</a>
         </div>
         <img class="position-absolute" src="{{('front/assets/img/flight.png')}}" alt="">
+>>>>>>> ffb76bd0d1fcee5591212272fdec351354b6a8d2
     </div>
         {{-- Make Payment Model box--}}
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content p-3">
                 <div>
-                    <div class="text-end"><button type="button" class="btn-close m-3" data-bs-dismiss="modal"
-                            aria-label="Close"></button></div>
+                    <div class="text-end">
+                        <button type="button" class="btn-close m-3" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        </button>
+                    </div>
 
                     <div class="text-center">
                         <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span
-                                style="color: #08fc34">treatment</span> package?</h4>
+                                class="green-color">treatment</span> package?</h4>
                         <p>Fill the form & get your desired treatment plan</p>
                     </div>
                 </div>
@@ -357,40 +362,115 @@
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-12 text-center ">
-                            <button type="submit" class="btn w-50 mt-4"
-                                style="height: 50px;background-color:#08fc34">Submit
+                        <div class="col-md-12 text-center ">
+                            <button type="submit" class="btn w-50 mt-4 bg-green h-75"
+                                >Submit
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
         <!-- SECTION 7: Testimonials -->
     <div class="bg-f6">
         <div class="container testimonial">
-            <div class="text-center mb-8">
-                <p class="mb-0">What our users</p>
-                <p class="mb-0">have to say</p>
+            <div class="text-center mb-5">
+                <p class="heading fw-bold camptonBook mb-0">What our users</p>
+                <p class="heading camptonBold text-green mb-0">have to say</p>
             </div>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                <div class="swiper-slide">Slide 1</div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-                <div class="swiper-slide">Slide 4</div>
-                <div class="swiper-slide">Slide 5</div>
-                <div class="swiper-slide">Slide 6</div>
-                <div class="swiper-slide">Slide 7</div>
-                <div class="swiper-slide">Slide 8</div>
-                <div class="swiper-slide">Slide 9</div>
+                    <div class="swiper-slide">
+                        <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
         </div>
     </div>
+
+    <!-- SECTION 8: SCAN QR -->
+    <div class="bg-f6 scanQr">
+        <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
+    </div>
+
 </div>
 @endsection
 @section('script')

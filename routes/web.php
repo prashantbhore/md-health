@@ -61,13 +61,33 @@ Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
+Route::get('home-service', function () {
+    return view('front.mdHome.index');
+});
 
+Route::get('search-result', function () {
+    return view('front.mdHome.searchResult');
+});
 
+Route::get('health-search-result', function () {
+    return view('front.mdHealth.searchResult');
+});
 
+Route::get('health-pack-details', function () {
+    return view('front.mdHealth.healthPackDetails');
+});
 
+Route::get('purchase-package', function () {
+    return view('front.mdHealth.purchase');
+});
 
+Route::get('home-pack-details', function () {
+    return view('front.mdHome.homePackDetails');
+});
 
-
+Route::get('buy-service', function () {
+    return view('front.mdHome.buyService');
+});
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
@@ -189,7 +209,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
-
     # Categories
 
 
@@ -306,6 +325,12 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 #User Profile
 Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 
+<<<<<<< HEAD
+// MD BOOKING PAGE
+Route::view('md-booking-home-page', 'front/mdhealth/md-booking-home-page');
+//MD FOOD PAGE
+Route::view('md-food-home-page', 'front/mdhealth/md-food-page');
+=======
 // Shubham
 // Vendor Panel
 Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
@@ -324,3 +349,4 @@ Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provi
 
 // Medical Provider Panel
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
+>>>>>>> ffb76bd0d1fcee5591212272fdec351354b6a8d2

@@ -26,11 +26,11 @@
          </div>
      </div>
      <div class="row mt-5 d-flex justify-content-end">
-         <img src="{{ URL::asset('admin/assets/img/Facebook.png') }}" alt="" style="width: 40px; height:20px" />
-         <img src="{{ URL::asset('admin/assets/img/twitter.png') }}" alt="" style="width: 40px; height:20px" />
+         <img src="{{ URL::asset('admin/assets/img/Facebook.png') }}" alt="" style="width: 40px;" />
+         <img src="{{ URL::asset('admin/assets/img/twitter.png') }}" alt="" style="width: 40px;" />
          <img src="{{ URL::asset('admin/assets/img/Instagram.png') }}" alt=""
-             style="width: 40px; height:20px" />
-         <img src="{{ URL::asset('admin/assets/img/linkedin.png') }}" alt="" style="width: 40px; height:20px" />
+             style="width: 40px;" />
+         <img src="{{ URL::asset('admin/assets/img/linkedin.png') }}" alt="" style="width: 40px;" />
      </div>
      <hr class="border border-white  mt-5 mb-5" />
      <div class="row">
