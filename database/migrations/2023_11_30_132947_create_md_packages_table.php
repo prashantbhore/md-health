@@ -29,6 +29,10 @@ return new class extends Migration
             $table->string('vehicle_in_time')->nullable();
             $table->string('vehicle_out_time')->nullable();
             $table->string('transportation_acommodition_price')->nullable();
+            $table->bigInteger('tour_id')->nullable();
+            $table->string('tour_in_time')->nullable();
+            $table->string('tour_out_time')->nullable();
+            $table->string('tour_price')->nullable();
             $table->string('visa_details')->nullable();
             $table->string('visa_service_price')->nullable();
             $table->string('package_discount')->nullable();

@@ -44,7 +44,7 @@
 
 <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/datepicker-js@latest/datepicker.min.js"></script>
 
 
 

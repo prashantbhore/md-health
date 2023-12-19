@@ -60,7 +60,6 @@
 .fw-900{
     font-weight: 900 !important;
 }
-
 .tab-div .nav-link.active{
     border: unset;
     border-bottom: 4px solid #4CDB06;
@@ -204,7 +203,7 @@ select option {
     margin: 40px 0;
   }
 .section-heading {
-    font-size: 18px !important;
+    font-size: 20px !important;
     font-weight: 700 !important;
     font-family: 'Campton' !important;
     margin-bottom: 20px !important;
@@ -256,63 +255,3 @@ select option {
     border-radius: 5px;
     width: 49%;
   }
-  .dashboard-card-title span.active {
-    width: 130px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    background: #4CDB06;
-    color: #000;
-    text-align: center;
-    font-family: Campton;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.1px;
-    padding: 5px 35px;
-
-}
-  .dashboard-card-title span.in-progress {
-    width: 130px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    background: #F4D100;
-    color: #000;
-    text-align: center;
-    font-family: Campton;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.1px;
-    padding: 5px 35px;
-
-}
-  .section-heading span.active {
-    width: 130px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    background: #4CDB06;
-    color: #000;
-    text-align: center;
-    font-family: Campton;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.1px;
-    padding: 5px 35px;
-    margin-left: 15px;
-}
-
-.order-completed-btn {
-    background: #E0E0E0;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    font-weight: 700;
-}
