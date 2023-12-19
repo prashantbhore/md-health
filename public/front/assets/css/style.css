@@ -96,7 +96,7 @@ input, select{
 }
 
 .bg-green {
-    background-color: #4CDB06;
+    background-color: #4CDB06 !important;
 }
 
 .bg-black {
@@ -1075,7 +1075,22 @@ select option {
     padding: 5px 35px;
     margin-left: 15px;
 }
-
+.section-heading span.in-progress {
+    width: 130px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    background: #F4D100;
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.1px;
+    padding: 5px 35px;
+    margin-left: 15px;
+}
 .order-completed-btn {
     background: #E0E0E0;
     text-decoration: none;
@@ -1087,72 +1102,72 @@ select option {
     color: #000;
     font-weight: 700;
 }
-
-/* Treatment Section */
-
-.treatment-section .arrow{
-    right: -25px;
+.remaining-time {
+    font-family: "Campton";
+    font-weight: 400;
+    font-size: 13px;
+    margin-bottom: 0;
 }
-
-.treatment-section .treatment-price{
-    margin-right: 80px;
+.green-colored-text {
+    color: #4CDB06 !important;
+    font-weight: 400;
 }
-
-.treatment-section .stars{
-    display: flex;
-    gap: 14px;
+.menu-detail-btn{
+    border: 1px solid transparent;
+    background: transparent;
 }
-
-/* Treatment Section */
-
-/* Download Section */
-
-.download-section{
-    padding: 8rem 0;
+.heading-date {
+    font-size: 15px;
 }
-
-.fs3{
-    font-size: 3rem;
-    line-height: 60px;
+.heading-date span {
+    font-weight: 300;
 }
-
-.download-section .part2{
-    max-width: 465px;
-    padding: 2rem 0;
-}
-
-/* Download Section */
-
-/* Medical Package */
-
-.medical-pckg{
-    padding-top: 18rem;
-    padding-bottom: 10rem;
-}
-
-.medical-pckg p{
-    line-height: 50px;
-}
-
-.section6{
-    overflow: hidden;
-}
-
-.section6 img{
-    left: 50%;
-    bottom: 0;
-}
-
-/* Medical Package */
-
-/* Testimonial */
-
-.testimonial{
-    height: 100vh;
-    padding: 8rem 0;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-}
-
-/* Testimonial */
+.bar-graph {
+    /* border: 1px solid #9a9a9a1c; */
+    border-radius: 2px;
+    max-width: 11rem;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  .bar-graph > div {
+    border-radius: 3px 0 0 3px;
+    background: #4CDB06;
+    height: 30px;
+  }
+  .bar-graph .remaining-text{
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-weight: 700;
+  }
+  .bar-graph > div[data-pourcent="10"] {
+    width: 10%;
+  }
+  .bar-graph > div[data-pourcent="20"] {
+    width: 20%;
+  }
+  .bar-graph > div[data-pourcent="30"] {
+    width: 30%;
+  }
+  .bar-graph > div[data-pourcent="40"] {
+    width: 40%;
+  }
+  .bar-graph > div[data-pourcent="50"] {
+    width: 50%;
+  }
+  .bar-graph > div[data-pourcent="60"] {
+    width: 60%;
+  }
+  .bar-graph > div[data-pourcent="70"] {
+    width: 70%;
+  }
+  .bar-graph > div[data-pourcent="80"] {
+    width: 80%;
+  }
+  .bar-graph > div[data-pourcent="90"] {
+    width: 90%;
+  }
+  .bar-graph > div[data-pourcent="100"] {
+    width: 100%;
+  }
+/* Shubham */

@@ -20,25 +20,24 @@ class UpdateCustomerProfileController extends BaseController
     public function update_customer_list()
     {
         $customer_list = CustomerRegistration::where('md_customer_registration.status', 'active')
-            ->select(
-                'md_customer_registration.id',
-                'md_customer_registration.first_name',
-                'md_customer_registration.last_name',
-                'md_customer_registration.full_name',
-                'md_customer_registration.email',
-                'md_customer_registration.phone',
-                'md_customer_registration.gender',
-                'md_master_country.country_name',
-                'md_master_cities.city_name',
-                'md_customer_registration.country_id',
-                'md_customer_registration.city_id',
-                'md_customer_registration.address',
-                'md_customer_registration.password',
-                'md_customer_registration.user_type'
-            )
+        ->select(
+            'md_customer_registration.id',
+            'md_customer_registration.first_name',
+            'md_customer_registration.last_name',
+            'md_customer_registration.full_name',
+            'md_customer_registration.email',
+            'md_customer_registration.phone',
+            'md_customer_registration.gender',
+            'md_master_country.country_name',
+            'md_master_cities.city_name',
+            'md_customer_registration.country_id',
+            'md_customer_registration.city_id',
+            'md_customer_registration.address',
+            'md_customer_registration.password',
+        )
             ->join('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
             ->join('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
-            ->where('id', 1)
+            ->where('md_customer_registration.id', 1)
             ->first();
 
         $countries = Country::where('status', 'active')
