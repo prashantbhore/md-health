@@ -61,13 +61,33 @@ Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
+Route::get('home-service', function () {
+    return view('front.mdHome.index');
+});
 
+Route::get('search-result', function () {
+    return view('front.mdHome.searchResult');
+});
 
+Route::get('health-search-result', function () {
+    return view('front.mdHealth.searchResult');
+});
 
+Route::get('health-pack-details', function () {
+    return view('front.mdHealth.healthPackDetails');
+});
 
+Route::get('purchase-package', function () {
+    return view('front.mdHealth.purchase');
+});
 
+Route::get('home-pack-details', function () {
+    return view('front.mdHome.homePackDetails');
+});
 
-
+Route::get('buy-service', function () {
+    return view('front.mdHome.buyService');
+});
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
