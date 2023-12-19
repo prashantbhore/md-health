@@ -89,7 +89,6 @@
         <img src="{{ 'front/assets/img/add.png' }}" alt="">
     </div>
 
-
     <!-- SECTION 3: TOP TREATMENT CARDS -->
     <div class="container section-wrapper gap-3 py-5 section-3 d-flex flex-column gap-3">
         <h1><span class="text-green">TOP 5</span> treatments</h1>
@@ -112,8 +111,6 @@
                 <div class="stars"></div>
             </div>
         </div>
-
-
     </div>
         {{-- Make Payment Model box--}}
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -125,7 +122,7 @@
 
                     <div class="text-center">
                         <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span
-                                style="color: #08fc34">treatment</span> package?</h4>
+                                class="green-color">treatment</span> package?</h4>
                         <p>Fill the form & get your desired treatment plan</p>
                     </div>
                 </div>
@@ -205,11 +202,10 @@
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-12 text-center ">
-                            <button type="submit" class="btn w-50 mt-4"
-                                style="height: 50px;background-color:#08fc34">Submit
+                        <div class="col-md-12 text-center ">
+                            <button type="submit" class="btn w-50 mt-4 bg-green h-75"
+                                >Submit
                             </button>
                         </div>
                     </form>

@@ -189,7 +189,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
-
     # Categories
 
 
@@ -300,3 +299,8 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // USER PANEL
 #User Profile
 Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+
+// MD BOOKING PAGE
+Route::view('md-booking-home-page', 'front/mdhealth/md-booking-home-page');
+//MD FOOD PAGE
+Route::view('md-food-home-page', 'front/mdhealth/md-food-page');
