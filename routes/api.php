@@ -298,6 +298,16 @@ Route::post('md-provider-add-bank-account', [PaymentController::class,'add_provi
 //Provider Transaction List
 Route::get('md-provider-transaction-list', [PaymentController::class,'transaction_list_view']);
 
+//Provider Transaction Search
+Route::post('md-provider-transaction-search', [PaymentController::class,'search_transactions']);
+
+
+//Provider Transaction total Panding
+Route::get('md-provider-transaction-total-pending', [PaymentController::class,'total_pending_amount']);
+
+
+//Provider Transaction total completed
+Route::get('md-provider-transaction-total-completed', [PaymentController::class,'total_payment_amount']);
 
 // });
 
