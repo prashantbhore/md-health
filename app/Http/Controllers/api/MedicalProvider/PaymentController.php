@@ -210,7 +210,7 @@ class PaymentController extends BaseController{
 
 
 
-public function total_payment_amount(){
+public function total_paid_amount(){
     //$provider_id=Auth::user()->id;
     $provider_id = 1; // Replace this with the actual provider ID
 
@@ -234,6 +234,40 @@ public function total_payment_amount(){
         }
 }
 
+
+
+
+public function total_business_amount(){
+
+    //$provider_id=Auth::user()->id;
+    $provider_id = 1; // Replace this with the actual provider ID
+
+    $total_completed_amount = CustomerPurchaseDetails::where('status', 'active')
+        ->where('provider_id', $provider_id)
+        ->sum('paid_amount');
+
+
+    $total_pending_amount = CustomerPurchaseDetails::where('status', 'active')
+            ->where('provider_id', $provider_id)
+            ->sum('pending_payment');    
+
+    $total_business_amount= $total_completed_amount + $total_pending_amount ;       
+
+
+
+        if(!empty($total_business_amount)){    
+            return response()->json([
+                'status' => 200,
+                'message' => 'Total business amount retrieved successfully',
+                'total_pending_amount' => $total_business_amount,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Total business amount can not be retrived',
+            ]);
+        }
+}
 
 
 

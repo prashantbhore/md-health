@@ -307,7 +307,12 @@ Route::get('md-provider-transaction-total-pending', [PaymentController::class,'t
 
 
 //Provider Transaction total completed
-Route::get('md-provider-transaction-total-completed', [PaymentController::class,'total_payment_amount']);
+Route::get('md-provider-transaction-total-completed', [PaymentController::class,'total_paid_amount']);
+
+
+//Provider Transaction total amount
+Route::get('md-provider-transaction-total-business-amount', [PaymentController::class,'total_business_amount']);
+
 
 // });
 
