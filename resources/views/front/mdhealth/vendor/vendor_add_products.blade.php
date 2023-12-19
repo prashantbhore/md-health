@@ -118,8 +118,8 @@
                                     <h6 class="section-heading">Featured Request</h6>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="featureproducts">
-                                        <label class="form-check-label fw-700 text-secondary" for="featureproducts">Featured this product</label>
-                                        <p class="text-muted fw-400"><i>*You pay 3% more commission on this product.</i></p>
+                                        <label class="form-check-label fw-700 text-secondary fsb-1" for="featureproducts">Featured this product</label>
+                                        <p class="text-muted fw-400 fsb-1"><i>*You pay 3% more commission on this product.</i></p>
                                     </div>
                                 </div>
 

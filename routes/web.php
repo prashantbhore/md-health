@@ -319,3 +319,6 @@ Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_s
 Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
 Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
 Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
+
+// Medical Provider Panel
+Route::view('medical-dashboard', 'front/mdhealth/medical-provider');

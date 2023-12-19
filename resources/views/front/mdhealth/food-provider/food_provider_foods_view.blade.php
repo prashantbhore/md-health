@@ -65,6 +65,9 @@
     .add-menu-modal .modal-content{
         padding: 30px;
     }
+    .menu-div ul li {
+        font-weight: 100 !important;
+    }
 </style>
 
 <div class="content-wrapper">
@@ -145,6 +148,215 @@
 
                             <div class="section-btns pt-3 mb-4">
                                 <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100" data-bs-toggle="modal" data-bs-target="#AddMenuModal">Add Menu</a>
+                            </div>
+
+                            <div class="menu-list-div mb-4">
+                                <h6 class="section-heading">Menu's</h6>
+                            <div class="row">
+                                <div class="col-md-3 mb-5">
+                                    <div class="menu-div">
+                                        <label class="form-menu-label fw-600 mb-2 fsb-1">Day 1 - Menu</label>
+                                        <div class="menu-more-div1 mb-3">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Breakfast</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Sheep Cheese</li>
+                                                <li>Boiled Egg</li>
+                                                <li>Tomato</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div class="menu-more-div2">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Lunch</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Chicken Soup</li>
+                                                <li>Boiled Vegatables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-5">
+                                    <div class="menu-div">
+                                        <label class="form-menu-label fw-600 mb-2 fsb-1">Day 2 - Menu</label>
+                                        <div class="menu-more-div1 mb-3">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Breakfast</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Sheep Cheese</li>
+                                                <li>Boiled Egg</li>
+                                                <li>Tomato</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div class="menu-more-div2">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Lunch</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Chicken Soup</li>
+                                                <li>Boiled Vegatables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-5">
+                                    <div class="menu-div">
+                                        <label class="form-menu-label fw-600 mb-2 fsb-1">Day 3 - Menu</label>
+                                        <div class="menu-more-div1 mb-3">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Breakfast</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Sheep Cheese</li>
+                                                <li>Boiled Egg</li>
+                                                <li>Tomato</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div class="menu-more-div2">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Lunch</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Chicken Soup</li>
+                                                <li>Boiled Vegatables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-5">
+                                    <div class="menu-div">
+                                        <label class="form-menu-label fw-600 mb-2 fsb-1">Day 4 - Menu</label>
+                                        <div class="menu-more-div1 mb-3">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Breakfast</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Sheep Cheese</li>
+                                                <li>Boiled Egg</li>
+                                                <li>Tomato</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div class="menu-more-div2">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Lunch</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Chicken Soup</li>
+                                                <li>Boiled Vegatables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-5">
+                                    <div class="menu-div">
+                                        <label class="form-menu-label fw-600 mb-2 fsb-1">Day 5 - Menu</label>
+                                        <div class="menu-more-div1 mb-3">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Breakfast</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Sheep Cheese</li>
+                                                <li>Boiled Egg</li>
+                                                <li>Tomato</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div class="menu-more-div2">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Lunch</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Chicken Soup</li>
+                                                <li>Boiled Vegatables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-5">
+                                    <div class="menu-div">
+                                        <label class="form-menu-label fw-600 mb-2 fsb-1">Day 6 - Menu</label>
+                                        <div class="menu-more-div1 mb-3">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Breakfast</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Sheep Cheese</li>
+                                                <li>Boiled Egg</li>
+                                                <li>Tomato</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div class="menu-more-div2">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Lunch</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Chicken Soup</li>
+                                                <li>Boiled Vegatables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-5">
+                                    <div class="menu-div">
+                                        <label class="form-menu-label fw-600 mb-2 fsb-1">Day 7 - Menu</label>
+                                        <div class="menu-more-div1 mb-3">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Breakfast</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Sheep Cheese</li>
+                                                <li>Boiled Egg</li>
+                                                <li>Tomato</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                        <div class="menu-more-div2">
+                                            <p class="text-green mb-0 fw-600 fsb-2">Lunch</p>
+                                            <ul class="list-unstyled mb-1 fsb-2">
+                                                <li>Chicken Soup</li>
+                                                <li>Boiled Vegatables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                            <div class="menu-btns d-flex gap-3">
+                                                <a href="javascript:void(0);" class="text-dark fsb-1">Edit</a>
+                                                <a href="javascript:void(0);" class="text-danger fsb-1">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                             
                             <div class="form-group d-flex flex-column mb-4">

@@ -60,7 +60,6 @@
 .fw-900{
     font-weight: 900 !important;
 }
-
 .tab-div .nav-link.active{
     border: unset;
     border-bottom: 4px solid #4CDB06;
@@ -204,7 +203,7 @@ select option {
     margin: 40px 0;
   }
 .section-heading {
-    font-size: 18px !important;
+    font-size: 20px !important;
     font-weight: 700 !important;
     font-family: 'Campton' !important;
     margin-bottom: 20px !important;
