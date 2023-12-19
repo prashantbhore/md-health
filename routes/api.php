@@ -295,6 +295,9 @@ Route::post('md-provider-treatment-search', [SalesController::class,'treatment_s
 //Provider account details saved 
 Route::post('md-provider-add-bank-account', [PaymentController::class,'add_provider_account']);
 
+//Provider Transaction List
+Route::get('md-provider-transaction-list', [PaymentController::class,'transaction_list_view']);
+
 
 // });
 

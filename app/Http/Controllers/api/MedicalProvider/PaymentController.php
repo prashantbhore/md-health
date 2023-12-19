@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\MedicalProvider;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\api\BaseController as BaseController;
+use App\Models\CustomerPurchaseDetails;
 use Validator;
 use App\Traits\MediaTrait;
 use App\Models\MedicalProviderAccountDetails;
@@ -59,6 +60,39 @@ class PaymentController extends BaseController{
         }
 
     }
+
+
+    public function transaction_list_view(Request $request){
+
+       
+        //$provider_id=Auth::user()->id;
+
+        $provider_id=1;
+
+     
+
+        $customer_transaction_details= CustomerPurchaseDetails::where('status','active')->get();
+
+
+
+        if (!empty($customer_transaction_details)){
+            return response()->json([
+                'status' => 200,
+                'message' => 'account details saved successfully',
+                'transaction_details'=>  $customer_transaction_details,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.account details does not saved.',
+            ]);
+        }
+
+    }
+
+
+
+
 
 
 
