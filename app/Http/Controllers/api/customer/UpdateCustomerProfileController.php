@@ -114,7 +114,7 @@ class UpdateCustomerProfileController extends BaseController
     {
         if (Auth::guard('md_customer_registration')->attempt([
             'status' => 'active',
-            'id' => Auth::user()->id,
+            'id' => 1,
             'password' => $request->password
         ])) {
             return response()->json([
