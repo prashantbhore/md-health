@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('hotel_id')->nullable();
             $table->bigInteger('vehicle_id')->nullable();
             $table->bigInteger('tour_id')->nullable();
+            $table->bigInteger('provider_id')->nullable();
             $table->string('package_treatment_price')->nullable();
             $table->string('package_hotel_price')->nullable();
             $table->string('package_transportation_price')->nullable();
