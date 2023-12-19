@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('package_total_price')->nullable();
             $table->string('treatment_start_date')->nullable();
             $table->string('package_payment_plan')->nullable();
+            $table->string('payment_percentage')->nullable();
+            $table->string('paid_amount')->nullable();
             $table->string('pending_payment')->nullable();
             $table->enum('purchase_type', ['pending','in_progress','active', 'completed', 'cancelled'])->nullable();
             $table->enum('payment_method', ['card', 'bank', 'md_coin'])->nullable();

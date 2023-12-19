@@ -452,6 +452,7 @@ public function packages_view_on_search_result(Request $request)
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+        
         $purchase_details = [];
 
         $purchase_details['customer_id'] = 1;
