@@ -58,39 +58,45 @@ class PaymentController extends BaseController{
                 'message' => 'Something went wrong.account details does not saved.',
             ]);
         }
-
     }
 
-
-    public function transaction_list_view(Request $request){
-
-       
-        //$provider_id=Auth::user()->id;
-
-        $provider_id=1;
-
-     
-
-        $customer_transaction_details= CustomerPurchaseDetails::where('status','active')->get();
+            
 
 
+            public function transaction_list_view(Request $request){
+                //$provider_id=Auth::user()->id;
 
-        if (!empty($customer_transaction_details)){
-            return response()->json([
-                'status' => 200,
-                'message' => 'account details saved successfully',
-                'transaction_details'=>  $customer_transaction_details,
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong.account details does not saved.',
-            ]);
-        }
-
-    }
-
-
+                $provider_id = 1; // Replace this with the actual provider ID
+            
+                $customer_transaction_details = CustomerPurchaseDetails::where('status', 'active')
+                 ->get();
+            
+                if ($customer_transaction_details->isNotEmpty()) {
+                    $order_details = [];
+            
+                    foreach ($customer_transaction_details as $transaction){
+                        $order_id = $transaction->order_id;
+                        $completed_payments = $transaction->paid_amount;
+                        $pending_payments = $transaction->pending_payment;
+            
+                        $order_details[$order_id]['completed_payments'][] = $completed_payments;
+                        $order_details[$order_id]['pending_payments'][] = $pending_payments;
+                        $order_details[$order_id]['transactions'][] = $transaction->toArray();
+                    }
+            
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Account details retrieved successfully',
+                        'order_details' => $order_details,
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'No active transactions found for the specified provider.',
+                    ]);
+                }
+            }
+            
 
 
 
