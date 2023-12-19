@@ -47,6 +47,7 @@ class CustomerPurchaseDetails extends Model
     {
         return $this->belongsTo(Packages::class, 'package_id');
     }
+    
     // public function report()
     // {
     //     return $this->hasMany(MedicalProviderReports::class, 'customer_package_purchage_id', 'id');
