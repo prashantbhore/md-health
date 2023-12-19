@@ -277,12 +277,31 @@ public function packages_view_on_search_result(Request $request)
 
         $purchase_details = Packages::where('md_packages.status', 'active')
             ->where('md_packages.id', $request->package_id)
-        ->select('md_packages.id', 'md_packages.package_name', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
+        ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_packages.other_services', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
             ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
             ->first();
+
+            if($purchase_details){
+
+            $purchase_details['package_id']= !empty($purchase_details->id)? $purchase_details->id:'';
+            $purchase_details['package_name'] = !empty($purchase_details->package_name) ? $purchase_details->package_name : '';
+            $purchase_details['city_name'] = !empty($purchase_details->city_name) ? $purchase_details->city_name : '';
+            $purchase_details['treatment_price'] = !empty($purchase_details->treatment_price) ? $purchase_details->treatment_price : '';
+            $purchase_details['hotel_name'] = !empty($purchase_details->hotel_name) ? $purchase_details->hotel_name : '';
+            $purchase_details['hotel_acommodition_price'] = !empty($purchase_details->hotel_acommodition_price) ? $purchase_details->hotel_acommodition_price : '';
+            $purchase_details['vehicle_model_name'] = !empty($purchase_details->vehicle_model_id) ? $purchase_details->vehicle_model_id : '';
+            $purchase_details['treatment_period_in_days'] = !empty($purchase_details->treatment_period_in_days) ? $purchase_details->treatment_period_in_days : '';
+            $purchase_details['other_services'] = !empty($purchase_details->other_services) ? explode(',',$purchase_details->other_services) : '';
+            $purchase_details['transportation_acommodition_price'] = !empty($purchase_details->transportation_acommodition_price) ? $purchase_details->transportation_acommodition_price : '';
+            $purchase_details['authorisation_full_name'] = !empty($purchase_details->authorisation_full_name) ? $purchase_details->authorisation_full_name : '';
+            $purchase_details['provider_id'] = !empty($purchase_details->provider_id) ? $purchase_details->provider_id : '';
+            $purchase_details['sale_price'] = !empty($purchase_details->sale_price) ? $purchase_details->sale_price : '';
+            $purchase_details['package_price'] = !empty($purchase_details->package_price) ? $purchase_details->package_price : '';
+            $purchase_details['package_discount'] = !empty($purchase_details->package_discount) ? $purchase_details->package_discount : '';
+            }
 
         if (!empty($purchase_details)) {
             return response()->json([
