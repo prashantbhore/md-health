@@ -41,7 +41,7 @@
    <link rel="stylesheet" href="{{URL::asset('front/assets/css/md-food.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-   
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>MDhealth</title>
 
 </head>

@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\admin\admin\AdminController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
+use App\Http\Controllers\Front\Login\CommonLoginController;
+use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\Registration\MedicalProviderRegistrationController;
+use App\Http\Controllers\Front\Registration\UserRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\master\CityController;
@@ -288,32 +291,78 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 });
 
 // FRONT ROUTES
-
-
-
-Route::controller(MedicalProviderRegistrationController::class)->group(function (){
-    Route::get('user-account', 'index');
-    // Route::get('/customer-data-table','data_table');
-    // Route::get('admin/customer-details/{id}','show')->name('customer.details');
-    // Route::get('customer-delete','delete_customer');
-    // Route::get('customer-details/{id}','show');
- });
-// Route::view('', 'front/mdhealth/registration/user-account');
-// AUTHENTICATION
 #User Account
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
 #SMS Code
 Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
+// Route::post('md-register-medical-provider', [RegistrationController::class, 'md_register_medical_provider']);
+Route::controller(MedicalProviderRegistrationController::class)->group(function (){
+    Route::get('user-account', 'index');
+    Route::post('/md-register-medical-provider','md_register_medical_provider');
+    Route::get('/logout','logout');
+   
+ });
+Route::controller(UserRegistrationController::class)->group(function (){
+    // Route::get('user-account', 'index');
+    Route::post('/md-customer-register','customer_register');
+    // Route::get('/logout','logout');
+   
+ });
+Route::controller(CommonLoginController::class)->group(function (){
+    Route::post('user-login', 'user_login');
+    Route::post('/otp-verify','otp_verify_for_register');
+//     // Route::get('/logout','logout');
+    
+ });
+// AUTHENTICATION
 
+Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
 
+    Route::controller(MedicalProviderLogin::class)->group(function () {
+        Route::get('/medical-provider-dashboard', 'dashboard_view');
+        // Route::get('/logout', 'logout');
+        // Route::get('/login/change_password', 'change_password_view');
+        // Route::post('/reset-password', 'reset_password');
+        // Route::post('/check-old-password', 'check_old_password');
+    });
+    // Route::controller(LoginController::class)->group(function () {
+    //     Route::get('/dashboard', 'dashboard_view')->name('dashboard');
+    //     Route::get('/logout', 'logout');
+    //     Route::get('/login/change_password', 'change_password_view');
+    //     Route::post('/reset-password', 'reset_password');
+    //     Route::post('/check-old-password', 'check_old_password');
+    // });
 
+});
+Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
+
+    Route::controller(UserRegistrationController::class)->group(function () {
+        // Route::get('/medical-provider-dashboard', 'dashboard_view');
+        Route::get('/user-profile', 'edit_customer');
+        // Route::get('/login/change_password', 'change_password_view');
+        Route::post('/update-customer-profile', 'update_customer_profile');
+        Route::post('/md-check-password-exist', 'check_password_exist');
+        Route::post('/reset-customer-password', 'update_customer_password');
+        // Route::post('/check-old-password', 'check_old_password');
+    });
+    // Route::controller(LoginController::class)->group(function () {
+    //     Route::get('/dashboard', 'dashboard_view')->name('dashboard');
+    //     Route::get('/logout', 'logout');
+    //     Route::get('/login/change_password', 'change_password_view');
+    //     Route::post('/reset-password', 'reset_password');
+    //     Route::post('/check-old-password', 'check_old_password');
+    // });
+
+});
 // MEDICAL PROVIDER
 #Dashboard
-Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
+// Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
 #Treatment Details
 Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
+Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');
+Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-packages-view');
 
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
@@ -321,7 +370,8 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 
 // USER PANEL
 #User Profile
-Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+// Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+
 
 // MD BOOKING PAGE
 Route::view('md-booking-home-page', 'front/mdhealth/md-booking-home-page');

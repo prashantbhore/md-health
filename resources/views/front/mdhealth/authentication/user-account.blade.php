@@ -47,55 +47,80 @@
                                 <h1 class="reg-title mb-0">Create User Account</h1>
                             </div>
                             <div class="form text-start px-5">
-                                <form action="{{ url('api/md-customer-register') }}" method="post" id="myForm">
+                                <form action="{{ url('/md-customer-register') }}" method="post" id="mycustomerForm">
                                     @csrf
                                     <input type="hidden" name="platform_type" value="web">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="firstName" class="form-label">*First Name</label>
-                                                <input type="text" class="form-control" name="first_name"
+                                                <input type="text" class="form-control" name="first_name" id="first_name"
                                                     placeholder="First Name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="lastName" class="form-label">*Last Name</label>
-                                                <input type="text" class="form-control" name="last_name"
+                                                <input type="text" class="form-control" name="last_name" id="last_name"
                                                     placeholder="Last Name">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">*E-mail</label>
-                                                <input type="text" class="form-control" name="email"
+                                                <input type="text" class="form-control" name="email" id="email"
                                                     placeholder="E-mail">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="phone" class="form-label">*Phone</label>
-                                                <input type="text" class="form-control" name="phone"
+                                                <input type="text" class="form-control" name="phone" id="phone"
                                                     placeholder="Phone">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="gender" class="form-label">*Gender</label>
-                                                <input type="text" class="form-control" name="gender"
-                                                    placeholder="Gender">
+                                                {{-- <input type="text" class="form-control" name="gender" id="gender"
+                                                    placeholder="Gender"> --}}
+                                                    <select name="gender" id="gender" class="form-select">
+                                                        <option value="" selected disabled>Choose</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                       
+                                                    </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="country_id" class="form-label">*Country</label>
                                                 <select name="country_id" id="country_id" class="form-select">
-                                                    <option value="">Choose</option>
+                                                    <option value=""selected disabled>Choose</option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->id }}">{{ $country->country_name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="city_id" class="form-label">*City</label>
+                                                <select name="city_id" id="city_id" class="form-select">
+                                                    <option value=""selected disabled>Choose</option>
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->id }}">{{ $city->city_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="dob" class="form-label">*Date of Birth</label>
+                                                <input type="text" class="form-control" name="date_of_birth" id="date_of_birth"
+                                                    placeholder="Date of Birth">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -108,14 +133,14 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">*Password</label>
-                                                <input type="password" name="password" class="form-control"
+                                                <input type="password" name="password" class="form-control" id="password"
                                                     placeholder="Minimum 8 characters">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="re-password" class="form-label">*Re-Password</label>
-                                                <input type="password" name="password" class="form-control"
+                                                <input type="password" name="repassword" class="form-control" id="repassword"
                                                     placeholder="Minimum 8 characters">
                                             </div>
                                         </div>
@@ -133,7 +158,7 @@
                                             <button type="submit" class="btn btn-md w-100" style="height: 47px;">Create
                                                 Account</button>
                                             <label for="" class="mt-auto">Already have an account?</label>
-                                            <a href="#" class="text-black fw-bold">Sign In</a>
+                                            <a href="{{url('sign-in-web')}}" class="text-black fw-bold">Sign In</a>
                                         </div>
                                     </div>
                                 </form>
@@ -152,7 +177,7 @@
                                 <h1 class="reg-title mb-0">Create Provider Account</h1>
                             </div>
                             <div class="form text-start px-5">
-                                <form id="myFormProvider" action="{{ url('/api/md-register-medical-provider') }}"
+                                <form id="myFormProvider" action="{{ url('/md-register-medical-provider') }}"
                                     method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -267,9 +292,11 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 text-center d-flex flex-column gap-3">
                                             <button class="btn btn-md w-100" type="submit" style="height: 47px;">Create
                                                 Account</button>
+                                                <label for="" class="mt-auto">Already have an account?</label>
+                                                <a href="{{url('sign-in-web')}}" class="text-black fw-bold">Sign In</a>
                                         </div>
                                     </div>
                                 </form>
@@ -665,6 +692,129 @@
             });
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+        $.validator.addMethod("passwordMatch", function(value, element) {
+            return $('#password').val() === value;
+        }, "Passwords do not match.");
+        $.validator.addMethod("spaceValidation", function(value, element) {
+            return value.trim().length !== 0;
+        }, "Field should not contain only spaces.");
+
+
+        $('#mycustomerForm').validate({
+                rules: {
+                    first_name: {
+                        required: true,
+                        spaceValidation: true,
+                    },
+                    last_name: {
+                        required: true,
+                        spaceValidation: true,
+                    },
+                    city_id: {
+                        required: true,
+                    },
+                    country_id: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        spaceValidation: true,
+                    },
+                    phone: {
+                        required: true,
+                        spaceValidation: true,
+                    },
+                    date_of_birth: {
+                        required: true,
+                        spaceValidation: true,
+                    },
+                    address: {
+                        required: true,
+                        spaceValidation: true,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8,
+                        spaceValidation: true,
+                    },
+                    repassword: {
+                        required: true,
+                        equalTo: "#password",
+                        minlength: 8,
+                        spaceValidation: true,
+                    },
+                    gender: {
+                        required: true,
+                    },
+                    UserflexCheckDefault: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    first_name: {
+                        required: "Please enter the first name.",
+                        spaceValidation: "Company name should not contain only spaces.",
+                    },
+                    last_name: {
+                        required: "Please enter the last name.",
+                        spaceValidation: "Company name should not contain only spaces.",
+                    },
+                    city_id: {
+                        required: "Please select a city.",
+                    },
+                    country_id: {
+                        required: "Please select a country.",
+                    },
+                    email: {
+                        required: "Please enter your email.",
+                        email: "Please enter a valid email address.",
+                        spaceValidation: "Email should not contain only spaces.",
+                    },
+                    phone: {
+                        required: "Please enter your phone number.",
+                        spaceValidation: "Phone number should not contain only spaces.",
+                    },
+                    date_of_birth: {
+                        required: "Please enter the Date of Birth.",
+                        spaceValidation: "Date of Birth should not contain only spaces.",
+                    },
+                    address: {
+                        required: "Please enter the address.",
+                        spaceValidation: "Address should not contain only spaces.",
+                    },
+                    password: {
+                        required: "Please enter a password.",
+                        minlength: "Password must be at least 8 characters long.",
+                        spaceValidation: "Password should not contain only spaces.",
+                    },
+                    repassword: {
+                        required: "Please re-enter the password.",
+                        equalTo: "Passwords do not match.",
+                        minlength: "Password must be at least 8 characters long.",
+                        spaceValidation: "Password should not contain only spaces.",
+                    },
+                    gender: {
+                        required: "Please select gender.",
+                    },
+                    UserflexCheckDefault: {
+                        required: "Please accept the terms and conditions.",
+                    },
+                },
+                submitHandler: function(form) {
+                    form.submit();
+    },
+    normalizer: function(value) {
+        return $.trim(value);
+    },
+        });
+    });
+</script>
+
 
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

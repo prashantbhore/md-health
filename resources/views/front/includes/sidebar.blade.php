@@ -9,11 +9,11 @@
             <li class="nav-item mpSalesLi">
                 <a class="nav-link mpSales" href="{{url('medical-provider-sales')}}">Sales</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Packages</a>
+            <li class="nav-item mpPackagesLi">
+                <a class="nav-link mpPackages" href="{{url('medical-packages')}}">Packages</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Payment Information</a>
+                <a class="nav-link " href="#">Payment Information</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Messages</a>
