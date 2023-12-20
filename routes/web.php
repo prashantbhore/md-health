@@ -357,12 +357,13 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 });
 // MEDICAL PROVIDER
 #Dashboard
-// Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
+Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
 #Treatment Details
 Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
 Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');
 Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-packages-view');
 Route::view('medical-account', 'front/mdhealth/medical-provider/account');
+Route::view('medical-other-services', 'front/mdhealth/medical-provider/other-services');
 
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');

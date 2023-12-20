@@ -21,11 +21,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Roles</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Other Services</a>
+            <li class="nav-item mpOtherServicesLi">
+                <a class="nav-link mpOtherServices" href="{{url('other-services')}}">Other Services</a>
             </li>
             <li class="nav-item mpAccountLi">
-                <a class="nav-link mpAccount" href="{{url('medical-account')}}">Account</a>
+                <a class="nav-link mpAccount" href="{{url('medical-other-services')}}">Account</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reports</a>
