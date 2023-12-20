@@ -4,7 +4,7 @@
     }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light md-navbar" style="background-color: black;">
+<nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
     <div class="container">
         <a class="navbar-brand" href="{{URL('admin/dashboard')}}">
             <img src="{{URL::asset('admin/assets/img/MDHealth_light.svg')}}" alt="" />
@@ -14,7 +14,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
-                <li class="nav-item"><a href="" class="nav-link">Home Service</a></li>
+                <li class="nav-item"><a href="{{url('home-service')}}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
@@ -142,3 +142,4 @@
         <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
     </div>
 </nav>
+

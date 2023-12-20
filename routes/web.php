@@ -61,13 +61,33 @@ Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
+Route::get('home-service', function () {
+    return view('front.mdHome.index');
+});
 
+Route::get('search-result', function () {
+    return view('front.mdHome.searchResult');
+});
 
+Route::get('health-search-result', function () {
+    return view('front.mdHealth.searchResult');
+});
 
+Route::get('health-pack-details', function () {
+    return view('front.mdHealth.healthPackDetails');
+});
 
+Route::get('purchase-package', function () {
+    return view('front.mdHealth.purchase');
+});
 
+Route::get('home-pack-details', function () {
+    return view('front.mdHome.homePackDetails');
+});
 
-
+Route::get('buy-service', function () {
+    return view('front.mdHome.buyService');
+});
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
@@ -294,6 +314,8 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
 #Treatment Details
 Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
+Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');
+Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-packages-view');
 
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');

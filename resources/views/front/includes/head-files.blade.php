@@ -34,7 +34,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<<<<<<< HEAD
 
    {{-- Md Booking --}}
    <link rel="stylesheet" href="{{URL::asset('front/assets/css/md-booking.css')}}">
@@ -42,14 +41,11 @@
 
    {{-- Md Food --}}
    <link rel="stylesheet" href="{{URL::asset('front/assets/css/md-food.css')}}">
-=======
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-   
->>>>>>> ffb76bd0d1fcee5591212272fdec351354b6a8d2
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>MDhealth</title>
 
 </head>
 
-<body>
  <input type="hidden" value="{{url('/')}}" id="base_url"/>
