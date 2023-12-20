@@ -1218,6 +1218,10 @@ select option {
  .multiple-upload-images {
     margin: 40px 0;
   }
+.section-heading-div .section-heading{
+    margin-bottom: 10px !important;
+
+  }
 .section-heading {
     font-size: 18px !important;
     font-weight: 700 !important;
@@ -1439,6 +1443,29 @@ select option {
 .treatment-card .trmt-card-body h5:last-child{
     font-size: 17px;
 }
+.date-picker-card-div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+.date-picker-card-div .input-container {
+    position: relative;
+    width: 50%;
+}
+.date-picker-card-div .input-icon{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.date-picker-card-div .input-container input{
+    border: 2px solid #D6D6D6;
+    border-radius: 5px;
+    padding: 10px 20px;
+
+}
+
+/* Shubham */
 
 .medical-pckg p{
     line-height: 50px;
@@ -1525,4 +1552,3 @@ select option {
 }
 
 /* Scan QR */
-/* Shubham */

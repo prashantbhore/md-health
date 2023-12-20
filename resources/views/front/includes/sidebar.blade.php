@@ -24,8 +24,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Other Services</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
+            <li class="nav-item mpAccountLi">
+                <a class="nav-link mpAccount" href="{{url('medical-account')}}">Account</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reports</a>
