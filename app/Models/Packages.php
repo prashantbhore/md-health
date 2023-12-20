@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use NunoMaduro\Collision\Provider;
 
 class Packages extends Model
 {
@@ -57,6 +58,17 @@ class Packages extends Model
             
     }
 
+    public function providerGallery()
+    {
+        return $this->hasMany(ProviderImagesVideos::class, 'provider_id', 'created_by')
+                    ->where('status', 'active');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
+    }
+    
     
 
 

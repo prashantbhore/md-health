@@ -110,6 +110,7 @@ class ToursController extends BaseController
                 'status',
                 'created_by'
             )
+            // ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($ToursDetails)) {

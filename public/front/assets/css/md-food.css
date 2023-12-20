@@ -1,0 +1,131 @@
+@font-face {
+    font-family: "Campton";
+    src: url("../fonts/campton/CamptonMedium.otf");
+}
+.md-food-banner{
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-top: 8.7rem;
+    margin-bottom: 2rem;
+}
+.sub-food-banner{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2rem;
+    margin-top: 5%;
+}
+.mid-sub-food-banner{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+}
+.banner-p1{
+    font-weight: 500;
+    font-size: 19px;
+    font-family: Campton;
+}
+.banner-p2{
+    font-weight: 700;
+    font-size: 48px;
+    font-family: Campton;
+    color:#4CDB06;
+
+}
+.banner-p3{
+    font-weight: 700;
+    font-size: 89px;
+    font-family: Campton;
+    color:#000000;
+}
+.mid-sect-height{
+    height: 100px;
+    width: 1066px;
+    margin-bottom: 2rem;
+}
+.green-color{
+    color:#4CDB06;
+}
+.md-food-select1 {
+    height: 100px
+}
+.btn-search-pill-food {
+    width: 203px;
+    height: 73px;
+    border-radius: 3px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+}
+.food-mid-sect2{
+    width: 1066px;
+    height: 178px;
+    border-radius: 5px;
+    margin-bottom: 3rem;
+    padding: 1rem
+}
+.food-mid-sect-img1{
+width: 212px;
+height: 141px;
+border-radius: 3px;
+/* border: 1px solid black; */
+}
+.food-review{
+    font-weight: 700;
+    font-family: Campton;
+    font-size: 18px;
+}
+.food-review-270{
+    font-weight: 500;
+    font-family: Campton;
+    font-size: 11px;
+}
+.food-factory{
+    font-weight: 600;
+    font-family: Campton;
+    font-size: 20px;
+    color: #000000;
+}
+.food-factory-veg{
+    font-weight: 400;
+    font-family: Campton;
+    font-size: 14px;
+    color: #000000;
+}
+.mid-food-sen1
+{
+    font-weight: 700;
+    font-family: Campton;
+    font-size: 53px;
+    color: #000000;
+}
+.mid-food-sen2{
+    font-weight: 700;
+    font-family: Campton;
+    font-size: 53px;
+    color: #4CDB06;
+}
+.mid-food-m{
+    margin-top: 22rem;
+    margin-bottom: 3rem;
+}
+.food-footer-m{
+    margin-bottom: 10rem;
+}
+.mid-food-sub{
+    font-weight: 500;
+    font-family: Campton;
+    font-size: 14px;
+    color: #A3A3A3;
+
+}

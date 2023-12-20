@@ -78,7 +78,7 @@ class TransportationController extends BaseController
                 'md_add_transportation_details.comfort_level_id'
             )
             ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
-            ->where('md_add_transportation_details.created_by', 1) // Assuming user_id is the column containing the user's ID
+            ->where('md_add_transportation_details.created_by',1) // Assuming user_id is the column containing the user's ID
             ->get();
 
         if (!empty($TransportationDetails)) {
@@ -198,12 +198,12 @@ class TransportationController extends BaseController
             $vehicle_input['created_by'] = 1;
             $TransportationDetails = TransportationDetails::where('id', $request->transportation_id)->update($vehicle_input);
 
-            if (!empty($TransportationDetails)) {
+            if (!empty($TransportationDetails)){
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details updated successfully.',
                 ]);
-            } else {
+            } else{
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',

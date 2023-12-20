@@ -9,12 +9,14 @@ use App\Http\Controllers\api\AppConfigController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
+use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
-
-
+use App\Http\Controllers\api\MedicalProvider\PaymentController;
+use App\Http\Controllers\api\MedicalProvider\ReportsController;
+use App\Http\Controllers\api\MedicalProvider\SalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -174,4 +176,144 @@ Route::post('md-packages-inactive-list-search', [PackageControllers::class, 'pac
 
 //customer-package-search-filter
 Route::post('md-customer-package-search-filter', [CustomerPackageController::class, 'customer_package_search_filter']);
+
+//customer-package-purchase-details
+Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
+
+//md-change-patient-information
+Route::post('md-change-patient-information', [CustomerPackageController::class, 'change_patient_information']);
+
+//change-patient-information-for-myself
+Route::post('md-change-patient-information-for-myself', [CustomerPackageController::class, 'change_patient_information_for_myself']);
+
+//customer-package-purchase-details
+Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);
+
+//customer-purchase-package-active-list
+Route::get('md-customer-purchase-package-active-list', [CustomerPackageController::class, 'customer_purchase_package_active_list']);
+
+//customer-purchase-package-completed-list
+Route::get('md-customer-purchase-package-completed-list', [CustomerPackageController::class, 'customer_purchase_package_completed_list']);
+
+//customer-purchase-package-cancelled-list
+Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
+
+//customer-change-package-list-active-cancelled
+Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);
+
+//change-patient-information-list
+Route::post('md-change-patient-information-list', [CustomerPackageController::class, 'change_patient_information_list']);
+
+//update-patient-information
+Route::post('md-update-patient-information', [CustomerPackageController::class, 'update_patient_information']);
+
+//customer-package-details
+Route::post('md-customer-package-details', [CustomerPackageController::class, 'customer_package_details']);
+
+//customer-my-details
+Route::post('md-customer-my-details', [CustomerPackageController::class, 'customer_my_details']);
+
+//customer-upload-documents
+Route::post('md-customer-upload-documents', [CustomerPackageController::class, 'customer_upload_documents']);
+
+//customer-pay-now
+Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_pay_now']);
+
+//customer-acommodition-details-view
+Route::post('md-customer-acommodition-details-view', [CustomerPackageController::class, 'customer_acommodition_details_view']);
+
+//customer-transporatation-details-view
+Route::post('md-customer-transporatation-details-view', [CustomerPackageController::class, 'customer_transporatation_details_view']);
+
+//customer-tour-details-view
+Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 'customer_tour_details_view']);
+
+//customer-reviews
+Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
+
 // });
+
+
+
+//customer-package-view-search
+Route::post('md-packages-view-search', [CustomerPackageController::class, 'packages_view_on_search_result']);
+
+//Medical Provider Add Reports
+Route::post('md-provider-add-reports', [ReportsController::class,'add_new_report']);
+
+//Medical Provider All Reports List
+Route::get('md-provider-all-reports-list', [ReportsController::class,'provider_all_reports_list']);
+
+//Medical Provider Patient list
+Route::get('md-customer-package-purchage-list', [ReportsController::class,'patient_package_purchage_list']);
+
+//Medical Provider Report Search
+Route::post('md-medical-provider-report-search', [ReportsController::class,'provider_reports_search']);
+
+
+//Customer Report Search
+Route::post('md-customer-report-search', [CustomerReportController::class,'customer_reports_search']);
+
+
+//Customer All Reports List
+Route::get('md-customer-all-reports-list', [CustomerReportController::class,'customer_all_reports_list']);
+
+
+//active treatment list
+Route::get('md-provider-active-treatment-list', [SalesController::class,'active_treatment_list']);
+
+
+//completed treatment list
+Route::get('md-provider-completed-treatment-list', [SalesController::class,'completed_treatment_list']);
+
+
+//Cancelled treatment list
+Route::get('md-provider-cancelled-treatment-list', [SalesController::class,'cancelled_treatment_list']);
+
+//Patient Details
+Route::post('md-provider-patient-details', [SalesController::class,'patient_details']);
+
+
+//Patient Details
+Route::post('md-provider-treatment-date-status', [SalesController::class,'treatement_date_status']);
+
+//Provider Case Manager Listing
+Route::get('md-provider-case-manager-list', [SalesController::class,'case_manager_list']);
+
+//Provider sales treatment package details
+Route::post('md-provider-package-details', [SalesController::class,'package_details']);
+
+//Provider sales treatment package details chnages and assign case manger
+Route::post('md-provider-assign-treatment-case-manager', [SalesController::class,'store_package_details_changes']);
+
+
+
+//Provider sales treatment search
+Route::post('md-provider-treatment-search', [SalesController::class,'treatment_search']);
+
+
+//Provider account details saved 
+Route::post('md-provider-add-bank-account', [PaymentController::class,'add_provider_account']);
+
+//Provider Transaction List
+Route::get('md-provider-transaction-list', [PaymentController::class,'transaction_list_view']);
+
+//Provider Transaction Search
+Route::post('md-provider-transaction-search', [PaymentController::class,'search_transactions']);
+
+
+//Provider Transaction total Panding
+Route::get('md-provider-transaction-total-pending', [PaymentController::class,'total_pending_amount']);
+
+
+//Provider Transaction total completed
+Route::get('md-provider-transaction-total-completed', [PaymentController::class,'total_paid_amount']);
+
+
+//Provider Transaction total amount
+Route::get('md-provider-transaction-total-business-amount', [PaymentController::class,'total_business_amount']);
+
+
+// });
+
+

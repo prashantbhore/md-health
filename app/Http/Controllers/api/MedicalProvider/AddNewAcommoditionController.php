@@ -111,7 +111,9 @@ class AddNewAcommoditionController extends BaseController
                 'service_provider_id',
                 'status',
             )
+            // ->where('created_by',Auth::user()->id)
             ->get();
+
         if (!empty($AcommoditionHotelList)) {
             foreach ($AcommoditionHotelList as $key => $value) {
                 $AcommoditionHotelList[$key]['hotel_name'] = ($value->hotel_name);

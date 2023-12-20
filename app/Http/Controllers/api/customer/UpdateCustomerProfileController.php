@@ -20,25 +20,24 @@ class UpdateCustomerProfileController extends BaseController
     public function update_customer_list()
     {
         $customer_list = CustomerRegistration::where('md_customer_registration.status', 'active')
-            ->select(
-                'md_customer_registration.id',
-                'md_customer_registration.first_name',
-                'md_customer_registration.last_name',
-                'md_customer_registration.full_name',
-                'md_customer_registration.email',
-                'md_customer_registration.phone',
-                'md_customer_registration.gender',
-                'md_master_country.country_name',
-                'md_master_cities.city_name',
-                'md_customer_registration.country_id',
-                'md_customer_registration.city_id',
-                'md_customer_registration.address',
-                'md_customer_registration.password',
-                'md_customer_registration.user_type'
-            )
+        ->select(
+            'md_customer_registration.id',
+            'md_customer_registration.first_name',
+            'md_customer_registration.last_name',
+            'md_customer_registration.full_name',
+            'md_customer_registration.email',
+            'md_customer_registration.phone',
+            'md_customer_registration.gender',
+            'md_master_country.country_name',
+            'md_master_cities.city_name',
+            'md_customer_registration.country_id',
+            'md_customer_registration.city_id',
+            'md_customer_registration.address',
+            'md_customer_registration.password',
+        )
             ->join('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
             ->join('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
-            ->where('id', Auth::user()->id)
+            ->where('md_customer_registration.id', 1)
             ->first();
 
         $countries = Country::where('status', 'active')
@@ -94,7 +93,7 @@ class UpdateCustomerProfileController extends BaseController
         $customer_input['city_id'] = $request->city_id;
         $customer_input['modified_ip_address'] = $request->ip();
 
-        $customer_update = CustomerRegistration::where('id', Auth::user()->id)->update($customer_input);
+        $customer_update = CustomerRegistration::where('id', 1)->update($customer_input);
 
         if (!empty($customer_update)) {
             return response()->json([
@@ -115,7 +114,7 @@ class UpdateCustomerProfileController extends BaseController
     {
         if (Auth::guard('md_customer_registration')->attempt([
             'status' => 'active',
-            'id' => Auth::user()->id,
+            'id' => 1,
             'password' => $request->password
         ])) {
             return response()->json([
@@ -148,7 +147,7 @@ class UpdateCustomerProfileController extends BaseController
             $medical_provider_input['password'] = Hash::make($request->new_password);
             $medical_provider_input['modified_ip_address'] = $request->ip();
 
-            $medical_provider_update = CustomerRegistration::where('id', Auth::user()->id)->update($medical_provider_input);
+            $medical_provider_update = CustomerRegistration::where('id', 1)->update($medical_provider_input);
 
             if (!empty($medical_provider_update)) {
                 return response()->json([
