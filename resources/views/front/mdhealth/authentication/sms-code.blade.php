@@ -4,6 +4,10 @@
     .navbar {
         display: none;
     }
+    .error {
+        color: red !important;
+        font-size: 14px !important;
+    }
 </style>
 <div class="container py-100px df-center sign-in-form">
     <div class="card">
@@ -14,13 +18,24 @@
                 </div>
                 <h2 class="mb-0">SMS Code</h2>
                 <p>Enter the 4 digit code sent to your mobile phone</p>
+                <form action="{{url('otp-verify')}}" method="post" id="otpForm">
+                    @csrf
                 <div class="w-100 df-center mb-3 sms-input gap-3">
-                    <input type="text" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                    <input type="text" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                    <input type="text" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                    <input type="text" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                    <input type="hidden" name="email" value="{{session('email') }}">
+                    <input type="hidden" name="password" value="{{session('password') }}">
+                    <input type="hidden" name="login_type" value="{{session('login_type') ? session('login_type'):'' }}">
+                    <input type="text" name="otp[]" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                    <input type="text" name="otp[]" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                    <input type="text" name="otp[]" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                    <input type="text" name="otp[]" minlength="1" maxlength="1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                 </div>
-                <button class="btn btn-md btn-text w-75 mb-3" style="height: 47px;">Sign In</button>
+                <button class="btn btn-md btn-text w-75 mb-3" type="submit" style="height: 47px;">Sign In</button>
+            </form>
+            <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
+            <form>
+                <input type="text" id="verification" class="form-control" placeholder="Verification code">
+                <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
+            </form>
 
                 <h6 class="mb-0 d-flex align-items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -61,5 +76,67 @@
 </div>
 @endsection
 @section('script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function() {
+// var coderesult = JSON.parse(localStorage.getItem('coderesult'));
+// console.log(coderesult);
+
+    $('#otpForm').validate({
+        rules: {
+            "otp[]": {
+                required: true,
+                digits: true
+            }
+        },
+        messages: {
+            "otp[]": {
+                required: "Please enter the OTP.",
+                digits: "Please enter only digits (0-9)."
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            if (element.attr("name") === "otp[]") {
+                error.insertAfter(".sms-input");
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function(form) {
+            var combinedOTP = $("input[name='otp[]']").map(function() {
+                return $(this).val();
+            }).get().join('');
+
+            if (combinedOTP.length === 4) {
+                form.submit();
+            } else {
+                var errorHtml = '<div class="error">Please enter a 4-digit OTP.</div>';
+                $(errorHtml).insertAfter(".sms-input"); // Change this selector to your designated container if needed
+            }
+        }
+    });
+});
+
+</script>
+
+<script>
+     function verify() {
+    var code = $("#verification").val();
+    var coderesult = JSON.parse(localStorage.getItem('coderesult'));
+    // var coderesult = sessionStorage.getItem('key');
+    console.log(coderesult);
+    coderesult.confirm(code).then(function(result) {
+      var user = result.user;
+      console.log(user);
+      $("#successOtpAuth").text("Auth is successful");
+      $("#successOtpAuth").show();
+    }).catch(function(error) {
+      $("#error").text(error.message);
+      $("#error").show();
+    });
+  }
+</script>
 
 @endsection

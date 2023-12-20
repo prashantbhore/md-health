@@ -1,6 +1,6 @@
 @extends('front.layout.layout')
 @section('content')
-    <div class="content-wrapper">
+    <div class="content-wrapper bg-f6">
         <div class="banner-section df-center flex-column">
             <div class="container">
                 <div class="banner-content df-center flex-column">
@@ -27,12 +27,15 @@
                             <label for="floatingSelect">City</label>
                         </div>
                         <div class="form-floating">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                 <option data-display="Select" selected>12 Aug</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
-                            </select>
+                            </select> -->
+                            <!-- <div class="datepickerContainer"> -->
+                                <input type="text" class="form-select" name="daterange" value="" />
+                            <!-- </div> -->
                             <label for="floatingSelect">Treatment Date</label>
                         </div>
                         <a href="{{url('health-search-result')}}">
@@ -58,37 +61,43 @@
             </div>
         </div>
     </div>
-    <div class="py-100px pb-0 md-coin df-center flex-column gap-5">
+    <div class="py-100px pb-0 md-coin df-center flex-column gap-5 bg-f6">
         <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
         <h1><span class="text-green text-decoration-underline">Earn</span> as you spend <span class="text-green">!</span>
         </h1>
         <p>Earn <span>cashback</span> per transaction or <span>invite your friends</span> and spend <span>MD</span>coin for
             your health needs. </p>
     </div>
-    <div class="df-center container md-earn">
-        <div>
-            <h1>2%</h1>
-            <img src="{{ 'front/assets/img/img1.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div>
-            <h1>4%</h1>
-            <img src="{{ 'front/assets/img/img2.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div>
-            <h1>3%</h1>
-            <img src="{{ 'front/assets/img/img3.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div>
-            <h1>5%</h1>
-            <img src="{{ 'front/assets/img/img1.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <div class="bg-f6">
+        <div class="df-center container md-earn">
+            <div>
+                <h1>2%</h1>
+                <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div>
+                <h1>4%</h1>
+                <img src="{{ 'front/assets/img/img2.png' }}" alt="">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div>
+                <h1>3%</h1>
+                <img src="{{ 'front/assets/img/img3.png' }}" alt="">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div>
+                <h1>5%</h1>
+                <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
         </div>
     </div>
-    <div class="bod-bot pb-5">
-        <img src="{{ 'front/assets/img/add.png' }}" alt="">
+    <div class="bg-f6">
+        <div class="container">
+            <div class="bod-bot pb-5">
+                <img src="{{ 'front/assets/img/add.png' }}" alt="">
+            </div>
+        </div>
     </div>
 
     <!-- SECTION 3: TOP TREATMENT CARDS -->
@@ -109,7 +118,7 @@
                         <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
                     </div>
                 </div>
-                <div class="brdr-right">
+                <div class="rating">
                     <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{('front/assets/img/star-green.svg')}}" alt="">
@@ -134,7 +143,7 @@
                         <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
                     </div>
                 </div>
-                <div>
+                <div class="rating">
                     <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{('front/assets/img/star-green.svg')}}" alt="">
@@ -159,7 +168,7 @@
                         <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
                     </div>
                 </div>
-                <div>
+                <div class="rating">
                     <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
                     <div class="stars">
                         <img src="{{('front/assets/img/star-green.svg')}}" alt="">
@@ -184,7 +193,7 @@
                         <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
                     </div>
                 </div>
-                <div>
+                <div class="rating">
                     <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
                     <div class="stars">
                         <img src="{{('front/assets/img/star-green.svg')}}" alt="">
@@ -209,7 +218,7 @@
                         <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
                     </div>
                 </div>
-                <div>
+                <div class="rating">
                     <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{('front/assets/img/star-green.svg')}}" alt="">
@@ -220,8 +229,6 @@
                     </div>
                 </div>
             </div>
-    
-    
         </div>
     </div>
 
@@ -255,8 +262,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-=======
     </div>
 
     <!-- SECTION 6 -->
@@ -267,7 +272,6 @@
                 <a class="bookButton">Book Now</a>
         </div>
         <img class="position-absolute" src="{{('front/assets/img/flight.png')}}" alt="">
->>>>>>> ffb76bd0d1fcee5591212272fdec351354b6a8d2
     </div>
         {{-- Make Payment Model box--}}
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -474,4 +478,19 @@
 </div>
 @endsection
 @section('script')
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    $(function() {
+    $('input[name="daterange"]').daterangepicker({
+        opens: 'left',
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+        // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    }, function(start, end, label) {
+    });
+    });
+</script>
 @endsection

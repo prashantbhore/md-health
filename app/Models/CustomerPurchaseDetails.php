@@ -26,6 +26,8 @@ class CustomerPurchaseDetails extends Model
           'package_total_price',
           'treatment_start_date',
           'package_payment_plan',
+          'payment_percentage',
+          'paid_amount',
           'pending_payment',
            'purchase_type', 
            'payment_method',
@@ -34,7 +36,7 @@ class CustomerPurchaseDetails extends Model
           'modified_ip_address',
           'created_by',
           'modified_by',
-           'status',
+           'status'
     ];
 
 

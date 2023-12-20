@@ -87,7 +87,7 @@ class RegistrationController extends BaseController
             $customer_input['otp_expiring_time'] = time() + 20;
             $customer_input['modified_ip_address'] = $request->ip();
             $customer_registration = CustomerRegistration::create($customer_input);
-          
+
             $CustomerRegistration = CustomerRegistration::select('id')->get();
             if (!empty($CustomerRegistration)) {
                 foreach ($CustomerRegistration as $key => $value) {
@@ -112,14 +112,16 @@ class RegistrationController extends BaseController
                 }
             }
 
-            if (Auth::guard('md_customer_registration')->attempt([
-                'phone' => $request->phone,
-                'status' => 'active',
-                'password' => $request->password
-            ])) {
+            if (
+                Auth::guard('md_customer_registration')->attempt([
+                    'phone' => $request->phone,
+                    'status' => 'active',
+                    'password' => $request->password
+                ])
+            ) {
                 $customer = Auth::guard('md_customer_registration')->user();
                 // return $customer;
-                $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                $success['token'] = $customer->createToken('MyApp')->plainTextToken;
                 CustomerRegistration::where('id', $customer->id)->update([
                     'access_token' => $success['token']
                 ]);
@@ -237,10 +239,10 @@ class RegistrationController extends BaseController
             ->where('email', $request->email)
             ->first();
 
-        if (!empty($email_exist||$email_exist_common)) {
+        if (!empty($email_exist || $email_exist_common)) {
             if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-                return redirect('/user-account')->with('error',"Email id already exist.");
-               }
+                return redirect('/user-account')->with('error', "Email id already exist.");
+            }
             return response()->json([
                 'status' => 404,
                 'message' => 'email id already exist.',
@@ -253,10 +255,10 @@ class RegistrationController extends BaseController
                 ->where('mobile_no', $request->phone)
                 ->first();
 
-            if (!empty($phone_exist||$phone_exist_common)) {
+            if (!empty($phone_exist || $phone_exist_common)) {
                 if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-                    return redirect('/user-account')->with('error',"Mobile number already exist.");
-                   }
+                    return redirect('/user-account')->with('error', "Mobile number already exist.");
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'mobile number already exist.',
@@ -271,7 +273,9 @@ class RegistrationController extends BaseController
         $commonData['password'] = Hash::make($request->password);
         $common_data_registration = CommonUserLoginTable::create($commonData);
 
-        $common_data_registrator = CommonUserLoginTable::select('id')->get();
+        // Retrieve the last inserted ID
+        $lastInsertedId = $common_data_registration->id;
+        // return $lastInsertedId;
 
         $md_provider_input = [];
         $md_provider_input['company_name'] = $request->company_name;
@@ -297,7 +301,7 @@ class RegistrationController extends BaseController
         // }
         $md_provider_input['modified_ip_address'] = $request->ip();
         $md_provider_registration = MedicalProviderRegistrater::create($md_provider_input);
-        
+
         $MedicalProviderRegistrater = MedicalProviderRegistrater::select('id')->get();
         if (!empty($MedicalProviderRegistrater)) {
             foreach ($MedicalProviderRegistrater as $key => $value) {
@@ -319,14 +323,16 @@ class RegistrationController extends BaseController
                 $update_unique_id = MedicalProviderRegistrater::where('id', $value->id)->update(['provider_unique_id' => $provider_unique_id]);
             }
         }
-        if (Auth::guard('md_health_medical_providers_registers')->attempt([
-            'mobile_no' => $request->phone,
-            'status' => 'active',
-            'password' => $request->password
-        ])) {
+        if (
+            Auth::guard('md_health_medical_providers_registers')->attempt([
+                'mobile_no' => $request->phone,
+                'status' => 'active',
+                'password' => $request->password
+            ])
+        ) {
             $customer = Auth::guard('md_health_medical_providers_registers')->user();
             // return $customer;
-            $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+            $success['token'] = $customer->createToken('MyApp')->plainTextToken;
             MedicalProviderRegistrater::where('id', $customer->id)->update([
                 'access_token' => $success['token']
             ]);
@@ -358,12 +364,12 @@ class RegistrationController extends BaseController
 
         MedicalProviderLicense::create($md_provider_input_image_license);
 
-        
+
 
         if (!empty($md_provider_registration)) {
             if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-            return redirect('/medical-provider-dashboard')->with('success',"Profile created successfully.");
-           }
+                return redirect('/medical-provider-dashboard')->with('success', "Profile created successfully.");
+            }
             return response()->json([
                 'status' => 200,
                 'message' => 'Profile created successfully.',
@@ -374,8 +380,8 @@ class RegistrationController extends BaseController
             ]);
         } else {
             if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-                return redirect('/user-account')->with('success',"Profile not completed.");
-               }
+                return redirect('/user-account')->with('success', "Profile not completed.");
+            }
             return response()->json([
                 'status' => 404,
                 'message' => 'Profile not completed.',

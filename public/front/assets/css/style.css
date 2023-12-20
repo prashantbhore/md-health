@@ -18,16 +18,16 @@
     font-family: "CamptonBook", sans-serif;
 }
 
-*{
+* {
     box-sizing: border-box;
     margin: 0;
 }
 
-.bg-f6{
+.bg-f6 {
     background-color: #f6f6f6;
 }
 
-.bg-e6{
+.bg-e6 {
     background-color: #e6e6e6;
 }
 
@@ -35,11 +35,11 @@
     background-color: #979797;
 }
 
-.clr-grey{
+.clr-grey {
     color: #979797;
 }
 
-.clr-white{
+.clr-white {
     color: #fff;
 }
 
@@ -51,23 +51,26 @@
     font-weight: bold;
     color: red;
 }
+
 /* UTILITY CLASSES */
 
-#treatmentForModal .modal-content, #treatmentForModal2 .modal-content{
+#treatmentForModal .modal-content,
+#treatmentForModal2 .modal-content {
     border-radius: 0.5rem;
     border: none;
     position: relative;
 }
 
-#treatmentForModal .modal-dialog{
+#treatmentForModal .modal-dialog {
     max-width: 600px;
 }
 
-#treatmentForModal2 .modal-dialog{
+#treatmentForModal2 .modal-dialog {
     max-width: 700px;
 }
 
-#treatmentForModal .closeModal, #treatmentForModal2 .closeModal{
+#treatmentForModal .closeModal,
+#treatmentForModal2 .closeModal {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -75,11 +78,11 @@
 
 /* Home Service Page */
 
-.homeServicePage .section-2{
+.homeServicePage .section-2 {
     padding: 12rem 0;
 }
 
-#homeService .nav-link{
+#homeService .nav-link {
     font-family: "CamptonBook";
     color: #000;
     font-size: 14px;
@@ -88,15 +91,16 @@
     letter-spacing: -0.04em;
 }
 
-#homeService .signIn{
+#homeService .signIn {
     text-decoration: underline;
 }
 
-.homeServiceTitle{
+.homeServiceTitle {
     margin-bottom: 3rem;
 }
 
-#homeServiceBanner, .searchBar{
+#homeServiceBanner,
+.searchBar {
     /* height: 100vh; */
     /* padding-top: 57.8px; */
     padding-top: 6rem;
@@ -110,30 +114,30 @@
     letter-spacing: 0.36em;
 }
 
-.packageFilter{
+.packageFilter {
     background-color: white;
     padding: 1.25rem;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
     /* margin-bottom: 2rem; */
 }
 
-.packageFilter .filter{
+.packageFilter .filter {
     font-size: 14px;
     font-family: CamptonBook;
 }
 
-.tab-card{
+.tab-card {
     background-color: white;
     padding: 1.25rem;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.tab-card a{
+.tab-card a {
     font-family: CamptonBook;
     color: #000;
 }
 
-.tab-card .nav-pills .nav-link.active{
+.tab-card .nav-pills .nav-link.active {
     font-weight: bold;
     color: #000;
     background-color: transparent;
@@ -143,21 +147,21 @@
     text-decoration-thickness: 3px;
 }
 
-.tab-card .nav-link:hover{
+.tab-card .nav-link:hover {
     color: #000;
 }
 
-.tab-card ul{
+.tab-card ul {
     border-bottom: 1px solid #ececec;
     padding-bottom: 1.6rem;
 }
 
-.tab-card .nav-link{
+.tab-card .nav-link {
     margin-right: 2rem;
     padding: 0;
 }
 
-.tab-card .overview img{
+.tab-card .overview img {
     width: 100%;
     height: auto;
     /* object-fit: cover; */
@@ -169,28 +173,29 @@
     border-bottom: 1.5px solid #4cdb06;
 }
 
-.tab-card .gallery{
+.tab-card .gallery {
     display: flex;
     justify-content: space-between;
     margin: 2rem 0;
     flex-wrap: wrap;
 }
 
-.tab-card .gallery a{
+.tab-card .gallery a {
     width: 19%;
     margin-bottom: 1rem;
 }
 
-.tab-card .gallery a img{
+.tab-card .gallery a img {
     width: 100%;
 }
 
-.tab-card .overview p{
+.tab-card .overview p {
     font-family: CamptonBook;
     font-size: 15px;
 }
 
-.homeServicePackage, .packageResult{
+.homeServicePackage,
+.packageResult {
     background-color: white;
     padding: 1.25rem;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
@@ -201,26 +206,28 @@
     align-items: end;
 }
 
-.backBtn a{
+.backBtn a {
     text-decoration: none;
     color: #000;
 }
 
-.packageResult .red-strike{
+.packageResult .red-strike {
     text-decoration: line-through;
     text-decoration-color: red;
 }
 
-.packageResult .lctn{
+.packageResult .lctn {
     font-size: 15px;
 }
 
-.packageResult .brdr-right, .homeServicePackage .brdr-right{
+.packageResult .brdr-right,
+.homeServicePackage .brdr-right {
     border-right: 1px solid #e1e1e1;
     padding-right: 2rem;
 }
 
-.homeServicePackage a, .packageResult a {
+.homeServicePackage a,
+.packageResult a {
     color: #000;
     font-family: CamptonBold;
 }
@@ -246,7 +253,8 @@ input[type="file"] {
     color: transparent !important;
 }
 
-input, select{
+input,
+select {
     font-family: 'CamptonBook' !important;
 }
 
@@ -259,7 +267,9 @@ input, select{
 }
 
 .bod-bot {
-    border-bottom: 2px solid #D0D0D0
+    border-bottom: 2px solid #D0D0D0;
+    display: flex;
+    justify-content: center;
 }
 
 .bod-right {
@@ -334,7 +344,7 @@ input, select{
     transition: 0.15s all;
 }
 
-.whiteBtn{
+.whiteBtn {
     font-size: 14px;
     font-weight: 600;
     font-family: CamptonBook;
@@ -348,7 +358,7 @@ input, select{
     transition: 0.15s all;
 }
 
-.whiteBtn:hover{
+.whiteBtn:hover {
     background-color: #e1e1e1;
 }
 
@@ -357,7 +367,8 @@ input, select{
     border-color: #3db303;
 }
 
-.banner-content, #homeServiceBanner .banner-content {
+.banner-content,
+#homeServiceBanner .banner-content {
     font-family: "CamptonBook", sans-serif;
 }
 
@@ -417,7 +428,7 @@ input, select{
     transition: 0.15s all;
 }
 
-.purchaseBtn{
+.purchaseBtn {
     height: 45px;
     padding: 0 2rem;
     border-radius: 3px;
@@ -431,16 +442,16 @@ input, select{
     transition: 0.15s all;
 }
 
-.deleteAll{
+.deleteAll {
     color: #f31d1d;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
-.favouriteBtn{
-    background-color: #f55c5c; 
-    border: none; 
-    height: 45px; 
+.favouriteBtn {
+    background-color: #f55c5c;
+    border: none;
+    height: 45px;
     border-radius: 3px;
     padding: 12px;
 }
@@ -596,6 +607,14 @@ input, select{
     letter-spacing: -0.64px;
 }
 
+.treatment-section .arrow {
+    right: -28px;
+}
+
+.treatment-section .rating {
+    margin-right: 2rem;
+}
+
 .treatment-price {
     color: #000;
     text-align: right;
@@ -605,6 +624,7 @@ input, select{
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.84px;
+    margin-right: 6rem;
 }
 
 /* REGISTRATION */
@@ -740,7 +760,7 @@ input, select{
     min-height: 467px;
 }
 
-.text-white{
+.text-white {
     color: #fff;
 }
 
@@ -801,13 +821,15 @@ input, select{
 }
 
 .green-plate,
-.black-plate, .white-plate {
+.black-plate,
+.white-plate {
     height: 58px;
     flex-shrink: 0;
     border-radius: 5px;
     padding: 0 1rem;
     text-decoration: none;
 }
+
 .white-plate {
     border: 1px solid #4cdb06;
 }
@@ -821,17 +843,21 @@ input, select{
     line-height: normal;
     letter-spacing: -0.64px;
 }
+
 .black-plate p {
     color: #4cdb06;
     font-size: 16px;
 }
-.black-plate h3{
+
+.black-plate h3 {
     color: #4cdb06;
     font-size: 27px;
     letter-spacing: -1.08px;
     font-weight: 800;
 }
-.green-plate h3, .white-plate h3 {
+
+.green-plate h3,
+.white-plate h3 {
     color: #000;
     text-align: right;
     font-family: Campton;
@@ -1012,124 +1038,161 @@ input, select{
     align-items: center;
     justify-content: space-between;
 }
-.treatment-card .row .card-row{
+
+.treatment-card .row .card-row {
     gap: 10px;
     justify-content: center;
     align-items: center;
 }
+
 .dashboard-card-title {
     display: flex;
     justify-content: space-between;
     font-weight: 700;
     font-family: 'Campton';
 }
+
 .dashboard-card-title2 {
     font-weight: 600;
 }
+
 .trmt-card-footer {
     padding-right: 20px;
 }
+
 .dbrd-order-total span {
     font-weight: 400;
 }
-.view-detail-btn{
-   color: #000;
+
+.view-detail-btn {
+    color: #000;
 }
-.fw-100{
+
+.fw-100 {
     font-weight: 100 !important;
 }
-.fw-100{
+
+.fw-100 {
     font-weight: 100 !important;
 }
-.fw-200{
+
+.fw-200 {
     font-weight: 200 !important;
 }
-.fw-100{
+
+.fw-100 {
     font-weight: 100 !important;
 }
-.fw-300{
+
+.fw-300 {
     font-weight: 300 !important;
 }
-.fw-400{
+
+.fw-400 {
     font-weight: 400 !important;
 }
-.fw-500{
+
+.fw-500 {
     font-weight: 500 !important;
 }
-.fw-600{
+
+.fw-600 {
     font-weight: 600 !important;
 }
-.fw-700{
+
+.fw-700 {
     font-weight: 700 !important;
 }
-.fw-800{
+
+.fw-800 {
     font-weight: 800 !important;
 }
-.fw-900{
+
+.fw-900 {
     font-weight: 900 !important;
 }
-.fsb-1{
+
+.fsb-1 {
     font-family: 'Campton' !important;
     font-weight: 800;
 }
-.fsb-2{
+
+.fsb-2 {
     font-family: 'CamptonBook' !important;
 }
 
-.tab-div .nav-link.active{
+.tab-div .nav-link.active {
     border: unset;
     border-bottom: 4px solid #4CDB06;
 }
-.tab-div .nav-link{
+
+.tab-div .nav-link {
     font-size: 16px;
     font-weight: 700;
     color: #000 !important;
     position: relative;
     border: unset;
 }
+
 .tab-div .nav.nav-tabs .nav-item:focus-visible {
     outline: unset !important;
     border: unset;
 }
-.tab-div .nav.nav-tabs{
+
+.tab-div .nav.nav-tabs {
     border: unset;
     align-items: center;
     justify-content: center;
     gap: 75px;
     margin-bottom: 30px;
 }
+
 .filter-div {
     display: flex;
     justify-content: end;
     gap: 15px;
     margin-bottom: 30px;
 }
-.filter-div input, .filter-div select{
+
+.filter-div input,
+.filter-div select {
     border-radius: 5px;
     padding: 6px 15px;
     border: 1px solid #EDEDED;
 }
-input:focus-visible, select:focus-visible{
+
+input:focus-visible,
+select:focus-visible {
     outline: unset !important;
 }
+
 select option {
     min-height: 10px;
 }
+
 .form-div .form-label {
     color: #979797;
 }
-.form-div input.form-control, .form-div select, .form-div textarea, .card-details .form-group select, .card-details .form-group input {
+
+.form-div input.form-control,
+.form-div select,
+.form-div textarea,
+.card-details .form-group select,
+.card-details .form-group input {
     border: 2px solid #D6D6D6;
     border-radius: 5px;
     padding: 10px 20px;
 }
+
 .form-div select {
     color: #979797;
 }
-.trmt-card-footer.footer-btns{
+
+.trmt-card-footer.footer-btns {
     display: flex;
 }
-.trmt-card-footer.footer-btns a{
+
+.trmt-card-footer.footer-btns a {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1142,17 +1205,20 @@ select option {
     color: #000;
     font-family: 'Campton';
 }
-.trmt-card-footer.footer-btns a i{
+
+.trmt-card-footer.footer-btns a i {
     background: #000;
     border-radius: 5px;
     font-size: 16px;
 }
-.trmt-card-footer.footer-btns a:first-child i{
+
+.trmt-card-footer.footer-btns a:first-child i {
     background: #000;
     color: #4CDB06;
     padding: 12px;
 }
-.trmt-card-footer.footer-btns a:last-child i{
+
+.trmt-card-footer.footer-btns a:last-child i {
     background: #F55C5C;
     padding: 12px 14px;
     color: #000;
@@ -1164,19 +1230,20 @@ select option {
     border-radius: 0.25rem;
     margin: 1.5rem 0;
     padding: 0.75rem;
-  }
-  .multiple-upload-images .img-thumbs-hidden {
+}
+
+.multiple-upload-images .img-thumbs-hidden {
     display: none;
-  }
-  
- .multiple-upload-images .wrapper-thumb {
+}
+
+.multiple-upload-images .wrapper-thumb {
     position: relative;
     display: inline-block;
     margin: 1rem 0;
     justify-content: space-around;
-  }
-  
- .multiple-upload-images .img-preview-thumb {
+}
+
+.multiple-upload-images .img-preview-thumb {
     background: #fff;
     border: 1px solid none;
     border-radius: 0.25rem;
@@ -1184,9 +1251,9 @@ select option {
     margin-right: 1rem;
     max-width: 140px;
     padding: 0.25rem;
-  }
-  
- .multiple-upload-images .remove-btn {
+}
+
+.multiple-upload-images .remove-btn {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -1200,36 +1267,41 @@ select option {
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
-  }
-  
- .multiple-upload-images .remove-btn:hover {
+}
+
+.multiple-upload-images .remove-btn:hover {
     box-shadow: 0px 0px 3px grey;
     transition: all 0.3s ease-in-out;
-  }
+}
 
- .multiple-upload-images .form-control[type=file] {
+.multiple-upload-images .form-control[type=file] {
     color: #000 !important;
-  }
- .multiple-upload-images .preview-img .prev-img-div img {
+}
+
+.multiple-upload-images .preview-img .prev-img-div img {
     height: 100px;
     width: auto;
     margin-top: 15px;
-  }
- .multiple-upload-images {
+}
+
+.multiple-upload-images {
     margin: 40px 0;
-  }
-.section-heading-div .section-heading{
+}
+
+.section-heading-div .section-heading {
     margin-bottom: 10px !important;
 
-  }
+}
+
 .section-heading {
     font-size: 18px !important;
     font-weight: 700 !important;
     font-family: 'Campton' !important;
     margin-bottom: 20px !important;
 
-  }
- .multiple-upload-images .preview-img .prev-img-div .clear-btn {
+}
+
+.multiple-upload-images .preview-img .prev-img-div .clear-btn {
     position: absolute;
     top: 7px;
     right: -6px;
@@ -1238,44 +1310,53 @@ select option {
     border-radius: 100%;
     color: #fff;
     text-decoration: none;
-  }
- .multiple-upload-images .preview-img .prev-img-div{
+}
+
+.multiple-upload-images .preview-img .prev-img-div {
     position: relative;
-  }
- .multiple-upload-images .preview-img{
+}
+
+.multiple-upload-images .preview-img {
     display: flex;
     gap: 10px;
-  }
-  .input-icon-div {
+}
+
+.input-icon-div {
     position: relative;
-  }
-  .input-icon-div input{
+}
+
+.input-icon-div input {
     padding-right: 45px;
     font-weight: 700;
-  }
-  .input-icon-div input::placeholder{
+}
+
+.input-icon-div input::placeholder {
     font-weight: 700;
-  }
-  .input-icon-div .input-icon{
+}
+
+.input-icon-div .input-icon {
     position: absolute;
     top: 10px;
     right: 20px;
     font-weight: 700;
-  }
-  .section-btns{
+}
+
+.section-btns {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  .section-btns a{
+}
+
+.section-btns a {
     height: unset;
     padding: 10px 15px;
     font-size: 15px;
     text-align: center;
     border-radius: 5px;
     width: 49%;
-  }
-  .dashboard-card-title span.active {
+}
+
+.dashboard-card-title span.active {
     width: 130px;
     height: 24px;
     flex-shrink: 0;
@@ -1292,7 +1373,8 @@ select option {
     padding: 5px 35px;
 
 }
-  .dashboard-card-title span.in-progress {
+
+.dashboard-card-title span.in-progress {
     width: 130px;
     height: 24px;
     flex-shrink: 0;
@@ -1309,7 +1391,8 @@ select option {
     padding: 5px 35px;
 
 }
-  .dashboard-card-title span.cancel {
+
+.dashboard-card-title span.cancel {
     width: 130px;
     height: 24px;
     flex-shrink: 0;
@@ -1326,7 +1409,8 @@ select option {
     padding: 5px 35px;
 
 }
-  .section-heading span.active {
+
+.section-heading span.active {
     width: 130px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1342,6 +1426,7 @@ select option {
     padding: 5px 35px;
     margin-left: 15px;
 }
+
 .section-heading span.in-progress {
     width: 130px;
     flex-shrink: 0;
@@ -1358,6 +1443,7 @@ select option {
     padding: 5px 35px;
     margin-left: 15px;
 }
+
 .order-completed-btn {
     background: #E0E0E0;
     text-decoration: none;
@@ -1369,96 +1455,119 @@ select option {
     color: #000;
     font-weight: 700;
 }
+
 .remaining-time {
     font-family: "Campton";
     font-weight: 400;
     font-size: 13px;
     margin-bottom: 0;
 }
+
 .green-colored-text {
     color: #4CDB06 !important;
     font-weight: 400;
 }
-.menu-detail-btn{
+
+.menu-detail-btn {
     border: 1px solid transparent;
     background: transparent;
 }
+
 .heading-date {
     font-size: 15px;
 }
+
 .heading-date span {
     font-weight: 300;
 }
+
 .bar-graph {
     /* border: 1px solid #9a9a9a1c; */
     border-radius: 2px;
     max-width: 11rem;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  }
-  .bar-graph > div {
+}
+
+.bar-graph>div {
     border-radius: 3px 0 0 3px;
     background: #4CDB06;
     height: 30px;
-  }
-  .bar-graph .remaining-text{
+}
+
+.bar-graph .remaining-text {
     position: absolute;
     top: 3px;
     left: 5px;
     font-weight: 700;
-  }
-  .bar-graph > div[data-pourcent="10"] {
+}
+
+.bar-graph>div[data-pourcent="10"] {
     width: 10%;
-  }
-  .bar-graph > div[data-pourcent="20"] {
+}
+
+.bar-graph>div[data-pourcent="20"] {
     width: 20%;
-  }
-  .bar-graph > div[data-pourcent="30"] {
+}
+
+.bar-graph>div[data-pourcent="30"] {
     width: 30%;
-  }
-  .bar-graph > div[data-pourcent="40"] {
+}
+
+.bar-graph>div[data-pourcent="40"] {
     width: 40%;
-  }
-  .bar-graph > div[data-pourcent="50"] {
+}
+
+.bar-graph>div[data-pourcent="50"] {
     width: 50%;
-  }
-  .bar-graph > div[data-pourcent="60"] {
+}
+
+.bar-graph>div[data-pourcent="60"] {
     width: 60%;
-  }
-  .bar-graph > div[data-pourcent="70"] {
+}
+
+.bar-graph>div[data-pourcent="70"] {
     width: 70%;
-  }
-  .bar-graph > div[data-pourcent="80"] {
+}
+
+.bar-graph>div[data-pourcent="80"] {
     width: 80%;
-  }
-  .bar-graph > div[data-pourcent="90"] {
+}
+
+.bar-graph>div[data-pourcent="90"] {
     width: 90%;
-  }
-  .bar-graph > div[data-pourcent="100"] {
+}
+
+.bar-graph>div[data-pourcent="100"] {
     width: 100%;
-  }
-  .treatment-card .trmt-card-body h5:first-child{
+}
+
+.treatment-card .trmt-card-body h5:first-child {
     font-size: 18px;
 }
-.treatment-card .trmt-card-body h5:last-child{
+
+.treatment-card .trmt-card-body h5:last-child {
     font-size: 17px;
 }
+
 .date-picker-card-div {
     display: flex;
     justify-content: space-between;
     gap: 15px;
 }
+
 .date-picker-card-div .input-container {
     position: relative;
     width: 50%;
 }
-.date-picker-card-div .input-icon{
+
+.date-picker-card-div .input-icon {
     position: absolute;
     right: 15px;
     top: 15px;
 }
 
-.date-picker-card-div .input-container input{
+.date-picker-card-div .input-container input {
     border: 2px solid #D6D6D6;
     border-radius: 5px;
     padding: 10px 20px;
@@ -1467,11 +1576,18 @@ select option {
 
 /* Shubham */
 
-.medical-pckg p{
+.medical-pckg {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.medical-pckg p {
     line-height: 50px;
 }
 
-.medical-pckg .bookButton{
+.medical-pckg .bookButton {
     border: 1.5px solid #4cdb06;
     padding: 8px 60px;
     border-radius: 25px;
@@ -1479,13 +1595,14 @@ select option {
     font-family: CamptonBold;
     text-decoration: none;
     color: #fff;
+    align-self: flex-start;
 }
 
-.section6{
+.section6 {
     overflow: hidden;
 }
 
-.section6 img{
+.section6 img {
     left: 50%;
     bottom: 0;
 }
@@ -1494,7 +1611,7 @@ select option {
 
 /* Testimonial */
 
-.testimonial{
+.testimonial {
     height: 100vh;
     padding: 8rem 0;
     /* display: flex;
@@ -1502,29 +1619,31 @@ select option {
     align-items: center; */
 }
 
-.testimonial .heading{
+.testimonial .heading {
     font-size: 50px;
     line-height: 55px;
 }
 
-.mySwiper .swiper-slide{
+.mySwiper .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.mySwiper .swiper-slide p:first-child{
+.mySwiper .swiper-slide p:first-child {
     width: 60%;
 }
 
-.mySwiper .swiper-button-next:after, .mySwiper .swiper-button-prev:after{
+.mySwiper .swiper-button-next:after,
+.mySwiper .swiper-button-prev:after {
     font-size: 1.5rem;
     font-weight: bold;
     color: #000;
 }
 
-.mySwiper .swiper-button-next, .mySwiper .swiper-button-prev{
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
     background-color: #979797;
     border-radius: 50%;
     width: 42px;
@@ -1538,13 +1657,13 @@ select option {
 
 /* Scan QR */
 
-.scanQr{
+.scanQr {
     height: 80vh;
     width: 100%;
     position: relative;
 }
 
-.scanQr img{
+.scanQr img {
     height: auto;
     width: 100%;
     position: absolute;
@@ -1552,3 +1671,21 @@ select option {
 }
 
 /* Scan QR */
+/* Shubham */
+
+/* DatePicker Start */
+
+.datepickerContainer {
+    /* position: relative; */
+}
+
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+    background-color: #4cdb06;
+}
+
+.daterangepicker td.in-range {
+    background-color: #4cdb060f;
+}
+
+/* DatePicker End */

@@ -42,7 +42,7 @@ return [
         ],
         'md_customer_registration' => [
             'driver' => 'session',
-            'provider' => 'customer_registration',
+            'provider' => 'md_customer_registration',
         ],
         'md_health_medical_providers_registers' => [
             'driver' => 'session',
@@ -52,8 +52,12 @@ return [
             'driver' => 'session',
             'provider' => 'md_super_admin',
         ],
+        'commonuser' => [
+            'driver' => 'session',
+            'provider' => 'common_user_login',
+        ],
     ],
-
+   
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -76,7 +80,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'customer_registration' => [
+        'md_customer_registration' => [
             'driver' => 'eloquent',
             'model' => App\Models\CustomerRegistration::class,
         ],
@@ -89,6 +93,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\SuperAdmin::class,
         ],
+        'common_user_login' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CommonUserLoginTable::class,
+        ],
+       
 
         // 'users' => [
         //     'driver' => 'database',
