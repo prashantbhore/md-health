@@ -56,4 +56,10 @@ class MedicalProviderRegistrater extends Authenticatable
             ->where('status', 'active');
     }
 
+    public function role()
+    {
+        return $this->belongsTo(MedicalProviderRole::class, 'roll_id', 'id')
+            ->where('status', 'active');
+    }
+
 }
