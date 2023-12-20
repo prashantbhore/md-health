@@ -377,7 +377,6 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 Route::view('md-booking-home-page', 'front/mdhealth/md-booking-home-page');
 //MD FOOD PAGE
 Route::view('md-food-home-page', 'front/mdhealth/md-food-page');
-
 // Shubham
 // Vendor Panel
 Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
@@ -396,4 +395,3 @@ Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provi
 
 // Medical Provider Panel
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
-
