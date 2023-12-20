@@ -259,7 +259,9 @@ input, select{
 }
 
 .bod-bot {
-    border-bottom: 2px solid #D0D0D0
+    border-bottom: 2px solid #D0D0D0;
+    display: flex;
+    justify-content: center;
 }
 
 .bod-right {
@@ -596,6 +598,14 @@ input, select{
     letter-spacing: -0.64px;
 }
 
+.treatment-section .arrow{
+    right: -28px;
+}
+
+.treatment-section .rating{
+    margin-right: 2rem;
+}
+
 .treatment-price {
     color: #000;
     text-align: right;
@@ -605,6 +615,7 @@ input, select{
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.84px;
+    margin-right: 6rem;
 }
 
 /* REGISTRATION */
@@ -1440,6 +1451,13 @@ select option {
     font-size: 17px;
 }
 
+.medical-pckg{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .medical-pckg p{
     line-height: 50px;
 }
@@ -1452,6 +1470,7 @@ select option {
     font-family: CamptonBold;
     text-decoration: none;
     color: #fff;
+    align-self: flex-start;
 }
 
 .section6{
@@ -1526,3 +1545,19 @@ select option {
 
 /* Scan QR */
 /* Shubham */
+
+/* DatePicker Start */
+
+.datepickerContainer{
+    /* position: relative; */
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover{
+    background-color: #4cdb06;
+}
+
+.daterangepicker td.in-range {
+    background-color: #4cdb060f;
+}
+
+/* DatePicker End */
