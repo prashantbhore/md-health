@@ -33,6 +33,8 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 
 <script src="{{URL::asset('admin\js\common\common_function.js')}}"></script>
 
@@ -42,7 +44,9 @@
 
 <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/datepicker-js@latest/datepicker.min.js"></script>
 
 
 
@@ -54,6 +58,15 @@
     $('select').niceSelect();
   });
 </script>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
 
 <script>
   var titleElement = document.getElementById("example_filter");

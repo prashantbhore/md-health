@@ -1,11 +1,6 @@
 @extends('front.layout.layout2')
 @section("content")
 
-<style>
-    body {
-        font-family: 'Campton';
-    }
-</style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
         <div class="row">
@@ -38,7 +33,7 @@
                     </h5>
                     <div class="card-body">
                         <div class="treatment-card df-start w-100 mb-3">
-                            <div class="row card-row">
+                            <div class="row card-row align-items-center">
                                 <div class="col-md-2 df-center px-0">
                                     <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                 </div>
@@ -52,13 +47,13 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="treatment-card df-start w-100 mb-3">
-                            <div class="row card-row">
+                            <div class="row card-row align-items-center">
                                 <div class="col-md-2 df-center px-0">
                                     <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                 </div>
@@ -72,13 +67,13 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="treatment-card df-start w-100 mb-3">
-                            <div class="row card-row">
+                            <div class="row card-row align-items-center">
                                 <div class="col-md-2 df-center px-0">
                                     <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                 </div>
@@ -92,13 +87,13 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="treatment-card df-start w-100 mb-3">
-                            <div class="row card-row">
+                            <div class="row card-row align-items-center">
                                 <div class="col-md-2 df-center px-0">
                                     <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                 </div>
@@ -112,7 +107,7 @@
                                     <div class="trmt-card-footer">
                                         <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                         <h6 class="fw-700">Order ID: #MD3726378</h6>
-                                        <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                        <a href="{{url('#')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,7 @@
 
+<!-- Main Stylesheet -->
+<link rel="stylesheet" href="{{URL::asset('front/assets/css/vendor.css')}}">
+
 <div class="card panel-left">
     <h5 class="card-header">Vendor Panel</h5>
     <div class="card-body">

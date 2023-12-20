@@ -52,7 +52,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="saleactive" role="tabpanel" aria-labelledby="saleactive-tab">
                                     <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row">
+                                        <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
                                                 <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                             </div>
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row">
+                                        <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
                                                 <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                             </div>
@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row">
+                                        <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
                                                 <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                             </div>
@@ -112,7 +112,7 @@
                                         </div>
                                     </div>
                                     <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row">
+                                        <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
                                                 <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                             </div>
@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                     <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row">
+                                        <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
                                                 <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                             </div>
@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="sale-completed" role="tabpanel" aria-labelledby="sale-completed-tab">
                                     <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row">
+                                        <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
                                                 <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                             </div>

@@ -11,30 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_provider_system_users', function (Blueprint $table) {
+        Schema::create('md_customer_package_reviews', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('medical_provider_id')->nullable();
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('role_id')->nullable();
-            $table->string('password')->nullable();
-
-
-            $table->bigInteger('customer_package_purchage_id')->nullable();
-            $table->bigInteger('custome_id')->nullable();
             $table->bigInteger('package_id')->nullable();
-            $table->string('report_path')->nullable();
-            $table->string('report_name')->nullable();
-
-
-         
+            $table->bigInteger('customer_id')->nullable();
+            $table->string('treatment_reviews')->nullable();
+            $table->string('acommodation_reviews')->nullable();
+            $table->string('transporatation_reviews')->nullable();
+            $table->string('behaviour_reviews')->nullable();
+            $table->string('provider_reviews')->nullable();
+            $table->string('extra_notes')->nullable();
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('modified_by')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
-
             $table->timestamps();
         });
     }
@@ -44,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('md_provider_system_users');
+        Schema::dropIfExists('md_customer_package_reviews');
     }
 };
