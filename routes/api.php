@@ -11,6 +11,7 @@ use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
 use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
+use App\Http\Controllers\api\MedicalProvider\AddSystemUserRole;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
@@ -313,6 +314,10 @@ Route::get('md-provider-transaction-total-completed', [PaymentController::class,
 //Provider Transaction total amount
 Route::get('md-provider-transaction-total-business-amount', [PaymentController::class,'total_business_amount']);
 
+
+
+//Provider Add System User
+Route::post('md-provider-add-system-user', [AddSystemUserRole::class,'add_system_user']);
 
 // });
 
