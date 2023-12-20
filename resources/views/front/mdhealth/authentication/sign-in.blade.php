@@ -46,9 +46,16 @@
                         <input type="text" id="number" class="form-control" placeholder="+91 ********">
             <div id="recaptcha-container"></div>
             <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button>
-       
+            <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
+            <div class="alert alert-success" id="successAuth" style="display: none;"></div>
+        
                     </form>
+                   
                 </div>
+                <form>
+                    <input type="text" id="verification" class="form-control" placeholder="Verification code">
+                    <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
+                </form>
             </div>
         </div>
     </div>
@@ -105,6 +112,32 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 </script> --}}
+<script>
+    window.onload = function() {
+    render();
+  };
 
+  function render() {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    recaptchaVerifier.render();
+  }
+
+  function sendOTP() {
+    var number = $("#number").val();
+    firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
+      window.confirmationResult = confirmationResult;
+      coderesult = confirmationResult;
+      localStorage.setItem('coderesult', JSON.stringify(coderesult));
+    //   sessionStorage.setItem('key', coderesult);
+      window.location.href = base_url + "/sms-code";
+      console.log(coderesult);
+      $("#successAuth").text("Message sent");
+      $("#successAuth").show();
+    }).catch(function(error) {
+      $("#error").text(error.message);
+      $("#error").show();
+    });
+  }
+</script>
 
 @endsection
