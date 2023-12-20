@@ -9,6 +9,7 @@ use Validator;
 use App\Traits\MediaTrait;
 use Str;
 use Auth;
+use Hash;
 use App\Models\CommonUserLoginTable;
 use App\Models\MedicalProviderRegistrater;
 
@@ -51,13 +52,10 @@ class AddSystemUserRole extends BaseController
 public function add_system_user(Request $request)
 {
     $request->validate([
-        'email' => 'required|email|unique:common_user_login_table,email|unique:medical_provider_registraters,email',
-        'phone' => 'required|unique:common_user_login_table,mobile_no|unique:medical_provider_registraters,mobile_no',
+        'name' => 'required|string',
+        'email' => 'required|email|unique:common_user_login,email|unique:md_medical_provider_register,email',
         'password' => 'required|min:6',
-        'company_name' => 'required',
-        'city_id' => 'required|integer',
-        'tax_no' => 'required',
-        'company_address' => 'required',
+        'roll_id' => 'required|integer',
     ]);
 
     $commonUserExist = CommonUserLoginTable::where('status', 'active')
