@@ -75,6 +75,16 @@ class CustomerPurchaseDetails extends Model
 
 
 
+    public function provider_logo()
+    {
+        return $this->belongsTo(MedicalProviderLogo::class, 'provider_id','medical_provider_id')
+            ->where('status', 'active');
+    }
+
+
+
+
+
  
 
 

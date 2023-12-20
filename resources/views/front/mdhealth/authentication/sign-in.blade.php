@@ -4,6 +4,10 @@
     .navbar {
         display: none;
     }
+    .error{
+        color: red !important;
+        font-size: 14px !important;
+    }
 </style>
 <div class="container py-100px df-center sign-in-form">
     <div class="card">
@@ -15,9 +19,10 @@
                 <h2 class="mb-0">Sign In to MD<span>health</span></h2>
                 <p>The device is not yours? Use private or incognito mode to log in.</p>
                 <div class="w-100 df-center">
-                    <form action="{{url('api/md-medical-provider-login')}}" method="post">
+                    <form action="{{url('user-login')}}" method="post" id="loginForm">
                         @csrf
                         <input type="hidden" name="platform_type" value="web">
+                        <input type="hidden" name="login_type" value="login">
                         <div class="mb-3">
                             <label for="E-mail" class="form-label">E-mail</label>
                             <input type="text" class="form-control" name="email" id="email" placeholder="E-mail">
@@ -38,6 +43,10 @@
                         <div class="text-center">
                             <a href="#" class="btn-text">Back to MDhealth.co</a>
                         </div>
+                        <input type="text" id="number" class="form-control" placeholder="+91 ********">
+            <div id="recaptcha-container"></div>
+            <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button>
+       
                     </form>
                 </div>
             </div>
@@ -46,5 +55,56 @@
 </div>
 @endsection
 @section('script')
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#loginForm').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true
+                }
+            },
+            messages: {
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                },
+                password: {
+                    required: "Please enter your password"
+                }
+            },
+            submitHandler: function(form) {
+                // Perform form submission if all validation passes
+                form.submit();
+            }
+        });
+    });
+</script>
+{{-- <script>
+ <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCi9vOusfNsRY2NgWUk8fDOjri9L8dALY8",
+    authDomain: "sweedesinew.firebaseapp.com",
+    databaseURL: "https://sweedesinew.firebaseio.com",
+    projectId: "sweedesinew",
+    storageBucket: "sweedesinew.appspot.com",
+    messagingSenderId: "537186381446",
+    appId: "1:537186381446:web:777955e71e5e61c8d62b07"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script> --}}
+
 
 @endsection
