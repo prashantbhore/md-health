@@ -31,6 +31,12 @@
                 </div>
                 <button class="btn btn-md btn-text w-75 mb-3" type="submit" style="height: 47px;">Sign In</button>
             </form>
+            <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
+            <form>
+                <input type="text" id="verification" class="form-control" placeholder="Verification code">
+                <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
+            </form>
+
                 <h6 class="mb-0 d-flex align-items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <g clip-path="url(#clip0_0_28401)">
@@ -74,6 +80,9 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
     $(document).ready(function() {
+// var coderesult = JSON.parse(localStorage.getItem('coderesult'));
+// console.log(coderesult);
+
     $('#otpForm').validate({
         rules: {
             "otp[]": {
@@ -112,6 +121,22 @@
 
 </script>
 
-
+<script>
+     function verify() {
+    var code = $("#verification").val();
+    var coderesult = JSON.parse(localStorage.getItem('coderesult'));
+    // var coderesult = sessionStorage.getItem('key');
+    console.log(coderesult);
+    coderesult.confirm(code).then(function(result) {
+      var user = result.user;
+      console.log(user);
+      $("#successOtpAuth").text("Auth is successful");
+      $("#successOtpAuth").show();
+    }).catch(function(error) {
+      $("#error").text(error.message);
+      $("#error").show();
+    });
+  }
+</script>
 
 @endsection
