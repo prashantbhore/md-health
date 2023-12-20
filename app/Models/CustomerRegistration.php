@@ -15,7 +15,7 @@ class CustomerRegistration extends Authenticatable
     // use HasFactory;
     // protected $table = 'md_customer_registration';
     use HasFactory, Notifiable, HasApiTokens;
-    protected $guard = 'md_health_admins';
+    protected $guard = 'md_customer_registration';
     protected $table = 'md_customer_registration';
 
     protected $fillable = [

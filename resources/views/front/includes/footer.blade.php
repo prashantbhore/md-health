@@ -61,3 +61,56 @@
              </div>
          </div>
  </footer>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+ <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+
+ <script>
+     var firebaseConfig = {
+         apiKey: "AIzaSyCi9vOusfNsRY2NgWUk8fDOjri9L8dALY8",
+         authDomain: "sweedesinew.firebaseapp.com",
+         databaseURL: "https://sweedesinew.firebaseio.com",
+         projectId: "sweedesinew",
+         storageBucket: "sweedesinew.appspot.com",
+         messagingSenderId: "537186381446",
+         appId: "1:537186381446:web:777955e71e5e61c8d62b07"
+     };
+     
+     window.onload = function() {
+         render();
+         firebase.initializeApp(firebaseConfig);
+     };
+
+     function render() {
+         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+         recaptchaVerifier.render();
+     }
+
+     function sendOTP() {
+         var number = $("#number").val();
+        //  alert(number);
+         firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
+             window.confirmationResult = confirmationResult;
+             coderesult = confirmationResult;
+             console.log(coderesult);
+             $("#successAuth").text("Message sent");
+             $("#successAuth").show();
+         }).catch(function(error) {
+             $("#error").text(error.message);
+             $("#error").show();
+         });
+     }
+
+     function verify() {
+         var code = $("#verification").val();
+         coderesult.confirm(code).then(function(result) {
+             var user = result.user;
+             console.log(user);
+             $("#successOtpAuth").text("Auth is successful");
+             $("#successOtpAuth").show();
+         }).catch(function(error) {
+             $("#error").text(error.message);
+             $("#error").show();
+         });
+     }
+ </script>
