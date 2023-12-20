@@ -25,6 +25,10 @@ return new class extends Migration
             $table->string('modified_ip_address')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('modified_by')->nullable();
+            $table->string('payment_percentage')->nullable();
+            $table->string('paid_amount')->nullable();
+            $table->string('pending_payment')->nullable();
+            $table->enum('payment_status', ['pending', 'completed'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->timestamps();
         });
