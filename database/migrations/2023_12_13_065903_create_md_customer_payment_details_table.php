@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_customer_payment_details', function (Blueprint $table) {
+        Schema::create('md_customer_payment_details', function (Blueprint $table){
             $table->id();
             $table->bigInteger('customer_id')->nullable();
             $table->bigInteger('order_id')->nullable();
+            $table->bigInteger('package_id')->nullable();
+            $table->bigInteger('provider_id')->nullable();
             $table->string('purchase_type')->nullable();
             $table->string('card_name')->nullable();
             $table->string('card_no')->nullable();
