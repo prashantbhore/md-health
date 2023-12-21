@@ -635,11 +635,7 @@ public function packages_view_on_search_result(Request $request)
         $purchase_details['paid_amount'] = $request->pending_amount;
         $purchase_details['pending_payment'] = $request->package_total_price;
         $package_percentage_price=$request->package_percentage_price;
-        // if($package_percentage_price=='100%'){
-        //     $purchase_details['purchase_type'] = 'completed';
-        // }else{
-            $purchase_details['purchase_type'] = 'pending';
-        // }
+        $purchase_details['purchase_type'] = 'pending';
         $purchase_details['created_by'] = 1;
 
         $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
@@ -665,25 +661,6 @@ public function packages_view_on_search_result(Request $request)
             }
         }
 
-        // if(!empty($update_unique_id)){
-        //     $payment_details = [];
-        //     $payment_details['order_id'] = $purchase_details_data->id;
-        //     $payment_details['customer_id'] = $purchase_details_data->customer_id;
-        //     $payment_details['card_name'] = $request->card_name;
-        //     $payment_details['card_no'] = $request->card_no;
-        //     $payment_details['card_expiry_date'] = $request->card_expiry_date;
-        //     $payment_details['card_cvv'] = $request->card_cvv;
-        //     $payment_details['payment_percentage'] = $request->package_percentage_price;
-        //     $payment_details['paid_amount'] = $request->pending_amount;
-        //     $payment_details['pending_payment'] = $request->package_total_price;
-        //     if ($package_percentage_price == '100%') {
-        //         $payment_details['payment_status'] = 'completed';
-        //     } else {
-        //         $payment_details['payment_status'] = 'pending';
-        //     }
-        //     $payment_details = CustomerPaymentDetails::create($payment_details);
-        // }
-
         // ... (existing code)
         if (!empty($update_unique_id)) {
             $payment_details_pending = [];
@@ -695,7 +672,7 @@ public function packages_view_on_search_result(Request $request)
             $payment_details_pending['card_cvv'] = $request->card_cvv;
             $payment_details_pending['payment_percentage'] = $purchase_details_data->payment_percentage;
             $payment_details_pending['paid_amount'] = $purchase_details_data->paid_amount;
-            $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
+            // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
             $payment_details_pending['payment_status'] = 'completed';
 
             // Calculate remaining amount after 'pending' payment
@@ -704,8 +681,8 @@ public function packages_view_on_search_result(Request $request)
             $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
 
             // Update 'completed' entry with remaining amount and status
-            $payment_details_completed['paid_amount'] = $remaining_amount;
-            $payment_details_completed['pending_payment'] = 0; // No pending amount for completed
+            // $payment_details_completed['paid_amount'] = $remaining_amount;
+            $payment_details_completed['pending_payment'] = $remaining_amount; // No pending amount for completed
             $payment_details_completed['payment_status'] = 'pending';
 
             $payment_pending = CustomerPaymentDetails::create($payment_details_pending);
@@ -1262,11 +1239,17 @@ public function packages_view_on_search_result(Request $request)
 
         $CustomerPurchaseDetails=[];
 
-        $CustomerPurchaseDetails['package_payment_plan'] = $request->discount_amount;
-        $CustomerPurchaseDetails['package_total_price'] = $request->pending_amount;
+        $CustomerPurchaseDetails['pending_payment'] = $request->discount_amount;
+        $CustomerPurchaseDetails['paid_amount'] = $request->pending_amount;
+        $CustomerPurchaseDetails['purchase_type'] = $request->purchase_type;
+
         $CustomerPurchaseDetails['created_by'] =1;
 
         $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->id)->update($CustomerPurchaseDetails);
+
+        if(!empty($CustomerPurchaseDetails)){
+            $CustomerPayamentDetails=CustomerPaymentDetails::where('order_id', $request->id)->update($CustomerPurchaseDetails);
+        }
 
         if (!empty($CustomerPurchaseDetails)) {
             return response()->json([

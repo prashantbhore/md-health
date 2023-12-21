@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\api\BaseController as BaseController;
-
 use App\Models\MedicalProviderLicense;
 use App\Models\MedicalProviderLogo;
 use App\Models\CustomerLogs;
