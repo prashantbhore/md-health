@@ -218,8 +218,8 @@
                     </div>
                 </div>
             </div>
-    
-    
+
+
         </div>
     </div>
 
@@ -253,8 +253,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-=======
     </div>
 
     <!-- SECTION 6 -->
@@ -267,7 +265,6 @@
             </div>
         </div>
         <img class="position-absolute" src="{{('front/assets/img/flight.png')}}" alt="">
->>>>>>> ffb76bd0d1fcee5591212272fdec351354b6a8d2
     </div>
         {{-- Make Payment Model box--}}
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

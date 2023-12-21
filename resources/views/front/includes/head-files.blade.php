@@ -34,19 +34,16 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<<<<<<< HEAD
 
    {{-- Md Booking --}}
-   <link rel="stylesheet" href="{{URL::asset('front/assets/css/md-booking.css')}}">
    <link href="https://cdn.jsdelivr.net/npm/datepicker-js@latest/datepicker.min.css" rel="stylesheet">
 
    {{-- Md Food --}}
    <link rel="stylesheet" href="{{URL::asset('front/assets/css/md-food.css')}}">
-=======
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-   
->>>>>>> ffb76bd0d1fcee5591212272fdec351354b6a8d2
+   <link rel="stylesheet" href="{{URL::asset('front/assets/css/md-booking.css')}}">
+
     <title>MDhealth</title>
 
 </head>
