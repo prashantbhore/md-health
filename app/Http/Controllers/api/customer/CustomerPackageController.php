@@ -600,11 +600,9 @@ public function packages_view_on_search_result(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
-            // 'package_treatment_price' => 'required',
-            // 'package_hotel_price' => 'required',
-            // 'package_transportation_price' => 'required',
-            // 'package_percentage_price' => 'required',
-            // 'package_total_price' => 'required',
+            'pending_amount' => 'required',
+            'package_percentage_price' => 'required',
+            'package_total_price' => 'required',
             'payment_method' => 'required',
             'platform_type' => 'required',
         ]);
