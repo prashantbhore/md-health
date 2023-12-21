@@ -26,9 +26,8 @@ return new class extends Migration
             $table->string('package_treatment_price')->nullable();
             $table->string('package_hotel_price')->nullable();
             $table->string('package_transportation_price')->nullable();
-            $table->string('package_total_price')->nullable();
             $table->string('treatment_start_date')->nullable();
-            $table->string('package_payment_plan')->nullable();
+            $table->string('package_total_price')->nullable();
             $table->string('payment_percentage')->nullable();
             $table->string('paid_amount')->nullable();
             $table->string('pending_payment')->nullable();
