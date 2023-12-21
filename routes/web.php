@@ -184,7 +184,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
-
     // Route::view('edit-admins', 'admin/admins/edit-admins');
 
     // MLM
@@ -314,7 +313,7 @@ Route::controller(CommonLoginController::class)->group(function () {
     Route::post('/otp-verify','otp_verify_for_register');
     Route::post('/email-to-mobile','email_to_mobile');
     Route::post('/email-password-exist','email_password_exist');
-    
+
  });
 // AUTHENTICATION
 
@@ -378,10 +377,18 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 
 
-// MD BOOKING PAGE
-Route::view('md-booking-home-page', 'front/mdhealth/md-booking-home-page');
-//MD FOOD PAGE
-Route::view('md-food-home-page', 'front/mdhealth/md-food-page');
+// MD BOOKING PAGE KD
+Route::view('md-booking-home-page', 'front/mdhealth/md-booking/md-booking-home-page');
+Route::view('md-booking-search-hotel-page', 'front/mdhealth/md-booking/md-booking-search-hotel');
+Route::view('md-booking-search-flight-page', 'front/mdhealth/md-booking/md-booking-search-flight');
+Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-booking-search-vehicle');
+//MD FOOD PAGE KD
+Route::view('md-food-home-page', 'front/mdhealth/md-food/md-food-page');
+Route::view('md-food-search-page', 'front/mdhealth/md-food/md-food-search');
+Route::view('md-food-search-view', 'front/mdhealth/md-food/md-food-view');
+
+
+
 // Shubham
 // Vendor Panel
 Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
@@ -397,3 +404,6 @@ Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_s
 Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
 Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
 Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
+
+// Medical Provider Panel
+Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
