@@ -175,9 +175,6 @@ public function edit_system_user(Request $request)
     }
 }
 
-
-
-
 public function delete_system_user(Request $request)
 {
     $validator = Validator::make($request->all(), [
