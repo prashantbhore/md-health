@@ -298,19 +298,18 @@ Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
 #SMS Code
 Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // Route::post('md-register-medical-provider', [RegistrationController::class, 'md_register_medical_provider']);
-Route::controller(MedicalProviderRegistrationController::class)->group(function (){
+Route::controller(MedicalProviderRegistrationController::class)->group(function () {
     Route::get('user-account', 'index');
-    Route::post('/md-register-medical-provider','md_register_medical_provider');
-    Route::get('/logout','logout');
-   
- });
-Route::controller(UserRegistrationController::class)->group(function (){
+    Route::post('/md-register-medical-provider', 'md_register_medical_provider');
+    Route::get('/logout', 'logout');
+});
+Route::controller(UserRegistrationController::class)->group(function () {
     // Route::get('user-account', 'index');
-    Route::post('/md-customer-register','customer_register');
+    Route::post('/md-customer-register', 'customer_register');
     // Route::get('/logout','logout');
-   
- });
-Route::controller(CommonLoginController::class)->group(function (){
+
+});
+Route::controller(CommonLoginController::class)->group(function () {
     Route::post('user-login', 'user_login');
     Route::post('/otp-verify','otp_verify_for_register');
     Route::post('/email-to-mobile','email_to_mobile');
@@ -359,11 +358,16 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 });
 // MEDICAL PROVIDER
 #Dashboard
-// Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
+Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
 #Treatment Details
 Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
 Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');
 Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-packages-view');
+Route::view('medical-account', 'front/mdhealth/medical-provider/account');
+Route::view('medical-other-services', 'front/mdhealth/medical-provider/other-services');
+Route::view('add-acommodition', 'front/mdhealth/medical-provider/add-acommodition');
+Route::view('add-new-vehical', 'front/mdhealth/medical-provider/add-new-vehical');
+Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
@@ -393,6 +397,3 @@ Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_s
 Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
 Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
 Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
-
-// Medical Provider Panel
-Route::view('medical-dashboard', 'front/mdhealth/medical-provider');

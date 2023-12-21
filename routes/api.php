@@ -325,6 +325,18 @@ Route::get('md-provider-transaction-total-business-amount', [PaymentController::
 //Provider Add System User
 Route::post('md-provider-add-system-user', [AddSystemUserRole::class,'add_system_user']);
 
+//Provider System User List
+Route::get('md-provider-system-user-list', [AddSystemUserRole::class,'provider_system_user_list']);
+
+//Provider System User Edit
+Route::post('md-provider-system-user-edit', [AddSystemUserRole::class,'edit_system_user']);
+
+
+//Provider System User delete
+Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_system_user']);
+
+
+
 // });
 
 
