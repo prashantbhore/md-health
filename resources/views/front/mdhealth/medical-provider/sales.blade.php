@@ -36,7 +36,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="sale-inprogress-tab" data-bs-toggle="tab" data-bs-target="#sale-inprogress" type="button"
-                                    role="tab" aria-controls="sale-inprogress" aria-selected="true">In Progress</button>
+                                    role="tab" aria-controls="sale-inprogress" aria-selected="true">Completed</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="sale-cancelled-tab" data-bs-toggle="tab"
@@ -51,10 +51,9 @@
                             </div>
                             <div class="list-div">
                                 <select name="" id="">
-                                    <option value="">All Orders</option>
-                                    <option value="">In Progress</option>
-                                    <option value="">Pending</option>
-                                    <option value="">Shipping</option>
+                                    <option value="">List for Date</option>
+                                    <option value="">List for Price</option>
+                                    <option value="">List for Distance</option>
                                 </select>
                             </div>
                         </div>
@@ -77,7 +76,7 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                                 
-                                                <a href="{{url('food-provider-view')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +96,7 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
                                                 
-                                                <a href="{{url('food-provider-view')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +116,7 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
                                                 
-                                                <a href="{{url('food-provider-view')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +136,7 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
                                                 
-                                                <a href="{{url('food-provider-view')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -157,7 +156,7 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
                                                 
-                                                <a href="{{url('food-provider-view')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -165,27 +164,21 @@
                             </div>
                             <div class="tab-pane fade" id="sale-inprogress" role="tabpanel" aria-labelledby="sale-inprogress-tab">
                                 <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center align-items-center">
+                                    <div class="row card-row align-items-center">
                                         <div class="col-md-2 df-center px-0">
                                             <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                         </div>
-                                        <div class="col-md-3 justify-content-start ps-0">
+                                        <div class="col-md-6 justify-content-start ps-0">
                                             <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Ali Danish</h5>
+                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="active">Completed</span></h5>
                                                 <h5 class="mb-0 fw-500">Raju Singh</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 justify-content-start ps-0 text-center">
-                                            <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title justify-content-center"><span class="in-progress">In Progress</span></h5>
-                                                <p class="remaining-time">Remaining Time <b>6 Days</b></p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                                 
-                                                <a href="{{url('food-provider-view')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -207,14 +200,33 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
                                                 
-                                                <a href="{{url('food-provider-view')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="sale-cancelled" role="tabpanel" aria-labelledby="sale-cancelled-tab">
-                                <h1>Shubham 2</h1>
+                                <div class="treatment-card df-start w-100 mb-3">
+                                    <div class="row card-row align-items-center">
+                                        <div class="col-md-2 df-center px-0">
+                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                                        </div>
+                                        <div class="col-md-6 justify-content-start ps-0">
+                                            <div class="trmt-card-body">
+                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="cancel">Cancel</span></h5>
+                                                <h5 class="mb-0 fw-500">Raju Singh</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                            <div class="trmt-card-footer">
+                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
+                                                
+                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

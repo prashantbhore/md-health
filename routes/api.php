@@ -11,6 +11,7 @@ use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
 use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
+use App\Http\Controllers\api\MedicalProvider\AddSystemUserRole;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
@@ -180,7 +181,7 @@ Route::post('md-customer-package-search-filter', [CustomerPackageController::cla
 //customer-package-purchase-details
 Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 
-//md-change-patient-information
+//change-patient-information
 Route::post('md-change-patient-information', [CustomerPackageController::class, 'change_patient_information']);
 
 //change-patient-information-for-myself
@@ -192,8 +193,14 @@ Route::post('md-customer-purchase-package', [CustomerPackageController::class, '
 //customer-purchase-package-active-list
 Route::get('md-customer-purchase-package-active-list', [CustomerPackageController::class, 'customer_purchase_package_active_list']);
 
+//customer-purchase-package-active-list-search
+Route::get('md-customer-purchase-package-active-list-search', [CustomerPackageController::class, 'customer_purchase_package_active_list_search']);
+
 //customer-purchase-package-completed-list
 Route::get('md-customer-purchase-package-completed-list', [CustomerPackageController::class, 'customer_purchase_package_completed_list']);
+
+//customer-purchase-package-completed-list-search
+Route::get('md-customer-purchase-package-completed-list-search', [CustomerPackageController::class, 'customer_purchase_package_completed_list_search']);
 
 //customer-purchase-package-cancelled-list
 Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
@@ -307,7 +314,28 @@ Route::get('md-provider-transaction-total-pending', [PaymentController::class,'t
 
 
 //Provider Transaction total completed
-Route::get('md-provider-transaction-total-completed', [PaymentController::class,'total_payment_amount']);
+Route::get('md-provider-transaction-total-completed', [PaymentController::class,'total_paid_amount']);
+
+
+//Provider Transaction total amount
+Route::get('md-provider-transaction-total-business-amount', [PaymentController::class,'total_business_amount']);
+
+
+
+//Provider Add System User
+Route::post('md-provider-add-system-user', [AddSystemUserRole::class,'add_system_user']);
+
+//Provider System User List
+Route::get('md-provider-system-user-list', [AddSystemUserRole::class,'provider_system_user_list']);
+
+//Provider System User Edit
+Route::post('md-provider-system-user-edit', [AddSystemUserRole::class,'edit_system_user']);
+
+
+//Provider System User delete
+Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_system_user']);
+
+
 
 // });
 

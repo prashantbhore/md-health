@@ -4,7 +4,7 @@
     }
 </style>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar" style="background-color: black;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
     <div class="container">
         <a class="navbar-brand" href="{{URL('admin/dashboard')}}">
             <img src="{{URL::asset('admin/assets/img/MDHealth_light.svg')}}" alt="" />
@@ -14,7 +14,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
-                <li class="nav-item"><a href="" class="nav-link">Home Service</a></li>
+                <li class="nav-item"><a href="{{url('home-service')}}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
@@ -29,7 +29,8 @@
 
                 <!-- This dropdown appears after user login [User Profile] -->
                 <li class="nav-item dropdown ms-auto">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span class="text-green me-1">MDhealth</span> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span class="text-green me-1">MDHealth</span> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                        {{-- {{session('user')->company_name}} --}}
                             <path d="M1 1.00042L6.5 6.35449L12 1.00042" stroke="#4CDB06" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg></a>
                     <ul class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">

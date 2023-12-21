@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class CommonUserLoginTable extends Model
+
+class CommonUserLoginTable extends Authenticatable
 {
     use HasFactory;
+    protected $guard = 'commonuser';
     protected $table = 'common_user_login';
     protected $fillable = [
         'user_id',
