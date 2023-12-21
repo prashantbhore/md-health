@@ -313,7 +313,8 @@ Route::controller(UserRegistrationController::class)->group(function (){
 Route::controller(CommonLoginController::class)->group(function (){
     Route::post('user-login', 'user_login');
     Route::post('/otp-verify','otp_verify_for_register');
-//     // Route::get('/logout','logout');
+    Route::post('/email-to-mobile','email_to_mobile');
+    Route::post('/email-password-exist','email_password_exist');
     
  });
 // AUTHENTICATION

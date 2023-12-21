@@ -9,6 +9,7 @@ use App\Models\MedicalProviderRegistrater;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
+use Hash;
 
 class CommonLoginController extends Controller
 {
@@ -103,6 +104,28 @@ class CommonLoginController extends Controller
         }
     }
 
+public function email_to_mobile(Request $request){
+ $mobile_no=CommonUserLoginTable::where('email', $request->email)->select('mobile_no')->first();
+ if(!empty($mobile_no)){
+    return $mobile_no;
+ }
+//  else{
+//     return false;
+//  }
+}
+public function email_password_exist(Request $request){
+    $user_exist = CommonUserLoginTable::where('email', $request->email)->first();
+
+    // Check if user exists and verify the password using the Hash::check() method
+    if(!empty($user_exist) && Hash::check($request->password, $user_exist->password)){
+        // dd($user_exist);
+        return response()->json(['user_exist' => $user_exist]); // Return user data as JSON response
+    } 
+    // else {
+    //     return response()->json(['user_exist' => null]); // Return null if user doesn't exist or credentials are incorrect
+    // }
+}
+
 
 
 
@@ -110,7 +133,8 @@ class CommonLoginController extends Controller
 
     public function otp_verify_for_register(request $request)
     {
-        $otpverify = implode('', $request->input('otp'));
+        // dd($request);
+        // $otpverify = implode('', $request->input('otp'));
         $user_data = array(
             'email' => $request->get('email'),
             'password' => $request->get('password')
@@ -201,7 +225,7 @@ class CommonLoginController extends Controller
 
                     if ($login_type == 'login') {
                         $otpcheck = CustomerRegistration::where('id', $providers->id)
-                            ->where('Login_otp', $otpverify)
+                            // ->where('Login_otp', $otpverify)
                             ->where('status', 'active')
                             // ->where('otp_expiring_time', '>=', now())
                             ->first();
@@ -215,18 +239,30 @@ class CommonLoginController extends Controller
                             Session::put('MDCustomer*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
-                            return redirect('/user-profile')->with('success', "Login successfully.");
+                            // return redirect('/user-profile')->with('success', "Login successfully.");
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Login successfully.',
+                                'url' => '/user-profile',
+                                // 'mobile_no' => $provider_id->mobile_no,
+                                // 'company_name' => $provider_id->company_name,
+                            ] );
                         } else {
-                            return redirect('sms-code')->with([
-                                'error' => "OTP does not match.",
-                                'email' => $request->email,
-                                'password' => $request->password,
-                            ]);
+                            // return redirect('sms-code')->with([
+                            //     'error' => "OTP does not match.",
+                            //     'email' => $request->email,
+                            //     'password' => $request->password,
+                            // ]);
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Credencials not match',
+                                'url' => '/sign-in-web',
+                            ] );
                         }
                     } else {
 
                         $otpcheck = CustomerRegistration::where('id', $providers->id)
-                            ->where('registration_otp', $otpverify)
+                            // ->where('registration_otp', $otpverify)
                             ->where('status', 'active')
                             // ->where('otp_expiring_time', '>=', now())
                             ->first();
@@ -240,13 +276,23 @@ class CommonLoginController extends Controller
                             Session::put('MDCustomer*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
-                            return redirect('/user-profile')->with('success', "Profile created successfully.");
+                            // return redirect('/user-profile')->with('success', "Profile created successfully.");
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Profile created successfully.',
+                                'url' => '/user-profile',
+                            ] );
                         } else {
-                            return redirect('sms-code')->with([
-                                'error' => "OTP does not match.",
-                                'email' => $request->email,
-                                'password' => $request->password,
-                            ]);
+                            // return redirect('sms-code')->with([
+                            //     'error' => "OTP does not match.",
+                            //     'email' => $request->email,
+                            //     'password' => $request->password,
+                            // ]);
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Credencials not match',
+                                'url' => '/sign-in-web',
+                            ] );
                         }
 
                     }
