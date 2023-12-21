@@ -13,7 +13,7 @@
                 <a class="nav-link mpPackages" href="{{url('medical-packages')}}">Packages</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="#">Payment Information</a>
+                <a class="nav-link " href="{{url('payment-information')}}">Payment Information</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Messages</a>
@@ -22,10 +22,10 @@
                 <a class="nav-link" href="#">Roles</a>
             </li>
             <li class="nav-item mpOtherServicesLi">
-                <a class="nav-link mpOtherServices" href="{{url('other-services')}}">Other Services</a>
+                <a class="nav-link mpOtherServices" href="{{url('medical-other-services')}}">Other Services</a>
             </li>
             <li class="nav-item mpAccountLi">
-                <a class="nav-link mpAccount" href="{{url('medical-other-services')}}">Account</a>
+                <a class="nav-link mpAccount" href="{{url('medical-account')}}">Account</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reports</a>

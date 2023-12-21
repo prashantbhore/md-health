@@ -1373,6 +1373,19 @@ select option {
     padding: 5px 35px;
 
 }
+.treatment-card .btn-active {
+    width: 130px;
+    height: 24px;
+    border-radius: 2px;
+    background: #4CDB06;
+    color: #fff;
+    text-align: center;
+    font-size: 10px;
+    /* font-weight: 700; */
+    letter-spacing: 0.1px;
+    padding: 5px 35px;
+    text-decoration: none;
+}
 
 .dashboard-card-title span.in-progress {
     width: 130px;

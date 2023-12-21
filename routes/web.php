@@ -364,6 +364,9 @@ Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');
 Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-packages-view');
 Route::view('medical-account', 'front/mdhealth/medical-provider/account');
 Route::view('medical-other-services', 'front/mdhealth/medical-provider/other-services');
+Route::view('add-acommodition', 'front/mdhealth/medical-provider/add-acommodition');
+Route::view('add-new-vehical', 'front/mdhealth/medical-provider/add-new-vehical');
+Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
