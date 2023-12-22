@@ -1,4 +1,3 @@
-
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="{{URL::asset('front/assets/css/vendor.css')}}">
 
@@ -18,8 +17,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Payment Information</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
+            <li class="nav-item mpAccountLi">
+                <a class="nav-link mpAccount" href="{{url('medical-account')}}">Account</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reports</a>

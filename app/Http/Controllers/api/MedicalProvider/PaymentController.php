@@ -10,6 +10,7 @@ use Validator;
 use App\Traits\MediaTrait;
 use App\Models\MedicalProviderAccountDetails;
 use App\Models\MedicalProviderLogo;
+use App\Models\CustomerPaymentDetails;
 use Str;
 use Auth;
 use Storage;
@@ -62,47 +63,45 @@ class PaymentController extends BaseController{
         }
     }
 
+   
+
     public function transaction_list_view(){
+
         //$provider_id=Auth::user()->id;
         $provider_id = 1; // Replace this with the actual provider ID
     
-        $customer_transaction_details = CustomerPurchaseDetails::where('status', 'active')
-            ->where('provider_id', $provider_id)->with('provider_logo')
-            ->get();
+        $customer_paymenty_details = CustomerPaymentDetails::where('provider_id', $provider_id)->with(['provider_logo','purchage'])->get();  
     
-        if ($customer_transaction_details->isNotEmpty()) {
+        if ($customer_paymenty_details->isNotEmpty()) {
             $order_details = [];
     
-            foreach ($customer_transaction_details as $transaction) {
-                $order_id = !empty($transaction->order_id) ? $transaction->order_id : '';
-                $provider_logo = !empty($transaction->provider_logo->company_logo_image_path) ?url(Storage::url($transaction->provider_logo->company_logo_image_path)) : '';
-    
-                $completed_payments = !empty($transaction->paid_amount) ? $transaction->paid_amount : 0;
-                $pending_payments = !empty($transaction->pending_payment) ? $transaction->pending_payment : 0;
-    
-           
-                if (!isset($order_details[$transaction->id])) {
-                    $order_details[$transaction->id] = [
-                        'transaction_id' => $transaction->id,
-                        'order_id' => $order_id,
-                        'provider_logo' => $provider_logo,
-                        'completed_amount' => 0,
-                        'pending_amount' => 0,
-                    ];
+            foreach ($customer_paymenty_details as $transaction){
+                $order_id = !empty($transaction->purchage->order_id) ? $transaction->purchage->order_id : '';
+                $provider_logo = !empty($transaction->provider_logo->company_logo_image_path) ? url(Storage::url($transaction->provider_logo->company_logo_image_path)) : '';
+                $payments_status = !empty($transaction->payment_status) ? $transaction->payment_status: 0;
+                
+                if($payments_status=='completed'){
+                $amount = !empty($transaction->paid_amount) ? $transaction->paid_amount : 0;
                 }
-    
-             
-                $order_details[$transaction->id]['completed_amount'] += $completed_payments;
-                $order_details[$transaction->id]['pending_amount'] += $pending_payments;
-    
+
+                if($payments_status=='pending'){
+                    $amount = !empty($transaction->pending_payment) ? $transaction->pending_payment : 0;
+                }
+                 
+                // Create a row for completed payment
+                $order_details[] = [
+                  //  'transaction_id' => $transaction->id,
+                    'payment_id' => $order_id,
+                    'provider_logo' => $provider_logo,
+                    'amount' => $amount,
+                    'payment_status' =>  $payments_status,
+                ];
             }
-    
-            $formatted_order_details = array_values($order_details);
     
             return response()->json([
                 'status' => 200,
                 'message' => 'Transaction list found',
-                'order_details' => $formatted_order_details,
+                'order_details' => $order_details,
             ]);
         } else {
             return response()->json([
@@ -111,9 +110,7 @@ class PaymentController extends BaseController{
             ]);
         }
     }
-
-
-
+    
 
 
     public function search_transactions(Request $request) {
@@ -134,7 +131,7 @@ class PaymentController extends BaseController{
     
         $search_query = $request->search_query;
     
-        $customer_transaction_details = CustomerPurchaseDetails::where('status', 'active')
+        $customer_transaction_details = CustomerPaymentDetails::where('status', 'active')
             ->where('provider_id', $provider_id)
             ->where(function ($query) use ($search_query){
                 $query->where('order_id', 'like', "%$search_query%")
