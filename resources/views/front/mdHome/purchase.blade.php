@@ -10,104 +10,30 @@
             <div class="packageResult rounded mb-3">
                 <div class="flex-grow-1">
                     <div class="d-flex gap-2 justify-content-between align-items-center">
-                        <p class="mb-0 fs-5 camptonBold lh-base">Heart Valve Replacement Surgery</p>
-                        <p class="mb-0 fs-6 camptonBold text-green">Treatment Price</p>
+                        <p class="mb-0 fs-5 camptonBold lh-base">Home Patient Service</p>
+                        <p class="mb-0 fs-6 camptonBold text-green">Service Price</p>
                     </div>
                     <div class="d-flex gap-5 justify-content-between">
                         <div class="d-flex align-items-center gap-2">
-                            <img src="{{('front/assets/img/Location.svg')}}" alt="">
-                            <p class="mb-0 lctn">Besiktas/Istanbul</p>
+                            <p class="mb-0 lctn">Service Provider Name</p>
                         </div>
                         <p class="mb-0 fs-5 camptonBold lh-base">32.430,00 ₺ <span class="smallFont">(3.679,00 ₺)</span></p>
+                    </div>
+                    <div class="greenBorder pt-3 mb-4"></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="camptonBold vSmallFont">Appointment Date: <span class="camptonBook">12/12/2023</span></p>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{('front/assets/img/change.svg')}}" alt="">
+                            <p class="mb-1 boldRed smallFont"><u>Change Appointment Date</u></p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center mb-3">
                 <img src="{{('front/assets/img/order.png')}}" alt="">
             </div>
-            <div class="packageResult rounded mb-3">
-                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                    <label class="" >
-                        <input type="checkbox" name="checkbox" />
-                    </label>
-                    <div class="flex-grow-1">
-                        <div class="d-flex gap-2 justify-content-between align-items-center">
-                            <p class="mb-0 fs-5 camptonBold lh-base">Accommodation</p>
-                            <p class="mb-0 fs-6 camptonBold text-green">Per Night Price</p>
-                        </div>
-                        <div class="d-flex gap-5 justify-content-between">
-                            <div class="d-flex align-items-center gap-2">
-                                <p class="mb-0 lctn">3 Stars Hotel</p>
-                            </div>
-                            <p class="mb-0 fs-5 camptonBold lh-base">1.430,00 ₺ <span class="smallFont">(3.679,0 ₺)</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="packageResult rounded mb-3">
-                <div class="flex-grow-1 d-flex align-items-center gap-2">
-                    <label class="" >
-                        <input type="checkbox" name="checkbox" />
-                    </label>
-                    <div class="flex-grow-1">
-                        <div class="d-flex gap-2 justify-content-between align-items-center">
-                            <p class="mb-0 fs-5 camptonBold lh-base">Transportation</p>
-                            <p class="mb-0 fs-6 camptonBold text-green">Transportation Price</p>
-                        </div>
-                        <div class="d-flex gap-5 justify-content-between">
-                            <div class="d-flex align-items-center gap-2">
-                                <p class="mb-0 lctn">Mercedes Vito or Volkswagen Transporter <br/><span class="camptonBold fst-italic">*Economy Class Vehicle</span></p>
-                            </div>
-                            <p class="mb-0 fs-5 camptonBold lh-base">7.360,00 ₺ <span class="smallFont">(11.679,0 ₺)</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="greenBorder pt-3 mb-4"></div>
-            <div class="mb-4 discount-sctn">
-                <div class="d-flex justify-content-between mb-3">
-                    <p class="mb-0 fs-6 camptonBold text-green">Select Your Payment Plan</p>
-                    <p class="mb-0 fs-6 camptonBold text-green">Total Price <span style="color: #000;">34.560,00 ₺</span></p>
-                </div>
-                <div>
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
-                            <input type="radio" value="20" name="discount" checked />
-                        </label>
-                        <div class="d-flex align-items-baseline gap-2">
-                            <p class="mb-0 fs-5 camptonBold lh-base">20% <span class="smallFont">(3.679,0 ₺)</span></p>
-                            <p class="vSmallFont boldRed mb-0">Min. Requirement</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <label class="smallFont camptonBold d-flex align-items-center gap-1">
-                        <input type="radio" value="30" name="discount" />
-                    </label>
-                    <div class="d-flex align-items-baseline gap-2 ">
-                        <p class="mb-0 fs-5 camptonBold lh-base">30% <span class="smallFont">(5.679,0 ₺)</span></p>
-                        <p class="vSmallFont text-green camptonBold mb-0">Min. Requirement</p>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <label class="smallFont camptonBold d-flex align-items-center gap-1">
-                        <input type="radio" value="50" name="discount" />
-                    </label>
-                    <div class="d-flex align-items-baseline gap-2 ">
-                        <p class="mb-0 fs-5 camptonBold lh-base">50% <span class="smallFont">(9.679,0 ₺)</span></p>
-                        <p class="vSmallFont text-green camptonBold mb-0">Min. Requirement</p>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <label class="smallFont camptonBold d-flex align-items-center gap-1">
-                        <input type="radio" value="100" name="discount" />
-                    </label>
-                    <div class="d-flex align-items-baseline gap-2 ">
-                        <p class="mb-0 fs-5 camptonBold lh-base">100% <span class="smallFont">(19.479,0 ₺)</span></p>
-                        <p class="vSmallFont text-green camptonBold mb-0">Min. Requirement</p>
-                    </div>
-                </div>
-            </div>
+            <div class="greenBorder mb-4"></div>
+            <p class="fs-6 camptonBold text-green text-end">Total Price <span style="color: #000;">34.560,00 ₺</span></p>
             <div class="d-flex flex-column align-items-center mb-2">
                 <img src="{{('front/assets/img/ArrowsDown.png')}}" alt="" class="mb-3">
                 <p class="mb-2 fs-3 camptonBold lh-base">Next Step</p>
@@ -151,8 +77,8 @@
                                 <input type="text">
                                 <input type="text">
                             </div>
-                            <!-- <a href="{{url('payment-status')}}"> -->
-                                <a href="{{url('payment-status')}}" style="color: #fff; height: unset; padding: 12px 2rem;" class="btn purchaseBtn" style="color: #fff;">Proceed Payment</a>
+                            <!-- <a> -->
+                                <a href="{{url('payment-status')}}" class="btn purchaseBtn" style="color: #fff; height: unset; padding: 12px 2rem;">Proceed Payment</a>
                             <!-- </a> -->
                         </form>
                     </div>
