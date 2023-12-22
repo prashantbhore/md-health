@@ -6,235 +6,144 @@
     <div class="searchBar backBtn bg-f6">
         <div class="container pt-4">
             <p class="fs-1 camptonBold text-center lh-1">Purchase Details</p>
-            <p class="fs-6 camptonBold text-center deleteAll">Delete All Items</p>
+            <p class="fs-6 camptonBold text-center deleteAll mb-4">Delete All Items</p>
             <div class="packageResult rounded mb-3">
-                <div>
-                    <div class="d-flex gap-2 align-items-center">
+                <div class="flex-grow-1">
+                    <div class="d-flex gap-2 justify-content-between align-items-center">
                         <p class="mb-0 fs-5 camptonBold lh-base">Heart Valve Replacement Surgery</p>
-                        <img src="{{('front/assets/img/verifiedBy.svg')}}" alt="">
+                        <p class="mb-0 fs-6 camptonBold text-green">Treatment Price</p>
                     </div>
-                    <div class="d-flex gap-5 mb-4">
-                        <div class="d-flex gap-2 align-items-center">
+                    <div class="d-flex gap-5 justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
                             <img src="{{('front/assets/img/Location.svg')}}" alt="">
                             <p class="mb-0 lctn">Besiktas/Istanbul</p>
                         </div>
-                        <div class="d-flex align-items-center gap-1">
-                            <img src="{{('front/assets/img/Diaganose.svg')}}" alt="">
-                            <p class="mb-0 lctn fst-italic">Treatment Period 3-5 days</p>
-                        </div>
+                        <p class="mb-0 fs-5 camptonBold lh-base">32.430,00 ₺ <span class="smallFont">(3.679,00 ₺)</span></p>
                     </div>
-                    <div class="d-flex gap-4">
-                        <div class="brdr-right">
-                            <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Includes</span></p>
-                            <div class="d-flex gap-1 align-items-baseline mb-1">
-                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                <p class="mb-0 camptonBook smallFont">Accomodation</p>
-                            </div>
-                            <div class="d-flex gap-1 align-items-baseline mb-1">
-                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                <p class="mb-0 camptonBook smallFont">Visa Service</p>
-                            </div>
-                            <div class="d-flex gap-1 align-items-baseline mb-1">
-                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                <p class="mb-0 camptonBook smallFont">Transportation</p>
-                            </div>
-                            <div class="d-flex gap-1 align-items-baseline mb-1">
-                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                <p class="mb-0 camptonBook smallFont">Translation</p>
-                            </div>
-                            <div class="d-flex gap-1 align-items-baseline mb-1">
-                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                <p class="mb-0 camptonBook smallFont">Tour</p>
-                            </div>
-                            <div class="d-flex gap-1 align-items-baseline mb-1">
-                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
-                            </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <img src="{{('front/assets/img/order.png')}}" alt="">
+            </div>
+            <div class="packageResult rounded mb-3">
+                <div class="flex-grow-1">
+                    <div class="d-flex gap-2 justify-content-between align-items-center">
+                        <p class="mb-0 fs-5 camptonBold lh-base">Accommodation</p>
+                        <p class="mb-0 fs-6 camptonBold text-green">Per Night Price</p>
+                    </div>
+                    <div class="d-flex gap-5 justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <p class="mb-0 lctn">3 Stars Hotel</p>
                         </div>
-                        <div class="brdr-right">
-                            <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Reviews</span><span class="fw-normal">(480)</span></p>
-                            <div class="stars">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                            </div>
-                            <p class="fs-6 camptonBold">Excellent</p>
+                        <p class="mb-0 fs-5 camptonBold lh-base">1.430,00 ₺ <span class="smallFont">(3.679,0 ₺)</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="packageResult rounded mb-3">
+                <div class="flex-grow-1">
+                    <div class="d-flex gap-2 justify-content-between align-items-center">
+                        <p class="mb-0 fs-5 camptonBold lh-base">Transportation</p>
+                        <p class="mb-0 fs-6 camptonBold text-green">Transportation Price</p>
+                    </div>
+                    <div class="d-flex gap-5 justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <p class="mb-0 lctn">Mercedes Vito or Volkswagen Transporter <br/><span class="camptonBold fst-italic">*Economy Class Vehicle</span></p>
                         </div>
-                        <div class="d-flex flex-column align-items-end gap-4">
+                        <p class="mb-0 fs-5 camptonBold lh-base">7.360,00 ₺ <span class="smallFont">(11.679,0 ₺)</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="greenBorder pt-3 mb-4"></div>
+            <div class="mb-4">
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="mb-0 fs-6 camptonBold text-green">Select Your Payment Plan</p>
+                    <p class="mb-0 fs-6 camptonBold text-green">Total Price <span style="color: #000;">34.560,00 ₺</span></p>
+                </div>
+                <div class="d-flex align-items-baseline gap-2 ">
+                    <p class="mb-0 fs-5 camptonBold lh-base">20% <span class="smallFont">(3.679,0 ₺)</span></p>
+                    <p class="vSmallFont boldRed mb-0">Min. Requirement</p>
+                </div>
+                <div class="d-flex align-items-baseline gap-2 ">
+                    <p class="mb-0 fs-5 camptonBold lh-base">30% <span class="smallFont">(5.679,0 ₺)</span></p>
+                    <p class="vSmallFont text-green camptonBold mb-0">Min. Requirement</p>
+                </div>
+                <div class="d-flex align-items-baseline gap-2 ">
+                    <p class="mb-0 fs-5 camptonBold lh-base">50% <span class="smallFont">(9.679,0 ₺)</span></p>
+                    <p class="vSmallFont text-green camptonBold mb-0">Min. Requirement</p>
+                </div>
+                <div class="d-flex align-items-baseline gap-2 ">
+                    <p class="mb-0 fs-5 camptonBold lh-base">100% <span class="smallFont">(19.479,0 ₺)</span></p>
+                    <p class="vSmallFont text-green camptonBold mb-0">Min. Requirement</p>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-center mb-2">
+                <img src="{{('front/assets/img/ArrowsDown.png')}}" alt="" class="mb-3">
+                <p class="mb-2 fs-3 camptonBold lh-base">Next Step</p>
+                <p class="underline smallFont fw-normal camptonBook"><u>Payment</u></p>
+            </div>
+            <div class="paymentSection mb-5">
+                <div class="row">
+                    <div class="col-2">
+                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                            <input type="radio" value="card" name="paymentMethod" checked />
+                            Credit or Debit Card
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                            <input type="radio" value="bank" name="paymentMethod" />
+                            Bank Transfer
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                            <input type="radio" value="wallet" name="paymentMethod" />
+                            My Wallet
+                        </label>
+                    </div>
+                    <!-- <div class="col-2">
+                        <p class="vSmallFont camptonBold">Bank Transfer</p>
+                    </div>
+                    <div class="col-2">
+                        <p class="vSmallFont camptonBold">My Wallet</p>
+                    </div> -->
+                </div>
+            </div>
+            <div id="card">
+                <div class="row">
+                    <div class="col-5 card-details me-5">
+                        <form action="">
+                            <input type="text" class="mb-3" name="" id="">
+                            <input type="text" class="mb-3" name="" id="">
+                            <div class="d-flex gap-2 mb-4">
+                                <input type="text">
+                                <input type="text">
+                            </div>
+                            <button class="btn purchaseBtn" data-bs-toggle="modal" data-bs-target="#treatmentForModal" style="color: #fff;">Proceed Payment</button>
+                        </form>
+                    </div>
+                    <div class="col-5">
+                        <div class="creditCardContainer">
                             <div>
-                                <p class="mb-0">
-                                    <span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Price</span>
-                                </p>
-                                <div class="my-2">
-                                    <p class="mb-0 fs-5 camptonBold lh-base">34.980,00 ₺ <span class="smallFont fs-6">*(6.983,90 ₺)</span></p>
-                                    <p class="camptonBook">*20% of the price is paid before booking.</p>
-                                </div>
-                                <div class="d-flex gap-2 mb-2">
-                                    <button class="btn purchaseBtn">Purchase Package</button>
-                                    <button class="favouriteBtn">
-                                        <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
-                                    </button>
+                                <img src="{{('front/assets/img/MDHealth_light.svg')}}" alt="">
+                            </div>
+                            <div>
+                                <p class="cardNumber">1234 1234 1234 1234</p>
+                                <div class="d-flex justify-content-between align-self-end">
+                                    <div>
+                                        <p class="cardholder">John Smith</p>
+                                        <p class="validity">02/24</p>
+                                    </div>
+                                    <div>
+                                        <img class="visa" src="{{('front/assets/img/visa.svg')}}" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                
-            <div class="tab-card rounded mb-3">     
-                <!-- Nav pills -->
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="pill" href="#home">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="pill" href="#menu1">Reviews</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="pill" href="#menu2">Photos/Videos</a>
-                    </li>
-                </ul>
-    
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active container" id="home">
-                       <div class="overview mt-4">
-                        <div class="row">
-                            <div class="col-8 ps-0">
-                                <p>************ Hospital is a family owned business and Trudi Scrivener, the founder is Buckinghamshire based, Trudi has over 30 years of care experience and provides a key leadership role to her team.
-
-                                <br/>
-                                <br/>
-
-                                Ashridge Home Care provide a multi award winning specialist live in care or hourly care service, depending on the needs of the client. Most people want to stay in their own home, and having a carer either living in or visiting from time to time means choosing to enjoy life on your own terms and being able to maintain your independence. Staff pride themselves on delivering quality person-centred care with compassion, choice, dignity and respect.
-
-                                <br/>
-                                <br/>
-
-                                Their ethos is based purely on happy and healthy lifestyles. ********** Hospital offers care tailored to suit the individual, taking into account the things that are important to the client, like family, interests, pets or the garden. This ethos applies to both the care provided to clients and also the support given to staff.Having a live-in carer removes all the unnecessary upheaval of leaving home to go to the unfamiliar surroundings or a nursing home.
-
-                                </p>
-                            </div>
-                            <div class="col-4 pe-0">
-                                <img src="{{('front/assets/img/Overview.png')}}" alt="Image">
-                            </div>
-                            <div class="col-12 px-0">
-                                <p>
-                                This is especially important to those with dementia where familiar belongings and routines are essential to providing comfort at times of confusion and anxiety.Considering care is a huge step and is one of life’s big decisions. Sometimes it’s difficult for people to accept that they need care, especially when life has been independent and fulfilling. They can sensitively help people through this decision making process, providing all the information needed in order to help make the right decision.
-
-                                <br/>
-                                <br/>
-
-                                Staff can provide bespoke live in care packages to people across the Home Counties and further afield in the South East, and hourly care to those in Buckinghamshire.
-                                </p>
-                            </div>
-                        </div>
-                       </div>
-                    </div>
-                    <div class="tab-pane fade" id="menu1">
-                        <div class="reviews mt-4">
-                            <div class="d-flex align-items-center gap-3">
-                                <p class="mb-0 fs-1 camptonBold">4,8</p>
-                                <p class="mb-0 u"><u>480 Reviews</u></p>
-                            </div>
-                            <div class="stars mb-5">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
-                                <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
-                            </div>
-                            <div class="review mb-4">
-                                <div class="mb-4">
-                                    <div class="stars d-inline me-2">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                    </div>
-                                    <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque non ducimus explicabo eligendi. Cupiditate sit recusandae tempora quia velit, asperiores odio.</p>
-                                </div>
-
-                                <div class="mb-4">
-                                    <p class="mb-1 fs-6 camptonBold">Ali G. / <span class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
-                                    <p class="fs-6 fst-italic">12/12/2023</p>
-                                </div>
-                            </div>
-                            <div class="review mb-4">
-                                <div class="mb-4">
-                                    <div class="stars d-inline me-2">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                    </div>
-                                    <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque non ducimus explicabo eligendi. Cupiditate sit recusandae tempora quia velit, asperiores odio.</p>
-                                </div>
-
-                                <div class="mb-4">
-                                    <p class="mb-1 fs-6 camptonBold">Ali G. / <span class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
-                                    <p class="fs-6 fst-italic">12/12/2023</p>
-                                </div>
-                            </div>
-                            <div class="review mb-4">
-                                <div class="mb-4">
-                                    <div class="stars d-inline me-2">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
-                                    </div>
-                                    <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque non ducimus explicabo eligendi. Cupiditate sit recusandae tempora quia velit, asperiores odio.</p>
-                                </div>
-
-                                <div class="mb-4">
-                                    <p class="mb-1 fs-6 camptonBold">Ali G. / <span class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
-                                    <p class="fs-6 fst-italic">12/12/2023</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="menu2">
-                        <div class="gallery">
-                            <a href="{{('front/assets/img/galleryImg1.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg1.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg2.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg2.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg3.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg3.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg4.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg4.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg5.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg5.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg3.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg3.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg4.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg4.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg5.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg5.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg1.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg1.png')}}" alt="image" />
-                            </a>
-                            <a href="{{('front/assets/img/galleryImg2.png')}}" class="glightbox">
-                                <img src="{{('front/assets/img/galleryImg2.png')}}" alt="image" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="wallet">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque maiores laudantium id ea asperiores quos explicabo aliquam modi voluptas laboriosam nam quae, vel eveniet quidem rerum suscipit a sit dolores!</div>
         </div>
     </div>
 
@@ -247,5 +156,18 @@
 @section('script')
 <script type="text/javascript">
   const lightbox = GLightbox({ ...options });
+</script>
+<script>
+    let checkedVal;
+    $('input[type=radio]').click(function(){
+        checkedVal = $('input[name="paymentMethod"]:checked').val();
+        if(checkedVal === "card"){
+            $("#card").css('display', 'block');
+            $("#wallet").css('display', 'none');
+        }else if(checkedVal === "wallet"){
+            $("#card").css('display', 'none');
+            $("#wallet").css('display', 'block');
+        }
+    });
 </script>
 @endsection

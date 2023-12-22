@@ -13,12 +13,18 @@
     src: url("../fonts/campton/CamptonBold.otf");
 }
 
+:root {
+    --form-control-color: #4cdb06;
+  }
+
 .body {
     scroll-behavior: smooth;
     font-family: "CamptonBook", sans-serif;
 }
 
-*{
+*,
+*:before,
+*:after {
     box-sizing: border-box;
     margin: 0;
 }
@@ -45,6 +51,10 @@
 
 .smallFont {
     font-size: 14px;
+}
+
+.vSmallFont{
+    font-size: 12px;
 }
 
 .boldRed {
@@ -128,6 +138,11 @@
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
+.tab-card ul .right-align{
+    position: absolute;
+    right: 100px;
+}
+
 .tab-card a{
     font-family: CamptonBook;
     color: #000;
@@ -201,8 +216,12 @@
     align-items: end;
 }
 
-.backBtn a{
+.backBtn {
     text-decoration: none;
+    color: #000;
+}
+
+.backBtn:hover {
     color: #000;
 }
 
@@ -220,9 +239,22 @@
     padding-right: 2rem;
 }
 
-.homeServicePackage a, .packageResult a {
+#buyService .brdr-right{
+    padding-right: 5rem;
+}
+
+.greenBorder {
+    border-bottom: 1px solid #4cdb06;
+    /* padding: 8px 0 16px 0; */
+}
+
+.homeServicePackage a, .packageResult a, .anchor {
     color: #000;
-    font-family: CamptonBold;
+    font-family: CamptonBold !important;
+}
+
+.anchor:hover{
+    color: #000;
 }
 
 /* Home Service Page */
@@ -1561,3 +1593,79 @@ select option {
 }
 
 /* DatePicker End */
+
+/* Purchase Package Start */
+
+.paymentSection input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    background-color: #d9d9d9;
+    width: 14px;
+    height: 14px;
+    border: 0.15em solid #d9d9d9;
+    border-radius: 3px;
+    display: grid;
+    place-content: center;
+  }
+
+  .paymentSection [type="radio"]::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+
+  .paymentSection input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+.card-details input{
+    width: 100%;
+    border-radius: 5px;
+    border: 1.5px solid #4cdb06;
+    background-color: transparent;
+    padding: 8px;
+}
+
+#wallet, #bank{
+    display: none;
+}
+
+.creditCardContainer{
+    background: linear-gradient(180deg, #0A0A0A 0%, #383838 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    border-radius: 25px;
+    gap: 4rem;
+}
+
+.cardNumber {
+    font-size: 1.25rem;
+    font-family: CamptonBook;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.creditCardContainer .validity, .creditCardContainer .cardholder{
+    margin-bottom: 0;
+    color: white;
+    font-family: CamptonBook;
+    font-size: 14px;
+}
+
+.creditCardContainer .visa{
+    transform: translateY(20px);
+}
+
+/* Purchase Package End */
