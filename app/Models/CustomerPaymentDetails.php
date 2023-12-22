@@ -29,4 +29,26 @@ class CustomerPaymentDetails extends Model
         'created_by',
         'modified_by',
     ];
+
+
+    public function provider_logo()
+    {
+        return $this->belongsTo(MedicalProviderLogo::class, 'provider_id','medical_provider_id')
+            ->where('status', 'active');
+    }
+
+
+    public function purchage()
+    {
+        return $this->belongsTo(CustomerPurchaseDetails::class, 'order_id','id')
+            ->where('status', 'active');
+    }
+
+
+
+    
+
+
+
+
 }

@@ -122,21 +122,24 @@
 </script>
 
 <script>
-     function verify() {
-    var code = $("#verification").val();
-    var coderesult = JSON.parse(localStorage.getItem('coderesult'));
-    // var coderesult = sessionStorage.getItem('key');
-    console.log(coderesult);
-    coderesult.confirm(code).then(function(result) {
-      var user = result.user;
-      console.log(user);
-      $("#successOtpAuth").text("Auth is successful");
-      $("#successOtpAuth").show();
-    }).catch(function(error) {
-      $("#error").text(error.message);
-      $("#error").show();
-    });
-  }
+//  $(document).ready(function() {
+//         var coderesult = JSON.parse(localStorage.getItem('coderesult'));
+//      function verify() {
+//     var code = $("#verification").val();
+//     // var coderesult = JSON.parse(localStorage.getItem('coderesult'));
+//     // var coderesult = sessionStorage.getItem('key');
+//     console.log(coderesult);
+//     coderesult.confirm(code).then(function(result) {
+//       var user = result.user;
+//       console.log(user);
+//       $("#successOtpAuth").text("Auth is successful");
+//       $("#successOtpAuth").show();
+//     }).catch(function(error) {
+//       $("#error").text(error.message);
+//       $("#error").show();
+//     });
+//   }
+// });
 </script>
 
 @endsection
