@@ -26,10 +26,10 @@
     .multiple-checkbox-div .multiple-checks {
         display: flex;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 10px;
     }
     .multiple-checkbox-div .multiple-checks .form-check {
-        width: 185px;
+        width: 189px;
     }
     .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
         margin-right: 3px;

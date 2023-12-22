@@ -295,7 +295,9 @@ select {
 .bg-green {
     background-color: #4CDB06 !important;
 }
-
+.bg-orange {
+    background-color: #F3771D !important;
+}
 .bg-black {
     background-color: #000;
 }
@@ -1402,7 +1404,55 @@ select option {
     line-height: normal;
     letter-spacing: 0.1px;
     padding: 5px 35px;
+}
+.trmt-card-footer span.in-progress {
+    width: 130px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    background: #F3771D;
+    color: #fff;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.1px;
+    padding: 5px 35px;
+}
 
+.trmt-card-footer span.active {
+    width: 130px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    background: #4CDB06;
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.1px;
+    padding: 5px 35px;
+}
+
+span.popup-msg.active {
+    width: 95px;
+    height: 20px;
+    background: #4CDB06;
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+    border-radius: 3px;
+    font-weight: 700;
+    padding: 2px;
+    position: absolute;
+    top: -2px;
+    right: 0;
 }
 
 .dashboard-card-title span.cancel {
