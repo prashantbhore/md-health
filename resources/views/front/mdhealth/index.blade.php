@@ -7,41 +7,49 @@
                     <h6>A NEW APPROACH IN MODERN TREATMENT</h6>
                     <h2>PLAN YOUR TREATMENT</h2>
                     <h1 class="mb-5">NOW</h1>
-                    <div class="search-bar d-flex align-items-center p-3 gap-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option data-display="Select" selected>Cardiac Arrest</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <label for="floatingSelect">Treatments</label>
-                        </div>
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option data-display="Select" selected>Istanbul</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <label for="floatingSelect">City</label>
-                        </div>
-                        <div class="form-floating">
-                            <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option data-display="Select" selected>12 Aug</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select> -->
-                            <!-- <div class="datepickerContainer"> -->
+                    <form method="POST" action="{{ url('health-search-result') }}">
+                        @csrf
+                        <div class="search-bar d-flex align-items-center p-3 gap-3">
+                            <div class="form-floating">
+                                <input type="hidden" name="platform_type" value="web">
+                                <select class="form-select" name="treatment_name" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option value="">Select Treatment</option>
+                                    @foreach ($treatment_plans as $treatment_plan)
+                                        {
+                                        <option>{{ $treatment_plan->product_category_name }}</option>
+                                        }
+                                    @endforeach
+                                </select>
+                                <label for="floatingSelect">Treatments</label>
+                            </div>
+                            <div class="form-floating">
+                                <select class="form-select" name="city_name" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option data-display="Select" selected>Select City</option>
+                                    @foreach ($cities as $city)
+                                        {
+                                        <option>{{ $city->city_name }}</option>
+                                        }
+                                    @endforeach
+                                </select>
+                                <label for="floatingSelect">City</label>
+                            </div>
+                            <div class="form-floating">
+                                <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                                        <option data-display="Select" selected>12 Aug</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select> -->
+                                <!-- <div class="datepickerContainer"> -->
                                 <input type="text" class="form-select" name="daterange" value="" />
-                            <!-- </div> -->
-                            <label for="floatingSelect">Treatment Date</label>
+                                <!-- </div> -->
+                                <label for="floatingSelect">Treatment Date</label>
+                            </div>
+                            <button type="submit" class="btn btn-search-pill">Search</button>
                         </div>
-                        <a href="{{url('health-search-result')}}">
-                            <button class="btn btn-search-pill">Search</button>
-                        </a>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -108,24 +116,25 @@
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
-                            <img src="{{('front/assets/img/brain.svg')}}" alt="">
+                            <img src="{{ 'front/assets/img/brain.svg' }}" alt="">
                         </div>
                         <div>
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                     </div>
                 </div>
             </div>
@@ -133,24 +142,26 @@
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
-                            <img src="{{('front/assets/img/heart.svg')}}" alt="">
+                            <img src="{{ 'front/assets/img/heart.svg' }}" alt="">
                         </div>
                         <div>
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                     </div>
                 </div>
             </div>
@@ -158,24 +169,26 @@
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
-                            <img src="{{('front/assets/img/eye.svg')}}" alt="">
+                            <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
                         </div>
                         <div>
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(520)</span></p>
                     <div class="stars">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-black.svg')}}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
                     </div>
                 </div>
             </div>
@@ -183,24 +196,26 @@
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
-                            <img src="{{('front/assets/img/eye.svg')}}" alt="">
+                            <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
                         </div>
                         <div>
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(400)</span></p>
                     <div class="stars">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-black.svg')}}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
                     </div>
                 </div>
             </div>
@@ -208,24 +223,26 @@
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                         <div class="bg-black p-2 rounded-circle">
-                            <img src="{{('front/assets/img/mouth.svg')}}" alt="">
+                            <img src="{{ 'front/assets/img/mouth.svg' }}" alt="">
                         </div>
                         <div>
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{('front/assets/img/round-arrow.svg')}}"  alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-green.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-black.svg')}}" alt="">
-                        <img src="{{('front/assets/img/star-black.svg')}}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
+                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
                     </div>
                 </div>
             </div>
@@ -236,7 +253,8 @@
     <div class="bg-green">
         <div class="container py-5 text-center">
             <p class="mb-0 camptonBold fs-2 fw-bold">We made the treatment reliable and easier for you</p>
-            <p class="mb-0 fs-4 fw-bolder camptonBook text-white">Get your treatment packages in Turkiye withing few clicks from professional healthcare providers.</p>
+            <p class="mb-0 fs-4 fw-bolder camptonBook text-white">Get your treatment packages in Turkiye withing few clicks
+                from professional healthcare providers.</p>
         </div>
     </div>
 
@@ -244,19 +262,21 @@
     <div class="bg-e6">
         <div class="container download-section d-flex justify-content-around">
             <div>
-                <img src="{{('front/assets/img/appScreen.png')}}" alt="">
+                <img src="{{ 'front/assets/img/appScreen.png' }}" alt="">
             </div>
             <div class="part2">
                 <div class="mb-4">
                     <p class="fs3 camptonBold mb-0">Download</p>
-                    <p class="fs3"><span class="camptonBold text-green">MD</span><span class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
-                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
+                    <p class="fs3"><span class="camptonBold text-green">MD</span><span
+                            class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
+                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
                 </div>
                 <div class="d-flex align-items-center gap-4">
-                    <img class="align-self-center" src="{{('front/assets/img/playstore.png')}}" alt="">
+                    <img class="align-self-center" src="{{ 'front/assets/img/playstore.png' }}" alt="">
                     <p class="camptonBook fw-bolder fs-5">or</p>
                     <div>
-                        <img src="{{('front/assets/img/qrCode.png')}}" alt="">
+                        <img src="{{ 'front/assets/img/qrCode.png' }}" alt="">
                         <p class="camptonBook fs-5">scan the QR Code</p>
                     </div>
                 </div>
@@ -267,20 +287,20 @@
     <!-- SECTION 6 -->
     <div class="bg-black position-relative section6">
         <div class="container medical-pckg">
-            <p class="fs-1 camptonBold clr-white mb-0">Find your <span class="text-green">medical</span> package <span class="fw-normal camptonBook">&</span></p>
+            <p class="fs-1 camptonBold clr-white mb-0">Find your <span class="text-green">medical</span> package <span
+                    class="fw-normal camptonBook">&</span></p>
             <p class="fs-1 camptonBook clr-white mb-5">flight to Turkiye!</p>
-                <a class="bookButton">Book Now</a>
+            <a class="bookButton">Book Now</a>
         </div>
-        <img class="position-absolute" src="{{('front/assets/img/flight.png')}}" alt="">
+        <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt="">
     </div>
-        {{-- Make Payment Model box--}}
+    {{-- Make Payment Model box --}}
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content p-3">
                 <div>
                     <div class="text-end">
-                        <button type="button" class="btn-close m-3" data-bs-dismiss="modal"
-                            aria-label="Close">
+                        <button type="button" class="btn-close m-3" data-bs-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
 
@@ -368,8 +388,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 text-center ">
-                            <button type="submit" class="btn w-50 mt-4 bg-green h-75"
-                                >Submit
+                            <button type="submit" class="btn w-50 mt-4 bg-green h-75">Submit
                             </button>
                         </div>
                     </form>
@@ -377,7 +396,7 @@
             </div>
         </div>
     </div>
-        <!-- SECTION 7: Testimonials -->
+    <!-- SECTION 7: Testimonials -->
     <div class="bg-f6">
         <div class="container testimonial">
             <div class="text-center mb-5">
@@ -388,77 +407,84 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam
+                            tempore repellat, sequi ea sit enim ullam, nam animi aut.
                         </p>
                         <div class="d-flex gap-2 align-items-center">
                             <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
                             </div>
                             <p class="mb-0 camptonBook fw-bolder">John Smith</p>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam
+                            tempore repellat, sequi ea sit enim ullam, nam animi aut.
                         </p>
                         <div class="d-flex gap-2 align-items-center">
                             <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
                             </div>
                             <p class="mb-0 camptonBook fw-bolder">John Smith</p>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam
+                            tempore repellat, sequi ea sit enim ullam, nam animi aut.
                         </p>
                         <div class="d-flex gap-2 align-items-center">
                             <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
                             </div>
                             <p class="mb-0 camptonBook fw-bolder">John Smith</p>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam
+                            tempore repellat, sequi ea sit enim ullam, nam animi aut.
                         </p>
                         <div class="d-flex gap-2 align-items-center">
                             <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
                             </div>
                             <p class="mb-0 camptonBook fw-bolder">John Smith</p>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam
+                            tempore repellat, sequi ea sit enim ullam, nam animi aut.
                         </p>
                         <div class="d-flex gap-2 align-items-center">
                             <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
                             </div>
                             <p class="mb-0 camptonBook fw-bolder">John Smith</p>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam
+                            tempore repellat, sequi ea sit enim ullam, nam animi aut.
                         </p>
                         <div class="d-flex gap-2 align-items-center">
                             <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
                             </div>
                             <p class="mb-0 camptonBook fw-bolder">John Smith</p>
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <p class="text-center clr-grey camptonBook fs-5 fw-bolder mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam tempore repellat, sequi ea sit enim ullam, nam animi aut.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam delectus aliquam
+                            tempore repellat, sequi ea sit enim ullam, nam animi aut.
                         </p>
                         <div class="d-flex gap-2 align-items-center">
                             <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                                <img src="{{('front/assets/img/user-light.svg')}}" alt="">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
                             </div>
                             <p class="mb-0 camptonBook fw-bolder">John Smith</p>
                         </div>
@@ -472,25 +498,24 @@
 
     <!-- SECTION 8: SCAN QR -->
     <div class="bg-f6 scanQr">
-        <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
+        <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
     </div>
 
-</div>
+    </div>
 @endsection
 @section('script')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script>
-    $(function() {
-    $('input[name="daterange"]').daterangepicker({
-        opens: 'left',
-        locale: {
-            format: 'DD/MM/YYYY'
-        }
-        // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-    }, function(start, end, label) {
-    });
-    });
-</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left',
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            }, function(start, end, label) {});
+        });
+    </script>
 @endsection

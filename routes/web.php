@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\admin\AdminController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
+use App\Http\Controllers\Front\Customer\CustomerPackageController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\Registration\MedicalProviderRegistrationController;
 use App\Http\Controllers\Front\Registration\UserRegistrationController;
@@ -50,9 +51,8 @@ Route::get('common-delete', [BaseController::class, 'delete']);
 
 Route::post('change-status', [BaseController::class, 'status'])->name('change-status');
 
-Route::get('/', function () {
-    return view('front.mdhealth.index');
-});
+Route::get('/', [CustomerPackageController::class, 'customer_home']);
+
 
 
 
@@ -72,13 +72,9 @@ Route::get('search-result', function () {
     return view('front.mdHome.searchResult');
 });
 
-Route::get('health-search-result', function () {
-    return view('front.mdHealth.searchResult');
-});
+Route::any('health-search-result', [CustomerPackageController::class , 'customer_package_search_filter']);
 
-Route::get('health-pack-details', function () {
-    return view('front.mdHealth.healthPackDetails');
-});
+Route::any('health-pack-details', [CustomerPackageController::class,'packages_view_on_search_result']);
 
 Route::get('purchase-package', function () {
     return view('front.mdHealth.purchase');
@@ -302,19 +298,19 @@ Route::controller(MedicalProviderRegistrationController::class)->group(function 
     Route::get('user-account', 'index');
     Route::post('/md-register-medical-provider','md_register_medical_provider');
     Route::get('/logout','logout');
-   
+
  });
 Route::controller(UserRegistrationController::class)->group(function (){
     // Route::get('user-account', 'index');
     Route::post('/md-customer-register','customer_register');
     // Route::get('/logout','logout');
-   
+
  });
 Route::controller(CommonLoginController::class)->group(function (){
     Route::post('user-login', 'user_login');
     Route::post('/otp-verify','otp_verify_for_register');
 //     // Route::get('/logout','logout');
-    
+
  });
 // AUTHENTICATION
 
