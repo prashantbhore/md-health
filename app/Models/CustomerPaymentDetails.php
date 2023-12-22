@@ -19,10 +19,36 @@ class CustomerPaymentDetails extends Model
         'card_expiry_date',
         'card_cvv',
         'md_coin',
+        'payment_percentage',
+        'paid_amount',
+        'pending_payment',
+        'payment_status',
         'status',
         'created_ip_address',
         'modified_ip_address',
         'created_by',
         'modified_by',
     ];
+
+
+    public function provider_logo()
+    {
+        return $this->belongsTo(MedicalProviderLogo::class, 'provider_id','medical_provider_id')
+            ->where('status', 'active');
+    }
+
+
+    public function purchage()
+    {
+        return $this->belongsTo(CustomerPurchaseDetails::class, 'order_id','id')
+            ->where('status', 'active');
+    }
+
+
+
+    
+
+
+
+
 }
