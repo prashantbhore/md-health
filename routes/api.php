@@ -91,6 +91,9 @@ Route::post('md-add-new-acommodition', [AddNewAcommoditionController::class, 'ad
 //hotel-list
 Route::get('md-hotel-list', [AddNewAcommoditionController::class, 'hotel_list']);
 
+//hotel-list-view
+Route::post('md-hotel-list-edit-view', [AddNewAcommoditionController::class, 'hotel_list_edit_view']);
+
 //edit-hotel-list
 Route::post('md-edit-hotel-list', [AddNewAcommoditionController::class, 'edit_hotel_list']);
 
@@ -204,6 +207,9 @@ Route::get('md-customer-purchase-package-completed-list-search', [CustomerPackag
 
 //customer-purchase-package-cancelled-list
 Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
+
+//customer-purchase-cancellation-reason
+Route::get('md-customer-purchase-cancellation-reason', [CustomerPackageController::class, 'customer_purchase_cancellation_reason']);
 
 //customer-change-package-list-active-cancelled
 Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);

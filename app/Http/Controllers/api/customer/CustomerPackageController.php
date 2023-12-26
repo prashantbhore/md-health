@@ -21,6 +21,7 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\PatientInformation;
 use App\Models\CustomerDocuments;
 use App\Models\CustomerReviews;
+use App\Models\CustomerCancelledReason;
 
 class CustomerPackageController extends BaseController
 {
@@ -1103,6 +1104,36 @@ public function packages_view_on_search_result(Request $request)
         }
     }
 
+    public function customer_purchase_cancellation_reason(Request $request){
+        $validator = Validator::make($request->all(), [
+            'purchase_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $cancellation_reason = [];
+        $cancellation_reason['purchase_id'] = $request->purchase_id;
+        $cancellation_reason['package_id'] = $request->package_id;
+        $cancellation_reason['customer_id'] = 1;
+        $cancellation_reason['cancellation_reason'] = $request->cancellation_reason;
+        $cancellation_reason['created_by'] = 1;
+        $CustomerCancelledReason = CustomerCancelledReason::create($cancellation_reason);
+        if (!empty($CustomerCancelledReason)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Thank You For Your Reason.We will get back to you.',
+                'CustomerCancelledReason' => $CustomerCancelledReason,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
     public function change_patient_information_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -1197,27 +1228,26 @@ public function packages_view_on_search_result(Request $request)
             $query->where('md_customer_purchase_details.purchase_type', 'in_progress')
             ->orWhere('md_customer_purchase_details.purchase_type', 'pending');
         })
-        ->select(
-            'md_customer_purchase_details.id',
-            'md_customer_purchase_details.status',
-            'md_customer_purchase_details.package_total_price',
-            'md_customer_purchase_details.package_payment_plan',
-            'md_customer_purchase_details.created_at',
-            'md_packages.id as package_id',
-            'md_packages.package_unique_no',
-            'md_packages.package_name',
-            'md_packages.treatment_period_in_days',
-            'md_packages.other_services',
-            'md_packages.package_price',
-            'md_packages.sale_price',
-            'md_packages.hotel_id',
-            'md_packages.vehicle_id',
-            'md_product_category.product_category_name',
-            'md_product_sub_category.product_sub_category_name',
-            'md_master_cities.city_name',
-            'md_medical_provider_register.company_name',
-            'md_medical_provider_logo.company_logo_image_path'
-        )
+            ->select(
+                'md_customer_purchase_details.id',
+                'md_customer_purchase_details.status',
+                'md_customer_purchase_details.package_total_price',
+                'md_customer_purchase_details.created_at',
+                'md_packages.id as package_id',
+                'md_packages.package_unique_no',
+                'md_packages.package_name',
+                'md_packages.treatment_period_in_days',
+                'md_packages.other_services',
+                'md_customer_purchase_details.paid_amount',
+                'md_customer_purchase_details.pending_payment',
+                'md_packages.hotel_id',
+                'md_packages.vehicle_id',
+                'md_product_category.product_category_name',
+                'md_product_sub_category.product_sub_category_name',
+                'md_master_cities.city_name',
+                'md_medical_provider_register.company_name',
+                'md_medical_provider_logo.company_logo_image_path'
+            )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
@@ -1225,28 +1255,53 @@ public function packages_view_on_search_result(Request $request)
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
             ->where('md_customer_purchase_details.package_id', $request->package_id)
-            ->get();
+            ->first();
 
-        foreach ($customer_purchase_package_active_list as $key => $val) {
-            $customer_purchase_package_active_list[$key]['id'] = !empty($val->id) ? $val->id : '';
-            $customer_purchase_package_active_list[$key]['package_unique_no'] = !empty($val->package_unique_no) ? $val->package_unique_no : '';
-            $customer_purchase_package_active_list[$key]['other_services'] = !empty($val->other_services) ? $val->other_services : '';
-            $customer_purchase_package_active_list[$key]['package_name'] = !empty($val->package_name) ? $val->package_name : '';
-            $customer_purchase_package_active_list[$key]['city_name'] = !empty($val->city_name) ? $val->city_name : '';
-            $customer_purchase_package_active_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
-            $customer_purchase_package_active_list[$key]['treatment_name'] = !empty($val->product_category_name) ? $val->product_category_name : '';
-            $customer_purchase_package_active_list[$key]['treatment_period_in_days'] = !empty($val->treatment_period_in_days) ? $val->treatment_period_in_days : '';
-            $customer_purchase_package_active_list[$key]['company_logo_image_path'] = !empty($val->company_logo_image_path) ? url('/') . Storage::url($val->company_logo_image_path) : '';
-            $customer_purchase_package_active_list[$key]['package_payment_plan'] = !empty($val->package_payment_plan) ? $val->package_payment_plan : '';
-            $customer_purchase_package_active_list[$key]['package_total_price'] = !empty($val->package_total_price) ? $val->package_total_price : '';
-            $customer_purchase_package_active_list[$key]['created_at'] = !empty($val->created_at) ? $val->created_at : '';
+        // foreach ($customer_purchase_package_active_list as $key => $val) {
+        $customer_purchase_package_active_list['id'] = !empty($customer_purchase_package_active_list->id) ? $customer_purchase_package_active_list->id : '';
+        $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
+        // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
+        $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
+        $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
+        $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
+        $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->product_category_name) ? $customer_purchase_package_active_list->product_category_name : '';
+        $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
+        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
+        $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
+        $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
+        // $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? $customer_purchase_package_active_list->created_at : '';
+        // }
+
+        $services = [];
+        if (!empty($customer_purchase_package_active_list->hotel_id)) {
+            $accommodation = [
+                'hotel_id' => $customer_purchase_package_active_list->hotel_id,
+                'title' => 'Acommodition',
+                'status' => 'active', // Replace with actual price format
+            ];
         }
+
+        if (!empty($customer_purchase_package_active_list->vehicle_id)) {
+            $transportation = [
+                'vehicle_id' => $customer_purchase_package_active_list->vehicle_id,
+                'title' => 'Transportation',
+                'status' => 'active', // Replace with actual price format
+
+            ];
+        }
+
+
+
+        $services[] = $accommodation;
+        $services[] = $transportation;
+
 
         if (!empty($customer_purchase_package_active_list)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'Here is your active purchase details list.',
-                'customer_purchase_package_active_list' => $customer_purchase_package_active_list
+                'message' => 'Here is your purchase details list.',
+                'customer_purchase_package_list' => $customer_purchase_package_active_list,
+                'other_services' => $services
             ]);
         } else {
             return response()->json([

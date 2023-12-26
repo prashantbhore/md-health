@@ -112,6 +112,14 @@ Route::get('mdShop', function () {
     return view('front.mdShop.index');
 });
 
+Route::get('cart', function () {
+    return view('front.mdShop.cart');
+});
+
+Route::get('product', function () {
+    return view('front.mdShop.product');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
