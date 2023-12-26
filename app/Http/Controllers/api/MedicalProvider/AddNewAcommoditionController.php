@@ -140,6 +140,49 @@ class AddNewAcommoditionController extends BaseController
         }
     }
 
+    public function hotel_list_edit_view(Request $request){
+        $AcommoditionHotelList = AddNewAcommodition::where('status', '!=', 'delete')
+            ->select(
+                'id',
+                'hotel_name',
+                'hotel_address',
+                'hotel_stars',
+                'hotel_image_path',
+                'hotel_image_name',
+                'hotel_per_night_price',
+                'hotel_other_services',
+                'service_provider_id',
+                'status',
+            )
+            ->where('id',$request->id)
+            ->first();
+
+        if (!empty($AcommoditionHotelList)) {
+            // foreach ($AcommoditionHotelList as $key => $value) {
+                $AcommoditionHotelList['hotel_name'] = ($AcommoditionHotelList->hotel_name);
+                $AcommoditionHotelList['hotel_address'] = ($AcommoditionHotelList->hotel_address);
+                $AcommoditionHotelList['hotel_stars'] = ($AcommoditionHotelList->hotel_stars);
+                $AcommoditionHotelList['hotel_image_path'] = url('/') . Storage::url($AcommoditionHotelList->hotel_image_path);
+                $AcommoditionHotelList['hotel_per_night_price'] = ($AcommoditionHotelList->hotel_per_night_price);
+                $AcommoditionHotelList['hotel_other_services'] = ($AcommoditionHotelList->hotel_other_services);
+            // }
+        }
+
+
+        if (!empty($AcommoditionHotelList)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Hotel details found.',
+                'hotel_details' => $AcommoditionHotelList,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+    }
+
     public function edit_hotel_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
