@@ -27,7 +27,12 @@ class UserRegistrationController extends Controller
             ->first();
 
         if ($email_exist || $email_exist_common) {
-                return redirect('/user-account')->with('error', "Email id already exist.");
+                // return redirect('/user-account')->with('error', "Email id already exist.");
+                return response()->json( [
+                    'status' => 200,
+                    'message' => 'Email id already exist.',
+                    'url' => '/user-account',
+                ] );
         } else {
             $phone_exist = CustomerRegistration::where('status', 'active')
                 ->where('phone', $request->phone)
@@ -37,7 +42,12 @@ class UserRegistrationController extends Controller
                 ->first();
 
             if ($phone_exist || $phone_exist_common) {
-                    return redirect('/user-account')->with('error', "Mobile number already exist.");
+                    // return redirect('/user-account')->with('error', "Mobile number already exist.");
+                    return response()->json( [
+                        'status' => 200,
+                        'message' => 'Mobile number already exist.',
+                        'url' => '/user-account',
+                    ] );
             }
         }
 
@@ -64,11 +74,11 @@ class UserRegistrationController extends Controller
         $customer_input['date_of_birth'] = $request->date_of_birth;
         $customer_input['password'] = Hash::make($request->password);
         $customer_input['platform_type'] = $request->platform_type;
-        $otp = rand(1111, 9999);
-        $customer_input['registration_otp'] = $otp;
-        $customer_input['login_otp'] = $request->shop_owner_upi_id;
-        $customer_input['fcm_token'] = $request->fcm_token;
-        $customer_input['otp_expiring_time'] = time() + 20;
+        // $otp = rand(1111, 9999);
+        // $customer_input['registration_otp'] = $otp;
+        // $customer_input['login_otp'] = $request->shop_owner_upi_id;
+        // $customer_input['fcm_token'] = $request->fcm_token;
+        // $customer_input['otp_expiring_time'] = time() + 20;
         $customer_input['modified_ip_address'] = $request->ip();
         $customer_registration = CustomerRegistration::create($customer_input);
 
@@ -130,27 +140,53 @@ class UserRegistrationController extends Controller
                         'status' => 'active',
                     ])
                 ) {
-                    // $user_id = Auth::guard('md_customer_registration')->user()->id;
-                    $providers = Auth::guard('md_customer_registration')->user();
-                    $otp = rand(1111, 9999);
-                    $id = $providers->id;
-                    CustomerRegistration::where('id', $providers->id)->update([
-                        'otp_expiring_time' => time() + 20,
-                        'registration_otp' => $otp,
-                    ]);
-                    CommonUserLoginTable::where('id', $lastInsertedId)->update([
-                        // 'otp_expiring_time' => time() + 20,
-                        'registration_otp' => $otp,
-                    ]);
-                    return redirect('sms-code')->with([
-                        // 'error' => "OTP does not match.",
-                        'email' => $email,
-                        'password' => $password,
-                    ]);
-                    // return view('front/mdhealth/authentication/sms-code', compact('password','email'));
+                        $customer = Auth::guard('md_customer_registration')->user();
+                        $otpcheck = CustomerRegistration::where('id', $customer->id)
+                            // ->where('registration_otp', $otpverify)
+                            ->where('status', 'active')
+                            // ->where('otp_expiring_time', '>=', now())
+                            ->first();
 
+                        if ($otpcheck) {
+                            // dd($otpcheck);
+                            $user_id = Auth::guard('md_customer_registration')->user()->id;
+                            $user_email = Auth::guard('md_customer_registration')->user()->email;
+                            $user = Auth::guard('md_customer_registration')->user();
+
+                            Session::put('MDCustomer*%', $user_id);
+                            Session::put('email', $user_email);
+                            Session::put('user', $user);
+                            // return redirect('/user-profile')->with('success', "Profile created successfully.");
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Profile created successfully.',
+                                'url' => '/user-profile',
+                            ] );
+                        } else {
+                            // return redirect('sms-code')->with([
+                            //     'error' => "OTP does not match.",
+                            //     'email' => $request->email,
+                            //     'password' => $request->password,
+                            // ]);
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Credencials not match',
+                                'url' => '/sign-in-web',
+                            ] );
+                        }
+
+                    // return response()->json( [
+                    //     'status' => 200,
+                    //     'message' => 'Your profile registered successfully.',
+                    //     'url' => '/user-profile',
+                    // ] );
                 } else {
-                    return redirect('/sign-in-web')->with('error', "Your credencials does not matched.");
+                    // return redirect('/sign-in-web')->with('error', "Your credencials does not matched.");
+                    return response()->json( [
+                        'status' => 200,
+                        'message' => 'Your credencials does not matched.',
+                        'url' => '/sign-in-web',
+                    ] );
                 }
             }
 

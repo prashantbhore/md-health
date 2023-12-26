@@ -52,12 +52,18 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['created_by'] = 1;
             $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
             if (!empty($AddNewAcommodition)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-acommodition')->with('success','Hotel Acommodition created successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Hotel Acommodition created successfully.',
                     'AddNewAcommodition' => $AddNewAcommodition,
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-acommodition')->with('success','Acommodition not created.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Acommodition not created.',
@@ -123,6 +129,49 @@ class AddNewAcommoditionController extends BaseController
                 $AcommoditionHotelList[$key]['hotel_per_night_price'] = ($value->hotel_per_night_price);
                 $AcommoditionHotelList[$key]['hotel_other_services'] = ($value->hotel_other_services);
             }
+        }
+
+
+        if (!empty($AcommoditionHotelList)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Hotel details found.',
+                'hotel_details' => $AcommoditionHotelList,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+    }
+
+    public function hotel_list_edit_view(Request $request){
+        $AcommoditionHotelList = AddNewAcommodition::where('status', '!=', 'delete')
+            ->select(
+                'id',
+                'hotel_name',
+                'hotel_address',
+                'hotel_stars',
+                'hotel_image_path',
+                'hotel_image_name',
+                'hotel_per_night_price',
+                'hotel_other_services',
+                'service_provider_id',
+                'status',
+            )
+            ->where('id',$request->id)
+            ->first();
+
+        if (!empty($AcommoditionHotelList)) {
+            // foreach ($AcommoditionHotelList as $key => $value) {
+                $AcommoditionHotelList['hotel_name'] = ($AcommoditionHotelList->hotel_name);
+                $AcommoditionHotelList['hotel_address'] = ($AcommoditionHotelList->hotel_address);
+                $AcommoditionHotelList['hotel_stars'] = ($AcommoditionHotelList->hotel_stars);
+                $AcommoditionHotelList['hotel_image_path'] = url('/') . Storage::url($AcommoditionHotelList->hotel_image_path);
+                $AcommoditionHotelList['hotel_per_night_price'] = ($AcommoditionHotelList->hotel_per_night_price);
+                $AcommoditionHotelList['hotel_other_services'] = ($AcommoditionHotelList->hotel_other_services);
+            // }
         }
 
 
