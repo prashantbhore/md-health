@@ -684,9 +684,6 @@ public function packages_view_on_search_result(Request $request)
                     // } 
                 }
             }
-
-            
-
         }else{
             $purchase_details = [];
 
