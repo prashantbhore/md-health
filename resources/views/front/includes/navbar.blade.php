@@ -142,7 +142,3 @@
         <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
     </div>
 </nav>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8e626ad5dd75c2723c8203ed1b371ea8f75e077e

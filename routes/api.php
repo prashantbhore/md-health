@@ -65,7 +65,7 @@ Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_prov
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 
-//check-password-exist 
+//check-password-exist
 Route::post('md-check-password-exist', [UpdateCustomerProfileController::class, 'check_password_exist']);
 
 //update-customer-profile
@@ -299,7 +299,7 @@ Route::post('md-provider-assign-treatment-case-manager', [SalesController::class
 Route::post('md-provider-treatment-search', [SalesController::class,'treatment_search']);
 
 
-//Provider account details saved 
+//Provider account details saved
 Route::post('md-provider-add-bank-account', [PaymentController::class,'add_provider_account']);
 
 //Provider Transaction List
@@ -336,6 +336,7 @@ Route::post('md-provider-system-user-edit', [AddSystemUserRole::class,'edit_syst
 Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_system_user']);
 
 
+//
 
 // });
 

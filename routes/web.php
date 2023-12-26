@@ -382,6 +382,10 @@ Route::view('md-booking-home-page', 'front/mdhealth/md-booking/md-booking-home-p
 Route::view('md-booking-search-hotel-page', 'front/mdhealth/md-booking/md-booking-search-hotel');
 Route::view('md-booking-search-flight-page', 'front/mdhealth/md-booking/md-booking-search-flight');
 Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-booking-search-vehicle');
+Route::view('md-booking-reservation-details-page', 'front/mdhealth/md-booking/md-booking-reservation-details');
+Route::view('md-booking-payment-succ-page', 'front/mdhealth/md-booking/md-booking-payment-successful');
+Route::view('md-booking-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-flight-ticket');
+
 //MD FOOD PAGE KD
 Route::view('md-food-home-page', 'front/mdhealth/md-food/md-food-page');
 Route::view('md-food-search-page', 'front/mdhealth/md-food/md-food-search');
