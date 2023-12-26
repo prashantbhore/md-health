@@ -18,14 +18,16 @@
                     <img src="{{URL('front/assets/img/Mask.png')}}" alt="">
                 </div>
             </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{{('front/assets/img/mdShopAd.png')}}" alt="" style="z-index: 1;">
+            </div>
         </div>
-
         <!-- SECTION 2: MOST SALES -->
         <p class="titleClass text-center">MOST <span class="text-green">SALES</span></p>
         <div class="product-card-container container">
             <div class="row product-row">
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -42,7 +44,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -59,7 +61,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -76,7 +78,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -93,7 +95,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -110,7 +112,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -127,7 +129,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -144,7 +146,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="#" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">

@@ -1,12 +1,11 @@
 @extends('front.layout.layout2')
 @section("content")
 <style>
-    .select-name-div {
+    .person-message-div .treatment-card {
         box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.25);
-        border-radius: 3px;
     }
     .input-file-div label{
-        padding: 5px 22px;
+    padding: 5px 22px;
     border-radius: 35px;
     margin-bottom: 20px;
     cursor: pointer;
@@ -29,6 +28,10 @@
         bottom: 65%;
         z-index: 999;
     }
+    .self-msg-div p:first-child{
+        padding: 10px 25px;
+        border-radius: 3px;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -42,34 +45,27 @@
                         <div class="message-div d-flex justify-content-between flex-column w-100 ">
                             <div class="message-header">
                                 <h5 class="d-flex align-items-center justify-content-between bg-light fw-700 p-4 mb-3 fsb-1">
-                                    <span>Message</span>
+                                    <span>Ali  Danish</span>
                                     <a href="{{url('medical-messages')}}" class="d-flex align-items-center text-dark gap-1 text-decoration-none">
                                         <img src="{{asset('front/assets/img/backPage.png')}}" alt=""> Back Messages
                                     </a>
                                 </h5>
-                                <div class="select-message-div">
-                                    <div class="select-name-div d-flex justify-content-between align-items-center p-3" id="onclickopen">
-                                        <p class="m-0 fw-800 fsb-1 d-flex align-items-center gap-2">
-                                            <span class="fw-200 text-secondary">Write to </span><span class="fw-200 text-secondary">|</span> Customer Name Surname
-                                        </p>
-                                        <i class="fa fa-chevron-down"></i>
-                                    </div>
-                                    <div class="show-name-list mt-3">
-                                        <div class="select-name-div p-3" id="onclickopen">
-                                            <p class="m-0 fw-800 fsb-1 d-flex align-items-center p-1 gap-2">
-                                                <span class="fw-200 text-secondary">Write to </span><span class="fw-200 text-secondary">|</span> Customer Name Surname
-                                            </p>
-                                            <p class="m-0 fw-800 fsb-1 d-flex align-items-center p-1 gap-2">
-                                                <span class="fw-200 text-secondary">Write to </span><span class="fw-200 text-secondary">|</span> Customer Name Surname
-                                            </p>
-                                            <p class="m-0 fw-800 fsb-1 d-flex align-items-center p-1 gap-2">
-                                                <span class="fw-200 text-secondary">Write to </span><span class="fw-200 text-secondary">|</span> Customer Name Surname
-                                            </p>
-                                            <p class="m-0 fw-800 fsb-1 d-flex align-items-center p-1 gap-2">
-                                                <span class="fw-200 text-secondary">Write to </span><span class="fw-200 text-secondary">|</span> Customer Name Surname
-                                            </p>
+                                <div class="person-message-div mb-4">
+                                    <div class="treatment-card df-start w-100 mb-1">
+                                        <div class="d-flex align-items-center justify-content-evenly">
+                                            <img class="mx-4" src="{{asset('front/assets/img/Memorial.svg')}}" alt="" style="height: 55px;width: 55px;object-fit: contain;">                                          
+                                            <div class="trmt-card-body pe-4">
+                                                <h5 class="mb-0 fw-400 msg-box text-end fsb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="day-time">
+                                        <p class="mb-0 fsb-2">Monday 14:32</p>
+                                    </div>
+                                </div>
+                                <div class="self-msg-div mb-4">
+                                    <p class="mb-1 bg-light fsb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</p>
+                                    <p class="mb-0 fsb-2 text-end">Monday 13:42</p>
                                 </div>
                             </div>
 
@@ -103,12 +99,5 @@
 <script>
     $(".mpMessagesLi").addClass("activeClass");
     $(".mpMessages").addClass("md-active");
-</script>
-
-<script>
-    $(".show-name-list").hide();
-    $("#onclickopen").click(function() {
-        $(".show-name-list").toggle(200);
-    });
 </script>
 @endsection
