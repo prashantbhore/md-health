@@ -44,10 +44,17 @@ return [
             'driver' => 'session',
             'provider' => 'md_customer_registration',
         ],
+
         'md_health_medical_providers_registers' => [
             'driver' => 'session',
             'provider' => 'md_medical_provider_register',
         ],
+
+        'md_health_medical_vendor_registers' => [
+            'driver' => 'session',
+            'provider' => 'md_vendor_register',
+        ],
+
         'superadmin' => [
             'driver' => 'session',
             'provider' => 'md_super_admin',
@@ -87,6 +94,11 @@ return [
         'md_medical_provider_register' => [
             'driver' => 'eloquent',
             'model' => App\Models\MedicalProviderRegistrater::class,
+        ],
+
+        'md_health_medical_vendor_registers' =>[
+            'driver' => 'eloquent',
+            'model' => App\Models\VendorRegister::class,
         ],
 
         'md_super_admin' => [

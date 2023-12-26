@@ -18,6 +18,7 @@ use App\Http\Controllers\api\MedicalProvider\PackageControllers;
 use App\Http\Controllers\api\MedicalProvider\PaymentController;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
+use App\Http\Controllers\api\vendor\VendorProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -335,6 +336,22 @@ Route::post('md-provider-system-user-edit', [AddSystemUserRole::class,'edit_syst
 //Provider System User delete
 Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_system_user']);
 
+//Vendor Registration
+
+Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
+
+//Vendor Prodcut
+Route::controller(VendorProductController::class)->group(function (){
+    Route::get('product-category','vendor_product_category');
+    Route::post('product-sub-category','vendor_product_sub_category');
+    Route::post('add-vendor-product', 'addProduct');
+    Route::get('active-product-count','active_product_count');
+    Route::get('active-product-list','active_product_list');
+    Route::get('inactive-product-list','inactive_product_list');
+    Route::post('vendor-product-search','vendor_search_products');
+    Route::post('vendor-product-view','vendor_product_view');
+    Route::post('/products/bulk-import','addProductsBulk');
+});
 
 
 // });
