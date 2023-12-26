@@ -366,10 +366,14 @@ Route::view('medical-account', 'front/mdhealth/medical-provider/account');
 Route::view('medical-other-services', 'front/mdhealth/medical-provider/other-services');
 Route::view('add-acommodition', 'front/mdhealth/medical-provider/add-acommodition');
 Route::view('add-new-vehical', 'front/mdhealth/medical-provider/add-new-vehical');
+Route::view('add-tour', 'front/mdhealth/medical-provider/add-tour');
 Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 Route::view('medical-roles', 'front/mdhealth/medical-provider/medical-roles');
 Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
+Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
+Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
+Route::view('reports', 'front/mdhealth/medical-provider/reports');
 
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');

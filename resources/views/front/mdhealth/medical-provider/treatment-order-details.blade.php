@@ -182,7 +182,7 @@
                                                 <div class="request-btn-div">
                                                     <p class="mb-0 text-end">Remaining: <b>27.837,85 ₺</b></p>
                                                     <div class="section-btns pt-2">
-                                                        <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100">Request Payment</a>
+                                                        <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100 fsb-1">Request Payment</a>
                                                     </div>
                                                 </div>
                                             </div>
