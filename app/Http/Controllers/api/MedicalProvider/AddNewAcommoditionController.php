@@ -52,12 +52,18 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['created_by'] = 1;
             $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
             if (!empty($AddNewAcommodition)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-acommodition')->with('success','Hotel Acommodition created successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Hotel Acommodition created successfully.',
                     'AddNewAcommodition' => $AddNewAcommodition,
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-acommodition')->with('success','Acommodition not created.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Acommodition not created.',
