@@ -1729,6 +1729,16 @@ span.popup-msg.active {
     padding: 10px 20px;
 
 }
+.page-bradcrumb , .page-bradcrumb a {
+    color: #6A6262;
+    font-family: 'Campton';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    text-decoration: none;
+}
 
 /* Shubham */
 
@@ -2066,6 +2076,8 @@ span.popup-msg.active {
 .mdShop{
     background-color: #f6f6f6;
     padding-top: 2.5rem;
+    position: relative;
+    z-index: 99;
 }
 
 .mdShop .hero-container{
