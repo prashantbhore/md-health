@@ -160,7 +160,7 @@ class AddNewAcommoditionController extends BaseController
                 'service_provider_id',
                 'status',
             )
-            ->where('id',$request->id)
+            ->where('id',$request->hotel_id)
             ->first();
 
         if (!empty($AcommoditionHotelList)) {

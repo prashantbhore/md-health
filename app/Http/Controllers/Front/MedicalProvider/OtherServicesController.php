@@ -28,24 +28,28 @@ class OtherServicesController extends Controller
     public function add_acommodition(){
         return view('front/mdhealth/medical-provider/add-acommodition');
     }
+
     public function saveStarRating(Request $request)
     {
         $selectedStars = $request->input('selectedStars');
         return response()->json(['message' => 'Stars count received: ' . $selectedStars]);
     }
+
     public function edit_acommodition(Request $request)
     {
         $encryptedId = $request->id; 
         $decryptedId = Crypt::decrypt($encryptedId);
         
-        $newRequest = Request::create('/api/md-edit-hotel-list', 'POST', ['hotel_id' => $decryptedId]);
+        $newRequest = Request::create('/api/md-hotel-list-edit-view', 'POST', ['hotel_id' => $decryptedId]);
         $response = app()->handle($newRequest); 
         
         $respo = $response->getContent();
-        dd($respo);
-        $selectedStars = $request->input('selectedStars');
-        return response()->json(['message' => 'Stars count received: ' . $selectedStars]);
+        $responseData = json_decode( $respo, true );
+        $hotel_details=$responseData[ 'hotel_details' ];
+        // dd($hotel_details);
+        return view('front/mdhealth/medical-provider/add-acommodition',compact('hotel_details'));
     }
+
     public function delete_acommodition(Request $request)
     {
         $encryptedId = $request->id; 
