@@ -17,7 +17,7 @@
                 <li class="nav-item"><a href="{{url('home-service')}}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="{{url('md-booking-home-page')}}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
                 <li class="nav-item"><a href="{{url('md-food-home-page')}}" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
-                <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
+                <li class="nav-item"><a href="{{url('mdShop')}}" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
                 <!-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -142,7 +142,3 @@
         <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
     </div>
 </nav>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8e626ad5dd75c2723c8203ed1b371ea8f75e077e

@@ -81,8 +81,8 @@ width: 212px;
 height: 141px;
 border-radius: 3px;
 /* border: 1px solid black; */
-
 }
+
 .food-review{
     font-weight: 700;
     font-family: Campton;
@@ -200,6 +200,7 @@ border-radius: 3px;
     cursor: pointer;
 }
 
+
 /* food View page */
 .md-food-view-stars{
     font-weight: 400;
@@ -223,7 +224,6 @@ border-radius: 3px;
 .food-view-border{
     border-bottom: 1px solid #4CDB06;
     margin: 2rem 0;
-    /* width: 1011.5px; */
 }
 .food-view-p2{
     font-weight: 600;
@@ -256,35 +256,29 @@ border-radius: 3px;
   font-size: 17px;
 }
 .active1 {
-    /* margin: 0; */
     border-bottom:4px solid #4CDB06;
-    /* width: 78px;
-    height: 3px; */
-    /* color: #4CDB06; */
     font-size:16px ;
     font-weight: 600;
   }
 
-
-  /* Default appearance styles for the range input */
 .range1{
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
     height: 4px;
     border-radius: 5px;
-    background: #ddd; /* Track color */
+    background: #ddd;
     outline: none;
 }
 
-/* Styling the thumb (circle) of the range input */
+
 .range1::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
     height: 20px;
-    border-radius: 50%; /* Circle shape */
-    background: #4cdb06; /* Change thumb color */
+    border-radius: 50%;
+    background: #4cdb06;
     cursor: pointer;
 }
 
@@ -296,9 +290,8 @@ border-radius: 3px;
     cursor: pointer;
 }
 
-/* Change thumb color on active/hover state (optional) */
 .range1:hover::-webkit-slider-thumb {
-    background: #4cdb06; /* New color on hover */
+    background: #4cdb06;
 }
 
 .range1:hover::-moz-range-thumb {

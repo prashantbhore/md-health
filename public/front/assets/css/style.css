@@ -13,12 +13,18 @@
     src: url("../fonts/campton/CamptonBold.otf");
 }
 
+:root {
+    --form-control-color: #4cdb06;
+  }
+
 .body {
     scroll-behavior: smooth;
     font-family: "CamptonBook", sans-serif;
 }
 
-* {
+*,
+*:before,
+*:after {
     box-sizing: border-box;
     margin: 0;
 }
@@ -47,6 +53,10 @@
     font-size: 14px;
 }
 
+.vSmallFont{
+    font-size: 12px;
+}
+
 .boldRed {
     font-weight: bold;
     color: red;
@@ -54,23 +64,23 @@
 
 /* UTILITY CLASSES */
 
-#treatmentForModal .modal-content,
-#treatmentForModal2 .modal-content {
+#treatmentForModal .modal-content, #treatmentForModal2 .modal-content, 
+#serviceForModal .modal-content, #serviceForModal2 .modal-content {
     border-radius: 0.5rem;
     border: none;
     position: relative;
 }
 
-#treatmentForModal .modal-dialog {
+#treatmentForModal .modal-dialog, #serviceForModal .modal-dialog{
     max-width: 600px;
 }
 
-#treatmentForModal2 .modal-dialog {
+#treatmentForModal2 .modal-dialog, #serviceForModal2 .modal-dialog{
     max-width: 700px;
 }
 
-#treatmentForModal .closeModal,
-#treatmentForModal2 .closeModal {
+#treatmentForModal .closeModal, #treatmentForModal2 .closeModal,
+#serviceForModal .closeModal, #serviceForModal2 .closeModal{
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -95,8 +105,10 @@
     text-decoration: underline;
 }
 
-.homeServiceTitle {
+.titleClass{
     margin-bottom: 3rem;
+    font-family: CamptonBold;
+    font-size: 3rem;
 }
 
 #homeServiceBanner,
@@ -132,7 +144,12 @@
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.tab-card a {
+.tab-card ul .right-align{
+    position: absolute;
+    right: 100px;
+}
+
+.tab-card a{
     font-family: CamptonBook;
     color: #000;
 }
@@ -206,12 +223,16 @@
     align-items: end;
 }
 
-.backBtn a {
+.backBtn {
     text-decoration: none;
     color: #000;
 }
 
-.packageResult .red-strike {
+.backBtn:hover {
+    color: #000;
+}
+
+.packageResult .red-strike{
     text-decoration: line-through;
     text-decoration-color: red;
 }
@@ -226,10 +247,26 @@
     padding-right: 2rem;
 }
 
-.homeServicePackage a,
-.packageResult a {
+#buyService .brdr-right{
+    padding-right: 5rem;
+}
+
+.blackBrdr {
+    border-left: 1px solid #000;
+}
+
+.greenBorder {
+    border-bottom: 1px solid #4cdb06;
+    /* padding: 8px 0 16px 0; */
+}
+
+.homeServicePackage a, .packageResult a, .anchor {
     color: #000;
-    font-family: CamptonBold;
+    font-family: CamptonBold !important;
+}
+
+.anchor:hover{
+    color: #000;
 }
 
 /* Home Service Page */
@@ -653,7 +690,7 @@ select {
 }
 
 .camptonBold {
-    font-family: CamptonBold;
+    font-family: CamptonBold !important;
 }
 
 .authentication .nav-tabs .nav-link {
@@ -1805,3 +1842,213 @@ span.popup-msg.active {
 }
 
 /* DatePicker End */
+
+/* Purchase Package Start */
+
+.paymentSection input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    background-color: #d9d9d9;
+    width: 14px;
+    height: 14px;
+    border: 0.15em solid #d9d9d9;
+    border-radius: 3px;
+    display: grid;
+    place-content: center;
+  }
+
+  .discount-sctn input[type="radio"]{
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    background-color: #d9d9d9;
+    width: 20px;
+    height: 20px;
+    border: 0.15em solid #d9d9d9;
+    border-radius: 3px;
+    display: grid;
+    place-content: center;
+  }
+
+  .paymentsPage input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    /* color: currentColor; */
+    width: 32px;
+    height: 32px;
+    border: 0.15em solid #d9d9d9;
+    border-radius: 3px;
+    /* transform: translateY(-0.075em); */
+    display: grid;
+    place-content: center;
+  }
+
+  .paymentSection [type="radio"]::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+
+  .discount-sctn [type="radio"]::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 20px 20px var(--form-control-color);
+  }
+
+  .paymentsPage input[type="checkbox"]::before {
+    content: "";
+    width: 28px;
+    height: 28px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 2rem 2rem var(--form-control-color);
+  }
+  
+
+  .paymentsPage input[type="checkbox"]:checked::before,.paymentSection input[type="radio"]:checked::before, .discount-sctn input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+.card-details input{
+    width: 100%;
+    border-radius: 5px;
+    border: 1.5px solid #4cdb06;
+    background-color: transparent;
+    padding: 8px;
+}
+
+#wallet, #bank{
+    display: none;
+}
+
+.inviteBtn {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: CamptonBook;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    width: 149px;
+    height: 35px;
+    border-radius: 70px;
+    /* background-color: #fff; */
+    border: 1.5px solid #4cdb06;
+    transition: 0.15s all;
+}
+
+.mdCard {
+    background: linear-gradient(109.88deg, #4CDB06 1.33%, rgba(76, 219, 6, 0.4) 98.07%);
+    border-radius: 25px;
+    display: flex;
+    padding: 2.5rem;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* #wallet .wallet-box{
+    padding: 2.5rem;
+} */
+
+.creditCardContainer{
+    background: linear-gradient(180deg, #0A0A0A 0%, #383838 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    border-radius: 25px;
+    gap: 4rem;
+}
+
+.cardNumber {
+    font-size: 1.25rem;
+    font-family: CamptonBook;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.creditCardContainer .validity, .creditCardContainer .cardholder{
+    margin-bottom: 0;
+    color: white;
+    font-family: CamptonBook;
+    font-size: 14px;
+}
+
+.creditCardContainer .visa{
+    transform: translateY(20px);
+}
+
+/* Purchase Package End */
+
+/* mdShop Start */
+
+#mdShopNav {
+    height: 100vh !important;
+    background-image: url('../../../front/assets/img/mdShopNavBg.png');
+    background-size: contain;
+    display: flex;
+    align-items: baseline;
+}
+
+#mdShopNav .nav2{
+    background-color: #fff;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 24px 0px #00000040;
+}
+
+#mdShopNav a{
+    color: #000;
+}
+
+.mdShop{
+    background-color: #f6f6f6;
+}
+
+.product-card-container .product-row .col-3{
+    margin-bottom: 1.5rem;
+}
+
+.product-card-container .card{
+    padding: 1rem;
+}
+
+.product-card-container .card .card-body{
+    padding: 1rem 0;
+}
+
+.product-card-container .card .card-body h5{
+    font-family: Campton;
+    font-weight: 600;
+}
+
+.product-card-container .card-link{
+    text-decoration: none;
+    color: #000;
+}
+
+/* mdShop End */
