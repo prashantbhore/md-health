@@ -3,9 +3,9 @@
 <div class="content-wrapper bg-f6">
     
     <!-- SECTION 1 -->
-    <div class="searchBar backBtn bg-f6">
+    <div class="searchBar bg-f6">
         <div class="container pt-4">
-            <a href="home-service" class="d-flex align-items-center mb-5 gap-2">
+            <a href="home-service" class="d-flex align-items-center mb-5 gap-2 backBtn">
                 <img src="{{('front/assets/img/ArrowLeftCircle.png')}}" alt="">
                 <p class="mb-0 fs-5 camptonBold">Back Home Services</p>
             </a>
@@ -67,6 +67,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="pill" href="#menu2">Photos/Videos</a>
                     </li>
+                    <div class="right-align">
+                        <a href="{{url('buy-service')}}" class="underline smallFont anchor">Buy Service</a>
+                    </div>
                 </ul>
     
                 <!-- Tab panes -->

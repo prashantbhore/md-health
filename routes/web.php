@@ -67,6 +67,8 @@ Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
+
+//Home Service Routes
 Route::get('home-service', function () {
     return view('front.mdHome.index');
 });
@@ -75,6 +77,23 @@ Route::get('search-result', function () {
     return view('front.mdHome.searchResult');
 });
 
+Route::get('homeService-purchase', function () {
+    return view('front.mdHome.purchase');
+});
+
+Route::get('home-pack-details', function () {
+    return view('front.mdHome.homePackDetails');
+});
+
+Route::get('payment-status', function () {
+    return view('front.mdHome.paymentStatus');
+});
+
+Route::get('buy-service', function () {
+    return view('front.mdHome.buyService');
+});
+
+//mdHealth Routes
 Route::get('health-search-result', function () {
     return view('front.mdHealth.searchResult');
 });
@@ -87,13 +106,12 @@ Route::get('purchase-package', function () {
     return view('front.mdHealth.purchase');
 });
 
-Route::get('home-pack-details', function () {
-    return view('front.mdHome.homePackDetails');
+
+//mdShop Routes
+Route::get('mdShop', function () {
+    return view('front.mdShop.index');
 });
 
-Route::get('buy-service', function () {
-    return view('front.mdHome.buyService');
-});
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
@@ -181,7 +199,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::get('/admin-data-table', 'data_table');
         Route::get('/edit-admins/{id}/edit', 'edit_admin');
     });
-
 
 
 
@@ -320,6 +337,11 @@ Route::controller(CommonLoginController::class)->group(function () {
     Route::post('/email-or-mobile-exist', 'email_or_mobile_exist');
 
 });
+//     Route::post('/otp-verify','otp_verify_for_register');
+//     Route::post('/email-to-mobile','email_to_mobile');
+//     Route::post('/email-password-exist','email_password_exist');
+
+//  });
 // AUTHENTICATION
 
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
@@ -387,6 +409,9 @@ Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-pa
 // Route::view('add-acommodition', 'front/mdhealth/medical-provider/add-acommodition');
 Route::view('add-new-vehical', 'front/mdhealth/medical-provider/add-new-vehical');
 Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
+Route::view('medical-roles', 'front/mdhealth/medical-provider/medical-roles');
+Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
+Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 
 #Sales
 Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
@@ -397,10 +422,22 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 
 
-// MD BOOKING PAGE
-Route::view('md-booking-home-page', 'front/mdhealth/md-booking-home-page');
-//MD FOOD PAGE
-Route::view('md-food-home-page', 'front/mdhealth/md-food-page');
+// MD BOOKING PAGE KD
+Route::view('md-booking-home-page', 'front/mdhealth/md-booking/md-booking-home-page');
+Route::view('md-booking-search-hotel-page', 'front/mdhealth/md-booking/md-booking-search-hotel');
+Route::view('md-booking-search-flight-page', 'front/mdhealth/md-booking/md-booking-search-flight');
+Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-booking-search-vehicle');
+Route::view('md-booking-reservation-details-page', 'front/mdhealth/md-booking/md-booking-reservation-details');
+Route::view('md-booking-payment-succ-page', 'front/mdhealth/md-booking/md-booking-payment-successful');
+Route::view('md-booking-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-flight-ticket');
+
+//MD FOOD PAGE KD
+Route::view('md-food-home-page', 'front/mdhealth/md-food/md-food-page');
+Route::view('md-food-search-page', 'front/mdhealth/md-food/md-food-search');
+Route::view('md-food-search-view', 'front/mdhealth/md-food/md-food-view');
+
+
+
 // Shubham
 // Vendor Panel
 Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
@@ -416,3 +453,6 @@ Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_s
 Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
 Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
 Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
+
+// Medical Provider Panel
+Route::view('medical-dashboard', 'front/mdhealth/medical-provider');

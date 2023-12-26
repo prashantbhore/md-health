@@ -13,6 +13,15 @@
             color: #B9B9B9;
         }
 
+        .star-rating .fa.fa-star {
+            color: gray;
+            cursor: pointer;
+        }
+
+        .star-rating .fa.fa-star.selected {
+            color: #4CDB06;
+        }
+
         .form-group input.form-control {
             color: #000 !important;
         }
@@ -22,6 +31,27 @@
             width: 150px;
             object-fit: contain;
             margin-top: 15px;
+        }
+
+        .form-group .prev-img-div img {
+            height: 150px;
+            width: 150px;
+            object-fit: contain;
+            margin-top: 15px;
+        }
+
+        .multiple-checkbox-div .multiple-checks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .multiple-checkbox-div .multiple-checks .form-check {
+            width: 189px;
+        }
+
+        .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
+            margin-right: 3px;
         }
 
         .multiple-checkbox-div .multiple-checks {
@@ -40,18 +70,6 @@
     </style>
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Star Rating -->
-    <style>
-        .star-rating .fa.fa-star {
-            color: gray;
-            cursor: pointer;
-        }
-
-        .star-rating .fa.fa-star.selected {
-            color: #4CDB06;
-        }
-    </style>
 
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -213,8 +231,8 @@
 
                                     <div class="section-btns mb-4">
                                         {{-- <a href="javascript:void(0);" --}}
-                                        <button
-                                            class="black-plate bg-black text-white fw-700 w-100">Save Acommodition</button>
+                                        <button class="black-plate bg-black text-white fw-700 w-100">Save
+                                            Acommodition</button>
                                     </div>
 
                                 </form>
@@ -233,7 +251,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            function updateCheckedValues(){
+            function updateCheckedValues() {
                 const checkedValues = $('.form-check-input:checked').map(function() {
                     return $(this).val();
                 }).get().join(', ');

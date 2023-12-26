@@ -19,7 +19,7 @@
                  <div class=" row text-white-50">Glossary</div>
                  <div class=" row text-white-50">Cancellation/Refund Transactions</div>
              </div>
-             <div class="col col-3 d-flex flex-column gap-3">
+             <div class="col col-3 d-flex flex-column gap-3 text-end">
                  <div class=" ">support@mdhealth.com</div>
                  <div class="h4">0800 800 8080</div>
              </div>

@@ -35,6 +35,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+   {{-- Md Booking --}}
    <link rel="stylesheet" href="{{URL::asset('front/assets/css/md-booking.css')}}">
    <link href="https://cdn.jsdelivr.net/npm/datepicker-js@latest/datepicker.min.css" rel="stylesheet">
 
