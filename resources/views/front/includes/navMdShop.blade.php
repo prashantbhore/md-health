@@ -1,4 +1,4 @@
-<div class="bg-img-container">
+<!-- <div class="bg-img-container"> -->
     <nav id="mdShopNav" class="navbar navbar-expand-lg navbar-light bg-f6 py-3">
     <img class="mdShopNavBg" src="{{URL('front/assets/img/mdShopNavBg.png')}}" alt="">
         <div class="container">

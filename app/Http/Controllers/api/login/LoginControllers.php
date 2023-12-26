@@ -15,7 +15,8 @@ use App\Models\CustomerLogs;
 class LoginControllers extends BaseController {
     // customer login
 
-    public function customer_login( Request $request ) {
+    public function customer_login(Request $request) {
+        // return 'asdsa';
         // return $request;
         $validator = Validator::make( $request->all(), [
             // 'email' => 'required',
@@ -25,25 +26,12 @@ class LoginControllers extends BaseController {
 
         $validation_message = '';
 
-        // // if ( empty( $request->email ) ) {
-        // //     $validation_message .= 'email field';
-        // // }
-        // // if ( empty( $request->password ) ) {
-        // //     $validation_message .= 'password field';
-        // // }
-
-        // if ( $validator->fails() ) {
-        //     // return $this->sendError( $validation_message . ' is required.' );
-        //     return response()->json( [
-        //         'status' => 404,
-        //         'message' => $validation_message . ' is required.',
-        // ] );
-        // }
         if ( $validator->fails() ) {
             return $this->sendError( 'Validation Error.', $validator->errors() );
         }
         // return $request;
         if ( $request->platform_type == 'web' ) {
+            // return 'asdsad';
             if ( Auth::guard( 'md_customer_registration' )->attempt( [
                 'email' => $request->email,
                 'password' => $request->password,

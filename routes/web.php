@@ -120,6 +120,14 @@ Route::get('product', function () {
     return view('front.mdShop.product');
 });
 
+Route::get('payment-status-shop', function () {
+    return view('front.mdShop.paymentStatus');
+});
+
+Route::get('view-products', function () {
+    return view('front.mdShop.allProducts');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
