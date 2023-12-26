@@ -125,6 +125,20 @@ public function email_password_exist(Request $request){
     //     return response()->json(['user_exist' => null]); // Return null if user doesn't exist or credentials are incorrect
     // }
 }
+public function email_or_mobile_exist(Request $request){
+    $email_exist = CommonUserLoginTable::where('email', $request->email)->first();
+    $phone_exist = CommonUserLoginTable::where('mobile_no', $request->phone)->first();
+    $mobile_no_exist = CommonUserLoginTable::where('mobile_no', $request->mobile_no)->first();
+    if(!empty($email_exist)){
+        return response()->json(['email_exist' => $email_exist]); 
+    }
+    if(!empty($phone_exist)){
+        return response()->json(['phone_exist' => $phone_exist]); 
+    }
+    if(!empty($mobile_no_exist)){
+        return response()->json(['mobile_no_exist' => $mobile_no_exist]); 
+    }
+}
 
 
 
@@ -156,16 +170,12 @@ public function email_password_exist(Request $request){
                     ])
                 ) {
                     $providers = Auth::guard('md_health_medical_providers_registers')->user();
-
                     if ($login_type == 'login') {
                         $otpcheck = MedicalProviderRegistrater::where('id', $providers->id)
-                            ->where('Login_otp', $otpverify)
                             ->where('status', 'active')
-                            // ->where('otp_expiring_time', '>=', now())
                             ->first();
 
                         if ($otpcheck) {
-                            // dd($otpcheck);
                             $user_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
                             $user_email = Auth::guard('md_health_medical_providers_registers')->user()->email;
                             $user = Auth::guard('md_health_medical_providers_registers')->user();
@@ -173,24 +183,26 @@ public function email_password_exist(Request $request){
                             Session::put('MDMedicalProvider*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
-                            return redirect('/medical-provider-dashboard')->with('success', "Login successfully.");
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Login successfully.',
+                                'url' => '/medical-provider-dashboard',
+                            ] );
                         } else {
-                            return redirect('sms-code')->with([
-                                'error' => "OTP does not match.",
-                                'email' => $request->email,
-                                'password' => $request->password,
-                            ]);
+                            dd($user_type);
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Credencials not match',
+                                'url' => '/sign-in-web',
+                            ] );
                         }
                     } else {
 
                         $otpcheck = MedicalProviderRegistrater::where('id', $providers->id)
-                            ->where('registration_otp', $otpverify)
                             ->where('status', 'active')
-                            // ->where('otp_expiring_time', '>=', now())
                             ->first();
 
                         if ($otpcheck) {
-                            // dd($otpcheck);
                             $user_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
                             $user_email = Auth::guard('md_health_medical_providers_registers')->user()->email;
                             $user = Auth::guard('md_health_medical_providers_registers')->user();
@@ -198,13 +210,17 @@ public function email_password_exist(Request $request){
                             Session::put('MDMedicalProvider*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
-                            return redirect('/medical-provider-dashboard')->with('success', "Profile created successfully.");
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Profile created successfully.',
+                                'url' => '/medical-provider-dashboard',
+                            ] );
                         } else {
-                            return redirect('sms-code')->with([
-                                'error' => "OTP does not match.",
-                                'email' => $request->email,
-                                'password' => $request->password,
-                            ]);
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Credencials not match',
+                                'url' => '/sign-in-web',
+                            ] );
                         }
 
                     }
@@ -225,13 +241,10 @@ public function email_password_exist(Request $request){
 
                     if ($login_type == 'login') {
                         $otpcheck = CustomerRegistration::where('id', $providers->id)
-                            // ->where('Login_otp', $otpverify)
                             ->where('status', 'active')
-                            // ->where('otp_expiring_time', '>=', now())
                             ->first();
 
                         if ($otpcheck) {
-                            // dd($otpcheck);
                             $user_id = Auth::guard('md_customer_registration')->user()->id;
                             $user_email = Auth::guard('md_customer_registration')->user()->email;
                             $user = Auth::guard('md_customer_registration')->user();
@@ -239,20 +252,13 @@ public function email_password_exist(Request $request){
                             Session::put('MDCustomer*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
-                            // return redirect('/user-profile')->with('success', "Login successfully.");
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Login successfully.',
                                 'url' => '/user-profile',
-                                // 'mobile_no' => $provider_id->mobile_no,
-                                // 'company_name' => $provider_id->company_name,
                             ] );
                         } else {
-                            // return redirect('sms-code')->with([
-                            //     'error' => "OTP does not match.",
-                            //     'email' => $request->email,
-                            //     'password' => $request->password,
-                            // ]);
+                           
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Credencials not match',
@@ -262,9 +268,7 @@ public function email_password_exist(Request $request){
                     } else {
 
                         $otpcheck = CustomerRegistration::where('id', $providers->id)
-                            // ->where('registration_otp', $otpverify)
                             ->where('status', 'active')
-                            // ->where('otp_expiring_time', '>=', now())
                             ->first();
 
                         if ($otpcheck) {
@@ -276,18 +280,12 @@ public function email_password_exist(Request $request){
                             Session::put('MDCustomer*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
-                            // return redirect('/user-profile')->with('success', "Profile created successfully.");
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Profile created successfully.',
                                 'url' => '/user-profile',
                             ] );
                         } else {
-                            // return redirect('sms-code')->with([
-                            //     'error' => "OTP does not match.",
-                            //     'email' => $request->email,
-                            //     'password' => $request->password,
-                            // ]);
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Credencials not match',
