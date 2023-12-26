@@ -1,4 +1,4 @@
-<nav id="homeService" class="navbar navbar-expand-lg navbar-light bg-f6 py-3">
+<nav id="mdShopNav" class="navbar navbar-expand-lg navbar-light bg-f6 py-3" style="height: 100vh; background-image: url('front/assets/img/mdShopNavBg.png'; )">
     <div class="container">
         <a class="navbar-brand" href="{{URL('admin/dashboard')}}">
             <img src="{{URL::asset('admin/assets/img/MDHealth.svg')}}" alt="" style="width: 180px;" />
@@ -17,5 +17,10 @@
         <a href="{{url('sign-in-web')}}" class="signIn nav-link underline text-underline">Sign In</a>
 
         <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
+    </div>
+    <div class="container">
+        <div class="search-bar">
+            hey
+        </div>
     </div>
 </nav>
