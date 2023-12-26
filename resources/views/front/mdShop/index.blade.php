@@ -27,7 +27,7 @@
         <div class="product-card-container container">
             <div class="row product-row">
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -44,7 +44,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -61,7 +61,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -78,7 +78,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -95,7 +95,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -112,7 +112,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -129,7 +129,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -146,7 +146,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a href="product" class="mt-4 card-link">
+                    <a href="{{url('product')}}" class="mt-4 card-link">
                         <div class="card" >
                             <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
