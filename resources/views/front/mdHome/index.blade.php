@@ -51,7 +51,7 @@
         <div class="bg-f6 section-2">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="homeServiceTitle">Best Home <span style="color: #08fc34">Service</span> Packages</h2>
+                    <h2 class="titleClass">Best Home <span style="color: #08fc34">Service</span> Packages</h2>
                 </div>
                 <div class="homeServicePackage rounded mb-4">
                     <div>

@@ -42,7 +42,7 @@
     <div class="section-2 bg-f6">
         <div class="container">
             <div class="text-center">
-                <h2 class="homeServiceTitle">Your <span style="color: #08fc34">search</span> results</h2>
+                <h2 class="titleClass">Your <span style="color: #08fc34">search</span> results</h2>
             </div>
         </div>
     </div>
@@ -507,7 +507,7 @@
                 <img src="{{('front/assets/img/step1.svg')}}" alt="">
                 <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
                 <div class="d-flex align-items-center flex-column">
-                    <a href="{{url('#')}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
+                    <a href="{{url('purchase-package')}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
                     <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#treatmentForModal2" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>
                 </div>
             </div>
@@ -557,8 +557,9 @@
                             </div>
                             <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
                             <div class="col-12 text-center ">
-                                <button type="submit" class="btn purchaseBtn my-4" style="padding: 0 6rem"><span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span> 
-                                </button>
+                                <a href="{{url('purchase-package')}}" type="submit" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                    <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span> 
+                                </a>
                             </div>
                         </form>
                 </div>

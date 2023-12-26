@@ -23,15 +23,16 @@ return new class extends Migration
             $table->string('card_expiry_date')->nullable();
             $table->string('card_cvv')->nullable();
             $table->string('md_coin')->nullable();
-            $table->string('created_ip_address')->nullable();
-            $table->string('modified_ip_address')->nullable();
-            $table->bigInteger('created_by')->nullable();
-            $table->bigInteger('modified_by')->nullable();
+            $table->string('package_total_price')->nullable();
             $table->string('payment_percentage')->nullable();
             $table->string('paid_amount')->nullable();
             $table->string('pending_payment')->nullable();
             $table->enum('payment_status', ['pending', 'completed'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
+            $table->string('created_ip_address')->nullable();
+            $table->string('modified_ip_address')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('modified_by')->nullable();
             $table->timestamps();
         });
     }
