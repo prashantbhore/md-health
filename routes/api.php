@@ -66,7 +66,7 @@ Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_prov
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 
-//check-password-exist 
+//check-password-exist
 Route::post('md-check-password-exist', [UpdateCustomerProfileController::class, 'check_password_exist']);
 
 //update-customer-profile
@@ -91,6 +91,9 @@ Route::post('md-add-new-acommodition', [AddNewAcommoditionController::class, 'ad
 
 //hotel-list
 Route::get('md-hotel-list', [AddNewAcommoditionController::class, 'hotel_list']);
+
+//hotel-list-view
+Route::post('md-hotel-list-edit-view', [AddNewAcommoditionController::class, 'hotel_list_edit_view']);
 
 //edit-hotel-list
 Route::post('md-edit-hotel-list', [AddNewAcommoditionController::class, 'edit_hotel_list']);
@@ -206,6 +209,9 @@ Route::get('md-customer-purchase-package-completed-list-search', [CustomerPackag
 //customer-purchase-package-cancelled-list
 Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
 
+//customer-purchase-cancellation-reason
+Route::get('md-customer-purchase-cancellation-reason', [CustomerPackageController::class, 'customer_purchase_cancellation_reason']);
+
 //customer-change-package-list-active-cancelled
 Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);
 
@@ -300,7 +306,7 @@ Route::post('md-provider-assign-treatment-case-manager', [SalesController::class
 Route::post('md-provider-treatment-search', [SalesController::class,'treatment_search']);
 
 
-//Provider account details saved 
+//Provider account details saved
 Route::post('md-provider-add-bank-account', [PaymentController::class,'add_provider_account']);
 
 //Provider Transaction List
@@ -353,6 +359,7 @@ Route::controller(VendorProductController::class)->group(function (){
     Route::post('/products/bulk-import','addProductsBulk');
 });
 
+//
 
 // });
 

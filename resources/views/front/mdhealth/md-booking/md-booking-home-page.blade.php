@@ -3,10 +3,12 @@
     <div>
         {{-- banner --}}
         <div>
-            <img src="{{ 'front/assets/img/mdBookings/mdBookingsHeader.png' }}" class="position-absolute banner-img " alt="">
+            <img src="{{ 'front/assets/img/mdBookings/mdBookingsHeader.png' }}" class="position-absolute banner-img "
+                alt="">
             <div class="position-relative  d-flex flex-column  align-items-center banner">
                 <p class="green-color banner-p">BOOK RELIABLE & AFFORDABLE</p>
-                <p class="fw-bold hotel-size"> HOTEL <span class="green-color">/ </span>FLIGHT<span class="green-color">/ </span>VEHICLE
+                <p class="fw-bold hotel-size"> HOTEL <span class="green-color">/ </span>FLIGHT<span class="green-color">/
+                    </span>VEHICLE
                 </p>
                 <p class="green-color banner-p">IN SECONDS</p>
             </div>
@@ -19,7 +21,7 @@
                         <div id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
                             class="nav-link active  d-flex justify-content-center align-items-center main-mid-seaction">
                             <img src="{{ 'front/assets/img/mdBookings/ic_baseline-hotel.png' }}" alt="">
-                            <span class="fs-6 fw-bold mx-1"> Hotel</span>
+                            <span class="fs-6 fw-bold mx-1 text-dark"> Hotel</span>
                         </div>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -27,14 +29,14 @@
                         <div id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
                             class="nav-link   d-flex justify-content-center align-items-center main-mid-seaction">
                             <img src="{{ 'front/assets/img/mdBookings/bxs_plane-take-off.png' }}" alt="">
-                            <span class="fs-6 fw-bold mx-1">Flight</span>
+                            <span class="fs-6 fw-bold mx-1 text-dark">Flight</span>
                         </div>
                     </li>
                     <li class="nav-item" role="presentation">
                         <div id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
                             class="nav-link   d-flex justify-content-center align-items-center main-mid-seaction">
                             <img src="{{ 'front/assets/img/mdBookings/Vector (1).png' }}" alt="">
-                            <span class="fs-6 fw-bold mx-1">Vehicle</span>
+                            <span class="fs-6 fw-bold mx-1 text-dark">Vehicle</span>
                         </div>
                     </li>
                 </ul>
@@ -72,15 +74,20 @@
                                     </div>
                                 </div>
                                 <div class="col main-mid-seaction borer-color">
-                                    <div class="d-flex justify-content-center align-items-center h-100 "
-                                        id="custom-select-button">
-                                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="">
-                                        <input type="date" id="datePicker" name="calendar"
-                                            class="form-control input1 border-0">
+
+                                    <div id="reportrange"
+                                        class="date-range-picker-div d-flex justify-content-center align-items-center h-100 "
+                                        name="daterange">
+                                        {{-- <i class="fa fa-calendar"></i>&nbsp; --}}
+                                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt=""
+                                            class="mx-2">
+                                        <input type="text" name="daterange"
+                                            class="form-control w-100 m-0 p-0 border-0 bg-light" value="Daily" />
+                                        <span></span>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-search-pill">Search</button>
+                                    <button class="btn-search-pill-food ">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +98,7 @@
 
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="shadow p-3 mb-5 bg-body roundedshadow">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
                                 <div class="row gap-2 m-1">
                                     <div class="col main-mid-seaction borer-color">
                                         <div class="d-flex justify-content-center align-items-center h-100">
@@ -128,89 +135,92 @@
                                         </div>
                                     </div>
                                     <div class="col ">
-                                        <button class="btn btn-search-pill">Search</button>
+                                        <button class="btn btn-search-pill-food ms-1">Search</button>
                                     </div>
                                 </div>
-                        </div>
-                        
-                        <div class="w-75 d-flex justify-content-between align-items-center flex-wrap mt-3">
-                            <div>One Way</div>
-                            <div>
-                                <img src="{{ 'front/assets/img/mdBookings/Rectangle 883.png' }}" alt="">
-                                <span>Two Way</span>
                             </div>
-                            <div class="d-flex">
-                                <p class="fw-bold">Fight Details:</p>
-                                <div class="form-floating">
-                                    <select class="border-0">
-                                        <option data-display="Select" selected>12 Aug</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+
+                            <div class="w-75 d-flex justify-content-between align-items-center flex-wrap mt-3">
+                                <div>One Way</div>
+                                <div>
+                                    <img src="{{ 'front/assets/img/mdBookings/Rectangle 883.png' }}" alt="">
+                                    <span>Two Way</span>
+                                </div>
+                                <div class="d-flex">
+                                    <p class="fw-bold">Fight Details:</p>
+                                    <div class="form-floating">
+                                        <select class="border-0">
+                                            <option data-display="Select" selected>12 Aug</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <p class="fw-bold">Person:</p>
+                                    <div class="form-floating">
+                                        <select class=" border-0">
+                                            <option data-display="Select " selected>12 Aug</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <p class="fw-bold">Person:</p>
-                                <div class="form-floating">
-                                    <select class=" border-0">
-                                        <option data-display="Select " selected>12 Aug</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <img src="{{ 'front/assets/img/mdBookings/flights.png' }}" alt="" class=" image1">
-                    </div>
+                        <div>
+                            <img src="{{ 'front/assets/img/mdBookings/flights.png' }}" alt="" class=" image1">
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div>
                             <div class="container">
                                 <div class="shadow p-3 mb-5 bg-body roundedshadow">
-                                <div class="row gap-3 m-1">
-                                    <div class="col borer-color main-mid-seaction">
-                                        <div class="d-flex justify-content-center align-items-center h-100">
-                                            <img src="{{ 'front/assets/img/mdBookings/bxs_plane-take-off.png' }}"
-                                                alt="">
-                                            <span>Pick up Location</span>
+                                    <div class="row gap-3 m-1">
+                                        <div class="col borer-color main-mid-seaction">
+                                            <div class="d-flex justify-content-center align-items-center h-100">
+                                                <img src="{{ 'front/assets/img/mdBookings/bxs_plane-take-off.png' }}"
+                                                    alt="">
+                                                <span>Pick up Location</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col borer-color main-mid-seaction">
-                                        <div class="d-flex justify-content-center align-items-center h-100">
-                                            <img src="{{ 'front/assets/img/mdBookings/Group 64.png' }}" alt="">
-                                            <span>1712
+                                        <div class="col borer-color main-mid-seaction">
+                                            <div class="d-flex justify-content-center align-items-center h-100">
+                                                <img src="{{ 'front/assets/img/mdBookings/Group 64.png' }}"
+                                                    alt="">
+                                                <span>1712
+                                                    <img src="{{ 'front/assets/img/mdBookings/Vector (2).png' }}"
+                                                        alt="">
+                                                    10.00
+                                                    <img src="{{ 'front/assets/img/mdBookings/Arrow - Down Circle.png' }}"
+                                                        alt="">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col borer-color main-mid-seaction">
+                                            <div class="d-flex justify-content-center align-items-center h-100">
                                                 <img src="{{ 'front/assets/img/mdBookings/Vector (2).png' }}"
                                                     alt="">
-                                                10.00
-                                                <img src="{{ 'front/assets/img/mdBookings/Arrow - Down Circle.png' }}"
-                                                    alt="">
-                                            </span>
+                                                <span>1712
+                                                    <img src="{{ 'front/assets/img/mdBookings/Group 56.png' }}"
+                                                        alt="">
+                                                    10.00
+                                                    <img src="{{ 'front/assets/img/mdBookings/Arrow - Down Circle.png' }}"
+                                                        alt="">
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col borer-color main-mid-seaction">
-                                        <div class="d-flex justify-content-center align-items-center h-100">
-                                            <img src="{{ 'front/assets/img/mdBookings/Vector (2).png' }}" alt="">
-                                            <span>1712
-                                                <img src="{{ 'front/assets/img/mdBookings/Group 56.png' }}"
-                                                    alt="">
-                                                10.00
-                                                <img src="{{ 'front/assets/img/mdBookings/Arrow - Down Circle.png' }}"
-                                                    alt="">
-                                            </span>
+                                        <div class="col main-mid-seaction">
+                                            <button class="btn btn-search-pill-food">Search</button>
                                         </div>
-                                    </div>
-                                    <div class="col main-mid-seaction">
-                                        <button class="btn btn-search-pill">Search</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <img src="{{ 'front/assets/img/mdBookings/flights.png' }}" alt="" class=" image1">
-                            </div>
+                                <div>
+                                    <img src="{{ 'front/assets/img/mdBookings/flights.png' }}" alt=""
+                                        class=" image1">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -226,6 +236,19 @@
     <script>
         document.getElementById('custom-select-button').addEventListener('click', function() {
             document.getElementById('selectWithOptions').click();
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end
+                    .format('YYYY-MM-DD'));
+            });
         });
     </script>
     {{-- <script>

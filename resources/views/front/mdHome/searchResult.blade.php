@@ -42,7 +42,7 @@
     <div class="section-2 bg-f6">
         <div class="container">
             <div class="text-center">
-                <h2 class="homeServiceTitle">Your <span style="color: #08fc34">search</span> results</h2>
+                <h2 class="titleClass">Your <span style="color: #08fc34">search</span> results</h2>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div>
                             <div class="d-flex gap-2 mb-2">
-                                <button class="btn purchaseBtn">Purchase Package</button>
+                                <button data-bs-toggle="modal" data-bs-target="#serviceForModal" class="btn purchaseBtn">Purchase Package</button>
                                 <button class="favouriteBtn">
                                     <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
                                 </button>
@@ -137,7 +137,7 @@
                         </div>
                         <div>
                             <div class="d-flex gap-2 mb-2">
-                                <button class="btn purchaseBtn">Purchase Package</button>
+                                <button data-bs-toggle="modal" data-bs-target="#serviceForModal" class="btn purchaseBtn">Purchase Package</button>
                                 <button class="favouriteBtn">
                                     <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
                                 </button>
@@ -259,6 +259,80 @@
     <!-- SECTION 4 -->
     <div class="bg-f6 scanQr">
         <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="serviceForModal" tabindex="-1" aria-labelledby="serviceForModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered position-relative">
+            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                <!-- </button> -->
+            <div class="modal-content">
+                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
+                <img src="{{('front/assets/img/step1.svg')}}" alt="">
+                <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
+                <div class="d-flex align-items-center flex-column">
+                    <a href="{{url('homeService-purchase')}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
+                    <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#serviceForModal2" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="serviceForModal2" tabindex="-1" aria-labelledby="serviceForModal2" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered position-relative">
+            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                <!-- </button> -->
+            <div class="modal-content">
+                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/modalClose.png')}}" alt="">
+                <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
+                <p class="camptonBook text-center">Fill the patient detail.</p>
+                <div class="modal-body">
+                    <form class="row g-4">
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label fw-bold">*Patient Full Name</label>
+                                <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputPassword4" class="form-label fw-bold">*Relationship To You</label>
+                                <input type="text" class="form-control h-75" id="inputPassword4" placeholder="Relationship To You">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputAddress" class="form-label fw-bold">*Patient E-mail</label>
+                                <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Email">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputAddress" class="form-label fw-bold">*Patient Contact Number</label>
+                                <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Contact Number">
+                            </div>
+    
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">*Patient Country</label>
+                                <select id="inputState" class="form-select h-75">
+                                    <option selected>Country</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">*Patient City</label>
+                                <select id="inputState" class="form-select h-75">
+                                    <option selected>City</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="inputEmail4" class="form-label fw-bold">*Full Address</label>
+                                <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Address">
+                            </div>
+                            <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
+                            <div class="col-12 text-center ">
+                                <a href="{{url('homeService-purchase')}}" type="submit" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                    <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span> 
+                                </a>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

@@ -12,14 +12,14 @@
             <li class="nav-item mpPackagesLi">
                 <a class="nav-link mpPackages" href="{{url('medical-packages')}}">Packages</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{{url('payment-information')}}">Payment Information</a>
+            <li class="nav-item mpPaymentLi">
+                <a class="nav-link mpPayment " href="{{url('payment-information')}}">Payment Information</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Messages</a>
+            <li class="nav-item mpMessagesLi">
+                <a class="nav-link mpMessages" href="{{url('medical-messages')}}">Messages</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Roles</a>
+            <li class="nav-item mpRolesLi">
+                <a class="nav-link mpRoles " href="{{url('medical-roles')}}">Roles</a>
             </li>
             <li class="nav-item mpOtherServicesLi">
                 <a class="nav-link mpOtherServices" href="{{url('medical-other-services')}}">Other Services</a>
@@ -27,8 +27,8 @@
             <li class="nav-item mpAccountLi">
                 <a class="nav-link mpAccount" href="{{url('medical-account')}}">Account</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Reports</a>
+            <li class="nav-item mpReportsLi">
+                <a class="nav-link mpReports" href="{{url('reports')}}">Reports</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Membership</a>
