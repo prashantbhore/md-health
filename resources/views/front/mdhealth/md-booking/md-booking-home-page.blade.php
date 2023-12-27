@@ -87,7 +87,9 @@
                                     </div>
                                 </div>
                                 <div class="col">
+                                    <a class="" href="{{URL('md-booking-search-hotel-page')}}" >
                                     <button class="btn-search-pill-food ">Search</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +137,9 @@
                                         </div>
                                     </div>
                                     <div class="col ">
+                                        <a class="" href="{{URL('md-booking-search-flight-page')}}">
                                         <button class="btn btn-search-pill-food ms-1">Search</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
