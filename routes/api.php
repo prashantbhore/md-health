@@ -197,6 +197,9 @@ Route::post('md-change-patient-information', [CustomerPackageController::class, 
 //change-patient-information-for-myself
 Route::post('md-change-patient-information-for-myself', [CustomerPackageController::class, 'change_patient_information_for_myself']);
 
+//customer-get-percentage
+Route::post('md-customer-get-percentage', [CustomerPackageController::class, 'customer_get_percentage']);
+
 //customer-package-purchase-details
 Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);
 
