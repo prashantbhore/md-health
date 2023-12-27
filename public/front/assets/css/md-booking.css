@@ -326,4 +326,30 @@ height: 150%;
     font-family: Campton;
     /* font-style: italic; */
 }
-
+.flight-detail-form-p3{
+    background-color: #4CDB06;
+width: 20%;
+padding: 1px;
+border-radius: 5px;
+color: black;
+font-weight: bold;
+text-align: center;
+}
+.flight-detail-form-p4{
+background-color: #4CDB06;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+}
+.flight-detail-form-p5{
+    font-size:18px ;
+    font-weight: 700;
+    color: #000002;
+    font-family: Campton;
+}
+.flight-detail-form-p6{
+    font-size:17px ;
+    font-weight: 600;
+    color: #F31D1D;
+    font-family: Campton;
+}

@@ -425,7 +425,6 @@ class CustomerPackageController extends BaseController
                 'minimum_discount' => 'min.Requirement',
                 'title' => 'twenty_percent',
                 'price' => number_format($twenty_percent, 2), // Replace with actual price format
-
             ];
             $thirty_percent = [
                 'id' => 2,
@@ -433,7 +432,6 @@ class CustomerPackageController extends BaseController
                 'minimum_discount' => 'Get 5% Discount',
                 'title' => 'thirty_percent',
                 'price' => number_format($thirty_percent, 2), // Replace with actual price format
-
             ];
             $fifty_percent = [
                 'id' => 3,
@@ -590,15 +588,89 @@ class CustomerPackageController extends BaseController
         }
     }
 
+    public function customer_get_percentage(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'sale_price' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $sale_price = $request->sale_price;
+        $twenty_percent = $sale_price * 0.2; // 20% of sale_price
+        $thirty_percent = $sale_price * 0.3; // 30% of sale_price
+        $fifty_percent = $sale_price * 0.5; // 50% of sale_price
+        $hundred_percent = $sale_price; // 100% of sale_price
+
+        // Apply discounts
+        $thirty_percent_discounted = $thirty_percent - ($thirty_percent * 0.05); // 5% discount on 30%
+        $fifty_percent_discounted = $fifty_percent - ($fifty_percent * 0.08); // 8% discount on 50%
+        $hundred_percent_discounted = $hundred_percent - ($hundred_percent * 0.1); // 10% discount on 100%
+
+        $discount = [];
+        $purchase_details['twenty_percent'] = $twenty_percent;
+        $purchase_details['thirty_percent'] = $thirty_percent_discounted;
+        $purchase_details['fifty_percent'] = $fifty_percent_discounted;
+        $purchase_details['hundred_percent'] = $hundred_percent_discounted;
+
+        $twenty_percent = [
+            'id' => 1,
+            'percentage' => '20 %',
+            'minimum_discount' => 'min.Requirement',
+            'title' => 'twenty_percent',
+            'price' => number_format($twenty_percent, 2), // Replace with actual price format
+        ];
+        $thirty_percent = [
+            'id' => 2,
+            'percentage' => '30 %',
+            'minimum_discount' => 'Get 5% Discount',
+            'title' => 'thirty_percent',
+            'price' => number_format($thirty_percent, 2), // Replace with actual price format
+        ];
+        $fifty_percent = [
+            'id' => 3,
+            'percentage' => '50 %',
+            'minimum_discount' => 'Get 8% Discount',
+            'title' => 'fifty_percent',
+            'price' => number_format($fifty_percent, 2), // Replace with actual price format
+        ];
+        $hundred_percent = [
+            'id' => 4,
+            'percentage' => '100 %',
+            'minimum_discount' => 'Get 10% Discount',
+            'title' => 'hundred_percent',
+            'price' => number_format($hundred_percent, 2), // Replace with actual price format
+
+        ];
+        $discount[] = $twenty_percent;
+        $discount[] = $thirty_percent;
+        $discount[] = $fifty_percent;
+        $discount[] = $hundred_percent;
+
+        if (!empty($discount)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your discount details.',
+                'discounts' => $discount,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'your list is empty.',
+
+            ]);
+        }
+    }
 
     public function customer_purchase_package(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
-            'pending_amount' => 'required',
-            'package_percentage_price' => 'required',
-            'payment_method' => 'required',
+            'sale_price' => 'required',
+            'paid_amount' => 'required',
+            'percentage' => 'required',
             'platform_type' => 'required',
         ]);
 
@@ -606,179 +678,380 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        if (!empty($request->purchase_id)) {
-            $purchase_details = [];
-            $purchase_details['payment_percentage'] = $request->package_percentage_price;
-            $purchase_details['paid_amount'] = $request->paid_amount;
-            $purchase_details['pending_payment'] = $request->pending_amount;
-            // $package_percentage_price = $request->package_percentage_price;
-            // $purchase_details['purchase_type'] = 'pending';
-            $purchase_details['created_by'] = 1;
-            $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
+        if($request->platform_type=='web'){
+            if (!empty($request->purchase_id)) {
+                $purchase_details = [];
+                $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                $purchase_details['paid_amount'] = $request->paid_amount;
+                $purchase_details['pending_payment'] = $request->pending_amount;
+                // $package_percentage_price = $request->package_percentage_price;
+                // $purchase_details['purchase_type'] = 'pending';
+                $purchase_details['created_by'] = 1;
+                $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
 
-            if (!empty($purchase_details_data)) {
-                if ($request->pending_amount == $request->paid_amount) {
-                    $payment_status_delete = [
-                        'status' => 'delete',
-                    ];
+                if (!empty($purchase_details_data)) {
+                    if ($request->pending_amount == $request->paid_amount) {
+                        $payment_status_delete = [
+                            'status' => 'delete',
+                        ];
 
-                    CustomerPaymentDetails::where('order_id', $request->purchase_id)
-                        ->where('payment_status', 'pending')
-                        ->update($payment_status_delete);
+                        CustomerPaymentDetails::where('order_id', $request->purchase_id)
+                            ->where('payment_status', 'pending')
+                            ->update($payment_status_delete);
 
-                    // When package_total_price and paid_amount are equal
-                    $payment_details_pending = [
-                        'payment_percentage' => $request->package_percentage_price,
-                        'paid_amount' => $request->pending_amount,
-                        'payment_status' => 'completed',
-                        'pending_payment' => 0 // Assuming no pending amount for completed status
-                    ];
+                        // When package_total_price and paid_amount are equal
+                        $payment_details_pending = [
+                            'payment_percentage' => $request->package_percentage_price,
+                            'paid_amount' => $request->pending_amount,
+                            'payment_status' => 'completed',
+                            'pending_payment' => 0 // Assuming no pending amount for completed status
+                        ];
 
-                    $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->purchase_id)
-                        ->update($payment_details_pending);
-                    if (!empty($CustomerPayamentDetails)) {
-                        return response()->json([
-                            'status' => 200,
-                            'message' => 'payment completed.',
-                            // 'payment_details' => $payment_details,
-                        ]);
+                        $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->purchase_id)
+                            ->update($payment_details_pending);
+                        if (!empty($CustomerPayamentDetails)) {
+                            return response()->json([
+                                'status' => 200,
+                                'message' => 'payment completed.',
+                                // 'payment_details' => $payment_details,
+                            ]);
+                        } else {
+                            return response()->json([
+                                'status' => 404,
+                                'message' => 'Something went wrong .payment not completed.',
+                            ]);
+                        } // This should come before the return to ensure the code below doesn't execute
                     } else {
+                        // When package_total_price and paid_amount are not equal
+                        // $payment_details_pending = [
+                        //     'payment_percentage' => $request->package_percentage_price,
+                        //     'paid_amount' => $request->pending_amount
+                        // ];
+
+                        // $remaining_amount = $request->package_total_price - $request->pending_amount;
+
+                        // $payment_details_completed = [
+                        //     'payment_percentage' => $request->package_percentage_price,
+                        //     'paid_amount' => $request->pending_amount,
+                        //     'pending_payment' => $remaining_amount,
+                        //     'payment_status' => 'pending'
+                        // ];
+
+                        // $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->id)
+                        //     ->update($payment_details_completed);
+                        // if (!empty($CustomerPayamentDetails)) {
+                        //     return response()->json([
+                        //         'status' => 200,
+                        //         'message' => 'success.',
+                        //         // 'payment_details' => $payment_details,
+                        //     ]);
+                        // } else {
                         return response()->json([
                             'status' => 404,
                             'message' => 'Something went wrong .payment not completed.',
                         ]);
-                    } // This should come before the return to ensure the code below doesn't execute
-                } else {
-                    // When package_total_price and paid_amount are not equal
-                    // $payment_details_pending = [
-                    //     'payment_percentage' => $request->package_percentage_price,
-                    //     'paid_amount' => $request->pending_amount
-                    // ];
+                        // } 
+                    }
+                }
+            } else {
+                $purchase_details = [];
 
+                $purchase_details['customer_id'] = 1;
+                $purchase_details['package_id'] = $request->package_id;
+                $packages = Packages::where('status', 'active')
+                    ->select(
+                        'hotel_id',
+                        'vehicle_id',
+                        'created_by',
+                        'sale_price',
+                        'treatment_price',
+                        'hotel_acommodition_price',
+                        'transportation_acommodition_price',
+                        'visa_service_price',
+                        'tour_price'
+                    )
+                    ->where('id', $request->package_id)
+                    ->first();
+                $purchase_details['package_treatment_price'] = $packages->treatment_price;
+                $purchase_details['package_hotel_price'] = $packages->hotel_acommodition_price;
+                $purchase_details['package_transportation_price'] = $packages->transportation_acommodition_price;
+                // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
+                // $purchase_details['package_total_price'] = $request->package_total_price;
+                // $purchase_details['transaction_id'] = $request->transaction_id;
+                // $purchase_details['payment_method'] = $request->payment_method;
+                $purchase_details['hotel_id'] = $packages->hotel_id;
+                $purchase_details['vehicle_id'] = $packages->vehicle_id;
+                $purchase_details['provider_id'] = $packages->created_by;
+                $purchase_details['package_total_price'] = $request->sale_price;
+                // $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                $purchase_details['paid_amount'] = $request->paid_amount;
+                $pending_amount = $request->sale_price - $request->paid_amount;
+                $purchase_details['pending_payment'] = $pending_amount;
+                $purchase_details['payment_percentage'] = $request->percentage;
+                $purchase_details['purchase_type'] = 'pending';
+                $purchase_details['created_by'] = 1;
+
+                $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
+
+                $CustomerPurchaseDetails = CustomerPurchaseDetails::select('id')->get();
+                if (!empty($CustomerPurchaseDetails)) {
+                    foreach ($CustomerPurchaseDetails as $key => $value) {
+                        $length = strlen($value->id);
+                        if ($length == 1) {
+                            $order_unique_id = '#MD00000' . $value->id;
+                        } elseif ($length == 2) {
+                            $order_unique_id = '#MD0000' . $value->id;
+                        } elseif ($length == 3) {
+                            $order_unique_id = '#MD000' . $value->id;
+                        } elseif ($length == 4) {
+                            $order_unique_id = '#MD00' . $value->id;
+                        } elseif ($length == 5) {
+                            $order_unique_id = '#MD0' . $value->id;
+                        } else {
+                            $order_unique_id = '#MD' . $value->id;
+                        }
+                        $update_unique_id = CustomerPurchaseDetails::where('id', $value->id)->update(['order_id' => $order_unique_id]);
+                    }
+                }
+
+                // ... (existing code)
+                if (!empty($update_unique_id)) {
+                    $payment_details_pending = [];
+                    $payment_details_pending['order_id'] = $purchase_details_data->id;
+                    $payment_details_pending['customer_id'] = $purchase_details_data->customer_id;
+                    $payment_details_pending['card_name'] = $request->card_name;
+                    $payment_details_pending['card_no'] = $request->card_no;
+                    $payment_details_pending['card_expiry_date'] = $request->card_expiry_date;
+                    $payment_details_pending['card_cvv'] = $request->card_cvv;
+                    $payment_details_pending['package_id'] = $request->package_id;
+                    $payment_details_pending['provider_id'] = $packages->created_by;
+                    $payment_details_pending['payment_percentage'] = $purchase_details_data->payment_percentage;
+                    $payment_details_pending['paid_amount'] = $purchase_details_data->paid_amount;
+                    // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
+                    $payment_details_pending['payment_status'] = 'completed';
+
+                    // Calculate remaining amount after 'pending' payment
                     // $remaining_amount = $request->package_total_price - $request->pending_amount;
 
-                    // $payment_details_completed = [
-                    //     'payment_percentage' => $request->package_percentage_price,
-                    //     'paid_amount' => $request->pending_amount,
-                    //     'pending_payment' => $remaining_amount,
-                    //     'payment_status' => 'pending'
-                    // ];
+                    $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
 
-                    // $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->id)
-                    //     ->update($payment_details_completed);
-                    // if (!empty($CustomerPayamentDetails)) {
-                    //     return response()->json([
-                    //         'status' => 200,
-                    //         'message' => 'success.',
-                    //         // 'payment_details' => $payment_details,
-                    //     ]);
-                    // } else {
+                    // Update 'completed' entry with remaining amount and status
+                    // $payment_details_completed['paid_amount'] = $remaining_amount;
+                    $payment_details_completed['pending_payment'] = $request->pending_amount;
+                    // No pending amount for completed
+                    $payment_details_completed['payment_status'] = 'pending';
+
+                    $payment_pending = CustomerPaymentDetails::create($payment_details_pending);
+
+                    // Store 'completed' entry only if there's a remaining amount
+                    if ($request->pending_amount > 0) {
+                        $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
+                    }
+                }
+
+
+                if (!empty($payment_completed || $payment_pending)) {
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'package purchase successfully.',
+                        // 'payment_details' => $payment_details,
+                    ]);
+                } else {
                     return response()->json([
                         'status' => 404,
-                        'message' => 'Something went wrong .payment not completed.',
+                        'message' => 'Something went wrong .package not purchased.',
                     ]);
-                    // } 
                 }
             }
-        } else {
-            $purchase_details = [];
 
-            $purchase_details['customer_id'] = 1;
-            $purchase_details['package_id'] = $request->package_id;
-            $packages = Packages::where('status', 'active')
-                ->select('hotel_id', 'vehicle_id', 'created_by', 'sale_price')
-                ->where('id', $request->package_id)
-                ->first();
-            $purchase_details['package_treatment_price'] = $request->package_treatment_price;
-            $purchase_details['package_hotel_price'] = $request->package_hotel_price;
-            $purchase_details['package_transportation_price'] = $request->package_transportation_price;
-            // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
-            // $purchase_details['package_total_price'] = $request->package_total_price;
-            $purchase_details['transaction_id'] = $request->transaction_id;
-            $purchase_details['payment_method'] = $request->payment_method;
-            $purchase_details['hotel_id'] = $packages->hotel_id;
-            $purchase_details['vehicle_id'] = $packages->vehicle_id;
-            $purchase_details['provider_id'] = $packages->created_by;
-            $purchase_details['package_total_price'] = $packages->sale_price;
-            $purchase_details['payment_percentage'] = $request->package_percentage_price;
-            $purchase_details['paid_amount'] = $request->paid_amount;
-            $purchase_details['pending_payment'] = $request->pending_amount;
-            $package_percentage_price = $request->package_percentage_price;
-            $purchase_details['purchase_type'] = 'pending';
-            $purchase_details['created_by'] = 1;
+        }else{
+            if (!empty($request->purchase_id)) {
+                $purchase_details = [];
+                $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                $purchase_details['paid_amount'] = $request->paid_amount;
+                $purchase_details['pending_payment'] = $request->pending_amount;
+                // $package_percentage_price = $request->package_percentage_price;
+                // $purchase_details['purchase_type'] = 'pending';
+                $purchase_details['created_by'] = 1;
+                $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
 
-            $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
+                if (!empty($purchase_details_data)) {
+                    if ($request->pending_amount == $request->paid_amount) {
+                        $payment_status_delete = [
+                            'status' => 'delete',
+                        ];
 
-            $CustomerPurchaseDetails = CustomerPurchaseDetails::select('id')->get();
-            if (!empty($CustomerPurchaseDetails)) {
-                foreach ($CustomerPurchaseDetails as $key => $value) {
-                    $length = strlen($value->id);
-                    if ($length == 1) {
-                        $order_unique_id = '#MD00000' . $value->id;
-                    } elseif ($length == 2) {
-                        $order_unique_id = '#MD0000' . $value->id;
-                    } elseif ($length == 3) {
-                        $order_unique_id = '#MD000' . $value->id;
-                    } elseif ($length == 4) {
-                        $order_unique_id = '#MD00' . $value->id;
-                    } elseif ($length == 5) {
-                        $order_unique_id = '#MD0' . $value->id;
+                        CustomerPaymentDetails::where('order_id', $request->purchase_id)
+                            ->where('payment_status', 'pending')
+                            ->update($payment_status_delete);
+
+                        // When package_total_price and paid_amount are equal
+                        $payment_details_pending = [
+                            'payment_percentage' => $request->package_percentage_price,
+                            'paid_amount' => $request->pending_amount,
+                            'payment_status' => 'completed',
+                            'pending_payment' => 0 // Assuming no pending amount for completed status
+                        ];
+
+                        $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->purchase_id)
+                            ->update($payment_details_pending);
+                        if (!empty($CustomerPayamentDetails)) {
+                            return response()->json([
+                                'status' => 200,
+                                'message' => 'payment completed.',
+                                // 'payment_details' => $payment_details,
+                            ]);
+                        } else {
+                            return response()->json([
+                                'status' => 404,
+                                'message' => 'Something went wrong .payment not completed.',
+                            ]);
+                        } // This should come before the return to ensure the code below doesn't execute
                     } else {
-                        $order_unique_id = '#MD' . $value->id;
+                        // When package_total_price and paid_amount are not equal
+                        // $payment_details_pending = [
+                        //     'payment_percentage' => $request->package_percentage_price,
+                        //     'paid_amount' => $request->pending_amount
+                        // ];
+
+                        // $remaining_amount = $request->package_total_price - $request->pending_amount;
+
+                        // $payment_details_completed = [
+                        //     'payment_percentage' => $request->package_percentage_price,
+                        //     'paid_amount' => $request->pending_amount,
+                        //     'pending_payment' => $remaining_amount,
+                        //     'payment_status' => 'pending'
+                        // ];
+
+                        // $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->id)
+                        //     ->update($payment_details_completed);
+                        // if (!empty($CustomerPayamentDetails)) {
+                        //     return response()->json([
+                        //         'status' => 200,
+                        //         'message' => 'success.',
+                        //         // 'payment_details' => $payment_details,
+                        //     ]);
+                        // } else {
+                        return response()->json([
+                            'status' => 404,
+                            'message' => 'Something went wrong .payment not completed.',
+                        ]);
+                        // } 
                     }
-                    $update_unique_id = CustomerPurchaseDetails::where('id', $value->id)->update(['order_id' => $order_unique_id]);
                 }
-            }
-
-            // ... (existing code)
-            if (!empty($update_unique_id)) {
-                $payment_details_pending = [];
-                $payment_details_pending['order_id'] = $purchase_details_data->id;
-                $payment_details_pending['customer_id'] = $purchase_details_data->customer_id;
-                $payment_details_pending['card_name'] = $request->card_name;
-                $payment_details_pending['card_no'] = $request->card_no;
-                $payment_details_pending['card_expiry_date'] = $request->card_expiry_date;
-                $payment_details_pending['card_cvv'] = $request->card_cvv;
-                $payment_details_pending['package_id'] = $request->package_id;
-                $payment_details_pending['provider_id'] = $packages->created_by;
-                $payment_details_pending['payment_percentage'] = $purchase_details_data->payment_percentage;
-                $payment_details_pending['paid_amount'] = $purchase_details_data->paid_amount;
-                // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
-                $payment_details_pending['payment_status'] = 'completed';
-
-                // Calculate remaining amount after 'pending' payment
-                // $remaining_amount = $request->package_total_price - $request->pending_amount;
-
-                $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
-
-                // Update 'completed' entry with remaining amount and status
-                // $payment_details_completed['paid_amount'] = $remaining_amount;
-                $payment_details_completed['pending_payment'] = $request->pending_amount;
-                // No pending amount for completed
-                $payment_details_completed['payment_status'] = 'pending';
-
-                $payment_pending = CustomerPaymentDetails::create($payment_details_pending);
-
-                // Store 'completed' entry only if there's a remaining amount
-                if ($request->pending_amount > 0) {
-                    $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
-                }
-            }
-
-
-            if (!empty($payment_completed || $payment_pending)) {
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'package purchase successfully.',
-                    // 'payment_details' => $payment_details,
-                ]);
             } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'Something went wrong .package not purchased.',
-                ]);
+                $purchase_details = [];
+
+                $purchase_details['customer_id'] = 1;
+                $purchase_details['package_id'] = $request->package_id;
+                $packages = Packages::where('status', 'active')
+                ->select(
+                    'hotel_id',
+                    'vehicle_id',
+                    'created_by',
+                    'sale_price',
+                    'treatment_price',
+                    'hotel_acommodition_price',
+                    'transportation_acommodition_price',
+                    'visa_service_price',
+                    'tour_price'
+                )
+                    ->where('id', $request->package_id)
+                    ->first();
+                $purchase_details['package_treatment_price'] = $packages->treatment_price;
+                $purchase_details['package_hotel_price'] = $packages->hotel_acommodition_price;
+                $purchase_details['package_transportation_price'] = $packages->transportation_acommodition_price;
+                // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
+                // $purchase_details['package_total_price'] = $request->package_total_price;
+                // $purchase_details['transaction_id'] = $request->transaction_id;
+                // $purchase_details['payment_method'] = $request->payment_method;
+                $purchase_details['hotel_id'] = $packages->hotel_id;
+                $purchase_details['vehicle_id'] = $packages->vehicle_id;
+                $purchase_details['provider_id'] = $packages->created_by;
+                $purchase_details['package_total_price'] = $request->sale_price;
+                // $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                $purchase_details['paid_amount'] = $request->paid_amount;
+                $pending_amount = $request->sale_price - $request->paid_amount;
+                $purchase_details['pending_payment'] = $pending_amount;
+                $purchase_details['payment_percentage'] = $request->percentage;
+                $purchase_details['purchase_type'] = 'pending';
+                $purchase_details['created_by'] = 1;
+
+                $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
+
+                $CustomerPurchaseDetails = CustomerPurchaseDetails::select('id')->get();
+                if (!empty($CustomerPurchaseDetails)) {
+                    foreach ($CustomerPurchaseDetails as $key => $value) {
+                        $length = strlen($value->id);
+                        if ($length == 1) {
+                            $order_unique_id = '#MD00000' . $value->id;
+                        } elseif ($length == 2) {
+                            $order_unique_id = '#MD0000' . $value->id;
+                        } elseif ($length == 3) {
+                            $order_unique_id = '#MD000' . $value->id;
+                        } elseif ($length == 4) {
+                            $order_unique_id = '#MD00' . $value->id;
+                        } elseif ($length == 5) {
+                            $order_unique_id = '#MD0' . $value->id;
+                        } else {
+                            $order_unique_id = '#MD' . $value->id;
+                        }
+                        $update_unique_id = CustomerPurchaseDetails::where('id', $value->id)->update(['order_id' => $order_unique_id]);
+                    }
+                }
+
+                // ... (existing code)
+                if (!empty($update_unique_id)) {
+                    $payment_details_pending = [];
+                    $payment_details_pending['order_id'] = $purchase_details_data->id;
+                    $payment_details_pending['customer_id'] = $purchase_details_data->customer_id;
+                    $payment_details_pending['card_name'] = $request->card_name;
+                    $payment_details_pending['card_no'] = $request->card_no;
+                    $payment_details_pending['card_expiry_date'] = $request->card_expiry_date;
+                    $payment_details_pending['card_cvv'] = $request->card_cvv;
+                    $payment_details_pending['package_id'] = $request->package_id;
+                    $payment_details_pending['provider_id'] = $packages->created_by;
+                    $payment_details_pending['payment_percentage'] = $purchase_details_data->payment_percentage;
+                    $payment_details_pending['paid_amount'] = $purchase_details_data->paid_amount;
+                    // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
+                    $payment_details_pending['payment_status'] = 'completed';
+
+                    // Calculate remaining amount after 'pending' payment
+                    // $remaining_amount = $request->package_total_price - $request->pending_amount;
+
+                    $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
+
+                    // Update 'completed' entry with remaining amount and status
+                    // $payment_details_completed['paid_amount'] = $remaining_amount;
+                    $payment_details_completed['pending_payment'] = $request->pending_amount;
+                    // No pending amount for completed
+                    $payment_details_completed['payment_status'] = 'pending';
+
+                    $payment_pending = CustomerPaymentDetails::create($payment_details_pending);
+
+                    // Store 'completed' entry only if there's a remaining amount
+                    if ($request->pending_amount > 0) {
+                        $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
+                    }
+                }
+
+
+                if (!empty($payment_completed || $payment_pending)) {
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'package purchase successfully.',
+                        // 'payment_details' => $payment_details,
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Something went wrong .package not purchased.',
+                    ]);
+                }
             }
         }
+
+        
     }
 
 
