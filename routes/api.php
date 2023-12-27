@@ -60,8 +60,8 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-// Route::middleware('auth:sanctum')->group(function ()
-// {
+Route::middleware('auth:sanctum')->group(function ()
+{
 //customers
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
@@ -117,6 +117,9 @@ Route::get('md-transportation-list', [TransportationController::class, 'transpor
 //edit-transportation-details
 Route::post('md-edit-transportation-details', [TransportationController::class, 'edit_transportation_details']);
 
+//edit-transportation-details-view
+Route::post('md-edit-transportation-details-view', [TransportationController::class, 'edit_transportation_details_view']);
+
 //delete-transportation
 Route::post('md-delete-transportation', [TransportationController::class, 'delete_transportation']);
 
@@ -129,6 +132,9 @@ Route::get('md-tour-list', [ToursController::class, 'tour_list']);
 
 //edit-tour-list
 Route::post('md-edit-tour-list', [ToursController::class, 'edit_tour_list']);
+
+//edit-tour-list-view
+Route::post('md-edit-tour-list-view', [ToursController::class, 'edit_tour_list_view']);
 
 //delete-tour
 Route::post('md-delete-tour', [ToursController::class, 'delete_tour']);
@@ -245,7 +251,7 @@ Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 
 //customer-reviews
 Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
 
-// });
+});
 
 
 
