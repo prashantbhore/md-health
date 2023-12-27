@@ -380,6 +380,9 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::get('/login/change_password', 'change_password_view');
         Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
         Route::get('/edit-acommodition/{id}', 'edit_acommodition');
+        Route::get('/edit-vehicle/{id}', 'edit_vehicle');
+        Route::get('/edit-tour/{id}', 'edit_tour');
+        Route::get('/add-new-vehical', 'add_new_vehical');
         // Route::post('/delete-acommodition/{id}', 'delete_acommodition');
         // Route::post('/check-old-password', 'check_old_password');
     });
@@ -415,7 +418,6 @@ Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-pa
 // Route::view('medical-account', 'front/mdhealth/medical-provider/account');
 // Route::view('medical-other-services', 'front/mdhealth/medical-provider/other-services');
 // Route::view('add-acommodition', 'front/mdhealth/medical-provider/add-acommodition');
-Route::view('add-new-vehical', 'front/mdhealth/medical-provider/add-new-vehical');
 Route::view('add-tour', 'front/mdhealth/medical-provider/add-tour');
 Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 Route::view('medical-roles', 'front/mdhealth/medical-provider/medical-roles');

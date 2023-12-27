@@ -134,4 +134,4 @@
   </script>
 
 <body>
- <!-- <input type="hidden" value="{{url('/')}}" id="base_url"/> -->
+<input type="hidden" value="{{url('/')}}" id="base_url"/>

@@ -69,7 +69,7 @@
         }
     </style>
     <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -89,9 +89,15 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
+                                @if ($hotel_details['id'])
+                                <form action="{{ url('api/md-edit-hotel-list') }}" method="post"
+                                    enctype="multipart/form-data" id="add_acommodition">
+                                    @else
                                 <form action="{{ url('api/md-add-new-acommodition') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
+                                @endif
                                     @csrf
+                                    <input type="hidden" name="hotel_id" value="{{!empty($hotel_details['id'])?$hotel_details['id']:''}}">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Hotel Name</label>
                                         <input type="text" class="form-control" name="hotel_name" id="hotel_name" value="{{!empty($hotel_details['hotel_name'])?$hotel_details['hotel_name']:''}}"
@@ -223,7 +229,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p>Checked Values: <span id="checkedValues"></span></p>
+                                        {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
                                         <input type="hidden" name="hotel_other_services" id="hotel_other_services" value="{{!empty($hotel_details['hotel_other_services'])?$hotel_details['hotel_other_services']:''}}">
                                         <input type="hidden" name="button_type" id="button_type" value="active">
                                         <input type="hidden" name="platform_type" id="platform_type" value="web">
@@ -244,6 +250,7 @@
         </div>
     </div>
 @endsection
+
 @section('script')
     <script>
         $(".mpOtherServicesLi").addClass("activeClass");

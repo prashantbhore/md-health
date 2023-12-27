@@ -52,14 +52,31 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            <form>
+                            {{-- @if ($hotel_details['id'])
+                                <form action="{{ url('api/md-edit-hotel-list') }}" method="post"
+                                    enctype="multipart/form-data" id="add_acommodition">
+                                    @else --}}
+                                <form action="{{ url('api/md-add-transportation-details') }}" method="post"
+                                    enctype="multipart/form-data" id="add_acommodition">
+                                {{-- @endif --}}
+                                    @csrf
+                                    {{-- <input type="hidden" name="hotel_id" value="{{!empty($hotel_details['id'])?$hotel_details['id']:''}}"> --}}
+                                    
                                 <div class="input-group mb-3">
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Mercedes Benz</label>
-                                        <select name="" id="">
-                                            <option value="">BMW</option>
+                                        {{-- <select name="vehicle_brand_id" id="vehicle_brand_id">
+                                            <option value="">comfort_level_details</option>
                                             <option value="">TATA</option>
                                             <option value="">TOYOTA</option>
+                                        </select> --}}
+                                        <select id="vehicle_brand_id" name="vehicle_brand_id" class="form-select">
+                                            <option value="" selected disabled>Choose</option>
+                                            @foreach ($vehicle_details as $vehicle_detail)
+                                                <option value="{{ $vehicle_detail['id'] }}">{{ $vehicle_detail['brand_name'] }}
+                                                </option>
+                                            @endforeach
+                                            {{-- <option value="">India</option> --}}
                                         </select>
                                     </div>
                                 </div>
@@ -67,21 +84,30 @@
                                 <div class="input-group mb-3">
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Vehicle Model</label>
-                                        <select name="" id="">
+                                        <input type="text" class="form-control" placeholder="Enter Vehicle Model Name" name="vehicle_model_name" id="vehicle_model_name">
+
+                                        {{-- <select name="vehicle_model_name" id="vehicle_model_name">
                                             <option value="">Vito 2.2 CDI</option>
                                             <option value="">Vito 2.2 CDI</option>
                                             <option value="">Vito 2.2 CDI</option>
-                                        </select>
+                                        </select> --}}
                                     </div>
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Comfort Level</label>
-                                        <select name="" id="">
+                                        {{-- <select name="comfort_level_id" id="comfort_level_id">
                                             <option value="">Luxury</option>
                                             <option value="">Luxury</option>
                                             <option value="">Luxury</option>
+                                        </select> --}}
+                                        <select id="comfort_level_id" name="comfort_level_id" class="form-select">
+                                            <option value="" selected disabled>Choose</option>
+                                            @foreach ($comfort_level_details as $comfort_level_detail)
+                                                <option value="{{ $comfort_level_detail['id'] }}">{{ $comfort_level_detail['vehicle_level_name'] }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -89,7 +115,7 @@
                                 <div class="form-group mb-3 section-heading-div">
                                     <label class="form-label">Vehicle Per Day Price (VAT Included)</label>
                                     <div class="input-icon-div">
-                                        <input type="text" class="form-control" placeholder="0">
+                                        <input type="text" class="form-control" placeholder="0" name="vehicle_per_day_price" id="vehicle_per_day_price">
                                         <span class="input-icon">₺</span>
                                     </div>
                                 </div>
@@ -99,7 +125,7 @@
                                         <label class="form-label">Other Services</label>
                                         <div class="multiple-checks">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="fornosmoking">
+                                                <input type="checkbox" class="form-check-input" value="No Smoking" id="fornosmoking">
                                                 <label class="form-check-label fw-500 fsb-1" for="fornosmoking">
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M6.66667 10.8333V14.1667M13.3333 4.16667V4.58333C13.3333 5.02536 13.5089 5.44928 13.8215 5.76184C14.134 6.07441 14.558 6.25 15 6.25C15.442 6.25 15.866 6.42559 16.1785 6.73816C16.4911 7.05072 16.6667 7.47464 16.6667 7.91667V8.33333M2.5 2.5L17.5 17.5M14.1667 10.8333H16.6667C16.8877 10.8333 17.0996 10.9211 17.2559 11.0774C17.4122 11.2337 17.5 11.4457 17.5 11.6667V13.3333C17.5 13.5667 17.4042 13.7775 17.25 13.9283M14.1667 14.1667H3.33333C3.11232 14.1667 2.90036 14.0789 2.74408 13.9226C2.5878 13.7663 2.5 13.5543 2.5 13.3333V11.6667C2.5 11.4457 2.5878 11.2337 2.74408 11.0774C2.90036 10.9211 3.11232 10.8333 3.33333 10.8333H10.8333" stroke="#111111" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
@@ -107,7 +133,7 @@
                                                 No Smoking</label>
                                             </div>
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="forwifi">
+                                                <input type="checkbox" class="form-check-input" value="Wi-Fi" id="forwifi">
                                                 <label class="form-check-label fw-500 fsb-1" for="forwifi">
                                                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_353_6343)">
@@ -123,11 +149,14 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <p>Checked Values: <span id="checkedValues"></span></p>
+                                    <input type="hidden" name="other_services" id="other_services" value="{{!empty($hotel_details['other_services'])?$hotel_details['other_services']:''}}">
+                                    <input type="hidden" name="button_type" id="button_type" value="active">
+                                        <input type="hidden" name="platform_type" id="platform_type" value="web">
                                 </div>
 
                                 <div class="section-btns mb-4">
-                                    <a href="javascript:void(0);" class="black-plate bg-black text-white fw-700 w-100">Save Acommodition</a>
+                                    <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save Acommodition</button>
                                 </div>
 
                             </form>
@@ -143,5 +172,18 @@
 <script>
     $(".mpOtherServicesLi").addClass("activeClass");
     $(".mpOtherServices").addClass("md-active");
+</script>
+<script>
+    $(document).ready(function() {
+        function updateCheckedValues() {
+            const checkedValues = $('.form-check-input:checked').map(function() {
+                return $(this).val();
+            }).get().join(', ');
+            $('#checkedValues').text(checkedValues);
+            $('#other_services').val(checkedValues);
+        }
+        $('.form-check-input').change(updateCheckedValues);
+        updateCheckedValues();
+    });
 </script>
 @endsection
