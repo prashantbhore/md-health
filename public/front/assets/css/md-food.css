@@ -35,7 +35,6 @@
     font-size: 48px;
     font-family: Campton;
     color:#4CDB06;
-
 }
 .banner-p3{
     font-weight: 700;
@@ -297,3 +296,57 @@ border-radius: 3px;
 .range1:hover::-moz-range-thumb {
     background: #4cdb06;
 }
+.img1{
+    transform: translateX(-10px);
+}
+.purchase-meal-btn1{
+    right: 18px;
+    top: 18px;
+}
+.purchase-meal-p1{
+   font-size:16px ;
+   font-weight:700 ;
+   color: #4CDB06;
+   font-family: Campton;
+}
+
+.btn-md-food-purchase1{
+    background-color: #4CDB06;
+    border: none;
+    border-radius: 25px;
+    width: 149px;
+    height: 35px;
+}
+.btn-md-food-purchase2{
+    /* background-color: #4CDB06; */
+    border: 1px solid #000000;
+    border-radius: 25px;
+    width: 149px;
+    height: 35px;
+}
+.purchase-form-p1{
+    height: 48px;
+}
+
+.purchase-details-p1{
+    font-size: 20px;
+    font-weight:700 ;
+    color: #212121;
+}
+.purchase-details-p2{
+    font-size: 14px;
+    font-weight:700 ;
+    color: #000000;
+}
+.purchase-details-p3{
+    font-size: 16px;
+    font-weight:500 ;
+    color: #000000;
+}
+.purchase-details-p4{
+    font-size: 18px;
+    font-weight:600 ;
+    color: #4CDB06;
+}
+
+

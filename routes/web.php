@@ -406,12 +406,14 @@ Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-book
 Route::view('md-booking-reservation-details-page', 'front/mdhealth/md-booking/md-booking-reservation-details');
 Route::view('md-booking-payment-succ-page', 'front/mdhealth/md-booking/md-booking-payment-successful');
 Route::view('md-booking-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-flight-ticket');
+Route::view('md-booking-sub-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-sub-flight-ticket');
+
 
 //MD FOOD PAGE KD
 Route::view('md-food-home-page', 'front/mdhealth/md-food/md-food-page');
 Route::view('md-food-search-page', 'front/mdhealth/md-food/md-food-search');
 Route::view('md-food-search-view', 'front/mdhealth/md-food/md-food-view');
-
+Route::view('md-food-purchase-details', 'front/mdhealth/md-food/md-food-purchase-details');
 
 
 // Shubham
