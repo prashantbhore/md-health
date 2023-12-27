@@ -506,6 +506,7 @@ public function vendor_product_view(Request $request)
 
         $data[] = [
             'id' => !empty( $proudct_data->id) ?  $proudct_data->id : '',
+            'product_name' => !empty( $proudct_data->product_name) ?  $proudct_data->product_name: '',
             'product_category_id' => !empty( $proudct_data->product_category_id) ?  $proudct_data->product_category_id: '',
             'product_category_name' => !empty($product_category->category_name) ? $product_category->category_name: '',
             'product_sub_category_id' => !empty( $proudct_data->product_subcategory_id) ?  $proudct_data->product_subcategory_id: '',
