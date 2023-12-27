@@ -37,39 +37,300 @@
                 <!-- Tab panes -->
                 <div>
                     <div class="tab-content">
-                        <div class="tab-pane active container" id="allProducts">
-                            <div class="overview mt-4">
-                            <div class="row">
-                                <div class="col-8 ps-0">
-                                    <p>************ Hospital is a family owned business and Trudi Scrivener, the founder is Buckinghamshire based, Trudi has over 30 years of care experience and provides a key leadership role to her team.
-        
-                                    <br/>
-                                    <br/>
-        
-                                    Ashridge Home Care provide a multi award winning specialist live in care or hourly care service, depending on the needs of the client. Most people want to stay in their own home, and having a carer either living in or visiting from time to time means choosing to enjoy life on your own terms and being able to maintain your independence. Staff pride themselves on delivering quality person-centred care with compassion, choice, dignity and respect.
-        
-                                    <br/>
-                                    <br/>
-        
-                                    Their ethos is based purely on happy and healthy lifestyles. ********** Hospital offers care tailored to suit the individual, taking into account the things that are important to the client, like family, interests, pets or the garden. This ethos applies to both the care provided to clients and also the support given to staff.Having a live-in carer removes all the unnecessary upheaval of leaving home to go to the unfamiliar surroundings or a nursing home.
-        
-                                    </p>
-                                </div>
-                                <div class="col-4 pe-0">
-                                    <img src="{{('front/assets/img/Overview.png')}}" alt="Image">
-                                </div>
-                                <div class="col-12 px-0">
-                                    <p>
-                                    This is especially important to those with dementia where familiar belongings and routines are essential to providing comfort at times of confusion and anxiety.Considering care is a huge step and is one of life’s big decisions. Sometimes it’s difficult for people to accept that they need care, especially when life has been independent and fulfilling. They can sensitively help people through this decision making process, providing all the information needed in order to help make the right decision.
-        
-                                    <br/>
-                                    <br/>
-        
-                                    Staff can provide bespoke live in care packages to people across the Home Counties and further afield in the South East, and hourly care to those in Buckinghamshire.
-                                    </p>
+                        <div class="tab-pane active" id="allProducts">
+                          <div class="row">
+                            <div class="col-3">
+                                <div class="white-box">
+                                    <p class="campton underline">Filters</p>
+                                    <div class="mb-4">
+                                        <p class="text-green vSmallFont camptonBold">Price</p>
+                                        <div class="price-range-slider">
+                                            <div id="slider-range" class="range-bar"></div>
+                                            <!-- <p class="range-value">
+                                                <input type="text" id="amount" readonly>
+                                            </p> -->
+                                            <div class="range-value mb-4">
+                                                <div class="d-flex mt-1">
+                                                    <input type="text" id="iniRange" class="campton" readonly>
+                                                    <input type="text" id="endRange" class="text-end campton" readonly>
+                                                </div>
+                                                <!-- <p id="iniRange"></p> -->
+                                                <!-- <p id="endRange"></p> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <p class="text-green vSmallFont camptonBold underline">Reviews</p>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="radio" value="20" name="rating" checked />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont camptonBold lh-base">5.0</p>
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="radio" value="20" name="rating" />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont camptonBold lh-base">4.0</p>
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="radio" value="20" name="rating" />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont camptonBold lh-base">3.0</p>
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="radio" value="20" name="rating" />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont camptonBold lh-base">2.0</p>
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="radio" value="20" name="rating" />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont camptonBold lh-base">1.0</p>
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <i class="fa fa-star text-green vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                    <i class="fa fa-star vSmallFont"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <p class="text-green vSmallFont camptonBold underline">Brands</p>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="checkbox" value="20" name="discount"/>
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont campton lh-base">Brand 1</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="checkbox" value="20" name="discount" />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont campton lh-base">Brand 2</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="checkbox" value="20" name="discount" />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont campton lh-base">Brand 3</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <p class="text-green vSmallFont camptonBold underline">Delivery</p>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="checkbox" value="20" name="discount" checked />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont campton lh-base">Free Shipping</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                                <input type="checkbox" value="20" name="discount" />
+                                            </label>
+                                            <div class="d-flex align-items-baseline gap-2">
+                                                <p class="mb-0 smallFont campton lh-base">Same Day Delivery</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="{{url('product')}}" class="mt-4 card-link">
+                                            <div class="card" >
+                                                <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="mb-1">Product Name</h5>
+                                                    <p class="mb-5 camptonBook">Product Description</p>
+                                                    <!-- <a href="#" class="mt-4"> -->
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                            <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                                        </div>
+                                                    <!-- </a> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
+                          </div>
                         </div>
                         <div class="tab-pane fade" id="aboutUs">
                             <p class="campton">About</p>
@@ -81,6 +342,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-4">
+                <img src="{{('front/assets/img/mdShopAd.png')}}" alt="" style="z-index: 1;">
             </div>
         </div>
 
@@ -107,5 +371,24 @@
             $("#wallet").css('display', 'block');
         }
     });
+</script>
+<script>
+    $(function() {
+	$( "#slider-range" ).slider({
+	  range: true,
+	  min: 0,
+	  max: 100,
+	  values: [ 0, 100 ],
+	  slide: function( event, ui ) {
+		// $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        $("#iniRange").val( "$" + ui.values[ 0 ] );
+        $("#endRange").val( "$" + ui.values[ 1 ] );
+	  }
+	});
+	// $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+	//   " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+      $("#iniRange").val($("#slider-range").slider("values", 0) + "₺")
+      $("#endRange").val($("#slider-range").slider("values", 1) + "₺")
+});
 </script>
 @endsection
