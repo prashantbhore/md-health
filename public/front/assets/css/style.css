@@ -160,7 +160,7 @@
     background-color: transparent;
     text-decoration: underline;
     text-decoration-color: #4cdb06;
-    text-underline-offset: 10px;
+    text-underline-offset: 15px;
     text-decoration-thickness: 3px;
 }
 
@@ -2027,14 +2027,37 @@ span.popup-msg.active {
     padding: 0;
 }
 
+.mdShop .tab-content .tab-pane{
+    padding: 0.5rem;
+}
+
 .mdShop .tab-card .nav{
-    padding: 1rem 1rem 8px 1rem;
+    padding: 1rem 2.5rem 10px 2.5rem;
+    box-shadow: 0px 18px 24px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 3px 3px;
 }
 
 .mdShop .product-title-section{
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     justify-content: space-between;
+    background-color: #fff;
+    border-radius: 3px 3px 0 0;
+}
+
+.mdShop .tab-content{
+    background-color: #fff;
+    margin-top: 2rem;
+}
+
+.mdShop #aboutUs p:first-child{
+    border-bottom: 1.5px solid #ededed;
+    padding-bottom: 4px;
+}
+
+.mdShop .tab-card{
+    background-color: unset;
+    box-shadow: unset;
 }
 
 .addRemoveBtn {
