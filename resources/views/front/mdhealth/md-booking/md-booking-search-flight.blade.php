@@ -305,7 +305,9 @@
                             <p class="md-booking-search-p3">Total 2,400.00$</p>
                         </div>
                         <p class="">
+                            <a class="" href="{{URL('md-booking-flight-ticket-page')}}">
                             <button class="btn btn-search-pill-booking1">Buy Ticket</button>
+                            </a>
                         </p>
                     </div>
                 </div>

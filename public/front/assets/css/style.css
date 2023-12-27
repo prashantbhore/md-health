@@ -54,7 +54,7 @@
 }
 
 .vSmallFont{
-    font-size: 12px;
+    font-size: 12px !important;
 }
 
 .boldRed {
@@ -160,7 +160,7 @@
     background-color: transparent;
     text-decoration: underline;
     text-decoration-color: #4cdb06;
-    text-underline-offset: 10px;
+    text-underline-offset: 15px;
     text-decoration-thickness: 3px;
 }
 
@@ -185,7 +185,7 @@
     border-radius: 20px;
 }
 
-.tab-card .review {
+.review {
     padding: 8px;
     border-bottom: 1.5px solid #4cdb06;
 }
@@ -686,11 +686,11 @@ select {
 }
 
 .campton {
-    font-family: Campton;
+    font-family: Campton !important;
 }
 
 .camptonBook {
-    font-family: CamptonBook;
+    font-family: CamptonBook !important;
 }
 
 .camptonBold {
@@ -1858,7 +1858,9 @@ span.popup-msg.active {
 
 /* Purchase Package Start */
 
-.paymentSection input[type="radio"] {
+.paymentSection input[type="radio"],
+.mdShop input[type="radio"],
+.mdShop input[type="checkbox"] {
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
@@ -1913,7 +1915,9 @@ span.popup-msg.active {
     place-content: center;
   }
 
-  .paymentSection [type="radio"]::before {
+  .paymentSection [type="radio"]::before, 
+  .mdShop input[type="radio"]::before,
+  .mdShop input[type="checkbox"]::before {
     content: "";
     width: 14px;
     height: 14px;
@@ -1943,7 +1947,11 @@ span.popup-msg.active {
   }
   
 
-  .paymentsPage input[type="checkbox"]:checked::before,.paymentSection input[type="radio"]:checked::before, .discount-sctn input[type="radio"]:checked::before {
+  .paymentsPage input[type="checkbox"]:checked::before,
+  .paymentSection input[type="radio"]:checked::before, 
+  .discount-sctn input[type="radio"]:checked::before,
+  .mdShop input[type="radio"]:checked::before,
+  .mdShop input[type="checkbox"]:checked::before {
     transform: scale(1);
   }
 
@@ -2017,6 +2025,73 @@ span.popup-msg.active {
 /* Purchase Package End */
 
 /* mdShop Start */
+
+.white-box{
+    background-color: #fff;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+}
+
+.mdShop .tab-card{
+    padding: 0;
+}
+
+.mdShop .tab-content #aboutUs{
+    padding: 0.5rem;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.mdShop .tab-card .nav{
+    padding: 1rem 2.5rem 10px 2.5rem;
+    box-shadow: 0px 18px 24px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 5px 5px;
+}
+
+.mdShop .product-title-section{
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+}
+
+.mdShop .tab-content{
+    /* background-color: #fff; */
+    margin-top: 2rem;
+}
+
+.mdShop #allProducts .white-box{
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.mdShop #aboutUs p:first-child, .mdShop #allProducts .white-box .underline{
+    border-bottom: 1.5px solid #ededed;
+    padding-bottom: 4px;
+}
+
+.mdShop .tab-card{
+    background-color: unset;
+    box-shadow: unset;
+    border-bottom: 2px solid #ededed;
+    padding-bottom: 4rem;
+}
+
+.mdShop .product-view .container{
+    border-bottom: 2px solid #ededed;
+    padding-bottom: 4rem;
+}
+
+.addRemoveBtn {
+    border: 1.5px solid #ededed;
+    border-radius: 25px;
+    padding: 4px 8px;
+    align-self: baseline;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
 
 .mdShopNavBg{
     position: absolute;
@@ -2104,22 +2179,73 @@ span.popup-msg.active {
     margin-bottom: 1.5rem;
 }
 
-.product-card-container .card{
+.product-card-container .card, .mdShop .card{
     padding: 1rem;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.product-card-container .card .card-body{
+.product-card-container .card .card-body,
+.mdShop .card .card-body{
     padding: 1rem 0;
 }
 
-.product-card-container .card .card-body h5{
+.product-card-container .card .card-body h5, 
+.mdShop .card .card-body h5{
     font-family: Campton;
     font-weight: 600;
 }
 
-.product-card-container .card-link{
+.product-card-container .card-link, .mdShop .card-link{
     text-decoration: none;
     color: #000;
 }
+
+/* Price Range Picker */
+
+.price-range-slider {
+    width: 100%;
+    float: left;
+    /* padding: 10px 20px; */
+  }
+
+.price-range-slider .range-value {
+margin: 0;
+}
+  
+.price-range-slider .range-value input {
+    width: 50%;
+    background: none;
+    color: #000;
+    font-size: 12px;
+    font-weight: initial;
+    box-shadow: none;
+    border: none;
+    /* margin: 20px 0 20px 0; */
+  }
+  .price-range-slider .range-bar {
+    border: none;
+    background: #000;
+    height: 1px;
+    width: 92%;
+    margin-left: 8px;
+  }
+  .price-range-slider .range-bar .ui-slider-range {
+    background: #4cdb06;
+  }
+  .price-range-slider .range-bar .ui-slider-handle {
+    border: none;
+    border-radius: 25px;
+    background: #4cdb06;
+    border: 2px solid #4cdb06;
+    height: 17px;
+    width: 17px;
+    top: -0.52em;
+    cursor: pointer;
+  }
+  .price-range-slider .range-bar .ui-slider-handle + span {
+    background: #4cdb06;
+  }
+
+/* Price Range Picker */
 
 /* mdShop End */

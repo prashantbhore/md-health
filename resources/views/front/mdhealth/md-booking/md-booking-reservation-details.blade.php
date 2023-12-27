@@ -181,7 +181,9 @@
                         <div class="col-md-6">
                             {{-- <label for="inputPassword4" class="form-label">Password</label> --}}
                             {{-- <input type="text" class="form-control" id="inputPassword4" placeholder="000"> --}}
+                            <a class="" href="{{URL('md-booking-payment-succ-page')}}" >
                             <button class="btn btn-search-pill-reservation1">Proceed Payment</button>
+                            </a>
                         </div>
                     </form>
                 </div>

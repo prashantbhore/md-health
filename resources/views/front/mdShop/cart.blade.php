@@ -8,12 +8,29 @@
                 <p class="fs-6 camptonBold text-center deleteAll mb-4">Delete All Items</p>
                 <div class="row">
                     <div class="col-9">
-                        <div class="packageResult rounded mb-3" style="padding: 0.5rem 0.75rem;">
-                            <div class="d-flex align-items-center justify-content-between flex-grow-1">
+                        <div class="white-box rounded mb-3" style="padding: 0.5rem 0.75rem;">
+                            <div class="d-flex align-items-center justify-content-between flex-grow-1" style="border-bottom: 1.5px solid #ededed; padding-bottom: 0.5rem;">
                                 <p class="mb-0 vSmallFont campton"><span class="text-green camptonBold">Vendor:</span> Evony Medical</p>
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center gap-1">
                                     <img src="{{('front/assets/img/shipment.svg')}}" alt="">
                                     <p class="mb-0 vSmallFont campton text-green">Free Shipping</p>
+                                </div>
+                            </div>
+                            <div style="padding-top: 0.5rem;" class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img src="{{('front/assets/img/proPic.svg')}}" alt="" class="me-3">
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <p class="campton smallFont mb-0">Evony Medical Mask 50 pc.</p>
+                                        <div class="addRemoveBtn">
+                                            <img src="{{('front/assets/img/Decrement.svg')}}" alt="">
+                                            <span class="vSmallFont campton">1</span>
+                                            <img src="{{('front/assets/img/Increment.svg')}}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="align-self-end">
+                                    <p class="mb-0 camptonBold lh-1 fs-4 text-end">299,99 ₺</p>
+                                    <p class="mb-0 vSmallFont camptonBold text-center deleteAll">Delete Products</p>
                                 </div>
                             </div>
                         </div>
@@ -41,24 +58,22 @@
                         </div> -->
                     </div>
                     <div class="col-3">
-                        <div class="packageResult rounded mb-3">
-                            <div class="flex-grow-1">
-                                <div class="d-flex gap-2 justify-content-between align-items-center">
-                                    <p class="mb-0 fs-5 camptonBold lh-base">Home Patient Service</p>
-                                    <p class="mb-0 fs-6 camptonBold text-green">Service Price</p>
+                        <div class="white-box rounded mb-3">
+                            <div class="p-3">
+                                <p class="mb-0 fs-6 camptonBold text-green lh-1">Total Price</p>
+                                <p class="mb-0 fs-4 camptonBold">299,99 ₺</p>
+                            </div>
+                            <img src="{{('front/assets/img/Invite.png')}}" alt="" style="width: 100%;">
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0 vSmallFont camptonBook">Products</p>
+                                    <p class="mb-0 vSmallFont camptonBold">299,99 ₺</p>
                                 </div>
-                                <div class="d-flex gap-5 justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <p class="mb-0 lctn">Service Provider Name</p>
-                                    </div>
-                                    <p class="mb-0 fs-5 camptonBold lh-base">32.430,00 ₺ <span class="smallFont">(3.679,00 ₺)</span></p>
-                                </div>
-                                <div class="greenBorder pt-3 mb-4"></div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="camptonBold vSmallFont">Appointment Date: <span class="camptonBook">12/12/2023</span></p>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="{{('front/assets/img/change.svg')}}" alt="">
-                                        <p class="mb-1 boldRed smallFont"><u>Change Appointment Date</u></p>
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0 vSmallFont camptonBook">Shipping Fee</p>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <p class="mb-0 vSmallFont camptonBold text-green">FREE</p>
+                                        <p class="mb-0 vSmallFont camptonBold red-strike">29,99 ₺</p>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +185,7 @@
             <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
         </div>
     </div>
-</div>
+<!-- </div> -->
 @endsection
 @section('script')
 <script type="text/javascript">

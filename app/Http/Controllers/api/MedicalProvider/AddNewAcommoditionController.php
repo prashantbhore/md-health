@@ -48,8 +48,8 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
             $hotel_input['hotel_other_services'] = $request->hotel_other_services;
             $hotel_input['status'] = 'active';
-            $hotel_input['service_provider_id'] =  1;
-            $hotel_input['created_by'] = 1;
+            $hotel_input['service_provider_id'] =Auth::user()->id;
+            $hotel_input['created_by'] =Auth::user()->id;
             $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
             if (!empty($AddNewAcommodition)) {
                 if (($request->platform_type=='web')) {
@@ -83,8 +83,8 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
             $hotel_input['hotel_other_services'] = $request->hotel_other_services;
             $hotel_input['status'] = 'inactive';
-            $hotel_input['service_provider_id'] =  1;
-            $hotel_input['created_by'] = 1;
+            $hotel_input['service_provider_id'] = Auth::user()->id;
+            $hotel_input['created_by'] = Auth::user()->id;
             $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
             if (!empty($AddNewAcommodition)) {
                 return response()->json([
@@ -117,7 +117,7 @@ class AddNewAcommoditionController extends BaseController
                 'service_provider_id',
                 'status',
             )
-            // ->where('created_by',Auth::user()->id)
+            ->where('created_by',Auth::user()->id)
             ->get();
 
         if (!empty($AcommoditionHotelList)) {
@@ -160,7 +160,7 @@ class AddNewAcommoditionController extends BaseController
                 'service_provider_id',
                 'status',
             )
-            ->where('id',$request->id)
+            ->where('id',$request->hotel_id)
             ->first();
 
         if (!empty($AcommoditionHotelList)) {
@@ -176,12 +176,15 @@ class AddNewAcommoditionController extends BaseController
 
 
         if (!empty($AcommoditionHotelList)) {
+            
+            
             return response()->json([
                 'status' => 200,
                 'message' => 'Hotel details found.',
                 'hotel_details' => $AcommoditionHotelList,
             ]);
         } else {
+            
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. Details not found.',
@@ -218,17 +221,23 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
             $hotel_input['hotel_other_services'] = $request->hotel_other_services;
             $hotel_input['status'] = 'active';
-            $hotel_input['service_provider_id'] = 1;
-            $hotel_input['created_by'] = 1;
+            $hotel_input['service_provider_id'] = Auth::user()->id;
+            $hotel_input['created_by'] = Auth::user()->id;
 
             $edit_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($hotel_input);
 
             if (!empty($edit_hotel)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('success','Hotel Acommodition updated successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Hotel details updated successfully.',
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('error','Something went wrong. Details not found.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',
@@ -247,8 +256,8 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
             $hotel_input['hotel_other_services'] = $request->hotel_other_services;
             $hotel_input['status'] = 'inactive';
-            $hotel_input['service_provider_id'] = 1;
-            $hotel_input['created_by'] = 1;
+            $hotel_input['service_provider_id'] = Auth::user()->id;
+            $hotel_input['created_by'] = Auth::user()->id;
 
             $edit_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($hotel_input);
 
@@ -276,7 +285,7 @@ class AddNewAcommoditionController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $status_update['status'] = 'delete';
-        $status_update['modified_by'] = 1;
+        $status_update['modified_by'] = Auth::user()->id;
         $status_update['modified_ip_address'] = $request->ip();
 
         $delete_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($status_update);

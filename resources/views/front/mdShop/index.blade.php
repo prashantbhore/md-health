@@ -18,8 +18,10 @@
                     <img src="{{URL('front/assets/img/Mask.png')}}" alt="">
                 </div>
             </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{{('front/assets/img/mdShopAd.png')}}" alt="" style="z-index: 1;">
+            </div>
         </div>
-
         <!-- SECTION 2: MOST SALES -->
         <p class="titleClass text-center">MOST <span class="text-green">SALES</span></p>
         <div class="product-card-container container">

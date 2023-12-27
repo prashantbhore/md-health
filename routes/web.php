@@ -120,6 +120,14 @@ Route::get('product', function () {
     return view('front.mdShop.product');
 });
 
+Route::get('payment-status-shop', function () {
+    return view('front.mdShop.paymentStatus');
+});
+
+Route::get('view-products', function () {
+    return view('front.mdShop.allProducts');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
@@ -380,6 +388,9 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::get('/login/change_password', 'change_password_view');
         Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
         Route::get('/edit-acommodition/{id}', 'edit_acommodition');
+        Route::get('/edit-vehicle/{id}', 'edit_vehicle');
+        Route::get('/edit-tour/{id}', 'edit_tour');
+        Route::get('/add-new-vehical', 'add_new_vehical');
         // Route::post('/delete-acommodition/{id}', 'delete_acommodition');
         // Route::post('/check-old-password', 'check_old_password');
     });
@@ -415,7 +426,6 @@ Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-pa
 // Route::view('medical-account', 'front/mdhealth/medical-provider/account');
 // Route::view('medical-other-services', 'front/mdhealth/medical-provider/other-services');
 // Route::view('add-acommodition', 'front/mdhealth/medical-provider/add-acommodition');
-Route::view('add-new-vehical', 'front/mdhealth/medical-provider/add-new-vehical');
 Route::view('add-tour', 'front/mdhealth/medical-provider/add-tour');
 Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 Route::view('medical-roles', 'front/mdhealth/medical-provider/medical-roles');
@@ -442,12 +452,14 @@ Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-book
 Route::view('md-booking-reservation-details-page', 'front/mdhealth/md-booking/md-booking-reservation-details');
 Route::view('md-booking-payment-succ-page', 'front/mdhealth/md-booking/md-booking-payment-successful');
 Route::view('md-booking-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-flight-ticket');
+Route::view('md-booking-sub-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-sub-flight-ticket');
+
 
 //MD FOOD PAGE KD
 Route::view('md-food-home-page', 'front/mdhealth/md-food/md-food-page');
 Route::view('md-food-search-page', 'front/mdhealth/md-food/md-food-search');
 Route::view('md-food-search-view', 'front/mdhealth/md-food/md-food-view');
-
+Route::view('md-food-purchase-details', 'front/mdhealth/md-food/md-food-purchase-details');
 
 
 // Shubham

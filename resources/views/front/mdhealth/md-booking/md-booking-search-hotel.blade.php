@@ -283,7 +283,9 @@
                     <p class="m-0 md-booking-search-p6">Total Price for 7 days</p>
                     <p class="md-booking-search-p4" style="color: #000000">9,9999.00$</p>
                     <p class="">
-                        <button class="btn btn-search-pill-food1">Book Hotel</button>
+                        <a class="" href="{{URL('md-booking-reservation-details-page')}}" >
+                            <button class="btn btn-search-pill-food1">Book Hotel</button>
+                            </a>
                     </p>
                 </div>
             </div>
@@ -330,7 +332,9 @@
                     <p class="m-0 md-booking-search-p6">Total Price for 7 days</p>
                     <p class="md-booking-search-p4" style="color: #000000">9,9999.00$</p>
                     <p class="">
-                        <button class="btn btn-search-pill-food1">Book Hotel</button>
+                        <a class="" href="{{URL('md-booking-reservation-details-page')}}" >
+                            <button class="btn btn-search-pill-food1">Book Hotel</button>
+                            </a>
                     </p>
                 </div>
             </div>
@@ -377,7 +381,9 @@
                     <p class="m-0 md-booking-search-p6">Total Price for 7 days</p>
                     <p class="md-booking-search-p4" style="color: #000000">9,9999.00$</p>
                     <p class="">
+                        <a class="" href="{{URL('md-booking-reservation-details-page')}}" >
                         <button class="btn btn-search-pill-food1">Book Hotel</button>
+                        </a>
                     </p>
                 </div>
             </div>
