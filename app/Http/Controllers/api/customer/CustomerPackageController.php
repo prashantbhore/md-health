@@ -488,8 +488,12 @@ class CustomerPackageController extends BaseController
             $purchase_details['package_discount'] = !empty($purchase_details->package_discount) ? $purchase_details->package_discount : '';
         }
 
+        // if($request->platform_type = "web"){
+        //     return
+        // }
         if (!empty($purchase_details)) {
             return response()->json([
+                // 'id' => $request->package_id,
                 'status' => 200,
                 'message' => 'Here is your purchase details.',
                 'purchase_details' => $purchase_details,
@@ -499,6 +503,7 @@ class CustomerPackageController extends BaseController
         } else {
             return response()->json([
                 'status' => 404,
+                // 'id' => $request->package_id,
                 'message' => 'your purchase details list is empty.',
                 'purchase_details' => $purchase_details,
             ]);

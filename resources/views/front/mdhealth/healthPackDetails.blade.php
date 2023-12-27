@@ -17,7 +17,7 @@
         <!-- SECTION 1 -->
         <div class="searchBar backBtn bg-f6">
             <div class="container pt-4">
-                <a href="{{ url('health-search-result') }}" class="d-flex align-items-center mb-5 gap-2">
+                <a href="health-search-result" class="d-flex align-items-center mb-5 gap-2">
                     <img src="{{ 'front/assets/img/ArrowLeftCircle.png' }}" alt="">
                     <p class="mb-0 fs-5 camptonBold">Back Treatments</p>
                 </a>
@@ -115,10 +115,10 @@
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div>
                                     <!-- <div class="col-12 px-0">
-                                            <p>
+                                                                <p>
 
-                                            </p>
-                                        </div> -->
+                                                                </p>
+                                                            </div> -->
                                 </div>
                             </div>
                         </div>

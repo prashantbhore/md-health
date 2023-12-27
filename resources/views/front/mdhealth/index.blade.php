@@ -1,3 +1,9 @@
+@php
+    $treatment_plans = App\Models\ProductCategory::all();
+    $cities = App\Models\Cities::where('country_id', '1')->get();
+@endphp
+
+
 @extends('front.layout.layout')
 @section('content')
     <div class="content-wrapper bg-f6">
@@ -37,11 +43,11 @@
                             </div>
                             <div class="form-floating">
                                 <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                        <option data-display="Select" selected>12 Aug</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select> -->
+                                                                <option data-display="Select" selected>12 Aug</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select> -->
                                 <!-- <div class="datepickerContainer"> -->
                                 <input type="text" class="form-select" name="daterange" value="" />
                                 <!-- </div> -->

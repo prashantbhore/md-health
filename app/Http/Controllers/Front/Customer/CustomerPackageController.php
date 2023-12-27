@@ -16,6 +16,7 @@ use App\Models\ToursDetails;
 use App\Models\TransportationDetails;
 use App\Traits\MediaTrait;
 use Illuminate\Http\Request;
+use App\Services\ApiService;
 use Storage;
 use Validator;
 
@@ -24,14 +25,24 @@ class CustomerPackageController extends Controller
     use MediaTrait;
 
 
+    public function __construct(ApiService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
+
     public function customer_home(){
 
-        $cities = Cities::where('status','active')->where('country_id',1)->get();
-        $treatment_plans = ProductCategory::where('status','active')->where('main_product_category_id','1')->get();
-        // $data = [$cities,$treatment];
-        $test = 'heiii';
-        return view('front.mdhealth.index',compact('cities','treatment_plans','test'));
+        // $data = $this->apiService->fetchSomeData();
+        // dd($data);
+        // Process the data or pass it to a view
+        //,compact('data')
+        return view('front.mdhealth.index');
 
+    }
+
+    public function purchase_package($id){
+
+        return view('front.mdhealth.purchase',compact('id'));
     }
 
     public function customer_package_search_filter(Request $request)
@@ -91,8 +102,8 @@ class CustomerPackageController extends Controller
 
             $cities = Cities::where('status','active')->where('country_id',1)->get();
             $treatment_plans = ProductCategory::where('status','active')->where('main_product_category_id','1')->get();
-            $treatment_name = $request->treatment_name;
-            $city_name = $request->city_name;
+            $treatment_name = $packages[0]['product_category_name'];
+            $city_name = $packages[0]['city_name'];
             return view('front.mdhealth.searchResult', compact('packages','cities','treatment_plans' , 'city_name','treatment_name'));
 
         } else {

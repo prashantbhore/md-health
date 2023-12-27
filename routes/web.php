@@ -64,6 +64,8 @@ Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
+
+//Home Service Routes
 Route::get('home-service', function () {
     return view('front.mdHome.index');
 });
@@ -72,21 +74,35 @@ Route::get('search-result', function () {
     return view('front.mdHome.searchResult');
 });
 
-Route::any('health-search-result', [CustomerPackageController::class , 'customer_package_search_filter']);
-
-Route::any('health-pack-details', [CustomerPackageController::class,'packages_view_on_search_result']);
-
-Route::get('purchase-package', function () {
-    return view('front.mdHealth.purchase');
+Route::get('homeService-purchase', function () {
+    return view('front.mdHome.purchase');
 });
 
 Route::get('home-pack-details', function () {
     return view('front.mdHome.homePackDetails');
 });
 
+Route::get('payment-status', function () {
+    return view('front.mdHome.paymentStatus');
+});
+
 Route::get('buy-service', function () {
     return view('front.mdHome.buyService');
 });
+
+//mdHealth Routes
+Route::any('health-search-result', [CustomerPackageController::class,'customer_package_search_filter']);
+
+Route::any('health-pack-details', [CustomerPackageController::class,'packages_view_on_search_result']);
+
+Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
+
+
+//mdShop Routes
+Route::get('mdShop', function () {
+    return view('front.mdShop.index');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {

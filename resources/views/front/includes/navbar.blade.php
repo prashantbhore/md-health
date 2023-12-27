@@ -6,18 +6,22 @@
 
 <nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
     <div class="container">
-        <a class="navbar-brand" href="{{URL('admin/dashboard')}}">
-            <img src="{{URL::asset('admin/assets/img/MDHealth_light.svg')}}" alt="" />
+        <a class="navbar-brand" href="{{ URL('admin/dashboard') }}">
+            <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
-                <li class="nav-item"><a href="{{url('home-service')}}" class="nav-link">Home Service</a></li>
-                <li class="nav-item"><a href="{{url('md-booking-home-page')}}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
-                <li class="nav-item"><a href="{{url('md-food-home-page')}}" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
-                <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
+                <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
+                <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Booking</a></li>
+                <li class="nav-item"><a href="{{ url('md-food-home-page') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Foods</a></li>
+                <li class="nav-item"><a href="{{ url('mdShop') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Shop</a></li>
                 <!-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -125,7 +129,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{url('logout')}}">
+                            <a class="dropdown-item" href="{{ url('logout') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 11 12" fill="none">
                                     <circle cx="5.5" cy="5.5" r="5.5" fill="#D9D9D9" />
                                     <path d="M7.78148 8H6.54148L5.27148 6.35L3.98148 8H2.75148L4.57148 5.63L2.76148 3.29H4.03148L5.26148 4.88L6.49148 3.29H7.76148L5.96148 5.63L5.95148 5.64L7.78148 8Z" fill="black" />
@@ -137,12 +141,8 @@
                 </li> -->
             </ul>
         </div>
-        <a href="{{url('sign-in-web')}}" class="nav-link underline text-white text-underline">Sign In</a>
+        <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
 
-        <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
+        <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
     </div>
 </nav>
-<<<<<<< HEAD
-=======
-
->>>>>>> 8e626ad5dd75c2723c8203ed1b371ea8f75e077e

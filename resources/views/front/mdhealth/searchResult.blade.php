@@ -63,7 +63,7 @@
     <div class="section-2 bg-f6">
         <div class="container">
             <div class="text-center">
-                <h2 class="homeServiceTitle">Your <span style="color: #08fc34">search</span> results</h2>
+                <h2 class="titleClass">Your <span style="color: #08fc34">search</span> results</h2>
             </div>
         </div>
     </div>
@@ -82,76 +82,146 @@
                         @endphp
                         @foreach($packages as $key => $package_list)
                         <div class="packageResult rounded mb-3">
-                        <div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <p class="mb-0 fs-5 camptonBold lh-base">{{$packages[$key]['package_name']}}</p>
-                                <img src="{{('front/assets/img/verifiedBy.svg')}}" alt="">
-                            </div>
-                            <div class="d-flex gap-5 mb-4">
+                            <div>
                                 <div class="d-flex gap-2 align-items-center">
-                                    <img src="{{('front/assets/img/Location.svg')}}" alt="">
-                                    <p class="mb-0 lctn">{{$packages[$key]['city_name']}}</p>
+                                    <p class="mb-0 fs-5 camptonBold lh-base">{{$packages[$key]['package_name']}}</p>
+                                    <img src="{{('front/assets/img/verifiedBy.svg')}}" alt="">
+                                </div>
+                                <div class="d-flex gap-5 mb-4">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <img src="{{('front/assets/img/Location.svg')}}" alt="">
+                                        <p class="mb-0 lctn">{{$packages[$key]['city_name']}}</p>
 
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <img src="{{('front/assets/img/Diaganose.svg')}}" alt="">
+                                        <p class="mb-0 lctn fst-italic">{{$packages[$key]['treatment_period_in_days']}}</p>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center gap-1">
-                                    <img src="{{('front/assets/img/Diaganose.svg')}}" alt="">
-                                    <p class="mb-0 lctn fst-italic">{{$packages[$key]['treatment_period_in_days']}}</p>
-                                </div>
-                            </div>
-                            <div class="d-flex gap-4">
-                                <div class="brdr-right">
-                                    <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Includes</span></p>
-                                    @foreach($package_list['other_services'] as $key => $other_service)
-                                        @if(!empty($package_list['other_services'][$key]))
-                                            <div class="d-flex gap-1 align-items-baseline mb-1">
+                                <div class="d-flex gap-4">
+                                    <div class="brdr-right">
+                                        <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Includes</span></p>
+                                        @foreach($package_list['other_services'] as $key => $other_service)
+                                            @if(!empty($package_list['other_services'][$key]))
+                                                <div class="d-flex gap-1 align-items-baseline mb-1">
+                                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
+                                                <p class="mb-0 camptonBook smallFont">{{$package_list['other_services'][$key]}}</p>
+                                                </div>
+                                            @endif
+
+
+                                        <!-- <div class="d-flex gap-1 align-items-baseline mb-1">
                                             <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                            <p class="mb-0 camptonBook smallFont">{{$package_list['other_services'][$key]}}</p>
+                                            <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
+                                        </div> -->
+                                        @endforeach
+                                    </div>
+                                    <div class="brdr-right">
+                                        <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Reviews</span><span class="fw-normal">(480)</span></p>
+                                        <div class="stars">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                        </div>
+                                        <p class="fs-6 camptonBold">Excellent</p>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-end gap-4">
+                                        <div>
+                                            <p class="mb-0">
+                                                <span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Price</span>
+                                            </p>
+                                            <div class="my-2">
+                                                <p class="mb-0 fs-5 camptonBold lh-base">{{$package_list['package_price']}} ₺ <span class="smallFont fs-6">*{{"(".get_twenty_percent($package_list['package_price'])."₺)"}}</span></p>
+                                                <p class="camptonBook">*20% of the price is paid before booking.</p>
                                             </div>
-                                        @endif
-
-
-                                    <!-- <div class="d-flex gap-1 align-items-baseline mb-1">
-                                        <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                        <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
-                                    </div> -->
-                                    @endforeach
-                                </div>
-                                 <div class="brdr-right">
-                                    <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Reviews</span><span class="fw-normal">(480)</span></p>
-                                    <div class="stars">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                        <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                    </div>
-                                    <p class="fs-6 camptonBold">Excellent</p>
-                                </div>
-                                <div class="d-flex flex-column align-items-end gap-4">
-                                    <div>
-                                        <p class="mb-0">
-                                            <span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Price</span>
-                                        </p>
-                                        <div class="my-2">
-                                            <p class="mb-0 fs-5 camptonBold lh-base">{{$package_list['package_price']}} ₺ <span class="smallFont fs-6">*{{"(".get_twenty_percent($package_list['package_price'])."₺)"}}</span></p>
-                                            <p class="camptonBook">*20% of the price is paid before booking.</p>
+                                            <div class="d-flex gap-2 mb-2">
+                                                <button class="btn purchaseBtn" data-bs-toggle="modal" data-bs-target="#treatmentForModal_{{$package_list['id']}}">Purchase Package</button>
+                                                <button class="favouriteBtn">
+                                                    <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="d-flex gap-2 mb-2">
-                                            <button class="btn purchaseBtn" data-bs-toggle="modal" data-bs-target="#treatmentForModal">Purchase Package</button>
-                                            <button class="favouriteBtn">
-                                                <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
-                                            </button>
-                                        </div>
+                                        <form method="POST" id="myForm_{{$package_list['id']}}" action="{{ url('health-pack-details') }}">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$package_list['id']}}">
+                                        <a href="javascript:void(0)" id="submit_btn_{{$package_list['id']}}" class="underline smallFont view_btn">View All Details</a>
+                                        </form>
                                     </div>
-                                    <form method="POST" id="myForm_{{$package_list['id']}}" action="{{ url('health-pack-details') }}">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{$package_list['id']}}">
-                                    <a href="javascript:void(0)" id="submit_btn_{{$package_list['id']}}" class="underline smallFont view_btn">View All Details</a>
-                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="treatmentForModal_{{$package_list['id']}}" tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered position-relative">
+                                <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                                    <!-- </button> -->
+                                <div class="modal-content">
+                                    <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
+                                    <img src="{{('front/assets/img/step1.svg')}}" alt="">
+                                    <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
+                                    <div class="d-flex align-items-center flex-column">
+                                        <a href="{{url('purchase-package/'.$package_list['id'])}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
+                                        <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#treatmentForModal2_{{$package_list['id']}}" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="treatmentForModal2_{{$package_list['id']}}" tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered position-relative">
+                                <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                                    <!-- </button> -->
+                                <div class="modal-content">
+                                    <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/modalClose.png')}}" alt="">
+                                    <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
+                                    <p class="camptonBook text-center">Fill the patient detail.</p>
+                                    <div class="modal-body">
+                                        <form class="row g-4">
+                                                <div class="col-md-4">
+                                                    <label for="inputEmail4" class="form-label fw-bold">*Patient Full Name</label>
+                                                    <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Name">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="inputPassword4" class="form-label fw-bold">*Relationship To You</label>
+                                                    <input type="text" class="form-control h-75" id="inputPassword4" placeholder="Relationship To You">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="inputAddress" class="form-label fw-bold">*Patient E-mail</label>
+                                                    <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Email">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="inputAddress" class="form-label fw-bold">*Patient Contact Number</label>
+                                                    <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Contact Number">
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label for="inputState" class="form-label fw-bold">*Patient Country</label>
+                                                    <select id="inputState" class="form-select h-75">
+                                                        <option selected>Country</option>
+                                                        <option>...</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="inputState" class="form-label fw-bold">*Patient City</label>
+                                                    <select id="inputState" class="form-select h-75">
+                                                        <option selected>City</option>
+                                                        <option>...</option>
+                                                    </select>
+                                                </div>
+                                                <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
+                                                <div class="col-12 text-center ">
+                                                    <a href="{{url('purchase-package/'.$package_list['id'])}}" type="submit" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                                        <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>
+                                                    </a>
+                                                </div>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Model -->
                     @endforeach
                     @php
                     }
@@ -379,74 +449,7 @@
         <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="treatmentForModal" tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered position-relative">
-            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
-                <!-- </button> -->
-            <div class="modal-content">
-                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
-                <img src="{{('front/assets/img/step1.svg')}}" alt="">
-                <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
-                <div class="d-flex align-items-center flex-column">
-                    <a href="{{url('#')}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
-                    <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#treatmentForModal2" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal fade" id="treatmentForModal2" tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered position-relative">
-            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
-                <!-- </button> -->
-            <div class="modal-content">
-                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/modalClose.png')}}" alt="">
-                <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
-                <p class="camptonBook text-center">Fill the patient detail.</p>
-                <div class="modal-body">
-                    <form class="row g-4">
-                            <div class="col-md-4">
-                                <label for="inputEmail4" class="form-label fw-bold">*Patient Full Name</label>
-                                <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Name">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputPassword4" class="form-label fw-bold">*Relationship To You</label>
-                                <input type="text" class="form-control h-75" id="inputPassword4" placeholder="Relationship To You">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputAddress" class="form-label fw-bold">*Patient E-mail</label>
-                                <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Email">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputAddress" class="form-label fw-bold">*Patient Contact Number</label>
-                                <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Contact Number">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">*Patient Country</label>
-                                <select id="inputState" class="form-select h-75">
-                                    <option selected>Country</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="inputState" class="form-label fw-bold">*Patient City</label>
-                                <select id="inputState" class="form-select h-75">
-                                    <option selected>City</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
-                            <div class="col-12 text-center ">
-                                <button type="submit" class="btn purchaseBtn my-4" style="padding: 0 6rem"><span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>
-                                </button>
-                            </div>
-                        </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 @endsection
 @section('script')
