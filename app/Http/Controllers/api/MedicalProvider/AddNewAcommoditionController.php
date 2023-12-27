@@ -160,7 +160,7 @@ class AddNewAcommoditionController extends BaseController
                 'service_provider_id',
                 'status',
             )
-            ->where('id',$request->id)
+            ->where('id',$request->hotel_id)
             ->first();
 
         if (!empty($AcommoditionHotelList)) {
@@ -176,12 +176,15 @@ class AddNewAcommoditionController extends BaseController
 
 
         if (!empty($AcommoditionHotelList)) {
+            
+            
             return response()->json([
                 'status' => 200,
                 'message' => 'Hotel details found.',
                 'hotel_details' => $AcommoditionHotelList,
             ]);
         } else {
+            
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. Details not found.',
@@ -224,11 +227,17 @@ class AddNewAcommoditionController extends BaseController
             $edit_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($hotel_input);
 
             if (!empty($edit_hotel)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('success','Hotel Acommodition updated successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Hotel details updated successfully.',
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('error','Something went wrong. Details not found.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',

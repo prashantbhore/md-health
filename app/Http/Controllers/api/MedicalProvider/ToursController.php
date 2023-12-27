@@ -138,6 +138,50 @@ class ToursController extends BaseController
         }
     }
 
+    public function edit_tour_list_view(Request $request)
+    {
+        $ToursDetails = ToursDetails::where('status', '=', 'active')
+        ->select(
+            'id',
+            'tour_name',
+            'tour_description',
+            'tour_days',
+            'tour_image_path',
+            'tour_image_name',
+            'tour_price',
+            'tour_other_services',
+            'platform_type',
+            'status',
+            'created_by'
+        )
+        ->where('id', 1)
+        ->first();
+
+        if (!empty($ToursDetails)) {
+            // foreach ($ToursDetails as $key => $value) {
+                $ToursDetails['tour_name'] = ($ToursDetails->tour_name);
+                $ToursDetails['tour_description'] = ($ToursDetails->tour_description);
+                $ToursDetails['tour_days'] = ($ToursDetails->tour_days);
+                $ToursDetails['tour_image_path'] = url('/') . Storage::url($ToursDetails->tour_image_path);
+                $ToursDetails['tour_price'] = ($ToursDetails->tour_price);
+                $ToursDetails['tour_other_services'] = ($ToursDetails->tour_other_services);
+            // }
+        }
+
+        if (!empty($ToursDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Tours Details found.',
+                'tour_details' => $ToursDetails,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+    }
+
     public function edit_tour_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
