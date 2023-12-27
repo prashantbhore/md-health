@@ -157,11 +157,17 @@ class TransportationController extends BaseController
             $vehicle_input['created_by'] = 1;
             $TransportationDetails = TransportationDetails::create($vehicle_input);
             if (!empty($TransportationDetails)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-new-vehical')->with('success','Transportation Details created successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details created successfully.',
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-new-vehical')->with('error','Transportation Details not created.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Transportation Details not created.',

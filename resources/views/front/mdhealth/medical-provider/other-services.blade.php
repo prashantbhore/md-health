@@ -79,21 +79,22 @@
                                     <a href="{{ url('add-new-vehical') }}"
                                         class="green-plate bg-dark text-green fw-500 fs-6">Add New Vehicle</a>
                                 </h6>
-                                <div class="treatment-card df-start w-100 mb-3">
+                                @foreach ($vehicle_details as $vehicle_detail)
+                                <div class="treatment-card df-start w-100 mb-3" id="divt_{{$vehicle_detail['id']}}">
                                     <div class="row card-row align-items-center">
                                         <div class="col-md-2 df-center px-0">
                                             <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
                                         </div>
                                         <div class="col-md-6 justify-content-start ps-0">
                                             <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Mercedes Vito 2.2 CDI</h5>
-                                                <a href="#" class="btn-active">Active</a>
+                                                <h5 class="dashboard-card-title">{{ $vehicle_detail['vehicle_model_id'] }}</h5>
+                                                <a href="#" class="btn-active">{{ $vehicle_detail['status'] }}</a>
                                             </div>
                                         </div>
                                         <div
                                             class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                             <div class="trmt-card-footer icon-btns">
-                                                <a href="#" class="mt-auto view-detail-btn">
+                                                <a href="{{ url('edit-vehicle/' . Crypt::encrypt($vehicle_detail['id'])) }}" class="mt-auto view-detail-btn">
                                                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -104,7 +105,8 @@
                                                             fill="#111111" />
                                                     </svg>
                                                 </a>
-                                                <a href="#" class="mt-auto view-detail-btn">
+                                                <span onclick="vehicle_delete('{{ $vehicle_detail['id'] }}')"
+                                                        class="mt-auto view-detail-btn">
                                                     <svg width="20" height="19" viewBox="0 0 20 19" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -112,26 +114,37 @@
                                                             stroke="#F24E1E" stroke-width="0.875" stroke-linecap="round"
                                                             stroke-linejoin="round" />
                                                     </svg>
-                                                </a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="treatment-card df-start w-100 mb-3">
+                                @endforeach
+                              
+                            </div>
+                            <div>
+                                <h6 class="section-heading section-btns justify-content-between align-items-center">
+                                    Tour
+                                    <a href="{{ url('add-tour') }}"
+                                        class="green-plate bg-dark text-green fw-500 fs-6">Add New Tour</a>
+                                </h6>
+                                
+                                @foreach ($tour_details as $tour_detail)
+                                <div class="treatment-card df-start w-100 mb-3" id="divtr_{{$tour_detail['id']}}">
                                     <div class="row card-row align-items-center">
                                         <div class="col-md-2 df-center px-0">
                                             <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
                                         </div>
                                         <div class="col-md-6 justify-content-start ps-0">
                                             <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Volkswagen Transporter 2.0 TDI</h5>
-                                                <a href="#" class="btn-active">Active</a>
+                                                <h5 class="dashboard-card-title">{{ $tour_detail['tour_name'] }}</h5>
+                                                <a href="#" class="btn-active">{{ $tour_detail['status'] }}</a>
                                             </div>
                                         </div>
                                         <div
                                             class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                             <div class="trmt-card-footer icon-btns">
-                                                <a href="#" class="mt-auto view-detail-btn">
+                                                <a href="{{ url('edit-tour/' . Crypt::encrypt($tour_detail['id'])) }}" class="mt-auto view-detail-btn">
                                                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -142,19 +155,22 @@
                                                             fill="#111111" />
                                                     </svg>
                                                 </a>
-                                                <a href="#" class="mt-auto view-detail-btn">
-                                                    <svg width="20" height="19" viewBox="0 0 20 19"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <span onclick="tour_delete('{{ $tour_detail['id'] }}')"
+                                                class="mt-auto view-detail-btn">
+                                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M7.57433 12.2245L10.0497 9.75M10.0497 9.75L12.5242 7.2755M10.0497 9.75L7.57433 7.2755M10.0497 9.75L12.5242 12.2245M10.0488 18.5C14.8815 18.5 18.7988 14.5826 18.7988 9.75C18.7988 4.91738 14.8815 1 10.0488 1C5.2162 1 1.29883 4.91738 1.29883 9.75C1.29883 14.5826 5.2162 18.5 10.0488 18.5Z"
                                                             stroke="#F24E1E" stroke-width="0.875" stroke-linecap="round"
                                                             stroke-linejoin="round" />
                                                     </svg>
-                                                </a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
+                               
                             </div>
                         </div>
                     </div>
@@ -187,6 +203,74 @@
                 success: function(response) {
                     if (response.status == 200) {
                         $('#div_' + id).css('display', 'none');
+                        // alert(response.message);
+                        success_toast("success", response.message);
+                        // alert(response.message);
+                    } else {
+                        fail_toast("error", response.message);
+                    }
+                    console.log('Success:', response.message);
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+
+        }
+    </script>
+    <script>
+        function vehicle_delete(id) {
+            // alert(id);
+            // Get the CSRF token from the meta tag
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            // Your AJAX call
+            $.ajax({
+                url: 'api/md-delete-transportation',
+                type: 'POST',
+                data: {
+                    transportation_id: id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                success: function(response) {
+                    if (response.status == 200) {
+                        $('#divt_' + id).css('display', 'none');
+                        // alert(response.message);
+                        success_toast("success", response.message);
+                        // alert(response.message);
+                    } else {
+                        fail_toast("error", response.message);
+                    }
+                    console.log('Success:', response.message);
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+
+        }
+    </script>
+    <script>
+        function tour_delete(id) {
+            // alert(id);
+            // Get the CSRF token from the meta tag
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            // Your AJAX call
+            $.ajax({
+                url: 'api/md-delete-tour',
+                type: 'POST',
+                data: {
+                    tour_id: id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                success: function(response) {
+                    if (response.status == 200) {
+                        $('#divtr_' + id).css('display', 'none');
                         // alert(response.message);
                         success_toast("success", response.message);
                         // alert(response.message);
