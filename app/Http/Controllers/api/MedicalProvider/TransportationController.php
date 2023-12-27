@@ -95,6 +95,42 @@ class TransportationController extends BaseController
         }
     }
 
+
+    public function edit_transportation_details_view(Request $request)
+    {
+        $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', '=', 'active')
+        ->select(
+            'md_add_transportation_details.id',
+            'md_add_transportation_details.status',
+            'md_master_brand.brand_name',
+            'md_add_transportation_details.vehicle_model_id',
+            'md_add_transportation_details.vehicle_per_day_price',
+            'md_add_transportation_details.other_services',
+            'md_master_vehicle_comfort_levels.vehicle_level_name'
+        )
+        ->leftjoin(
+            'md_master_vehicle_comfort_levels',
+            'md_master_vehicle_comfort_levels.id',
+            'md_add_transportation_details.comfort_level_id'
+        )
+        ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
+        ->where('md_add_transportation_details.id', $request->id) // Assuming user_id is the column containing the user's ID
+        ->get();
+
+        if (!empty($TransportationDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Transportation Details list found.',
+                'data' => $TransportationDetails,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Transportation Details list is empty.',
+            ]);
+        }
+    }
+
     //add_transportation_details
     public function add_transportation_details(Request $request)
     {
@@ -121,11 +157,17 @@ class TransportationController extends BaseController
             $vehicle_input['created_by'] = 1;
             $TransportationDetails = TransportationDetails::create($vehicle_input);
             if (!empty($TransportationDetails)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-new-vehical')->with('success','Transportation Details created successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details created successfully.',
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/add-new-vehical')->with('error','Transportation Details not created.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Transportation Details not created.',

@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_customer_payment_details', function (Blueprint $table){
+        Schema::create('md_customer_payment_details', function (Blueprint $table)
+        {
             $table->id();
             $table->bigInteger('customer_id')->nullable();
             $table->bigInteger('order_id')->nullable();
@@ -23,6 +24,9 @@ return new class extends Migration
             $table->string('card_expiry_date')->nullable();
             $table->string('card_cvv')->nullable();
             $table->string('md_coin')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('receiver_name')->nullable();
+            $table->string('iban')->nullable();
             $table->string('package_total_price')->nullable();
             $table->string('payment_percentage')->nullable();
             $table->string('paid_amount')->nullable();

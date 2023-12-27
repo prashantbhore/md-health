@@ -18,6 +18,7 @@ use App\Http\Controllers\api\MedicalProvider\PackageControllers;
 use App\Http\Controllers\api\MedicalProvider\PaymentController;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
+use App\Http\Controllers\api\vendor\VendorProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +60,8 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-// Route::middleware('auth:sanctum')->group(function ()
-// {
+Route::middleware('auth:sanctum')->group(function ()
+{
 //customers
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
@@ -91,6 +92,9 @@ Route::post('md-add-new-acommodition', [AddNewAcommoditionController::class, 'ad
 //hotel-list
 Route::get('md-hotel-list', [AddNewAcommoditionController::class, 'hotel_list']);
 
+//hotel-list-view
+Route::post('md-hotel-list-edit-view', [AddNewAcommoditionController::class, 'hotel_list_edit_view']);
+
 //edit-hotel-list
 Route::post('md-edit-hotel-list', [AddNewAcommoditionController::class, 'edit_hotel_list']);
 
@@ -113,6 +117,9 @@ Route::get('md-transportation-list', [TransportationController::class, 'transpor
 //edit-transportation-details
 Route::post('md-edit-transportation-details', [TransportationController::class, 'edit_transportation_details']);
 
+//edit-transportation-details-view
+Route::post('md-edit-transportation-details-view', [TransportationController::class, 'edit_transportation_details_view']);
+
 //delete-transportation
 Route::post('md-delete-transportation', [TransportationController::class, 'delete_transportation']);
 
@@ -125,6 +132,9 @@ Route::get('md-tour-list', [ToursController::class, 'tour_list']);
 
 //edit-tour-list
 Route::post('md-edit-tour-list', [ToursController::class, 'edit_tour_list']);
+
+//edit-tour-list-view
+Route::post('md-edit-tour-list-view', [ToursController::class, 'edit_tour_list_view']);
 
 //delete-tour
 Route::post('md-delete-tour', [ToursController::class, 'delete_tour']);
@@ -205,6 +215,9 @@ Route::get('md-customer-purchase-package-completed-list-search', [CustomerPackag
 //customer-purchase-package-cancelled-list
 Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
 
+//customer-purchase-cancellation-reason
+Route::get('md-customer-purchase-cancellation-reason', [CustomerPackageController::class, 'customer_purchase_cancellation_reason']);
+
 //customer-change-package-list-active-cancelled
 Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);
 
@@ -238,7 +251,7 @@ Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 
 //customer-reviews
 Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
 
-// });
+});
 
 
 
@@ -335,6 +348,22 @@ Route::post('md-provider-system-user-edit', [AddSystemUserRole::class,'edit_syst
 //Provider System User delete
 Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_system_user']);
 
+//Vendor Registration
+
+Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
+
+//Vendor Prodcut
+Route::controller(VendorProductController::class)->group(function (){
+    Route::get('product-category','vendor_product_category');
+    Route::post('product-sub-category','vendor_product_sub_category');
+    Route::post('add-vendor-product', 'addProduct');
+    Route::get('active-product-count','active_product_count');
+    Route::get('active-product-list','active_product_list');
+    Route::get('inactive-product-list','inactive_product_list');
+    Route::post('vendor-product-search','vendor_search_products');
+    Route::post('vendor-product-view','vendor_product_view');
+    Route::post('/products/bulk-import','addProductsBulk');
+});
 
 //
 
