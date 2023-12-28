@@ -66,7 +66,32 @@
                             <!-- Tab panes -->
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
+                                   @foreach ($packages_active_list as $package_active_list )
+                                       
+                                   
                                     <div class="treatment-card df-start w-100 mb-3">
+                                        <div class="row card-row align-items-center">
+                                            <div class="col-md-2 df-center px-0">
+                                                <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                                            </div>
+                                            <div class="col-md-6 justify-content-start ps-0">
+                                                <div class="trmt-card-body">
+                                                    <h5 class="dashboard-card-title fw-600">Package No:{{!empty($package_active_list['package_unique_no'])?$package_active_list['package_unique_no']:''}}<span class="active">Active</span></h5>
+                                                    <h5 class="mb-0 fw-500">{{!empty($package_active_list['package_name'])?$package_active_list['package_name']:''}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                                <div class="trmt-card-footer footer-btns">
+                                                    <a href="{{url('medical-packages-view')}}" class="view-btn"><i class="fa fa-eye"></i>
+                                                        View </a>
+                                                    <a href="" class="close-btn"><i class="fa fa-close"></i>
+                                                        Deactivate </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    {{-- <div class="treatment-card df-start w-100 mb-3">
                                         <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
                                                 <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
@@ -86,30 +111,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row align-items-center">
-                                            <div class="col-md-2 df-center px-0">
-                                                <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                            </div>
-                                            <div class="col-md-6 justify-content-start ps-0">
-                                                <div class="trmt-card-body">
-                                                    <h5 class="dashboard-card-title fw-600">Package No: #MD3726378<span class="active">Active</span></h5>
-                                                    <h5 class="mb-0 fw-500">Heart Valve Replacement Package</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                                <div class="trmt-card-footer footer-btns">
-                                                    <a href="{{url('medical-packages-view')}}" class="view-btn"><i class="fa fa-eye"></i>
-                                                        View </a>
-                                                    <a href="" class="close-btn"><i class="fa fa-close"></i>
-                                                        Deactivate </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="tab-pane fade" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
+                                    @foreach ($packages_deactive_list as $package_deactive_list )
                                     <div class="treatment-card df-start w-100 mb-3">
                                         <div class="row card-row align-items-center">
                                             <div class="col-md-2 df-center px-0">
@@ -117,8 +122,8 @@
                                             </div>
                                             <div class="col-md-6 justify-content-start ps-0">
                                                 <div class="trmt-card-body">
-                                                    <h5 class="dashboard-card-title fw-600">Package No: #MD3726378<span class="cancel">Deactive</span></h5>
-                                                    <h5 class="mb-0 fw-500">Heart Valve Replacement Package</h5>
+                                                    <h5 class="dashboard-card-title fw-600">Package No: {{!empty($package_deactive_list['package_unique_no'])?$package_deactive_list['package_unique_no']:''}}<span class="cancel">Deactive</span></h5>
+                                                    <h5 class="mb-0 fw-500">{{!empty($package_deactive_list['package_name'])?$package_deactive_list['package_name']:''}}</h5>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
@@ -131,6 +136,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

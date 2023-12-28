@@ -24,7 +24,7 @@ class ToursController extends BaseController
             'tour_name' => 'required',
             'tour_description' => 'required',
             'tour_days' => 'required',
-            // 'tour_image_path' => 'required',
+            'tour_image_path' => 'required',
             'tour_price' => 'required',
             'tour_other_services' => 'required',
             // 'platform_type' => 'required',
@@ -49,15 +49,21 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'active';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $ToursDetails = ToursDetails::create($tour_input);
             if (!empty($ToursDetails)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('success','Tour created successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour created successfully.',
                     'ToursDetails' => $ToursDetails,
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('error','Tour not created.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Tour not created.',
@@ -77,15 +83,21 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'inactive';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $ToursDetails = ToursDetails::create($tour_input);
             if (!empty($ToursDetails)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('success','Tour created successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour created successfully.',
                     'ToursDetails' => $ToursDetails,
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('error','Tour not created.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Tour not created.',
@@ -110,7 +122,7 @@ class ToursController extends BaseController
                 'status',
                 'created_by'
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($ToursDetails)) {
@@ -140,8 +152,7 @@ class ToursController extends BaseController
 
     public function edit_tour_list_view(Request $request)
     {
-        $ToursDetails = ToursDetails::where('status', '=', 'active')
-        ->select(
+        $ToursDetails = ToursDetails::select(
             'id',
             'tour_name',
             'tour_description',
@@ -154,7 +165,7 @@ class ToursController extends BaseController
             'status',
             'created_by'
         )
-        ->where('id', 1)
+        ->where('id', $request->id)
         ->first();
 
         if (!empty($ToursDetails)) {
@@ -205,15 +216,21 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'active';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $edit_tour = ToursDetails::where('id', $request->tour_id)->update($tour_input);
 
             if (!empty($edit_tour)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('success','Tour details updated successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour details updated successfully.',
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('error','Something went wrong. Details not updated.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',
@@ -233,15 +250,21 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'inactive';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $edit_tour = ToursDetails::where('id', $request->tour_id)->update($tour_input);
 
             if (!empty($edit_tour)) {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('success','Tour details updated successfully.');
+                }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour details updated successfully.',
                 ]);
             } else {
+                if (($request->platform_type=='web')) {
+                    return redirect('/medical-other-services')->with('error','Something went wrong. Details not updated.');
+                }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',
@@ -260,7 +283,7 @@ class ToursController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $status_update['status'] = 'delete';
-        $status_update['modified_by'] = 1;
+        $status_update['modified_by'] = Auth::user()->id;
         $status_update['modified_ip_address'] = $request->ip();
 
         $delete_tour = ToursDetails::where('id', $request->tour_id)->update($status_update);

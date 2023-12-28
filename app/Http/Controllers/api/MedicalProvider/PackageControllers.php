@@ -128,7 +128,7 @@ class PackageControllers extends BaseController
                     $package_input['package_price'] = $request->package_price;
                     $package_input['sale_price'] = $request->sale_price;
                     $package_input['platform_type'] = $request->platform_type;
-                    $package_input['created_by'] = 1;
+                    $package_input['created_by'] = Auth::user()->id;
                     $AddPackages = Packages::create($package_input);
                     $Packages = Packages::select('id')->get();
                     if (!empty($Packages)) {
@@ -155,11 +155,17 @@ class PackageControllers extends BaseController
                     }
 
                     if (!empty($AddPackages)) {
+                        if (($request->platform_type=='web')) {
+                            return redirect('/medical-packages')->with('success','Package created successfully in active packages.');
+                        }
                         return response()->json([
                             'status' => 200,
                             'message' => 'Package created successfully in active packages.',
                         ]);
                     } else {
+                        if (($request->platform_type=='web')) {
+                            return redirect('/medical-packages')->with('error','Package not created in active packages.');
+                        }
                         return response()->json([
                             'status' => 404,
                             'message' => 'Package not created in active packages.',
@@ -188,7 +194,7 @@ class PackageControllers extends BaseController
                     $package_input['sale_price'] = $request->sale_price;
                     $package_input['platform_type'] = $request->platform_type;
                     $package_input['status'] = $request->button_type;
-                    $package_input['created_by'] = 1;
+                    $package_input['created_by'] = Auth::user()->id;
                     $AddPackages = Packages::create($package_input);
                     $Packages = Packages::select('id')->get();
                     if (!empty($Packages)) {
@@ -214,11 +220,17 @@ class PackageControllers extends BaseController
                         }
                     }
                     if (!empty($AddPackages)) {
+                        if (($request->platform_type=='web')) {
+                            return redirect('/medical-packages')->with('success','Package created successfully in de-activate packages.');
+                        }
                         return response()->json([
                             'status' => 200,
                             'message' => 'Package created successfully in de-activate packages.',
                         ]);
                     } else {
+                        if (($request->platform_type=='web')) {
+                            return redirect('/medical-packages')->with('error','Package not created in de-activate packages.');
+                        }
                         return response()->json([
                             'status' => 404,
                             'message' => 'Package not created in de-activate packages.',
@@ -232,6 +244,9 @@ class PackageControllers extends BaseController
                 ]);
             }
         } else {
+            if (($request->platform_type=='web')) {
+                return redirect('/medical-packages')->with('error','package name already exist');
+            }
             return response()->json([
                 'status' => 404,
                 'message' => 'package name already exist',
@@ -248,7 +263,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            ->where('created_by', Auth::user()->id)
+            // ->where('created_by', Auth::user()->id)
             ->get();
 
 
@@ -275,7 +290,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            ->where('created_by', Auth::user()->id)
+            // ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($packages_deactive_list)) {
@@ -451,7 +466,7 @@ class PackageControllers extends BaseController
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['status'] = 'active';
                 $package_input['platform_type'] = $request->platform_type;
-                $package_input['created_by'] = 1;
+                $package_input['created_by'] = Auth::user()->id;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);
                 if (!empty($edit_packages)) {
                     return response()->json([
@@ -487,7 +502,7 @@ class PackageControllers extends BaseController
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
                 $package_input['status'] = 'inactive';
-                $package_input['created_by'] = 1;
+                $package_input['created_by'] = Auth::user()->id;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);
                 if (!empty($edit_packages)) {
                     return response()->json([

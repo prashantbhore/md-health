@@ -1,12 +1,12 @@
 @extends('front.layout.layout')
 @section('content')
     <div>
-        <div class="container shadow-lg bg-body rounded mt-5 p-2">
-            <div class="row  align-items-center h-100 ms-2">
-                <div class="col h-75">
+        <div class="container shadow-lg bg-body rounded mt-5 p-3">
+            <div class="row g-0 gap-3 ">
+                <div class="col booking-box-h">
                     <div class="form-floating ">
                         <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                            style="height: 75px">
+                            >
                             <option data-display="Select" selected>Max 1500 kcal</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -15,10 +15,10 @@
                         <label for="floatingSelect" class="mid-food-sub">Calaries</label>
                     </div>
                 </div>
-                <div class="col h-75">
+                <div class="col booking-box-h">
                     <div class="form-floating ">
                         <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                            style="height: 75px">
+                            >
                             <option data-display="Select" selected>Beef & Vegetables</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -27,7 +27,7 @@
                         <label for="floatingSelect" class="mid-food-sub"> Food Type</label>
                     </div>
                 </div>
-                <div class="col main-mid-seaction borer-color">
+                <div class="col booking-box-h border" style="padding-left: 10px">
 
                     <label for="floatingSelect" class="mid-food-sub mb-1">Subscription Type</label>
                     {{-- <div class="d-flex gap-2 m-0 p-0" id="custom-select-button">
@@ -43,9 +43,9 @@
                         <span></span>
                     </div>
                 </div>
-                <div class="col h-75">
+                <div class="col ">
                     {{-- <a href="{{url('md-food-search-page')}}" class="nav-link"> --}}
-                    <button class="btn btn-search-pill-food ms-1">Search</button>
+                    <button class="btn-search-pill-booking3" style="height: 57px">Search</button>
                     {{-- </a> --}}
                 </div>
             </div>
@@ -455,7 +455,7 @@
                                     style="color: #000000" data-bs-dismiss="modal">Myself</button>
                             </a>
                             <button class="btn-md-food-purchase2" style="width: 100%" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal2" id="openSecondModal1"><span class="mid-food-sub"
+                                data-bs-target="#example2Modal2" id="openSecondModal1"><span class="mid-food-sub"
                                     style="color: #000000" data-bs-dismiss="modal">Gift</button>
                         </div>
                     </div>
@@ -465,7 +465,7 @@
     </div>
 
     {{-- Model 3 --}}
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="example2Modal2" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content m-0 p-0">
                 <div class="modal-header border-0 m-0 p-0 position-relative overflow-hidden">
