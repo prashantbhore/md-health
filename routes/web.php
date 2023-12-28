@@ -128,6 +128,23 @@ Route::get('view-products', function () {
     return view('front.mdShop.allProducts');
 });
 
+// mdFood Routes
+Route::get('mdFoods', function () {
+    return view('front.mdFoods.index');
+});
+
+Route::get('foods-search-result', function () {
+    return view('front.mdFoods.searchResult');
+});
+
+Route::get('food-pack-details', function () {
+    return view('front.mdFoods.foodPackDetails');
+});
+
+Route::get('purchase-food-pack', function () {
+    return view('front.mdFoods.purchase');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {

@@ -5,7 +5,7 @@
 .md-food-banner{
     /* border: 1px solid red; */
     width: 100%;
-    margin-top: 8.7rem;
+    padding-top: 4rem;
     margin-bottom: 2rem;
 }
 .sub-food-banner{
@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     row-gap: 2rem;
-    margin-top: 5%;
+    /* margin-top: 5%; */
 }
 .mid-sub-food-banner{
     display: flex;
@@ -25,20 +25,24 @@
     align-items: center;
     column-gap: 1rem;
 }
+.mid-sub-food-banner img{
+    width: 250px;
+}
 .banner-p1{
     font-weight: 500;
     font-size: 19px;
     font-family: Campton;
+    letter-spacing: 4px;
 }
 .banner-p2{
     font-weight: 700;
-    font-size: 48px;
+    font-size: 40px;
     font-family: Campton;
     color:#4CDB06;
 }
 .banner-p3{
     font-weight: 700;
-    font-size: 89px;
+    font-size: 65px;
     font-family: Campton;
     color:#000000;
 }
