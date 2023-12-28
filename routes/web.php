@@ -101,7 +101,9 @@ Route::any('health-pack-details', [CustomerPackageController::class,'packages_vi
 
 Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
+Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 
+Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 //mdShop Routes
 Route::get('mdShop', function () {
     return view('front.mdShop.index');
@@ -343,6 +345,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
+Route::view('food-login', 'front/mdhealth/authentication/food-login');
 
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
@@ -475,6 +478,7 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
+Route::view('user-package-view', 'front/mdhealth/user-panel/user-package-view');
 
 
 // MD BOOKING PAGE KD

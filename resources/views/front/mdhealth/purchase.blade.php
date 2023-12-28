@@ -1,12 +1,12 @@
 @section('php')
-    <form method="POST" name="init_form" action="{{ url('api/md-customer-package-purchase-details') }}">
+    {{-- <form method="POST" name="init_form" action="{{ url('api/md-customer-package-purchase-details') }}">
         @csrf
         <input type="hidden" value="{{ $id }}" id="package_id" name="package_id">
         {{ $id }}
-    </form>
+    </form> --}}
 
     @php
-
+        // dd(Session::all());
     @endphp
 @endsection
 @extends('front.layout.layout2')
@@ -194,6 +194,9 @@
 @section('script')
     <script>
         $(document).ready(function() {
+
+            var baseUrl = $('#base_url').val();
+            var token = "{{ Session::get('login_token') }}";
             var totalPrice = 0;
             var proxyPrice = 0;
             var isTwentySelected = true;
@@ -304,11 +307,14 @@
             function getData() {
 
                 $.ajax({
-                    url: '/api/md-customer-package-purchase-details',
+                    url: baseUrl + '/api/md-customer-package-purchase-details',
                     type: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
                     success: function(response) {
                         console.log('Success:', response);
 
@@ -379,15 +385,19 @@
 
             function makePurchase() {
 
+
+                // alert(token);
+                // var token = '145|QbVxfOaPYonjsIqwVibAdJB0cP82yRzuBk94qajf28c079a3';
+
                 var formData = new FormData();
                 formData.append('package_id', packageId);
                 formData.append('sale_price', proxyPrice);
                 formData.append('paid_amount', totalPrice);
                 formData.append('platform_type', 'web');
-                formData.append('card_no', cardNo.toString());
-                formData.append('card_expiry_date', cardExpiryDate);
-                formData.append('card_cvv', cardCvv);
-                formData.append('card_name', cardName);
+                formData.append('card_no', cardNo ?? '');
+                formData.append('card_expiry_date', cardExpiryDate ?? '');
+                formData.append('card_cvv', cardCvv ?? '');
+                formData.append('card_name', cardName ?? '');
 
                 if (isTwentySelected) {
                     formData.append('percentage', '20%');
@@ -400,11 +410,14 @@
                 }
 
                 $.ajax({
-                    url: '/api/md-customer-purchase-package',
+                    url: baseUrl + '/api/md-customer-purchase-package',
                     type: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
                     success: function(response) {
                         if (response.status == "200") {
                             window.location.href = '/payment-status'

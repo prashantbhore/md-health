@@ -191,6 +191,7 @@
         });
 
         $(document).on('keyup', '#email', function() {
+            var base_url = $('#base_url').val();
             var email = $(this).val();
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             $.ajaxSetup({
@@ -222,8 +223,8 @@
         });
 
         $(document).on('click', '#signup', function() {
-
-
+            var base_url = $('#base_url').val();
+            // alert(base_url);
 
             if ($('#loginForm').valid()) {
                 var email = $('#email').val();
@@ -307,7 +308,7 @@
                     });
 
                     $.ajax({
-                        url: base_url+'/otp-verify',
+                        url: base_url + '/otp-verify',
                         method: 'POST',
                         data: {
                             email: email, // Use the correct email variable here
