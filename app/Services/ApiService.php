@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class ApiService {
 
+
     public function getCities() {
 
         $request = Request :: create( url( '/api/md-city-list' ), 'POST', $body );
@@ -54,6 +55,7 @@ class ApiService {
         if ( $token ) {
             $request->headers->set( 'Authorization', 'Bearer ' . $token );
         }
+
 
         $response = app()->handle( $request );
         return  json_decode( $response->getContent(), true );

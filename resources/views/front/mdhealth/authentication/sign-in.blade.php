@@ -200,7 +200,7 @@
                 }
             });
             $.ajax({
-                url: base_url + '/email-to-mobile',
+                url: base_url+'/email-to-mobile',
                 method: 'POST',
                 data: {
                     email: email
@@ -237,7 +237,7 @@
                     }
                 });
                 $.ajax({
-                    url: base_url + '/email-password-exist',
+                    url: base_url+'/email-password-exist',
                     method: 'POST',
                     data: {
                         email: email,

@@ -40,9 +40,19 @@ class ToursController extends BaseController
             $tour_input['tour_name'] = $request->tour_name;
             $tour_input['tour_description'] = $request->tour_description;
             $tour_input['tour_days'] = $request->tour_days;
-            if ($request->has('tour_image_path')) {
+            // if ($request->has('tour_image_path')) {
+            //     $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
+            //     $original_name = $request->file('tour_image_path')->getClientOriginalName();
+            //     $tour_input['tour_image_name'] = $original_name;
+            // }
+            if ($request->file('tour_image_path')) {
                 $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
                 $original_name = $request->file('tour_image_path')->getClientOriginalName();
+                $tour_input['tour_image_name'] = $original_name;
+            }
+            elseif ($request->has('tour_image_path')) {
+                $tour_input['tour_image_path'] = $this->verifyAndUploadAPi($request, 'tour_image_path', 'tour_images');
+                $original_name = $request->tour_image_path->getClientOriginalName();
                 $tour_input['tour_image_name'] = $original_name;
             }
             $tour_input['tour_price'] = $request->tour_price;
@@ -52,18 +62,18 @@ class ToursController extends BaseController
             $tour_input['created_by'] = Auth::user()->id;
             $ToursDetails = ToursDetails::create($tour_input);
             if (!empty($ToursDetails)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Tour created successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Tour created successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour created successfully.',
                     'ToursDetails' => $ToursDetails,
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('error','Tour not created.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('error','Tour not created.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Tour not created.',
@@ -74,9 +84,19 @@ class ToursController extends BaseController
             $tour_input['tour_name'] = $request->tour_name;
             $tour_input['tour_description'] = $request->tour_description;
             $tour_input['tour_days'] = $request->tour_days;
-            if ($request->has('tour_image_path')) {
+            // if ($request->has('tour_image_path')) {
+            //     $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
+            //     $original_name = $request->file('tour_image_path')->getClientOriginalName();
+            //     $tour_input['tour_image_name'] = $original_name;
+            // }
+            if ($request->file('tour_image_path')) {
                 $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
                 $original_name = $request->file('tour_image_path')->getClientOriginalName();
+                $tour_input['tour_image_name'] = $original_name;
+            }
+            elseif ($request->has('tour_image_path')) {
+                $tour_input['tour_image_path'] = $this->verifyAndUploadAPi($request, 'tour_image_path', 'tour_images');
+                $original_name = $request->tour_image_path->getClientOriginalName();
                 $tour_input['tour_image_name'] = $original_name;
             }
             $tour_input['tour_price'] = $request->tour_price;
@@ -86,18 +106,18 @@ class ToursController extends BaseController
             $tour_input['created_by'] = Auth::user()->id;
             $ToursDetails = ToursDetails::create($tour_input);
             if (!empty($ToursDetails)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Tour created successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Tour created successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour created successfully.',
                     'ToursDetails' => $ToursDetails,
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('error','Tour not created.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('error','Tour not created.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Tour not created.',
@@ -195,6 +215,7 @@ class ToursController extends BaseController
 
     public function edit_tour_list(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'tour_id' => 'required',
         ]);
@@ -207,9 +228,21 @@ class ToursController extends BaseController
             $tour_input['tour_name'] = $request->tour_name;
             $tour_input['tour_description'] = $request->tour_description;
             $tour_input['tour_days'] = $request->tour_days;
-            if ($request->has('tour_image_path')) {
+            // if ($request->has('tour_image_path')) {
+            //     $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
+            //     $original_name = $request->file('tour_image_path')->getClientOriginalName();
+            //     $tour_input['tour_image_name'] = $original_name;
+            // }
+            if ($request->file('tour_image_path')) {
+                // dd(Auth::user()->id);
                 $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
                 $original_name = $request->file('tour_image_path')->getClientOriginalName();
+                $tour_input['tour_image_name'] = $original_name;
+            }
+            elseif ($request->has('tour_image_path')) {
+                // dd($request);
+                $tour_input['tour_image_path'] = $this->verifyAndUploadAPi($request, 'tour_image_path', 'tour_images');
+                $original_name = $request->tour_image_path->getClientOriginalName();
                 $tour_input['tour_image_name'] = $original_name;
             }
             $tour_input['tour_price'] = $request->tour_price;
@@ -220,17 +253,17 @@ class ToursController extends BaseController
             $edit_tour = ToursDetails::where('id', $request->tour_id)->update($tour_input);
 
             if (!empty($edit_tour)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Tour details updated successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Tour details updated successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour details updated successfully.',
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('error','Something went wrong. Details not updated.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('error','Something went wrong. Details not updated.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',
@@ -241,9 +274,19 @@ class ToursController extends BaseController
             $tour_input['tour_name'] = $request->tour_name;
             $tour_input['tour_description'] = $request->tour_description;
             $tour_input['tour_days'] = $request->tour_days;
-            if ($request->has('tour_image_path')) {
+            // if ($request->has('tour_image_path')) {
+            //     $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
+            //     $original_name = $request->file('tour_image_path')->getClientOriginalName();
+            //     $tour_input['tour_image_name'] = $original_name;
+            // }
+            if ($request->file('tour_image_path')) {
                 $tour_input['tour_image_path'] = $this->verifyAndUpload($request, 'tour_image_path', 'tour_images');
                 $original_name = $request->file('tour_image_path')->getClientOriginalName();
+                $tour_input['tour_image_name'] = $original_name;
+            }
+            elseif ($request->has('tour_image_path')) {
+                $tour_input['tour_image_path'] = $this->verifyAndUploadAPi($request, 'tour_image_path', 'tour_images');
+                $original_name = $request->tour_image_path->getClientOriginalName();
                 $tour_input['tour_image_name'] = $original_name;
             }
             $tour_input['tour_price'] = $request->tour_price;
@@ -254,17 +297,17 @@ class ToursController extends BaseController
             $edit_tour = ToursDetails::where('id', $request->tour_id)->update($tour_input);
 
             if (!empty($edit_tour)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Tour details updated successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Tour details updated successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Tour details updated successfully.',
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('error','Something went wrong. Details not updated.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('error','Something went wrong. Details not updated.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',
