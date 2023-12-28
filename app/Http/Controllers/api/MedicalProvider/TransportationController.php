@@ -19,11 +19,13 @@ class TransportationController extends BaseController
     // master_brands
     public function master_brands()
     {
+        // dd('Auth::user()->id');
+        // dd(Auth::user()->id);
         $brands = VehicleBrand::where('status', 'active')
             ->orderBy('brand_name', 'asc')
             ->select('id', 'brand_name', 'status')
             ->get();
-
+// dd($brands);
         if (!empty($brands)) {
             return response()->json([
                 'status' => 200,
@@ -159,17 +161,17 @@ class TransportationController extends BaseController
             $vehicle_input['created_by'] = Auth::user()->id;
             $TransportationDetails = TransportationDetails::create($vehicle_input);
             if (!empty($TransportationDetails)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Transportation Details created successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Transportation Details created successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details created successfully.',
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('error','Transportation Details not created.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('error','Transportation Details not created.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Transportation Details not created.',
@@ -221,17 +223,17 @@ class TransportationController extends BaseController
             $TransportationDetails = TransportationDetails::where('id', $request->transportation_id)->update($vehicle_input);
 
             if (!empty($TransportationDetails)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Transportation Details updated successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Transportation Details updated successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details updated successfully.',
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Something went wrong. Details not updated.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Something went wrong. Details not updated.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',

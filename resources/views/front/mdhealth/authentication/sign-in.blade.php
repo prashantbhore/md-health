@@ -199,7 +199,7 @@
                 }
             });
             $.ajax({
-                url: 'http://127.0.0.1:8000/email-to-mobile',
+                url: base_url+'/email-to-mobile',
                 method: 'POST',
                 data: {
                     email: email
@@ -236,7 +236,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/email-password-exist',
+                    url: base_url+'/email-password-exist',
                     method: 'POST',
                     data: {
                         email: email,
