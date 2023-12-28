@@ -594,7 +594,7 @@ class CustomerPackageController extends BaseController
         $package_price = Packages::where('status', 'active')
         ->select('sale_price')
         ->where('id', $request->package_id)
-            ->first();
+        ->first();
 
         if ($request->sale_price) {
             $sale_price = $request->sale_price;
