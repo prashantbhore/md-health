@@ -307,7 +307,7 @@
                     });
 
                     $.ajax({
-                        url: 'http://127.0.0.1:8000/otp-verify',
+                        url: base_url+'/otp-verify',
                         method: 'POST',
                         data: {
                             email: email, // Use the correct email variable here
@@ -318,7 +318,7 @@
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);
-                                window.location.href = 'http://127.0.0.1:8000' + response.url;
+                                window.location.href = base_url + response.url;
                                 $('#error').text('');
                             } else {
                                 // $('#number').val('');
