@@ -55,7 +55,7 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            @if ($tour_details['id'])
+                            @if (!empty($tour_details['id']))
                             
                             <form action="{{ url('api/md-edit-tour-list') }}" method="post"
                                 enctype="multipart/form-data" id="add_acommodition">

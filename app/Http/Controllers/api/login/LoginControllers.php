@@ -29,14 +29,17 @@ class LoginControllers extends BaseController {
         if ( $validator->fails() ) {
             return $this->sendError( 'Validation Error.', $validator->errors() );
         }
-        // return $request;
-        if ( $request->platform_type == 'web' ) {
-            // return 'asdsad';
+        // dd($request);
+        if ($request->platform_type == "web") {
+    // dd($request->platform_type);
+
+          
             if ( Auth::guard( 'md_customer_registration' )->attempt( [
                 'email' => $request->email,
                 'password' => $request->password,
                 'status' => 'active',
             ] ) ) {
+                // dd($request);
                 $customer = Auth::guard( 'md_customer_registration' )->user();
                 $success[ 'token' ] =  $customer->createToken( 'MyApp' )->plainTextToken;
                 $otp = rand( 1111, 9999 );
@@ -55,14 +58,14 @@ class LoginControllers extends BaseController {
                 $customer_logs[ 'type' ] = 'login';
                 CustomerLogs::create( $customer_logs );
 
-                return redirect( '/sms-code' );
-                // return response()->json( [
-                //     'status' => 200,
-                //     'message' => 'Login successfull.',
-                //     'mobile_number' => $customer->phone,
-                //     'full_name' => $customer->full_name,
-                //     'success_token' => $success,
-                // ] );
+                // return redirect( '/sms-code' );
+                return response()->json( [
+                    'status' => 200,
+                    'message' => 'Login successfull.',
+                    'mobile_number' => $customer->phone,
+                    'full_name' => $customer->full_name,
+                    'success_token' => $success,
+                ] );
             } else {
                 $customer = CustomerRegistration::where( 'status', 'active' )
                 ->select( 'id' )
@@ -74,13 +77,13 @@ class LoginControllers extends BaseController {
                     $customer_logs[ 'status' ] = 'inactive';
                     $customer_logs[ 'type' ] = 'login';
                     CustomerLogs::create( $customer_logs );
-                    return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
+                    // return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
                 }
 
-                // return response()->json( [
-                //     'status' => 404,
-                //     'message' => 'Unauthorised.',
-                // ] );
+                return response()->json( [
+                    'status' => 404,
+                    'message' => 'Unauthorised.',
+                ] );
             }
         } else {
             if ( Auth::guard( 'md_customer_registration' )->attempt( [
@@ -141,7 +144,7 @@ class LoginControllers extends BaseController {
     }
 
     public function medical_provider_login( Request $request ) {
-        return $request;
+        // return $request;
         $validator = Validator::make( $request->all(), [
             'email' => 'required',
             'password' => 'required'
@@ -190,14 +193,14 @@ class LoginControllers extends BaseController {
                 $customer_logs[ 'type' ] = 'login';
                 CustomerLogs::create( $customer_logs );
 
-                return redirect( '/sms-code' );
-                // return response()->json( [
-                //     'status' => 200,
-                //     'message' => 'Login successfull.',
-                //     'mobile_number' => $customer->phone,
-                //     'full_name' => $customer->full_name,
-                //     'success_token' => $success,
-                // ] );
+                // return redirect( '/sms-code' );
+                return response()->json( [
+                    'status' => 200,
+                    'message' => 'Login successfull.',
+                    'mobile_number' => $customer->phone,
+                    'full_name' => $customer->full_name,
+                    'success_token' => $success,
+                ] );
             } else {
                 $customer = CustomerRegistration::where( 'status', 'active' )
                 ->select( 'id' )
@@ -209,13 +212,13 @@ class LoginControllers extends BaseController {
                     $customer_logs[ 'status' ] = 'inactive';
                     $customer_logs[ 'type' ] = 'login';
                     CustomerLogs::create( $customer_logs );
-                    return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
+                    // return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
                 }
 
-                // return response()->json( [
-                //     'status' => 404,
-                //     'message' => 'Unauthorised.',
-                // ] );
+                return response()->json( [
+                    'status' => 404,
+                    'message' => 'Unauthorised.',
+                ] );
             }
         } else {
             if ( Auth::guard( 'md_health_medical_providers_registers' )->attempt( [

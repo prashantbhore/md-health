@@ -123,6 +123,23 @@ Route::get('view-products', function () {
     return view('front.mdShop.allProducts');
 });
 
+// mdFood Routes
+Route::get('mdFoods', function () {
+    return view('front.mdFoods.index');
+});
+
+Route::get('foods-search-result', function () {
+    return view('front.mdFoods.searchResult');
+});
+
+Route::get('food-pack-details', function () {
+    return view('front.mdFoods.foodPackDetails');
+});
+
+Route::get('purchase-food-pack', function () {
+    return view('front.mdFoods.purchase');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
@@ -324,6 +341,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // FRONT ROUTES
 #User Account
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
+Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
+Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
+
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
 #SMS Code
@@ -383,6 +403,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('/add-tour', 'add_tour');
         // Route::get('/login/change_password', 'change_password_view');
         Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
+        Route::post('/md-add-new-acommodition', 'md_add_new_acommodition')->name('saveStarRating');
         Route::get('/edit-acommodition/{id}', 'edit_acommodition');
         Route::get('/edit-vehicle/{id}', 'edit_vehicle');
         Route::get('/edit-tour/{id}', 'edit_tour');
@@ -452,6 +473,7 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // USER PANEL
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 
 
 // MD BOOKING PAGE KD

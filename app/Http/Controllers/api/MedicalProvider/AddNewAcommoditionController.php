@@ -19,6 +19,7 @@ class AddNewAcommoditionController extends BaseController
     //add_new_acommodition
     public function add_new_acommodition(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'hotel_name' => 'required',
             'hotel_address' => 'required',
@@ -35,35 +36,43 @@ class AddNewAcommoditionController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        if ($request->button_type == 'active') {
+        if ($request->button_type == "active") {
+            // dd($request->hotel_name);
             $hotel_input = [];
             $hotel_input['hotel_name'] = $request->hotel_name;
             $hotel_input['hotel_address'] = $request->hotel_address;
             $hotel_input['hotel_stars'] = $request->hotel_stars;
-            if ($request->has('hotel_image_path')) {
+            if ($request->file('hotel_image_path')) {
                 $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
                 $original_name = $request->file('hotel_image_path')->getClientOriginalName();
                 $hotel_input['hotel_image_name'] = $original_name;
             }
+            else {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->hotel_image_path->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
             $hotel_input['hotel_other_services'] = $request->hotel_other_services;
             $hotel_input['status'] = 'active';
             $hotel_input['service_provider_id'] =Auth::user()->id;
             $hotel_input['created_by'] =Auth::user()->id;
             $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
+            // dd($AddNewAcommodition);
             if (!empty($AddNewAcommodition)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Hotel Acommodition created successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Hotel Acommodition created successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Hotel Acommodition created successfully.',
                     'AddNewAcommodition' => $AddNewAcommodition,
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Acommodition not created.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Acommodition not created.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Acommodition not created.',
@@ -75,9 +84,14 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['hotel_name'] = $request->hotel_name;
             $hotel_input['hotel_address'] = $request->hotel_address;
             $hotel_input['hotel_stars'] = $request->hotel_stars;
-            if ($request->has('hotel_image_path')) {
+            if ($request->file('hotel_image_path')) {
                 $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
                 $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            else {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input['hotel_image_name'] = $original_name;
             }
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
@@ -104,6 +118,7 @@ class AddNewAcommoditionController extends BaseController
 
     public function hotel_list()
     {
+        // dd(Auth::user()->id);
         $AcommoditionHotelList = AddNewAcommodition::where('status', '!=', 'delete')
             ->select(
                 'id',
@@ -213,9 +228,14 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['hotel_name'] = $request->hotel_name;
             $hotel_input['hotel_address'] = $request->hotel_address;
             $hotel_input['hotel_stars'] = $request->hotel_stars;
-            if ($request->has('hotel_image_path')) {
+            if ($request->file('hotel_image_path')) {
                 $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
                 $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            else {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input['hotel_image_name'] = $original_name;
             }
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
@@ -227,17 +247,17 @@ class AddNewAcommoditionController extends BaseController
             $edit_hotel = AddNewAcommodition::where('id', $request->hotel_id)->update($hotel_input);
 
             if (!empty($edit_hotel)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('success','Hotel Acommodition updated successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Hotel Acommodition updated successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Hotel details updated successfully.',
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/medical-other-services')->with('error','Something went wrong. Details not found.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('error','Something went wrong. Details not found.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',
@@ -248,9 +268,14 @@ class AddNewAcommoditionController extends BaseController
             $hotel_input['hotel_name'] = $request->hotel_name;
             $hotel_input['hotel_address'] = $request->hotel_address;
             $hotel_input['hotel_stars'] = $request->hotel_stars;
-            if ($request->has('hotel_image_path')) {
+            if ($request->file('hotel_image_path')) {
                 $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
                 $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            else {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input['hotel_image_name'] = $original_name;
             }
             $hotel_input['hotel_per_night_price'] = $request->hotel_per_night_price;
