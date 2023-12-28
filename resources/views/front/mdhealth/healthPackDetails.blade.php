@@ -78,7 +78,9 @@
                                         <p class="camptonBook">*20% of the price is paid before booking.</p>
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
-                                        <button class="btn purchaseBtn">Purchase Package</button>
+                                        <button class="btn purchaseBtn" data-bs-toggle="modal"
+                                            data-bs-target="#treatmentForModal_{{ $packageDetails['id'] }}">Purchase
+                                            Package</button>
                                         <button class="favouriteBtn">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
@@ -88,6 +90,107 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="treatmentForModal_{{ $packageDetails['id'] }}" tabindex="-1"
+                    aria-labelledby="treatmentForModal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered position-relative">
+                        <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                        <!-- </button> -->
+                        <div class="modal-content">
+                            <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/closeModal.png' }}"
+                                alt="">
+                            <img src="{{ 'front/assets/img/step1.svg' }}" alt="">
+                            <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
+                            <div class="d-flex align-items-center flex-column">
+                                <a href="{{ url('purchase-package/' . $packageDetails['id']) }}" type="button"
+                                    class="btn btn-sm btn-md df-center mt-4">Myself</a>
+                                <a href="{{ url('#') }}" data-bs-dismiss="modal" data-bs-toggle="modal"
+                                    data-bs-target="#treatmentForModal2_{{ $packageDetails['id'] }}" type="button"
+                                    class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="treatmentForModal2_{{ $packageDetails['id'] }}" tabindex="-1"
+                    aria-labelledby="treatmentForModal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered position-relative">
+                        <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                        <!-- </button> -->
+                        <div class="modal-content">
+                            <img class="closeModal" data-bs-dismiss="modal"
+                                src="{{ 'front/assets/img/modalClose.png' }}" alt="">
+                            <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
+                            <p class="camptonBook text-center">Fill the patient detail.</p>
+                            <div class="modal-body">
+                                <form id="other_form" class="row g-4">
+                                    @csrf
+                                    <input type="hidden" name="package_id" value="{{ $packageDetails['id'] }}">
+                                    <input type="hidden" name="platform_type" value="web">
+                                    <input type="hidden" name="package_buy_for" value="other">
+                                    <div class="col-md-4">
+                                        <label for="inputEmail4" class="form-label fw-bold">*Patient Full Name</label>
+                                        <input type="email" name="patient_full_name" class="form-control  h-75"
+                                            id="inputEmail4" placeholder="Full Name">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputPassword4" class="form-label fw-bold">*Relationship To
+                                            You</label>
+                                        <input type="text" name="patient_relation" class="form-control h-75"
+                                            id="inputPassword4" placeholder="Relationship To You">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputAddress" class="form-label fw-bold">*Patient E-mail</label>
+                                        <input type="email" name="patient_email" class="form-control  h-75"
+                                            id="inputAddress" placeholder="Email">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputAddress" class="form-label fw-bold">*Patient Contact
+                                            Number</label>
+                                        <input type="email" name="patient_contact_no" class="form-control  h-75"
+                                            id="inputAddress" placeholder="Contact Number">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">*Patient Country</label>
+                                        <select name="patient_country_id" id="inputState" class="form-select h-75">
+                                            <option selected>Country</option>
+                                            @foreach ($counties as $country)
+                                                <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inputState" class="form-label fw-bold">*Patient City</label>
+                                        <select name="patient_city_id" id="inputState" class="form-select h-75">
+                                            <option selected>City</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $country->id }}">{{ $city->city_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from
+                                        <span class="camptonBold">panel</span> <span
+                                            class="camptonBold text-green">></span> <span
+                                            class="camptonBold">packages</span>
+                                    </p>
+                                    <div class="col-12 text-center ">
+                                        <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4"
+                                            style="padding: 10px 6rem">
+                                            <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment
+                                                Page</span>
+                                        </a>
+                                    </div>
+                                </form>
+                                <input type="hidden" value="{{ url('purchase-package/' . $packageDetails['id']) }}"
+                                    id="hidden_url">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Model -->
 
                 <div class="tab-card rounded mb-3">
                     <!-- Nav pills -->
@@ -115,10 +218,10 @@
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div>
                                     <!-- <div class="col-12 px-0">
-                                                                <p>
+                                                                                <p>
 
-                                                                </p>
-                                                            </div> -->
+                                                                                </p>
+                                                                            </div> -->
                                 </div>
                             </div>
                         </div>
@@ -267,8 +370,34 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        const lightbox = GLightbox({
-            ...options
+        $(document).ready(function() {
+
+            const lightbox = GLightbox({
+                ...options
+            });
+
+            $('#other').click(function(e) {
+                e.preventDefault();
+                $('#other_form').submit();
+            });
+
+            $('#other_form').submit(function(e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '/api/md-change-patient-information',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log('Success:', response);
+                        window.location.href = $('#hidden_url').val();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
         });
     </script>
 @endsection

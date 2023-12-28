@@ -19,9 +19,12 @@
                     </div>
                     <h2 class="mb-0">Sign In to MD<span>health</span></h2>
                     <p>The device is not yours? Use private or incognito mode to log in.</p>
+                    <span id="error" class="text-danger"></span>
                     <div class="w-100 df-center">
                         <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
                         <div class="alert alert-success" id="successAuth" style="display: none;"></div>
+                        {{-- <span class="alert alert-danger" id="error" ></span> --}}
+
                         <form id="loginForm">
                             {{-- action="{{ url('user-login') }}" method="post" --}}
                             {{-- @csrf --}}
@@ -31,7 +34,7 @@
                                 <label for="E-mail" class="form-label">E-mail</label>
                                 <input type="text" class="form-control" name="email" id="email"
                                     placeholder="E-mail">
-                                <span id="error" class="text-danger"></span>
+                                {{-- --}}
                             </div>
                             <div class="mb-3">
                                 <label for="Password" class="form-label">Password</label>
@@ -47,20 +50,15 @@
                             <input type="hidden" id="number" class="form-control" placeholder="+91 ********">
                             <div id="recaptcha-container"></div>
                             <div>
-                                <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" 
-                                    id="signup" style="height: 47px;">Sign
+                                <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup"
+                                    style="height: 47px;">Sign
                                     In</button>
                             </div>
                             <div class="text-center">
                                 <a href="#" class="btn-text">Back to MDhealth.co</a>
                             </div>
-
-
                             {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
-
-
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -154,6 +152,16 @@
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+
+
     <script>
         $(document).ready(function() {
             $('#loginForm').validate({
@@ -181,11 +189,7 @@
                 }
             });
         });
-    </script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
         $(document).on('keyup', '#email', function() {
             var email = $(this).val();
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -194,7 +198,6 @@
                     'X-CSRF-TOKEN': csrfToken
                 }
             });
-
             $.ajax({
                 url: 'http://127.0.0.1:8000/email-to-mobile',
                 method: 'POST',
@@ -219,43 +222,43 @@
         });
 
         $(document).on('click', '#signup', function() {
-    var email = $('#email').val();
-    var password = $('#password').val();
 
-    var csrfToken = $('meta[name="csrf-token"]').attr('content');
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': csrfToken
-        }
-    });
 
-    $.ajax({
-        url: 'http://127.0.0.1:8000/email-password-exist',
-        method: 'POST',
-        data: {
-            email: email,
-            password: password
-        },
-        success: function(response) {
-            if (response.user_exist !== undefined) {
-                alert(JSON.stringify(response.user_exist));
-                $('#error').text('dfsvfggbvthytnjynmyhnbgfbvf');
-                sendOTP();
-            } else {
-                $('#error').text('Credentials do not match');
+
+            if ($('#loginForm').valid()) {
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                });
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/email-password-exist',
+                    method: 'POST',
+                    data: {
+                        email: email,
+                        password: password
+                    },
+                    success: function(response) {
+                        if (response.user_exist !== undefined) {
+                            alert(JSON.stringify(response.user_exist));
+                            $('#error').text('dfsvfggbvthytnjynmyhnbgfbvf');
+                            sendOTP();
+                        } else {
+                            $('#error').text('Credentials do not match');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
             }
-        },
-        error: function(xhr, status, error) {
-            console.error(error);
-        }
-    });
-});
-
-    </script>
+        });
 
 
-
-    <script>
         window.onload = function() {
             render();
         };
@@ -270,9 +273,6 @@
             firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
-                //   localStorage.setItem('coderesult', JSON.stringify(coderesult));
-                //   sessionStorage.setItem('key', coderesult);
-                //   window.location.href = "http://127.0.0.1:8000/sms-code";
                 $("#successAuth").text("Message sent");
                 $("#successAuth").show();
                 $("#otpDiv").removeClass('d-none');
@@ -282,115 +282,60 @@
                 $("#error").show();
             });
         }
+
         function verify(e) {
-  var code1 = $("#ot1").val();
-  var code2 = $("#ot2").val();
-  var code3 = $("#ot3").val();
-  var code4 = $("#ot4").val();
-  var code5 = $("#ot5").val();
-  var code6 = $("#ot6").val();
-  var code = code1 + code2 + code3 + code4 + code5 + code6;
+            var code1 = $("#ot1").val();
+            var code2 = $("#ot2").val();
+            var code3 = $("#ot3").val();
+            var code4 = $("#ot4").val();
+            var code5 = $("#ot5").val();
+            var code6 = $("#ot6").val();
+            var code = code1 + code2 + code3 + code4 + code5 + code6;
 
-  coderesult.confirm(code)
-    .then(function(result) {
-      var user = result.user;
-      $("#successOtpAuthot").text("Auth is successful");
-      $("#successOtpAuthot").show();
-
-      // Assuming email is defined somewhere
-      var email = $('#email').val(); 
-      var password = $('#password').val(); 
-      var csrfToken = $('meta[name="csrf-token"]').attr('content');
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': csrfToken
-        }
-      });
-
-      $.ajax({
-        url: 'http://127.0.0.1:8000/otp-verify',
-        method: 'POST',
-        data: {
-          email: email, // Use the correct email variable here
-          login_type: 'login', // Use the correct email variable here
-          password: password // Use the correct email variable here
-        },
-        success: function(response) {
-          console.log(response);
-          if (response.url !== undefined) {
-                            // alert(response.url);
-                            window.location.href='http://127.0.0.1:8000'+response.url;
-                            $('#error').text('');
-                        } else {
-                            // $('#number').val('');
-                            $('#error').text('Credentials do not match');
+            coderesult.confirm(code)
+                .then(function(result) {
+                    var user = result.user;
+                    $("#successOtpAuthot").text("Auth is successful");
+                    $("#successOtpAuthot").show();
+                    var email = $('#email').val();
+                    var password = $('#password').val();
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
                         }
-        },
-        error: function(xhr, status, error) {
-          console.error(error);
+                    });
+
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/otp-verify',
+                        method: 'POST',
+                        data: {
+                            email: email, // Use the correct email variable here
+                            login_type: 'login', // Use the correct email variable here
+                            password: password // Use the correct email variable here
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            if (response.url !== undefined) {
+                                // alert(response.url);
+                                window.location.href = 'http://127.0.0.1:8000' + response.url;
+                                $('#error').text('');
+                            } else {
+                                // $('#number').val('');
+                                $('#error').text('Credentials do not match');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+
+                    e.preventDefault();
+                })
+                .catch(function(error) {
+                    $("#error").text(error.message);
+                    $("#error").show();
+                });
         }
-      });
-
-      e.preventDefault();
-    })
-    .catch(function(error) {
-      $("#error").text(error.message);
-      $("#error").show();
-    });
-}
-
-
-        // function verify(e) {
-        //     var code1 = $("#ot1").val();
-        //     var code2 = $("#ot2").val();
-        //     var code3 = $("#ot3").val();
-        //     var code4 = $("#ot4").val();
-        //     var code5 = $("#ot5").val();
-        //     var code6 = $("#ot6").val();
-        //     var code = code1 + code2 + code3 + code4 + code5 + code6;
-        //     console.log(code);
-        //     // alert(code);
-        //     // var code = $("#verification").val();
-        //     // var coderesult = JSON.parse(localStorage.getItem('coderesult'));
-        //     // var coderesult = sessionStorage.getItem('key');
-        //     // console.log(coderesult);
-        //     coderesult.confirm(code).then(function(result) {
-        //         var user = result.user;
-        //         $("#successOtpAuthot").text("Auth is successful");
-        //         $("#successOtpAuthot").show();
-        //         var csrfToken = $('meta[name="csrf-token"]').attr('content');
-        //         $.ajaxSetup({
-        //             headers: {
-        //                 'X-CSRF-TOKEN': csrfToken
-        //             }
-        //         });
-
-        //         $.ajax({
-        //             url: 'http://127.0.0.1:8000/otp-verify',
-        //             method: 'POST',
-        //             data: {
-        //                 email: email
-        //             },
-        //             success: function(response) {
-        //                 console.log(response);
-        //                 // if (response.mobile_no !== undefined) {
-        //                 //     // alert(response.mobile_no);
-        //                 //     // $('#number').val(response.mobile_no);
-        //                 //     $('#error').text('');
-        //                 // } else {
-        //                 //     // $('#number').val('');
-        //                 //     $('#error').text('Credentials do not match');
-        //                 // }
-        //             },
-        //             error: function(xhr, status, error) {
-        //                 console.error(error);
-        //             }
-        //         });
-        //         e.preventDefault();
-        //     }).catch(function(error) {
-        //         $("#error").text(error.message);
-        //         $("#error").show();
-        //     });
-        // }
     </script>
 @endsection

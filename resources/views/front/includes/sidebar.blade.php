@@ -27,8 +27,8 @@
             <li class="nav-item mpAccountLi">
                 <a class="nav-link mpAccount" href="{{url('medical-account')}}">Account</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Reports</a>
+            <li class="nav-item mpReportsLi">
+                <a class="nav-link mpReports" href="{{url('reports')}}">Reports</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Membership</a>

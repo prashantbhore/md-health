@@ -121,7 +121,7 @@
                                 <input type="text" class="mb-3" id="input1" placeholder="Card Holder Name">
                                 <input type="text" class="mb-3" id="input2" placeholder="Card Number">
                                 <div class="d-flex gap-2 mb-4">
-                                    <input type="text" id="input3" placeholder="CVV">
+                                    <input type="password" id="input3" placeholder="CVV">
                                     <input type="text" id="input4" placeholder="Valid Till">
                                 </div>
                                 <!-- <a href="{{ url('payment-status') }}"> -->
@@ -152,6 +152,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div id="wallet">
                     <div class="row">
                         <div class="col-6 text-end px-5 align-self-end mt-4">
@@ -199,6 +200,10 @@
             var isThirtySelected = false;
             var isFiftySelected = false;
             var isHundredSelected = false;
+            var cardNo;
+            var cardExpiryDate;
+            var cardCvv;
+            var cardName;
             var twentyAmount;
             var thirtyAmount;
             var fiftyAmount;
@@ -210,6 +215,7 @@
             var packageId = "{{ $id }}";
             var formData = new FormData();
             formData.append('package_id', packageId);
+            getData();
 
             ///////////////////////////////////////////////////////////////////////////////
 
@@ -274,94 +280,138 @@
                 switch ($(this).attr('id')) {
                     case 'input1':
                         $('.cardholder').text(inputValue);
+                        cardName = $(this).val().toString();
                         break;
                     case 'input2':
                         $('.cardNumber').text(inputValue);
+                        cardNo = $(this).val().toString()
+                        break;
+                    case 'input3':
+                        cardCvv = $(this).val().toString();
                         break;
                     case 'input4':
                         $('.validity').text(inputValue);
+                        cardExpiryDate = $(this).val().toString();
                         break;
                 }
             });
 
-            $('#input3').on('input', function() {
-                var cvv = $(this).val();
-                var maskedCVV = cvv.replace(/./g, '*'); // Replace each character with an asterisk
-                $(this).val(maskedCVV);
-            });
+            $('.purchaseBtn').click(function() {
+                makePurchase();
+            })
             ////////////////////////////////////////////////////////////////////////////////
 
-            $.ajax({
-                url: '/api/md-customer-package-purchase-details',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    console.log('Success:', response);
+            function getData() {
 
-                    var otherServicesHtml = '';
-                    purchaseDetails = response.purchase_details;
-                    otherServices = response.other_services;
-                    discounts = response.discounts;
-                    var treatmentPriceHtml = purchaseDetails.treatment_price +
-                        ' ₺ <span class="smallFont treatment_price_discount"> (' + numberToPercent(
-                            percentValue,
-                            purchaseDetails
-                            .treatment_price) + '₺)</span>';
+                $.ajax({
+                    url: '/api/md-customer-package-purchase-details',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log('Success:', response);
 
-                    totalPrice = parseFloat(purchaseDetails.treatment_price);
-
-                    otherServices.forEach(function(service) {
-                        totalPrice += parseFloat(service.price);
-                    });
-                    // alert(totalPrice);
-
-                    $('.package_name').text(purchaseDetails.title);
-                    $('.city_name').text(purchaseDetails.city_name);
-                    $('.treatment_price').append(treatmentPriceHtml);
-
-                    otherServices.forEach(function(service) {
-                        otherServicesHtml += '<div class="packageResult rounded mb-3">'
-                        otherServicesHtml +=
-                            '<div class="flex-grow-1 d-flex align-items-center gap-2">'
-                        otherServicesHtml += '<label class="">'
-                        otherServicesHtml += '<input id=' + service.title +
-                            ' type="checkbox" name="checkbox" checked />'
-                        otherServicesHtml += '</label>'
-                        otherServicesHtml += '<div class="flex-grow-1">'
-                        otherServicesHtml +=
-                            '<div class="d-flex gap-2 justify-content-between align-items-center">'
-                        otherServicesHtml += '<p class="mb-0 fs-5 camptonBold lh-base">' +
-                            service.title + '</p>'
-                        otherServicesHtml +=
-                            '<p class="mb-0 fs-6 camptonBold text-green">Per Night Price</p>'
-                        otherServicesHtml += '</div>'
-                        otherServicesHtml +=
-                            '<div class="d-flex gap-5 justify-content-between">'
-                        otherServicesHtml += '<div class="d-flex align-items-center gap-2">'
-                        otherServicesHtml += '<p class="mb-0 lctn">3 Stars Hotel</p>'
-                        otherServicesHtml += '</div>'
-                        otherServicesHtml +=
-                            '<p class="mb-0 fs-5 camptonBold lh-base other-service-price">' +
-                            service.price + ' ₺ <span class="smallFont">(' +
-                            numberToPercent(
+                        var otherServicesHtml = '';
+                        purchaseDetails = response.purchase_details;
+                        otherServices = response.other_services;
+                        discounts = response.discounts;
+                        var treatmentPriceHtml = purchaseDetails.treatment_price +
+                            ' ₺ <span class="smallFont treatment_price_discount"> (' + numberToPercent(
                                 percentValue,
-                                service.price) + '₺)</span></p>'
-                        otherServicesHtml += '</div>'
-                        otherServicesHtml += '</div>'
-                        otherServicesHtml += '</div>'
-                        otherServicesHtml += '</div>'
-                    });
-                    $('.other_services_items').append(otherServicesHtml);
-                    calcOtherServices();
-                    updateDiscountedPrice();
+                                purchaseDetails
+                                .treatment_price) + '₺)</span>';
 
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
+                        totalPrice = parseFloat(purchaseDetails.treatment_price);
+
+                        otherServices.forEach(function(service) {
+                            totalPrice += parseFloat(service.price);
+                        });
+                        // alert(totalPrice);
+
+                        $('.package_name').text(purchaseDetails.package_name);
+                        $('.city_name').text(purchaseDetails.city_name);
+                        $('.treatment_price').append(treatmentPriceHtml);
+
+                        otherServices.forEach(function(service) {
+                            otherServicesHtml += '<div class="packageResult rounded mb-3">'
+                            otherServicesHtml +=
+                                '<div class="flex-grow-1 d-flex align-items-center gap-2">'
+                            otherServicesHtml += '<label class="">'
+                            otherServicesHtml += '<input id=' + service.title +
+                                ' type="checkbox" name="checkbox" checked />'
+                            otherServicesHtml += '</label>'
+                            otherServicesHtml += '<div class="flex-grow-1">'
+                            otherServicesHtml +=
+                                '<div class="d-flex gap-2 justify-content-between align-items-center">'
+                            otherServicesHtml += '<p class="mb-0 fs-5 camptonBold lh-base">' +
+                                service.title + '</p>'
+                            otherServicesHtml +=
+                                '<p class="mb-0 fs-6 camptonBold text-green">Per Night Price</p>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml +=
+                                '<div class="d-flex gap-5 justify-content-between">'
+                            otherServicesHtml += '<div class="d-flex align-items-center gap-2">'
+                            otherServicesHtml += '<p class="mb-0 lctn">3 Stars Hotel</p>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml +=
+                                '<p class="mb-0 fs-5 camptonBold lh-base other-service-price">' +
+                                service.price + ' ₺ <span class="smallFont">(' +
+                                numberToPercent(
+                                    percentValue,
+                                    service.price) + '₺)</span></p>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                        });
+                        $('.other_services_items').append(otherServicesHtml);
+                        calcOtherServices();
+                        updateDiscountedPrice();
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+
+            function makePurchase() {
+
+                var formData = new FormData();
+                formData.append('package_id', packageId);
+                formData.append('sale_price', proxyPrice);
+                formData.append('paid_amount', totalPrice);
+                formData.append('platform_type', 'web');
+                formData.append('card_no', cardNo.toString());
+                formData.append('card_expiry_date', cardExpiryDate);
+                formData.append('card_cvv', cardCvv);
+                formData.append('card_name', cardName);
+
+                if (isTwentySelected) {
+                    formData.append('percentage', '20%');
+                } else if (isThirtySelected) {
+                    formData.append('percentage', '30%');
+                } else if (isFiftySelected) {
+                    formData.append('percentage', '50%');
+                } else if (isHundredSelected) {
+                    formData.append('percentage', '100%');
                 }
-            });
+
+                $.ajax({
+                    url: '/api/md-customer-purchase-package',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.status == "200") {
+                            window.location.href = '/payment-status'
+                        }
+                    },
+                });
+            }
 
             ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -407,10 +457,8 @@
                 }
 
                 // alert(totalPrice);
-                $('.total_price').empty();
-                $('.total_price').append(proxyPrice + ' ₺ ' + '<span class="smallFont thirtyPercent">(' +
-                    totalPrice +
-                    ' ₺)</span>');
+                // $('.total_price').empty();
+                $('.total_price').text(totalPrice + ' ₺');
             };
 
             function updateOtherServicesUi() {

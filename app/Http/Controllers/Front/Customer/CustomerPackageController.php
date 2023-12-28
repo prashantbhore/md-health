@@ -10,6 +10,7 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerReviews;
 use App\Models\Packages;
 use App\Models\Cities;
+use App\Models\Country;
 use App\Models\ProductCategory;
 use App\Models\PatientInformation;
 use App\Models\ToursDetails;
@@ -98,18 +99,22 @@ class CustomerPackageController extends Controller
 
         // print_r($request);
 
-        if (!empty($packages)) {
+            if (!empty($packages)) {
+                // print_r($packages);die;
+                $cities = Cities::where('status','active')->where('country_id',1)->get();
+                $treatment_plans = ProductCategory::where('status','active')->where('main_product_category_id','1')->get();
 
-            $cities = Cities::where('status','active')->where('country_id',1)->get();
-            $treatment_plans = ProductCategory::where('status','active')->where('main_product_category_id','1')->get();
-            $treatment_name = $packages[0]['product_category_name'];
-            $city_name = $packages[0]['city_name'];
-            return view('front.mdhealth.searchResult', compact('packages','cities','treatment_plans' , 'city_name','treatment_name'));
+                $treatment_name = $packages[0]['product_category_name'] ?? 'Select Treatment';
+                $city_name = $packages[0]['city_name'] ?? 'Select City';
 
-        } else {
-            return view('front.index');
+                $counties = Country::all();
 
-        }
+                return view('front.mdhealth.searchResult', compact('packages','cities','treatment_plans','city_name','treatment_name','counties'));
+
+            } else {
+                return view('front.index');
+
+            }
 
     }
 
@@ -164,7 +169,11 @@ class CustomerPackageController extends Controller
 
                     // // Attach the cookie to the response
                     // $response->withCookie($cookie);
-                    return view('front.mdhealth.healthPackDetails', compact('packageDetails'));
+
+                    $cities = Cities::where('status','active')->where('country_id',1)->get();
+                    $counties = Country::all();
+
+                    return view('front.mdhealth.healthPackDetails', compact('packageDetails','cities','counties'));
 
                 } else {
                     return view('front.index');

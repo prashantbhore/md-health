@@ -178,45 +178,55 @@
                                     <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
                                     <p class="camptonBook text-center">Fill the patient detail.</p>
                                     <div class="modal-body">
-                                        <form class="row g-4">
+                                        <form id="other_form" class="row g-4">
+                                            @csrf
+                                            <input type="hidden" name="package_id" value="{{$package_list['id']}}">
+                                            <input type="hidden" name="platform_type" value="web">
+                                            <input type="hidden" name="package_buy_for" value="other">
                                                 <div class="col-md-4">
                                                     <label for="inputEmail4" class="form-label fw-bold">*Patient Full Name</label>
-                                                    <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Name">
+                                                    <input type="email" name="patient_full_name" class="form-control  h-75" id="inputEmail4" placeholder="Full Name">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="inputPassword4" class="form-label fw-bold">*Relationship To You</label>
-                                                    <input type="text" class="form-control h-75" id="inputPassword4" placeholder="Relationship To You">
+                                                    <input type="text" name="patient_relation" class="form-control h-75" id="inputPassword4" placeholder="Relationship To You">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="inputAddress" class="form-label fw-bold">*Patient E-mail</label>
-                                                    <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Email">
+                                                    <input type="email" name="patient_email" class="form-control  h-75" id="inputAddress"  placeholder="Email">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="inputAddress" class="form-label fw-bold">*Patient Contact Number</label>
-                                                    <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Contact Number">
+                                                    <input type="email" name="patient_contact_no" class="form-control  h-75" id="inputAddress"  placeholder="Contact Number">
                                                 </div>
 
                                                 <div class="col-md-4">
                                                     <label for="inputState" class="form-label fw-bold">*Patient Country</label>
-                                                    <select id="inputState" class="form-select h-75">
+                                                    <select name="patient_country_id" id="inputState" class="form-select h-75">
                                                         <option selected>Country</option>
-                                                        <option>...</option>
+                                                        @foreach($counties as $country)
+                                                            <option value="{{$country->id}}">{{$country->country_name}}</option>
+                                                        @endforeach
+
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="inputState" class="form-label fw-bold">*Patient City</label>
-                                                    <select id="inputState" class="form-select h-75">
+                                                    <select name="patient_city_id" id="inputState" class="form-select h-75">
                                                         <option selected>City</option>
-                                                        <option>...</option>
+                                                        @foreach($cities as $city)
+                                                            <option value="{{$country->id}}">{{$city->city_name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
                                                 <div class="col-12 text-center ">
-                                                    <a href="{{url('purchase-package/'.$package_list['id'])}}" type="submit" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                                    <a href="javascript:void(0)" id="other"  class="btn purchaseBtn my-4" style="padding: 10px 6rem">
                                                         <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>
                                                     </a>
                                                 </div>
                                             </form>
+                                            <input type="hidden" value="{{url('purchase-package/'.$package_list['id'])}}" id="hidden_url">
                                     </div>
                                 </div>
                             </div>
@@ -460,6 +470,29 @@
         var id = this.id.split("_")[2];
         $("#myForm_"+id).submit();
         // alert("hi"+id);
+        });
+
+        $('#other').click(function(e) {
+            e.preventDefault();
+            $('#other_form').submit();
+        });
+
+        $('#other_form').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: '/api/md-change-patient-information',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    console.log('Success:', response);
+                    window.location.href = $('#hidden_url').val();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
         });
     });
 </script>
