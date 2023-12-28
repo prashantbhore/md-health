@@ -89,14 +89,15 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                @if (!empty($hotel_details['id']))
+                                {{-- @if (!empty($hotel_details['id']))
                                 <form action="{{ url('api/md-edit-hotel-list') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
-                                    @else
-                                <form action="{{ url('api/md-add-new-acommodition') }}" method="post"
+                                    @else --}}
+                                <form action="{{ url('md-add-new-acommodition') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
-                                @endif
+                                {{-- @endif --}}
                                     @csrf
+                                    {{-- <input type="hidden" name="bearer_token" value="{{Session::get('login_token')}}"> --}}
                                     <input type="hidden" name="hotel_id" value="{{!empty($hotel_details['id'])?$hotel_details['id']:''}}">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Hotel Name</label>
