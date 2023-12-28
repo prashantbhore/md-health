@@ -10,6 +10,7 @@ use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
 use App\Http\Controllers\api\customer\CustomerReportController;
+use App\Http\Controllers\api\customer\CustomerShopController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\AddSystemUserRole;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
@@ -200,6 +201,9 @@ Route::post('md-change-patient-information-for-myself', [CustomerPackageControll
 //customer-get-percentage
 Route::post('md-customer-get-percentage', [CustomerPackageController::class, 'customer_get_percentage']);
 
+//customer-get-purchase-information
+Route::post('md-customer-get-purchase-information', [CustomerPackageController::class, 'customer_get_purchase_information']);
+
 //customer-package-purchase-details
 Route::post('md-customer-purchase-package', [CustomerPackageController::class, 'customer_purchase_package']);
 
@@ -356,7 +360,7 @@ Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_
 Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
 
 //Vendor Prodcut
-Route::controller(VendorProductController::class)->group(function (){
+Route::controller(VendorProductController::class)->group(function(){
     Route::get('product-category','vendor_product_category');
     Route::post('product-sub-category','vendor_product_sub_category');
     Route::post('add-vendor-product', 'addProduct');
@@ -368,7 +372,18 @@ Route::controller(VendorProductController::class)->group(function (){
     Route::post('/products/bulk-import','addProductsBulk');
 });
 
-//
+
+
+//customer MD Shop
+
+Route::controller(CustomerShopController::class)->group(function(){
+    Route::get('featured-product','featured_product_list');
+    Route::post('customer-product-view','product_view');
+    Route::post('vendor-product-lists','vendor_product_list');
+    Route::post('/shopping-cart/add','addToCart');
+});
+
+
 
 // });
 

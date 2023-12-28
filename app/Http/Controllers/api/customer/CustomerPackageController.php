@@ -21,6 +21,7 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\PatientInformation;
 use App\Models\CustomerDocuments;
 use App\Models\CustomerReviews;
+use App\Models\CustomerCancelledReason;
 
 class CustomerPackageController extends BaseController
 {
@@ -495,7 +496,7 @@ class CustomerPackageController extends BaseController
 
         if ($request->package_buy_for == 'myself') {
             $PatientInformation = [];
-            $PatientInformation['customer_id'] = 1;
+            $PatientInformation['customer_id'] = Auth::user()->id;
             $PatientInformation['package_id'] = $request->package_id;
             $PatientInformation['address'] = $request->address;
             $PatientInformation['patient_full_name'] = $request->patient_full_name;
@@ -503,7 +504,7 @@ class CustomerPackageController extends BaseController
             $PatientInformation['patient_city_id'] = $request->patient_city_id;
             $PatientInformation['birth_date'] = $request->birth_date;
             $PatientInformation['package_buy_for'] = 'myself';
-            $PatientInformation['created_by'] = 1;
+            $PatientInformation['created_by'] = Auth::user()->id;
             $purchase_details_data = PatientInformation::create($PatientInformation);
             $PatientInformation = PatientInformation::select('id')->get();
             if (!empty($PatientInformation)) {
@@ -540,7 +541,7 @@ class CustomerPackageController extends BaseController
             }
         } else {
             $PatientInformation = [];
-            $PatientInformation['customer_id'] = 1;
+            $PatientInformation['customer_id'] = Auth::user()->id;
             $PatientInformation['package_id'] = $request->package_id;
             $PatientInformation['patient_full_name'] = $request->patient_full_name;
             $PatientInformation['patient_relation'] = $request->patient_relation;
@@ -550,7 +551,7 @@ class CustomerPackageController extends BaseController
             $PatientInformation['patient_country_id'] = $request->patient_country_id;
             $PatientInformation['patient_city_id'] = $request->patient_city_id;
             $PatientInformation['package_buy_for'] = 'other';
-            $PatientInformation['created_by'] = 1;
+            $PatientInformation['created_by'] = Auth::user()->id;
             $purchase_details_data = PatientInformation::create($PatientInformation);
             $PatientInformation = PatientInformation::select('id')->get();
             if (!empty($PatientInformation)) {
@@ -590,15 +591,17 @@ class CustomerPackageController extends BaseController
 
     public function customer_get_percentage(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'sale_price' => 'required',
-        ]);
+        $package_price = Packages::where('status', 'active')
+        ->select('sale_price')
+        ->where('id', $request->package_id)
+            ->first();
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+        if ($request->sale_price) {
+            $sale_price = $request->sale_price;
+        } else {
+            $sale_price = $package_price->sale_price;
         }
 
-        $sale_price = $request->sale_price;
         $twenty_percent = $sale_price * 0.2; // 20% of sale_price
         $thirty_percent = $sale_price * 0.3; // 30% of sale_price
         $fifty_percent = $sale_price * 0.5; // 50% of sale_price
@@ -664,6 +667,59 @@ class CustomerPackageController extends BaseController
         }
     }
 
+    public function customer_get_purchase_information(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'package_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $purchase_details = Packages::where('md_packages.status', 'active')
+            ->where('md_packages.id', $request->package_id)
+            ->select('md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id as vehicle_name', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount','md_product_category.product_category_name',
+            'md_product_sub_category.product_sub_category_name as treatment_name')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
+            ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->first();
+
+            $purchase_details_data=[];
+
+            if(!empty($purchase_details))
+            {
+                $purchase_details_data['treatment_name']=$purchase_details->treatment_name;
+                $purchase_details_data['hotel_name'] = $purchase_details->hotel_name;
+                $purchase_details_data['hotel_acommodition_price'] = $purchase_details->hotel_acommodition_price;
+                $purchase_details_data['vehicle_name'] = $purchase_details->vehicle_name;
+                $purchase_details_data['transportation_acommodition_price'] = $purchase_details->transportation_acommodition_price;
+                $purchase_details_data['tour_price'] = $purchase_details->tour_price;
+                $purchase_details_data['visa_service_price'] = $purchase_details->visa_service_price;
+                $purchase_details_data['sale_price'] = $request->sale_price;
+                $purchase_details_data['percentage'] = $request->percentage;
+                $purchase_details_data['price'] = $request->price;
+            }
+
+        if (!empty($purchase_details)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your purchase data details.',
+                'purchase_details_data' => $purchase_details_data,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'your list is empty.',
+
+            ]);
+        }
+    }
+
     public function customer_purchase_package(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -689,7 +745,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['pending_payment'] = $request->pending_amount;
                 // $package_percentage_price = $request->package_percentage_price;
                 // $purchase_details['purchase_type'] = 'pending';
-                $purchase_details['created_by'] = 1;
+                $purchase_details['created_by'] = Auth::user()->id;
                 $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
 
                 if (!empty($purchase_details_data)) {
@@ -759,7 +815,7 @@ class CustomerPackageController extends BaseController
             } else {
                 $purchase_details = [];
 
-                $purchase_details['customer_id'] = 1;
+                $purchase_details['customer_id'] = Auth::user()->id;
                 $purchase_details['package_id'] = $request->package_id;
                 $packages = Packages::where('status', 'active')
                     ->select(
@@ -792,7 +848,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
                 $purchase_details['purchase_type'] = 'pending';
-                $purchase_details['created_by'] = 1;
+                $purchase_details['created_by'] = Auth::user()->id;
 
                 $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
 
@@ -875,7 +931,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['pending_payment'] = $request->pending_amount;
                 // $package_percentage_price = $request->package_percentage_price;
                 // $purchase_details['purchase_type'] = 'pending';
-                $purchase_details['created_by'] = 1;
+                $purchase_details['created_by'] = Auth::user()->id;
                 $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
 
                 if (!empty($purchase_details_data)) {
@@ -945,7 +1001,7 @@ class CustomerPackageController extends BaseController
             } else {
                 $purchase_details = [];
 
-                $purchase_details['customer_id'] = 1;
+                $purchase_details['customer_id'] = Auth::user()->id;
                 $purchase_details['package_id'] = $request->package_id;
                 $packages = Packages::where('status', 'active')
                 ->select(
@@ -978,7 +1034,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
                 $purchase_details['purchase_type'] = 'pending';
-                $purchase_details['created_by'] = 1;
+                $purchase_details['created_by'] = Auth::user()->id;
 
                 $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
 
@@ -1039,7 +1095,7 @@ class CustomerPackageController extends BaseController
                 }
 
 
-                if (!empty($payment_completed || $payment_pending)) {
+                if (!empty($payment_completed) || !empty($payment_pending)) {
                     return response()->json([
                         'status' => 200,
                         'message' => 'package purchase successfully.',
@@ -1088,7 +1144,7 @@ class CustomerPackageController extends BaseController
             // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->where('md_customer_purchase_details.customer_id', '1')
+            ->where('md_customer_purchase_details.customer_id',Auth::user()->id)
             ->get();
 
         foreach ($customer_purchase_package_active_list as $key => $val) {
@@ -1145,7 +1201,7 @@ class CustomerPackageController extends BaseController
             // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->where('md_customer_purchase_details.customer_id', '1');
+            ->where('md_customer_purchase_details.customer_id', Auth::user()->id);
         if (!empty($request->treatment_name)) {
             $customer_purchase_package_active_list = $customer_purchase_package_active_list->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
         }
@@ -1204,7 +1260,7 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->where('md_customer_purchase_details.customer_id', '1')
+            ->where('md_customer_purchase_details.customer_id', Auth::user()->id)
             ->get();
 
         foreach ($customer_purchase_package_completed_list as $key => $val) {
@@ -1257,7 +1313,7 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->where('md_customer_purchase_details.customer_id', '1');
+            ->where('md_customer_purchase_details.customer_id', Auth::user()->id);
         if (!empty($request->treatment_name)) {
             $customer_purchase_package_completed_list = $customer_purchase_package_completed_list->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
         }
@@ -1317,7 +1373,7 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->where('md_customer_purchase_details.customer_id', '1')
+            ->where('md_customer_purchase_details.customer_id', Auth::user()->id)
             ->get();
 
         foreach ($customer_purchase_package_cancelled_list as $key => $val) {
@@ -1356,7 +1412,7 @@ class CustomerPackageController extends BaseController
         }
 
         $status_update['purchase_type'] = 'cancelled';
-        $status_update['modified_by'] = 1;
+        $status_update['modified_by'] = Auth::user()->id;
         $status_update['modified_ip_address'] = $request->ip();
 
         $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->id)->update($status_update);
@@ -1386,9 +1442,9 @@ class CustomerPackageController extends BaseController
         $cancellation_reason = [];
         $cancellation_reason['purchase_id'] = $request->purchase_id;
         $cancellation_reason['package_id'] = $request->package_id;
-        $cancellation_reason['customer_id'] = 1;
+        $cancellation_reason['customer_id'] = Auth::user()->id;
         $cancellation_reason['cancellation_reason'] = $request->cancellation_reason;
-        $cancellation_reason['created_by'] = 1;
+        $cancellation_reason['created_by'] = Auth::user()->id;
         $CustomerCancelledReason = CustomerCancelledReason::create($cancellation_reason);
         if (!empty($CustomerCancelledReason)) {
             return response()->json([
@@ -1429,7 +1485,7 @@ class CustomerPackageController extends BaseController
                 'package_buy_for'
             )
             ->where('package_id', $request->id)
-            ->where('customer_id', 1)
+            ->where('customer_id',Auth::user()->id)
             ->get();
 
         if (!empty($PatientInformation)) {
@@ -1465,7 +1521,7 @@ class CustomerPackageController extends BaseController
         $patient_information['patient_city_id'] = $request->patient_city_id;
         $patient_information['address'] = $request->address;
         $patient_information['birth_date'] = $request->birth_date;
-        $patient_information['created_by'] = 1;
+        $patient_information['created_by'] = Auth::user()->id;
 
         $PatientInformation = PatientInformation::where('id', $request->id)->update($patient_information);
 
@@ -1593,7 +1649,7 @@ class CustomerPackageController extends BaseController
         }
         $customer_documents = [];
         $customer_documents['package_id'] = $request->package_id;
-        $customer_documents['customer_id'] = '1';
+        $customer_documents['customer_id'] = Auth::user()->id;
         if ($request->has('customer_document_image_path')) {
             if ($request->file('customer_document_image_path')) {
                 $customer_documents['customer_document_image_path'] = $this->verifyAndUpload($request, 'customer_document_image_path', 'customer/customer_documents');
@@ -1606,7 +1662,7 @@ class CustomerPackageController extends BaseController
         if ($customer_documents_data) {
             $CustomerDocuments = CustomerDocuments::where('status', 'active')
                 ->select('id', 'customer_document_image_path', 'package_id')
-                ->where('customer_id', '1')
+                ->where('customer_id', Auth::user()->id)
                 ->get();
 
             foreach ($CustomerDocuments as $key => $val) {
@@ -1646,7 +1702,7 @@ class CustomerPackageController extends BaseController
         $CustomerPurchaseDetails['paid_amount'] = $request->pending_amount;
         $CustomerPurchaseDetails['purchase_type'] = $request->purchase_type;
 
-        $CustomerPurchaseDetails['created_by'] = 1;
+        $CustomerPurchaseDetails['created_by'] = Auth::user()->id;
 
         $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->id)->update($CustomerPurchaseDetails);
 
@@ -1878,7 +1934,7 @@ class CustomerPackageController extends BaseController
         }
 
         $customer_reviews = [];
-        $customer_reviews['customer_id'] = 1;
+        $customer_reviews['customer_id'] = Auth::user()->id;
         $customer_reviews['package_id'] = $request->package_id;
         $customer_reviews['treatment_reviews'] = $request->treatment_reviews;
         $customer_reviews['acommodation_reviews'] = $request->acommodation_reviews;
@@ -1886,7 +1942,7 @@ class CustomerPackageController extends BaseController
         $customer_reviews['behaviour_reviews'] = $request->behaviour_reviews;
         $customer_reviews['provider_reviews'] = $request->provider_reviews;
         $customer_reviews['extra_notes'] = $request->extra_notes;
-        $customer_reviews['created_by'] = 1;
+        $customer_reviews['created_by'] = Auth::user()->id;
         $customer_reviews_data = CustomerReviews::create($customer_reviews);
 
         if (!empty($customer_reviews_data)) {
