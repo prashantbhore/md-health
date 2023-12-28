@@ -442,6 +442,7 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // USER PANEL
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 
 
 // MD BOOKING PAGE KD
