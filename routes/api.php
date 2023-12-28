@@ -10,6 +10,7 @@ use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
 use App\Http\Controllers\api\customer\CustomerReportController;
+use App\Http\Controllers\api\customer\CustomerShopController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\AddSystemUserRole;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
@@ -60,8 +61,8 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-Route::middleware('auth:sanctum')->group(function ()
-{
+// Route::middleware('auth:sanctum')->group(function ()
+// {
 //customers
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
@@ -257,7 +258,7 @@ Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 
 //customer-reviews
 Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
 
-});
+// });
 
 
 
@@ -359,7 +360,7 @@ Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_
 Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
 
 //Vendor Prodcut
-Route::controller(VendorProductController::class)->group(function (){
+Route::controller(VendorProductController::class)->group(function(){
     Route::get('product-category','vendor_product_category');
     Route::post('product-sub-category','vendor_product_sub_category');
     Route::post('add-vendor-product', 'addProduct');
@@ -371,7 +372,18 @@ Route::controller(VendorProductController::class)->group(function (){
     Route::post('/products/bulk-import','addProductsBulk');
 });
 
-//
+
+
+//customer MD Shop
+
+Route::controller(CustomerShopController::class)->group(function(){
+    Route::get('featured-product','featured_product_list');
+    Route::post('customer-product-view','product_view');
+    Route::post('vendor-product-lists','vendor_product_list');
+    Route::post('/shopping-cart/add','addToCart');
+});
+
+
 
 // });
 

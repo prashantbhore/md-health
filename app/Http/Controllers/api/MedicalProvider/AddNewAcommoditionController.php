@@ -53,7 +53,7 @@ class AddNewAcommoditionController extends BaseController
             $AddNewAcommodition = AddNewAcommodition::create($hotel_input);
             if (!empty($AddNewAcommodition)) {
                 if (($request->platform_type=='web')) {
-                    return redirect('/add-acommodition')->with('success','Hotel Acommodition created successfully.');
+                    return redirect('/medical-other-services')->with('success','Hotel Acommodition created successfully.');
                 }
                 return response()->json([
                     'status' => 200,
@@ -62,7 +62,7 @@ class AddNewAcommoditionController extends BaseController
                 ]);
             } else {
                 if (($request->platform_type=='web')) {
-                    return redirect('/add-acommodition')->with('success','Acommodition not created.');
+                    return redirect('/medical-other-services')->with('success','Acommodition not created.');
                 }
                 return response()->json([
                     'status' => 404,

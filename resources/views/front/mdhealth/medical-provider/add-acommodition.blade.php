@@ -89,7 +89,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                @if ($hotel_details['id'])
+                                @if (!empty($hotel_details['id']))
                                 <form action="{{ url('api/md-edit-hotel-list') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
                                     @else
@@ -139,10 +139,10 @@
                                         <label class="form-label">Hotel Picture</label>
                                         <div class="form-group">
                                             <input type="file" name="hotel_image_path" id="hotel_image_path"
-                                                class="form-control text-dark" />
+                                                class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])"/>
                                         </div>
                                         <div class="prev-img-div">
-                                            <img src="{{!empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image" />
+                                            <img src="{{!empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image"  id="pic"  />
                                         </div>
                                     </div>
 
@@ -161,7 +161,9 @@
                                             <div class="multiple-checks">
                                                 <div class="form-check">
                                                     <input type="checkbox" value="Breakfast & Dinner"
-                                                        class="form-check-input" id="fordinner">
+                                                        class="form-check-input" id="fordinner"
+                                                        {{ !empty($hotel_details['hotel_other_services']) && (strpos($hotel_details['hotel_other_services'], 'Breakfast & Dinner') !== false) ? 'checked' : '' }}
+                                                        >
                                                     <label class="form-check-label fw-500 fsb-1" for="fordinner">
                                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -173,7 +175,7 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" value="Sauna & Spa" class="form-check-input"
-                                                        id="forspa">
+                                                        id="forspa"{{ !empty($hotel_details['hotel_other_services']) && strpos($hotel_details['hotel_other_services'], 'Sauna & Spa') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="forspa">
                                                         <svg width="14" height="14" viewBox="0 0 14 14"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,7 +187,7 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" value="No Smoking" class="form-check-input"
-                                                        id="fornosmoking">
+                                                        id="fornosmoking"{{ !empty($hotel_details['hotel_other_services']) && strpos($hotel_details['hotel_other_services'], 'No Smoking') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="fornosmoking">
                                                         <svg width="20" height="20" viewBox="0 0 20 20"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -198,7 +200,7 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" value="Wi-Fi" class="form-check-input"
-                                                        id="forwifi">
+                                                        id="forwifi"{{ !empty($hotel_details['hotel_other_services']) && strpos($hotel_details['hotel_other_services'], 'Wi-Fi') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="forwifi">
                                                         <svg width="16" height="12" viewBox="0 0 16 12"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +219,7 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" value="Fitness Center"
-                                                        class="form-check-input" id="forfitness">
+                                                        class="form-check-input" id="forfitness"{{!empty($hotel_details['hotel_other_services']) &&  strpos($hotel_details['hotel_other_services'], 'Fitness Center') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="forfitness">
                                                         <svg width="13" height="15" viewBox="0 0 13 15"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -275,23 +277,28 @@
     <!-- JavaScript for Star Rating & AJAX -->
     <script>
         $(document).ready(function() {
+            // Fetch the value of hotel_stars
+            var selectedStars = "{{ !empty($hotel_details['hotel_stars']) ? $hotel_details['hotel_stars'] : 0 }}";
+            
+            // Add 'selected' class to stars up to the selected count
+            $('.star-rating i').slice(0, selectedStars).addClass('selected');
+    
             $('.star-rating i').click(function() {
-                var selectedStars = $(this).data('value');
-                $('#selectedStarsCount').text('Selected stars count: ' + selectedStars);
-                $('#hotel_stars').val(selectedStars);
-
+                var newSelectedStars = $(this).data('value');
+                $('#hotel_stars').val(newSelectedStars);
+    
                 // Remove 'selected' class from all stars
                 $('.star-rating i').removeClass('selected');
-
+    
                 // Add 'selected' class to stars up to the selected count
                 $(this).prevAll().addBack().addClass('selected');
-
+    
                 // Send an AJAX request to your Laravel endpoint with the selected stars count
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('saveStarRating') }}',
                     data: {
-                        selectedStars: selectedStars,
+                        selectedStars: newSelectedStars,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
@@ -304,4 +311,5 @@
             });
         });
     </script>
+    
 @endsection

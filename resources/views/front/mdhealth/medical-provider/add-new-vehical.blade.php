@@ -52,31 +52,28 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            {{-- @if ($hotel_details['id'])
-                                <form action="{{ url('api/md-edit-hotel-list') }}" method="post"
+                            @if ($transportation_details['id'])
+                            
+                                <form action="{{ url('api/md-edit-transportation-details') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
-                                    @else --}}
+                                    @else
                                 <form action="{{ url('api/md-add-transportation-details') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
-                                {{-- @endif --}}
+                                @endif
                                     @csrf
-                                    {{-- <input type="hidden" name="hotel_id" value="{{!empty($hotel_details['id'])?$hotel_details['id']:''}}"> --}}
+                                    <input type="hidden" name="transportation_id" value="{{!empty($transportation_details['id'])?$transportation_details['id']:''}}">
                                     
                                 <div class="input-group mb-3">
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Mercedes Benz</label>
-                                        {{-- <select name="vehicle_brand_id" id="vehicle_brand_id">
-                                            <option value="">comfort_level_details</option>
-                                            <option value="">TATA</option>
-                                            <option value="">TOYOTA</option>
-                                        </select> --}}
+                                       
                                         <select id="vehicle_brand_id" name="vehicle_brand_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($vehicle_details as $vehicle_detail)
-                                                <option value="{{ $vehicle_detail['id'] }}">{{ $vehicle_detail['brand_name'] }}
+                                                <option value="{{ $vehicle_detail['id'] }}"{{ $transportation_details['brand_id'] == $vehicle_detail['id'] ? 'selected' : '' }}>{{ $vehicle_detail['brand_name'] }}
                                                 </option>
                                             @endforeach
-                                            {{-- <option value="">India</option> --}}
+                                          
                                         </select>
                                     </div>
                                 </div>
@@ -84,28 +81,20 @@
                                 <div class="input-group mb-3">
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Vehicle Model</label>
-                                        <input type="text" class="form-control" placeholder="Enter Vehicle Model Name" name="vehicle_model_name" id="vehicle_model_name">
+                                        <input type="text" class="form-control" placeholder="Enter Vehicle Model Name" name="vehicle_model_name" id="vehicle_model_name" value="{{!empty($transportation_details['vehicle_model_name'])?$transportation_details['vehicle_model_name']:''}}">
 
-                                        {{-- <select name="vehicle_model_name" id="vehicle_model_name">
-                                            <option value="">Vito 2.2 CDI</option>
-                                            <option value="">Vito 2.2 CDI</option>
-                                            <option value="">Vito 2.2 CDI</option>
-                                        </select> --}}
+                                       
                                     </div>
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Comfort Level</label>
-                                        {{-- <select name="comfort_level_id" id="comfort_level_id">
-                                            <option value="">Luxury</option>
-                                            <option value="">Luxury</option>
-                                            <option value="">Luxury</option>
-                                        </select> --}}
+                                       
                                         <select id="comfort_level_id" name="comfort_level_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($comfort_level_details as $comfort_level_detail)
-                                                <option value="{{ $comfort_level_detail['id'] }}">{{ $comfort_level_detail['vehicle_level_name'] }}
+                                                <option value="{{ $comfort_level_detail['id'] }}"{{ $transportation_details['level_id'] == $comfort_level_detail['id'] ? 'selected' : '' }}>{{ $comfort_level_detail['vehicle_level_name'] }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -115,11 +104,11 @@
                                 <div class="form-group mb-3 section-heading-div">
                                     <label class="form-label">Vehicle Per Day Price (VAT Included)</label>
                                     <div class="input-icon-div">
-                                        <input type="text" class="form-control" placeholder="0" name="vehicle_per_day_price" id="vehicle_per_day_price">
+                                        <input type="text" class="form-control" placeholder="0" name="vehicle_per_day_price" id="vehicle_per_day_price" value="{{!empty($transportation_details['vehicle_per_day_price'])?$transportation_details['vehicle_per_day_price']:''}}">
                                         <span class="input-icon">₺</span>
                                     </div>
                                 </div>
-
+{{-- {{dd($transportation_details)}} --}}
                                 <div class="multiple-checkbox-div mb-5">
                                     <div class="form-group d-flex flex-column">
                                         <label class="form-label">Other Services</label>

@@ -152,7 +152,7 @@ class CustomerPackageController extends BaseController
                 $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
             }
             $packages = $packages->get();
-            // return $packages; 
+            // return $packages;
 
             $data = [];
             $data['package_list'] = [];
@@ -226,7 +226,7 @@ class CustomerPackageController extends BaseController
                 $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
             }
             $packages = $packages->get();
-            // return $packages; 
+            // return $packages;
 
             $data = [];
             $data['package_list'] = [];
@@ -735,6 +735,9 @@ class CustomerPackageController extends BaseController
         }
 
         if($request->platform_type=='web'){
+
+            // dd($request);
+
             if (!empty($request->purchase_id)) {
                 $purchase_details = [];
                 $purchase_details['payment_percentage'] = $request->package_percentage_price;
@@ -806,7 +809,7 @@ class CustomerPackageController extends BaseController
                             'status' => 404,
                             'message' => 'Something went wrong .payment not completed.',
                         ]);
-                        // } 
+                        // }
                     }
                 }
             } else {
@@ -890,7 +893,7 @@ class CustomerPackageController extends BaseController
                     // $remaining_amount = $request->package_total_price - $request->pending_amount;
 
                     $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
-
+// return $payment_details_completed;
                     // Update 'completed' entry with remaining amount and status
                     // $payment_details_completed['paid_amount'] = $remaining_amount;
                     $payment_details_completed['pending_payment'] = $request->pending_amount;
@@ -898,7 +901,7 @@ class CustomerPackageController extends BaseController
                     $payment_details_completed['payment_status'] = 'pending';
 
                     $payment_pending = CustomerPaymentDetails::create($payment_details_pending);
-
+// return   $payment_pending;
                     // Store 'completed' entry only if there's a remaining amount
                     if ($request->pending_amount > 0) {
                         $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
@@ -906,7 +909,7 @@ class CustomerPackageController extends BaseController
                 }
 
 
-                if (!empty($payment_completed || $payment_pending)) {
+                if (!empty($payment_completed) ||!empty($payment_pending)) {
                     return response()->json([
                         'status' => 200,
                         'message' => 'package purchase successfully.',
@@ -992,7 +995,7 @@ class CustomerPackageController extends BaseController
                             'status' => 404,
                             'message' => 'Something went wrong .payment not completed.',
                         ]);
-                        // } 
+                        // }
                     }
                 }
             } else {
@@ -1107,7 +1110,7 @@ class CustomerPackageController extends BaseController
             }
         }
 
-        
+
     }
 
 
