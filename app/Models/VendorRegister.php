@@ -46,5 +46,15 @@ class VendorRegister extends Authenticatable
              'modified_by',
     ];
 
+
+    public function logo()
+    {
+        return $this->belongsTo(VendorLogo::class, 'id','vendor_id')
+            ->where('status', 'active');
+    }
+
+
+
+
    
 }

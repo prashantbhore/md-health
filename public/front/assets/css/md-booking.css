@@ -326,4 +326,59 @@ height: 150%;
     font-family: Campton;
     /* font-style: italic; */
 }
+.flight-detail-form-p3{
+    background-color: #4CDB06;
+width: 20%;
+padding: 1px;
+border-radius: 5px;
+color: black;
+font-weight: bold;
+text-align: center;
+}
+.flight-detail-form-p4{
+background-color: #4CDB06;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+}
+.flight-detail-form-p5{
+    font-size:18px ;
+    font-weight: 700;
+    color: #000002;
+    font-family: Campton;
+}
+.flight-detail-form-p6{
+    font-size:17px ;
+    font-weight: 600;
+    color: #F31D1D;
+    font-family: Campton;
+}
 
+.booking-select1{
+    padding:0 2rem 0
+}
+.booking-img2{
+    z-index: 1;
+    top: 1rem;
+    left: .5rem;
+}
+
+.booking-box-h{
+    height: 57px;
+}
+
+.btn-search-pill-booking3{
+    width:100%;
+    height: 73px;
+    border-radius: 3px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    /* letter-spacing: -0.07em; */
+    /* transition: 0.15s all; */
+    color: #000000;
+    cursor: pointer;
+}

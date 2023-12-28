@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\admin\AdminController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
+use App\Http\Controllers\Front\Customer\CustomerPackageController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
 use App\Http\Controllers\Front\MedicalProvider\PackageController;
@@ -54,9 +55,8 @@ Route::get('common-delete', [BaseController::class, 'delete']);
 
 Route::post('change-status', [BaseController::class, 'status'])->name('change-status');
 
-Route::get('/', function () {
-    return view('front.mdhealth.index');
-});
+Route::get('/', [CustomerPackageController::class, 'customer_home']);
+
 
 
 
@@ -95,17 +95,11 @@ Route::get('buy-service', function () {
 });
 
 //mdHealth Routes
-Route::get('health-search-result', function () {
-    return view('front.mdHealth.searchResult');
-});
+Route::any('health-search-result', [CustomerPackageController::class,'customer_package_search_filter']);
 
-Route::get('health-pack-details', function () {
-    return view('front.mdHealth.healthPackDetails');
-});
+Route::any('health-pack-details', [CustomerPackageController::class,'packages_view_on_search_result']);
 
-Route::get('purchase-package', function () {
-    return view('front.mdHealth.purchase');
-});
+Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 
 //mdShop Routes
@@ -468,12 +462,14 @@ Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-book
 Route::view('md-booking-reservation-details-page', 'front/mdhealth/md-booking/md-booking-reservation-details');
 Route::view('md-booking-payment-succ-page', 'front/mdhealth/md-booking/md-booking-payment-successful');
 Route::view('md-booking-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-flight-ticket');
+Route::view('md-booking-sub-flight-ticket-page', 'front/mdhealth/md-booking/md-booking-sub-flight-ticket');
+
 
 //MD FOOD PAGE KD
 Route::view('md-food-home-page', 'front/mdhealth/md-food/md-food-page');
 Route::view('md-food-search-page', 'front/mdhealth/md-food/md-food-search');
 Route::view('md-food-search-view', 'front/mdhealth/md-food/md-food-view');
-
+Route::view('md-food-purchase-details', 'front/mdhealth/md-food/md-food-purchase-details');
 
 
 // Shubham

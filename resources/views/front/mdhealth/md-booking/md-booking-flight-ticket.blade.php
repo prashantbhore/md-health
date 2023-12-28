@@ -1,13 +1,13 @@
 @extends('front.layout.layout')
 @section('content')
     <div>
-        <div class="container text-center">
-            <h6>Ticket Details</h6>
+        <div class="container text-center mt-5 mb-5">
+            <h6 class="reservation-p6" style="text-align: center">Ticket Details</h6>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-8">
-                    <div class="row shadow-lg p-2 mb-5 bg-body rounded">
+                <div class="col-8 mx-4">
+                    <div class="row shadow-lg p-2 mb-3 bg-body rounded">
                         <div class="col">
                             <p class="border-bottom md-booking-search-p6">Contact Details</p>
                             <form class="row g-3">
@@ -34,7 +34,7 @@
                                 e-mail free SMS.</p>
                         </div>
                     </div>
-                    <div class="row shadow-lg p-2 mb-5 bg-body rounded">
+                    <div class="row shadow-lg p-2 mb-3 bg-body rounded">
                         <form class="row g-3">
                             <p class="border-bottom md-booking-search-p6">1. Adult</p>
                             <div class="col-md-6">
@@ -100,7 +100,7 @@
 
                         </form>
                     </div>
-                    <div class="row shadow-lg p-2 mb-5 bg-body rounded">
+                    <div class="row shadow-lg p-2 mb-3 bg-body rounded">
                         <form class="row g-3">
                             <p class="border-bottom md-booking-search-p6">2. Adult</p>
                             <div class="col-md-6">
@@ -156,7 +156,8 @@
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </select>
-                                <p class="flight-detail-form-p2 mt-4"> <span class="mx-1 ">Allowed Luggage Capacity</span>
+                                <p class="flight-detail-form-p2 mt-4"> <span class="mx-1 ">Allowed Luggage
+                                        Capacity</span>
                                     <span class="">
                                         <img src="{{ 'front/assets/img/mdBookings/suitcase.png' }}" alt="">
                                     </span>
@@ -167,31 +168,50 @@
                         </form>
                     </div>
                     <div class="row">
+                        <a class="" href="{{URL('md-booking-sub-flight-ticket-page')}}" >
                         <button class="btn btn-search-pill-reservation1" style="width:100%">Continue Payment Page</button>
+                        </a>
                     </div>
                 </div>
-                <div class="col shadow-lg  bg-body rounded h-75">
-                    <div class="">
-                        <h4 class="">FLIGHT INFORMATION</h4>
-                        <p class="">Via</p>
+                <div class="col  h-75 text-center">
+                    <div class="row shadow-lg  bg-body rounded p-2">
+                    <div class="txt-center">
+                        <h4 class="flight-detail-form-p5">FLIGHT INFORMATION</h4>
+                        <p class="md-booking-search-p3">Via</p>
                         <div class="">
                             <img src="{{ 'front/assets/img/mdBookings/airlinesLogo.png' }}" alt="">
                         </div>
-                        <div class="">
-                            <p class="">Departure</p>
-                            <p class="">12 December 2023, Thursday</p>
-                            <p class="">Skockholm Airport</p>
-                            <p class=""></p>
-                            <p class="">ARN</p>
-                            <p class=""></p>
-                            <p class=""></p>
-                            <p class="">IST</p>
-                            <p class="">Instanbul Airport</p>
-                            <p class=""></p>
-                            <p class="">12 December 2023, Thursday</p>
-                            <p class="">Arrial</p>
+                        <div class="mt-2">
+                            <p class="m-0 md-booking-search-p2 m-0" style="color: #9B9B9B">Departure</p>
+                            <p class="m-0 md-booking-search-p3 m-0" style="color: #9B9B9B">12 December 2023, Thursday</p>
+                            <p class="m-0 md-booking-search-p3 m-0">Skockholm Airport</p>
+                            <div class="d-flex justify-content-center align-items-center m-0">
+                                <p class="flight-detail-form-p3 m-0">18:20</p>
+                            </div>
+
+                            <p class="m-0 md-booking-search-p4" style="color: #000000">ARN</p>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <p class="flight-detail-form-p4 m-0"></p>
+                            </div>
+                            <p class="m-0">
+                                <img src="{{ 'front/assets/img/mdBookings/fa6-solid_plane.png' }}" alt="">
+                            </p>
+                            <p class="m-0 md-booking-search-p4" style="color: #000000">IST</p>
+                            <p class="m-0 md-booking-search-p3">Instanbul Airport</p>
+                            <div class="d-flex justify-content-center align-items-center m-0">
+                                <p class="flight-detail-form-p3 m-0" style="background-color: #F31D1D;color:white ">20:30
+                                </p>
+                            </div>
+                            <p class="m-0 md-booking-search-p3" style="color: #9B9B9B">12 December 2023, Thursday</p>
+                            <p class="m-0 md-booking-search-p2" style="color: #9B9B9B">Arrial</p>
                         </div>
                     </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <h5 class="flight-detail-form-p6"><ins>Change Fligh</ins>t</h5>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

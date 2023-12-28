@@ -128,7 +128,7 @@ class PackageControllers extends BaseController
                     $package_input['package_price'] = $request->package_price;
                     $package_input['sale_price'] = $request->sale_price;
                     $package_input['platform_type'] = $request->platform_type;
-                    $package_input['created_by'] = 1;
+                    $package_input['created_by'] = Auth::user()->id;
                     $AddPackages = Packages::create($package_input);
                     $Packages = Packages::select('id')->get();
                     if (!empty($Packages)) {
@@ -194,7 +194,7 @@ class PackageControllers extends BaseController
                     $package_input['sale_price'] = $request->sale_price;
                     $package_input['platform_type'] = $request->platform_type;
                     $package_input['status'] = $request->button_type;
-                    $package_input['created_by'] = 1;
+                    $package_input['created_by'] = Auth::user()->id;
                     $AddPackages = Packages::create($package_input);
                     $Packages = Packages::select('id')->get();
                     if (!empty($Packages)) {
@@ -466,7 +466,7 @@ class PackageControllers extends BaseController
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['status'] = 'active';
                 $package_input['platform_type'] = $request->platform_type;
-                $package_input['created_by'] = 1;
+                $package_input['created_by'] = Auth::user()->id;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);
                 if (!empty($edit_packages)) {
                     return response()->json([
@@ -502,7 +502,7 @@ class PackageControllers extends BaseController
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
                 $package_input['status'] = 'inactive';
-                $package_input['created_by'] = 1;
+                $package_input['created_by'] = Auth::user()->id;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);
                 if (!empty($edit_packages)) {
                     return response()->json([
