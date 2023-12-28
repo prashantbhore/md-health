@@ -101,7 +101,9 @@ Route::any('health-pack-details', [CustomerPackageController::class,'packages_vi
 
 Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
+Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 
+Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 //mdShop Routes
 Route::get('mdShop', function () {
     return view('front.mdShop.index');
