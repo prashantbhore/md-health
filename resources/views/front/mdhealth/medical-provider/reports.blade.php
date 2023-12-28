@@ -15,6 +15,7 @@
         object-fit: contain;
         margin-top: 15px;
     }
+    
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">

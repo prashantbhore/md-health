@@ -5,8 +5,8 @@
             <li class="nav-item upProfileLi">
                 <a class="nav-link upProfile" aria-current="page" href="{{url('user-profile')}}">Profile</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Packages</a>
+            <li class="nav-item upPackageLi">
+                <a class="nav-link upPackage" href="{{url('user-package')}}">Packages</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reservations</a>

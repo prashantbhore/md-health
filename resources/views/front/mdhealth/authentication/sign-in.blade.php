@@ -19,12 +19,12 @@
                     </div>
                     <h2 class="mb-0">Sign In to MD<span>health</span></h2>
                     <p>The device is not yours? Use private or incognito mode to log in.</p>
-                    <span id="error" class="text-danger"></span> 
+                    <span id="error" class="text-danger"></span>
                     <div class="w-100 df-center">
                         <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
                         <div class="alert alert-success" id="successAuth" style="display: none;"></div>
                         {{-- <span class="alert alert-danger" id="error" ></span> --}}
-                       
+
                         <form id="loginForm">
                             {{-- action="{{ url('user-login') }}" method="post" --}}
                             {{-- @csrf --}}
@@ -154,11 +154,11 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- jQuery Validate -->
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
 
@@ -191,6 +191,7 @@
         });
 
         $(document).on('keyup', '#email', function() {
+            var base_url = $('#base_url').val();
             var email = $(this).val();
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             $.ajaxSetup({
@@ -199,7 +200,7 @@
                 }
             });
             $.ajax({
-                url: 'http://127.0.0.1:8000/email-to-mobile',
+                url: base_url+'/email-to-mobile',
                 method: 'POST',
                 data: {
                     email: email
@@ -222,40 +223,40 @@
         });
 
         $(document).on('click', '#signup', function() {
-
-            
+            var base_url = $('#base_url').val();
+            // alert(base_url);
 
             if ($('#loginForm').valid()) {
-            var email = $('#email').val();
-            var password = $('#password').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
 
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            });
-            $.ajax({
-                url: 'http://127.0.0.1:8000/email-password-exist',
-                method: 'POST',
-                data: {
-                    email: email,
-                    password: password
-                },
-                success: function(response) {
-                    if (response.user_exist !== undefined) {
-                        alert(JSON.stringify(response.user_exist));
-                        $('#error').text('dfsvfggbvthytnjynmyhnbgfbvf');
-                        sendOTP();
-                    } else {
-                        $('#error').text('Credentials do not match');
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        }
+                });
+                $.ajax({
+                    url: base_url+'/email-password-exist',
+                    method: 'POST',
+                    data: {
+                        email: email,
+                        password: password
+                    },
+                    success: function(response) {
+                        if (response.user_exist !== undefined) {
+                            alert(JSON.stringify(response.user_exist));
+                            $('#error').text('dfsvfggbvthytnjynmyhnbgfbvf');
+                            sendOTP();
+                        } else {
+                            $('#error').text('Credentials do not match');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
         });
 
 
@@ -307,7 +308,7 @@
                     });
 
                     $.ajax({
-                        url: 'http://127.0.0.1:8000/otp-verify',
+                        url: base_url + '/otp-verify',
                         method: 'POST',
                         data: {
                             email: email, // Use the correct email variable here
@@ -318,7 +319,7 @@
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);
-                                window.location.href = 'http://127.0.0.1:8000' + response.url;
+                                window.location.href = base_url + response.url;
                                 $('#error').text('');
                             } else {
                                 // $('#number').val('');

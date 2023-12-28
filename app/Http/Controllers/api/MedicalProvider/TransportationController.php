@@ -19,11 +19,13 @@ class TransportationController extends BaseController
     // master_brands
     public function master_brands()
     {
+        // dd('Auth::user()->id');
+        // dd(Auth::user()->id);
         $brands = VehicleBrand::where('status', 'active')
             ->orderBy('brand_name', 'asc')
             ->select('id', 'brand_name', 'status')
             ->get();
-
+// dd($brands);
         if (!empty($brands)) {
             return response()->json([
                 'status' => 200,
@@ -103,9 +105,11 @@ class TransportationController extends BaseController
             'md_add_transportation_details.id',
             'md_add_transportation_details.status',
             'md_master_brand.brand_name',
-            'md_add_transportation_details.vehicle_model_id',
+            'md_master_brand.id as brand_id',
+            'md_add_transportation_details.vehicle_model_id as vehicle_model_name',
             'md_add_transportation_details.vehicle_per_day_price',
             'md_add_transportation_details.other_services',
+            'md_master_vehicle_comfort_levels.id as level_id',
             'md_master_vehicle_comfort_levels.vehicle_level_name'
         )
         ->leftjoin(
@@ -115,7 +119,7 @@ class TransportationController extends BaseController
         )
         ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
         ->where('md_add_transportation_details.id', $request->id) // Assuming user_id is the column containing the user's ID
-        ->get();
+        ->first();
 
         if (!empty($TransportationDetails)) {
             return response()->json([
@@ -157,17 +161,17 @@ class TransportationController extends BaseController
             $vehicle_input['created_by'] = Auth::user()->id;
             $TransportationDetails = TransportationDetails::create($vehicle_input);
             if (!empty($TransportationDetails)) {
-                if (($request->platform_type=='web')) {
-                    return redirect('/add-new-vehical')->with('success','Transportation Details created successfully.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Transportation Details created successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details created successfully.',
                 ]);
             } else {
-                if (($request->platform_type=='web')) {
-                    return redirect('/add-new-vehical')->with('error','Transportation Details not created.');
-                }
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('error','Transportation Details not created.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Transportation Details not created.',
@@ -219,11 +223,17 @@ class TransportationController extends BaseController
             $TransportationDetails = TransportationDetails::where('id', $request->transportation_id)->update($vehicle_input);
 
             if (!empty($TransportationDetails)) {
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Transportation Details updated successfully.');
+                // }
                 return response()->json([
                     'status' => 200,
                     'message' => 'Transportation Details updated successfully.',
                 ]);
             } else {
+                // if (($request->platform_type=='web')) {
+                //     return redirect('/medical-other-services')->with('success','Something went wrong. Details not updated.');
+                // }
                 return response()->json([
                     'status' => 404,
                     'message' => 'Something went wrong. Details not updated.',
