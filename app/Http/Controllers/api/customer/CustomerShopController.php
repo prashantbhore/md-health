@@ -195,10 +195,7 @@ public function vendor_product_list(Request $request)
 
         $vendor= VendorRegister::where('id',$request->id)->with('logo')->first();
 
-        
-
-
-
+    
        $proudct_data= VendorProduct::where('status','active')->where('vendor_id',$request->id)->get();
 
    
@@ -274,9 +271,8 @@ public function addToCart(Request $request)
         }
 
 
-        //$customerId = Auth::user()->id; 
+        $customerId = Auth::user()->id; 
 
-        $customerId=1;
 
         $cartItem = ShoppingCart::where('customer_id',$customerId)
             ->where('product_id', $request->input('product_id'))
@@ -301,7 +297,7 @@ public function addToCart(Request $request)
             'status' => 200,
             'message' => 'Product Added To Cart.',
         ]);
-    } else {
+    } else{
         return response()->json([
             'status' => 404,
             'message' => 'Product Is Not Added To Cart.',

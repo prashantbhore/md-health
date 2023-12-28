@@ -169,9 +169,9 @@ public function addProduct(Request $request)
         return $this->sendError('Validation Error.', $validator->errors());
     }
     
-    //$vendor_id =Auth::user()->id;
+      $vendor_id =Auth::user()->id;
 
-    $vendor_id = 1; // Assuming a fixed vendor ID for now
+  //  $vendor_id = 1; // Assuming a fixed vendor ID for now
 
     $productData = [
         'vendor_id' => $vendor_id,
@@ -211,8 +211,8 @@ public function addProduct(Request $request)
                         $filePath = $file->storeAs('public/vendorProductImages', $filename);
                         $accout_images['vendor_product_image_path'] = $filePath;
                         $accout_images['vendor_product_image_name'] = $original_name;
-                        $accout_images['modified_by'] = 1;
-                        // $accout_images['modified_by'] = Auth::user()->id;
+                       // $accout_images['modified_by'] = 1;
+                        $accout_images['modified_by'] = Auth::user()->id;
                         $accout_images['modified_ip_address'] = $request->ip();
                         $accout_images->save();
                   }
@@ -247,8 +247,8 @@ public function addProduct(Request $request)
                   $filePath = $file->storeAs('public/vendorProductImages', $filename);
                   $accout_images['vendor_product_image_path'] = $filePath;
                   $accout_images['vendor_product_image_name'] = $original_name;
-                  $accout_images['modified_by'] = 1;
-                  // $accout_images['modified_by'] = Auth::user()->id;
+                //  $accout_images['modified_by'] = 1;
+                  $accout_images['modified_by'] = Auth::user()->id;
                   $accout_images['modified_ip_address'] = $request->ip();
                   $accout_images->save();
             }
@@ -291,8 +291,8 @@ public function addProduct(Request $request)
       public function active_product_count(Request $request)
      {
    
-           //$vendor_id=Auth::user()->id();
-           $vendor_id=1;
+           $vendor_id=Auth::user()->id();
+           //$vendor_id=1;
         $activeProductCount = VendorProduct::where('status', 'active')->where('vendor_id',$vendor_id)->count();
 
       if (!empty($activeProductCount)) {
@@ -312,8 +312,8 @@ public function addProduct(Request $request)
 
 public function active_product_list(Request $request)
 {
-    //$vendor_id = Auth::user()->id();
-    $vendor_id = 1;
+    $vendor_id = Auth::user()->id();
+    //$vendor_id = 1;
 
     $activeProductList = VendorProduct::where('status', 'active')
         ->where('vendor_id', $vendor_id)
@@ -357,8 +357,8 @@ public function active_product_list(Request $request)
 
 public function inactive_product_list(Request $request)
 {
-    //$vendor_id = Auth::user()->id();
-    $vendor_id = 1;
+    $vendor_id = Auth::user()->id();
+    //$vendor_id = 1;
 
     $inactiveProductList = VendorProduct::where('status', 'inactive')
         ->where('vendor_id', $vendor_id)
@@ -411,8 +411,8 @@ public function vendor_search_products(Request $request)
         }
 
 
-    //$vendor_id = Auth::user()->id();
-    $vendor_id = 1;
+    $vendor_id = Auth::user()->id();
+   // $vendor_id = 1;
 
     $searchQuery = $request->input('search_query');
 
