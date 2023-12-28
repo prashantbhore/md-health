@@ -341,6 +341,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // FRONT ROUTES
 #User Account
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
+Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
+Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
+
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
 #SMS Code
