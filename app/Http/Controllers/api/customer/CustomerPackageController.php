@@ -722,6 +722,7 @@ class CustomerPackageController extends BaseController
 
     public function customer_purchase_package(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'sale_price' => 'required',
@@ -735,8 +736,6 @@ class CustomerPackageController extends BaseController
         }
 
         if($request->platform_type=='web'){
-
-            // dd($request);
 
             if (!empty($request->purchase_id)) {
                 $purchase_details = [];

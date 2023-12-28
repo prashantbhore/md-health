@@ -10,6 +10,7 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerReviews;
 use App\Models\Packages;
 use App\Models\Cities;
+use Session;
 use App\Models\Country;
 use App\Models\ProductCategory;
 use App\Models\PatientInformation;
@@ -20,6 +21,7 @@ use Illuminate\Http\Request;
 use App\Services\ApiService;
 use Storage;
 use Validator;
+use Auth;
 
 class CustomerPackageController extends Controller {
     use MediaTrait;
@@ -30,12 +32,7 @@ class CustomerPackageController extends Controller {
 
     public function customer_home() {
 
-        // $data = $this->apiService->fetchSomeData();
-        // dd( $data );
-        // Process the data or pass it to a view
-        //, compact( 'data' )
         return view( 'front.mdhealth.index' );
-
     }
 
     public function purchase_package( $id ) {
@@ -44,10 +41,7 @@ class CustomerPackageController extends Controller {
     }
 
     public function customer_package_search_filter( Request $request ) {
-
-        // echo 'hi';
-        die;
-
+        // return 'asd ';
         $packages = Packages::select(
             'md_packages.id',
             'md_packages.package_unique_no',
@@ -97,8 +91,6 @@ class CustomerPackageController extends Controller {
         // print_r( $request );
 
         if ( !empty( $packages ) ) {
-            // print_r( $packages );
-            die;
             $cities = Cities::where( 'status', 'active' )->where( 'country_id', 1 )->get();
             $treatment_plans = ProductCategory::where( 'status', 'active' )->where( 'main_product_category_id', '1' )->get();
 
@@ -181,7 +173,17 @@ class CustomerPackageController extends Controller {
     }
 
     public function my_packages( Request $request ) {
-        return view( 'front.mdhealth.user-panel.user-package' );
+        $token = Session::get( 'login_token' );
+
+        $data = $this->apiService->getMyActivePackages( $token );
+        $data_two = $this->apiService->getMyCompletedPackages( $token );
+        $data_three = $this->apiService->getMyCancelledPackages( $token );
+
+        $my_active_packages_list = $data[ 'customer_purchase_package_active_list' ];
+        $my_completed_packages_list = $data_two[ 'customer_purchase_package_completed_list' ];
+        $my_cancelled_packages_list = $data_three[ 'customer_purchase_package_cancelled_list' ];
+
+        return view( 'front.mdhealth.user-panel.user-package', compact( 'my_active_packages_list', 'my_completed_packages_list', 'my_cancelled_packages_list' ) );
     }
 
     public function my_profile( Request $request ) {
