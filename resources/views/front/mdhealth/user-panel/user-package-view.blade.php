@@ -56,6 +56,32 @@
     .user-package-details {
         padding: 25px 15px;
     }
+    .user-details-body p {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    .user-details-body span {
+        font-size: 20px;
+        font-weight: 800;
+    }
+    .user-details-body ul li{
+        padding: 5px 0;
+        font-weight: 600;
+    }
+    .user-details-body ul li svg{
+        margin-right: 5px;
+    }
+    .user-details-body .section-btns button{
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        width: 35%;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -106,19 +132,71 @@
                                 <div class="user-package-details">
                                     <div class="user-package-body">
                                         <div class="user-details-body">
-                                            <p><span class="fsb-2">Package Other Details</span> <span class="fsb-1">Your Case No <span class="fsb-1 text-green">#MD829</span></span></p>
-                                            <ul>
-                                                <li>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none"><g clip-path="url(#clip0_0_22025)"><path d="M8.54102 0.585938L3.95898 6.62695L1.25 3.91992L0 5.16992L4.16602 9.33594L10 1.83594L8.54102 0.585938Z" fill="#4CDB06"/></g><defs><clipPath id="clip0_0_22025"><rect width="10" height="10" fill="white"/></clipPath></defs></svg>
+                                            <div class="d-flex justify-content-between">
+                                                <p>Package Other Details </p>
+                                                <span>
+                                                    <span class="fsb-1">Your Case No </span>
+                                                    <span class="fsb-1 text-green">#MD829</span>
+                                                </span>
+                                            </div>
+                                            <ul style="padding: 0;list-style: none;">
+                                                <li class="fsb-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 10 10" fill="none"><g clip-path="url(#clip0_0_22025)"><path d="M8.54102 0.585938L3.95898 6.62695L1.25 3.91992L0 5.16992L4.16602 9.33594L10 1.83594L8.54102 0.585938Z" fill="#4CDB06"/></g><defs><clipPath id="clip0_0_22025"><rect width="10" height="10" fill="white"/></clipPath></defs></svg>
                                                     Acommodition
-                                                    <a href="javascript:void(0);" class="fsw">View Details</a>
+                                                    <a href="javascript:void(0);" class="fsb-1 ps-2">View Details</a>
                                                 </li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
+                                                <li class="fsb-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 10 10" fill="none"><g clip-path="url(#clip0_0_22025)"><path d="M8.54102 0.585938L3.95898 6.62695L1.25 3.91992L0 5.16992L4.16602 9.33594L10 1.83594L8.54102 0.585938Z" fill="#4CDB06"/></g><defs><clipPath id="clip0_0_22025"><rect width="10" height="10" fill="white"/></clipPath></defs></svg>
+                                                    Transportation
+                                                    <a href="javascript:void(0);" class="fsb-1 ps-2">View Details</a>
+                                                </li>
+                                                <li class="fsb-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 10 10" fill="none"><g clip-path="url(#clip0_0_22025)"><path d="M8.54102 0.585938L3.95898 6.62695L1.25 3.91992L0 5.16992L4.16602 9.33594L10 1.83594L8.54102 0.585938Z" fill="#4CDB06"/></g><defs><clipPath id="clip0_0_22025"><rect width="10" height="10" fill="white"/></clipPath></defs></svg>
+                                                    Tour
+                                                    <a href="javascript:void(0);" class="fsb-1 ps-2 text-secondary text-decoration-none">View Details</a>
+                                                </li>
+                                                <li class="fsb-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 13 13" fill="none">
+                                                        <path d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z" fill="#111111"/>
+                                                    </svg>
+                                                    Visa Service
+                                                    
+                                                </li>
+                                                <li class="fsb-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 13 13" fill="none">
+                                                        <path d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z" fill="#111111"/>
+                                                    </svg>
+                                                    Translate
+                                                   
+                                                </li>
+                                                <li class="fsb-2 text-red">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 13 13" fill="none">
+                                                        <path d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z" fill="#111111"/>
+                                                    </svg>
+                                                    Ambulance
+                                                   
+                                                </li>
                                             </ul>
+
+                                            <div class="section-btns pt-2 d-flex justify-content-start gap-3">
+                                                <button class="green-plate bg-dark text-white fw-700 menu-detail-btn">My Details</button>
+                                                <button class="green-plate text-dark border border-1 border-dark fw-700">My Documents</button>
+                                            </div>
+
+                                            <div class="view-menu-div mt-4">
+                                                <div class="view-menu mb-4">
+                                                    <h6 class="fsb-1">Your Case Manager</h6>
+                                                    <p class="text-orange">Abdul G.</p>
+                                                    <p>Boiled Vegetables</p>
+                                                    <p>Salad</p>
+                                                </div>
+                                                <div class="view-menu mb-4">
+                                                    <h6 class="green-colored-text">Day 1 - Menu</h6>
+                                                    <p>Chicken Soup</p>
+                                                    <p>Boiled Vegetables</p>
+                                                    <p>Salad</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -248,5 +326,12 @@
 <script>
     $(".upPackageLi").addClass("activeClass");
     $(".upPackage").addClass("md-active");
+</script>
+
+<script>
+        $(".view-menu-div").hide();
+        $("button").click(function(){
+            $(".view-menu-div").toggle(200);
+        });
 </script>
 @endsection
