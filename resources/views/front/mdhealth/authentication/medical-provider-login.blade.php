@@ -21,7 +21,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a href="{{ url('') }}" class="nav-link">User</a>
+                    <a href="{{ url('user-account') }}" class="nav-link">User</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('medical-provider-login') }}" class="nav-link active">Medical Provider</a>
@@ -31,6 +31,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="javascript:void(0);" class="nav-link">Home Service</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('food-login') }}" class="nav-link">Food Provider</a>
                 </li>
             </ul>
 

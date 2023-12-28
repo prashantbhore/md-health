@@ -27,13 +27,13 @@
                     <a href="{{ url('medical-provider-login') }}" class="nav-link ">Medical Provider</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('vendor-login') }}" class="nav-link active">Vendor</a>
+                    <a href="{{ url('vendor-login') }}" class="nav-link ">Vendor</a>
                 </li>
                 <li class="nav-item">
                     <a href="javascript:void(0);" class="nav-link">Home Service</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('food-login') }}" class="nav-link">Food Provider</a>
+                    <a href="{{ url('food-login') }}" class="nav-link active">Food Provider</a>
                 </li>
             </ul>
 

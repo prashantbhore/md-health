@@ -101,7 +101,9 @@ Route::any('health-pack-details', [CustomerPackageController::class,'packages_vi
 
 Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
+Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 
+Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 //mdShop Routes
 Route::get('mdShop', function () {
     return view('front.mdShop.index');
@@ -343,6 +345,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
+Route::view('food-login', 'front/mdhealth/authentication/food-login');
 
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
@@ -401,9 +404,10 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
        Route::get('medical-other-services', 'index');
         Route::get('/add-acommodition', 'add_acommodition');
         Route::get('/add-tour', 'add_tour');
-        // Route::get('/login/change_password', 'change_password_view');
         Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
-        Route::post('/md-add-new-acommodition', 'md_add_new_acommodition')->name('saveStarRating');
+        Route::post('/md-add-new-acommodition', 'md_add_new_acommodition');
+        Route::post('/md-add-tour', 'md_add_tour');
+        Route::post('/md-add-transportation-details', 'md_add_transportation_details');
         Route::get('/edit-acommodition/{id}', 'edit_acommodition');
         Route::get('/edit-vehicle/{id}', 'edit_vehicle');
         Route::get('/edit-tour/{id}', 'edit_tour');
@@ -474,6 +478,7 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
+Route::view('user-package-view', 'front/mdhealth/user-panel/user-package-view');
 
 
 // MD BOOKING PAGE KD

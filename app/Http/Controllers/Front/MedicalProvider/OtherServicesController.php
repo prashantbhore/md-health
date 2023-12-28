@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\MedicalProvider;
 
 use App\Http\Controllers\Controller;
+use App\Services\ApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -15,10 +16,16 @@ use App\Traits\MediaTrait;
 class OtherServicesController extends Controller
 {
     use MediaTrait;
+
+    // public function __construct( ApiService $apiService ) {
+    //     $this->apiService = $apiService;
+    // }
     public function index()
     {
         $token = Session::get('login_token');
         $apiUrl = url('/api/md-hotel-list');
+        
+        // $data = $this->apiService->function();
 
         $request = Request::create($apiUrl, 'GET');
         $request->headers->set('Authorization', 'Bearer ' . $token);
@@ -75,16 +82,21 @@ class OtherServicesController extends Controller
     public function add_new_vehical()
     {
         $token = Session::get('login_token');
-        $request = Request::create('/api/md-master-brands', 'GET');
+        $apiUrl1 = url('/api/md-master-brands');
 
+        $request = Request::create($apiUrl1, 'GET');
         $request->headers->set('Authorization', 'Bearer ' . $token);
 
-        $response = Route::dispatch($request);
+        $response = app()->handle($request);
         $respo = $response->getContent();
         $responseData = json_decode($respo, true);
         $vehicle_details = $responseData['data'];
         // dd($vehicle_details);
-        $request = Request::create('/api/md-comfort-levels-master', 'GET');
+
+        
+        $apiUrl2 = url('/api/md-comfort-levels-master');
+        $request = Request::create($apiUrl2 , 'GET');
+        $request->headers->set('Authorization', 'Bearer ' . $token);
         $response = Route::dispatch($request);
         $respo = $response->getContent();
         $responseData = json_decode($respo, true);
@@ -213,11 +225,57 @@ class OtherServicesController extends Controller
     public function md_add_new_acommodition(Request $request)
     {
         $token = Session::get('login_token');
-        if(!empty($request->id)){
-        $apiUrl = url('/api/md-add-new-acommodition');
-    }else{
-        $apiUrl = url('/api/md-edit-hotel-list'); 
+        if (!empty($request->id)) {
+            $apiUrl = url('/api/md-add-new-acommodition');
+        } else {
+            $apiUrl = url('/api/md-edit-hotel-list');
+        }
+        $newRequest = Request::create($apiUrl, 'POST', $request->all());
+        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
+        $response = app()->handle($newRequest);
+
+        $respo = $response->getContent();
+        // dd($respo);
+        $responseData = json_decode($respo, true);
+        // dd($responseData['status']);
+        if (($responseData['status'] == 200)) {
+            return redirect('/medical-other-services')->with('success', $responseData['message']);
+        } else {
+            return redirect('/medical-other-services')->with('error', $responseData['message']);
+        }
     }
+    public function md_add_tour(Request $request)
+    {
+        $token = Session::get('login_token');
+        if (empty($request->tour_id)) {
+            // dd($request);
+            $apiUrl = url('/api/md-add-tour');
+        } else {
+            $apiUrl = url('/api/md-edit-tour-list');
+        }
+        $newRequest = Request::create($apiUrl, 'POST', $request->all());
+        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
+        $response = app()->handle($newRequest);
+
+        $respo = $response->getContent();
+        // dd($respo);
+        $responseData = json_decode($respo, true);
+        // dd($responseData['status']);
+        if (($responseData['status'] == 200)) {
+            return redirect('/medical-other-services')->with('success', $responseData['message']);
+        } else {
+            return redirect('/medical-other-services')->with('error', $responseData['message']);
+        }
+    }
+    public function md_add_transportation_details(Request $request)
+    {
+        $token = Session::get('login_token');
+        if (empty($request->transportation_id)) {
+            // dd($request);
+            $apiUrl = url('/api/md-add-transportation-details');
+        } else {
+            $apiUrl = url('api/md-edit-transportation-details');
+        }
         $newRequest = Request::create($apiUrl, 'POST', $request->all());
         $newRequest->headers->set('Authorization', 'Bearer ' . $token);
         $response = app()->handle($newRequest);

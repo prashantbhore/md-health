@@ -55,14 +55,14 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            @if (!empty($tour_details['id']))
+                            {{-- @if (!empty($tour_details['id']))
                             
                             <form action="{{ url('api/md-edit-tour-list') }}" method="post"
                                 enctype="multipart/form-data" id="add_acommodition">
-                                @else
-                            <form action="{{ url('api/md-add-tour') }}" method="post"
+                                @else --}}
+                            <form action="{{ url('md-add-tour') }}" method="post"
                                 enctype="multipart/form-data" id="add_acommodition">
-                            @endif
+                            {{-- @endif --}}
                                 @csrf
                                 <input type="hidden" name="tour_id" value="{{!empty($tour_details['id'])?$tour_details['id']:''}}">
                             
@@ -84,10 +84,10 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label">Hotel Picture</label>
                                     <div class="form-group">
-                                        <input type="file" name="tour_image_path" id="tour_image_path" class="form-control text-dark" />
+                                        <input type="file" name="tour_image_path" id="tour_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
                                     </div>
                                     <div class="prev-img-div">
-                                        <img src="{{!empty($tour_details['tour_image_path'])?$tour_details['tour_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image" />
+                                        <img src="{{!empty($tour_details['tour_image_path'])?$tour_details['tour_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image" id="pic" />
                                     </div>
                                 </div>
 

@@ -21,7 +21,7 @@
              <!-- Nav tabs -->
              <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a href="{{ url('') }}" class="nav-link active">User</a>
+                    <a href="{{ url('user-account') }}" class="nav-link active">User</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('medical-provider-login') }}" class="nav-link ">Medical Provider</a>
@@ -32,6 +32,9 @@
                 <li class="nav-item">
                     <a href="javascript:void(0);" class="nav-link">Home Service</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('food-login') }}" class="nav-link">Food Provider</a>
+                </li>
             </ul>
 
             <!-- Tab panes -->
@@ -41,34 +44,30 @@
                     <div class="row pt-4">
                         <div class="col-md-6 bod-right pt-4">
                             <div class="d-flex align-items-center gap-3 pt-5 pb-4">
-                                <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}"
-                                        alt=""></a>
-                                <h1 class="reg-title mb-0">Create Provider Account</h1>
+                                <a href="{{ url('/') }}">
+                                    <img src="{{ 'front/assets/img/back.svg' }}" alt="">
+                                </a>
+                                <h1 class="reg-title mb-0">Create User Account</h1>
                                 <span id="error" class="text-danger"></span>
                             </div>
                             <div class="form text-start px-5">
-                                <form id="myFormProvider">
-                                    {{-- action="{{ url('/md-register-medical-provider') }}"
-                                    method="post" enctype="multipart/form-data" --}}
+                                <form id="mycustomerForm">
+                                    {{-- action="{{ url('/md-customer-register') }}" method="post"  --}}
+                                    <input type="hidden" name="platform_type" value="web">
+                                    <input type="hidden" name="user_type" value="customer">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="CompanyName" class="form-label">*Company Name</label>
-                                                <input type="text" class="form-control" name="company_name"
-                                                    id="company_name" placeholder="Company Name">
+                                                <label for="firstName" class="form-label">*First Name</label>
+                                                <input type="text" class="form-control" name="first_name" id="first_name"
+                                                    placeholder="First Name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="city_id" class="form-label">*City</label>
-                                                <select id="city_id" name="city_id" class="form-select">
-                                                    <option value="" selected disabled>Choose</option>
-                                                    @foreach ($cities as $city)
-                                                        <option value="{{ $city->id }}">{{ $city->city_name }}
-                                                        </option>
-                                                    @endforeach
-                                                    {{-- <option value="">India</option> --}}
-                                                </select>
+                                                <label for="lastName" class="form-label">*Last Name</label>
+                                                <input type="text" class="form-control" name="last_name" id="last_name"
+                                                    placeholder="Last Name">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -87,53 +86,69 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label for="TAXNumber" class="form-label">*TAX Number</label>
-                                                <input type="text" class="form-control" name="tax_no" id="tax_no"
-                                                    placeholder="TAX Number">
+                                                <label for="gender" class="form-label">*Gender</label>
+                                                {{-- <input type="text" class="form-control" name="gender" id="gender"
+                                                    placeholder="Gender"> --}}
+                                                <select name="gender" id="gender" class="form-select">
+                                                    <option value="" selected disabled>Choose</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+
+                                                </select>
                                             </div>
                                         </div>
-                                        
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label for="*Company Address" class="form-label">*Company Address</label>
-                                                <textarea name="company_address" id="company_address" cols="" rows="5" class="form-control"
-                                                    placeholder="Company Address"></textarea>
+                                                <label for="country_id" class="form-label">*Country</label>
+                                                <select name="country_id" id="country_id" class="form-select">
+                                                    <option value=""selected disabled>Choose</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->country_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="city_id" class="form-label">*City</label>
+                                                <select name="city_id" id="city_id" class="form-select">
+                                                    <option value=""selected disabled>Choose</option>
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->id }}">{{ $city->city_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="dob" class="form-label">*Date of Birth</label>
+                                                <input type="text" class="form-control" name="date_of_birth"
+                                                    id="date_of_birth" placeholder="Date of Birth">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3 ">
+                                                <label for="address" class="form-label">*Address</label>
+                                                <textarea name="address" id="address" cols="" rows="5" class="form-control"
+                                                    placeholder="Enter Address"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3 hide-eye-div">
                                                 <label for="password" class="form-label">*Password</label>
-                                                <input type="passowrd" class="form-control"
-                                                    id="password" placeholder="Minimum 8 characters" id="password" name="password">
-                                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                                <input type="password" name="password" class="form-control"
+                                                    id="password" placeholder="Minimum 8 characters">
+                                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3 hide-eye-div">
-                                                <label for="repassword" class="form-label">*Re-Password</label>
-                                                <input type="password" class="form-control" name="repassword"
-                                                    id="repassword" placeholder="Minimum 8 characters" >
+                                                <label for="re-password" class="form-label">*Re-Password</label>
+                                                <input type="password" name="repassword" class="form-control"
+                                                    id="repassword" placeholder="Minimum 8 characters">
                                                 <span toggle="#repassword" class="fa fa-fw fa-eye field-icon toggle-password "></span>
-                                            </div>
-                                        </div>
-                                        <hr style="height:1px;background-color: #4CDB06;opacity:1" >
-                                        <div class="col-md-12">
-                                            <div class="mb-3 hide-eye-div">
-                                                <label for="*Upload Company Logo" class="form-label">*Upload Company
-                                                    Logo</label>
-                                                <input type="file" class="form-control" name="company_logo_image_path"
-                                                    id="company_logo_image_path" placeholder="*Upload Company Logo">
-                                                    <span class="fa fa-cloud-upload"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3 hide-eye-div">
-                                                <label for="*Upload Company License" class="form-label">*Upload Company
-                                                    License</label>
-                                                <input type="file" class="form-control"
-                                                    name="company_licence_image_path" id="company_licence_image_path"
-                                                    placeholder="*Upload Company License">
-                                                    <span class="fa fa-cloud-upload"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -146,9 +161,9 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div id="recaptcha-container"></div>
+                                        {{-- <div id="recaptcha-container"></div> --}}
                                         <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                            <button class="btn btn-md w-100" type="button" id="medproreg"
+                                            <button type="button" class="btn btn-md w-100" id="regcustuser"
                                                 style="height: 47px;">Create
                                                 Account</button>
                                             <label for="" class="mt-auto">Already have an account?</label>
@@ -711,5 +726,16 @@
         });
     </script>
 
+    <script>
+        $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+        });
+    </script>
    
 @endsection
