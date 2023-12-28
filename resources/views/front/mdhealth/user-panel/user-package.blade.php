@@ -12,6 +12,37 @@
         margin-bottom: 20px;
         padding-bottom: 20px;
    }
+   .modal-header {
+    display: block;
+   }
+   .modal-header .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 1;
+    background: gray;
+    color: #000;
+    line-height: 0;
+    padding: 5px 5px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 12px;
+   }
+   .modal-dialog {
+        max-width: 700px;
+   }
+   .modal-body select{
+        border: 1px solid #D6D6D6;
+        border-radius: 5px;
+        padding: 0.375rem 0.75rem;
+    }
+    .modal-footer .order-completed-btn {
+        padding: 12px 20px;
+        width: 70%;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -103,7 +134,7 @@
                                         </div>
                                         <div class="treatment-card-btns d-flex justify-content-around gap-3">
                                             <a href="#" class="order-completed-btn w-100 bg-white  fsb-2 border border-black ">Package Details</a>
-                                            <a href="#" class="order-completed-btn w-100 bg-black fsb-2 text-white">Change Patient Information</a>
+                                            <a href="#" class="order-completed-btn w-100 bg-black fsb-2 text-white" data-bs-toggle="modal" data-bs-target="#UserChangeInformation">Change Patient Information</a>
                                             <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white">Cancellation Request</a>
                                         </div>
                                     </div>
@@ -148,7 +179,7 @@
                                         </div>
                                         <div class="treatment-card-btns d-flex justify-content-around gap-3">
                                             <a href="#" class="order-completed-btn w-100 bg-white  fsb-2 border border-black ">Package Details</a>
-                                            <a href="#" class="order-completed-btn w-100 bg-black fsb-2 text-white">Change Patient Information</a>
+                                            <a href="#" class="order-completed-btn w-100 bg-black fsb-2 text-white" data-bs-toggle="modal" data-bs-target="#UserChangeInformation">Change Patient Information</a>
                                             <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white">Cancellation Request</a>
                                         </div>
                                     </div>
@@ -231,6 +262,75 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Change Patient Information -->
+<div class="modal fade" id="UserChangeInformation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title fsb-1" id="">Change Patient Information</h5>
+        <h6 class="modal-title fsb-2" id="">Fill the patient detail.</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label class="form-label fsb-2 fw-600">*Patient Full Name</label>
+                    <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="First Name">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label class="form-label fsb-2 fw-600">*Relationship To You</label>
+                    <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="Relationship To You">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label class="form-label fsb-2 fw-600">*Patient E-mail  <b>*optional</b></label>
+                    <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="E-Mail">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label class="form-label fsb-2 fw-600">*Patient Contact Number</label>
+                    <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group d-flex flex-column mb-5">
+                    <label class="form-label fsb-2 fw-600">*Patient Country</label>
+                    <select name="" id="">
+                        <option value="">Country</option>
+                        <option value="">Patient 1</option>
+                        <option value="">Patient 2</option>
+                        <option value="">Patient 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group d-flex flex-column mb-5">
+                    <label class="form-label fsb-2 fw-600">*Patient City</label>
+                    <select name="" id="">
+                        <option value="">City</option>
+                        <option value="">Patient 1</option>
+                        <option value="">Patient 2</option>
+                        <option value="">Patient 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h6 class="fsb-2 fw-500">*You can also change the patient information from <span class="fw-900 fsb-1">panel</span> <span class="text-green fw-900">></span> <span class="fw-900 fsb-1">packages</span></h6>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center border-0">
+        <a href="javascript:void(0);" class="order-completed-btn bg-green">Completed</a>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 @section('script')
