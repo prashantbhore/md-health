@@ -13,26 +13,33 @@ class OtherServicesController extends Controller
 {
     public function index()
     {
-        // Fetch hotel details
-        $hotelRequest = Request::create('/api/md-hotel-list', 'GET');
-        $hotelResponse = Route::dispatch($hotelRequest);
-        $hotelRespo = $hotelResponse->getContent();
-        $hotelData = json_decode($hotelRespo, true);
-        $hotel_details = $hotelData['hotel_details'];
+        $apiUrl1 = url('/api/md-hotel-list');
+        $request = Request::create($apiUrl1, 'GET');
+        $response = Route::dispatch($request);
+        $respo = $response->getContent();
 
-        // Fetch vehicle details
-        $vehicleRequest = Request::create('/api/md-transportation-list', 'GET');
-        $vehicleResponse = Route::dispatch($vehicleRequest);
-        $vehicleRespo = $vehicleResponse->getContent();
-        $vehicleData = json_decode($vehicleRespo, true);
-        $vehicle_details = $vehicleData['data'];
+        $responseData = json_decode($respo, true);
+        // dd($responseData);
+        $hotel_details = $responseData['hotel_details'];
 
-        // Fetch tour details
-        $tourRequest = Request::create('/api/md-tour-list', 'GET');
-        $tourResponse = Route::dispatch($tourRequest);
-        $tourRespo = $tourResponse->getContent();
-        $tourData = json_decode($tourRespo, true);
-        $tour_details = $tourData['tour_details'];
+        $apiUrl2 = url('/api/md-transportation-list');
+        $request = Request::create($apiUrl2, 'GET');
+        $response = Route::dispatch($request);
+        $respo = $response->getContent();
+
+        $responseData = json_decode($respo, true);
+        // dd($responseData);
+        $vehicle_details = $responseData['data'];
+
+        $apiUrl3 = url('/api/md-tour-list');
+        $request = Request::create($apiUrl3, 'GET');
+        $response = Route::dispatch($request);
+        $respo = $response->getContent();
+
+        $responseData = json_decode($respo, true);
+        // dd($responseData);
+        $tour_details = $responseData['tour_details'];
+
 
         return view('front.mdhealth.medical-provider.other-services', compact('hotel_details', 'vehicle_details', 'tour_details'));
     }
@@ -44,31 +51,32 @@ class OtherServicesController extends Controller
     }
     public function add_new_vehical()
     {
-        // dd('jjhg');
         $request = Request::create('/api/md-master-brands', 'GET');
         $response = Route::dispatch($request);
         $respo = $response->getContent();
-
         $responseData = json_decode($respo, true);
         $vehicle_details = $responseData['data'];
         // dd($vehicle_details);
         $request = Request::create('/api/md-comfort-levels-master', 'GET');
         $response = Route::dispatch($request);
         $respo = $response->getContent();
-
         $responseData = json_decode($respo, true);
         $comfort_level_details = $responseData['data'];
         // dd($comfort_level_details);
         return view('front/mdhealth/medical-provider/add-new-vehical', compact('vehicle_details', 'comfort_level_details'));
     }
 
+    public function add_tour()
+    {
+        return view('front/mdhealth/medical-provider/add-tour');
+    }
     public function saveStarRating(Request $request)
     {
         $selectedStars = $request->input('selectedStars');
         return response()->json(['message' => 'Stars count received: ' . $selectedStars]);
     }
 
-    
+
     public function edit_acommodition(Request $request)
     {
         $encryptedId = $request->id;
@@ -86,40 +94,55 @@ class OtherServicesController extends Controller
 
         return view('front/mdhealth/medical-provider/add-acommodition', compact('hotel_details'));
     }
-    // public function edit_vehicle(Request $request)
-    // {
-    //     $encryptedId = $request->id;
-    //     $decryptedId = Crypt::decrypt($encryptedId);
+    public function edit_vehicle(Request $request)
+    {
+        $encryptedId = $request->id;
+        $decryptedId = Crypt::decrypt($encryptedId);
 
-    //     // Generating an absolute URL using the url() helper function
-    //     $apiUrl = url('/api/md-hotel-list-edit-view');
+        $apiUrl = url('/api/md-edit-transportation-details-view');
 
-    //     $newRequest = Request::create($apiUrl, 'POST', ['hotel_id' => $decryptedId]);
-    //     $response = app()->handle($newRequest);
+        $newRequest = Request::create($apiUrl, 'POST', ['id' => $decryptedId]);
+        $response = app()->handle($newRequest);
 
-    //     $respo = $response->getContent();
-    //     $responseData = json_decode($respo, true);
-    //     $hotel_details = $responseData['hotel_details'];
+        $respo = $response->getContent();
+        $responseData = json_decode($respo, true);
+        $transportation_details = $responseData['data'];
+        // dd($vehicle_details);
+        $request = Request::create('/api/md-master-brands', 'GET');
+        $response = Route::dispatch($request);
+        $respo = $response->getContent();
 
-    //     return view('front/mdhealth/medical-provider/add-acommodition', compact('hotel_details'));
-    // }
-    // public function edit_tour(Request $request)
-    // {
-    //     $encryptedId = $request->id;
-    //     $decryptedId = Crypt::decrypt($encryptedId);
+        $responseData = json_decode($respo, true);
+        $vehicle_details = $responseData['data'];
+        // dd($vehicle_details);
+        $request = Request::create('/api/md-comfort-levels-master', 'GET');
+        $response = Route::dispatch($request);
+        $respo = $response->getContent();
 
-    //     // Generating an absolute URL using the url() helper function
-    //     $apiUrl = url('/api/md-hotel-list-edit-view');
+        $responseData = json_decode($respo, true);
+        $comfort_level_details = $responseData['data'];
+        // dd($comfort_level_details);
+        return view('front/mdhealth/medical-provider/add-new-vehical', compact('transportation_details', 'vehicle_details', 'comfort_level_details'));
+    }
 
-    //     $newRequest = Request::create($apiUrl, 'POST', ['hotel_id' => $decryptedId]);
-    //     $response = app()->handle($newRequest);
+    public function edit_tour(Request $request)
+    {
+        $encryptedId = $request->id;
+        $decryptedId = Crypt::decrypt($encryptedId);
 
-    //     $respo = $response->getContent();
-    //     $responseData = json_decode($respo, true);
-    //     $hotel_details = $responseData['hotel_details'];
+        // Generating an absolute URL using the url() helper function
+        $apiUrl = url('/api/md-edit-tour-list-view');
 
-    //     return view('front/mdhealth/medical-provider/add-acommodition', compact('hotel_details'));
-    // }
+        $newRequest = Request::create($apiUrl, 'POST', ['id' => $decryptedId]);
+        $response = app()->handle($newRequest);
+
+        $respo = $response->getContent();
+        $responseData = json_decode($respo, true);
+        // dd($responseData);
+        $tour_details = $responseData['tour_details'];
+
+        return view('front/mdhealth/medical-provider/add-tour', compact('tour_details'));
+    }
 
 
     public function delete_acommodition(Request $request)

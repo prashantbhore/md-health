@@ -133,12 +133,18 @@
                                 <div class="treatment-card df-start w-100 mb-3" id="divtr_{{$tour_detail['id']}}">
                                     <div class="row card-row align-items-center">
                                         <div class="col-md-2 df-center px-0">
-                                            <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
+                                            <img src="{{!empty($tour_detail['tour_image_path'])?$tour_detail['tour_image_path']:'front/assets/img/Memorial.svg'}}" alt="" width="100px">
                                         </div>
                                         <div class="col-md-6 justify-content-start ps-0">
                                             <div class="trmt-card-body">
                                                 <h5 class="dashboard-card-title">{{ $tour_detail['tour_name'] }}</h5>
-                                                <a href="#" class="btn-active">{{ $tour_detail['status'] }}</a>
+                                                @if ($tour_detail['status']=='active')
+                                                <a href="#" class="btn-active" >{{ $tour_detail['status'] }}</a>
+                                                @else
+                                                <a href="#" class="btn-active" style="background-color:black;">{{ $tour_detail['status'] }}</a>
+                                                @endif
+                                               
+                                                
                                             </div>
                                         </div>
                                         <div
