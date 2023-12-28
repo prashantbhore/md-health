@@ -1767,6 +1767,15 @@ span.popup-msg.active {
     letter-spacing: -0.64px;
     text-decoration: none;
 }
+.hide-eye-div {
+    position: relative;
+}
+.hide-eye-div .fa {
+    position: absolute;
+    top: 46px;
+    right: 10px;
+    cursor: pointer;
+}
 
 /* Shubham */
 

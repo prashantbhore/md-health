@@ -237,6 +237,5 @@
 <script>
     $(".upPackageLi").addClass("activeClass");
     $(".upPackage").addClass("md-active");
-
 </script>
 @endsection
