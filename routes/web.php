@@ -400,6 +400,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('/add-tour', 'add_tour');
         // Route::get('/login/change_password', 'change_password_view');
         Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
+        Route::post('/md-add-new-acommodition', 'md_add_new_acommodition')->name('saveStarRating');
         Route::get('/edit-acommodition/{id}', 'edit_acommodition');
         Route::get('/edit-vehicle/{id}', 'edit_vehicle');
         Route::get('/edit-tour/{id}', 'edit_tour');

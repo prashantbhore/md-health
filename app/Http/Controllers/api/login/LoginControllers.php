@@ -144,7 +144,7 @@ class LoginControllers extends BaseController {
     }
 
     public function medical_provider_login( Request $request ) {
-        return $request;
+        // return $request;
         $validator = Validator::make( $request->all(), [
             'email' => 'required',
             'password' => 'required'
@@ -199,7 +199,7 @@ class LoginControllers extends BaseController {
                     'message' => 'Login successfull.',
                     'mobile_number' => $customer->phone,
                     'full_name' => $customer->full_name,
-                    'success_token' => $success[ 'token' ],
+                    'success_token' => $success,
                 ] );
             } else {
                 $customer = CustomerRegistration::where( 'status', 'active' )
