@@ -33,7 +33,7 @@ class CustomerPackageController extends Controller
 
     public function customer_home(){
 
-        // $data = $this->apiService->fetchSomeData();
+        $data = $this->apiService->fetchSomeData();
         // dd($data);
         // Process the data or pass it to a view
         //,compact('data')
