@@ -67,6 +67,7 @@ class CommonLoginController extends Controller
             }
 
             elseif ($user_type == 'customer') {
+
                 if (
                     Auth::guard('md_customer_registration')->attempt([
                         'email' => $request->email,
@@ -148,6 +149,21 @@ public function email_or_mobile_exist(Request $request){
     public function otp_verify_for_register(request $request)
     {
         // dd($request);
+        $user_datacust = array(
+            'platform_type' => 'web',
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        );
+        $apiUrl = url('/api/md-customer-login');
+
+        $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+        $response = app()->handle($newRequest);
+
+        $respo = $response->getContent();
+        $responseData = json_decode($respo, true);
+        // dd($responseData);
+        Session::put('login_token', $responseData['success_token']['token']);
+        
         // $otpverify = implode('', $request->input('otp'));
         $user_data = array(
             'email' => $request->get('email'),
@@ -169,6 +185,20 @@ public function email_or_mobile_exist(Request $request){
                         'status' => 'active',
                     ])
                 ) {
+                    $user_datacust = array(
+                        'platform_type' => 'web',
+                        'email' => $request->get('email'),
+                        'password' => $request->get('password')
+                    );
+                    $apiUrl = url('/api/md-medical-provider-login');
+            
+                    $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+                    $response = app()->handle($newRequest);
+            
+                    $respo = $response->getContent();
+                    $responseData = json_decode($respo, true);
+                    // dd($responseData);
+                    Session::put('login_token', $responseData['success_token']['token']);
                     $providers = Auth::guard('md_health_medical_providers_registers')->user();
                     if ($login_type == 'login') {
                         $otpcheck = MedicalProviderRegistrater::where('id', $providers->id)
@@ -230,6 +260,7 @@ public function email_or_mobile_exist(Request $request){
 
 
             elseif ($user_type == 'customer') {
+               
                 if (
                     Auth::guard('md_customer_registration')->attempt([
                         'email' => $request->email,
@@ -237,6 +268,22 @@ public function email_or_mobile_exist(Request $request){
                         'status' => 'active',
                     ])
                 ) {
+                    $user_datacust = array(
+                        'platform_type' => 'web',
+                        'email' => $request->get('email'),
+                        'password' => $request->get('password')
+                    );
+                    $apiUrl = url('/api/md-customer-login');
+            
+                    $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+                    $response = app()->handle($newRequest);
+            
+                    $respo = $response->getContent();
+                    $responseData = json_decode($respo, true);
+                    // dd($responseData);
+                    Session::put('login_token', $responseData['success_token']['token']);
+                   
+                    
                     $providers = Auth::guard('md_customer_registration')->user();
 
                     if ($login_type == 'login') {

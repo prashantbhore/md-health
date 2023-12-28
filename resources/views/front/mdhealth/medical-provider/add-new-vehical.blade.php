@@ -52,7 +52,7 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            @if ($transportation_details['id'])
+                            @if (!empty($transportation_details['id']))
                             
                                 <form action="{{ url('api/md-edit-transportation-details') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">

@@ -19,7 +19,7 @@ class OtherServicesController extends Controller
         $respo = $response->getContent();
 
         $responseData = json_decode($respo, true);
-        // dd($responseData);
+        // dd($response);
         $hotel_details = $responseData['hotel_details'];
 
         $apiUrl2 = url('/api/md-transportation-list');

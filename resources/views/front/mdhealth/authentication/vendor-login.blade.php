@@ -37,10 +37,6 @@
             <!-- Tab panes -->
             <div class="tab-content" id="myTabContent">
 
-                {{-- hfeffihfdfiufhhedwyug3rwhfgdwgjgd? --}}
-               
-                {{-- hfeffihfdfiufhhedwyug3rwhfgdwgjgd? --}}
-
                 <div class="login-form">
                     <div class="row pt-4">
                         <div class="col-md-6 bod-right pt-4">

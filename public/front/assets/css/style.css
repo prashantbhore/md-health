@@ -98,7 +98,9 @@
     padding: 12rem 0;
 }
 
-#homeService .nav-link {
+#homeService .nav-link,
+#mdFoodsNav .nav-link,
+#mdShopNav .nav-link {
     font-family: "CamptonBook";
     color: #000;
     font-size: 14px;
@@ -2143,6 +2145,13 @@ span.popup-msg.active {
     right: 0;
 }
 
+.mdFoodsNavBg{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+}
+
 #mdShopNav {
     /* height: 100vh !important;
     background-image: url('../../../front/assets/img/mdShopNavBg.png');
@@ -2155,7 +2164,8 @@ span.popup-msg.active {
     top: 0; */
 }
 
-#mdShopNav .container {
+#mdShopNav .container, 
+#mdFoodsNav .container{
     z-index: 1;
 }
 
@@ -2180,7 +2190,8 @@ span.popup-msg.active {
     border: none;
 }
 
-#mdShopNav a {
+#mdShopNav a,
+#mdFoodsNav a{
     color: #000;
 }
 
