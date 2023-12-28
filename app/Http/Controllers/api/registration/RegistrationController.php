@@ -25,7 +25,7 @@ class RegistrationController extends BaseController
 {
     use MediaTrait;
 
-    public function customer_register(request $request)
+    public function customer_register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
@@ -56,7 +56,8 @@ class RegistrationController extends BaseController
                     'status' => 404,
                     'message' => 'email id already exist.',
                 ]);
-            } else {
+            } 
+            // else {
                 $phone_exist = CustomerRegistration::where('status', 'active')
                     ->where('phone', $request->phone)
                     ->first();
@@ -67,7 +68,7 @@ class RegistrationController extends BaseController
                         'message' => 'mobile number already exist.',
                     ]);
                 }
-            }
+            // }
 
             $customer_input = [];
             $customer_input['first_name'] = $request->first_name;
