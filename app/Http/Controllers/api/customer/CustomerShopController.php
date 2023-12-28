@@ -1,0 +1,329 @@
+<?php
+
+namespace App\Http\Controllers\api\customer;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Http\Controllers\api\BaseController as BaseController;
+use Validator;
+use App\Traits\MediaTrait;
+use Str;
+use Auth;
+use Storage;
+use App\Models\VendorProduct;
+use App\Models\VendorProductGallery;
+use App\Models\VendorProductCategory;
+use App\Models\VendorProductSubCategory;
+use App\Models\VendorRegister;
+use App\Models\ShoppingCart;
+
+
+class CustomerShopController extends BaseController
+{
+    use MediaTrait;
+
+
+
+    public function featured_product_list()
+    {
+    
+       $activeProductList = VendorProduct::where('status', 'active')->where('featured','yes')
+             ->select('id', 'product_unique_id', 'product_name','product_description')
+             ->get();
+
+      $selected_data = [];
+
+    foreach ($activeProductList as $key => $product){
+        $productImage = VendorProductGallery::where('status', 'active')
+            ->where('vendor_product_id', $product->id)
+            ->select('vendor_product_image_path')
+            ->first();
+
+        $selected_data[] = [
+            'id' => !empty($product->id) ? $product->id : '',
+            'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
+            'product_name' => !empty($product->product_name) ? $product->product_name : '',
+            'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
+
+        ];
+    }
+
+    if (!empty($selected_data)){
+        return response()->json([
+            'status' => 200,
+            'message' => 'Featured Product List Found.',
+            'featured_products' => $selected_data,
+        ]);
+    } else{
+        return response()->json([
+            'status' => 404,
+            'message' => 'Something went wrong. Featured Product List Not Found',
+        ]);
+    }
+}
+
+
+
+public function product_view(Request $request)
+{
+
+      $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+       $proudct_data= VendorProduct::where('status','!=','delete')->where('id',$request->id)->first();
+
+       $product_category=null;
+        if(!empty($proudct_data->product_category_id)){
+           $product_category=VendorProductCategory::where('id',$proudct_data->product_category_id)->first();
+        }
+
+        $product_sub_category=null;
+        if(!empty($proudct_data->product_subcategory_id)){
+            $product_sub_category=VendorProductSubCategory::where('id',$proudct_data->product_subcategory_id)->first();
+         }
+         
+         $gallery=null;
+         if(!empty($proudct_data->id)){
+            $gallery=VendorProductGallery::where('vendor_product_id',$proudct_data->id)->get();
+         }
+
+         $vendor=null;
+         if(!empty($proudct_data->vendor_id)){
+            $vendor=VendorRegister::where('id',$proudct_data->vendor_id)->first();
+         }
+
+         $product_gallery = [];
+
+         if(!empty($gallery)){
+       
+         foreach ( $gallery as $val) {
+            $product_gallery[] = !empty($val->vendor_product_image_path) ? url(Storage::url($val->vendor_product_image_path)) : '';
+         }
+        }
+
+        $otherProducts = [];
+
+        if ($proudct_data) {
+            $randomProducts = VendorProduct::where('status', '!=', 'delete')
+                ->where('id', '!=', $request->id)
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
+        
+            foreach ($randomProducts as $val) {
+                // Use firstOrNew to ensure a default empty object if no image is found
+                $product_image = VendorProductGallery::where('vendor_product_id', $val->id)
+                    ->select('vendor_product_image_path')
+                    ->firstOrNew();
+        
+                $product = [
+                    'id' => $val->id ? $val->id : '',
+                    'product_name' => $val->product_name ? $val->product_name : '',
+                    'product_descrition' => $val->product_description ? $val->product_description : '',
+                    'product_price' => $val->product_price ? $val->product_price : '',
+                    'shipping_fee' => $val->shipping_fee ? $val->shipping_fee : '',
+                    'free_shipping' => $val->free_shipping ? $val->free_shipping : '',
+                    'discount' => $val->discount_price ? $val->discount_price : '',
+                    'sale_price' => $val->sale_price ? $val->sale_price : '',
+                    'featured' => $val->featured ? $val->featured : '',
+                    'vendor_product_image_path' => $product_image->vendor_product_image_path ?? '',
+                ];
+        
+                $otherProducts[] = $product;
+            }
+        }
+        
+        
+
+       $data = [];
+
+    
+
+        $data[] = [
+            'id' => !empty( $proudct_data->id) ?  $proudct_data->id : '',
+            'product_name' => !empty( $proudct_data->product_name) ?  $proudct_data->product_name: '',
+            'product_category_id' => !empty( $proudct_data->product_category_id) ?  $proudct_data->product_category_id: '',
+            'product_category_name' => !empty($product_category->category_name) ? $product_category->category_name: '',
+            'product_sub_category_id' => !empty( $proudct_data->product_subcategory_id) ?  $proudct_data->product_subcategory_id: '',
+            'product_sub_category_name' => !empty($product_sub_category->sub_category_name) ? $product_sub_category->sub_category_name:'',
+            'product_descrition' => !empty( $proudct_data->product_description) ?  $proudct_data->product_description: '',
+            'product_price' => !empty( $proudct_data->product_price) ?  $proudct_data->product_price: '',
+            'shipping_fee' => !empty( $proudct_data->shipping_fee) ?  $proudct_data->shipping_fee: '',
+            'free_shipping' => !empty( $proudct_data->free_shipping) ?  $proudct_data->free_shipping: '',
+            'discount' => !empty( $proudct_data->discount_price) ?  $proudct_data->discount_price: '',
+            'sale_price' => !empty( $proudct_data->sale_price) ?  $proudct_data->sale_price: '',
+            'featured' => !empty( $proudct_data->featured) ?  $proudct_data->featured: '',
+            'vendor_id' => !empty($vendor->id) ? $vendor->id: '',
+            'vendor_name' => !empty($vendor->company_name) ? $vendor->company_name: '',
+      ];
+    
+
+    if (!empty( $data)){
+        return response()->json([
+            'status' => 200,
+            'message' => 'Product Data Found.',
+            'product_data' =>  $data,
+            'product_gallery' =>  $product_gallery,
+            'other_products' =>  $otherProducts,
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'No Product Data Found',
+        ]);
+    }
+}
+
+
+
+
+public function vendor_product_list(Request $request)
+{
+
+      $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $vendor= VendorRegister::where('id',$request->id)->with('logo')->first();
+
+        
+
+
+
+       $proudct_data= VendorProduct::where('status','active')->where('vendor_id',$request->id)->get();
+
+   
+
+        $vendorProductsList = [];
+
+        if ($proudct_data){
+        
+            foreach ($proudct_data as $val){
+                // Use firstOrNew to ensure a default empty object if no image is found
+                $product_image = VendorProductGallery::where('vendor_product_id', $val->id)
+                    ->select('vendor_product_image_path')
+                    ->firstOrNew();
+        
+                $product = [
+                    'id' => $val->id ? $val->id : '',
+                    'product_name' => $val->product_name ? $val->product_name : '',
+                    'product_descrition' => $val->product_description ? $val->product_description : '',
+                    'product_price' => $val->product_price ? $val->product_price : '',
+                    'shipping_fee' => $val->shipping_fee ? $val->shipping_fee : '',
+                    'free_shipping' => $val->free_shipping ? $val->free_shipping : '',
+                    'discount' => $val->discount_price ? $val->discount_price : '',
+                    'sale_price' => $val->sale_price ? $val->sale_price : '',
+                    'featured' => $val->featured ? $val->featured : '',
+                    'vendor_product_image_path' => $product_image->vendor_product_image_path ?? '',
+                ];
+        
+                $vendorProductsList[] = $product;
+            }
+        }
+        
+        
+
+       $data = [];
+
+    
+
+        $data[] = [
+          
+            'vendor_id' => !empty($vendor->id) ? $vendor->id: '',
+            'vendor_unique_id' => !empty($vendor->vendor_unique_no) ? $vendor->vendor_unique_no:'',
+            'vendor_name' => !empty($vendor->company_name) ? $vendor->company_name: '',
+            'vendor_about' => !empty($vendor->company_overview) ? $vendor->company_overview: '',
+            'vendor_logo' => !empty($vendor->logo->company_logo_image_path) ? url(Storage::url($vendor->logo->company_logo_image_path)): '',
+        ];
+    
+
+    if (!empty($data)){
+        return response()->json([
+            'status' => 200,
+            'message' => 'vendor deatils and vendor product list found.',
+            'product_data' =>  $data,
+            'vendor_products' => $vendorProductsList,
+            'vendor' => $vendor,
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'vendor deatils and vendor product list found.',
+        ]);
+    }
+}
+
+public function addToCart(Request $request)
+{
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
+            'quantity' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+
+        //$customerId = Auth::user()->id; 
+
+        $customerId=1;
+
+        $cartItem = ShoppingCart::where('customer_id',$customerId)
+            ->where('product_id', $request->input('product_id'))
+            ->first();
+
+
+        $productAddedToCart=null;
+        if ($cartItem) {
+           $productAddedToCart= $cartItem->update(['quantity' => $cartItem->quantity + $request->input('quantity')]);
+        } else {
+            $productAddedToCart=ShoppingCart::create([
+                'customer_id' =>  $customerId,
+                'product_id' => $request->input('product_id'),
+                'quantity' => $request->input('quantity'),
+            ]);
+        }
+
+
+        
+    if (!empty($productAddedToCart)){
+        return response()->json([
+            'status' => 200,
+            'message' => 'Product Added To Cart.',
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Product Is Not Added To Cart.',
+        ]);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+}

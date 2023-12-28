@@ -193,7 +193,7 @@
         <div class="product-view">
             <div class="container">
                 <div class="page-bradcrumb mb-5">
-                    <a href="#">Home Page</a> >
+                    <a href="{{URL('mdShop')}}">Home Page</a> >
                     <a href="#">Category</a> >
                     <a href="#">Product Name</a>
                 </div>
@@ -305,7 +305,7 @@
                                             <p class="mb-0 fsb-2">120 Followers</p>
                                         </div>
                                     </div>
-                                    <a href="javascript:void(0);" class="product-btn">
+                                    <a href="{{URL('view-products')}}" class="product-btn">
                                         View All Products
                                     </a>
                                 </div>
@@ -326,11 +326,154 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-center align-items-center mt-4">
+                <img src="{{('front/assets/img/mdShopAd.png')}}" alt="" style="z-index: 1;">
+            </div>
         </div>
 
-        
+        <!-- SECTION 2: MOST SALES -->
+        <p class="titleClass text-center mt-4">Other <span class="text-green">Products</span></p>
+                <div class="product-card-container container">
+                    <div class="row product-row">
+                        <div class="col-3">
+                            <a href="{{url('product')}}" class="mt-4 card-link">
+                                <div class="card" >
+                                    <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="mb-1">Product Name</h5>
+                                        <p class="mb-5 camptonBook">Product Description</p>
+                                        <!-- <a href="#" class="mt-4"> -->
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                            </div>
+                                        <!-- </a> -->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{url('product')}}" class="mt-4 card-link">
+                                <div class="card" >
+                                    <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="mb-1">Product Name</h5>
+                                        <p class="mb-5 camptonBook">Product Description</p>
+                                        <!-- <a href="#" class="mt-4"> -->
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                            </div>
+                                        <!-- </a> -->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{url('product')}}" class="mt-4 card-link">
+                                <div class="card" >
+                                    <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="mb-1">Product Name</h5>
+                                        <p class="mb-5 camptonBook">Product Description</p>
+                                        <!-- <a href="#" class="mt-4"> -->
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                            </div>
+                                        <!-- </a> -->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{url('product')}}" class="mt-4 card-link">
+                                <div class="card" >
+                                    <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="mb-1">Product Name</h5>
+                                        <p class="mb-5 camptonBook">Product Description</p>
+                                        <!-- <a href="#" class="mt-4"> -->
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="camptonBold fs-4 text-green mb-0">1.290,00 ₺</p>
+                                                <img src="{{('front/assets/img/ArrowRight.svg')}}" alt="">
+                                            </div>
+                                        <!-- </a> -->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="white-box container" style="border-radius: 5px;">
+                        <div class="p-3" id="">
+                            <div class="reviews mt-4">
+                                <div class="d-flex align-items-center gap-3">
+                                    <p class="mb-0 fs-1 camptonBold">4,8</p>
+                                    <p class="mb-0 u"><u>480 Reviews</u></p>
+                                </div>
+                                <div class="stars mb-5">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 30px;" alt="">
+                                </div>
+                                <div class="review mb-4">
+                                    <div class="mb-4">
+                                        <div class="stars d-inline me-2">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                        </div>
+                                        <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque non ducimus explicabo eligendi. Cupiditate sit recusandae tempora quia velit, asperiores odio.</p>
+                                    </div>
+                                    <div class="mb-4">
+                                        <p class="mb-1 fs-6 camptonBold">Ali G. / <span class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
+                                        <p class="fs-6 fst-italic">12/12/2023</p>
+                                    </div>
+                                </div>
+                                <div class="review mb-4">
+                                    <div class="mb-4">
+                                        <div class="stars d-inline me-2">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                        </div>
+                                        <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque non ducimus explicabo eligendi. Cupiditate sit recusandae tempora quia velit, asperiores odio.</p>
+                                    </div>
+    
+                                    <div class="mb-4">
+                                        <p class="mb-1 fs-6 camptonBold">Ali G. / <span class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
+                                        <p class="fs-6 fst-italic">12/12/2023</p>
+                                    </div>
+                                </div>
+                                <div class="review mb-4">
+                                    <div class="mb-4">
+                                        <div class="stars d-inline me-2">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                            <img src="{{('front/assets/img/star-green.svg')}}" style="width: 15px;" alt="">
+                                        </div>
+                                        <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque non ducimus explicabo eligendi. Cupiditate sit recusandae tempora quia velit, asperiores odio.</p>
+                                    </div>
+    
+                                    <div class="mb-4">
+                                        <p class="mb-1 fs-6 camptonBold">Ali G. / <span class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
+                                        <p class="fs-6 fst-italic">12/12/2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- SECTION 2: SCAN QR -->
+        <!-- SECTION 3: SCAN QR -->
         <div class="bg-f6 scanQr">
             <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
         </div>

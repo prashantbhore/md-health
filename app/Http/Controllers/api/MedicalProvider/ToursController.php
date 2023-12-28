@@ -49,7 +49,7 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'active';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $ToursDetails = ToursDetails::create($tour_input);
             if (!empty($ToursDetails)) {
                 return response()->json([
@@ -77,7 +77,7 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'inactive';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $ToursDetails = ToursDetails::create($tour_input);
             if (!empty($ToursDetails)) {
                 return response()->json([
@@ -110,7 +110,7 @@ class ToursController extends BaseController
                 'status',
                 'created_by'
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($ToursDetails)) {
@@ -154,7 +154,7 @@ class ToursController extends BaseController
             'status',
             'created_by'
         )
-        ->where('id', 1)
+        ->where('id', $request->id)
         ->first();
 
         if (!empty($ToursDetails)) {
@@ -205,7 +205,7 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'active';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $edit_tour = ToursDetails::where('id', $request->tour_id)->update($tour_input);
 
             if (!empty($edit_tour)) {
@@ -233,7 +233,7 @@ class ToursController extends BaseController
             $tour_input['tour_other_services'] = $request->tour_other_services;
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'inactive';
-            $tour_input['created_by'] = 1;
+            $tour_input['created_by'] = Auth::user()->id;
             $edit_tour = ToursDetails::where('id', $request->tour_id)->update($tour_input);
 
             if (!empty($edit_tour)) {
@@ -260,7 +260,7 @@ class ToursController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $status_update['status'] = 'delete';
-        $status_update['modified_by'] = 1;
+        $status_update['modified_by'] = Auth::user()->id;
         $status_update['modified_ip_address'] = $request->ip();
 
         $delete_tour = ToursDetails::where('id', $request->tour_id)->update($status_update);
