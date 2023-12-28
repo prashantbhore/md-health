@@ -14,6 +14,7 @@
    }
    .modal-header {
     display: block;
+    padding: 2rem;
    }
    .modal-header .btn-close {
     position: absolute;
@@ -32,14 +33,24 @@
     font-size: 12px;
    }
    .modal-dialog {
-        max-width: 700px;
+        max-width: 750px;
    }
    .modal-body select{
-        border: 1px solid #D6D6D6;
+        border: 2px solid #D6D6D6;
         border-radius: 5px;
         padding: 0.375rem 0.75rem;
     }
-    .modal-footer .order-completed-btn {
+   .modal-body input{
+        border: 2px solid #D6D6D6;
+    }
+    .modal-body input.form-check-input {
+        border: 1px solid #D6D6D6;
+        margin: 0px;
+    }
+   .modal-body {
+        padding: 1rem 2rem 4rem;
+    }
+    .modal-body .order-completed-btn {
         padding: 12px 20px;
         width: 70%;
     }
@@ -133,9 +144,9 @@
                                             </div>
                                         </div>
                                         <div class="treatment-card-btns d-flex justify-content-around gap-3">
-                                            <a href="#" class="order-completed-btn w-100 bg-white  fsb-2 border border-black ">Package Details</a>
+                                            <a href="{{url('user-package-view')}}" class="order-completed-btn w-100 bg-white  fsb-2 border border-black ">Package Details</a>
                                             <a href="#" class="order-completed-btn w-100 bg-black fsb-2 text-white" data-bs-toggle="modal" data-bs-target="#UserChangeInformation">Change Patient Information</a>
-                                            <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white">Cancellation Request</a>
+                                            <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white" data-bs-toggle="modal" data-bs-target="#UserCancellationReq">Cancellation Request</a>
                                         </div>
                                     </div>
                                     <div class="treatment-card-div mb-3">
@@ -178,9 +189,9 @@
                                             </div>
                                         </div>
                                         <div class="treatment-card-btns d-flex justify-content-around gap-3">
-                                            <a href="#" class="order-completed-btn w-100 bg-white  fsb-2 border border-black ">Package Details</a>
+                                            <a href="{{url('user-package-view')}}" class="order-completed-btn w-100 bg-white  fsb-2 border border-black ">Package Details</a>
                                             <a href="#" class="order-completed-btn w-100 bg-black fsb-2 text-white" data-bs-toggle="modal" data-bs-target="#UserChangeInformation">Change Patient Information</a>
-                                            <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white">Cancellation Request</a>
+                                            <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white" data-bs-toggle="modal" data-bs-target="#UserCancellationReq">Cancellation Request</a>
                                         </div>
                                     </div>
                                 </div>
@@ -268,39 +279,39 @@
 <div class="modal fade" id="UserChangeInformation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header text-center">
+      <div class="modal-header text-center border-0">
         <h5 class="modal-title fsb-1" id="">Change Patient Information</h5>
         <h6 class="modal-title fsb-2" id="">Fill the patient detail.</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+        <button type="button" class="btn-close fw-700" data-bs-dismiss="modal" aria-label="Close">X</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
         <div class="row">
-            <div class="col-md-4">
-                <div class="form-group mb-3">
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
                     <label class="form-label fsb-2 fw-600">*Patient Full Name</label>
                     <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="First Name">
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group mb-3">
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
                     <label class="form-label fsb-2 fw-600">*Relationship To You</label>
                     <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="Relationship To You">
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group mb-3">
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
                     <label class="form-label fsb-2 fw-600">*Patient E-mail  <b>*optional</b></label>
                     <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="E-Mail">
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group mb-3">
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
                     <label class="form-label fsb-2 fw-600">*Patient Contact Number</label>
                     <input type="text" class="form-control" name="" id="" value="" aria-describedby="foodname" placeholder="Contact Number">
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group d-flex flex-column mb-5">
+            <div class="col-md-4 mb-3">
+                <div class="form-group d-flex flex-column">
                     <label class="form-label fsb-2 fw-600">*Patient Country</label>
                     <select name="" id="">
                         <option value="">Country</option>
@@ -310,8 +321,8 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group d-flex flex-column mb-5">
+            <div class="col-md-4 mb-3">
+                <div class="form-group d-flex flex-column">
                     <label class="form-label fsb-2 fw-600">*Patient City</label>
                     <select name="" id="">
                         <option value="">City</option>
@@ -321,17 +332,61 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 my-5">
                 <h6 class="fsb-2 fw-500">*You can also change the patient information from <span class="fw-900 fsb-1">panel</span> <span class="text-green fw-900">></span> <span class="fw-900 fsb-1">packages</span></h6>
             </div>
+            <div class="col-md-12 d-flex justify-content-center">
+                <a href="javascript:void(0);" class="order-completed-btn bg-green">Submit</a>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer justify-content-center border-0">
-        <a href="javascript:void(0);" class="order-completed-btn bg-green">Completed</a>
       </div>
     </div>
   </div>
 </div>
+<!-- Change Patient Information -->
+<!-- Cancellation Request -->
+<div class="modal fade" id="UserCancellationReq" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-center border-0">
+        <h5 class="modal-title fsb-1" id="">Cancellation Request</h5>
+        <h6 class="modal-title fsb-2" id="">Fill the form & get your desired treatment plan.</h6>
+        <button type="button" class="btn-close fw-700" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body ">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="form-group d-flex flex-column">
+                    <label class="form-label fsb-2 fw-600">Reason for Cancellation</label>
+                    <select name="" id="">
+                        <option value="">I don’t need this treatment</option>
+                        <option value="">I don’t need this treatment 1</option>
+                        <option value="">I don’t need this treatment 2</option>
+                        <option value="">I don’t need this treatment 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="form-group d-flex flex-column">
+                    <label class="form-label fsb-2 fw-600">Cancellation Detail</label>
+                    <textarea name="" id="" rows="5" class="form-control border-2" placeholder="Please write your treatment cancellation request in detail"></textarea>
+                </div>
+            </div>
+            <div class="col-md-12 my-5 d-flex align-items-center gap-2">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                <label class="form-check-label fsb-2 fw-600" for="flexCheckChecked">
+                    I confirm that I wish cancel my treatment.
+                </label>
+            </div>
+            <div class="col-md-12 d-flex justify-content-center">
+                <a href="javascript:void(0);" class="order-completed-btn bg-red text-white">Cancel Treatment</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Cancellation Request -->
 @endsection
 @section('script')
 <script>

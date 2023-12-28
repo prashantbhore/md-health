@@ -343,6 +343,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
+Route::view('food-login', 'front/mdhealth/authentication/food-login');
 
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
@@ -473,6 +474,7 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
+Route::view('user-package-view', 'front/mdhealth/user-panel/user-package-view');
 
 
 // MD BOOKING PAGE KD
