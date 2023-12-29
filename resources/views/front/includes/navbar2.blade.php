@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
-                <li class="nav-item"><a href="" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
+                <li class="nav-item"><a href="{{url('md-booking-home-page')}}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
                 <li class="nav-item"><a href="{{url('mdFoods')}}" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
                 <li class="nav-item"><a href="{{url('mdShop')}}" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
 
