@@ -113,7 +113,9 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <button class="btn-search-pill-booking3" style="height: 57px">Search</button>
+                                    <a href="{{url('md-booking-search-hotel-page')}}">
+                                        <button class="btn-search-pill-booking3" style="height: 57px">Search</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

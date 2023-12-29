@@ -41,11 +41,11 @@ class OtherServicesController extends Controller
                 // dd($hotel_details);
             } else {
                 // Handle the absence of 'hotel_details' in the response
-                dd("Hotel details not found or API response structure has changed.");
+                // dd("Hotel details not found or API response structure has changed.");
             }
         } else {
             // Handle errors if the request fails
-            dd("Request failed: " . $response->getContent());
+            // dd("Request failed: " . $response->getContent());
         }
 
 
@@ -225,7 +225,7 @@ class OtherServicesController extends Controller
     public function md_add_new_acommodition(Request $request)
     {
         $token = Session::get('login_token');
-        if (!empty($request->id)) {
+        if (empty($request->hotel_id)) {
             $apiUrl = url('/api/md-add-new-acommodition');
         } else {
             $apiUrl = url('/api/md-edit-hotel-list');

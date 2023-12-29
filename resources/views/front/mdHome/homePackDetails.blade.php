@@ -38,16 +38,16 @@
                             </div>
                         </div>
                         <div>
-                                    <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Service</span></p>
-                                    <div class="d-flex gap-1 align-items-baseline mb-1">
-                                        <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                        <p class="mb-0 camptonBook smallFont">Patient Care</p>
-                                    </div>
-                                    <div class="d-flex gap-1 align-items-baseline mb-1">
-                                        <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
-                                        <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
-                                    </div>
-                                </div>
+                            <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Service</span></p>
+                            <div class="d-flex gap-1 align-items-baseline mb-1">
+                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
+                                <p class="mb-0 camptonBook smallFont">Patient Care</p>
+                            </div>
+                            <div class="d-flex gap-1 align-items-baseline mb-1">
+                                <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
+                                <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="d-flex flex-column justify-content-between">
                         <img src="{{('front/assets/img/verifiedBy.svg')}}" alt="">
@@ -221,6 +221,6 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  const lightbox = GLightbox({ ...options });
+    const lightbox = GLightbox({ ...options });
 </script>
 @endsection
