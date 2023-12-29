@@ -596,7 +596,7 @@ class CustomerPackageController extends BaseController
         $package_price = Packages::where('status', 'active')
         ->select('sale_price')
         ->where('id', $request->package_id)
-            ->first();
+        ->first();
 
         if ($request->sale_price) {
             $sale_price = $request->sale_price;
@@ -724,6 +724,7 @@ class CustomerPackageController extends BaseController
 
     public function customer_purchase_package(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'sale_price' => 'required',
@@ -737,8 +738,6 @@ class CustomerPackageController extends BaseController
         }
 
         if($request->platform_type=='web'){
-
-            // dd($request);
 
             if (!empty($request->purchase_id)) {
                 $purchase_details = [];
