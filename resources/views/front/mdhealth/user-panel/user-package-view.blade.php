@@ -83,7 +83,9 @@
         padding: 5px 0;
         font-weight: 600;
     }
-
+    .acmdn-hotel-details  {
+        margin-bottom: 100px;
+    }
     .acmdn-hotel-details ul li {
         padding: 3px 0;
         font-weight: 600;
@@ -104,15 +106,16 @@
         height: auto;
         width: 35%;
     }
-
-    .view-menu-div {
+    .user-details-body {
+        border-bottom: 1px solid #000;
+    padding-bottom: 25px;
+    }
+    .view-menu-divm {
         border-top: 1px solid #000;
         padding-top: 25px;
-        margin-top: 30px;
     }
-
     #AcommoditionView .modal-content {
-        background-image: url('../front/assets/img/Accombg.png');
+        background-image: url('../front/assets/img/Accombg-2.png');
         background-position: right;
         background-repeat: no-repeat;
         background-size: contain;
@@ -123,10 +126,7 @@
         font-size: 20px;
     }
 
-    .acmdn-notes textarea.form-control {
-        width: 300px;
-    }
-
+    
     .acmdn-head h6:last-child,
     .acmdn-hotel-details h6:last-child {
         font-size: 15px;
@@ -136,6 +136,44 @@
     }
     .acdm-btns.section-btns button{
         width: 49%;
+    }
+    .textarea-btn {
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 12px 15px;
+        font-size: 13px;
+        color: #787878;
+        line-height: 0;
+    }
+    .for-textarea-div{
+        width: 300px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 2px solid #D6D6D6;
+    }
+    .acmdn-notes textarea.form-control {
+        width: 275px;
+        padding: 0;
+        border: unset;
+    }
+    .for-textarea-div span{
+        font-size: 12px;
+        color: #979797;
+        width: 265px;
+        background: #fff;
+    }
+    .text-area-footer{
+        display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    .view-menu-div{
+        border-top: 1px solid #000;
+        padding-top: 20px;
+        margin-top: 25px;
+    }
+    .user-patient-detail-div label {
+        position: absolute;
     }
 </style>
 <div class="content-wrapper">
@@ -184,9 +222,9 @@
 
                                     <div class="user-package-details">
                                         <div class="user-package-body">
-                                            <div class="user-details-body">
+                                            <div class="user-details-body mb-4">
                                                 <div class="d-flex justify-content-between">
-                                                    <p>Package Other Details </p>
+                                                    <p class="fsb-2">Package Other Details </p>
                                                     <span>
                                                         <span class="fsb-1">Your Case No </span>
                                                         <span class="fsb-1 text-green">#MD829</span>
@@ -262,8 +300,9 @@
                                                     <button class="green-plate bg-black text-white boder border-1 border-dark fw-700">My Details</button>
                                                     <button class="green-plate bg-white text-dark fw-700 border border-1 border-dark">My Documents</button>
                                                 </div>
+                                                
 
-                                                <div class="view-menu-div mt-4">
+                                                <div class="view-menu-div mt-5">
                                                     <div class="view-menu mb-4">
                                                         <h6 class="fsb-1">Your Case Manager</h6>
                                                         <p class="text-orange">Abdul G.</p>
@@ -274,6 +313,32 @@
                                                     </div>
                                                 </div>
 
+                                            </div>
+                                            <div class="user-details-footer">
+                                                <h6 class="section-heading">You paid</h6>
+                                                <div class="user-payment-date">
+                                                    <p class="fsb-1">20% (7.263,82 ₺)
+                                                        <span class="fsb-2 text-green">Payment Completed.</span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="user-patient-detail-div">
+                                                    <h6 class="section-heading">Patient Details</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label class="form-label">*Food Name</label>
+                                                                <input type="text" class="form-control" id="foodname" aria-describedby="foodname" placeholder="Food Name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label class="form-label">*Food Name</label>
+                                                                <input type="text" class="form-control" id="foodname" aria-describedby="foodname" placeholder="Food Name">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +364,7 @@
                                 <h6 class="fsb-1">Hotel</h6>
                                 <h6 class="fsb-2 fw-500">Renaissence Besiktas</h6>
                             </div>
-                            <div class="acmdn-star mb-3">
+                            <div class="acmdn-star mb-4">
                                 <h6 class="fsb-1">Hotel Stars</h6>
                                 <p class="text-green">
                                     <i class="fa fa-star"></i>
@@ -356,9 +421,15 @@
 
                                 
                             </div>
-                            <div class="acmdn-notes mb-4">
-                                <h6 class="fsb-1"><b>Notes</b> *Optional</h6>
-                                <textarea name="" id="" rows="4" class="form-control border-2" placeholder="Please write your treatment cancellation request in detail"></textarea>
+                            <div class="acmdn-notes mb-1">
+                                <h6 class="fsb-1">Notes<i class="fsb-2">*Optional</i></h6>
+                                <div class="for-textarea-div position-relative">
+                                    <textarea name="" id="" rows="4" class="form-control border-2" placeholder="Write notes if any"></textarea>
+                                    <div class="text-area-footer">
+                                        <span>0 / 200</span>
+                                        <button class="textarea-btn">Submit</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
