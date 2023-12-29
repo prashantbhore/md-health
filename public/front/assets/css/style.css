@@ -346,6 +346,9 @@ select {
 .text-red {
     color: #F31D1D;
 }
+.text-orange {
+    color: #F3771D;
+}
 
 .bg-green {
     background-color: #4CDB06 !important;
