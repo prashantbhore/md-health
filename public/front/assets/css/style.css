@@ -346,6 +346,9 @@ select {
 .text-red {
     color: #F31D1D;
 }
+.text-orange {
+    color: #F3771D;
+}
 
 .bg-green {
     background-color: #4CDB06 !important;
@@ -1768,6 +1771,15 @@ span.popup-msg.active {
     line-height: normal;
     letter-spacing: -0.64px;
     text-decoration: none;
+}
+.hide-eye-div {
+    position: relative;
+}
+.hide-eye-div .fa {
+    position: absolute;
+    top: 46px;
+    right: 10px;
+    cursor: pointer;
 }
 
 /* Shubham */

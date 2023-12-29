@@ -191,6 +191,7 @@
         });
 
         $(document).on('keyup', '#email', function() {
+            var base_url = $('#base_url').val();
             var email = $(this).val();
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             $.ajaxSetup({
@@ -199,7 +200,7 @@
                 }
             });
             $.ajax({
-                url: 'http://127.0.0.1:8000/email-to-mobile',
+                url: base_url+'/email-to-mobile',
                 method: 'POST',
                 data: {
                     email: email
@@ -222,8 +223,8 @@
         });
 
         $(document).on('click', '#signup', function() {
-
-
+            var base_url = $('#base_url').val();
+            // alert(base_url);
 
             if ($('#loginForm').valid()) {
                 var email = $('#email').val();
@@ -236,7 +237,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/email-password-exist',
+                    url: base_url+'/email-password-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -307,7 +308,7 @@
                     });
 
                     $.ajax({
-                        url: 'http://127.0.0.1:8000/otp-verify',
+                        url: base_url + '/otp-verify',
                         method: 'POST',
                         data: {
                             email: email, // Use the correct email variable here
@@ -318,7 +319,7 @@
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);
-                                window.location.href = 'http://127.0.0.1:8000' + response.url;
+                                window.location.href = base_url + response.url;
                                 $('#error').text('');
                             } else {
                                 // $('#number').val('');

@@ -61,8 +61,8 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-// Route::middleware('auth:sanctum')->group(function ()
-// {
+Route::middleware('auth:sanctum')->group(function ()
+{
 //customers
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
@@ -258,7 +258,7 @@ Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 
 //customer-reviews
 Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
 
-// });
+});
 
 
 
@@ -381,6 +381,13 @@ Route::controller(CustomerShopController::class)->group(function(){
     Route::post('customer-product-view','product_view');
     Route::post('vendor-product-lists','vendor_product_list');
     Route::post('/shopping-cart/add','addToCart');
+    Route::get('/shopping-cart/view','viewCart');
+    Route::post('/shopping-cart/delete-item','deleteCartItem');
+    Route::get('/shopping-cart/clear','clearCart');
+    Route::post('filter-product-list','filteredProductList');
+    Route::post('store-payment-details','processPayment');
+    Route::post('/follow-vendor','followVendor');
+    Route::post('/unfollow-vendor','unfollowVendor');
 });
 
 

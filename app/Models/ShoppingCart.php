@@ -19,4 +19,16 @@ class ShoppingCart extends Model
            'modified_by',
            'status',
     ];
+
+
+    public function product()
+    {
+        return $this->belongsTo(VendorProduct::class,'product_id','id');
+    }
+    
+
+
+
+
+
 }

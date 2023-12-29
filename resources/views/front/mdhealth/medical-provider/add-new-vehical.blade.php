@@ -52,14 +52,14 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            @if ($transportation_details['id'])
+                            {{-- @if (!empty($transportation_details['id']))
                             
                                 <form action="{{ url('api/md-edit-transportation-details') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
-                                    @else
-                                <form action="{{ url('api/md-add-transportation-details') }}" method="post"
+                                    @else --}}
+                                <form action="{{ url('md-add-transportation-details') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
-                                @endif
+                                {{-- @endif --}}
                                     @csrf
                                     <input type="hidden" name="transportation_id" value="{{!empty($transportation_details['id'])?$transportation_details['id']:''}}">
                                     
@@ -70,11 +70,15 @@
                                         <select id="vehicle_brand_id" name="vehicle_brand_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($vehicle_details as $vehicle_detail)
-                                                <option value="{{ $vehicle_detail['id'] }}"{{ $transportation_details['brand_id'] == $vehicle_detail['id'] ? 'selected' : '' }}>{{ $vehicle_detail['brand_name'] }}
+                                                @php
+                                                    $isSelected = isset($transportation_details['brand_id']) && $transportation_details['brand_id'] == $vehicle_detail['id'];
+                                                @endphp
+                                                <option value="{{ $vehicle_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                    {{ $vehicle_detail['brand_name'] }}
                                                 </option>
                                             @endforeach
-                                          
                                         </select>
+                                        
                                     </div>
                                 </div>
 
@@ -94,10 +98,15 @@
                                         <select id="comfort_level_id" name="comfort_level_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($comfort_level_details as $comfort_level_detail)
-                                                <option value="{{ $comfort_level_detail['id'] }}"{{ $transportation_details['level_id'] == $comfort_level_detail['id'] ? 'selected' : '' }}>{{ $comfort_level_detail['vehicle_level_name'] }}
+                                                @php
+                                                    $isSelected = isset($transportation_details['level_id']) && $transportation_details['level_id'] == $comfort_level_detail['id'];
+                                                @endphp
+                                                <option value="{{ $comfort_level_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                    {{ $comfort_level_detail['vehicle_level_name'] }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        
                                     </div>
                                 </div>
 
