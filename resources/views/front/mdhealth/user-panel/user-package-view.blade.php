@@ -213,10 +213,79 @@
         font-size: 15px;
         font-weight: 600;
     }
-    .user-payment-date .paymt-green-text {
+    .paymt-green-text {
         font-size: 12px;
     }
+    .payment-paid-div {
+        border-radius: 3px;
+        border: 1px solid #4CDB06;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 0 100px 100px 0;
+    }
+    .payment-paid-div .paid-percentage {
+        width: 80%;
+        padding: 5px 10px;
+       
+    }
+    .payment-paid-div .payment-pay-btn{
+        width: 35%;
+        background: #4cdb06;
+        border-radius: 0 100px 100px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    .view-menu-div .fa-cloud-upload {
+        padding: 25px;
+        background: #000;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .cloud-upload-file span {
+        vertical-align: bottom;
+        font-size: 16px;
+    }
+    .gallery{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .gallery a {
+        position: relative;
+        width: 140px;
+        height: 140px;
+    }
+    .gallery .clear-btn{
+        position: absolute;
+        top: 5px;
+        right: -5px;
+        background: black;
+        padding: 3px 7px;
+        border-radius: 100%;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 100;
+        line-height: 20px;
+        }
+    .gallery img{
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+    }
+    .video-div {
+        width: 140px;
+        height: 140px;
+    }
 
+    .video-card i {
+        position: absolute;
+        top: 65px;
+        left: 60px;
+        font-size: 30px;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -339,12 +408,12 @@
                                                 </ul>
 
                                                 <div class="acdm-btns section-btns pt-3">
-                                                    <button class="green-plate bg-black text-white boder border-1 border-dark fw-700">My Details</button>
-                                                    <button class="green-plate bg-white text-dark fw-700 border border-1 border-dark">My Documents</button>
+                                                    <button target="1" class="showSingle green-plate bg-black text-white boder border-1 border-dark fw-700">My Details</button>
+                                                    <button target="2" class="showSingle green-plate bg-white text-dark fw-700 border border-1 border-dark">My Documents</button>
                                                 </div>
                                                 
 
-                                                <div class="view-menu-div mt-5">
+                                                <div id="ShowDiv1" class="view-menu-div targetDiv mt-5">
                                                     <div class="view-menu mb-4">
                                                         <h6 class="fsb-1">Your Case Manager</h6>
                                                         <p class="text-orange">Abdul G.</p>
@@ -436,10 +505,64 @@
                                                     </div>
                                                 </div>
 
+                                                <div id="ShowDiv2" class="view-menu-div targetDiv mt-5">
+                                                    <div class="view-menu mb-4">
+                                                        <h6 class="fsb-1 mb-4">Upload Documents & Video</h6>
+                                                        <label for="cloud-upload-file" class="cloud-upload-file">
+                                                            <i class="fa fa-cloud-upload text-green"></i>
+                                                            <input type="file" id="cloud-upload-file" hidden>
+                                                            <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4, HEIC, H.264</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="gallery">
+                                                        <a href="{{asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}" class=" video-card glightbox" id="">
+                                                            <video class="video-div " controls>
+                                                                <source src="{{asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
+                                                                    type="video/mp4">
+                                                            </video>
+                                                            <i class="fa fa-play"></i>
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg1.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg1.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg2.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg2.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg3.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg3.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg4.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg4.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg3.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg3.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg4.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg4.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg1.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg1.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{('front/assets/img/galleryImg2.png')}}" class="glightbox">
+                                                            <img src="{{('front/assets/img/galleryImg2.png')}}" alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="user-details-footer">
                                                 <h6 class="section-heading">You paid</h6>
-                                                <div class="user-payment-date">
+                                                <div class="user-payment-date mb-3">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="payment-left-div">
                                                             <div class="user-percentage fsb-1 fw-600">20%<span>(7.263,82 ₺)</span></div>
@@ -452,12 +575,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="payment-paid-div">
-                                                    <div class="paid-percentage fsb-1 fw-600">80%<span>(9.263,82 ₺)</span>
+                                                    <div class="paid-percentage fsb-1 fw-600 d-flex flex-column">
+                                                        <span>
+                                                            80% <span>(9.263,82 ₺)</span>
+                                                        </span>
                                                         <span class="fsb-2 text-orange paymt-green-text">Pending</span>
                                                     </div>
-                                                    <div class="payment-pay-btn">
-                                                        
-                                                    </div>
+                                                    <a href="javascript:void(0);" class="payment-pay-btn fsb-1 text-dark">
+                                                        Pay Now
+                                                    </a>
                                                 </div>
 
                                             </div>
@@ -642,9 +768,19 @@
         </script>
 
         <script>
-            $(".view-menu-div").hide();
-            $("button").click(function() {
-                $(".view-menu-div").toggle(200);
-            });
+            $(document).ready(function(){
+                    $(".view-menu-div").hide();
+                });
+
+                $(function(){   
+                    $('.showSingle').click(function(){
+                        $('.targetDiv').hide('.view-menu-div');
+                        $('#ShowDiv'+$(this).attr('target')).slideToggle();
+                    }); 
+                });
+        </script>
+
+        <script type="text/javascript">
+            const lightbox = GLightbox({ ...options });
         </script>
         @endsection
