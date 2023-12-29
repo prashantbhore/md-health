@@ -169,6 +169,7 @@
                                             </div>
                                         </div>
                                         <div id="recaptcha-container"></div>
+                                        <span id="error" class="text-danger"></span>
                                         <div class="col-md-12 text-center d-flex flex-column gap-3">
                                             <button class="btn btn-md w-100" type="button" id="medproreg"
                                                 style="height: 47px;">Create

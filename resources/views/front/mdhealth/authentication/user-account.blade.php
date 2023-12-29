@@ -48,7 +48,7 @@
                                     <img src="{{ 'front/assets/img/back.svg' }}" alt="">
                                 </a>
                                 <h1 class="reg-title mb-0">Create User Account</h1>
-                                <span id="error" class="text-danger"></span>
+                                
                             </div>
                             <div class="form text-start px-5">
                                 <form id="mycustomerForm">
@@ -162,6 +162,7 @@
                                             </div>
                                         </div>
                                         <div id="recaptcha-container"></div>
+                                        <span id="error" class="text-danger"></span>
                                         <div class="col-md-12 text-center d-flex flex-column gap-3">
                                             <button type="button" class="btn btn-md w-100" id="regcustuser"
                                                 style="height: 47px;">Create
