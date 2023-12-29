@@ -18,6 +18,7 @@ use App\Models\VendorRegister;
 use App\Models\ShoppingCart;
 use App\Models\VendorProductPayment;
 use App\Models\VendorCustomerFollower;
+use App\Models\MdShopFavorite;
 
 
 class CustomerShopController extends BaseController
@@ -655,6 +656,48 @@ public function processPayment(Request $request)
         ]);
     }
 
+
+
+
+
+    public function addToFavorites(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'product_id' => 'required',
+        ]);
+        
+
+        if ($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+
+       // $customerId = Auth::user()->id; 
+
+        $customerId = 1; 
+
+         $existingFavorite = MdShopFavorite::where('customer_id',$customerId)
+         ->where('product_id', $request->input('product_id'))
+         ->first();
+
+     if ($existingFavorite) {
+         $existingFavorite->delete();
+         $message = 'Product removed from favorites successfully';
+     } else {
+         MdShopFavorite::create([
+             'customer_id' => $customerId,
+             'product_id' => $request->input('product_id'),
+         ]);
+         $message = 'Product added to favorites successfully';
+     }
+
+
+        return response()->json([
+            'status' => 404,
+            'message' =>  $message,
+        ]);
+
+    }
 
 
 

@@ -22,6 +22,8 @@ use App\Models\PatientInformation;
 use App\Models\CustomerDocuments;
 use App\Models\CustomerReviews;
 use App\Models\CustomerCancelledReason;
+use App\Models\CustomerFavouritePackages;
+
 
 class CustomerPackageController extends BaseController
 {
@@ -594,7 +596,7 @@ class CustomerPackageController extends BaseController
         $package_price = Packages::where('status', 'active')
         ->select('sale_price')
         ->where('id', $request->package_id)
-            ->first();
+        ->first();
 
         if ($request->sale_price) {
             $sale_price = $request->sale_price;
@@ -722,6 +724,7 @@ class CustomerPackageController extends BaseController
 
     public function customer_purchase_package(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'sale_price' => 'required',
@@ -735,8 +738,6 @@ class CustomerPackageController extends BaseController
         }
 
         if($request->platform_type=='web'){
-
-            // dd($request);
 
             if (!empty($request->purchase_id)) {
                 $purchase_details = [];
@@ -1950,6 +1951,35 @@ class CustomerPackageController extends BaseController
                 'status' => 200,
                 'message' => 'Your Reviews Added Successfully.',
                 'customer_reviews_data' => $customer_reviews_data,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+
+    public function add_package_to_favourite(Request $request){
+        $validator = Validator::make($request->all(), [
+            'package_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $add_to_fav = [];
+        $add_to_fav['customer_id'] = Auth::user()->id;
+        $add_to_fav['package_id'] = $request->package_id;
+        $add_to_fav['created_by'] = Auth::user()->id;
+
+        $add_to_favorite = CustomerFavouritePackages::create($add_to_fav);
+        if (!empty($customer_reviews_data)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'This Package Added To Favourite.',
             ]);
         } else {
             return response()->json([
