@@ -109,8 +109,8 @@
 
                                     <div class="form-group mb-3">
                                         <label class="form-label">Authorized Person Mobile Contact</label>
-                                        <input type="text" name="company_address"
-                                            value="{{ $medical_provider_list->company_address }}" class="form-control"
+                                        <input type="text" name="mobile_no"
+                                            value="{{ $medical_provider_list->mobile_no }}" class="form-control"
                                             id="foodname" aria-describedby="foodname" placeholder="+90">
                                     </div>
 

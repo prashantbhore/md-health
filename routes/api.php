@@ -259,6 +259,8 @@ Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 
 //customer-reviews
 Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
 
+//add-package-to-favourite
+Route::post('md-add-package-to-favourite', [CustomerPackageController::class, 'add_package_to_favourite']);
 });
 
 

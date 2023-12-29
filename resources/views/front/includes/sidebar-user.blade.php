@@ -3,10 +3,10 @@
     <div class="card-body">
         <ul class="nav flex-column nav-stuff">
             <li class="nav-item upProfileLi">
-                <a class="nav-link upProfile" aria-current="page" href="{{url('user-profile')}}">Profile</a>
+                <a class="nav-link upProfile" aria-current="page" href="{{ url('my-profile') }}">Profile</a>
             </li>
             <li class="nav-item upPackageLi">
-                <a class="nav-link upPackage" href="{{url('user-package')}}">Packages</a>
+                <a class="nav-link upPackage" href="{{ url('my-packages-list') }}">Packages</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reservations</a>
@@ -28,7 +28,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link disabled text-black fw-bold" href="#" tabindex="-1" aria-disabled="true">Version 1.0</a>
+                <a class="nav-link disabled text-black fw-bold" href="#" tabindex="-1"
+                    aria-disabled="true">Version 1.0</a>
             </li>
 
         </ul>
