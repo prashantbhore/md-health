@@ -343,7 +343,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // FRONT ROUTES
 #User Account
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
-Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
+// Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
 Route::view('food-login', 'front/mdhealth/authentication/food-login');
 
@@ -354,6 +354,7 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // Route::post('md-register-medical-provider', [RegistrationController::class, 'md_register_medical_provider']);
 Route::controller(MedicalProviderRegistrationController::class)->group(function () {
     Route::get('user-account', 'index');
+    Route::get('medical-provider-login', 'indexmedpro');
     Route::post('/md-register-medical-provider', 'md_register_medical_provider');
     Route::get('/logout', 'logout');
 });

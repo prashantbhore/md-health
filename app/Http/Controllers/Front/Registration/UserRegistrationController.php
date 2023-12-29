@@ -17,108 +17,118 @@ use DB;
 class UserRegistrationController extends Controller {
     public function customer_register( request $request ) {
         // dd( $request );
-        $email_exist = CustomerRegistration::where( 'status', 'active' )
-        ->where( 'email', $request->email )
-        ->first();
-        $email_exist_common = CommonUserLoginTable::where( 'status', 'active' )
-        ->where( 'email', $request->email )
-        ->first();
+        // $email_exist = CustomerRegistration::where( 'status', 'active' )
+        // ->where( 'email', $request->email )
+        // ->first();
+        // $email_exist_common = CommonUserLoginTable::where( 'status', 'active' )
+        // ->where( 'email', $request->email )
+        // ->first();
 
-        if ( $email_exist || $email_exist_common ) {
-            // return redirect( '/user-account' )->with( 'error', 'Email id already exist.' );
-            return response()->json( [
-                'status' => 200,
-                'message' => 'Email id already exist.',
-                'url' => '/user-account',
-            ] );
-        } else {
-            $phone_exist = CustomerRegistration::where( 'status', 'active' )
-            ->where( 'phone', $request->phone )
-            ->first();
-            $phone_exist_common = CommonUserLoginTable::where( 'status', 'active' )
-            ->where( 'mobile_no', $request->phone )
-            ->first();
+        // if ( $email_exist || $email_exist_common ) {
+        //     // return redirect( '/user-account' )->with( 'error', 'Email id already exist.' );
+        //     return response()->json( [
+        //         'status' => 200,
+        //         'message' => 'Email id already exist.',
+        //         'url' => '/user-account',
+        //     ] );
+        // } else {
+        //     $phone_exist = CustomerRegistration::where( 'status', 'active' )
+        //     ->where( 'phone', $request->phone )
+        //     ->first();
+        //     $phone_exist_common = CommonUserLoginTable::where( 'status', 'active' )
+        //     ->where( 'mobile_no', $request->phone )
+        //     ->first();
 
-            if ( $phone_exist || $phone_exist_common ) {
-                // return redirect( '/user-account' )->with( 'error', 'Mobile number already exist.' );
-                return response()->json( [
-                    'status' => 200,
-                    'message' => 'Mobile number already exist.',
-                    'url' => '/user-account',
-                ] );
-            }
-        }
+        //     if ( $phone_exist || $phone_exist_common ) {
+        //         // return redirect( '/user-account' )->with( 'error', 'Mobile number already exist.' );
+        //         return response()->json( [
+        //             'status' => 200,
+        //             'message' => 'Mobile number already exist.',
+        //             'url' => '/user-account',
+        //         ] );
+        //     }
+        // }
 
-        $commonData = [];
-        $commonData[ 'email' ] = $request->email;
-        $commonData[ 'mobile_no' ] = $request->phone;
-        $commonData[ 'user_type' ] = 'customer';
-        $commonData[ 'password' ] = Hash::make( $request->password );
-        $common_data_registration = CommonUserLoginTable::create( $commonData );
+        // $commonData = [];
+        // $commonData[ 'email' ] = $request->email;
+        // $commonData[ 'mobile_no' ] = $request->phone;
+        // $commonData[ 'user_type' ] = 'customer';
+        // $commonData[ 'password' ] = Hash::make( $request->password );
+        // $common_data_registration = CommonUserLoginTable::create( $commonData );
 
-        $lastInsertedId = $common_data_registration->id;
+        // $lastInsertedId = $common_data_registration->id;
 
-        $customer_input = [];
-        $customer_input[ 'first_name' ] = $request->first_name;
-        $customer_input[ 'last_name' ] = $request->last_name;
-        $customer_input[ 'full_name' ] = $request->first_name . ' ' . $request->last_name;
-        $customer_input[ 'email' ] = $request->email;
-        $customer_input[ 'phone' ] = $request->phone;
-        $customer_input[ 'gender' ] = $request->gender;
-        $customer_input[ 'country_id' ] = $request->country_id;
-        $customer_input[ 'city_id' ] = $request->city_id;
-        $customer_input[ 'address' ] = $request->address;
-        $customer_input[ 'date_of_birth' ] = $request->date_of_birth;
-        $customer_input[ 'password' ] = Hash::make( $request->password );
-        $customer_input[ 'platform_type' ] = $request->platform_type;
-        // $otp = rand( 1111, 9999 );
-        // $customer_input[ 'registration_otp' ] = $otp;
-        // $customer_input[ 'login_otp' ] = $request->shop_owner_upi_id;
-        // $customer_input[ 'fcm_token' ] = $request->fcm_token;
-        // $customer_input[ 'otp_expiring_time' ] = time() + 20;
-        $customer_input[ 'modified_ip_address' ] = $request->ip();
-        $customer_registration = CustomerRegistration::create( $customer_input );
+        // $customer_input = [];
+        // $customer_input[ 'first_name' ] = $request->first_name;
+        // $customer_input[ 'last_name' ] = $request->last_name;
+        // $customer_input[ 'full_name' ] = $request->first_name . ' ' . $request->last_name;
+        // $customer_input[ 'email' ] = $request->email;
+        // $customer_input[ 'phone' ] = $request->phone;
+        // $customer_input[ 'gender' ] = $request->gender;
+        // $customer_input[ 'country_id' ] = $request->country_id;
+        // $customer_input[ 'city_id' ] = $request->city_id;
+        // $customer_input[ 'address' ] = $request->address;
+        // $customer_input[ 'date_of_birth' ] = $request->date_of_birth;
+        // $customer_input[ 'password' ] = Hash::make( $request->password );
+        // $customer_input[ 'platform_type' ] = $request->platform_type;
+        // // $otp = rand( 1111, 9999 );
+        // // $customer_input[ 'registration_otp' ] = $otp;
+        // // $customer_input[ 'login_otp' ] = $request->shop_owner_upi_id;
+        // // $customer_input[ 'fcm_token' ] = $request->fcm_token;
+        // // $customer_input[ 'otp_expiring_time' ] = time() + 20;
+        // $customer_input[ 'modified_ip_address' ] = $request->ip();
+        // $customer_registration = CustomerRegistration::create( $customer_input );
 
-        if ( !empty( $customer_registration ) ) {
-            $customer_logs = [];
-            $customer_logs[ 'customer_id' ] = !empty( $customer_registration->id ) ? $customer_registration->id : '';
-            $customer_logs[ 'status' ] = 'active';
-            $customer_logs[ 'type' ] = 'signup';
-            CustomerLogs::create( $customer_logs );
-            // return redirect( 'user-profile' )->with( 'success', 'Profile created successfully.' );
+        // if ( !empty( $customer_registration ) ) {
+        //     $customer_logs = [];
+        //     $customer_logs[ 'customer_id' ] = !empty( $customer_registration->id ) ? $customer_registration->id : '';
+        //     $customer_logs[ 'status' ] = 'active';
+        //     $customer_logs[ 'type' ] = 'signup';
+        //     CustomerLogs::create( $customer_logs );
+        //     // return redirect( 'user-profile' )->with( 'success', 'Profile created successfully.' );
 
-        } else {
-            $customer_logs = [];
-            $customer_logs[ 'customer_id' ] = !empty( $customer_registration->id ) ? $customer_registration->id : '';
-            $customer_logs[ 'status' ] = 'inactive';
-            $customer_logs[ 'type' ] = 'signup';
-            CustomerLogs::create( $customer_logs );
-            // return redirect( 'user-profile' )->with( 'error', 'Profile not completed.' );
-        }
+        // } else {
+        //     $customer_logs = [];
+        //     $customer_logs[ 'customer_id' ] = !empty( $customer_registration->id ) ? $customer_registration->id : '';
+        //     $customer_logs[ 'status' ] = 'inactive';
+        //     $customer_logs[ 'type' ] = 'signup';
+        //     CustomerLogs::create( $customer_logs );
+        //     // return redirect( 'user-profile' )->with( 'error', 'Profile not completed.' );
+        // }
 
-        $CustomerRegistration = CustomerRegistration::select( 'id' )->get();
-        if ( !empty( $CustomerRegistration ) ) {
-            foreach ( $CustomerRegistration as $key => $value ) {
+        // $CustomerRegistration = CustomerRegistration::select( 'id' )->get();
+        // if ( !empty( $CustomerRegistration ) ) {
+        //     foreach ( $CustomerRegistration as $key => $value ) {
 
-                $length = strlen( $value->id );
+        //         $length = strlen( $value->id );
 
-                if ( $length == 1 ) {
-                    $customer_unique_id = '#MDCUST00000' . $value->id;
-                } elseif ( $length == 2 ) {
-                    $customer_unique_id = '#MDCUST0000' . $value->id;
-                } elseif ( $length == 3 ) {
-                    $customer_unique_id = '#MDCUST000' . $value->id;
-                } elseif ( $length == 4 ) {
-                    $customer_unique_id = '#MDCUST00' . $value->id;
-                } elseif ( $length == 5 ) {
-                    $customer_unique_id = '#MDCUST0' . $value->id;
-                } else {
-                    $customer_unique_id = '#MDCUST' . $value->id;
-                }
+        //         if ( $length == 1 ) {
+        //             $customer_unique_id = '#MDCUST00000' . $value->id;
+        //         } elseif ( $length == 2 ) {
+        //             $customer_unique_id = '#MDCUST0000' . $value->id;
+        //         } elseif ( $length == 3 ) {
+        //             $customer_unique_id = '#MDCUST000' . $value->id;
+        //         } elseif ( $length == 4 ) {
+        //             $customer_unique_id = '#MDCUST00' . $value->id;
+        //         } elseif ( $length == 5 ) {
+        //             $customer_unique_id = '#MDCUST0' . $value->id;
+        //         } else {
+        //             $customer_unique_id = '#MDCUST' . $value->id;
+        //         }
 
-            }
-            $update_unique_id = CustomerRegistration::where( 'id', $value->id )->update( [ 'customer_unique_no' => $customer_unique_id ] );
-            $common_data_registrationid = CommonUserLoginTable::where( 'id', $lastInsertedId )->update( [ 'user_id' => $value->id, 'status'=>'active' ] );
+        //     }
+        //     $update_unique_id = CustomerRegistration::where( 'id', $value->id )->update( [ 'customer_unique_no' => $customer_unique_id ] );
+        //     $common_data_registrationid = CommonUserLoginTable::where( 'id', $lastInsertedId )->update( [ 'user_id' => $value->id, 'status'=>'active' ] );
+
+            $apiUrl = url('/api/md-customer-register');
+
+                $newRequest = Request::create($apiUrl, 'POST', $request->all());
+                $response = app()->handle($newRequest);
+
+                $respo = $response->getContent();
+                $responseData = json_decode($respo, true);
+                // dd($responseData);
+                Session::put('login_token', $responseData['data']['access_token']);
 
             $user_data = array(
                 'email' => $request->get( 'email' ),
@@ -135,14 +145,14 @@ class UserRegistrationController extends Controller {
                         'status' => 'active',
                     ] )
                 ) {
-                    $customer = Auth::guard( 'md_customer_registration' )->user();
-                    $otpcheck = CustomerRegistration::where( 'id', $customer->id )
-                    // ->where( 'registration_otp', $otpverify )
-                    ->where( 'status', 'active' )
-                    // ->where( 'otp_expiring_time', '>=', now() )
-                    ->first();
+                    // $customer = Auth::guard( 'md_customer_registration' )->user();
+                    // $otpcheck = CustomerRegistration::where( 'id', $customer->id )
+                    // // ->where( 'registration_otp', $otpverify )
+                    // ->where( 'status', 'active' )
+                    // // ->where( 'otp_expiring_time', '>=', now() )
+                    // ->first();
 
-                    if ( $otpcheck ) {
+                    // if ( $otpcheck ) {
                         // dd( $otpcheck );
                         $user_id = Auth::guard( 'md_customer_registration' )->user()->id;
                         $user_email = Auth::guard( 'md_customer_registration' )->user()->email;
@@ -152,42 +162,42 @@ class UserRegistrationController extends Controller {
                         Session::put( 'email', $user_email );
                         Session::put( 'user', $user );
                         // return redirect( '/user-profile' )->with( 'success', 'Profile created successfully.' );
-                        return response()->json( [
-                            'status' => 200,
-                            'message' => 'Profile created successfully.',
-                            'url' => '/user-profile',
-                        ] );
-                    } else {
-                        // return redirect( 'sms-code' )->with( [
-                        //     'error' => 'OTP does not match.',
-                        //     'email' => $request->email,
-                        //     'password' => $request->password,
-                        // ] );
-                        return response()->json( [
-                            'status' => 200,
-                            'message' => 'Credencials not match',
-                            'url' => '/sign-in-web',
-                        ] );
-                    }
+                    //     return response()->json( [
+                    //         'status' => 200,
+                    //         'message' => 'Profile created successfully.',
+                    //         'url' => '/user-profile',
+                    //     ] );
+                    // } else {
+                    //     // return redirect( 'sms-code' )->with( [
+                    //     //     'error' => 'OTP does not match.',
+                    //     //     'email' => $request->email,
+                    //     //     'password' => $request->password,
+                    //     // ] );
+                    //     return response()->json( [
+                    //         'status' => 200,
+                    //         'message' => 'Credencials not match',
+                    //         'url' => '/sign-in-web',
+                    //     ] );
+                    // }
 
-                    // return response()->json( [
-                    //     'status' => 200,
-                    //     'message' => 'Your profile registered successfully.',
-                    //     'url' => '/user-profile',
-                    // ] );
+                    return response()->json( [
+                        'status' => 200,
+                        'message' => $responseData['message'],
+                        'url' => '/user-profile',
+                    ] );
                 } else {
                     // return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
                     return response()->json( [
-                        'status' => 200,
-                        'message' => 'Your credencials does not matched.',
-                        'url' => '/sign-in-web',
+                        'status' => 404,
+                        'message' => $responseData['message'],
+                        'url' => '/user-account',
                     ] );
                 }
             }
 
         }
 
-    }
+    // }
 
     public function edit_customer() {
         // dd( Session::get( 'user' ) );

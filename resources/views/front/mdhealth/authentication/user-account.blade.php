@@ -161,7 +161,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        {{-- <div id="recaptcha-container"></div> --}}
+                                        <div id="recaptcha-container"></div>
                                         <div class="col-md-12 text-center d-flex flex-column gap-3">
                                             <button type="button" class="btn btn-md w-100" id="regcustuser"
                                                 style="height: 47px;">Create
@@ -276,7 +276,7 @@
       
 
         $(document).on('click', '#regcustuser', function() {
-
+            var base_url = $('#base_url').val();
             if ($('#mycustomerForm').valid()) {
                 var email = $('#email').val();
                 var phone = $('#phone').val();
@@ -288,7 +288,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/email-or-mobile-exist',
+                    url: base_url+'/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -329,7 +329,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/email-or-mobile-exist',
+                    url: base_url+'/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -360,7 +360,7 @@
 
         window.onload = function() {
             render();
-            // renderSecondForm();
+           
         };
 
         function render() {
@@ -369,13 +369,11 @@
 
         }
 
-        // function renderSecondForm() {
-        //     window.recaptchaVerifier2 = new firebase.auth.RecaptchaVerifier('recaptcha-container2');
-        //     recaptchaVerifier2.render();
-        // }
+       
 
         function sendOTP() {
             var number = $("#phone").val();
+            // alert(number);
             firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
@@ -407,8 +405,8 @@
                     // console.log(user_type);
                     // alert(user_type);
                     // var password = $('#password').val();
-                    // var formData = $('#mycustomerForm').serialize();
-                    var formData = $('#myFormProvider').serialize();
+                    var formData = $('#mycustomerForm').serialize();
+                    // var formData = $('#myFormProvider').serialize();
                     // $('#form1').(serialize);
                     console.log(formData);
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -419,8 +417,8 @@
                     });
 
                     $.ajax({
-                        // url: 'http://127.0.0.1:8000/md-customer-register',
-                        url: 'http://127.0.0.1:8000/md-register-medical-provider',
+                        url: base_url+'/md-customer-register',
+                        // url: base_url+'/md-register-medical-provider',
                         method: 'POST',
                         data: formData,
                         //  {
@@ -432,7 +430,7 @@
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);
-                                window.location.href = 'http://127.0.0.1:8000' + response.url;
+                                window.location.href = base_url + response.url;
                                 $('#error').text('');
                             } else {
                                 // $('#number').val('');

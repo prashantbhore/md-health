@@ -305,7 +305,7 @@ public function email_or_mobile_exist(Request $request){
                                 'status' => 200,
                                 'message' => 'Login successfully.',
                                 // 'url' => '/user-profile',
-                                'url' => '/'
+                                'url' => '/user-profile'
                             ] );
                         } else {
 
