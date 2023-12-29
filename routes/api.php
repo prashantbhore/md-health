@@ -20,6 +20,7 @@ use App\Http\Controllers\api\MedicalProvider\PaymentController;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
+use App\Http\Controllers\api\vendor\VendorSalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -388,10 +389,23 @@ Route::controller(CustomerShopController::class)->group(function(){
     Route::post('store-payment-details','processPayment');
     Route::post('/follow-vendor','followVendor');
     Route::post('/unfollow-vendor','unfollowVendor');
+    Route::post('/favorites/add','addToFavorites');
+});
+
+
+
+//Vendor Sales Controller
+Route::controller(VendorSalesController::class)->group(function(){
+
+    Route::get('active-sales-lists','activeSales');
+    Route::get('completed-sales-lists','completedSales');
+    Route::get('cancelled-sales-lists','cancelledSales');
+    Route::post('order-view','salesView');
+
+
 });
 
 
 
 // });
-
 
