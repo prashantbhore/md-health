@@ -381,6 +381,13 @@ Route::controller(CustomerShopController::class)->group(function(){
     Route::post('customer-product-view','product_view');
     Route::post('vendor-product-lists','vendor_product_list');
     Route::post('/shopping-cart/add','addToCart');
+    Route::get('/shopping-cart/view','viewCart');
+    Route::post('/shopping-cart/delete-item','deleteCartItem');
+    Route::get('/shopping-cart/clear','clearCart');
+    Route::post('filter-product-list','filteredProductList');
+    Route::post('store-payment-details','processPayment');
+    Route::post('/follow-vendor','followVendor');
+    Route::post('/unfollow-vendor','unfollowVendor');
 });
 
 
