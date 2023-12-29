@@ -306,6 +306,7 @@
 
             function getData() {
 
+                // alert(token);
                 $.ajax({
                     url: baseUrl + '/api/md-customer-package-purchase-details',
                     type: 'POST',
@@ -315,6 +316,7 @@
                     headers: {
                         'Authorization': 'Bearer ' + token
                     },
+
                     success: function(response) {
                         console.log('Success:', response);
 

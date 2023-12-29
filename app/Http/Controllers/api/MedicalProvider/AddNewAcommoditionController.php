@@ -36,15 +36,17 @@ class AddNewAcommoditionController extends BaseController {
         if ( $request->button_type == 'active' ) {
             // dd( $request->hotel_name );
             $hotel_input = [];
-            $hotel_input[ 'hotel_name' ] = $request->hotel_name;
-            $hotel_input[ 'hotel_address' ] = $request->hotel_address;
-            $hotel_input[ 'hotel_stars' ] = $request->hotel_stars;
-            if ( $request->file( 'hotel_image_path' ) ) {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUpload( $request, 'hotel_image_path', 'hotel_images' );
-                $original_name = $request->file( 'hotel_image_path' )->getClientOriginalName();
-                $hotel_input[ 'hotel_image_name' ] = $original_name;
-            } else {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUploadAPi( $request, 'hotel_image_path', 'hotel_images' );
+
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->file('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            elseif ($request->has('hotel_image_path'))  {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
                 $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input[ 'hotel_image_name' ] = $original_name;
             }
@@ -77,15 +79,18 @@ class AddNewAcommoditionController extends BaseController {
         } else {
 
             $hotel_input = [];
-            $hotel_input[ 'hotel_name' ] = $request->hotel_name;
-            $hotel_input[ 'hotel_address' ] = $request->hotel_address;
-            $hotel_input[ 'hotel_stars' ] = $request->hotel_stars;
-            if ( $request->file( 'hotel_image_path' ) ) {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUpload( $request, 'hotel_image_path', 'hotel_images' );
-                $original_name = $request->file( 'hotel_image_path' )->getClientOriginalName();
-                $hotel_input[ 'hotel_image_name' ] = $original_name;
-            } else {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUploadAPi( $request, 'hotel_image_path', 'hotel_images' );
+
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->file('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            elseif ($request->has('hotel_image_path'))  {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
+
                 $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input[ 'hotel_image_name' ] = $original_name;
             }
@@ -214,15 +219,18 @@ class AddNewAcommoditionController extends BaseController {
         }
         if ( $request->button_type == 'active' ) {
             $hotel_input = [];
-            $hotel_input[ 'hotel_name' ] = $request->hotel_name;
-            $hotel_input[ 'hotel_address' ] = $request->hotel_address;
-            $hotel_input[ 'hotel_stars' ] = $request->hotel_stars;
-            if ( $request->file( 'hotel_image_path' ) ) {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUpload( $request, 'hotel_image_path', 'hotel_images' );
-                $original_name = $request->file( 'hotel_image_path' )->getClientOriginalName();
-                $hotel_input[ 'hotel_image_name' ] = $original_name;
-            } else {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUploadAPi( $request, 'hotel_image_path', 'hotel_images' );
+
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->file('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            elseif ($request->has('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
+
                 $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input[ 'hotel_image_name' ] = $original_name;
             }
@@ -253,15 +261,18 @@ class AddNewAcommoditionController extends BaseController {
             }
         } else {
             $hotel_input = [];
-            $hotel_input[ 'hotel_name' ] = $request->hotel_name;
-            $hotel_input[ 'hotel_address' ] = $request->hotel_address;
-            $hotel_input[ 'hotel_stars' ] = $request->hotel_stars;
-            if ( $request->file( 'hotel_image_path' ) ) {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUpload( $request, 'hotel_image_path', 'hotel_images' );
-                $original_name = $request->file( 'hotel_image_path' )->getClientOriginalName();
-                $hotel_input[ 'hotel_image_name' ] = $original_name;
-            } else {
-                $hotel_input[ 'hotel_image_path' ] = $this->verifyAndUploadAPi( $request, 'hotel_image_path', 'hotel_images' );
+
+            $hotel_input['hotel_name'] = $request->hotel_name;
+            $hotel_input['hotel_address'] = $request->hotel_address;
+            $hotel_input['hotel_stars'] = $request->hotel_stars;
+            if ($request->file('hotel_image_path')) {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
+                $original_name = $request->file('hotel_image_path')->getClientOriginalName();
+                $hotel_input['hotel_image_name'] = $original_name;
+            }
+            elseif ($request->has('hotel_image_path'))  {
+                $hotel_input['hotel_image_path'] = $this->verifyAndUploadAPi($request, 'hotel_image_path', 'hotel_images');
+
                 $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input[ 'hotel_image_name' ] = $original_name;
             }
