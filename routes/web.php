@@ -474,6 +474,8 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // USER PANEL
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+Route::view('user-package', 'front/mdhealth/user-panel/user-package');
+Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 Route::any('user-package-view', function () {
