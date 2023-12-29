@@ -1,7 +1,7 @@
 @extends('front.layout.mdFoods')
 @section('content')
-    <div class="bg-f6">
-        {{-- Food Page Banner --}}
+    <div class="bg-f6 mdFoods">
+        <!-- SECTION 1 -->
         <div class="md-food-banner">
             <div class="sub-food-banner">
                 <div class="banner-p1 position-relative z-index-1">HEALTHY MEAL FOR YOU</div>
@@ -13,7 +13,7 @@
                 <div class="banner-p3 position-relative z-index-1">NOW</div>
             </div>
         </div>
-        <!-- <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
             <div class="search-bar d-flex align-items-center p-3 gap-3">
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
@@ -22,7 +22,7 @@
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
-                    <label for="floatingSelect">Treatments</label>
+                    <label for="floatingSelect">Calories</label>
                 </div>
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
@@ -37,12 +37,12 @@
                         <input type="text" class="form-select" name="daterange" value="" />
                     <label for="floatingSelect">Subscription Type</label>
                 </div>
-                <a href="{{url('health-search-result')}}">
+                <a href="{{url('foods-search-result')}}">
                     <button class="btn btn-search-pill">Search</button>
                 </a>
             </div>
-        </div> -->
-        <div class="container shadow-lg bg-body rounded mid-sect-height">
+        </div>
+        <!-- <div class="container shadow-lg bg-body rounded mid-sect-height">
             <div class="row  align-items-center h-100 ms-2">
                 <div class="col h-75 borer-color">
                     <div class="d-flex flex-column gap-2">
@@ -92,115 +92,107 @@
                             class="nav-link">Search</a></button>
                 </div>
             </div>
-        </div>
-
-        <div class="container mid-food-m">
-            <div class="row">
-                <div class="col text-center">
-                    <p><span class="mid-food-sen1">Most Used Food</span> <span class="mid-food-sen2">Providers</span></p>
+        </div> -->
+        
+        <!-- SECTION 2 -->
+        <div class="bg-f6 section-2">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="titleClass">Most Used Food <span style="color: #4cdb06">Providers</span></h2>
                 </div>
-            </div>
-        </div>
-
-        <div class="container shadow-lg bg-body rounded  food-mid-sect2">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="d-flex align-items-center flex-wrap gap-4">
-                        <img src="{{ 'front/assets/img/mdFoods/Rectangle 661.png' }}" alt=""
-                            class="food-mid-sect-img1">
-                        <div class="">
-                            <div class="">
-                                <p class="m-0 p-0 food-factory">MDFood Factory</p>
-                                <p class="mt-0 food-factory-veg">Vegetable ,Beefs,Vegan & Vegetarian kitchen</p>
+                <div class="homeServicePackage rounded mb-4">
+                    <div>
+                        <img src="{{('front/assets/img/ProvidersLogo.png')}}" alt="">
+                    </div>
+                    <div class="d-flex justify-content-between flex-grow-1 align-self-stretch">
+                        <div class="d-flex flex-column justify-content-between py-2">
+                            <div>
+                                <p class="mb-0 fs-5 camptonBold lh-base">MDFood Factory</p>
+                                <p class="mb-0 lh-1 smallFont camptonBook">Vegetables, Beef, Vegan & Vegetarian Kitchen</p>
                             </div>
-
-                            <p class="m-0 p-0"><span class="green-color food-review">Reviews</span><span
-                                    class="food-review-270">(270)</span></p>
-                            <div class="mt-0">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt="" class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt="" class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt="" class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt="" class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill (1).png' }}" alt=""
-                                    class="">
+                            <div>
+                            <div>
+                                <p class="mb-0"><span class="text-green fs-6 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                                <div class="stars">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                </div>
                             </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <img src="{{('front/assets/img/verifiedByMdFoods.svg')}}" alt="">
+                            <!-- <a href="{{url('home-pack-details')}}" class="underline">View Services</a> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-end">
-                    <img src="{{ 'front/assets/img/verifiedBy.png' }}" alt="" class="">
-                </div>
-            </div>
-        </div>
-        <div class="container shadow-lg bg-body rounded  food-mid-sect2">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="d-flex align-items-center flex-wrap gap-4">
-                        <img src="{{ 'front/assets/img/mdFoods/Rectangle 661.png' }}" alt=""
-                            class="food-mid-sect-img1">
-                        <div class="">
-                            <div class="">
-                                <p class="m-0 p-0 food-factory">MDFood Factory</p>
-                                <p class="mt-0 food-factory-veg">Vegetable ,Beefs,Vegan & Vegetarian kitchen</p>
+                <div class="homeServicePackage rounded mb-4">
+                    <div>
+                        <img src="{{('front/assets/img/ProvidersLogo.png')}}" alt="">
+                    </div>
+                    <div class="d-flex justify-content-between flex-grow-1 align-self-stretch">
+                        <div class="d-flex flex-column justify-content-between py-2">
+                            <div>
+                                <p class="mb-0 fs-5 camptonBold lh-base">Diet Restaurant</p>
+                                <p class="mb-0 lh-1 smallFont camptonBook">Vegetables, Beef, Vegan & Vegetarian Kitchen</p>
                             </div>
-                            <p class="m-0 p-0"><span class="green-color food-review">Reviews</span><span
-                                    class="food-review-270">(270)</span></p>
-                            <div class="mt-0">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill (1).png' }}" alt=""
-                                    class="">
+                            <div>
+                            <div>
+                                <p class="mb-0"><span class="text-green fs-6 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                                <div class="stars">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                </div>
                             </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <img src="{{('front/assets/img/verifiedByMdFoods.svg')}}" alt="">
+                            <!-- <a href="{{url('home-pack-details')}}" class="underline">View Services</a> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-end">
-                    <img src="{{ 'front/assets/img/verifiedBy.png' }}" alt="" class="">
-                </div>
-            </div>
-        </div>
-        <div class="container shadow-lg bg-body rounded  food-mid-sect2 food-footer-m">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="d-flex align-items-center flex-wrap gap-4">
-                        <img src="{{ 'front/assets/img/mdFoods/Rectangle 661.png' }}" alt=""
-                            class="food-mid-sect-img1">
-                        <div class="">
-                            <div class="">
-                                <p class="m-0 p-0 food-factory">MDFood Factory</p>
-                                <p class="mt-0 food-factory-veg">Vegetable ,Beefs,Vegan & Vegetarian kitchen</p>
+                <div class="homeServicePackage rounded mb-4">
+                    <div>
+                        <img src="{{('front/assets/img/ProvidersLogo.png')}}" alt="">
+                    </div>
+                    <div class="d-flex justify-content-between flex-grow-1 align-self-stretch">
+                        <div class="d-flex flex-column justify-content-between py-2">
+                            <div>
+                                <p class="mb-0 fs-5 camptonBold lh-base">Veggie's & Fish</p>
+                                <p class="mb-0 lh-1 smallFont camptonBook">Vegetables, Beef, Vegan & Vegetarian Kitchen</p>
                             </div>
-
-                            <p class="m-0 p-0"><span class="green-color food-review">Reviews</span><span
-                                    class="food-review-270">(270)</span></p>
-                            <div class="mt-0">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill.png' }}" alt=""
-                                    class="">
-                                <img src="{{ 'front/assets/img/mdFoods/bi_star-fill (1).png' }}" alt=""
-                                    class="">
+                            <div>
+                            <div>
+                                <p class="mb-0"><span class="text-green fs-6 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                                <div class="stars">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                </div>
                             </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <img src="{{('front/assets/img/verifiedByMdFoods.svg')}}" alt="">
+                            <!-- <a href="{{url('home-pack-details')}}" class="underline">View Services</a> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-end">
-                    <img src="{{ 'front/assets/img/verifiedBy.png' }}" alt="" class="">
-                </div>
             </div>
-        </div>
-        <div class="mt-3 ">
-            <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="" class="footer-image">
+        </div> 
+        
+        <!-- SECTION 3: SCAN QR -->
+        <div class="bg-f6 scanQr">
+            <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
         </div>
     </div>
 @endsection
