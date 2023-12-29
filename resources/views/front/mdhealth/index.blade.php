@@ -1,6 +1,12 @@
 @php
     $treatment_plans = App\Models\ProductCategory::all();
     $cities = App\Models\Cities::where('country_id', '1')->get();
+    // dd(Session::all());
+    if (Session::get('login_token') != null) {
+        $is_logged_in = true;
+    } else {
+        $is_logged_in = false;
+    }
 @endphp
 
 
@@ -22,9 +28,7 @@
                                     aria-label="Floating label select example">
                                     <option value="">Select Treatment</option>
                                     @foreach ($treatment_plans as $treatment_plan)
-                                        {
                                         <option>{{ $treatment_plan->product_category_name }}</option>
-                                        }
                                     @endforeach
                                 </select>
                                 <label for="floatingSelect">Treatments</label>
@@ -34,20 +38,18 @@
                                     aria-label="Floating label select example">
                                     <option data-display="Select" selected>Select City</option>
                                     @foreach ($cities as $city)
-                                        {
                                         <option>{{ $city->city_name }}</option>
-                                        }
                                     @endforeach
                                 </select>
                                 <label for="floatingSelect">City</label>
                             </div>
                             <div class="form-floating">
                                 <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                                <option data-display="Select" selected>12 Aug</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select> -->
+                                                                                                <option data-display="Select" selected>12 Aug</option>
+                                                                                                <option value="1">One</option>
+                                                                                                <option value="2">Two</option>
+                                                                                                <option value="3">Three</option>
+                                                                                            </select> -->
                                 <!-- <div class="datepickerContainer"> -->
                                 <input type="text" class="form-select" name="daterange" value="" />
                                 <!-- </div> -->
