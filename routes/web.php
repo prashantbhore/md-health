@@ -139,6 +139,11 @@ Route::get('purchase-food-pack', function () {
     return view('front.mdFoods.purchase');
 });
 
+// mdBooking Routes
+Route::get('mdBooking', function () {
+    return view('front.mdBooking.index');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {

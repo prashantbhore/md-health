@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col">
                                     {{-- hhhh --}}
-                                    <a class="" href="{{ URL('md-booking-search-hotel-page')}}">
+                                    <a class="" href="{{URL('md-booking-search-hotel-page')}}">
                                         <button class="btn-search-pill-booking3 " style="height: 57px">Search</button>
                                     </a>
                                 </div>
