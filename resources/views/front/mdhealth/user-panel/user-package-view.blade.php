@@ -596,6 +596,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         <!-- Change Patient Information -->
         <div class="modal fade" id="AcommoditionView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
