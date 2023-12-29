@@ -67,14 +67,30 @@
 #treatmentForModal .modal-content,
 #treatmentForModal2 .modal-content,
 #serviceForModal .modal-content,
-#serviceForModal2 .modal-content {
+#serviceForModal2 .modal-content,
+#foodForModal1 .modal-content {
     border-radius: 0.5rem;
     border: none;
     position: relative;
 }
 
+.mdFoodsPurchaseFoodModal1{
+    width: 60%;
+}
+
+.mdFoodsPurchaseFoodModal1 .form-select{
+    border-radius: 3px;
+}
+
+.mdFoodsPurchaseFoodModal1 .unselect{
+    background-image: unset;
+    display: flex;
+    gap: 1rem;
+}
+
 #treatmentForModal .modal-dialog,
-#serviceForModal .modal-dialog {
+#serviceForModal .modal-dialog,
+#foodForModal1 .modal-dialog {
     max-width: 600px;
 }
 
@@ -86,7 +102,8 @@
 #treatmentForModal .closeModal,
 #treatmentForModal2 .closeModal,
 #serviceForModal .closeModal,
-#serviceForModal2 .closeModal {
+#serviceForModal2 .closeModal,
+#foodForModal1 .closeModal {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -220,7 +237,8 @@
 }
 
 .homeServicePackage,
-.packageResult {
+.packageResult, 
+.foodsPackage {
     background-color: white;
     padding: 1.25rem;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
@@ -270,7 +288,8 @@
 
 .homeServicePackage a,
 .packageResult a,
-.anchor {
+.anchor, 
+.foodsPackage a {
     color: #000;
     font-family: CamptonBold !important;
 }
@@ -1902,7 +1921,8 @@ span.popup-msg.active {
 
 .paymentSection input[type="radio"],
 .mdShop input[type="radio"],
-.mdShop input[type="checkbox"] {
+.mdShop input[type="checkbox"],
+.greenCheck input[type="checkbox"] {
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
@@ -1920,7 +1940,13 @@ span.popup-msg.active {
     place-content: center;
 }
 
-.discount-sctn input[type="radio"] {
+.greenCheck input[type="checkbox"],
+.greenCheck input[type="checkbox"]::before{
+    border-radius: 50% !important;
+}
+
+.discount-sctn input[type="radio"],
+.mdFoodsPurchaseFoodModal1 input[type="checkbox"] {
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
@@ -1959,7 +1985,8 @@ span.popup-msg.active {
 
 .paymentSection [type="radio"]::before,
 .mdShop input[type="radio"]::before,
-.mdShop input[type="checkbox"]::before {
+.mdShop input[type="checkbox"]::before,
+.greenCheck input[type="checkbox"]::before {
     content: "";
     width: 14px;
     height: 14px;
@@ -1969,7 +1996,10 @@ span.popup-msg.active {
     box-shadow: inset 1em 1em var(--form-control-color);
 }
 
-.discount-sctn [type="radio"]::before {
+
+
+.discount-sctn [type="radio"]::before,
+.mdFoodsPurchaseFoodModal1 input[type="checkbox"]::before {
     content: "";
     width: 20px;
     height: 20px;
@@ -1993,7 +2023,9 @@ span.popup-msg.active {
 .paymentSection input[type="radio"]:checked::before,
 .discount-sctn input[type="radio"]:checked::before,
 .mdShop input[type="radio"]:checked::before,
-.mdShop input[type="checkbox"]:checked::before {
+.mdShop input[type="checkbox"]:checked::before,
+.greenCheck input[type="checkbox"]:checked::before,
+.mdFoodsPurchaseFoodModal1 input[type="checkbox"]:checked::before {
     transform: scale(1);
 }
 
@@ -2310,3 +2342,7 @@ span.popup-msg.active {
 /* Price Range Picker */
 
 /* mdShop End */
+
+.mdFoods .section-2{
+    margin-top: 15rem;
+}
