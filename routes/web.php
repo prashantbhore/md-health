@@ -476,9 +476,8 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
-Route::any('user-package-view', function () {
-    return view('front.mdhealth.user-panel.user-package-view');
-});
+// Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);
+Route::get('view-my-active-packages/{id}', [CustomerPackageController::class , 'view_my_active_packages'])->name('view-my-active-packages');
 
 
 // MD BOOKING PAGE KD

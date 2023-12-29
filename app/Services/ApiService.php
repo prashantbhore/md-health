@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 class ApiService {
 
-
     public function getCities() {
 
         $request = Request :: create( url( '/api/md-city-list' ), 'POST', $body );
@@ -56,6 +55,33 @@ class ApiService {
             $request->headers->set( 'Authorization', 'Bearer ' . $token );
         }
 
+        $response = app()->handle( $request );
+        return  json_decode( $response->getContent(), true );
+    }
+
+    public function cancelPackage( $token, $id ) {
+
+        $body = [ 'id' => $id ];
+
+        $request = Request :: create( url( '/api/md-customer-change-package-list-active-cancelled' ), 'POST', $body );
+
+        if ( $token ) {
+            $request->headers->set( 'Authorization', 'Bearer ' . $token );
+        }
+
+        $response = app()->handle( $request );
+        return  json_decode( $response->getContent(), true );
+    }
+
+    public function activePackageDetails( $token, $id ) {
+
+        $body = [ 'package_id' => $id ];
+
+        $request = Request :: create( url( '/api/md-customer-package-details' ), 'POST', $body );
+
+        if ( $token ) {
+            $request->headers->set( 'Authorization', 'Bearer ' . $token );
+        }
 
         $response = app()->handle( $request );
         return  json_decode( $response->getContent(), true );

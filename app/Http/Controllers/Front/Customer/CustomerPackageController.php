@@ -174,7 +174,7 @@ class CustomerPackageController extends Controller {
 
     public function my_packages( Request $request ) {
         $token = Session::get( 'login_token' );
-
+        // dd( $token );
         $data = $this->apiService->getMyActivePackages( $token );
         $data_two = $this->apiService->getMyCompletedPackages( $token );
         $data_three = $this->apiService->getMyCancelledPackages( $token );
@@ -188,5 +188,16 @@ class CustomerPackageController extends Controller {
 
     public function my_profile( Request $request ) {
         return view( 'front.mdhealth.user-panel.user-profile' );
+    }
+
+    public function view_my_active_packages( $id ) {
+
+        $token = Session::get( 'login_token' );
+
+        $data = $this->apiService->activePackageDetails( $token, $id )[ 'customer_purchase_package_list' ];
+        $other_service = explode( ',', $data[ 'other_services' ] );
+        $data[ 'other_services' ] = $other_service;
+        return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data' ) );
+
     }
 }

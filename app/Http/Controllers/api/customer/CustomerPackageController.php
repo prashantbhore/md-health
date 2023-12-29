@@ -1123,7 +1123,9 @@ class CustomerPackageController extends BaseController
             ->select(
                 'md_customer_purchase_details.id as purchase_id',
                 // 'md_customer_purchase_details.status',
-                // 'md_packages.id as package_id',
+                /////// Ali has made this change do not remove while resolving confilct //////
+                'md_packages.id as package_id',
+                /////// Ali has made this change do not remove while resolving confilct //////
                 // 'md_packages.package_unique_no',
                 'md_packages.package_name',
                 'md_packages.treatment_period_in_days',
@@ -1615,10 +1617,14 @@ class CustomerPackageController extends BaseController
             ];
         }
 
-
-
-        $services[] = $accommodation;
-        $services[] = $transportation;
+        /////// Ali has made this change do not remove while resolving confilct //////
+        if(isset($accommodation)){
+            $services[] = $accommodation;
+        }
+        if(isset($accommodation)){
+            $services[] = $transportation;
+        }
+        /////// Ali has made this change do not remove while resolving confilct //////
 
 
         if (!empty($customer_purchase_package_active_list)) {
