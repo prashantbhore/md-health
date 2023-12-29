@@ -131,6 +131,12 @@
     .acmdn-hotel-details h6:last-child {
         font-size: 15px;
     }
+    .package-view-div .treatment-card{
+        padding: 15px;
+    }
+    .acdm-btns.section-btns button{
+        width: 49%;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -152,7 +158,7 @@
                         <div class="package-view-div">
                             <div class="treatment-card df-start w-100 mb-3">
                                 <div class="row card-row">
-                                    <div class="col-md-2 df-center ps-4">
+                                    <div class="col-md-2 df-center ps-3">
                                         <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                     </div>
                                     <div class="col-md-10 justify-content-start ps-0">
@@ -252,23 +258,22 @@
                                                     </li>
                                                 </ul>
 
-                                                </li>
-                                                <li class="fsb-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 13 13" fill="none">
-                                                        <path d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z" fill="#111111" />
-                                                    </svg>
-                                                    Translate
+                                                <div class="acdm-btns section-btns pt-3">
+                                                    <button class="green-plate bg-black text-white boder border-1 border-dark fw-700">My Details</button>
+                                                    <button class="green-plate bg-white text-dark fw-700 border border-1 border-dark">My Documents</button>
+                                                </div>
 
-                                                    <div class="view-menu-div mt-4">
-                                                        <div class="view-menu mb-4">
-                                                            <h6 class="fsb-1">Your Case Manager</h6>
-                                                            <p class="text-orange">Abdul G.</p>
-                                                        </div>
-
-                                                        <div class="patient-details">
-
-                                                        </div>
+                                                <div class="view-menu-div mt-4">
+                                                    <div class="view-menu mb-4">
+                                                        <h6 class="fsb-1">Your Case Manager</h6>
+                                                        <p class="text-orange">Abdul G.</p>
                                                     </div>
+
+                                                    <div class="patient-details">
+
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -307,6 +312,7 @@
                             <div class="acmdn-hotel-details">
                                 <h6 class="fsb-1">Hotel Details</h6>
                                 <h6 class="fsb-2 fw-500">Everything Included</h6>
+
                                 <ul style="padding: 0;list-style: none;" class="mt-2">
                                     <li>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16" fill="none">
@@ -347,6 +353,8 @@
                                         Fitness Center
                                     </li>
                                 </ul>
+
+                                
                             </div>
                             <div class="acmdn-notes mb-4">
                                 <h6 class="fsb-1"><b>Notes</b> *Optional</h6>
