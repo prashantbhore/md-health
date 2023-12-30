@@ -214,6 +214,71 @@ class VendorSalesController extends BaseController
 
 
 
+public function searchSales(Request $request)
+{
+
+    $validator = Validator::make($request->all(),[
+        'search_query' => 'required',
+    ]);
+
+    if ($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors());
+    }
+
+  
+
+     $vendorId = Auth::user()->id;
+
+   // $vendorId = 5;
+
+    $query = VendorProductPayment::where('vendor_id', $vendorId);
+
+   
+    $searchQuery = $request->input('search_query');
+    if ($searchQuery) {
+        $query->where(function ($subquery) use ($searchQuery) {
+            $subquery->where('order_id', 'like', "%$searchQuery%")
+                ->orWhereHas('customer', function ($customerSubquery) use ($searchQuery) {
+                    $customerSubquery->where('full_name', 'like', "%$searchQuery%");
+                })
+                ->orWhereHas('product', function ($productSubquery) use ($searchQuery) {
+                    $productSubquery->where('product_name', 'like', "%$searchQuery%");
+                });
+        });
+    }
+
+    $orders = $query->with(['customer', 'product'])->get();
+
+    if ($orders->isNotEmpty()) {
+        $selectedData = [];
+
+        foreach ($orders as $order) {
+            $selectedData[] = [
+                'order_id' => $order->id,
+                'order_unique_id' => $order->order_id,
+                'customer_name' => $order->customer->full_name,
+                'product_name' => $order->product->product_name,
+                'order_status' => $order->order_status,
+                'total_price' => $order->amount,
+            ];
+        }
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Sales Found',
+            'sales_list' => $selectedData,
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'No Sales Found',
+        ]);
+    }
+}
+
+
+
+
 
 
 

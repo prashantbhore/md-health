@@ -32,6 +32,7 @@ class CustomerRegistration extends Authenticatable
         'address',
         'password',
         'user_type',
+        'platform_type',
         'registration_otp',
         'login_otp',
         'access_token',
