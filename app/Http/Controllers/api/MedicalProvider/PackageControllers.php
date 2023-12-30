@@ -452,8 +452,10 @@ class PackageControllers extends BaseController
 
 
         // if (empty($package_exist_or_not)) {
-        if (!empty($request->button_type)) {
-            if ($request->button_type == 'active') {
+        if (!empty($request->button_type)) 
+        {
+            if ($request->button_type == 'active') 
+            {
                 $package_input = [];
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
