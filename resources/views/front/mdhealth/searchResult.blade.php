@@ -465,6 +465,10 @@
 @section('script')
 
 <script type="text/javascript">
+
+    var baseUrl = $('#base_url').val();
+    var token = "{{ Session::get('login_token') }}";
+
     $(document).ready(function(){
         $(".view_btn").click(function(){
         var id = this.id.split("_")[2];
@@ -480,11 +484,14 @@
         $('#other_form').submit(function(e) {
             e.preventDefault();
             var formData = $(this).serialize();
-
+            alert('hi');
             $.ajax({
-                url: '/api/md-change-patient-information',
+                url: baseUrl + '/api/md-change-patient-information',
                 type: 'POST',
                 data: formData,
+                headers: {
+                        'Authorization': 'Bearer ' + token
+                },
                 success: function(response) {
                     console.log('Success:', response);
                     window.location.href = $('#hidden_url').val();

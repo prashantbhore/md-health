@@ -392,7 +392,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
     Route::controller(UpdateProfileController::class)->group(function () {
         //update-medical-profile-list
-        
+
         Route::get('medical-account', 'update_medical_profile_list');
 
         //update-medical-profile
@@ -441,7 +441,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
     Route::controller(UserRegistrationController::class)->group(function () {
         // Route::get('/medical-provider-dashboard', 'dashboard_view');
-        Route::get('/user-profile', 'edit_customer');
+        Route::get('/my-profile', 'edit_customer');
         // Route::get('/login/change_password', 'change_password_view');
         Route::post('/update-customer-profile', 'update_customer_profile');
         Route::post('/md-check-password-exist', 'check_password_exist');
@@ -486,7 +486,7 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
-Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
+// Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 // Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);
 Route::get('view-my-active-packages/{id}', [CustomerPackageController::class , 'view_my_active_packages'])->name('view-my-active-packages');
 
