@@ -83,7 +83,8 @@ class PackageControllers extends BaseController
 
     //add_packages
     public function add_packages(Request $request)
-    {
+    { 
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'package_name' => 'required',
             'treatment_category_id' => 'required',
@@ -158,17 +159,17 @@ class PackageControllers extends BaseController
                     }
 
                     if (!empty($AddPackages)) {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('success','Package created successfully in active packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('success','Package created successfully in active packages.');
+                        // }
                         return response()->json([
                             'status' => 200,
                             'message' => 'Package created successfully in active packages.',
                         ]);
                     } else {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('error','Package not created in active packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('error','Package not created in active packages.');
+                        // }
                         return response()->json([
                             'status' => 404,
                             'message' => 'Package not created in active packages.',
@@ -226,17 +227,17 @@ class PackageControllers extends BaseController
                         }
                     }
                     if (!empty($AddPackages)) {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('success','Package created successfully in de-activate packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('success','Package created successfully in de-activate packages.');
+                        // }
                         return response()->json([
                             'status' => 200,
                             'message' => 'Package created successfully in de-activate packages.',
                         ]);
                     } else {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('error','Package not created in de-activate packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('error','Package not created in de-activate packages.');
+                        // }
                         return response()->json([
                             'status' => 404,
                             'message' => 'Package not created in de-activate packages.',

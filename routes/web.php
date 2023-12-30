@@ -424,7 +424,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
        Route::get('medical-packages', 'package_list');
        Route::get('medical-packages-view', 'index');
        Route::post('md-add-packages', 'md_add_packages');
-        // Route::get('/add-acommodition', 'add_acommodition');
+        Route::get('/edit-package/{id}', 'edit_package');
         // Route::get('/add-tour', 'add_tour');
         // // Route::get('/login/change_password', 'change_password_view');
         // Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
