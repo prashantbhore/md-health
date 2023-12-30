@@ -73,6 +73,7 @@
                     <button class="btn btn-md-black position-absolute" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">Make a Request</button>
                 </div>
+                <!-- exampleModal -->
                 <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute" alt="">
             </div>
         </div>
@@ -510,8 +511,24 @@
     <div class="bg-f6 scanQr">
         <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
     </div>
-
+    <!-- Modals -->
+    <div class="modal fade loginFirstModal" id="loginFirstModal" tabindex="-1" aria-labelledby="serviceForModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered position-relative">
+            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                <!-- </button> -->
+            <div class="modal-content bg-f6">
+                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
+                <img src="{{('front/assets/img/Oops.svg')}}" alt="">
+                <div class="d-flex align-items-center flex-column">
+                    <p class="camptonBook fw-bold text-center mt-4">Excited to explore more? It's time to join <span class="camptonBold">MD</span> family.</p>
+                    <a href="{{url('homeService-purchase')}}" type="button" class="btn btn-sm btn-md df-center mb-4">Get Started</a>
+                    <p class="camptonBook fw-bold text-center mt-4">Already<span class="camptonBold">MD</span> member?</p>
+                    <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#serviceForModal2" type="button" class="btn btn-sm whiteBtn df-center mb-5">Sign In</a>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 @endsection
 @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
