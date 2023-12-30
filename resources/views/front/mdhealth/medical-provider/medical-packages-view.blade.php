@@ -50,7 +50,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                <form action="{{ url('api/md-add-packages') }}" method="post">
+                                <form action="{{ url('/md-add-packages') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="platform_type" value="web">
                                     <div class="form-group mb-3">
@@ -83,39 +83,43 @@
                                     <div class="multiple-checkbox-div">
                                         <div class="form-group d-flex flex-column mb-5">
                                             <label class="form-label">Other Services (Selectable)</label>
+                                            <p>Checked Values: <span id="checkedValues"></span></p>
+                                            <input type="text" name="other_services" id="other_services" >
+                                            {{-- value="{{!empty($hotel_details['other_services'])?$hotel_details['other_services']:''}}" --}}
+                                        
                                             <div class="multiple-checks">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="foraccommodation">
+                                                    <input type="checkbox" class="form-check-input" value="Accomodition" id="foraccommodation">
                                                     {{-- {{ $hotel_details['accommodation'] ? 'checked' : '' }} --}}
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="foraccomodition">Accomodition</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="fortransportation">
+                                                    <input type="checkbox" class="form-check-input" value="Transportation" id="fortransportation">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fortransportation">Transportation</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="fortour">
+                                                    <input type="checkbox" class="form-check-input" value="Tour" id="fortour">
                                                     <label class="form-check-label fw-500 fsb-1" for="fortour">Tour</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="fortranslation">
+                                                    <input type="checkbox" class="form-check-input" value="Translation" id="fortranslation">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fortranslation">Translation</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forvisaservice">
+                                                    <input type="checkbox" class="form-check-input" value="Visa Services" id="forvisaservice">
                                                     <label class="form-check-label fw-500 fsb-1" for="forvisaservice">Visa
                                                         Services</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forticketservice">
+                                                    <input type="checkbox" class="form-check-input" value="Ticket Services" id="forticketservice">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forticketservice">Ticket Services</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input"
+                                                    <input type="checkbox" class="form-check-input" value="Ambulance Services"
                                                         id="forambulanceservice">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forambulanceservice">Ambulance Services</label>
@@ -449,22 +453,40 @@
             }, function(start, end, label) {});
         });
     </script>
+     <script>
+        $(document).ready(function() {
+            function updateCheckedValues() {
+                const checkedValues = $('.form-check-input:checked').map(function() {
+                    return $(this).val();
+                }).get().join(', ');
+                $('#checkedValues').text(checkedValues);
+                $('#other_services').val(checkedValues);
+            }
+            $('.form-check-input').change(updateCheckedValues);
+            updateCheckedValues();
+        });
+    </script>
 
     <script>
         function categoryselect(value) {
+            var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+            const bearer_token = '{{ Session::get('login_token') }}'; 
+            // var url= base_url + 'api/md-treatment-list'
+            // alert(url);
             $.ajax({
-                url: 'api/md-treatment-list',
+                url: base_url + '/api/md-treatment-list',
                 type: 'POST',
                 data: {
                     id: value,
                 },
                 headers: {
-                    'X-CSRF-TOKEN': token
+                    'X-CSRF-TOKEN': token,
+                    'Authorization': 'Bearer ' + bearer_token
                 },
                 success: function(response) {
                     console.log(response);
+                    // alert(response);
                     if (response.status === 200) {
                         // Clear existing options
                         $('#treatment_id').empty();
