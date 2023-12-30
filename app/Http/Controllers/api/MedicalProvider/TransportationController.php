@@ -68,8 +68,8 @@ class TransportationController extends BaseController
             ->select(
                 'md_add_transportation_details.id',
                 'md_add_transportation_details.status',
-                'md_master_brand.brand_name',
-                'md_add_transportation_details.vehicle_model_id',
+                // 'md_master_brand.brand_name',
+                'md_add_transportation_details.vehicle_model_id as vehicle_model_name',
                 'md_add_transportation_details.vehicle_per_day_price',
                 'md_add_transportation_details.other_services',
                 'md_master_vehicle_comfort_levels.vehicle_level_name'

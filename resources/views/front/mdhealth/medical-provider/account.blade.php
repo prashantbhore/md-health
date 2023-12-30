@@ -109,8 +109,8 @@
 
                                     <div class="form-group mb-3">
                                         <label class="form-label">Authorized Person Mobile Contact</label>
-                                        <input type="text" name="company_address"
-                                            value="{{ $medical_provider_list->company_address }}" class="form-control"
+                                        <input type="text" name="mobile_no"
+                                            value="{{ $medical_provider_list->mobile_no }}" class="form-control"
                                             id="foodname" aria-describedby="foodname" placeholder="+90">
                                     </div>
 
@@ -215,12 +215,13 @@
 
 
     <script>
-        function deleteClientLogo(client_logo_id) {
+        function deleteClientLogo(client_logo_id){
+
             if (client_logo_id != "") {
-                if (confirm("Do you really want to delete this image ?")) {
+                if (confirm("Do you really want to delete this image ?")){
                     $.ajax({
-                        // url: base_url + "/md-delete-provider-images-videos",
-                        url: "http://127.0.0.1:8000/md-delete-provider-images-videos",
+                        url: base_url + "/md-delete-provider-images-videos",
+                       // url: "http://127.0.0.1:8000/md-delete-provider-images-videos",
 
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -232,9 +233,15 @@
                         success: function(response) {
                             if (response.status == 200) {
                                 $('#img_div_' + client_logo_id).css('display', 'none');
-                                alert(response.message);
-                                success_toast("success", response.message);
-                                alert(response.message);
+
+                                toastr.options ={
+                                   "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                               toastr.success(response.message);
+                              
+
                             } else {
                                 fail_toast("error", response.message);
                             }
@@ -316,7 +323,7 @@
            });
    
            // Adding a custom method for disallowing spaces
-           $.validator.addMethod("nowhitespace", function(value, element) {
+           $.validator.addMethod("nowhitespace", function(value, element){
                return value.trim().length !== 0;
            }, "Spaces are not allowed");
        });

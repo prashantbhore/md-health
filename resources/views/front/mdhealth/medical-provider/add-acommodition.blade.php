@@ -140,6 +140,7 @@
                                         </div>
                                         <div class="prev-img-div">
                                             <img src="{{!empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image"  id="pic"  />
+                                            <input type="hidden" name="old_image" id="old_image" value="{{ !empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'' }}">
                                         </div>
                                     </div>
 
@@ -236,7 +237,7 @@
 
                                     <div class="section-btns mb-4">
                                         {{-- <a href="javascript:void(0);" --}}
-                                        <button class="black-plate bg-black text-white fw-700 w-100">Save
+                                        <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save
                                             Acommodition</button>
                                     </div>
 
@@ -251,6 +252,12 @@
 @endsection
 
 @section('script')
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include jQuery Validation Plugin -->
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
     <script>
         $(".mpOtherServicesLi").addClass("activeClass");
         $(".mpOtherServices").addClass("md-active");
@@ -267,6 +274,56 @@
             $('.form-check-input').change(updateCheckedValues);
             updateCheckedValues();
         });
+
+
+        $(document).ready(function() {
+            var old_image=$('#old_image').val();
+    // Validate the form with id "add_acommodition"
+    $("#add_acommodition").validate({
+      rules: {
+        hotel_name: {
+          required: true
+        },
+        hotel_address: {
+          required: true
+        },
+        hotel_per_night_price: {
+          required: true,
+          number: true
+        },
+        hotel_image_path: {
+          required: function(element) {
+                    // Check if an old image exists
+                    var oldImage = $("#old_image").val();
+
+                    // Require new image if no old image exists
+                    return oldImage === '';
+                }
+        }
+        // Add rules for other fields as needed
+      },
+      messages: {
+        hotel_name: {
+          required: "Please enter the hotel name"
+        },
+        hotel_address: {
+          required: "Please enter the hotel address"
+        },
+        hotel_per_night_price: {
+          required: "Please enter the price",
+          number: "Please enter a valid number"
+        },
+        hotel_image_path: {
+          required: "Please select a hotel picture"
+        }
+        // Add custom messages for other fields as needed
+      },
+      submitHandler: function(form) {
+        // If the form is valid, you can submit it here
+        form.submit();
+      }
+    });
+  });
     </script>
 
 

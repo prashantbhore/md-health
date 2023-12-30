@@ -30,10 +30,10 @@ class LoginControllers extends BaseController {
             return $this->sendError( 'Validation Error.', $validator->errors() );
         }
         // dd($request);
-        if ($request->platform_type == "web") {
+        if ($request->platform_type == "web") 
+        {
     // dd($request->platform_type);
-
-          
+  
             if ( Auth::guard( 'md_customer_registration' )->attempt( [
                 'email' => $request->email,
                 'password' => $request->password,
@@ -138,9 +138,16 @@ class LoginControllers extends BaseController {
         }
     }
 
-    public function customer_logout() {
+    public function customer_logout()
+    {
         Auth::user()->tokens()->delete();
-        return $this->sendResponse( $success = NULL, 'User logout successfully.' );
+        return $this->sendResponse($success = NULL, 'Customer logout successfully.');
+    }
+
+    public function medical_provider_logout()
+    {
+        Auth::user()->tokens()->delete();
+        return $this->sendResponse($success = NULL, 'Vendor logout successfully.');
     }
 
     public function medical_provider_login( Request $request ) {

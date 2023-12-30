@@ -12,6 +12,7 @@ class VendorProductPayment extends Model
     protected $table = 'md_vendor_product_payment';
 
     protected $fillable =[
+            'order_id',
             'customer_id',
             'vendor_id',
             'product_id',
@@ -31,4 +32,29 @@ class VendorProductPayment extends Model
             'modified_by',
              'status',
     ];
+
+
+    public function customer()
+    {
+        return $this->belongsTo(CustomerRegistration::class,'customer_id','id');
+    }
+
+
+    public function product()
+    {
+        return $this->belongsTo(VendorProduct::class,'product_id','id');
+    }
+
+
+
+
+
+    
+
+
+
+
+
+
+
 }

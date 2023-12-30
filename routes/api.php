@@ -20,6 +20,7 @@ use App\Http\Controllers\api\MedicalProvider\PaymentController;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
+use App\Http\Controllers\api\vendor\VendorSalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,11 @@ Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_prov
 Route::middleware('auth:sanctum')->group(function ()
 {
 //customers
+Route::post('md-customer-logout',  [LoginControllers::class, 'customer_logout']);
+
+Route::post('md-medical-provider-logout',  [LoginControllers::class, 'medical_provider_logout']);
+
+
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 
@@ -258,6 +264,8 @@ Route::post('md-customer-tour-details-view', [CustomerPackageController::class, 
 //customer-reviews
 Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_reviews']);
 
+//add-package-to-favourite
+Route::post('md-add-package-to-favourite', [CustomerPackageController::class, 'add_package_to_favourite']);
 });
 
 
@@ -388,10 +396,23 @@ Route::controller(CustomerShopController::class)->group(function(){
     Route::post('store-payment-details','processPayment');
     Route::post('/follow-vendor','followVendor');
     Route::post('/unfollow-vendor','unfollowVendor');
+    Route::post('/favorites/add','addToFavorites');
+});
+
+
+
+//Vendor Sales Controller
+Route::controller(VendorSalesController::class)->group(function(){
+    Route::get('active-sales-lists','activeSales');
+    Route::get('completed-sales-lists','completedSales');
+    Route::get('cancelled-sales-lists','cancelledSales');
+    Route::post('order-view','salesView');
+    Route::post('search-sales','searchSales');
+
+
 });
 
 
 
 // });
-
 

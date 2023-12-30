@@ -88,6 +88,7 @@
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="{{!empty($tour_details['tour_image_path'])?$tour_details['tour_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image" id="pic" />
+                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($tour_details['tour_image_path'])?$tour_details['tour_image_path']:'' }}">
                                     </div>
                                 </div>
 
@@ -105,7 +106,8 @@
                                         <div class="multiple-checks">
                                             <div class="form-check">
                                                 <input type="checkbox" value="Breakfast & Dinner"
-                                                    class="form-check-input" id="fordinner">
+                                                    class="form-check-input" id="fordinner"
+                                                    {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Breakfast & Dinner') !== false ? 'checked' : '' }}>
                                                 <label class="form-check-label fw-500 fsb-1" for="fordinner">
                                                     <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +119,8 @@
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" value="Sauna & Spa" class="form-check-input"
-                                                    id="forspa">
+                                                    id="forspa"
+                                                    {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Sauna & Spa') !== false ? 'checked' : '' }}>
                                                 <label class="form-check-label fw-500 fsb-1" for="forspa">
                                                     <svg width="14" height="14" viewBox="0 0 14 14"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +132,8 @@
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" value="No Smoking" class="form-check-input"
-                                                    id="fornosmoking">
+                                                    id="fornosmoking"
+                                                    {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'No Smoking') !== false ? 'checked' : '' }}>
                                                 <label class="form-check-label fw-500 fsb-1" for="fornosmoking">
                                                     <svg width="20" height="20" viewBox="0 0 20 20"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,7 +146,8 @@
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" value="Wi-Fi" class="form-check-input"
-                                                    id="forwifi">
+                                                    id="forwifi"
+                                                    {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Wi-Fi') !== false ? 'checked' : '' }}>
                                                 <label class="form-check-label fw-500 fsb-1" for="forwifi">
                                                     <svg width="16" height="12" viewBox="0 0 16 12"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +166,8 @@
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" value="Fitness Center"
-                                                    class="form-check-input" id="forfitness">
+                                                    class="form-check-input" id="forfitness"
+                                                    {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Fitness Center') !== false ? 'checked' : '' }}>
                                                 <label class="form-check-label fw-500 fsb-1" for="forfitness">
                                                     <svg width="13" height="15" viewBox="0 0 13 15"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -173,7 +179,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p>Checked Values: <span id="checkedValues"></span></p>
+                                    {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
                                     <input type="hidden" name="tour_other_services" id="tour_other_services" value="{{!empty($tour_details['tour_other_services'])?$tour_details['tour_other_services']:''}}">
                                     {{-- <input type="hidden" name="button_type" id="button_type" value="active"> --}}
                                     <input type="hidden" name="platform_type" id="platform_type" value="web">
@@ -194,6 +200,12 @@
 </div>
 @endsection
 @section('script')
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery Validation Plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
 <script>
     $(".mpOtherServicesLi").addClass("activeClass");
     $(".mpOtherServices").addClass("md-active");
@@ -210,5 +222,69 @@
         $('.form-check-input').change(updateCheckedValues);
         updateCheckedValues();
     });
+
+
+    
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('#add_acommodition').validate({
+            // Rules for validation
+            rules: {
+                tour_name: {
+                    required: true
+                },
+                tour_description: {
+                    required: true
+                },
+                tour_days: {
+                    required: true,
+                    number: true
+                },
+                tour_image_path: {
+                     required: function(element) {
+                    // Check if an old image exists
+                    var oldImage = $("#old_image").val();
+
+                    // Require new image if no old image exists
+                    return oldImage === '';
+                }
+                },
+                tour_price: {
+                    required: true,
+                    number: true
+                },
+                // Add rules for other fields as needed
+            },
+            // Messages for validation errors
+            messages: {
+                tour_name: {
+                    required: "Please enter tour name"
+                },
+                tour_description: {
+                    required: "Please enter tour description"
+                },
+                tour_days: {
+                    required: "Please enter number of days",
+                    number: "Please enter a valid number"
+                },
+                tour_image_path: {
+                    required: "Please upload an image"
+                },
+                tour_price: {
+                    required: "Please enter tour price",
+                    number: "Please enter a valid number"
+                },
+                // Add messages for other fields as needed
+            },
+            // Handle submission and other settings as needed
+            submitHandler: function(form) {
+                // If form is valid, you can submit the form here
+                form.submit();
+            }
+        });
+    });
+</script>
+
 @endsection
