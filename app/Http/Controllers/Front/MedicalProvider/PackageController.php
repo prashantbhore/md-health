@@ -3,21 +3,26 @@
 namespace App\Http\Controllers\Front\MedicalProvider;
 
 use App\Http\Controllers\Controller;
+use App\Services\ApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 class PackageController extends Controller
 {
+    public function __construct(ApiService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
     public function index()
     {
         $token = Session::get('login_token');
-        $request = Request::create(url('/api/md-treatment-category-list'), 'GET');
-        $request->headers->set('Authorization', 'Bearer ' . $token);
+       
+        $apiUrl = url('/api/md-treatment-category-list');
+        $method = 'GET';
+        $body=null;
 
-        $response = app()->handle($request);
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         $treatment_categories = $responseData['packages_active_list'];
         // dd($treatment_categories);
         return view('front/mdhealth/medical-provider/medical-packages-view',compact('treatment_categories'));
@@ -25,20 +30,16 @@ class PackageController extends Controller
     public function package_list()
     {
         $token = Session::get('login_token');
-        // dd('hjdvhjv');
-        $request = Request::create(url('/api/md-packages-active-list'), 'GET');
-        $request->headers->set('Authorization', 'Bearer ' . $token);
+        
+        $apiUrl = url('/api/md-packages-active-list');
+        $apiUrl2 = url('/api/md-packages-deactive-list');
+        $method = 'GET';
+        $body=null;
 
-        $response = app()->handle($request);
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
-        // dd($responseData);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         $packages_active_list = $responseData['packages_active_list'];
-        $request = Request::create('/api/md-packages-deactive-list', 'GET');
-        $response = Route::dispatch($request);
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
-        // dd($responseData);
+
+        $responseData = $this->apiService->getData($token, $apiUrl2, $body, $method);
         $packages_deactive_list = $responseData['packages_deactive_list'];
         return view('front/mdhealth/medical-provider/packages',compact('packages_active_list','packages_deactive_list'));
     }
@@ -51,14 +52,10 @@ class PackageController extends Controller
         // } else {
             // $apiUrl = url('/api/md-edit-hotel-list');
         // }
-        $newRequest = Request::create($apiUrl, 'POST', $request->all());
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-        $response = app()->handle($newRequest);
+        $method = 'POST';
+        $body=$request->all();
 
-        $respo = $response->getContent();
-        // dd($respo);
-        $responseData = json_decode($respo, true);
-        // dd($responseData['status']);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         if (($responseData['status'] == 200)) {
             return redirect('/medical-other-services')->with('success', $responseData['message']);
         } else {

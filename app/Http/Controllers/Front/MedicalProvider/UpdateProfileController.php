@@ -7,6 +7,7 @@ use App\Models\Cities;
 use App\Models\Country;
 use App\Models\MedicalProviderRegistrater;
 use App\Models\ProviderImagesVideos;
+use App\Services\ApiService;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,10 @@ use Storage;
 class UpdateProfileController extends Controller
 {
     use MediaTrait;
-    
+    public function __construct(ApiService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
     //update_medical_profile_list
     public function update_medical_profile_list()
     {
