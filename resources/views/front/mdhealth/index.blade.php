@@ -12,6 +12,7 @@
 
 @extends('front.layout.layout')
 @section('content')
+<div class="bg-f6">
     <div class="content-wrapper bg-f6">
         <div class="banner-section df-center flex-column">
             <div class="container">
@@ -73,15 +74,16 @@
                     <button class="btn btn-md-black position-absolute" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">Make a Request</button>
                 </div>
+                <!-- exampleModal -->
                 <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute" alt="">
             </div>
         </div>
     </div>
-    <div class="py-100px pb-0 md-coin df-center flex-column gap-5 bg-f6">
+    <div class="py-100px pb-0 md-coin df-center flex-column gap-4 bg-f6 section-3 mb-5">
         <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
-        <h1><span class="text-green text-decoration-underline">Earn</span> as you spend <span class="text-green">!</span>
+        <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span class="text-green">!</span>
         </h1>
-        <p>Earn <span>cashback</span> per transaction or <span>invite your friends</span> and spend <span>MD</span>coin for
+        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and <br/> spend <span class="camptonBold">MD</span>coin for
             your health needs. </p>
     </div>
     <div class="bg-f6">
@@ -276,10 +278,10 @@
             </div>
             <div class="part2">
                 <div class="mb-4">
-                    <p class="fs3 camptonBold mb-0">Download</p>
-                    <p class="fs3"><span class="camptonBold text-green">MD</span><span
-                            class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
-                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
+                    <p class="fs3 camptonBold mb-0 lh-sm" style="font-size: 40px;">Download</p>
+                    <p class="fs3 lh-sm" style="font-size: 40px;"><span class="camptonBold text-green">MD</span><span
+                            class="text-green campton">health</span> <span class="camptonBold">Mobile</span></p>
+                    <p class="clr-grey camptonBook fs-5 fw-bolder lh-sm">Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
                 </div>
                 <div class="d-flex align-items-center gap-4">
@@ -510,8 +512,24 @@
     <div class="bg-f6 scanQr">
         <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
     </div>
-
+    <!-- Modals -->
+    <div class="modal fade loginFirstModal" id="loginFirstModal" tabindex="-1" aria-labelledby="serviceForModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered position-relative">
+            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                <!-- </button> -->
+            <div class="modal-content bg-f6">
+                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
+                <img src="{{('front/assets/img/Oops.svg')}}" alt="">
+                <div class="d-flex align-items-center flex-column">
+                    <p class="camptonBook fw-bold text-center mt-4">Excited to explore more? It's time to join <span class="camptonBold">MD</span> family.</p>
+                    <a href="{{url('homeService-purchase')}}" type="button" class="btn btn-sm btn-md df-center mb-4">Get Started</a>
+                    <p class="camptonBook fw-bold text-center mt-4">Already<span class="camptonBold">MD</span> member?</p>
+                    <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#serviceForModal2" type="button" class="btn btn-sm whiteBtn df-center mb-5">Sign In</a>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 @endsection
 @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>

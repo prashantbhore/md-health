@@ -53,8 +53,7 @@ class ApiService
             // dd( $response );
             return json_decode($response->getContent(), true);
         }
-    }
 
-
+}
 }
 
