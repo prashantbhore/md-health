@@ -322,10 +322,29 @@
                             if (response.url !== undefined) {
                                 // alert(response.url);
                                 window.location.href = base_url + response.url;
-                                $('#error').text('');
+                                
+                                toastr.options ={
+                                   "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                               toastr.success(response.message);
+
+                                //$('#error').text('');
                             } else {
                                 // $('#number').val('');
-                                $('#error').text('Credentials do not match');
+
+                                
+                                toastr.options ={
+                                   "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                                toastr.error('Credentials do not match');  
+                                
+                               //toastr.success(response.message);
+
+                                //$('#error').text('Credentials do not match');
                             }
                         },
                         error: function(xhr, status, error) {

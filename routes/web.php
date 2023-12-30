@@ -392,7 +392,9 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
     Route::controller(UpdateProfileController::class)->group(function () {
         //update-medical-profile-list
+        
         Route::get('medical-account', 'update_medical_profile_list');
+
         //update-medical-profile
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
         //delete-provider-images-videos
