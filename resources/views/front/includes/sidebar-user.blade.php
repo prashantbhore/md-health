@@ -8,11 +8,11 @@
             <li class="nav-item upPackageLi">
                 <a class="nav-link upPackage" href="{{ url('my-packages-list') }}">Packages</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Reservations</a>
+            <li class="nav-item upReservationsLi">
+                <a class="nav-link upReservations" href="{{ url('user-reservation') }}">Reservations</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Messages</a>
+            <li class="nav-item upMessagesLi">
+                <a class="nav-link upMessages" href="{{ url('user-message') }}">Messages</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Orders</a>
@@ -20,8 +20,8 @@
             <li class="nav-item upWalletLi">
                 <a class="nav-link upWallet" href="{{ url('user-wallet') }}">Wallets</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">My Reports</a>
+            <li class="nav-item upReportsLi">
+                <a class="nav-link upReports" href="{{ url('user-all-reports') }}">My Reports</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Favorites</a>

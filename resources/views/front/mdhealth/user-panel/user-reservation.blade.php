@@ -1430,8 +1430,8 @@
 @endsection
 @section('script')
     <script>
-        $(".upPackageLi").addClass("activeClass");
-        $(".upPackage").addClass("md-active");
+        $(".upReservationsLi").addClass("activeClass");
+        $(".upReservations").addClass("md-active");
     </script>
     <script>
         $(".view-menu-div1").hide();
