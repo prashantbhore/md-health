@@ -482,11 +482,14 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
+Route::view('user-credit-card-pay', 'front/mdhealth/user-panel/user-credit-card-pay');
+Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 Route::any('user-package-view', function () {
     return view('front.mdhealth.user-panel.user-package-view');
 });
+Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
 
 
 // MD BOOKING PAGE KD
