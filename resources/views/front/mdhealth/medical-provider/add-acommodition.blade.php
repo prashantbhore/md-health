@@ -140,6 +140,7 @@
                                         </div>
                                         <div class="prev-img-div">
                                             <img src="{{!empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image"  id="pic"  />
+                                            <input type="hidden" name="old_image" id="old_image" value="{{ !empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'' }}">
                                         </div>
                                     </div>
 
@@ -276,6 +277,7 @@
 
 
         $(document).ready(function() {
+            var old_image=$('#old_image').val();
     // Validate the form with id "add_acommodition"
     $("#add_acommodition").validate({
       rules: {
@@ -290,7 +292,13 @@
           number: true
         },
         hotel_image_path: {
-          required: true
+          required: function(element) {
+                    // Check if an old image exists
+                    var oldImage = $("#old_image").val();
+
+                    // Require new image if no old image exists
+                    return oldImage === '';
+                }
         }
         // Add rules for other fields as needed
       },

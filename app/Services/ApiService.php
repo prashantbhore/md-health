@@ -107,20 +107,5 @@ class ApiService {
             $response = app()->handle( $request );
             return  json_decode( $response->getContent(), true );
         }
-
-        public function activePackageDetails( $token, $id ) {
-
-            $body = [ 'package_id' => $id ];
-
-            $request = Request :: create( url( '/api/md-customer-package-details' ), 'POST', $body );
-
-            if ( $token ) {
-                $request->headers->set( 'Authorization', 'Bearer ' . $token );
-            }
-
-            $response = app()->handle( $request );
-            return  json_decode( $response->getContent(), true );
-        }
-
     }
 

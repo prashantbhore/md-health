@@ -169,21 +169,22 @@ class CustomerPackageController extends Controller {
                 return view( 'front.mdhealth.healthPackDetails', compact( 'packageDetails', 'cities', 'counties' ) );
 
             } else {
-                return view( 'front.index' );
+                return view( 'front.mdhealth.searchResult' );
 
             }
 
         } else {
-            return view( 'front.searchResult' );
+            return view( 'front.mdhealth.searchResult' );
         }
     }
 
     public function my_packages( Request $request ) {
         $token = Session::get( 'login_token' );
         // dd( $token );
-        $data = $this->apiService->getMyActivePackages( $token );
-        $data_two = $this->apiService->getMyCompletedPackages( $token );
-        $data_three = $this->apiService->getMyCancelledPackages( $token );
+        $method = 'GET';
+        $data = $this->apiService->getData( $token, url( '/api/md-customer-purchase-package-active-list' ), null, $method );
+        $data_two = $this->apiService->getData( $token, url( '/api/md-customer-purchase-package-completed-list' ), null, $method );
+        $data_three = $this->apiService->getData( $token, url( '/api/md-customer-purchase-package-cancelled-list' ), null, $method );
 
         $my_active_packages_list = $data[ 'customer_purchase_package_active_list' ];
         $my_completed_packages_list = $data_two[ 'customer_purchase_package_completed_list' ];
@@ -194,10 +195,7 @@ class CustomerPackageController extends Controller {
 
     public function view_my_active_packages( $id ) {
 
-        $token = Session::get( 'login_token' );
-        echo $token;
-        die;
-        $data = $this->apiService->activePackageDetails( $token, $id )[ 'customer_purchase_package_list' ];
+        $data = $this->apiService->getData( $token, url( '/api/md-customer-package-details' ), [ 'package_id'=>$id ], 'POST' );
         $other_service = explode( ',', $data[ 'other_services' ] );
         $data[ 'other_services' ] = $other_service;
         return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data' ) );

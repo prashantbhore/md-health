@@ -100,12 +100,15 @@
         font-weight: 600;
         text-decoration: none;
     }
+    .product-buttons a{
+        cursor: pointer;
+    }
     .product-buttons a:nth-child(2) {
         background-color: #F55C5C;
-    padding: 10px;
-    border-radius: 5px;
-    width: 12%;
-    text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+        width: 12%;
+        text-align: center;
     }
     .product-buttons a:last-child {
         border-radius: 3px;
@@ -167,16 +170,16 @@
     }
     .product-btn {
         border-radius: 3px;
-    background: #000;
-    font-size: 12px;
-    color: #4CDB06;
-    text-decoration: none;
-    padding: 10px 15px;
-    position: absolute;
-    bottom: -15px;
-    width: 165px;
-    left: 50px;
-    text-align: center;
+        background: #000;
+        font-size: 12px;
+        color: #4CDB06;
+        text-decoration: none;
+        padding: 10px 15px;
+        position: absolute;
+        bottom: -15px;
+        width: 165px;
+        left: 50px;
+        text-align: center;
     }
     .product-div3 img{
         height: 65px;
@@ -184,6 +187,9 @@
         object-fit: contain;
         border-radius: 5px;
         box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    }
+    .product-content-div ul{
+        padding-left: 18px;
     }
 </style>
 
@@ -262,12 +268,12 @@
                                 </div>
                                 <h3 class="product-price"> 299,99 ₺ </h3>
                             </div>
-                            <div class="product-buttons">
-                                <a href="javascript:void(0);">Add To Cart</a>
-                                <a href="javascript:void(0);">
+                            <div class="product-buttons mb-4">
+                                <a data-bs-toggle="modal" data-bs-target="#addToCartModal">Add To Cart</a>
+                                <a>
                                     <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
                                 </a>
-                                <a href="javascript:void(0);">
+                                <a>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                                         <path d="M0.5625 5.625H7.875L8.4375 6.75H1.125L0.5625 5.625ZM1.3125 7.875H8.625L9.1875 9H1.875L1.3125 7.875ZM13.5 13.875C14.1225 13.875 14.625 13.3725 14.625 12.75C14.625 12.1275 14.1225 11.625 13.5 11.625C12.8775 11.625 12.375 12.1275 12.375 12.75C12.375 13.3725 12.8775 13.875 13.5 13.875ZM14.625 7.125H12.75V9H16.095L14.625 7.125ZM6 13.875C6.6225 13.875 7.125 13.3725 7.125 12.75C7.125 12.1275 6.6225 11.625 6 11.625C5.3775 11.625 4.875 12.1275 4.875 12.75C4.875 13.3725 5.3775 13.875 6 13.875ZM15 6L17.25 9V12.75H15.75C15.75 13.995 14.745 15 13.5 15C12.255 15 11.25 13.995 11.25 12.75H8.25C8.25 13.995 7.2375 15 6 15C4.755 15 3.75 13.995 3.75 12.75H2.25V10.125H3.75V11.25H4.32C4.7325 10.7925 5.3325 10.5 6 10.5C6.6675 10.5 7.2675 10.7925 7.68 11.25H11.25V4.5H2.25C2.25 3.6675 2.9175 3 3.75 3H12.75V6H15Z" fill="#111111"/>
                                     </svg>
@@ -476,6 +482,20 @@
         <!-- SECTION 3: SCAN QR -->
         <div class="bg-f6 scanQr">
             <img src="{{('front/assets/img/appScreenFooter.png')}}" alt="">
+        </div>
+    </div>
+    <!-- Modals -->
+    <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered position-relative">
+            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                <!-- </button> -->
+            <div class="modal-content">
+                <p class="camptonBook fw-bold text-center mt-4">Who is this meal for?</p>
+                <div class="d-flex align-items-center flex-column">
+                    <a href="{{url('purchase-food-pack')}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
+                    <a src="" data-bs-dismiss="modal" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Gift</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

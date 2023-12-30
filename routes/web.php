@@ -95,9 +95,9 @@ Route::get('buy-service', function () {
 });
 
 //mdHealth Routes
-Route::any('health-search-result', [CustomerPackageController::class,'customer_package_search_filter']);
+Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
 
-Route::any('health-pack-details', [CustomerPackageController::class,'packages_view_on_search_result']);
+Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
 Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
@@ -137,6 +137,10 @@ Route::get('food-pack-details', function () {
 
 Route::get('purchase-food-pack', function () {
     return view('front.mdFoods.purchase');
+});
+
+Route::get('food-payment-status', function () {
+    return view('front.mdFoods.paymentStatus');
 });
 
 // mdBooking Routes
@@ -372,7 +376,6 @@ Route::controller(CommonLoginController::class)->group(function () {
     Route::post('/email-to-mobile', 'email_to_mobile');
     Route::post('/email-password-exist', 'email_password_exist');
     Route::post('/email-or-mobile-exist', 'email_or_mobile_exist');
-
 });
 //     Route::post('/otp-verify','otp_verify_for_register');
 //     Route::post('/email-to-mobile','email_to_mobile');
@@ -406,7 +409,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
 
     Route::controller(OtherServicesController::class)->group(function () {
-       Route::get('medical-other-services', 'index');
+        Route::get('medical-other-services', 'index');
         Route::get('/add-acommodition', 'add_acommodition');
         Route::get('/add-tour', 'add_tour');
         Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
@@ -424,7 +427,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
        Route::get('medical-packages', 'package_list');
        Route::get('medical-packages-view', 'index');
        Route::post('md-add-packages', 'md_add_packages');
-        // Route::get('/add-acommodition', 'add_acommodition');
+        Route::get('/edit-package/{id}', 'edit_package');
         // Route::get('/add-tour', 'add_tour');
         // // Route::get('/login/change_password', 'change_password_view');
         // Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
@@ -435,7 +438,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::post('/delete-acommodition/{id}', 'delete_acommodition');
         // Route::post('/check-old-password', 'check_old_password');
     });
-
 });
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
 
@@ -485,10 +487,12 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
+Route::view('user-credit-card-pay', 'front/mdhealth/user-panel/user-credit-card-pay');
+Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 // Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 // Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);
-Route::get('view-my-active-packages/{id}', [CustomerPackageController::class , 'view_my_active_packages'])->name('view-my-active-packages');
+Route::get('view-my-active-packages/{id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
 
 
 // MD BOOKING PAGE KD
