@@ -83,7 +83,8 @@ class PackageControllers extends BaseController
 
     //add_packages
     public function add_packages(Request $request)
-    {
+    { 
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'package_name' => 'required',
             'treatment_category_id' => 'required',
@@ -158,17 +159,17 @@ class PackageControllers extends BaseController
                     }
 
                     if (!empty($AddPackages)) {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('success','Package created successfully in active packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('success','Package created successfully in active packages.');
+                        // }
                         return response()->json([
                             'status' => 200,
                             'message' => 'Package created successfully in active packages.',
                         ]);
                     } else {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('error','Package not created in active packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('error','Package not created in active packages.');
+                        // }
                         return response()->json([
                             'status' => 404,
                             'message' => 'Package not created in active packages.',
@@ -226,17 +227,17 @@ class PackageControllers extends BaseController
                         }
                     }
                     if (!empty($AddPackages)) {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('success','Package created successfully in de-activate packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('success','Package created successfully in de-activate packages.');
+                        // }
                         return response()->json([
                             'status' => 200,
                             'message' => 'Package created successfully in de-activate packages.',
                         ]);
                     } else {
-                        if (($request->platform_type=='web')) {
-                            return redirect('/medical-packages')->with('error','Package not created in de-activate packages.');
-                        }
+                        // if (($request->platform_type=='web')) {
+                        //     return redirect('/medical-packages')->with('error','Package not created in de-activate packages.');
+                        // }
                         return response()->json([
                             'status' => 404,
                             'message' => 'Package not created in de-activate packages.',
@@ -269,7 +270,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
 
@@ -296,7 +297,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($packages_deactive_list)) {
@@ -340,6 +341,7 @@ class PackageControllers extends BaseController
                 'md_packages.hotel_acommodition_price',
                 'md_packages.vehicle_id',
                 'md_packages.vehicle_in_time',
+                'md_packages.tour_in_time',
                 'md_packages.vehicle_out_time',
                 'md_packages.transportation_acommodition_price',
                 'md_packages.visa_details',
@@ -452,8 +454,10 @@ class PackageControllers extends BaseController
 
 
         // if (empty($package_exist_or_not)) {
-        if (!empty($request->button_type)) {
-            if ($request->button_type == 'active') {
+        if (!empty($request->button_type)) 
+        {
+            if ($request->button_type == 'active') 
+            {
                 $package_input = [];
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
@@ -467,6 +471,7 @@ class PackageControllers extends BaseController
                 $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
                 $package_input['vehicle_id'] = $request->vehicle_id;
                 $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['tour_in_time'] = $request->tour_in_time;
                 $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;
@@ -506,6 +511,7 @@ class PackageControllers extends BaseController
                 $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
                 $package_input['vehicle_id'] = $request->vehicle_id;
                 $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['tour_in_time'] = $request->tour_in_time;
                 $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;

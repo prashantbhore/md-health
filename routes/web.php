@@ -24,6 +24,7 @@ use App\Http\Controllers\admin\product\MDshopController;
 use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
+use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 
 /*
@@ -139,6 +140,10 @@ Route::get('purchase-food-pack', function () {
     return view('front.mdFoods.purchase');
 });
 
+Route::get('food-payment-status', function () {
+    return view('front.mdFoods.paymentStatus');
+});
+
 // mdBooking Routes
 Route::get('mdBooking', function () {
     return view('front.mdBooking.index');
@@ -211,7 +216,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function () {
+    Route::controller(CityController::class)->group(function(){
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table', 'data_table');
@@ -224,8 +229,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CITIES
 
-    Route::controller(AdminController::class)->group(function () {
-
+    Route::controller(AdminController::class)->group(function (){
         Route::get('add-admins', 'index');
         Route::post('admin-store', 'store')->name('admin.store');
         Route::get('/admin-data-table', 'data_table');
@@ -420,10 +424,10 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::post('/check-old-password', 'check_old_password');
     });
     Route::controller(PackageController::class)->group(function () {
-        Route::get('medical-packages', 'package_list');
-        Route::get('medical-packages-view', 'index');
-        Route::post('md-add-packages', 'md_add_packages');
-        // Route::get('/add-acommodition', 'add_acommodition');
+       Route::get('medical-packages', 'package_list');
+       Route::get('medical-packages-view', 'index');
+       Route::post('md-add-packages', 'md_add_packages');
+        Route::get('/edit-package/{id}', 'edit_package');
         // Route::get('/add-tour', 'add_tour');
         // // Route::get('/login/change_password', 'change_password_view');
         // Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
@@ -439,7 +443,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
     Route::controller(UserRegistrationController::class)->group(function () {
         // Route::get('/medical-provider-dashboard', 'dashboard_view');
-        Route::get('/user-profile', 'edit_customer');
+        Route::get('/my-profile', 'edit_customer');
         // Route::get('/login/change_password', 'change_password_view');
         Route::post('/update-customer-profile', 'update_customer_profile');
         Route::post('/md-check-password-exist', 'check_password_exist');
@@ -459,7 +463,10 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 #Dashboard
 // Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
 #Treatment Details
-Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
+
+
+
+
 // Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');
 // Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-packages-view');
 // Route::view('medical-account', 'front/mdhealth/medical-provider/account');
@@ -476,7 +483,13 @@ Route::view('reports', 'front/mdhealth/medical-provider/reports');
 Route::view('reports', 'front/mdhealth/medical-provider/reports');
 
 #Sales
-Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
+
+Route::controller(SalesController::class)->group(function(){
+    Route::get('medical-provider-sales','index');
+   // Route::post('treatment-order-details/{id}','sales_view');
+    Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
+});
+
 
 
 // USER PANEL
@@ -487,7 +500,7 @@ Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 Route::view('user-credit-card-pay', 'front/mdhealth/user-panel/user-credit-card-pay');
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
-Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
+// Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 // Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);
 Route::get('view-my-active-packages/{id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
 

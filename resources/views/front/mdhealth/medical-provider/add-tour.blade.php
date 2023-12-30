@@ -88,6 +88,7 @@
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="{{!empty($tour_details['tour_image_path'])?$tour_details['tour_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image" id="pic" />
+                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($tour_details['tour_image_path'])?$tour_details['tour_image_path']:'' }}">
                                     </div>
                                 </div>
 
@@ -242,7 +243,13 @@
                     number: true
                 },
                 tour_image_path: {
-                    required: true
+                     required: function(element) {
+                    // Check if an old image exists
+                    var oldImage = $("#old_image").val();
+
+                    // Require new image if no old image exists
+                    return oldImage === '';
+                }
                 },
                 tour_price: {
                     required: true,
