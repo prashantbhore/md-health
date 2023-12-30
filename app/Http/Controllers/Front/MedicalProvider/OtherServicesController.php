@@ -17,59 +17,28 @@ class OtherServicesController extends Controller
 {
     use MediaTrait;
 
-    // public function __construct( ApiService $apiService ) {
-    //     $this->apiService = $apiService;
-    // }
+    public function __construct(ApiService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
     public function index()
     {
         $token = Session::get('login_token');
         $apiUrl = url('/api/md-hotel-list');
-        
-        // $data = $this->apiService->function();
-
-        $request = Request::create($apiUrl, 'GET');
-        $request->headers->set('Authorization', 'Bearer ' . $token);
-
-        $response = app()->handle($request);
-
-        if ($response->isOk()) {
-            $responseData = json_decode($response->getContent(), true);
-            // dd($responseData);
-            if (isset($responseData['hotel_details'])) {
-                $hotel_details = $responseData['hotel_details'];
-                // Now you can use $hotel_details as needed
-                // dd($hotel_details);
-            } else {
-                // Handle the absence of 'hotel_details' in the response
-                // dd("Hotel details not found or API response structure has changed.");
-            }
-        } else {
-            // Handle errors if the request fails
-            // dd("Request failed: " . $response->getContent());
-        }
-
-
         $apiUrl2 = url('/api/md-transportation-list');
-        $request = Request::create($apiUrl2, 'GET');
-        $request->headers->set('Authorization', 'Bearer ' . $token);
-        $response = Route::dispatch($request);
-        $respo = $response->getContent();
+        $apiUrl3 = url('/api/md-tour-list');
+        $body=null;
+        $method = 'GET';
 
-        $responseData = json_decode($respo, true);
-        // dd($responseData);
+
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+        $hotel_details = $responseData['hotel_details'];
+
+        $responseData = $this->apiService->getData($token, $apiUrl2, $body, $method);
         $vehicle_details = $responseData['data'];
 
-        $apiUrl3 = url('/api/md-tour-list');
-        $request = Request::create($apiUrl3, 'GET');
-
-        $request->headers->set('Authorization', 'Bearer ' . $token);
-        $response = Route::dispatch($request);
-        $respo = $response->getContent();
-
-        $responseData = json_decode($respo, true);
-        // dd($responseData);
+        $responseData = $this->apiService->getData($token, $apiUrl3, $body, $method);
         $tour_details = $responseData['tour_details'];
-
 
         return view('front.mdhealth.medical-provider.other-services', compact('hotel_details', 'vehicle_details', 'tour_details'));
     }
@@ -83,25 +52,16 @@ class OtherServicesController extends Controller
     {
         $token = Session::get('login_token');
         $apiUrl1 = url('/api/md-master-brands');
-
-        $request = Request::create($apiUrl1, 'GET');
-        $request->headers->set('Authorization', 'Bearer ' . $token);
-
-        $response = app()->handle($request);
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
-        $vehicle_details = $responseData['data'];
-        // dd($vehicle_details);
-
-        
         $apiUrl2 = url('/api/md-comfort-levels-master');
-        $request = Request::create($apiUrl2 , 'GET');
-        $request->headers->set('Authorization', 'Bearer ' . $token);
-        $response = Route::dispatch($request);
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
+        $body=null;
+        $method = 'GET';
+        
+        $responseData = $this->apiService->getData($token, $apiUrl1, $body, $method);
+        $vehicle_details = $responseData['data'];
+
+        $responseData = $this->apiService->getData($token, $apiUrl2, $body, $method);
         $comfort_level_details = $responseData['data'];
-        // dd($comfort_level_details);
+       
         return view('front/mdhealth/medical-provider/add-new-vehical', compact('vehicle_details', 'comfort_level_details'));
     }
 
@@ -122,17 +82,11 @@ class OtherServicesController extends Controller
         $encryptedId = $request->id;
         $decryptedId = Crypt::decrypt($encryptedId);
 
-        // Generating an absolute URL using the url() helper function
         $apiUrl = url('/api/md-hotel-list-edit-view');
-
-        $newRequest = Request::create($apiUrl, 'POST', ['hotel_id' => $decryptedId]);
-
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-
-        $response = app()->handle($newRequest);
-
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
+        $body=['hotel_id' => $decryptedId];
+        $method = 'POST';
+        
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         $hotel_details = $responseData['hotel_details'];
 
         return view('front/mdhealth/medical-provider/add-acommodition', compact('hotel_details'));
@@ -142,39 +96,24 @@ class OtherServicesController extends Controller
         $token = Session::get('login_token');
         $encryptedId = $request->id;
         $decryptedId = Crypt::decrypt($encryptedId);
-
         $apiUrl = url('/api/md-edit-transportation-details-view');
-
-        $newRequest = Request::create($apiUrl, 'POST', ['id' => $decryptedId]);
-
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-
-        $response = app()->handle($newRequest);
-
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
+        $body=['id' => $decryptedId];
+        $method = 'POST';
+        
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         $transportation_details = $responseData['data'];
         // dd($vehicle_details);
-        $request = Request::create('/api/md-master-brands', 'GET');
 
-        $request->headers->set('Authorization', 'Bearer ' . $token);
+        $apiUrl2 = url('/api/md-master-brands');
+        $apiUrl3 = url('/api/md-comfort-levels-master');
+        $method2 = 'GET';
+        $body2=null;
 
-        $response = Route::dispatch($request);
-        $respo = $response->getContent();
-
-        $responseData = json_decode($respo, true);
+        $responseData = $this->apiService->getData($token, $apiUrl2, $body2, $method2);
         $vehicle_details = $responseData['data'];
-        // dd($vehicle_details);
-        $request = Request::create('/api/md-comfort-levels-master', 'GET');
 
-        $request->headers->set('Authorization', 'Bearer ' . $token);
-
-        $response = Route::dispatch($request);
-        $respo = $response->getContent();
-
-        $responseData = json_decode($respo, true);
+        $responseData = $this->apiService->getData($token, $apiUrl3, $body2, $method2);
         $comfort_level_details = $responseData['data'];
-        // dd($comfort_level_details);
         return view('front/mdhealth/medical-provider/add-new-vehical', compact('transportation_details', 'vehicle_details', 'comfort_level_details'));
     }
 
@@ -184,18 +123,11 @@ class OtherServicesController extends Controller
         $encryptedId = $request->id;
         $decryptedId = Crypt::decrypt($encryptedId);
 
-        // Generating an absolute URL using the url() helper function
         $apiUrl = url('/api/md-edit-tour-list-view');
+        $method = 'POST';
+        $body=['id' => $decryptedId];
 
-        $newRequest = Request::create($apiUrl, 'POST', ['id' => $decryptedId]);
-
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-
-        $response = app()->handle($newRequest);
-
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
-        // dd($responseData);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         $tour_details = $responseData['tour_details'];
 
         return view('front/mdhealth/medical-provider/add-tour', compact('tour_details'));
@@ -208,14 +140,12 @@ class OtherServicesController extends Controller
         $encryptedId = $request->id;
         $decryptedId = Crypt::decrypt($encryptedId);
 
-        $newRequest = Request::create('/api/md-edit-hotel-list', 'POST', ['hotel_id' => $decryptedId]);
+        $apiUrl = url('/api/md-edit-hotel-list');
+        $method = 'POST';
+        $body=['hotel_id' => $decryptedId];
 
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-
-        $response = app()->handle($newRequest);
-
-        $respo = $response->getContent();
-        dd($respo);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+        // $tour_details = $responseData['tour_details'];
         $selectedStars = $request->input('selectedStars');
         return response()->json(['message' => 'Stars count received: ' . $selectedStars]);
     }
@@ -230,14 +160,10 @@ class OtherServicesController extends Controller
         } else {
             $apiUrl = url('/api/md-edit-hotel-list');
         }
-        $newRequest = Request::create($apiUrl, 'POST', $request->all());
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-        $response = app()->handle($newRequest);
+        $method = 'POST';
+        $body=$request->all();
 
-        $respo = $response->getContent();
-        // dd($respo);
-        $responseData = json_decode($respo, true);
-        // dd($responseData['status']);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         if (($responseData['status'] == 200)) {
             return redirect('/medical-other-services')->with('success', $responseData['message']);
         } else {
@@ -253,14 +179,10 @@ class OtherServicesController extends Controller
         } else {
             $apiUrl = url('/api/md-edit-tour-list');
         }
-        $newRequest = Request::create($apiUrl, 'POST', $request->all());
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-        $response = app()->handle($newRequest);
+        $method = 'POST';
+        $body=$request->all();
 
-        $respo = $response->getContent();
-        // dd($respo);
-        $responseData = json_decode($respo, true);
-        // dd($responseData['status']);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         if (($responseData['status'] == 200)) {
             return redirect('/medical-other-services')->with('success', $responseData['message']);
         } else {
@@ -276,19 +198,14 @@ class OtherServicesController extends Controller
         } else {
             $apiUrl = url('api/md-edit-transportation-details');
         }
-        $newRequest = Request::create($apiUrl, 'POST', $request->all());
-        $newRequest->headers->set('Authorization', 'Bearer ' . $token);
-        $response = app()->handle($newRequest);
+        $method = 'POST';
+        $body=$request->all();
 
-        $respo = $response->getContent();
-        // dd($respo);
-        $responseData = json_decode($respo, true);
-        // dd($responseData['status']);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         if (($responseData['status'] == 200)) {
             return redirect('/medical-other-services')->with('success', $responseData['message']);
         } else {
             return redirect('/medical-other-services')->with('error', $responseData['message']);
         }
     }
-    // Crypt::encrypt($hotel_detail['id'])
 }
