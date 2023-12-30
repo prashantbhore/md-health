@@ -33,11 +33,11 @@ class CustomerPackageController extends Controller {
     public function customer_home() {
 
         // dd( Session::get( 'login_token' ) );
-        $token = Session::get( 'login_token' );
-        $url = url( '/api/md-city-list' );
-        $body = [ 'country_id'=>'1' ];
-        $method = 'POST';
-        $this->apiService->getCities( $token, $url, $body, $method );
+        // $token = Session::get( 'login_token' );
+        // $url = url( '/api/md-city-list' );
+        // $body = [ 'country_id'=>'1' ];
+        // $method = 'POST';
+        // $this->apiService->getCities( $token, $url, $body, $method );
         return view( 'front.mdhealth.index' );
     }
 
