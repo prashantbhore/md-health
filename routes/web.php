@@ -392,7 +392,9 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
     Route::controller(UpdateProfileController::class)->group(function () {
         //update-medical-profile-list
+        
         Route::get('medical-account', 'update_medical_profile_list');
+
         //update-medical-profile
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
         //delete-provider-images-videos
@@ -421,6 +423,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     Route::controller(PackageController::class)->group(function () {
        Route::get('medical-packages', 'package_list');
        Route::get('medical-packages-view', 'index');
+       Route::post('md-add-packages', 'md_add_packages');
         // Route::get('/add-acommodition', 'add_acommodition');
         // Route::get('/add-tour', 'add_tour');
         // // Route::get('/login/change_password', 'change_password_view');
@@ -456,7 +459,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 });
 // MEDICAL PROVIDER
 #Dashboard
-Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
+// Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
 #Treatment Details
 Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
 // Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');

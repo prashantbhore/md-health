@@ -188,9 +188,9 @@
 
                                     <div class="user-package-details">
                                         <div class="user-package-body">
-                                            <div class="user-details-body">
+                                            <div class="user-details-body mb-4">
                                                 <div class="d-flex justify-content-between">
-                                                    <p>Package Other Details </p>
+                                                    <p class="fsb-2">Package Other Details </p>
                                                     <span>
                                                         <span class="fsb-1">Your Case No </span>
                                                         <span class="fsb-1 text-green">#MD829</span>
@@ -366,29 +366,236 @@
                                                     </li>
                                                 </ul>
 
-                                                <div class="section-btns pt-2 d-flex justify-content-start gap-3">
-                                                    <button
-                                                        class="green-plate bg-dark text-white fw-700 menu-detail-btn">My
+                                                <div class="acdm-btns section-btns pt-3">
+                                                    <button target="1"
+                                                        class="showSingle green-plate bg-black text-white boder border-1 border-dark fw-700">My
                                                         Details</button>
-                                                    <button
-                                                        class="green-plate text-dark border border-1 border-dark fw-700">My
+                                                    <button target="2"
+                                                        class="showSingle green-plate bg-white text-dark fw-700 border border-1 border-dark">My
                                                         Documents</button>
                                                 </div>
 
-                                                <div class="view-menu-div mt-4">
+
+                                                <div id="ShowDiv1" class="view-menu-div targetDiv mt-5">
                                                     <div class="view-menu mb-4">
                                                         <h6 class="fsb-1">Your Case Manager</h6>
                                                         <p class="text-orange">Abdul G.</p>
                                                         <p>Boiled Vegetables</p>
                                                         <p>Salad</p>
                                                     </div>
-                                                    <div class="view-menu mb-4">
-                                                        <h6 class="green-colored-text">Day 1 - Menu</h6>
-                                                        <p>Chicken Soup</p>
-                                                        <p>Boiled Vegetables</p>
-                                                        <p>Salad</p>
+
+                                                    <div class="patient-details-div">
+                                                        <div class="patient-details mb-5">
+                                                            <h6 class="section-heading">Patient Details</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">First Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="First Name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Last Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Last Name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">E-Mail</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="E-Mail">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Country</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Country">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">City</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="City">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="patient-details">
+                                                            <h6 class="section-heading">Treatment Details</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Hospital Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Hospital Name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Treatment</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Treatment">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Treatment Period</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Treatment Period">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Contact Number</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Contact Number">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Country</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Country">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">City</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="City">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Address</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="Address">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                <div id="ShowDiv2" class="view-menu-div targetDiv mt-5">
+                                                    <div class="view-menu mb-4">
+                                                        <h6 class="fsb-1 mb-4">Upload Documents & Video</h6>
+                                                        <label for="cloud-upload-file" class="cloud-upload-file">
+                                                            <i class="fa fa-cloud-upload text-green"></i>
+                                                            <input type="file" id="cloud-upload-file" hidden>
+                                                            <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4, HEIC,
+                                                                H.264</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="gallery">
+                                                        <a href="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
+                                                            class=" video-card glightbox" id="">
+                                                            <video class="video-div " controls>
+                                                                <source
+                                                                    src="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
+                                                                    type="video/mp4">
+                                                            </video>
+                                                            <i class="fa fa-play"></i>
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg1.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg1.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg2.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg2.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg3.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg3.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg4.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg4.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg3.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg3.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg4.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg4.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg1.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg1.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                        <a href="{{ 'front/assets/img/galleryImg2.png' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ 'front/assets/img/galleryImg2.png' }}"
+                                                                alt="image" />
+                                                            <span class="clear-btn">X</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="user-details-footer">
+                                                <h6 class="section-heading">You paid</h6>
+                                                <div class="user-payment-date mb-3">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="payment-left-div">
+                                                            <div class="user-percentage fsb-1 fw-600">20%<span>(7.263,82
+                                                                    ₺)</span></div>
+                                                            <div class="fsb-2 text-green paymt-green-text">Payment
+                                                                Completed.</div>
+                                                        </div>
+                                                        <div class="payment-right-div">
+                                                            <div class="fsb-2 text-green paymt-green-text">Payment Date
+                                                            </div>
+                                                            <div class="fsb-1"> 15:33:50 | 12/02/2023</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="payment-paid-div">
+                                                    <div class="paid-percentage fsb-1 fw-600 d-flex flex-column">
+                                                        <span>
+                                                            80% <span>(9.263,82 ₺)</span>
+                                                        </span>
+                                                        <span class="fsb-2 text-orange paymt-green-text">Pending</span>
+                                                    </div>
+                                                    <a href="javascript:void(0);" class="payment-pay-btn fsb-1 text-dark">
+                                                        Pay Now
+                                                    </a>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

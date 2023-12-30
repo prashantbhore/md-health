@@ -6,12 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonUserLoginTable;
 use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderRegistrater;
+use App\Services\ApiService;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
 use Hash;
 
 class CommonLoginController extends Controller {
+    public function __construct( ApiService $apiService ) {
+        $this->apiService = $apiService;
+    }
+
     public function user_login( Request $request ) {
         $request->validate( [
             'email' => 'required|email',
@@ -154,7 +159,7 @@ public function email_or_mobile_exist(Request $request){
             'email' => $request->get('email'),
             'password' => $request->get('password')
         );
-
+        $token=null;
         // dd(Session::get('login_token'));
 
         // $otpverify = implode('', $request->input('otp'));
@@ -171,15 +176,15 @@ public function email_or_mobile_exist(Request $request){
             $user_type = Auth::guard('commonuser')->user()->user_type;
 
             if ($user_type == 'medicalprovider') {
-                $apiUrl = url('/api/md-medical-provider-login');
+                // $apiUrl = url('/api/md-medical-provider-login');
 
-                $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
-                $response = app()->handle($newRequest);
+                // $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+                // $response = app()->handle($newRequest);
 
-                $respo = $response->getContent();
-                $responseData = json_decode($respo, true);
-                // dd($responseData);
-                Session::put('login_token', $responseData['success_token']['token']);
+                // $respo = $response->getContent();
+                // $responseData = json_decode($respo, true);
+                // // dd($responseData);
+                // Session::put('login_token', $responseData['success_token']['token']);
                 if (
                     Auth::guard('md_health_medical_providers_registers')->attempt([
                         'email' => $request->email,
@@ -192,14 +197,12 @@ public function email_or_mobile_exist(Request $request){
                         'email' => $request->get('email'),
                         'password' => $request->get('password')
                     );
+
                     $apiUrl = url('/api/md-medical-provider-login');
+                    $method = 'POST';
+                    $body = $user_datacust;
 
-                    $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
-                    $response = app()->handle($newRequest);
-
-                    $respo = $response->getContent();
-                    $responseData = json_decode($respo, true);
-                    // dd($responseData);
+                    $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
                     Session::put('login_token', $responseData['success_token']['token']);
                     $providers = Auth::guard('md_health_medical_providers_registers')->user();
                     if ($login_type == 'login') {
@@ -262,15 +265,15 @@ public function email_or_mobile_exist(Request $request){
 
 
             elseif ($user_type == 'customer') {
-                $apiUrl = url('/api/md-customer-login');
+                // $apiUrl = url('/api/md-customer-login');
 
-                $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
-                $response = app()->handle($newRequest);
+                // $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+                // $response = app()->handle($newRequest);
 
-                $respo = $response->getContent();
-                $responseData = json_decode($respo, true);
-                // dd($responseData);
-                Session::put('login_token', $responseData['success_token']['token']);
+                // $respo = $response->getContent();
+                // $responseData = json_decode($respo, true);
+                // // dd($responseData);
+                // Session::put('login_token', $responseData['success_token']['token']);
 
                 if (
                     Auth::guard('md_customer_registration')->attempt([
@@ -284,14 +287,12 @@ public function email_or_mobile_exist(Request $request){
                         'email' => $request->get('email'),
                         'password' => $request->get('password')
                     );
+
                     $apiUrl = url('/api/md-customer-login');
+                    $method = 'POST';
+                    $body = $user_datacust;
 
-                    $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
-                    $response = app()->handle($newRequest);
-
-                    $respo = $response->getContent();
-                    $responseData = json_decode($respo, true);
-                    // dd($responseData);
+                    $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
                     Session::put('login_token', $responseData['success_token']['token']);
 
 
@@ -320,7 +321,7 @@ public function email_or_mobile_exist(Request $request){
                         } else {
 
                             return response()->json( [
-                                'status' => 200,
+                                'status' => 404,
                                 'message' => 'Credencials not match',
                                 'url' => '/sign-in-web',
                             ] );
@@ -347,7 +348,7 @@ public function email_or_mobile_exist(Request $request){
                             ] );
                         } else {
                             return response()->json( [
-                                'status' => 200,
+                                'status' => 404,
                                 'message' => 'Credencials not match',
                                 'url' => '/sign-in-web',
                             ] );
