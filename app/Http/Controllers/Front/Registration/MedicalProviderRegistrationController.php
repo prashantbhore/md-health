@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\MedicalProviderLicense;
 use App\Models\MedicalProviderLogo;
 use App\Models\MedicalProviderRegistrater;
+use App\Services\ApiService;
 use App\Traits\MediaTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
@@ -19,6 +20,10 @@ use Session;
 class MedicalProviderRegistrationController extends Controller
 {
     use MediaTrait;
+    public function __construct(ApiService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
     public function index()
     {
         $countries = Country::get();
@@ -116,14 +121,13 @@ class MedicalProviderRegistrationController extends Controller
                 //     'email' => $request->get('email'),
                 //     'password' => $request->get('password')
                 // );
+                $token=null;
                 $apiUrl = url('/api/md-register-medical-provider');
 
-                $newRequest = Request::create($apiUrl, 'POST', $request->all());
-                $response = app()->handle($newRequest);
-
-                $respo = $response->getContent();
-                $responseData = json_decode($respo, true);
-                // dd($responseData['data']['access_token']);
+                $method = 'POST';
+                $body = $request->all();
+        
+                $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
                 Session::put('login_token', $responseData['data']['access_token']);
 
                 // $provider = Auth::guard('md_health_medical_providers_registers')->user();

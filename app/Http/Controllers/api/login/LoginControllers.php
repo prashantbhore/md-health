@@ -30,10 +30,10 @@ class LoginControllers extends BaseController {
             return $this->sendError( 'Validation Error.', $validator->errors() );
         }
         // dd($request);
-        if ($request->platform_type == "web") {
+        if ($request->platform_type == "web") 
+        {
     // dd($request->platform_type);
-
-          
+  
             if ( Auth::guard( 'md_customer_registration' )->attempt( [
                 'email' => $request->email,
                 'password' => $request->password,
