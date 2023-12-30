@@ -194,7 +194,7 @@
                                                             Details</a>
                                                         <a href="#"
                                                             class="order-completed-btn w-100 bg-black fsb-2 text-white"
-                                                            data-bs-toggle="modal"
+                                                            data-bs-toggle="modal" id="change_information_model"
                                                             data-bs-target="#UserChangeInformation">Change
                                                             Patient Information</a>
                                                         <a href="#"
@@ -470,6 +470,8 @@
 
             $(".upPackageLi").addClass("activeClass");
             $(".upPackage").addClass("md-active");
+
+
             $(".package-details").click(function() {
                 var id = this.id.split('_')[1];
                 var formData = new FormData();
@@ -490,6 +492,31 @@
                     },
                     error: function(xhr, status, error) {
                         console.error('Error:', error);
+                    }
+                });
+            });
+
+            $('#change_information_model').on('click', function(e) {
+
+                var formData = new FormData();
+                formData.append("package_id", id);
+                formData.append("patient_id");
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + '/api/md-customer-my-details', // Your endpoint
+                    dataType: 'json',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: formData,
+                    success: function(response) {
+                        console.log("Success: " + response);
+                        $('#UserChangeInformation').modal('show');
+                    },
+                    error: function(xhr, status, error) {
+
+                        console.log(xhr.responseText);
                     }
                 });
             });

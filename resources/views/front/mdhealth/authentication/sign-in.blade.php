@@ -19,10 +19,10 @@
                     </div>
                     <h2 class="mb-0">Sign In to MD<span>health</span></h2>
                     <p>The device is not yours? Use private or incognito mode to log in.</p>
-                    <span id="error" class="text-danger"></span>
+
                     <div class="w-100 df-center">
-                        <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
-                        <div class="alert alert-success" id="successAuth" style="display: none;"></div>
+                        {{-- <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
+                        <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
                         {{-- <span class="alert alert-danger" id="error" ></span> --}}
 
                         <form id="loginForm">
@@ -36,10 +36,11 @@
                                     placeholder="E-mail">
                                 {{-- --}}
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3 hide-eye-div">
                                 <label for="Password" class="form-label">Password</label>
-                                <input type="text" class="form-control" name="password" id="password"
+                                <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
+                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -49,13 +50,14 @@
                             </div>
                             <input type="hidden" id="number" class="form-control" placeholder="+91 ********">
                             <div id="recaptcha-container"></div>
+                            <span id="error" class="text-danger"></span>
                             <div>
                                 <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup"
                                     style="height: 47px;">Sign
                                     In</button>
                             </div>
                             <div class="text-center">
-                                <a href="#" class="btn-text">Back to MDhealth.co</a>
+                                <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
                             </div>
                             {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
                         </form>
@@ -80,9 +82,9 @@
                             <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
                         </form> --}}
                     <form>
+                        {{-- <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                         <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
-                        <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
-                        <div class="alert alert-success" id="successAuth" style="display: none;"></div>
+                        <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
                         <div class="w-100 df-center mb-3 sms-input gap-3">
                             <input type="hidden" name="email" value="{{ session('email') }}">
                             <input type="hidden" name="password" value="{{ session('password') }}">
@@ -108,7 +110,7 @@
 
 
 
-                    <h6 class="mb-0 d-flex align-items-center gap-1">
+                    {{-- <h6 class="mb-0 d-flex align-items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
                             <g clip-path="url(#clip0_0_28401)">
@@ -122,11 +124,11 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span class="text-danger">32 sec</span>
+                         <span class="text-danger">32 sec</span>
                     </h6>
                     <div>
-                        <a href="#" class="text-secondary">Resend Code In</a>
-                    </div>
+                         <a href="#" class="text-secondary">Resend Code In</a>
+                    </div> --}}
 
                 </div>
             </div>
@@ -200,7 +202,7 @@
                 }
             });
             $.ajax({
-                url: base_url+'/email-to-mobile',
+                url: base_url + '/email-to-mobile',
                 method: 'POST',
                 data: {
                     email: email
@@ -237,7 +239,7 @@
                     }
                 });
                 $.ajax({
-                    url: base_url+'/email-password-exist',
+                    url: base_url + '/email-password-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -245,9 +247,9 @@
                     },
                     success: function(response) {
                         if (response.user_exist !== undefined) {
-                            alert(JSON.stringify(response.user_exist));
-                            $('#error').text('dfsvfggbvthytnjynmyhnbgfbvf');
+                            // alert(JSON.stringify(response.user_exist));
                             sendOTP();
+                            $('#error').text('Message Sent Successfully');
                         } else {
                             $('#error').text('Credentials do not match');
                         }

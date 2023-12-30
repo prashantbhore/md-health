@@ -243,7 +243,7 @@
                     <div class="packageFilter rounded mb-3">
                         <p class="fs-5 camptonBold lh-base">Supplier Rating</p>
                         <div>
-                            <form action="" class="filter">
+                            <form action="" class="filter greenCheck">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex gap-1 align-items-center">
                                         <input type="checkbox" id="" name="" value="">
@@ -271,7 +271,7 @@
                     <div class="packageFilter rounded mb-3">
                         <p class="fs-5 camptonBold lh-base">Services</p>
                         <div>
-                            <form action="" class="filter">
+                            <form action="" class="filter greenCheck">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex gap-1 align-items-center">
                                         <input type="checkbox" id="" name="" value="">
@@ -313,7 +313,7 @@
                     <div class="packageFilter rounded mb-3">
                         <p class="fs-5 camptonBold lh-base">Price</p>
                         <div>
-                            <form action="" class="filter">
+                            <form action="" class="filter greenCheck">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex gap-1 align-items-center">
                                         <input type="checkbox" id="" name="" value="">

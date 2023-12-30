@@ -139,6 +139,11 @@ Route::get('purchase-food-pack', function () {
     return view('front.mdFoods.purchase');
 });
 
+// mdBooking Routes
+Route::get('mdBooking', function () {
+    return view('front.mdBooking.index');
+});
+
 // Route::group(['prefix' => 'admin'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
@@ -340,7 +345,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // FRONT ROUTES
 #User Account
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
-Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
+// Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
 Route::view('food-login', 'front/mdhealth/authentication/food-login');
 
@@ -351,6 +356,7 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // Route::post('md-register-medical-provider', [RegistrationController::class, 'md_register_medical_provider']);
 Route::controller(MedicalProviderRegistrationController::class)->group(function () {
     Route::get('user-account', 'index');
+    Route::get('medical-provider-login', 'indexmedpro');
     Route::post('/md-register-medical-provider', 'md_register_medical_provider');
     Route::get('/logout', 'logout');
 });
@@ -474,6 +480,8 @@ Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
 // USER PANEL
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
+Route::view('user-package', 'front/mdhealth/user-panel/user-package');
+Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 // Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);

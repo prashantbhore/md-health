@@ -154,15 +154,7 @@ public function email_or_mobile_exist(Request $request){
             'email' => $request->get('email'),
             'password' => $request->get('password')
         );
-        $apiUrl = url('/api/md-customer-login');
 
-        $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
-        $response = app()->handle($newRequest);
-
-        $respo = $response->getContent();
-        $responseData = json_decode($respo, true);
-        // dd($responseData);
-        Session::put('login_token', $responseData['success_token']['token']);
         // dd(Session::get('login_token'));
 
         // $otpverify = implode('', $request->input('otp'));
@@ -179,6 +171,15 @@ public function email_or_mobile_exist(Request $request){
             $user_type = Auth::guard('commonuser')->user()->user_type;
 
             if ($user_type == 'medicalprovider') {
+                $apiUrl = url('/api/md-medical-provider-login');
+
+                $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+                $response = app()->handle($newRequest);
+
+                $respo = $response->getContent();
+                $responseData = json_decode($respo, true);
+                // dd($responseData);
+                Session::put('login_token', $responseData['success_token']['token']);
                 if (
                     Auth::guard('md_health_medical_providers_registers')->attempt([
                         'email' => $request->email,
@@ -261,6 +262,15 @@ public function email_or_mobile_exist(Request $request){
 
 
             elseif ($user_type == 'customer') {
+                $apiUrl = url('/api/md-customer-login');
+
+                $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+                $response = app()->handle($newRequest);
+
+                $respo = $response->getContent();
+                $responseData = json_decode($respo, true);
+                // dd($responseData);
+                Session::put('login_token', $responseData['success_token']['token']);
 
                 if (
                     Auth::guard('md_customer_registration')->attempt([
@@ -305,7 +315,7 @@ public function email_or_mobile_exist(Request $request){
                                 'status' => 200,
                                 'message' => 'Login successfully.',
                                 // 'url' => '/user-profile',
-                                'url' => '/'
+                                'url' => '/my-profile'
                             ] );
                         } else {
 

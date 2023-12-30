@@ -7,85 +7,119 @@ use Illuminate\Support\Facades\Route;
 
 class ApiService {
 
-    public function getCities() {
+    public function getData( $token = null, $url, $body = null, $method ) {
+        $env = explode( ':', url( '/' ) )[ 0 ];
+        // if ( $method == 'POST' ) {
 
-        $request = Request :: create( url( '/api/md-city-list' ), 'POST', $body );
-        if ( $token ) {
-            $request->headers->set( 'Authorization', 'Bearer ' . $token );
-        }
-        $response = app()->handle( $request );
-        return $json_decode( $response->getContent(), true );
-    }
+        //     $response = Http::withHeaders( [
+        //       'Authorization' => 'Bearer ' . $token
+        // ] )->post( $url, $body ?? null );
 
-    public function getHotels() {
-        $request = Request :: create( url( '/api/md-city-list' ), 'GET', $body );
-        if ( $token ) {
-            $request->headers->set( 'Authorization', 'Bearer ' . $token );
-        }
-        $response = app()->handle( $request );
-        return $json_decode( $response->getContent(), true );
-    }
+        //     // dd( $response );
+        //     return $responseData;
+        // } else {
 
-    public function getMyActivePackages( $token ) {
-        $request = Request :: create( url( '/api/md-customer-purchase-package-active-list' ), 'GET' );
+        //     $response = Http::withHeaders( [
+        //         'Authorization' => 'Bearer ' . $token,
+        // ] )->get( $url );
+        //     $responseData = $response->json();
+        //     // dd( $response );
+        //     return $responseData;
+        // }
 
-        if ( $token ) {
-            $request->headers->set( 'Authorization', 'Bearer ' . $token );
-        }
+        if ( $env == 'https' ) {
+            $headers = [];
 
-        $response = app()->handle( $request );
-        return  json_decode( $response->getContent(), true );
-    }
+            if ( $token ) {
+                $headers[ 'Authorization' ] = 'Bearer ' . $token;
+            }
 
-    public function getMyCompletedPackages( $token ) {
-        $request = Request :: create( url( '/api/md-customer-purchase-package-completed-list' ), 'GET' );
+            $response = Http::withHeaders( $headers )-> {
+                $method}
+                ( $url, $body ?? null );
 
-        if ( $token ) {
-            $request->headers->set( 'Authorization', 'Bearer ' . $token );
-        }
+                return $response->json();
+            } else {
+                $request = Request :: create( $url, $method, $body??[] );
+                if ( $token ) {
+                    $request->headers->set( 'Authorization', 'Bearer ' . $token );
 
-        $response = app()->handle( $request );
-        return  json_decode( $response->getContent(), true );
-    }
-
-    public function getMyCancelledPackages( $token ) {
-        $request = Request :: create( url( '/api/md-customer-purchase-package-cancelled-list' ), 'GET' );
-
-        if ( $token ) {
-            $request->headers->set( 'Authorization', 'Bearer ' . $token );
+                }
+                $response = app()->handle( $request );
+                // dd( $response );
+                return json_decode( $response->getContent(), true );
+            }
         }
 
-        $response = app()->handle( $request );
-        return  json_decode( $response->getContent(), true );
-    }
-
-    public function cancelPackage( $token, $id ) {
-
-        $body = [ 'id' => $id ];
-
-        $request = Request :: create( url( '/api/md-customer-change-package-list-active-cancelled' ), 'POST', $body );
-
-        if ( $token ) {
-            $request->headers->set( 'Authorization', 'Bearer ' . $token );
+        public function getHotels() {
+            $request = Request :: create( url( '/api/md-city-list' ), 'GET', $body );
+            if ( $token ) {
+                $request->headers->set( 'Authorization', 'Bearer ' . $token );
+            }
+            $response = app()->handle( $request );
+            return $json_decode( $response->getContent(), true );
         }
 
-        $response = app()->handle( $request );
-        return  json_decode( $response->getContent(), true );
-    }
+        public function getMyActivePackages( $token ) {
+            $request = Request :: create( url( '/api/md-customer-purchase-package-active-list' ), 'GET' );
 
-    public function activePackageDetails( $token, $id ) {
+            if ( $token ) {
+                $request->headers->set( 'Authorization', 'Bearer ' . $token );
+            }
 
-        $body = [ 'package_id' => $id ];
-
-        $request = Request :: create( url( '/api/md-customer-package-details' ), 'POST', $body );
-
-        if ( $token ) {
-            $request->headers->set( 'Authorization', 'Bearer ' . $token );
+            $response = app()->handle( $request );
+            return  json_decode( $response->getContent(), true );
         }
 
-        $response = app()->handle( $request );
-        return  json_decode( $response->getContent(), true );
-    }
+        public function getMyCompletedPackages( $token ) {
+            $request = Request :: create( url( '/api/md-customer-purchase-package-completed-list' ), 'GET' );
 
-}
+            if ( $token ) {
+                $request->headers->set( 'Authorization', 'Bearer ' . $token );
+            }
+
+            $response = app()->handle( $request );
+            return  json_decode( $response->getContent(), true );
+        }
+
+        public function getMyCancelledPackages( $token ) {
+            $request = Request :: create( url( '/api/md-customer-purchase-package-cancelled-list' ), 'GET' );
+
+            if ( $token ) {
+                $request->headers->set( 'Authorization', 'Bearer ' . $token );
+            }
+
+            $response = app()->handle( $request );
+            return  json_decode( $response->getContent(), true );
+        }
+
+        public function cancelPackage( $token, $id ) {
+
+            $body = [ 'id' => $id ];
+
+            $request = Request :: create( url( '/api/md-customer-change-package-list-active-cancelled' ), 'POST', $body );
+
+            if ( $token ) {
+                $request->headers->set( 'Authorization', 'Bearer ' . $token );
+            }
+
+            $response = app()->handle( $request );
+            return  json_decode( $response->getContent(), true );
+        }
+
+        public function activePackageDetails( $token, $id ) {
+
+            $body = [ 'package_id' => $id ];
+
+            $request = Request :: create( url( '/api/md-customer-package-details' ), 'POST', $body );
+
+            if ( $token ) {
+                $request->headers->set( 'Authorization', 'Bearer ' . $token );
+            }
+
+            $response = app()->handle( $request );
+            return  json_decode( $response->getContent(), true );
+        }
+
+    }
 
