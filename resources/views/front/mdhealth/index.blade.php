@@ -278,10 +278,10 @@
             </div>
             <div class="part2">
                 <div class="mb-4">
-                    <p class="fs3 camptonBold mb-0">Download</p>
-                    <p class="fs3"><span class="camptonBold text-green">MD</span><span
-                            class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
-                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
+                    <p class="fs3 camptonBold mb-0 lh-sm" style="font-size: 40px;">Download</p>
+                    <p class="fs3 lh-sm" style="font-size: 40px;"><span class="camptonBold text-green">MD</span><span
+                            class="text-green campton">health</span> <span class="camptonBold">Mobile</span></p>
+                    <p class="clr-grey camptonBook fs-5 fw-bolder lh-sm">Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
                 </div>
                 <div class="d-flex align-items-center gap-4">
