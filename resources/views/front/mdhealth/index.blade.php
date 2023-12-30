@@ -78,11 +78,11 @@
             </div>
         </div>
     </div>
-    <div class="py-100px pb-0 md-coin df-center flex-column gap-5 bg-f6">
+    <div class="py-100px pb-0 md-coin df-center flex-column gap-4 bg-f6 section-3 mb-5">
         <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
-        <h1><span class="text-green text-decoration-underline">Earn</span> as you spend <span class="text-green">!</span>
+        <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span class="text-green">!</span>
         </h1>
-        <p>Earn <span>cashback</span> per transaction or <span>invite your friends</span> and spend <span>MD</span>coin for
+        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and <br/> spend <span class="camptonBold">MD</span>coin for
             your health needs. </p>
     </div>
     <div class="bg-f6">
