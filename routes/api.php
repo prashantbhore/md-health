@@ -65,6 +65,11 @@ Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_prov
 Route::middleware('auth:sanctum')->group(function ()
 {
 //customers
+Route::post('md-customer-logout',  [LoginControllers::class, 'customer_logout']);
+
+Route::post('md-medical-provider-logout',  [LoginControllers::class, 'medical_provider_logout']);
+
+
 //update-customer-list
 Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
 

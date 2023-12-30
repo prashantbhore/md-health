@@ -13,10 +13,10 @@ use Session;
 use Hash;
 
 class CommonLoginController extends Controller {
-    public function __construct(ApiService $apiService)
-    {
+    public function __construct( ApiService $apiService ) {
         $this->apiService = $apiService;
     }
+
     public function user_login( Request $request ) {
         $request->validate( [
             'email' => 'required|email',
@@ -180,7 +180,7 @@ public function email_or_mobile_exist(Request $request){
 
                 // $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
                 // $response = app()->handle($newRequest);
-        
+
                 // $respo = $response->getContent();
                 // $responseData = json_decode($respo, true);
                 // // dd($responseData);
@@ -201,7 +201,7 @@ public function email_or_mobile_exist(Request $request){
                     $apiUrl = url('/api/md-medical-provider-login');
                     $method = 'POST';
                     $body = $user_datacust;
-            
+
                     $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
                     Session::put('login_token', $responseData['success_token']['token']);
                     $providers = Auth::guard('md_health_medical_providers_registers')->user();
@@ -269,7 +269,7 @@ public function email_or_mobile_exist(Request $request){
 
                 // $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
                 // $response = app()->handle($newRequest);
-        
+
                 // $respo = $response->getContent();
                 // $responseData = json_decode($respo, true);
                 // // dd($responseData);
@@ -291,7 +291,7 @@ public function email_or_mobile_exist(Request $request){
                     $apiUrl = url('/api/md-customer-login');
                     $method = 'POST';
                     $body = $user_datacust;
-            
+
                     $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
                     Session::put('login_token', $responseData['success_token']['token']);
 
@@ -316,7 +316,7 @@ public function email_or_mobile_exist(Request $request){
                                 'status' => 200,
                                 'message' => 'Login successfully.',
                                 // 'url' => '/user-profile',
-                                'url' => '/user-profile'
+                                'url' => '/my-profile'
                             ] );
                         } else {
 

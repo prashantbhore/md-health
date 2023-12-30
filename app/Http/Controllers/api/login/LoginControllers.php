@@ -138,9 +138,16 @@ class LoginControllers extends BaseController {
         }
     }
 
-    public function customer_logout() {
+    public function customer_logout()
+    {
         Auth::user()->tokens()->delete();
-        return $this->sendResponse( $success = NULL, 'User logout successfully.' );
+        return $this->sendResponse($success = NULL, 'Customer logout successfully.');
+    }
+
+    public function medical_provider_logout()
+    {
+        Auth::user()->tokens()->delete();
+        return $this->sendResponse($success = NULL, 'Vendor logout successfully.');
     }
 
     public function medical_provider_login( Request $request ) {

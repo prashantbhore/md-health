@@ -92,7 +92,7 @@
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="treatmentForModal_{{ $packageDetails['id'] }}" tabindex="-1"
+                <div class="modal fade treatmentForModal" id="treatmentForModal_{{ $packageDetails['id'] }}" tabindex="-1"
                     aria-labelledby="treatmentForModal" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered position-relative">
                         <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
@@ -113,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="treatmentForModal2_{{ $packageDetails['id'] }}" tabindex="-1"
+                <div class="modal fade treatmentForModal2" id="treatmentForModal2_{{ $packageDetails['id'] }}" tabindex="-1"
                     aria-labelledby="treatmentForModal" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered position-relative">
                         <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->

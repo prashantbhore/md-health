@@ -64,12 +64,16 @@
 
 /* UTILITY CLASSES */
 
-#treatmentForModal .modal-content,
-#treatmentForModal2 .modal-content,
+.treatmentForModal .modal-content,
+.treatmentForModal2 .modal-content,
 #serviceForModal .modal-content,
 #serviceForModal2 .modal-content,
-#foodForModal1 .modal-content {
-    border-radius: 0.5rem;
+#foodForModal1 .modal-content,
+#foodForModal2 .modal-content,
+#foodForModal3 .modal-content,
+#addToCartModal .modal-content,
+.loginFirstModal .modal-content {
+    border-radius: 0.6rem;
     border: none;
     position: relative;
 }
@@ -88,22 +92,28 @@
     gap: 1rem;
 }
 
-#treatmentForModal .modal-dialog,
+.treatmentForModal .modal-dialog,
 #serviceForModal .modal-dialog,
 #foodForModal1 .modal-dialog {
     max-width: 600px;
 }
 
-#treatmentForModal2 .modal-dialog,
-#serviceForModal2 .modal-dialog {
+.treatmentForModal2 .modal-dialog,
+#serviceForModal2 .modal-dialog,
+#foodForModal3 .modal-dialog,
+.loginFirstModal .modal-dialog  {
     max-width: 700px;
 }
 
-#treatmentForModal .closeModal,
-#treatmentForModal2 .closeModal,
+.treatmentForModal .closeModal,
+.treatmentForModal2 .closeModal,
 #serviceForModal .closeModal,
 #serviceForModal2 .closeModal,
-#foodForModal1 .closeModal {
+#foodForModal1 .closeModal,
+#foodForModal2 .closeModal,
+#foodForModal3 .closeModal,
+#addToCartModal .closeModal,
+.loginFirstModal .closeModal {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -2345,4 +2355,13 @@ span.popup-msg.active {
 
 .mdFoods .section-2{
     margin-top: 15rem;
+}
+
+.download-section{
+    padding: 7rem;
+}
+
+.download-section .part2{
+    width: 50%;
+    padding: 2.5rem 0;
 }

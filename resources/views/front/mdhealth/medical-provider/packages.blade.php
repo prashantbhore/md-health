@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                                 <div class="trmt-card-footer footer-btns">
-                                                    <a href="{{url('medical-packages-view')}}" class="view-btn"><i class="fa fa-eye"></i>
+                                                    <a href="{{ url('edit-package/' . Crypt::encrypt($package_active_list['id'])) }}" class="view-btn"><i class="fa fa-eye"></i>
                                                         View </a>
                                                     <a href="" class="close-btn"><i class="fa fa-close"></i>
                                                         Deactivate </a>
@@ -128,7 +128,7 @@
                                             </div>
                                             <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                                 <div class="trmt-card-footer footer-btns">
-                                                    <a href="{{url('medical-packages-view')}}" class="view-btn"><i class="fa fa-eye"></i>
+                                                    <a href="{{ url('edit-package/' . Crypt::encrypt($package_deactive_list['id'])) }}" class="view-btn"><i class="fa fa-eye"></i>
                                                         View </a>
                                                     <a href="" class="close-btn"><i class="fa fa-close"></i>
                                                         Deactivate </a>
