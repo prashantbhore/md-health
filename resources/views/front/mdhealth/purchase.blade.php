@@ -134,7 +134,7 @@
                         <div class="col-5">
                             <div class="creditCardContainer">
                                 <div>
-                                    <img src="{{ 'front/assets/img/MDHealth_light.svg' }}" alt="">
+                                    <img src="{{ url('front/assets/img/MDHealth_light.svg') }}" alt="">
                                 </div>
                                 <div>
                                     <p class="cardNumber">1234 1234 1234 1234</p>
@@ -144,7 +144,8 @@
                                             <p class="validity">02/24</p>
                                         </div>
                                         <div>
-                                            <img class="visa" src="{{ 'front/assets/img/visa.svg' }}" alt="">
+                                            <img class="visa" src="{{ url('front/assets/img/visa.svg') }}"
+                                                alt="">
                                         </div>
                                     </div>
                                 </div>

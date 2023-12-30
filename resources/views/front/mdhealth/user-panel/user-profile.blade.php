@@ -1,7 +1,5 @@
 @php
-    // dd(Session::all());
-    $pratik_ka_token = Session::get('login_token');
-    Session::put('pratik_token', $pratik_ka_token);
+
 @endphp
 
 @extends('front.layout.layout2')
@@ -51,12 +49,19 @@
                                         <label for="Country" class="form-label">Country</label>
                                         <select name="country_id" id="country_id" class="form-select">
                                             {{-- <option value="" disabled>Choose</option> --}}
+
                                             @if (!empty($countries))
                                                 @foreach ($countries as $country)
-                                                    <option
-                                                        value="{{ $country->id }}"{{ $country->id == $customer_list->country_id ? 'selected' : '' }}>
-                                                        {{ $country->country_name }}
-                                                    </option>
+                                                    @if (!empty($customer_list))
+                                                        <option
+                                                            value="{{ $country->id }}"{{ $country->id == $customer_list->country_id ? 'selected' : '' }}>
+                                                            {{ $country->country_name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $country->id }}">
+                                                            {{ $country->country_name }}
+                                                        </option>
+                                                    @endif
                                                 @endforeach
                                             @else
                                                 <option value="" disabled>Choose</option>
@@ -69,10 +74,16 @@
                                             {{-- <option value="" disabled>Choose</option> --}}
                                             @if (!empty($cities))
                                                 @foreach ($cities as $city)
-                                                    <option
-                                                        value="{{ $city->id }}"{{ $city->id == $customer_list->city_id ? 'selected' : '' }}>
-                                                        {{ $city->city_name }}
-                                                    </option>
+                                                    @if (!empty($customer_list))
+                                                        <option
+                                                            value="{{ $city->id }}"{{ $city->id == $customer_list->city_id ? 'selected' : '' }}>
+                                                            {{ $city->city_name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $city->id }}">
+                                                            {{ $city->city_name }}
+                                                        </option>
+                                                    @endif
                                                 @endforeach
                                             @else
                                                 <option value="" disabled>Choose</option>

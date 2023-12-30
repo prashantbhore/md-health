@@ -1,3 +1,16 @@
+@section('php')
+    @php
+        // dd(Session::all());
+        if (Session::get('MDCustomer*%') != null) {
+            $name = !empty(session('user')) ? (session('user')->first_name ? session('user')->first_name : 'MDHealth') : 'MDHealth';
+        } elseif (Session::get('MDMedicalProvider*%') != null) {
+            $name = !empty(session('user')) ? (session('user')->company_name ? session('user')->company_name : 'MDHealth') : 'MDHealth';
+        } else {
+            $name = 'MDHealth';
+        }
+    @endphp
+@endsection
+
 <style>
     .dropdown-toggle::after {
         display: none;
@@ -45,9 +58,8 @@
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span
                             class="text-green me-1">
-                            {{ !empty(session('user')) ?(session('user')->company_name ? session('user')->company_name : 'MDHealth') : 'MDHealth' }}</span> <svg
-                            xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8"
-                            fill="none">
+                            {{ $name }}</span> <svg xmlns="http://www.w3.org/2000/svg" width="13"
+                            height="8" viewBox="0 0 13 8" fill="none">
                             {{-- {{(session('user')->company_name)?session('user')->company_name:MDHealth}} --}}
                             <path d="M1 1.00042L6.5 6.35449L12 1.00042" stroke="#4CDB06" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" />

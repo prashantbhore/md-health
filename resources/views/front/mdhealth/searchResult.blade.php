@@ -12,6 +12,12 @@
         }
     }
 
+    if (Session::get('login_token') != null) {
+        $user = true;
+    } else {
+        $user = false;
+    }
+
 @endphp
 
  <form method="POST" action="{{ url('health-search-result') }}">
@@ -137,7 +143,7 @@
                                                 <p class="camptonBook">*20% of the price is paid before booking.</p>
                                             </div>
                                             <div class="d-flex gap-2 mb-2">
-                                                <button class="btn purchaseBtn" data-bs-toggle="modal" data-bs-target="#treatmentForModal_{{$package_list['id']}}">Purchase Package</button>
+                                                <button class="btn purchaseBtn"  data-bs-toggle="modal" data-bs-target="#treatmentForModal_{{$package_list['id']}}">Purchase Package</button>
                                                 <button class="favouriteBtn">
                                                     <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
                                                 </button>
@@ -461,10 +467,32 @@
 
 
 </div>
+
+<div class="modal fade loginFirstModal" id="loginFirstModal" tabindex="-1" aria-labelledby="serviceForModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered position-relative">
+        <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+            <!-- </button> -->
+        <div class="modal-content bg-f6">
+            <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
+            <img src="{{('front/assets/img/Oops.svg')}}" alt="">
+            <div class="d-flex align-items-center flex-column">
+                <p class="camptonBook fw-bold text-center mt-4">Excited to explore more? It's time to join <span class="camptonBold">MD</span> family.</p>
+                <a href="{{url('homeService-purchase')}}" type="button" class="btn btn-sm btn-md df-center mb-4">Get Started</a>
+                <p class="camptonBook fw-bold text-center mt-4">Already<span class="camptonBold">MD</span> member?</p>
+                <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#serviceForModal2" type="button" class="btn btn-sm whiteBtn df-center mb-5">Sign In</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('script')
 
 <script type="text/javascript">
+
+    var baseUrl = $('#base_url').val();
+    var token = "{{ Session::get('login_token') }}";
+
     $(document).ready(function(){
         $(".view_btn").click(function(){
         var id = this.id.split("_")[2];
@@ -480,11 +508,13 @@
         $('#other_form').submit(function(e) {
             e.preventDefault();
             var formData = $(this).serialize();
-
             $.ajax({
-                url: '/api/md-change-patient-information',
+                url: baseUrl + '/api/md-change-patient-information',
                 type: 'POST',
                 data: formData,
+                headers: {
+                        'Authorization': 'Bearer ' + token
+                },
                 success: function(response) {
                     console.log('Success:', response);
                     window.location.href = $('#hidden_url').val();
@@ -493,6 +523,17 @@
                     console.error('Error:', error);
                 }
             });
+        });
+
+        $('.purchaseBtn').click(function(e){
+            e.preventDefault();
+            var user = "{{$user}}";
+
+            if(user == 'true'){
+
+            }else{
+                $('#loginFirstModal').modal('show');
+            }
         });
     });
 </script>

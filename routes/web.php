@@ -443,7 +443,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
     Route::controller(UserRegistrationController::class)->group(function () {
         // Route::get('/medical-provider-dashboard', 'dashboard_view');
-        Route::get('/user-profile', 'edit_customer');
+        Route::get('/my-profile', 'edit_customer');
         // Route::get('/login/change_password', 'change_password_view');
         Route::post('/update-customer-profile', 'update_customer_profile');
         Route::post('/md-check-password-exist', 'check_password_exist');
@@ -480,6 +480,7 @@ Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message'
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
 Route::view('reports', 'front/mdhealth/medical-provider/reports');
+Route::view('reports', 'front/mdhealth/medical-provider/reports');
 
 #Sales
 
@@ -499,10 +500,16 @@ Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 Route::view('user-credit-card-pay', 'front/mdhealth/user-panel/user-credit-card-pay');
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
-Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
+// Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 // Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);
 Route::get('view-my-active-packages/{id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
 
+Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
+Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');
+Route::view('user-message', 'front/mdhealth/user-panel/user-message');
+Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
+Route::view('user-reports', 'front/mdhealth/user-panel/user-reports');
+Route::view('user-all-reports', 'front/mdhealth/user-panel/user-all-reports');
 
 // MD BOOKING PAGE KD
 Route::view('md-booking-home-page', 'front/mdhealth/md-booking/md-booking-home-page');
