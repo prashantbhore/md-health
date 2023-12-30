@@ -50,7 +50,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                <form action="{{ url('/md-add-packages') }}" method="post">
+                                <form action="{{ url('/md-add-packages') }}" method="post" id="package_add">
                                     @csrf
                                     <input type="hidden" name="platform_type" value="web">
                                     <input type="hidden" name="id"
@@ -187,16 +187,16 @@
 
                                             </select>
                                         </div>
-
+                                        <input type="hidden" id="hotel_details_input" name="hotel_details_input"
+                                            readonly>
                                         <div class="date-picker-div mb-5">
-                                            <label class="form-label">Reservation Date</label>
+                                            <label class="form-label">Reservation Days</label>
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
                                                     <input type="text" name="hotel_in_time" id="hotel_in_time"
                                                         class="date-icon w-100"
-                                                        value="{{ !empty($packages_active_list['hotel_in_time']) ? $packages_active_list['hotel_in_time'] : '' }}"
-                                                        value="10/24/1984" />
+                                                        value="{{ !empty($packages_active_list['hotel_in_time']) ? $packages_active_list['hotel_in_time'] : '' }}" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -205,7 +205,7 @@
                                                             fill="black"></path>
                                                     </svg>
                                                 </div>
-                                                <div class="input-container w-50" id="date-picker-container">
+                                                {{-- <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
                                                     <input type="text" name="hotel_out_time" id="hotel_out_time"
                                                         class="date-icon w-100"
@@ -218,14 +218,42 @@
                                                             d="M10.6347 1.89601e-06C10.9916 -0.00083649 11.2739 0.27646 11.2747 0.646188L11.2755 1.27641C13.5914 1.45791 15.1212 3.03597 15.1237 5.45601L15.1328 12.5397C15.1361 15.1782 13.4785 16.8016 10.8215 16.8058L4.33125 16.8142C1.69084 16.8176 0.012462 15.1555 0.0091418 12.5094L5.57173e-06 5.50895C-0.00330907 3.07295 1.47253 1.49908 3.7884 1.28649L3.78757 0.656271C3.78674 0.286543 4.06066 0.00840671 4.42588 0.00840671C4.79111 0.00756642 5.06503 0.284862 5.06586 0.65459L5.06669 1.24279L9.99723 1.23607L9.9964 0.647868C9.99557 0.27814 10.2695 0.000844092 10.6347 1.89601e-06ZM10.9734 11.9313H10.9651C10.5833 11.9405 10.277 12.2607 10.2853 12.6472C10.2861 13.0338 10.594 13.3522 10.9759 13.3606C11.3652 13.3598 11.6806 13.0396 11.6798 12.6447C11.6798 12.2498 11.3635 11.9313 10.9734 11.9313ZM4.1337 11.9321C3.75187 11.9489 3.45305 12.2691 3.45388 12.6556C3.47131 13.0422 3.78674 13.3447 4.16856 13.327C4.54292 13.3102 4.84091 12.9901 4.82348 12.6035C4.81518 12.2254 4.50723 11.9313 4.1337 11.9321ZM7.55354 11.9279C7.17171 11.9456 6.87372 12.2649 6.87372 12.6514C6.89115 13.038 7.20658 13.3396 7.5884 13.3228C7.96193 13.3052 8.26075 12.9859 8.24332 12.5985C8.23502 12.2212 7.92707 11.9271 7.55354 11.9279ZM4.12955 8.90709C3.74772 8.92389 3.44973 9.24404 3.45056 9.63058C3.46716 10.0171 3.78342 10.3196 4.16524 10.302C4.53877 10.2852 4.83676 9.96501 4.81933 9.57848C4.81103 9.20035 4.50391 8.90625 4.12955 8.90709ZM7.55022 8.87768C7.16839 8.89448 6.86957 9.21463 6.8704 9.60117C6.887 9.9877 7.20326 10.2894 7.58508 10.2726C7.95861 10.2549 8.2566 9.9356 8.24 9.54907C8.23087 9.17094 7.92375 8.87684 7.55022 8.87768ZM10.9701 8.88188C10.5882 8.89028 10.2894 9.20119 10.2902 9.58772V9.59697C10.2985 9.9835 10.614 10.2768 10.9966 10.2684C11.3701 10.2591 11.6681 9.93897 11.6598 9.55243C11.6424 9.1827 11.3428 8.88104 10.9701 8.88188ZM9.99889 2.53012L5.06835 2.53684L5.06918 3.21664C5.06918 3.5788 4.79609 3.8645 4.43086 3.8645C4.06564 3.86534 3.79089 3.58048 3.79089 3.21832L3.79006 2.57129C2.17144 2.73347 1.27581 3.68468 1.2783 5.50727L1.27913 5.7686L13.8462 5.7518V5.45769C13.8105 3.65107 12.9041 2.70322 11.2772 2.56205L11.278 3.20908C11.278 3.5704 10.9966 3.85694 10.6397 3.85694C10.2745 3.85778 9.99972 3.57208 9.99972 3.21076L9.99889 2.53012Z"
                                                             fill="black"></path>
                                                     </svg>
-                                                </div>
+                                                </div> --}}
+                                                {{-- <div class="input-container w-50" id="date-picker-container">
+                                                    <!-- <label for="date-from">check-out</label> -->
+                                                    <input type="text" name="vehicle_out_time" id="vehicle_out_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['vehicle_out_time']) ? $packages_active_list['vehicle_out_time'] : '' }}"
+                                                        value="10/24/1984" />
+                                                    <svg class="input-icon" width="18" height="18"
+                                                        viewBox="0 0 16 17" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.6347 1.89601e-06C10.9916 -0.00083649 11.2739 0.27646 11.2747 0.646188L11.2755 1.27641C13.5914 1.45791 15.1212 3.03597 15.1237 5.45601L15.1328 12.5397C15.1361 15.1782 13.4785 16.8016 10.8215 16.8058L4.33125 16.8142C1.69084 16.8176 0.012462 15.1555 0.0091418 12.5094L5.57173e-06 5.50895C-0.00330907 3.07295 1.47253 1.49908 3.7884 1.28649L3.78757 0.656271C3.78674 0.286543 4.06066 0.00840671 4.42588 0.00840671C4.79111 0.00756642 5.06503 0.284862 5.06586 0.65459L5.06669 1.24279L9.99723 1.23607L9.9964 0.647868C9.99557 0.27814 10.2695 0.000844092 10.6347 1.89601e-06ZM10.9734 11.9313H10.9651C10.5833 11.9405 10.277 12.2607 10.2853 12.6472C10.2861 13.0338 10.594 13.3522 10.9759 13.3606C11.3652 13.3598 11.6806 13.0396 11.6798 12.6447C11.6798 12.2498 11.3635 11.9313 10.9734 11.9313ZM4.1337 11.9321C3.75187 11.9489 3.45305 12.2691 3.45388 12.6556C3.47131 13.0422 3.78674 13.3447 4.16856 13.327C4.54292 13.3102 4.84091 12.9901 4.82348 12.6035C4.81518 12.2254 4.50723 11.9313 4.1337 11.9321ZM7.55354 11.9279C7.17171 11.9456 6.87372 12.2649 6.87372 12.6514C6.89115 13.038 7.20658 13.3396 7.5884 13.3228C7.96193 13.3052 8.26075 12.9859 8.24332 12.5985C8.23502 12.2212 7.92707 11.9271 7.55354 11.9279ZM4.12955 8.90709C3.74772 8.92389 3.44973 9.24404 3.45056 9.63058C3.46716 10.0171 3.78342 10.3196 4.16524 10.302C4.53877 10.2852 4.83676 9.96501 4.81933 9.57848C4.81103 9.20035 4.50391 8.90625 4.12955 8.90709ZM7.55022 8.87768C7.16839 8.89448 6.86957 9.21463 6.8704 9.60117C6.887 9.9877 7.20326 10.2894 7.58508 10.2726C7.95861 10.2549 8.2566 9.9356 8.24 9.54907C8.23087 9.17094 7.92375 8.87684 7.55022 8.87768ZM10.9701 8.88188C10.5882 8.89028 10.2894 9.20119 10.2902 9.58772V9.59697C10.2985 9.9835 10.614 10.2768 10.9966 10.2684C11.3701 10.2591 11.6681 9.93897 11.6598 9.55243C11.6424 9.1827 11.3428 8.88104 10.9701 8.88188ZM9.99889 2.53012L5.06835 2.53684L5.06918 3.21664C5.06918 3.5788 4.79609 3.8645 4.43086 3.8645C4.06564 3.86534 3.79089 3.58048 3.79089 3.21832L3.79006 2.57129C2.17144 2.73347 1.27581 3.68468 1.2783 5.50727L1.27913 5.7686L13.8462 5.7518V5.45769C13.8105 3.65107 12.9041 2.70322 11.2772 2.56205L11.278 3.20908C11.278 3.5704 10.9966 3.85694 10.6397 3.85694C10.2745 3.85778 9.99972 3.57208 9.99972 3.21076L9.99889 2.53012Z"
+                                                            fill="black"></path>
+                                                    </svg>
+                                                </div> --}}
+                                                {{-- <div class="input-container w-50" id="date-picker-container">
+                                                    <!-- <label for="date-from">check-out</label> -->
+                                                    <input type="text" name="tour_out_time" id="tour_out_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['tour_out_time']) ? $packages_active_list['tour_out_time'] : '' }}"
+                                                        value="10/24/1984" />
+                                                    <svg class="input-icon" width="18" height="18"
+                                                        viewBox="0 0 16 17" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.6347 1.89601e-06C10.9916 -0.00083649 11.2739 0.27646 11.2747 0.646188L11.2755 1.27641C13.5914 1.45791 15.1212 3.03597 15.1237 5.45601L15.1328 12.5397C15.1361 15.1782 13.4785 16.8016 10.8215 16.8058L4.33125 16.8142C1.69084 16.8176 0.012462 15.1555 0.0091418 12.5094L5.57173e-06 5.50895C-0.00330907 3.07295 1.47253 1.49908 3.7884 1.28649L3.78757 0.656271C3.78674 0.286543 4.06066 0.00840671 4.42588 0.00840671C4.79111 0.00756642 5.06503 0.284862 5.06586 0.65459L5.06669 1.24279L9.99723 1.23607L9.9964 0.647868C9.99557 0.27814 10.2695 0.000844092 10.6347 1.89601e-06ZM10.9734 11.9313H10.9651C10.5833 11.9405 10.277 12.2607 10.2853 12.6472C10.2861 13.0338 10.594 13.3522 10.9759 13.3606C11.3652 13.3598 11.6806 13.0396 11.6798 12.6447C11.6798 12.2498 11.3635 11.9313 10.9734 11.9313ZM4.1337 11.9321C3.75187 11.9489 3.45305 12.2691 3.45388 12.6556C3.47131 13.0422 3.78674 13.3447 4.16856 13.327C4.54292 13.3102 4.84091 12.9901 4.82348 12.6035C4.81518 12.2254 4.50723 11.9313 4.1337 11.9321ZM7.55354 11.9279C7.17171 11.9456 6.87372 12.2649 6.87372 12.6514C6.89115 13.038 7.20658 13.3396 7.5884 13.3228C7.96193 13.3052 8.26075 12.9859 8.24332 12.5985C8.23502 12.2212 7.92707 11.9271 7.55354 11.9279ZM4.12955 8.90709C3.74772 8.92389 3.44973 9.24404 3.45056 9.63058C3.46716 10.0171 3.78342 10.3196 4.16524 10.302C4.53877 10.2852 4.83676 9.96501 4.81933 9.57848C4.81103 9.20035 4.50391 8.90625 4.12955 8.90709ZM7.55022 8.87768C7.16839 8.89448 6.86957 9.21463 6.8704 9.60117C6.887 9.9877 7.20326 10.2894 7.58508 10.2726C7.95861 10.2549 8.2566 9.9356 8.24 9.54907C8.23087 9.17094 7.92375 8.87684 7.55022 8.87768ZM10.9701 8.88188C10.5882 8.89028 10.2894 9.20119 10.2902 9.58772V9.59697C10.2985 9.9835 10.614 10.2768 10.9966 10.2684C11.3701 10.2591 11.6681 9.93897 11.6598 9.55243C11.6424 9.1827 11.3428 8.88104 10.9701 8.88188ZM9.99889 2.53012L5.06835 2.53684L5.06918 3.21664C5.06918 3.5788 4.79609 3.8645 4.43086 3.8645C4.06564 3.86534 3.79089 3.58048 3.79089 3.21832L3.79006 2.57129C2.17144 2.73347 1.27581 3.68468 1.2783 5.50727L1.27913 5.7686L13.8462 5.7518V5.45769C13.8105 3.65107 12.9041 2.70322 11.2772 2.56205L11.278 3.20908C11.278 3.5704 10.9966 3.85694 10.6397 3.85694C10.2745 3.85778 9.99972 3.57208 9.99972 3.21076L9.99889 2.53012Z"
+                                                            fill="black"></path>
+                                                    </svg>
+                                                </div> --}}
                                             </div>
                                         </div>
 
                                         <div class="section-btns mb-5">
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Accomodition
-                                                Price <span>0 ₺</span></a>
+                                                Price <span id="accommodation_price_span">0 ₺</span></a>
                                             <input type="hidden" name="hotel_acommodition_price"
                                                 id="hotel_acommodition_price"
                                                 value="{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '' }}">
@@ -242,21 +270,22 @@
                                                     @endphp
                                                     <option
                                                         value="{{ $vehicle_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
-                                                        {{ $vehicle_detail['brand_name'] }}
+                                                        {{ $vehicle_detail['vehicle_model_name'] }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <input type="hidden" id="vehicle_details_input" name="vehicle_details_input"
+                                            readonly>
 
                                         <div class="date-picker-div mb-5">
-                                            <label class="form-label">Reservation Date</label>
+                                            <label class="form-label">Reservation Days</label>
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
                                                     <input type="text" name="vehicle_in_time" id="vehicle_in_time"
                                                         class="date-icon w-100"
-                                                        value="{{ !empty($packages_active_list['vehicle_in_time']) ? $packages_active_list['vehicle_in_time'] : '' }}"
-                                                        value="10/24/1984" />
+                                                        value="{{ !empty($packages_active_list['vehicle_in_time']) ? $packages_active_list['vehicle_in_time'] : '' }}" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -265,27 +294,14 @@
                                                             fill="black"></path>
                                                     </svg>
                                                 </div>
-                                                <div class="input-container w-50" id="date-picker-container">
-                                                    <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="vehicle_out_time" id="vehicle_out_time"
-                                                        class="date-icon w-100"
-                                                        value="{{ !empty($packages_active_list['vehicle_out_time']) ? $packages_active_list['vehicle_out_time'] : '' }}"
-                                                        value="10/24/1984" />
-                                                    <svg class="input-icon" width="18" height="18"
-                                                        viewBox="0 0 16 17" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M10.6347 1.89601e-06C10.9916 -0.00083649 11.2739 0.27646 11.2747 0.646188L11.2755 1.27641C13.5914 1.45791 15.1212 3.03597 15.1237 5.45601L15.1328 12.5397C15.1361 15.1782 13.4785 16.8016 10.8215 16.8058L4.33125 16.8142C1.69084 16.8176 0.012462 15.1555 0.0091418 12.5094L5.57173e-06 5.50895C-0.00330907 3.07295 1.47253 1.49908 3.7884 1.28649L3.78757 0.656271C3.78674 0.286543 4.06066 0.00840671 4.42588 0.00840671C4.79111 0.00756642 5.06503 0.284862 5.06586 0.65459L5.06669 1.24279L9.99723 1.23607L9.9964 0.647868C9.99557 0.27814 10.2695 0.000844092 10.6347 1.89601e-06ZM10.9734 11.9313H10.9651C10.5833 11.9405 10.277 12.2607 10.2853 12.6472C10.2861 13.0338 10.594 13.3522 10.9759 13.3606C11.3652 13.3598 11.6806 13.0396 11.6798 12.6447C11.6798 12.2498 11.3635 11.9313 10.9734 11.9313ZM4.1337 11.9321C3.75187 11.9489 3.45305 12.2691 3.45388 12.6556C3.47131 13.0422 3.78674 13.3447 4.16856 13.327C4.54292 13.3102 4.84091 12.9901 4.82348 12.6035C4.81518 12.2254 4.50723 11.9313 4.1337 11.9321ZM7.55354 11.9279C7.17171 11.9456 6.87372 12.2649 6.87372 12.6514C6.89115 13.038 7.20658 13.3396 7.5884 13.3228C7.96193 13.3052 8.26075 12.9859 8.24332 12.5985C8.23502 12.2212 7.92707 11.9271 7.55354 11.9279ZM4.12955 8.90709C3.74772 8.92389 3.44973 9.24404 3.45056 9.63058C3.46716 10.0171 3.78342 10.3196 4.16524 10.302C4.53877 10.2852 4.83676 9.96501 4.81933 9.57848C4.81103 9.20035 4.50391 8.90625 4.12955 8.90709ZM7.55022 8.87768C7.16839 8.89448 6.86957 9.21463 6.8704 9.60117C6.887 9.9877 7.20326 10.2894 7.58508 10.2726C7.95861 10.2549 8.2566 9.9356 8.24 9.54907C8.23087 9.17094 7.92375 8.87684 7.55022 8.87768ZM10.9701 8.88188C10.5882 8.89028 10.2894 9.20119 10.2902 9.58772V9.59697C10.2985 9.9835 10.614 10.2768 10.9966 10.2684C11.3701 10.2591 11.6681 9.93897 11.6598 9.55243C11.6424 9.1827 11.3428 8.88104 10.9701 8.88188ZM9.99889 2.53012L5.06835 2.53684L5.06918 3.21664C5.06918 3.5788 4.79609 3.8645 4.43086 3.8645C4.06564 3.86534 3.79089 3.58048 3.79089 3.21832L3.79006 2.57129C2.17144 2.73347 1.27581 3.68468 1.2783 5.50727L1.27913 5.7686L13.8462 5.7518V5.45769C13.8105 3.65107 12.9041 2.70322 11.2772 2.56205L11.278 3.20908C11.278 3.5704 10.9966 3.85694 10.6397 3.85694C10.2745 3.85778 9.99972 3.57208 9.99972 3.21076L9.99889 2.53012Z"
-                                                            fill="black"></path>
-                                                    </svg>
-                                                </div>
+
                                             </div>
                                         </div>
 
                                         <div class="section-btns mb-5">
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Transportation
-                                                Price <span>0 ₺</span></a>
+                                                Price <span id="transportation_acommodition_span">0 ₺</span></a>
                                             <input type="hidden" name="transportation_acommodition_price"
                                                 id="transportation_acommodition_price"
                                                 value="{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '' }}">
@@ -307,9 +323,10 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <input type="hidden" id="tour_details_input" name="tour_details_input" readonly>
 
                                         <div class="date-picker-div mb-5">
-                                            <label class="form-label">Reservation Date</label>
+                                            <label class="form-label">Reservation Days</label>
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
@@ -325,27 +342,14 @@
                                                             fill="black"></path>
                                                     </svg>
                                                 </div>
-                                                <div class="input-container w-50" id="date-picker-container">
-                                                    <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="tour_out_time" id="tour_out_time"
-                                                        class="date-icon w-100"
-                                                        value="{{ !empty($packages_active_list['tour_out_time']) ? $packages_active_list['tour_out_time'] : '' }}"
-                                                        value="10/24/1984" />
-                                                    <svg class="input-icon" width="18" height="18"
-                                                        viewBox="0 0 16 17" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M10.6347 1.89601e-06C10.9916 -0.00083649 11.2739 0.27646 11.2747 0.646188L11.2755 1.27641C13.5914 1.45791 15.1212 3.03597 15.1237 5.45601L15.1328 12.5397C15.1361 15.1782 13.4785 16.8016 10.8215 16.8058L4.33125 16.8142C1.69084 16.8176 0.012462 15.1555 0.0091418 12.5094L5.57173e-06 5.50895C-0.00330907 3.07295 1.47253 1.49908 3.7884 1.28649L3.78757 0.656271C3.78674 0.286543 4.06066 0.00840671 4.42588 0.00840671C4.79111 0.00756642 5.06503 0.284862 5.06586 0.65459L5.06669 1.24279L9.99723 1.23607L9.9964 0.647868C9.99557 0.27814 10.2695 0.000844092 10.6347 1.89601e-06ZM10.9734 11.9313H10.9651C10.5833 11.9405 10.277 12.2607 10.2853 12.6472C10.2861 13.0338 10.594 13.3522 10.9759 13.3606C11.3652 13.3598 11.6806 13.0396 11.6798 12.6447C11.6798 12.2498 11.3635 11.9313 10.9734 11.9313ZM4.1337 11.9321C3.75187 11.9489 3.45305 12.2691 3.45388 12.6556C3.47131 13.0422 3.78674 13.3447 4.16856 13.327C4.54292 13.3102 4.84091 12.9901 4.82348 12.6035C4.81518 12.2254 4.50723 11.9313 4.1337 11.9321ZM7.55354 11.9279C7.17171 11.9456 6.87372 12.2649 6.87372 12.6514C6.89115 13.038 7.20658 13.3396 7.5884 13.3228C7.96193 13.3052 8.26075 12.9859 8.24332 12.5985C8.23502 12.2212 7.92707 11.9271 7.55354 11.9279ZM4.12955 8.90709C3.74772 8.92389 3.44973 9.24404 3.45056 9.63058C3.46716 10.0171 3.78342 10.3196 4.16524 10.302C4.53877 10.2852 4.83676 9.96501 4.81933 9.57848C4.81103 9.20035 4.50391 8.90625 4.12955 8.90709ZM7.55022 8.87768C7.16839 8.89448 6.86957 9.21463 6.8704 9.60117C6.887 9.9877 7.20326 10.2894 7.58508 10.2726C7.95861 10.2549 8.2566 9.9356 8.24 9.54907C8.23087 9.17094 7.92375 8.87684 7.55022 8.87768ZM10.9701 8.88188C10.5882 8.89028 10.2894 9.20119 10.2902 9.58772V9.59697C10.2985 9.9835 10.614 10.2768 10.9966 10.2684C11.3701 10.2591 11.6681 9.93897 11.6598 9.55243C11.6424 9.1827 11.3428 8.88104 10.9701 8.88188ZM9.99889 2.53012L5.06835 2.53684L5.06918 3.21664C5.06918 3.5788 4.79609 3.8645 4.43086 3.8645C4.06564 3.86534 3.79089 3.58048 3.79089 3.21832L3.79006 2.57129C2.17144 2.73347 1.27581 3.68468 1.2783 5.50727L1.27913 5.7686L13.8462 5.7518V5.45769C13.8105 3.65107 12.9041 2.70322 11.2772 2.56205L11.278 3.20908C11.278 3.5704 10.9966 3.85694 10.6397 3.85694C10.2745 3.85778 9.99972 3.57208 9.99972 3.21076L9.99889 2.53012Z"
-                                                            fill="black"></path>
-                                                    </svg>
-                                                </div>
+
                                             </div>
                                         </div>
 
                                         <div class="section-btns mb-5">
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Tour Price
-                                                <span>0 ₺</span></a>
+                                                <span id="tour_price_span">0 ₺</span></a>
                                             <input type="hidden" name="tour_price" id="tour_price"
                                                 value="{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '' }}">
                                         </div>
@@ -415,7 +419,7 @@
                                         <label class="form-label">Discount </label>
                                         <div class="input-icon-div">
                                             <input type="text" class="form-control" name="package_discount"
-                                                id="package_discount"
+                                                id="package_discount" maxlength="3"
                                                 value="{{ !empty($packages_active_list['package_discount']) ? $packages_active_list['package_discount'] : '' }}"
                                                 placeholder="0">
                                             <span class="input-icon">%</span>
@@ -447,7 +451,7 @@
                                         <h6 class="section-heading">Featured Request</h6>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="featureproducts"
-                                            {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
+                                                {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
                                             <label class="form-check-label text-secondary" for="featureproducts">I confirm
                                                 that all details are correct and meets the <a href="#"
                                                     class="text-green fw-700">Terms & Conditions.</a></label>
@@ -481,7 +485,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
+    {{-- <script>
         $(function() {
             $('input[name="hotel_in_time"]').daterangepicker({
                 singleDatePicker: true,
@@ -535,7 +539,7 @@
                 maxYear: parseInt(moment().format('YYYY'), 10)
             }, function(start, end, label) {});
         });
-    </script>
+    </script> --}}
     <script>
         $(document).ready(function() {
             function updateCheckedValues() {
@@ -550,59 +554,61 @@
         });
     </script>
 
-<script>
-    function categoryselect(value) {
-        var base_url = $('#base_url').val();
-        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('login_token') }}';
+    <script>
+        function categoryselect(value) {
+            var base_url = $('#base_url').val();
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
 
-        $.ajax({
-            url: base_url + '/api/md-treatment-list',
-            type: 'POST',
-            data: {
-                id: value,
-            },
-            headers: {
-                'X-CSRF-TOKEN': token,
-                'Authorization': 'Bearer ' + bearer_token
-            },
-            success: function(response) {
-                console.log(response);
-                // Clear existing options
-                $('#treatment_id').empty();
+            $.ajax({
+                url: base_url + '/api/md-treatment-list',
+                type: 'POST',
+                data: {
+                    id: value,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'Authorization': 'Bearer ' + bearer_token
+                },
+                success: function(response) {
+                    console.log(response);
+                    // Clear existing options
+                    $('#treatment_id').empty();
 
-                if (response.status === 200) {
-                    // Add new options based on the response
-                    response.packages_active_list.forEach(function(treatment) {
-                        $('#treatment_id').append($('<option>', {
-                            value: treatment.id,
-                            text: treatment.product_sub_category_name
-                        }));
-                    });
+                    if (response.status === 200) {
+                        // Add new options based on the response
+                        response.packages_active_list.forEach(function(treatment) {
+                            $('#treatment_id').append($('<option>', {
+                                value: treatment.id,
+                                text: treatment.product_sub_category_name
+                            }));
+                        });
 
-                    // Pre-select treatment if it exists
-                    var selectedTreatment = "{{ isset($packages_active_list['treatment_id']) ? $packages_active_list['treatment_id'] : null }}";
-                    if (selectedTreatment) {
-                        $('#treatment_id').val(selectedTreatment);
+                        // Pre-select treatment if it exists
+                        var selectedTreatment =
+                            "{{ isset($packages_active_list['treatment_id']) ? $packages_active_list['treatment_id'] : null }}";
+                        if (selectedTreatment) {
+                            $('#treatment_id').val(selectedTreatment);
+                        }
+                    } else {
+                        console.error('Error:', response.message);
                     }
-                } else {
-                    console.error('Error:', response.message);
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
                 }
-            },
-            error: function(xhr) {
-                console.error('Error:', xhr);
+            });
+        }
+
+        // Call categoryselect() initially with the default value
+        $(document).ready(function() {
+            var defaultValue =
+                "{{ isset($packages_active_list['treatment_category_id']) ? $packages_active_list['treatment_category_id'] : null }}";
+            if (defaultValue) {
+                categoryselect(defaultValue);
             }
         });
-    }
-
-    // Call categoryselect() initially with the default value
-    $(document).ready(function() {
-        var defaultValue = "{{ isset($packages_active_list['treatment_category_id']) ? $packages_active_list['treatment_category_id'] : null }}";
-        if (defaultValue) {
-            categoryselect(defaultValue);
-        }
-    });
-</script>
+    </script>
 
 
     <script>
@@ -660,5 +666,225 @@
             }
         });
     </script> --}}
-    
+
+    <script>
+        $(document).ready(function() {
+            var base_url = $('#base_url').val();
+
+            function updateAccommodationPrice() {
+                var hotelDetailsInput = parseFloat($('#vehicle_details_input').val());
+                var hotelInTime = parseFloat($('#vehicle_in_time').val());
+
+                if (!isNaN(hotelDetailsInput) && !isNaN(hotelInTime)) {
+                    var totalPrice = hotelDetailsInput * hotelInTime;
+                    $('#transportation_acommodition_price').val(totalPrice.toFixed(2));
+                    $('#transportation_acommodition_span').text(totalPrice.toFixed(2) + ' ₺');
+                }
+            }
+
+            $('#vehicle_id').on('change', function() {
+                var selectedvehicleid = $(this).val();
+                // alert(selectedvehicleid);
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
+                    'content');
+                const bearer_token = '{{ Session::get('login_token') }}';
+
+                if (selectedvehicleid) {
+                    $.ajax({
+                        url: base_url + '/api/md-get-transportation-price',
+                        type: 'POST',
+                        data: {
+                            id: selectedvehicleid
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Authorization': 'Bearer ' + bearer_token
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            $('#vehicle_details_input').val(response.price
+                                .vehicle_per_day_price);
+                            updateAccommodationPrice();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#vehicle_details_input').val('');
+                    $('#transportation_acommodition_price').val('');
+                    $('#transportation_acommodition_span').text('0 ₺');
+                }
+            });
+
+            $('#vehicle_details_input, #vehicle_in_time').on('input', function() {
+                updateAccommodationPrice();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var base_url = $('#base_url').val();
+
+            function updateAccommodationPrice() {
+                var hotelDetailsInput = parseFloat($('#hotel_details_input').val());
+                var hotelInTime = parseFloat($('#hotel_in_time').val());
+
+                if (!isNaN(hotelDetailsInput) && !isNaN(hotelInTime)) {
+                    var totalPrice = hotelDetailsInput * hotelInTime;
+                    $('#hotel_acommodition_price').val(totalPrice.toFixed(2));
+                    $('#accommodation_price_span').text(totalPrice.toFixed(2) + ' ₺');
+                }
+            }
+
+            $('#hotel_id').on('change', function() {
+                var selectedHotelId = $(this).val();
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
+                    'content');
+                const bearer_token = '{{ Session::get('login_token') }}';
+
+                if (selectedHotelId) {
+                    $.ajax({
+                        url: base_url + '/api/md-get-acommodition-price',
+                        type: 'POST',
+                        data: {
+                            id: selectedHotelId
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Authorization': 'Bearer ' + bearer_token
+                        },
+                        success: function(response) {
+                            $('#hotel_details_input').val(response.price.hotel_per_night_price);
+                            updateAccommodationPrice();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#hotel_details_input').val('');
+                    $('#hotel_acommodition_price').val('');
+                    $('#accommodation_price_span').text('0 ₺');
+                }
+            });
+
+            $('#hotel_details_input, #hotel_in_time').on('input', function() {
+                updateAccommodationPrice();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var base_url = $('#base_url').val();
+
+            function updateAccommodationPrice() {
+                var hotelDetailsInput = parseFloat($('#tour_details_input').val());
+                var hotelInTime = parseFloat($('#tour_in_time').val());
+
+                if (!isNaN(hotelDetailsInput) && !isNaN(hotelInTime)) {
+                    var totalPrice = hotelDetailsInput * hotelInTime;
+                    $('#tour_price').val(totalPrice.toFixed(2));
+                    $('#tour_price_span').text(totalPrice.toFixed(2) + ' ₺');
+                }
+            }
+
+            $('#tour_id').on('change', function() {
+                var selectedtourid = $(this).val();
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
+                    'content');
+                const bearer_token = '{{ Session::get('login_token') }}';
+
+                if (selectedtourid) {
+                    $.ajax({
+                        url: base_url + '/api/md-get-acommodition-price',
+                        type: 'POST',
+                        data: {
+                            id: selectedtourid
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Authorization': 'Bearer ' + bearer_token
+                        },
+                        success: function(response) {
+                            $('#tour_details_input').val(response.price.hotel_per_night_price);
+                            updateAccommodationPrice();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#tour_details_input').val('');
+                    $('#tour_price').val('');
+                    $('#tour_price_span').text('0 ₺');
+                }
+            });
+
+            $('#tour_details_input, #tour_in_time').on('input', function() {
+                updateAccommodationPrice();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Function to calculate and update package price
+            function updatePackagePrice() {
+                var treatmentPrice = parseFloat($('#treatment_price').val()) || 0;
+                var hotelAccommodationPrice = parseFloat($('#hotel_acommodition_price').val()) || 0;
+                var transportationAccommodationPrice = parseFloat($('#transportation_accommodition_price').val()) ||
+                    0;
+                var tourPrice = parseFloat($('#tour_price').val()) || 0;
+                var visaServicePrice = parseFloat($('#visa_service_price').val()) || 0;
+                var translationPrice = parseFloat($('#translation_price').val()) || 0;
+                var ambulanceServicePrice = parseFloat($('#ambulance_service_price').val()) || 0;
+                var ticketPrice = parseFloat($('#ticket_price').val()) || 0;
+
+                // Check if any field contains non-numeric values
+                if (!($.isNumeric(treatmentPrice) && $.isNumeric(hotelAccommodationPrice) && $.isNumeric(
+                            transportationAccommodationPrice) &&
+                        $.isNumeric(tourPrice) && $.isNumeric(visaServicePrice) && $.isNumeric(translationPrice) &&
+                        $.isNumeric(ambulanceServicePrice) && $.isNumeric(ticketPrice))) {
+                    alert('Please enter numbers only.');
+                    return;
+                }
+
+                // Calculate total package price
+                var packagePrice = treatmentPrice + hotelAccommodationPrice + transportationAccommodationPrice +
+                    tourPrice + visaServicePrice + translationPrice + ambulanceServicePrice + ticketPrice;
+
+                // Retrieve package discount percentage
+                var packageDiscountPercentage = parseFloat($('#package_discount').val()) || 0;
+
+                // Check if discount percentage is valid
+                if (packageDiscountPercentage < 0 || packageDiscountPercentage > 100) {
+                    alert('Please enter a discount percentage between 0 and 100.');
+                    return;
+                }
+
+                // Calculate the discount amount
+                var packageDiscount = (packageDiscountPercentage / 100) * packagePrice;
+
+                // Calculate the sale price after deducting the discount
+                var salePrice = packagePrice - packageDiscount;
+
+                // Ensure sale price doesn't go negative
+                salePrice = Math.max(salePrice, 0);
+
+                // Update the package price field
+                $('#package_price').val(packagePrice.toFixed(2));
+
+                // Update the sale price field
+                $('#sale_price').val(salePrice.toFixed(2));
+            }
+
+            // Event listener for changes in dependent fields including package discount
+            $('#treatment_price, #hotel_acommodition_price, #transportation_accommodition_price, #tour_price, #visa_service_price, #translation_price, #ambulance_service_price, #ticket_price, #package_discount')
+                .on('input', function() {
+                    updatePackagePrice();
+                });
+        });
+    </script>
 @endsection

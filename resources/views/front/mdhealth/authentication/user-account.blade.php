@@ -221,9 +221,9 @@
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
-                        <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
-                            style="height: 47px;">Sign
-                            In</button>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        </div>
                     </form>
 
 
@@ -260,7 +260,7 @@
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
                     <h2 class="mb-0">Verification</h2>
-                    <p>Enter the 4 digit code sent to your mobile phone</p>
+                    <p>Enter the 6 digit code sent to your mobile phone</p>
                     <div class="w-100 df-center">
                         <img src="{{ asset('front/assets/img/heart-rate.png') }}" alt="">
                     </div>

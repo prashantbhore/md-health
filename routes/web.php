@@ -139,6 +139,10 @@ Route::get('purchase-food-pack', function () {
     return view('front.mdFoods.purchase');
 });
 
+Route::get('food-payment-status', function () {
+    return view('front.mdFoods.paymentStatus');
+});
+
 // mdBooking Routes
 Route::get('mdBooking', function () {
     return view('front.mdBooking.index');
