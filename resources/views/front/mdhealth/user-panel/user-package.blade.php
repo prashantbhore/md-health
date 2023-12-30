@@ -187,13 +187,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--id="package-details_{{ $active_package['package_id'] }}"-->
                                                     <div class="treatment-card-btns d-flex justify-content-around gap-3">
-                                                        <a href="{{ url('user-package-view') }}"
-                                                            class="order-completed-btn w-100 bg-white  fsb-2 border border-black ">Package
+                                                        <a href="{{ url('view-my-active-packages/' . $active_package['package_id']) }}"
+                                                            class="order-completed-btn w-100 bg-white  fsb-2 border border-black package-details">Package
                                                             Details</a>
                                                         <a href="#"
                                                             class="order-completed-btn w-100 bg-black fsb-2 text-white"
-                                                            data-bs-toggle="modal"
+                                                            data-bs-toggle="modal" id="change_information_model"
                                                             data-bs-target="#UserChangeInformation">Change
                                                             Patient Information</a>
                                                         <a href="#"
@@ -461,7 +462,65 @@
 @endsection
 @section('script')
     <script>
-        $(".upPackageLi").addClass("activeClass");
-        $(".upPackage").addClass("md-active");
+        $(document).ready(function() {
+
+            var baseUrl = $('#base_url').val();
+            var token = "{{ Session::get('login_token') }}";
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            $(".upPackageLi").addClass("activeClass");
+            $(".upPackage").addClass("md-active");
+
+
+            $(".package-details").click(function() {
+                var id = this.id.split('_')[1];
+                var formData = new FormData();
+                formData.append("package_id", id);
+
+                $.ajax({
+                    url: baseUrl + 'view_my_active_packages',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+
+                    success: function(response) {
+                        console.log('Success:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            $('#change_information_model').on('click', function(e) {
+
+                var formData = new FormData();
+                formData.append("package_id", id);
+                formData.append("patient_id");
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + '/api/md-customer-my-details', // Your endpoint
+                    dataType: 'json',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: formData,
+                    success: function(response) {
+                        console.log("Success: " + response);
+                        $('#UserChangeInformation').modal('show');
+                    },
+                    error: function(xhr, status, error) {
+
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+
+        });
     </script>
 @endsection

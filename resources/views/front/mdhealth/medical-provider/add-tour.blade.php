@@ -199,6 +199,12 @@
 </div>
 @endsection
 @section('script')
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery Validation Plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
 <script>
     $(".mpOtherServicesLi").addClass("activeClass");
     $(".mpOtherServices").addClass("md-active");
@@ -215,5 +221,63 @@
         $('.form-check-input').change(updateCheckedValues);
         updateCheckedValues();
     });
+
+
+    
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('#add_acommodition').validate({
+            // Rules for validation
+            rules: {
+                tour_name: {
+                    required: true
+                },
+                tour_description: {
+                    required: true
+                },
+                tour_days: {
+                    required: true,
+                    number: true
+                },
+                tour_image_path: {
+                    required: true
+                },
+                tour_price: {
+                    required: true,
+                    number: true
+                },
+                // Add rules for other fields as needed
+            },
+            // Messages for validation errors
+            messages: {
+                tour_name: {
+                    required: "Please enter tour name"
+                },
+                tour_description: {
+                    required: "Please enter tour description"
+                },
+                tour_days: {
+                    required: "Please enter number of days",
+                    number: "Please enter a valid number"
+                },
+                tour_image_path: {
+                    required: "Please upload an image"
+                },
+                tour_price: {
+                    required: "Please enter tour price",
+                    number: "Please enter a valid number"
+                },
+                // Add messages for other fields as needed
+            },
+            // Handle submission and other settings as needed
+            submitHandler: function(form) {
+                // If form is valid, you can submit the form here
+                form.submit();
+            }
+        });
+    });
+</script>
+
 @endsection

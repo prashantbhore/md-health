@@ -119,6 +119,12 @@
 </noscript>
 
 
+
+
+
+
+
+
 <script>
   @if(Session::has('success'))
   toastr.options = {
@@ -139,6 +145,8 @@
   @endif
 </script>
 
+
+{{-- 
 <script>
   function success_toast(title = '', message = '') {
     $.toast({
@@ -163,7 +171,9 @@
   }
 </script>
 
+
+
 <script>
   var base_url = $("#base_url").val();
-</script>
+</script> --}}
 

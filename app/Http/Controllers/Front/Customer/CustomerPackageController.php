@@ -32,6 +32,12 @@ class CustomerPackageController extends Controller {
 
     public function customer_home() {
 
+        // dd( Session::get( 'login_token' ) );
+        $token = Session::get( 'login_token' );
+        $url = url( '/api/md-city-list' );
+        $body = [ 'country_id'=>'1' ];
+        $method = 'POST';
+        $this->apiService->getCities( $token, $url, $body, $method );
         return view( 'front.mdhealth.index' );
     }
 
@@ -174,7 +180,7 @@ class CustomerPackageController extends Controller {
 
     public function my_packages( Request $request ) {
         $token = Session::get( 'login_token' );
-
+        // dd( $token );
         $data = $this->apiService->getMyActivePackages( $token );
         $data_two = $this->apiService->getMyCompletedPackages( $token );
         $data_three = $this->apiService->getMyCancelledPackages( $token );
@@ -188,5 +194,17 @@ class CustomerPackageController extends Controller {
 
     public function my_profile( Request $request ) {
         return view( 'front.mdhealth.user-panel.user-profile' );
+    }
+
+    public function view_my_active_packages( $id ) {
+
+        $token = Session::get( 'login_token' );
+        echo $token;
+        die;
+        $data = $this->apiService->activePackageDetails( $token, $id )[ 'customer_purchase_package_list' ];
+        $other_service = explode( ',', $data[ 'other_services' ] );
+        $data[ 'other_services' ] = $other_service;
+        return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data' ) );
+
     }
 }

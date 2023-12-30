@@ -124,6 +124,9 @@ class PackageControllers extends BaseController
                     $package_input['tour_price'] = $request->tour_price;
                     $package_input['visa_details'] = $request->visa_details;
                     $package_input['visa_service_price'] = $request->visa_service_price;
+                    $package_input['translation_price'] = $request->translation_price;
+                    $package_input['ambulance_service_price'] = $request->ambulance_service_price;
+                    $package_input['ticket_price'] = $request->ticket_price;
                     $package_input['package_discount'] = $request->package_discount;
                     $package_input['package_price'] = $request->package_price;
                     $package_input['sale_price'] = $request->sale_price;
@@ -189,6 +192,9 @@ class PackageControllers extends BaseController
                     $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                     $package_input['visa_details'] = $request->visa_details;
                     $package_input['visa_service_price'] = $request->visa_service_price;
+                    $package_input['ambulance_service_price'] = $request->ambulance_service_price;
+                    $package_input['ticket_price'] = $request->ticket_price;
+                    $package_input['package_discount'] = $request->package_discount;
                     $package_input['package_discount'] = $request->package_discount;
                     $package_input['package_price'] = $request->package_price;
                     $package_input['sale_price'] = $request->sale_price;
@@ -338,6 +344,9 @@ class PackageControllers extends BaseController
                 'md_packages.transportation_acommodition_price',
                 'md_packages.visa_details',
                 'md_packages.visa_service_price',
+                'md_packages.translation_price',
+                'md_packages.ambulance_service_price',
+                'md_packages.ticket_price',
                 'md_packages.package_discount',
                 'md_packages.package_price',
                 'md_packages.sale_price',
@@ -401,6 +410,7 @@ class PackageControllers extends BaseController
                 'md_packages.transportation_acommodition_price',
                 'md_packages.visa_details',
                 'md_packages.visa_service_price',
+                'md_packages.ticket_price',
                 'md_packages.package_discount',
                 'md_packages.package_price',
                 'md_packages.sale_price',
@@ -461,6 +471,9 @@ class PackageControllers extends BaseController
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;
                 $package_input['visa_service_price'] = $request->visa_service_price;
+                $package_input['ambulance_service_price'] = $request->ambulance_service_price;
+                $package_input['ticket_price'] = $request->ticket_price;
+                $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
@@ -497,6 +510,9 @@ class PackageControllers extends BaseController
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;
                 $package_input['visa_service_price'] = $request->visa_service_price;
+                $package_input['ambulance_service_price'] = $request->ambulance_service_price;
+                $package_input['ticket_price'] = $request->ticket_price;
+                $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
