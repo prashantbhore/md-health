@@ -41,7 +41,7 @@
                 <div class="col-md-9">
                     <div class="card mb-4">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
-                            <span>#MD3726378</span>
+                            <span>{{ !empty($packages_active_list['package_unique_no']) ? $packages_active_list['package_unique_no'] : 'ADD PACKAGE' }}</span>
                             <a href="{{ url('medical-packages') }}"
                                 class="d-flex align-items-center gap-1 text-decoration-none text-dark">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
@@ -53,9 +53,12 @@
                                 <form action="{{ url('/md-add-packages') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="platform_type" value="web">
+                                    <input type="hidden" name="id"
+                                        value="{{ !empty($packages_active_list['id']) ? $packages_active_list['id'] : '' }}">
                                     <div class="form-group mb-3">
                                         <label class="form-label">*Package Name</label>
                                         <input type="text" class="form-control" id="package_name" name="package_name"
+                                            value="{{ !empty($packages_active_list['package_name']) ? $packages_active_list['package_name'] : '' }}"
                                             aria-describedby="foodname" placeholder="Package Name">
                                     </div>
 
@@ -66,8 +69,13 @@
                                             onchange="categoryselect(this.value)">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($treatment_categories as $treatment_category)
-                                                <option value="{{ $treatment_category['id'] }}">
-                                                    {{ $treatment_category['product_category_name'] }}</option>
+                                                @php
+                                                    $isSelected = isset($packages_active_list['treatment_category_id']) && $packages_active_list['treatment_category_id'] == $treatment_category['id'];
+                                                @endphp
+                                                <option
+                                                    value="{{ $treatment_category['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                    {{ $treatment_category['product_category_name'] }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -83,44 +91,58 @@
                                     <div class="multiple-checkbox-div">
                                         <div class="form-group d-flex flex-column mb-5">
                                             <label class="form-label">Other Services (Selectable)</label>
-                                            <p>Checked Values: <span id="checkedValues"></span></p>
-                                            <input type="text" name="other_services" id="other_services" >
+                                            {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
+                                            <input type="hidden" name="other_services" id="other_services"
+                                                value="{{ !empty($packages_active_list['other_services']) ? $packages_active_list['other_services'] : '' }}">
                                             {{-- value="{{!empty($hotel_details['other_services'])?$hotel_details['other_services']:''}}" --}}
-                                        
+
                                             <div class="multiple-checks">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="Accomodition" id="foraccommodation">
+                                                    <input type="checkbox" class="form-check-input" value="Accomodition"
+                                                        id="foraccommodation"
+                                                        {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Accomodition') !== false ? 'checked' : '' }}>
                                                     {{-- {{ $hotel_details['accommodation'] ? 'checked' : '' }} --}}
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="foraccomodition">Accomodition</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="Transportation" id="fortransportation">
+                                                    <input type="checkbox" class="form-check-input" value="Transportation"
+                                                        id="fortransportation"
+                                                        {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Transportation') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fortransportation">Transportation</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="Tour" id="fortour">
+                                                    <input type="checkbox" class="form-check-input" value="Tour"
+                                                        id="fortour"
+                                                        {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Tour') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="fortour">Tour</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="Translation" id="fortranslation">
+                                                    <input type="checkbox" class="form-check-input" value="Translation"
+                                                        id="fortranslation"
+                                                        {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Translation') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fortranslation">Translation</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="Visa Services" id="forvisaservice">
+                                                    <input type="checkbox" class="form-check-input" value="Visa Services"
+                                                        id="forvisaservice"
+                                                        {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Visa Services') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="forvisaservice">Visa
                                                         Services</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="Ticket Services" id="forticketservice">
+                                                    <input type="checkbox" class="form-check-input" value="Ticket Services"
+                                                        id="forticketservice"
+                                                        {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Ticket Services') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forticketservice">Ticket Services</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="Ambulance Services"
-                                                        id="forambulanceservice">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        value="Ambulance Services" id="forambulanceservice"
+                                                        {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Ambulance Services') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forambulanceservice">Ambulance Services</label>
                                                 </div>
@@ -131,7 +153,9 @@
 
                                     <div class="form-group mb-5 section-heading-div">
                                         <h6 class="section-heading">Treatment Period in Days</h6>
-                                        <input type="text" class="form-control" id="foodname"
+                                        <input type="text" class="form-control" name="treatment_period_in_days"
+                                            id="treatment_period_in_days"
+                                            value="{{ !empty($packages_active_list['treatment_period_in_days']) ? $packages_active_list['treatment_period_in_days'] : '' }}"
                                             aria-describedby="foodname" placeholder="1-3 Days">
                                     </div>
 
@@ -139,7 +163,10 @@
                                         <h6 class="section-heading">Treatment Price</h6>
                                         <label class="form-label">Treatment Price (VAT Included Price) </label>
                                         <div class="input-icon-div">
-                                            <input type="text" class="form-control" placeholder="Treatment Price">
+                                            <input type="text" class="form-control" name="treatment_price"
+                                                id="treatment_price"
+                                                value="{{ !empty($packages_active_list['treatment_price']) ? $packages_active_list['treatment_price'] : '' }}"
+                                                placeholder="Treatment Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -147,11 +174,17 @@
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Acommodition Details</h6>
                                             <label class="form-label">Hotel Name</label>
-                                            <select name="" id="">
-                                                <option value="">Choose Hotel</option>
-                                                <option value="">Choose Hotel 2</option>
-                                                <option value="">Choose Hotel 3</option>
-                                                <option value="">Choose Hotel 4</option>
+                                            <select name="hotel_id" id="hotel_id">
+                                                @foreach ($hotel_details as $hotel_detail)
+                                                    @php
+                                                        $isSelected = isset($packages_active_list['hotel_id']) && $packages_active_list['hotel_id'] == $hotel_detail['id'];
+                                                    @endphp
+                                                    <option
+                                                        value="{{ $hotel_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                        {{ $hotel_detail['hotel_name'] }}
+                                                    </option>
+                                                @endforeach
+
                                             </select>
                                         </div>
 
@@ -160,7 +193,9 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in" class="date-icon w-100"
+                                                    <input type="text" name="hotel_in_time" id="hotel_in_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['hotel_in_time']) ? $packages_active_list['hotel_in_time'] : '' }}"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -172,7 +207,9 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out" class="date-icon w-100"
+                                                    <input type="text" name="hotel_out_time" id="hotel_out_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['hotel_out_time']) ? $packages_active_list['hotel_out_time'] : '' }}"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -189,17 +226,25 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Accomodition
                                                 Price <span>0 ₺</span></a>
+                                            <input type="hidden" name="hotel_acommodition_price"
+                                                id="hotel_acommodition_price"
+                                                value="{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '' }}">
                                         </div>
                                     </div>
                                     <div id="transportationDiv">
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Transportation Details</h6>
                                             <label class="form-label">Vehicle</label>
-                                            <select name="" id="">
-                                                <option value="">Choose Vehicle</option>
-                                                <option value="">Choose Vehicle 2</option>
-                                                <option value="">Choose Vehicle 3</option>
-                                                <option value="">Choose Vehicle 4</option>
+                                            <select name="vehicle_id" id="vehicle_id">
+                                                @foreach ($vehicle_details as $vehicle_detail)
+                                                    @php
+                                                        $isSelected = isset($packages_active_list['vehicle_id']) && $packages_active_list['vehicle_id'] == $vehicle_detail['id'];
+                                                    @endphp
+                                                    <option
+                                                        value="{{ $vehicle_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                        {{ $vehicle_detail['brand_name'] }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -208,7 +253,9 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in2" class="date-icon w-100"
+                                                    <input type="text" name="vehicle_in_time" id="vehicle_in_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['vehicle_in_time']) ? $packages_active_list['vehicle_in_time'] : '' }}"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -220,7 +267,9 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out2" class="date-icon w-100"
+                                                    <input type="text" name="vehicle_out_time" id="vehicle_out_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['vehicle_out_time']) ? $packages_active_list['vehicle_out_time'] : '' }}"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -237,17 +286,25 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Transportation
                                                 Price <span>0 ₺</span></a>
+                                            <input type="hidden" name="transportation_acommodition_price"
+                                                id="transportation_acommodition_price"
+                                                value="{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '' }}">
                                         </div>
                                     </div>
                                     <div id="tourDiv">
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Tour Name</h6>
                                             <label class="form-label">Vehicle</label>
-                                            <select name="" id="">
-                                                <option value="">Tour Name</option>
-                                                <option value="">Tour Name 2</option>
-                                                <option value="">Tour Name 3</option>
-                                                <option value="">Tour Name 4</option>
+                                            <select name="tour_id" id="tour_id">
+                                                @foreach ($tour_details as $tour_detail)
+                                                    @php
+                                                        $isSelected = isset($packages_active_list['tour_id']) && $packages_active_list['tour_id'] == $tour_detail['id'];
+                                                    @endphp
+                                                    <option
+                                                        value="{{ $tour_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                        {{ $tour_detail['tour_name'] }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -256,7 +313,9 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in3" class="date-icon w-100"
+                                                    <input type="text" name="tour_in_time" id="tour_in_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['tour_in_time']) ? $packages_active_list['tour_in_time'] : '' }}"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -268,7 +327,9 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out3" class="date-icon w-100"
+                                                    <input type="text" name="tour_out_time" id="tour_out_time"
+                                                        class="date-icon w-100"
+                                                        value="{{ !empty($packages_active_list['tour_out_time']) ? $packages_active_list['tour_out_time'] : '' }}"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -285,6 +346,8 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Tour Price
                                                 <span>0 ₺</span></a>
+                                            <input type="hidden" name="tour_price" id="tour_price"
+                                                value="{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '' }}">
                                         </div>
                                     </div>
                                     <div id="translationDiv">
@@ -292,7 +355,9 @@
                                             <h6 class="section-heading">Translation Price</h6>
                                             <label class="form-label">Translation Price (VAT Included Price) </label>
                                             <div class="input-icon-div">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" name="translation_price"
+                                                    id="translation_price"
+                                                    value="{{ !empty($packages_active_list['translation_price']) ? $packages_active_list['translation_price'] : '' }}"
                                                     placeholder="Translation Price">
                                                 <span class="input-icon">₺</span>
                                             </div>
@@ -303,14 +368,18 @@
                                             <h6 class="section-heading">Visa Service Details</h6>
                                             <label class="form-label" for="featureproducts">Please Written Visa Service
                                                 Details</label>
-                                            <input type="text" class="form-control" id="foodname"
+                                            <input type="text" class="form-control" name="visa_details"
+                                                id="visa_details"
+                                                value="{{ !empty($packages_active_list['visa_details']) ? $packages_active_list['visa_details'] : '' }}"
                                                 aria-describedby="foodname" placeholder="Write Here Please">
                                         </div>
 
                                         <div class="form-group d-flex flex-column mb-5">
                                             <label class="form-label">Visa Service Price</label>
                                             <div class="input-icon-div ">
-                                                <input type="text" class="form-control" placeholder="Price">
+                                                <input type="text" class="form-control" name="visa_service_price"
+                                                    id="visa_service_price" placeholder="Price"
+                                                    value="{{ !empty($packages_active_list['visa_service_price']) ? $packages_active_list['visa_service_price'] : '' }}">
                                                 <span class="input-icon">₺</span>
                                             </div>
                                         </div>
@@ -320,7 +389,9 @@
                                             <h6 class="section-heading">Ticket Service</h6>
                                             <label class="form-label">Ticket Price (VAT Included Price) </label>
                                             <div class="input-icon-div">
-                                                <input type="text" class="form-control" placeholder="Price">
+                                                <input type="text" class="form-control" name="ticket_price"
+                                                    id="ticket_price" placeholder="Price"
+                                                    value="{{ !empty($packages_active_list['ticket_price']) ? $packages_active_list['ticket_price'] : '' }}">
                                                 <span class="input-icon">₺</span>
                                             </div>
                                         </div>
@@ -330,7 +401,10 @@
                                             <h6 class="section-heading">Ambulance Service</h6>
                                             <label class="form-label">Ambulance Price (One Time Pickup and Drop) </label>
                                             <div class="input-icon-div">
-                                                <input type="text" class="form-control" placeholder="Price">
+                                                <input type="text" class="form-control" name="ambulance_service_price"
+                                                    id="ambulance_service_price"
+                                                    value="{{ !empty($packages_active_list['ambulance_service_price']) ? $packages_active_list['ambulance_service_price'] : '' }}"
+                                                    placeholder="Price">
                                                 <span class="input-icon">₺</span>
                                             </div>
                                         </div>
@@ -340,7 +414,10 @@
                                         <h6 class="section-heading">Package Price</h6>
                                         <label class="form-label">Discount </label>
                                         <div class="input-icon-div">
-                                            <input type="text" class="form-control" placeholder="0">
+                                            <input type="text" class="form-control" name="package_discount"
+                                                id="package_discount"
+                                                value="{{ !empty($packages_active_list['package_discount']) ? $packages_active_list['package_discount'] : '' }}"
+                                                placeholder="0">
                                             <span class="input-icon">%</span>
                                         </div>
                                     </div>
@@ -348,7 +425,10 @@
                                     <div class="form-group d-flex flex-column mb-3">
                                         <label class="form-label">*Price (VAT Included)</label>
                                         <div class="input-icon-div">
-                                            <input type="text" class="form-control" placeholder="0">
+                                            <input type="text" class="form-control" name="package_price"
+                                                id="package_price"
+                                                value="{{ !empty($packages_active_list['package_price']) ? $packages_active_list['package_price'] : '' }}"
+                                                placeholder="0">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -356,7 +436,8 @@
                                     <div class="form-group d-flex flex-column mb-5">
                                         <label class="form-label">Sale Price</label>
                                         <div class="input-icon-div">
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control" name="sale_price" id="sale_price"
+                                                value="{{ !empty($packages_active_list['sale_price']) ? $packages_active_list['sale_price'] : '' }}"
                                                 placeholder="Calculated Automatically">
                                             <span class="input-icon">₺</span>
                                         </div>
@@ -365,18 +446,20 @@
                                     <div class="form-group d-flex flex-column mb-5 section-heading-div">
                                         <h6 class="section-heading">Featured Request</h6>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="featureproducts">
+                                            <input type="checkbox" class="form-check-input" id="featureproducts"
+                                            {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
                                             <label class="form-check-label text-secondary" for="featureproducts">I confirm
                                                 that all details are correct and meets the <a href="#"
                                                     class="text-green fw-700">Terms & Conditions.</a></label>
                                         </div>
                                     </div>
-
+                                    <input type="hidden" name="platform_type" value="web">
                                     <div class="section-btns mb-3">
                                         <button type="submit" name="button_type" value="active"
                                             class="green-plate bg-green text-dark fw-700 fsb-1">Save Changes</button>
-                                        <button type="submit"  name="button_type" value="inactive"
-                                            class="black-plate bg-black text-white fw-500 fsb-1">Deactivate Package</button>
+                                        <button type="submit" name="button_type" value="inactive"
+                                            class="black-plate bg-black text-white fw-500 fsb-1">Deactivate
+                                            Package</button>
                                     </div>
 
                                 </form>
@@ -400,7 +483,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
         $(function() {
-            $('input[name="check-in"]').daterangepicker({
+            $('input[name="hotel_in_time"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minYear: 1901,
@@ -409,7 +492,7 @@
         });
 
         $(function() {
-            $('input[name="check-out"]').daterangepicker({
+            $('input[name="hotel_out_time"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minYear: 1901,
@@ -418,7 +501,7 @@
         });
 
         $(function() {
-            $('input[name="check-in2"]').daterangepicker({
+            $('input[name="vehicle_in_time"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minYear: 1901,
@@ -427,7 +510,7 @@
         });
 
         $(function() {
-            $('input[name="check-out2"]').daterangepicker({
+            $('input[name="vehicle_out_time"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minYear: 1901,
@@ -436,7 +519,7 @@
         });
 
         $(function() {
-            $('input[name="check-in3"]').daterangepicker({
+            $('input[name="tour_in_time"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minYear: 1901,
@@ -445,7 +528,7 @@
         });
 
         $(function() {
-            $('input[name="check-out3"]').daterangepicker({
+            $('input[name="tour_out_time"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minYear: 1901,
@@ -453,7 +536,7 @@
             }, function(start, end, label) {});
         });
     </script>
-     <script>
+    <script>
         $(document).ready(function() {
             function updateCheckedValues() {
                 const checkedValues = $('.form-check-input:checked').map(function() {
@@ -467,53 +550,61 @@
         });
     </script>
 
-    <script>
-        function categoryselect(value) {
-            var base_url = $('#base_url').val();
-            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('login_token') }}'; 
-            // var url= base_url + 'api/md-treatment-list'
-            // alert(url);
-            $.ajax({
-                url: base_url + '/api/md-treatment-list',
-                type: 'POST',
-                data: {
-                    id: value,
-                },
-                headers: {
-                    'X-CSRF-TOKEN': token,
-                    'Authorization': 'Bearer ' + bearer_token
-                },
-                success: function(response) {
-                    console.log(response);
-                    // alert(response);
-                    if (response.status === 200) {
-                        // Clear existing options
-                        $('#treatment_id').empty();
+<script>
+    function categoryselect(value) {
+        var base_url = $('#base_url').val();
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const bearer_token = '{{ Session::get('login_token') }}';
 
-                        // Add new options based on the response
-                        response.packages_active_list.forEach(function(treatment) {
-                            $('#treatment_id').append($('<option>', {
-                                value: treatment.id,
-                                text: treatment.product_sub_category_name
-                            }));
-                        });
-                    } else {
-                        console.error('Error:', response.message);
+        $.ajax({
+            url: base_url + '/api/md-treatment-list',
+            type: 'POST',
+            data: {
+                id: value,
+            },
+            headers: {
+                'X-CSRF-TOKEN': token,
+                'Authorization': 'Bearer ' + bearer_token
+            },
+            success: function(response) {
+                console.log(response);
+                // Clear existing options
+                $('#treatment_id').empty();
+
+                if (response.status === 200) {
+                    // Add new options based on the response
+                    response.packages_active_list.forEach(function(treatment) {
+                        $('#treatment_id').append($('<option>', {
+                            value: treatment.id,
+                            text: treatment.product_sub_category_name
+                        }));
+                    });
+
+                    // Pre-select treatment if it exists
+                    var selectedTreatment = "{{ isset($packages_active_list['treatment_id']) ? $packages_active_list['treatment_id'] : null }}";
+                    if (selectedTreatment) {
+                        $('#treatment_id').val(selectedTreatment);
                     }
-                },
-                error: function(xhr) {
-                    console.error('Error:', xhr);
+                } else {
+                    console.error('Error:', response.message);
                 }
-            });
-        }
-    </script>
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr);
+            }
+        });
+    }
 
-    {{-- // Pre-select the treatment on edit
-    // $(document).ready(function() {
-    //     var selectedTreatment = "{{ $selected_treatment_id }}"; 
-    //     $('#comfort_level_id').val(selectedTreatment).change();
-    // }); --}}
+    // Call categoryselect() initially with the default value
+    $(document).ready(function() {
+        var defaultValue = "{{ isset($packages_active_list['treatment_category_id']) ? $packages_active_list['treatment_category_id'] : null }}";
+        if (defaultValue) {
+            categoryselect(defaultValue);
+        }
+    });
+</script>
+
+
     <script>
         // Function to handle checkbox change
         $('.form-check-input').on('change', function() {
@@ -540,4 +631,34 @@
             }
         });
     </script>
+    {{-- <script>
+        // Function to handle checkbox change
+        $('.form-check-input').on('change', function() {
+            var checkboxId = $(this).attr('id');
+            var divId = checkboxId.replace('for', ''); // Remove 'for' from checkbox ID to get div ID
+    
+            // Show/hide div based on checkbox state
+            if ($(this).is(':checked')) {
+                $('#' + divId + 'Div').show();
+            } else {
+                $('#' + divId + 'Div').hide();
+                $('#' + divId + 'Div input[type="text"]').val(''); // Clear input fields
+                $('#' + divId + 'Div textarea').val(''); // Clear textareas
+                // Add more selectors if needed for other types of input fields (e.g., select)
+            }
+        });
+    
+        // Handle checkbox states on page load
+        $('.form-check-input').each(function() {
+            var checkboxId = $(this).attr('id');
+            var divId = checkboxId.replace('for', ''); // Remove 'for' from checkbox ID to get div ID
+    
+            if ($(this).is(':checked')) {
+                $('#' + divId + 'Div').show();
+            } else {
+                $('#' + divId + 'Div').hide();
+            }
+        });
+    </script> --}}
+    
 @endsection
