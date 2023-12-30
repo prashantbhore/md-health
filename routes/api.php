@@ -398,7 +398,6 @@ Route::controller(CustomerShopController::class)->group(function(){
 
 //Vendor Sales Controller
 Route::controller(VendorSalesController::class)->group(function(){
-
     Route::get('active-sales-lists','activeSales');
     Route::get('completed-sales-lists','completedSales');
     Route::get('cancelled-sales-lists','cancelledSales');
