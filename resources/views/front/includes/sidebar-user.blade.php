@@ -17,8 +17,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Orders</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Wallets</a>
+            <li class="nav-item upWalletLi">
+                <a class="nav-link upWallet" href="{{ url('user-wallet') }}">Wallets</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">My Reports</a>

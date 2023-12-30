@@ -50,7 +50,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                <form action="{{ url('api/md-add-packages') }}" method="post">
+                                <form action="{{ url('/md-add-packages') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="platform_type" value="web">
                                     <div class="form-group mb-3">
@@ -83,39 +83,43 @@
                                     <div class="multiple-checkbox-div">
                                         <div class="form-group d-flex flex-column mb-5">
                                             <label class="form-label">Other Services (Selectable)</label>
+                                            {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
+                                            <input type="hidden" name="other_services" id="other_services" >
+                                            {{-- value="{{!empty($hotel_details['other_services'])?$hotel_details['other_services']:''}}" --}}
+                                        
                                             <div class="multiple-checks">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="foraccommodation">
+                                                    <input type="checkbox" class="form-check-input" value="Accomodition" id="foraccommodation">
                                                     {{-- {{ $hotel_details['accommodation'] ? 'checked' : '' }} --}}
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="foraccomodition">Accomodition</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="fortransportation">
+                                                    <input type="checkbox" class="form-check-input" value="Transportation" id="fortransportation">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fortransportation">Transportation</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="fortour">
+                                                    <input type="checkbox" class="form-check-input" value="Tour" id="fortour">
                                                     <label class="form-check-label fw-500 fsb-1" for="fortour">Tour</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="fortranslation">
+                                                    <input type="checkbox" class="form-check-input" value="Translation" id="fortranslation">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fortranslation">Translation</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forvisaservice">
+                                                    <input type="checkbox" class="form-check-input" value="Visa Services" id="forvisaservice">
                                                     <label class="form-check-label fw-500 fsb-1" for="forvisaservice">Visa
                                                         Services</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forticketservice">
+                                                    <input type="checkbox" class="form-check-input" value="Ticket Services" id="forticketservice">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forticketservice">Ticket Services</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input"
+                                                    <input type="checkbox" class="form-check-input" value="Ambulance Services"
                                                         id="forambulanceservice">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forambulanceservice">Ambulance Services</label>
@@ -127,7 +131,7 @@
 
                                     <div class="form-group mb-5 section-heading-div">
                                         <h6 class="section-heading">Treatment Period in Days</h6>
-                                        <input type="text" class="form-control" id="foodname"
+                                        <input type="text" class="form-control" name="treatment_period_in_days" id="treatment_period_in_days"
                                             aria-describedby="foodname" placeholder="1-3 Days">
                                     </div>
 
@@ -135,7 +139,7 @@
                                         <h6 class="section-heading">Treatment Price</h6>
                                         <label class="form-label">Treatment Price (VAT Included Price) </label>
                                         <div class="input-icon-div">
-                                            <input type="text" class="form-control" placeholder="Treatment Price">
+                                            <input type="text" class="form-control" name="treatment_price" id="treatment_price" placeholder="Treatment Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -143,7 +147,7 @@
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Acommodition Details</h6>
                                             <label class="form-label">Hotel Name</label>
-                                            <select name="" id="">
+                                            <select name="hotel_id" id="hotel_id">
                                                 <option value="">Choose Hotel</option>
                                                 <option value="">Choose Hotel 2</option>
                                                 <option value="">Choose Hotel 3</option>
@@ -156,7 +160,7 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in" class="date-icon w-100"
+                                                    <input type="text" name="hotel_in_time" id="hotel_in_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -168,7 +172,7 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out" class="date-icon w-100"
+                                                    <input type="text" name="hotel_out_time" id="hotel_out_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -185,13 +189,14 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Accomodition
                                                 Price <span>0 ₺</span></a>
+                                                <input type="hidden" name="hotel_acommodition_price" id="hotel_acommodition_price">
                                         </div>
                                     </div>
                                     <div id="transportationDiv">
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Transportation Details</h6>
                                             <label class="form-label">Vehicle</label>
-                                            <select name="" id="">
+                                            <select name="vehicle_id" id="vehicle_id">
                                                 <option value="">Choose Vehicle</option>
                                                 <option value="">Choose Vehicle 2</option>
                                                 <option value="">Choose Vehicle 3</option>
@@ -204,7 +209,7 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in2" class="date-icon w-100"
+                                                    <input type="text" name="vehicle_in_time" id="vehicle_in_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -216,7 +221,7 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out2" class="date-icon w-100"
+                                                    <input type="text" name="vehicle_out_time" id="vehicle_out_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -233,13 +238,14 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Transportation
                                                 Price <span>0 ₺</span></a>
+                                                <input type="hidden" name="transportation_acommodition_price" id="transportation_acommodition_price">
                                         </div>
                                     </div>
                                     <div id="tourDiv">
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Tour Name</h6>
                                             <label class="form-label">Vehicle</label>
-                                            <select name="" id="">
+                                            <select name="tour_id" id="tour_id">
                                                 <option value="">Tour Name</option>
                                                 <option value="">Tour Name 2</option>
                                                 <option value="">Tour Name 3</option>
@@ -252,7 +258,7 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in3" class="date-icon w-100"
+                                                    <input type="text" name="tour_in_time" id="tour_in_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -264,7 +270,7 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out3" class="date-icon w-100"
+                                                    <input type="text" name="tour_out_time" id="tour_out_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -281,6 +287,7 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Tour Price
                                                 <span>0 ₺</span></a>
+                                                <input type="hidden" name="tour_price" id="tour_price">
                                         </div>
                                     </div>
                                     <div id="translationDiv">
@@ -288,7 +295,7 @@
                                             <h6 class="section-heading">Translation Price</h6>
                                             <label class="form-label">Translation Price (VAT Included Price) </label>
                                             <div class="input-icon-div">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" name="visa_details" id="visa_details"
                                                     placeholder="Translation Price">
                                                 <span class="input-icon">₺</span>
                                             </div>
@@ -299,14 +306,14 @@
                                             <h6 class="section-heading">Visa Service Details</h6>
                                             <label class="form-label" for="featureproducts">Please Written Visa Service
                                                 Details</label>
-                                            <input type="text" class="form-control" id="foodname"
+                                            <input type="text" class="form-control" name="visa_details" id="visa_details"
                                                 aria-describedby="foodname" placeholder="Write Here Please">
                                         </div>
 
                                         <div class="form-group d-flex flex-column mb-5">
                                             <label class="form-label">Visa Service Price</label>
                                             <div class="input-icon-div ">
-                                                <input type="text" class="form-control" placeholder="Price">
+                                                <input type="text" class="form-control" name="visa_service_price" id="visa_service_price" placeholder="Price">
                                                 <span class="input-icon">₺</span>
                                             </div>
                                         </div>
@@ -449,22 +456,40 @@
             }, function(start, end, label) {});
         });
     </script>
+     <script>
+        $(document).ready(function() {
+            function updateCheckedValues() {
+                const checkedValues = $('.form-check-input:checked').map(function() {
+                    return $(this).val();
+                }).get().join(', ');
+                $('#checkedValues').text(checkedValues);
+                $('#other_services').val(checkedValues);
+            }
+            $('.form-check-input').change(updateCheckedValues);
+            updateCheckedValues();
+        });
+    </script>
 
     <script>
         function categoryselect(value) {
+            var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+            const bearer_token = '{{ Session::get('login_token') }}'; 
+            // var url= base_url + 'api/md-treatment-list'
+            // alert(url);
             $.ajax({
-                url: 'api/md-treatment-list',
+                url: base_url + '/api/md-treatment-list',
                 type: 'POST',
                 data: {
                     id: value,
                 },
                 headers: {
-                    'X-CSRF-TOKEN': token
+                    'X-CSRF-TOKEN': token,
+                    'Authorization': 'Bearer ' + bearer_token
                 },
                 success: function(response) {
                     console.log(response);
+                    // alert(response);
                     if (response.status === 200) {
                         // Clear existing options
                         $('#treatment_id').empty();

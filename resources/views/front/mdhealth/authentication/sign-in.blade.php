@@ -19,7 +19,7 @@
                     </div>
                     <h2 class="mb-0">Sign In to MD<span>health</span></h2>
                     <p>The device is not yours? Use private or incognito mode to log in.</p>
-                    
+
                     <div class="w-100 df-center">
                         {{-- <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
                         <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
@@ -40,7 +40,7 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -57,7 +57,7 @@
                                     In</button>
                             </div>
                             <div class="text-center">
-                                <a href="#" class="btn-text">Back to MDhealth.co</a>
+                                <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
                             </div>
                             {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
                         </form>
@@ -124,10 +124,10 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                         <span class="text-danger">32 sec</span> 
+                         <span class="text-danger">32 sec</span>
                     </h6>
                     <div>
-                         <a href="#" class="text-secondary">Resend Code In</a> 
+                         <a href="#" class="text-secondary">Resend Code In</a>
                     </div> --}}
 
                 </div>
@@ -202,7 +202,7 @@
                 }
             });
             $.ajax({
-                url: base_url+'/email-to-mobile',
+                url: base_url + '/email-to-mobile',
                 method: 'POST',
                 data: {
                     email: email
@@ -239,7 +239,7 @@
                     }
                 });
                 $.ajax({
-                    url: base_url+'/email-password-exist',
+                    url: base_url + '/email-password-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -322,10 +322,29 @@
                             if (response.url !== undefined) {
                                 // alert(response.url);
                                 window.location.href = base_url + response.url;
-                                $('#error').text('');
+                                
+                                toastr.options ={
+                                   "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                               toastr.success(response.message);
+
+                                //$('#error').text('');
                             } else {
                                 // $('#number').val('');
-                                $('#error').text('Credentials do not match');
+
+                                
+                                toastr.options ={
+                                   "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                                toastr.error('Credentials do not match');  
+                                
+                               //toastr.success(response.message);
+
+                                //$('#error').text('Credentials do not match');
                             }
                         },
                         error: function(xhr, status, error) {

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('md_vendor_product_payment', function (Blueprint $table) {
             $table->id();
+            $table->string('order_id');
             $table->bigInteger('customer_id');
             $table->bigInteger('vendor_id');
             $table->bigInteger('product_id');
@@ -29,7 +30,7 @@ return new class extends Migration
 
             $table->string('bank_name')->nullable();
             $table->string('wallet_id')->nullable();
-            $table->enum('order_status', ['completed','pending','active'])->default('pending');
+            $table->enum('order_status', ['completed','pending','active','cancelled'])->default('pending');
             
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->bigInteger('created_by')->nullable();

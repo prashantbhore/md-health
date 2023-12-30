@@ -156,7 +156,7 @@
                                 </div>
 
                                 <div class="section-btns mb-4">
-                                    <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save Acommodition</button>
+                                    <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save Vehicle</button>
                                 </div>
 
                             </form>
@@ -169,6 +169,12 @@
 </div>
 @endsection
 @section('script')
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery Validate plugin -->
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
 <script>
     $(".mpOtherServicesLi").addClass("activeClass");
     $(".mpOtherServices").addClass("md-active");
@@ -185,5 +191,62 @@
         $('.form-check-input').change(updateCheckedValues);
         updateCheckedValues();
     });
+
+    
 </script>
+
+<script>
+    $(document).ready(function () {
+        $('#add_acommodition').validate({
+            rules: {
+                vehicle_brand_id: {
+                    required: true
+                },
+                vehicle_model_name: {
+                    required: true
+                },
+                comfort_level_id: {
+                    required: true
+                },
+                vehicle_per_day_price: {
+                    required: true,
+                    number: true
+                }
+                // Add rules for other fields if needed
+            },
+            messages: {
+                vehicle_brand_id: {
+                    required: "Please select a vehicle brand"
+                },
+                vehicle_model_name: {
+                    required: "Please enter the vehicle model name"
+                },
+                comfort_level_id: {
+                    required: "Please select a comfort level"
+                },
+                vehicle_per_day_price: {
+                    required: "Please enter the vehicle per day price",
+                    number: "Please enter a valid number"
+                }
+                // Add custom error messages for other fields if needed
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            },
+            submitHandler: function (form) {
+                // If the form is valid, you can submit it
+                form.submit();
+            }
+        });
+    });
+</script>
+
 @endsection

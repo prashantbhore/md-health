@@ -35,6 +35,9 @@ return new class extends Migration
             $table->string('tour_price')->nullable();
             $table->string('visa_details')->nullable();
             $table->string('visa_service_price')->nullable();
+            $table->string('translation_price')->nullable();
+            $table->string('ambulance_service_price')->nullable();
+            $table->string('ticket_price')->nullable();
             $table->string('package_discount')->nullable();
             $table->string('package_price')->nullable();
             $table->string('sale_price')->nullable();

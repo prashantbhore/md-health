@@ -339,9 +339,10 @@
                     success: function(response) {
                         console.log(response);
                         if (response !== undefined) {
-                            if (response.email_exist !== undefined) {
+
+                            if (response.email_exist !== undefined){
                                 $('#error').text('Email already exist');
-                            } else if (response.mobile_no_exist !== undefined) {
+                            } else if (response.mobile_no_exist !== undefined){
                                 $('#error').text('Phone number already exist');
                             } else if (response.phone_exist !== undefined) {
                                 $('#error').text('Phone number already exist');
@@ -432,10 +433,26 @@
                             if (response.url !== undefined) {
                                 // alert(response.url);
                                 window.location.href = base_url + response.url;
-                                $('#error').text('');
+                                
+
+                                
+                                toastr.options ={
+                                   "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                               toastr.success(response.message);
                             } else {
                                 // $('#number').val('');
-                                $('#error').text('Credentials do not match');
+                               // $('#error').text('Credentials do not match');
+
+                                toastr.options ={
+                                   "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                                toastr.error(response.message);  
+
                             }
                         },
                         error: function(xhr, status, error) {
