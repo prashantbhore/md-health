@@ -83,8 +83,8 @@
                                     <div class="multiple-checkbox-div">
                                         <div class="form-group d-flex flex-column mb-5">
                                             <label class="form-label">Other Services (Selectable)</label>
-                                            <p>Checked Values: <span id="checkedValues"></span></p>
-                                            <input type="text" name="other_services" id="other_services" >
+                                            {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
+                                            <input type="hidden" name="other_services" id="other_services" >
                                             {{-- value="{{!empty($hotel_details['other_services'])?$hotel_details['other_services']:''}}" --}}
                                         
                                             <div class="multiple-checks">
@@ -131,7 +131,7 @@
 
                                     <div class="form-group mb-5 section-heading-div">
                                         <h6 class="section-heading">Treatment Period in Days</h6>
-                                        <input type="text" class="form-control" id="foodname"
+                                        <input type="text" class="form-control" name="treatment_period_in_days" id="treatment_period_in_days"
                                             aria-describedby="foodname" placeholder="1-3 Days">
                                     </div>
 
@@ -139,7 +139,7 @@
                                         <h6 class="section-heading">Treatment Price</h6>
                                         <label class="form-label">Treatment Price (VAT Included Price) </label>
                                         <div class="input-icon-div">
-                                            <input type="text" class="form-control" placeholder="Treatment Price">
+                                            <input type="text" class="form-control" name="treatment_price" id="treatment_price" placeholder="Treatment Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -147,7 +147,7 @@
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Acommodition Details</h6>
                                             <label class="form-label">Hotel Name</label>
-                                            <select name="" id="">
+                                            <select name="hotel_id" id="hotel_id">
                                                 <option value="">Choose Hotel</option>
                                                 <option value="">Choose Hotel 2</option>
                                                 <option value="">Choose Hotel 3</option>
@@ -160,7 +160,7 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in" class="date-icon w-100"
+                                                    <input type="text" name="hotel_in_time" id="hotel_in_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -172,7 +172,7 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out" class="date-icon w-100"
+                                                    <input type="text" name="hotel_out_time" id="hotel_out_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -189,13 +189,14 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Accomodition
                                                 Price <span>0 ₺</span></a>
+                                                <input type="hidden" name="hotel_acommodition_price" id="hotel_acommodition_price">
                                         </div>
                                     </div>
                                     <div id="transportationDiv">
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Transportation Details</h6>
                                             <label class="form-label">Vehicle</label>
-                                            <select name="" id="">
+                                            <select name="vehicle_id" id="vehicle_id">
                                                 <option value="">Choose Vehicle</option>
                                                 <option value="">Choose Vehicle 2</option>
                                                 <option value="">Choose Vehicle 3</option>
@@ -208,7 +209,7 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in2" class="date-icon w-100"
+                                                    <input type="text" name="vehicle_in_time" id="vehicle_in_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -220,7 +221,7 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out2" class="date-icon w-100"
+                                                    <input type="text" name="vehicle_out_time" id="vehicle_out_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -237,13 +238,14 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Transportation
                                                 Price <span>0 ₺</span></a>
+                                                <input type="hidden" name="transportation_acommodition_price" id="transportation_acommodition_price">
                                         </div>
                                     </div>
                                     <div id="tourDiv">
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Tour Name</h6>
                                             <label class="form-label">Vehicle</label>
-                                            <select name="" id="">
+                                            <select name="tour_id" id="tour_id">
                                                 <option value="">Tour Name</option>
                                                 <option value="">Tour Name 2</option>
                                                 <option value="">Tour Name 3</option>
@@ -256,7 +258,7 @@
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
-                                                    <input type="text" name="check-in3" class="date-icon w-100"
+                                                    <input type="text" name="tour_in_time" id="tour_in_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -268,7 +270,7 @@
                                                 </div>
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-out</label> -->
-                                                    <input type="text" name="check-out3" class="date-icon w-100"
+                                                    <input type="text" name="tour_out_time" id="tour_out_time" class="date-icon w-100"
                                                         value="10/24/1984" />
                                                     <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -285,6 +287,7 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Tour Price
                                                 <span>0 ₺</span></a>
+                                                <input type="hidden" name="tour_price" id="tour_price">
                                         </div>
                                     </div>
                                     <div id="translationDiv">
@@ -292,7 +295,7 @@
                                             <h6 class="section-heading">Translation Price</h6>
                                             <label class="form-label">Translation Price (VAT Included Price) </label>
                                             <div class="input-icon-div">
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" name="visa_details" id="visa_details"
                                                     placeholder="Translation Price">
                                                 <span class="input-icon">₺</span>
                                             </div>
@@ -303,14 +306,14 @@
                                             <h6 class="section-heading">Visa Service Details</h6>
                                             <label class="form-label" for="featureproducts">Please Written Visa Service
                                                 Details</label>
-                                            <input type="text" class="form-control" id="foodname"
+                                            <input type="text" class="form-control" name="visa_details" id="visa_details"
                                                 aria-describedby="foodname" placeholder="Write Here Please">
                                         </div>
 
                                         <div class="form-group d-flex flex-column mb-5">
                                             <label class="form-label">Visa Service Price</label>
                                             <div class="input-icon-div ">
-                                                <input type="text" class="form-control" placeholder="Price">
+                                                <input type="text" class="form-control" name="visa_service_price" id="visa_service_price" placeholder="Price">
                                                 <span class="input-icon">₺</span>
                                             </div>
                                         </div>
