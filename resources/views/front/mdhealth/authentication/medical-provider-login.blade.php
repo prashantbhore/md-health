@@ -146,7 +146,7 @@
                                                 <label for="*Upload Company Logo" class="form-label">*Upload Company
                                                     Logo</label>
                                                 <input type="file" class="form-control" name="company_logo_image_path"
-                                                    id="company_logo_image_path" placeholder="*Upload Company Logo">
+                                                     id="company_logo_image_path" placeholder="*Upload Company Logo">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -454,6 +454,9 @@
                     $("#error").show();
                 });
         }
+
+
+
     </script>
     <script>
         $(document).ready(function() {
@@ -495,10 +498,10 @@
 
     <script>
         $(document).ready(function() {
-            $.validator.addMethod("passwordMatch", function(value, element) {
+            $.validator.addMethod("passwordMatch", function(value, element){
                 return $('#password').val() === value;
             }, "Passwords do not match.");
-            $.validator.addMethod("spaceValidation", function(value, element) {
+            $.validator.addMethod("spaceValidation", function(value, element){
                 return value.trim().length !== 0;
             }, "Field should not contain only spaces.");
 
@@ -551,7 +554,7 @@
                     },
 
                 },
-                messages: {
+                messages:{
                     company_name: {
                         required: "Please enter the company name.",
                         spaceValidation: "Company name should not contain only spaces.",

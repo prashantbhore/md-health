@@ -24,6 +24,7 @@ use App\Http\Controllers\admin\product\MDshopController;
 use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
+use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 
 /*
@@ -211,7 +212,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function () {
+    Route::controller(CityController::class)->group(function(){
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table', 'data_table');
@@ -224,8 +225,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CITIES
 
-    Route::controller(AdminController::class)->group(function () {
-
+    Route::controller(AdminController::class)->group(function (){
         Route::get('add-admins', 'index');
         Route::post('admin-store', 'store')->name('admin.store');
         Route::get('/admin-data-table', 'data_table');
@@ -392,7 +392,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
     Route::controller(UpdateProfileController::class)->group(function () {
         //update-medical-profile-list
-        
+
         Route::get('medical-account', 'update_medical_profile_list');
 
         //update-medical-profile
@@ -461,7 +461,10 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 #Dashboard
 // Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
 #Treatment Details
-Route::view('treatment-order-details', 'front/mdhealth/medical-provider/treatment-order-details');
+
+
+
+
 // Route::view('medical-packages', 'front/mdhealth/medical-provider/packages');
 // Route::view('medical-packages-view', 'front/mdhealth/medical-provider/medical-packages-view');
 // Route::view('medical-account', 'front/mdhealth/medical-provider/account');
@@ -477,7 +480,13 @@ Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/liv
 Route::view('reports', 'front/mdhealth/medical-provider/reports');
 
 #Sales
-Route::view('medical-provider-sales', 'front/mdhealth/medical-provider/sales');
+
+Route::controller(SalesController::class)->group(function(){
+    Route::get('medical-provider-sales','index');
+   // Route::post('treatment-order-details/{id}','sales_view');
+    Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
+});
+
 
 
 // USER PANEL
