@@ -34,6 +34,7 @@ class PackageController extends Controller
         $hotel_details = $responseData['hotel_details'];
 
         $responseData = $this->apiService->getData($token, $apiUrl3, $body, $method);
+        // dd($responseData);
         $vehicle_details = $responseData['data'];
 
         $responseData = $this->apiService->getData($token, $apiUrl4, $body, $method);

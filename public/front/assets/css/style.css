@@ -2356,3 +2356,12 @@ span.popup-msg.active {
 .mdFoods .section-2{
     margin-top: 15rem;
 }
+
+.download-section{
+    padding: 7rem;
+}
+
+.download-section .part2{
+    width: 50%;
+    padding: 2.5rem 0;
+}

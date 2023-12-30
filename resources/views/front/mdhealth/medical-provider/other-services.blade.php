@@ -199,11 +199,12 @@
     </script>
     <script>
         function acommodition_delete(id) {
+            var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const bearer_token = '{{ Session::get('login_token') }}'; 
 
             $.ajax({
-                url: 'api/md-delete-hotel',
+                url: base_url+'api/md-delete-hotel',
                 type: 'POST',
                 data: {
                     hotel_id: id,
@@ -233,11 +234,12 @@
         function vehicle_delete(id) {
             // alert(id);
             // Get the CSRF token from the meta tag
+            var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const bearer_token = '{{ Session::get('login_token') }}'; 
             // Your AJAX call
             $.ajax({
-                url: 'api/md-delete-transportation',
+                url: base_url+'api/md-delete-transportation',
                 type: 'POST',
                 data: {
                     transportation_id: id,
@@ -268,11 +270,12 @@
         function tour_delete(id) {
             // alert(id);
             // Get the CSRF token from the meta tag
+            var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const bearer_token = '{{ Session::get('login_token') }}'; 
             // Your AJAX call
             $.ajax({
-                url: 'api/md-delete-tour',
+                url: base_url+'api/md-delete-tour',
                 type: 'POST',
                 data: {
                     tour_id: id,
