@@ -59,79 +59,58 @@
             font-size: 14px !important;
         }
     </style>
+
     <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}">
+
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
 <script>
-    function success_toast(title = '', message = '') {
-        alert('uhguygvbhj');
-      $.toast({
-        heading: title,
-        text: message,
-        icon: 'success',
-        loader: true, // Change it to false to disable loader
-        loaderBg: '#9EC600', // To change the background,
-        position: "bottom-right"
-      });
-    }
-  
-    function fail_toast(title = '', message = '') {
-      $.toast({
-        heading: title,
-        text: message,
-        icon: 'error',
-        loader: true, // Change it to false to disable loader
-        loaderBg: '#9EC600', // To change the background,
-        position: "bottom-right"
-      });
-    }
-  </script>
-  <script src="{{ URL::asset('admin_panel/js/jquery.toast.min.js')}}"></script>
-  <script>
-    @if(Session::has('success'))
-    toastr.options = {
-      "closeButton": true,
-      "progressBar": true,
-      "positionClass": "toast-bottom-right",
-    }
-    toastr.success("{{ session('success') }}");
-    @endif
-  
-    @if(Session::has('error'))
-    toastr.options = {
-      "closeButton": true,
-      "progressBar": true,
-      "positionClass": "toast-bottom-right",
-    }
-    toastr.error("{{ session('error') }}");
-    @endif
-  </script>
-  
-  <script>
-    function success_toast(title = '', message = '') {
-      $.toast({
-        heading: title,
-        text: message,
-        icon: 'success',
-        loader: true, // Change it to false to disable loader
-        loaderBg: '#9EC600', // To change the background,
-        position: "bottom-right"
-      });
-    }
-  
-    function fail_toast(title = '', message = '') {
-      $.toast({
-        heading: title,
-        text: message,
-        icon: 'error',
-        loader: true, // Change it to false to disable loader
-        loaderBg: '#9EC600', // To change the background,
-        position: "bottom-right"
-      });
-    }
-  </script>
+  @if(Session::has('success'))
+  toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+  }
+  toastr.success("{{ session('success') }}");
+  @endif
+
+  @if(Session::has('error'))
+  toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+  }
+  toastr.error("{{ session('error') }}");
+  @endif
+</script>
+
+<script>
+  function success_toast(title = '', message = '') {
+    $.toast({
+      heading: title,
+      text: message,
+      icon: 'success',
+      loader: true, // Change it to false to disable loader
+      loaderBg: '#9EC600', // To change the background,
+      position: "bottom-right"
+    });
+  }
+
+  function fail_toast(title = '', message = ''){
+    $.toast({
+      heading: title,
+      text: message,
+      icon: 'error',
+      loader: true, // Change it to false to disable loader
+      loaderBg: '#9EC600', // To change the background,
+      position: "bottom-right"
+    });
+  }
+</script>
 
 <body>
 <input type="hidden" value="{{url('/')}}" id="base_url"/>
