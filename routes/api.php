@@ -403,6 +403,7 @@ Route::controller(VendorSalesController::class)->group(function(){
     Route::get('completed-sales-lists','completedSales');
     Route::get('cancelled-sales-lists','cancelledSales');
     Route::post('order-view','salesView');
+    Route::post('search-sales','searchSales');
 
 
 });
