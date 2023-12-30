@@ -97,7 +97,7 @@ class SalesController extends BaseController{
     {
 
         $validator = Validator::make($request->all(), [
-            'purchage_id' => 'required|string',
+            'purchage_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -181,7 +181,7 @@ class SalesController extends BaseController{
 
 
      $validator = Validator::make($request->all(), [
-           'purchage_id' => 'required|string',
+           'purchage_id' => 'required',
        ]);
    
        if ($validator->fails()) {

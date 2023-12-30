@@ -64,7 +64,23 @@ class SalesController extends Controller
     {
 
 
-    //     $token = Session::get('login_token');
+        $token = Session::get('login_token');
+
+        //$purchage_id=Crypt::decrypt($request->id);
+        //dd($purchage_id);
+
+        $apiUrl = url('api/md-provider-patient-details');
+        $encryptedId = $request->id;
+        $decryptedId = Crypt::decrypt($request->id);
+        $body=['purchage_id' => $decryptedId];
+        $method = 'POST';
+
+
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+        // dd($responseData);
+        $patient_details = $responseData['patient_details'];
+
+
        
     //     $apiUrl = url('api/md-provider-active-treatment-list');
     //     $method = 'GET';
@@ -100,7 +116,7 @@ class SalesController extends Controller
 
     //     // dd($active_sales);
 
-        return view('front.mdhealth.medical-provider.treatment-order-details');
+        return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));
     }
 
 
