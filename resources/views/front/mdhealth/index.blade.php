@@ -12,6 +12,7 @@
 
 @extends('front.layout.layout')
 @section('content')
+<div class="bg-f6">
     <div class="content-wrapper bg-f6">
         <div class="banner-section df-center flex-column">
             <div class="container">
