@@ -389,7 +389,7 @@
                             </div>
                             <label for="floatingSelect">Meals</label>
                         </div>
-                        <div class="form-floating mb-4">
+                        <div class="form-floating mb-2">
                             <select class="form-select" name="subscription" id="floatingSelect"
                                 aria-label="Floating label select example">
                                 <option data-display="Select" selected>Select Subscription</option>
@@ -397,7 +397,8 @@
                             </select>
                             <label for="floatingSelect">Subscription Type</label>
                         </div>
-                        <a href="{{url('homeService-purchase')}}" type="submit" class="btn purchaseBtn my-4 d-flex justify-content-center align-items-center " data-bs-toggle="modal" data-bs-target="#foodForModal2">
+                        <p class="fs-6 camptonBold text-green text-end">Price: <span style="color: #000;">2.820,00 ₺</span></p>
+                        <a href="{{url('homeService-purchase')}}" type="submit" class="btn purchaseBtn my-4 d-flex justify-content-center align-items-center " data-bs-toggle="modal" data-bs-target="#foodForModal2" data-bs-dismiss="modal">
                             <span class="fw-bold">Step 2:</span> <span class="camptonBook">Who is this meal for?</span> 
                         </a>
                     </form>
@@ -412,11 +413,59 @@
                 <!-- </button> -->
             <div class="modal-content">
                 <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
-                <img src="{{('front/assets/img/step1.svg')}}" alt="">
-                <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
+                <img src="{{('front/assets/img/step2.svg')}}" alt="">
+                <p class="camptonBook fw-bold text-center mt-4">Who is this meal for?</p>
                 <div class="d-flex align-items-center flex-column">
                     <a href="{{url('homeService-purchase')}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
-                    <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#serviceForModal2" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>
+                    <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#foodForModal3" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Gift</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="foodForModal3" tabindex="-1" aria-labelledby="foodForModal3" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered position-relative">
+            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+                <!-- </button> -->
+            <div class="modal-content">
+                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/modalClose.png')}}" alt="">
+                <img src="{{('front/assets/img/giftMeal.svg')}}" alt="">
+                <div class="modal-body">
+                    <form class="row g-4">
+                            <div class="col-md-4 mb-3">
+                                <label for="inputEmail4" class="form-label fw-bold">*Recipient Full Name</label>
+                                <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Name">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="inputAddress" class="form-label fw-bold">*E-mail</label>
+                                <input type="email" class="form-control  h-75" id="inputAddress"  placeholder="Email">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="inputPassword4" class="form-label fw-bold">*Recipient Number</label>
+                                <input type="number" class="form-control h-75" id="inputPassword4" placeholder="Contact Number">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="inputState" class="form-label fw-bold">*City</label>
+                                <select id="inputState" class="form-select h-75">
+                                    <option selected>City</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="inputEmail4" class="form-label fw-bold">*Full Address</label>
+                                <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Address">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="inputEmail4" class="form-label fw-bold">*Gift Note</label>
+                                <!-- <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Address"> -->
+                                <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="col-12 text-center ">
+                                <a href="{{url('homeService-purchase')}}" type="submit" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                    <span class="fw-bold">Go</span> <span class="camptonBook">Payment Page</span> 
+                                </a>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

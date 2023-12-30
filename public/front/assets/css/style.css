@@ -68,7 +68,9 @@
 #treatmentForModal2 .modal-content,
 #serviceForModal .modal-content,
 #serviceForModal2 .modal-content,
-#foodForModal1 .modal-content {
+#foodForModal1 .modal-content,
+#foodForModal2 .modal-content,
+#foodForModal3 .modal-content {
     border-radius: 0.5rem;
     border: none;
     position: relative;
@@ -90,12 +92,13 @@
 
 #treatmentForModal .modal-dialog,
 #serviceForModal .modal-dialog,
-#foodForModal1 .modal-dialog {
+#foodForModal1 .modal-dialog{
     max-width: 600px;
 }
 
 #treatmentForModal2 .modal-dialog,
-#serviceForModal2 .modal-dialog {
+#serviceForModal2 .modal-dialog,
+#foodForModal3 .modal-dialog  {
     max-width: 700px;
 }
 
@@ -103,7 +106,9 @@
 #treatmentForModal2 .closeModal,
 #serviceForModal .closeModal,
 #serviceForModal2 .closeModal,
-#foodForModal1 .closeModal {
+#foodForModal1 .closeModal,
+#foodForModal2 .closeModal,
+#foodForModal3 .closeModal {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -554,14 +559,23 @@ select {
 
 }
 
-.section-2 h2,
-.section-3 h1 {
+.section-2 h2, .section-3 h2 {
     font-family: "CamptonBold";
     color: #000002;
     font-size: 53px;
     font-weight: 700;
     line-height: 67px;
-    padding-bottom: 1rem;
+    /* padding-bottom: 1rem; */
+    letter-spacing: -0.04em;
+}
+
+.section-3 h1{
+    font-family: "CamptonBold";
+    color: #000002;
+    font-size: 65px;
+    font-weight: 700;
+    line-height: 67px;
+    /* padding-bottom: 1rem; */
     letter-spacing: -0.04em;
 }
 
@@ -688,9 +702,22 @@ select {
     font-family: Campton;
     font-size: 16px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
+}
+
+.download-section{
+    padding: 7rem;
+}
+
+.download-section .part2{
+    width: 50%;
+    padding: 2.5rem 0;
+}
+
+.form-label{
+    font-family: "Campton";
 }
 
 .treatment-section .arrow {

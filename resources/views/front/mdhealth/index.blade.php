@@ -6,6 +6,7 @@
 
 @extends('front.layout.layout')
 @section('content')
+<div class="bg-f6">
     <div class="content-wrapper bg-f6">
         <div class="banner-section df-center flex-column">
             <div class="container">
@@ -75,33 +76,33 @@
             </div>
         </div>
     </div>
-    <div class="py-100px pb-0 md-coin df-center flex-column gap-5 bg-f6">
+    <div class="py-100px pb-0 md-coin df-center flex-column gap-4 bg-f6 section-3 mb-5">
         <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
-        <h1><span class="text-green text-decoration-underline">Earn</span> as you spend <span class="text-green">!</span>
+        <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span class="text-green">!</span>
         </h1>
-        <p>Earn <span>cashback</span> per transaction or <span>invite your friends</span> and spend <span>MD</span>coin for
+        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and <br/> spend <span class="camptonBold">MD</span>coin for
             your health needs. </p>
     </div>
     <div class="bg-f6">
         <div class="df-center container md-earn">
             <div>
                 <h1>2%</h1>
-                <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                <img class="mb-3" src="{{ 'front/assets/img/img1.png' }}" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
             <div>
                 <h1>4%</h1>
-                <img src="{{ 'front/assets/img/img2.png' }}" alt="">
+                <img class="mb-3" src="{{ 'front/assets/img/img2.png' }}" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
             <div>
                 <h1>3%</h1>
-                <img src="{{ 'front/assets/img/img3.png' }}" alt="">
+                <img class="mb-3" src="{{ 'front/assets/img/img3.png' }}" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
             <div>
                 <h1>5%</h1>
-                <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                <img class="mb-3" src="{{ 'front/assets/img/img1.png' }}" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
         </div>
@@ -117,7 +118,7 @@
     <!-- SECTION 3: TOP TREATMENT CARDS -->
     <div class="bg-f6">
         <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
-            <h1><span class="text-green">TOP 5</span> treatments</h1>
+            <h2><span class="text-green">TOP 5</span> treatments</h2>
             <div class="d-flex justify-content-between me-4 align-items-center">
                 <div class="card">
                     <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
@@ -274,10 +275,10 @@
             </div>
             <div class="part2">
                 <div class="mb-4">
-                    <p class="fs3 camptonBold mb-0">Download</p>
-                    <p class="fs3"><span class="camptonBold text-green">MD</span><span
-                            class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
-                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
+                    <p class="fs3 camptonBold mb-0 lh-sm" style="font-size: 40px;">Download</p>
+                    <p class="fs3 lh-sm" style="font-size: 40px;"><span class="camptonBold text-green">MD</span><span
+                            class="text-green campton">health</span> <span class="camptonBold">Mobile</span></p>
+                    <p class="clr-grey camptonBook fs-5 fw-bolder lh-sm">Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
                 </div>
                 <div class="d-flex align-items-center gap-4">
@@ -321,27 +322,27 @@
                 <div class="modal-body">
                     <form class="row g-4">
                         <div class="col-md-4">
-                            <label for="inputEmail4" class="form-label fw-bold">*First Name</label>
+                            <label for="inputEmail4" class="form-label">*First Name</label>
                             <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="First Name">
                         </div>
                         <div class="col-md-4">
-                            <label for="inputPassword4" class="form-label fw-bold">*Last Name</label>
+                            <label for="inputPassword4" class="form-label">*Last Name</label>
                             <input type="text" class="form-control h-75" id="inputPassword4" placeholder="Last Name">
                         </div>
                         <div class="col-md-4">
-                            <label for="inputAddress" class="form-label fw-bold">*Email</label>
+                            <label for="inputAddress" class="form-label">*Email</label>
                             <input type="email" class="form-control  h-75" id="inputAddress" placeholder="Optional">
                         </div>
 
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label fw-bold">*Country</label>
+                            <label for="inputState" class="form-label">*Country</label>
                             <select id="inputState" class="form-select h-75">
                                 <option selected>Choose...</option>
                                 <option>...</option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
+                            <label for="inputAddress33" class="form-label">*Contact Mobile</label>
                             <input type="tel" class="form-control h-75" id="inputAddress33"
                                 placeholder="+Contact Mobile">
                             {{-- <div class="form-check form-check-inline">
@@ -356,32 +357,32 @@
                             </div> --}}
                         </div>
                         <div class="col-md-4">
-                            <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
+                            <label for="inputAddress443" class="form-label">*Treatment Name</label>
                             <input type="text" class="form-control h-75" id="inputAddress443"
                                 placeholder="Treatment Name">
                         </div>
 
                         <div class="col-md-12">
-                            <label for="inputAddress5" class="form-label fw-bold">*Details</label>
+                            <label for="inputAddress5" class="form-label">*Details</label>
                             <input type="text" class="form-control h-75" id="inputAddress5"
                                 placeholder="Please Write your treatment requirement in detail">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
+                            <label for="inputAddress5" class="form-label">*Previes Treatment</label>
                             <input type="text" class="form-control h-75" id="inputAddress5"
                                 placeholder="Have you done/received any related treatment before If Yes,Please write the details">
                         </div>
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label fw-bold">Upload Your Treatment Documents</label>
+                            <label for="formFile" class="form-label">Upload Your Treatment Documents</label>
                             <input class="form-control h-75" type="file" id="formFile">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress5" class="form-label fw-bold">When do you need the treatment?</label>
+                            <label for="inputAddress5" class="form-label">When do you need the treatment?</label>
                             <input type="text" class="form-control h-75" id="inputAddress5"
                                 placeholder="Apartment, studio, or floor">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress5" class="form-label fw-bold">Do you need travel visa?</label>
+                            <label for="inputAddress5" class="form-label">Do you need travel visa?</label>
                             <div class="mt-2">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
@@ -508,8 +509,7 @@
     <div class="bg-f6 scanQr">
         <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
     </div>
-
-    </div>
+</div>
 @endsection
 @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
