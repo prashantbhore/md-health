@@ -157,16 +157,17 @@
                                                 <label for="address">Address</label>
                                                 <p class="d-flex flex-column gap-3">
                                                     <span>{{!empty($patient_details['customer']['address'])?$patient_details['customer']['address']:''}}</span>
-                                                    <span>City / Country</span>
+                                                    <span>{{!empty($patient_details['customer']['city']['city_name'])?$patient_details['customer']['city']['city_name']:''}} / {{!empty($patient_details['customer']['city']['city_name'])?$patient_details['customer']['country']['country_name']:''}}</span>
                                                 </p>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="address">Invoice Address</label>
                                                 <p class="d-flex flex-column gap-3">
                                                     <span>{{!empty($patient_details['customer']['address'])?$patient_details['customer']['address']:''}}</span>
-                                                    <span>City / Country</span>
+                                                    <span>{{!empty($patient_details['customer']['city']['city_name'])?$patient_details['customer']['city']['city_name']:''}} / {{!empty($patient_details['customer']['city']['city_name'])?$patient_details['customer']['country']['country_name']:''}}</span>
                                                 </p>
                                             </div>
+                                            
                                             <div class="col-md-6 mb-3">
                                                 <div class="payment-div mb-4">
                                                     <h6 class="section-heading">Payment Info</h6>
