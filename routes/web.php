@@ -489,7 +489,9 @@ Route::controller(SalesController::class)->group(function(){
    // Route::post('treatment-order-details/{id}','sales_view');
     Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
 
-    Route::match(['get', 'post'], 'store-date-status','status_date_change');
+    //Route::post('store-date-status','status_date_change')->name('status.date.store');
+
+    Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
 
 
 });

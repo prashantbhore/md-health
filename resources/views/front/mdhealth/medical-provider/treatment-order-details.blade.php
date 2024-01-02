@@ -201,32 +201,44 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <form method="POST" action="{{route('status.date.store')}}">
+                                                @csrf
+
+                                                <input type="hidden"  name="treatment_purchage_id"  value="{{!empty($patient_details['id'])?$patient_details['id']:''}}">
                                             <div class="col-md-12 mb-4">
                                                 <h6 class="section-heading">Treatment Start Date</h6>
                                                 <!-- <div id="reportrange" class="date-range-picker-div" name="daterange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"> -->
                                                 <div class="" name="" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                                                     <i class="fa fa-calendar"></i>&nbsp;
-                                                    <input id="datepicker" type="text" name="" value="" />
+                                                    <input id="datepicker" type="text" name="treatment_start_date" value="{{!empty($patient_details['treatment_start_date'])?$patient_details['treatment_start_date']:''}}"/>
                                                     <span></span>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 mb-3">
+                                                
+                                             {{-- {{dd(!empty($patient_details['purchase_type'])?$patient_details['purchase_type']:'')}}    --}}
+                                            
+                                             <div class="col-md-12 mb-3">
                                                 <div class="form-group d-flex flex-column">
                                                     <h4 class="text-dark">Status</h4>
-                                                    <select name="" id="" class="form-control cstom-select-img">
-                                                        <option value="">Pending</option>
-                                                        <option value="">In Progress</option>
-                                                        <option value="">Complete</option>
+                                                    <select name="treatment_status" id="" class="form-control cstom-select-img">
+                                                        <option value="pending" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='pending'))?'selected':''}}>Pending</option>
+                                                        <option value="in_progress"  {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='in_progress'))?'selected':''}} >In Progress</option>
+                                                        <option value="completed" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='completed'))?'selected':''}}>Complete</option>
+                                                        <option value="cancelled" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='cancelled'))?'selected':''}}>Cancel</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12">
                                                 <div class="section-btns pt-2">
-                                                    <a href="javascript:void(0);" class="green-plate bg-dark text-white fw-700 w-100">Save Changes</a>
+                                                    <button type="submit" class="green-plate bg-dark text-white fw-700 w-100">Save Changes</button>
                                                 </div>
                                             </div>
+                                            </form>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -235,13 +247,17 @@
                                         <div class="col-md-12 mb-3">
                                             <div class="payment-div mb-4">
                                                 <h6 class="section-heading">Treatment Details</h6>
-                                                <h6>Hearth Valve Replacement Surgery</h6>
+                                                <h6>{{!empty($patient_details['package']['package_name'])?$patient_details['package']['package_name']:''}}</h6>
                                                 <h6 class="fsb-2 mb-0 fst-italic d-flex align-items-center gap-1">
                                                     <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M4.21458 1.41667V0H8.46458V1.41667H4.21458ZM4.92292 9.73958L4.14375 8.18125C4.08472 8.05139 3.99618 7.95388 3.87812 7.88871C3.76007 7.82354 3.63611 7.79119 3.50625 7.79167H0C0.177083 6.19792 0.867708 4.85492 2.07187 3.76267C3.27604 2.67042 4.69861 2.12453 6.33958 2.125C7.07153 2.125 7.77396 2.24306 8.44687 2.47917C9.11979 2.71528 9.75139 3.05764 10.3417 3.50625L11.3333 2.51458L12.325 3.50625L11.3333 4.49792C11.7111 4.99375 12.0122 5.51626 12.2365 6.06546C12.4608 6.61465 12.6083 7.19006 12.6792 7.79167H9.61562L8.39375 5.34792C8.26389 5.07639 8.05139 4.94062 7.75625 4.94062C7.46111 4.94062 7.24861 5.07639 7.11875 5.34792L4.92292 9.73958ZM6.33958 14.875C4.69861 14.875 3.27604 14.3289 2.07187 13.2366C0.867708 12.1444 0.177083 10.8016 0 9.20833H3.06354L4.28542 11.6521C4.41528 11.9236 4.62778 12.0594 4.92292 12.0594C5.21806 12.0594 5.43055 11.9236 5.56042 11.6521L7.75625 7.26042L8.53542 8.81875C8.59444 8.94861 8.68299 9.04612 8.80104 9.11129C8.9191 9.17646 9.04306 9.20881 9.17292 9.20833H12.6792C12.5021 10.8021 11.8115 12.1448 10.6073 13.2366C9.40312 14.3284 7.98056 14.8745 6.33958 14.875Z" fill="#111111" />
                                                     </svg>
+                                                    {{ !empty($patient_details['treatment_start_date']) ? \Carbon\Carbon::parse($patient_details['treatment_start_date'])->format('j F Y') : '' }}
 
-                                                    12 December 2023 - 19 December 2023
+
+                                                    {{-- {{!empty($patient_details['treatment_start_date'])?$patient_details['treatment_start_date']:''}} --}}
+
+                                                    {{-- 12 December 2023 - 19 December 2023 --}}
                                                 </h6>
                                             </div>
                                         </div>
