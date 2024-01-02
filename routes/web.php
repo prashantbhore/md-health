@@ -480,6 +480,7 @@ Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message'
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
 Route::view('reports', 'front/mdhealth/medical-provider/reports');
+Route::view('reports', 'front/mdhealth/medical-provider/reports');
 
 #Sales
 
@@ -487,6 +488,12 @@ Route::controller(SalesController::class)->group(function(){
     Route::get('medical-provider-sales','index');
    // Route::post('treatment-order-details/{id}','sales_view');
     Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
+
+    //Route::post('store-date-status','status_date_change')->name('status.date.store');
+
+    Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
+
+
 });
 
 
@@ -503,6 +510,12 @@ Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']
 // Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);
 Route::get('view-my-active-packages/{id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
 
+Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
+Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');
+Route::view('user-message', 'front/mdhealth/user-panel/user-message');
+Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
+Route::view('user-reports', 'front/mdhealth/user-panel/user-reports');
+Route::view('user-all-reports', 'front/mdhealth/user-panel/user-all-reports');
 
 // MD BOOKING PAGE KD
 Route::view('md-booking-home-page', 'front/mdhealth/md-booking/md-booking-home-page');
