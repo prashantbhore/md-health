@@ -207,7 +207,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="sale-cancelled" role="tabpanel" aria-labelledby="sale-cancelled-tab">
-                                        <h1>Shubham 2</h1>
+                                        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, iusto!</h1>
                                     </div>
                                 </div>
                             </div>
