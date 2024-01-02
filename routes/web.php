@@ -495,6 +495,8 @@ Route::controller(SalesController::class)->group(function(){
 
     Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
 
+    Route::match(['get', 'post'], 'assign-case-manager','assign_case_manager')->name('assign.case.manager');
+
 
 });
 

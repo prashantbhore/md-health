@@ -262,12 +262,21 @@
                                             </div>
                                         </div>
 
+
+
+
+
+                                        <form method="POST" action="{{route('assign.case.manager')}}">
+
+                                            @csrf
+                                            <input type="hidden"  name="purchage_id" value="{{!empty($patient_details['id'])?$patient_details['id']:''}}" >
+
                                         <div class="col-md-12 mb-3 payment-div">
                                             <h6 class="section-heading mb-1">Case Details</h6>
                                             <h6>Assign Case Manager</h6>
                                             <div class="input-with-cross mb-3">
-                                                <select class="form-control" id="" aria-describedby="">
-                                                    <option value="">Select a name</option>
+                                                <select class="form-control" name="case_manager_id" id="" aria-describedby="">
+                                                    <option value="">Select case manager</option>
                                                     @foreach ($case_manager as $manager )
                                                     <option value="{{!empty($manager['id'])?$manager['id']:''}}">{{!empty($manager['name'])?$manager['name']:''}}</option>
                                                     @endforeach
@@ -289,9 +298,10 @@
                                             <h6 class="section-heading mb-1">Acommodition Details</h6>
                                             <h6>Assign Hotel</h6>
                                             <div class="input-with-cross mb-3">
-                                                <input type="text" class="form-control" id="" aria-describedby="" placeholder="Renaissence Hotel Besiktas">
+                                                <input type="text" name="hotel_id" class="form-control" id="" aria-describedby="" placeholder="Renaissence Hotel Besiktas">
                                                 <i class="fa fa-close"></i>
                                             </div>
+
                                             <div class="example-div">
                                                 <p class="mb-1"><b>Hotel:</b>{{!empty($patient_details['hotel']['hotel_name'])?  $patient_details['hotel']['hotel_name'] :''}} <span class="text-green">{{!empty($patient_details['hotel']['hotel_address'])?  $patient_details['hotel']['hotel_address'] :''}}</span></p>
                                                 <div class="for-icon-text">
@@ -325,10 +335,10 @@
                                             <h6 class="section-heading">Transportation Details</h6>
                                             <div class="form-group d-flex flex-column mb-2">
                                                 <h6>Assign Vehicle</h6>
-                                                <select name="" id="" class="cstom-select-img form-control">
-                                                    <option value="">Mercedes Vito 7+1 VIP Diesel</option>
-                                                    <option value="">Mercedes Vito 7+1 VIP Diesel</option>
-                                                    <option value="">Mercedes Vito 7+1 VIP Diesel</option>
+                                                <select name="vehicle_id" id="" class="cstom-select-img form-control">
+                                                    <option value="1">Mercedes Vito 7+1 VIP Diesel</option>
+                                                    <option value="2">Mercedes Vito 7+1 VIP Diesel</option>
+                                                    <option value="3">Mercedes Vito 7+1 VIP Diesel</option>
                                                 </select>
                                             </div>
                                             <div class="example-div">
@@ -355,7 +365,7 @@
                                                         </svg>
                                                         No Smoking
                                                     </p>
-                                                    
+
                                                     <p class="mb-1 fw-500 d-flex align-items-center gap-2">
                                                         <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <g clip-path="url(#clip0_353_6343)">
@@ -378,19 +388,24 @@
                                         <div class="col-md-12 mb-3">
                                             <div class="form-group d-flex flex-column mb-2">
                                                 <h6>Status</h6>
-                                                <select name="" id="" class="cstom-select-img form-control">
-                                                    <option value="">Pending</option>
-                                                    <option value="">Complete</option>
-                                                    <option value="">Inprogress</option>
+                                                <select name="purchase_type" id="" class="cstom-select-img form-control">
+                                                    <option value="pending" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='pending'))?'selected':''}}>Pending</option>
+                                                    <option value="in_progress"  {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='in_progress'))?'selected':''}} >In Progress</option>
+                                                    <option value="completed" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='completed'))?'selected':''}}>Complete</option>
+                                                    <option value="cancelled" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='cancelled'))?'selected':''}}>Cancel</option>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div class="col-md-12">
                                             <div class="section-btns pt-2">
-                                                <a href="javascript:void(0);" class="green-plate bg-dark text-white fw-700 w-100">Save Changes</a>
+                                                <button type="submit" class="green-plate bg-dark text-white fw-700 w-100">Save Changes</button>
                                             </div>
                                         </div>
+                                        
+                                    </form>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -411,8 +426,8 @@
 @section('script')
 
 <script>
-    $(".mpDashboardLi").addClass("activeClass");
-    $(".mpDashboard").addClass("md-active");
+    $(".mpSalesLi").addClass("activeClass");
+    $(".mpSales").addClass("md-active");
 </script>
 <script>
     $('#datepicker').datepicker({
