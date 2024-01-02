@@ -9,6 +9,10 @@ use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
 use App\Http\Controllers\Front\MedicalProvider\PackageController;
 use App\Http\Controllers\Front\Registration\MedicalProviderRegistrationController;
 use App\Http\Controllers\Front\Registration\UserRegistrationController;
+use App\Http\Controllers\Front\Mdhome\MdHomeController;
+use App\Http\Controllers\Front\MdBooking\MdBookingController;
+use App\Http\Controllers\Front\MdFood\MdFoodsController;
+use App\Http\Controllers\Front\MdShop\MdShoppingController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\master\CityController;
@@ -71,9 +75,9 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 
 //Home Service Routes
-Route::get('home-service', function () {
-    return view('front.mdHome.index');
-});
+Route::get('home-service', [MdhomeController::class ,'home']
+    // return view('front.mdHome.index');
+);
 
 Route::get('search-result', function () {
     return view('front.mdHome.searchResult');
@@ -103,9 +107,7 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 //mdShop Routes
-Route::get('mdShop', function () {
-    return view('front.mdShop.index');
-});
+Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
 
 Route::get('cart', function () {
     return view('front.mdShop.cart');
@@ -124,9 +126,7 @@ Route::get('view-products', function () {
 });
 
 // mdFood Routes
-Route::get('mdFoods', function () {
-    return view('front.mdFoods.index');
-});
+Route::get('mdFoods', [MdFoodsController::class , 'mdfood_home']);
 
 Route::get('foods-search-result', function () {
     return view('front.mdFoods.searchResult');
@@ -520,7 +520,8 @@ Route::view('user-reports', 'front/mdhealth/user-panel/user-reports');
 Route::view('user-all-reports', 'front/mdhealth/user-panel/user-all-reports');
 
 // MD BOOKING PAGE KD
-Route::view('md-booking-home-page', 'front/mdhealth/md-booking/md-booking-home-page');
+// 'front/mdhealth/md-booking/md-booking-home-page'
+Route::any('md-booking-home-page',[MdBookingController::class, 'mdbooking_home'] );
 Route::view('md-booking-search-hotel-page', 'front/mdhealth/md-booking/md-booking-search-hotel');
 Route::view('md-booking-search-flight-page', 'front/mdhealth/md-booking/md-booking-search-flight');
 Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-booking-search-vehicle');
