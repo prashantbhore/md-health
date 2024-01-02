@@ -274,7 +274,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
 
@@ -301,7 +301,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($packages_deactive_list)) {

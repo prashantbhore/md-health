@@ -189,7 +189,7 @@
                                         <p class="mb-0 camptonBook fs-5 fw-bold lh-sm">invite your friends</p>
                                         <p class="mb-0 camptonBold fs-3">and <span class="text-green"><u>earn</u></span> MD<span class="camptonBook fw-bold">coin</span>.</p>
                                         <div class="mt-2 d-flex justify-content-center">
-                                            <a href="{{url('user-wallet')}}" type="button" class="btn btn-sm inviteBtn df-center mt-3 mb-5">Invite Friends</a>
+                                            <a href="{{url('user-invite')}}" type="button" class="btn btn-sm inviteBtn df-center mt-3 mb-5">Invite Friends</a>
                                         </div>
                                     </div>
                                 </div>

@@ -1,12 +1,13 @@
 @php
-    $treatment_plans = App\Models\ProductCategory::all();
-    $cities = App\Models\Cities::where('country_id', '1')->get();
-    // dd(Session::all());
-    if (Session::get('login_token') != null) {
-        $is_logged_in = true;
-    } else {
-        $is_logged_in = false;
-    }
+$treatment_plans = App\Models\ProductCategory::all();
+$cities = App\Models\Cities::where('country_id', '1')->get();
+// dd(Session::all());
+if (Session::get('login_token') != null) {
+$is_logged_in = true;
+} else {
+$is_logged_in = false;
+}
+// dd(Session::all());
 @endphp
 
 
@@ -25,32 +26,30 @@
                         <div class="search-bar d-flex align-items-center p-3 gap-3">
                             <div class="form-floating">
                                 <input type="hidden" name="platform_type" value="web">
-                                <select class="form-select" name="treatment_name" id="floatingSelect"
-                                    aria-label="Floating label select example">
+                                <select class="form-select" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option value="">Select Treatment</option>
                                     @foreach ($treatment_plans as $treatment_plan)
-                                        <option>{{ $treatment_plan->product_category_name }}</option>
+                                    <option>{{ $treatment_plan->product_category_name }}</option>
                                     @endforeach
                                 </select>
                                 <label for="floatingSelect">Treatments</label>
                             </div>
                             <div class="form-floating">
-                                <select class="form-select" name="city_name" id="floatingSelect"
-                                    aria-label="Floating label select example">
+                                <select class="form-select" name="city_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option data-display="Select" selected>Select City</option>
                                     @foreach ($cities as $city)
-                                        <option>{{ $city->city_name }}</option>
+                                    <option>{{ $city->city_name }}</option>
                                     @endforeach
                                 </select>
                                 <label for="floatingSelect">City</label>
                             </div>
                             <div class="form-floating">
                                 <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                                                                <option data-display="Select" selected>12 Aug</option>
-                                                                                                <option value="1">One</option>
-                                                                                                <option value="2">Two</option>
-                                                                                                <option value="3">Three</option>
-                                                                                            </select> -->
+                                                                                                                <option data-display="Select" selected>12 Aug</option>
+                                                                                                                <option value="1">One</option>
+                                                                                                                <option value="2">Two</option>
+                                                                                                                <option value="3">Three</option>
+                                                                                                            </select> -->
                                 <!-- <div class="datepickerContainer"> -->
                                 <input type="text" class="form-select" name="daterange" value="" />
                                 <!-- </div> -->
@@ -69,10 +68,10 @@
             <h2>Couldn’t find your <span class="text-green text-decoration-underline">treatment</span> package?</h2>
             <div class="card border-0 position-relative">
                 <div class="card-body df-center flex-column">
-                    <p class="card-text">Contact us with your detail & our team will prepare your desired treatment package!
+                    <p class="card-text">Contact us with your detail & our team will prepare your desired treatment
+                        package!
                     </p>
-                    <button class="btn btn-md-black position-absolute" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Make a Request</button>
+                    <button class="btn btn-md-black position-absolute" data-bs-toggle="modal" data-bs-target="#exampleModal">Make a Request</button>
                 </div>
                 <!-- exampleModal -->
                 <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute" alt="">
@@ -83,7 +82,8 @@
         <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
         <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span class="text-green">!</span>
         </h1>
-        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and <br/> spend <span class="camptonBold">MD</span>coin for
+        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and <br /> spend <span class="camptonBold">MD</span>coin
+            for
             your health needs. </p>
     </div>
     <div class="bg-f6">
@@ -137,8 +137,7 @@
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
-                            class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -159,13 +158,11 @@
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
-                            alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
-                            class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -186,13 +183,11 @@
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
-                            alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
-                            class="fw-normal">(520)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -213,13 +208,11 @@
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
-                            alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
-                            class="fw-normal">(400)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -240,13 +233,11 @@
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
-                            alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
-                            class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -265,7 +256,8 @@
     <div class="bg-green">
         <div class="container py-5 text-center">
             <p class="mb-0 camptonBold fs-2 fw-bold">We made the treatment reliable and easier for you</p>
-            <p class="mb-0 fs-4 fw-bolder camptonBook text-white">Get your treatment packages in Turkiye withing few clicks
+            <p class="mb-0 fs-4 fw-bolder camptonBook text-white">Get your treatment packages in Turkiye withing few
+                clicks
                 from professional healthcare providers.</p>
         </div>
     </div>
@@ -278,10 +270,9 @@
             </div>
             <div class="part2">
                 <div class="mb-4">
-                    <p class="fs3 camptonBold mb-0 lh-sm" style="font-size: 40px;">Download</p>
-                    <p class="fs3 lh-sm" style="font-size: 40px;"><span class="camptonBold text-green">MD</span><span
-                            class="text-green campton">health</span> <span class="camptonBold">Mobile</span></p>
-                    <p class="clr-grey camptonBook fs-5 fw-bolder lh-sm">Lorem, ipsum dolor sit amet consectetur adipisicing
+                    <p class="fs3 camptonBold mb-0">Download</p>
+                    <p class="fs3"><span class="camptonBold text-green">MD</span><span class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
+                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
                 </div>
                 <div class="d-flex align-items-center gap-4">
@@ -299,8 +290,7 @@
     <!-- SECTION 6 -->
     <div class="bg-black position-relative section6">
         <div class="container medical-pckg">
-            <p class="fs-1 camptonBold clr-white mb-0">Find your <span class="text-green">medical</span> package <span
-                    class="fw-normal camptonBook">&</span></p>
+            <p class="fs-1 camptonBold clr-white mb-0">Find your <span class="text-green">medical</span> package <span class="fw-normal camptonBook">&</span></p>
             <p class="fs-1 camptonBook clr-white mb-5">flight to Turkiye!</p>
             <a class="bookButton">Book Now</a>
         </div>
@@ -317,8 +307,7 @@
                     </div>
 
                     <div class="text-center">
-                        <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span
-                                class="green-color">treatment</span> package?</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span class="green-color">treatment</span> package?</h4>
                         <p>Fill the form & get your desired treatment plan</p>
                     </div>
                 </div>
@@ -346,8 +335,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
-                            <input type="tel" class="form-control h-75" id="inputAddress33"
-                                placeholder="+Contact Mobile">
+                            <input type="tel" class="form-control h-75" id="inputAddress33" placeholder="+Contact Mobile">
                             {{-- <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio1" value="option1">
@@ -361,40 +349,35 @@
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
-                            <input type="text" class="form-control h-75" id="inputAddress443"
-                                placeholder="Treatment Name">
+                            <input type="text" class="form-control h-75" id="inputAddress443" placeholder="Treatment Name">
                         </div>
 
                         <div class="col-md-12">
                             <label for="inputAddress5" class="form-label fw-bold">*Details</label>
-                            <input type="text" class="form-control h-75" id="inputAddress5"
-                                placeholder="Please Write your treatment requirement in detail">
+                            <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Please Write your treatment requirement in detail">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
-                            <input type="text" class="form-control h-75" id="inputAddress5"
-                                placeholder="Have you done/received any related treatment before If Yes,Please write the details">
+                            <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details">
                         </div>
                         <div class="col-md-6">
                             <label for="formFile" class="form-label fw-bold">Upload Your Treatment Documents</label>
                             <input class="form-control h-75" type="file" id="formFile">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress5" class="form-label fw-bold">When do you need the treatment?</label>
-                            <input type="text" class="form-control h-75" id="inputAddress5"
-                                placeholder="Apartment, studio, or floor">
+                            <label for="inputAddress5" class="form-label fw-bold">When do you need the
+                                treatment?</label>
+                            <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Apartment, studio, or floor">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddress5" class="form-label fw-bold">Do you need travel visa?</label>
                             <div class="mt-2">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                        value="option2">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
@@ -513,37 +496,22 @@
         <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
     </div>
     <!-- Modals -->
-    <div class="modal fade loginFirstModal" id="loginFirstModal" tabindex="-1" aria-labelledby="serviceForModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered position-relative">
-            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
-                <!-- </button> -->
-            <div class="modal-content bg-f6">
-                <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/closeModal.png')}}" alt="">
-                <img src="{{('front/assets/img/Oops.svg')}}" alt="">
-                <div class="d-flex align-items-center flex-column">
-                    <p class="camptonBook fw-bold text-center mt-4">Excited to explore more? It's time to join <span class="camptonBold">MD</span> family.</p>
-                    <a href="{{url('homeService-purchase')}}" type="button" class="btn btn-sm btn-md df-center mb-4">Get Started</a>
-                    <p class="camptonBook fw-bold text-center mt-4">Already<span class="camptonBold">MD</span> member?</p>
-                    <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#serviceForModal2" type="button" class="btn btn-sm whiteBtn df-center mb-5">Sign In</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
-        $(function() {
-            $('input[name="daterange"]').daterangepicker({
-                opens: 'left',
-                locale: {
-                    format: 'DD/MM/YYYY'
-                }
-                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-            }, function(start, end, label) {});
-        });
-    </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left',
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        }, function(start, end, label) {});
+    });
+</script>
 @endsection

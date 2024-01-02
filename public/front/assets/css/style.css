@@ -64,6 +64,16 @@
 
 /* UTILITY CLASSES */
 
+.card-h1 {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
 .treatmentForModal .modal-content,
 .treatmentForModal2 .modal-content,
 #serviceForModal .modal-content,
@@ -78,15 +88,15 @@
     position: relative;
 }
 
-.mdFoodsPurchaseFoodModal1{
+.mdFoodsPurchaseFoodModal1 {
     width: 60%;
 }
 
-.mdFoodsPurchaseFoodModal1 .form-select{
+.mdFoodsPurchaseFoodModal1 .form-select {
     border-radius: 3px;
 }
 
-.mdFoodsPurchaseFoodModal1 .unselect{
+.mdFoodsPurchaseFoodModal1 .unselect {
     background-image: unset;
     display: flex;
     gap: 1rem;
@@ -101,7 +111,7 @@
 .treatmentForModal2 .modal-dialog,
 #serviceForModal2 .modal-dialog,
 #foodForModal3 .modal-dialog,
-.loginFirstModal .modal-dialog  {
+.loginFirstModal .modal-dialog {
     max-width: 700px;
 }
 
@@ -247,7 +257,7 @@
 }
 
 .homeServicePackage,
-.packageResult, 
+.packageResult,
 .foodsPackage {
     background-color: white;
     padding: 1.25rem;
@@ -298,7 +308,7 @@
 
 .homeServicePackage a,
 .packageResult a,
-.anchor, 
+.anchor,
 .foodsPackage a {
     color: #000;
     font-family: CamptonBold !important;
@@ -375,6 +385,7 @@ select {
 .text-red {
     color: #F31D1D;
 }
+
 .text-orange {
     color: #F3771D;
 }
@@ -1801,9 +1812,11 @@ span.popup-msg.active {
     letter-spacing: -0.64px;
     text-decoration: none;
 }
+
 .hide-eye-div {
     position: relative;
 }
+
 .hide-eye-div .fa {
     position: absolute;
     top: 46px;
@@ -1951,7 +1964,7 @@ span.popup-msg.active {
 }
 
 .greenCheck input[type="checkbox"],
-.greenCheck input[type="checkbox"]::before{
+.greenCheck input[type="checkbox"]::before {
     border-radius: 50% !important;
 }
 
@@ -2190,7 +2203,7 @@ span.popup-msg.active {
     right: 0;
 }
 
-.mdFoodsNavBg{
+.mdFoodsNavBg {
     position: absolute;
     height: 100vh;
     width: 100%;
@@ -2209,8 +2222,8 @@ span.popup-msg.active {
     top: 0; */
 }
 
-#mdShopNav .container, 
-#mdFoodsNav .container{
+#mdShopNav .container,
+#mdFoodsNav .container {
     z-index: 1;
 }
 
@@ -2236,7 +2249,7 @@ span.popup-msg.active {
 }
 
 #mdShopNav a,
-#mdFoodsNav a{
+#mdFoodsNav a {
     color: #000;
 }
 
@@ -2353,15 +2366,19 @@ span.popup-msg.active {
 
 /* mdShop End */
 
-.mdFoods .section-2{
+.mdFoods .section-2 {
     margin-top: 15rem;
 }
 
-.download-section{
+.download-section {
     padding: 7rem;
 }
 
-.download-section .part2{
+.download-section .part2 {
     width: 50%;
     padding: 2.5rem 0;
+}
+
+.search-bar select {
+    cursor: pointer;
 }
