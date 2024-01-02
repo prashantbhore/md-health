@@ -4,7 +4,7 @@
         {{-- {{ dd($packageDetails) }} --}}
 
         @php
-
+            // dd($packageDetailsuse);
             if (!function_exists('get_twenty_percent')) {
                 function get_twenty_percent($number)
                 {
@@ -113,8 +113,8 @@
                     </div>
                 </div>
 
-                <div class="modal fade treatmentForModal2" id="treatmentForModal2_{{ $packageDetails['id'] }}" tabindex="-1"
-                    aria-labelledby="treatmentForModal" aria-hidden="true">
+                <div class="modal fade treatmentForModal2" id="treatmentForModal2_{{ $packageDetails['id'] }}"
+                    tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered position-relative">
                         <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
                         <!-- </button> -->
@@ -218,10 +218,10 @@
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div>
                                     <!-- <div class="col-12 px-0">
-                                                                                <p>
+                                                                                                                    <p>
 
-                                                                                </p>
-                                                                            </div> -->
+                                                                                                                    </p>
+                                                                                                                </div> -->
                                 </div>
                             </div>
                         </div>
@@ -370,6 +370,9 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+        var baseUrl = $('#base_url').val();
+        var token = "{{ Session::get('login_token') }}";
+
         $(document).ready(function() {
 
             const lightbox = GLightbox({
@@ -384,11 +387,13 @@
             $('#other_form').submit(function(e) {
                 e.preventDefault();
                 var formData = $(this).serialize();
-
                 $.ajax({
-                    url: '/api/md-change-patient-information',
+                    url: baseUrl + '/api/md-change-patient-information',
                     type: 'POST',
                     data: formData,
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
                     success: function(response) {
                         console.log('Success:', response);
                         window.location.href = $('#hidden_url').val();

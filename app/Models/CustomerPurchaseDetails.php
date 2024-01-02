@@ -73,6 +73,7 @@ class CustomerPurchaseDetails extends Model
     {
         return $this->belongsTo(CustomerPaymentDetails::class,'id','order_id');
     }
+    
 
 
 
