@@ -558,3 +558,5 @@ Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provi
 
 // Medical Provider Panel
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
+
+Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');

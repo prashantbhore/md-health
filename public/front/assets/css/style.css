@@ -2481,3 +2481,45 @@ span.popup-msg.active {
     color: #fff;
     border: none;
 }
+
+.live-screen {
+    width: 992px;
+    height: 506px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #D9D9D9;
+}
+
+.live-screen h2 {
+    color: #8A8282;
+    text-align: center;
+    font-family: Campton;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.28px;
+}
+
+.customer-cam {
+    width: 216px;
+    height: 174px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #A8A2A2;
+
+    position: absolute;
+    bottom: 26px;
+    right: 26px;
+}
+
+.customer-cam h4 {
+    color: #FFF;
+    text-align: center;
+    font-family: Campton;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
