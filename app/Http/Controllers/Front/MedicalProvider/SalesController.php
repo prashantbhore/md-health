@@ -75,6 +75,7 @@ class SalesController extends Controller
 
 
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
         $patient_details = $responseData['patient_details'];
 
         $payment_details= $responseData['payment_details'];
@@ -84,6 +85,47 @@ class SalesController extends Controller
 
 
         return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));
+    }
+
+
+
+
+    public function status_date_change(Request $request)
+    {
+        
+        $token = Session::get('login_token');
+
+
+
+        $apiUrl = url('api/md-provider-treatment-date-status');
+
+        $treatment_purchage_id = $request->treatment_purchage_id;
+        $treatment_start_date= $request->treatment_start_date;
+
+        $treatment_status= $request->treatment_status;
+
+       
+        $body=['treatment_purchage_id' =>  $treatment_purchage_id,
+                'treatment_start_date' =>  $treatment_start_date,
+                'treatment_status' =>  $treatment_status,
+            ];
+        $method = 'POST';
+
+
+        // $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+        // $patient_details = $responseData['patient_details'];
+
+        // $payment_details= $responseData['payment_details'];
+
+
+       //dd($payment_details);
+
+       $id=Crypt::encrypt($treatment_purchage_id);
+
+       return redirect('treatment-order-details/'.$id);
+
+
+       // return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));
     }
 
 
