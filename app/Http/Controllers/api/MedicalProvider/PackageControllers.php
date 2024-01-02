@@ -83,7 +83,7 @@ class PackageControllers extends BaseController
 
     //add_packages
     public function add_packages(Request $request)
-    { 
+    {
         // dd($request);
         $validator = Validator::make($request->all(), [
             'package_name' => 'required',
@@ -121,8 +121,9 @@ class PackageControllers extends BaseController
                     $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                     $package_input['tour_id'] = $request->tour_id;
                     $package_input['tour_in_time'] = $request->tour_in_time;
-                    $package_input['tour_out_time'] = $request->tour_out_time;
                     $package_input['tour_price'] = $request->tour_price;
+                    $package_input['tour_out_time'] = $request->tour_out_time;
+                    // $package_input['tour_price'] = $request->tour_price;
                     $package_input['visa_details'] = $request->visa_details;
                     $package_input['visa_service_price'] = $request->visa_service_price;
                     $package_input['translation_price'] = $request->translation_price;
@@ -189,6 +190,9 @@ class PackageControllers extends BaseController
                     $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
                     $package_input['vehicle_id'] = $request->vehicle_id;
                     $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                    $package_input['tour_id'] = $request->tour_id;
+                    $package_input['tour_in_time'] = $request->tour_in_time;
+                    $package_input['tour_price'] = $request->tour_price;
                     $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                     $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                     $package_input['visa_details'] = $request->visa_details;
@@ -251,8 +255,8 @@ class PackageControllers extends BaseController
                 ]);
             }
         } else {
-            if (($request->platform_type=='web')) {
-                return redirect('/medical-packages')->with('error','package name already exist');
+            if (($request->platform_type == 'web')) {
+                return redirect('/medical-packages')->with('error', 'package name already exist');
             }
             return response()->json([
                 'status' => 404,
@@ -341,6 +345,8 @@ class PackageControllers extends BaseController
                 'md_packages.hotel_acommodition_price',
                 'md_packages.vehicle_id',
                 'md_packages.vehicle_in_time',
+                'md_packages.tour_id',
+                'md_packages.tour_price',
                 'md_packages.tour_in_time',
                 'md_packages.vehicle_out_time',
                 'md_packages.transportation_acommodition_price',
@@ -409,6 +415,9 @@ class PackageControllers extends BaseController
                 'md_packages.vehicle_id',
                 'md_packages.vehicle_in_time',
                 'md_packages.vehicle_out_time',
+                'md_packages.tour_id',
+                'md_packages.tour_price',
+                'md_packages.tour_in_time',
                 'md_packages.transportation_acommodition_price',
                 'md_packages.visa_details',
                 'md_packages.visa_service_price',
@@ -454,10 +463,8 @@ class PackageControllers extends BaseController
 
 
         // if (empty($package_exist_or_not)) {
-        if (!empty($request->button_type)) 
-        {
-            if ($request->button_type == 'active') 
-            {
+        if (!empty($request->button_type)) {
+            if ($request->button_type == 'active') {
                 $package_input = [];
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
@@ -471,7 +478,9 @@ class PackageControllers extends BaseController
                 $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
                 $package_input['vehicle_id'] = $request->vehicle_id;
                 $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['tour_id'] = $request->tour_id;
                 $package_input['tour_in_time'] = $request->tour_in_time;
+                $package_input['tour_price'] = $request->tour_price;
                 $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;
@@ -511,7 +520,9 @@ class PackageControllers extends BaseController
                 $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
                 $package_input['vehicle_id'] = $request->vehicle_id;
                 $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['tour_id'] = $request->tour_id;
                 $package_input['tour_in_time'] = $request->tour_in_time;
+                $package_input['tour_price'] = $request->tour_price;
                 $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;

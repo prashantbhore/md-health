@@ -425,6 +425,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
     Route::controller(PackageController::class)->group(function () {
        Route::get('medical-packages', 'package_list');
+       Route::get('md-packages-active-list', 'active_package_list');
+       Route::get('md-packages-deactive-list', 'deactive_package_list');
        Route::get('medical-packages-view', 'index');
        Route::post('md-add-packages', 'md_add_packages');
         Route::get('/edit-package/{id}', 'edit_package');
