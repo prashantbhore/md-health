@@ -76,7 +76,7 @@
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
                     <h2 class="mb-0">SMS Code</h2>
-                    <p>Enter the 4 digit code sent to your mobile phone</p>
+                    <p>Enter the 6 digit code sent to your mobile phone</p>
                     {{-- <form action="{{ url('otp-verify') }}" method="post" id="otpForm"> --}}
                     {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code">
                             <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
@@ -103,9 +103,11 @@
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
-                        <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
-                            style="height: 47px;">Sign
-                            In</button>
+                        <div class="d-flex align-items-center justify-content-center mt-3">
+                            <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
+                                style="height: 47px;">Sign
+                                In</button>
+                        </div>
                     </form>
 
 
@@ -142,7 +144,7 @@
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
                     <h2 class="mb-0">Verification</h2>
-                    <p>Enter the 4 digit code sent to your mobile phone</p>
+                    <p>Enter the 6 digit code sent to your mobile phone</p>
                     <div class="w-100 df-center">
                         <img src="{{ asset('front/assets/img/heart-rate.png') }}" alt="">
                     </div>
@@ -322,27 +324,27 @@
                             if (response.url !== undefined) {
                                 // alert(response.url);
                                 window.location.href = base_url + response.url;
-                                
-                                toastr.options ={
-                                   "positionClass": "toast-bottom-right",
+
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
                                     "timeOut": "5000",
                                 };
 
-                               toastr.success(response.message);
+                                toastr.success(response.message);
 
                                 //$('#error').text('');
                             } else {
                                 // $('#number').val('');
 
-                                
-                                toastr.options ={
-                                   "positionClass": "toast-bottom-right",
+
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
                                     "timeOut": "5000",
                                 };
 
-                                toastr.error('Credentials do not match');  
-                                
-                               //toastr.success(response.message);
+                                toastr.error('Credentials do not match');
+
+                                //toastr.success(response.message);
 
                                 //$('#error').text('Credentials do not match');
                             }

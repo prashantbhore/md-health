@@ -159,7 +159,7 @@ public function email_or_mobile_exist(Request $request){
             'email' => $request->get('email'),
             'password' => $request->get('password')
         );
-        $token=null;
+        $token = Session::get('login_token');
         // dd(Session::get('login_token'));
 
         // $otpverify = implode('', $request->input('otp'));
@@ -293,8 +293,9 @@ public function email_or_mobile_exist(Request $request){
                     $body = $user_datacust;
 
                     $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+                    // dd($responseData);
+                    // dd( $responseData['success_token']);
                     Session::put('login_token', $responseData['success_token']['token']);
-
 
                     $providers = Auth::guard('md_customer_registration')->user();
 

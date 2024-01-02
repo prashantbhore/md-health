@@ -320,7 +320,9 @@
 
                     success: function(response) {
                         console.log('Success:', response);
-
+                        if (response.status == '404') {
+                            window.location.href = '/health-search-result'
+                        }
                         var otherServicesHtml = '';
                         purchaseDetails = response.purchase_details;
                         otherServices = response.other_services;

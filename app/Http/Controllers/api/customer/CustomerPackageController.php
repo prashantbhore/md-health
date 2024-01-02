@@ -419,10 +419,25 @@ class CustomerPackageController extends BaseController
 
 
             // Add services to the services array
-            $services[] = $accommodation;
-            $services[] = $transportation;
-            $services[] = $tour_details;
-            $services[] = $visa_details;
+            if(!empty($accommodation)){
+
+                $services[] = $accommodation;
+            }
+
+            if(!empty($transportation)){
+
+                $services[] = $transportation;
+            }
+
+            if(!empty($tour_details)){
+
+                $services[] = $tour_details;
+            }
+
+            if(!empty($visa_details)){
+
+                $services[] = $visa_details;
+            }
             $purchase_details['vehicle_model_name'] = !empty($purchase_details->vehicle_model_id) ? $purchase_details->vehicle_model_id : '';
             $purchase_details['treatment_period_in_days'] = !empty($purchase_details->treatment_period_in_days) ? $purchase_details->treatment_period_in_days : '';
             $purchase_details['transportation_price'] = !empty($purchase_details->transportation_acommodition_price) ? $purchase_details->transportation_acommodition_price : '';
@@ -1741,13 +1756,14 @@ class CustomerPackageController extends BaseController
                 'md_customer_purchase_details.id as purchase_id',
                 // 'md_customer_purchase_details.status',
                 // 'md_customer_purchase_details.package_total_price',
-                // 'md_customer_purchase_details.created_at',
+                'md_customer_purchase_details.created_at',
                 'md_packages.id as package_id',
                 // 'md_packages.package_unique_no',
                 'md_packages.package_name',
                 'md_packages.treatment_period_in_days',
                 'md_packages.other_services',
                 'md_customer_purchase_details.paid_amount',
+                'md_customer_purchase_details.payment_percentage',
                 'md_customer_purchase_details.pending_payment',
                 'md_packages.hotel_id',
                 'md_packages.vehicle_id',
@@ -1800,11 +1816,24 @@ class CustomerPackageController extends BaseController
         }
 
         /////// Ali has made this change do not remove while resolving confilct //////
-        if(isset($accommodation)){
+        if(!empty($accommodation)){
+
             $services[] = $accommodation;
         }
-        if(isset($accommodation)){
+
+        if(!empty($transportation)){
+
             $services[] = $transportation;
+        }
+
+        if(!empty($tour_details)){
+
+            $services[] = $tour_details;
+        }
+
+        if(!empty($visa_details)){
+
+            $services[] = $visa_details;
         }
         /////// Ali has made this change do not remove while resolving confilct //////
 

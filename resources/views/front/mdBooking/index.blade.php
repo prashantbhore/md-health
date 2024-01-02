@@ -21,7 +21,7 @@
                         <div id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
                             class="nav-link active  d-flex justify-content-center align-items-center main-mid-seaction">
                             <img src="{{ 'front/assets/img/mdBookings/ic_baseline-hotel.png' }}" alt="">
-                            <span class="fs-6 fw-bold mx-1 text-dark"> Hotel</span>
+                            <span class="fs-6 fw-bold mx-1 text-dark">Hotel</span>
                         </div>
                     </li>
                     <li class="nav-item" role="presentation">
