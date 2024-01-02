@@ -88,7 +88,7 @@
                                             <div class="col-md-6 justify-content-start ps-0">
                                                 <div class="trmt-card-body">
                                                     <h5 class="dashboard-card-title">
-                                                        {{ $vehicle_detail['vehicle_model_id'] }}</h5>
+                                                        {{ $vehicle_detail['vehicle_model_name'] }}</h5>
                                                     <a href="#"
                                                         class="btn-active">{{ $vehicle_detail['status'] }}</a>
                                                 </div>

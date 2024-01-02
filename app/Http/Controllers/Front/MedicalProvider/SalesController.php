@@ -80,11 +80,18 @@ class SalesController extends Controller
 
         $payment_details= $responseData['payment_details'];
 
+        $apiUrl = url('api/md-provider-case-manager-list');
+        $method = 'GET';
+        $body=null;
 
-     //  dd($patient_details);
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+         $case_manager= $responseData ['case_managers'];
+
+        // dd($patient_details);
 
 
-        return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));
+        return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details','case_manager'));
     }
 
 

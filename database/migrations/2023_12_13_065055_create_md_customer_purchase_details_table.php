@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('paid_amount')->nullable();
             $table->string('pending_payment')->nullable();
             $table->enum('purchase_type', ['pending','in_progress','active', 'completed', 'cancelled'])->nullable();
+            $table->enum('purchase_status', ['purchased', 'not_purchased'])->default('not_purchased');
             $table->enum('payment_method', ['card', 'bank', 'md_coin'])->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->string('created_ip_address')->nullable();
