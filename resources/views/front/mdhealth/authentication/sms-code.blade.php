@@ -17,7 +17,7 @@
                     <img src="{{asset('front/assets/img/otpLogo.png')}}" alt="">
                 </div>
                 <h2 class="mb-0">SMS Code</h2>
-                <p>Enter the 4 digit code sent to your mobile phone</p>
+                <p>Enter the 6 digit code sent to your mobile phone</p>
                 <form action="{{url('otp-verify')}}" method="post" id="otpForm">
                     @csrf
                 <div class="w-100 df-center mb-3 sms-input gap-3">
@@ -66,7 +66,7 @@
                     <img src="{{asset('front/assets/img/otpLogo.png')}}" alt="">
                 </div>
                 <h2 class="mb-0">Verification</h2>
-                <p>Enter the 4 digit code sent to your mobile phone</p>
+                <p>Enter the 6 digit code sent to your mobile phone</p>
                 <div class="w-100 df-center">
                     <img src="{{asset('front/assets/img/heart-rate.png')}}" alt="">
                 </div>

@@ -76,7 +76,7 @@
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
                     <h2 class="mb-0">SMS Code</h2>
-                    <p>Enter the 4 digit code sent to your mobile phone</p>
+                    <p>Enter the 6 digit code sent to your mobile phone</p>
                     {{-- <form action="{{ url('otp-verify') }}" method="post" id="otpForm"> --}}
                     {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code">
                             <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
@@ -142,7 +142,7 @@
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
                     <h2 class="mb-0">Verification</h2>
-                    <p>Enter the 4 digit code sent to your mobile phone</p>
+                    <p>Enter the 6 digit code sent to your mobile phone</p>
                     <div class="w-100 df-center">
                         <img src="{{ asset('front/assets/img/heart-rate.png') }}" alt="">
                     </div>
