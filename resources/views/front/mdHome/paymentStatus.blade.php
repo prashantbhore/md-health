@@ -30,11 +30,12 @@
         });
     </script>
     <script>
+        var baseUrl = $('#base_url').val();
         $("#go_to_packages").click(function() {
-            window.location.href = '/my-packages-list'
+            window.location.href = baseUrl + '/my-packages-list'
         });
         $("#home_page").click(function() {
-            window.location.href = '/'
+            window.location.href = baseUrl + '/'
         });
     </script>
     <script>
