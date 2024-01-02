@@ -73,7 +73,7 @@ class CustomerPurchaseDetails extends Model
     {
         return $this->belongsTo(CustomerPaymentDetails::class,'id','order_id');
     }
-    
+
 
 
 
@@ -85,6 +85,22 @@ class CustomerPurchaseDetails extends Model
 
 
 
+    public function case_manager()
+    {
+        return $this->belongsTo(MedicalProviderSystemUser::class, 'case_manager_id','id');
+    }
+
+
+    public function hotel()
+    {
+        return $this->belongsTo(AddNewAcommodition::class, 'hotel_id','id');
+    }
+
+    
+    public function vehical()
+    {
+        return $this->belongsTo(TransportationDetails::class,'vehicle_id','id');
+    }
 
 
  
