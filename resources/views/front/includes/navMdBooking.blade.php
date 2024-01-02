@@ -1,5 +1,15 @@
+@php
+    // dd(Session::all());
+    if (Session::get('MDCustomer*%') != null) {
+        $name = !empty(session('user')) ? (session('user')->first_name ? session('user')->first_name : 'MDHealth') : 'MDHealth';
+    } elseif (Session::get('MDMedicalProvider*%') != null) {
+        $name = !empty(session('user')) ? (session('user')->company_name ? session('user')->company_name : 'MDHealth') : 'MDHealth';
+    } else {
+        $name = 'MDHealth';
+    }
+@endphp
 <nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
-<img class="mdFoodsNavBg" src="{{URL('front/assets/img/mdBookings/mdBookingsHeader.png')}}" alt="">
+    <img class="mdFoodsNavBg" src="{{ URL('front/assets/img/mdBookings/mdBookingsHeader.png') }}" alt="">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
@@ -17,14 +27,30 @@
                             class="fw-bold">MD</span>Foods</a></li>
                 <li class="nav-item"><a href="{{ url('mdShop') }}" class="nav-link"><span
                             class="fw-bold">MD</span>Shop</a></li>
-                    <li class="nav-item dropdown me-auto">
+                @if (Session::get('login_token') != null)
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
+                                fill="none">
+                                <path
+                                    d="M15.4375 6.33366C16.9654 6.33366 18.2083 5.09074 18.2083 3.56283C18.2083 2.03491 16.9654 0.791992 15.4375 0.791992C13.9096 0.791992 12.6667 2.03491 12.6667 3.56283C12.6667 5.09074 13.9096 6.33366 15.4375 6.33366ZM16.625 12.667V7.75074C16.2292 7.86158 15.8333 7.91699 15.4375 7.91699H15.0417V12.667C15.0417 13.9812 13.9808 15.042 12.6667 15.042H6.33333C5.01917 15.042 3.95833 13.9812 3.95833 12.667V6.33366C3.95833 5.01949 5.01917 3.95866 6.33333 3.95866H11.0833V3.56283C11.0833 3.16699 11.1387 2.77116 11.2496 2.37533H6.33333C4.14833 2.37533 2.375 4.14866 2.375 6.33366V12.667C2.375 14.852 4.14833 16.6253 6.33333 16.6253H12.6667C14.8517 16.6253 16.625 14.852 16.625 12.667Z"
+                                    fill="#4CDB06" />
+                            </svg>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown ms-auto">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span
-                                class="text-green me-1">MDhealth</span> <svg xmlns="http://www.w3.org/2000/svg"
-                                width="13" height="8" viewBox="0 0 13 8" fill="none">
+                                class="text-green me-1">
+                                {{ $name }}</span> <svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                height="8" viewBox="0 0 13 8" fill="none">
+                                {{-- {{(session('user')->company_name)?session('user')->company_name:MDHealth}} --}}
                                 <path d="M1 1.00042L6.5 6.35449L12 1.00042" stroke="#4CDB06" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg></a>
+                        @if (Session::get('MDCustomer*%') != null)
                             <ul class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/my-profile') }}">
@@ -167,45 +193,88 @@
                                     </a>
                                 </li>
                             </ul>
+                        @elseif(Session::get('MDMedicalProvider*%') != null)
+                            <ul class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" href="{{ url('/medical-provider-dashboard') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 12 12" fill="none">
+                                            <g clip-path="url(#clip0_187_7253)">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M8 4.5C8 5.03043 7.78929 5.53914 7.41421 5.91421C7.03914 6.28929 6.53043 6.5 6 6.5C5.46957 6.5 4.96086 6.28929 4.58579 5.91421C4.21071 5.53914 4 5.03043 4 4.5C4 3.96957 4.21071 3.46086 4.58579 3.08579C4.96086 2.71071 5.46957 2.5 6 2.5C6.53043 2.5 7.03914 2.71071 7.41421 3.08579C7.78929 3.46086 8 3.96957 8 4.5ZM7 4.5C7 4.76522 6.89464 5.01957 6.70711 5.20711C6.51957 5.39464 6.26522 5.5 6 5.5C5.73478 5.5 5.48043 5.39464 5.29289 5.20711C5.10536 5.01957 5 4.76522 5 4.5C5 4.23478 5.10536 3.98043 5.29289 3.79289C5.48043 3.60536 5.73478 3.5 6 3.5C6.26522 3.5 6.51957 3.60536 6.70711 3.79289C6.89464 3.98043 7 4.23478 7 4.5Z"
+                                                    fill="#111111" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M6 0.5C2.9625 0.5 0.5 2.9625 0.5 6C0.5 9.0375 2.9625 11.5 6 11.5C9.0375 11.5 11.5 9.0375 11.5 6C11.5 2.9625 9.0375 0.5 6 0.5ZM1.5 6C1.5 7.045 1.8565 8.007 2.454 8.771C2.87362 8.21995 3.41495 7.77337 4.03572 7.46616C4.65648 7.15894 5.33987 6.9994 6.0325 7C6.71616 6.99935 7.39096 7.15476 8.00547 7.45439C8.61997 7.75402 9.15798 8.18996 9.5785 8.729C10.0117 8.1608 10.3034 7.49761 10.4294 6.79429C10.5555 6.09098 10.5122 5.36777 10.3032 4.68449C10.0943 4.00122 9.72561 3.37752 9.22774 2.86502C8.72988 2.35251 8.11713 1.96593 7.44019 1.73725C6.76326 1.50858 6.0416 1.44439 5.33493 1.54999C4.62826 1.65559 3.9569 1.92795 3.37638 2.34453C2.79587 2.76111 2.32291 3.30994 1.99661 3.9456C1.67032 4.58126 1.50009 5.28548 1.5 6ZM6 10.5C4.96697 10.5016 3.96513 10.1462 3.164 9.494C3.48646 9.03237 3.91567 8.65546 4.4151 8.39534C4.91452 8.13523 5.46939 7.9996 6.0325 8C6.58858 7.99955 7.13674 8.13179 7.63146 8.38571C8.12618 8.63964 8.55318 9.00793 8.877 9.46C8.06965 10.1334 7.05129 10.5015 6 10.5Z"
+                                                    fill="#111111" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_187_7253">
+                                                    <rect width="14" height="14" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url('logout') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 11 12" fill="none">
+                                            <circle cx="5.5" cy="5.5" r="5.5" fill="#D9D9D9" />
+                                            <path
+                                                d="M7.78148 8H6.54148L5.27148 6.35L3.98148 8H2.75148L4.57148 5.63L2.76148 3.29H4.03148L5.26148 4.88L6.49148 3.29H7.76148L5.96148 5.63L5.95148 5.64L7.78148 8Z"
+                                                fill="black" />
+                                        </svg>
+                                        Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        @endif
                     </li>
+                @endif
             </ul>
+
+            @if (Session::get('login_token') == null)
+                <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
+
+                <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get
+                    Started</a>
+            @endif
         </div>
-            <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
-            <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
-    </div>
-    <div>
-        <!-- <img src="{{ 'front/assets/img/mdBookings/mdBookingsHeader.png' }}" class="position-absolute banner-img "
+        <div>
+            <!-- <img src="{{ 'front/assets/img/mdBookings/mdBookingsHeader.png' }}" class="position-absolute banner-img "
             alt=""> -->
-        <div class="position-relative  d-flex flex-column  align-items-center banner">
-            <p class="green-color banner-p">BOOK RELIABLE & AFFORDABLE</p>
-            <p class="fw-bold hotel-size"> HOTEL <span class="green-color">/ </span>FLIGHT<span class="green-color">/
-                </span>VEHICLE
-            </p>
-            <p class="green-color banner-p">IN SECONDS</p>
+            <div class="position-relative  d-flex flex-column  align-items-center banner">
+                <p class="green-color banner-p">BOOK RELIABLE & AFFORDABLE</p>
+                <p class="fw-bold hotel-size"> HOTEL <span class="green-color">/ </span>FLIGHT<span
+                        class="green-color">/
+                    </span>VEHICLE
+                </p>
+                <p class="green-color banner-p">IN SECONDS</p>
+            </div>
         </div>
-    </div>
 </nav>
 
 
 <!-- <nav id="mdFoodsNav" class="navbar navbar-expand-lg navbar-light bg-f6 py-3 d-block">
-<img class="mdFoodsNavBg" src="{{URL('front/assets/img/mdBookings/mdBookingsHeader.png')}}" alt="">
+<img class="mdFoodsNavBg" src="{{ URL('front/assets/img/mdBookings/mdBookingsHeader.png') }}" alt="">
     <div class="container">
-        <a class="navbar-brand" href="{{URL('admin/dashboard')}}">
-            <img src="{{URL::asset('admin/assets/img/mdFoods.svg')}}" alt="" style="width: 180px;" />
+        <a class="navbar-brand" href="{{ URL('admin/dashboard') }}">
+            <img src="{{ URL::asset('admin/assets/img/mdFoods.svg') }}" alt="" style="width: 180px;" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
-                <li class="nav-item"><a href="{{url('home-service')}}" class="nav-link">Home Service</a></li>
-                <li class="nav-item"><a href="{{url('md-booking-home-page')}}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
-                <li class="nav-item"><a href="{{url('/')}}" class="nav-link"><span class="fw-bold">MD</span>Health</a></li>
-                <li class="nav-item"><a href="{{url('mdShop')}}" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
+                <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
+                <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
+                <li class="nav-item"><a href="{{ url('/') }}" class="nav-link"><span class="fw-bold">MD</span>Health</a></li>
+                <li class="nav-item"><a href="{{ url('mdShop') }}" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
             </ul>
         </div>
-        <a href="{{url('sign-in-web')}}" class="signIn nav-link underline text-underline">Sign In</a>
-        <a href="{{url('user-account')}}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
+        <a href="{{ url('sign-in-web') }}" class="signIn nav-link underline text-underline">Sign In</a>
+        <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
     </div>
     {{-- banner --}}
     <div>
