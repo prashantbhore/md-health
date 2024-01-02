@@ -109,7 +109,13 @@
                                 In</button>
                         </div>
                     </form>
-
+                    <script>
+                        function moveToNext(current, nextId) {
+                            if (current.value.length === current.maxLength) {
+                                document.getElementById(nextId).focus();
+                            }
+                        }
+                    </script>
 
 
                     {{-- <h6 class="mb-0 d-flex align-items-center gap-1">
