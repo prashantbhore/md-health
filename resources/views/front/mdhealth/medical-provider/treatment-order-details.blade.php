@@ -266,9 +266,16 @@
                                             <h6 class="section-heading mb-1">Case Details</h6>
                                             <h6>Assign Case Manager</h6>
                                             <div class="input-with-cross mb-3">
-                                                <input type="text" class="form-control" id="" aria-describedby="" placeholder="Pooja Dashpande">
-                                                <i class="fa fa-close"></i>
+                                                <select class="form-control" id="" aria-describedby="">
+                                                    <option value="">Select a name</option>
+                                                    <option value="Pooja Dashpande">Pooja Dashpande</option>
+                                                    <!-- Add more options as needed -->
+                                                </select>
+                                                {{-- <i class="fa fa-close"></i> --}}
+                                                <div class="for-icon-text">
+                                                </div>
                                             </div>
+                                            
                                             <div class="example-div">
                                                 <p class="mb-0"><b>Case Manager:</b> Pooja Dashpande</p>
                                                 <p class="mb-0"><b>Case No <span class="text-green">#MD829</span></p>
