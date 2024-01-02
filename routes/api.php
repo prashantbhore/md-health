@@ -315,6 +315,7 @@ Route::post('md-provider-treatment-date-status', [SalesController::class,'treate
 //Provider Case Manager Listing
 Route::get('md-provider-case-manager-list', [SalesController::class,'case_manager_list']);
 
+
 //Provider sales treatment package details
 Route::post('md-provider-package-details', [SalesController::class,'package_details']);
 
