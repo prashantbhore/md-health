@@ -198,6 +198,7 @@
 
             var baseUrl = $('#base_url').val();
             var token = "{{ Session::get('login_token') }}";
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
             var totalPrice = 0;
             var proxyPrice = 0;
             var isTwentySelected = true;
@@ -315,12 +316,15 @@
                     processData: false,
                     contentType: false,
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
                     },
 
                     success: function(response) {
                         console.log('Success:', response);
-
+                        if (response.status == '404') {
+                            window.location.href = baseUrl + '/health-search-result';
+                        }
                         var otherServicesHtml = '';
                         purchaseDetails = response.purchase_details;
                         otherServices = response.other_services;
@@ -419,11 +423,12 @@
                     processData: false,
                     contentType: false,
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
                     },
                     success: function(response) {
                         if (response.status == "200") {
-                            window.location.href = '/payment-status'
+                            window.location.href = baseUrl + '/payment-status'
                         }
                     },
                 });

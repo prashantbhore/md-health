@@ -143,7 +143,7 @@
                                                 <p class="camptonBook">*20% of the price is paid before booking.</p>
                                             </div>
                                             <div class="d-flex gap-2 mb-2">
-                                                <button class="btn purchaseBtn"  data-bs-toggle="modal" data-bs-target="#treatmentForModal_{{$package_list['id']}}">Purchase Package</button>
+                                                <button class="btn purchaseBtn"  id="{{$package_list['id']}}"data-bs-toggle="modal" >Purchase Package</button>
                                                 <button class="favouriteBtn">
                                                     <img src="{{('front/assets/img/white-heart.svg')}}" alt="">
                                                 </button>
@@ -477,9 +477,9 @@
             <img src="{{('front/assets/img/Oops.svg')}}" alt="">
             <div class="d-flex align-items-center flex-column">
                 <p class="camptonBook fw-bold text-center mt-4">Excited to explore more? It's time to join <span class="camptonBold">MD</span> family.</p>
-                <a href="{{url('homeService-purchase')}}" type="button" class="btn btn-sm btn-md df-center mb-4">Get Started</a>
+                <a href="{{url('/user-account')}}" type="button" class="btn btn-sm btn-md df-center mb-4">Get Started</a>
                 <p class="camptonBook fw-bold text-center mt-4">Already<span class="camptonBold">MD</span> member?</p>
-                <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#serviceForModal2" type="button" class="btn btn-sm whiteBtn df-center mb-5">Sign In</a>
+                <a href="{{url('/sign-in-web')}}"  type="button" class="btn btn-sm whiteBtn df-center mb-5">Sign In</a>
             </div>
         </div>
     </div>
@@ -528,10 +528,13 @@
         $('.purchaseBtn').click(function(e){
             e.preventDefault();
             var user = "{{$user}}";
-
-            if(user == 'true'){
-
+            var id = this.id;
+            // alert(id);
+            // $('.treatmentForModal_'+id).modal('hide');
+            if(user == '1'){
+                $('#treatmentForModal_'+id).modal('show');
             }else{
+                $('.treatmentForModal_'+id).modal('hide');
                 $('#loginFirstModal').modal('show');
             }
         });

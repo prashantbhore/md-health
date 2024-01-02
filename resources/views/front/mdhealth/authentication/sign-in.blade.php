@@ -103,11 +103,19 @@
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
-                        <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
-                            style="height: 47px;">Sign
-                            In</button>
+                        <div class="d-flex align-items-center justify-content-center mt-3">
+                            <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
+                                style="height: 47px;">Sign
+                                In</button>
+                        </div>
                     </form>
-
+                    <script>
+                        function moveToNext(current, nextId) {
+                            if (current.value.length === current.maxLength) {
+                                document.getElementById(nextId).focus();
+                            }
+                        }
+                    </script>
 
 
                     {{-- <h6 class="mb-0 d-flex align-items-center gap-1">
@@ -322,27 +330,27 @@
                             if (response.url !== undefined) {
                                 // alert(response.url);
                                 window.location.href = base_url + response.url;
-                                
-                                toastr.options ={
-                                   "positionClass": "toast-bottom-right",
+
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
                                     "timeOut": "5000",
                                 };
 
-                               toastr.success(response.message);
+                                toastr.success(response.message);
 
                                 //$('#error').text('');
                             } else {
                                 // $('#number').val('');
 
-                                
-                                toastr.options ={
-                                   "positionClass": "toast-bottom-right",
+
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
                                     "timeOut": "5000",
                                 };
 
-                                toastr.error('Credentials do not match');  
-                                
-                               //toastr.success(response.message);
+                                toastr.error('Credentials do not match');
+
+                                //toastr.success(response.message);
 
                                 //$('#error').text('Credentials do not match');
                             }

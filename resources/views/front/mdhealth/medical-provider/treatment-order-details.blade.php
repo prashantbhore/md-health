@@ -268,7 +268,10 @@
                                             <div class="input-with-cross mb-3">
                                                 <select class="form-control" id="" aria-describedby="">
                                                     <option value="">Select a name</option>
-                                                    <option value="Pooja Dashpande">Pooja Dashpande</option>
+                                                    @foreach ($case_manager as $manager )
+                                                    <option value="{{!empty($manager['id'])?$manager['id']:''}}">{{!empty($manager['name'])?$manager['name']:''}}</option>
+                                                    @endforeach
+                                                   
                                                     <!-- Add more options as needed -->
                                                 </select>
                                                 {{-- <i class="fa fa-close"></i> --}}
@@ -277,8 +280,8 @@
                                             </div>
                                             
                                             <div class="example-div">
-                                                <p class="mb-0"><b>Case Manager:</b> Pooja Dashpande</p>
-                                                <p class="mb-0"><b>Case No <span class="text-green">#MD829</span></p>
+                                                <p class="mb-0"><b>Case Manager:</b>{{!empty($patient_details['case_manager']['name'])?$patient_details['case_manager']['name']:''}}</p>
+                                                <p class="mb-0"><b>Case No <span class="text-green">#{{!empty($patient_details['case_no'])?$patient_details['case_no']:''}}</span></p>
                                             </div>
                                         </div>
 
@@ -290,7 +293,7 @@
                                                 <i class="fa fa-close"></i>
                                             </div>
                                             <div class="example-div">
-                                                <p class="mb-1"><b>Hotel:</b> Renaissence Hotel Besiktas <span class="text-green">Standart Room</span></p>
+                                                <p class="mb-1"><b>Hotel:</b>{{!empty($patient_details['hotel']['hotel_name'])?  $patient_details['hotel']['hotel_name'] :''}} <span class="text-green">{{!empty($patient_details['hotel']['hotel_address'])?  $patient_details['hotel']['hotel_address'] :''}}</span></p>
                                                 <div class="for-icon-text">
                                                     <p class="mb-1 fst-italic fw-500 d-flex align-items-center gap-2">
                                                         <svg width="16" height="14" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -329,26 +332,30 @@
                                                 </select>
                                             </div>
                                             <div class="example-div">
-                                                <p class="mb-2"><span class="fw-800">Vehicle:</span> <span class="fw-500">Mercedes Benz Vito 2.2 CDI</span></p>
+                                                <p class="mb-2"><span class="fw-800">Vehicle:</span> <span class="fw-500">{{!empty($patient_details['vehical']['vehicle_model_id'])?  $patient_details['vehical']['vehicle_model_id'] :''}}</span></p>
                                                 <div class="for-icon-text d-flex gap-4">
+
                                                     <p class="mb-1 fw-500 d-flex align-items-center gap-2">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M7.50016 15.8329H12.5002V17.4996H7.50016C5.20016 17.4996 3.3335 15.6329 3.3335 13.3329V5.83294H5.00016V13.3329C5.00016 14.7163 6.11683 15.8329 7.50016 15.8329ZM8.6835 4.50794C9.3335 3.85794 9.3335 2.79961 8.6835 2.14961C8.0335 1.49961 6.97516 1.49961 6.32516 2.14961C5.67516 2.79961 5.67516 3.85794 6.32516 4.50794C6.97516 5.16628 8.02516 5.16628 8.6835 4.50794ZM9.5835 7.49961C9.5835 6.58294 8.8335 5.83294 7.91683 5.83294H7.50016C6.5835 5.83294 5.8335 6.58294 5.8335 7.49961V12.4996C5.8335 13.8829 6.95016 14.9996 8.3335 14.9996H12.5585L15.4752 17.9163L16.6668 16.7246L12.4418 12.4996H9.5835V7.49961Z" fill="#111111" />
                                                         </svg>
                                                         7+1
                                                     </p>
+
                                                     <p class="mb-1 fw-500 d-flex align-items-center gap-2">
                                                         <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M0 0H2.5C2.73333 0 2.94167 0.0916666 3.09167 0.241667L4.825 1.98333L5.49167 1.325C5.83333 1 6.25 0.833333 6.66667 0.833333H11.6667C12.0833 0.833333 12.5 1 12.8417 1.325L13.675 2.15833C14 2.5 14.1667 2.91667 14.1667 3.33333V14.1667C14.1667 14.6087 13.9911 15.0326 13.6785 15.3452C13.3659 15.6577 12.942 15.8333 12.5 15.8333H4.16667C3.72464 15.8333 3.30072 15.6577 2.98816 15.3452C2.67559 15.0326 2.5 14.6087 2.5 14.1667V5C2.5 4.58333 2.66667 4.16667 2.99167 3.825L3.65 3.15833L2.15833 1.66667H0V0ZM6.66667 2.5V4.16667H11.6667V2.5H6.66667ZM7.00833 7.5L5.34167 5.83333H4.16667V7.00833L5.83333 8.675V11.325L4.16667 12.9917V14.1667H5.34167L7.00833 12.5H9.65833L11.325 14.1667H12.5V12.9917L10.8333 11.325V8.675L12.5 7.00833V5.83333H11.325L9.65833 7.5H7.00833ZM7.5 9.16667H9.16667V10.8333H7.5V9.16667Z" fill="#111111" />
                                                         </svg>
                                                         Diesel
                                                     </p>
+
                                                     <p class="mb-1 fw-500 d-flex align-items-center gap-2">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M6.66667 10.8333V14.1667M13.3333 4.16667V4.58333C13.3333 5.02536 13.5089 5.44928 13.8215 5.76184C14.134 6.07441 14.558 6.25 15 6.25C15.442 6.25 15.866 6.42559 16.1785 6.73816C16.4911 7.05072 16.6667 7.47464 16.6667 7.91667V8.33333M2.5 2.5L17.5 17.5M14.1667 10.8333H16.6667C16.8877 10.8333 17.0996 10.9211 17.2559 11.0774C17.4122 11.2337 17.5 11.4457 17.5 11.6667V13.3333C17.5 13.5667 17.4042 13.7775 17.25 13.9283M14.1667 14.1667H3.33333C3.11232 14.1667 2.90036 14.0789 2.74408 13.9226C2.5878 13.7663 2.5 13.5543 2.5 13.3333V11.6667C2.5 11.4457 2.5878 11.2337 2.74408 11.0774C2.90036 10.9211 3.11232 10.8333 3.33333 10.8333H10.8333" stroke="#111111" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
                                                         No Smoking
                                                     </p>
+                                                    
                                                     <p class="mb-1 fw-500 d-flex align-items-center gap-2">
                                                         <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <g clip-path="url(#clip0_353_6343)">
@@ -424,4 +431,5 @@
         });
     });
 </script>
+
 @endsection

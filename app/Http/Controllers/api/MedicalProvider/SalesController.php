@@ -106,7 +106,7 @@ class SalesController extends BaseController{
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $patient_details = CustomerPurchaseDetails::where('id', $request->purchage_id)->with('customer','customer.city','customer.country','package','paymentDetails')->first();
+        $patient_details = CustomerPurchaseDetails::where('id', $request->purchage_id)->with('customer','customer.city','customer.country','package','paymentDetails','case_manager','hotel','vehical')->first();
 
         $payment_details=CustomerPaymentDetails::where('order_id', $patient_details->id)->get();
 

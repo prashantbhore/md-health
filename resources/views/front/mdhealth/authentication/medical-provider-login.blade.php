@@ -9,6 +9,7 @@
             color: red !important;
             font-size: 14px !important;
         }
+
         input[type="file"] {
             color: #000 !important;
             line-height: 2 !important;
@@ -95,7 +96,7 @@
                                                     placeholder="TAX Number">
                                             </div>
                                         </div>
-                                         {{-- <div class="col-md-12">
+                                        {{-- <div class="col-md-12">
                                                                 <div class="mb-3">
                                                                     <label for="gender" class="form-label">*Gender</label>
                                                                      <select name="gender" id="gender" class="form-select">
@@ -113,7 +114,7 @@
                                             @foreach ($countries as $country)
                                             <option value="{{$country->id}}">{{$country->country_name}}</option>
                                             @endforeach
-                                          
+
                                         </select>
                                     </div>
                                 </div> --}}
@@ -127,9 +128,10 @@
                                         <div class="col-md-12">
                                             <div class="mb-3 hide-eye-div">
                                                 <label for="password" class="form-label">*Password</label>
-                                                <input type="password" class="form-control" name="password"
-                                                    id="password" placeholder="Minimum 8 characters">
-                                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                                <input type="password" class="form-control" name="password" id="password"
+                                                    placeholder="Minimum 8 characters">
+                                                <span toggle="#password"
+                                                    class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -137,7 +139,8 @@
                                                 <label for="re-password" class="form-label">*Re-Password</label>
                                                 <input type="password" class="form-control" name="repassword"
                                                     id="repassword" placeholder="Minimum 8 characters">
-                                                    <span toggle="#repassword" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                                <span toggle="#repassword"
+                                                    class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                             </div>
                                         </div>
                                         <hr>
@@ -146,7 +149,7 @@
                                                 <label for="*Upload Company Logo" class="form-label">*Upload Company
                                                     Logo</label>
                                                 <input type="file" class="form-control" name="company_logo_image_path"
-                                                     id="company_logo_image_path" placeholder="*Upload Company Logo">
+                                                    id="company_logo_image_path" placeholder="*Upload Company Logo">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -229,7 +232,8 @@
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
                         <div class="d-flex justify-content-center">
-                             <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                            <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()"
+                                style="height: 47px;">Sign In</button>
                         </div>
                     </form>
 
@@ -281,8 +285,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-      
-
         $(document).on('click', '#regcustuser', function() {
             var base_url = $('#base_url').val();
             if ($('#mycustomerForm').valid()) {
@@ -296,7 +298,7 @@
                     }
                 });
                 $.ajax({
-                    url: base_url+'/email-or-mobile-exist',
+                    url: base_url + '/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -337,7 +339,7 @@
                     }
                 });
                 $.ajax({
-                    url: base_url+'/email-or-mobile-exist',
+                    url: base_url + '/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -423,13 +425,13 @@
 
                     $.ajax({
                         // url: base_url+'/md-customer-register',
-                        url: base_url+'/md-register-medical-provider',
+                        url: base_url + '/md-register-medical-provider',
                         method: 'POST',
                         data: formData,
                         //  {
-                        //     // email: email, 
-                        //     formData: formData, 
-                        //     password: password 
+                        //     // email: email,
+                        //     formData: formData,
+                        //     password: password
                         // },
                         success: function(response) {
                             console.log(response);
@@ -454,9 +456,6 @@
                     $("#error").show();
                 });
         }
-
-
-
     </script>
     <script>
         $(document).ready(function() {
@@ -498,10 +497,10 @@
 
     <script>
         $(document).ready(function() {
-            $.validator.addMethod("passwordMatch", function(value, element){
+            $.validator.addMethod("passwordMatch", function(value, element) {
                 return $('#password').val() === value;
             }, "Passwords do not match.");
-            $.validator.addMethod("spaceValidation", function(value, element){
+            $.validator.addMethod("spaceValidation", function(value, element) {
                 return value.trim().length !== 0;
             }, "Field should not contain only spaces.");
 
@@ -554,7 +553,7 @@
                     },
 
                 },
-                messages:{
+                messages: {
                     company_name: {
                         required: "Please enter the company name.",
                         spaceValidation: "Company name should not contain only spaces.",
@@ -733,15 +732,14 @@
     </script>
 
     <script>
-        $(".toggle-password").click(function(){
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        var input = $($(this).attr("toggle"));
-        if (input.attr("type") == "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
-        }
+        $(".toggle-password").click(function() {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
         });
     </script>
-   
 @endsection

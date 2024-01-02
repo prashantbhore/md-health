@@ -243,7 +243,7 @@
                               
 
                             } else {
-                                fail_toast("error", response.message);
+                                toastr.error(response.message);
                             }
                         },
                         error: function(response) {
