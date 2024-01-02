@@ -270,7 +270,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
 
@@ -297,7 +297,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_name',
                 'md_packages.status',
             )
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($packages_deactive_list)) {
@@ -341,6 +341,7 @@ class PackageControllers extends BaseController
                 'md_packages.hotel_acommodition_price',
                 'md_packages.vehicle_id',
                 'md_packages.vehicle_in_time',
+                'md_packages.tour_in_time',
                 'md_packages.vehicle_out_time',
                 'md_packages.transportation_acommodition_price',
                 'md_packages.visa_details',
@@ -470,6 +471,7 @@ class PackageControllers extends BaseController
                 $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
                 $package_input['vehicle_id'] = $request->vehicle_id;
                 $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['tour_in_time'] = $request->tour_in_time;
                 $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;
@@ -509,6 +511,7 @@ class PackageControllers extends BaseController
                 $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
                 $package_input['vehicle_id'] = $request->vehicle_id;
                 $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['tour_in_time'] = $request->tour_in_time;
                 $package_input['vehicle_out_time'] = $request->vehicle_out_time;
                 $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
                 $package_input['visa_details'] = $request->visa_details;

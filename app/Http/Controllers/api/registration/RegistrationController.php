@@ -250,7 +250,7 @@ class RegistrationController extends BaseController
     {
 
         // dd($request);
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(),[
             'company_name' => 'required',
             'city_id' => 'required',
             'email' => 'required',
@@ -319,13 +319,15 @@ class RegistrationController extends BaseController
         $md_provider_input['tax_no'] = $request->tax_no;
         $md_provider_input['company_address'] = $request->company_address;
         $md_provider_input['password'] = Hash::make($request->password);
-        // if ($request->has('company_logo_image_path')) {
-        //     if ($request->file('company_logo_image_path')) {
-        //         $md_provider_input['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
-        //         $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
-        //         $md_provider_input['company_logo_image_name'] = $original_name;
-        //     }
-        // }
+
+        if ($request->has('company_logo_image_path')) {
+            if ($request->file('company_logo_image_path')) {
+                $md_provider_input['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+                $md_provider_input['company_logo_image_name'] = $original_name;
+            }
+        }
+
         // if ($request->has('company_licence_image_path')) {
         //     if ($request->file('company_licence_image_path')) {
         //         $md_provider_input['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');

@@ -25,7 +25,7 @@ class SalesController extends BaseController{
 
     public function active_treatment_list()
     {
-        $active_treatment_list = CustomerPurchaseDetails::whereIn('purchase_type', ['pending', 'inprogress'])
+        $active_treatment_list = CustomerPurchaseDetails::whereIn('purchase_type', ['pending','in_progress'])
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
@@ -48,7 +48,7 @@ class SalesController extends BaseController{
     public function completed_treatment_list()
     {
 
-        $completed_treatment_list = CustomerPurchaseDetails::where('purchase_type', 'completed')
+        $completed_treatment_list = CustomerPurchaseDetails::where('purchase_type','completed')
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
@@ -97,7 +97,7 @@ class SalesController extends BaseController{
     {
 
         $validator = Validator::make($request->all(), [
-            'purchage_id' => 'required|string',
+            'purchage_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -181,7 +181,7 @@ class SalesController extends BaseController{
 
 
      $validator = Validator::make($request->all(), [
-           'purchage_id' => 'required|string',
+           'purchage_id' => 'required',
        ]);
    
        if ($validator->fails()) {

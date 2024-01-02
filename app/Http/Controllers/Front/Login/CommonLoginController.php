@@ -344,7 +344,7 @@ public function email_or_mobile_exist(Request $request){
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Profile created successfully.',
-                                'url' => '/user-profile',
+                                'url' => '/my-profile',
                             ] );
                         } else {
                             return response()->json( [

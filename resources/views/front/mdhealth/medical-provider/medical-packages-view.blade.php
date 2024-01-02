@@ -187,10 +187,10 @@
 
                                             </select>
                                         </div>
-                                        <input type="text" id="hotel_details_input" name="hotel_details_input"
+                                        <input type="hidden" id="hotel_details_input" name="hotel_details_input"
                                             readonly>
                                         <div class="date-picker-div mb-5">
-                                            <label class="form-label">Reservation Date</label>
+                                            <label class="form-label">Reservation Days</label>
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
@@ -254,7 +254,7 @@
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Accomodition
                                                 Price <span id="accommodation_price_span">0 ₺</span></a>
-                                            <input type="text" name="hotel_acommodition_price"
+                                            <input type="hidden" name="hotel_acommodition_price"
                                                 id="hotel_acommodition_price"
                                                 value="{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '' }}">
                                         </div>
@@ -270,16 +270,16 @@
                                                     @endphp
                                                     <option
                                                         value="{{ $vehicle_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
-                                                        {{ $vehicle_detail['brand_name'] }}
+                                                        {{ $vehicle_detail['vehicle_model_name'] }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <input type="text" id="vehicle_details_input" name="vehicle_details_input"
+                                        <input type="hidden" id="vehicle_details_input" name="vehicle_details_input"
                                             readonly>
 
                                         <div class="date-picker-div mb-5">
-                                            <label class="form-label">Reservation Date</label>
+                                            <label class="form-label">Reservation Days</label>
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
@@ -323,10 +323,10 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <input type="text" id="tour_details_input" name="tour_details_input" readonly>
+                                        <input type="hidden" id="tour_details_input" name="tour_details_input" readonly>
 
                                         <div class="date-picker-div mb-5">
-                                            <label class="form-label">Reservation Date</label>
+                                            <label class="form-label">Reservation Days</label>
                                             <div class="date-picker-card-div">
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->

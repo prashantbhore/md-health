@@ -6,13 +6,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+class ApiService {
 
-class ApiService
-{
-
-    public function getData($token = null, $url, $body = null, $method)
-    {
-        $env = explode(':', url('/'))[0];
+    public function getData( $token = null, $url, $body = null, $method ) {
+        $env = explode( ':', url( '/' ) )[ 0 ];
         // if ( $method == 'POST' ) {
 
         //     $response = Http::withHeaders( [
@@ -31,29 +28,29 @@ class ApiService
         //     return $responseData;
         // }
 
-        if ($env == 'https') {
+        if ( $env == 'https' ) {
             $headers = [];
 
-            if ($token) {
-                $headers['Authorization'] = 'Bearer ' . $token;
+            if ( $token ) {
+                $headers[ 'Authorization' ] = 'Bearer ' . $token;
             }
 
-            $response = Http::withHeaders($headers)->{
+            $response = Http::withHeaders( $headers )-> {
                 $method}
-            ($url, $body ?? null);
+                ( $url, $body ?? null );
 
-            return $response->json();
-        } else {
-            $request = Request::create($url, $method, $body ?? []);
-            if ($token) {
-                $request->headers->set('Authorization', 'Bearer ' . $token);
+                return $response->json();
+            } else {
+                $request = Request::create( $url, $method, $body ?? [] );
+                if ( $token ) {
+                    $request->headers->set( 'Authorization', 'Bearer ' . $token );
 
+                }
+                $response = app()->handle( $request );
+                // dd( $response );
+                return json_decode( $response->getContent(), true );
             }
-            $response = app()->handle($request);
-            // dd( $response );
-            return json_decode($response->getContent(), true);
-        }
 
-}
-}
+        }
+    }
 

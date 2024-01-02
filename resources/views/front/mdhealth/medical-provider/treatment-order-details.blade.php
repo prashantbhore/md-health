@@ -99,8 +99,8 @@
                 <div class="card mb-4">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <div>
-                            <span class="text-green">Treatment No: </span>#MD3726378
-                            <h6>Hearth Valve Replacement Surgery</h6>
+                            <span class="text-green">Treatment No: </span>{{!empty($patient_details['order_id'])?$patient_details['order_id']:''}}
+                            <h6>{{!empty($patient_details['package']['package_name'])?$patient_details['package']['package_name']:''}}</h6>
                         </div>
                         <a href="{{url('medical-provider-dashboard')}}" class="d-flex align-items-center gap-1 text-decoration-none">
                             <img src="{{asset('front/assets/img/backPage.png')}}" alt="">
@@ -139,31 +139,31 @@
                                         <div class="row card-details">
                                             <div class="col-md-6 mb-3">
                                                 <label for="firstName">First Name</label>
-                                                <p>Ali</p>
+                                                <p>{{!empty($patient_details['customer']['first_name'])?$patient_details['customer']['first_name']:''}}</p>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="lastName">Last Name</label>
-                                                <p>Danish</p>
+                                                <p>{{!empty($patient_details['customer']['last_name'])?$patient_details['customer']['last_name']:''}}</p>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="contactNo">Contact Number</label>
-                                                <p>+44 4444 44 44</p>
+                                                <p>{{!empty($patient_details['customer']['phone'])?$patient_details['customer']['phone']:''}}</p>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="email">E-mail</label>
-                                                <p>ali.danish@mdhealth.io</p>
+                                                <p>{{!empty($patient_details['customer']['email'])?$patient_details['customer']['email']:''}}</p>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="address">Address</label>
                                                 <p class="d-flex flex-column gap-3">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</span>
+                                                    <span>{{!empty($patient_details['customer']['address'])?$patient_details['customer']['address']:''}}</span>
                                                     <span>City / Country</span>
                                                 </p>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="address">Invoice Address</label>
                                                 <p class="d-flex flex-column gap-3">
-                                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</span>
+                                                    <span>{{!empty($patient_details['customer']['address'])?$patient_details['customer']['address']:''}}</span>
                                                     <span>City / Country</span>
                                                 </p>
                                             </div>
