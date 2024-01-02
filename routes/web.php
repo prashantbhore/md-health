@@ -488,6 +488,12 @@ Route::controller(SalesController::class)->group(function(){
     Route::get('medical-provider-sales','index');
    // Route::post('treatment-order-details/{id}','sales_view');
     Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
+
+    //Route::post('store-date-status','status_date_change')->name('status.date.store');
+
+    Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
+
+
 });
 
 

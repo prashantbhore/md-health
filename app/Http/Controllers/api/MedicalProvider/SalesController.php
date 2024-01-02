@@ -136,20 +136,20 @@ class SalesController extends BaseController{
         ]);
 
 
-        if ($validator->fails()) {
+        if ($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $patient_details = CustomerPurchaseDetails::where('id', $request->treatment_purchage_id)->update(['purchase_type' => $request->treatment_status, 'treatment_start_date' => $request->treatment_start_date]);
 
 
-        if (!empty($patient_details)) {
+        if (!empty($patient_details)){
             return response()->json([
                 'status' => 200,
                 'message' => 'date and status store successfully.',
                 'patient_details' =>  $patient_details,
             ]);
-        } else {
+        } else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong.failed to store date and status.',
