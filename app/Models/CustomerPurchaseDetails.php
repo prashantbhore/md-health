@@ -28,6 +28,7 @@ class CustomerPurchaseDetails extends Model
           'package_payment_plan',
           'payment_percentage',
           'paid_amount',
+            'purchase_status',
           'pending_payment',
            'purchase_type', 
            'payment_method',
