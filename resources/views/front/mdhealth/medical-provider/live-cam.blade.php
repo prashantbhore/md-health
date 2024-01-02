@@ -6,14 +6,6 @@
         height: 659px;
         flex-shrink: 0;
     }
-
-    .live-screen {
-        width: 992px;
-        height: 506px;
-        flex-shrink: 0;
-        border-radius: 5px;
-        background: #D9D9D9;
-    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards my-3">
@@ -27,8 +19,17 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <div class="live-screen">
+                        <div class="live-screen df-center position-relative">
+                            <h2>Medical Service Provider Cam</h2>
+                            <div class="customer-cam df-center">
+                                <h4>Customer Cam</h4>
 
+                            </div>
+                        </div>
+                        <div class="df-center gap-3 handset">
+                            <img src="{{asset('front/assets/img/mic.png')}}" alt="">
+                            <img src="{{asset('front/assets/img/call.png')}}" alt="">
+                            <img src="{{asset('front/assets/img/cam.png')}}" alt="">
                         </div>
                     </div>
                 </div>
