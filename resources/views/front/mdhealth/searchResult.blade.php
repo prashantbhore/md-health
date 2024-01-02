@@ -47,17 +47,17 @@
                     <label for="floatingSelect">City</label>
                 </div>
                 <div class="form-floating">
-                            <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option data-display="Select" selected>12 Aug</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select> -->
-                            <!-- <div class="datepickerContainer"> -->
-                                <input type="text" class="form-select" name="daterange" value="" />
-                            <!-- </div> -->
-                            <label for="floatingSelect">Treatment Date</label>
-                        </div>
+                    <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                                                                                    <option data-display="Select" selected>12 Aug</option>
+                                                                                                    <option value="1">One</option>
+                                                                                                    <option value="2">Two</option>
+                                                                                                    <option value="3">Three</option>
+                                                                                                </select> -->
+                    <!-- <div class="datepickerContainer"> -->
+                    <input type="text" class="form-select" name="daterange" value="" />
+                    <!-- </div> -->
+                    <label for="floatingSelect">Treatment Date</label>
+                </div>
                 <button class="btn btn-search-pill">Search</button>
             </div>
             <input type="hidden" name="platform_type" value="web">
@@ -487,7 +487,7 @@
 
 @endsection
 @section('script')
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script type="text/javascript">
 
     var baseUrl = $('#base_url').val();
