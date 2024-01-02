@@ -22,11 +22,9 @@
     .trmt-card-body {
         position: relative;
     }
-    .no-msg-div a {
-        margin: 70px 0;
-    }
+
     .no-msg-div a:last-child {
-        padding: 13px 20px;
+        /* padding: 13px 20px; */
         background: #FE4949;
         border-radius: 25px;
         line-height: 0;

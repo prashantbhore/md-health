@@ -131,5 +131,56 @@ class SalesController extends Controller
     }
 
 
+
+
+    public function assign_case_manager(Request $request)
+    {
+        
+        $token = Session::get('login_token');
+
+     
+        
+        $apiUrl = url('api/md-provider-assign-treatment-case-manager');
+
+        $treatment_purchage_id = $request->purchage_id;
+
+        $case_manager_id= $request->case_manager_id;
+
+        $hotel_id= $request->hotel_id;
+
+        $vehicle_id= $request->vehicle_id;
+
+        $purchase_type= $request->purchase_type;
+
+       $body=[
+                'purchage_id' =>  $treatment_purchage_id,
+                'case_manager_id' =>   $case_manager_id,
+                'hotel_id' =>  $hotel_id,
+                'vehicle_id' =>  $vehicle_id,
+                'status' =>  $purchase_type,
+            ];
+
+       $method = 'POST';
+
+
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+       if(!empty($responseData)){
+       $id=Crypt::encrypt($treatment_purchage_id);
+
+       return redirect('treatment-order-details/'.$id)->with('success', 'Treatment Status Changes Successfully!');
+       }
+    
+       // return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));
+    }
+
+
+
+
+
+
+
+
+
     
 }
