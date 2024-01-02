@@ -18,6 +18,7 @@ use App\Models\ProductSubCategory;
 use App\Models\MedicalProviderSystemUser;
 use App\Models\AddNewAcommodition;
 use APP\Models\VehicleBrand;
+use App\Models\CustomerPaymentDetails;
 
 
 class SalesController extends BaseController{
@@ -96,24 +97,27 @@ class SalesController extends BaseController{
     public function patient_details(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'purchage_id' => 'required|string',
+        $validator = Validator::make($request->all(),[
+            'purchage_id' => 'required',
         ]);
 
-        if ($validator->fails()) {
+
+        if ($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $patient_details = CustomerPurchaseDetails::where('id', $request->purchage_id)->with('customer', 'package', 'paymentDetails')->first();
+        $patient_details = CustomerPurchaseDetails::where('id', $request->purchage_id)->with('customer','customer.city','customer.country','package','paymentDetails')->first();
 
+        $payment_details=CustomerPaymentDetails::where('order_id', $patient_details->id)->get();
 
-        if (!empty($patient_details)) {
+        if (!empty($patient_details)){
             return response()->json([
                 'status' => 200,
                 'message' => 'patient details found.',
                 'patient_details' =>  $patient_details,
+                'payment_details'=>    $payment_details,
             ]);
-        } else {
+        } else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong.patient details not fond.',
@@ -181,7 +185,7 @@ class SalesController extends BaseController{
 
 
      $validator = Validator::make($request->all(), [
-           'purchage_id' => 'required|string',
+           'purchage_id' => 'required',
        ]);
    
        if ($validator->fails()) {

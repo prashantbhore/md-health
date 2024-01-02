@@ -3,7 +3,7 @@
     <div>
         {{-- banner --}}
         <div>
-            <img src="{{ 'front/assets/img/mdBookings/mdBookingsHeader.png' }}" class="position-absolute banner-img "
+            <!-- <img src="{{ 'front/assets/img/mdBookings/mdBookingsHeader.png' }}" class="position-absolute banner-img "
                 alt="">
             <div class="position-relative  d-flex flex-column  align-items-center banner">
                 <p class="green-color banner-p">BOOK RELIABLE & AFFORDABLE</p>
@@ -11,7 +11,7 @@
                     </span>VEHICLE
                 </p>
                 <p class="green-color banner-p">IN SECONDS</p>
-            </div>
+            </div> -->
 
             {{-- middle seaction --}}
             <div class="container  mt-5">
