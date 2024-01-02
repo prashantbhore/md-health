@@ -185,7 +185,7 @@ class CustomerPackageController extends Controller {
         $data = $this->apiService->getData( $token, url( '/api/md-customer-purchase-package-active-list' ), null, $method );
         $data_two = $this->apiService->getData( $token, url( '/api/md-customer-purchase-package-completed-list' ), null, $method );
         $data_three = $this->apiService->getData( $token, url( '/api/md-customer-purchase-package-cancelled-list' ), null, $method );
-
+        // dd( $data );
         $my_active_packages_list = $data[ 'customer_purchase_package_active_list' ];
         $my_completed_packages_list = $data_two[ 'customer_purchase_package_completed_list' ];
         $my_cancelled_packages_list = $data_three[ 'customer_purchase_package_cancelled_list' ];
@@ -195,9 +195,13 @@ class CustomerPackageController extends Controller {
 
     public function view_my_active_packages( $id ) {
 
+        $token = Session::get( 'login_token' );
         $data = $this->apiService->getData( $token, url( '/api/md-customer-package-details' ), [ 'package_id'=>$id ], 'POST' );
-        $other_service = explode( ',', $data[ 'other_services' ] );
+        // dd( $data );
+        $other_service =  array_map( fn( $item ) => $item[ 'title' ], $data[ 'other_services' ] );
+        $data = $data[ 'customer_purchase_package_list' ];
         $data[ 'other_services' ] = $other_service;
+        // dd( $data );
         return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data' ) );
 
     }
