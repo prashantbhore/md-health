@@ -44,6 +44,7 @@ class CustomerPackageController extends Controller {
 
     public function customer_package_search_filter( Request $request ) {
         // return 'asd ';
+        // return dd( $request );
         $packages = Packages::select(
             'md_packages.id',
             'md_packages.package_unique_no',
@@ -59,19 +60,21 @@ class CustomerPackageController extends Controller {
         // ->where( 'md_packages.status', 'active' )
         // ->where( 'md_product_category.status', 'active' )
         // ->where( 'md_product_sub_category.status', 'active' )
+        // ->where( 'md_packages.purchase_status', 'not_purchased' )
+        // ->leftjoin( 'md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id' )
         ->leftjoin( 'md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id' )
         ->leftjoin( 'md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id' )
         ->leftjoin( 'md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by' )
         ->leftjoin( 'md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id' );
 
-        // if ( !empty( $request->treatment_name ) ) {
-        //     $packages = $packages->where( 'md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%' );
-        // }
+        if ( !empty( $request->treatment_name ) ) {
+            $packages = $packages->where( 'md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%' );
+        }
         if ( !empty( $request->city_name ) ) {
-            $packages = $packages->where( 'md_master_cities.city_name', 'like', '%' . $request->city_name . '%' );
+            $packages = $packages->orWhere( 'md_master_cities.city_name', 'like', '%' . $request->city_name . '%' );
         }
         $packages = $packages->get();
-
+        // return  $packages;
         if ( !empty( $packages ) ) {
             foreach ( $packages as $key => $value ) {
                 $packages[ $key ][ 'id' ] = !empty( $value->id ) ? $value->id : '';
@@ -95,20 +98,21 @@ class CustomerPackageController extends Controller {
 
             $treatment_name = $request->treatment_name ?? 'Select Treatment';
             // $city_name = $packages[ 0 ][ 'city_name' ] ?? 'Select City' ?? $request->city_name;
-
+            $date =  $request->daterange ?? '';
             $city_name = $request->city_name?? 'Select City';
 
             $counties = Country::all();
 
-            return view( 'front.mdhealth.searchResult', compact( 'packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties' ) );
+            return view( 'front.mdhealth.searchResult', compact( 'packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date' ) );
 
         } else {
             $counties = Country::all();
             $city_name = $request->city_name?? 'Select City';
             $treatment_name = $request->treatment_name ?? 'Select Treatment';
+            $date =  $request->daterange ?? '';
             $cities = Cities::where( 'status', 'active' )->where( 'country_id', 1 )->get();
             $treatment_plans = ProductCategory::where( 'status', 'active' )->where( 'main_product_category_id', '1' )->get();
-            return view( 'front.mdhealth.searchResult', compact( 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties' ) );
+            return view( 'front.mdhealth.searchResult', compact( 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date' ) );
 
         }
 

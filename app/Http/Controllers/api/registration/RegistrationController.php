@@ -434,6 +434,7 @@ class RegistrationController extends BaseController
 
     public function vendor_registration(request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'company_name' => 'required',
             'city_id' => 'required',
@@ -442,8 +443,8 @@ class RegistrationController extends BaseController
             'tax_no' => 'required',
             'company_address' => 'required',
             'password' => 'required',
-            'company_logo_image_path' => 'required',
-            'company_licence_image_path' => 'required',
+            // 'company_logo_image_path' => 'required',
+            // 'company_licence_image_path' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -537,9 +538,11 @@ class RegistrationController extends BaseController
                 }
 
                 $update_unique_id = VendorRegister::where('id', $value->id)->update(['vendor_unique_no' => $provider_unique_id]);
+                $common_data_registrationid = CommonUserLoginTable::where('id', $lastInsertedId)->update(['user_id' => $value->id,'status'=>'active']);
+
             }
         }
-
+// dd($common_data_registrationid);
         if (
             Auth::guard('md_health_medical_vendor_registers')->attempt([
                 'mobile_no' => $request->phone,
@@ -548,58 +551,55 @@ class RegistrationController extends BaseController
             ])
         ) {
             $customer = Auth::guard('md_health_medical_vendor_registers')->user();
-            // return $customer;
+            return $customer;
+            // dd($customer);
             // $success=[];
             $success['token'] = $customer->createToken('MyApp')->plainTextToken;
             VendorRegister::where('id', $customer->id)->update([
                 'access_token' => $success['token']
             ]);
         } else {
-            // return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            dd('5645646sdfv'); // return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
             return response()->json([
                 'status' => 404,
                 'message' => 'Unauthorised.',
             ]);
         }
 
-        if ($request->has('company_logo_image_path')){
-            if ($request->file('company_logo_image_path')){
-                $md_provider_input_image_logo['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
-                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
-                $md_provider_input_image_logo['company_logo_image_name'] = $original_name;
-            }
-        }
-        VendorLogo::create($md_provider_input_image_logo);
+        // if ($request->has('company_logo_image_path')){
+        //     if ($request->file('company_logo_image_path')){
+        //         $md_provider_input_image_logo['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+        //         $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+        //         $md_provider_input_image_logo['company_logo_image_name'] = $original_name;
+        //     }
+        // }
+        // VendorLogo::create($md_provider_input_image_logo);
 
 
-        if ($request->has('company_licence_image_path')){
-            if ($request->file('company_licence_image_path')){
-                $md_provider_input_image_license['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
-                $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
-                $md_provider_input_image_license['company_licence_image_name'] = $original_name;
-            }
-        }
+        // if ($request->has('company_licence_image_path')){
+        //     if ($request->file('company_licence_image_path')){
+        //         $md_provider_input_image_license['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
+        //         $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
+        //         $md_provider_input_image_license['company_licence_image_name'] = $original_name;
+        //     }
+        // }
 
-         VendorLicense::create($md_provider_input_image_license);
+        //  VendorLicense::create($md_provider_input_image_license);
 
 
 
         if (!empty($md_provider_registration)){
-            if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-                return redirect('/medical-provider-dashboard')->with('success', "Profile created successfully.");
-            }
+           
             return response()->json([
                 'status' => 200,
                 'message' => 'Profile created successfully.',
                 'data' => [
                     'id' => $md_provider_registration->id,
-                    'access_token' => $success
+                    'access_token' => $success['token']
                 ],
             ]);
         } else {
-            // if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
-            //     return redirect('/user-account')->with('success', "Profile not completed.");
-            // }
+           
             return response()->json([
                 'status' => 404,
                 'message' => 'Profile not completed.',
@@ -607,7 +607,7 @@ class RegistrationController extends BaseController
         }
     }
 
-
+}
 
 
 

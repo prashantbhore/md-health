@@ -48,7 +48,7 @@
                                 <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}"
                                         alt=""></a>
                                 <h1 class="reg-title mb-0">Create Provider Account</h1>
-                                <span id="error" class="text-danger"></span>
+                                
                             </div>
                             <div class="form text-start px-5">
                                 <form id="myFormProvider">
@@ -218,7 +218,7 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                            {{-- <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
@@ -229,6 +229,18 @@
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control"> --}}
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
                         <div class="d-flex justify-content-center">
@@ -236,6 +248,13 @@
                                 style="height: 47px;">Sign In</button>
                         </div>
                     </form>
+                    <script>
+                        function moveToNext(current, nextId) {
+                            if (current.value.length === current.maxLength) {
+                                document.getElementById(nextId).focus();
+                            }
+                        }
+                    </script>
 
 
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\Front\Mdhome\MdHomeController;
 use App\Http\Controllers\Front\MdBooking\MdBookingController;
 use App\Http\Controllers\Front\MdFood\MdFoodsController;
 use App\Http\Controllers\Front\MdShop\MdShoppingController;
+use App\Http\Controllers\Front\Registration\VendorRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\master\CityController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
+use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 
 /*
 |--------------------------------------------------------------------------
@@ -352,7 +354,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 #User Account
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 // Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
-Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
+// Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
 Route::view('food-login', 'front/mdhealth/authentication/food-login');
 
 #Sign In
@@ -363,12 +365,19 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 Route::controller(MedicalProviderRegistrationController::class)->group(function () {
     Route::get('user-account', 'index');
     Route::get('medical-provider-login', 'indexmedpro');
+    Route::get('vendor-login', 'vendor_login');
     Route::post('/md-register-medical-provider', 'md_register_medical_provider');
     Route::get('/logout', 'logout');
 });
 Route::controller(UserRegistrationController::class)->group(function () {
     // Route::get('user-account', 'index');
     Route::post('/md-customer-register', 'customer_register');
+    // Route::get('/logout','logout');
+
+});
+Route::controller(VendorRegistrationController::class)->group(function () {
+    // Route::get('user-account', 'index');
+    Route::post('/md-vendor-register', 'vendor_register');
     // Route::get('/logout','logout');
 
 });
@@ -389,7 +398,7 @@ Route::controller(CommonLoginController::class)->group(function () {
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
 
     Route::controller(MedicalProviderLogin::class)->group(function () {
-        Route::get('/medical-provider-dashboard', 'dashboard_view');
+        //Route::get('/medical-provider-dashboard', 'dashboard_view');
         // Route::get('/logout', 'logout');
         // Route::get('/login/change_password', 'change_password_view');
         // Route::post('/reset-password', 'reset_password');
@@ -410,7 +419,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::post('/check-old-password', 'check_old_password');
     });
 
-    Route::controller(OtherServicesController::class)->group(function () {
+    Route::controller(OtherServicesController::class)->group(function (){
         Route::get('medical-other-services', 'index');
         Route::get('/add-acommodition', 'add_acommodition');
         Route::get('/add-tour', 'add_tour');
@@ -422,7 +431,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('/edit-vehicle/{id}', 'edit_vehicle');
         Route::get('/edit-tour/{id}', 'edit_tour');
         Route::get('/add-new-vehical', 'add_new_vehical');
-        // Route::post('/delete-acommodition/{id}', 'delete_acommodition');
+        Route::post('/delete-acommodition/{id}', 'delete_acommodition');
         // Route::post('/check-old-password', 'check_old_password');
     });
     Route::controller(PackageController::class)->group(function () {
@@ -432,6 +441,9 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('medical-packages-view', 'index');
         Route::post('md-add-packages', 'md_add_packages');
         Route::get('/edit-package/{id}', 'edit_package');
+        Route::post('/md-packages-active-list-search', 'md_packages_active_list_search');
+        Route::post('/md-packages-inactive-list-search', 'md_packages_inactive_list_search');
+        // Route::get('/edit-package/{id}', 'edit_package');
         // Route::get('/add-tour', 'add_tour');
         // // Route::get('/login/change_password', 'change_password_view');
         // Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
@@ -488,14 +500,31 @@ Route::view('reports', 'front/mdhealth/medical-provider/reports');
 
 #Sales
 
-Route::controller(SalesController::class)->group(function () {
-    Route::get('medical-provider-sales', 'index');
-    // Route::post('treatment-order-details/{id}','sales_view');
-    Route::match(['get', 'post'], 'treatment-order-details/{id}', 'sales_view');
+Route::controller(SalesController::class)->group(function(){
+
+    Route::get('medical-provider-sales','index');
+   // Route::post('treatment-order-details/{id}','sales_view');
+
+    Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
 
     //Route::post('store-date-status','status_date_change')->name('status.date.store');
 
-    Route::match(['get', 'post'], 'store-date-status', 'status_date_change')->name('status.date.store');
+    Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
+
+    Route::match(['get', 'post'], 'assign-case-manager','assign_case_manager')->name('assign.case.manager');
+
+    Route::match(['get', 'post'], 'sales-search','sales_search')->name('sales.search');
+
+
+});
+
+
+
+
+#Medical Provider Dashboard
+Route::controller(MedicalProviderDashboradController::class)->group(function(){
+    
+    Route::get('medical-provider-dashboard','index');
 
     Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
 });

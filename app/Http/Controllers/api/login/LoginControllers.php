@@ -15,126 +15,361 @@ use App\Models\CustomerLogs;
 class LoginControllers extends BaseController {
     // customer login
 
-    public function customer_login(Request $request) {
+    // public function customer_login(Request $request) {
+    //     // return 'asdsa';
+    //     // return $request;
+    //     $validator = Validator::make( $request->all(), [
+    //         // 'email' => 'required',
+    //         'platform_type' => 'required',
+    //         'password' => 'required'
+    //     ] );
+
+    //     $validation_message = '';
+
+    //     if ( $validator->fails() ) {
+    //         return $this->sendError( 'Validation Error.', $validator->errors() );
+    //     }
+    //     // dd($request);
+    //     if ($request->platform_type == "web") 
+    //     {
+    // // dd($request->platform_type);
+
+    //         if ( Auth::guard( 'md_customer_registration' )->attempt( [
+    //             'email' => $request->email,
+    //             'password' => $request->password,
+    //             'status' => 'active',
+    //         ] ) ) {
+    //             // dd($request);
+    //             $customer = Auth::guard( 'md_customer_registration' )->user();
+    //             $success[ 'token' ] =  $customer->createToken( 'MyApp' )->plainTextToken;
+    //             $otp = rand( 1111, 9999 );
+
+    //             CustomerRegistration::where( 'id', $customer->id )->update( [
+    //                 // 'shop_owner_last_login' => Carbon::now(),
+    //                 'otp_expiring_time' => time() + 20,
+    //                 // 'login_otp' => $otp,
+    //                 'fcm_token' => $request->fcm_token,
+    //                 'access_token' => $success[ 'token' ]
+    //             ] );
+
+    //             $customer_logs = [];
+    //             $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
+    //             $customer_logs[ 'status' ] = 'active';
+    //             $customer_logs[ 'type' ] = 'login';
+    //             CustomerLogs::create( $customer_logs );
+
+    //             // return redirect( '/sms-code' );
+    //             return response()->json( [
+    //                 'status' => 200,
+    //                 'message' => 'Login successfull.',
+    //                 'mobile_number' => $customer->phone,
+    //                 'full_name' => $customer->full_name,
+    //                 'success_token' => $success,
+    //             ] );
+    //         } else {
+    //             $customer = CustomerRegistration::where( 'status', 'active' )
+    //             ->select( 'id' )
+    //             ->where( 'email', $request->email )
+    //             ->first();
+    //             if ( $customer ) {
+    //                 $customer_logs = [];
+    //                 $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
+    //                 $customer_logs[ 'status' ] = 'inactive';
+    //                 $customer_logs[ 'type' ] = 'login';
+    //                 CustomerLogs::create( $customer_logs );
+    //                 // return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
+    //             }
+
+    //             return response()->json( [
+    //                 'status' => 404,
+    //                 'message' => 'Unauthorised.',
+    //             ] );
+    //         }
+    //     } else {
+    //         if ( Auth::guard( 'md_customer_registration' )->attempt( [
+    //             'phone' => $request->phone,
+    //             'password' => $request->password,
+    //             'status' => 'active',
+    //         ] ) ) {
+
+    //             $customer = Auth::guard( 'md_customer_registration' )->user();
+    //             $success[ 'token' ] =  $customer->createToken( 'MyApp' )->plainTextToken;
+    //             $otp = rand( 111111, 999999 );
+
+    //             CustomerRegistration::where( 'id', $customer->id )->update( [
+    //                 // 'shop_owner_last_login' => Carbon::now(),
+    //                 'otp_expiring_time' => time() + 20,
+    //                 // 'login_otp' => $otp,
+    //                 'fcm_token' => $request->fcm_token,
+    //                 'access_token' => $success[ 'token' ]
+    //             ] );
+
+    //             $customer_logs = [];
+    //             $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
+    //             $customer_logs[ 'status' ] = 'active';
+    //             $customer_logs[ 'type' ] = 'login';
+    //             CustomerLogs::create( $customer_logs );
+
+    //             return response()->json( [
+    //                 'status' => 200,
+    //                 'message' => 'Login successfull.',
+    //                 'mobile_number' => $customer->phone,
+    //                 'full_name' => $customer->full_name,
+    //                 'success_token' => $success,
+    //             ] );
+    //         } else {
+    //             $customer = CustomerRegistration::where( 'status', 'active' )
+    //             ->select( 'id' )
+    //             ->where( 'email', $request->email )
+    //             ->first();
+    //             if ( $customer ) {
+    //                 $customer_logs = [];
+    //                 $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
+    //                 $customer_logs[ 'status' ] = 'inactive';
+    //                 $customer_logs[ 'type' ] = 'login';
+    //                 CustomerLogs::create( $customer_logs );
+    //             }
+
+    //             return response()->json( [
+    //                 'status' => 404,
+    //                 'message' => 'Unauthorised.',
+    //             ] );
+    //         }
+    //     }
+    // }
+
+    public function customer_login(Request $request)
+    {
         // return 'asdsa';
         // return $request;
-        $validator = Validator::make( $request->all(), [
+        $validator = Validator::make($request->all(), [
             // 'email' => 'required',
             'platform_type' => 'required',
             'password' => 'required'
-        ] );
+        ]);
 
         $validation_message = '';
 
-        if ( $validator->fails() ) {
-            return $this->sendError( 'Validation Error.', $validator->errors() );
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.',
+                $validator->errors()
+            );
         }
         // dd($request);
-        if ($request->platform_type == "web") 
-        {
-    // dd($request->platform_type);
-  
-            if ( Auth::guard( 'md_customer_registration' )->attempt( [
-                'email' => $request->email,
-                'password' => $request->password,
-                'status' => 'active',
-            ] ) ) {
-                // dd($request);
-                $customer = Auth::guard( 'md_customer_registration' )->user();
-                $success[ 'token' ] =  $customer->createToken( 'MyApp' )->plainTextToken;
-                $otp = rand( 1111, 9999 );
+        if ($request->platform_type == "web") {
+            // dd($request->platform_type);
+if(!empty($request->phone)){
+                if (Auth::guard('md_customer_registration')->attempt([
+                    'phone' => $request->phone,
+                    'password' => $request->password,
+                    'status' => 'active',
+                ])) {
 
-                CustomerRegistration::where( 'id', $customer->id )->update( [
-                    // 'shop_owner_last_login' => Carbon::now(),
-                    'otp_expiring_time' => time() + 20,
-                    // 'login_otp' => $otp,
-                    'fcm_token' => $request->fcm_token,
-                    'access_token' => $success[ 'token' ]
-                ] );
+                    $customer = Auth::guard('md_customer_registration')->user();
+                    $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                    $otp = rand(111111, 999999);
 
-                $customer_logs = [];
-                $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
-                $customer_logs[ 'status' ] = 'active';
-                $customer_logs[ 'type' ] = 'login';
-                CustomerLogs::create( $customer_logs );
+                    CustomerRegistration::where('id', $customer->id)->update([
+                        // 'shop_owner_last_login' => Carbon::now(),
+                        'otp_expiring_time' => time() + 20,
+                        // 'login_otp' => $otp,
+                        'fcm_token' => $request->fcm_token,
+                        'access_token' => $success['token']
+                    ]);
 
-                // return redirect( '/sms-code' );
-                return response()->json( [
-                    'status' => 200,
-                    'message' => 'Login successfull.',
-                    'mobile_number' => $customer->phone,
-                    'full_name' => $customer->full_name,
-                    'success_token' => $success,
-                ] );
-            } else {
-                $customer = CustomerRegistration::where( 'status', 'active' )
-                ->select( 'id' )
-                ->where( 'email', $request->email )
-                ->first();
-                if ( $customer ) {
                     $customer_logs = [];
-                    $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
-                    $customer_logs[ 'status' ] = 'inactive';
-                    $customer_logs[ 'type' ] = 'login';
-                    CustomerLogs::create( $customer_logs );
-                    // return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
+                    $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    $customer_logs['status'] = 'active';
+                    $customer_logs['type'] = 'login';
+                    CustomerLogs::create($customer_logs);
+
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Login successfull.',
+                        'mobile_number' => $customer->phone,
+                        'full_name' => $customer->full_name,
+                        'success_token' => $success,
+                    ]);
+                } else {
+                    $customer = CustomerRegistration::where('status', 'active')
+                        ->select('id')
+                        ->where('email', $request->email)
+                        ->first();
+                    if ($customer) {
+                        $customer_logs = [];
+                        $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                        $customer_logs['status'] = 'inactive';
+                        $customer_logs['type'] = 'login';
+                        CustomerLogs::create($customer_logs);
+                    }
+
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Unauthorised.',
+                    ]);
                 }
 
-                return response()->json( [
-                    'status' => 404,
-                    'message' => 'Unauthorised.',
-                ] );
-            }
+}else{
+
+                if (Auth::guard('md_customer_registration')->attempt([
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'status' => 'active',
+                ])) {
+                    // dd($request);
+                    $customer = Auth::guard('md_customer_registration')->user();
+                    $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                    $otp = rand(1111, 9999);
+
+                    CustomerRegistration::where('id', $customer->id)->update([
+                        // 'shop_owner_last_login' => Carbon::now(),
+                        'otp_expiring_time' => time() + 20,
+                        // 'login_otp' => $otp,
+                        'fcm_token' => $request->fcm_token,
+                        'access_token' => $success['token']
+                    ]);
+
+                    $customer_logs = [];
+                    $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    $customer_logs['status'] = 'active';
+                    $customer_logs['type'] = 'login';
+                    CustomerLogs::create($customer_logs);
+
+                    // return redirect( '/sms-code' );
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Login successfull.',
+                        'mobile_number' => $customer->phone,
+                        'full_name' => $customer->full_name,
+                        'success_token' => $success,
+                    ]);
+                } else {
+                    $customer = CustomerRegistration::where('status', 'active')
+                        ->select('id')
+                        ->where('email', $request->email)
+                        ->first();
+                    if ($customer) {
+                        $customer_logs = [];
+                        $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                        $customer_logs['status'] = 'inactive';
+                        $customer_logs['type'] = 'login';
+                        CustomerLogs::create($customer_logs);
+                        // return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
+                    }
+
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Unauthorised.',
+                    ]);
+                }
+}     
         } else {
-            if ( Auth::guard( 'md_customer_registration' )->attempt( [
-                'phone' => $request->phone,
-                'password' => $request->password,
-                'status' => 'active',
-            ] ) ) {
 
-                $customer = Auth::guard( 'md_customer_registration' )->user();
-                $success[ 'token' ] =  $customer->createToken( 'MyApp' )->plainTextToken;
-                $otp = rand( 111111, 999999 );
+            if(!empty($request->email)){
 
-                CustomerRegistration::where( 'id', $customer->id )->update( [
-                    // 'shop_owner_last_login' => Carbon::now(),
-                    'otp_expiring_time' => time() + 20,
-                    // 'login_otp' => $otp,
-                    'fcm_token' => $request->fcm_token,
-                    'access_token' => $success[ 'token' ]
-                ] );
+                if (Auth::guard('md_customer_registration')->attempt([
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'status' => 'active',
+                ])) {
+                    // dd($request);
+                    $customer = Auth::guard('md_customer_registration')->user();
+                    $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                    $otp = rand(1111, 9999);
 
-                $customer_logs = [];
-                $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
-                $customer_logs[ 'status' ] = 'active';
-                $customer_logs[ 'type' ] = 'login';
-                CustomerLogs::create( $customer_logs );
+                    CustomerRegistration::where('id', $customer->id)->update([
+                        // 'shop_owner_last_login' => Carbon::now(),
+                        'otp_expiring_time' => time() + 20,
+                        // 'login_otp' => $otp,
+                        'fcm_token' => $request->fcm_token,
+                        'access_token' => $success['token']
+                    ]);
 
-                return response()->json( [
-                    'status' => 200,
-                    'message' => 'Login successfull.',
-                    'mobile_number' => $customer->phone,
-                    'full_name' => $customer->full_name,
-                    'success_token' => $success,
-                ] );
-            } else {
-                $customer = CustomerRegistration::where( 'status', 'active' )
-                ->select( 'id' )
-                ->where( 'email', $request->email )
-                ->first();
-                if ( $customer ) {
                     $customer_logs = [];
-                    $customer_logs[ 'customer_id' ] = !empty( $customer->id ) ? $customer->id : '';
-                    $customer_logs[ 'status' ] = 'inactive';
-                    $customer_logs[ 'type' ] = 'login';
-                    CustomerLogs::create( $customer_logs );
-                }
+                    $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    $customer_logs['status'] = 'active';
+                    $customer_logs['type'] = 'login';
+                    CustomerLogs::create($customer_logs);
 
-                return response()->json( [
-                    'status' => 404,
-                    'message' => 'Unauthorised.',
-                ] );
+                    // return redirect( '/sms-code' );
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Login successfull.',
+                        'mobile_number' => $customer->phone,
+                        'full_name' => $customer->full_name,
+                        'success_token' => $success,
+                    ]);
+                } else {
+                    $customer = CustomerRegistration::where('status', 'active')
+                        ->select('id')
+                        ->where('email', $request->email)
+                        ->first();
+                    if ($customer) {
+                        $customer_logs = [];
+                        $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                        $customer_logs['status'] = 'inactive';
+                        $customer_logs['type'] = 'login';
+                        CustomerLogs::create($customer_logs);
+                        // return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
+                    }
+
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Unauthorised.',
+                    ]);
+                }
+            }else{
+                if (Auth::guard('md_customer_registration')->attempt([
+                    'phone' => $request->phone,
+                    'password' => $request->password,
+                    'status' => 'active',
+                ])) {
+
+                    $customer = Auth::guard('md_customer_registration')->user();
+                    $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                    $otp = rand(111111, 999999);
+
+                    CustomerRegistration::where('id', $customer->id)->update([
+                        // 'shop_owner_last_login' => Carbon::now(),
+                        'otp_expiring_time' => time() + 20,
+                        // 'login_otp' => $otp,
+                        'fcm_token' => $request->fcm_token,
+                        'access_token' => $success['token']
+                    ]);
+
+                    $customer_logs = [];
+                    $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    $customer_logs['status'] = 'active';
+                    $customer_logs['type'] = 'login';
+                    CustomerLogs::create($customer_logs);
+
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Login successfull.',
+                        'mobile_number' => $customer->phone,
+                        'full_name' => $customer->full_name,
+                        'success_token' => $success,
+                    ]);
+                } else {
+                    $customer = CustomerRegistration::where('status', 'active')
+                        ->select('id')
+                        ->where('email', $request->email)
+                        ->first();
+                    if ($customer) {
+                        $customer_logs = [];
+                        $customer_logs['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                        $customer_logs['status'] = 'inactive';
+                        $customer_logs['type'] = 'login';
+                        CustomerLogs::create($customer_logs);
+                    }
+
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Unauthorised.',
+                    ]);
+                }
             }
+            
         }
     }
 

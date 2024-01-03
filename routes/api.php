@@ -13,6 +13,7 @@ use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\customer\CustomerShopController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\AddSystemUserRole;
+use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
@@ -21,6 +22,7 @@ use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
+use App\Models\MedicalProviderLogo;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,9 @@ Route::get('unauthorized-user', function () {
 
 // dynamic app url
 Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']);
+
+
+
 
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
@@ -60,6 +65,10 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 
 //md-medical-provider-login
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
+
+//Vendor Registration
+
+Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function ()
@@ -266,7 +275,7 @@ Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_
 
 //add-package-to-favourite
 Route::post('md-add-package-to-favourite', [CustomerPackageController::class, 'add_package_to_favourite']);
-});
+
 
 
 
@@ -327,6 +336,10 @@ Route::post('md-provider-assign-treatment-case-manager', [SalesController::class
 //Provider sales treatment search
 Route::post('md-provider-treatment-search', [SalesController::class,'treatment_search']);
 
+//Medical Provider
+
+Route::get('md-provider-daily-monthly-summary', [SalesController::class,'salesSummary']);
+
 
 //Provider account details saved
 Route::post('md-provider-add-bank-account', [PaymentController::class,'add_provider_account']);
@@ -364,9 +377,7 @@ Route::post('md-provider-system-user-edit', [AddSystemUserRole::class,'edit_syst
 //Provider System User delete
 Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_system_user']);
 
-//Vendor Registration
 
-Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
 
 //Vendor Prodcut
 Route::controller(VendorProductController::class)->group(function(){
@@ -409,11 +420,20 @@ Route::controller(VendorSalesController::class)->group(function(){
     Route::get('cancelled-sales-lists','cancelledSales');
     Route::post('order-view','salesView');
     Route::post('search-sales','searchSales');
-
-
 });
 
 
+
+//Medical Provider Dashboard APs
+Route::controller(MedicalProviderDashboradController::class)->group(function(){
+    Route::get('vendor-monthly-order-count','monthlyOrders');
+    Route::get('vendor-monthly-sales-count','monthlySales');
+    Route::get('vendor-package-latest-orders','latestOrders');
+});
+
+
+
+});
 
 // });
 

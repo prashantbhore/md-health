@@ -12,7 +12,7 @@
     <img class="mdFoodsNavBg" src="{{ URL('front/assets/img/mdFoodsBg.png') }}" alt="">
     <div class="container">
         <a class="navbar-brand" href="{{ URL('admin/dashboard') }}">
-            <img src="{{ URL::asset('admin/assets/img/mdFoods.svg') }}" alt="" style="width: 180px;" />
+            <img src="{{ URL::asset('admin/assets/img/MDHealth.svg') }}" alt="" style="width: 180px;" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -213,7 +213,7 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        Profile
+                                        Dashboard
                                     </a>
                                 </li>
                                 <li>
