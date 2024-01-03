@@ -266,7 +266,7 @@ Route::post('md-customer-reviews', [CustomerPackageController::class, 'customer_
 
 //add-package-to-favourite
 Route::post('md-add-package-to-favourite', [CustomerPackageController::class, 'add_package_to_favourite']);
-});
+
 
 
 
@@ -408,11 +408,7 @@ Route::controller(VendorSalesController::class)->group(function(){
     Route::get('cancelled-sales-lists','cancelledSales');
     Route::post('order-view','salesView');
     Route::post('search-sales','searchSales');
-
-
 });
-
-
-
+});
 // });
 
