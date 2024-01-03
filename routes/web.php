@@ -75,7 +75,9 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 
 //Home Service Routes
-Route::get('home-service', [MdhomeController::class ,'home']
+Route::get(
+    'home-service',
+    [MdhomeController::class, 'home']
     // return view('front.mdHome.index');
 );
 
@@ -126,7 +128,7 @@ Route::get('view-products', function () {
 });
 
 // mdFood Routes
-Route::get('mdFoods', [MdFoodsController::class , 'mdfood_home']);
+Route::get('mdFoods', [MdFoodsController::class, 'mdfood_home']);
 
 Route::get('foods-search-result', function () {
     return view('front.mdFoods.searchResult');
@@ -216,7 +218,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function(){
+    Route::controller(CityController::class)->group(function () {
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table', 'data_table');
@@ -229,7 +231,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CITIES
 
-    Route::controller(AdminController::class)->group(function (){
+    Route::controller(AdminController::class)->group(function () {
         Route::get('add-admins', 'index');
         Route::post('admin-store', 'store')->name('admin.store');
         Route::get('/admin-data-table', 'data_table');
@@ -424,11 +426,11 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::post('/check-old-password', 'check_old_password');
     });
     Route::controller(PackageController::class)->group(function () {
-       Route::get('medical-packages', 'package_list');
-       Route::get('md-packages-active-list', 'active_package_list');
-       Route::get('md-packages-deactive-list', 'deactive_package_list');
-       Route::get('medical-packages-view', 'index');
-       Route::post('md-add-packages', 'md_add_packages');
+        Route::get('medical-packages', 'package_list');
+        Route::get('md-packages-active-list', 'active_package_list');
+        Route::get('md-packages-deactive-list', 'deactive_package_list');
+        Route::get('medical-packages-view', 'index');
+        Route::post('md-add-packages', 'md_add_packages');
         Route::get('/edit-package/{id}', 'edit_package');
         // Route::get('/add-tour', 'add_tour');
         // // Route::get('/login/change_password', 'change_password_view');
@@ -486,18 +488,16 @@ Route::view('reports', 'front/mdhealth/medical-provider/reports');
 
 #Sales
 
-Route::controller(SalesController::class)->group(function(){
-    Route::get('medical-provider-sales','index');
-   // Route::post('treatment-order-details/{id}','sales_view');
-    Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
+Route::controller(SalesController::class)->group(function () {
+    Route::get('medical-provider-sales', 'index');
+    // Route::post('treatment-order-details/{id}','sales_view');
+    Route::match(['get', 'post'], 'treatment-order-details/{id}', 'sales_view');
 
     //Route::post('store-date-status','status_date_change')->name('status.date.store');
 
-    Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
+    Route::match(['get', 'post'], 'store-date-status', 'status_date_change')->name('status.date.store');
 
-    Route::match(['get', 'post'], 'assign-case-manager','assign_case_manager')->name('assign.case.manager');
-
-
+    Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
 });
 
 
@@ -523,7 +523,7 @@ Route::view('user-all-reports', 'front/mdhealth/user-panel/user-all-reports');
 
 // MD BOOKING PAGE KD
 // 'front/mdhealth/md-booking/md-booking-home-page'
-Route::any('md-booking-home-page',[MdBookingController::class, 'mdbooking_home'] );
+Route::any('md-booking-home-page', [MdBookingController::class, 'mdbooking_home']);
 Route::view('md-booking-search-hotel-page', 'front/mdhealth/md-booking/md-booking-search-hotel');
 Route::view('md-booking-search-flight-page', 'front/mdhealth/md-booking/md-booking-search-flight');
 Route::view('md-booking-search-vehicle-page', 'front/mdhealth/md-booking/md-booking-search-vehicle');
@@ -560,3 +560,12 @@ Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provi
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 
 Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');
+
+// USER PANEL
+#Orders
+Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
+Route::view('user-favorites', 'front/mdhealth/user-panel/user-favorites');
+
+
+Route::view('membership', 'front/mdhealth/medical-provider/membership');
+
