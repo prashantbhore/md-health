@@ -40,6 +40,7 @@ class ApiService {
         //     $method}
         //     ( $url, $body ?? null );
         // dd( time().Str::random( 5 ).'.'.$extension );
+        
 
         if ( $env == 'https' ) {
 
@@ -116,7 +117,7 @@ class ApiService {
 
                 $response = app()->handle( $request );
 
-                // dd( $response );
+                // dd( json_decode( $response->getContent(), true ) );
 
                 return json_decode( $response->getContent(), true );
             }

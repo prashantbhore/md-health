@@ -1,5 +1,19 @@
+@section('css')
+@endsection
 @extends('front.layout.layout2')
 @section('content')
+    <style>
+        .no-data {
+            border: solid #b8b8b8 1px;
+            height: 150px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 150px;
+            font-size: 25px;
+            color: #a0a0a0;
+        }
+    </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
             <div class="row">
@@ -101,7 +115,7 @@
                                                 </div>
                                             </div>
                                         @endforeach --}}
-                                       
+
                                     </div>
                                     <div class="tab-pane fade" id="medical-provider" role="tabpanel"
                                         aria-labelledby="medical-provider-tab">
@@ -134,7 +148,7 @@
                                                                     <i class="fa fa-close"></i>
                                                                     Activate
                                                                 </a>
-                                                                
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -218,8 +232,8 @@
                     },
                     success: function(response) {
                         // if (response.status == 200) {
-                            $('#activelist').html(response);
-                            console.log('Active tab API response:', response);
+                        $('#activelist').html(response);
+                        console.log('Active tab API response:', response);
                         // }
                         fetchActiveCount();
                     },
@@ -241,8 +255,8 @@
                     },
                     success: function(response) {
                         // if (response.status == 200) {
-                            $('#deactivelist').html(response);
-                            console.log('Deactive tab API response:', response);
+                        $('#deactivelist').html(response);
+                        console.log('Deactive tab API response:', response);
                         // }
                         fetchDeactiveCount();
                     },
@@ -274,79 +288,69 @@
         });
     </script>
 
-<script>
+    <script>
+        function change_status(id, type) {
+            var base_url = $('#base_url').val();
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
 
+            var url = '';
 
-function change_status(id, type) {
-    var base_url = $('#base_url').val();
-    const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const bearer_token = '{{ Session::get('login_token') }}';
-
-    var url = '';
-
-    if (type === 'active') {
-        url = base_url + '/api/md-activate-to-deactivate-packages';
-    } else {
-        url = base_url + '/api/md-deactivate-to-activate-packages';
-    }
-
-    $.ajax({
-        url: url,
-        type: 'POST',
-        data: {
-            id: id,
-        },
-        headers: {
-            'X-CSRF-TOKEN': token,
-            'Authorization': 'Bearer ' + bearer_token
-        },
-        success: function(response) {
-            if (response.status === 200) {
-                toastr.options = {
-                    "positionClass": "toast-bottom-right",
-                    "timeOut": "5000",
-                };
-                toastr.success(response.message);
-
-                // Move the package to the corresponding tab
-                movePackageToTab(id, type);
+            if (type === 'active') {
+                url = base_url + '/api/md-activate-to-deactivate-packages';
             } else {
-                toastr.error(response.message);
+                url = base_url + '/api/md-deactivate-to-activate-packages';
             }
-        },
-        error: function(xhr) {
-            console.error('Error:', xhr);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'Authorization': 'Bearer ' + bearer_token
+                },
+                success: function(response) {
+                    if (response.status === 200) {
+                        toastr.options = {
+                            "positionClass": "toast-bottom-right",
+                            "timeOut": "5000",
+                        };
+                        toastr.success(response.message);
+
+                        // Move the package to the corresponding tab
+                        movePackageToTab(id, type);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
         }
-    });
-}
 
-function movePackageToTab(id, type) {
-    var sourceTabId = type === 'active' ? '#user' : '#medical-provider';
-    var targetTabId = type === 'active' ? '#medical-provider' : '#user';
-    $('#div_' + id).remove();
-    // Find the package element in the source tab
-    var packageElement = $('#' + sourceTabId + ' #div_' + id);
+        function movePackageToTab(id, type) {
+            var sourceTabId = type === 'active' ? '#user' : '#medical-provider';
+            var targetTabId = type === 'active' ? '#medical-provider' : '#user';
+            $('#div_' + id).remove();
+            // Find the package element in the source tab
+            var packageElement = $('#' + sourceTabId + ' #div_' + id);
 
-    // Remove existing tab-pane fade classes
-    packageElement.removeClass('tab-pane fade show active').addClass('tab-pane fade');
+            // Remove existing tab-pane fade classes
+            packageElement.removeClass('tab-pane fade show active').addClass('tab-pane fade');
 
-    // Remove existing card status classes
-    packageElement.find('.active, .cancel').removeClass('active cancel');
+            // Remove existing card status classes
+            packageElement.find('.active, .cancel').removeClass('active cancel');
 
-    // Update card status based on type
-    var statusClass = type === 'active' ? 'active' : 'cancel';
-    packageElement.find('.dashboard-card-title span').addClass(statusClass);
+            // Update card status based on type
+            var statusClass = type === 'active' ? 'active' : 'cancel';
+            packageElement.find('.dashboard-card-title span').addClass(statusClass);
 
-    // Detach the package element and append it to the target tab
-    $(targetTabId + ' .tab-content').append(packageElement.detach());
-}
-
-
-
-
-
-
-
-</script>
-
+            // Detach the package element and append it to the target tab
+            $(targetTabId + ' .tab-content').append(packageElement.detach());
+        }
+    </script>
 @endsection
