@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mb-3">
-                    <img src="{{ 'front/assets/img/order.png' }}" alt="">
+                    <img src="{{ url('front/assets/img/order.png') }}" alt="">
                 </div>
                 <div class="other_services_items">
                 </div>
@@ -88,7 +88,8 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column align-items-center mb-2">
-                    <img src="{{ 'front/assets/img/ArrowsDown.png' }}" alt="" class="mb-3">
+                    {{-- {{ dd(url('front/assets/img/ArrowsDown.png')) }} --}}
+                    <img src="{{ url('front/assets/img/ArrowsDown.png') }}" alt="" class="mb-3">
                     <p class="mb-2 fs-3 camptonBold lh-base">Next Step</p>
                     <p class="underline smallFont fw-normal camptonBook"><u>Payment</u></p>
                 </div>
@@ -329,16 +330,18 @@
                         purchaseDetails = response.purchase_details;
                         otherServices = response.other_services;
                         discounts = response.discounts;
-                        var treatmentPriceHtml = purchaseDetails.treatment_price +
-                            ' ₺ <span class="smallFont treatment_price_discount"> (' + numberToPercent(
-                                percentValue,
+                        var treatmentPriceHtml = numberToDiscount(
+                                parseInt(purchaseDetails.package_discount),
                                 purchaseDetails
-                                .treatment_price) + '₺)</span>';
+                                .treatment_price) +
+                            ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails
+                            .treatment_price + '₺)</span>';
 
                         totalPrice = parseFloat(purchaseDetails.treatment_price);
 
                         otherServices.forEach(function(service) {
-                            totalPrice += parseFloat(service.price);
+                            totalPrice += parseFloat(numberToDiscount(parseInt(purchaseDetails
+                                .package_discount), service.price));
                         });
                         // alert(totalPrice);
 
@@ -369,10 +372,11 @@
                             otherServicesHtml += '</div>'
                             otherServicesHtml +=
                                 '<p class="mb-0 fs-5 camptonBold lh-base other-service-price">' +
-                                service.price + ' ₺ <span class="smallFont">(' +
-                                numberToPercent(
-                                    percentValue,
-                                    service.price) + '₺)</span></p>'
+                                numberToDiscount(
+                                    parseInt(purchaseDetails.package_discount),
+                                    service.price) + ' ₺ <span class="smallFont">(' + service
+                                .price +
+                                '₺)</span></p>'
                             otherServicesHtml += '</div>'
                             otherServicesHtml += '</div>'
                             otherServicesHtml += '</div>'
@@ -441,17 +445,25 @@
                 return number * (percent / 100);
             };
 
+            function numberToDiscount(percent, number) {
+                console.log("///////////number//////////", number);
+                return number -= number * (percent / 100);
+            };
+
             function calcOtherServices() {
-                treatmentPrice = purchaseDetails.treatment_price;
-                // alert(treatmentPrice);
+                treatmentPrice = numberToDiscount(parseInt(purchaseDetails.package_discount), purchaseDetails
+                    .treatment_price);
+
                 totalPrice = parseFloat(treatmentPrice);
+
 
                 $('.other_services_items input[type="checkbox"]').each(function(index) {
                     if ($(this).is(':checked')) {
-                        totalPrice += parseFloat(otherServices[index].price);
+                        totalPrice += parseFloat(numberToDiscount(parseInt(purchaseDetails
+                            .package_discount), otherServices[index].price));
                     }
                 });
-
+                // alert(totalPrice);
                 proxyPrice = totalPrice;
 
                 twentyAmount = proxyPrice * (20 / 100);
@@ -479,28 +491,29 @@
 
                 // alert(totalPrice);
                 // $('.total_price').empty();
-                $('.total_price').text(totalPrice + ' ₺');
+                $('.total_price').text(proxyPrice + ' ₺');
             };
 
             function updateOtherServicesUi() {
 
                 $('.treatment_price').empty();
 
-                otherServices.forEach(function(service) {
-                    $('.other-service-price').empty();
-                    $('.other-service-price').append(service.price +
-                        ' ₺ <span class="smallFont">(' +
-                        numberToPercent(
-                            percentValue,
-                            service.price) + '₺)</span>');
-                });
+                // otherServices.forEach(function(service) {
+                //     $('.other-service-price').empty();
+                //     $('.other-service-price').append(service.price +
+                //         ' ₺ <span class="smallFont">(' +
+                //         numberToPercent(
+                //             percentValue,
+                //             service.price) + '₺)</span>');
+                // });
 
 
-                var treatmentPriceHtml = purchaseDetails.treatment_price +
-                    ' ₺ <span class="smallFont treatment_price_discount"> (' + numberToPercent(
-                        percentValue,
+                var treatmentPriceHtml = numberToDiscount(
+                        parseInt(purchaseDetails.package_discount),
                         purchaseDetails
-                        .treatment_price) + '₺)</span>';
+                        .treatment_price) +
+                    ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails.treatment_price +
+                    '₺)</span>';
                 $('.total_price').text(totalPrice + ' ₺');
                 $('.treatment_price').append(treatmentPriceHtml);
 
