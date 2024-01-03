@@ -494,11 +494,11 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 
 
-Route::controller(::class)->group(function(){
-    
-    Route::get('medical-provider-dashboard','index');
+// Route::controller(::class)->group(function(){
 
-});
+//     Route::get('medical-provider-dashboard','index');
+
+// });
 
 
 
@@ -536,7 +536,7 @@ Route::controller(SalesController::class)->group(function(){
 
 #Medical Provider Dashboard
 Route::controller(MedicalProviderDashboradController::class)->group(function(){
-    
+
     Route::get('medical-provider-dashboard','index');
 
     Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');

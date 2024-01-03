@@ -85,7 +85,7 @@
                                                     @endphp
 
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/Memorial.svg') }}"
+                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
                                                             alt="">
                                                     </div>
 
@@ -125,7 +125,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        @include('front.includes.no-data-found');
+                                        @include('front.includes.no-data-found')
                                     @endif
 
 
@@ -147,7 +147,7 @@
                                                     @endphp
 
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/Memorial.svg') }}"
+                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
                                                             alt="">
                                                     </div>
 
@@ -180,7 +180,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        @include('front.includes.no-data-found');
+                                        @include('front.includes.no-data-found')
                                     @endif
 
 
@@ -216,7 +216,7 @@
                                                     @endphp
 
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/Memorial.svg') }}"
+                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
                                                             alt="">
                                                     </div>
 
@@ -249,7 +249,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        @include('front.includes.no-data-found');
+                                        @include('front.includes.no-data-found')
                                     @endif
                                 </div>
 

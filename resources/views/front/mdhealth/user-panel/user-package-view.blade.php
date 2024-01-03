@@ -4,33 +4,39 @@
         $accomodation = $transportation = $tour = $visa = $translate = $ambulance = false;
         if (!empty($data['other_services'])) {
             $avialable_services = true;
-        }
-
-        foreach ($data['other_services'] as $service) {
-            switch (str_replace(' ', '', strtolower($service))) {
-                case 'acommodition':
-                    $accomodation = true;
-                    break;
-                case 'transportation':
-                    $transportation = true;
-                    break;
-                case 'tour':
-                    $tour = true;
-                    break;
-                case 'visa':
-                    $visa = true;
-                    break;
-                case 'translate':
-                    $translate = true;
-                    break;
-                case 'ambulance':
-                    $ambulance = true;
-                    break;
+            foreach ($data['other_services'] as $service) {
+                switch (str_replace(' ', '', strtolower($service))) {
+                    case 'acommodition':
+                        $accomodation = true;
+                        break;
+                    case 'transportation':
+                        $transportation = true;
+                        break;
+                    case 'tour':
+                        $tour = true;
+                        break;
+                    case 'visa':
+                        $visa = true;
+                        break;
+                    case 'translate':
+                        $translate = true;
+                        break;
+                    case 'ambulance':
+                        $ambulance = true;
+                        break;
+                }
             }
         }
-
-        $pending_percent = strval(100 - explode('%', $data['payment_percentage'])[0]) . '%';
-        $payment_time_and_date = explode('T', $data['created_at'])[0] . ' | ' . explode('T', explode('.', $data['created_at'])[0])[1];
+        if (!empty($data['payment_percentage'])) {
+            $pending_percent = strval(100 - explode('%', $data['payment_percentage'])[0]) . '%';
+        } else {
+            $pending_percent = 0;
+        }
+        if (!empty($data['created_at'])) {
+            $payment_time_and_date = explode('T', $data['created_at'])[0] . ' | ' . explode('T', explode('.', $data['created_at'])[0])[1];
+        } else {
+            $payment_time_and_date = '';
+        }
 
     @endphp
 @endsection
@@ -380,13 +386,18 @@
                                 <div class="treatment-card df-start w-100 mb-3">
                                     <div class="row card-row">
                                         <div class="col-md-2 df-center ps-4">
-                                            <img src="{{ asset($data['company_logo_image_path']) }}" alt="">
+                                            @if (!empty($data['company_logo_image_path']))
+                                                <img src="{{ asset($data['company_logo_image_path']) }}" alt="">
+                                            @endif
                                         </div>
                                         <div class="col-md-10 justify-content-start ps-0">
                                             <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title fw-600 mb-0">{{ $data['company_name'] }}
+                                                <h5 class="dashboard-card-title fw-600 mb-0">
+                                                    {{ !empty($data['company_name']) ? $data['company_name'] : '' }}
                                                 </h5>
-                                                <h6 class="mb-1 fsb-1">{{ $data['treatment_name'] }}</h6>
+                                                <h6 class="mb-1 fsb-1">
+                                                    {{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}
+                                                </h6>
                                                 <div class="trmt-card-location d-flex align-items-center gap-3 mb-3">
                                                     <p class="fsb-2 mb-0 d-flex align-items-center gap-1">
                                                         <svg width="10" height="15" viewBox="0 0 10 15"
@@ -395,7 +406,7 @@
                                                                 d="M4.95833 6.72917C4.48868 6.72917 4.03826 6.5426 3.70617 6.2105C3.37407 5.87841 3.1875 5.42799 3.1875 4.95833C3.1875 4.48868 3.37407 4.03826 3.70617 3.70617C4.03826 3.37407 4.48868 3.1875 4.95833 3.1875C5.42799 3.1875 5.87841 3.37407 6.2105 3.70617C6.5426 4.03826 6.72917 4.48868 6.72917 4.95833C6.72917 5.19088 6.68336 5.42115 6.59437 5.636C6.50538 5.85085 6.37494 6.04606 6.2105 6.2105C6.04606 6.37494 5.85085 6.50538 5.636 6.59437C5.42115 6.68336 5.19088 6.72917 4.95833 6.72917ZM4.95833 0C3.6433 0 2.38213 0.522394 1.45226 1.45226C0.522394 2.38213 0 3.6433 0 4.95833C0 8.67708 4.95833 14.1667 4.95833 14.1667C4.95833 14.1667 9.91667 8.67708 9.91667 4.95833C9.91667 3.6433 9.39427 2.38213 8.46441 1.45226C7.53454 0.522394 6.27337 0 4.95833 0Z"
                                                                 fill="#111111" />
                                                         </svg>
-                                                        {{ $data['city_name'] }}
+                                                        {{ !empty($data['city_name']) ? $data['city_name'] : '' }}
                                                     </p>
                                                     <p class="fsb-2 mb-0 d-flex align-items-center gap-1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="14"
@@ -404,7 +415,7 @@
                                                                 d="M4.83372 1.41667V0H9.08372V1.41667H4.83372ZM5.54206 9.73958L4.76289 8.18125C4.70386 8.05139 4.61532 7.95388 4.49727 7.88871C4.37921 7.82354 4.25525 7.79119 4.12539 7.79167H0.619141C0.796224 6.19792 1.48685 4.85492 2.69102 3.76267C3.89518 2.67042 5.31775 2.12453 6.95872 2.125C7.69067 2.125 8.3931 2.24306 9.06602 2.47917C9.73893 2.71528 10.3705 3.05764 10.9608 3.50625L11.9525 2.51458L12.9441 3.50625L11.9525 4.49792C12.3303 4.99375 12.6313 5.51626 12.8556 6.06546C13.0799 6.61465 13.2275 7.19006 13.2983 7.79167H10.2348L9.01289 5.34792C8.88303 5.07639 8.67053 4.94062 8.37539 4.94062C8.08025 4.94062 7.86775 5.07639 7.73789 5.34792L5.54206 9.73958ZM6.95872 14.875C5.31775 14.875 3.89518 14.3289 2.69102 13.2366C1.48685 12.1444 0.796224 10.8016 0.619141 9.20833H3.68268L4.90456 11.6521C5.03442 11.9236 5.24692 12.0594 5.54206 12.0594C5.8372 12.0594 6.0497 11.9236 6.17956 11.6521L8.37539 7.26042L9.15456 8.81875C9.21358 8.94861 9.30213 9.04612 9.42018 9.11129C9.53824 9.17646 9.6622 9.20881 9.79206 9.20833H13.2983C13.1212 10.8021 12.4306 12.1448 11.2264 13.2366C10.0223 14.3284 8.5997 14.8745 6.95872 14.875Z"
                                                                 fill="#111111" />
                                                         </svg>
-                                                        <i>{{ $data['treatment_period_in_days'] }}</i>
+                                                        <i>{{ !empty($data['treatment_period_in_days']) ? $data['treatment_period_in_days'] : '' }}</i>
                                                     </p>
                                                 </div>
                                                 <h6 class="mb-1 fsb-1">Time left to treatment: 12 days</h6>
@@ -449,7 +460,9 @@
                                                             </svg>
                                                         @endif
                                                         Accomodation
-                                                        <a href="javascript:void(0);" class="fsb-1 ps-2">View
+                                                        <a href="javascript:void(0);" id="accomodation_modal"
+                                                            data-toggle="modal" data-target="#AcommoditionView"
+                                                            class="fsb-1 ps-2">View
                                                             Details</a>
                                                     </li>
                                                     <li class="fsb-2">
@@ -477,7 +490,8 @@
                                                             </svg>
                                                         @endif
                                                         Transportation
-                                                        <a href="javascript:void(0);" class="fsb-1 ps-2">View
+                                                        <a href="#" data-toggle="modal" id="transportation_modal"
+                                                            data-target="#TransportationView"class="fsb-1 ps-2">View
                                                             Details</a>
                                                     </li>
                                                     <li class="fsb-2">
@@ -563,7 +577,7 @@
                                                         Translate
 
                                                     </li>
-                                                    <li class="fsb-2 text-red">
+                                                    <li class="fsb-2 ">
                                                         @if ($ambulance == 1)
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="15"
                                                                 height="15" viewBox="0 0 10 10" fill="none">
@@ -619,40 +633,45 @@
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" class="form-control"
+                                                                            placeholder="{{ !empty($my_details['patient_full_name']) ? $my_details['patient_full_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="First Name">
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Last Name</label>
                                                                         <input type="text" class="form-control"
-                                                                            id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Last Name">
+                                                                            value="sdfdshf" id="foodname"
+                                                                            aria-describedby="foodname"
+                                                                            placeholder="Last Name" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
-                                                                        <label class="form-label">E-Mail</label>
+                                                                        <label class="form-label">Email</label>
                                                                         <input type="text" class="form-control"
+                                                                            value="{{ !empty($my_details['patient_email']) ? $my_details['patient_email'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="E-Mail">
+                                                                            placeholder="E-Mail" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Country</label>
                                                                         <input type="text" class="form-control"
+                                                                            value="{{ !empty($my_details['country_name']) ? $my_details['country_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Country">
+                                                                            placeholder="Country" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">City</label>
                                                                         <input type="text" class="form-control"
+                                                                            value="{{ !empty($my_details['city_name']) ? $my_details['city_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="City">
+                                                                            placeholder="City" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -664,8 +683,9 @@
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Hospital Name</label>
                                                                         <input type="text" class="form-control"
+                                                                            value="{{ !empty($data['company_name']) ? $data['company_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Hospital Name">
+                                                                            placeholder="Hospital Name" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -673,7 +693,8 @@
                                                                         <label class="form-label">Treatment</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Treatment">
+                                                                            value="{{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}"placeholder="Treatment"
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -681,7 +702,8 @@
                                                                         <label class="form-label">Treatment Period</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Treatment Period">
+                                                                            value="{{ !empty($data['treatment_period_in_days']) ? $data['treatment_period_in_days'] : '' }}"
+                                                                            placeholder="Treatment Period" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -689,7 +711,7 @@
                                                                         <label class="form-label">Contact Number</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Contact Number">
+                                                                            placeholder="Contact Number" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -697,7 +719,7 @@
                                                                         <label class="form-label">Country</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Country">
+                                                                            placeholder="Country" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -705,7 +727,8 @@
                                                                         <label class="form-label">City</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="City">
+                                                                            value="{{ !empty($data['city_name']) ? $data['city_name'] : '' }}"
+                                                                            placeholder="City" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
@@ -713,7 +736,7 @@
                                                                         <label class="form-label">Address</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Address">
+                                                                            placeholder="Address" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -722,15 +745,18 @@
                                                 </div>
 
                                                 <div id="ShowDiv2" class="view-menu-div targetDiv mt-5">
-                                                    <div class="view-menu mb-4">
-                                                        <h6 class="fsb-1 mb-4">Upload Documents & Video</h6>
-                                                        <label for="cloud-upload-file" class="cloud-upload-file">
-                                                            <i class="fa fa-cloud-upload text-green"></i>
-                                                            <input type="file" id="cloud-upload-file" hidden>
-                                                            <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4, HEIC,
-                                                                H.264</span>
-                                                        </label>
-                                                    </div>
+                                                    <form id="my_form">
+                                                        <div class="view-menu mb-4">
+                                                            <h6 class="fsb-1 mb-4">Upload Documents & Video</h6>
+                                                            <label for="cloud-upload-file" class="cloud-upload-file">
+                                                                <i class="fa fa-cloud-upload text-green"></i>
+                                                                <input type="file" id="cloud-upload-file" hidden>
+                                                                <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4,
+                                                                    HEIC,
+                                                                    H.264</span>
+                                                            </label>
+                                                        </div>
+                                                    </form>
 
                                                     <div class="gallery">
                                                         <a href="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
@@ -800,8 +826,8 @@
                                                     <div class="d-flex justify-content-between">
                                                         <div class="payment-left-div">
                                                             <div class="user-percentage fsb-1 fw-600">
-                                                                {{ $data['payment_percentage'] }}<span>(
-                                                                    {{ $data['paid_amount'] }}
+                                                                {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] : '' }}<span>(
+                                                                    {{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
                                                                     ₺)</span></div>
                                                             <div class="fsb-2 text-green paymt-green-text">Payment
                                                                 Completed.</div>
@@ -816,7 +842,8 @@
                                                 <div class="payment-paid-div">
                                                     <div class="paid-percentage fsb-1 fw-600 d-flex flex-column">
                                                         <span>
-                                                            {{ $pending_percent }} <span>( {{ $data['pending_payment'] }}
+                                                            {{ $pending_percent }} <span>(
+                                                                {{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}
                                                                 ₺)</span>
                                                         </span>
                                                         <span class="fsb-2 text-orange paymt-green-text">Pending</span>
@@ -1049,6 +1076,44 @@
     <script>
         $(document).ready(function() {
             $(".view-menu-div").hide();
+
+            $("#accomodation_modal").click(function() {
+                $("#AcommoditionView").modal('show');
+            });
+
+            $("#transportation_modal").click(function() {
+                $("#TransportationView").modal('show');
+            });
+
+
+            var baseUrl = $('#base_url').val();
+            var token = "{{ Session::get('login_token') }}";
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var formElement = document.getElementById('my_form');
+            var formData = new FormData(formElement);
+
+            // Append additional data (if needed) to the FormData object
+            formData.append('additionalField', 'additionalValue');
+
+            $.ajax({
+                url: 'your_api_endpoint',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': 'your_csrf_token_value',
+                    'Authorization': 'Bearer your_access_token_here'
+                },
+                data: formData,
+                processData: false, // To prevent jQuery from processing the data
+                contentType: false, // To prevent jQuery from setting contentType
+                success: function(response) {
+                    // Handle success response
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
         });
 
         $(function() {
