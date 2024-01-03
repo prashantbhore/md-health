@@ -31,6 +31,7 @@ use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
+use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
 
@@ -393,7 +394,7 @@ Route::controller(CommonLoginController::class)->group(function () {
 //     Route::post('/email-to-mobile','email_to_mobile');
 //     Route::post('/email-password-exist','email_password_exist');
 
-//  });
+//  });  
 // AUTHENTICATION
 
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
@@ -444,18 +445,38 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('/edit-package/{id}', 'edit_package');
         Route::post('/md-packages-active-list-search', 'md_packages_active_list_search');
         Route::post('/md-packages-inactive-list-search', 'md_packages_inactive_list_search');
-        // Route::get('/edit-package/{id}', 'edit_package');
-        // Route::get('/add-tour', 'add_tour');
-        // // Route::get('/login/change_password', 'change_password_view');
-        // Route::post('/saveStarRating', 'saveStarRating')->name('saveStarRating');
-        // Route::get('/edit-acommodition/{id}', 'edit_acommodition');
-        // Route::get('/edit-vehicle/{id}', 'edit_vehicle');
-        // Route::get('/edit-tour/{id}', 'edit_tour');
-        // Route::get('/add-new-vehical', 'add_new_vehical');
-        // Route::post('/delete-acommodition/{id}', 'delete_acommodition');
-        // Route::post('/check-old-password', 'check_old_password');
+       
     });
 });
+
+
+Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function () {
+
+    Route::controller(VendorProductController::class)->group(function () {
+        Route::get('/vendor-dashboard', 'vendor_dashboard');
+        Route::get('/vendor-products', 'vendor_products');
+        Route::get('/vendor-add-products', 'vendor_add_products');
+        Route::post('add-vendor-product', 'add_vendor_product');
+        Route::get('md-vendor-active-list', 'active_product_list');
+        Route::get('md-vendor-deactive-list', 'deactive_product_list');
+        Route::get('/edit-product/{id}', 'edit_product');
+    });
+    // Route::controller(UpdateProfileController::class)->group(function () {
+    //     //update-medical-profile-list
+
+    //     Route::get('medical-account', 'update_medical_profile_list');
+
+    //     //update-medical-profile
+    //     Route::post('md-update-medical-profile', 'update_medical_provider_profile');
+    //     //delete-provider-images-videos
+    //     Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
+
+    //     // Route::get('/login/change_password', 'change_password_view');
+    //     // Route::post('/reset-password', 'reset_password');
+    //     // Route::post('/check-old-password', 'check_old_password');
+    // });
+});
+
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
 
     Route::controller(UserRegistrationController::class)->group(function () {
@@ -586,9 +607,9 @@ Route::view('md-food-purchase-details', 'front/mdhealth/md-food/md-food-purchase
 
 // Shubham
 // Vendor Panel
-Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
-Route::view('vendor-products', 'front/mdhealth/vendor/vendor_products');
-Route::view('vendor-add-products', 'front/mdhealth/vendor/vendor_add_products');
+// Route::view('vendor-dashboard', 'front/mdhealth/vendor/vendor_dashboard');
+// Route::view('vendor-products', 'front/mdhealth/vendor/vendor_products');
+// Route::view('vendor-add-products', 'front/mdhealth/vendor/vendor_add_products');
 Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');

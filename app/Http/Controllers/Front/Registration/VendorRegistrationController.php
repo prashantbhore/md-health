@@ -25,7 +25,7 @@ class VendorRegistrationController extends Controller
                 
         
                 $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
-                dd($responseData);
+                // dd($responseData);
                 Session::put('login_token', $responseData['data']['access_token']);
 
                
