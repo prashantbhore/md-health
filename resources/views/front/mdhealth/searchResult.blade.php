@@ -5,7 +5,7 @@
 
 @php
 
-
+    // dd($date);
     if(!function_exists('get_twenty_percent')){
         function get_twenty_percent($number){
             return $number * (20/100);
@@ -17,6 +17,8 @@
     } else {
         $user = false;
     }
+
+    // dd($packages);
 
 @endphp
 
@@ -54,7 +56,7 @@
                                                                                                     <option value="3">Three</option>
                                                                                                 </select> -->
                     <!-- <div class="datepickerContainer"> -->
-                    <input type="text" class="form-select" name="daterange" value="" />
+                    <input type="text" class="form-select" name="daterange" value="{{$date}}" />
                     <!-- </div> -->
                     <label for="floatingSelect">Treatment Date</label>
                 </div>
@@ -538,6 +540,17 @@
                 $('#loginFirstModal').modal('show');
             }
         });
+    });
+</script>
+<script>
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left',
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        }, function(start, end, label) {});
     });
 </script>
 

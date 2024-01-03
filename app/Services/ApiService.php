@@ -11,6 +11,7 @@ class ApiService {
 
     public function getData( $token = null, $url, $body = null, $method, $image = null, $image_input_field_name = null ) {
         $env = explode( ':', url( '/' ) )[ 0 ];
+        // dd($env);
 
         // if ( $method == 'POST' ) {
         //     $response = Http::withHeaders( [
@@ -40,7 +41,6 @@ class ApiService {
         //     $method}
         //     ( $url, $body ?? null );
         // dd( time().Str::random( 5 ).'.'.$extension );
-        
 
         if ( $env == 'https' ) {
 
@@ -57,7 +57,6 @@ class ApiService {
                 if ( is_array( $image ) ) {
                     foreach ( $image as $index => $singleImage ) {
                         $extension = explode( '.', $_FILES[ $singleImage ][ 'name' ] )[ 1 ];
-                        $unique = explode( '/', $_FILES[ $singleImage ][ 'tmp_name' ] )[ 2 ];
                         $apiRequest->attach(
                             $singleImage,
                             file_get_contents( $singleImage ),
@@ -66,7 +65,6 @@ class ApiService {
                     }
                 } else {
                     $extension = explode( '.', $_FILES[ $image_input_field_name ][ 'name' ] )[ 1 ];
-                    $unique = explode( '/', $_FILES[ $image_input_field_name ][ 'tmp_name' ] )[ 2 ];
                     $apiRequest->attach(
                         $image_input_field_name,
                         file_get_contents( $image ),
@@ -97,7 +95,7 @@ class ApiService {
                     if ( is_array( $image ) ) {
                         foreach ( $image as $index => $singleImage ) {
                             $extension = explode( '.', $_FILES[ $singleImage ][ 'name' ] )[ 1 ];
-                            $unique = explode( '/', $_FILES[ $singleImage ][ 'tmp_name' ] )[ 2 ];
+                            // $unique = explode( '/', $_FILES[ $singleImage ][ 'tmp_name' ] )[ 2 ];
                             $request->files->set( $singleImage, $singleImage );
                             $request->request->add( [
                                 $singleImage => file_get_contents( $singleImage ),
@@ -106,7 +104,7 @@ class ApiService {
                         }
                     } else {
                         $extension = explode( '.', $_FILES[ $image_input_field_name ][ 'name' ] )[ 1 ];
-                        $unique = explode( '/', $_FILES[ $image_input_field_name ][ 'tmp_name' ] )[ 2 ];
+                        // $unique = explode( '/', $_FILES[ $image_input_field_name ][ 'tmp_name' ] )[ 2 ];
                         $request->files->set( $image_input_field_name, $image );
                         $request->request->add( [
                             $image_input_field_name => file_get_contents( $image ),
@@ -117,7 +115,7 @@ class ApiService {
 
                 $response = app()->handle( $request );
 
-                // dd( $response );
+                // dd( json_decode( $response->getContent(), true ) );
 
                 return json_decode( $response->getContent(), true );
             }

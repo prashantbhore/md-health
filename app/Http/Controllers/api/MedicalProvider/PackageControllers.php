@@ -85,6 +85,7 @@ class PackageControllers extends BaseController
     public function add_packages(Request $request)
     {
         // dd($request);
+        // dd(Auth::user()->id);
         $validator = Validator::make($request->all(), [
             'package_name' => 'required',
             'treatment_category_id' => 'required',
@@ -255,9 +256,9 @@ class PackageControllers extends BaseController
                 ]);
             }
         } else {
-            if (($request->platform_type == 'web')) {
-                return redirect('/medical-packages')->with('error', 'package name already exist');
-            }
+            // if (($request->platform_type == 'web')) {
+            //     return redirect('/medical-packages')->with('error', 'package name already exist');
+            // }
             return response()->json([
                 'status' => 404,
                 'message' => 'package name already exist',

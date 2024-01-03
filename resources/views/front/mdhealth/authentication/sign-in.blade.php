@@ -40,8 +40,8 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
-                            </div>
+                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -90,22 +90,23 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
+                        </div>
                         <div class="d-flex align-items-center justify-content-center mt-3">
-                            <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
-                                style="height: 47px;">Sign
+                            <button class="btn btn-md btn-text w-75 mb-3" id="verifyBtn" type="button"
+                                onclick="verify()" style="height: 47px;">Sign
                                 In</button>
                         </div>
                     </form>
@@ -253,7 +254,13 @@
                         email: email,
                         password: password
                     },
+                    beforeSend: function() {
+                        $('#signup').attr('disabled', true);
+                        $('#signup').html(
+                            '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+                    },
                     success: function(response) {
+                        $('#signup').attr('enable', true);
                         if (response.user_exist !== undefined) {
                             // alert(JSON.stringify(response.user_exist));
                             sendOTP();
@@ -295,6 +302,10 @@
         }
 
         function verify(e) {
+            // verifyBtn
+            $('#verifyBtn').attr('disabled', true);
+            $('#verifyBtn').html(
+                '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
             var code1 = $("#ot1").val();
             var code2 = $("#ot2").val();
             var code3 = $("#ot3").val();
@@ -326,6 +337,7 @@
                             password: password // Use the correct email variable here
                         },
                         success: function(response) {
+                            $('#verifyBtn').attr('enable', true);
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);
@@ -367,5 +379,16 @@
                     $("#error").show();
                 });
         }
+    </script>
+    <script>
+        $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+        });
     </script>
 @endsection

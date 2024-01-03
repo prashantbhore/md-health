@@ -12,6 +12,12 @@
                 }
             }
 
+            if (Session::get('login_token') != null) {
+                $user = true;
+            } else {
+                $user = false;
+            }
+
         @endphp
 
         <!-- SECTION 1 -->
@@ -78,8 +84,7 @@
                                         <p class="camptonBook">*20% of the price is paid before booking.</p>
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
-                                        <button class="btn purchaseBtn" data-bs-toggle="modal"
-                                            data-bs-target="#treatmentForModal_{{ $packageDetails['id'] }}">Purchase
+                                        <button class="btn purchaseBtn">Purchase
                                             Package</button>
                                         <button class="favouriteBtn">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
@@ -218,10 +223,10 @@
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div>
                                     <!-- <div class="col-12 px-0">
-                                                                                                                    <p>
+                                                                                                                                                    <p>
 
-                                                                                                                    </p>
-                                                                                                                </div> -->
+                                                                                                                                                    </p>
+                                                                                                                                                </div> -->
                                 </div>
                             </div>
                         </div>
@@ -367,6 +372,28 @@
             <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
         </div>
     </div>
+
+    <div class="modal fade loginFirstModal" id="loginFirstModal" tabindex="-1" aria-labelledby="serviceForModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered position-relative">
+            <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
+            <!-- </button> -->
+            <div class="modal-content bg-f6">
+                <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/closeModal.png' }}"
+                    alt="">
+                <img src="{{ 'front/assets/img/Oops.svg' }}" alt="">
+                <div class="d-flex align-items-center flex-column">
+                    <p class="camptonBook fw-bold text-center mt-4">Excited to explore more? It's time to join <span
+                            class="camptonBold">MD</span> family.</p>
+                    <a href="{{ url('/user-account') }}" type="button" class="btn btn-sm btn-md df-center mb-4">Get
+                        Started</a>
+                    <p class="camptonBook fw-bold text-center mt-4">Already<span class="camptonBold">MD</span> member?</p>
+                    <a href="{{ url('/sign-in-web') }}" type="button" class="btn btn-sm whiteBtn df-center mb-5">Sign
+                        In</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
     <script type="text/javascript">
@@ -375,9 +402,9 @@
 
         $(document).ready(function() {
 
-            const lightbox = GLightbox({
-                ...options
-            });
+            // const lightbox = GLightbox({
+            //     ...options
+            // });
 
             $('#other').click(function(e) {
                 e.preventDefault();
@@ -403,6 +430,21 @@
                     }
                 });
             });
+
+            $('.purchaseBtn').click(function(e) {
+                e.preventDefault();
+                var user = "{{ $user }}";
+                var id = this.id;
+                // alert(id);
+                // $('.treatmentForModal_'+id).modal('hide');
+                if (user == '1') {
+                    $('#treatmentForModal_' + id).modal('show');
+                } else {
+                    $('.treatmentForModal_' + id).modal('hide');
+                    $('#loginFirstModal').modal('show');
+                }
+            });
+
         });
     </script>
 @endsection

@@ -208,7 +208,7 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                            {{-- <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
@@ -219,13 +219,31 @@
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control"> --}}
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
+                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                         </div>
                     </form>
-
+                    <script>
+                        function moveToNext(current, nextId) {
+                            if (current.value.length === current.maxLength) {
+                                document.getElementById(nextId).focus();
+                            }
+                        }
+                    </script>
 
 
                     <h6 class="mb-0 d-flex align-items-center gap-1">

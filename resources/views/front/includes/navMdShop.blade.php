@@ -10,6 +10,7 @@
 @endphp
 <nav id="mdShopNav" class="navbar navbar-expand-lg navbar-light bg-f6 py-3">
     <img class="mdShopNavBg" src="{{ URL('front/assets/img/mdShopNavBg.png') }}" alt="">
+
     <div class="container">
         <a class="navbar-brand" href="javascript:void(0)">
             <img src="{{ URL::asset('front/assets/img/MDShop.svg') }}" alt="" style="width: 180px;" />
@@ -213,7 +214,7 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        Profile
+                                        Dashboard
                                     </a>
                                 </li>
                                 <li>
@@ -241,14 +242,17 @@
                     Started</a>
             @endif
         </div>
-        <div class="container">
-            <div class="nav2">
-                <p class="mb-0 brdr-right">Equipment</p>
-                <p class="mb-0">Injection & Infusion</p>
-                <p class="mb-0">Emergency & First Aid</p>
-                <p class="mb-0">Hygience & Disinfection</p>
-                <p class="mb-0">Instruments</p>
-                <p class="mb-0">More</p>
-            </div>
+
+    </div>
+
+    <div class="container">
+        <div class="nav2">
+            <p class="mb-0 brdr-right">Equipment</p>
+            <p class="mb-0">Injection & Infusion</p>
+            <p class="mb-0">Emergency & First Aid</p>
+            <p class="mb-0">Hygience & Disinfection</p>
+            <p class="mb-0">Instruments</p>
+            <p class="mb-0">More</p>
         </div>
+    </div>
 </nav>

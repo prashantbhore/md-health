@@ -336,7 +336,7 @@ Route::post('md-provider-assign-treatment-case-manager', [SalesController::class
 //Provider sales treatment search
 Route::post('md-provider-treatment-search', [SalesController::class,'treatment_search']);
 
-//Medical Provider 
+//Medical Provider
 
 Route::get('md-provider-daily-monthly-summary', [SalesController::class,'salesSummary']);
 
