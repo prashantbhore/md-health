@@ -48,7 +48,7 @@
                                 <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}"
                                         alt=""></a>
                                 <h1 class="reg-title mb-0">Create Provider Account</h1>
-                                
+
                             </div>
                             <div class="form text-start px-5">
                                 <form id="myFormProvider">
@@ -230,22 +230,27 @@
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control"> --}}
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                                oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                                oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                                oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                                oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()"
-                                style="height: 47px;">Sign In</button>
+                            <button class="btn btn-md btn-text w-75 my-3 text-center" id="otp-btn" type="button"
+                                onclick="verify()" style="height: 47px;">Sign In</button>
                         </div>
                     </form>
                     <script>
@@ -364,7 +369,14 @@
                         email: email,
                         phone: phone
                     },
+                    beforeSend: function() {
+                        $('#medproreg').attr('disabled', true);
+                        $('#medproreg').html(
+                            '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                        );
+                    },
                     success: function(response) {
+                        $('#medproreg').attr('disabled', false);
                         console.log(response);
                         if (response !== undefined) {
                             if (response.email_exist !== undefined) {
@@ -452,7 +464,14 @@
                         //     formData: formData,
                         //     password: password
                         // },
+                        beforeSend: function() {
+                            $('#otp-btn').attr('disabled', true);
+                            $('#otp-btn').html(
+                                '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                            );
+                        },
                         success: function(response) {
+                            $('#otp-btn').attr('disabled', false);
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);

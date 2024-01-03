@@ -176,7 +176,15 @@ class OtherServicesController extends Controller {
         $method = 'POST';
         $body = $request->all();
 
-        $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+
+        if ( $request->hasFile( 'tour_image_path' ) && $request->file( 'tour_image_path' )->isValid() ) {
+            $image = $request->file( 'tour_image_path' );
+            $image_name = 'tour_image_path';
+            $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method, $image, $image_name );
+        } else {
+            $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method );
+        }
         if ( ( $responseData[ 'status' ] == 200 ) ) {
             return redirect( '/medical-other-services' )->with( 'success', $responseData[ 'message' ] );
         } else {

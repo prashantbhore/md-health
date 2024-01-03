@@ -11,25 +11,20 @@ use Illuminate\Support\Facades\Session;
 use Crypt;
 use Auth;
 
+class MedicalProviderDashboradController extends Controller {
 
-class MedicalProviderDashboradController extends Controller
-{
-
-    public function __construct(ApiService $apiService)
-    {
+    public function __construct( ApiService $apiService ) {
         $this->apiService = $apiService;
     }
 
+    public function index() {
 
-    public function index()
-    {
+        $token = Session::get( 'login_token' );
 
-        $token = Session::get('login_token');
-
-
-        $apiUrl = url('api/vendor-monthly-order-count');
+        $apiUrl = url( 'api/vendor-monthly-order-count' );
         $method = 'GET';
         $body=null;
+
         $monthly_orders = $this->apiService->getData($token, $apiUrl, $body, $method);
 
       
@@ -39,6 +34,7 @@ class MedicalProviderDashboradController extends Controller
         $apiUrl = url('api/vendor-monthly-sales-count');
         $method = 'GET';
         $body=null;
+
         $monthly_sales_count = $this->apiService->getData($token, $apiUrl, $body, $method);
 
        
@@ -47,20 +43,19 @@ class MedicalProviderDashboradController extends Controller
 
         $apiUrl = url('api/vendor-package-latest-orders');
         $method = 'GET';
-        $body=null;
+        $body = null;
 
-        $responseData= $this->apiService->getData($token, $apiUrl, $body, $method);
+        $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        $recent_orders =  '';
+        if ( $responseData[ 'status' ] == '200' ) {
+            $recent_orders =  $responseData[ 'latest_orders' ];
+        }
 
+        $provider_logo = MedicalProviderLogo::where( 'status', 'active' )->where( 'medical_provider_id', Auth::user()->id )->first();
 
-        $recent_orders=  $responseData['latest_orders'];
+        // dd( $provider_logo->company_logo_image_path );
 
-        $provider_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',Auth::user()->id)->first();
-
-       // dd($provider_logo->company_logo_image_path);
-
-        return view('front/mdhealth/medical-provider/dashboard',compact('monthly_orders','monthly_sales_count','recent_orders','provider_logo'));
+        return view( 'front/mdhealth/medical-provider/dashboard', compact( 'monthly_orders', 'monthly_sales_count', 'recent_orders', 'provider_logo' ) );
     }
-
-
 
 }

@@ -431,7 +431,7 @@ class CustomerPackageController extends BaseController
                 $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
                 // return $translation['price'];
                 $price = $translation['price'] * $discount_percentage;
-                
+
                 $translation['price_percentage'] = abs($price - $purchase_details->translation_price);
                 $total_price_percentage += $translation['price_percentage']; // Add to total
             }
@@ -2134,16 +2134,16 @@ class CustomerPackageController extends BaseController
             'md_product_sub_category.product_sub_category_name',
             'md_master_cities.city_name'
         )
-            ->where('md_packages.status', 'active')
-            ->where('md_product_category.status', 'active')
-            ->where('md_product_sub_category.status', 'active')
+            // ->where('md_packages.status', 'active')
+            // ->where('md_product_category.status', 'active')
+            // ->where('md_product_sub_category.status', 'active')
             ->join('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->join('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
             ->join('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->join('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->where('md_packages.id', $request->package_id)
             ->first();
-
+            // dd($treatment_information);
         if (!empty($PatientInformation) || !empty($treatment_information)) {
             return response()->json([
                 'status' => 200,

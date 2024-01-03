@@ -9,6 +9,7 @@
             color: red !important;
             font-size: 14px !important;
         }
+
         input[type="file"] {
             color: #000 !important;
             line-height: 2 !important;
@@ -18,8 +19,8 @@
         <div class="container text-center my-5 authentication">
             <h3 class="mb-3 form-heading">Select Account Type</h3>
 
-             <!-- Nav tabs -->
-             <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a href="{{ url('user-account') }}" class="nav-link active">User</a>
                 </li>
@@ -39,7 +40,7 @@
 
             <!-- Tab panes -->
             <div class="tab-content" id="myTabContent">
-                
+
                 <div class="login-form" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
                     <div class="row pt-4">
                         <div class="col-md-6 bod-right pt-4">
@@ -48,7 +49,7 @@
                                     <img src="{{ 'front/assets/img/back.svg' }}" alt="">
                                 </a>
                                 <h1 class="reg-title mb-0">Create User Account</h1>
-                                
+
                             </div>
                             <div class="form text-start px-5">
                                 <form id="mycustomerForm">
@@ -140,7 +141,8 @@
                                                 <label for="password" class="form-label">*Password</label>
                                                 <input type="password" name="password" class="form-control"
                                                     id="password" placeholder="Minimum 8 characters">
-                                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                                <span toggle="#password"
+                                                    class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -148,7 +150,8 @@
                                                 <label for="re-password" class="form-label">*Re-Password</label>
                                                 <input type="password" name="repassword" class="form-control"
                                                     id="repassword" placeholder="Minimum 8 characters">
-                                                <span toggle="#repassword" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                                <span toggle="#repassword"
+                                                    class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -220,21 +223,27 @@
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control"> --}}
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                                oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                                oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                                oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                                oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                            <button class="btn btn-md btn-text w-75 my-3 text-center" id="login_otp_btn" type="button"
+                                onclick="verify()" style="height: 47px;">Sign In</button>
                         </div>
                     </form>
                     <script>
@@ -292,8 +301,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-      
-
         $(document).on('click', '#regcustuser', function() {
             var base_url = $('#base_url').val();
             if ($('#mycustomerForm').valid()) {
@@ -307,13 +314,20 @@
                     }
                 });
                 $.ajax({
-                    url: base_url+'/email-or-mobile-exist',
+                    url: base_url + '/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
                         phone: phone
                     },
+                    beforeSend: function() {
+                        $('#regcustuser').attr('disabled', true);
+                        $('#regcustuser').html(
+                            '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                        );
+                    },
                     success: function(response) {
+                        $('#regcustuser').attr('disabled', false);
                         console.log(response);
                         if (response !== undefined) {
                             if (response.email_exist !== undefined) {
@@ -348,7 +362,7 @@
                     }
                 });
                 $.ajax({
-                    url: base_url+'/email-or-mobile-exist',
+                    url: base_url + '/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -358,9 +372,9 @@
                         console.log(response);
                         if (response !== undefined) {
 
-                            if (response.email_exist !== undefined){
+                            if (response.email_exist !== undefined) {
                                 $('#error').text('Email already exist');
-                            } else if (response.mobile_no_exist !== undefined){
+                            } else if (response.mobile_no_exist !== undefined) {
                                 $('#error').text('Phone number already exist');
                             } else if (response.phone_exist !== undefined) {
                                 $('#error').text('Phone number already exist');
@@ -380,7 +394,7 @@
 
         window.onload = function() {
             render();
-           
+
         };
 
         function render() {
@@ -389,7 +403,7 @@
 
         }
 
-       
+
 
         function sendOTP() {
             var number = $("#phone").val();
@@ -415,7 +429,10 @@
             var code5 = $("#ot5").val();
             var code6 = $("#ot6").val();
             var code = code1 + code2 + code3 + code4 + code5 + code6;
-
+            $('#login_otp_btn').attr('disabled', true);
+            $('#login_otp_btn').html(
+                '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+            );
             coderesult.confirm(code)
                 .then(function(result) {
                     var user = result.user;
@@ -437,39 +454,40 @@
                     });
 
                     $.ajax({
-                        url: base_url+'/md-customer-register',
+                        url: base_url + '/md-customer-register',
                         // url: base_url+'/md-register-medical-provider',
                         method: 'POST',
                         data: formData,
                         //  {
-                        //     // email: email, 
-                        //     formData: formData, 
-                        //     password: password 
+                        //     // email: email,
+                        //     formData: formData,
+                        //     password: password
                         // },
                         success: function(response) {
+                            $('#login_otp_btn').attr('disabled', false);
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);
                                 window.location.href = base_url + response.url;
-                                
 
-                                
-                                toastr.options ={
-                                   "positionClass": "toast-bottom-right",
+
+
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
                                     "timeOut": "5000",
                                 };
 
-                               toastr.success(response.message);
+                                toastr.success(response.message);
                             } else {
                                 // $('#number').val('');
-                               // $('#error').text('Credentials do not match');
+                                // $('#error').text('Credentials do not match');
 
-                                toastr.options ={
-                                   "positionClass": "toast-bottom-right",
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
                                     "timeOut": "5000",
                                 };
 
-                                toastr.error(response.message);  
+                                toastr.error(response.message);
 
                             }
                         },
@@ -762,14 +780,13 @@
 
     <script>
         $(".toggle-password").click(function() {
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        var input = $($(this).attr("toggle"));
-        if (input.attr("type") == "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
-        }
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
         });
     </script>
-   
 @endsection
