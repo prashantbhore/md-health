@@ -53,16 +53,16 @@
 
                                 <div class="filter-div">
                                     <div class="search-div">
-                                        <input type="text" placeholder="Search">
+                                        <input type="text" name="searchpackage" id="searchpackage" placeholder="Search">
                                     </div>
-                                    <div class="list-div">
+                                    {{-- <div class="list-div">
                                         <select name="" id="">
                                             <option value="">List for Date</option>
                                             <option value="">List for Stars</option>
                                             <option value="">List for Price</option>
                                             <option value="">List for Distance</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <!-- Tab panes -->
@@ -101,7 +101,7 @@
                                                 </div>
                                             </div>
                                         @endforeach --}}
-                                       
+
                                     </div>
                                     <div class="tab-pane fade" id="medical-provider" role="tabpanel"
                                         aria-labelledby="medical-provider-tab">
@@ -218,8 +218,8 @@
                     },
                     success: function(response) {
                         // if (response.status == 200) {
-                            $('#activelist').html(response);
-                            console.log('Active tab API response:', response);
+                        $('#activelist').html(response);
+                        console.log('Active tab API response:', response);
                         // }
                         fetchActiveCount();
                     },
@@ -241,8 +241,8 @@
                     },
                     success: function(response) {
                         // if (response.status == 200) {
-                            $('#deactivelist').html(response);
-                            console.log('Deactive tab API response:', response);
+                        $('#deactivelist').html(response);
+                        console.log('Deactive tab API response:', response);
                         // }
                         fetchDeactiveCount();
                     },
@@ -271,82 +271,161 @@
                     }
                 }
             });
+            // Search package function
+            $('#searchpackage').on('keyup', function() {
+                var package = $(this).val().trim();
+                var type = $('.nav-link[aria-selected="true"]').attr('aria-controls') === 'user' ?
+                    'active' : 'deactive';
+
+                if (package) {
+                    var url = (type === 'active') ? base_url + '/md-packages-active-list-search' :
+                        base_url + '/md-packages-inactive-list-search';
+
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            package_name: package
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Authorization': 'Bearer ' + bearer_token
+                        },
+                        success: function(response) {
+                            if (response) {
+                                if (type === 'active') {
+                                    $('#activelist').html(response);
+                                } else {
+                                    $('#deactivelist').html(response);
+                                }
+                            } else {
+                                if (type === 'active') {
+                                    $('#activelist').html('<h3>No Data Found</h3>');
+                                } else {
+                                    $('#deactivelist').html('<h3>No Data Found</h3>');
+                                }
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    if (type === 'active') {
+                        fetchActiveDiv();
+                    } else {
+                        fetchDeactiveDiv();
+                    }
+                }
+            });
         });
     </script>
 
-<script>
+    <script>
+        function change_status(id, type) {
+            var base_url = $('#base_url').val();
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
 
+            var url = '';
 
-function change_status(id, type) {
-    var base_url = $('#base_url').val();
-    const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const bearer_token = '{{ Session::get('login_token') }}';
-
-    var url = '';
-
-    if (type === 'active') {
-        url = base_url + '/api/md-activate-to-deactivate-packages';
-    } else {
-        url = base_url + '/api/md-deactivate-to-activate-packages';
-    }
-
-    $.ajax({
-        url: url,
-        type: 'POST',
-        data: {
-            id: id,
-        },
-        headers: {
-            'X-CSRF-TOKEN': token,
-            'Authorization': 'Bearer ' + bearer_token
-        },
-        success: function(response) {
-            if (response.status === 200) {
-                toastr.options = {
-                    "positionClass": "toast-bottom-right",
-                    "timeOut": "5000",
-                };
-                toastr.success(response.message);
-
-                // Move the package to the corresponding tab
-                movePackageToTab(id, type);
+            if (type === 'active') {
+                url = base_url + '/api/md-activate-to-deactivate-packages';
             } else {
-                toastr.error(response.message);
+                url = base_url + '/api/md-deactivate-to-activate-packages';
             }
-        },
-        error: function(xhr) {
-            console.error('Error:', xhr);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'Authorization': 'Bearer ' + bearer_token
+                },
+                success: function(response) {
+                    if (response.status === 200) {
+                        toastr.options = {
+                            "positionClass": "toast-bottom-right",
+                            "timeOut": "5000",
+                        };
+                        toastr.success(response.message);
+
+                        // Move the package to the corresponding tab
+                        movePackageToTab(id, type);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
         }
-    });
-}
 
-function movePackageToTab(id, type) {
-    var sourceTabId = type === 'active' ? '#user' : '#medical-provider';
-    var targetTabId = type === 'active' ? '#medical-provider' : '#user';
-    $('#div_' + id).remove();
-    // Find the package element in the source tab
-    var packageElement = $('#' + sourceTabId + ' #div_' + id);
+        function movePackageToTab(id, type) {
+            var sourceTabId = type === 'active' ? '#user' : '#medical-provider';
+            var targetTabId = type === 'active' ? '#medical-provider' : '#user';
+            $('#div_' + id).remove();
+            // Find the package element in the source tab
+            var packageElement = $('#' + sourceTabId + ' #div_' + id);
 
-    // Remove existing tab-pane fade classes
-    packageElement.removeClass('tab-pane fade show active').addClass('tab-pane fade');
+            // Remove existing tab-pane fade classes
+            packageElement.removeClass('tab-pane fade show active').addClass('tab-pane fade');
 
-    // Remove existing card status classes
-    packageElement.find('.active, .cancel').removeClass('active cancel');
+            // Remove existing card status classes
+            packageElement.find('.active, .cancel').removeClass('active cancel');
 
-    // Update card status based on type
-    var statusClass = type === 'active' ? 'active' : 'cancel';
-    packageElement.find('.dashboard-card-title span').addClass(statusClass);
+            // Update card status based on type
+            var statusClass = type === 'active' ? 'active' : 'cancel';
+            packageElement.find('.dashboard-card-title span').addClass(statusClass);
 
-    // Detach the package element and append it to the target tab
-    $(targetTabId + ' .tab-content').append(packageElement.detach());
-}
+            // Detach the package element and append it to the target tab
+            $(targetTabId + ' .tab-content').append(packageElement.detach());
+        }
+    </script>
 
+    <script>
+        $(document).ready(function() {
+            $('#searchpackage').on('keyup', function() {
+                var package = $(this).val();
+                // alert(package);
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
+                    'content');
+                const bearer_token = '{{ Session::get('login_token') }}';
 
+                var url = '';
 
+                if (type === 'active') {
+                    url = base_url + '/api/md-packages-active-list-search';
+                } else {
+                    url = base_url + '/api/md-packages-inactive-list-search';
+                }
+                if (package) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            package_name: package
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Authorization': 'Bearer ' + bearer_token
+                        },
+                        success: function(response) {
+                            console.log(response);
 
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
 
-
-
-</script>
-
+                }
+            });
+        });
+    </script>
 @endsection

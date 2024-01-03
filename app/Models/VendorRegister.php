@@ -16,7 +16,7 @@ class VendorRegister extends Authenticatable
     protected $guard = 'md_health_medical_vendor_registers';
     protected $table = 'md_vendor_register';
     protected $fillable = [
-             'provider_unique_no',
+             'vendor_unique_no',
              'company_name',
              'country_id',
              'city_id',
