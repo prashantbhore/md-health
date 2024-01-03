@@ -2086,7 +2086,8 @@ $purchase_details = Packages::where('md_packages.status', 'active')
     }
 
 
-    public function add_package_to_favourite(Request $request){
+    public function add_package_to_favourite(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
         ]);

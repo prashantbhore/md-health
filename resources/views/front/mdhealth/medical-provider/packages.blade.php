@@ -67,16 +67,16 @@
 
                                 <div class="filter-div">
                                     <div class="search-div">
-                                        <input type="text" placeholder="Search">
+                                        <input type="text" name="searchpackage" id="searchpackage" placeholder="Search">
                                     </div>
-                                    <div class="list-div">
+                                    {{-- <div class="list-div">
                                         <select name="" id="">
                                             <option value="">List for Date</option>
                                             <option value="">List for Stars</option>
                                             <option value="">List for Price</option>
                                             <option value="">List for Distance</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <!-- Tab panes -->
@@ -285,6 +285,53 @@
                     }
                 }
             });
+            // Search package function
+            $('#searchpackage').on('keyup', function() {
+                var package = $(this).val().trim();
+                var type = $('.nav-link[aria-selected="true"]').attr('aria-controls') === 'user' ?
+                    'active' : 'deactive';
+
+                if (package) {
+                    var url = (type === 'active') ? base_url + '/md-packages-active-list-search' :
+                        base_url + '/md-packages-inactive-list-search';
+
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            package_name: package
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Authorization': 'Bearer ' + bearer_token
+                        },
+                        success: function(response) {
+                            if (response) {
+                                if (type === 'active') {
+                                    $('#activelist').html(response);
+                                } else {
+                                    $('#deactivelist').html(response);
+                                }
+                            } else {
+                                if (type === 'active') {
+                                    $('#activelist').html('<h3>No Data Found</h3>');
+                                } else {
+                                    $('#deactivelist').html('<h3>No Data Found</h3>');
+                                }
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    if (type === 'active') {
+                        fetchActiveDiv();
+                    } else {
+                        fetchDeactiveDiv();
+                    }
+                }
+            });
         });
     </script>
 
@@ -352,5 +399,47 @@
             // Detach the package element and append it to the target tab
             $(targetTabId + ' .tab-content').append(packageElement.detach());
         }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#searchpackage').on('keyup', function() {
+                var package = $(this).val();
+                // alert(package);
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
+                    'content');
+                const bearer_token = '{{ Session::get('login_token') }}';
+
+                var url = '';
+
+                if (type === 'active') {
+                    url = base_url + '/api/md-packages-active-list-search';
+                } else {
+                    url = base_url + '/api/md-packages-inactive-list-search';
+                }
+                if (package) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            package_name: package
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Authorization': 'Bearer ' + bearer_token
+                        },
+                        success: function(response) {
+                            console.log(response);
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+
+                }
+            });
+        });
     </script>
 @endsection

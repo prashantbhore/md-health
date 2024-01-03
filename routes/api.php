@@ -63,6 +63,9 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 //md-medical-provider-login
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
+Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
+
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function ()
 {

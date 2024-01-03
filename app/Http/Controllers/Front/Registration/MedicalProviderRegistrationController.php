@@ -37,6 +37,13 @@ class MedicalProviderRegistrationController extends Controller
         return view('front/mdhealth/authentication/medical-provider-login', compact('countries', 'cities'));
     }
 
+    public function vendor_login()
+    {
+        $countries = Country::get();
+        $cities = Cities::get();
+        return view('front/mdhealth/authentication/vendor-login', compact('countries', 'cities'));
+    }
+
 
     public function md_register_medical_provider(request $request)
     {
