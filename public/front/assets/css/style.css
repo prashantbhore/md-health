@@ -63,6 +63,25 @@
 }
 
 /* UTILITY CLASSES */
+.card-h3 {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.card-h2 {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
 
 .card-h1 {
     color: #000;
@@ -1511,7 +1530,7 @@ select option {
 }
 
 .treatment-card .btn-active {
-    width: 130px;
+    width: 150px;
     height: 24px;
     border-radius: 2px;
     background: #4CDB06;
@@ -1520,12 +1539,12 @@ select option {
     font-size: 10px;
     /* font-weight: 700; */
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
     text-decoration: none;
 }
 
 .dashboard-card-title span.in-progress {
-    width: 130px;
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1538,11 +1557,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
 .trmt-card-footer span.in-progress {
-    width: 130px;
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1555,11 +1574,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
-.trmt-card-footer span.active {
-    width: 130px;
+.trmt-card-footer .active {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1572,11 +1591,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
-.trmt-card-body span.active {
-    width: 130px;
+.trmt-card-body .active {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1589,11 +1608,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 32px;
+    padding: 5px;
 }
 
-.trmt-card-footer span.cancel {
-    width: 130px;
+.trmt-card-footer .cancel {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1606,12 +1625,12 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 
 }
 
-.trmt-card-body span.cancel {
-    width: 130px;
+.trmt-card-body .cancel {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -2453,7 +2472,7 @@ span.popup-msg.active {
     flex-shrink: 0;
 
     border-radius: 5px;
-    border: 1px solid #D6D6D6;  
+    border: 1px solid #D6D6D6;
     color: #000;
 
     font-size: 14px;
@@ -2471,6 +2490,7 @@ span.popup-msg.active {
 .appTime .btn:focus {
     border: 1px solid #D6D6D6;
 }
+
 .appTime button:hover {
     background: #F31D1D;
     color: #fff;
@@ -2522,4 +2542,83 @@ span.popup-msg.active {
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.88px;
+}
+
+.handset {
+    position: absolute;
+    left: 40%;
+    bottom: 65px;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-item .progress {
+    border-radius: 2px;
+    background: #FFF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.accordion-item .progress-bar {
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    background: #4CDB06;
+}
+
+.accordion .accordion-item {
+    border: none;
+}
+
+.accordion-button {
+    border-radius: 3px;
+    background: #F6F6F6;
+    margin-bottom: 1rem;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000;
+    background-color: #F6F6F6;
+    box-shadow: none;
+}
+
+.membership-card .progress {
+    height: 2rem;
+    font-size: .75rem;
+    background-color: #D9D9D9;
+    border-radius: 50px;
+}
+
+.membership-card .progress-bar {
+    background-color: #4CDB06;
+    border-radius: 50px;
+    font-weight: 700;
+    color: #000;
+}
+
+.mem-type {
+    color: #D9D9D9;
+    text-align: center;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.mem-type span {
+    color: #D9D9D9;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }

@@ -24,6 +24,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="card card-body">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                             <span>All Sales</span>
@@ -77,8 +78,14 @@
                                             <div class="treatment-card df-start w-100 mb-3">
 
                                                 <div class="row card-row align-items-center">
+                                                    @php
+                                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                                            ->where('medical_provider_id', Auth::user()->id)
+                                                            ->first();
+                                                    @endphp
+
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ asset('front/assets/img/Memorial.svg') }}"
+                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/Memorial.svg') }}"
                                                             alt="">
                                                     </div>
 
@@ -104,6 +111,10 @@
                                                                     {{ !empty($activeSale['package_total_price']) ? $activeSale['package_total_price'] : '' }}
                                                                     ₺</span></h6>
 
+
+
+
+
                                                             <a href="{{ url('treatment-order-details/' . (!empty($activeSale['id']) ? Crypt::encrypt($activeSale['id']) : '')) }}"
                                                                 class="mt-auto view-detail-btn"><strong>View
                                                                     Details</strong></a>
@@ -114,7 +125,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        @include('front.includes.no-data-found')
+                                        @include('front.includes.no-data-found');
                                     @endif
 
 
@@ -128,10 +139,18 @@
                                         @foreach ($completed_sales as $completedSale)
                                             <div class="treatment-card df-start w-100 mb-3">
                                                 <div class="row card-row align-items-center">
+
+                                                    @php
+                                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                                            ->where('medical_provider_id', Auth::user()->id)
+                                                            ->first();
+                                                    @endphp
+
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ asset('front/assets/img/Memorial.svg') }}"
+                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/Memorial.svg') }}"
                                                             alt="">
                                                     </div>
+
                                                     <div class="col-md-6 justify-content-start ps-0">
                                                         <div class="trmt-card-body">
                                                             <h5 class="dashboard-card-title">Treatment
@@ -161,7 +180,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        @include('front.includes.no-data-found')
+                                        @include('front.includes.no-data-found');
                                     @endif
 
 
@@ -190,10 +209,17 @@
                                         @foreach ($cancelled_sales as $completedSale)
                                             <div class="treatment-card df-start w-100 mb-3">
                                                 <div class="row card-row align-items-center">
+                                                    @php
+                                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                                            ->where('medical_provider_id', Auth::user()->id)
+                                                            ->first();
+                                                    @endphp
+
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ asset('front/assets/img/Memorial.svg') }}"
+                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/Memorial.svg') }}"
                                                             alt="">
                                                     </div>
+
                                                     <div class="col-md-6 justify-content-start ps-0">
                                                         <div class="trmt-card-body">
                                                             <h5 class="dashboard-card-title">Treatment
@@ -223,16 +249,11 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        @include('front.includes.no-data-found')
+                                        @include('front.includes.no-data-found');
                                     @endif
-
-
-
-
-
-
-
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
