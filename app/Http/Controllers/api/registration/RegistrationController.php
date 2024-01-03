@@ -21,11 +21,13 @@ use App\Models\VendorLogo;
 use App\Models\VendorLicense;
 use App\Models\VendorRegister;
 
-class RegistrationController extends BaseController {
+class RegistrationController extends BaseController
+{
     use MediaTrait;
 
-    public function customer_register( Request $request ) {
-        $validator = Validator::make( $request->all(), [
+    public function customer_register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
@@ -36,21 +38,21 @@ class RegistrationController extends BaseController {
             'address' => 'required',
             'password' => 'required',
             'platform_type' => 'required',
-        ] );
+        ]);
 
-        if ( $validator->fails() ) {
-            return $this->sendError( 'Validation Error.', $validator->errors() );
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $appkey = !empty( $request->api_key ) ? $request->api_key : '-';
+        $appkey = !empty($request->api_key) ? $request->api_key : '-';
 
-        if ( !empty( $appkey ) ) {
-            $email_exist = CustomerRegistration::where( 'status', 'active' )
-            ->where( 'email', $request->email )
-            ->first();
+        if (!empty($appkey)) {
+            $email_exist = CustomerRegistration::where('status', 'active')
+                ->where('email', $request->email)
+                ->first();
 
-            if ( !empty( $email_exist ) ) {
-                return response()->json( [
+            if (!empty($email_exist)) {
+                return response()->json([
                     'status' => 404,
                     'message' => 'email id already exist.',
                 ]);
@@ -143,8 +145,6 @@ class RegistrationController extends BaseController {
 
             }
         }
-            }
-        }
 
         if (
             Auth::guard('md_customer_registration')->attempt([
@@ -201,49 +201,53 @@ class RegistrationController extends BaseController {
         // }
     }
 
-    public function otp_verify_for_register( request $request ) {
-        if ( empty( $request->otp ) ) {
-            return response()->json( [
+    public function otp_verify_for_register(request $request)
+    {
+        if (empty($request->otp)) {
+            return response()->json([
                 'status' => 404,
                 'message' => 'Otp field required',
-            ] );
-        } elseif ( empty( $request->customer_id ) ) {
-            return response()->json( [
+            ]);
+        } elseif (empty($request->customer_id)) {
+            return response()->json([
                 'status' => 404,
                 'message' => 'Mandatory field required',
-            ] );
+            ]);
         } else {
-            $customer_exist = CustomerRegistration::where( 'status', 'active' )
-            ->where( 'id', $request->customer_id )
-            ->first();
+            $customer_exist = CustomerRegistration::where('status', 'active')
+                ->where('id', $request->customer_id)
+                ->first();
 
-            if ( empty( $customer_exist ) ) {
-                return response()->json( [
+            if (empty($customer_exist)) {
+                return response()->json([
                     'status' => 404,
                     'message' => 'user does not exist',
-                ] );
+                ]);
             }
         }
-        $otp = CustomerRegistration::where( 'id', $request->customer_id )
-        ->where( 'registration_otp', $request->otp )
-        ->where( 'status', 'active' )
-        ->where( 'otp_expiring_time', '>=', now() )
-        ->first();
+        $otp = CustomerRegistration::where('id', $request->customer_id)
+            ->where('registration_otp', $request->otp)
+            ->where('status', 'active')
+            ->where('otp_expiring_time', '>=', now())
+            ->first();
 
-        if ( $otp ) {
+        if ($otp) {
             // OTP is valid
             // Implement your logic here ( e.g., mark the OTP as used, authenticate the user, etc. )
-            return response()->json( [
+            return response()->json([
                 'status' => 200,
                 'message' => 'OTP verified successfully.',
-            ] );
+            ]);
         } else {
             // Invalid OTP or expired
-            return response()->json( [ 'message' => 'Invalid OTP or expired' ], 404 );
+            return response()->json(['message' => 'Invalid OTP or expired'], 404);
         }
     }
 
-    public function md_register_medical_provider( request $request ) {
+    // public function md_register_medical_provider( request $request ) {
+
+    public function md_register_medical_provider(request $request)
+    {
 
         // dd($request);
         $validator = Validator::make($request->all(), [
@@ -256,71 +260,71 @@ class RegistrationController extends BaseController {
             'password' => 'required',
             // 'company_logo_image_path' => 'required',
             // 'company_licence_image_path' => 'required',
-        ] );
+        ]);
 
-        if ( $validator->fails() ) {
-            return $this->sendError( 'Validation Error.', $validator->errors() );
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $email_exist = MedicalProviderRegistrater::where( 'status', 'active' )
-        ->where( 'email', $request->email )
-        ->first();
-        $email_exist_common = CommonUserLoginTable::where( 'status', 'active' )
-        ->where( 'email', $request->email )
-        ->first();
+        $email_exist = MedicalProviderRegistrater::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
+        $email_exist_common = CommonUserLoginTable::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
 
-        if ( !empty( $email_exist || $email_exist_common ) ) {
+        if (!empty($email_exist || $email_exist_common)) {
             // if ( $request->platform_type != 'ios' && $request->platform_type != 'android' ) {
             //     return redirect( '/user-account' )->with( 'error', 'Email id already exist.' );
             // }
-            return response()->json( [
+            return response()->json([
                 'status' => 404,
                 'message' => 'email id already exist.',
-            ] );
+            ]);
         } else {
-            $phone_exist = MedicalProviderRegistrater::where( 'status', 'active' )
-            ->where( 'mobile_no', $request->phone )
-            ->first();
-            $phone_exist_common = CommonUserLoginTable::where( 'status', 'active' )
-            ->where( 'mobile_no', $request->phone )
-            ->first();
+            $phone_exist = MedicalProviderRegistrater::where('status', 'active')
+                ->where('mobile_no', $request->phone)
+                ->first();
+            $phone_exist_common = CommonUserLoginTable::where('status', 'active')
+                ->where('mobile_no', $request->phone)
+                ->first();
 
-            if ( !empty( $phone_exist || $phone_exist_common ) ) {
+            if (!empty($phone_exist || $phone_exist_common)) {
                 // if ( $request->platform_type != 'ios' && $request->platform_type != 'android' ) {
                 //     return redirect( '/user-account' )->with( 'error', 'Mobile number already exist.' );
                 // }
-                return response()->json( [
+                return response()->json([
                     'status' => 404,
                     'message' => 'mobile number already exist.',
-                ] );
+                ]);
             }
         }
 
         $commonData = [];
-        $commonData[ 'email' ] = $request->email;
-        $commonData[ 'mobile_no' ] = $request->phone;
-        $commonData[ 'user_type' ] = 'medicalprovider';
-        $commonData[ 'password' ] = Hash::make( $request->password );
-        $common_data_registration = CommonUserLoginTable::create( $commonData );
+        $commonData['email'] = $request->email;
+        $commonData['mobile_no'] = $request->phone;
+        $commonData['user_type'] = 'medicalprovider';
+        $commonData['password'] = Hash::make($request->password);
+        $common_data_registration = CommonUserLoginTable::create($commonData);
 
         // Retrieve the last inserted ID
         $lastInsertedId = $common_data_registration->id;
         // return $lastInsertedId;
 
         $md_provider_input = [];
-        $md_provider_input[ 'company_name' ] = $request->company_name;
-        $md_provider_input[ 'city_id' ] = $request->city_id;
-        $md_provider_input[ 'email' ] = $request->email;
-        $md_provider_input[ 'mobile_no' ] = $request->phone;
-        $md_provider_input[ 'tax_no' ] = $request->tax_no;
-        $md_provider_input[ 'company_address' ] = $request->company_address;
-        $md_provider_input[ 'password' ] = Hash::make( $request->password );
+        $md_provider_input['company_name'] = $request->company_name;
+        $md_provider_input['city_id'] = $request->city_id;
+        $md_provider_input['email'] = $request->email;
+        $md_provider_input['mobile_no'] = $request->phone;
+        $md_provider_input['tax_no'] = $request->tax_no;
+        $md_provider_input['company_address'] = $request->company_address;
+        $md_provider_input['password'] = Hash::make($request->password);
 
-        if ( $request->has( 'company_logo_image_path' ) ) {
-            if ( $request->file( 'company_logo_image_path' ) ) {
-                $md_provider_input[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
-                $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
-                $md_provider_input[ 'company_logo_image_name' ] = $original_name;
+        if ($request->has('company_logo_image_path')) {
+            if ($request->file('company_logo_image_path')) {
+                $md_provider_input['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+                $md_provider_input['company_logo_image_name'] = $original_name;
             }
         }
 
@@ -340,13 +344,13 @@ class RegistrationController extends BaseController {
                 $length = strlen($value->id);
                 if ($length == 1) {
                     $provider_unique_id = '#MDPRVDR00000' . $value->id;
-                } elseif ( $length == 2 ) {
+                } elseif ($length == 2) {
                     $provider_unique_id = '#MDPRVDR0000' . $value->id;
-                } elseif ( $length == 3 ) {
+                } elseif ($length == 3) {
                     $provider_unique_id = '#MDPRVDR000' . $value->id;
-                } elseif ( $length == 4 ) {
+                } elseif ($length == 4) {
                     $provider_unique_id = '#MDPRVDR00' . $value->id;
-                } elseif ( $length == 5 ) {
+                } elseif ($length == 5) {
                     $provider_unique_id = '#MDPRVDR0' . $value->id;
                 } else {
                     $provider_unique_id = '#MDPRVDR' . $value->id;
@@ -358,26 +362,25 @@ class RegistrationController extends BaseController {
             }
         }
 
-
         if (
-            Auth::guard( 'md_health_medical_providers_registers' )->attempt( [
+            Auth::guard('md_health_medical_providers_registers')->attempt([
                 'mobile_no' => $request->phone,
                 'status' => 'active',
                 'password' => $request->password
-            ] )
+            ])
         ) {
-            $customer = Auth::guard( 'md_health_medical_providers_registers' )->user();
+            $customer = Auth::guard('md_health_medical_providers_registers')->user();
             // return $customer;
-            $success[ 'token' ] = $customer->createToken( 'MyApp' )->plainTextToken;
-            MedicalProviderRegistrater::where( 'id', $customer->id )->update( [
-                'access_token' => $success[ 'token' ]
-            ] );
+            $success['token'] = $customer->createToken('MyApp')->plainTextToken;
+            MedicalProviderRegistrater::where('id', $customer->id)->update([
+                'access_token' => $success['token']
+            ]);
         } else {
             // return $this->sendError( 'Unauthorised.', [ 'error' => 'Unauthorised' ] );
-            return response()->json( [
+            return response()->json([
                 'status' => 404,
                 'message' => 'Unauthorised.',
-            ] );
+            ]);
         }
 
         // if ( $request->has( 'company_logo_image_path' ) ) {
@@ -399,32 +402,33 @@ class RegistrationController extends BaseController {
 
         // MedicalProviderLicense::create( $md_provider_input_image_license );
 
-        if ( !empty( $md_provider_registration ) ) {
+        if (!empty($md_provider_registration)) {
             // if ( $request->platform_type != 'ios' && $request->platform_type != 'android' ) {
             //     return redirect( '/medical-provider-dashboard' )->with( 'success', 'Profile created successfully.' );
             // }
-            return response()->json( [
+            return response()->json([
                 'status' => 200,
                 'message' => 'Profile created successfully.',
                 'data' => [
                     'id' => $md_provider_registration->id,
-                    'access_token' => $success[ 'token' ]
+                    'access_token' => $success['token']
                 ],
-            ] );
+            ]);
         } else {
             // if ( $request->platform_type != 'ios' && $request->platform_type != 'android' ) {
             //     return redirect( '/user-account' )->with( 'success', 'Profile not completed.' );
             // }
-            return response()->json( [
+            return response()->json([
                 'status' => 404,
                 'message' => 'Profile not completed.',
-            ] );
+            ]);
         }
     }
 
-    public function vendor_registration( request $request ) {
+    public function vendor_registration(request $request)
+    {
         // dd( $request );
-        $validator = Validator::make( $request->all(), [
+        $validator = Validator::make($request->all(), [
             'company_name' => 'required',
             'city_id' => 'required',
             'email' => 'required',
@@ -434,19 +438,19 @@ class RegistrationController extends BaseController {
             'password' => 'required',
             // 'company_logo_image_path' => 'required',
             // 'company_licence_image_path' => 'required',
-        ] );
+        ]);
 
-        if ( $validator->fails() ) {
-            return $this->sendError( 'Validation Error.', $validator->errors() );
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $email_exist = VendorRegister::where( 'status', 'active' )
-        ->where( 'email', $request->email )
-        ->first();
+        $email_exist = VendorRegister::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
 
-        $email_exist_common = CommonUserLoginTable::where( 'status', 'active' )
-        ->where( 'email', $request->email )
-        ->first();
+        $email_exist_common = CommonUserLoginTable::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
 
         if (!empty($email_exist || $email_exist_common)) {
             return response()->json([
@@ -455,18 +459,18 @@ class RegistrationController extends BaseController {
             ]);
 
         } else {
-            $phone_exist = VendorRegister::where( 'status', 'active' )
-            ->where( 'mobile_no', $request->phone )
-            ->first();
-            $phone_exist_common = CommonUserLoginTable::where( 'status', 'active' )
-            ->where( 'mobile_no', $request->phone )
-            ->first();
+            $phone_exist = VendorRegister::where('status', 'active')
+                ->where('mobile_no', $request->phone)
+                ->first();
+            $phone_exist_common = CommonUserLoginTable::where('status', 'active')
+                ->where('mobile_no', $request->phone)
+                ->first();
 
             if (!empty($phone_exist || $phone_exist_common)) {
                 return response()->json([
                     'status' => 404,
                     'message' => 'mobile number already exist.',
-                ] );
+                ]);
             }
         }
 
@@ -474,11 +478,11 @@ class RegistrationController extends BaseController {
 
 
         $commonData = [];
-        $commonData[ 'email' ] = $request->email;
-        $commonData[ 'mobile_no' ] = $request->phone;
-        $commonData[ 'user_type' ] = 'vendor';
-        $commonData[ 'password' ] = Hash::make( $request->password );
-        $common_data_registration = CommonUserLoginTable::create( $commonData );
+        $commonData['email'] = $request->email;
+        $commonData['mobile_no'] = $request->phone;
+        $commonData['user_type'] = 'vendor';
+        $commonData['password'] = Hash::make($request->password);
+        $common_data_registration = CommonUserLoginTable::create($commonData);
 
         $lastInsertedId = $common_data_registration->id;
         // return $lastInsertedId;
@@ -495,19 +499,22 @@ class RegistrationController extends BaseController {
         $md_provider_input['modified_ip_address'] = $request->ip();
         $md_provider_registration = VendorRegister::create($md_provider_input);
 
-        $MedicalProviderRegistrater = VendorRegister::select( 'id' )->get();
-        if ( !empty( $MedicalProviderRegistrater ) ) {
-            foreach ( $MedicalProviderRegistrater as $key => $value ) {
-                $length = strlen( $value->id );
-                if ( $length == 1 ) {
+        $md_provider_input['modified_ip_address'] = $request->ip();
+        $md_provider_registration = VendorRegister::create($md_provider_input);
+
+        $MedicalProviderRegistrater = VendorRegister::select('id')->get();
+        if (!empty($MedicalProviderRegistrater)) {
+            foreach ($MedicalProviderRegistrater as $key => $value) {
+                $length = strlen($value->id);
+                if ($length == 1) {
                     $provider_unique_id = '#MDPRVDR00000' . $value->id;
-                } elseif ( $length == 2 ) {
+                } elseif ($length == 2) {
                     $provider_unique_id = '#MDPRVDR0000' . $value->id;
-                } elseif ( $length == 3 ) {
+                } elseif ($length == 3) {
                     $provider_unique_id = '#MDPRVDR000' . $value->id;
-                } elseif ( $length == 4 ) {
+                } elseif ($length == 4) {
                     $provider_unique_id = '#MDPRVDR00' . $value->id;
-                } elseif ( $length == 5 ) {
+                } elseif ($length == 5) {
                     $provider_unique_id = '#MDPRVDR0' . $value->id;
                 } else {
                     $provider_unique_id = '#MDPRVDR' . $value->id;
@@ -520,11 +527,11 @@ class RegistrationController extends BaseController {
         }
         // dd($common_data_registrationid);
         if (
-            Auth::guard( 'md_health_medical_vendor_registers' )->attempt( [
+            Auth::guard('md_health_medical_vendor_registers')->attempt([
                 'mobile_no' => $request->phone,
                 'status' => 'active',
                 'password' => $request->password
-            ] )
+            ])
         ) {
             $customer = Auth::guard('md_health_medical_vendor_registers')->user();
             // return $customer;
@@ -539,7 +546,7 @@ class RegistrationController extends BaseController {
             return response()->json([
                 'status' => 404,
                 'message' => 'Unauthorised.',
-            ] );
+            ]);
         }
 
         // if ( $request->has( 'company_logo_image_path' ) ) {
@@ -561,27 +568,28 @@ class RegistrationController extends BaseController {
 
         //  VendorLicense::create( $md_provider_input_image_license );
 
-
-
         if (!empty($md_provider_registration)) {
 
-            return response()->json([
-                'status' => 200,
-                'message' => 'Profile created successfully.',
-                'data' => [
-                    'id' => $md_provider_registration->id,
-                    'access_token' => $success[ 'token' ]
-                ],
-            ] );
-        } else {
 
-            return response()->json([
-                'status' => 404,
-                'message' => 'Profile not completed.',
-            ] );
+            if (!empty($md_provider_registration)) {
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Profile created successfully.',
+                    'data' => [
+                        'id' => $md_provider_registration->id,
+                        'access_token' => $success['token']
+                    ],
+                ]);
+            } else {
+
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Profile not completed.',
+                ]);
+            }
         }
+
     }
 
 }
-
-
