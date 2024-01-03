@@ -10,7 +10,7 @@
 @endphp
 <nav id="homeService" class="navbar navbar-expand-lg navbar-light bg-f6 py-3">
     <div class="container">
-        <a class="navbar-brand" href="{{ URL('admin/dashboard') }}">
+        <a class="navbar-brand" href="{{ URL('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth.svg') }}" alt="" style="width: 180px;" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -215,7 +215,7 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        Profile
+                                        Dashboard
                                     </a>
                                 </li>
                                 <li>

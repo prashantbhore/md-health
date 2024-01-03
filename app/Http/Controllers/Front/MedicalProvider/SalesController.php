@@ -21,25 +21,25 @@ class SalesController extends Controller
     public function index()
     {
         $token = Session::get('login_token');
-       
+
         $apiUrl = url('api/md-provider-active-treatment-list');
         $method = 'GET';
         $body=null;
 
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
 
-        
+
         $active_sales= $responseData['packages_active_list'];
 
 
-         
+
         $apiUrl = url('api/md-provider-completed-treatment-list');
         $method = 'GET';
         $body=null;
 
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
 
-        
+
         $completed_sales= $responseData['packages_active_list'];
 
 
@@ -49,7 +49,7 @@ class SalesController extends Controller
 
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
 
-        
+
         $cancelled_sales= $responseData['packages_active_list'];
 
        // dd($completed_sales);
@@ -99,11 +99,11 @@ class SalesController extends Controller
 
     public function status_date_change(Request $request)
     {
-        
+
         $token = Session::get('login_token');
 
- 
-        
+
+
         $apiUrl = url('api/md-provider-treatment-date-status');
 
         $treatment_purchage_id = $request->treatment_purchage_id;
@@ -126,7 +126,7 @@ class SalesController extends Controller
 
        return redirect('treatment-order-details/'.$id)->with('success', 'Treatment Status Changes Successfully!');
        }
-    
+
        // return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));
     }
 
@@ -135,11 +135,11 @@ class SalesController extends Controller
 
     public function assign_case_manager(Request $request)
     {
-        
+
         $token = Session::get('login_token');
 
-     
-        
+
+
         $apiUrl = url('api/md-provider-assign-treatment-case-manager');
 
         $treatment_purchage_id = $request->purchage_id;
@@ -170,7 +170,7 @@ class SalesController extends Controller
 
        return redirect('treatment-order-details/'.$id)->with('success', 'Treatment Status Changes Successfully!');
        }
-    
+
        // return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));
     }
 
@@ -182,5 +182,5 @@ class SalesController extends Controller
 
 
 
-    
+
 }
