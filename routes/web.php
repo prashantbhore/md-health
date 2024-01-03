@@ -32,6 +32,7 @@ use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
+use App\Http\Controllers\Front\MedicalProvider\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,7 +158,7 @@ Route::get('mdBooking', function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
 
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard', function (){
         return view('admin.dashboard.dashboard');
     });
 
@@ -491,13 +492,14 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 // Route::view('add-tour', 'front/mdhealth/medical-provider/add-tour');
 
 
-Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
+// Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 
 
-Route::controller(::class)->group(function(){
+Route::controller(PaymentController::class)->group(function(){
     
-    Route::get('medical-provider-dashboard','index');
+    Route::get('payment-information','index');
 
+    Route::post('store-vendor-bank-details','storeBankDetails')->name('store.vendor.bank.details');
 });
 
 

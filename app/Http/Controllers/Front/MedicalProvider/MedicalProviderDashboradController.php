@@ -30,7 +30,6 @@ class MedicalProviderDashboradController extends Controller
         $apiUrl = url('api/vendor-monthly-order-count');
         $method = 'GET';
         $body=null;
-
         $monthly_orders = $this->apiService->getData($token, $apiUrl, $body, $method);
 
       
@@ -40,7 +39,6 @@ class MedicalProviderDashboradController extends Controller
         $apiUrl = url('api/vendor-monthly-sales-count');
         $method = 'GET';
         $body=null;
-
         $monthly_sales_count = $this->apiService->getData($token, $apiUrl, $body, $method);
 
        
