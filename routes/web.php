@@ -30,6 +30,7 @@ use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
+use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 
 /*
 |--------------------------------------------------------------------------
@@ -387,7 +388,7 @@ Route::controller(CommonLoginController::class)->group(function () {
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
 
     Route::controller(MedicalProviderLogin::class)->group(function () {
-        Route::get('/medical-provider-dashboard', 'dashboard_view');
+        //Route::get('/medical-provider-dashboard', 'dashboard_view');
         // Route::get('/logout', 'logout');
         // Route::get('/login/change_password', 'change_password_view');
         // Route::post('/reset-password', 'reset_password');
@@ -487,7 +488,7 @@ Route::view('reports', 'front/mdhealth/medical-provider/reports');
 #Sales
 
 Route::controller(SalesController::class)->group(function(){
-    
+
     Route::get('medical-provider-sales','index');
    // Route::post('treatment-order-details/{id}','sales_view');
 
@@ -501,6 +502,16 @@ Route::controller(SalesController::class)->group(function(){
 
     Route::match(['get', 'post'], 'sales-search','sales_search')->name('sales.search');
 
+
+});
+
+
+
+
+#Medical Provider Dashboard
+Route::controller(MedicalProviderDashboradController::class)->group(function(){
+    
+    Route::get('medical-provider-dashboard','index');
 
 });
 

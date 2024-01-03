@@ -4,8 +4,57 @@ namespace App\Http\Controllers\Front\MedicalProvider;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ApiService;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use Crypt;
+
 
 class MedicalProviderDashboradController extends Controller
 {
-    //
+    public function __construct(ApiService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
+
+
+    public function index()
+    {
+
+        $token = Session::get('login_token');
+
+
+        $apiUrl = url('api/vendor-monthly-order-count');
+        $method = 'GET';
+        $body=null;
+
+        $monthly_orders = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+      
+
+
+
+        $apiUrl = url('api/vendor-monthly-sales-count');
+        $method = 'GET';
+        $body=null;
+
+        $monthly_sales_count = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+       
+
+
+
+        $apiUrl = url('api/vendor-package-latest-orders');
+        $method = 'GET';
+        $body=null;
+
+        $responseData= $this->apiService->getData($token, $apiUrl, $body, $method);
+
+
+        $recent_orders=  $responseData['latest_orders'];
+
+        // dd($recent_orders);
+
+        return view('front/mdhealth/medical-provider/dashboard',compact('monthly_orders','monthly_sales_count','recent_orders'));
+    }
 }

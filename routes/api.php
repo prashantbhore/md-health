@@ -42,6 +42,9 @@ Route::get('unauthorized-user', function () {
 // dynamic app url
 Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']);
 
+
+
+
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
@@ -62,6 +65,10 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 
 //md-medical-provider-login
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
+
+//Vendor Registration
+
+Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function ()
@@ -370,9 +377,7 @@ Route::post('md-provider-system-user-edit', [AddSystemUserRole::class,'edit_syst
 //Provider System User delete
 Route::post('md-provider-system-user-delete', [AddSystemUserRole::class,'delete_system_user']);
 
-//Vendor Registration
 
-Route::post('md-vendor-registration', [RegistrationController::class,'vendor_registration']);
 
 //Vendor Prodcut
 Route::controller(VendorProductController::class)->group(function(){
