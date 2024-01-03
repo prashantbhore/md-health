@@ -106,9 +106,10 @@ class CustomerPackageController extends Controller {
             $counties = Country::all();
             $city_name = $request->city_name?? 'Select City';
             $treatment_name = $request->treatment_name ?? 'Select Treatment';
+            $date =  $request->daterange ?? '';
             $cities = Cities::where( 'status', 'active' )->where( 'country_id', 1 )->get();
             $treatment_plans = ProductCategory::where( 'status', 'active' )->where( 'main_product_category_id', '1' )->get();
-            return view( 'front.mdhealth.searchResult', compact( 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties' ) );
+            return view( 'front.mdhealth.searchResult', compact( 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date' ) );
 
         }
 
