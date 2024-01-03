@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Front\MedicalProvider;
 
 use App\Http\Controllers\Controller;
+use App\Models\MedicalProviderLogo;
 use Illuminate\Http\Request;
 use App\Services\ApiService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Crypt;
+use Auth;
 
 
 class MedicalProviderDashboradController extends Controller
 {
+
     public function __construct(ApiService $apiService)
     {
         $this->apiService = $apiService;
@@ -53,8 +56,13 @@ class MedicalProviderDashboradController extends Controller
 
         $recent_orders=  $responseData['latest_orders'];
 
-        // dd($recent_orders);
+        $provider_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',Auth::user()->id)->first();
 
-        return view('front/mdhealth/medical-provider/dashboard',compact('monthly_orders','monthly_sales_count','recent_orders'));
+       // dd($provider_logo->company_logo_image_path);
+
+        return view('front/mdhealth/medical-provider/dashboard',compact('monthly_orders','monthly_sales_count','recent_orders','provider_logo'));
     }
+
+
+
 }
