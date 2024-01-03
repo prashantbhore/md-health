@@ -204,6 +204,8 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+                                        @else
+                                            @include('front.includes.no-data-found')
                                         @endif
                                     </div>
                                     <div class="tab-pane fade" id="user-completed" role="tabpanel"
@@ -268,6 +270,8 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+                                        @else
+                                            @include('front.includes.no-data-found')
                                         @endif
                                     </div>
                                     <div class="tab-pane fade" id="user-cancelled" role="tabpanel"
@@ -323,6 +327,8 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+                                        @else
+                                            @include('front.includes.no-data-found')
                                         @endif
                                     </div>
                                 </div>

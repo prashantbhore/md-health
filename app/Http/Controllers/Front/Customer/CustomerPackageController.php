@@ -202,11 +202,31 @@ class CustomerPackageController extends Controller {
         $token = Session::get( 'login_token' );
         $data = $this->apiService->getData( $token, url( '/api/md-customer-package-details' ), [ 'package_id'=>$id ], 'POST' );
         // dd( $data );
-        $other_service =  array_map( fn( $item ) => $item[ 'title' ], $data[ 'other_services' ] );
-        $data = $data[ 'customer_purchase_package_list' ];
-        $data[ 'other_services' ] = $other_service;
-        // dd( $data );
-        return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data' ) );
+        if ( $data[ 'status' ] == '200' ) {
+
+            $other_service =  array_map( fn( $item ) => $item[ 'title' ], $data[ 'other_services' ] );
+            $data = $data[ 'customer_purchase_package_list' ];
+            $data[ 'other_services' ] = $other_service;
+        }
+        // $data = $data[ 'customer_purchase_package_list' ];
+        // $data[ 'other_services' ] = $other_service;
+        if ( Auth::user()->id != null ) {
+            $response = $this->apiService->getData( $token,  url( '/api/md-customer-my-details' ), [ 'patient_id'=>Auth::user()->id, 'package_id'=>$id ], 'POST' );
+            if ( $response[ 'status' ] == '200' ) {
+                // dd( $response );
+                $my_details = $response[ 'PatientInformation' ];
+            } else {
+                $my_details = '';
+            }
+
+            //md-customer-upload-documents
+        }
+        // $data = [];
+        // $response = $this->apiService->getData( $token,  url( '/api/md-customer-change-package-list-active-cancelled' ), [ 'id'=>$id ], 'POST' );
+        // dd( $response );
+
+        return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data', 'my_details' ) );
 
     }
+
 }

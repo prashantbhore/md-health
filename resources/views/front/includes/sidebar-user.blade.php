@@ -14,8 +14,8 @@
             <li class="nav-item upMessagesLi">
                 <a class="nav-link upMessages" href="{{ url('user-message') }}">Messages</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Orders</a>
+            <li class="nav-item upOrdersLi ">
+                <a class="nav-link upOrders" href="{{ url('user-orders') }}">Orders</a>
             </li>
             <li class="nav-item upWalletLi">
                 <a class="nav-link upWallet" href="{{ url('user-wallet') }}">Wallets</a>
@@ -23,13 +23,12 @@
             <li class="nav-item upReportsLi">
                 <a class="nav-link upReports" href="{{ url('user-all-reports') }}">My Reports</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Favorites</a>
+            <li class="nav-item upFavLi">
+                <a class="nav-link upFav" href="{{ url('user-favorites') }}">Favorites</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link disabled text-black fw-bold" href="#" tabindex="-1"
-                    aria-disabled="true">Version 1.0</a>
+                <a class="nav-link disabled text-black fw-bold" href="#" tabindex="-1" aria-disabled="true">Version 1.0</a>
             </li>
 
         </ul>
