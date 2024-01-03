@@ -23,6 +23,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="card card-body">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>All Sales</span>
@@ -74,8 +75,14 @@
                                 <div class="treatment-card df-start w-100 mb-3">
 
                                     <div class="row card-row align-items-center">
+                                        @php
+                                            $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                                ->where('medical_provider_id', Auth::user()->id)
+                                                ->first();
+                                        @endphp
+                                         
                                         <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                                            <img src="{{!empty($provider_logo->company_logo_image_path)?url('/').Storage::url($provider_logo->company_logo_image_path):asset('front/assets/img/Memorial.svg')}}" alt="">
                                         </div>
 
                                         <div class="col-md-6 justify-content-start ps-0">
@@ -91,6 +98,10 @@
                                         <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class=""> {{!empty($activeSale['package_total_price'])?$activeSale['package_total_price']:''}} ₺</span></h6>
+
+                                                
+
+                                            
                                                 
                                                 <a href="{{ url('treatment-order-details/' . (!empty($activeSale['id']) ?Crypt::encrypt($activeSale['id']): '')) }}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
 
@@ -113,9 +124,17 @@
 
                                 <div class="treatment-card df-start w-100 mb-3">
                                     <div class="row card-row align-items-center">
-                                        <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                        </div>
+
+                                        @php
+                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                            ->where('medical_provider_id', Auth::user()->id)
+                                            ->first();
+                                       @endphp
+                                     
+                                    <div class="col-md-2 df-center px-0">
+                                        <img src="{{!empty($provider_logo->company_logo_image_path)?url('/').Storage::url($provider_logo->company_logo_image_path):asset('front/assets/img/Memorial.svg')}}" alt="">
+                                    </div>
+
                                         <div class="col-md-6 justify-content-start ps-0">
                                             <div class="trmt-card-body">
                                                 <h5 class="dashboard-card-title">Treatment No:{{!empty($completedSale['order_id'])?$completedSale['order_id']:''}}<span class="active">{{!empty($completedSale['purchase_type'])?ucfirst($completedSale['purchase_type']):''}}</span></h5>
@@ -161,9 +180,16 @@
 
                                 <div class="treatment-card df-start w-100 mb-3">
                                     <div class="row card-row align-items-center">
+                                        @php
+                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                            ->where('medical_provider_id', Auth::user()->id)
+                                            ->first();
+                                       @endphp
+                                     
                                         <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                                            <img src="{{!empty($provider_logo->company_logo_image_path)?url('/').Storage::url($provider_logo->company_logo_image_path):asset('front/assets/img/Memorial.svg')}}" alt="">
                                         </div>
+
                                         <div class="col-md-6 justify-content-start ps-0">
                                             <div class="trmt-card-body">
                                                 <h5 class="dashboard-card-title">Treatment No:{{!empty($completedSale['order_id'])?$completedSale['order_id']:''}}<span class="cancel">{{!empty($completedSale['purchase_type'])?ucfirst($completedSale['purchase_type']):''}}</span></h5>
@@ -182,14 +208,9 @@
 
                                 @endforeach
                                 @endif
+                           </div>
 
-
-
-
-
-
-
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

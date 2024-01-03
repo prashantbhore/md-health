@@ -487,7 +487,20 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 // Route::view('medical-other-services', 'front/mdhealth/medical-provider/other-services');
 // Route::view('add-acommodition', 'front/mdhealth/medical-provider/add-acommodition');
 // Route::view('add-tour', 'front/mdhealth/medical-provider/add-tour');
+
+
 Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
+
+
+Route::controller(::class)->group(function(){
+    
+    Route::get('medical-provider-dashboard','index');
+
+});
+
+
+
+
 Route::view('medical-roles', 'front/mdhealth/medical-provider/medical-roles');
 Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
