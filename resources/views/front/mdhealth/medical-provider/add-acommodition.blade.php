@@ -28,14 +28,7 @@
 
         .form-group .prev-img-div img {
             height: 150px;
-            width: 150px;
-            object-fit: contain;
-            margin-top: 15px;
-        }
-
-        .form-group .prev-img-div img {
-            height: 150px;
-            width: 150px;
+            width: auto;
             object-fit: contain;
             margin-top: 15px;
         }
@@ -69,7 +62,7 @@
         }
     </style>
     <!-- Include jQuery -->
-    
+
 
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -89,21 +82,24 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                
+
                                 <form action="{{ url('md-add-new-acommodition') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
                                     @csrf
-                                   
-                                    <input type="hidden" name="hotel_id" value="{{!empty($hotel_details['id'])?$hotel_details['id']:''}}">
+
+                                    <input type="hidden" name="hotel_id"
+                                        value="{{ !empty($hotel_details['id']) ? $hotel_details['id'] : '' }}">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Hotel Name</label>
-                                        <input type="text" class="form-control" name="hotel_name" id="hotel_name" value="{{!empty($hotel_details['hotel_name'])?$hotel_details['hotel_name']:''}}"
+                                        <input type="text" class="form-control" name="hotel_name" id="hotel_name"
+                                            value="{{ !empty($hotel_details['hotel_name']) ? $hotel_details['hotel_name'] : '' }}"
                                             aria-describedby="foodname" placeholder="Please Write Here">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="form-label">Hotel Address</label>
-                                        <input type="text" class="form-control" name="hotel_address" id="hotel_address" value="{{!empty($hotel_details['hotel_address'])?$hotel_details['hotel_address']:''}}"
+                                        <input type="text" class="form-control" name="hotel_address" id="hotel_address"
+                                            value="{{ !empty($hotel_details['hotel_address']) ? $hotel_details['hotel_address'] : '' }}"
                                             aria-describedby="foodname" placeholder="Please Write Here">
                                     </div>
 
@@ -118,17 +114,25 @@
                                     </div>
                                 </div> --}}
 
-                                    <div class="star-rating">
-                                        <i class="fa fa-star" data-value="1"></i>
-                                        <i class="fa fa-star" data-value="2"></i>
-                                        <i class="fa fa-star" data-value="3"></i>
-                                        <i class="fa fa-star" data-value="4"></i>
-                                        <i class="fa fa-star" data-value="5"></i>
-                                    </div>
+
 
                                     <!-- Display Selected Stars Count -->
                                     {{-- <div id="selectedStarsCount"></div> --}}
-                                    <input type="hidden" name="hotel_stars" id="hotel_stars" value="{{!empty($hotel_details['hotel_stars']) ? $hotel_details['hotel_stars'] : ''}}">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Hotel Stars (Selectable)</label>
+                                        <div class="form-group">
+                                            <input type="hidden" name="hotel_stars" id="hotel_stars"
+                                                value="{{ !empty($hotel_details['hotel_stars']) ? $hotel_details['hotel_stars'] : '' }}">
+                                            <div class="star-rating">
+                                                <i class="fa fa-star" data-value="1"></i>
+                                                <i class="fa fa-star" data-value="2"></i>
+                                                <i class="fa fa-star" data-value="3"></i>
+                                                <i class="fa fa-star" data-value="4"></i>
+                                                <i class="fa fa-star" data-value="5"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
 
 
@@ -136,11 +140,14 @@
                                         <label class="form-label">Hotel Picture</label>
                                         <div class="form-group">
                                             <input type="file" name="hotel_image_path" id="hotel_image_path"
-                                                class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])"/>
+                                                class="form-control text-dark"
+                                                oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
                                         </div>
                                         <div class="prev-img-div">
-                                            <img src="{{!empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'front/assets/img/homepage/img-2.jpg'}}" alt="image"  id="pic"  />
-                                            <input type="hidden" name="old_image" id="old_image" value="{{ !empty($hotel_details['hotel_image_path'])?$hotel_details['hotel_image_path']:'' }}">
+                                            <img src="{{ !empty($hotel_details['hotel_image_path']) ? $hotel_details['hotel_image_path'] : 'front/assets/img/default-img.png' }}"
+                                                alt="image" id="pic" />
+                                            <input type="hidden" name="old_image" id="old_image"
+                                                value="{{ !empty($hotel_details['hotel_image_path']) ? $hotel_details['hotel_image_path'] : '' }}">
                                         </div>
                                     </div>
 
@@ -148,7 +155,8 @@
                                         <label class="form-label">Hotel Per Night Price (VAT Included)</label>
                                         <div class="input-icon-div">
                                             <input type="text" class="form-control" name="hotel_per_night_price"
-                                                id="hotel_per_night_price" placeholder="0" value="{{!empty($hotel_details['hotel_per_night_price'])?$hotel_details['hotel_per_night_price']:''}}">
+                                                id="hotel_per_night_price" placeholder="0"
+                                                value="{{ !empty($hotel_details['hotel_per_night_price']) ? $hotel_details['hotel_per_night_price'] : '' }}">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -160,8 +168,7 @@
                                                 <div class="form-check">
                                                     <input type="checkbox" value="Breakfast & Dinner"
                                                         class="form-check-input" id="fordinner"
-                                                        {{ !empty($hotel_details['hotel_other_services']) && (strpos($hotel_details['hotel_other_services'], 'Breakfast & Dinner') !== false) ? 'checked' : '' }}
-                                                        >
+                                                        {{ !empty($hotel_details['hotel_other_services']) && strpos($hotel_details['hotel_other_services'], 'Breakfast & Dinner') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="fordinner">
                                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +224,8 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" value="Fitness Center"
-                                                        class="form-check-input" id="forfitness"{{!empty($hotel_details['hotel_other_services']) &&  strpos($hotel_details['hotel_other_services'], 'Fitness Center') !== false ? 'checked' : '' }}>
+                                                        class="form-check-input"
+                                                        id="forfitness"{{ !empty($hotel_details['hotel_other_services']) && strpos($hotel_details['hotel_other_services'], 'Fitness Center') !== false ? 'checked' : '' }}>
                                                     <label class="form-check-label fw-500 fsb-1" for="forfitness">
                                                         <svg width="13" height="15" viewBox="0 0 13 15"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -230,7 +238,8 @@
                                             </div>
                                         </div>
                                         {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
-                                        <input type="hidden" name="hotel_other_services" id="hotel_other_services" value="{{!empty($hotel_details['hotel_other_services'])?$hotel_details['hotel_other_services']:''}}">
+                                        <input type="hidden" name="hotel_other_services" id="hotel_other_services"
+                                            value="{{ !empty($hotel_details['hotel_other_services']) ? $hotel_details['hotel_other_services'] : '' }}">
                                         <input type="hidden" name="button_type" id="button_type" value="active">
                                         <input type="hidden" name="platform_type" id="platform_type" value="web">
                                     </div>
@@ -252,11 +261,11 @@
 @endsection
 
 @section('script')
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Include jQuery Validation Plugin -->
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <!-- Include jQuery Validation Plugin -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
     <script>
         $(".mpOtherServicesLi").addClass("activeClass");
@@ -277,53 +286,53 @@
 
 
         $(document).ready(function() {
-            var old_image=$('#old_image').val();
-    // Validate the form with id "add_acommodition"
-    $("#add_acommodition").validate({
-      rules: {
-        hotel_name: {
-          required: true
-        },
-        hotel_address: {
-          required: true
-        },
-        hotel_per_night_price: {
-          required: true,
-          number: true
-        },
-        hotel_image_path: {
-          required: function(element) {
-                    // Check if an old image exists
-                    var oldImage = $("#old_image").val();
+            var old_image = $('#old_image').val();
+            // Validate the form with id "add_acommodition"
+            $("#add_acommodition").validate({
+                rules: {
+                    hotel_name: {
+                        required: true
+                    },
+                    hotel_address: {
+                        required: true
+                    },
+                    hotel_per_night_price: {
+                        required: true,
+                        number: true
+                    },
+                    hotel_image_path: {
+                        required: function(element) {
+                            // Check if an old image exists
+                            var oldImage = $("#old_image").val();
 
-                    // Require new image if no old image exists
-                    return oldImage === '';
+                            // Require new image if no old image exists
+                            return oldImage === '';
+                        }
+                    }
+                    // Add rules for other fields as needed
+                },
+                messages: {
+                    hotel_name: {
+                        required: "Please enter the hotel name"
+                    },
+                    hotel_address: {
+                        required: "Please enter the hotel address"
+                    },
+                    hotel_per_night_price: {
+                        required: "Please enter the price",
+                        number: "Please enter a valid number"
+                    },
+                    hotel_image_path: {
+                        required: "Please select a hotel picture"
+                    }
+                    // Add custom messages for other fields as needed
+                },
+                submitHandler: function(form) {
+                    // If the form is valid, you can submit it here
+                    form.submit();
                 }
-        }
-        // Add rules for other fields as needed
-      },
-      messages: {
-        hotel_name: {
-          required: "Please enter the hotel name"
-        },
-        hotel_address: {
-          required: "Please enter the hotel address"
-        },
-        hotel_per_night_price: {
-          required: "Please enter the price",
-          number: "Please enter a valid number"
-        },
-        hotel_image_path: {
-          required: "Please select a hotel picture"
-        }
-        // Add custom messages for other fields as needed
-      },
-      submitHandler: function(form) {
-        // If the form is valid, you can submit it here
-        form.submit();
-      }
-    });
-  });
+            });
+        });
     </script>
 
 
@@ -333,20 +342,20 @@
         $(document).ready(function() {
             // Fetch the value of hotel_stars
             var selectedStars = "{{ !empty($hotel_details['hotel_stars']) ? $hotel_details['hotel_stars'] : 0 }}";
-            
+
             // Add 'selected' class to stars up to the selected count
             $('.star-rating i').slice(0, selectedStars).addClass('selected');
-    
+
             $('.star-rating i').click(function() {
                 var newSelectedStars = $(this).data('value');
                 $('#hotel_stars').val(newSelectedStars);
-    
+
                 // Remove 'selected' class from all stars
                 $('.star-rating i').removeClass('selected');
-    
+
                 // Add 'selected' class to stars up to the selected count
                 $(this).prevAll().addBack().addClass('selected');
-    
+
                 // Send an AJAX request to your Laravel endpoint with the selected stars count
                 $.ajax({
                     type: 'POST',
@@ -365,5 +374,4 @@
             });
         });
     </script>
-    
 @endsection

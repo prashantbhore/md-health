@@ -115,7 +115,7 @@ class ApiService {
 
                 $response = app()->handle( $request );
 
-                // dd( $response );
+                // dd( json_decode( $response->getContent(), true ) );
 
                 return json_decode( $response->getContent(), true );
             }

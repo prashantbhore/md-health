@@ -105,8 +105,8 @@
                         </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mt-3">
-                            <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
-                                style="height: 47px;">Sign
+                            <button class="btn btn-md btn-text w-75 mb-3" id="verifyBtn" type="button"
+                                onclick="verify()" style="height: 47px;">Sign
                                 In</button>
                         </div>
                     </form>
@@ -254,7 +254,13 @@
                         email: email,
                         password: password
                     },
+                    beforeSend: function() {
+                        $('#signup').attr('disabled', true);
+                        $('#signup').html(
+                            '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+                    },
                     success: function(response) {
+                        $('#signup').attr('enable', true);
                         if (response.user_exist !== undefined) {
                             // alert(JSON.stringify(response.user_exist));
                             sendOTP();
@@ -296,6 +302,10 @@
         }
 
         function verify(e) {
+            // verifyBtn
+            $('#verifyBtn').attr('disabled', true);
+            $('#verifyBtn').html(
+                '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
             var code1 = $("#ot1").val();
             var code2 = $("#ot2").val();
             var code3 = $("#ot3").val();
@@ -327,6 +337,7 @@
                             password: password // Use the correct email variable here
                         },
                         success: function(response) {
+                            $('#verifyBtn').attr('enable', true);
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);

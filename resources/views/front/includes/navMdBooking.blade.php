@@ -213,7 +213,7 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        Profile
+                                        Dashboard
                                     </a>
                                 </li>
                                 <li>

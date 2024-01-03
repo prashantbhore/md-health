@@ -1,5 +1,19 @@
+@section('css')
+@endsection
 @extends('front.layout.layout2')
 @section('content')
+    <style>
+        .no-data {
+            border: solid #b8b8b8 1px;
+            height: 150px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 150px;
+            font-size: 25px;
+            color: #a0a0a0;
+        }
+    </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
             <div class="row">
@@ -134,7 +148,7 @@
                                                                     <i class="fa fa-close"></i>
                                                                     Activate
                                                                 </a>
-                                                                
+
                                                         </div>
                                                     </div>
                                                 </div>
