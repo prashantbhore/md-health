@@ -168,7 +168,7 @@ class SalesController extends Controller
        if(!empty($responseData)){
        $id=Crypt::encrypt($treatment_purchage_id);
 
-       return redirect('treatment-order-details/'.$id)->with('success', 'Treatment Status Changes Successfully!');
+        return redirect('treatment-order-details/'.$id)->with('success', 'Case Details and Status Changed Successfully!');
        }
     
        // return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details'));

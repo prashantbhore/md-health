@@ -408,7 +408,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::post('/check-old-password', 'check_old_password');
     });
 
-    Route::controller(OtherServicesController::class)->group(function () {
+    Route::controller(OtherServicesController::class)->group(function (){
         Route::get('medical-other-services', 'index');
         Route::get('/add-acommodition', 'add_acommodition');
         Route::get('/add-tour', 'add_tour');
@@ -489,6 +489,7 @@ Route::view('reports', 'front/mdhealth/medical-provider/reports');
 Route::controller(SalesController::class)->group(function(){
     Route::get('medical-provider-sales','index');
    // Route::post('treatment-order-details/{id}','sales_view');
+
     Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
 
     //Route::post('store-date-status','status_date_change')->name('status.date.store');

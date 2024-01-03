@@ -206,7 +206,7 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">{{!empty($completedSale['package_total_price'])?$completedSale['package_total_price']:''}} ₺</span></h6>
                                                 
-                                                <a href="{{ url('treatment-order-details/' . (!empty($activeSale['id']) ?Crypt::encrypt($activeSale['id']): '')) }}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ?Crypt::encrypt($completedSale['id']): '')) }}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -278,7 +278,7 @@
                                             <div class="trmt-card-footer">
                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">{{!empty($completedSale['package_total_price'])?$completedSale['package_total_price']:''}} ₺</span></h6>
                                                 
-                                                <a href="{{ url('treatment-order-details/' . (!empty($activeSale['id']) ?Crypt::encrypt($activeSale['id']): '')) }}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
+                                                <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ?Crypt::encrypt($completedSale['id']): '')) }}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
                                             </div>
                                         </div>
                                     </div>
