@@ -13,6 +13,7 @@ use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\customer\CustomerShopController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\AddSystemUserRole;
+use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\MedicalProvider\TransportationController;
 use App\Http\Controllers\api\MedicalProvider\ToursController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
@@ -21,6 +22,7 @@ use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
+use App\Models\MedicalProviderLogo;
 
 /*
 |--------------------------------------------------------------------------
@@ -269,6 +271,7 @@ Route::post('md-add-package-to-favourite', [CustomerPackageController::class, 'a
 
 
 
+
 //customer-package-view-search
 Route::post('md-packages-view-search', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
@@ -325,6 +328,10 @@ Route::post('md-provider-assign-treatment-case-manager', [SalesController::class
 
 //Provider sales treatment search
 Route::post('md-provider-treatment-search', [SalesController::class,'treatment_search']);
+
+//Medical Provider
+
+Route::get('md-provider-daily-monthly-summary', [SalesController::class,'salesSummary']);
 
 
 //Provider account details saved
@@ -408,9 +415,17 @@ Route::controller(VendorSalesController::class)->group(function(){
     Route::get('cancelled-sales-lists','cancelledSales');
     Route::post('order-view','salesView');
     Route::post('search-sales','searchSales');
-
-
 });
+
+
+
+//Medical Provider Dashboard APs
+Route::controller(MedicalProviderDashboradController::class)->group(function(){
+    Route::get('vendor-monthly-order-count','monthlyOrders');
+    Route::get('vendor-monthly-sales-count','monthlySales');
+    Route::get('vendor-package-latest-orders','latestOrders');
+});
+
 
 
 });

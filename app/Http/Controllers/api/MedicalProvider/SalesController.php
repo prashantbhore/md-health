@@ -24,20 +24,25 @@ use App\Models\CustomerPaymentDetails;
 class SalesController extends BaseController{
 
 
+
+
+
+
     public function active_treatment_list()
     {
-        $active_treatment_list = CustomerPurchaseDetails::whereIn('purchase_type', ['pending','in_progress'])
+    
+        $active_treatment_list = CustomerPurchaseDetails::whereIn('purchase_type', ['pending','in_progress'])->where('provider_id',Auth::user()->id)
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
 
-        if (!empty($active_treatment_list)) {
+        if (!empty($active_treatment_list)){
             return response()->json([
                 'status' => 200,
                 'message' => 'active treatment list found.',
                 'packages_active_list' => $active_treatment_list,
             ]);
-        } else {
+        } else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. active treatment list not found.',
@@ -49,7 +54,7 @@ class SalesController extends BaseController{
     public function completed_treatment_list()
     {
 
-        $completed_treatment_list = CustomerPurchaseDetails::where('purchase_type','completed')
+        $completed_treatment_list = CustomerPurchaseDetails::where('purchase_type','completed')->where('provider_id',Auth::user()->id)
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
@@ -74,12 +79,12 @@ class SalesController extends BaseController{
     public function cancelled_treatment_list()
     {
 
-        $cancelled_treatment_list = CustomerPurchaseDetails::where('purchase_type', 'cancelled')
+        $cancelled_treatment_list = CustomerPurchaseDetails::where('purchase_type', 'cancelled')->where('provider_id',Auth::user()->id)
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
 
-        if (!empty($cancelled_treatment_list)) {
+        if (!empty($cancelled_treatment_list)){
             return response()->json([
                 'status' => 200,
                 'message' => 'cancelled treatment list found.',
@@ -160,9 +165,9 @@ class SalesController extends BaseController{
 
     public function case_manager_list()
     {
-       // $provider_id = Auth::user()->id;
+       $provider_id = Auth::user()->id;
 
-        $provider_id = 1;
+        // $provider_id = 1;
 
         $caseManagers = MedicalProviderSystemUser::where('status', 'active')->where('medical_provider_id', $provider_id)->select('id', 'name')->get();
 
@@ -312,20 +317,22 @@ class SalesController extends BaseController{
 
         $searchQuery = $request->search_query;
 
-        $result = CustomerPurchaseDetails::where(function ($query) use ($searchQuery){
-            $query->whereHas('customer', function ($subquery) use ($searchQuery){
-                $subquery->where('first_name', 'LIKE', '%' . $searchQuery . '%');
-            })
-            ->orWhereHas('package', function ($subquery) use ($searchQuery) {
-                $subquery->where('name', 'LIKE', '%' . $searchQuery . '%');
-            })
-            ->orWhereHas('package.provider', function ($subquery) use ($searchQuery){
-                $subquery->where('company_name', 'LIKE', '%' . $searchQuery . '%');
-            })
-            ->orWhere('purchase_type', 'LIKE', '%' . $searchQuery . '%');
+        $result = CustomerPurchaseDetails::where(function ($query) use ($searchQuery) {
+            $query->whereHas('customer', function ($subquery) use ($searchQuery) {
+                    $subquery->where('first_name', 'LIKE', '%' . $searchQuery . '%');
+                })
+                ->orWhereHas('package', function ($subquery) use ($searchQuery) {
+                    $subquery->where('name', 'LIKE', '%' . $searchQuery . '%');
+                })
+                ->orWhereHas('package.provider', function ($subquery) use ($searchQuery) {
+                    $subquery->where('company_name', 'LIKE', '%' . $searchQuery . '%');
+                })
+                ->orWhere('purchase_type', 'LIKE', '%' . $searchQuery . '%');
         })
+        ->where('provider_id', Auth::user()->id)
         ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
         ->get();
+        
 
         if ($result->isNotEmpty()) {
             return response()->json([
@@ -344,13 +351,31 @@ class SalesController extends BaseController{
 
 
 
+    public function salesSummary(Request $request){
 
+        $providerId = Auth::user()->id;
+        $currentDate = now()->toDateString();
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+    
+        // Daily Sales
+        $dailySales = CustomerPurchaseDetails::where('provider_id', $providerId)
+            ->whereDate('created_at', $currentDate)
+            ->sum('paid_amount');
+    
+        // Monthly Sales
+        $monthlySales = CustomerPurchaseDetails::where('provider_id', $providerId)
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
+            ->sum('paid_amount');
 
-
-
-
-
-
-
+    
+        return response()->json([
+            'status' => 200,
+            'message' => 'Sales summary retrieved successfully',
+            'daily_sales' => $dailySales,
+            'monthly_sales' => $monthlySales,
+        ]);
+}
 
 }
