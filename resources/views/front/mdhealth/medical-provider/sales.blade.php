@@ -15,11 +15,11 @@
                     <div class="card-body">
                         <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
                             <p class="mb-0 fw-700 fsb-1">Sales (Daily)</p>
-                            <h3 class="mb-0 fw-900 fsb-1">79.938,92 ₺</h3>
+                            <h3 class="mb-0 fw-900 fsb-1">{{$daily_sales_amount}} ₺</h3>
                         </div>
                         <div class="black-plate bg-black text-green d-flex align-items-center justify-content-between mb-3">
                             <p class="mb-0 fw-400 fsb-1">Sales (Monthly)</p>
-                            <h3 class="mb-0 fw-600 fsb-1">349,938,07 ₺</h3>
+                            <h3 class="mb-0 fw-600 fsb-1">{{ $monthly_sales_amount}} ₺</h3>
                         </div>
                     </div>
                 </div>
@@ -46,9 +46,11 @@
                         </ul>
 
                         <div class="filter-div">
+                            
                             <div class="search-div">
-                                <input type="text" placeholder="Search">
+                                <input type="text" placeholder="Search" id="liveSearchInput">
                             </div>
+                            
                             <div class="list-div">
                                 <select name="" id="">
                                     <option value="">List for Date</option>
@@ -61,11 +63,13 @@
                         <!-- Tab panes -->
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="saleactive" role="tabpanel" aria-labelledby="saleactive-tab">
+
+                                <div id="searchResultsContainer">
+                                  
+                                </div>
                                
                                 @if(!empty($active_sales))
                                 @foreach ($active_sales as $activeSale)
-                                 
-                                  {{-- {{dd($activeSale)}} --}}
 
                                 <div class="treatment-card df-start w-100 mb-3">
 
@@ -100,90 +104,6 @@
             
 
 
-
-                                {{-- <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center">
-                                        <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                        </div>
-                                        <div class="col-md-6 justify-content-start ps-0">
-                                            <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="pending">Pending</span></h5>
-                                                <h5 class="mb-0 fw-500">Heart Valve Replacement Surgery</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                            <div class="trmt-card-footer">
-                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
-                                                
-                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-
-                                {{-- <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center">
-                                        <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                        </div>
-                                        <div class="col-md-6 justify-content-start ps-0">
-                                            <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="pending">Pending</span></h5>
-                                                <h5 class="mb-0 fw-500">Heart Valve Replacement Surgery</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                            <div class="trmt-card-footer">
-                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
-                                                
-                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-
-                                {{-- <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center">
-                                        <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                        </div>
-                                        <div class="col-md-6 justify-content-start ps-0">
-                                            <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="pending">Pending</span></h5>
-                                                <h5 class="mb-0 fw-500">Heart Valve Replacement Surgery</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                            <div class="trmt-card-footer">
-                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
-                                                
-                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-
-                                {{-- <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center">
-                                        <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                        </div>
-                                        <div class="col-md-6 justify-content-start ps-0">
-                                            <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="pending">Pending</span></h5>
-                                                <h5 class="mb-0 fw-500">Heart Valve Replacement Surgery</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                            <div class="trmt-card-footer">
-                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺ ₺</span></h6>
-                                                
-                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
 
                             </div>
 
@@ -220,31 +140,7 @@
 
 
 
-                            {{-- <div class="tab-pane fade" id="sale-completed" role="tabpanel" aria-labelledby="sale-completed-tab">
-
-                                <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center">
-                                        <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                        </div>
-                                        <div class="col-md-6 justify-content-start ps-0">
-                                            <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="active">Completed</span></h5>
-                                                <h5 class="mb-0 fw-500">Raju Singh</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                            <div class="trmt-card-footer">
-                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
-                                                
-                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div> --}}
+                        
 
 
 
@@ -291,28 +187,6 @@
 
 
 
-                                {{-- <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center">
-                                        <div class="col-md-2 df-center px-0">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                        </div>
-                                        <div class="col-md-6 justify-content-start ps-0">
-                                            <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title">Treatment No: #MD3726378<span class="cancel">Cancel</span></h5>
-                                                <h5 class="mb-0 fw-500">Raju Singh</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                            <div class="trmt-card-footer">
-                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span class="">34.473,98 ₺</span></h6>
-                                                
-                                                <a href="{{url('treatment-order-details')}}" class="mt-auto view-detail-btn"><strong>View Details</strong></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                               
-                                </div> --}}
-
 
 
                             </div>
@@ -328,5 +202,36 @@
 <script>
     $(".mpSalesLi").addClass("activeClass");
     $(".mpSales").addClass("md-active");
+</script>
+
+<script>
+$(document).ready(function () {
+    $('#liveSearchInput').on('input', function () {
+        let query = $(this).val();
+        var base_url = $("#base_url").val();
+
+        $.ajax({
+            url: base_url + "/sales-search",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: { query: query },
+            success: function (html) {
+                // Update only if the search box is not empty
+                if (query.trim() !== "") {
+                    $('#searchResultsContainer').html(html);
+                } else {
+                    // Clear the results when the search box is empty
+                    $('#searchResultsContainer').html("");
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+});
+
 </script>
 @endsection
