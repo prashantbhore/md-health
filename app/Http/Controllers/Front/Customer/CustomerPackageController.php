@@ -212,11 +212,12 @@ class CustomerPackageController extends Controller {
         // $data[ 'other_services' ] = $other_service;
         // dd( Auth::user()->id );
         if ( Auth::user()->id != null ) {
-            $response = $this->apiService->getData( $token,  url( '/api/md-customer-my-details' ), [ 'patient_id'=>'4', 'package_id'=>$id ], 'POST' );
-            dd( $token );
+            $response = $this->apiService->getData( $token,  url( '/api/md-customer-my-details' ), [ 'patient_id'=>'1', 'package_id'=>'4' ], 'POST' );
+            // dd( $token );
             if ( $response[ 'status' ] == '200' ) {
 
                 $my_details = $response[ 'PatientInformation' ];
+                // dd( $response );
             } else {
                 $my_details = '';
             }

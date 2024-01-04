@@ -16,8 +16,10 @@
     </style>
     <div class="content-wrapper" id="regdiv">
         <div class="container text-center my-5 authentication">
+        <div class="position-relative">
             <h3 class="mb-3 form-heading">Select Account Type</h3>
-
+            <h1 class="mb-3 form-heading p-abs">Go Super Admin Panel</h1>
+        </div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -49,7 +51,7 @@
                                 </a>
                                 <h1 class="reg-title mb-0">Create Provider Account</h1>
                             </div>
-                            <div class="form text-start px-5">
+                            <div class="form text-start">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -127,7 +129,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="mb-3 hide-eye-div">
+                                        <div class="mb-5 hide-eye-div">
                                             <label for="*Upload Company License" class="form-label">*Upload Company
                                                 License</label>
                                             <input type="file" class="form-control"
@@ -136,22 +138,36 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-check">
+                                        <div class="form-check tc">
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="UserflexCheckDefault">
                                             <label class="form-check-label" for="UserflexCheckDefault">
                                                 I accept <a href="#">Terms and Condition</a> & I agree to the <a
-                                                    href="#">User Data Consent</a>.
+                                                    href="#">User Data Consent.</a>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-md w-100" style="height: 47px;">Create Account</button>
+                                  
+                                    <div class="col-md-12 text-center d-flex flex-column gap-3">
+                                        <button type="button" class="btn btn-md w-100" id="regcustuser" style="height: 47px;">Create
+                                            Account</button>
+                                        <label for="" class="mt-auto">Already have an account?</label>
+                                        <a href="{{ url('sign-in-web') }}" class="text-black fw-bold">Sign In</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-4">
+                    <div>
+                        <img src="{{asset('front/assets/img/MDHealth.svg')}}" alt="" />
+                    </div>
+                    <h5 class="text-h1">Get your reliable & affordable</h5>
+                    <h4 class="text-green-h1b">Treatment Packages</h4>
+                    <p class="text-p1-gray">We are partnered with the top health service providers and vendors that gives you the best health experience!</p>
+
+                </div>
+            </div>
                     </div>
                 </div>
             </div>

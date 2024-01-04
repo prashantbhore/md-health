@@ -56,26 +56,26 @@
                         <div class="card-body">
                             <div class="form-group mb-3">
                                 <label class="form-label">Your Personnel E-Mail Address</label>
-                                <input type="text" class="form-control" placeholder="your-personnel@mail.com">
+                                <input type="text" class="form-control" name="email" id="email" placeholder="your-personnel@mail.com">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="form-label">Enter Password</label>
-                                <input type="text" class="form-control" placeholder="Password@2023">
+                                <input type="text" class="form-control" name="password" id="password" placeholder="Password@2023">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="form-label">Your Personnel Full Name</label>
-                                <input type="text" class="form-control" placeholder="Full Name">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Full Name">
                             </div>
 
                             <div class="form-group d-flex flex-column mb-5">
                                 <label class="form-label">Role</label>
                                 <select name="roll_id" id="roll_id">
                                     <option value="">Choose Role</option>
-                                    <option value="1">Super Admin</option>
-                                    <option value="2">Case Manager</option>
-                                    <option value="3">Finance</option>
+                                    <option value="2">Super Admin</option>
+                                    <option value="3">Case Manager</option>
+                                    <option value="4">Finance</option>
                                 </select>
                             </div>
 
