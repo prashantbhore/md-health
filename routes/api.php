@@ -276,164 +276,164 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::controller(VendorProductController::class)->group(function () {
         Route::post('add-vendor-product', 'addProduct');
-        Route::get('active-product-count','active_product_count');
-        Route::get('inactive-product-count','deactive_product_count');
+        Route::get('active-product-count', 'active_product_count');
+        Route::get('inactive-product-count', 'deactive_product_count');
         Route::get('active-product-list', 'active_product_list');
         Route::get('inactive-product-list', 'inactive_product_list');
-        Route::post('vendor-active-product-search','active_vendor_search_products');
-        Route::post('vendor-inactive-product-search','inactive_vendor_search_products');
-        Route::post('vendor-product-view','vendor_product_view');
+        Route::post('vendor-active-product-search', 'active_vendor_search_products');
+        Route::post('vendor-inactive-product-search', 'inactive_vendor_search_products');
+        Route::post('vendor-product-view', 'vendor_product_view');
         // Route::post('/products/bulk-import','addProductsBulk');
     });
-   
 
 
 
 
 
-//customer-package-view-search
-Route::post('md-packages-view-search', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
-//Medical Provider Add Reports
-Route::post('md-provider-add-reports', [ReportsController::class, 'add_new_report']);
+    //customer-package-view-search
+    Route::post('md-packages-view-search', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
-//Medical Provider All Reports List
-Route::get('md-provider-all-reports-list', [ReportsController::class, 'provider_all_reports_list']);
+    //Medical Provider Add Reports
+    Route::post('md-provider-add-reports', [ReportsController::class, 'add_new_report']);
 
-//Medical Provider Patient list
-Route::get('md-customer-package-purchage-list', [ReportsController::class, 'patient_package_purchage_list']);
+    //Medical Provider All Reports List
+    Route::get('md-provider-all-reports-list', [ReportsController::class, 'provider_all_reports_list']);
 
-//Medical Provider Report Search
-Route::post('md-medical-provider-report-search', [ReportsController::class, 'provider_reports_search']);
+    //Medical Provider Patient list
+    Route::get('md-customer-package-purchage-list', [ReportsController::class, 'patient_package_purchage_list']);
 
-
-//Customer Report Search
-Route::post('md-customer-report-search', [CustomerReportController::class, 'customer_reports_search']);
+    //Medical Provider Report Search
+    Route::post('md-medical-provider-report-search', [ReportsController::class, 'provider_reports_search']);
 
 
-//Customer All Reports List
-Route::get('md-customer-all-reports-list', [CustomerReportController::class, 'customer_all_reports_list']);
+    //Customer Report Search
+    Route::post('md-customer-report-search', [CustomerReportController::class, 'customer_reports_search']);
 
 
-//active treatment list
-Route::get('md-provider-active-treatment-list', [SalesController::class, 'active_treatment_list']);
+    //Customer All Reports List
+    Route::get('md-customer-all-reports-list', [CustomerReportController::class, 'customer_all_reports_list']);
 
 
-//completed treatment list
-Route::get('md-provider-completed-treatment-list', [SalesController::class, 'completed_treatment_list']);
+    //active treatment list
+    Route::get('md-provider-active-treatment-list', [SalesController::class, 'active_treatment_list']);
 
 
-//Cancelled treatment list
-Route::get('md-provider-cancelled-treatment-list', [SalesController::class, 'cancelled_treatment_list']);
-
-//Patient Details
-Route::post('md-provider-patient-details', [SalesController::class, 'patient_details']);
+    //completed treatment list
+    Route::get('md-provider-completed-treatment-list', [SalesController::class, 'completed_treatment_list']);
 
 
-//Patient Details
-Route::post('md-provider-treatment-date-status', [SalesController::class, 'treatement_date_status']);
+    //Cancelled treatment list
+    Route::get('md-provider-cancelled-treatment-list', [SalesController::class, 'cancelled_treatment_list']);
 
-//Provider Case Manager Listing
-Route::get('md-provider-case-manager-list', [SalesController::class, 'case_manager_list']);
-
-
-//Provider sales treatment package details
-Route::post('md-provider-package-details', [SalesController::class, 'package_details']);
-
-//Provider sales treatment package details chnages and assign case manger
-Route::post('md-provider-assign-treatment-case-manager', [SalesController::class, 'store_package_details_changes']);
+    //Patient Details
+    Route::post('md-provider-patient-details', [SalesController::class, 'patient_details']);
 
 
+    //Patient Details
+    Route::post('md-provider-treatment-date-status', [SalesController::class, 'treatement_date_status']);
 
-//Provider sales treatment search
-Route::post('md-provider-treatment-search', [SalesController::class, 'treatment_search']);
-
-
-//Provider account details saved
-Route::post('md-provider-add-bank-account', [PaymentController::class, 'add_provider_account']);
-
-//Provider Transaction List
-Route::get('md-provider-transaction-list', [PaymentController::class, 'transaction_list_view']);
-
-//Provider Transaction Search
-Route::post('md-provider-transaction-search', [PaymentController::class, 'search_transactions']);
+    //Provider Case Manager Listing
+    Route::get('md-provider-case-manager-list', [SalesController::class, 'case_manager_list']);
 
 
-//Provider Transaction total Panding
-Route::get('md-provider-transaction-total-pending', [PaymentController::class, 'total_pending_amount']);
+    //Provider sales treatment package details
+    Route::post('md-provider-package-details', [SalesController::class, 'package_details']);
 
-
-//Provider Transaction total completed
-Route::get('md-provider-transaction-total-completed', [PaymentController::class, 'total_paid_amount']);
-
-
-//Provider Transaction total amount
-Route::get('md-provider-transaction-total-business-amount', [PaymentController::class, 'total_business_amount']);
+    //Provider sales treatment package details chnages and assign case manger
+    Route::post('md-provider-assign-treatment-case-manager', [SalesController::class, 'store_package_details_changes']);
 
 
 
-//Provider Add System User
-Route::post('md-provider-add-system-user', [AddSystemUserRole::class, 'add_system_user']);
-
-//Provider System User List
-Route::get('md-provider-system-user-list', [AddSystemUserRole::class, 'provider_system_user_list']);
-
-//Provider System User Edit
-Route::post('md-provider-system-user-edit', [AddSystemUserRole::class, 'edit_system_user']);
+    //Provider sales treatment search
+    Route::post('md-provider-treatment-search', [SalesController::class, 'treatment_search']);
 
 
-//Provider System User delete
-Route::post('md-provider-system-user-delete', [AddSystemUserRole::class, 'delete_system_user']);
+    //Provider account details saved
+    Route::post('md-provider-add-bank-account', [PaymentController::class, 'add_provider_account']);
+
+    //Provider Transaction List
+    Route::get('md-provider-transaction-list', [PaymentController::class, 'transaction_list_view']);
+
+    //Provider Transaction Search
+    Route::post('md-provider-transaction-search', [PaymentController::class, 'search_transactions']);
 
 
-//medical Provider Daily Monthly Summary
-Route::get('md-provider-daily-monthly-summary', [SalesController::class,'salesSummary']);
+    //Provider Transaction total Panding
+    Route::get('md-provider-transaction-total-pending', [PaymentController::class, 'total_pending_amount']);
 
 
-
-//Vendor Prodcut
-Route::controller(VendorProductController::class)->group(function (){
-    Route::get('product-category', 'vendor_product_category');
-    Route::post('product-sub-category', 'vendor_product_sub_category');
-});
+    //Provider Transaction total completed
+    Route::get('md-provider-transaction-total-completed', [PaymentController::class, 'total_paid_amount']);
 
 
-
-//customer MD Shop
-
-Route::controller(CustomerShopController::class)->group(function () {
-    Route::get('featured-product', 'featured_product_list');
-    Route::post('customer-product-view', 'product_view');
-    Route::post('vendor-product-lists', 'vendor_product_list');
-    Route::post('/shopping-cart/add', 'addToCart');
-    Route::get('/shopping-cart/view', 'viewCart');
-    Route::post('/shopping-cart/delete-item', 'deleteCartItem');
-    Route::get('/shopping-cart/clear', 'clearCart');
-    Route::post('filter-product-list', 'filteredProductList');
-    Route::post('store-payment-details', 'processPayment');
-    Route::post('/follow-vendor', 'followVendor');
-    Route::post('/unfollow-vendor', 'unfollowVendor');
-    Route::post('/favorites/add', 'addToFavorites');
-});
+    //Provider Transaction total amount
+    Route::get('md-provider-transaction-total-business-amount', [PaymentController::class, 'total_business_amount']);
 
 
 
-//Vendor Sales Controller
-Route::controller(VendorSalesController::class)->group(function () {
-    Route::get('active-sales-lists', 'activeSales');
-    Route::get('completed-sales-lists', 'completedSales');
-    Route::get('cancelled-sales-lists', 'cancelledSales');
-    Route::post('order-view', 'salesView');
-    Route::post('search-sales', 'searchSales');
-});
+    //Provider Add System User
+    Route::post('md-provider-add-system-user', [AddSystemUserRole::class, 'add_system_user']);
+
+    //Provider System User List
+    Route::get('md-provider-system-user-list', [AddSystemUserRole::class, 'provider_system_user_list']);
+
+    //Provider System User Edit
+    Route::post('md-provider-system-user-edit', [AddSystemUserRole::class, 'edit_system_user']);
 
 
-//Medical Provider Dashboard 
-Route::controller(MedicalProviderDashboradController::class)->group(function(){
-    Route::get('medical-provider-monthly-order-count','monthlyOrders');
-    Route::get('medical-provider-monthly-sales-count','monthlySales');
-    Route::get('medical-provider-package-latest-orders','latestOrders');
-});
+    //Provider System User delete
+    Route::post('md-provider-system-user-delete', [AddSystemUserRole::class, 'delete_system_user']);
+
+
+    //medical Provider Daily Monthly Summary
+    Route::get('md-provider-daily-monthly-summary', [SalesController::class, 'salesSummary']);
+
+
+
+    //Vendor Prodcut
+    Route::controller(VendorProductController::class)->group(function () {
+        Route::get('product-category', 'vendor_product_category');
+        Route::post('product-sub-category', 'vendor_product_sub_category');
+    });
+
+
+
+    //customer MD Shop
+
+    Route::controller(CustomerShopController::class)->group(function () {
+        Route::get('featured-product', 'featured_product_list');
+        Route::post('customer-product-view', 'product_view');
+        Route::post('vendor-product-lists', 'vendor_product_list');
+        Route::post('/shopping-cart/add', 'addToCart');
+        Route::get('/shopping-cart/view', 'viewCart');
+        Route::post('/shopping-cart/delete-item', 'deleteCartItem');
+        Route::get('/shopping-cart/clear', 'clearCart');
+        Route::post('filter-product-list', 'filteredProductList');
+        Route::post('store-payment-details', 'processPayment');
+        Route::post('/follow-vendor', 'followVendor');
+        Route::post('/unfollow-vendor', 'unfollowVendor');
+        Route::post('/favorites/add', 'addToFavorites');
+    });
+
+
+
+    //Vendor Sales Controller
+    Route::controller(VendorSalesController::class)->group(function () {
+        Route::get('active-sales-lists', 'activeSales');
+        Route::get('completed-sales-lists', 'completedSales');
+        Route::get('cancelled-sales-lists', 'cancelledSales');
+        Route::post('order-view', 'salesView');
+        Route::post('search-sales', 'searchSales');
+    });
+
+
+    //Medical Provider Dashboard 
+    Route::controller(MedicalProviderDashboradController::class)->group(function () {
+        Route::get('medical-provider-monthly-order-count', 'monthlyOrders');
+        Route::get('medical-provider-monthly-sales-count', 'monthlySales');
+        Route::get('medical-provider-package-latest-orders', 'latestOrders');
+    });
 
 
 });
