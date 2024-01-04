@@ -17,7 +17,8 @@ class MedicalProviderDashboradController extends Controller {
         $this->apiService = $apiService;
     }
 
-    public function index() {
+    public function index(){
+        
 
         $token = Session::get( 'login_token' );
 
@@ -46,12 +47,17 @@ class MedicalProviderDashboradController extends Controller {
         $body = null;
 
         $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        
+     
+
         $recent_orders =  '';
         if ( $responseData[ 'status' ] == '200' ) {
             $recent_orders =  $responseData[ 'latest_orders' ];
         }
+  
+      
 
-        $provider_logo = MedicalProviderLogo::where( 'status', 'active' )->where( 'medical_provider_id', Auth::user()->id )->first();
+       // $provider_logo = MedicalProviderLogo::where( 'status', 'active' )->where( 'medical_provider_id', Auth::user()->id )->first();
 
         // dd( $provider_logo->company_logo_image_path );
 

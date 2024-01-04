@@ -21,6 +21,7 @@ use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
+use App\Http\Controllers\api\vendor\MedicalProviderDashboradController;
 
 /*
 |--------------------------------------------------------------------------
@@ -421,10 +422,15 @@ Route::controller(VendorSalesController::class)->group(function () {
     Route::get('cancelled-sales-lists', 'cancelledSales');
     Route::post('order-view', 'salesView');
     Route::post('search-sales', 'searchSales');
-
-
 });
 
+
+//Medical Provider Dashboard 
+Route::controller(MedicalProviderDashboradController::class)->group(function(){
+    Route::get('vendor-monthly-order-count','monthlyOrders');
+    Route::get('vendor-monthly-sales-count','monthlySales');
+    Route::get('vendor-package-latest-orders','latestOrders');
+});
 
 
 // });
