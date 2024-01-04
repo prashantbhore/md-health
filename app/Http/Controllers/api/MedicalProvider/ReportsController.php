@@ -14,7 +14,7 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
 use Storage;
 
-class ReportsController extends Controller
+class ReportsController extends BaseController
 {
 
     use MediaTrait;
@@ -41,7 +41,8 @@ class ReportsController extends Controller
         $report_input['customer_package_purchage_id'] = $idArray[0];
         $report_input['custome_id'] = $idArray[1];
         $report_input['package_id'] = $idArray[0];
-        $report_input['report_path'] = $request->report_path;
+        
+        //$report_input['report_path'] = $request->report_path;
 
 
         if ($request->has('report_path')) {
@@ -69,9 +70,11 @@ class ReportsController extends Controller
         }
     }
 
+
+
     public function patient_package_purchage_list()
     {
-        $patientList = CustomerPurchaseDetails::with(['customer', 'package'])->where('status', 'active')->get();
+        $patientList = CustomerPurchaseDetails::where('provider_id',Auth::user()->id)->with(['customer', 'package'])->where('status', 'active')->get();
 
         if (!empty($patientList)) {
             $formattedList = [];
