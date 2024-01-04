@@ -51,9 +51,11 @@ class MedicalProviderDashboradController extends Controller {
      
 
         $recent_orders =  '';
+        if(!empty($responseData)){
         if ( $responseData[ 'status' ] == '200' ) {
             $recent_orders =  $responseData[ 'latest_orders' ];
         }
+    }
   
       
 
