@@ -210,10 +210,12 @@ class CustomerPackageController extends Controller {
         }
         // $data = $data[ 'customer_purchase_package_list' ];
         // $data[ 'other_services' ] = $other_service;
+        // dd( Auth::user()->id );
         if ( Auth::user()->id != null ) {
-            $response = $this->apiService->getData( $token,  url( '/api/md-customer-my-details' ), [ 'patient_id'=>Auth::user()->id, 'package_id'=>$id ], 'POST' );
+            $response = $this->apiService->getData( $token,  url( '/api/md-customer-my-details' ), [ 'patient_id'=>'4', 'package_id'=>$id ], 'POST' );
+            dd( $token );
             if ( $response[ 'status' ] == '200' ) {
-                // dd( $response );
+
                 $my_details = $response[ 'PatientInformation' ];
             } else {
                 $my_details = '';
