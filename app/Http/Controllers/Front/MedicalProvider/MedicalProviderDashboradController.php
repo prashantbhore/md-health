@@ -18,11 +18,11 @@ class MedicalProviderDashboradController extends Controller {
     }
 
     public function index(){
-        
+
 
         $token = Session::get( 'login_token' );
 
-        $apiUrl = url( 'api/vendor-monthly-order-count' );
+        $apiUrl = url( 'api/medical-provider-monthly-order-count' );
         $method = 'GET';
         $body=null;
 
@@ -32,7 +32,7 @@ class MedicalProviderDashboradController extends Controller {
 
 
 
-        $apiUrl = url('api/vendor-monthly-sales-count');
+        $apiUrl = url('api/medical-provider-monthly-sales-count');
         $method = 'GET';
         $body=null;
 
@@ -42,7 +42,7 @@ class MedicalProviderDashboradController extends Controller {
 
 
 
-        $apiUrl = url('api/vendor-package-latest-orders');
+        $apiUrl = url('api/medical-provider-package-latest-orders');
         $method = 'GET';
         $body = null;
 
@@ -57,7 +57,7 @@ class MedicalProviderDashboradController extends Controller {
   
       
 
-       // $provider_logo = MedicalProviderLogo::where( 'status', 'active' )->where( 'medical_provider_id', Auth::user()->id )->first();
+       $provider_logo = MedicalProviderLogo::where( 'status', 'active' )->where( 'medical_provider_id', Auth::user()->id )->first();
 
         // dd( $provider_logo->company_logo_image_path );
 
