@@ -389,6 +389,10 @@ select {
     padding: 100px 0;
 }
 
+.pt-300px {
+    padding-top: 300px;
+}
+
 .form-check-input:focus {
     box-shadow: none;
 }
@@ -483,8 +487,8 @@ select {
 
 .btn-md {
     font-size: 14px;
-    font-weight: 600;
-    font-family: CamptonBook;
+    font-weight: 700;
+    font-family: Campton;
     line-height: 16px;
     letter-spacing: -0.04em;
     width: 149px;
@@ -825,6 +829,7 @@ select {
 .authentication .nav-tabs .nav-link.active {
     border-bottom: 2px solid #4CDB06;
     font-weight: 700;
+    font-family: "Campton";
 
 }
 
@@ -2621,4 +2626,62 @@ span.popup-msg.active {
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
+}
+
+.text-h1 {
+    color: #000;
+    font-family: Campton;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 53px;
+    /* 123.256% */
+    letter-spacing: -1.72px;
+}
+
+.text-green-h1b {
+    color: #4CDB06;
+    font-family: Campton;
+    font-size: 33px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.32px;
+}
+
+.text-p1-gray {
+    color: #979797;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    text-align: left;
+}
+
+.login-form #recaptcha-container {
+    padding: 1rem 2rem;
+}
+
+.tc label a {
+    color: #4CDB06;
+}
+
+.text-black {
+    color: #000;
+}
+
+.text-black:hover {
+    color: #000;
+}
+
+.p-abs {
+    position: absolute;
+    right: -75px;
+    top: 0;
+}
+
+.tab-content .form.text-start {
+    padding: 0 57px;
 }
