@@ -71,11 +71,11 @@
 
                             <div class="form-group d-flex flex-column mb-5">
                                 <label class="form-label">Role</label>
-                                <select name="" id="">
+                                <select name="roll_id" id="roll_id">
                                     <option value="">Choose Role</option>
-                                    <option value="">Super Admin</option>
-                                    <option value="">Case Manager</option>
-                                    <option value="">Finance</option>
+                                    <option value="1">Super Admin</option>
+                                    <option value="2">Case Manager</option>
+                                    <option value="3">Finance</option>
                                 </select>
                             </div>
 
