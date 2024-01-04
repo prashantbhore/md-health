@@ -13,6 +13,9 @@
             color: #000 !important;
             line-height: 2 !important;
         }
+        .footer {
+        display: none;
+    }
     </style>
     <div class="content-wrapper" id="regdiv">
         <div class="container text-center my-5 authentication">
@@ -51,7 +54,7 @@
                                 <h1 class="reg-title mb-0">Create Vendor Account</h1>
                                 
                             </div>
-                            <div class="form text-start px-4">
+                            <div class="form text-start">
                                 <form id="myFormProvider">
                                     
                                     <div class="row">
