@@ -386,6 +386,10 @@ Route::post('md-provider-system-user-edit', [AddSystemUserRole::class, 'edit_sys
 Route::post('md-provider-system-user-delete', [AddSystemUserRole::class, 'delete_system_user']);
 
 
+//medical Provider Daily Monthly Summary
+Route::get('md-provider-daily-monthly-summary', [SalesController::class,'salesSummary']);
+
+
 
 //Vendor Prodcut
 Route::controller(VendorProductController::class)->group(function (){
