@@ -15,11 +15,11 @@
                     <div class="card-body">
                         <div class="green-plate bg-green d-flex align-items-center justify-content-between mb-3">
                             <p class="mb-0">Orders (Monthly)</p>
-                            <h3 class="mb-0">{{$monthly_orders['monthly_orders']}}</h3>
+                            <h3 class="mb-0">{{!empty($monthly_orders['monthly_orders'])?$monthly_orders['monthly_orders']:0}}</h3>
                         </div>
                         <div class="black-plate bg-black text-green d-flex align-items-center justify-content-between mb-3">
                             <p class="mb-0">Sales (Monthly)</p>
-                            <h3 class="mb-0">{{$monthly_sales_count['monthly_sales']}} ₺</h3>
+                            <h3 class="mb-0">{{!empty($monthly_sales_count['monthly_sales'])?$monthly_sales_count['monthly_sales']:0}} ₺</h3>
                         </div>
                     </div>
                 </div>
