@@ -1813,6 +1813,14 @@ class CustomerPackageController extends BaseController
         $cancellation_reason['cancellation_reason'] = $request->cancellation_reason;
         $cancellation_reason['created_by'] = Auth::user()->id;
         $CustomerCancelledReason = CustomerCancelledReason::create($cancellation_reason);
+
+        if(!empty($CustomerCancelledReason)){
+            $status_update['purchase_type'] = 'cancelled';
+            $status_update['modified_by'] = Auth::user()->id;
+            $status_update['modified_ip_address'] = $request->ip();
+            $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($status_update);
+        }
+
         if (!empty($CustomerCancelledReason)) {
             return response()->json([
                 'status' => 200,
