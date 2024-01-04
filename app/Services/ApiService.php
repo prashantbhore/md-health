@@ -11,7 +11,7 @@ class ApiService {
 
     public function getData( $token = null, $url, $body = null, $method, $image = null, $image_input_field_name = null ) {
         $env = explode( ':', url( '/' ) )[ 0 ];
-        // dd($env);
+        // dd( $env );
 
         // if ( $method == 'POST' ) {
         //     $response = Http::withHeaders( [
@@ -114,8 +114,8 @@ class ApiService {
                 }
 
                 $response = app()->handle( $request );
-                // dd( $response);
-                // dd( json_decode( $response->getContent(), true ) );
+                // dd( $response );
+                // dd( jso n_decode( $response->getContent(), true ) );
 
                 return json_decode( $response->getContent(), true );
             }

@@ -2143,6 +2143,7 @@ class CustomerPackageController extends BaseController
             ->join('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->where('md_packages.id', $request->package_id)
             ->first();
+            // return $treatment_information;
             // dd($treatment_information);
         if (!empty($PatientInformation) || !empty($treatment_information)) {
             return response()->json([

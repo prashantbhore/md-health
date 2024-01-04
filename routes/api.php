@@ -21,6 +21,7 @@ use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
+use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 
 /*
 |--------------------------------------------------------------------------
@@ -286,7 +287,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
    
 
-});
+
 
 
 
@@ -387,10 +388,9 @@ Route::post('md-provider-system-user-delete', [AddSystemUserRole::class, 'delete
 
 
 //Vendor Prodcut
-Route::controller(VendorProductController::class)->group(function () {
+Route::controller(VendorProductController::class)->group(function (){
     Route::get('product-category', 'vendor_product_category');
     Route::post('product-sub-category', 'vendor_product_sub_category');
-   
 });
 
 
@@ -421,11 +421,16 @@ Route::controller(VendorSalesController::class)->group(function () {
     Route::get('cancelled-sales-lists', 'cancelledSales');
     Route::post('order-view', 'salesView');
     Route::post('search-sales', 'searchSales');
-
-
 });
 
 
+//Medical Provider Dashboard 
+Route::controller(MedicalProviderDashboradController::class)->group(function(){
+    Route::get('medical-provider-monthly-order-count','monthlyOrders');
+    Route::get('medical-provider-monthly-sales-count','monthlySales');
+    Route::get('medical-provider-package-latest-orders','latestOrders');
+});
 
-// });
+
+});
 
