@@ -67,8 +67,8 @@ class PaymentController extends BaseController{
 
     public function transaction_list_view(){
 
-        //$provider_id=Auth::user()->id;
-        $provider_id = 1; // Replace this with the actual provider ID
+        $provider_id=Auth::user()->id;
+       // $provider_id = 1; // Replace this with the actual provider ID
     
         $customer_paymenty_details = CustomerPaymentDetails::where('provider_id', $provider_id)->with(['provider_logo','purchage'])->get();  
     
@@ -101,7 +101,7 @@ class PaymentController extends BaseController{
             return response()->json([
                 'status' => 200,
                 'message' => 'Transaction list found',
-                'order_details' => $order_details,
+                'payment_list' => $order_details,
             ]);
         } else {
             return response()->json([
@@ -182,8 +182,9 @@ class PaymentController extends BaseController{
 
 
     public function total_pending_amount(){
-        //$provider_id=Auth::user()->id;
-        $provider_id = 1; // Replace this with the actual provider ID
+
+        $provider_id=Auth::user()->id;
+        // $provider_id = 1; // Replace this with the actual provider ID
     
         $total_pending_amount = CustomerPurchaseDetails::where('status', 'active')
             ->where('provider_id', $provider_id)
@@ -208,8 +209,8 @@ class PaymentController extends BaseController{
 
 
 public function total_paid_amount(){
-    //$provider_id=Auth::user()->id;
-    $provider_id = 1; // Replace this with the actual provider ID
+    $provider_id=Auth::user()->id;
+    //$provider_id = 1; // Replace this with the actual provider ID
 
     $total_completed_amount = CustomerPurchaseDetails::where('status', 'active')
         ->where('provider_id', $provider_id)
@@ -221,7 +222,7 @@ public function total_paid_amount(){
             return response()->json([
                 'status' => 200,
                 'message' => 'Total completed amount retrieved successfully',
-                'total_pending_amount' => $total_completed_amount,
+                'total_completed_amount' => $total_completed_amount,
             ]);
         } else {
             return response()->json([
@@ -236,8 +237,8 @@ public function total_paid_amount(){
 
 public function total_business_amount(){
 
-    //$provider_id=Auth::user()->id;
-    $provider_id = 1; // Replace this with the actual provider ID
+    $provider_id=Auth::user()->id;
+    // $provider_id = 1; // Replace this with the actual provider ID
 
     $total_completed_amount = CustomerPurchaseDetails::where('status', 'active')
         ->where('provider_id', $provider_id)
@@ -256,7 +257,7 @@ public function total_business_amount(){
             return response()->json([
                 'status' => 200,
                 'message' => 'Total business amount retrieved successfully',
-                'total_pending_amount' => $total_business_amount,
+                'total_business_amount' => $total_business_amount,
             ]);
         } else {
             return response()->json([
