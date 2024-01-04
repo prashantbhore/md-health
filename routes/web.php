@@ -243,10 +243,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     });
 
 
-
-
-
-
     // Route::view('edit-admins', 'admin/admins/edit-admins');
 
     // MLM

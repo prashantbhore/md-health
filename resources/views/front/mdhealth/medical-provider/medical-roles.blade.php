@@ -83,43 +83,43 @@
                                 <div class="form-group d-flex flex-column">
                                     <div class="multiple-checks">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="fordashboard">
+                                            <input type="checkbox" class="form-check-input" id="fordashboard" value="Dashboard">
                                             <label class="form-check-label fw-500 fsb-1" for="fordashboard">Dashboard</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="forsales">
+                                            <input type="checkbox" class="form-check-input" id="forsales" value="Sales">
                                             <label class="form-check-label fw-500 fsb-1" for="forsales">Sales</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="forpackages">
+                                            <input type="checkbox" class="form-check-input" id="forpackages" value="Packages">
                                             <label class="form-check-label fw-500 fsb-1" for="forpackages">Packages</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="forpaymentinfo">
+                                            <input type="checkbox" class="form-check-input" id="forpaymentinfo" value="Payment Information">
                                             <label class="form-check-label fw-500 fsb-1" for="forpaymentinfo">Payment Information</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="formessages">
+                                            <input type="checkbox" class="form-check-input" id="formessages" value="Messages">
                                             <label class="form-check-label fw-500 fsb-1" for="formessages">Messages</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="forroles">
+                                            <input type="checkbox" class="form-check-input" id="forroles" value="Roles">
                                             <label class="form-check-label fw-500 fsb-1" for="forroles">Roles</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="forotherservices">
+                                            <input type="checkbox" class="form-check-input" id="forotherservices" value="Other Services">
                                             <label class="form-check-label fw-500 fsb-1" for="forotherservices">Other Services</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="foraccount">
+                                            <input type="checkbox" class="form-check-input" id="foraccount" value="Account">
                                             <label class="form-check-label fw-500 fsb-1" for="foraccount">Account</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="forreports">
+                                            <input type="checkbox" class="form-check-input" id="forreports" value="Reports">
                                             <label class="form-check-label fw-500 fsb-1" for="forreports">Reports</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="formembership">
+                                            <input type="checkbox" class="form-check-input" id="formembership" value="Membership">
                                             <label class="form-check-label fw-500 fsb-1" for="formembership">Membership</label>
                                         </div>
                                     </div>
