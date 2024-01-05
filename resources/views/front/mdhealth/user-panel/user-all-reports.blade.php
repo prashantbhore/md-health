@@ -220,15 +220,12 @@
     <script>
         function printDocument(reportPath) {
             if (reportPath) {
-                // Open the report in a new window
                 var printWindow = window.open(reportPath, '_blank');
                 if (printWindow) {
-                    // Wait for the new window to load, then initiate the print
                     printWindow.onload = function() {
                         printWindow.print();
                     };
                 } else {
-                    // Handle popup blocker or other issues
                     alert('Failed to open the print window. Please check your browser settings.');
                 }
             } else {

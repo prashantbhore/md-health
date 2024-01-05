@@ -266,7 +266,7 @@ class CustomerPackageController extends Controller
         $method = 'GET';
         $data = $this->apiService->getData($token, url('api/md-customer-all-reports-list'), null, $method);
         
-        $my_active_packages_list='';
+        $customer_reports='';
 
         if ($data['status'] == '200'){
         if(!empty($data['provider_report_list'])){
