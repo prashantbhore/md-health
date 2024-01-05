@@ -21,9 +21,19 @@ class CustomerReportController extends Controller
     public function customer_all_reports_list()
     {
         $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
-            ->where('custome_id', 1)
+            ->where('custome_id', Auth::user()->id)
             ->where('status', 'active')
             ->get();
+
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Customer report list found.',
+                'provider_report_list' =>  $provider_report_list,
+            ]);
+
+          
+
     
         $formatted_data = [];
     
