@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('hotel_image_name')->nullable();
             $table->string('hotel_per_night_price')->nullable();
             $table->string('hotel_other_services')->nullable();
+            $table->string('distance_from_hospital')->nullable();
             $table->string('service_provider_id')->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');

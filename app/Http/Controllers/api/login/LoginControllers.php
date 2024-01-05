@@ -497,7 +497,7 @@ if(!empty($request->phone)){
     }
 
 
-
+    //code by mplus01
     public function food_login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -529,8 +529,8 @@ if(!empty($request->phone)){
                 return response()->json([
                     'status' => 200,
                     'message' => 'Login successfull.',
-                    'mobile_number' => $customer->phone,
-                    'full_name' => $customer->full_name,
+                    // 'mobile_number' => $customer->phone,
+                    // 'full_name' => $customer->full_name,
                     'success_token' => $success,
                 ]);
             } 

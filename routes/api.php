@@ -103,8 +103,15 @@ Route::middleware('auth:sanctum')->group(function () {
     //delete-provider-images-videos
     Route::post('md-delete-provider-images-videos', [UpdateMedicalProfileController::class, 'delete_provider_images_videos']);
 
+    //food-provider
+    //update-food-profile-list
+    Route::get('md-update-food-profile-list', [UpdateMedicalProfileController::class, 'update_food_profile_list']);
+
+    //update-food-profile
+    Route::post('md-update-food-profile', [UpdateMedicalProfileController::class, 'update_food_profile']);
+
     //other-services
-//add-new-acommodition-hotel
+    //add-new-acommodition-hotel
     Route::post('md-add-new-acommodition', [AddNewAcommoditionController::class, 'add_new_acommodition']);
 
     //hotel-list
@@ -383,6 +390,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Provider Add System User
     Route::post('md-provider-add-system-user', [AddSystemUserRole::class, 'add_system_user']);
+
+    // Mplus04
+    //Provider update System User
+    Route::post('md-provider-update-system-user', [AddSystemUserRole::class, 'update_system_user']);
+    // Mplus04
 
     //Provider System User List
     Route::get('md-provider-system-user-list', [AddSystemUserRole::class, 'provider_system_user_list']);

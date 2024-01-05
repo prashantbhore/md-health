@@ -51,6 +51,7 @@ class AddNewAcommoditionController extends BaseController {
                 $hotel_input[ 'hotel_image_name' ] = $original_name;
             }
 
+            $hotel_input['distance_from_hospital'] = $request->distance_from_hospital;
             $hotel_input[ 'hotel_per_night_price' ] = $request->hotel_per_night_price;
             $hotel_input[ 'hotel_other_services' ] = $request->hotel_other_services;
             $hotel_input[ 'status' ] = 'active';
