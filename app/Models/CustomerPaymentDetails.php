@@ -21,6 +21,7 @@ class CustomerPaymentDetails extends Model
         'bank_name',
         'receiver_name',
         'iban',
+        'provider_id',
         'md_coin',
         'payment_percentage',
         'paid_amount',

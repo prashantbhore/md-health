@@ -20,6 +20,10 @@ use App\Models\CustomerLogs;
 use App\Models\VendorLogo;
 use App\Models\VendorLicense;
 use App\Models\VendorRegister;
+use App\Models\MDFoodRegisters;
+use App\Models\MDFoodLogos;
+use App\Models\MDFoodLicense;
+
 
 class RegistrationController extends BaseController
 {
@@ -607,6 +611,180 @@ class RegistrationController extends BaseController
         }
     }
 
+
+    public function food_registration(Request $request)
+    {
+        // return $request;
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required',
+            'city_id' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'tax_no' => 'required',
+            'company_address' => 'required',
+            'password' => 'required',
+            'company_logo_image_path' => 'required',
+            'company_licence_image_path' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $email_exist = MDFoodRegisters::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
+
+        $email_exist_common = CommonUserLoginTable::where('status', 'active')
+            ->where('email', $request->email)
+            ->first();
+
+
+
+        if (!empty($email_exist || $email_exist_common)) {
+
+            // if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+            //     return redirect('/user-account')->with('error', "Email id already exist.");
+            // }
+            return response()->json([
+                'status' => 404,
+                'message' => 'email id already exist.',
+            ]);
+        } else {
+            $phone_exist = MDFoodRegisters::where('status', 'active')
+                ->where('mobile_no', $request->phone)
+                ->first();
+            $phone_exist_common = CommonUserLoginTable::where('status', 'active')
+                ->where('mobile_no', $request->phone)
+                ->first();
+
+            if (!empty($phone_exist || $phone_exist_common)) {
+                // if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+                //     return redirect('/user-account')->with('error', "Mobile number already exist.");
+                // }
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'mobile number already exist.',
+                ]);
+            }
+        }
+
+
+
+
+        $commonData = [];
+        $commonData['email'] = $request->email;
+        $commonData['mobile_no'] = $request->phone;
+        $commonData['user_type'] = 'vendor';
+        $commonData['password'] = Hash::make($request->password);
+        $common_data_registration = CommonUserLoginTable::create($commonData);
+
+        // Retrieve the last inserted ID
+        $lastInsertedId = $common_data_registration->id;
+        // return $lastInsertedId;
+
+        $md_provider_input = [];
+        $md_provider_input['company_name'] = $request->company_name;
+        $md_provider_input['country_id'] = $request->country_id;
+        $md_provider_input['city_id'] = $request->city_id;
+        $md_provider_input['email'] = $request->email;
+        $md_provider_input['mobile_no'] = $request->phone;
+        $md_provider_input['tax_no'] = $request->tax_no;
+        $md_provider_input['company_address'] = $request->company_address;
+        $md_provider_input['password'] = Hash::make($request->password);
+
+        $md_provider_input['modified_ip_address'] = $request->ip();
+        $md_provider_registration = MDFoodRegisters::create($md_provider_input);
+
+        $MedicalProviderRegistrater = MDFoodRegisters::select('id')->get();
+        if (!empty($MedicalProviderRegistrater)) {
+            foreach ($MedicalProviderRegistrater as $key => $value) {
+                $length = strlen($value->id);
+                if ($length == 1) {
+                    $provider_unique_id = '#FOODPRVDR00000' . $value->id;
+                } elseif ($length == 2) {
+                    $provider_unique_id = '#FOODPRVDR0000' . $value->id;
+                } elseif ($length == 3) {
+                    $provider_unique_id = '#FOODPRVDR000' . $value->id;
+                } elseif ($length == 4) {
+                    $provider_unique_id = '#FOODPRVDR00' . $value->id;
+                } elseif ($length == 5) {
+                    $provider_unique_id = '#FOODPRVDR0' . $value->id;
+                } else {
+                    $provider_unique_id = '#FOODPRVDR' . $value->id;
+                }
+
+                $update_unique_id = MDFoodRegisters::where('id', $value->id)->update(['food_unique_no' => $provider_unique_id]);
+            }
+        }
+
+        if (
+            Auth::guard('md_health_food_registers')->attempt([
+                'mobile_no' => $request->phone,
+                'status' => 'active',
+                'password' => $request->password
+            ])
+        ) {
+            // return 'asdsa';
+            $customer = Auth::guard('md_health_food_registers')->user();
+            // return $customer;
+            // $success=[];
+            $success['token'] = $customer->createToken('MyApp')->plainTextToken;
+            MDFoodRegisters::where('id', $customer->id)->update([
+                'access_token' => $success['token']
+            ]);
+        } else {
+            // return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return response()->json([
+                'status' => 404,
+                'message' => 'Unauthorised.',
+            ]);
+        }
+
+        if ($request->has('company_logo_image_path')) {
+            if ($request->file('company_logo_image_path')) {
+                $md_provider_input_image_logo['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+                $md_provider_input_image_logo['company_logo_image_name'] = $original_name;
+            }
+        }
+        MDFoodLogos::create($md_provider_input_image_logo);
+
+
+        if ($request->has('company_licence_image_path')) {
+            if ($request->file('company_licence_image_path')) {
+                $md_provider_input_image_license['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
+                $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
+                $md_provider_input_image_license['company_licence_image_name'] = $original_name;
+            }
+        }
+
+        MDFoodLicense::create($md_provider_input_image_license);
+
+
+
+        if (!empty($md_provider_registration)) {
+            // if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+            //     return redirect('/medical-provider-dashboard')->with('success', "Profile created successfully.");
+            // }
+            return response()->json([
+                'status' => 200,
+                'message' => 'Profile created successfully.',
+                'data' => [
+                    'id' => $md_provider_registration->id,
+                    'access_token' => $success
+                ],
+            ]);
+        } else {
+            // if ($request->platform_type != 'ios' && $request->platform_type != 'android') {
+            //     return redirect('/user-account')->with('success', "Profile not completed.");
+            // }
+            return response()->json([
+                'status' => 404,
+                'message' => 'Profile not completed.',
+            ]);
+        }
+    }
 
 
 
