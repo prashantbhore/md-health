@@ -9,7 +9,6 @@ use App\Http\Controllers\Front\Customer\CustomerPackageController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
 use App\Http\Controllers\Front\MedicalProvider\PackageController;
-use App\Http\Controllers\Front\MedicalProvider\RolesController;
 use App\Http\Controllers\Front\Registration\MedicalProviderRegistrationController;
 use App\Http\Controllers\Front\Registration\UserRegistrationController;
 use App\Http\Controllers\Front\Mdhome\MdHomeController;
@@ -398,7 +397,7 @@ Route::controller(CommonLoginController::class)->group(function () {
 
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
 
-   
+
     Route::controller(UpdateProfileController::class)->group(function () {
         Route::get('medical-account', 'update_medical_profile_list');
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
@@ -430,8 +429,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('/edit-package/{id}', 'edit_package');
         Route::post('/md-packages-active-list-search', 'md_packages_active_list_search');
         Route::post('/md-packages-inactive-list-search', 'md_packages_inactive_list_search');
-       
-    }); 
+
+    });
     // Mplus04
     Route::controller(RolesController::class)->group(function () {
         Route::get('/medical-roles', 'index');
