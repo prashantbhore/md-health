@@ -83,15 +83,20 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label">Upload Report File</label>
                                     <div class="form-group">
-                                        <input type="file" name="report_path" class="form-control text-dark">
+                                        <input type="file" name="report_path" class="form-control text-dark" id="fileInput" onchange="previewFile()">
                                     </div>
-                                    <div class="prev-img-div">
-                                        <img src="front/assets/img/default-img.png" alt="image">
+                                    <div class="prev-img-div" style="position: relative;">
+                                        <img id="previewImage" src="front/assets/img/default-img.png" alt="image" style="max-width: 100%; max-height: 200px;">
+                                        <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
+                                        <div id="previewPDF" style="display: none;">
+                                            <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;">
+                                            <span id="pdfFileName"></span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="section-btns mb-5">
-                                    <a href="javascript:void(0);" class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
+                                    <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
                                 </div>
 
                             </form>
@@ -121,14 +126,14 @@
                             </div>
 
                             <!-- Reports-->
-                            <div class="card" style="border-radius: 3px;background: #F6F6F6;">
+                            <div class="card shadow-none" style="border-radius: 3px;background: #F6F6F6;">
                                 <div class="card-body d-flex gap-3">
                                     <div>
                                         <img src="{{ asset('front/assets/img/msg2.png') }}" alt="">
                                     </div>
                                     <div>
                                         <h5 class="card-h1">Treatment No: #MD3726378 <span class="pending ms-3">2 Documents</span></h5>
-                                        <p class="mb-0 card-p1">Raju Singh</p>
+                                        <p class="mb-0 pkg-name">Raju Singh</p>
                                     </div>
                                     <div class="ms-auto d-flex flex-column justify-content-end align-items-end">
                                         <h5 class="card-h3 mb-0">Upload Time: <span class="card-p1">16/12/2023</span></h5>
@@ -150,5 +155,62 @@
 <script>
     $(".mpReportsLi").addClass("activeClass");
     $(".mpReports").addClass("md-active");
+</script>
+<script>
+    function previewFile() {
+        var fileInput = document.getElementById('fileInput');
+        var previewImage = document.getElementById('previewImage');
+        var removePreviewBtn = document.getElementById('removePreviewBtn');
+        var previewPDF = document.getElementById('previewPDF');
+        var pdfFileName = document.getElementById('pdfFileName');
+
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            if (file.type.startsWith('image/')) {
+                previewImage.src = reader.result;
+                previewImage.style.display = 'block';
+                removePreviewBtn.style.display = 'block';
+                previewPDF.style.display = 'none';
+            } else if (file.type === 'application/pdf') {
+                previewPDF.style.display = 'block';
+                pdfFileName.textContent = file.name;
+                previewImage.style.display = 'none';
+                removePreviewBtn.style.display = 'block';
+            } else {
+                // Ignore other file types (optional)
+                previewImage.src = 'front/assets/img/default-img.png';
+                previewImage.style.display = 'block';
+                removePreviewBtn.style.display = 'none';
+                previewPDF.style.display = 'none';
+            }
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            previewImage.src = 'front/assets/img/default-img.png';
+            previewPDF.style.display = 'none';
+            pdfFileName.textContent = '';
+            previewImage.style.display = 'block';
+            removePreviewBtn.style.display = 'none';
+        }
+    }
+
+    function removePreview() {
+        var fileInput = document.getElementById('fileInput');
+        var previewImage = document.getElementById('previewImage');
+        var removePreviewBtn = document.getElementById('removePreviewBtn');
+        var previewPDF = document.getElementById('previewPDF');
+        var pdfFileName = document.getElementById('pdfFileName');
+
+        fileInput.value = ''; // Clear the file input
+        previewImage.src = 'front/assets/img/default-img.png';
+        previewImage.style.display = 'block';
+        removePreviewBtn.style.display = 'none';
+        previewPDF.style.display = 'none';
+        pdfFileName.textContent = '';
+    }
 </script>
 @endsection

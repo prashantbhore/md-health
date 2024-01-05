@@ -392,6 +392,11 @@ Route::middleware('auth:sanctum')->group(function () {
     //Provider Add System User
     Route::post('md-provider-add-system-user', [AddSystemUserRole::class, 'add_system_user']);
 
+    // Mplus04
+    //Provider update System User
+    Route::post('md-provider-update-system-user', [AddSystemUserRole::class, 'update_system_user']);
+    // Mplus04
+
     //Provider System User List
     Route::get('md-provider-system-user-list', [AddSystemUserRole::class, 'provider_system_user_list']);
 
