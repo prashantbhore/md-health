@@ -126,14 +126,14 @@
                             </div>
 
                             <!-- Reports-->
-                            <div class="card" style="border-radius: 3px;background: #F6F6F6;">
+                            <div class="card shadow-none" style="border-radius: 3px;background: #F6F6F6;">
                                 <div class="card-body d-flex gap-3">
                                     <div>
                                         <img src="{{ asset('front/assets/img/msg2.png') }}" alt="">
                                     </div>
                                     <div>
                                         <h5 class="card-h1">Treatment No: #MD3726378 <span class="pending ms-3">2 Documents</span></h5>
-                                        <p class="mb-0 card-p1">Raju Singh</p>
+                                        <p class="mb-0 pkg-name">Raju Singh</p>
                                     </div>
                                     <div class="ms-auto d-flex flex-column justify-content-end align-items-end">
                                         <h5 class="card-h3 mb-0">Upload Time: <span class="card-p1">16/12/2023</span></h5>
