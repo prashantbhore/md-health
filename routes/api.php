@@ -22,6 +22,7 @@ use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
 use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
+use App\Http\Controllers\api\food\UpdateFoodProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,10 +106,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //food-provider
     //update-food-profile-list
-    Route::get('md-update-food-profile-list', [UpdateMedicalProfileController::class, 'update_food_profile_list']);
+    Route::get('md-update-food-profile-list', [UpdateFoodProfileController::class, 'update_food_profile_list']);
 
     //update-food-profile
-    Route::post('md-update-food-profile', [UpdateMedicalProfileController::class, 'update_food_profile']);
+    Route::post('md-update-food-profile', [UpdateFoodProfileController::class, 'update_food_profile']);
 
     //other-services
     //add-new-acommodition-hotel

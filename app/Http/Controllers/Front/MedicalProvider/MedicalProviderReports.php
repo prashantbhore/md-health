@@ -11,7 +11,7 @@ use App\Traits\MediaTrait;
 use Crypt;
 use Auth;
 
-
+//Code By Mplus03
 class MedicalProviderReports extends Controller
 {
 
@@ -23,9 +23,6 @@ class MedicalProviderReports extends Controller
 
 
     public function index(){
-
-
-
 
         $token = Session::get( 'login_token' );
 
@@ -44,10 +41,26 @@ class MedicalProviderReports extends Controller
          }
         }
 
-        //dd($patient_list);
+        $apiUrl = url('api/md-provider-all-reports-list');
+        $method = 'GET';
+        $body=null;
+
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
 
 
-        return view('front/mdhealth/medical-provider/reports',compact('patient_list'));
+
+        $provider_report_list =  '';
+        if(!empty($responseData)){
+        if ( $responseData[ 'status' ] == '200' ){
+          $provider_report_list= $responseData['provider_report_list'];
+         }
+        }
+
+
+
+
+
+        return view('front/mdhealth/medical-provider/reports',compact('patient_list','provider_report_list'));
     }
 
 
@@ -55,7 +68,6 @@ class MedicalProviderReports extends Controller
 
   public function addReport(Request $request){
 
-    dd($request->all());
      
 
     $token = Session::get('login_token');
@@ -92,12 +104,15 @@ class MedicalProviderReports extends Controller
         $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method );
     }
 
-    //dd($responseData);
-    if(!empty($responseData)){
-      return redirect('reports')->with('success','Report Added Successfully');
-    }else{
-        return redirect('reports')->with('error','Failed');
-    }
+ 
+
+    if (!empty($responseData) && $responseData['status'] == '200') {
+      return redirect('reports')->with('success', 'Report Added Successfully');
+  } else {
+      return redirect('reports')->with('error', 'Failed');
+  }
+  
+
   }
 
 

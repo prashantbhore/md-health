@@ -45,7 +45,7 @@
                             <a href="{{ url('medical-packages') }}"
                                 class="d-flex align-items-center gap-1 text-decoration-none text-dark">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                                <p class="mb-0">Back Dashboard</p>
+                                <p class="mb-0 card-h1">Back Dashboard</p>
                             </a>
                         </h5>
                         <div class="card-body">
