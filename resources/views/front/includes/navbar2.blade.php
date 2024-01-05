@@ -1,6 +1,7 @@
 @section('php')
     @php
         // dd(Session::all());
+        // Session::get('MDCustomer*%')
         if (Session::get('MDCustomer*%') != null) {
             $name = !empty(session('user')) ? (session('user')->first_name ? session('user')->first_name : 'MDHealth') : 'MDHealth';
         } elseif (Session::get('MDMedicalProvider*%') != null) {
@@ -244,7 +245,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            @elseif(Session::get('MDMedicalVendor*%') != null)
+                        @elseif(Session::get('MDMedicalVendor*%') != null)
                             <ul class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/medical-provider-dashboard') }}">

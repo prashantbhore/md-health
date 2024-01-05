@@ -70,6 +70,8 @@ Route::get('/', [CustomerPackageController::class, 'customer_home']);
 
 
 
+Route::any('myself_as_patient/{id}',[CustomerPackageController::class,'myself_as_patient'])->name('myself_as_patient');
+
 
 // Super Admin authentication
 
