@@ -71,7 +71,7 @@
                     <div class="card">
                         <h5 class="card-header mb-3">
                             Packages
-                            <a href="{{ url('user-package') }}"
+                            <a href="{{ url('my-packages-list') }}"
                                 class="fw-800 d-flex align-items-center gap-1 text-decoration-none text-dark mt-3">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
                                 <p class="mb-0">Booked Packages</p>
@@ -304,16 +304,18 @@
 
                     var formData = new FormData();
                     var packageId = "{{ !empty($data['package_id']) ? $data['package_id'] : '' }}";
+                    var purchaseId = "{{ !empty($data['purchase_id']) ? $data['purchase_id'] : '' }}";
                     var proxyPrice = "{{ !empty($data['sale_price']) ? $data['sale_price'] : '' }}";
                     var percentage =
                         "{{ !empty($data['package_percentage_price']) ? $data['package_percentage_price'] : '' }}";
                     var paidAmount = "{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}";
-                    alert(proxyPrice);
+                    // alert(proxyPrice);
                     formData.append('package_id', packageId);
+                    formData.append('purchase_id', purchaseId);
                     formData.append('sale_price', proxyPrice);
                     formData.append('paid_amount', paidAmount);
                     formData.append('percentage', percentage);
-                    formData.append('pending_payment', '0');
+                    formData.append('pending_amount', paidAmount);
                     formData.append('platform_type', 'web');
                     formData.append('card_no', cardNo ?? '');
                     formData.append('card_expiry_date', cardExpiryDate ?? '');
