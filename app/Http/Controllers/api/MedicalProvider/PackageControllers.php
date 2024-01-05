@@ -103,7 +103,7 @@ class PackageControllers extends BaseController
             ->where('package_name', $request->package_name)
             ->first();
 
-        if (empty($package_exist_or_not)) {
+        // if (empty($package_exist_or_not)) {
             if (!empty($request->button_type)) {
                 if ($request->button_type == 'active') {
                     $package_input = [];
@@ -256,15 +256,15 @@ class PackageControllers extends BaseController
                     'message' => 'please click button type either active or inactive',
                 ]);
             }
-        } else {
-            // if (($request->platform_type == 'web')) {
-            //     return redirect('/medical-packages')->with('error', 'package name already exist');
-            // }
-            return response()->json([
-                'status' => 404,
-                'message' => 'package name already exist',
-            ]);
-        }
+        // } else {
+        //     // if (($request->platform_type == 'web')) {
+        //     //     return redirect('/medical-packages')->with('error', 'package name already exist');
+        //     // }
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' => 'package name already exist',
+        //     ]);
+        // }
     }
 
       //code by mplus01
