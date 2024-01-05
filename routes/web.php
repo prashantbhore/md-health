@@ -17,7 +17,6 @@ use App\Http\Controllers\Front\MdFood\MdFoodsController;
 use App\Http\Controllers\Front\MdShop\MdShoppingController;
 use App\Http\Controllers\Front\Registration\VendorRegistrationController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\admin\master\CityController;
 use App\Http\Controllers\admin\BaseController;
 use App\Http\Controllers\admin\customer\CustomerController;
@@ -35,7 +34,6 @@ use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
-use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
 use App\Models\MedicalProviderLogo;
 

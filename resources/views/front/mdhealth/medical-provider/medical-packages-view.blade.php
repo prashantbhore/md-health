@@ -166,7 +166,8 @@
                                             <input type="text" class="form-control" name="treatment_price"
                                                 id="treatment_price"
                                                 value="{{ !empty($packages_active_list['treatment_price']) ? $packages_active_list['treatment_price'] : '' }}"
-                                                placeholder="Treatment Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');">
+                                                placeholder="Treatment Price"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -196,7 +197,8 @@
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
                                                     <input type="text" name="hotel_in_time" id="hotel_in_time"
-                                                        class="date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                        class="date-icon w-100"
+                                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                         value="{{ !empty($packages_active_list['hotel_in_time']) ? $packages_active_list['hotel_in_time'] : '' }}" />
                                                     {{-- <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -254,7 +256,9 @@
                                         <div class="section-btns mb-5">
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Accomodition
-                                                Price <span id="accommodation_price_span">{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '0' }} ₺</span></a>
+                                                Price <span
+                                                    id="accommodation_price_span">{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '0' }}
+                                                    ₺</span></a>
                                             <input type="hidden" name="hotel_acommodition_price"
                                                 id="hotel_acommodition_price"
                                                 value="{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '' }}">
@@ -286,7 +290,8 @@
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
                                                     <input type="text" name="vehicle_in_time" id="vehicle_in_time"
-                                                        class="date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                        class="date-icon w-100"
+                                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                         value="{{ !empty($packages_active_list['vehicle_in_time']) ? $packages_active_list['vehicle_in_time'] : '' }}" />
                                                     {{-- <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
@@ -303,7 +308,9 @@
                                         <div class="section-btns mb-5">
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Transportation
-                                                Price <span id="transportation_acommodition_span">{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '0' }} ₺</span></a>
+                                                Price <span
+                                                    id="transportation_acommodition_span">{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '0' }}
+                                                    ₺</span></a>
                                             <input type="hidden" name="transportation_acommodition_price"
                                                 id="transportation_acommodition_price"
                                                 value="{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '' }}">
@@ -335,7 +342,8 @@
                                                 <div class="input-container w-50" id="date-picker-container">
                                                     <!-- <label for="date-from">check-in</label> -->
                                                     <input type="text" name="tour_in_time" id="tour_in_time"
-                                                        class="date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                        class="date-icon w-100"
+                                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                         value="{{ !empty($packages_active_list['tour_in_time']) ? $packages_active_list['tour_in_time'] : '' }}"
                                                         value="10/24/1984" />
                                                     {{-- <svg class="input-icon" width="18" height="18"
@@ -353,7 +361,9 @@
                                         <div class="section-btns mb-5">
                                             <a href="javascript:void(0);"
                                                 class="green-plate bg-green text-dark fw-700 fsb-1">Total Tour Price
-                                                <span id="tour_price_span">{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '0' }} ₺</span></a>
+                                                <span
+                                                    id="tour_price_span">{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '0' }}
+                                                    ₺</span></a>
                                             <input type="hidden" name="tour_price" id="tour_price"
                                                 value="{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '' }}">
                                         </div>
@@ -364,7 +374,8 @@
                                             <label class="form-label">Translation Price (VAT Included Price) </label>
                                             <div class="input-icon-div">
                                                 <input type="text" class="form-control" name="translation_price"
-                                                    id="translation_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                    id="translation_price"
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                     value="{{ !empty($packages_active_list['translation_price']) ? $packages_active_list['translation_price'] : '' }}"
                                                     placeholder="Translation Price">
                                                 <span class="input-icon">₺</span>
@@ -386,7 +397,8 @@
                                             <label class="form-label">Visa Service Price</label>
                                             <div class="input-icon-div ">
                                                 <input type="text" class="form-control" name="visa_service_price"
-                                                    id="visa_service_price" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                    id="visa_service_price" placeholder="Price"
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                     value="{{ !empty($packages_active_list['visa_service_price']) ? $packages_active_list['visa_service_price'] : '' }}">
                                                 <span class="input-icon">₺</span>
                                             </div>
@@ -398,7 +410,8 @@
                                             <label class="form-label">Ticket Price (VAT Included Price) </label>
                                             <div class="input-icon-div">
                                                 <input type="text" class="form-control" name="ticket_price"
-                                                    id="ticket_price" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                    id="ticket_price" placeholder="Price"
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                     value="{{ !empty($packages_active_list['ticket_price']) ? $packages_active_list['ticket_price'] : '' }}">
                                                 <span class="input-icon">₺</span>
                                             </div>
@@ -410,7 +423,8 @@
                                             <label class="form-label">Ambulance Price (One Time Pickup and Drop) </label>
                                             <div class="input-icon-div">
                                                 <input type="text" class="form-control" name="ambulance_service_price"
-                                                    id="ambulance_service_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                    id="ambulance_service_price"
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                     value="{{ !empty($packages_active_list['ambulance_service_price']) ? $packages_active_list['ambulance_service_price'] : '' }}"
                                                     placeholder="Price">
                                                 <span class="input-icon">₺</span>
@@ -423,7 +437,8 @@
                                         <label class="form-label">Discount </label>
                                         <div class="input-icon-div">
                                             <input type="text" class="form-control" name="package_discount"
-                                                id="package_discount" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                id="package_discount" maxlength="3"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                 value="{{ !empty($packages_active_list['package_discount']) ? $packages_active_list['package_discount'] : '' }}"
                                                 placeholder="0">
                                             <span class="input-icon">%</span>
@@ -434,7 +449,8 @@
                                         <label class="form-label">*Price (VAT Included)</label>
                                         <div class="input-icon-div">
                                             <input type="text" class="form-control" name="package_price" readonly
-                                                id="package_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                id="package_price"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                 value="{{ !empty($packages_active_list['package_price']) ? $packages_active_list['package_price'] : '' }}"
                                                 placeholder="0">
                                             <span class="input-icon">₺</span>
@@ -444,7 +460,9 @@
                                     <div class="form-group d-flex flex-column mb-5">
                                         <label class="form-label">Sale Price</label>
                                         <div class="input-icon-div">
-                                            <input type="text" class="form-control" name="sale_price" id="sale_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" readonly
+                                            <input type="text" class="form-control" name="sale_price" id="sale_price"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                readonly
                                                 value="{{ !empty($packages_active_list['sale_price']) ? $packages_active_list['sale_price'] : '' }}"
                                                 placeholder="Calculated Automatically">
                                             <span class="input-icon">₺</span>
@@ -552,7 +570,7 @@
             $.validator.addMethod("noSpace", function(value, element) {
                 return $.trim(value).length !== 0;
             }, "This field cannot contain only spaces");
-    
+
             // Add validation rules and messages
             $('#package_add').validate({
                 rules: {
@@ -594,7 +612,7 @@
             });
         });
     </script>
-    
+
     <script>
         $(document).ready(function() {
             function updateCheckedValues() {
@@ -697,7 +715,7 @@
             $('.form-check-input').on('change', function() {
                 var checkboxId = $(this).attr('id');
                 var divId = checkboxId.replace('for', ''); // Remove 'for' from checkbox ID to get div ID
-    
+
                 // Show/hide div based on checkbox state
                 if ($(this).is(':checked')) {
                     $('#' + divId + 'Div').show();
@@ -710,12 +728,12 @@
                     // Add more selectors if needed for other types of input fields
                 }
             });
-    
+
             // Handle checkbox states on page load
             $('.form-check-input').each(function() {
                 var checkboxId = $(this).attr('id');
                 var divId = checkboxId.replace('for', ''); // Remove 'for' from checkbox ID to get div ID
-    
+
                 if ($(this).is(':checked')) {
                     $('#' + divId + 'Div').show();
                 } else {
@@ -724,7 +742,7 @@
             });
         });
     </script>
-   
+
     <script>
         $(document).ready(function() {
             var base_url = $('#base_url').val();
