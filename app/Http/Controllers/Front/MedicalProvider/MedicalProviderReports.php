@@ -75,7 +75,18 @@ class MedicalProviderReports extends Controller
     $method = 'POST';
 
 
-    $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+    $body = $request->all();
+    $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+
+
+
+    if ( $request->hasFile( 'report_path' ) && $request->file( 'report_path' )->isValid() ) {
+        $image = $request->file( 'report_path' );
+        $image_name = 'report_path';
+        $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method, $image, $image_name );
+    } else {
+        $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method );
+    }
 
     //dd($responseData);
     if(!empty($responseData)){

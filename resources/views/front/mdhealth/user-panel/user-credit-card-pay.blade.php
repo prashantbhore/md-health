@@ -304,12 +304,14 @@
 
                     var formData = new FormData();
                     var packageId = "{{ !empty($data['package_id']) ? $data['package_id'] : '' }}";
+                    var purchaseId = "{{ !empty($data['purchase_id']) ? $data['purchase_id'] : '' }}";
                     var proxyPrice = "{{ !empty($data['sale_price']) ? $data['sale_price'] : '' }}";
                     var percentage =
                         "{{ !empty($data['package_percentage_price']) ? $data['package_percentage_price'] : '' }}";
                     var paidAmount = "{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}";
-                    alert(proxyPrice);
+                    // alert(proxyPrice);
                     formData.append('package_id', packageId);
+                    formData.append('purchase_id', purchaseId);
                     formData.append('sale_price', proxyPrice);
                     formData.append('paid_amount', paidAmount);
                     formData.append('percentage', percentage);
