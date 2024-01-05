@@ -63,32 +63,46 @@
                             <div class="card-body">
                                 <form action="{{ url('roles-add') }}" method="post">
                                     @csrf
+                                    <input type="hidden" name="id" value="{{ !empty($system_users['id']) ? $system_users['id'] : '' }}">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Your Personnel E-Mail Address</label>
                                         <input type="text" class="form-control" name="email" id="email"
-                                            placeholder="your-personnel@mail.com">
+                                            placeholder="your-personnel@mail.com" value="{{ !empty($system_users['email']) ? $system_users['email'] : '' }}">
                                     </div>
 
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-3{{ !empty($system_users['id']) ? ' d-none' : '' }}">
                                         <label class="form-label">Enter Password</label>
                                         <input type="text" class="form-control" name="password" id="password"
-                                            placeholder="Password@2023">
+                                            placeholder="Password@2023" value="{{ !empty($system_users['password']) ? $system_users['password'] : '' }}">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label class="form-label">Your Personnel Full Name</label>
                                         <input type="text" class="form-control" name="name" id="name"
-                                            placeholder="Full Name">
+                                            placeholder="Full Name" value="{{ !empty($system_users['name']) ? $system_users['name'] : '' }}">
                                     </div>
 
                                     <div class="form-group d-flex flex-column mb-5">
                                         <label class="form-label">Role</label>
                                         <select name="roll_id" id="roll_id">
                                             <option value="">Choose Role</option>
-                                            <option value="2">Super Admin</option>
-                                            <option value="3">Case Manager</option>
-                                            <option value="4">Finance</option>
+                                            <option value="2"{{ (!empty($system_users['roll_id'])) ? $system_users['roll_id'] : '' }}>Super Admin</option>
+                                            <option value="3"{{ (!empty($system_users['roll_id'])) ? $system_users['roll_id'] : '' }}>Case Manager</option>
+                                            <option value="4"{{ (!empty($system_users['roll_id'])) ? $system_users['roll_id'] : '' }}>Finance</option>
                                         </select>
+                                        {{-- <select id="treatment_category_id" name="treatment_category_id" class="form-select"
+                                            onchange="categoryselect(this.value)">
+                                            <option value="" selected disabled>Choose</option>
+                                            @foreach ($treatment_categories as $treatment_category)
+                                                @php
+                                                    $isSelected = isset($packages_active_list['treatment_category_id']) && $packages_active_list['treatment_category_id'] == $treatment_category['id'];
+                                                @endphp
+                                                <option
+                                                    value="{{ $treatment_category['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                    {{ $treatment_category['product_category_name'] }}
+                                                </option>
+                                            @endforeach
+                                        </select> --}}
                                     </div>
 
                                     <div class="multiple-checkbox-div mb-5">
@@ -96,60 +110,70 @@
                                             <div class="multiple-checks">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="fordashboard"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Dashboard') !== false ? 'checked' : '' }}
                                                         value="Dashboard">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fordashboard">Dashboard</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="forsales"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Sales') !== false ? 'checked' : '' }}
                                                         value="Sales">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forsales">Sales</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="forpackages"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Packages') !== false ? 'checked' : '' }}
                                                         value="Packages">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forpackages">Packages</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="forpaymentinfo"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Payment Information') !== false ? 'checked' : '' }}
                                                         value="Payment Information">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forpaymentinfo">Payment Information</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="formessages"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Messages') !== false ? 'checked' : '' }}
                                                         value="Messages">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="formessages">Messages</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="forroles"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Roles') !== false ? 'checked' : '' }}
                                                         value="Roles">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forroles">Roles</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="forotherservices"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Other Services') !== false ? 'checked' : '' }}
                                                         value="Other Services">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forotherservices">Other Services</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="foraccount"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Account') !== false ? 'checked' : '' }}
                                                         value="Account">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="foraccount">Account</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="forreports"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Reports') !== false ? 'checked' : '' }}
                                                         value="Reports">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forreports">Reports</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="formembership"
+                                                    {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Membership') !== false ? 'checked' : '' }}
                                                         value="Membership">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="formembership">Membership</label>
@@ -157,11 +181,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="previlages" id="previlages">
+                                    <input type="hidden" name="previlages" id="previlages" value="{{ !empty($system_users['previlages']) ? $system_users['previlages'] : '' }}">
 
                                     <div class="section-btns mb-5">
-                                        <button class="black-plate bg-black text-white fw-700 w-100">Save
-                                            Personnel</button>
+                                        <button
+                                            class="black-plate bg-black text-white fw-700 w-100">Save Personnel</button>
                                     </div>
                                 </form>
                                 <div class="white-plate d-flex align-items-center mb-3 border-0 bg-f6">
@@ -169,7 +193,8 @@
                                 </div>
 
                                 <div class="roles-history-list">
-                                    {!! !empty($html) ? $html : '' !!}
+                                   {!! !empty($html) ? $html : '' !!}
+                                    
                                     {{-- <div class="roles-card df-start w-100 mb-3">
                                         <h6 class="mb-0">your-personnel@mail.com | Super Admin</h6>
                                         <div class="roles-card-footer">
