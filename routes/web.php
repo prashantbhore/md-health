@@ -35,7 +35,9 @@ use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
+use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
+use App\Models\MedicalProviderLogo;
 
 /*
 |--------------------------------------------------------------------------
@@ -540,6 +542,7 @@ Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message'
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
 
+
 Route::controller(MedicalProviderReports::class)->group(function(){
 
     Route::get('reports','index');
@@ -547,6 +550,8 @@ Route::controller(MedicalProviderReports::class)->group(function(){
     Route::post('add-reports','addReport')->name('add.report');
 
 });
+
+
 
 #Sales
 

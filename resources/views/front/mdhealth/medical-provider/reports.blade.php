@@ -74,8 +74,8 @@
                                     </div>
 
                                     <div class="section-btns mb-5">
-                                        <button class="black-plate bg-black text-white fw-700 w-100" type="submit">Upload
-                                            Reports</button>
+                                        <a href="javascript:void(0);"
+                                            class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
                                     </div>
 
                                 </form>

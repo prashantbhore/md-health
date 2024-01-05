@@ -11,7 +11,9 @@ use App\Traits\MediaTrait;
 use Crypt;
 use Auth;
 
-class MedicalProviderReports extends Controller {
+
+class MedicalProviderReports extends Controller
+{
 
     use MediaTrait;
 
@@ -19,61 +21,72 @@ class MedicalProviderReports extends Controller {
         $this->apiService = $apiService;
     }
 
-    public function index() {
+
+    public function index(){
+
 
         $token = Session::get( 'login_token' );
 
-        $apiUrl = url( 'api/md-customer-package-purchage-list' );
+        $apiUrl = url('api/md-customer-package-purchage-list');
         $method = 'GET';
-        $body = null;
+        $body=null;
 
-        $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+
 
         $patient_list =  '';
-        if ( !empty( $responseData ) ) {
-            if ( $responseData[ 'status' ] == '200' ) {
-                $patient_list =  $responseData[ 'customer_package_purchase_list' ];
-            }
+        if(!empty($responseData)){
+        if ( $responseData[ 'status' ] == '200' ) {
+            $patient_list=  $responseData['customer_package_purchase_list'];
+         }
         }
 
-        //dd( $patient_list );
+        //dd($patient_list);
 
-        return view( 'front/mdhealth/medical-provider/reports', compact( 'patient_list' ) );
+
+        return view('front/mdhealth/medical-provider/reports',compact('patient_list'));
     }
 
-    public function addReport( Request $request ) {
 
-        $token = Session::get( 'login_token' );
 
-        $apiUrl = url( 'api/md-provider-add-reports' );
-        $report_title = $request->report_title;
-        $customer_package_purchage_id = $request->customer_package_purchage_id;
 
-        // $uploadedFile = $this->verifyAndUpload( $request, 'report_path', 'providerreports' );
+  public function addReport(Request $request){
 
-        // $report_path = $request->file( 'report_path' );
 
-        $body = $request->all();
-        $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+    $token = Session::get('login_token');
 
-        $method = 'POST';
 
-        if ( $request->hasFile( 'report_path' ) && $request->file( 'report_path' )->isValid() ) {
-            $image = $request->file( 'report_path' );
-            $image_name = 'report_path';
-            $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method, $image, $image_name );
-        } else {
-            $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method );
-        }
+    $apiUrl = url('api/md-provider-add-reports');
+    $report_title= $request->report_title;
+    $customer_package_purchage_id= $request->customer_package_purchage_id;
 
-        // $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+    $uploadedFile = $this->verifyAndUpload($request, 'report_path', 'providerreports');
 
-        //dd( $responseData );
-        if ( !empty( $responseData ) ) {
-            return redirect( 'reports' )->with( 'success', 'Report Added Successfully' );
-        } else {
-            return redirect( 'reports' )->with( 'error', 'Failed' );
-        }
+
+
+    $report_path = $request->file('report_path');
+
+    $body=['report_title' => $report_title,
+    'customer_package_purchage_id' => $customer_package_purchage_id,
+    'report_path' => $uploadedFile,
+   ];
+
+    $method = 'POST';
+
+
+    $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+    //dd($responseData);
+    if(!empty($responseData)){
+      return redirect('reports')->with('success','Report Added Successfully');
+    }else{
+        return redirect('reports')->with('error','Failed');
     }
+  }
+
+
+
+
 
 }
