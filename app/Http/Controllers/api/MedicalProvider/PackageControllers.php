@@ -678,6 +678,33 @@ class PackageControllers extends BaseController
         }
     }
 
+    public function get_tour_price(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $tour_price = ToursDetails::where('status', 'active')
+            ->select('id', 'tour_price')
+            ->where('id', $request->id)
+            ->first();
+
+        if (!empty($tour_price)) {
+            return response()->json([
+                'status' => 200,
+                'price' => $tour_price,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
     public function packages_active_list_search(Request $request)
     {
         $validator = Validator::make($request->all(), [

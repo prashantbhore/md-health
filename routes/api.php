@@ -173,6 +173,10 @@ Route::middleware('auth:sanctum')->group(function () {
     //get-transportation-price
     Route::post('md-get-transportation-price', [PackageControllers::class, 'get_transportation_price']);
 
+    //get-tour-price
+    Route::post('md-get-tour-price', [PackageControllers::class, 'get_tour_price']);
+
+
     //packages-active-list
     Route::get('md-packages-active-list', [PackageControllers::class, 'packages_active_list']);
 
