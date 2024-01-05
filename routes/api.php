@@ -65,6 +65,11 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 //md-medical-provider-login
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
+//md-food-registration
+Route::post('md-food-registration', [RegistrationController::class, 'food_registration']);
+
+//md-food-login
+Route::post('md-food-login', [LoginControllers::class, 'food_login']);
 //Vendor Registration
 Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_registration']);
 
@@ -235,7 +240,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('md-customer-purchase-package-cancelled-list', [CustomerPackageController::class, 'customer_purchase_package_cancelled_list']);
 
     //customer-purchase-cancellation-reason
-    Route::get('md-customer-purchase-cancellation-reason', [CustomerPackageController::class, 'customer_purchase_cancellation_reason']);
+    Route::post('md-customer-purchase-cancellation-reason', [CustomerPackageController::class, 'customer_purchase_cancellation_reason']);
 
     //customer-change-package-list-active-cancelled
     Route::post('md-customer-change-package-list-active-cancelled', [CustomerPackageController::class, 'customer_change_package_list_active_cancelled']);
@@ -428,7 +433,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-    //Medical Provider Dashboard 
+    //Medical Provider Dashboard
     Route::controller(MedicalProviderDashboradController::class)->group(function () {
         Route::get('medical-provider-monthly-order-count', 'monthlyOrders');
         Route::get('medical-provider-monthly-sales-count', 'monthlySales');

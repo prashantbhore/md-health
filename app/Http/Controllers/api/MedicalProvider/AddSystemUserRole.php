@@ -54,10 +54,13 @@ public function add_system_user(Request $request)
         'password' => Hash::make($request->password),
        // 'created_by' =>Auth::guard('md_health_medical_providers_registers')->user()->id,
         'created_by'=>Auth::user()->id,
+        'created_by'=>Auth::user()->id,
     ];
 
 
+
     $commonUserRegistration = CommonUserLoginTable::create($userData);
+    // dd($commonUserRegistration);
     // dd($commonUserRegistration);
     $lastInsertedId = $commonUserRegistration->id;
    
@@ -68,6 +71,7 @@ public function add_system_user(Request $request)
         'password' => Hash::make($request->password),
         'modified_ip_address' => $request->ip(),
         //'created_by' =>Auth::guard('md_health_medical_providers_registers')->user()->id,
+        'created_by'=>Auth::user()->id,
         'created_by'=>Auth::user()->id,
     ];
 
@@ -97,7 +101,7 @@ public function add_system_user(Request $request)
             return response()->json([
                 'status' => 200,
                 'message' => 'System user added successfully.',
-               
+
             ]);
         } else{
             return response()->json([
@@ -112,6 +116,7 @@ public function provider_system_user_list(){
 
        //$provider_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
        $provider_id =Auth::user()->id;
+       $provider_id =Auth::user()->id;
         $sytem_user_list=MedicalProviderRegistrater::where('roll_id','!=',1)->where('status','active')->where('created_by',$provider_id)->with('role')->get();
 
         if (!empty( $sytem_user_list)){
@@ -120,6 +125,8 @@ public function provider_system_user_list(){
             $selected_data = [];
 
             foreach ( $sytem_user_list as $system_user){
+                // dd($system_user);
+                $selected_data[]= [
                 // dd($system_user);
                 $selected_data[]= [
                     'id' => $system_user->id,
@@ -137,7 +144,7 @@ public function provider_system_user_list(){
                 'status' => 200,
                 'message' => 'System user list found.',
                 'system_user' => $selected_data,
-               
+
             ]);
         } else{
             return response()->json([
@@ -153,6 +160,7 @@ public function edit_system_user(Request $request)
 {
     $validator = Validator::make($request->all(), [
         'id' => 'required',
+        'id' => 'required',
     ]);
 
     if ($validator->fails()) {
@@ -162,6 +170,7 @@ public function edit_system_user(Request $request)
 
     //$provider_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
 
+    $provider_id = Auth::user()->id;
     $provider_id = Auth::user()->id;
 
     $sytem_user_list = MedicalProviderRegistrater::where('roll_id', '!=', 1)
@@ -179,7 +188,7 @@ public function edit_system_user(Request $request)
             'email' => $sytem_user_list->email,
             'previlages' => $sytem_user_list->role->privilege,
             'role_id' => $sytem_user_list->role->id,
-            'role_name' => $sytem_user_list->role->role_name,
+            'role_name' => $sytem_user_list->company_name,
         ];
 // dd($selected_data);
         return response()->json([
@@ -206,8 +215,9 @@ public function delete_system_user(Request $request)
     }
 
     $provider_id = Auth::user()->id;
+    $provider_id = Auth::user()->id;
     $system_user = MedicalProviderRegistrater::where('id', $request->id)->update('status','delete');
-    
+
 
     if (!is_null($system_user)) {
         return response()->json([
@@ -232,4 +242,3 @@ public function delete_system_user(Request $request)
 
 
 }
-

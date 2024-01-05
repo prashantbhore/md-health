@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
+use App\Http\Controllers\Front\MedicalProvider\RolesController;
 use App\Http\Controllers\admin\admin\AdminController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
@@ -34,7 +36,9 @@ use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
+use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
+use App\Models\MedicalProviderLogo;
 
 /*
 |--------------------------------------------------------------------------
@@ -391,7 +395,7 @@ Route::controller(CommonLoginController::class)->group(function () {
 //     Route::post('/email-to-mobile','email_to_mobile');
 //     Route::post('/email-password-exist','email_password_exist');
 
-//  });  
+//  });
 // AUTHENTICATION
 
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
@@ -510,7 +514,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
 
 Route::controller(PaymentController::class)->group(function(){
-    
+
     Route::get('payment-information','index');
 
     Route::post('store-vendor-bank-details','storeBankDetails')->name('store.vendor.bank.details');
@@ -524,8 +528,17 @@ Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
-Route::view('reports', 'front/mdhealth/medical-provider/reports');
-Route::view('reports', 'front/mdhealth/medical-provider/reports');
+
+
+Route::controller(MedicalProviderReports::class)->group(function(){
+
+    Route::get('reports','index');
+
+    Route::post('add-reports','addReport')->name('add.report');
+
+});
+
+
 
 #Sales
 
@@ -552,10 +565,8 @@ Route::controller(SalesController::class)->group(function(){
 
 #Medical Provider Dashboard
 Route::controller(MedicalProviderDashboradController::class)->group(function(){
-
-    Route::get('medical-provider-dashboard','index');
-
-    Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
+     Route::get('medical-provider-dashboard','index');
+     Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
 });
 
 
@@ -565,7 +576,7 @@ Route::controller(MedicalProviderDashboradController::class)->group(function(){
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
-Route::view('user-credit-card-pay', 'front/mdhealth/user-panel/user-credit-card-pay');
+Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 // Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);

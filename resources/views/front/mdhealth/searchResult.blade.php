@@ -8,7 +8,7 @@
     // dd($date);
     if(!function_exists('get_twenty_percent')){
         function get_twenty_percent($number){
-            return $number * (20/100);
+            return floatval($number) * (20/100);
         }
     }
 
@@ -109,6 +109,7 @@
                                 <div class="d-flex gap-4">
                                     <div class="brdr-right">
                                         <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Includes</span></p>
+                                        @if(!empty($package_list['other_services']))
                                         @foreach($package_list['other_services'] as $key => $other_service)
                                             @if(!empty($package_list['other_services'][$key]))
                                                 <div class="d-flex gap-1 align-items-baseline mb-1">
@@ -118,11 +119,13 @@
                                             @endif
 
 
+
                                         <!-- <div class="d-flex gap-1 align-items-baseline mb-1">
                                             <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
                                             <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
                                         </div> -->
                                         @endforeach
+                                        @endif
                                     </div>
                                     <div class="brdr-right">
                                         <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Reviews</span><span class="fw-normal">(480)</span></p>

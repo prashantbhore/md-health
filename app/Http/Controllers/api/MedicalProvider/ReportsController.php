@@ -14,7 +14,7 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
 use Storage;
 
-class ReportsController extends Controller
+class ReportsController extends BaseController
 {
 
     use MediaTrait;
@@ -41,7 +41,8 @@ class ReportsController extends Controller
         $report_input['customer_package_purchage_id'] = $idArray[0];
         $report_input['custome_id'] = $idArray[1];
         $report_input['package_id'] = $idArray[0];
-        $report_input['report_path'] = $request->report_path;
+
+        //$report_input['report_path'] = $request->report_path;
 
 
         if ($request->has('report_path')) {
@@ -69,9 +70,11 @@ class ReportsController extends Controller
         }
     }
 
+
+
     public function patient_package_purchage_list()
     {
-        $patientList = CustomerPurchaseDetails::with(['customer', 'package'])->where('status', 'active')->get();
+        $patientList = CustomerPurchaseDetails::where('provider_id',Auth::user()->id)->with(['customer', 'package'])->where('status', 'active')->get();
 
         if (!empty($patientList)) {
             $formattedList = [];
@@ -112,24 +115,24 @@ class ReportsController extends Controller
             ->where('created_by', 1)
             ->where('status', 'active')
             ->get();
-    
+
         $formatted_data = [];
-    
+
         foreach ($provider_report_list as $report) {
             $customerPurchasePackage = $report->customerPackagePurchase;
             $providerData = $report->provider;
             $providerLogo = $report->provider_logo;
             $customerData = $customerPurchasePackage->customer;
-    
+
             $packageIndex = null;
-    
+
             foreach ($formatted_data as $index => $formattedItem) {
                 if ($formattedItem['customer_purchased_package']['order_id'] == $customerPurchasePackage->order_id) {
                     $packageIndex = $index;
                     break;
                 }
             }
-    
+
             if ($packageIndex !== null) {
                 $formatted_data[$packageIndex]['reports'][] = [
                     'id' => $report->id,
@@ -138,7 +141,7 @@ class ReportsController extends Controller
                     'report_name' => $report->report_name,
                     'created_at' => $report->created_at,
                 ];
-    
+
                 $formatted_data[$packageIndex]['report_count']++;
             } else {
                 $formatted_data[] = [
@@ -164,7 +167,7 @@ class ReportsController extends Controller
                 ];
             }
         }
-    
+
         if (!empty($formatted_data)) {
             return response()->json([
                 'status' => 200,
@@ -178,7 +181,7 @@ class ReportsController extends Controller
             ]);
         }
     }
-    
+
 
     public function provider_reports_search(Request $request)
     {
@@ -191,10 +194,10 @@ class ReportsController extends Controller
         return $this->sendError('Validation Error.', $validator->errors());
     }
 
-  
+
     $searchQuery = $request->input('search_query');
 
-   
+
     $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
         $query->where('report_title', 'like', '%' . $searchQuery . '%')
             ->orWhere('report_name', 'like', '%' . $searchQuery . '%');

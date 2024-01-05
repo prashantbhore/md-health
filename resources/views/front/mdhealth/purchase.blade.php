@@ -6,6 +6,8 @@
     </form> --}}
 
     @php
+
+        // dd(Session::all());
         // dd(Session::all());
     @endphp
 @endsection
@@ -401,6 +403,8 @@
                 // var token = '145|QbVxfOaPYonjsIqwVibAdJB0cP82yRzuBk94qajf28c079a3';
 
                 var formData = new FormData();
+
+                var pendingAmount = proxyPrice - totalPrice;
                 formData.append('package_id', packageId);
                 formData.append('sale_price', proxyPrice);
                 formData.append('paid_amount', totalPrice);
@@ -409,7 +413,7 @@
                 formData.append('card_expiry_date', cardExpiryDate ?? '');
                 formData.append('card_cvv', cardCvv ?? '');
                 formData.append('card_name', cardName ?? '');
-
+                formData.append('pending_amount', pendingAmount);
                 if (isTwentySelected) {
                     formData.append('percentage', '20%');
                 } else if (isThirtySelected) {
@@ -432,7 +436,7 @@
                     },
                     success: function(response) {
                         if (response.status == "200") {
-                            window.location.href = baseUrl + '/payment-status'
+                            window.location.href = baseUrl + '/payment-status';
                         }
                     },
                 });
