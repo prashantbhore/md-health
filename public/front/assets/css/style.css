@@ -1350,6 +1350,8 @@ select option {
     border: 2px solid #D6D6D6;
     border-radius: 5px;
     padding: 10px 20px;
+
+
 }
 
 .form-div select {
@@ -2768,10 +2770,12 @@ span.popup-msg.active {
     line-height: normal;
     letter-spacing: -0.48px;
 }
+
 .bottom-links li {
     margin-bottom: 0 !important;
 
 }
+
 .bottom-links li a {
     color: #878787;
     text-align: right;

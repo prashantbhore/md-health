@@ -86,7 +86,7 @@ class SalesController extends Controller
 
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
 
-        dd($responseData);
+        //dd($responseData);
 
         $patient_details = $responseData['patient_details'];
 
