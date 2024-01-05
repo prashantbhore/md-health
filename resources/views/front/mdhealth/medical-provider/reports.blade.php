@@ -99,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4">
+                <div class="card mb-4" style="min-height: 450px;">
                     <div class="form-div">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-4">
                             <span>Uploaded Reports</span>
