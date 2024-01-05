@@ -14,6 +14,7 @@ class AddNewAcommodition extends Model
         'hotel_address',
         'hotel_stars',
         'hotel_image_path',
+        'distance_from_hospital',
         'hotel_image_name',
         'hotel_per_night_price',
         'hotel_other_services',
