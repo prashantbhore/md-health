@@ -55,11 +55,13 @@
     border: none !important;
     text-shadow: none;
 }
+
 .datepicker table tr td.selected {
     border-color: transparent !important;
     border: none !important;
     background-color: transparent !important;
 }
+
 *,
 *:before,
 *:after {
@@ -443,6 +445,12 @@ select {
 
 .bod-right {
     border-right: 1px solid #4CDB06;
+}
+
+.df-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .df-center {
@@ -1385,7 +1393,7 @@ select option {
 .card-details .form-group input {
     border: 2px solid #D6D6D6;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 8px 10px;
 
 
 }
@@ -2857,4 +2865,20 @@ span.popup-msg.active {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
+}
+
+.view,
+.print {
+    text-decoration: none;
+}
+
+.view p,
+.print p {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.4px;
 }
