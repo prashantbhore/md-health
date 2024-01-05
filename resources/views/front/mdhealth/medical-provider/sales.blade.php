@@ -79,13 +79,19 @@
 
                                                 <div class="row card-row align-items-center">
                                                     @php
+
+                                                        $id = Session::get('MDMedicalProvider*%');
                                                         $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                                            ->where('medical_provider_id', Auth::user()->id)
+                                                            ->where('medical_provider_id', $id)
                                                             ->first();
+                                                        // $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                                        //   ->where('medical_provider_id', Auth::user()->id)
+                                                        //  ->first();
                                                     @endphp
 
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
+                                                        <img style="width:auto;height:75px;"
+                                                            src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
                                                             alt="">
                                                     </div>
 
@@ -147,7 +153,7 @@
                                                     @endphp
 
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
+                                                        <img style="width:auto;height:75px;"src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
                                                             alt="">
                                                     </div>
 
@@ -216,7 +222,8 @@
                                                     @endphp
 
                                                     <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
+                                                        <img style="width:auto;height:75px;"
+                                                            src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}"
                                                             alt="">
                                                     </div>
 

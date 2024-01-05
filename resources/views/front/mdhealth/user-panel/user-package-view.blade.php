@@ -820,41 +820,54 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="user-details-footer">
-                                                <h6 class="section-heading">You paid</h6>
-                                                <div class="user-payment-date mb-3">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="payment-left-div">
-                                                            <div class="user-percentage fsb-1 fw-600">
-                                                                {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] : '' }}<span>(
-                                                                    {{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
-                                                                    ₺)</span></div>
-                                                            <div class="fsb-2 text-green paymt-green-text">Payment
-                                                                Completed.</div>
-                                                        </div>
-                                                        <div class="payment-right-div">
-                                                            <div class="fsb-2 text-green paymt-green-text">Payment Date
-                                                            </div>
-                                                            <div class="fsb-1">{{ $payment_time_and_date }}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="payment-paid-div">
-                                                    <div class="paid-percentage fsb-1 fw-600 d-flex flex-column">
-                                                        <span>
-                                                            {{ $pending_percent }} <span>(
-                                                                {{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}
-                                                                ₺)</span>
-                                                        </span>
-                                                        <span class="fsb-2 text-orange paymt-green-text">Pending</span>
-                                                    </div>
-                                                    <a href="{{ url('user-credit-card-pay') }}"
-                                                        class="payment-pay-btn fsb-1 text-dark">
-                                                        Pay Now
-                                                    </a>
-                                                </div>
+                                            <form action="{{ url('/user-credit-card-pay') }}" id="payment_form"
+                                                method="POST">
+                                                @csrf
+                                                <input type="hidden"
+                                                    name="package_id"value="{{ !empty($data['package_id']) ? $data['package_id'] : '' }}">
+                                                <input type="hidden"
+                                                    name="package_percentage_price"value="{{ !empty($pending_percent) ? $pending_percent : '' }}">
+                                                <input type="hidden"
+                                                    name="sale_price"value="{{ !empty($treatment_information['sale_price']) ? $treatment_information['sale_price'] : '' }}">
+                                                <input type="hidden"
+                                                    name="pending_payment"value="{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}">
 
-                                            </div>
+                                                <div class="user-details-footer">
+                                                    <h6 class="section-heading">You paid</h6>
+                                                    <div class="user-payment-date mb-3">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="payment-left-div">
+                                                                <div class="user-percentage fsb-1 fw-600">
+                                                                    {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] : '' }}<span>(
+                                                                        {{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
+                                                                        ₺)</span></div>
+                                                                <div class="fsb-2 text-green paymt-green-text">Payment
+                                                                    Completed.</div>
+                                                            </div>
+                                                            <div class="payment-right-div">
+                                                                <div class="fsb-2 text-green paymt-green-text">Payment Date
+                                                                </div>
+                                                                <div class="fsb-1">{{ $payment_time_and_date }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="payment-paid-div">
+                                                        <div class="paid-percentage fsb-1 fw-600 d-flex flex-column">
+                                                            <span>
+                                                                {{ $pending_percent }} <span>(
+                                                                    {{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}
+                                                                    ₺)</span>
+                                                            </span>
+                                                            <span class="fsb-2 text-orange paymt-green-text">Pending</span>
+                                                        </div>
+                                                        <a href="javascript:void(0)"
+                                                            class="payment-pay-btn fsb-1 text-dark">
+                                                            Pay Now
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -1089,31 +1102,12 @@
             var baseUrl = $('#base_url').val();
             var token = "{{ Session::get('login_token') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            var formElement = document.getElementById('my_form');
-            var formData = new FormData(formElement);
 
-            // Append additional data (if needed) to the FormData object
-            formData.append('additionalField', 'additionalValue');
-
-            $.ajax({
-                url: 'your_api_endpoint',
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': 'your_csrf_token_value',
-                    'Authorization': 'Bearer your_access_token_here'
-                },
-                data: formData,
-                processData: false, // To prevent jQuery from processing the data
-                contentType: false, // To prevent jQuery from setting contentType
-                success: function(response) {
-                    // Handle success response
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    console.error(xhr.responseText);
-                }
+            $(".payment-pay-btn").click(function() {
+                // alert("hi");
+                $("#payment_form").submit();
             });
+
         });
 
         $(function() {

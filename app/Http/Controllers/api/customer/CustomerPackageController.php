@@ -1091,7 +1091,7 @@ class CustomerPackageController extends BaseController
 
     public function customer_purchase_package(Request $request)
     {
-
+        // return $request->sale_price;
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'sale_price' => 'required',
@@ -1111,6 +1111,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
                 $purchase_details['pending_payment'] = $request->pending_amount;
+
                 // $package_percentage_price = $request->package_percentage_price;
                 // $purchase_details['purchase_type'] = 'pending';
                 $purchase_details['created_by'] = Auth::user()->id;
@@ -1366,6 +1367,7 @@ class CustomerPackageController extends BaseController
                     }
                 }
             } else {
+                // return $request->pending_amount;
                 $purchase_details = [];
 
                 $purchase_details['customer_id'] = Auth::user()->id;
@@ -1449,7 +1451,7 @@ class CustomerPackageController extends BaseController
 
                     // Update 'completed' entry with remaining amount and status
                     // $payment_details_completed['paid_amount'] = $remaining_amount;
-                    $payment_details_completed['pending_payment'] = $request->pending_amount;
+                    $payment_details_completed['pending_payment'] = $pending_amount;
                     // No pending amount for completed
                     $payment_details_completed['payment_status'] = 'pending';
 
@@ -2111,6 +2113,8 @@ class CustomerPackageController extends BaseController
             'package_id' => 'required',
         ]);
 
+        // return $request;
+
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
@@ -2145,10 +2149,10 @@ class CustomerPackageController extends BaseController
             // ->where('md_packages.status', 'active')
             // ->where('md_product_category.status', 'active')
             // ->where('md_product_sub_category.status', 'active')
-            ->join('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->join('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->join('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->join('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->where('md_packages.id', $request->package_id)
             ->first();
             // return $treatment_information;
