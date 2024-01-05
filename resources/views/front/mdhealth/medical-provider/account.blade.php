@@ -109,9 +109,9 @@
 
                                     <div class="form-group mb-3">
                                         <label class="form-label">Company Email</label>
-                                        <input type="text" name="company_address"
-                                            value="{{ $medical_provider_list->company_address }}" class="form-control"
-                                            id="company_address" aria-describedby="foodname"
+                                        <input type="text" name="email"
+                                            value="{{ $medical_provider_list->email }}" class="form-control"
+                                            id="email" aria-describedby="foodname"
                                             placeholder="Company Full Address">
                                     </div>
 

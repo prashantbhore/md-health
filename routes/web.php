@@ -7,6 +7,7 @@ use App\Http\Controllers\Front\Customer\CustomerPackageController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
 use App\Http\Controllers\Front\MedicalProvider\PackageController;
+use App\Http\Controllers\Front\MedicalProvider\RolesController;
 use App\Http\Controllers\Front\Registration\MedicalProviderRegistrationController;
 use App\Http\Controllers\Front\Registration\UserRegistrationController;
 use App\Http\Controllers\Front\Mdhome\MdHomeController;
@@ -395,26 +396,12 @@ Route::controller(CommonLoginController::class)->group(function () {
 
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
 
-    Route::controller(MedicalProviderLogin::class)->group(function () {
-        //Route::get('/medical-provider-dashboard', 'dashboard_view');
-        // Route::get('/logout', 'logout');
-        // Route::get('/login/change_password', 'change_password_view');
-        // Route::post('/reset-password', 'reset_password');
-        // Route::post('/check-old-password', 'check_old_password');
-    });
+   
     Route::controller(UpdateProfileController::class)->group(function () {
-        //update-medical-profile-list
-
         Route::get('medical-account', 'update_medical_profile_list');
-
-        //update-medical-profile
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
-        //delete-provider-images-videos
         Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
 
-        // Route::get('/login/change_password', 'change_password_view');
-        // Route::post('/reset-password', 'reset_password');
-        // Route::post('/check-old-password', 'check_old_password');
     });
 
     Route::controller(OtherServicesController::class)->group(function (){
@@ -442,7 +429,17 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::post('/md-packages-active-list-search', 'md_packages_active_list_search');
         Route::post('/md-packages-inactive-list-search', 'md_packages_inactive_list_search');
        
+    }); 
+    // Mplus04
+    Route::controller(RolesController::class)->group(function () {
+        Route::get('/medical-roles', 'index');
+        Route::post('/roles-add', 'roles_add');
+        Route::get('/edit-role/{id}', 'edit_role');
+        // Route::get('/login/change_password', 'change_password_view');
+        // Route::post('/reset-password', 'reset_password');
+        // Route::post('/check-old-password', 'check_old_password');
     });
+    // Mplus04
 });
 
 
@@ -522,7 +519,7 @@ Route::controller(PaymentController::class)->group(function(){
 
 
 
-Route::view('medical-roles', 'front/mdhealth/medical-provider/medical-roles');
+
 Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
