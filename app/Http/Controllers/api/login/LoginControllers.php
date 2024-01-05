@@ -11,6 +11,7 @@ use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderRegistrater;
 use App\Http\Controllers\api\BaseController as BaseController;
 use App\Models\CustomerLogs;
+use App\Models\MDFoodRegisters;
 
 class LoginControllers extends BaseController {
     // customer login
@@ -493,5 +494,46 @@ if(!empty($request->phone)){
                 ] );
             }
         }
+    }
+
+
+
+    public function food_login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+     
+            if (Auth::guard('md_health_food_registers')->attempt([
+                'email' => $request->email,
+                'password' => $request->password,
+                'status' => 'active',
+            ])) {
+                $customer = Auth::guard('md_health_food_registers')->user();
+                $success['token'] =  $customer->createToken('MyApp')->plainTextToken;
+                $otp = rand(1111, 9999);
+
+                MDFoodRegisters::where('id', $customer->id)->update([
+                    // 'shop_owner_last_login' => Carbon::now(),
+                    'otp_expiring_time' => time() + 20,
+                    // 'login_otp' => $otp,
+                    'fcm_token' => $request->fcm_token,
+                    'access_token' => $success['token']
+                ]);
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Login successfull.',
+                    'mobile_number' => $customer->phone,
+                    'full_name' => $customer->full_name,
+                    'success_token' => $success,
+                ]);
+            } 
+        
     }
 }

@@ -41,7 +41,7 @@ class ReportsController extends BaseController
         $report_input['customer_package_purchage_id'] = $idArray[0];
         $report_input['custome_id'] = $idArray[1];
         $report_input['package_id'] = $idArray[0];
-        
+
         //$report_input['report_path'] = $request->report_path;
 
 
@@ -115,24 +115,24 @@ class ReportsController extends BaseController
             ->where('created_by', 1)
             ->where('status', 'active')
             ->get();
-    
+
         $formatted_data = [];
-    
+
         foreach ($provider_report_list as $report) {
             $customerPurchasePackage = $report->customerPackagePurchase;
             $providerData = $report->provider;
             $providerLogo = $report->provider_logo;
             $customerData = $customerPurchasePackage->customer;
-    
+
             $packageIndex = null;
-    
+
             foreach ($formatted_data as $index => $formattedItem) {
                 if ($formattedItem['customer_purchased_package']['order_id'] == $customerPurchasePackage->order_id) {
                     $packageIndex = $index;
                     break;
                 }
             }
-    
+
             if ($packageIndex !== null) {
                 $formatted_data[$packageIndex]['reports'][] = [
                     'id' => $report->id,
@@ -141,7 +141,7 @@ class ReportsController extends BaseController
                     'report_name' => $report->report_name,
                     'created_at' => $report->created_at,
                 ];
-    
+
                 $formatted_data[$packageIndex]['report_count']++;
             } else {
                 $formatted_data[] = [
@@ -167,7 +167,7 @@ class ReportsController extends BaseController
                 ];
             }
         }
-    
+
         if (!empty($formatted_data)) {
             return response()->json([
                 'status' => 200,
@@ -181,7 +181,7 @@ class ReportsController extends BaseController
             ]);
         }
     }
-    
+
 
     public function provider_reports_search(Request $request)
     {
@@ -194,10 +194,10 @@ class ReportsController extends BaseController
         return $this->sendError('Validation Error.', $validator->errors());
     }
 
-  
+
     $searchQuery = $request->input('search_query');
 
-   
+
     $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
         $query->where('report_title', 'like', '%' . $searchQuery . '%')
             ->orWhere('report_name', 'like', '%' . $searchQuery . '%');

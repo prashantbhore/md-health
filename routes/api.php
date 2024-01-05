@@ -65,6 +65,11 @@ Route::post('md-register-medical-provider', [RegistrationController::class, 'md_
 //md-medical-provider-login
 Route::post('md-medical-provider-login', [LoginControllers::class, 'medical_provider_login']);
 
+//md-food-registration
+Route::post('md-food-registration', [RegistrationController::class, 'food_registration']);
+
+//md-food-login
+Route::post('md-food-login', [LoginControllers::class, 'food_login']);
 //Vendor Registration
 Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_registration']);
 

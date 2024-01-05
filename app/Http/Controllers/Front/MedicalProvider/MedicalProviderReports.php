@@ -34,13 +34,13 @@ class MedicalProviderReports extends Controller
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
 
 
-        
+
         $patient_list =  '';
         if(!empty($responseData)){
         if ( $responseData[ 'status' ] == '200' ) {
             $patient_list=  $responseData['customer_package_purchase_list'];
          }
-        } 
+        }
 
         //dd($patient_list);
 
@@ -53,7 +53,7 @@ class MedicalProviderReports extends Controller
 
   public function addReport(Request $request){
 
-    
+
     $token = Session::get('login_token');
 
 
@@ -63,10 +63,10 @@ class MedicalProviderReports extends Controller
 
     $uploadedFile = $this->verifyAndUpload($request, 'report_path', 'providerreports');
 
-   
+
 
     $report_path = $request->file('report_path');
-    
+
     $body=['report_title' => $report_title,
     'customer_package_purchage_id' => $customer_package_purchage_id,
     'report_path' => $uploadedFile,

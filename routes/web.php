@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
+use App\Http\Controllers\Front\MedicalProvider\RolesController;
 use App\Http\Controllers\admin\admin\AdminController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
@@ -392,7 +394,7 @@ Route::controller(CommonLoginController::class)->group(function () {
 //     Route::post('/email-to-mobile','email_to_mobile');
 //     Route::post('/email-password-exist','email_password_exist');
 
-//  });  
+//  });
 // AUTHENTICATION
 
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
@@ -443,8 +445,18 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('/edit-package/{id}', 'edit_package');
         Route::post('/md-packages-active-list-search', 'md_packages_active_list_search');
         Route::post('/md-packages-inactive-list-search', 'md_packages_inactive_list_search');
-       
+
     });
+
+    Route::controller(RolesController::class)->group(function () {
+        Route::get('/medical-roles', 'index');
+        Route::post('/roles-add', 'roles_add');
+        Route::get('/edit-role/{id}', 'edit_role');
+        // Route::get('/login/change_password', 'change_password_view');
+        // Route::post('/reset-password', 'reset_password');
+        // Route::post('/check-old-password', 'check_old_password');
+    });
+
 });
 
 
@@ -515,7 +527,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
 
 Route::controller(PaymentController::class)->group(function(){
-    
+
     Route::get('payment-information','index');
 
     Route::post('store-vendor-bank-details','storeBankDetails')->name('store.vendor.bank.details');
@@ -524,7 +536,7 @@ Route::controller(PaymentController::class)->group(function(){
 
 
 
-Route::view('medical-roles', 'front/mdhealth/medical-provider/medical-roles');
+
 Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
@@ -532,11 +544,11 @@ Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/liv
 
 
 Route::controller(MedicalProviderReports::class)->group(function(){
-    
+
     Route::get('reports','index');
 
     Route::post('add-reports','addReport')->name('add.report');
-  
+
 });
 
 
@@ -577,7 +589,7 @@ Route::controller(MedicalProviderDashboradController::class)->group(function(){
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
-Route::view('user-credit-card-pay', 'front/mdhealth/user-panel/user-credit-card-pay');
+Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 // Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);

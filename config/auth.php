@@ -55,6 +55,11 @@ return [
             'provider' => 'md_vendor_register',
         ],
 
+        'md_health_food_registers' => [
+            'driver' => 'session',
+            'provider' => 'md_food_register',
+        ],
+
         'superadmin' => [
             'driver' => 'session',
             'provider' => 'md_super_admin',
@@ -99,6 +104,11 @@ return [
         'md_vendor_register' =>[
             'driver' => 'eloquent',
             'model' => App\Models\VendorRegister::class,
+        ],
+
+        'md_food_register' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MDFoodRegisters::class,
         ],
 
         'md_super_admin' => [

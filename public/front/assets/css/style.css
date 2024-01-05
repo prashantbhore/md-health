@@ -13,6 +13,11 @@
     src: url("../fonts/campton/CamptonBold.otf");
 }
 
+@font-face {
+    font-family: "CamptonLight";
+    src: url("../fonts/campton/CamptonLight.otf");
+}
+
 :root {
     --form-control-color: #4cdb06;
 }
@@ -894,6 +899,7 @@ select {
     line-height: normal;
     letter-spacing: -0.64px;
 }
+
 
 .reg-title {
     color: #4CDB06;
@@ -2684,4 +2690,106 @@ span.popup-msg.active {
 
 .tab-content .form.text-start {
     padding: 0 57px;
+}
+
+.tab-content select {
+    color: #979797 !important;
+}
+
+.tab-content option:not(:first-of-type) {
+    color: black;
+}
+
+.tab-content option:checked {
+    color: #000 !important;
+}
+
+.footer .card-text {
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 49px;
+    letter-spacing: -0.72px;
+    margin-bottom: 1rem;
+}
+
+.footer .card-text span {
+    font-weight: 700;
+}
+
+.footer .contact-no {
+    color: #FFF;
+    text-align: right;
+    font-family: CamptonBook;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 49px;
+    /* 188.462% */
+    letter-spacing: -1.04px;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer ul li {
+    color: #878787;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    margin-bottom: 1rem;
+}
+
+.mext {
+    color: #878787;
+    text-align: right;
+    font-family: CamptonLight;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: -0.44px;
+}
+
+.fl-text {
+    width: 130px;
+    color: #878787;
+    font-family: CamptonBook;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+.bottom-links li {
+    margin-bottom: 0 !important;
+
+}
+.bottom-links li a {
+    color: #878787;
+    text-align: right;
+    font-family: CamptonBook;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    text-decoration-line: underline;
+}
+
+.copyText {
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }

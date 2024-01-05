@@ -1,5 +1,4 @@
-@extends('front.layout.layout')
-@section('content')
+@extends('front.layout.layout') @section('content')
 <style>
     .navbar {
         display: none;
@@ -14,6 +13,10 @@
         color: #000 !important;
         line-height: 2 !important;
     }
+
+    .footer {
+        display: none;
+    }
 </style>
 <div class="content-wrapper" id="regdiv">
     <div class="container text-center my-5 authentication">
@@ -22,14 +25,13 @@
             <h1 class="mb-3 form-heading p-abs">Go Super Admin Panel</h1>
         </div>
 
-
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
                 <a href="{{ url('user-account') }}" class="nav-link active">User</a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('medical-provider-login') }}" class="nav-link ">Medical Provider</a>
+                <a href="{{ url('medical-provider-login') }}" class="nav-link">Medical Provider</a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('vendor-login') }}" class="nav-link">Vendor</a>
@@ -49,116 +51,93 @@
                     <div class="col-md-6 bod-right pt-4">
                         <div class="d-flex align-items-center gap-3 pt-5 pb-4">
                             <a href="{{ url('/') }}">
-                                <img src="{{ 'front/assets/img/back.svg' }}" alt="">
+                                <img src="{{ 'front/assets/img/back.svg' }}" alt="" />
                             </a>
                             <h1 class="reg-title mb-0">Create User Account</h1>
-
                         </div>
                         <div class="form text-start">
                             <form id="mycustomerForm">
                                 {{-- action="{{ url('/md-customer-register') }}" method="post" --}}
-                                <input type="hidden" name="platform_type" value="web">
-                                <input type="hidden" name="user_type" value="customer">
+                                <input type="hidden" name="platform_type" value="web" />
+                                <input type="hidden" name="user_type" value="customer" />
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="firstName" class="form-label">*First Name</label>
-                                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">*First Name</label>
+                                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="lastName" class="form-label">*Last Name</label>
-                                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">*Last Name</label>
+                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label">*E-mail</label>
-                                            <input type="text" class="form-control" name="email" id="email" placeholder="E-mail">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="dob" class="form-label">*Date of Birth</label>
+                                        <input class="form-control dobj" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="phone" class="form-label">*Phone</label>
-                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="gender" class="form-label">*Gender</label>
+                                        <select name="gender" id="gender" class="form-select">
+                                            <option value="" selected disabled>Choose</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="gender" class="form-label">*Gender</label>
-                                            {{-- <input type="text" class="form-control" name="gender" id="gender"
-                                                    placeholder="Gender"> --}}
-                                            <select name="gender" id="gender" class="form-select">
-                                                <option value="" selected disabled>Choose</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                            </select>
-                                        </div>
+                              
+                                    <div class="col-md-12 mb-3">
+                                        <label for="email" class="form-label">*E-mail</label>
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="E-mail" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="country_id" class="form-label">*Country</label>
-                                            <select name="country_id" id="country_id" class="form-select">
-                                                <option value="" selected disabled>Choose</option>
-                                                @foreach ($countries as $country)
-                                                <option value="{{ $country->id }}">{{ $country->country_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="phone" class="form-label">*Phone</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" />
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="city_id" class="form-label">*City</label>
-                                            <select name="city_id" id="city_id" class="form-select">
-                                                <option value="" selected disabled>Choose</option>
-                                                @foreach ($cities as $city)
-                                                <option value="{{ $city->id }}">{{ $city->city_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="country_id" class="form-label">*Country</label>
+                                        <select name="country_id" id="country_id" class="form-select">
+                                            <option value="" selected disabled>Choose</option>
+                                            @foreach ($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->country_name }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="dob" class="form-label">*Date of Birth</label>
-                                            <input type="text" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="city_id" class="form-label">*City</label>
+                                        <select name="city_id" id="city_id" class="form-select">
+                                            <option value="" selected disabled>Choose</option>
+                                            @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->city_name }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3 ">
-                                            <label for="address" class="form-label">*Address</label>
-                                            <textarea name="address" id="address" cols="" rows="5" class="form-control" placeholder="Enter Address"></textarea>
-                                        </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label for="address" class="form-label">*Address</label>
+                                        <textarea name="address" id="address" cols="" rows="5" class="form-control" placeholder="Enter Address"></textarea>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3 hide-eye-div">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="hide-eye-div">
                                             <label for="password" class="form-label">*Password</label>
-                                            <input type="password" name="password" class="form-control" id="password" placeholder="Minimum 8 characters">
-                                            <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Minimum 8 characters" />
+                                            <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-5 hide-eye-div">
                                             <label for="re-password" class="form-label">*Re-Password</label>
-                                            <input type="password" name="repassword" class="form-control" id="repassword" placeholder="Minimum 8 characters">
-                                            <span toggle="#repassword" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                            <input type="password" name="repassword" class="form-control" id="repassword" placeholder="Minimum 8 characters" />
+                                            <span toggle="#repassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="form-check tc">
-                                            <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault">
-                                            <label class="form-check-label" for="UserflexCheckDefault">
-                                                I accept <a href="#">Terms and Condition</a> & I agree to the <a href="#">User Data Consent.</a>
-                                            </label>
+                                            <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
+                                            <label class="form-check-label" for="UserflexCheckDefault"> I accept <a href="#">Terms and Condition</a> & I agree to the <a href="#">User Data Consent.</a> </label>
                                         </div>
                                     </div>
                                     <div id="recaptcha-container"></div>
                                     <span id="error" class="text-danger"></span>
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                        <button type="button" class="btn btn-md w-100" id="regcustuser" style="height: 47px;">Create
-                                            Account</button>
+                                        <button type="button" class="btn btn-md w-100" id="regcustuser" style="height: 47px;">Create Account</button>
                                         <label for="" class="mt-auto">Already have an account?</label>
                                         <a href="{{ url('sign-in-web') }}" class="text-black fw-bold">Sign In</a>
                                     </div>
@@ -174,7 +153,6 @@
                             <h5 class="text-h1 mb-0">Get your reliable & affordable</h5>
                             <h4 class="text-green-h1b mb-2">Treatment Packages</h4>
                             <p class="text-p1-gray mb-0">We are partnered with the top health service providers and vendors that gives you the best health experience!</p>
-
                         </div>
                     </div>
                 </div>
@@ -183,49 +161,43 @@
     </div>
 </div>
 
-
 {{-- otp --}}
-
 
 <div class="container py-100px df-center sign-in-form d-none" id="otpDiv">
     <div class="card">
         <div class="card-body">
             <div class="d-flex flex-column align-items-center gap-4">
                 <div class="pt-3">
-                    <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
+                    <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="" />
                 </div>
                 <h2 class="mb-0">SMS Code</h2>
                 <p>Enter the 6 digit code sent to your mobile phone</p>
-                {{-- <form action="{{ url('otp-verify') }}" method="post" id="otpForm"> --}}
-                {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code">
-                            <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
-                        </form> --}}
+                {{--
+                <form action="{{ url('otp-verify') }}" method="post" id="otpForm">
+                --}} {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code" />
+                    <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
+                </form>
+                --}}
                 <form>
                     <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                     <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                     <div class="alert alert-success" id="successAuth" style="display: none;"></div>
                     <div class="w-100 df-center mb-3 sms-input gap-3">
-                        <input type="hidden" name="email" value="{{ session('email') }}">
-                        <input type="hidden" name="password" value="{{ session('password') }}">
-                        <input type="hidden" name="login_type" value="{{ session('login_type') ? session('login_type') : '' }}">
-                        {{-- <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control"> --}}
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                        <input type="hidden" name="email" value="{{ session('email') }}" />
+                        <input type="hidden" name="password" value="{{ session('password') }}" />
+                        <input type="hidden" name="login_type" value="{{ session('login_type') ? session('login_type') : '' }}" />
+                        {{-- <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" /> --}}
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                     </div>
                     <div class="d-flex justify-content-center">
                         <button class="btn btn-md btn-text w-75 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
@@ -238,7 +210,6 @@
                         }
                     }
                 </script>
-
 
                 <h6 class="mb-0 d-flex align-items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -256,7 +227,6 @@
                 <div>
                     <a href="#" class="text-secondary">Resend Code In</a>
                 </div>
-
             </div>
         </div>
     </div>
@@ -266,141 +236,133 @@
         <div class="card-body">
             <div class="d-flex flex-column align-items-center gap-4">
                 <div class="pt-3">
-                    <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
+                    <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="" />
                 </div>
                 <h2 class="mb-0">Verification</h2>
                 <p>Enter the 6 digit code sent to your mobile phone</p>
                 <div class="w-100 df-center">
-                    <img src="{{ asset('front/assets/img/heart-rate.png') }}" alt="">
+                    <img src="{{ asset('front/assets/img/heart-rate.png') }}" alt="" />
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
-@section('script')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection @section('script')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    $(document).on('click', '#regcustuser', function() {
-        var base_url = $('#base_url').val();
-        if ($('#mycustomerForm').valid()) {
-            var email = $('#email').val();
-            var phone = $('#phone').val();
+    $(document).on("click", "#regcustuser", function() {
+        var base_url = $("#base_url").val();
+        if ($("#mycustomerForm").valid()) {
+            var email = $("#email").val();
+            var phone = $("#phone").val();
             // var formData = $(this).serialize();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var csrfToken = $('meta[name="csrf-token"]').attr("content");
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
+                    "X-CSRF-TOKEN": csrfToken,
+                },
             });
             $.ajax({
-                url: base_url + '/email-or-mobile-exist',
-                method: 'POST',
+                url: base_url + "/email-or-mobile-exist",
+                method: "POST",
                 data: {
                     email: email,
-                    phone: phone
+                    phone: phone,
                 },
                 beforeSend: function() {
-                    $('#regcustuser').attr('disabled', true);
-                    $('#regcustuser').html(
-                        '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-                    );
+                    $("#regcustuser").attr("disabled", true);
+                    $("#regcustuser").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                 },
                 success: function(response) {
-                    $('#regcustuser').attr('disabled', false);
+                    $("#regcustuser").attr("disabled", false);
                     console.log(response);
                     if (response !== undefined) {
                         if (response.email_exist !== undefined) {
-                            $('#error').text('Email already exist');
+                            $("#error").text("Email already exist");
                         } else if (response.mobile_no_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
+                            $("#error").text("Phone number already exist");
                         } else if (response.phone_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
+                            $("#error").text("Phone number already exist");
                         } else {
                             sendOTP();
                         }
-
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
-                }
+                },
             });
         }
     });
 
-    $(document).on('click', '#medproreg', function() {
-
-        if ($('#myFormProvider').valid()) {
-            var email = $('#email').val();
-            var phone = $('#phone').val();
+    $(document).on("click", "#medproreg", function() {
+        if ($("#myFormProvider").valid()) {
+            var email = $("#email").val();
+            var phone = $("#phone").val();
             // var formData = $(this).serialize();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var csrfToken = $('meta[name="csrf-token"]').attr("content");
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
+                    "X-CSRF-TOKEN": csrfToken,
+                },
             });
             $.ajax({
-                url: base_url + '/email-or-mobile-exist',
-                method: 'POST',
+                url: base_url + "/email-or-mobile-exist",
+                method: "POST",
                 data: {
                     email: email,
-                    phone: phone
+                    phone: phone,
                 },
                 success: function(response) {
                     console.log(response);
                     if (response !== undefined) {
-
                         if (response.email_exist !== undefined) {
-                            $('#error').text('Email already exist');
+                            $("#error").text("Email already exist");
                         } else if (response.mobile_no_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
+                            $("#error").text("Phone number already exist");
                         } else if (response.phone_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
+                            $("#error").text("Phone number already exist");
                         } else {
                             sendOTP();
                         }
-
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
-                }
+                },
             });
         }
     });
-
 
     window.onload = function() {
         render();
-
     };
 
     function render() {
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container");
         recaptchaVerifier.render();
-
     }
-
-
 
     function sendOTP() {
         var number = $("#phone").val();
         // alert(number);
-        firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
-            window.confirmationResult = confirmationResult;
-            coderesult = confirmationResult;
-            $("#successAuth").text("Message sent");
-            $("#successAuth").show();
-            $("#otpDiv").removeClass('d-none');
-            $("#regdiv").hide();
-        }).catch(function(error) {
-            $("#error").text(error.message);
-            $("#error").show();
-        });
+        firebase
+            .auth()
+            .signInWithPhoneNumber(number, window.recaptchaVerifier)
+            .then(function(confirmationResult) {
+                window.confirmationResult = confirmationResult;
+                coderesult = confirmationResult;
+                $("#successAuth").text("Message sent");
+                $("#successAuth").show();
+                $("#otpDiv").removeClass("d-none");
+                $("#regdiv").hide();
+            })
+            .catch(function(error) {
+                $("#error").text(error.message);
+                $("#error").show();
+            });
     }
 
     function verify(e) {
@@ -411,11 +373,10 @@
         var code5 = $("#ot5").val();
         var code6 = $("#ot6").val();
         var code = code1 + code2 + code3 + code4 + code5 + code6;
-        $('#login_otp_btn').attr('disabled', true);
-        $('#login_otp_btn').html(
-            '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-        );
-        coderesult.confirm(code)
+        $("#login_otp_btn").attr("disabled", true);
+        $("#login_otp_btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+        coderesult
+            .confirm(code)
             .then(function(result) {
                 var user = result.user;
                 $("#successOtpAuthot").text("OTP verified");
@@ -424,21 +385,21 @@
                 // console.log(user_type);
                 // alert(user_type);
                 // var password = $('#password').val();
-                var formData = $('#mycustomerForm').serialize();
+                var formData = $("#mycustomerForm").serialize();
                 // var formData = $('#myFormProvider').serialize();
                 // $('#form1').(serialize);
                 console.log(formData);
-                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var csrfToken = $('meta[name="csrf-token"]').attr("content");
                 $.ajaxSetup({
                     headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    }
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
                 });
 
                 $.ajax({
-                    url: base_url + '/md-customer-register',
+                    url: base_url + "/md-customer-register",
                     // url: base_url+'/md-register-medical-provider',
-                    method: 'POST',
+                    method: "POST",
                     data: formData,
                     //  {
                     //     // email: email,
@@ -446,17 +407,15 @@
                     //     password: password
                     // },
                     success: function(response) {
-                        $('#login_otp_btn').attr('disabled', false);
+                        $("#login_otp_btn").attr("disabled", false);
                         console.log(response);
                         if (response.url !== undefined) {
                             // alert(response.url);
                             window.location.href = base_url + response.url;
 
-
-
                             toastr.options = {
-                                "positionClass": "toast-bottom-right",
-                                "timeOut": "5000",
+                                positionClass: "toast-bottom-right",
+                                timeOut: "5000",
                             };
 
                             toastr.success(response.message);
@@ -465,17 +424,16 @@
                             // $('#error').text('Credentials do not match');
 
                             toastr.options = {
-                                "positionClass": "toast-bottom-right",
-                                "timeOut": "5000",
+                                positionClass: "toast-bottom-right",
+                                timeOut: "5000",
                             };
 
                             toastr.error(response.message);
-
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error(error);
-                    }
+                    },
                 });
 
                 e.preventDefault();
@@ -495,7 +453,7 @@
                 last_name: "required",
                 email: {
                     required: true,
-                    email: true
+                    email: true,
                 },
                 phone: "required",
                 gender: "required",
@@ -503,38 +461,47 @@
                 address: "required",
                 password: {
                     required: true,
-                    minlength: 8
+                    minlength: 8,
                 },
-                're-password': {
+                "re-password": {
                     required: true,
-                    equalTo: "#password"
+                    equalTo: "#password",
                 },
-                UserflexCheckDefault: "required"
+                UserflexCheckDefault: "required",
             },
             messages: {
                 // Define error messages for each field
             },
             submitHandler: function(form) {
                 form.submit();
-            }
+            },
         });
     });
 </script>
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+{{--
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+--}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 
 <script>
     $(document).ready(function() {
-        $.validator.addMethod("passwordMatch", function(value, element) {
-            return $('#password').val() === value;
-        }, "Passwords do not match.");
-        $.validator.addMethod("spaceValidation", function(value, element) {
-            return value.trim().length !== 0;
-        }, "Field should not contain only spaces.");
+        $.validator.addMethod(
+            "passwordMatch",
+            function(value, element) {
+                return $("#password").val() === value;
+            },
+            "Passwords do not match."
+        );
+        $.validator.addMethod(
+            "spaceValidation",
+            function(value, element) {
+                return value.trim().length !== 0;
+            },
+            "Field should not contain only spaces."
+        );
 
-
-        $('#myFormProvider').validate({
+        $("#myFormProvider").validate({
             rules: {
                 company_name: {
                     required: true,
@@ -580,7 +547,6 @@
                 UserflexCheckDefault: {
                     required: true,
                 },
-
             },
             messages: {
                 company_name: {
@@ -640,15 +606,22 @@
 
 <script>
     $(document).ready(function() {
-        $.validator.addMethod("passwordMatch", function(value, element) {
-            return $('#password').val() === value;
-        }, "Passwords do not match.");
-        $.validator.addMethod("spaceValidation", function(value, element) {
-            return value.trim().length !== 0;
-        }, "Field should not contain only spaces.");
+        $.validator.addMethod(
+            "passwordMatch",
+            function(value, element) {
+                return $("#password").val() === value;
+            },
+            "Passwords do not match."
+        );
+        $.validator.addMethod(
+            "spaceValidation",
+            function(value, element) {
+                return value.trim().length !== 0;
+            },
+            "Field should not contain only spaces."
+        );
 
-
-        $('#mycustomerForm').validate({
+        $("#mycustomerForm").validate({
             rules: {
                 first_name: {
                     required: true,
@@ -698,7 +671,6 @@
                 UserflexCheckDefault: {
                     required: true,
                 },
-
             },
             messages: {
                 first_name: {
@@ -769,6 +741,12 @@
         } else {
             input.attr("type", "password");
         }
+    });
+</script>
+<script>
+    $('.dobj').datepicker({
+        format: 'mm/dd/yyyy',
+
     });
 </script>
 @endsection
