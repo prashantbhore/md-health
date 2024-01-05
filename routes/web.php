@@ -116,6 +116,16 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 
 Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
+
+//Customer Report Controller Code By Mpluss03
+  Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
+
+ 
+
+
+
+
+
 //mdShop Routes
 Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
 
@@ -587,7 +597,8 @@ Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');
 Route::view('user-message', 'front/mdhealth/user-panel/user-message');
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
 Route::view('user-reports', 'front/mdhealth/user-panel/user-reports');
-Route::view('user-all-reports', 'front/mdhealth/user-panel/user-all-reports');
+
+
 
 // MD BOOKING PAGE KD
 // 'front/mdhealth/md-booking/md-booking-home-page'

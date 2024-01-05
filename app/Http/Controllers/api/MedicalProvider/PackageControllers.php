@@ -18,7 +18,7 @@ use App\Models\ProductSubCategory;
 
 class PackageControllers extends BaseController
 {
-
+  //code by mplus01
     public function treatment_category_list()
     {
         $treatment_category_list = ProductCategory::where('status', 'active')
@@ -45,6 +45,7 @@ class PackageControllers extends BaseController
         }
     }
 
+      //code by mplus01
     public function treatment_list(Request $request)
     {
         // return $request;
@@ -80,7 +81,7 @@ class PackageControllers extends BaseController
         }
     }
 
-
+  //code by mplus01
     //add_packages
     public function add_packages(Request $request)
     {
@@ -102,7 +103,7 @@ class PackageControllers extends BaseController
             ->where('package_name', $request->package_name)
             ->first();
 
-        if (empty($package_exist_or_not)) {
+        // if (empty($package_exist_or_not)) {
             if (!empty($request->button_type)) {
                 if ($request->button_type == 'active') {
                     $package_input = [];
@@ -255,17 +256,18 @@ class PackageControllers extends BaseController
                     'message' => 'please click button type either active or inactive',
                 ]);
             }
-        } else {
-            // if (($request->platform_type == 'web')) {
-            //     return redirect('/medical-packages')->with('error', 'package name already exist');
-            // }
-            return response()->json([
-                'status' => 404,
-                'message' => 'package name already exist',
-            ]);
-        }
+        // } else {
+        //     // if (($request->platform_type == 'web')) {
+        //     //     return redirect('/medical-packages')->with('error', 'package name already exist');
+        //     // }
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' => 'package name already exist',
+        //     ]);
+        // }
     }
 
+      //code by mplus01
     public function packages_active_list()
     {
         $packages_active_list = Packages::where('md_packages.status', 'active')
@@ -293,6 +295,7 @@ class PackageControllers extends BaseController
         }
     }
 
+      //code by mplus01
     public function packages_deactive_list()
     {
         $packages_deactive_list = Packages::where('md_packages.status', 'inactive')
@@ -319,6 +322,7 @@ class PackageControllers extends BaseController
         }
     }
 
+      //code by mplus01
     public function packages_view_active_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -388,6 +392,7 @@ class PackageControllers extends BaseController
         }
     }
 
+      //code by mplus01
     public function packages_view_deactive_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -450,7 +455,7 @@ class PackageControllers extends BaseController
         }
     }
 
-
+  //code by mplus01
     public function edit_packages(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -564,6 +569,7 @@ class PackageControllers extends BaseController
         // }
     }
 
+      //code by mplus01
     public function activate_to_deactivate_packages(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -592,7 +598,7 @@ class PackageControllers extends BaseController
         }
     }
 
-
+  //code by mplus01
     public function deactivate_to_activate_packages(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -621,7 +627,7 @@ class PackageControllers extends BaseController
         }
     }
 
-
+  //code by mplus01
     public function get_acommodition_price(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -650,6 +656,7 @@ class PackageControllers extends BaseController
         }
     }
 
+      //code by mplus01
     public function get_transportation_price(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -678,6 +685,7 @@ class PackageControllers extends BaseController
         }
     }
 
+     //code by mplus01
     public function get_tour_price(Request $request){
         $validator = Validator::make($request->all(), [
             'id' => 'required',

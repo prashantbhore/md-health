@@ -61,7 +61,7 @@
                                 <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
                             </h5>
                             <div class="card-body">
-                                <form action="{{ url('roles-add') }}" method="post">
+                                <form action="{{ url('roles-add') }}" method="post" id="rolesprivilages">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ !empty($system_users['id']) ? $system_users['id'] : '' }}">
                                     <div class="form-group mb-3">
@@ -86,23 +86,11 @@
                                         <label class="form-label">Role</label>
                                         <select name="roll_id" id="roll_id">
                                             <option value="">Choose Role</option>
-                                            <option value="2"{{ (!empty($system_users['roll_id'])) ? $system_users['roll_id'] : '' }}>Super Admin</option>
-                                            <option value="3"{{ (!empty($system_users['roll_id'])) ? $system_users['roll_id'] : '' }}>Case Manager</option>
-                                            <option value="4"{{ (!empty($system_users['roll_id'])) ? $system_users['roll_id'] : '' }}>Finance</option>
+                                            <option value="2" {{ !empty($system_users['roll_id']) && $system_users['roll_id'] == 2 ? 'selected' : 'gdfvg' }}>Super Admin</option>
+                                            <option value="3" {{ !empty($system_users['roll_id']) && $system_users['roll_id'] == 3 ? 'selected' : 'dv' }}>Case Manager</option>
+                                            <option value="4" {{ !empty($system_users['roll_id']) && $system_users['roll_id'] == 4 ? 'selected' : 'dv' }}>Finance</option>
                                         </select>
-                                        {{-- <select id="treatment_category_id" name="treatment_category_id" class="form-select"
-                                            onchange="categoryselect(this.value)">
-                                            <option value="" selected disabled>Choose</option>
-                                            @foreach ($treatment_categories as $treatment_category)
-                                                @php
-                                                    $isSelected = isset($packages_active_list['treatment_category_id']) && $packages_active_list['treatment_category_id'] == $treatment_category['id'];
-                                                @endphp
-                                                <option
-                                                    value="{{ $treatment_category['id'] }}"{{ $isSelected ? ' selected' : '' }}>
-                                                    {{ $treatment_category['product_category_name'] }}
-                                                </option>
-                                            @endforeach
-                                        </select> --}}
+                                        
                                     </div>
 
                                     <div class="multiple-checkbox-div mb-5">
@@ -248,4 +236,91 @@
             updateCheckedValues();
         });
     </script>
+
+<script>
+    function delete_role(id) {
+        alert(id);
+        // Get the CSRF token from the meta tag
+        var base_url = $('#base_url').val();
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const bearer_token = '{{ Session::get('login_token') }}';
+        // Your AJAX call
+        $.ajax({
+            url: base_url + '/api/md-provider-system-user-delete',
+            type: 'POST',
+            data: {
+                id: id,
+            },
+            headers: {
+                'X-CSRF-TOKEN': token,
+                'Authorization': 'Bearer ' + bearer_token
+            },
+            success: function(response) {
+                if (response.status == 200) {
+                    $('#div_' + id).css('display', 'none');
+                    toastr.options = {
+                        "positionClass": "toast-bottom-right",
+                        "timeOut": "5000",
+                    };
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
+                console.log('Success:', response.message);
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr);
+            }
+        });
+
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#rolesprivilages').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 8  // Example: Minimum 8 characters
+                },
+                name: {
+                    required: true
+                },
+                roll_id: {
+                    required: true
+                }
+                // Define rules for other fields here
+            },
+            messages: {
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                },
+                password: {
+                    required: "Please enter a password",
+                    minlength: "Password must be at least 8 characters long"  // Example: Custom message for minlength
+                },
+                name: {
+                    required: "Please enter your full name"
+                },
+                roll_id: {
+                    required: "Please choose a role"
+                }
+                // Define custom messages for other fields here
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+
+        $('#submitBtn').click(function () {
+            $('#rolesprivilages').valid();
+        });
+    });
+</script>
 @endsection

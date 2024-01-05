@@ -318,4 +318,31 @@ class CustomerPackageController extends Controller
     {
         return response()->json(['error' => $message], $code);
     }
+
+
+    public function customer_reports(Request $request)
+    {
+
+
+        $token = Session::get('login_token');
+        // dd( $token );
+        $method = 'GET';
+        $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
+
+
+
+
+
+        return view('front/mdhealth/user-panel/user-all-reports');
+    }
+
+
+
+
+
+
+
+
+
+
 }

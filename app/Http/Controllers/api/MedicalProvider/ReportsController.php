@@ -52,8 +52,8 @@ class ReportsController extends BaseController
             $report_input['report_name'] = $original_name;
         }
 
-        $report_input['medical_provider_id'] =  1;
-        $report_input['created_by'] = 1;
+        $report_input['medical_provider_id'] = Auth::user()->id;
+        $report_input['created_by'] = Auth::user()->id;
 
         $AddNewReports = MedicalProviderReports::create($report_input);
 
@@ -112,7 +112,7 @@ class ReportsController extends BaseController
     public function provider_all_reports_list()
     {
         $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
-            ->where('created_by', 1)
+            ->where('medical_provider_id',Auth::user()->id)
             ->where('status', 'active')
             ->get();
 

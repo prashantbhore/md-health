@@ -59,6 +59,7 @@ class UpdateMedicalProfileController extends BaseController
 
         $ProviderImagesVideos= ProviderImagesVideos::where('status','active')
         ->select('id','provider_id', 'provider_image_path', 'provider_image_name')
+        ->where('provider_id',Auth::user()->id)
         ->get();
 
         $countries = Country::where('status', 'active')
