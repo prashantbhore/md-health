@@ -71,7 +71,7 @@
                     <div class="card">
                         <h5 class="card-header mb-3">
                             Packages
-                            <a href="{{ url('user-package') }}"
+                            <a href="{{ url('my-packages-list') }}"
                                 class="fw-800 d-flex align-items-center gap-1 text-decoration-none text-dark mt-3">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
                                 <p class="mb-0">Booked Packages</p>
@@ -315,7 +315,7 @@
                     formData.append('sale_price', proxyPrice);
                     formData.append('paid_amount', paidAmount);
                     formData.append('percentage', percentage);
-                    formData.append('pending_payment', '0');
+                    formData.append('pending_amount', paidAmount);
                     formData.append('platform_type', 'web');
                     formData.append('card_no', cardNo ?? '');
                     formData.append('card_expiry_date', cardExpiryDate ?? '');

@@ -46,6 +46,13 @@ public function add_system_user(Request $request)
     //     ]);
     // }
     // dd($request);
+    $email_exist = CommonUserLoginTable::where('email', $request->email)->first();
+    if ($email_exist) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Email already exist.',
+        ]);
+    } 
 
     $userData = [
         'email' => $request->email,
@@ -54,7 +61,7 @@ public function add_system_user(Request $request)
         'password' => Hash::make($request->password),
        // 'created_by' =>Auth::guard('md_health_medical_providers_registers')->user()->id,
         'created_by'=>Auth::user()->id,
-        'created_by'=>Auth::user()->id,
+        // 'created_by'=>Auth::user()->id,
     ];
 
 
@@ -72,7 +79,7 @@ public function add_system_user(Request $request)
         'modified_ip_address' => $request->ip(),
         //'created_by' =>Auth::guard('md_health_medical_providers_registers')->user()->id,
         'created_by'=>Auth::user()->id,
-        'created_by'=>Auth::user()->id,
+        // 'created_by'=>Auth::user()->id,
     ];
 
     $mdProviderRegistration = MedicalProviderRegistrater::create($providerData);
@@ -112,11 +119,83 @@ public function add_system_user(Request $request)
 
 }
 
+
+// Mplus04
+public function update_system_user(Request $request)
+{
+    // dd($request);
+    $userId = $request->input('id');
+
+    // Validate the incoming request data
+    // $request-> $request->validate([
+    //     'email' => 'required|email',
+    //     'name' => 'required',
+    //     // 'password' => 'required|min:6',
+    //     'roll_id' => 'required|exists:medical_provider_roles,id',
+    //     'privileges' => 'required',
+    // ]);
+    // Fetch the user by ID
+    $user = CommonUserLoginTable::where('user_id', $userId)->first();
+    $user2 = MedicalProviderRegistrater::where('id', $userId)->first();
+    $email_exist = CommonUserLoginTable::where('email', $request->email)->first();
+    // if ($email_exist) {
+    //     return response()->json([
+    //         'status' => 404,
+    //         'message' => 'Email already exist.',
+    //     ]);
+    // } 
+    // else {
+    //     return response()->json([
+    //         'status' => 404,
+    //         'message' => 'User not found.',
+    //     ]);
+    // }
+        // Check if the user exists
+        
+        if ($user) {
+        // Update user data
+        $userData = [
+            'email' => $request->email,
+            'name' => $request->name,
+            // 'user_type' => 'medicalprovider',
+            // 'password' => Hash::make($request->password']),
+            'created_by' => Auth::user()->id,
+        ];
+
+        $user->update($userData);
+        $user2->update($userData);
+      
+
+        // Update user role and privileges
+        $roleId = $request->roll_id;
+        $privileges = $request->previlages;
+
+        // dd($request);
+        $role = MedicalProviderRole::find($roleId);
+        if ($role) {
+            $role->update(['privilege' => $privileges]);
+           
+        }
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'User updated successfully.',
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'User not found.',
+        ]);
+    }
+}
+// Mplus04
+
+
 public function provider_system_user_list(){
 
        //$provider_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
        $provider_id =Auth::user()->id;
-       $provider_id =Auth::user()->id;
+    //    $provider_id =Auth::user()->id;
         $sytem_user_list=MedicalProviderRegistrater::where('roll_id','!=',1)->where('status','active')->where('created_by',$provider_id)->with('role')->get();
 
         if (!empty( $sytem_user_list)){
@@ -126,8 +205,8 @@ public function provider_system_user_list(){
 
             foreach ( $sytem_user_list as $system_user){
                 // dd($system_user);
-                $selected_data[]= [
-                // dd($system_user);
+                // $selected_data[]= [
+                // // dd($system_user);
                 $selected_data[]= [
                     'id' => $system_user->id,
                     'provider_unique_id' => $system_user->provider_unique_id,
@@ -160,7 +239,7 @@ public function edit_system_user(Request $request)
 {
     $validator = Validator::make($request->all(), [
         'id' => 'required',
-        'id' => 'required',
+        // 'id' => 'required',
     ]);
 
     if ($validator->fails()) {
@@ -171,7 +250,7 @@ public function edit_system_user(Request $request)
     //$provider_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
 
     $provider_id = Auth::user()->id;
-    $provider_id = Auth::user()->id;
+    // $provider_id = Auth::user()->id;
 
     $sytem_user_list = MedicalProviderRegistrater::where('roll_id', '!=', 1)
         ->where('status', 'active')
@@ -187,7 +266,7 @@ public function edit_system_user(Request $request)
             'name' => $sytem_user_list->company_name,
             'email' => $sytem_user_list->email,
             'previlages' => $sytem_user_list->role->privilege,
-            'role_id' => $sytem_user_list->role->id,
+            'roll_id' => $sytem_user_list->role->id,
             'role_name' => $sytem_user_list->company_name,
         ];
 // dd($selected_data);
@@ -205,9 +284,9 @@ public function edit_system_user(Request $request)
 }
 
 public function delete_system_user(Request $request)
-{
+{ 
     $validator = Validator::make($request->all(), [
-        'id' => 'required|string',
+        'id' => 'required',
     ]);
 
     if ($validator->fails()) {
@@ -215,9 +294,11 @@ public function delete_system_user(Request $request)
     }
 
     $provider_id = Auth::user()->id;
-    $provider_id = Auth::user()->id;
-    $system_user = MedicalProviderRegistrater::where('id', $request->id)->update('status','delete');
+    // $provider_id = Auth::user()->id;
+    $system_user = MedicalProviderRegistrater::where('id', $request->id)->update(['status' => 'delete']);
+    $system_user2 = CommonUserLoginTable::where('user_id', $request->id)->update(['status' => 'delete']);
 
+    // dd($system_user2);
 
     if (!is_null($system_user)) {
         return response()->json([
