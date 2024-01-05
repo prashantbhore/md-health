@@ -570,7 +570,12 @@
             $.validator.addMethod("noSpace", function(value, element) {
                 return $.trim(value).length !== 0;
             }, "This field cannot contain only spaces");
-
+    
+            // Add custom validation method for discount percentage
+            $.validator.addMethod("maxDiscount", function(value, element) {
+                return parseFloat(value) <= 100;
+            }, "Discount percentage cannot be more than 100%");
+    
             // Add validation rules and messages
             $('#package_add').validate({
                 rules: {
@@ -586,6 +591,10 @@
                     },
                     treatment_price: {
                         required: true
+                    },
+                    package_discount: {
+                        required: true,
+                        maxDiscount: true // Use the custom validation method for discount percentage
                     }
                     // Add more rules for other fields as needed
                 },
@@ -602,6 +611,9 @@
                     },
                     treatment_price: {
                         required: "Please enter a treatment price"
+                    },
+                    package_discount: {
+                        required: "Please enter a Discount percentage"
                     }
                     // Add more messages for other fields as needed
                 },
@@ -612,6 +624,7 @@
             });
         });
     </script>
+    
 
     <script>
         $(document).ready(function() {
@@ -874,7 +887,7 @@
 
                 if (selectedtourid) {
                     $.ajax({
-                        url: base_url + '/api/md-get-acommodition-price',
+                        url: base_url + '/api/md-get-tour-price',
                         type: 'POST',
                         data: {
                             id: selectedtourid
@@ -885,7 +898,7 @@
                         },
                         success: function(response) {
                             console.log(response);
-                            $('#tour_details_input').val(response.price.hotel_per_night_price);
+                            $('#tour_details_input').val(response.price.tour_price);
                             updateAccommodationPrice();
                         },
                         error: function(xhr, status, error) {
@@ -924,7 +937,7 @@
                             transportationAccommodationPrice) &&
                         $.isNumeric(tourPrice) && $.isNumeric(visaServicePrice) && $.isNumeric(translationPrice) &&
                         $.isNumeric(ambulanceServicePrice) && $.isNumeric(ticketPrice))) {
-                    alert('Please enter numbers only.');
+                    // alert('Please enter numbers only.');
                     return;
                 }
 
@@ -937,7 +950,7 @@
 
                 // Check if discount percentage is valid
                 if (packageDiscountPercentage < 0 || packageDiscountPercentage > 100) {
-                    alert('Please enter a discount percentage between 0 and 100.');
+                    // alert('Please enter a discount percentage between 0 and 100.');
                     return;
                 }
 
@@ -958,7 +971,7 @@
             }
 
             // Event listener for changes in dependent fields including package discount
-            $('#treatment_price, #hotel_acommodition_price, #transportation_acommodition_price, #tour_price, #visa_service_price, #translation_price, #ambulance_service_price, #ticket_price, #package_discount')
+            $('#treatment_price,#other_services, #hotel_acommodition_price, #transportation_acommodition_price, #tour_price, #visa_service_price, #translation_price, #ambulance_service_price, #ticket_price, #package_discount')
                 .on('input', function() {
                     updatePackagePrice();
                 });
