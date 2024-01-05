@@ -25,6 +25,8 @@ class MedicalProviderReports extends Controller
     public function index(){
 
 
+
+
         $token = Session::get( 'login_token' );
 
         $apiUrl = url('api/md-customer-package-purchage-list');
@@ -53,6 +55,8 @@ class MedicalProviderReports extends Controller
 
   public function addReport(Request $request){
 
+    dd($request->all());
+     
 
     $token = Session::get('login_token');
 

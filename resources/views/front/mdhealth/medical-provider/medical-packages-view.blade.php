@@ -884,6 +884,7 @@
                             'Authorization': 'Bearer ' + bearer_token
                         },
                         success: function(response) {
+                            console.log(response);
                             $('#tour_details_input').val(response.price.hotel_per_night_price);
                             updateAccommodationPrice();
                         },
