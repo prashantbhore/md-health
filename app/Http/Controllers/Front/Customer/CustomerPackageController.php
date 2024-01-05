@@ -71,7 +71,6 @@ class CustomerPackageController extends Controller
             $packages = $packages->orWhere('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
         }
         $packages = $packages->get();
-        return  $packages;
         if (!empty($packages)) {
             foreach ($packages as $key => $value) {
                 $packages[$key]['id'] = !empty($value->id) ? $value->id : '';
@@ -241,6 +240,7 @@ class CustomerPackageController extends Controller
 
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
+            'purchase_id' => 'required',
             'package_percentage_price' => 'required',
             'sale_price' => 'required',
             'pending_payment' => 'required',
@@ -248,6 +248,7 @@ class CustomerPackageController extends Controller
         $data = array('package_id' => $request->package_id,
             'package_percentage_price' => $request->package_percentage_price,
             'sale_price' => $request->sale_price,
+            'purchase_id' => $request->purchase_id,
             'pending_payment' => $request->pending_payment,
         );
         // dd($data);

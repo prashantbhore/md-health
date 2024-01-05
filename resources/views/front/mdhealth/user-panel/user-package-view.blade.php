@@ -38,6 +38,8 @@
             $payment_time_and_date = '';
         }
 
+        // dd($data);
+
     @endphp
 @endsection
 @extends('front.layout.layout2')
@@ -831,7 +833,8 @@
                                                     name="sale_price"value="{{ !empty($treatment_information['sale_price']) ? $treatment_information['sale_price'] : '' }}">
                                                 <input type="hidden"
                                                     name="pending_payment"value="{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}">
-
+                                                <input type="hidden"
+                                                    name="purchase_id"value="{{ !empty($data['purchase_id']) ? $data['purchase_id'] : '' }}">
                                                 <div class="user-details-footer">
                                                     <h6 class="section-heading">You paid</h6>
                                                     <div class="user-payment-date mb-3">
