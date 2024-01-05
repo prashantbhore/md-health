@@ -101,7 +101,7 @@ return [
             'model' => App\Models\MedicalProviderRegistrater::class,
         ],
 
-        'md_health_medical_vendor_registers' =>[
+        'md_vendor_register' =>[
             'driver' => 'eloquent',
             'model' => App\Models\VendorRegister::class,
         ],

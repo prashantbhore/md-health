@@ -37,36 +37,48 @@
                                     <h6 class="section-heading">Add New Reports</h6>
                                 </div>
 
-                                <div class="form-group  mb-3 ">
-                                    <label class="form-label">Report Title</label>
-                                    <input type="text" class="form-control" placeholder="Write Here Please">
-                                </div>
-
-
-                                <div class="form-group d-flex flex-column mb-5">
-                                    <label class="form-label">Patient</label>
-                                    <select name="" id="">
-                                        <option value="">Choose Patient</option>
-                                        <option value="">Patient 1</option>
-                                        <option value="">Patient 2</option>
-                                        <option value="">Patient 3</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Upload Report File</label>
-                                    <div class="form-group">
-                                        <input type="file" class="form-control text-dark">
+                                <form method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group  mb-3 ">
+                                        <label class="form-label">Report Title</label>
+                                        <input type="text" name="report_title" class="form-control"
+                                            placeholder="Write Here Please">
                                     </div>
-                                    <div class="prev-img-div">
-                                        <img src="front/assets/img/default-img.png" alt="image">
-                                    </div>
-                                </div>
 
-                                <div class="section-btns mb-5">
-                                    <a href="javascript:void(0);"
-                                        class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
-                                </div>
+                                    {{-- {{dd($patient_list)}} --}}
+
+                                    <div class="form-group d-flex flex-column mb-5">
+                                        <label class="form-label">Patient</label>
+                                        <select name="customer_package_purchage_id" id="">
+                                            <option value="">Choose Patient</option>
+                                            @if (!empty($patient_list))
+                                                @foreach ($patient_list as $patient)
+                                                    <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
+                                                        {{ !empty($patient['name']) ? $patient['name'] : '' }}</option>
+                                                @endforeach
+                                            @endif
+
+                                            {{-- <option value="">Patient 2</option>
+                                        <option value="">Patient 3</option> --}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Upload Report File</label>
+                                        <div class="form-group">
+                                            <input type="file" name="report_path" class="form-control text-dark">
+                                        </div>
+                                        <div class="prev-img-div">
+                                            <img src="front/assets/img/default-img.png" alt="image">
+                                        </div>
+                                    </div>
+
+                                    <div class="section-btns mb-5">
+                                        <a href="javascript:void(0);"
+                                            class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
+                                    </div>
+
+                                </form>
 
                             </div>
                         </div>

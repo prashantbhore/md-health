@@ -207,7 +207,9 @@ class SalesController extends Controller
 
        $active_sales = $this->apiService->getData($token, $apiUrl, $body, $method);
 
-        foreach ($active_sales as $activeSale) {
+       if(!empty($active_sales)){
+
+        foreach ($active_sales as $activeSale){
        
             $resultHtml .= '<div class="treatment-card df-start w-100 mb-3">';
             $resultHtml .= '<div class="row card-row align-items-center">';
@@ -230,6 +232,7 @@ class SalesController extends Controller
             $resultHtml .= '</div>';
             
         }
+      }
 
         return $resultHtml;
     }

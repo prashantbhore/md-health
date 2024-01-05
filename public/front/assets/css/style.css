@@ -13,6 +13,11 @@
     src: url("../fonts/campton/CamptonBold.otf");
 }
 
+@font-face {
+    font-family: "CamptonLight";
+    src: url("../fonts/campton/CamptonLight.otf");
+}
+
 :root {
     --form-control-color: #4cdb06;
 }
@@ -63,6 +68,25 @@
 }
 
 /* UTILITY CLASSES */
+.card-h3 {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.card-h2 {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
 
 .card-h1 {
     color: #000;
@@ -370,6 +394,10 @@ select {
     padding: 100px 0;
 }
 
+.pt-300px {
+    padding-top: 300px;
+}
+
 .form-check-input:focus {
     box-shadow: none;
 }
@@ -464,8 +492,8 @@ select {
 
 .btn-md {
     font-size: 14px;
-    font-weight: 600;
-    font-family: CamptonBook;
+    font-weight: 700;
+    font-family: Campton;
     line-height: 16px;
     letter-spacing: -0.04em;
     width: 149px;
@@ -806,6 +834,7 @@ select {
 .authentication .nav-tabs .nav-link.active {
     border-bottom: 2px solid #4CDB06;
     font-weight: 700;
+    font-family: "Campton";
 
 }
 
@@ -870,6 +899,7 @@ select {
     line-height: normal;
     letter-spacing: -0.64px;
 }
+
 
 .reg-title {
     color: #4CDB06;
@@ -1511,7 +1541,7 @@ select option {
 }
 
 .treatment-card .btn-active {
-    width: 130px;
+    width: 150px;
     height: 24px;
     border-radius: 2px;
     background: #4CDB06;
@@ -1520,12 +1550,12 @@ select option {
     font-size: 10px;
     /* font-weight: 700; */
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
     text-decoration: none;
 }
 
 .dashboard-card-title span.in-progress {
-    width: 130px;
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1538,11 +1568,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
 .trmt-card-footer span.in-progress {
-    width: 130px;
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1555,11 +1585,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
-.trmt-card-footer span.active {
-    width: 130px;
+.trmt-card-footer .active {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1572,11 +1602,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
-.trmt-card-body span.active {
-    width: 130px;
+.trmt-card-body .active {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1589,11 +1619,11 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 32px;
+    padding: 5px;
 }
 
-.trmt-card-footer span.cancel {
-    width: 130px;
+.trmt-card-footer .cancel {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1606,12 +1636,12 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 
 }
 
-.trmt-card-body span.cancel {
-    width: 130px;
+.trmt-card-body .cancel {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -2453,7 +2483,7 @@ span.popup-msg.active {
     flex-shrink: 0;
 
     border-radius: 5px;
-    border: 1px solid #D6D6D6;  
+    border: 1px solid #D6D6D6;
     color: #000;
 
     font-size: 14px;
@@ -2471,6 +2501,7 @@ span.popup-msg.active {
 .appTime .btn:focus {
     border: 1px solid #D6D6D6;
 }
+
 .appTime button:hover {
     background: #F31D1D;
     color: #fff;
@@ -2522,4 +2553,243 @@ span.popup-msg.active {
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.88px;
+}
+
+.handset {
+    position: absolute;
+    left: 40%;
+    bottom: 65px;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-item .progress {
+    border-radius: 2px;
+    background: #FFF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.accordion-item .progress-bar {
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    background: #4CDB06;
+}
+
+.accordion .accordion-item {
+    border: none;
+}
+
+.accordion-button {
+    border-radius: 3px;
+    background: #F6F6F6;
+    margin-bottom: 1rem;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000;
+    background-color: #F6F6F6;
+    box-shadow: none;
+}
+
+.membership-card .progress {
+    height: 2rem;
+    font-size: .75rem;
+    background-color: #D9D9D9;
+    border-radius: 50px;
+}
+
+.membership-card .progress-bar {
+    background-color: #4CDB06;
+    border-radius: 50px;
+    font-weight: 700;
+    color: #000;
+}
+
+.mem-type {
+    color: #D9D9D9;
+    text-align: center;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.mem-type span {
+    color: #D9D9D9;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.text-h1 {
+    color: #000;
+    font-family: Campton;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 53px;
+    /* 123.256% */
+    letter-spacing: -1.72px;
+}
+
+.text-green-h1b {
+    color: #4CDB06;
+    font-family: Campton;
+    font-size: 33px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.32px;
+}
+
+.text-p1-gray {
+    color: #979797;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    text-align: left;
+}
+
+.login-form #recaptcha-container {
+    padding: 1rem 2rem;
+}
+
+.tc label a {
+    color: #4CDB06;
+}
+
+.text-black {
+    color: #000;
+}
+
+.text-black:hover {
+    color: #000;
+}
+
+.p-abs {
+    position: absolute;
+    right: -75px;
+    top: 0;
+}
+
+.tab-content .form.text-start {
+    padding: 0 57px;
+}
+
+.tab-content select {
+    color: #979797 !important;
+}
+
+.tab-content option:not(:first-of-type) {
+    color: black;
+}
+
+.tab-content option:checked {
+    color: #000 !important;
+}
+
+.footer .card-text {
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 49px;
+    letter-spacing: -0.72px;
+    margin-bottom: 1rem;
+}
+
+.footer .card-text span {
+    font-weight: 700;
+}
+
+.footer .contact-no {
+    color: #FFF;
+    text-align: right;
+    font-family: CamptonBook;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 49px;
+    /* 188.462% */
+    letter-spacing: -1.04px;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer ul li {
+    color: #878787;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    margin-bottom: 1rem;
+}
+
+.mext {
+    color: #878787;
+    text-align: right;
+    font-family: CamptonLight;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: -0.44px;
+}
+
+.fl-text {
+    width: 130px;
+    color: #878787;
+    font-family: CamptonBook;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+.bottom-links li {
+    margin-bottom: 0 !important;
+
+}
+.bottom-links li a {
+    color: #878787;
+    text-align: right;
+    font-family: CamptonBook;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    text-decoration-line: underline;
+}
+
+.copyText {
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }

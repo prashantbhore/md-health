@@ -30,8 +30,8 @@
             <li class="nav-item mpReportsLi">
                 <a class="nav-link mpReports" href="{{url('reports')}}">Reports</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Membership</a>
+            <li class="nav-item mpMembershipLi">
+                <a class="nav-link mpMembership" href="{{url('membership')}}">Membership</a>
             </li>
 
             <li class="nav-item">

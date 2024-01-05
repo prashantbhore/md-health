@@ -50,13 +50,17 @@
   <!-- jQuery Validate -->
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-  
+
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/css/datepicker-bs5.min.css"> -->
   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- DATE-PICKER -->
+  <link href="{{URL::asset('front/assets/css/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
 
   <title>MDhealth</title>
 
   <style>
+    
     .error {
       color: red !important;
       font-size: 14px !important;

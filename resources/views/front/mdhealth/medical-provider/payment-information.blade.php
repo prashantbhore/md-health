@@ -30,21 +30,31 @@
                             <span>MY Bank Account Details</span>
                             <img src="{{asset('front/assets/img/GoldMember.svg')}}" alt="">
                         </h5>
-                        <div class="card-body">
-                            <div class="form-group mb-3">
-                                <label class="form-label">Your Company IBAN</label>
-                                <div class="input-icon-div">
-                                    <input type="text" class="form-control" placeholder="TR00 0000 0000 0000 0000 0000 00">
-                                </div>
-                            </div>
 
-                            <div class="form-group mb-3">
-                                <label class="form-label">Company Name</label>
-                                <div class="input-icon-div">
-                                    <input type="text" class="form-control" placeholder="MDhealth Ltd. Sti.">
+                        <form method="POST" action="{{ route('store.vendor.bank.details') }}">
+                            @csrf
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Your Company IBAN</label>
+                                    <div class="input-icon-div">
+                                        <input type="text" name="account_number" class="form-control" placeholder="TR00 0000 0000 0000 0000 0000 00">
+                                    </div>
+                                </div>
+                        
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Company Name</label>
+                                    <div class="input-icon-div">
+                                        <input type="text" name="bank_name" class="form-control" placeholder="MDhealth Ltd. Sti.">
+                                    </div>
+                                </div>
+                        
+                                <div class="form-group mb-3">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+                        
+
                     </div>
                 </div>
 
@@ -53,19 +63,19 @@
                         <div class="col-md-4">
                             <div class="payment-card bg-warning">
                                 <h6 class="text-dark fsb-2">Total Payment</h6>
-                                <h5 class="text-dark fsb-1">198.927,03 ₺</h5>
+                                <h5 class="text-dark fsb-1">{{$total_business_amount}} ₺</h5>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="payment-card bg-green" >
-                                <h6 class="text-dark fsb-2">Total Payment</h6>
-                                <h5 class="text-dark fsb-1">198.927,03 ₺</h5>
+                                <h6 class="text-dark fsb-2">Total Completed Payment</h6>
+                                <h5 class="text-dark fsb-1">{{ $total_completed_amount}} ₺</h5>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="payment-card bg-orange">
-                                <h6 class="text-white fsb-2">Total Payment</h6>
-                                <h5 class="text-white fsb-1">198.927,03 ₺</h5>
+                                <h6 class="text-white fsb-2">Total Pending Payment</h6>
+                                <h5 class="text-white fsb-1">{{$total_pending_amount}} ₺</h5>
                             </div>
                         </div>
                     </div>
@@ -92,7 +102,46 @@
                         </div>
 
                         <div class="transaction-list">
-                            <div class="treatment-card df-start w-100 mb-3">
+                           @if($payment_list)
+                           @foreach ($payment_list as $payment)
+
+
+                           <div class="treatment-card df-start w-100 mb-3">
+                            <div class="row card-row align-items-center">
+                                <div class="col-md-2 df-center px-0">
+                                    <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                                </div>
+                                <div class="col-md-6 justify-content-start ps-0">
+                                    <div class="trmt-card-body">
+                                        <h5 class="dashboard-card-title">Payment ID: #{{!empty($payment['payment_id'])?$payment['payment_id']:''}}</h5>
+                                        <h5 class="mb-0 fw-500">{{!empty($payment['amount'])?$payment['amount']:''}} ₺</h5>
+                                    </div>
+                                </div>
+                                @if($payment['payment_status']=='pending')
+                                <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                    <div class="trmt-card-footer">
+                                        <span class="in-progress">Pending</span>
+                                    </div>
+                                </div>
+                                @endif
+
+
+                                @if($payment['payment_status']=='completed')
+                                <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                    <div class="trmt-card-footer">
+                                        <span class="active">Completed</span>
+                                    </div>
+                                </div>
+                               @endif
+
+                            </div>
+                        </div>
+                               
+                           @endforeach
+                           @endif
+
+
+                            {{-- <div class="treatment-card df-start w-100 mb-3">
                                 <div class="row card-row align-items-center">
                                     <div class="col-md-2 df-center px-0">
                                         <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
@@ -110,6 +159,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="treatment-card df-start w-100 mb-3">
                                 <div class="row card-row align-items-center">
                                     <div class="col-md-2 df-center px-0">
@@ -127,7 +177,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
+
+
+
                         </div>
                         
                     </div>

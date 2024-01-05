@@ -26,7 +26,7 @@
 
                             </div>
                         </div>
-                        <div class="df-center gap-3 handset">
+                        <div class="df-center gap-4 handset">
                             <img src="{{asset('front/assets/img/mic.png')}}" alt="">
                             <img src="{{asset('front/assets/img/call.png')}}" alt="">
                             <img src="{{asset('front/assets/img/cam.png')}}" alt="">

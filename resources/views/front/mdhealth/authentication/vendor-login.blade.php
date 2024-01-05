@@ -13,11 +13,16 @@
             color: #000 !important;
             line-height: 2 !important;
         }
+        .footer {
+        display: none;
+    }
     </style>
     <div class="content-wrapper" id="regdiv">
         <div class="container text-center my-5 authentication">
+        <div class="position-relative">
             <h3 class="mb-3 form-heading">Select Account Type</h3>
-
+            <h1 class="mb-3 form-heading p-abs">Go Super Admin Panel</h1>
+        </div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -44,114 +49,133 @@
                     <div class="row pt-4">
                         <div class="col-md-6 bod-right pt-4">
                             <div class="d-flex align-items-center gap-3 pt-5 pb-4">
-                                <a href="{{ url('/') }}">
-                                    <img src="{{ 'front/assets/img/back.svg' }}" alt="">
-                                </a>
-                                <h1 class="reg-title mb-0">Create Provider Account</h1>
+                                <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}"
+                                        alt=""></a>
+                                <h1 class="reg-title mb-0">Create Vendor Account</h1>
+                                
                             </div>
-                            <div class="form text-start px-5">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="CompanyName" class="form-label">*Company Name</label>
-                                            <input type="text" class="form-control" placeholder="Company Name">
+                            <div class="form text-start">
+                                <form id="myFormProvider">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="CompanyName" class="form-label">*Company Name</label>
+                                                <input type="text" class="form-control" name="company_name"
+                                                    id="company_name" placeholder="Company Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="city_id" class="form-label">*City</label>
+                                                <select id="city_id" name="city_id" class="form-select">
+                                                    <option value="" selected disabled>Choose</option>
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->id }}">{{ $city->city_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">*E-mail</label>
+                                                <input type="text" class="form-control" name="email" id="email"
+                                                    placeholder="E-mail">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">*Phone</label>
+                                                <input type="text" class="form-control" name="phone" id="phone"
+                                                    placeholder="Phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="TAXNumber" class="form-label">*TAX Number</label>
+                                                <input type="text" class="form-control" name="tax_no" id="tax_no"
+                                                    placeholder="TAX Number">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="*Company Address" class="form-label">*Company Address</label>
+                                                <textarea name="company_address" id="company_address" cols="" rows="5" class="form-control"
+                                                    placeholder="Company Address"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3 hide-eye-div">
+                                                <label for="password" class="form-label">*Password</label>
+                                                <input type="password" class="form-control" name="password" id="password"
+                                                    placeholder="Minimum 8 characters">
+                                                <span toggle="#password"
+                                                    class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3 hide-eye-div">
+                                                <label for="re-password" class="form-label">*Re-Password</label>
+                                                <input type="password" class="form-control" name="repassword"
+                                                    id="repassword" placeholder="Minimum 8 characters">
+                                                <span toggle="#repassword"
+                                                    class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="*Upload Company Logo" class="form-label">*Upload Company
+                                                    Logo</label>
+                                                <input type="file" class="form-control" name="company_logo_image_path"
+                                                    id="company_logo_image_path" placeholder="*Upload Company Logo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-5">
+                                                <label for="*Upload Company License" class="form-label">*Upload Company
+                                                    License</label>
+                                                <input type="file" class="form-control"
+                                                    name="company_licence_image_path" id="company_licence_image_path"
+                                                    placeholder="*Upload Company License">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="form-check tc">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="UserflexCheckDefault">
+                                                <label class="form-check-label" for="UserflexCheckDefault">
+                                                    I accept <a href="#">Terms and Condition</a> & I agree to the <a
+                                                        href="#">User Data Consent.</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div id="recaptcha-container"></div>
+                                        <span id="error" class="text-danger"></span>
+                                        <div class="col-md-12 text-center d-flex flex-column gap-3">
+                                            <button class="btn btn-md w-100" type="button" id="medproreg"
+                                                style="height: 47px;">Create
+                                                Account</button>
+                                            <label for="" class="mt-auto">Already have an account?</label>
+                                            <a href="{{ url('sign-in-web') }}" class="text-black fw-bold">Sign In</a>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="city" class="form-label">*City</label>
-                                            <select name="city" id="city" class="form-select">
-                                                <option value="">Choose</option>
-                                                <option value="">Istanbul</option>
-                                                <option value="">Ankara</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label">*E-mail</label>
-                                            <input type="text" class="form-control" placeholder="E-mail">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="phone" class="form-label">*Phone</label>
-                                            <input type="text" class="form-control" placeholder="Phone">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="TAXNumber" class="form-label">*TAX Number</label>
-                                            <input type="text" class="form-control" placeholder="TAX Number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="gender" class="form-label">*Country</label>
-                                            <select name="country" id="country" class="form-select">
-                                                <option value="">Choose</option>
-                                                <option value="">Istanbul</option>
-                                                <option value="">Ankara</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label for="*Company Address" class="form-label">*Company Address</label>
-                                            <textarea name="" id="" cols="" rows="5" class="form-control"
-                                                placeholder="Company Address"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3 hide-eye-div">
-                                            <label for="password" class="form-label">*Password</label>
-                                            <input type="password" class="form-control" placeholder="Minimum 8 characters" id="txtPassword" name="txtPassword">
-                                            <span toggle="#txtPassword" class="fa fa-fw fa-eye field-icon toggle-password "></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3 hide-eye-div">
-                                            <label for="re-password" class="form-label">*Re-Password</label>
-                                            <input type="password" class="form-control" placeholder="Minimum 8 characters" id="txtRePassword" name="txtRePassword">
-                                            <span toggle="#txtRePassword" class="fa fa-fw fa-eye field-icon toggle-password "></span>
-                                        </div>
-                                    </div>
-                                    <hr style="height:1px;background-color: #4CDB06;opacity:1" >
-                                    <div class="col-md-12">
-                                        <div class="mb-3 hide-eye-div">
-                                            <label for="*Upload Company Logo" class="form-label">*Upload Company
-                                                Logo</label>
-                                            <input type="file" class="form-control"
-                                                placeholder="*Upload Company Logo">
-                                            <span class="fa fa-cloud-upload"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3 hide-eye-div">
-                                            <label for="*Upload Company License" class="form-label">*Upload Company
-                                                License</label>
-                                            <input type="file" class="form-control"
-                                                placeholder="*Upload Company License">
-                                            <span class="fa fa-cloud-upload"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="UserflexCheckDefault">
-                                            <label class="form-check-label" for="UserflexCheckDefault">
-                                                I accept <a href="#">Terms and Condition</a> & I agree to the <a
-                                                    href="#">User Data Consent</a>.
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-md w-100" style="height: 47px;">Create Account</button>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-4">
+                    <div>
+                        <img src="{{asset('front/assets/img/MDHealth.svg')}}" alt="" />
+                    </div>
+                    <h5 class="text-h1">Get your reliable & affordable</h5>
+                    <h4 class="text-green-h1b">Treatment Packages</h4>
+                    <p class="text-p1-gray">We are partnered with the top health service providers and vendors that gives you the best health experience!</p>
+
+                </div>
+            </div>
                     </div>
                 </div>
             </div>
@@ -185,23 +209,32 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
-                        <button class="btn btn-md btn-text w-75 mb-3" type="button" onclick="verify()"
-                            style="height: 47px;">Sign
-                            In</button>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()"
+                                style="height: 47px;">Sign In</button>
+                        </div>
                     </form>
+                    <script>
+                        function moveToNext(current, nextId) {
+                            if (current.value.length === current.maxLength) {
+                                document.getElementById(nextId).focus();
+                            }
+                        }
+                    </script>
+
 
 
 
@@ -251,10 +284,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-      
-
         $(document).on('click', '#regcustuser', function() {
-
+            var base_url = $('#base_url').val();
             if ($('#mycustomerForm').valid()) {
                 var email = $('#email').val();
                 var phone = $('#phone').val();
@@ -266,7 +297,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/email-or-mobile-exist',
+                    url: base_url + '/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -307,7 +338,7 @@
                     }
                 });
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/email-or-mobile-exist',
+                    url: base_url + '/email-or-mobile-exist',
                     method: 'POST',
                     data: {
                         email: email,
@@ -338,7 +369,6 @@
 
         window.onload = function() {
             render();
-            // renderSecondForm();
         };
 
         function render() {
@@ -347,10 +377,6 @@
 
         }
 
-        // function renderSecondForm() {
-        //     window.recaptchaVerifier2 = new firebase.auth.RecaptchaVerifier('recaptcha-container2');
-        //     recaptchaVerifier2.render();
-        // }
 
         function sendOTP() {
             var number = $("#phone").val();
@@ -363,6 +389,12 @@
                 $("#regdiv").hide();
             }).catch(function(error) {
                 $("#error").text(error.message);
+                if (error.message=="TOO_MANY_ATTEMPTS_TRY_LATER") {
+                    $("#error").text("Too many attempts try again later");
+                }
+                //  else {
+                    
+                // }
                 $("#error").show();
             });
         }
@@ -381,13 +413,7 @@
                     var user = result.user;
                     $("#successOtpAuthot").text("OTP verified");
                     $("#successOtpAuthot").show();
-                    // var user_type = $('#user_type').val();
-                    // console.log(user_type);
-                    // alert(user_type);
-                    // var password = $('#password').val();
-                    // var formData = $('#mycustomerForm').serialize();
                     var formData = $('#myFormProvider').serialize();
-                    // $('#form1').(serialize);
                     console.log(formData);
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     $.ajaxSetup({
@@ -397,20 +423,15 @@
                     });
 
                     $.ajax({
-                        // url: 'http://127.0.0.1:8000/md-customer-register',
-                        url: 'http://127.0.0.1:8000/md-register-medical-provider',
+                        url: base_url + '/md-vendor-register',
                         method: 'POST',
                         data: formData,
-                        //  {
-                        //     // email: email, 
-                        //     formData: formData, 
-                        //     password: password 
-                        // },
+                       
                         success: function(response) {
                             console.log(response);
                             if (response.url !== undefined) {
                                 // alert(response.url);
-                                window.location.href = 'http://127.0.0.1:8000' + response.url;
+                                window.location.href = base_url + response.url;
                                 $('#error').text('');
                             } else {
                                 // $('#number').val('');
@@ -515,12 +536,12 @@
                         minlength: 8,
                         spaceValidation: true,
                     },
-                    // company_logo_image_path: {
-                    //     required: true,
-                    // },
-                    // company_licence_image_path: {
-                    //     required: true,
-                    // },
+                    company_logo_image_path: {
+                        required: true,
+                    },
+                    company_licence_image_path: {
+                        required: true,
+                    },
                     UserflexCheckDefault: {
                         required: true,
                     },
@@ -706,14 +727,13 @@
 
     <script>
         $(".toggle-password").click(function() {
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        var input = $($(this).attr("toggle"));
-        if (input.attr("type") == "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
-        }
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
         });
     </script>
-   
 @endsection

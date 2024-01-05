@@ -229,7 +229,7 @@
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const bearer_token = '{{ Session::get('login_token') }}';
-
+            // alert(base_url);
             $.ajax({
                 url: base_url + '/api/md-delete-hotel',
                 type: 'POST',
@@ -243,11 +243,13 @@
                 success: function(response) {
                     if (response.status == 200) {
                         $('#div_' + id).css('display', 'none');
-                        // alert(response.message);
-                        success_toast("success", response.message);
-                        // alert(response.message);
+                        toastr.options = {
+                            "positionClass": "toast-bottom-right",
+                            "timeOut": "5000",
+                        };
+                        toastr.success(response.message);
                     } else {
-                        fail_toast("error", response.message);
+                        toastr.error(response.message);
                     }
                     console.log('Success:', response.message);
                 },
@@ -278,11 +280,13 @@
                 success: function(response) {
                     if (response.status == 200) {
                         $('#divt_' + id).css('display', 'none');
-                        // alert(response.message);
-                        success_toast("success", response.message);
-                        // alert(response.message);
+                        toastr.options = {
+                            "positionClass": "toast-bottom-right",
+                            "timeOut": "5000",
+                        };
+                        toastr.success(response.message);
                     } else {
-                        fail_toast("error", response.message);
+                        toastr.error(response.message);
                     }
                     console.log('Success:', response.message);
                 },
@@ -314,11 +318,13 @@
                 success: function(response) {
                     if (response.status == 200) {
                         $('#divtr_' + id).css('display', 'none');
-                        // alert(response.message);
-                        success_toast("success", response.message);
-                        // alert(response.message);
+                        toastr.options = {
+                            "positionClass": "toast-bottom-right",
+                            "timeOut": "5000",
+                        };
+                        toastr.success(response.message);
                     } else {
-                        fail_toast("error", response.message);
+                        toastr.error(response.message);
                     }
                     console.log('Success:', response.message);
                 },
