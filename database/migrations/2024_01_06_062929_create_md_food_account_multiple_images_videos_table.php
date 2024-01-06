@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_add_transportation_details', function (Blueprint $table) {
+        Schema::create('md_food_account_multiple_images_videos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('vehicle_brand_id')->nullable();
-            $table->string('vehicle_model_id')->nullable();
-            $table->bigInteger('comfort_level_id')->nullable();
-            $table->string('vehicle_per_day_price')->nullable();
-            $table->string('vehicle_image_path')->nullable();
-            $table->string('vehicle_image_name')->nullable();
-            $table->string('other_services')->nullable();
-            $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
+            $table->string('food_id')->nullable();
+            $table->string('provider_image_path')->nullable();
+            $table->string('provider_image_name')->nullable();
+            $table->string('provider_file_type')->nullable();                    
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('md_add_transportation_details');
+        Schema::dropIfExists('md_food_account_multiple_images_videos');
     }
 };

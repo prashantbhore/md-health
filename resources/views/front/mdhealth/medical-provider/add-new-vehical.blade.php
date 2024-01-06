@@ -119,7 +119,7 @@
 
                                         </div>
                                     </div>
-
+{{-- {{dd($transportation_details)}} --}}
                                     <div class="form-group mb-3">
                                         <label class="form-label">Vehicle Picture</label>
                                         <div class="form-group">
@@ -128,8 +128,9 @@
                                                 oninput="pic.src=window.URL.createObjectURL(this.files[0])">
                                         </div>
                                         <div class="prev-img-div">
-                                            <img src="front/assets/img/default-img.png" alt="image" id="pic">
-                                            <input type="hidden" name="old_image" id="old_image" value="">
+                                            <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/default-img.png' }}" alt="image"
+                                            id="pic">
+                                            <input type="hidden" name="old_image" id="old_image" value="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : '' }}">
                                         </div>
                                     </div>
 

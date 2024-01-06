@@ -358,6 +358,102 @@ public function email_or_mobile_exist(Request $request){
                     }
                 }
             }
+
+
+            elseif ($user_type == 'customer') {
+                // $apiUrl = url('/api/md-customer-login');
+
+                // $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+                // $response = app()->handle($newRequest);
+
+                // $respo = $response->getContent();
+                // $responseData = json_decode($respo, true);
+                // // dd($responseData);
+                // Session::put('login_token', $responseData['success_token']['token']);
+
+                if (
+                    Auth::guard('md_customer_registration')->attempt([
+                        'email' => $request->email,
+                        'password' => $request->password,
+                        'status' => 'active',
+                    ])
+                ) {
+                    $user_datacust = array(
+                        'platform_type' => 'web',
+                        'email' => $request->get('email'),
+                        'password' => $request->get('password')
+                    );
+
+                    $apiUrl = url('/api/md-customer-login');
+                    $method = 'POST';
+                    $body = $user_datacust;
+
+                    $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+                    // dd($responseData);
+                    // dd( $responseData['success_token']);
+                    Session::put('login_token', $responseData['success_token']['token']);
+
+                    $providers = Auth::guard('md_customer_registration')->user();
+
+                    if ($login_type == 'login') {
+                        $otpcheck = CustomerRegistration::where('id', $providers->id)
+                            ->where('status', 'active')
+                            ->first();
+
+                        if ($otpcheck) {
+                            $user_id = Auth::guard('md_customer_registration')->user()->id;
+                            $user_email = Auth::guard('md_customer_registration')->user()->email;
+                            $user = Auth::guard('md_customer_registration')->user();
+
+                            Session::put('MDCustomer*%', $user_id);
+                            Session::put('email', $user_email);
+                            Session::put('user', $user);
+                            // dd(Session::all());
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Login successfully.',
+                                // 'url' => '/user-profile',
+                                'url' => '/my-profile'
+                            ] );
+                        } else {
+
+                            return response()->json( [
+                                'status' => 404,
+                                'message' => 'Credencials not match',
+                                'url' => '/sign-in-web',
+                            ] );
+                        }
+                    } else {
+
+                        $otpcheck = CustomerRegistration::where('id', $providers->id)
+                            ->where('status', 'active')
+                            ->first();
+
+                        if ($otpcheck) {
+                            // dd($otpcheck);
+                            $user_id = Auth::guard('md_customer_registration')->user()->id;
+                            $user_email = Auth::guard('md_customer_registration')->user()->email;
+                            $user = Auth::guard('md_customer_registration')->user();
+
+                            Session::put('MDCustomer*%', $user_id);
+                            Session::put('email', $user_email);
+                            Session::put('user', $user);
+                            return response()->json( [
+                                'status' => 200,
+                                'message' => 'Profile created successfully.',
+                                'url' => '/my-profile',
+                            ] );
+                        } else {
+                            return response()->json( [
+                                'status' => 404,
+                                'message' => 'Credencials not match',
+                                'url' => '/sign-in-web',
+                            ] );
+                        }
+
+                    }
+                }
+            }
         }
 
         return redirect('/sign-in-web')->with('error', 'Invalid Login Details!' );

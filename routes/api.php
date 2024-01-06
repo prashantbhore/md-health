@@ -21,9 +21,9 @@ use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
+use App\Http\Controllers\api\vendor\UpdateVendorProfileController;
 use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\food\UpdateFoodProfileController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,6 +47,10 @@ Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']
 
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
+
+
+// get treatment list
+Route::get('md-treatment-list', [CommonController::class, 'get_treatment_list']);
 
 // get city list
 Route::post('md-city-list', [CommonController::class, 'get_cities_list']);
@@ -74,8 +78,10 @@ Route::post('md-food-login', [LoginControllers::class, 'food_login']);
 //Vendor Registration
 Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_registration']);
 
+Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () 
+{
     //customers
     Route::post('md-customer-logout', [LoginControllers::class, 'customer_logout']);
 
@@ -104,6 +110,11 @@ Route::middleware('auth:sanctum')->group(function () {
     //delete-provider-images-videos
     Route::post('md-delete-provider-images-videos', [UpdateMedicalProfileController::class, 'delete_provider_images_videos']);
 
+    //vendor
+    Route::get('md-update-vendor-profile-list', [UpdateVendorProfileController::class, 'update_vendor_profile_list']);
+
+    //update-food-profile
+    Route::post('md-update-vendor-profile', [UpdateVendorProfileController::class, 'update_vendor_profile']);
     //food-provider
     //update-food-profile-list
     Route::get('md-update-food-profile-list', [UpdateFoodProfileController::class, 'update_food_profile_list']);
