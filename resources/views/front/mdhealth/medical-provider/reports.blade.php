@@ -1,7 +1,8 @@
-@extends('front.layout.layout2') @section('content')
+@extends('front.layout.layout2')
+@section('content')
 <style>
     .reports-div {
-        border-bottom: 1px solid #a5a5a5;
+        border-bottom: 1px solid #A5A5A5;
         padding-bottom: 15px;
         margin-bottom: 20px;
     }
@@ -17,13 +18,14 @@
         margin-top: 15px;
     }
 
-    /* .form-div input.form-control,
+    .form-div input.form-control,
     .form-div select {
+
         padding: 8px 10px;
 
         border-radius: 3px;
-        border: 1px solid #ededed;
-        background: #fff;
+        border: 1px solid #EDEDED;
+        background: #FFF;
 
         font-family: CamptonBook;
         font-size: 14px;
@@ -31,7 +33,7 @@
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.56px;
-    } */
+    }
 </style>
 <style>
     .error-message {
@@ -50,9 +52,10 @@
                     <div class="form-div">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-4">
                             <span>Reports</span>
-                            <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="" />
+                            <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
                         </h5>
                         <div class="card-body mb-3">
+
                             <div class="reports-div section-heading-div">
                                 <h6 class="section-heading">Add New Reports</h6>
                             </div>
@@ -70,7 +73,8 @@
                                     <label class="form-label">Patient</label>
                                     <select name="customer_package_purchage_id" id="patientSelect">
                                         <option value="">Choose Patient</option>
-                                        @if (!empty($patient_list)) @foreach ($patient_list as $patient)
+                                        @if (!empty($patient_list))
+                                        @foreach ($patient_list as $patient)
                                         <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
                                             {{ !empty($patient['name']) ? $patient['name'] : '' }}
                                         </option>
@@ -82,15 +86,13 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label">Upload Report File</label>
                                     <div class="form-group">
-                                        <input type="file" name="report_path" class="form-control text-dark" id="fileInput" onchange="previewFile()" />
+                                        <input type="file" name="report_path" class="form-control text-dark" id="fileInput" onchange="previewFile()">
                                     </div>
                                     <div class="prev-img-div" style="position: relative;">
-                                        <img id="previewImage" src="front/assets/img/default-img.png" alt="image" style="max-width: 100%; max-height: 200px;" />
-                                        <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">
-                                            &times;
-                                        </button>
+                                        <img id="previewImage" src="front/assets/img/default-img.png" alt="image" style="max-width: 100%; max-height: 200px;">
+                                        <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
                                         <div id="previewPDF" style="display: none;">
-                                            <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;" />
+                                            <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;">
                                             <span id="pdfFileName"></span>
                                         </div>
                                     </div>
@@ -98,17 +100,19 @@
                                 </div>
                             
                                 <div class="section-btns mb-5">
-                                    <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Upload Reports</button>
+                                    <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
                                 </div>
+
                             </form>
+
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4" style="min-height: 450px;">
+                <div class="card mb-4">
                     <div class="form-div">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-4">
                             <span>Uploaded Reports</span>
-                            <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="" />
+                            <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
                         </h5>
                         <div class="card-body">
                             <!-- FILTER -->
@@ -139,59 +143,60 @@
         </div>
     </div>
 </div>
-@endsection @section('script')
+@endsection
+@section('script')
 <script>
     $(".mpReportsLi").addClass("activeClass");
     $(".mpReports").addClass("md-active");
 </script>
 <script>
     function previewFile() {
-        var fileInput = document.getElementById("fileInput");
-        var previewImage = document.getElementById("previewImage");
-        var removePreviewBtn = document.getElementById("removePreviewBtn");
-        var previewPDF = document.getElementById("previewPDF");
-        var pdfFileName = document.getElementById("pdfFileName");
+        var fileInput = document.getElementById('fileInput');
+        var previewImage = document.getElementById('previewImage');
+        var removePreviewBtn = document.getElementById('removePreviewBtn');
+        var previewPDF = document.getElementById('previewPDF');
+        var pdfFileName = document.getElementById('pdfFileName');
 
         var file = fileInput.files[0];
         var reader = new FileReader();
 
-        reader.onloadend = function() {
-            if (file.type.startsWith("image/")) {
+        reader.onloadend = function () {
+            if (file.type.startsWith('image/')) {
                 previewImage.src = reader.result;
-                previewImage.style.display = "block";
-                removePreviewBtn.style.display = "block";
-                previewPDF.style.display = "none";
-            } else if (file.type === "application/pdf") {
-                previewPDF.style.display = "block";
+                previewImage.style.display = 'block';
+                removePreviewBtn.style.display = 'block';
+                previewPDF.style.display = 'none';
+            } else if (file.type === 'application/pdf') {
+                previewPDF.style.display = 'block';
                 pdfFileName.textContent = file.name;
-                previewImage.style.display = "none";
-                removePreviewBtn.style.display = "block";
+                previewImage.style.display = 'none';
+                removePreviewBtn.style.display = 'block';
             } else {
                 // Ignore other file types (optional)
-                previewImage.src = "front/assets/img/default-img.png";
-                previewImage.style.display = "block";
-                removePreviewBtn.style.display = "none";
-                previewPDF.style.display = "none";
+                previewImage.src = 'front/assets/img/default-img.png';
+                previewImage.style.display = 'block';
+                removePreviewBtn.style.display = 'none';
+                previewPDF.style.display = 'none';
             }
         };
 
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            previewImage.src = "front/assets/img/default-img.png";
-            previewPDF.style.display = "none";
-            pdfFileName.textContent = "";
-            previewImage.style.display = "block";
-            removePreviewBtn.style.display = "none";
+            previewImage.src = 'front/assets/img/default-img.png';
+            previewPDF.style.display = 'none';
+            pdfFileName.textContent = '';
+            previewImage.style.display = 'block';
+            removePreviewBtn.style.display = 'none';
         }
     }
 
     function removePreview() {
-        var fileInput = document.getElementById("fileInput");
-        var previewImage = document.getElementById("previewImage");
-        var removePreviewBtn = document.getElementById("removePreviewBtn");
-        var previewPDF = document.getElementById("previewPDF");
-        var pdfFileName = document.getElementById("pdfFileName");
+        var fileInput = document.getElementById('fileInput');
+        var previewImage = document.getElementById('previewImage');
+        var removePreviewBtn = document.getElementById('removePreviewBtn');
+        var previewPDF = document.getElementById('previewPDF');
+        var pdfFileName = document.getElementById('pdfFileName');
 
         fileInput.value = ""; // Clear the file input
         previewImage.src = "front/assets/img/default-img.png";
