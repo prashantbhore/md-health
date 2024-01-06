@@ -173,7 +173,7 @@
                                     <img src="{{('front/assets/img/step1.svg')}}" alt="">
                                     <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
                                     <div class="d-flex align-items-center flex-column">
-                                        <a href="{{url('myself_as_patient/'.$package_list['id'])}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
+                                        <a href="{{url('purchase-package/'.$package_list['id'])}}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
                                         <a href="{{url('#')}}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#treatmentForModal2_{{$package_list['id']}}" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>
                                     </div>
                                 </div>
