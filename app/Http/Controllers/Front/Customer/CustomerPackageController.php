@@ -373,6 +373,49 @@ class CustomerPackageController extends Controller
 
 
 
+    public function customer_report_search(Request $request)
+    {
+
+       
+
+        $token = Session::get('login_token');
+
+        // dd( $token );
+        if($request['query']==null){
+        $method = 'GET';
+        $data = $this->apiService->getData($token, url('api/md-customer-all-reports-list'), null, $method);
+        }
+
+        if($request['query']){
+            $query=$request['query'];
+            $apiUrl = url('api/md-customer-report-search');
+            $body=[ 'search_query' => $query,];
+            $method = 'POST';
+            $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+            
+            dd($request['$responseData']);
+        }
+
+
+
+        
+        $customer_reports='';
+
+        if ($data['status'] == '200'){
+        if(!empty($data['provider_report_list'])){
+        $customer_reports = $data['provider_report_list'];
+        }
+       }
+
+        
+        return view('front/mdhealth/user-panel/user-all-reports',compact('customer_reports'));
+    }
+ 
+ 
+
+
+
+
 
 
 

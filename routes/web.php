@@ -117,8 +117,7 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 
-//Customer Report Controller Code By Mpluss03
-  Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
+
 
 
 
@@ -453,6 +452,40 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         // Route::post('/check-old-password', 'check_old_password');
     });
     // Mplus04
+
+    //Code By  Mplus03
+    Route::controller(PaymentController::class)->group(function(){
+        Route::get('payment-information','index');
+        Route::post('store-vendor-bank-details','storeBankDetails')->name('store.vendor.bank.details');
+    });
+
+    Route::controller(MedicalProviderReports::class)->group(function(){
+         Route::get('reports','index');
+         Route::post('provider-reports-list','report_list');
+         Route::post('add-reports','addReport')->name('add.report');
+    });
+
+
+    #Sales By Mplus03
+
+    Route::controller(SalesController::class)->group(function(){
+        Route::get('medical-provider-sales','index');
+        Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
+        Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
+        Route::match(['get', 'post'], 'assign-case-manager','assign_case_manager')->name('assign.case.manager');
+        Route::match(['get', 'post'], 'sales-search','sales_search')->name('sales.search');
+    });
+
+
+    #Medical Provider Dashboard By Mplus03
+    Route::controller(MedicalProviderDashboradController::class)->group(function(){
+        Route::get('medical-provider-dashboard','index');
+        Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
+    });
+
+
+    
+    
 });
 
 
@@ -483,7 +516,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
     // });
 });
 
-Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
+Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function (){
 
     Route::controller(UserRegistrationController::class)->group(function () {
         // Route::get('/medical-provider-dashboard', 'dashboard_view');
@@ -501,6 +534,10 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     //     Route::post('/reset-password', 'reset_password');
     //     Route::post('/check-old-password', 'check_old_password');
     // });
+
+    //Customer Report Controller Code By Mpluss03
+  Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
+  Route::post('user-all-reports-search', [CustomerPackageController::class,'customer_report_search']);
 
 });
 // MEDICAL PROVIDER
@@ -522,13 +559,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 // Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 
 
-Route::controller(PaymentController::class)->group(function(){
-
-    Route::get('payment-information','index');
-
-    Route::post('store-vendor-bank-details','storeBankDetails')->name('store.vendor.bank.details');
-});
-
 
 
 
@@ -539,39 +569,14 @@ Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
 
 
-Route::controller(MedicalProviderReports::class)->group(function(){
-
-    Route::get('reports','index');
-
-    Route::post('add-reports','addReport')->name('add.report');
-
-});
-
-
-
-#Sales
-
-Route::controller(SalesController::class)->group(function(){
-
-    Route::get('medical-provider-sales','index');
-   // Route::post('treatment-order-details/{id}','sales_view');
-    Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
-    //Route::post('store-date-status','status_date_change')->name('status.date.store');
-    Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
-    Route::match(['get', 'post'], 'assign-case-manager','assign_case_manager')->name('assign.case.manager');
-    Route::match(['get', 'post'], 'sales-search','sales_search')->name('sales.search');
-
-
-});
 
 
 
 
-#Medical Provider Dashboard
-Route::controller(MedicalProviderDashboradController::class)->group(function(){
-     Route::get('medical-provider-dashboard','index');
-     Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
-});
+
+
+
+
 
 
 

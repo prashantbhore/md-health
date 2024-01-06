@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TransportationDetails extends Model
+class FoodImageVideos extends Model
 {
     use HasFactory;
-    protected $table = 'md_add_transportation_details';
+    protected $table = 'md_food_account_multiple_images_videos';
     protected $fillable = [
-        'vehicle_brand_id',
-        'vehicle_model_id',
-        'comfort_level_id',
-        'vehicle_image_path',
-        'vehicle_image_name',
-        'vehicle_per_day_price',
-        'other_services',
+        'food_id',
+        'provider_image_path',
+        'provider_image_name',
         'status',
         'created_ip_address',
         'modified_ip_address',
