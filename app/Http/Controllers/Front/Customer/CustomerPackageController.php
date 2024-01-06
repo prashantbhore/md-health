@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Front\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\PatientInformation;
-use App\Models\CustomerRegistration;
 use App\Models\Cities;
 use App\Models\Country;
 use App\Models\Packages;
@@ -29,9 +27,34 @@ class CustomerPackageController extends Controller
     public function customer_home()
     {
 
-        // dd( Session::get( 'login_token' ) );
-
         return view('front.mdhealth.index');
+    }
+    public function test(Request $request){
+
+        $token = null;
+        $apiUrl = url( '/api/md-register-medical-provider' );
+
+        $method = 'POST';
+        $body = $request->all();
+        $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+
+        if($request->hasFile('company_logo_image_path') && $request->hasFile('company_licence_image_path')){
+            $image=[];
+            $image_name=[];
+            if ($request->hasFile('company_logo_image_path') && $request->file('company_logo_image_path')->isValid()) {
+                $image[] = $request->file('company_logo_image_path');
+                $image_name[] = 'company_logo_image_path';
+            }
+            if ($request->hasFile('company_licence_image_path') && $request->file('company_licence_image_path')->isValid()) {
+                $image[] = $request->file('company_licence_image_path');
+                $image_name[] = 'company_licence_image_path';
+            }
+
+            $responseData = $this->apiService->getData($token,$apiUrl,$body,$method,$image,$image_name);
+        }
+        else{
+            $responseData = $this->apiService->getData($token,$apiUrl,$body,$method);
+        }
     }
 
     public function purchase_package($id)
@@ -202,7 +225,7 @@ class CustomerPackageController extends Controller
 
         $token = Session::get('login_token');
         $data = $this->apiService->getData($token, url('/api/md-customer-package-details'), ['package_id' => $id], 'POST');
-
+        // dd( $data );
         if ($data['status'] == '200') {
 
             $other_service = array_map(fn($item) => $item['title'], $data['other_services']);
@@ -212,23 +235,19 @@ class CustomerPackageController extends Controller
         // $data = $data[ 'customer_purchase_package_list' ];
         // $data[ 'other_services' ] = $other_service;
         // dd( Auth::user()->id );
-        $user_id = Session::get('MDCustomer*%');
-        if (!empty($id)) {
-            $patient_info = PatientInformation::where('customer_id',$user_id)->where('package_id',$data['package_id'])->where('purchase_id',$data['purchase_id'])->first();
-            $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $id], 'POST');
+        if (Auth::user()->id != null) {
+            $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => Auth::user()->id, 'package_id' => $id], 'POST');
             // dd( $token );
             // dd($token);
-            // dd( $response );
             if ($response['status'] == '200') {
 
                 $my_details = $response['PatientInformation'];
                 $treatment_information = $response['treatment_information'];
-
+                // dd( $response );
             } else {
                 $my_details = '';
                 $treatment_information = '';
             }
-            //  dd( $response );
 
             //md-customer-upload-documents
         }
@@ -251,11 +270,6 @@ class CustomerPackageController extends Controller
             'sale_price' => 'required',
             'pending_payment' => 'required',
         ]);
-
-        if($validator->fails()){
-            $this->sendError('Validation Error' . $validator->errors());
-        }
-
         $data = array('package_id' => $request->package_id,
             'package_percentage_price' => $request->package_percentage_price,
             'sale_price' => $request->sale_price,
@@ -266,60 +280,8 @@ class CustomerPackageController extends Controller
         return view('front.mdhealth.user-panel.user-credit-card-pay', compact('data'));
     }
 
-    public function myself_as_patient($package_id){
 
-        // dd('hi');
-        $user_id = Session::get('MDCustomer*%');
 
-        if ($user_id != null) {
-            $user_data = CustomerRegistration::where('id',$user_id)->where('status','active')->first();
-
-            $patient = new PatientInformation();
-            $patient->customer_id = $user_data->id;
-            $patient->package_id = $package_id;
-            $patient->patient_full_name = $user_data->full_name;
-            $patient->patient_last_name = $user_data->first_name;
-            $patient->patient_first_name = $user_data->last_name;
-            $patient->patient_email = $user_data->email;
-            $patient->patient_contact_no = $user_data->phone;
-            $patient->patient_country_id = $user_data->country_id;
-            $patient->patient_city_id = $user_data->city_id;
-            $patient->birth_date = $user_data->date_of_birth;
-            $patient->address = $user_data->address;
-            $patient->created_ip_address = $_SERVER['REMOTE_ADDR'];;
-            $patient->package_buy_for = 'myself';
-            $patient->platform_type = 'web';
-            $patient->created_by = $user_data->id;
-            $patient->save();
-
-            $providerUniqueId = '#MD' . str_pad($patient->id, 6, '0', STR_PAD_LEFT);
-            $patteint = PatientInformation::where('id', $patient->id)->update(['patient_unique_id' => $providerUniqueId]);
-            if($patteint){
-
-                $id = $package_id;
-                Session::put('Patient_id',$patient->id);
-                return view('front.mdhealth.purchase', compact('id'));
-            }else{
-
-                $counties = Country::all();
-                $city_name = 'Select City';
-                $treatment_name = 'myself_as_patient_id_not_found';
-                $date = '';
-                $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
-                $treatment_plans = ProductCategory::where('status', 'active')->where('main_product_category_id', '1')->get();
-                return view('front.mdhealth.searchResult', compact('cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
-            }
-        }else{
-            $this->sendError('User not found');
-        }
-    }
-
-    public function sendError($message, $code = 404)
-    {
-        return response()->json(['error' => $message], $code);
-    }
-
-//Code By Mplus03
     public function customer_reports(Request $request)
     {
 
@@ -327,11 +289,45 @@ class CustomerPackageController extends Controller
         $token = Session::get('login_token');
         // dd( $token );
         $method = 'GET';
+        $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
 
+        
+
+
+        
+        return view('front/mdhealth/user-panel/user-all-reports');
+    }
+ 
+
+
+
+    public function customer_report_search(Request $request)
+    {
+
+       
+
+        $token = Session::get('login_token');
+
+        // dd( $token );
+        if($request['query']==null){
+        $method = 'GET';
         $data = $this->apiService->getData($token, url('api/md-customer-all-reports-list'), null, $method);
+        }
 
+        if($request['query']){
+            $query=$request['query'];
+            $apiUrl = url('api/md-customer-report-search');
+            $body=[ 'search_query' => $query,];
+            $method = 'POST';
+            $data= $this->apiService->getData($token, $apiUrl, $body, $method);
+            
+            dd($data);
+        }
+
+
+
+        
         $customer_reports='';
-
 
         if ($data['status'] == '200'){
         if(!empty($data['provider_report_list'])){
@@ -339,11 +335,11 @@ class CustomerPackageController extends Controller
         }
        }
 
-
-
+        
         return view('front/mdhealth/user-panel/user-all-reports',compact('customer_reports'));
-
     }
+ 
+ 
 
 
 

@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PatientInformation extends Model {
+class PatientInformation extends Model
+{
     use HasFactory;
     protected $table = 'md_other_patient_information';
 
@@ -13,10 +14,7 @@ class PatientInformation extends Model {
         'patient_unique_id',
         'customer_id',
         'package_id',
-        'purchase_id',
         'patient_full_name',
-        'patient_first_name',
-        'patient_last_name',
         'patient_relation',
         'patient_email',
         'patient_contact_no',

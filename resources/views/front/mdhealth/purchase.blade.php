@@ -399,14 +399,10 @@
             function makePurchase() {
 
 
-                // alert(token);
-                // var token = '145|QbVxfOaPYonjsIqwVibAdJB0cP82yRzuBk94qajf28c079a3';
-
                 var formData = new FormData();
-                var patientId = "{{ Session::get('Patient_id') }}";
+
                 var pendingAmount = proxyPrice - totalPrice;
                 formData.append('package_id', packageId);
-                formData.append('patient_id', patientId);
                 formData.append('sale_price', proxyPrice);
                 formData.append('paid_amount', totalPrice);
                 formData.append('platform_type', 'web');
