@@ -66,11 +66,7 @@ Route::get('common-delete', [BaseController::class, 'delete']);
 
 Route::post('change-status', [BaseController::class, 'status'])->name('change-status');
 
-Route::get('/', [CustomerPackageController::class, 'customer_home']);
 
-
-
-Route::any('myself_as_patient/{id}',[CustomerPackageController::class,'myself_as_patient'])->name('myself_as_patient');
 
 
 // Super Admin authentication
@@ -110,11 +106,8 @@ Route::get('buy-service', function () {
 });
 
 //mdHealth Routes
-Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
 
-Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
-Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 
 
@@ -484,8 +477,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
 
 
-    
-    
+
+
 });
 
 
@@ -516,6 +509,12 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
     // });
 });
 
+
+//Mplu02
+Route::get('/', [CustomerPackageController::class, 'customer_home']);
+Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
+Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
+
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function (){
 
     Route::controller(UserRegistrationController::class)->group(function () {
@@ -536,10 +535,23 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     // });
 
     //Customer Report Controller Code By Mpluss03
-  Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
-  Route::post('user-all-reports-search', [CustomerPackageController::class,'customer_report_search']);
+    Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
+    Route::post('user-all-reports-search', [CustomerPackageController::class,'customer_report_search']);
+
+    //Mplus02
+
+    Route::any('myself_as_patient/{id}',[CustomerPackageController::class,'myself_as_patient'])->name('myself_as_patient');
+    Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
+    Route::any('test',[CustomerPackageController::class,'test']);
+    Route::get('view-my-active-packages/{id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
+    Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
+    Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 });
+
+
+
+
 // MEDICAL PROVIDER
 #Dashboard
 // Route::view('medical-provider-dashboard', 'front/mdhealth/medical-provider/dashboard');
@@ -583,15 +595,14 @@ Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/liv
 // USER PANEL
 #User Profile
 // Route::view('user-profile', 'front/mdhealth/user-panel/user-profile');
-Route::view('user-package', 'front/mdhealth/user-panel/user-package');
+// Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
-Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
-Route::any('test',[CustomerPackageController::class,'test']);
+
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
-Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
+
 // Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);
 // Route::any('user-package-view/{{$id}}', [CustomerPackageController::class, 'view_my_active_packages']);
-Route::get('view-my-active-packages/{id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
+
 
 Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
 Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');

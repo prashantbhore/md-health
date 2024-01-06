@@ -25,17 +25,17 @@ class PackageController extends Controller {
         $body = null;
 
         $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
-        $treatment_categories = $responseData[ 'packages_active_list' ];
+        $treatment_categories = !empty( $responseData[ 'packages_active_list' ] ) ? $responseData[ 'packages_active_list' ] : [];
 
         $responseData = $this->apiService->getData( $token, $apiUrl2, $body, $method );
-        $hotel_details = $responseData[ 'hotel_details' ];
+        $hotel_details = !empty( $responseData[ 'hotel_details' ] ) ? $responseData[ 'hotel_details' ] : '';
 
         $responseData = $this->apiService->getData( $token, $apiUrl3, $body, $method );
         // dd( $responseData );
-        $vehicle_details = $responseData[ 'data' ];
+        $vehicle_details = !empty( $responseData[ 'data' ] )?$responseData[ 'data' ]:[];
 
         $responseData = $this->apiService->getData( $token, $apiUrl4, $body, $method );
-        $tour_details = $responseData[ 'tour_details' ];
+        $tour_details = !empty( $responseData[ 'tour_details' ] ) ? $responseData[ 'tour_details' ] : '';
         // dd( $responseData );
         return view( 'front/mdhealth/medical-provider/medical-packages-view', compact( 'treatment_categories', 'hotel_details', 'vehicle_details', 'tour_details' ) );
     }
