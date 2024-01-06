@@ -319,9 +319,9 @@ class CustomerPackageController extends Controller
             $apiUrl = url('api/md-customer-report-search');
             $body=[ 'search_query' => $query,];
             $method = 'POST';
-            $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+            $data= $this->apiService->getData($token, $apiUrl, $body, $method);
             
-            dd($request['$responseData']);
+            dd($data);
         }
 
 
