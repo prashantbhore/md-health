@@ -1,6 +1,7 @@
 @section('php')
     @php
         // dd(Session::all());
+        // Session::get('MDCustomer*%')
         if (Session::get('MDCustomer*%') != null) {
             $name = !empty(session('user')) ? (session('user')->first_name ? session('user')->first_name : 'MDHealth') : 'MDHealth';
         } elseif (Session::get('MDMedicalProvider*%') != null) {
@@ -21,7 +22,7 @@
 <!--MDMedicalProvider*%-->
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
-    <div class="container">
+    <div class="container px-0">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
         </a>
@@ -30,21 +31,25 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-
-
-            <ul class="navbar-nav align-items-center gap-5">
-                <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
-                <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Booking</a></li>
-                <li class="nav-item"><a href="{{ url('mdFoods') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Foods</a></li>
-                <li class="nav-item"><a href="{{ url('mdShop') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Shop</a></li>
+            <ul class="navbar-nav align-items-center gap-4 w-100">
+                <li class="nav-item">
+                    <a href="{{ url('home-service') }}" class="nav-link">Home Service</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('mdFoods') }}" class="nav-link"><span class="fw-bold">MD</span>Foods</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('mdShop') }}" class="nav-link"><span class="fw-bold">MD</span>Shop</a>
+                </li>
 
                 <!-- This dropdown appears after user login [User Profile] -->
                 @if (Session::get('login_token') != null)
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown ms-auto">
                         <a href="#" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
                                 fill="none">
@@ -55,7 +60,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item dropdown ms-auto">
+                    <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span
                                 class="text-green me-1">
@@ -244,7 +249,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            @elseif(Session::get('MDMedicalVendor*%') != null)
+                        @elseif(Session::get('MDMedicalVendor*%') != null)
                             <ul class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/medical-provider-dashboard') }}">
@@ -293,4 +298,5 @@
             @endif
 
         </div>
+    </div>
 </nav>

@@ -43,7 +43,6 @@ class UpdateMedicalProfileController extends BaseController
         ->first();
 
         if (!empty($medical_provider_list)) {
-
             $medical_provider_list['company_name'] = ($medical_provider_list->company_name);
             $medical_provider_list['city_id'] = ($medical_provider_list->city_id);
             $medical_provider_list['email'] = ($medical_provider_list->email);

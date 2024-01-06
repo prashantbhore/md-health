@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_other_patient_information', function (Blueprint $table) 
+        Schema::create('md_other_patient_information', function (Blueprint $table)
         {
             $table->id();
             $table->string('patient_unique_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
             $table->bigInteger('package_id')->nullable();
+            $table->bigInteger('purchase_id')->nullable();
+            $table->string('patient_first_name')->nullable();
+            $table->string('patient_last_name')->nullable();
             $table->string('patient_full_name')->nullable();
             $table->string('patient_relation')->nullable();
             $table->string('patient_email')->nullable();

@@ -70,6 +70,8 @@ Route::get('/', [CustomerPackageController::class, 'customer_home']);
 
 
 
+Route::any('myself_as_patient/{id}',[CustomerPackageController::class,'myself_as_patient'])->name('myself_as_patient');
+
 
 // Super Admin authentication
 
@@ -118,7 +120,7 @@ Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase
 //Customer Report Controller Code By Mpluss03
   Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
 
- 
+
 
 
 
@@ -553,15 +555,10 @@ Route::controller(SalesController::class)->group(function(){
 
     Route::get('medical-provider-sales','index');
    // Route::post('treatment-order-details/{id}','sales_view');
-
     Route::match(['get', 'post'], 'treatment-order-details/{id}','sales_view');
-
     //Route::post('store-date-status','status_date_change')->name('status.date.store');
-
     Route::match(['get', 'post'], 'store-date-status','status_date_change')->name('status.date.store');
-
     Route::match(['get', 'post'], 'assign-case-manager','assign_case_manager')->name('assign.case.manager');
-
     Route::match(['get', 'post'], 'sales-search','sales_search')->name('sales.search');
 
 
