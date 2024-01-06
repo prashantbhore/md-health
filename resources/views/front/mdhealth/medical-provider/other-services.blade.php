@@ -102,7 +102,7 @@
                                             id="divt_{{ $vehicle_detail['id'] }}">
                                             <div class="row card-row align-items-center">
                                                 <div class="col-md-2 df-center px-0">
-                                                    <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
+                                                    <img src="{{ url( '/' ) . Storage::url($vehicle_detail['vehicle_image_path']) }}" alt="image"  width="100px">
                                                 </div>
                                                 <div class="col-md-6 justify-content-start ps-0">
                                                     <div class="trmt-card-body">

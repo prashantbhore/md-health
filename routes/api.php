@@ -74,8 +74,10 @@ Route::post('md-food-login', [LoginControllers::class, 'food_login']);
 //Vendor Registration
 Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_registration']);
 
+Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () 
+{
     //customers
     Route::post('md-customer-logout', [LoginControllers::class, 'customer_logout']);
 

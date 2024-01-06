@@ -38,7 +38,7 @@
             $payment_time_and_date = '';
         }
 
-        // dd($data);
+        // dd($data, $my_details, $treatment_information);
 
     @endphp
 @endsection
@@ -635,7 +635,7 @@
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" class="form-control"
-                                                                            placeholder="{{ !empty($my_details['patient_full_name']) ? $my_details['patient_full_name'] : '' }}"
+                                                                            placeholder="{{ !empty($my_details['patient_first_name']) ? $my_details['patient_first_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
                                                                             readonly>
                                                                     </div>
@@ -644,9 +644,9 @@
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Last Name</label>
                                                                         <input type="text" class="form-control"
-                                                                            value="sdfdshf" id="foodname"
-                                                                            aria-describedby="foodname"
-                                                                            placeholder="Last Name" readonly>
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            placeholder="{{ !empty($my_details['patient_last_name']) ? $my_details['patient_last_name'] : '' }}"
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">

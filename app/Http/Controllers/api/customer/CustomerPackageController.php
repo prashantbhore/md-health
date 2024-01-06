@@ -1036,6 +1036,17 @@ class CustomerPackageController extends BaseController
                     if ($request->pending_amount > 0) {
                         $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
                     }
+
+                    if(!empty($request->patient_id)){
+                        $purchase_id =[];
+                        $purchase_id = [
+                            'purchase_id' => $purchase_details_data->id,
+                        ];
+
+                        PatientInformation::where('id', $request->patient_id)
+                            ->where('status', 'active')
+                            ->update($purchase_id);
+                    }
                 }
 
 
@@ -1860,6 +1871,7 @@ class CustomerPackageController extends BaseController
 
     public function customer_my_details(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'patient_id' => 'required',
             'package_id' => 'required',
@@ -1873,6 +1885,8 @@ class CustomerPackageController extends BaseController
             ->select(
                 'md_other_patient_information.id',
                 'patient_full_name',
+                'patient_first_name',
+                'patient_last_name',
                 'md_other_patient_information.patient_relation',
                 'md_other_patient_information.patient_email',
                 'md_other_patient_information.patient_contact_no',
@@ -1883,6 +1897,7 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_master_country', 'md_master_country.id', 'md_other_patient_information.patient_country_id')
             ->where('md_other_patient_information.id', $request->patient_id)
             ->first();
+            // return  $PatientInformation ;
 
         $treatment_information = Packages::select(
             'md_packages.id',
