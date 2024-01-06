@@ -45,8 +45,8 @@
 
          <hr class="border border-white  my-3" />
          <div class="row">
-             <div class="d-flex justify-content-between">
-                 <div class="d-flex justify-content-center align-items-center gap-2">
+             <div class="d-flex justify-content-between mdLtd">
+                 <div class="d-flex justify-content-center">
                      <div style="color: #07f747;font-size:20px">MDhealth</div>
                      <div class="fl-text">is a brand of MD Sanglik Technology Ltd.Sti</div>
                  </div>
@@ -59,7 +59,7 @@
                  </div>
              </div>
              <hr class="border border-white my-3" />
-             <div class="d-flex align-items-center">
+             <div class="allRights">
                  <div class="me-auto copyText">
                      @2023.All rights reserved.
                  </div>

@@ -596,10 +596,11 @@ select {
 
 .search-bar {
     background-color: #fff;
-    width: 1066px;
-    height: 84px;
+    max-width: 1066px;
+    /* max-height: 84px; */
     border-radius: 5px;
     box-shadow: 0px 0px 24px 0px #00000040;
+    padding: 0.75rem;
 }
 
 .search-bar .form-select {
@@ -673,8 +674,8 @@ select {
 }
 
 .section-2 .card {
-    width: 1057px;
-    height: 191px;
+    width: inherit;
+    min-height: 191px;
     border-radius: 0px 0px 5px 5px;
     background-color: #4CDB06;
     font-size: 22px;
@@ -690,8 +691,8 @@ select {
 }
 
 .section-2 .card-text {
-    padding: 0 200px;
-    color: #1E1E1E;
+    /* padding: 0 200px; */
+    color: #1e1e1e;
     font-family: Campton;
     font-size: 22px;
     font-weight: 500;
@@ -791,6 +792,7 @@ select {
 }
 
 .section-3 p {
+    max-width: 405px;
     color: #000;
     font-family: Campton;
     font-size: 16px;
@@ -1945,6 +1947,7 @@ span.popup-msg.active {
 }
 
 .section6 img {
+    position: absolute;
     left: 50%;
     bottom: 0;
 }
@@ -2857,4 +2860,66 @@ span.popup-msg.active {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
+}
+
+.view,
+.print {
+    text-decoration: none;
+}
+
+.view p,
+.print p {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.4px;
+}
+
+/* DATEPICKER */
+.gj-picker {
+    font-family: "CamptonBook";
+}
+
+.other-month>div,
+.gj-picker [role="week-days"] th>div,
+.gj-picker-bootstrap table tr td div {
+    font-family: CamptonBook;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.84px;
+}
+
+.gj-picker [role="period"] {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.gj-picker-bootstrap table tr td.selected.gj-cursor-pointer div {
+    color: #fff;
+    background-color: #4cdb06 !important;
+    border-color: transparent !important;
+    border-radius: 3px !important;
+    border: none !important;
+    text-shadow: none;
+}
+
+.datepicker table tr td.selected {
+    border-color: transparent !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.mdLtd div:first-child {
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.allRights{
+    display: flex;
+    align-items: center;
 }

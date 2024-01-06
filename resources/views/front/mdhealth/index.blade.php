@@ -25,7 +25,7 @@
                         <h1 class="mb-5">NOW</h1>
                         <form method="POST" action="{{ url('health-search-result') }}">
                             @csrf
-                            <div class="search-bar d-flex align-items-center p-3 gap-3">
+                            <div class="search-bar d-flex align-items-center gap-3">
                                 <div class="form-floating">
                                     <input type="hidden" name="platform_type" value="web">
                                     <select class="form-select" name="treatment_name" id="floatingSelect"
@@ -67,19 +67,18 @@
             </div>
 
             <!-- SECTION 2: MAKE REQUEST FORM -->
-            <div class="section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
+            <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
                 <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
                 <h2>Couldn’t find your <span class="text-green text-decoration-underline">treatment</span> package?</h2>
                 <div class="card border-0 position-relative">
                     <div class="card-body df-center flex-column">
-                        <p class="card-text">Contact us with your detail & our team will prepare your desired treatment
-                            package!
+                        <p class="card-text">Contact us with your detail & our team will prepare your desired <br> treatment package!
                         </p>
                         <button class="btn btn-md-black position-absolute" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Make a Request</button>
+                        <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute doctorImg" alt="">
                     </div>
                     <!-- exampleModal -->
-                    <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute" alt="">
                 </div>
             </div>
         </div>
@@ -89,30 +88,38 @@
                     class="text-green">!</span>
             </h1>
             <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span
-                    class="camptonBold">invite your friends</span> and <br /> spend <span class="camptonBold">MD</span>coin
+                    class="camptonBold">invite your friends</span> and spend <span class="camptonBold">MD</span>coin
                 for
                 your health needs. </p>
         </div>
         <div class="bg-f6">
             <div class="df-center container md-earn">
                 <div>
-                    <h1>2%</h1>
-                    <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                    <div class="mb-2">
+                        <h1>2%</h1>
+                        <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                    </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div>
-                    <h1>4%</h1>
-                    <img src="{{ 'front/assets/img/img2.png' }}" alt="">
+                    <div class="mb-2">
+                        <h1>4%</h1>
+                        <img src="{{ 'front/assets/img/img2.png' }}" alt="">
+                    </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div>
-                    <h1>3%</h1>
-                    <img src="{{ 'front/assets/img/img3.png' }}" alt="">
+                    <div class="mb-2">
+                        <h1>3%</h1>
+                        <img src="{{ 'front/assets/img/img3.png' }}" alt="">
+                    </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div>
-                    <h1>5%</h1>
-                    <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                    <div class="mb-2">
+                        <h1>5%</h1>
+                        <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+                    </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
@@ -129,7 +136,7 @@
         <div class="bg-f6">
             <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
                 <h1><span class="text-green">TOP 5</span> treatments</h1>
-                <div class="d-flex justify-content-between me-4 align-items-center">
+                <div class="top5-card me-md-4 d-flex justify-content-between align-items-center">
                     <div class="card">
                         <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                             <div class="bg-black p-2 rounded-circle">
@@ -139,7 +146,7 @@
                                 <h6 class="mb-0">Treatment Name</h6>
                                 <p class="mb-0">Treatment Category</p>
                             </div>
-                            <div class="treatment-price ms-auto">₺ 18.829,91</div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
                             <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
                                 alt="">
                         </div>
@@ -156,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between me-4 align-items-center">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
                     <div class="card">
                         <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                             <div class="bg-black p-2 rounded-circle">
@@ -166,7 +173,7 @@
                                 <h6 class="mb-0">Treatment Name</h6>
                                 <p class="mb-0">Treatment Category</p>
                             </div>
-                            <div class="treatment-price ms-auto">₺ 18.829,91</div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
                             <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
                                 alt="">
                         </div>
@@ -183,7 +190,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between me-4 align-items-center">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
                     <div class="card">
                         <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                             <div class="bg-black p-2 rounded-circle">
@@ -193,7 +200,7 @@
                                 <h6 class="mb-0">Treatment Name</h6>
                                 <p class="mb-0">Treatment Category</p>
                             </div>
-                            <div class="treatment-price ms-auto">₺ 18.829,91</div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
                             <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
                                 alt="">
                         </div>
@@ -210,7 +217,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between me-4 align-items-center">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
                     <div class="card">
                         <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                             <div class="bg-black p-2 rounded-circle">
@@ -220,7 +227,7 @@
                                 <h6 class="mb-0">Treatment Name</h6>
                                 <p class="mb-0">Treatment Category</p>
                             </div>
-                            <div class="treatment-price ms-auto">₺ 18.829,91</div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
                             <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
                                 alt="">
                         </div>
@@ -237,7 +244,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between me-4 align-items-center">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
                     <div class="card">
                         <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
                             <div class="bg-black p-2 rounded-circle">
@@ -247,7 +254,7 @@
                                 <h6 class="mb-0">Treatment Name</h6>
                                 <p class="mb-0">Treatment Category</p>
                             </div>
-                            <div class="treatment-price ms-auto">₺ 18.829,91</div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
                             <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
                                 alt="">
                         </div>
@@ -313,7 +320,7 @@
                 <p class="fs-1 camptonBook clr-white mb-5">flight to Turkiye!</p>
                 <a class="bookButton">Book Now</a>
             </div>
-            <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt="">
+            <img src="{{ 'front/assets/img/flight.png' }}" alt="">
         </div>
         {{-- Make Payment Model box --}}
         <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

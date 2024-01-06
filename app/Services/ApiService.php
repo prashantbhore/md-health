@@ -78,7 +78,7 @@ class ApiService {
                         }
 
                     } else {
-                        $extension = $singleImage->getClientOriginalExtension();
+                        $extension = $image->getClientOriginalExtension();
                         $request->files->set( $image_input_field_name, $image );
                         $request->request->add( [
                             $image_input_field_name => file_get_contents( $image ),
@@ -88,7 +88,8 @@ class ApiService {
                 }
 
                 $response = app()->handle( $request );
-                // dd( $response );
+                // echo ( $response->getContent() );
+                // die;
                 // dd( jso n_decode( $response->getContent(), true ) );
 
                 return json_decode( $response->getContent(), true );

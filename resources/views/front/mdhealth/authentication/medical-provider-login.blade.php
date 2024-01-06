@@ -290,147 +290,14 @@
 @section('script')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(document).on('click', '#regcustuser', function() {
-        var base_url = $('#base_url').val();
-        if ($('#mycustomerForm').valid()) {
-            var email = $('#email').val();
-            var phone = $('#phone').val();
-            // var formData = $(this).serialize();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            });
-            $.ajax({
-                url: base_url + '/email-or-mobile-exist',
-                method: 'POST',
-                data: {
-                    email: email,
-                    phone: phone
-                },
-                success: function(response) {
-                    console.log(response);
-                    if (response !== undefined) {
-                        if (response.email_exist !== undefined) {
-                            $('#error').text('Email already exist');
-                        } else if (response.mobile_no_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
-                        } else if (response.phone_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
-                        } else {
-                            sendOTP();
-                        }
-
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        }
-    });
-
-    $(document).on('click', '#medproreg', function() {
-
-        if ($('#myFormProvider').valid()) {
-            var email = $('#email').val();
-            var phone = $('#phone').val();
-            // var formData = $(this).serialize();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            });
-            $.ajax({
-                url: base_url + '/email-or-mobile-exist',
-                method: 'POST',
-                data: {
-                    email: email,
-                    phone: phone
-                },
-                beforeSend: function() {
-                    $('#medproreg').attr('disabled', true);
-                    $('#medproreg').html(
-                        '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-                    );
-                },
-                success: function(response) {
-                    $('#medproreg').attr('disabled', false);
-                    console.log(response);
-                    if (response !== undefined) {
-                        if (response.email_exist !== undefined) {
-                            $('#error').text('Email already exist');
-                        } else if (response.mobile_no_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
-                        } else if (response.phone_exist !== undefined) {
-                            $('#error').text('Phone number already exist');
-                        } else {
-                            sendOTP();
-                        }
-
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        }
-    });
-
-
-    window.onload = function() {
-        render();
-    };
-
-    function render() {
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-        recaptchaVerifier.render();
-
-    }
-
-
-    function sendOTP() {
-        var number = $("#phone").val();
-        firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
-            window.confirmationResult = confirmationResult;
-            coderesult = confirmationResult;
-            $("#successAuth").text("Message sent");
-            $("#successAuth").show();
-            $("#otpDiv").removeClass('d-none');
-            $("#regdiv").hide();
-        }).catch(function(error) {
-            $("#error").text(error.message);
-            $("#error").show();
-        });
-    }
-
-    function verify(e) {
-        var code1 = $("#ot1").val();
-        var code2 = $("#ot2").val();
-        var code3 = $("#ot3").val();
-        var code4 = $("#ot4").val();
-        var code5 = $("#ot5").val();
-        var code6 = $("#ot6").val();
-        var code = code1 + code2 + code3 + code4 + code5 + code6;
-
-        coderesult.confirm(code)
-            .then(function(result) {
-                var user = result.user;
-                $("#successOtpAuthot").text("OTP verified");
-                $("#successOtpAuthot").show();
-                // var user_type = $('#user_type').val();
-                // console.log(user_type);
-                // alert(user_type);
-                // var password = $('#password').val();
-                // var formData = $('#mycustomerForm').serialize();
-                // var formData = $('#myFormProvider').serialize();
-                var formData = new FormData($('#myFormProvider')[0]);
-                // $('#form1').(serialize);
-                console.log(formData);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).on('click', '#regcustuser', function() {
+            var base_url = $('#base_url').val();
+            if ($('#mycustomerForm').valid()) {
+                var email = $('#email').val();
+                var phone = $('#phone').val();
+                // var formData = $(this).serialize();
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
                 $.ajaxSetup({
                     headers: {
@@ -442,19 +309,9 @@
                     // url: base_url+'/md-customer-register',
                     url: base_url + '/md-register-medical-provider',
                     method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    //  {
-                    //     // email: email,
-                    //     formData: formData,
-                    //     password: password
-                    // },
-                    beforeSend: function() {
-                        $('#otp-btn').attr('disabled', true);
-                        $('#otp-btn').html(
-                            '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-                        );
+                    data: {
+                        email: email,
+                        phone: phone
                     },
                     success: function(response) {
                         $('#otp-btn').attr('disabled', false);
