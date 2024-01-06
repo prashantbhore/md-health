@@ -12,10 +12,12 @@ use App\Models\TransportationDetails;
 use App\Models\VehicleBrand;
 use App\Models\ComfortLevels;
 use Auth;
+use Storage;
 
 
 class TransportationController extends BaseController
 {
+    use MediaTrait;
     // master_brands
     public function master_brands()
     {
@@ -69,6 +71,8 @@ class TransportationController extends BaseController
                 'md_add_transportation_details.id',
                 'md_add_transportation_details.status',
                 // 'md_master_brand.brand_name',
+                'md_add_transportation_details.vehicle_image_path',
+                'md_add_transportation_details.vehicle_image_name',
                 'md_add_transportation_details.vehicle_model_id as vehicle_model_name',
                 'md_add_transportation_details.vehicle_per_day_price',
                 'md_add_transportation_details.other_services',
@@ -82,6 +86,7 @@ class TransportationController extends BaseController
             ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
             ->where('md_add_transportation_details.created_by', Auth::user()->id) // Assuming user_id is the column containing the user's ID
             ->get();
+
 
         if (!empty($TransportationDetails)) {
             return response()->json([
@@ -108,6 +113,8 @@ class TransportationController extends BaseController
             'md_master_brand.id as brand_id',
             'md_add_transportation_details.vehicle_model_id as vehicle_model_name',
             'md_add_transportation_details.vehicle_per_day_price',
+            'md_add_transportation_details.vehicle_image_path',
+            'md_add_transportation_details.vehicle_image_name',
             'md_add_transportation_details.other_services',
             'md_master_vehicle_comfort_levels.id as level_id',
             'md_master_vehicle_comfort_levels.vehicle_level_name'
@@ -120,6 +127,8 @@ class TransportationController extends BaseController
         ->leftjoin('md_master_brand', 'md_master_brand.id', 'md_add_transportation_details.vehicle_brand_id')
         ->where('md_add_transportation_details.id', $request->id) // Assuming user_id is the column containing the user's ID
         ->first();
+
+        $TransportationDetails[ 'vehicle_image_path' ] = url( '/' ) . Storage::url( $TransportationDetails->vehicle_image_path );
 
         if (!empty($TransportationDetails)) {
             return response()->json([
@@ -158,6 +167,11 @@ class TransportationController extends BaseController
             $vehicle_input['status'] = 'active';
             $vehicle_input['vehicle_per_day_price'] = $request->vehicle_per_day_price;
             $vehicle_input['other_services'] = $request->other_services;
+            if ($request->file('vehicle_image_path')) {
+                $vehicle_input['vehicle_image_path'] = $this->verifyAndUpload($request, 'vehicle_image_path', 'vehicle_image');
+                $original_name = $request->file('vehicle_image_path')->getClientOriginalName();
+                $vehicle_input['vehicle_image_name'] = $original_name;
+            }
             $vehicle_input['created_by'] = Auth::user()->id;
             $TransportationDetails = TransportationDetails::create($vehicle_input);
             if (!empty($TransportationDetails)) {
@@ -186,6 +200,11 @@ class TransportationController extends BaseController
             $vehicle_input['other_services'] = $request->other_services;
             $vehicle_input['status'] = 'inactive';
             $vehicle_input['created_by'] = Auth::user()->id;
+            if ($request->file('vehicle_image_path')) {
+                $vehicle_input['vehicle_image_path'] = $this->verifyAndUpload($request, 'vehicle_image_path', 'vehicle_image');
+                $original_name = $request->file('vehicle_image_path')->getClientOriginalName();
+                $vehicle_input['vehicle_image_name'] = $original_name;
+            }
             $TransportationDetails = TransportationDetails::create($vehicle_input);
             if (!empty($TransportationDetails)) {
                 return response()->json([
@@ -219,6 +238,11 @@ class TransportationController extends BaseController
             $vehicle_input['status'] = 'active';
             $vehicle_input['vehicle_per_day_price'] = $request->vehicle_per_day_price;
             $vehicle_input['other_services'] = $request->other_services;
+            if ($request->file('vehicle_image_path')) {
+                $vehicle_input['vehicle_image_path'] = $this->verifyAndUpload($request, 'vehicle_image_path', 'vehicle_image');
+                $original_name = $request->file('vehicle_image_path')->getClientOriginalName();
+                $vehicle_input['vehicle_image_name'] = $original_name;
+            }
             $vehicle_input['created_by'] = Auth::user()->id;
             $TransportationDetails = TransportationDetails::where('id', $request->transportation_id)->update($vehicle_input);
 
@@ -247,6 +271,11 @@ class TransportationController extends BaseController
             $vehicle_input['status'] = 'inactive';
             $vehicle_input['vehicle_per_day_price'] = $request->vehicle_per_day_price;
             $vehicle_input['other_services'] = $request->other_services;
+            if ($request->file('vehicle_image_path')) {
+                $vehicle_input['vehicle_image_path'] = $this->verifyAndUpload($request, 'vehicle_image_path', 'vehicle_image');
+                $original_name = $request->file('vehicle_image_path')->getClientOriginalName();
+                $vehicle_input['vehicle_image_name'] = $original_name;
+            }
             $vehicle_input['created_by'] = Auth::user()->id;
             $TransportationDetails = TransportationDetails::where('id', $request->transportation_id)->update($vehicle_input);
 
