@@ -256,7 +256,7 @@ class CustomerPackageController extends Controller
     }
 
 
-
+//Code By Mplus03
     public function customer_reports(Request $request)
     {
 
@@ -264,13 +264,18 @@ class CustomerPackageController extends Controller
         $token = Session::get('login_token');
         // dd( $token );
         $method = 'GET';
-        $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
+        $data = $this->apiService->getData($token, url('api/md-customer-all-reports-list'), null, $method);
+        
+        $customer_reports='';
+
+        if ($data['status'] == '200'){
+        if(!empty($data['provider_report_list'])){
+        $customer_reports = $data['provider_report_list'];
+        }
+       }
 
         
-
-
-        
-        return view('front/mdhealth/user-panel/user-all-reports');
+        return view('front/mdhealth/user-panel/user-all-reports',compact('customer_reports'));
     }
  
 
