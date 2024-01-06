@@ -195,9 +195,7 @@ class MedicalProviderReports extends Controller
 
   public function addReport(Request $request){
 
-     
-
-    $token = Session::get('login_token');
+     $token = Session::get('login_token');
 
 
     $apiUrl = url('api/md-provider-add-reports');
