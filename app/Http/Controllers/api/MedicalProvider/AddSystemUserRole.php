@@ -92,17 +92,16 @@ public function add_system_user(Request $request)
     ->update(['user_id' => $mdProviderRegistration->id, 'status' => 'active']);
    
 
-    $roleId = $request->roll_id;
+    // $roleId = $request->roll_id;
+    $roleId = $mdProviderRegistration->id;
+
     $privileges = $request->previlages; // Ensure correct spelling here
     
-    $role = MedicalProviderRole::find($roleId);
+    // $role = MedicalProviderRole::find($roleId);
+    $role = MedicalProviderRegistrater::find($roleId);
     
     if ($role) {
-        $role->update(['privilege' => $privileges]);
-        // Or if you prefer the setter method
-        // $role->privilege = $privileges;
-        // $role->save();
-        // dd($role);
+        $role->update(['privilege' => $privileges]); 
     }
  if (!empty($commonUserRegistrationUpdate )){
             return response()->json([

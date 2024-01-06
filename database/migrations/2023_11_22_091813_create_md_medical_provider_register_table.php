@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('country_id')->nullable();
             $table->bigInteger('city_id')->nullable();
             $table->string('roll_id')->nullable();
+            $table->string('previllages')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();
             $table->string('tax_no')->nullable();
