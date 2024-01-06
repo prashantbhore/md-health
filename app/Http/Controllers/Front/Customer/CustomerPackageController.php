@@ -27,9 +27,34 @@ class CustomerPackageController extends Controller
     public function customer_home()
     {
 
-        // dd( Session::get( 'login_token' ) );
-
         return view('front.mdhealth.index');
+    }
+    public function test(Request $request){
+
+        $token = null;
+        $apiUrl = url( '/api/md-register-medical-provider' );
+
+        $method = 'POST';
+        $body = $request->all();
+        $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+
+        if($request->hasFile('company_logo_image_path') && $request->hasFile('company_licence_image_path')){
+            $image=[];
+            $image_name=[];
+            if ($request->hasFile('company_logo_image_path') && $request->file('company_logo_image_path')->isValid()) {
+                $image[] = $request->file('company_logo_image_path');
+                $image_name[] = 'company_logo_image_path';
+            }
+            if ($request->hasFile('company_licence_image_path') && $request->file('company_licence_image_path')->isValid()) {
+                $image[] = $request->file('company_licence_image_path');
+                $image_name[] = 'company_licence_image_path';
+            }
+
+            $responseData = $this->apiService->getData($token,$apiUrl,$body,$method,$image,$image_name);
+        }
+        else{
+            $responseData = $this->apiService->getData($token,$apiUrl,$body,$method);
+        }
     }
 
     public function purchase_package($id)
@@ -273,6 +298,49 @@ class CustomerPackageController extends Controller
         return view('front/mdhealth/user-panel/user-all-reports');
     }
  
+
+
+
+    public function customer_report_search(Request $request)
+    {
+
+       
+
+        $token = Session::get('login_token');
+
+        // dd( $token );
+        if($request['query']==null){
+        $method = 'GET';
+        $data = $this->apiService->getData($token, url('api/md-customer-all-reports-list'), null, $method);
+        }
+
+        if($request['query']){
+            $query=$request['query'];
+            $apiUrl = url('api/md-customer-report-search');
+            $body=[ 'search_query' => $query,];
+            $method = 'POST';
+            $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+            
+            dd($request['$responseData']);
+        }
+
+
+
+        
+        $customer_reports='';
+
+        if ($data['status'] == '200'){
+        if(!empty($data['provider_report_list'])){
+        $customer_reports = $data['provider_report_list'];
+        }
+       }
+
+        
+        return view('front/mdhealth/user-panel/user-all-reports',compact('customer_reports'));
+    }
+ 
+ 
+
 
 
 

@@ -10,37 +10,8 @@ use Illuminate\Support\Facades\Route;
 class ApiService {
 
     public function getData( $token = null, $url, $body = null, $method, $image = null, $image_input_field_name = null ) {
-        $env = explode( ':', url( '/' ) )[ 0 ];
-        // dd( $env );
 
-        // if ( $method == 'POST' ) {
-        //     $response = Http::withHeaders( [
-        //       'Authorization' => 'Bearer ' . $token
-        // ] )->post( $url, $body ?? null );
-        //     // dd( $response );
-        //     return $responseData;
-        // } else {
-        //     $response = Http::withHeaders( [
-        //         'Authorization' => 'Bearer ' . $token,
-        // ] )->get( $url );
-        //     $responseData = $response->json();
-        //     // dd( $response );
-        //     return $responseData;
-        // }
-        // $headers[ 'Content-Type' ] = 'multipart/form-data';
-        // if ( $image_path ) {
-        //     $headers[ 'Content-Type' ] = 'multipart/form-data';
-        // }
-        // dd( $body );
-        // $response = Http::withHeaders( $headers )
-        //     ->attach( 'hotel_image_path', file_get_contents( $image ), 'image.jpg' )
-        //     -> {
-        // $method}
-        // ( $apiUrl, $body );
-        // $response = Http::withHeaders( $headers )-> {
-        //     $method}
-        //     ( $url, $body ?? null );
-        // dd( time().Str::random( 5 ).'.'.$extension );
+        $env = explode( ':', url( '/' ) )[ 0 ];
 
         if ( $env == 'https' ) {
 
@@ -56,9 +27,10 @@ class ApiService {
 
                 if ( is_array( $image ) ) {
                     foreach ( $image as $index => $singleImage ) {
-                        $extension = explode( '.', $_FILES[ $singleImage ][ 'name' ] )[ 1 ];
+
+                        $extension = $singleImage->getClientOriginalExtension();
                         $apiRequest->attach(
-                            $singleImage,
+                            $image_input_field_name[ $index ],
                             file_get_contents( $singleImage ),
                             time() . Str::random( 5 ) . '_' . $index . '.' . $extension
                         );
@@ -76,6 +48,7 @@ class ApiService {
             $response = $apiRequest-> {
                 $method}
                 ( $url, $body ?? null );
+                // dd( $response->json() );
                 return $response->json();
 
                 // dd( $response );
@@ -93,18 +66,19 @@ class ApiService {
 
                 if ( $image ) {
                     if ( is_array( $image ) ) {
+
                         foreach ( $image as $index => $singleImage ) {
-                            $extension = explode( '.', $_FILES[ $singleImage ][ 'name' ] )[ 1 ];
-                            // $unique = explode( '/', $_FILES[ $singleImage ][ 'tmp_name' ] )[ 2 ];
-                            $request->files->set( $singleImage, $singleImage );
+
+                            $extension = $singleImage->getClientOriginalExtension();
+                            $request->files->set( $image_input_field_name[ $index ], $singleImage );
                             $request->request->add( [
-                                $singleImage => file_get_contents( $singleImage ),
-                                'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension,
+                                $image_input_field_name[ $index ] => file_get_contents( $singleImage ),
+                                'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension
                             ] );
                         }
+
                     } else {
-                        $extension = explode( '.', $_FILES[ $image_input_field_name ][ 'name' ] )[ 1 ];
-                        // $unique = explode( '/', $_FILES[ $image_input_field_name ][ 'tmp_name' ] )[ 2 ];
+                        $extension = $singleImage->getClientOriginalExtension();
                         $request->files->set( $image_input_field_name, $image );
                         $request->request->add( [
                             $image_input_field_name => file_get_contents( $image ),
@@ -122,4 +96,35 @@ class ApiService {
         }
 
     }
+
+    // dd( $env );
+
+    // if ( $method == 'POST' ) {
+    //     $response = Http::withHeaders( [
+    //       'Authorization' => 'Bearer ' . $token
+    // ] )->post( $url, $body ?? null );
+    //     // dd( $response );
+    //     return $responseData;
+    // } else {
+    //     $response = Http::withHeaders( [
+    //         'Authorization' => 'Bearer ' . $token,
+    // ] )->get( $url );
+    //     $responseData = $response->json();
+    //     // dd( $response );
+    //     return $responseData;
+    // }
+    // $headers[ 'Content-Type' ] = 'multipart/form-data';
+    // if ( $image_path ) {
+    //     $headers[ 'Content-Type' ] = 'multipart/form-data';
+    // }
+    // dd( $body );
+    // $response = Http::withHeaders( $headers )
+    //     ->attach( 'hotel_image_path', file_get_contents( $image ), 'image.jpg' )
+    //     -> {
+    // $method}
+    // ( $apiUrl, $body );
+    // $response = Http::withHeaders( $headers )-> {
+    //     $method}
+    //     ( $url, $body ?? null );
+    // dd( time().Str::random( 5 ).'.'.$extension );
 

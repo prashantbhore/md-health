@@ -55,7 +55,7 @@
 
                     <div class="filter-div">
                         <div class="search-div">
-                            <input type="text" placeholder="Search">
+                            <input type="text" placeholder="Search" id="liveSearchInput">
                         </div>
                         <div class="list-div">
                             <select name="" id="">
@@ -177,4 +177,65 @@
         });
     });
     </script>
-    @endsection
+    <script>
+        function printDocument(reportPath) {
+            if (reportPath) {
+                var printWindow = window.open(reportPath, '_blank');
+                if (printWindow) {
+                    printWindow.onload = function() {
+                        printWindow.print();
+                    };
+                } else {
+                    alert('Failed to open the print window. Please check your browser settings.');
+                }
+            } else {
+                // Handle the case where the report path is empty
+                alert('No report available for printing.');
+            }
+    
+            return false; // Prevent the default behavior of the link
+        }
+    </script>
+
+<script>
+    $(document).ready(function(){
+        performSearch();
+
+        // Bind the function to the input event on the search box
+        $('#liveSearchInput').on('input', function(){
+            performSearch();
+        });
+
+        function performSearch(){
+           
+
+            let query = $('#liveSearchInput').val();
+            var base_url = $("#base_url").val();
+
+            $.ajax({
+                url: base_url + "/user-all-reports-search",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    query: query
+                },
+                success: function(html) {
+                    // Check if the HTML content is not empty
+                    if (html.trim() !== "") {
+                        // Display the results in #resultContainer
+                        $('#resultContainer').html(html);
+                    } else {
+                        // Show "No report found" message when HTML is empty
+                        $('#resultContainer').html("<p>No report found</p>");
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>
+@endsection

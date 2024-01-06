@@ -35,6 +35,12 @@
         letter-spacing: -0.56px;
     }
 </style>
+<style>
+    .error-message {
+        color: red;
+        margin-top: 5px;
+    }
+</style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
         <div class="row">
@@ -54,32 +60,29 @@
                                 <h6 class="section-heading">Add New Reports</h6>
                             </div>
 
-                            <form method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
                                 @csrf
-                                <div class="form-group  mb-3 ">
+                            
+                                <div class="form-group mb-3">
                                     <label class="form-label">Report Title</label>
-                                    <input type="text" name="report_title" class="form-control" placeholder="Write Here Please">
+                                    <input type="text" name="report_title" class="form-control" placeholder="Write Here Please" />
+                                    <div class="error-message" id="reportTitleError"></div>
                                 </div>
-
-                                {{-- {{dd($patient_list)}} --}}
-
+                            
                                 <div class="form-group d-flex flex-column mb-5">
                                     <label class="form-label">Patient</label>
-                                    <select name="customer_package_purchage_id" id="">
+                                    <select name="customer_package_purchage_id" id="patientSelect">
                                         <option value="">Choose Patient</option>
                                         @if (!empty($patient_list))
                                         @foreach ($patient_list as $patient)
                                         <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
                                             {{ !empty($patient['name']) ? $patient['name'] : '' }}
                                         </option>
-                                        @endforeach
-                                        @endif
-
-                                        {{-- <option value="">Patient 2</option>
-                                        <option value="">Patient 3</option> --}}
+                                        @endforeach @endif
                                     </select>
+                                    <div class="error-message" id="patientError"></div>
                                 </div>
-
+                            
                                 <div class="form-group mb-3">
                                     <label class="form-label">Upload Report File</label>
                                     <div class="form-group">
@@ -93,8 +96,9 @@
                                             <span id="pdfFileName"></span>
                                         </div>
                                     </div>
+                                    <div class="error-message" id="reportPathError"></div>
                                 </div>
-
+                            
                                 <div class="section-btns mb-5">
                                     <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
                                 </div>
@@ -114,8 +118,9 @@
                             <!-- FILTER -->
                             <div class="filter-div">
                                 <div class="search-div">
-                                    <input type="text" class="form-control" placeholder="Search" id="">
+                                    <input type="text" class="form-control" placeholder="Search" id="liveSearchInput" />
                                 </div>
+                                
                                 <div class="list-div">
                                     <select name="" id="" class="form-select">
                                         <option value="">List for Date</option>
@@ -125,23 +130,11 @@
                                 </div>
                             </div>
 
-                            <!-- Reports-->
-                            <div class="card shadow-none" style="border-radius: 3px;background: #F6F6F6;">
-                                <div class="card-body d-flex gap-3">
-                                    <div>
-                                        <img src="{{ asset('front/assets/img/msg2.png') }}" alt="">
-                                    </div>
-                                    <div>
-                                        <h5 class="card-h1">Treatment No: #MD3726378 <span class="pending ms-3">2 Documents</span></h5>
-                                        <p class="mb-0 pkg-name">Raju Singh</p>
-                                    </div>
-                                    <div class="ms-auto d-flex flex-column justify-content-end align-items-end">
-                                        <h5 class="card-h3 mb-0">Upload Time: <span class="card-p1">16/12/2023</span></h5>
-                                        <a href="javascript:;" class="text-black mt-auto card-h3">View Details</a>
-                                    </div>
+                            <div id="resultContainer"></div>
 
-                                </div>
-                            </div>
+                            <!-- Reports-->
+                        
+
 
                         </div>
                     </div>
@@ -205,12 +198,121 @@
         var previewPDF = document.getElementById('previewPDF');
         var pdfFileName = document.getElementById('pdfFileName');
 
-        fileInput.value = ''; // Clear the file input
-        previewImage.src = 'front/assets/img/default-img.png';
-        previewImage.style.display = 'block';
-        removePreviewBtn.style.display = 'none';
-        previewPDF.style.display = 'none';
-        pdfFileName.textContent = '';
+        fileInput.value = ""; // Clear the file input
+        previewImage.src = "front/assets/img/default-img.png";
+        previewImage.style.display = "block";
+        removePreviewBtn.style.display = "none";
+        previewPDF.style.display = "none";
+        pdfFileName.textContent = "";
     }
 </script>
+<script>
+    function printDocument(reportPath){
+        if (reportPath) {
+            var printWindow = window.open(reportPath, '_blank');
+            if (printWindow) {
+                printWindow.onload = function(){
+                    printWindow.print();
+                };
+            } else {
+                alert('Failed to open the print window. Please check your browser settings.');
+            }
+        } else {
+            // Handle the case where the report path is empty
+            alert('No report available for printing.');
+        }
+
+        return false; // Prevent the default behavior of the link
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Function to validate the form
+        function validateForm() {
+            var isValid = true;
+
+            // Validate Report Title
+            var reportTitle = $('input[name="report_title"]').val().trim();
+            if (reportTitle === '') {
+                isValid = false;
+                $('#reportTitleError').text('Report Title is required.');
+            } else {
+                $('#reportTitleError').text('');
+            }
+
+            // Validate Patient selection
+            var selectedPatient = $('#patientSelect').val();
+            if (selectedPatient === '') {
+                isValid = false;
+                $('#patientError').text('Please choose a patient.');
+            } else {
+                $('#patientError').text('');
+            }
+
+            // Validate Report File
+            var reportPath = $('input[name="report_path"]').val();
+            if (reportPath === '') {
+                isValid = false;
+                $('#reportPathError').text('Please upload a report file.');
+            } else {
+                $('#reportPathError').text('');
+            }
+
+            return isValid;
+        }
+
+        // Submit form with validation
+        $('#reportForm').submit(function (event) {
+            if (!validateForm()) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        performSearch();
+
+        // Bind the function to the input event on the search box
+        $('#liveSearchInput').on('input', function() {
+            performSearch();
+        });
+
+        function performSearch(){
+
+            let query = $('#liveSearchInput').val();
+            var base_url = $("#base_url").val();
+
+            $.ajax({
+                url: base_url + "/provider-reports-list",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    query: query
+                },
+                success: function(html) {
+                    // Check if the HTML content is not empty
+                    if (html.trim() !== "") {
+                        // Display the results in #resultContainer
+                        $('#resultContainer').html(html);
+                    } else {
+                        // Show "No report found" message when HTML is empty
+                        $('#resultContainer').html("<p>No report found</p>");
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
 @endsection
