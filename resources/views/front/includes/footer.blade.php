@@ -96,5 +96,5 @@
      };
 
      // Initialize Firebase before rendering reCAPTCHA
-     //  firebase.initializeApp(firebaseConfig);
+     firebase.initializeApp(firebaseConfig);
  </script>

@@ -160,7 +160,7 @@ public function email_or_mobile_exist(Request $request){
             'password' => $request->get('password')
         );
         $token = Session::get('login_token');
-        // dd(Session::get('login_token'));
+        // dd($token);
 
         // $otpverify = implode('', $request->input('otp'));
         $user_data = array(
@@ -224,7 +224,7 @@ public function email_or_mobile_exist(Request $request){
                                 'url' => '/medical-provider-dashboard',
                             ] );
                         } else {
-                            dd($user_type);
+                            // dd($user_type);
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Credencials not match',
