@@ -21,7 +21,7 @@ class UpdateFoodProfileController extends BaseController
 {
     use MediaTrait;
     //code by mplus01
-    public function update_food_profile_list()
+    public function update_food_profile_list(Request $request)
     {
         $medical_provider_list = MDFoodRegisters::where('status', 'active')
         ->select(
@@ -43,6 +43,7 @@ class UpdateFoodProfileController extends BaseController
             ->first();
 
         if (!empty($medical_provider_list)) {
+
             $medical_provider_list['company_name'] = ($medical_provider_list->company_name);
             $medical_provider_list['city_id'] = ($medical_provider_list->city_id);
             $medical_provider_list['email'] = ($medical_provider_list->email);

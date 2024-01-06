@@ -69,6 +69,9 @@ Route::post('change-status', [BaseController::class, 'status'])->name('change-st
 
 
 
+Route::any('myself_as_patient/{id}',[CustomerPackageController::class,'myself_as_patient'])->name('myself_as_patient');
+
+
 // Super Admin authentication
 
 Route::get('/admin-panel', [LoginController::class, 'index']);
@@ -571,25 +574,10 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 // Route::view('payment-information', 'front/mdhealth/medical-provider/payment-information');
 
 
-
-
-
-
 Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
-
-
-
-
-
-
-
-
-
-
-
 
 
 // USER PANEL
