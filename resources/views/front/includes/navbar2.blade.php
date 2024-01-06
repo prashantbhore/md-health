@@ -29,11 +29,19 @@ $name = 'MDHealth';
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-            <ul class="navbar-nav align-items-center gap-5 w-100">
-                <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
-                <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
-                <li class="nav-item"><a href="{{ url('mdFoods') }}" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
-                <li class="nav-item"><a href="{{ url('mdShop') }}" class="nav-link"><span class="fw-bold">MD</span>Shop</a></li>
+            <ul class="navbar-nav align-items-center gap-4 w-100">
+                <li class="nav-item">
+                    <a href="{{ url('home-service') }}" class="nav-link">Home Service</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('md-booking-home-page') }}" class="nav-link"><span class="fw-bold">MD</span>Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('mdFoods') }}" class="nav-link"><span class="fw-bold">MD</span>Foods</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('mdShop') }}" class="nav-link"><span class="fw-bold">MD</span>Shop</a>
+                </li>
 
                 <!-- This dropdown appears after user login [User Profile] -->
                 @if (Session::get('login_token') != null)
