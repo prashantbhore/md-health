@@ -28,13 +28,13 @@ class OtherServicesController extends Controller {
         $method = 'GET';
 
         $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
-        $hotel_details = $responseData[ 'hotel_details' ];
+        $hotel_details = !empty( $responseData[ 'hotel_details' ] ) ?$responseData[ 'hotel_details' ] : [];
 
         $responseData = $this->apiService->getData( $token, $apiUrl2, $body, $method );
-        $vehicle_details = $responseData[ 'data' ];
+        $vehicle_details = !empty( $responseData[ 'data' ] ) ? $responseData[ 'data' ] : [];
 
         $responseData = $this->apiService->getData( $token, $apiUrl3, $body, $method );
-        $tour_details = $responseData[ 'tour_details' ];
+        $tour_details = !empty( $responseData[ 'tour_details' ] ) ? $responseData[ 'tour_details' ] : [];
 
         return view( 'front.mdhealth.medical-provider.other-services', compact( 'hotel_details', 'vehicle_details', 'tour_details' ) );
     }
@@ -202,7 +202,7 @@ class OtherServicesController extends Controller {
         }
         $method = 'POST';
         $body = $request->all();
-        
+
         $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
 
         if ( $request->hasFile( 'vehicle_image_path' ) && $request->file( 'vehicle_image_path' )->isValid() ) {
@@ -212,7 +212,6 @@ class OtherServicesController extends Controller {
         } else {
             $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method );
         }
-
 
         // $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
         if ( ( $responseData[ 'status' ] == 200 ) ) {
