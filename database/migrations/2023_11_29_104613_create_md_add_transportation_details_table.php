@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('vehicle_model_id')->nullable();
             $table->bigInteger('comfort_level_id')->nullable();
             $table->string('vehicle_per_day_price')->nullable();
+            $table->string('vehicle_image_path')->nullable();
+            $table->string('vehicle_image_name')->nullable();
             $table->string('other_services')->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');

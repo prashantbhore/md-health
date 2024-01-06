@@ -13,6 +13,8 @@ class TransportationDetails extends Model
         'vehicle_brand_id',
         'vehicle_model_id',
         'comfort_level_id',
+        'vehicle_image_path',
+        'vehicle_image_name',
         'vehicle_per_day_price',
         'other_services',
         'status',

@@ -47,6 +47,7 @@ class MedicalProviderRegistrationController extends Controller
 
     public function md_register_medical_provider(request $request)
     {
+
         // $email_exist = MedicalProviderRegistrater::where('status', 'active')
         //     ->where('email', $request->email)
         //     ->first();
@@ -128,13 +129,23 @@ class MedicalProviderRegistrationController extends Controller
                 //     'email' => $request->get('email'),
                 //     'password' => $request->get('password')
                 // );
+                // dd($_FILES,$request);
                 $token=null;
                 $apiUrl = url('/api/md-register-medical-provider');
 
                 $method = 'POST';
                 $body = $request->all();
-        
-                $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+                $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+                
+            if ($request->hasFile('company_logo_image_path') && $request->file('company_logo_image_path')->isValid()) {
+                $image = $request->file('company_logo_image_path');
+                $image_name = 'company_logo_image_path';
+                $responseData = $this->apiService->getData($token,$apiUrl,$plainArray,$method,$image,$image_name);
+            }else{
+                $responseData = $this->apiService->getData($token,$apiUrl,$plainArray,$method);
+            }
+
+                // $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
                 Session::put('login_token', $responseData['data']['access_token']);
 
                 // $provider = Auth::guard('md_health_medical_providers_registers')->user();

@@ -427,7 +427,8 @@
                 // alert(user_type);
                 // var password = $('#password').val();
                 // var formData = $('#mycustomerForm').serialize();
-                var formData = $('#myFormProvider').serialize();
+                // var formData = $('#myFormProvider').serialize();
+                var formData = new FormData($('#myFormProvider')[0]);
                 // $('#form1').(serialize);
                 console.log(formData);
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -442,6 +443,8 @@
                     url: base_url + '/md-register-medical-provider',
                     method: 'POST',
                     data: formData,
+                    processData: false,
+                    contentType: false,
                     //  {
                     //     // email: email,
                     //     formData: formData,
