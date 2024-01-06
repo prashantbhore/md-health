@@ -215,6 +215,9 @@ class ReportsController extends BaseController
     ->orWhereHas('provider', function ($query) use ($searchQuery) {
         $query->where('company_name', 'like', '%' . $searchQuery . '%');
     })
+    ->whereHas('provider', function ($query) {
+        $query->where('medical_provider_id', Auth::user()->id);
+    })
     ->where('status', 'active')
     ->get();
 
@@ -276,7 +279,7 @@ class ReportsController extends BaseController
         return response()->json([
             'status' => 200,
             'message' => 'Search results found.',
-            'search_results' => $formattedResults,
+            'provider_report_list' => $formattedResults,
         ]);
     } else {
         return response()->json([

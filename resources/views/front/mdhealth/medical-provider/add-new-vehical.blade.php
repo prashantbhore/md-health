@@ -112,12 +112,19 @@
                                         </select>
 
                                     </div>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Vehicle Picture</label>
-                                    <div class="form-group">
-                                        <input type="file" name="vehicle_image_path" id="vehicle_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+{{-- {{dd($transportation_details)}} --}}
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Vehicle Picture</label>
+                                        <div class="form-group">
+                                            <input type="file" name="vehicle_image_path" id="vehicle_image_path"
+                                                class="form-control text-dark"
+                                                oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                        </div>
+                                        <div class="prev-img-div">
+                                            <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/default-img.png' }}" alt="image"
+                                            id="pic">
+                                            <input type="hidden" name="old_image" id="old_image" value="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : '' }}">
+                                        </div>
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="front/assets/img/default-img.png" alt="image" id="pic">

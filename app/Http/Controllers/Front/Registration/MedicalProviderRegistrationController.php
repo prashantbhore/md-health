@@ -44,11 +44,10 @@ class MedicalProviderRegistrationController extends Controller
         return view('front/mdhealth/authentication/vendor-login', compact('countries', 'cities'));
     }
 
+    public function md_register_medical_provider( request $request ) {
 
-    public function md_register_medical_provider(request $request)
-    {
-        // $email_exist = MedicalProviderRegistrater::where('status', 'active')
-        //     ->where('email', $request->email)
+        // $email_exist = MedicalProviderRegistrater::where( 'status', 'active' )
+        //     ->where( 'email', $request->email )
         //     ->first();
         // $email_exist_common = CommonUserLoginTable::where('status', 'active')
         //     ->where('email', $request->email)
@@ -119,23 +118,41 @@ class MedicalProviderRegistrationController extends Controller
         //         }
         //         // dd($MedicalProviderRegistrater);
         //     }
-        // $update_unique_id = MedicalProviderRegistrater::where('id', $value->id)->update(['provider_unique_id' => $provider_unique_id]);
-        // $common_data_registrationid = CommonUserLoginTable::where('id', $lastInsertedId)->update(['user_id' => $value->id,'status'=>'active']);
+        // $update_unique_id = MedicalProviderRegistrater::where( 'id', $value->id )->update( [ 'provider_unique_id' => $provider_unique_id ] );
+        // $common_data_registrationid = CommonUserLoginTable::where( 'id', $lastInsertedId )->update( [ 'user_id' => $value->id, 'status'=>'active' ] );
 
-        
-                //     $user_datacust = array(
-                //     'platform_type' => 'web',
-                //     'email' => $request->get('email'),
-                //     'password' => $request->get('password')
-                // );
-                $token=null;
-                $apiUrl = url('/api/md-register-medical-provider');
+        //     $user_datacust = array(
+        //     'platform_type' => 'web',
+        //     'email' => $request->get( 'email' ),
+        //     'password' => $request->get( 'password' )
+        // );
+        // dd( $_FILES, $request );
+        $token = null;
+        $apiUrl = url( '/api/md-register-medical-provider' );
 
-                $method = 'POST';
-                $body = $request->all();
-        
-                $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
-                Session::put('login_token', $responseData['data']['access_token']);
+        $method = 'POST';
+        $body = $request->all();
+        $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+
+        if ( $request->hasFile( 'company_logo_image_path' ) && $request->hasFile( 'company_licence_image_path' ) ) {
+            $image = [];
+            $image_name = [];
+            if ( $request->hasFile( 'company_logo_image_path' ) && $request->file( 'company_logo_image_path' )->isValid() ) {
+                $image[] = $request->file( 'company_logo_image_path' );
+                $image_name[] = 'company_logo_image_path';
+            }
+            if ( $request->hasFile( 'company_licence_image_path' ) && $request->file( 'company_licence_image_path' )->isValid() ) {
+                $image[] = $request->file( 'company_licence_image_path' );
+                $image_name[] = 'company_licence_image_path';
+            }
+
+            $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method, $image, $image_name );
+        } else {
+            $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        }
+
+        // $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        Session::put( 'login_token', $responseData[ 'data' ][ 'access_token' ] );
 
                 // $provider = Auth::guard('md_health_medical_providers_registers')->user();
                 // $otpcheck = MedicalProviderRegistrater::where('id', $provider->id)
