@@ -499,6 +499,7 @@ class RegistrationController extends BaseController
 
         $md_provider_input = [];
         $md_provider_input['company_name'] = $request->company_name;
+        $md_provider_input['country_id'] = $request->country_id;
         $md_provider_input['city_id'] = $request->city_id;
         $md_provider_input['email'] = $request->email;
         $md_provider_input['mobile_no'] = $request->phone;
@@ -509,8 +510,8 @@ class RegistrationController extends BaseController
         $md_provider_input['modified_ip_address'] = $request->ip();
         $md_provider_registration = VendorRegister::create($md_provider_input);
 
-        $md_provider_input['modified_ip_address'] = $request->ip();
-        $md_provider_registration = VendorRegister::create($md_provider_input);
+        // $md_provider_input['modified_ip_address'] = $request->ip();
+        // $md_provider_registration = VendorRegister::create($md_provider_input);
 
         $MedicalProviderRegistrater = VendorRegister::select('id')->get();
         if (!empty($MedicalProviderRegistrater)) {
@@ -693,7 +694,7 @@ class RegistrationController extends BaseController
 
         $md_provider_input['modified_ip_address'] = $request->ip();
         $md_provider_registration = MDFoodRegisters::create($md_provider_input);
-
+// return $md_provider_registration;
         $MedicalProviderRegistrater = MDFoodRegisters::select('id')->get();
         if (!empty($MedicalProviderRegistrater)) {
             foreach ($MedicalProviderRegistrater as $key => $value) {
