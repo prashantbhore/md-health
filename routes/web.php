@@ -581,6 +581,7 @@ Route::controller(MedicalProviderDashboradController::class)->group(function(){
 Route::view('user-package', 'front/mdhealth/user-panel/user-package');
 Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
+Route::any('test',[CustomerPackageController::class,'test']);
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
 // Route::any('my-profile', [CustomerPackageController::class, 'my_profile']);

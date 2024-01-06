@@ -29,9 +29,34 @@ class CustomerPackageController extends Controller
     public function customer_home()
     {
 
-        // dd( Session::get( 'login_token' ) );
-
         return view('front.mdhealth.index');
+    }
+    public function test(Request $request){
+
+        $token = null;
+        $apiUrl = url( '/api/md-register-medical-provider' );
+
+        $method = 'POST';
+        $body = $request->all();
+        $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+
+        if($request->hasFile('company_logo_image_path') && $request->hasFile('company_licence_image_path')){
+            $image=[];
+            $image_name=[];
+            if ($request->hasFile('company_logo_image_path') && $request->file('company_logo_image_path')->isValid()) {
+                $image[] = $request->file('company_logo_image_path');
+                $image_name[] = 'company_logo_image_path';
+            }
+            if ($request->hasFile('company_licence_image_path') && $request->file('company_licence_image_path')->isValid()) {
+                $image[] = $request->file('company_licence_image_path');
+                $image_name[] = 'company_licence_image_path';
+            }
+
+            $responseData = $this->apiService->getData($token,$apiUrl,$body,$method,$image,$image_name);
+        }
+        else{
+            $responseData = $this->apiService->getData($token,$apiUrl,$body,$method);
+        }
     }
 
     public function purchase_package($id)
