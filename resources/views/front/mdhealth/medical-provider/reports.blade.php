@@ -135,7 +135,7 @@
                                         <img src="{{ asset('front/assets/img/msg2.png') }}" alt="" />
                                     </div>
                                     <div>
-                                        <h5 class="card-h1">Treatment No: #{{!empty($report['customer_purchased_package']['order_id'])?$report['customer_purchased_package']['order_id']:''}} <span class="pending ms-3">{{!empty($report['report_count'])?$report['report_count']:''}}<span class="pending ms-3">  {{!empty($report['report_count'])?$report['report_count']:''}} Documents</span></h5>
+                                        <h5 class="card-h1">Treatment No: #{{!empty($report['customer_purchased_package']['order_id'])?$report['customer_purchased_package']['order_id']:''}} <span class="pending ms-3"><span class="pending ms-3">  {{!empty($report['report_count'])?$report['report_count']:''}} Documents</span></h5>
                                         <p class="mb-0 pkg-name">{{!empty($report['customer_data']['name'])?$report['customer_data']['name']:''}}</p>
                                     </div>
                                     <div class="ms-auto d-flex flex-column justify-content-end align-items-end">
