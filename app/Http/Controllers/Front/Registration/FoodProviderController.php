@@ -77,14 +77,14 @@ class FoodProviderController extends Controller
         }
 
 
-        if (!empty($responseData['data']['access_token'])) {
+        if (!empty($responseData['data']['access_token'])){
             return response()->json([
                         'status' => 200,
                         'message' => $responseData['message'],
                         'url' => '/medical-provider-dashboard',
                     ]);
 
-        } else {
+        } else{
             return response()->json([
                         'status' => 404,
                         'message' => $responseData['message'],

@@ -522,7 +522,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
 
     });
-   
+
 });
 
 
