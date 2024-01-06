@@ -15,13 +15,19 @@
     .dropdown-toggle::after {
         display: none;
     }
+
+    .md-navbar .nav-item .nav-link,
+    .md-navbar .nav-link {
+        padding-bottom: 0;
+    }
 </style>
 
 
 <!--MDMedicalProvider*%-->
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
-    <div class="container">
+    <div class="container px-0">
+        <!-- Logo Image -->
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
         </a>
@@ -29,17 +35,20 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-
-
-            <ul class="navbar-nav align-items-center gap-5">
-                <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
-                <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Booking</a></li>
-                <li class="nav-item"><a href="{{ url('mdFoods') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Foods</a></li>
-                <li class="nav-item"><a href="{{ url('mdShop') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Shop</a></li>
+        <div class="collapse navbar-collapse justify-content-center ms-5" id="navbarNavDropdown">
+            <ul class="navbar-nav align-items-center gap-5 w-100">
+                <li class="nav-item">
+                    <a href="{{ url('home-service') }}" class="nav-link">Home Service</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('md-booking-home-page') }}" class="nav-link"><span class="fw-bold">MD</span>Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('mdFoods') }}" class="nav-link"><span class="fw-bold">MD</span>Foods</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('mdShop') }}" class="nav-link"><span class="fw-bold">MD</span>Shop</a>
+                </li>
 
                 <!-- This dropdown appears after user login [User Profile] -->
                 @if (Session::get('login_token') != null)
@@ -286,7 +295,7 @@
             </ul>
 
             @if (Session::get('login_token') == null)
-                <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
+            <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-decoration-underline" style="width: 100px;">Sign In</a>
 
                 <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get
                     Started</a>
