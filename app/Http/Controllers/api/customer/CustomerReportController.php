@@ -14,7 +14,7 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
 use Storage;
 
-class CustomerReportController extends Controller
+class CustomerReportController extends BaseController
 {
 
     
@@ -93,10 +93,10 @@ class CustomerReportController extends Controller
     $searchQuery = $request->input('search_query');
 
   
-   // $customerId = auth()->user()->id; 
+    $customerId = auth()->user()->id; 
 
     
-    $customerId=1; 
+    //$customerId=1; 
 
     $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
         $query->where('report_title', 'like', '%' . $searchQuery . '%')
