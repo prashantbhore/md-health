@@ -78,7 +78,7 @@ class ApiService {
                         }
 
                     } else {
-                        $extension = $singleImage->getClientOriginalExtension();
+                        $extension = $image->getClientOriginalExtension();
                         $request->files->set( $image_input_field_name, $image );
                         $request->request->add( [
                             $image_input_field_name => file_get_contents( $image ),
