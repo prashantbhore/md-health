@@ -226,7 +226,7 @@
                                                     <select name="patient_city_id" id="inputState" class="form-select h-75">
                                                         <option selected>City</option>
                                                         @foreach($cities as $city)
-                                                            <option value="{{$country->id}}">{{$city->city_name}}</option>
+                                                            <option value="{{$city->id}}">{{$city->city_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

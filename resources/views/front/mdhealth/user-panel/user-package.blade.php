@@ -189,9 +189,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!--id="package-details_{{ $active_package['package_id'] }}"-->
+
                                                     <div class="treatment-card-btns d-flex justify-content-around gap-3">
                                                         <a href="{{ url('view-my-active-packages/' . $active_package['package_id']) }}"
+                                                            id="package-details_{{ $active_package['package_id'] }}"
                                                             class="order-completed-btn w-100 bg-white  fsb-2 border border-black package-details">Package
                                                             Details</a>
                                                         <a href="#"
@@ -353,70 +354,88 @@
                         aria-label="Close">X</button>
                 </div>
                 <div class="modal-body ">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label class="form-label fsb-2 fw-600">*Patient Full Name</label>
-                                <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname"
-                                    placeholder="{{ !empty($patient_information_list['patient_full_name']) ? $patient_information_list['patient_full_name'] : '' }}">
+                    <form id="UserChangeInformationForm">
+                        <div class="row">
+                            <input type="hidden" name="package_buy_for"
+                                value="{{ !empty($patient_information_list['package_buy_for']) ? $patient_information_list['package_buy_for'] : '' }}">
+                            <input type="hidden" name="package_id"
+                                value="{{ !empty($patient_information_list['package_id']) ? $patient_information_list['package_id'] : '' }}">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label class="form-label fsb-2 fw-600">*Patient Full Name</label>
+                                    <input type="text" class="form-control" name="patient_full_name" id=""
+                                        value="{{ !empty($patient_information_list['patient_full_name']) ? $patient_information_list['patient_full_name'] : '' }}"
+                                        aria-describedby="foodname"
+                                        placeholder="{{ !empty($patient_information_list['patient_full_name']) ? $patient_information_list['patient_full_name'] : 'Patient Full Name' }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label class="form-label fsb-2 fw-600">*Relationship To You</label>
-                                <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname"
-                                    placeholder="{{ !empty($patient_information_list['patient_relation']) ? $patient_information_list['patient_relation'] : 'Relationship To You' }}">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label class="form-label fsb-2 fw-600">*Relationship To You</label>
+                                    <input type="text" class="form-control" name="patient_relation" id=""
+                                        value="{{ !empty($patient_information_list['patient_relation']) ? $patient_information_list['patient_relation'] : '' }}"
+                                        aria-describedby="foodname"
+                                        placeholder="{{ !empty($patient_information_list['patient_relation']) ? $patient_information_list['patient_relation'] : 'Relationship To You' }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label class="form-label fsb-2 fw-600">*Patient E-mail <b>*optional</b></label>
-                                <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname"
-                                    placeholder="{{ !empty($patient_information_list['patient_email']) ? $patient_information_list['patient_email'] : 'E-Mail' }}">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label class="form-label fsb-2 fw-600">*Patient E-mail <b>*optional</b></label>
+                                    <input type="text" class="form-control" name="patient_email" id=""
+                                        value="{{ !empty($patient_information_list['patient_email']) ? $patient_information_list['patient_email'] : '' }}"
+                                        aria-describedby="foodname"
+                                        placeholder="{{ !empty($patient_information_list['patient_email']) ? $patient_information_list['patient_email'] : 'E-Mail' }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group">
-                                <label class="form-label fsb-2 fw-600">*Patient Contact Number</label>
-                                <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname"
-                                    placeholder="{{ !empty($patient_information_list['patient_contact_no']) ? $patient_information_list['patient_contact_no'] : 'Contact Number' }}">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label class="form-label fsb-2 fw-600">*Patient Contact Number</label>
+                                    <input type="text" class="form-control" name="patient_contact_no" id=""
+                                        value="{{ !empty($patient_information_list['patient_contact_no']) ? $patient_information_list['patient_contact_no'] : '' }}"
+                                        aria-describedby="foodname"
+                                        placeholder="{{ !empty($patient_information_list['patient_contact_no']) ? $patient_information_list['patient_contact_no'] : 'Contact Number' }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group d-flex flex-column">
-                                <label class="form-label fsb-2 fw-600">*Patient Country</label>
-                                <select name="" id="">
-                                    <option value="">Country</option>
-                                    <option value="">Patient 1</option>
-                                    <option value="">Patient 2</option>
-                                    <option value="">Patient 3</option>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">*Patient Country</label>
+                                <select name="patient_country_id" id="inputState" class="form-select h-40 mt-1">
+                                    @if (!empty($counties))
+                                        @foreach ($counties as $country)
+                                            @if ($patient_information_list['patient_country_id'] == $country->id)
+                                                <option value="{{ $country->id }}" selected>{{ $country->country_name }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="form-group d-flex flex-column">
-                                <label class="form-label fsb-2 fw-600">*Patient City</label>
-                                <select name="" id="">
-                                    <option value="">City</option>
-                                    <option value="">Patient 1</option>
-                                    <option value="">Patient 2</option>
-                                    <option value="">Patient 3</option>
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label fw-bold">*Patient City</label>
+                                <select name="patient_city_id" id="inputState" class="form-select h-40 mt-1">
+                                    @if (!empty($cities))
+                                        @foreach ($cities as $city)
+                                            @if ($patient_information_list['patient_city_id'] == $city->id)
+                                                <option value="{{ $city->id }}" selected>{{ $city->city_name }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $city->id }}">{{ $city->city_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
+                            <div class="col-md-12 my-5">
+                                <h6 class="fsb-2 fw-500">*You can also change the patient information from <span
+                                        class="fw-900 fsb-1">panel</span> <span class="text-green fw-900">></span> <span
+                                        class="fw-900 fsb-1">packages</span></h6>
+                            </div>
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <a href="javascript:void(0);" class="order-completed-btn bg-green">Submit</a>
+                            </div>
                         </div>
-                        <div class="col-md-12 my-5">
-                            <h6 class="fsb-2 fw-500">*You can also change the patient information from <span
-                                    class="fw-900 fsb-1">panel</span> <span class="text-green fw-900">></span> <span
-                                    class="fw-900 fsb-1">packages</span></h6>
-                        </div>
-                        <div class="col-md-12 d-flex justify-content-center">
-                            <a href="javascript:void(0);" class="order-completed-btn bg-green">Submit</a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -481,47 +500,54 @@
             $(".upPackage").addClass("md-active");
 
 
-            $(".package-details").click(function() {
-                var id = this.id.split('_')[1];
-                var formData = new FormData();
+            // $(".package-details").click(function() {
+
+
+            //     alert(id);
+            //     var formData = new FormData();
+            //     formData.append("package_id", id);
+
+            //     $.ajax({
+            //         url: baseUrl + 'view_my_active_packages',
+            //         type: 'POST',
+            //         data: formData,
+            //         processData: false,
+            //         contentType: false,
+            //         headers: {
+            //             'X-CSRF-TOKEN': csrfToken
+            //         },
+
+            //         success: function(response) {
+            //             console.log('Success:', response);
+            //         },
+            //         error: function(xhr, status, error) {
+            //             console.error('Error:', error);
+            //         }
+            //     });
+            // });
+
+            $('#UserChangeInformationForm').submit(function(e) {
+
+                var formData = new FormData(this);
+                var patientId =
+                    "{{ !empty($patient_information_list['id']) ? $patient_information_list['id'] : '' }}";
+                var id = $(".package-details").attr('id').split('_')[1];
                 formData.append("package_id", id);
-
-                $.ajax({
-                    url: baseUrl + 'view_my_active_packages',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-
-                    success: function(response) {
-                        console.log('Success:', response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
-            });
-
-            $('#change_information_model').on('click', function(e) {
-
-                var formData = new FormData();
-                formData.append("package_id", id);
-                formData.append("patient_id");
+                formData.append("patient_id", patientId);
                 e.preventDefault();
                 $.ajax({
                     type: 'POST',
-                    url: baseUrl + '/api/md-customer-my-details', // Your endpoint
-                    dataType: 'json',
+                    url: baseUrl + '/api/md-change-patient-information', // Your endpoint
+                    contentType: false,
+                    processData: false,
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
                     },
-                    body: formData,
+                    data: formData,
                     success: function(response) {
                         console.log("Success: " + response);
-                        $('#UserChangeInformation').modal('show');
+                        $('#UserChangeInformation').modal('hide');
                     },
                     error: function(xhr, status, error) {
 

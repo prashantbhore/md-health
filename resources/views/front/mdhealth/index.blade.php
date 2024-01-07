@@ -1,15 +1,15 @@
 @php
-$treatment_plans = App\Models\ProductCategory::all();
-$cities = App\Models\Cities::where('country_id', '1')
-->where('status', 'active')
-->get();
-// dd(Session::all());
-if (Session::get('login_token') != null) {
-$is_logged_in = true;
-} else {
-$is_logged_in = false;
-}
-// dd(Session::all());
+    $treatment_plans = App\Models\ProductCategory::all();
+    $cities = App\Models\Cities::where('country_id', '1')
+        ->where('status', 'active')
+        ->get();
+    // dd(Session::all());
+    if (Session::get('login_token') != null) {
+        $is_logged_in = true;
+    } else {
+        $is_logged_in = false;
+    }
+    // dd(Session::all());
 @endphp
 
 
@@ -31,9 +31,11 @@ $is_logged_in = false;
                                     <select class="form-select" name="treatment_name" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option value="">Select Treatment</option>
-                                        @foreach ($treatment_plans as $treatment_plan)
-                                            <option>{{ $treatment_plan->product_category_name }}</option>
-                                        @endforeach
+                                        @if (!empty($treatment_plans))
+                                            @foreach ($treatment_plans as $treatment_plan)
+                                                <option>{{ $treatment_plan->product_category_name }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                     <label for="floatingSelect">Treatments</label>
                                 </div>
@@ -41,24 +43,26 @@ $is_logged_in = false;
                                     <select class="form-select" name="city_name" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option data-display="Select" selected>Select City</option>
-                                        @foreach ($cities as $city)
-                                            <option>{{ $city->city_name }}</option>
-                                        @endforeach
+                                        @if (!empty($cities))
+                                            @foreach ($cities as $city)
+                                                <option>{{ $city->city_name }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                     <label for="floatingSelect">City</label>
                                 </div>
                                 <div class="form-floating">
                                     <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                                                                                            <option data-display="Select" selected>12 Aug</option>
-                                                                                                                            <option value="1">One</option>
-                                                                                                                            <option value="2">Two</option>
-                                                                                                                            <option value="3">Three</option>
-                                                                                                                        </select> -->
-                                <!-- <div class="datepickerContainer"> -->
-                                <input type="text" class="form-select" name="daterange" value="" />
-                                <!-- </div> -->
-                                <label for="floatingSelect">Treatment Date</label>
-                            </div>
+                                                                                                                                                <option data-display="Select" selected>12 Aug</option>
+                                                                                                                                                <option value="1">One</option>
+                                                                                                                                                <option value="2">Two</option>
+                                                                                                                                                <option value="3">Three</option>
+                                                                                                                                            </select> -->
+                                    <!-- <div class="datepickerContainer"> -->
+                                    <input type="text" class="form-select" name="daterange" value="" />
+                                    <!-- </div> -->
+                                    <label for="floatingSelect">Treatment Date</label>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -70,7 +74,8 @@ $is_logged_in = false;
                 <h2>Couldn’t find your <span class="text-green text-decoration-underline">treatment</span> package?</h2>
                 <div class="card border-0 position-relative">
                     <div class="card-body df-center flex-column">
-                        <p class="card-text">Contact us with your detail & our team will prepare your desired <br> treatment package!
+                        <p class="card-text">Contact us with your detail & our team will prepare your desired <br> treatment
+                            package!
                         </p>
                         <button class="btn btn-md-black position-absolute" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Make a Request</button>
@@ -276,9 +281,11 @@ $is_logged_in = false;
     </div>
     <div class="py-100px pb-0 md-coin df-center flex-column gap-4 bg-f6 section-3 mb-5">
         <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
-        <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span class="text-green">!</span>
+        <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span
+                class="text-green">!</span>
         </h1>
-        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and <br /> spend <span class="camptonBold">MD</span>coin
+        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span
+                class="camptonBold">invite your friends</span> and <br /> spend <span class="camptonBold">MD</span>coin
             for
             your health needs. </p>
     </div>
@@ -329,11 +336,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -354,11 +363,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -379,11 +390,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(520)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -404,11 +417,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(400)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -429,11 +444,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -467,7 +484,8 @@ $is_logged_in = false;
             <div class="part2">
                 <div class="mb-4">
                     <p class="fs3 camptonBold mb-0">Download</p>
-                    <p class="fs3"><span class="camptonBold text-green">MD</span><span class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
+                    <p class="fs3"><span class="camptonBold text-green">MD</span><span
+                            class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
                     <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
                 </div>
@@ -483,17 +501,17 @@ $is_logged_in = false;
         </div>
     </div>
 
-        <!-- SECTION 6 -->
-        <div class="bg-black position-relative section6">
-            <div class="container medical-pckg">
-                <p class="fs-1 camptonBold clr-white mb-0">Find your <span class="text-green">medical</span> package <span
-                        class="fw-normal camptonBook">&</span></p>
-                <p class="fs-1 camptonBook clr-white mb-5">flight to Turkiye!</p>
-                <a class="bookButton">Book Now</a>
-            </div>
-            <img src="{{ 'front/assets/img/flight.png' }}" alt="">
+    <!-- SECTION 6 -->
+    <div class="bg-black position-relative section6">
+        <div class="container medical-pckg">
+            <p class="fs-1 camptonBold clr-white mb-0">Find your <span class="text-green">medical</span> package <span
+                    class="fw-normal camptonBook">&</span></p>
+            <p class="fs-1 camptonBook clr-white mb-5">flight to Turkiye!</p>
+            <a class="bookButton">Book Now</a>
         </div>
-        <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt="">
+        <img src="{{ 'front/assets/img/flight.png' }}" alt="">
+    </div>
+    <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt="">
     </div>
     {{-- Make Payment Model box --}}
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -506,7 +524,8 @@ $is_logged_in = false;
                     </div>
 
                     <div class="text-center">
-                        <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span class="green-color">treatment</span> package?</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span
+                                class="green-color">treatment</span> package?</h4>
                         <p>Fill the form & get your desired treatment plan</p>
                     </div>
                 </div>
@@ -534,7 +553,8 @@ $is_logged_in = false;
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
-                            <input type="tel" class="form-control h-75" id="inputAddress33" placeholder="+Contact Mobile">
+                            <input type="tel" class="form-control h-75" id="inputAddress33"
+                                placeholder="+Contact Mobile">
                             {{-- <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio1" value="option1">
@@ -548,16 +568,19 @@ $is_logged_in = false;
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
-                            <input type="text" class="form-control h-75" id="inputAddress443" placeholder="Treatment Name">
+                            <input type="text" class="form-control h-75" id="inputAddress443"
+                                placeholder="Treatment Name">
                         </div>
 
                         <div class="col-md-12">
                             <label for="inputAddress5" class="form-label fw-bold">*Details</label>
-                            <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Please Write your treatment requirement in detail">
+                            <input type="text" class="form-control h-75" id="inputAddress5"
+                                placeholder="Please Write your treatment requirement in detail">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
-                            <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details">
+                            <input type="text" class="form-control h-75" id="inputAddress5"
+                                placeholder="Have you done/received any related treatment before If Yes,Please write the details">
                         </div>
                         <div class="col-md-6">
                             <label for="formFile" class="form-label fw-bold">Upload Your Treatment Documents</label>
@@ -566,17 +589,20 @@ $is_logged_in = false;
                         <div class="col-md-6">
                             <label for="inputAddress5" class="form-label fw-bold">When do you need the
                                 treatment?</label>
-                            <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Apartment, studio, or floor">
+                            <input type="text" class="form-control h-75" id="inputAddress5"
+                                placeholder="Apartment, studio, or floor">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddress5" class="form-label fw-bold">Do you need travel visa?</label>
                             <div class="mt-2">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                        value="option1">
                                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                        value="option2">
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
@@ -696,21 +722,26 @@ $is_logged_in = false;
     </div>
     <!-- Modals -->
 
-</div>
+    </div>
 @endsection
 @section('script')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script>
-    $(function() {
-        $('input[name="daterange"]').daterangepicker({
-            opens: 'left',
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
-            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        }, function(start, end, label) {});
-    });
-</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left',
+
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            }, function(start, end, label) {});
+        });
+    </script>
 @endsection
+
+
+{{-- singleDatePicker: true, --}}
+{{-- showDropdowns: true, --}}
