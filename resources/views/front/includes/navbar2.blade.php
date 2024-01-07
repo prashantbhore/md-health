@@ -41,7 +41,8 @@
                     <a href="{{ url('home-service') }}" class="nav-link">Home Service</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('md-booking-home-page') }}" class="nav-link"><span class="fw-bold">MD</span>Booking</a>
+                    <a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Booking</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('mdFoods') }}" class="nav-link"><span class="fw-bold">MD</span>Foods</a>
@@ -253,7 +254,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            @elseif(Session::get('MDMedicalVendor*%') != null)
+                        @elseif(Session::get('MDMedicalVendor*%') != null)
                             <ul class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/medical-provider-dashboard') }}">
@@ -295,7 +296,8 @@
             </ul>
 
             @if (Session::get('login_token') == null)
-            <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-decoration-underline" style="width: 100px;">Sign In</a>
+                <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-decoration-underline"
+                    style="width: 100px;">Sign In</a>
 
                 <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get
                     Started</a>

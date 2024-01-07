@@ -185,7 +185,7 @@ $name = 'MDHealth';
             </ul>
         </div>
         @if (Session::get('login_token') == null)
-        <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-decoration-underline">Sign In</a>
+        <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
 
         <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
         @endif

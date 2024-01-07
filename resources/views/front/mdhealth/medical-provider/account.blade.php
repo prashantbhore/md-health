@@ -137,42 +137,41 @@
                                                 oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
                                         </div>
                                         <div class="prev-img-div">
-                                            <img  src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
-                                                Storage::exists($MedicalProviderLogo['company_logo_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}"
-{{-- 
-                                            src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}}
-                                                alt="image" id="pic1">
+                                            <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
+                                            Storage::exists($MedicalProviderLogo['company_logo_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}"
+                                                {{--
+                                            src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic1">
                                             <input type="hidden" name="old_image" id="old_image"
                                                 value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
                                         </div>
 
                                     </div>
-{{-- {{dd($MedicalProviderLogo)}} --}}
+                                    {{-- {{dd($MedicalProviderLogo)}} --}}
                                     <div class="multiple-upload-images">
                                         <h6 class="section-heading">Company License</h6>
                                         <div class="form-group">
                                             <input type="file" id="company_licence_image_path" class="form-control"
-                                                name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
+                                                name="company_licence_image_path"
+                                                oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
                                         </div>
                                         <div class="prev-img-div">
-                                            <img  src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
-                                                Storage::exists($MedicalProviderLicense['company_licence_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}"
-                                             {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}}
-                                                alt="image" id="pic2">
+                                            <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
+                                            Storage::exists($MedicalProviderLicense['company_licence_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}"
+                                                {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
                                             <input type="hidden" name="old_image" id="old_image"
                                                 value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
                                         </div>
                                     </div>
 
                                     <div class="multiple-upload-images">
-                                        <h6 class="section-heading">Product Pictures</h6>
+                                        <h6 class="section-heading">Gallery Images/Videos</h6>
                                         <div class="form-group">
                                             <input type="file" id="provider_image_path" class="form-control"
-                                                name="provider_image_path[]" multiple="">
+                                                name="provider_image_path[]" multiple>
                                         </div>
                                         <div class="preview-img gallery">
 

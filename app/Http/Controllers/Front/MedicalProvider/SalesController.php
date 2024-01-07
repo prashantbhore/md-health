@@ -58,9 +58,9 @@ class SalesController extends Controller
         $body=null;
 
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
-        
+
         $daily_sales_amount= $responseData['daily_sales'];
-        $monthly_sales_amount= $responseData['monthly_sales'];     
+        $monthly_sales_amount= $responseData['monthly_sales'];
 
        // dd($completed_sales);
 
@@ -190,14 +190,14 @@ class SalesController extends Controller
 
     public function sales_search(Request $request)
     {
-        
+
         $token = Session::get('login_token');
-        
+
         $query=$request['query'];
 
         $apiUrl = url('api/md-medical-provider-report-search');
 
-      
+
 
        $body=[
                 'search_query' => $query,
@@ -212,7 +212,7 @@ class SalesController extends Controller
        if(!empty($active_sales)){
 
         foreach ($active_sales as $activeSale){
-       
+
             $resultHtml .= '<div class="treatment-card df-start w-100 mb-3">';
             $resultHtml .= '<div class="row card-row align-items-center">';
             $resultHtml .= '<div class="col-md-2 df-center px-0">';
@@ -232,7 +232,7 @@ class SalesController extends Controller
             $resultHtml .= '</div>';
             $resultHtml .= '</div>';
             $resultHtml .= '</div>';
-            
+
         }
       }
 
@@ -241,7 +241,7 @@ class SalesController extends Controller
 
 
 
-      
+
 
 
 

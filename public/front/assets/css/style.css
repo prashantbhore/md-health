@@ -55,11 +55,13 @@
     border: none !important;
     text-shadow: none;
 }
+
 .datepicker table tr td.selected {
     border-color: transparent !important;
     border: none !important;
     background-color: transparent !important;
 }
+
 *,
 *:before,
 *:after {
@@ -101,8 +103,6 @@
 }
 
 /* UTILITY CLASSES */
-
-
 .add-btn {
     border-radius: 3px;
     background: #000;
@@ -193,6 +193,74 @@
     line-height: normal;
     letter-spacing: -0.92px;
 }
+
+/* END */
+
+/* ============================================================================================= 
+                                1 : SEARCH TREATMENT BAR
+   =============================================================================================  */
+
+
+.search-bar .form-select {
+    height: 57px;
+    width: 256px;
+
+    border-radius: 3px;
+    border: 1px solid #EDEDED;
+    background: #FFF;
+
+    color: #212121;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
+.search-bar .form-select:focus {
+    border: 1px solid #EDEDED;
+}
+
+.search-bar .form-floating label {
+    color: #A3A3A3;
+    font-family: CamptonBook;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.98px;
+}
+
+.search-bar {
+    background-color: #fff;
+    max-width: 1066px;
+    /* max-height: 84px; */
+    border-radius: 5px;
+    box-shadow: 0px 0px 24px 0px #00000040;
+    padding: 0.75rem;
+}
+
+
+.btn-search-pill {
+    width: 203px;
+    height: 57px;
+    border-radius: 3px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+}
+
+
+
+/* ============================================================================================= 
+                                END
+   =============================================================================================  */
 
 .treatmentForModal .modal-content,
 .treatmentForModal2 .modal-content,
@@ -550,10 +618,24 @@ select {
     border: 1px solid #000 !important;
 }
 
+/* .bb-green {
+    border-bottom: 10px solid #4CDB06;
+} */
+
+.bb-green::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 10px solid #4CDB06;
+    width: 29%;
+ }
+
 .banner-section {
     height: 100vh;
     background-color: black;
     padding-top: 57.8px;
+    padding-bottom: 100px;
     border-bottom: 3px solid #4cdb06;
 }
 
@@ -651,33 +733,6 @@ select {
     text-align: center;
 }
 
-.search-bar {
-    background-color: #fff;
-    max-width: 1066px;
-    /* max-height: 84px; */
-    border-radius: 5px;
-    box-shadow: 0px 0px 24px 0px #00000040;
-    padding: 0.75rem;
-}
-
-.search-bar .form-select {
-    height: 57px;
-    width: 256px;
-}
-
-.btn-search-pill {
-    width: 203px;
-    height: 57px;
-    border-radius: 3px;
-    background-color: #4cdb06;
-    border-color: #4cdb06;
-    font-family: Campton;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 19px;
-    letter-spacing: -0.07em;
-    transition: 0.15s all;
-}
 
 .purchaseBtn {
     height: 45px;
@@ -849,7 +904,7 @@ select {
 }
 
 .section-3 p {
-    max-width: 405px;
+    max-width: 465px;
     color: #000;
     font-family: Campton;
     font-size: 16px;
@@ -908,6 +963,10 @@ select {
 
 .camptonBold {
     font-family: CamptonBold !important;
+}
+
+.camLight {
+    font-family: "CamptonLight";
 }
 
 .authentication .nav-tabs .nav-link {
@@ -1407,6 +1466,10 @@ select {
 
 .fsb-2 {
     font-family: 'CamptonBook' !important;
+}
+
+.fs-18 {
+    font-size: 18px !important;
 }
 
 .tab-div .nav-link.active {
@@ -2431,7 +2494,7 @@ span.popup-msg.active {
     color: #000;
 }
 
-/* 
+/*
 .container-wrap{
     transform: translateY(-26rem);
 } */
@@ -3047,12 +3110,13 @@ label.tc-text {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
-.mdLtd div:first-child {
-    gap: 0.5rem;
-    align-items: center;
-}
 
-.allRights{
-    display: flex;
-    align-items: center;
-}
+    .mdLtd div:first-child {
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .allRights {
+        display: flex;
+        align-items: center;
+    }

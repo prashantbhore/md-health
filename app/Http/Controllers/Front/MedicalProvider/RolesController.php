@@ -8,28 +8,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 
-class RolesController extends Controller
-{
-    public function __construct(ApiService $apiService)
-    {
+class RolesController extends Controller {
+    public function __construct( ApiService $apiService ) {
         $this->apiService = $apiService;
     }
 
-    public function index()
-    {
-        $token = Session::get('login_token');
-        $apiUrl1 = url('/api/md-provider-system-user-list');
+    public function index() {
+        $token = Session::get( 'login_token' );
+        $apiUrl1 = url( '/api/md-provider-system-user-list' );
         $body = null;
         $method = 'GET';
 
-        $responseData = $this->apiService->getData($token, $apiUrl1, $body, $method);
-        // dd($responseData);
-        $system_users = $responseData['system_user'];
+        $responseData = $this->apiService->getData( $token, $apiUrl1, $body, $method );
+        // dd( $responseData );
+        $system_users = $responseData[ 'system_user' ];
         $html = '';
 
-        foreach ($system_users as $system_user) {
-            $html .= '<div class="roles-card df-start w-100 mb-3" id="div_' . $system_user['id'] . '">';
-            $html .= '<h6 class="mb-0">' . (!empty($system_user['email']) ? $system_user['email'] : '') . '| ' . (!empty($system_user['role_name']) ? $system_user['role_name'] : '') . '</h6>';
+        foreach ( $system_users as $system_user ) {
+            $html .= '<div class="roles-card df-start w-100 mb-3" id="div_' . $system_user[ 'id' ] . '">';
+            $html .= '<h6 class="mb-0">' . ( !empty( $system_user[ 'email' ] ) ? $system_user[ 'email' ] : '' ) . '| ' . ( !empty( $system_user[ 'role_name' ] ) ? $system_user[ 'role_name' ] : '' ) . '</h6>';
             $html .= ' <div class="roles-card-footer">';
             $html .= '<a href="' . url( 'edit-role/' . Crypt::encrypt( $system_user[ 'id' ] ) ) . '" class="mt-auto view-detail-btn">';
             $html .= '<svg width="19" height="19" viewBox="0 0 19 19" fill="none"xmlns="http://www.w3.org/2000/svg">';
@@ -42,19 +39,18 @@ class RolesController extends Controller
             $html .= '</svg></a></div></div>';
 
         }
-        if ($html == '') {
+        if ( $html == '' ) {
             $html = "<div class='no-data'>No Data Available</div>";
         }
 
-
-        return view('front/mdhealth/medical-provider/medical-roles', compact('html'));
+        return view( 'front/mdhealth/medical-provider/medical-roles', compact( 'html' ) );
     }
-    public function roles_add(Request $request)
-    {
-        $token = Session::get('login_token');
-        // dd($request);
+
+    public function roles_add( Request $request ) {
+        $token = Session::get( 'login_token' );
+        // dd( $request );
         if ( empty( $request->id ) ) {
-        $apiUrl = url('/api/md-provider-add-system-user');
+            $apiUrl = url( '/api/md-provider-add-system-user' );
         } else {
             $apiUrl = url( '/api/md-provider-update-system-user' );
         }
@@ -62,16 +58,16 @@ class RolesController extends Controller
         $method = 'post';
         $body = $request->all();
 
-        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
-        // dd($responseData);
-        if (($responseData['status'] == 200)) {
-            return redirect('/medical-roles')->with('success', $responseData['message']);
+        $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        // dd( $responseData );
+        if ( ( $responseData[ 'status' ] == '200' ) ) {
+            return redirect( '/medical-roles' )->with( 'success', $responseData[ 'message' ] );
         } else {
-            return redirect('/medical-roles')->with('error', $responseData['message']);
+            return redirect( '/medical-roles' )->with( 'error', $responseData[ 'message' ] );
         }
     }
-    public function edit_role(Request $request)
-    {
+
+    public function edit_role( Request $request ) {
         $token = Session::get( 'login_token' );
 
         $apiUrl = url( '/api/md-provider-system-user-edit' );
@@ -84,19 +80,19 @@ class RolesController extends Controller
         // dd( $responseData );
         $system_users = $responseData[ 'system_user' ];
 
-        $token = Session::get('login_token');
-        $apiUrl1 = url('/api/md-provider-system-user-list');
+        $token = Session::get( 'login_token' );
+        $apiUrl1 = url( '/api/md-provider-system-user-list' );
         $body1 = null;
         $method1 = 'GET';
 
-        $responseData = $this->apiService->getData($token, $apiUrl1, $body1, $method1);
-        // dd($responseData);
-        $system_userslist = $responseData['system_user'];
+        $responseData = $this->apiService->getData( $token, $apiUrl1, $body1, $method1 );
+        // dd( $responseData );
+        $system_userslist = $responseData[ 'system_user' ];
         $html = '';
 
-        foreach ($system_userslist as $system_user) {
-            $html .= '<div class="roles-card df-start w-100 mb-3" id="div_' . $system_user['id'] . '">';
-            $html .= '<h6 class="mb-0">' . (!empty($system_user['email']) ? $system_user['email'] : '') . '| ' . (!empty($system_user['role_name']) ? $system_user['role_name'] : '') . '</h6>';
+        foreach ( $system_userslist as $system_user ) {
+            $html .= '<div class="roles-card df-start w-100 mb-3" id="div_' . $system_user[ 'id' ] . '">';
+            $html .= '<h6 class="mb-0">' . ( !empty( $system_user[ 'email' ] ) ? $system_user[ 'email' ] : '' ) . '| ' . ( !empty( $system_user[ 'role_name' ] ) ? $system_user[ 'role_name' ] : '' ) . '</h6>';
             $html .= ' <div class="roles-card-footer">';
             $html .= '<a href="' . url( 'edit-role/' . Crypt::encrypt( $system_user[ 'id' ] ) ) . '" class="mt-auto view-detail-btn">';
             $html .= '<svg width="19" height="19" viewBox="0 0 19 19" fill="none"xmlns="http://www.w3.org/2000/svg">';
@@ -109,11 +105,10 @@ class RolesController extends Controller
             $html .= '</svg></a></div></div>';
 
         }
-        if ($html == '') {
+        if ( $html == '' ) {
             $html = "<div class='no-data'>No Data Available</div>";
         }
 
-
-        return view('front/mdhealth/medical-provider/medical-roles', compact('html','system_users'));
+        return view( 'front/mdhealth/medical-provider/medical-roles', compact( 'html', 'system_users' ) );
     }
 }
