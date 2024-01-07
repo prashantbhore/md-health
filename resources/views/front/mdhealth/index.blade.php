@@ -25,17 +25,15 @@
                         <h1 class="mb-5">NOW</h1>
                         <form method="POST" action="{{ url('health-search-result') }}">
                             @csrf
-                            <div class="search-bar d-flex align-items-center gap-3">
+                            <div class="search-bar d-flex align-items-center p-3 gap-3">
                                 <div class="form-floating">
                                     <input type="hidden" name="platform_type" value="web">
                                     <select class="form-select" name="treatment_name" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option value="">Select Treatment</option>
-                                        @if (!empty($treatment_plans))
-                                            @foreach ($treatment_plans as $treatment_plan)
-                                                <option>{{ $treatment_plan->product_category_name }}</option>
-                                            @endforeach
-                                        @endif
+                                        @foreach ($treatment_plans as $treatment_plan)
+                                            <option>{{ $treatment_plan->product_category_name }}</option>
+                                        @endforeach
                                     </select>
                                     <label for="floatingSelect">Treatments</label>
                                 </div>
@@ -43,26 +41,26 @@
                                     <select class="form-select" name="city_name" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option data-display="Select" selected>Select City</option>
-                                        @if (!empty($cities))
-                                            @foreach ($cities as $city)
-                                                <option>{{ $city->city_name }}</option>
-                                            @endforeach
-                                        @endif
+                                        @foreach ($cities as $city)
+                                            <option>{{ $city->city_name }}</option>
+                                        @endforeach
                                     </select>
                                     <label for="floatingSelect">City</label>
                                 </div>
                                 <div class="form-floating">
                                     <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                                                                                                                    <option data-display="Select" selected>12 Aug</option>
-                                                                                                                                                    <option value="1">One</option>
-                                                                                                                                                    <option value="2">Two</option>
-                                                                                                                                                    <option value="3">Three</option>
-                                                                                                                                                </select> -->
+                                                                                                                                    <option data-display="Select" selected>12 Aug</option>
+                                                                                                                                    <option value="1">One</option>
+                                                                                                                                    <option value="2">Two</option>
+                                                                                                                                    <option value="3">Three</option>
+                                                                                                                                </select> -->
                                     <!-- <div class="datepickerContainer"> -->
                                     <input type="text" class="form-select" name="daterange" value="" />
                                     <!-- </div> -->
                                     <label for="floatingSelect">Treatment Date</label>
                                 </div>
+                                <button type="submit" class="btn btn-search-pill">Search</button>
+                            </div>
                         </form>
                     </div>
                 </div>

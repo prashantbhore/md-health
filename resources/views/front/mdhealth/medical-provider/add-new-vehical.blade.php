@@ -50,10 +50,8 @@
                             <span>Add New Vehicle</span>
                             <a href="{{ url('medical-other-services') }}"
                                 class="d-flex align-items-center gap-1 text-decoration-none">
-                                <div>
-                                    <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                                </div>
-                                <p class="card-h1 mb-0">Back</p>
+                                <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
+                                <p class="mb-0 text-dark">Back</p>
                             </a>
                         </h5>
                         <div class="card-body">
@@ -61,8 +59,8 @@
                                 {{-- @if (!empty($transportation_details['id']))
 
                                 <form action="{{ url('api/md-edit-transportation-details') }}" method="post"
-                            enctype="multipart/form-data" id="add_acommodition">
-                            @else --}}
+                                    enctype="multipart/form-data" id="add_acommodition">
+                                    @else --}}
                                 <form action="{{ url('md-add-transportation-details') }}" method="post"
                                     enctype="multipart/form-data" id="add_acommodition">
                                     {{-- @endif --}}
@@ -80,8 +78,8 @@
                                                     @php
                                                         $isSelected = isset($transportation_details['brand_id']) && $transportation_details['brand_id'] == $vehicle_detail['id'];
                                                     @endphp
-                                                    <option value="{{ $vehicle_detail['id'] }}"
-                                                        {{ $isSelected ? ' selected' : '' }}>
+                                                    <option
+                                                        value="{{ $vehicle_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
                                                         {{ $vehicle_detail['brand_name'] }}
                                                     </option>
                                                 @endforeach
@@ -112,28 +110,22 @@
                                                     @php
                                                         $isSelected = isset($transportation_details['level_id']) && $transportation_details['level_id'] == $comfort_level_detail['id'];
                                                     @endphp
-                                                    <option value="{{ $comfort_level_detail['id'] }}"
-                                                        {{ $isSelected ? ' selected' : '' }}>
+                                                    <option
+                                                        value="{{ $comfort_level_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
                                                         {{ $comfort_level_detail['vehicle_level_name'] }}
                                                     </option>
                                                 @endforeach
                                             </select>
 
                                         </div>
-                                        {{-- {{dd($transportation_details)}} --}}
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Vehicle Picture</label>
-                                            <div class="form-group">
-                                                <input type="file" name="vehicle_image_path" id="vehicle_image_path"
-                                                    class="form-control text-dark"
-                                                    oninput="pic.src=window.URL.createObjectURL(this.files[0])">
-                                            </div>
-                                            <div class="prev-img-div">
-                                                <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/default-img.png' }}"
-                                                    alt="image" id="pic">
-                                                <input type="hidden" name="old_image" id="old_image"
-                                                    value="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : '' }}">
-                                            </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Vehicle Picture</label>
+                                        <div class="form-group">
+                                            <input type="file" name="vehicle_image_path" id="vehicle_image_path"
+                                                class="form-control text-dark"
+                                                oninput="pic.src=window.URL.createObjectURL(this.files[0])">
                                         </div>
                                         <div class="prev-img-div">
                                             <img src="front/assets/img/default-img.png" alt="image" id="pic">
@@ -199,7 +191,7 @@
                                     </div>
 
                                     <div class="section-btns mb-4">
-                                        <button type="submit" class="btn save-btn-black">Save
+                                        <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save
                                             Vehicle</button>
                                     </div>
 

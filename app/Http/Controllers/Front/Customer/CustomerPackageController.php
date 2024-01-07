@@ -218,17 +218,28 @@ class CustomerPackageController extends Controller
         $my_active_packages_list = !empty($data['customer_purchase_package_active_list']) ? $data['customer_purchase_package_active_list'] : [];
         $my_completed_packages_list = !empty($data_two['customer_purchase_package_completed_list']) ? $data_two['customer_purchase_package_completed_list'] : [];
         $my_cancelled_packages_list = !empty($data_three['customer_purchase_package_cancelled_list']) ? $data_three['customer_purchase_package_cancelled_list'] : [];
+        // dd($my_active_packages_list);
 
-        // dd( $my_active_packages_list );
 
-        if (!empty($user_id) && !empty($data)) {
-
-            $patient_info = PatientInformation::where('customer_id', $user_id)->where('package_id', $my_active_packages_list[0]['package_id'])->where('purchase_id', $my_active_packages_list[0]['purchase_id'])->first();
+        if (!empty($user_id) && !empty($my_active_packages_list)) {
+            // dd( $my_active_packages_list );
+            $array= [];
+            foreach($my_active_packages_list as $active_package){
+                $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $active_package['package_id']], 'POST');
+                $array[] = [ $active_package['package_id'] => !empty($patient_information_list['PatientInformation'])?$patient_information_list['PatientInformation']:''];
+                // echo $active_package['package_id'];
+            }
+            // dd($array);
 
             if (!empty($patient_info->id)) {
-                $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $my_active_packages_list[0]['package_id']], 'POST');
-                $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $patient_info->id], 'POST');
+                $patient_info = PatientInformation::where('customer_id', $user_id)->where('purchase_id', $active_package['purchase_id'])->first();
+                // $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $my_active_packages_list[0]['package_id']], 'POST');
+                $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $my_active_packages_list[0]['package_id']], 'POST');
+                // dd($patient_information_list);
+                $last = key($patient_information_list['PatientInformation']);
+                // dd($patient_information_list['PatientInformation'][$last]);
                 $patient_information_list = !empty($patient_information_list['PatientInformation']) ? $patient_information_list['PatientInformation'] : [];
+
                 // $patient_information_list = !empty($patient_information_list['PatientInformation'][0])?$patient_information_list['PatientInformation'][0]:[];
             } else {
                 $patient_information_list = [];
@@ -269,17 +280,15 @@ class CustomerPackageController extends Controller
                 // dd($user_id,$data['package_id'],$data['purchase_id']);
                 if (!empty($patient_info->id)) {
                     $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $id], 'POST');
-                    $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $patient_info->id], 'POST');
-                    $data['patient_information_list'] = !empty($patient_information_list['PatientInformation']) ? $patient_information_list['PatientInformation'] : [];
-                    $data['patient_information_list'] = !empty($patient_information_list['PatientInformation'][0]) ? $patient_information_list['PatientInformation'][0] : [];
+
                 } // dd( $token );
                 // dd($token);
+                // dd( $patient_info );
                 if (!empty($response['status'])) {
                     if ($response['status'] == '200') {
                         $my_details = !empty($response['PatientInformation']) ? $response['PatientInformation'] : [];
                         $treatment_information = !empty($response['treatment_information']) ? $response['treatment_information'] : [];
                     }
-
                     // dd( $response );
                 } else {
                     $my_details = '';
@@ -401,6 +410,7 @@ class CustomerPackageController extends Controller
 
         return view('front/mdhealth/user-panel/user-all-reports', compact('customer_reports'));
     }
+    //MPLUS03
 
     public function customer_report_search(Request $request)
     {

@@ -56,11 +56,38 @@
                                                         <a href="#"
                                                             class="btn-active">{{ $hotel_detail['status'] }}</a>
                                                     </div>
+                                    @endforeach
+                                @else
+                                    <div class="no-data">No Acommoditions Added</div>
+                                @endif
+                            </div>
+                            <div>
+                                <h6 class="section-heading section-btns justify-content-between align-items-center">
+                                    Transportation
+                                    <a href="{{ url('add-new-vehical') }}"
+                                        class="green-plate bg-dark text-green fw-500 fs-6">Add New Vehicle</a>
+                                </h6>
+                                @if (!empty($vehicle_details))
+                                    @foreach ($vehicle_details as $vehicle_detail)
+                                        <div class="treatment-card df-start w-100 mb-3"
+                                            id="divt_{{ $vehicle_detail['id'] }}">
+                                            <div class="row card-row align-items-center">
+                                                <div class="col-md-2 df-center px-0">
+                                                    <img src="{{ url('/') . Storage::url($vehicle_detail['vehicle_image_path']) }}"
+                                                        alt="image" width="100px">
+                                                </div>
+                                                <div class="col-md-6 justify-content-start ps-0">
+                                                    <div class="trmt-card-body">
+                                                        <h5 class="dashboard-card-title">
+                                                            {{ $vehicle_detail['vehicle_model_name'] }}</h5>
+                                                        <a href="#"
+                                                            class="btn-active">{{ $vehicle_detail['status'] }}</a>
+                                                    </div>
                                                 </div>
                                                 <div
                                                     class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                                     <div class="trmt-card-footer icon-btns">
-                                                        <a href="{{ url('edit-acommodition/' . Crypt::encrypt($hotel_detail['id'])) }}"
+                                                        <a href="{{ url('edit-vehicle/' . Crypt::encrypt($vehicle_detail['id'])) }}"
                                                             class="mt-auto view-detail-btn">
                                                             <svg width="19" height="19" viewBox="0 0 19 19"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +99,7 @@
                                                                     fill="#111111" />
                                                             </svg>
                                                         </a>
-                                                        <span onclick="acommodition_delete('{{ $hotel_detail['id'] }}')"
+                                                        <span onclick="vehicle_delete('{{ $vehicle_detail['id'] }}')"
                                                             class="mt-auto view-detail-btn">
                                                             <svg width="20" height="19" viewBox="0 0 20 19"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +121,8 @@
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Transportation
-                                    <a href="{{ url('add-new-vehical') }}" class="btn add-btn">Add New Vehicle</a>
+                                    <a href="{{ url('add-new-vehical') }}"
+                                        class="green-plate bg-dark text-green fw-500 fs-6">Add New Vehicle</a>
                                 </h6>
                                 @if (!empty($vehicle_details))
                                     @foreach ($vehicle_details as $vehicle_detail)
@@ -102,14 +130,12 @@
                                             id="divt_{{ $vehicle_detail['id'] }}">
                                             <div class="row card-row align-items-center">
                                                 <div class="col-md-2 df-center px-0">
-                                                    <img src="{{ url('/') . Storage::url($vehicle_detail['vehicle_image_path']) }}"
-                                                        alt="image" width="100px">
+                                                    <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
                                                 </div>
                                                 <div class="col-md-6 justify-content-start ps-0">
                                                     <div class="trmt-card-body">
                                                         <h5 class="dashboard-card-title">
-                                                            {{ $vehicle_detail['vehicle_model_name'] }}
-                                                        </h5>
+                                                            {{ $vehicle_detail['vehicle_model_name'] }}</h5>
                                                         <a href="#"
                                                             class="btn-active">{{ $vehicle_detail['status'] }}</a>
                                                     </div>
@@ -152,7 +178,8 @@
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Tour
-                                    <a href="{{ url('add-tour') }}" class="btn add-btn">Add
+                                    <a href="{{ url('add-tour') }}"
+                                        class="green-plate bg-dark text-green fw-500 fs-6">Add
                                         New Tour</a>
                                 </h6>
                                 @if (!empty($tour_details))
@@ -230,8 +257,7 @@
         function acommodition_delete(id) {
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-                                login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
             // alert(base_url);
             $.ajax({
                 url: base_url + '/api/md-delete-hotel',
@@ -268,8 +294,7 @@
             // Get the CSRF token from the meta tag
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-                                login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
             // Your AJAX call
             $.ajax({
                 url: base_url + '/api/md-delete-transportation',
@@ -307,8 +332,7 @@
             // Get the CSRF token from the meta tag
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-                                login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
             // Your AJAX call
             $.ajax({
                 url: base_url + '/api/md-delete-tour',

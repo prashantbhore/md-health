@@ -3,7 +3,8 @@
         // $my_active_packages_list;
         // $my_completed_packages_list;
         // $my_cancelled_packages_list;
-        $patient_information_list = $patient_information_list[0];
+        // dd($patient_information_list);
+        $patient_information_list = !empty($patient_information_list[0]) ? $patient_information_list[0] : '';
         // dd($patient_information_list);
     @endphp
 @endsection
@@ -399,7 +400,7 @@
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">*Patient Country</label>
                                 <select name="patient_country_id" id="inputState" class="form-select h-40 mt-1">
-                                    @if (!empty($counties))
+                                    @if (!empty($counties) && !empty($patient_information_list['patient_country_id']))
                                         @foreach ($counties as $country)
                                             @if ($patient_information_list['patient_country_id'] == $country->id)
                                                 <option value="{{ $country->id }}" selected>{{ $country->country_name }}
@@ -414,7 +415,7 @@
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">*Patient City</label>
                                 <select name="patient_city_id" id="inputState" class="form-select h-40 mt-1">
-                                    @if (!empty($cities))
+                                    @if (!empty($cities) && !empty($patient_information_list['patient_city_id']))
                                         @foreach ($cities as $city)
                                             @if ($patient_information_list['patient_city_id'] == $city->id)
                                                 <option value="{{ $city->id }}" selected>{{ $city->city_name }}
