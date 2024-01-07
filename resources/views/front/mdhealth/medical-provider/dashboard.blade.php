@@ -37,7 +37,7 @@
                         <!--  -->
                         <div class="card shadow-none" style="border-radius: 3px;background: #F6F6F6;">
                             <div class="p-3 d-flex gap-3">
-                                <div>
+                                <div class="card-img-div">
                                     <img src="{{!empty($provider_logo->company_logo_image_path)?url('/').Storage::url($provider_logo->company_logo_image_path):asset('front/assets/img/Memorial.svg')}}" alt="">
                                 </div>
                                 <div>

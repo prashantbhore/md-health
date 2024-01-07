@@ -16,7 +16,7 @@ $name = 'MDHealth';
 </style>
 
 <nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
-    <div class="container">
+    <div class="container p-0">
         <!-- Logo -->
         <a class="navbar-brand" style="padding-bottom: 0.8rem;" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
@@ -25,7 +25,7 @@ $name = 'MDHealth';
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-start align-items-center ms-5" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-end align-items-center ms-5" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>

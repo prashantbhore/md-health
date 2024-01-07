@@ -25,7 +25,7 @@ $is_logged_in = false;
                         <h1 class="mb-5">NOW</h1>
                         <form method="POST" action="{{ url('health-search-result') }}">
                             @csrf
-                            <div class="search-bar d-flex align-items-center gap-3">
+                            <div class="search-bar d-flex align-items-center p-3 gap-3">
                                 <div class="form-floating">
                                     <input type="hidden" name="platform_type" value="web">
                                     <select class="form-select" name="treatment_name" id="floatingSelect"
@@ -54,15 +54,18 @@ $is_logged_in = false;
                                                                                                                             <option value="2">Two</option>
                                                                                                                             <option value="3">Three</option>
                                                                                                                         </select> -->
-                                <!-- <div class="datepickerContainer"> -->
-                                <input type="text" class="form-select" name="daterange" value="" />
-                                <!-- </div> -->
-                                <label for="floatingSelect">Treatment Date</label>
+                                    <!-- <div class="datepickerContainer"> -->
+                                    <input type="text" class="form-select" name="daterange" value="" />
+                                    <!-- </div> -->
+                                    <label for="floatingSelect">Treatment Date</label>
+                                </div>
+                                <button type="submit" class="btn btn-search-pill">Search</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
 
             <!-- SECTION 2: MAKE REQUEST FORM -->
             <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">

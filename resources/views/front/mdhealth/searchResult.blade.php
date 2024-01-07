@@ -27,8 +27,8 @@
 {{-- {{dd($packages)}} --}}
     <!-- SECTION 1 -->
     <div class="searchBar bg-f6">
-        <div class="container pt-5">
-            <div class="search-bar d-flex align-items-center p-3 gap-3 mb-5">
+        <div class="container pt-5 px-0">
+            <div class="search-bar d-flex align-items-center justify-content-between p-3 gap-3 mb-5">
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" name="treatment_name" aria-label="Floating label select example">
                         <option data-display="Select" value="{{$treatment_name}}" selected>{{$treatment_name}}</option>
