@@ -47,14 +47,14 @@
 
 <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/datepicker-js@latest/datepicker.min.js"></script>
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> -->
 
 <!-- Datepicker -->
 <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"></script>
+
+<script src="https://cdn.tiny.cloud/1/bjb2ddu6e56m3tkx46k66z7gvds3q7lpwsrg7s0jz38d39i9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 
 
