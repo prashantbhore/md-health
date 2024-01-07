@@ -127,7 +127,7 @@
                                     <div class="tab-pane fade show active" id="user" role="tabpanel"
                                         aria-labelledby="user-tab">
                                         @if (!empty($my_active_packages_list))
-                                            @foreach ($my_active_packages_list as $active_package)
+                                            @foreach ($my_active_packages_list as $key => $active_package)
                                                 <div class="treatment-card-div mb-3">
                                                     <div class="treatment-card df-start w-100 mb-3">
                                                         <div class="row card-row">
@@ -197,8 +197,9 @@
                                                             class="order-completed-btn w-100 bg-white  fsb-2 border border-black package-details">Package
                                                             Details</a>
                                                         <a href="#"
-                                                            class="order-completed-btn w-100 bg-black fsb-2 text-white"
-                                                            data-bs-toggle="modal" id="change_information_model"
+                                                            class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation"
+                                                            data-bs-toggle="modal"
+                                                            id="change_information_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}"
                                                             data-bs-target="#UserChangeInformation">Change
                                                             Patient Information</a>
                                                         <a href="#"
@@ -500,7 +501,13 @@
             $(".upPackageLi").addClass("activeClass");
             $(".upPackage").addClass("md-active");
 
-
+            $(".UserChangeInformation").click(function() {
+                let rawId = this.id.split('-')[1];
+                let packageId = rawId.split('?')[0];
+                let purchaseId = rawId.split('?')[1];
+                // alert(packageId + " " + purchaseId);
+                // var fullName =
+            });
             // $(".package-details").click(function() {
 
 
