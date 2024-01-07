@@ -344,7 +344,7 @@
 
     tinymce.init({
         selector: 'textarea#company_overview',
-        height: "200px  "
+        height: "200px"
     });
 </script>
 @endsection
