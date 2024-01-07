@@ -61,6 +61,11 @@
     <!-- DATE-PICKER -->
     <link href="{{ URL::asset('front/assets/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <!-- Semantic UI -->
+    <link href="{{ URL::asset('front/assets/css/semantic.min.css') }}" rel="stylesheet" type="text/css" />
+
+
+
     <title>MDhealth</title>
 
     <style>

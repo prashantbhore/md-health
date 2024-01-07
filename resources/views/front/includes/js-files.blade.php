@@ -41,6 +41,8 @@
 
 <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
 
+<script src="{{URL::asset('front/assets/js/semantic.min.js')}}"></script>
+
 
 
 <script src="{{URL::asset('admin\js\validations\common\common.js')}}"></script>
@@ -52,7 +54,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> -->
 
 <!-- Datepicker -->
-<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" ></script>
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"></script>
 
 
 
@@ -60,16 +62,19 @@
   $(document).ready(function() {
     $('select').niceSelect();
   });
+
+  $('.ui.dropdown')
+    .dropdown();
 </script>
 
 <script>
-    var swiper = new Swiper(".mySwiper", {
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  </script>
+  var swiper = new Swiper(".mySwiper", {
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
 
 <script>
   var titleElement = document.getElementById("example_filter");
@@ -148,7 +153,7 @@
 </script>
 
 
-{{-- 
+{{--
 <script>
   function success_toast(title = '', message = '') {
     $.toast({
@@ -178,4 +183,3 @@
 <script>
   var base_url = $("#base_url").val();
 </script> --}}
-
