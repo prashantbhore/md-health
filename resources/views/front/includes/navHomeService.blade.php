@@ -9,7 +9,7 @@
     }
 @endphp
 <nav id="homeService" class="navbar navbar-expand-lg navbar-light bg-f6 py-3">
-    <div class="container">
+    <div class="container p-0">
         <a class="navbar-brand" href="{{ URL('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth.svg') }}" alt="" style="width: 180px;" />
         </a>
@@ -17,7 +17,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
                 <li class="nav-item"><a href="{{ url('/') }}" class="nav-link"><span
                             class="fw-bold">MD</span>Health</a></li>

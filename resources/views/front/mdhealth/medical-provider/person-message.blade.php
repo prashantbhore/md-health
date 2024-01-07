@@ -55,7 +55,7 @@
                                         <div class="d-flex align-items-center justify-content-evenly">
                                             <img class="mx-4" src="{{asset('front/assets/img/Memorial.svg')}}" alt="" style="height: 55px;width: 55px;object-fit: contain;">                                          
                                             <div class="trmt-card-body pe-4">
-                                                <h5 class="mb-0 fw-400 msg-box text-end fsb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+                                                <h6 class="mb-0 fw-400 msg-box text-end fsb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h6>
                                             </div>
                                         </div>
                                     </div>

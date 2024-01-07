@@ -1359,6 +1359,27 @@ select {
 }
 
 /* Shubham */
+.card-img-div {
+    height: 80px;
+    width: 80px;
+    background: lightgrey;
+    border-radius: 5px;
+}
+.card-img-div img{
+    width: 100%;
+}
+.search-bar {
+    max-width: 100%;
+}
+.search-bar .form-floating, .search-bar .form-select {
+    width: 100%;
+}
+.search-bar .btn-search-pill {
+    width: 75%;
+}
+.navbar-collapse {
+    flex-grow: 0;
+}
 .order-card {
     display: flex;
     align-items: center;
@@ -1715,7 +1736,7 @@ select option {
     font-size: 10px;
     /* font-weight: 700; */
     letter-spacing: 0.1px;
-    padding: 5px;
+    padding: 5px 15px;
     text-decoration: none;
 }
 
@@ -1767,7 +1788,7 @@ select option {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px;
+    padding: 5px 15px;
 }
 
 .trmt-card-body .active {

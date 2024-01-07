@@ -26,7 +26,7 @@ $name = 'MDHealth';
 <!--MDMedicalProvider*%-->
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
-    <div class="container px-0">
+    <div class="container p-0">
         <!-- Logo Image -->
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
@@ -34,7 +34,7 @@ $name = 'MDHealth';
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center ms-5" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-end ms-5" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5 w-100">
                 <li class="nav-item">
                     <a href="{{ url('home-service') }}" class="nav-link">Home Service</a>

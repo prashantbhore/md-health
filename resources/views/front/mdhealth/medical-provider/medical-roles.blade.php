@@ -173,7 +173,7 @@
 
                                     <div class="section-btns mb-5">
                                         <button
-                                            class="black-plate bg-black text-white fw-700 w-100">Save Personnel</button>
+                                            class="black-plate bg-black text-white fw-700 w-100 border border-dark">Save Personnel</button>
                                     </div>
                                 </form>
                                 <div class="white-plate d-flex align-items-center mb-3 border-0 bg-f6">

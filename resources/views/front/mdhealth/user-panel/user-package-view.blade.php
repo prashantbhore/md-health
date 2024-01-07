@@ -683,8 +683,6 @@
                                                     <div class="view-menu mb-4">
                                                         <h6 class="fsb-1">Your Case Manager</h6>
                                                         <p class="text-orange">Abdul G.</p>
-                                                        <p>Boiled Vegetables</p>
-                                                        <p>Salad</p>
                                                     </div>
 
                                                     <div class="patient-details-div">
