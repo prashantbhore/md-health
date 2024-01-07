@@ -525,7 +525,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
 });
 
 
-//Mplu02
+//Mplus02
 Route::get('/', [CustomerPackageController::class, 'customer_home']);
 Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
