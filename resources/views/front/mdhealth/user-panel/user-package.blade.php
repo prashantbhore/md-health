@@ -3,6 +3,8 @@
         // $my_active_packages_list;
         // $my_completed_packages_list;
         // $my_cancelled_packages_list;
+        $patient_information_list = $patient_information_list[0];
+        // dd($patient_information_list);
     @endphp
 @endsection
 @extends('front.layout.layout2')
@@ -356,28 +358,32 @@
                             <div class="form-group">
                                 <label class="form-label fsb-2 fw-600">*Patient Full Name</label>
                                 <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname" placeholder="First Name">
+                                    aria-describedby="foodname"
+                                    placeholder="{{ !empty($patient_information_list['patient_full_name']) ? $patient_information_list['patient_full_name'] : '' }}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label class="form-label fsb-2 fw-600">*Relationship To You</label>
                                 <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname" placeholder="Relationship To You">
+                                    aria-describedby="foodname"
+                                    placeholder="{{ !empty($patient_information_list['patient_relation']) ? $patient_information_list['patient_relation'] : 'Relationship To You' }}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label class="form-label fsb-2 fw-600">*Patient E-mail <b>*optional</b></label>
                                 <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname" placeholder="E-Mail">
+                                    aria-describedby="foodname"
+                                    placeholder="{{ !empty($patient_information_list['patient_email']) ? $patient_information_list['patient_email'] : 'E-Mail' }}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-group">
                                 <label class="form-label fsb-2 fw-600">*Patient Contact Number</label>
                                 <input type="text" class="form-control" name="" id="" value=""
-                                    aria-describedby="foodname" placeholder="Contact Number">
+                                    aria-describedby="foodname"
+                                    placeholder="{{ !empty($patient_information_list['patient_contact_no']) ? $patient_information_list['patient_contact_no'] : 'Contact Number' }}">
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">

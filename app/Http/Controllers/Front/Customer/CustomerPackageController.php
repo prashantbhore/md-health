@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cities;
+use App\Models\CustomerRegistration;
+use App\Models\PatientInformation;
 use App\Models\Country;
 use App\Models\Packages;
 use App\Models\ProductCategory;
@@ -207,55 +209,109 @@ class CustomerPackageController extends Controller
     public function my_packages(Request $request)
     {
         $token = Session::get('login_token');
+        $user_id = Session::get('MDCustomer*%');
         // dd( $token );
         $method = 'GET';
         $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
         $data_two = $this->apiService->getData($token, url('/api/md-customer-purchase-package-completed-list'), null, $method);
         $data_three = $this->apiService->getData($token, url('/api/md-customer-purchase-package-cancelled-list'), null, $method);
-        // dd( $data );
-        $my_active_packages_list = $data['customer_purchase_package_active_list'];
-        $my_completed_packages_list = $data_two['customer_purchase_package_completed_list'];
-        $my_cancelled_packages_list = $data_three['customer_purchase_package_cancelled_list'];
 
-        return view('front.mdhealth.user-panel.user-package', compact('my_active_packages_list', 'my_completed_packages_list', 'my_cancelled_packages_list'));
+        $my_active_packages_list = !empty($data['customer_purchase_package_active_list'])?$data['customer_purchase_package_active_list']:[];
+        $my_completed_packages_list = !empty($data_two['customer_purchase_package_completed_list'])?$data_two['customer_purchase_package_completed_list']:[];
+        $my_cancelled_packages_list = !empty($data_three['customer_purchase_package_cancelled_list'])?$data_three['customer_purchase_package_cancelled_list']:[];
+
+        // dd( $my_active_packages_list );
+
+        if (!empty($user_id) && !empty($data)) {
+
+            $patient_info = PatientInformation::where('customer_id',$user_id)->where('package_id',$my_active_packages_list[0]['package_id'])->where('purchase_id',$my_active_packages_list[0]['purchase_id'])->first();
+
+            if(!empty($patient_info->id)){
+                $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $my_active_packages_list[0]['package_id']    ], 'POST');
+                $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $patient_info->id], 'POST');
+                $patient_information_list = !empty($patient_information_list['PatientInformation'])?$patient_information_list['PatientInformation']:[];
+                // $patient_information_list = !empty($patient_information_list['PatientInformation'][0])?$patient_information_list['PatientInformation'][0]:[];
+            }else{
+                $patient_information_list = [];
+            }
+            // dd($patient_information_list);
+        }else{
+            $patient_information_list = [];
+        }
+
+
+
+        return view('front.mdhealth.user-panel.user-package', compact('my_active_packages_list', 'my_completed_packages_list', 'my_cancelled_packages_list', 'patient_information_list'));
     }
 
     public function view_my_active_packages($id)
     {
-
+        $user_id = Session::get('MDCustomer*%');
         $token = Session::get('login_token');
-        $data = $this->apiService->getData($token, url('/api/md-customer-package-details'), ['package_id' => $id], 'POST');
-        // dd( $data );
-        if ($data['status'] == '200') {
 
-            $other_service = array_map(fn($item) => $item['title'], $data['other_services']);
-            $data = $data['customer_purchase_package_list'];
-            $data['other_services'] = $other_service;
+        if(!empty($token)){
+
         }
-        // $data = $data[ 'customer_purchase_package_list' ];
-        // $data[ 'other_services' ] = $other_service;
-        // dd( Auth::user()->id );
-        if (Auth::user()->id != null) {
-            $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => Auth::user()->id, 'package_id' => $id], 'POST');
-            // dd( $token );
-            // dd($token);
-            if ($response['status'] == '200') {
 
-                $my_details = $response['PatientInformation'];
-                $treatment_information = $response['treatment_information'];
-                // dd( $response );
-            } else {
-                $my_details = '';
-                $treatment_information = '';
+
+
+
+
+
+
+
+        $data = $this->apiService->getData($token, url('/api/md-customer-package-details'), ['package_id' => $id], 'POST');
+
+        if (!empty($data['status'])) {
+
+            if($data['status'] == '200'){
+                $other_service = explode(',',$data['customer_purchase_package_list']['other_services']);
+                $data = $data['customer_purchase_package_list'];
+                $data['other_services'] = $other_service;
             }
 
-            //md-customer-upload-documents
+            if (!empty($user_id)) {
+
+                $patient_info = PatientInformation::where('customer_id',$user_id)->where('package_id',$data['package_id'])->where('purchase_id',$data['purchase_id'])->first();
+                // dd($user_id,$data['package_id'],$data['purchase_id']);
+                if(!empty($patient_info->id)){
+                    $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $id], 'POST');
+                    $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $patient_info->id], 'POST');
+                    $data['patient_information_list'] = !empty($patient_information_list['PatientInformation'])?$patient_information_list['PatientInformation']:[];
+                    $data['patient_information_list'] = !empty($patient_information_list['PatientInformation'][0])?$patient_information_list['PatientInformation'][0]:[];
+                }                // dd( $token );
+                // dd($token);
+                if (!empty($response['status'])) {
+                    if($response['status']== '200'){
+                        $my_details = !empty($response['PatientInformation'])?$response['PatientInformation'] : [];
+                        $treatment_information = !empty($response['treatment_information'])?$response['treatment_information']:[];
+                    }
+
+                    // dd( $response );
+                } else {
+                    $my_details = '';
+                    $treatment_information = '';
+                }
+            }
         }
 
-        // $data = [];
-        // $response = $this->apiService->getData( $token,  url( '/api/md-customer-change-package-list-active-cancelled' ), [ 'id'=>$id ], 'POST' );
-        // dd( $data );
+        $documents = $this->apiService->getData($token,url('/api/md-customer-all-reports-list'),null,'GET');
+        $data['documents'] = !empty($documents['provider_report_list']) ? $documents['provider_report_list'] : [];
 
+
+        if(!empty($data['hotel_id'])){
+            $accomodation_view = $this->apiService->getData($token,url('/api/md-customer-acommodition-details-view'),['hotel_id'=>$data['hotel_id']],'POST');
+            $data['accomodation_view'] = !empty($accomodation_view['hotel_list']) ? $accomodation_view['hotel_list'] : [];
+        }
+
+        if(!empty($data['vehicle_id'])){
+            $transportation_view = $this->apiService->getData($token,url('/api/md-customer-transporatation-details-view'),['vehicle_id'=>$data['vehicle_id']],'POST');
+            $other_service = explode(',',$transportation_view['data']['other_services']);
+            $data['transportation_view'] = !empty($transportation_view['data']) ? $transportation_view['data'] : [];
+            $data['transportation_view']['other_services'] = $other_service;
+        }
+
+        // dd($data);
         return view('front.mdhealth.user-panel.user-package-view', compact('data', 'my_details', 'treatment_information'));
 
     }
@@ -281,6 +337,60 @@ class CustomerPackageController extends Controller
     }
 
 
+    public function myself_as_patient($package_id){
+
+        // dd('hi');
+        $user_id = Session::get('MDCustomer*%');
+
+        if ($user_id != null) {
+            $user_data = CustomerRegistration::where('id',$user_id)->where('status','active')->first();
+
+            $patient = new PatientInformation();
+            $patient->customer_id = $user_data->id;
+            $patient->package_id = $package_id;
+            $patient->patient_full_name = $user_data->full_name;
+            $patient->patient_last_name = $user_data->last_name;
+            $patient->patient_first_name = $user_data->first_name;
+            $patient->patient_email = $user_data->email;
+            $patient->patient_contact_no = $user_data->phone;
+            $patient->patient_country_id = $user_data->country_id;
+            $patient->patient_city_id = $user_data->city_id;
+            $patient->birth_date = $user_data->date_of_birth;
+            $patient->address = $user_data->address;
+            $patient->created_ip_address = $_SERVER['REMOTE_ADDR'];;
+            $patient->package_buy_for = 'myself';
+            $patient->platform_type = 'web';
+            $patient->created_by = $user_data->id;
+            $patient->save();
+
+            $providerUniqueId = '#MD' . str_pad($patient->id, 6, '0', STR_PAD_LEFT);
+
+            $patteint = PatientInformation::where('id', $patient->id)->update(['patient_unique_id' => $providerUniqueId]);
+            if($patteint){
+
+                $id = $package_id;
+                Session::put('Patient_id',$patient->id);
+                return view('front.mdhealth.purchase', compact('id'));
+            }else{
+
+                $counties = Country::all();
+                $city_name = 'Select City';
+                $treatment_name = 'myself_as_patient_id_not_found';
+                $date = '';
+                $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
+                $treatment_plans = ProductCategory::where('status', 'active')->where('main_product_category_id', '1')->get();
+                return view('front.mdhealth.searchResult', compact('cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
+            }
+        }else{
+            $this->sendError('User not found');
+        }
+    }
+
+    public function sendError($message, $code = 404)
+    {
+        return response()->json(['error' => $message], $code);
+    }
+
 
     public function customer_reports(Request $request)
     {
@@ -291,20 +401,20 @@ class CustomerPackageController extends Controller
         $method = 'GET';
         $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
 
-        
 
 
-        
+
+
         return view('front/mdhealth/user-panel/user-all-reports');
     }
- 
+
 
 
 
     public function customer_report_search(Request $request)
     {
 
-       
+
 
         $token = Session::get('login_token');
 
@@ -320,13 +430,13 @@ class CustomerPackageController extends Controller
             $body=[ 'search_query' => $query,];
             $method = 'POST';
             $data= $this->apiService->getData($token, $apiUrl, $body, $method);
-            
+
             dd($data);
         }
 
 
 
-        
+
         $customer_reports='';
 
         if ($data['status'] == '200'){
@@ -335,11 +445,11 @@ class CustomerPackageController extends Controller
         }
        }
 
-        
+
         return view('front/mdhealth/user-panel/user-all-reports',compact('customer_reports'));
     }
- 
- 
+
+
 
 
 
