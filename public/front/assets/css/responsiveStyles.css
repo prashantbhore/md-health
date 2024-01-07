@@ -1,0 +1,130 @@
+/* 320px — 480px Mobile devices */
+
+@media screen and (max-width: 480px) {
+    
+    .banner-section {
+        height: unset;
+        padding-bottom: 50px;
+    }
+
+    .banner-content {
+        text-align: center;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .section-wrapper {
+        text-align: center;
+    }
+
+    .doctorImg {
+        display: none;
+    }
+
+    .md-coin {
+        text-align: center;
+    }
+
+    .md-earn {
+        flex-direction: column;
+    }
+
+    .md-earn div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .md-earn p{
+        text-align: center;
+    }
+
+    .md-earn h1 {
+        top: unset;
+        left: unset;
+        bottom: 0;
+        right: -58px;
+    }
+
+    .bod-bot img {
+        width: 100%;
+    }
+
+    .treatment-section .top5-card {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .treatment-section .top5-card .card {
+        align-self: normal;
+        width: unset;
+        height: unset;
+    }
+
+    .treatment-section .card .card-body {
+        flex-direction: column;
+    }
+
+    .treatment-section .top5-card .treatment-price {
+        margin-right: 0;
+    }
+
+    .treatment-section .arrow {
+        right: unset;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 45px);
+    }
+
+    .treatment-section .rating {
+        margin-right: unset;
+    }
+
+    .section6 img {
+        position: unset;
+    }
+
+    .download-section {
+        padding: 2rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .download-section .part2 {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        width: unset;
+    }
+
+    .download-section .part2 div:last-child {
+        flex-direction: column;
+    }
+
+    .mdLtd {
+        gap: 1rem;
+    }
+
+    .mdLtd div:first-child {
+        flex-direction: column;
+        gap: 0;
+        align-items: unset;
+    }
+
+    .allRights {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: unset;
+    }
+
+    .allRights ul {
+        flex-direction: column;
+        gap: 0 !important;
+    }
+}
+
+/* 481px — 768px: iPads, Tablets */
+
+/* 769px — 1024px: Small screens, laptops */

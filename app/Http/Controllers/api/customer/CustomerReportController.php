@@ -24,16 +24,6 @@ class CustomerReportController extends BaseController
             ->where('custome_id', Auth::user()->id)
             ->where('status', 'active')
             ->get();
-
-
-            return response()->json([
-                'status' => 200,
-                'message' => 'Customer report list found.',
-                'provider_report_list' =>  $provider_report_list,
-            ]);
-
-          
-
     
         $formatted_data = [];
     
@@ -85,10 +75,10 @@ class CustomerReportController extends BaseController
     }
 
 
-    public function customer_reports_search(Request $request)
+   public function customer_reports_search(Request $request)
    {
    
-    $validator = Validator::make($request->all(), [
+    $validator = Validator::make($request->all(),[
         'search_query' => 'required|string',
     ]);
 
@@ -166,7 +156,7 @@ class CustomerReportController extends BaseController
         return response()->json([
             'status' => 200,
             'message' => 'Search results found.',
-            'search_results' => $formattedResults,
+            'provider_report_list' => $formattedResults,
         ]);
     } else {
         return response()->json([

@@ -101,6 +101,47 @@
 }
 
 /* UTILITY CLASSES */
+
+
+.add-btn {
+    border-radius: 3px;
+    background: #000;
+    width: 242px;
+    height: 36px;
+    flex-shrink: 0;
+    color: #4CDB06;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.add-btn:hover {
+    color: #4CDB06;
+}
+
+.save-btn-black {
+    width: 100%;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #000;
+    color: #FFF;
+    text-align: center;
+    font-family: CamptonBook;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+}
+
+.save-btn-black:hover {
+    color: #FFF;
+}
+
 .card-h3 {
     color: #000;
     font-family: Campton;
@@ -223,6 +264,10 @@
     font-weight: 500;
     line-height: 16px;
     letter-spacing: -0.04em;
+}
+
+.nav-link span {
+    font-family: "Campton";
 }
 
 #homeService .signIn {
@@ -427,6 +472,18 @@ select {
     padding: 100px 0;
 }
 
+.pb-100px {
+    padding-bottom: 100px;
+}
+
+.pt-135px {
+    padding-top: 135px;
+}
+
+.pt-60px {
+    padding-top: 60px;
+}
+
 .pt-300px {
     padding-top: 300px;
 }
@@ -596,10 +653,11 @@ select {
 
 .search-bar {
     background-color: #fff;
-    width: 1066px;
-    height: 84px;
+    max-width: 1066px;
+    /* max-height: 84px; */
     border-radius: 5px;
     box-shadow: 0px 0px 24px 0px #00000040;
+    padding: 0.75rem;
 }
 
 .search-bar .form-select {
@@ -673,8 +731,8 @@ select {
 }
 
 .section-2 .card {
-    width: 1057px;
-    height: 191px;
+    width: inherit;
+    min-height: 191px;
     border-radius: 0px 0px 5px 5px;
     background-color: #4CDB06;
     font-size: 22px;
@@ -690,8 +748,8 @@ select {
 }
 
 .section-2 .card-text {
-    padding: 0 200px;
-    color: #1E1E1E;
+    /* padding: 0 200px; */
+    color: #1e1e1e;
     font-family: Campton;
     font-size: 22px;
     font-weight: 500;
@@ -791,6 +849,7 @@ select {
 }
 
 .section-3 p {
+    max-width: 405px;
     color: #000;
     font-family: Campton;
     font-size: 16px;
@@ -922,6 +981,10 @@ select {
     letter-spacing: -0.64px;
 }
 
+.input-icon-div .form-control::placeholder {
+    font-family: Campton !important;
+    font-weight: 400 !important;
+}
 
 .form-control::placeholder {
     color: #979797;
@@ -1378,6 +1441,7 @@ select option {
     color: #979797;
 }
 
+.payment-div .form-control,
 .form-div input.form-control,
 .form-div select,
 .form-div textarea,
@@ -1945,6 +2009,7 @@ span.popup-msg.active {
 }
 
 .section6 img {
+    position: absolute;
     left: 50%;
     bottom: 0;
 }
@@ -2857,4 +2922,116 @@ span.popup-msg.active {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
+}
+
+.view,
+.print {
+    text-decoration: none;
+}
+
+.view p,
+.print p {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.4px;
+}
+
+/* DATEPICKER */
+.gj-picker {
+    font-family: "CamptonBook";
+}
+
+.other-month>div,
+.gj-picker [role="week-days"] th>div,
+.gj-picker-bootstrap table tr td div {
+    font-family: CamptonBook;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.84px;
+}
+
+.gj-picker [role="period"] {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.gj-picker-bootstrap table tr td.selected.gj-cursor-pointer div {
+    color: #fff;
+    background-color: #4cdb06 !important;
+    border-color: transparent !important;
+    border-radius: 3px !important;
+    border: none !important;
+    text-shadow: none;
+}
+
+.datepicker table tr td.selected {
+    border-color: transparent !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+label.tc-text {
+    color: #979797;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.form-check-input:checked {
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+}
+
+.form-check-input:focus {
+    border-color: #4cdb06;
+}
+
+.form-check-input:checked[type=checkbox] {
+    background-image: none;
+}
+
+.multiple-checks .form-check-label {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.trmt-card-body .dashboard-card-title {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.trmt-card-body h5:nth-child(2) {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+.mdLtd div:first-child {
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.allRights{
+    display: flex;
+    align-items: center;
 }
