@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                         
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-3">
                                     <label class="form-label">Company Name</label>
                                     <div class="input-icon-div">
                                         <input type="text" name="bank_name" class="form-control" placeholder="MDhealth Ltd. Sti.">
@@ -49,7 +49,7 @@
                                 </div>
                         
                                 <div class="form-group mb-3">
-                                    <button type="submit" class="btn save-btn-black">Save Bank Account</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>

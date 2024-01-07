@@ -1,20 +1,46 @@
-@extends('front.layout.layout2')
+@extends('front.layout.layout')
 @section("content")
 
 <style>
-    .form-select option {
-        color: #979797 !important;
-        font-family: CamptonBook !important;
-        font-size: 16px !important;
-        font-style: normal !important;
-        font-weight: 400 !important;
-        line-height: normal !important;
-        letter-spacing: -0.64px !important;
-        padding: 20px 59px 24px 19px !important;
-
+    .date-range-picker-div {
+        position: relative;
+        border: 2px solid #D6D6D6 !important;
+        border-radius: 5px;
+        padding: 10px 20px !important;
     }
 
+    .date-range-picker-div input {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        top: 0;
+        height: 100%;
+        padding-left: 45px;
+        z-index: 00;
+        border: unset;
+    }
 
+    .date-range-picker-div .fa {
+        position: relative;
+        z-index: 9;
+    }
+
+    .payment-div .section-heading {
+        margin-bottom: 10px !important;
+    }
+
+    .daterangepicker.opensleft:before {
+        left: 9px !important;
+    }
+
+    .daterangepicker.opensleft:after {
+        left: 10px !important;
+    }
+
+    .daterangepicker {
+        left: 425.5px !important;
+        right: unset !important;
+    }
 
     .cstom-select-img {
         background-image: url('/front/assets/img/arrow-down-circle.svg');
@@ -68,20 +94,20 @@
 
     .example-div {
         border-bottom: 1px solid #4cdb06;
-        padding-bottom: 50px;
-        margin-bottom: 50px;
+        padding-bottom: 35px;
+        margin-bottom: 35px;
     }
 
     .example-div p {
         font-size: 14px;
     }
 
-    [role=right-icon] {
-        display: none;
-    }
+[role=right-icon] {
+    display: none;
+}
 </style>
 <div class="content-wrapper">
-    <div class="container pt-135px pb-100px for-cards order-details">
+    <div class="container py-100px for-cards order-details">
         <div class="row">
             <div class="col-md-3">
                 @include('front.includes.sidebar')
@@ -184,10 +210,10 @@
                                                 <div class="col-md-12 mb-4">
                                                     <h6 class="section-heading">Treatment Start Date</h6>
                                                     <!-- <div id="reportrange" class="date-range-picker-div" name="daterange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"> -->
-                                                    <div>
+                                                    <div >
                                                         <!-- <i class="fa fa-calendar"></i>&nbsp; -->
-                                                        <input type="text" id="datepicker" class="form-control" style="border: 2px solid #d6d6d6;" name="treatment_start_date" value="{{!empty($patient_details['treatment_start_date'])?$patient_details['treatment_start_date']:''}}" />
-
+                                                        <input type="text" id="datepicker"  class="form-control" style="border: 2px solid #d6d6d6;"  name="treatment_start_date" value="{{!empty($patient_details['treatment_start_date'])?$patient_details['treatment_start_date']:''}}" />
+                                                    
                                                     </div>
                                                 </div>
 
@@ -197,18 +223,18 @@
                                                 <div class="col-md-12 mb-3">
                                                     <div class="form-group d-flex flex-column">
                                                         <h4 class="text-dark">Status</h4>
-                                                        <select name="treatment_status" id="" class="form-select cstom-select-img">
-                                                                <option value="pending" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='pending'))?'selected':''}}>Pending</option>
-                                                                <option value="in_progress" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='in_progress'))?'selected':''}}>In Progress</option>
-                                                                <option value="completed" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='completed'))?'selected':''}}>Complete</option>
-                                                                <option value="cancelled" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='cancelled'))?'selected':''}}>Cancel</option>
+                                                        <select name="treatment_status" id="" class="form-control cstom-select-img">
+                                                            <option value="pending" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='pending'))?'selected':''}}>Pending</option>
+                                                            <option value="in_progress" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='in_progress'))?'selected':''}}>In Progress</option>
+                                                            <option value="completed" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='completed'))?'selected':''}}>Complete</option>
+                                                            <option value="cancelled" {{(!empty($patient_details['purchase_type'])&&($patient_details['purchase_type']=='cancelled'))?'selected':''}}>Cancel</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-12">
                                                     <div class="section-btns pt-2">
-                                                        <button type="submit" class="btn save-btn-black">Save Changes</button>
+                                                        <button type="submit" class="black-plate text-light w-100 btn fsb-1" style="background-color: #000002;">Save Changes</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -372,7 +398,7 @@
 
                                             <div class="col-md-12">
                                                 <div class="section-btns pt-2">
-                                                    <button type="submit" class="btn save-btn-black">Save Changes</button>
+                                                    <button type="submit" class="green-plate bg-dark text-white fw-700 w-100">Save Changes</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -401,7 +427,7 @@
         weekStartDay: 1,
         // showRightIcon: true,
         format: 'dd mmm yyyy',
-
+        
     });
 </script>
 
