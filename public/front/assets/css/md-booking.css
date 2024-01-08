@@ -43,6 +43,10 @@
     width: 110%;
     margin-left: -5.5rem;
 }
+.vehical-tab-div .md-booking-middle-img .image1 {
+    width: 104.5%;
+    margin-left: -25px;
+}
 
 .footer-image {
     width: 116.6%;
@@ -405,7 +409,10 @@
 }
 
 .booking-box-h {
-    height: 57px;
+    padding: 0;
+    height: calc(3.5rem + 2px) !important;
+    border-radius: 3px;
+    width: 100%;
 }
 
 .btn-search-pill-booking3 {
@@ -434,10 +441,29 @@
 .md-booking-middle-content .nav-tabs {
     border: unset !important;
 }
-.md-booking-middle-content .nav-tabs .nav-item.show .nav-link, .md-booking-middle-content .nav-tabs .nav-link.active,
+
+.md-booking-middle-content .nav-tabs .nav-item.show .nav-link,
+.md-booking-middle-content .nav-tabs .nav-link.active,
 .md-booking-middle-content .nav-tabs .nav-link.focus {
     border: 1px solid transparent;
 }
+
 .page-wrapper {
     background: #F6F6F6;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border-radius: 3px !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+    padding: 7px !important;
+}
+
+.select2-container--open .select2-dropdown--below {
+    padding: 5px !important;
+}
+
+.select2-results__option {
+    padding: 7px !important;
 }
