@@ -360,6 +360,8 @@
                                 value="{{ !empty($patient_information_list['package_buy_for']) ? $patient_information_list['package_buy_for'] : '' }}">
                             <input type="hidden" name="package_id" id="package_id"
                                 value="{{ !empty($patient_information_list['package_id']) ? $patient_information_list['package_id'] : '' }}">
+                            <input type="hidden" name="id" id="patiant_id"
+                                value="{{ !empty($patient_information_list['package_id']) ? $patient_information_list['package_id'] : '' }}">
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label class="form-label fsb-2 fw-600">*Patient Full Name</label>
@@ -459,7 +461,7 @@
                 <div class="modal-body ">
                     <form id="UserCancelPackageForm">
                         <div class="row">
-                            <input type="hidden" name="purchase_id" id="purchase_id" value="">
+                            <input type="hidden" name="id" id="id" value="">
                             <div class="col-md-12 mb-3">
                                 <div class="form-group d-flex flex-column">
                                     <label class="form-label fsb-2 fw-600">Reason for Cancellation</label>
@@ -499,7 +501,7 @@
 @endsection
 @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             // alert('hi');
@@ -519,6 +521,7 @@
                 let formData = new FormData();
                 formData.append("id", packageId);
                 formData.append("purchase_id", purchaseId);
+                alert(packageId + " " + purchaseId);
                 e.preventDefault();
                 let clickedId = id;
                 $.ajax({
@@ -532,17 +535,21 @@
                     },
                     data: formData,
                     success: function(response) {
-                        // alert(clickedId);
+                        alert(clickedId);
                         var id = this.id;
                         console.log("Success: " + response.PatientInformation);
                         var PatientInformation = response.PatientInformation;
                         var patientId = 0;
+
                         PatientInformation.forEach(function(patientInfo) {
+                            console.log(patientInfo);
                             patientId++;
                         });
                         PatientInformation = PatientInformation[patientId - 1];
+                        console.log(PatientInformation);
                         $('#package_buy_for').val(PatientInformation.package_buy_for);
                         $('#package_id').val(PatientInformation.package_id);
+                        $('#patiant_id').val(PatientInformation.id);
                         $('#patient_full_name').val(PatientInformation.patient_full_name);
                         $('#patient_relation').val(PatientInformation.patient_relation);
                         $('#patient_email').val(PatientInformation.patient_email);
@@ -610,6 +617,7 @@
                 submitHandler: function(form) {
                     var formData = new FormData(form);
                     formData.append('platform_type', 'web');
+
                     $.ajax({
                         type: 'POST',
                         url: baseUrl + '/api/md-change-patient-information', // Your endpoint
@@ -649,7 +657,7 @@
                 let packageId = rawId.split('?')[0];
                 let purchaseId = rawId.split('?')[1];
 
-                $("#purchase_id").val(purchaseId);
+                $("#id").val(purchaseId);
                 $('#UserCancellationReq').modal('show');
 
             });
@@ -661,9 +669,9 @@
 
             $('#UserCancelPackageForm').validate({
                 rules: {
-                    cancellation_reason: {
-                        required: true,
-                    },
+                    // cancellation_reason: {
+                    //     required: true,
+                    // },
                     cancellation_detail: {
                         required: true,
                     },
@@ -672,9 +680,9 @@
                     },
                 },
                 messages: {
-                    cancellation_reason: {
-                        required: "Please select a cancellation reason",
-                    },
+                    // cancellation_reason: {
+                    //     required: "Please select a cancellation reason",
+                    // },
                     cancellation_detail: {
                         required: "Please enter your cancellation detail",
                     },
@@ -709,6 +717,7 @@
                             $('.cancel-package-from-submit').attr('disabled', false);
                             $('.cancel-package-from-submit').html('CancelTreatment');
                             $('#UserCancellationReq').modal('hide');
+                            location.reload();
                             console.log('Success:', response);
                         },
                         error: function(error) {

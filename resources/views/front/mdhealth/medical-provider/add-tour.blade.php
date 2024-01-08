@@ -223,7 +223,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- jQuery Validation Plugin -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    
 
     <script>
         $(".mpOtherServicesLi").addClass("activeClass");

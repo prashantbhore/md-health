@@ -337,7 +337,10 @@ class CustomerPackageController extends BaseController
 
         $purchase_details = Packages::where('md_packages.status', 'active')
             ->where('md_packages.id', $request->package_id)
-            ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
+            ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount',
+            'md_packages.translation_price',
+            'md_packages.ambulance_service_price',
+            'md_packages.ticket_price')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
@@ -416,6 +419,55 @@ class CustomerPackageController extends BaseController
                 $total_price_percentage += $visa_details['price_percentage']; // Add to total
             }
 
+            if (!empty($purchase_details->translation_price)) {
+                // Visa Details
+                $translation = [
+                    'id' => 4,
+                    'title' => 'Translation',
+                    'price' => $purchase_details->translation_price, // Replace with actual price format
+                ];
+
+                $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+                // return $translation['price'];
+                $price = $translation['price'] * $discount_percentage;
+
+                $translation['price_percentage'] = abs($price - $purchase_details->translation_price);
+                $total_price_percentage += $translation['price_percentage']; // Add to total
+            }
+
+
+            if (!empty($purchase_details->ambulance_service_price)) {
+                // Visa Details
+                $ambulance_service = [
+                    'id' => 4,
+                    'title' => 'Ambulance Service',
+                    'price' => $purchase_details->ambulance_service_price, // Replace with actual price format
+                ];
+
+                $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+                // return $translation['price'];
+                $price = $ambulance_service['price'] * $discount_percentage;
+
+                $ambulance_service['price_percentage'] = abs($price - $purchase_details->ambulance_service_price);
+                $total_price_percentage += $ambulance_service['price_percentage']; // Add to total
+            }
+
+            if (!empty($purchase_details->ticket_price)) {
+                // Visa Details
+                $ticket_service = [
+                    'id' => 4,
+                    'title' => 'Ticket Service',
+                    'price' => $purchase_details->ticket_price, // Replace with actual price format
+                ];
+
+                $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+                // return $translation['price'];
+                $price = $ticket_service['price'] * $discount_percentage;
+
+                $ticket_service['price_percentage'] = abs($price - $purchase_details->ambulance_service_price);
+                $total_price_percentage += $ticket_service['price_percentage']; // Add to total
+            }
+
             // Output the total price percentage
             // echo "Total Price Percentage: " . $total_price_percentage;
 
@@ -439,6 +491,17 @@ class CustomerPackageController extends BaseController
             if (!empty($visa_details)) {
 
                 $services[] = $visa_details;
+            }
+            if (!empty($translation)) {
+                $services[] = $translation;
+            }
+
+            if (!empty($ambulance_service)) {
+                $services[] = $ambulance_service;
+            }
+
+            if (!empty($ticket_service)) {
+                $services[] = $ticket_service;
             }
             $purchase_details['vehicle_model_name'] = !empty($purchase_details->vehicle_model_id) ? $purchase_details->vehicle_model_id : '';
             $purchase_details['treatment_period_in_days'] = !empty($purchase_details->treatment_period_in_days) ? $purchase_details->treatment_period_in_days : '';
@@ -1036,6 +1099,17 @@ class CustomerPackageController extends BaseController
                     if ($request->pending_amount > 0) {
                         $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
                     }
+
+                    if (!empty($request->patient_id)) {
+                        $purchase_id = [];
+                        $purchase_id = [
+                            'purchase_id' => $purchase_details_data->id,
+                        ];
+
+                        PatientInformation::where('id', $request->patient_id)
+                            ->where('status', 'active')
+                            ->update($purchase_id);
+                    }
                 }
 
 
@@ -1572,19 +1646,10 @@ class CustomerPackageController extends BaseController
         $cancellation_reason['purchase_id'] = $request->purchase_id;
         $cancellation_reason['package_id'] = $request->package_id;
         $cancellation_reason['customer_id'] = Auth::user()->id;
-
         $cancellation_reason['cancellation_reason'] = $request->cancellation_reason;
-        $cancellation_reason['cancellation_detail'] = $request->cancellation_detail;
         $cancellation_reason['created_by'] = Auth::user()->id;
         $CustomerCancelledReason = CustomerCancelledReason::create($cancellation_reason);
-
-        if($CustomerCancelledReason){
-            $status_update['purchase_type'] = 'cancelled';
-            $status_update['modified_by'] = Auth::user()->id;
-            $status_update['modified_ip_address'] = $request->ip();
-            $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($status_update);
-        }
-        if (!empty($CustomerPurchaseDetails)) {
+        if (!empty($CustomerCancelledReason)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Thank You For Your Reason.We will get back to you.',
@@ -1601,7 +1666,7 @@ class CustomerPackageController extends BaseController
     public function change_patient_information_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id' => 'required',  
+            'id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -1625,7 +1690,7 @@ class CustomerPackageController extends BaseController
             ->where('package_id', $request->id)
             ->where('purchase_id', $request->purchase_id)
             // ->where('customer_id', Auth::user()->id)
-            ->get();
+            ->first();
 
         if (!empty($PatientInformation)) {
             return response()->json([
@@ -1883,6 +1948,8 @@ class CustomerPackageController extends BaseController
             ->select(
                 'md_other_patient_information.id',
                 'patient_full_name',
+                'patient_first_name',
+                'patient_last_name',
                 'md_other_patient_information.patient_relation',
                 'md_other_patient_information.patient_email',
                 'md_other_patient_information.patient_contact_no',
@@ -2133,7 +2200,7 @@ class CustomerPackageController extends BaseController
         }
     }
 
-    public function customer_favourite_list()
+    public function customer_favourite_list(Request $request)
     {
         $CustomerFavouritePackages=CustomerFavouritePackages::where('md_customer_favourite_packages.status','active')
         ->select(
@@ -2148,41 +2215,12 @@ class CustomerPackageController extends BaseController
         ->where('md_customer_favourite_packages.customer_id',Auth::user()->id)
         ->get();
 
-        if (!empty($CustomerFavouritePackages)) 
+        if (!empty($CustomerFavouritePackages))
         {
             return response()->json([
                 'status' => 200,
                 'message' => 'Here is your Favourite list.',
                 'data' => $CustomerFavouritePackages,
-
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong.',
-            ]);
-        }
-    }
-
-    public function remove_from_favourite(Request $request){
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $CustomerFavouritePackages = [];
-        $CustomerFavouritePackages['status'] = 'inactive';
-        $CustomerFavouritePackages['created_by'] = Auth::user()->id;
-
-        $CustomerPurchaseDetails = CustomerFavouritePackages::where('id', $request->id)->update($CustomerFavouritePackages);
-
-        if (!empty($CustomerPurchaseDetails)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Package Removed From Favourite list.',
 
             ]);
         } else {

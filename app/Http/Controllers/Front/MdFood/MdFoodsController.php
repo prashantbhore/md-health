@@ -18,7 +18,7 @@ class MdFoodsController extends Controller {
         $this->apiService = $apiService;
     }
 
-    public function mdfood_home() {
+    public function mdfood_home(){
         return view( 'front.mdFoods.index' );
     }
 }
