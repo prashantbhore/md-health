@@ -301,6 +301,12 @@ Route::middleware('auth:sanctum')->group(function ()
     //add-package-to-favourite
     Route::post('md-add-package-to-favourite', [CustomerPackageController::class, 'add_package_to_favourite']);
 
+    //customer-favourite-list
+    Route::get('md-customer-favourite-list', [CustomerPackageController::class, 'customer_favourite_list']);
+
+    //remove-from-favourite
+    Route::post('md-remove-from-favourite', [CustomerPackageController::class, 'remove_from_favourite']);
+
 
     Route::controller(VendorProductController::class)->group(function () {
         Route::post('add-vendor-product', 'addProduct');

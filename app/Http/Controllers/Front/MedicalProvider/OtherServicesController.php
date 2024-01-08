@@ -204,7 +204,7 @@ class OtherServicesController extends Controller {
         $body = $request->all();
 
         $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
-
+        // dd( $plainArray );
         if ( $request->hasFile( 'vehicle_image_path' ) && $request->file( 'vehicle_image_path' )->isValid() ) {
             $image = $request->file( 'vehicle_image_path' );
             $image_name = 'vehicle_image_path';
@@ -214,7 +214,7 @@ class OtherServicesController extends Controller {
         }
 
         // $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
-        dd($responmseData);
+        // dd( $responseData );
         if ( ( $responseData[ 'status' ] == 200 ) ) {
             return redirect( '/medical-other-services' )->with( 'success', $responseData[ 'message' ] );
         } else {

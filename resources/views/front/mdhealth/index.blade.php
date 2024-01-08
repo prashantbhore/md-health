@@ -1,15 +1,15 @@
 @php
-$treatment_plans = App\Models\ProductCategory::all();
-$cities = App\Models\Cities::where('country_id', '1')
-->where('status', 'active')
-->get();
-// dd(Session::all());
-if (Session::get('login_token') != null) {
-$is_logged_in = true;
-} else {
-$is_logged_in = false;
-}
-// dd(Session::all());
+    $treatment_plans = App\Models\ProductCategory::all();
+    $cities = App\Models\Cities::where('country_id', '1')
+        ->where('status', 'active')
+        ->get();
+    // dd(Session::all());
+    if (Session::get('login_token') != null) {
+        $is_logged_in = true;
+    } else {
+        $is_logged_in = false;
+    }
+    // dd(Session::all());
 @endphp
 
 @extends('front.layout.layout')
@@ -132,348 +132,188 @@ $is_logged_in = false;
         </div>
     </div>
 
-    <!-- SECTION 3: TOP TREATMENT CARDS -->
-    <div class="bg-f6">
-        <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
-            <h1><span class="text-green">TOP 5</span> treatments</h1>
-            <div class="top5-card me-md-4 d-flex justify-content-between align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/brain.svg' }}" alt="">
+        <!-- SECTION 3: TOP TREATMENT CARDS -->
+        <div class="bg-f6">
+            <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
+                <h1><span class="text-green">TOP 5</span> treatments</h1>
+                <div class="top5-card me-md-4 d-flex justify-content-between align-items-center">
+                    <div class="card">
+                        <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                            <div class="bg-black p-2 rounded-circle">
+                                <img src="{{ 'front/assets/img/brain.svg' }}" alt="">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Treatment Name</h6>
+                                <p class="mb-0">Treatment Category</p>
+                            </div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                            <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                                alt="">
                         </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="rating">
+                        <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                                class="fw-normal">(480)</span></p>
+                        <div class="stars">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/heart.svg' }}" alt="">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+                    <div class="card">
+                        <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                            <div class="bg-black p-2 rounded-circle">
+                                <img src="{{ 'front/assets/img/heart.svg' }}" alt="">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Treatment Name</h6>
+                                <p class="mb-0">Treatment Category</p>
+                            </div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                            <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                                alt="">
                         </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="rating">
+                        <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                                class="fw-normal">(480)</span></p>
+                        <div class="stars">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+                    <div class="card">
+                        <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                            <div class="bg-black p-2 rounded-circle">
+                                <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Treatment Name</h6>
+                                <p class="mb-0">Treatment Category</p>
+                            </div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                            <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                                alt="">
                         </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="rating">
+                        <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                                class="fw-normal">(520)</span></p>
+                        <div class="stars">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+                    <div class="card">
+                        <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                            <div class="bg-black p-2 rounded-circle">
+                                <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Treatment Name</h6>
+                                <p class="mb-0">Treatment Category</p>
+                            </div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                            <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                                alt="">
                         </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="rating">
+                        <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                                class="fw-normal">(400)</span></p>
+                        <div class="stars">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/mouth.svg' }}" alt="">
+                <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+                    <div class="card">
+                        <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                            <div class="bg-black p-2 rounded-circle">
+                                <img src="{{ 'front/assets/img/mouth.svg' }}" alt="">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Treatment Name</h6>
+                                <p class="mb-0">Treatment Category</p>
+                            </div>
+                            <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                            <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                                alt="">
                         </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="rating">
+                        <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                                class="fw-normal">(480)</span></p>
+                        <div class="stars">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
+                            <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
 
 
+            </div>
         </div>
     </div>
-</div>
-<div class="py-100px pb-0 md-coin df-center flex-column gap-4 bg-f6 section-3 mb-5">
-    <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
-    <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span class="text-green">!</span>
-    </h1>
-    <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and <br /> spend <span class="camptonBold">MD</span>coin
-        for
-        your health needs. </p>
-</div>
-<div class="bg-f6">
-    <div class="df-center container md-earn">
-        <div>
-            <h1>2%</h1>
-            <img src="{{ 'front/assets/img/img1.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div>
-            <h1>4%</h1>
-            <img src="{{ 'front/assets/img/img2.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div>
-            <h1>3%</h1>
-            <img src="{{ 'front/assets/img/img3.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div>
-            <h1>5%</h1>
-            <img src="{{ 'front/assets/img/img1.png' }}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-    </div>
-</div>
-<div class="bg-f6">
-    <div class="container">
-        <div class="bod-bot pb-5">
-            <img src="{{ 'front/assets/img/add.png' }}" alt="">
-        </div>
-    </div>
-</div>
 
-<!-- SECTION 3: TOP TREATMENT CARDS -->
-<div class="bg-f6">
-    <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
-        <h1><span class="text-green">TOP 5</span> treatments</h1>
-        <div class="d-flex justify-content-between me-4 align-items-center">
-            <div class="card">
-                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                    <div class="bg-black p-2 rounded-circle">
-                        <img src="{{ 'front/assets/img/brain.svg' }}" alt="">
-                    </div>
+
+ 
+    <!-- SECTION 4 -->
+    <div class="bg-green">
+        <div class="container py-5 text-center">
+            <p class="mb-0 camptonBold fs-2 fw-bold">We made the treatment reliable and easier for you</p>
+            <p class="mb-0 fs-4 fw-bolder camptonBook text-white">Get your treatment packages in Turkiye withing few
+                clicks
+                from professional healthcare providers.</p>
+        </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="bg-e6">
+        <div class="container download-section d-flex justify-content-around">
+            <div>
+                <img src="{{ 'front/assets/img/appScreen.png' }}" alt="">
+            </div>
+            <div class="part2">
+                <div class="mb-4">
+                    <p class="fs3 camptonBold mb-0">Download</p>
+                    <p class="fs3"><span class="camptonBold text-green">MD</span><span
+                            class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
+                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <img class="align-self-center" src="{{ 'front/assets/img/playstore.png' }}" alt="">
+                    <p class="camptonBook fw-bolder fs-5">or</p>
                     <div>
-                        <h6 class="mb-0">Treatment Name</h6>
-                        <p class="mb-0">Treatment Category</p>
+                        <img src="{{ 'front/assets/img/qrCode.png' }}" alt="">
+                        <p class="camptonBook fs-5">scan the QR Code</p>
                     </div>
-                    <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                </div>
-            </div>
-            <div class="rating">
-                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                <div class="stars">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between me-4 align-items-center">
-            <div class="card">
-                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                    <div class="bg-black p-2 rounded-circle">
-                        <img src="{{ 'front/assets/img/heart.svg' }}" alt="">
-                    </div>
-                    <div>
-                        <h6 class="mb-0">Treatment Name</h6>
-                        <p class="mb-0">Treatment Category</p>
-                    </div>
-                    <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                </div>
-            </div>
-            <div class="rating">
-                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                <div class="stars">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between me-4 align-items-center">
-            <div class="card">
-                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                    <div class="bg-black p-2 rounded-circle">
-                        <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
-                    </div>
-                    <div>
-                        <h6 class="mb-0">Treatment Name</h6>
-                        <p class="mb-0">Treatment Category</p>
-                    </div>
-                    <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                </div>
-            </div>
-            <div class="rating">
-                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
-                <div class="stars">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between me-4 align-items-center">
-            <div class="card">
-                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                    <div class="bg-black p-2 rounded-circle">
-                        <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
-                    </div>
-                    <div>
-                        <h6 class="mb-0">Treatment Name</h6>
-                        <p class="mb-0">Treatment Category</p>
-                    </div>
-                    <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                </div>
-            </div>
-            <div class="rating">
-                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
-                <div class="stars">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between me-4 align-items-center">
-            <div class="card">
-                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                    <div class="bg-black p-2 rounded-circle">
-                        <img src="{{ 'front/assets/img/mouth.svg' }}" alt="">
-                    </div>
-                    <div>
-                        <h6 class="mb-0">Treatment Name</h6>
-                        <p class="mb-0">Treatment Category</p>
-                    </div>
-                    <div class="treatment-price ms-auto">₺ 18.829,91</div>
-                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                </div>
-            </div>
-            <div class="rating">
-                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                <div class="stars">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-</div>
-
-<!-- SECTION 4 -->
-<div class="bg-green">
-    <div class="container py-5 text-center">
-        <p class="mb-0 camptonBold fs-2 fw-bold">We made the treatment reliable and easier for you</p>
-        <p class="mb-0 fs-4 fw-bolder camptonBook text-white">Get your treatment packages in Turkiye withing few
-            clicks
-            from professional healthcare providers.</p>
-    </div>
-</div>
-
-<!-- SECTION 5 -->
-<div class="bg-e6">
-    <div class="container download-section d-flex justify-content-around">
-        <div>
-            <img src="{{ 'front/assets/img/appScreen.png' }}" alt="">
-        </div>
-        <div class="part2">
-            <div class="mb-4">
-                <p class="fs3 camptonBold mb-0">Download</p>
-                <p class="fs3"><span class="camptonBold text-green">MD</span><span class="text-green">health</span> <span class="camptonBold">Mobile</span></p>
-                <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem, ipsum dolor sit amet consectetur adipisicing
-                    elit. Recusandae veniam necessitatibus molestias dolorem aut harum placeat esse, .</p>
-            </div>
-            <div class="d-flex align-items-center gap-4">
-                <img class="align-self-center" src="{{ 'front/assets/img/playstore.png' }}" alt="">
-                <p class="camptonBook fw-bolder fs-5">or</p>
-                <div>
-                    <img src="{{ 'front/assets/img/qrCode.png' }}" alt="">
-                    <p class="camptonBook fs-5">scan the QR Code</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <!-- SECTION 6 -->
 <div class="bg-black position-relative section6">
@@ -484,7 +324,7 @@ $is_logged_in = false;
     </div>
     <img src="{{ 'front/assets/img/flight.png' }}" alt="">
 </div>
-<img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt="">
+<!-- <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt=""> -->
 </div>
 {{-- Make Payment Model box --}}
 
@@ -694,32 +534,32 @@ $is_logged_in = false;
     </div>
 </div>
 
-<!-- SECTION 8: SCAN QR -->
-<div class="bg-f6 scanQr">
-    <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
-</div>
-<!-- Modals -->
+    <!-- SECTION 8: SCAN QR -->
+    <div class="bg-f6 scanQr">
+        <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
+    </div>
+    <!-- Modals -->
 
-</div>
+    </div>
 @endsection
 @section('script')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script>
-    $(function() {
-        $('input[name="daterange"]').daterangepicker({
-            opens: 'left',
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left',
 
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
-            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        }, function(start, end, label) {});
-    });
-</script>
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            }, function(start, end, label) {});
+        });
+    </script>
 @endsection
 
-
-{{-- singleDatePicker: true, --}}
-{{-- showDropdowns: true, --}}
+{{--
+singleDatePicker: true,
+ showDropdowns: true, --}}

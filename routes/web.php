@@ -35,6 +35,7 @@ use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
+use App\Http\Controllers\Front\Registration\FoodProviderController;
 use App\Models\MedicalProviderLogo;
 
 /*
@@ -362,7 +363,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 // Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 // Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
-Route::view('food-login', 'front/mdhealth/authentication/food-login');
+
 
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
@@ -520,7 +521,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('medical-account', 'update_medical_profile_list');
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
         Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
-
     });
 
 });
@@ -567,6 +567,32 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 });
+
+
+
+
+//Food Vendor Route Starts By Mplus03
+
+Route::get('food-provider-register',[FoodProviderController::class,'index']);
+Route::post('create-food-provider-account',[FoodProviderController::class,'food_vendor_register']);
+
+Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], function (){
+
+   
+Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
+Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
+Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
+Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
+Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
+
+
+ 
+   
+});
+
+//Food Vendor Route Ends By Mplus03
+
+
 
 
 
@@ -644,12 +670,6 @@ Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
 
-// MDFood Provider Panel
-Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
-Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
-Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
-Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
-Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
 
 // Medical Provider Panel
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
