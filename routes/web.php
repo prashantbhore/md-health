@@ -36,6 +36,7 @@ use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
 use App\Http\Controllers\Front\Registration\FoodProviderController;
+use App\Http\Controllers\Front\Vendor\UpdateVendorProfileController;
 use App\Models\MedicalProviderLogo;
 
 /*
@@ -490,6 +491,13 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
         Route::get('md-vendor-active-list', 'active_product_list');
         Route::get('md-vendor-deactive-list', 'deactive_product_list');
         Route::get('/edit-product/{id}', 'edit_product');
+    });
+
+    Route::controller(UpdateVendorProfileController::class)->group(function () {
+        Route::get('vendor-account', 'update_vendor_profile_list');
+        // Route::post('md-update-medical-profile', 'update_medical_provider_profile');
+        // Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
+
     });
 
 });
