@@ -223,10 +223,10 @@
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div> --}}
                                     <!-- <div class="col-12 px-0">
-                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                        <p>
 
-                                                                                                                                                                                                    </p>
-                                                                                                                                                                                                </div> -->
+                                                                                                                                                                                                        </p>
+                                                                                                                                                                                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -396,6 +396,7 @@
     </div>
 @endsection
 @section('script')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript">
         var baseUrl = $('#base_url').val();
         var token = "{{ Session::get('login_token') }}";
