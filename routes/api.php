@@ -301,6 +301,12 @@ Route::middleware('auth:sanctum')->group(function ()
     //add-package-to-favourite
     Route::post('md-add-package-to-favourite', [CustomerPackageController::class, 'add_package_to_favourite']);
 
+    //customer-favourite-list
+    Route::get('md-customer-favourite-list', [CustomerPackageController::class, 'customer_favourite_list']);
+
+    //remove-from-favourite
+    Route::post('md-remove-from-favourite', [CustomerPackageController::class, 'remove_from_favourite']);
+
 
     Route::controller(VendorProductController::class)->group(function () {
         Route::post('add-vendor-product', 'addProduct');
@@ -311,6 +317,9 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('vendor-active-product-search', 'active_vendor_search_products');
         Route::post('vendor-inactive-product-search', 'inactive_vendor_search_products');
         Route::post('vendor-product-view', 'vendor_product_view');
+        Route::post('md-vendor-product-active-to-deactive', 'product_active_to_deactive');
+        Route::post('md-vendor-product-deactive-to-active', 'product_deactive_to_active');
+
         // Route::post('/products/bulk-import','addProductsBulk');
     });
 

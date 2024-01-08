@@ -173,7 +173,7 @@
 
                                     <div class="section-btns mb-5">
                                         <button
-                                            class="black-plate bg-black text-white fw-700 w-100 border border-dark">Save Personnel</button>
+                                            class="black-plate bg-black text-white fw-700 w-100">Save Personnel</button>
                                     </div>
                                 </form>
                                 <div class="white-plate d-flex align-items-center mb-3 border-0 bg-f6">
@@ -224,7 +224,7 @@
     </script>
 
     <script>
-        $(document).ready(function() {
+        // $(document).ready(function() {
             function updateCheckedValues() {
                 const checkedValues = $('.form-check-input:checked').map(function() {
                     return $(this).val();
@@ -234,12 +234,12 @@
             }
             $('.form-check-input').change(updateCheckedValues);
             updateCheckedValues();
-        });
+        // });
     </script>
 
 <script>
     function delete_role(id) {
-        alert(id);
+        // alert(id);
         // Get the CSRF token from the meta tag
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');

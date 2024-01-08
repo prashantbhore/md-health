@@ -15,6 +15,7 @@ class CustomerCancelledReason extends Model
         'customer_id',
         'package_id',
         'cancellation_reason',
+        'cancellation_detail',
         'status',
         'created_ip_address',
         'modified_ip_address',

@@ -12,21 +12,20 @@ $is_logged_in = false;
 // dd(Session::all());
 @endphp
 
-
 @extends('front.layout.layout')
 @section('content')
 <div class="bg-f6">
     <div class="content-wrapper bg-f6">
-        <!-- =============================================================================================
+        <!-- =============================================================================================================
                                             1 : BANNER SECTION
-             ============================================================================================= -->
+             ============================================================================================================= -->
         <div class="banner-section df-center flex-column">
             <div class="container">
                 <div class="banner-content df-center flex-column">
                     <h6>A NEW APPROACH IN MODERN TREATMENT</h6>
                     <h2>PLAN YOUR TREATMENT</h2>
                     <h1 class="mb-5">NOW</h1>
-                    <form method="POST" action="{{ url('health-search-result') }}">
+                    <form method="POST" action="{{ url('health-search-result') }}" class="w-100">
                         @csrf
                         <!-- SEARCH TREATMENT BAR -->
                         <div class="search-bar d-flex align-items-center p-3 gap-3">
@@ -64,13 +63,12 @@ $is_logged_in = false;
             </div>
         </div>
 
-        <!-- =============================================================================================
-                                            2 : MAKE REQUEST FORM/MODAL
-             ============================================================================================= -->
-        <!--  -->
+        <!-- =============================================================================================================
+                                            2 : MAKE REQUEST FORM
+             ============================================================================================================= -->
         <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
             <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
-            <h2>Couldn’t find your <span class="text-green text-decoration-underline">treatment</span> package?</h2>
+            <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span> package?</h2>
             <div class="card border-0 position-relative">
                 <div class="card-body df-center flex-column">
                     <p class="card-text">Contact us with your detail & our team will prepare your desired <br> treatment
@@ -489,45 +487,51 @@ $is_logged_in = false;
 <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt="">
 </div>
 {{-- Make Payment Model box --}}
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+
+<!-- MAKE REQUEST MODAL -->
+<div class="modal fade request-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="width:704px">
         <div class="modal-content p-3">
             <div>
                 <div class="text-end">
                     <button type="button" class="btn-close m-3" data-bs-dismiss="modal" aria-label="Close">
+                        <!-- <img src="{{('front/assets/img/modalClose.png')}}" alt=""> -->
                     </button>
                 </div>
 
-                <div class="text-center">
-                    <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span class="green-color">treatment</span> package?</h4>
-                    <p>Fill the form & get your desired treatment plan</p>
+                <div class="text-center" style="margin-top: -8px;">
+                    <h4 class="modal-title mb-2" id="exampleModalLabel">Couldn't find your <span class="green-color">treatment</span> package?</h4>
+                    <p class="mb-4">Fill the form & get your desired treatment plan</p>
                 </div>
             </div>
             <div class="modal-body">
-                <form class="row g-4">
-                    <div class="col-md-4">
+                <form class="row g-3">
+                    <div class="col-md-4 mb-3">
                         <label for="inputEmail4" class="form-label fw-bold">*First Name</label>
-                        <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="First Name">
+                        <input type="email" class="form-control  " id="inputEmail4" placeholder="First Name">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <label for="inputPassword4" class="form-label fw-bold">*Last Name</label>
-                        <input type="text" class="form-control h-75" id="inputPassword4" placeholder="Last Name">
+                        <input type="text" class="form-control " id="inputPassword4" placeholder="Last Name">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <label for="inputAddress" class="form-label fw-bold">*Email</label>
-                        <input type="email" class="form-control  h-75" id="inputAddress" placeholder="Optional">
+                        <input type="email" class="form-control  " id="inputAddress" placeholder="Optional">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <label for="inputState" class="form-label fw-bold">*Country</label>
-                        <select id="inputState" class="form-select h-75">
-                            <option selected>Choose...</option>
-                            <option>...</option>
+                        <select id="inputState" class="form-select ">
+                            <option selected disabled>Choose</option>
+                            <option>Turkey</option>
+                            <option>India</option>
+                            <option>China</option>
+                            <option>USA</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
-                        <input type="tel" class="form-control h-75" id="inputAddress33" placeholder="+Contact Mobile">
+                        <input type="tel" class="form-control " id="inputAddress33" placeholder="+ Contact Mobile">
                         {{-- <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio1" value="option1">
@@ -539,30 +543,37 @@ $is_logged_in = false;
                                 <label class="form-check-label" for="inlineRadio2">Telegram</label>
                             </div> --}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
-                        <input type="text" class="form-control h-75" id="inputAddress443" placeholder="Treatment Name">
+                        <input type="text" class="form-control " id="inputAddress443" placeholder="Treatment Name">
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-3">
                         <label for="inputAddress5" class="form-label fw-bold">*Details</label>
-                        <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Please Write your treatment requirement in detail">
+                        <!-- <input type="text" class="form-control "  id="inputAddress5" placeholder="Please Write your treatment requirement in detail"> -->
+                        <textarea name="" id="" cols="" style="height: 66px;" class="form-control" id="inputAddress5" placeholder="Please write your treatment requirement in detail"></textarea>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-3 position-relative">
                         <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
-                        <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details">
+                        <!-- <input type="text" class="form-control " id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details"> -->
+                        <div class="form-control position-relative" style="height:101px">
+                            <textarea name="" id="" class="form-control border-0 p-0" id="pre-treat" style="resize:none;" placeholder="Have you done / received any releted treatment before"></textarea>
+                            <span class="epic-span">If Yes, please write the detail</span>
+                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-3">
                         <label for="formFile" class="form-label fw-bold">Upload Your Treatment Documents</label>
-                        <input class="form-control h-75" type="file" id="formFile">
+                        <input type="file" id="formFile">
+                        <img src="{{('front/assets/img/uploadFile.png')}}" alt="" class="pe-2">
+                        <span class="Campton fst-italic fs-14 align-top">*Optional</span>
                     </div>
-                    <div class="col-md-6">
-                        <label for="inputAddress5" class="form-label fw-bold">When do you need the
+                    <div class="col-md-6 mb-4">
+                        <label for="inputAddress5" class="form-label fw-bold">*When do you need the
                             treatment?</label>
-                        <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Apartment, studio, or floor">
+                        <input type="text" class="form-control " id="inputAddress5" placeholder="Write in week or month">
                     </div>
-                    <div class="col-md-6">
-                        <label for="inputAddress5" class="form-label fw-bold">Do you need travel visa?</label>
+                    <div class="col-md-6 mb-4">
+                        <label for="inputAddress5" class="form-label fw-bold">*Do you need travel visa?</label>
                         <div class="mt-2">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
@@ -574,8 +585,8 @@ $is_logged_in = false;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 text-center ">
-                        <button type="submit" class="btn w-50 mt-4 bg-green h-75">Submit
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn save-btn-green">Submit
                         </button>
                     </div>
                 </form>

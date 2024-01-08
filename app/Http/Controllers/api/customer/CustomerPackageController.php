@@ -337,7 +337,10 @@ class CustomerPackageController extends BaseController
 
         $purchase_details = Packages::where('md_packages.status', 'active')
             ->where('md_packages.id', $request->package_id)
-            ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
+            ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount',
+            'md_packages.translation_price',
+            'md_packages.ambulance_service_price',
+            'md_packages.ticket_price')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
@@ -416,6 +419,55 @@ class CustomerPackageController extends BaseController
                 $total_price_percentage += $visa_details['price_percentage']; // Add to total
             }
 
+            if (!empty($purchase_details->translation_price)) {
+                // Visa Details
+                $translation = [
+                    'id' => 4,
+                    'title' => 'Translation',
+                    'price' => $purchase_details->translation_price, // Replace with actual price format
+                ];
+
+                $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+                // return $translation['price'];
+                $price = $translation['price'] * $discount_percentage;
+
+                $translation['price_percentage'] = abs($price - $purchase_details->translation_price);
+                $total_price_percentage += $translation['price_percentage']; // Add to total
+            }
+
+
+            if (!empty($purchase_details->ambulance_service_price)) {
+                // Visa Details
+                $ambulance_service = [
+                    'id' => 4,
+                    'title' => 'Ambulance Service',
+                    'price' => $purchase_details->ambulance_service_price, // Replace with actual price format
+                ];
+
+                $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+                // return $translation['price'];
+                $price = $ambulance_service['price'] * $discount_percentage;
+
+                $ambulance_service['price_percentage'] = abs($price - $purchase_details->ambulance_service_price);
+                $total_price_percentage += $ambulance_service['price_percentage']; // Add to total
+            }
+
+            if (!empty($purchase_details->ticket_price)) {
+                // Visa Details
+                $ticket_service = [
+                    'id' => 4,
+                    'title' => 'Ticket Service',
+                    'price' => $purchase_details->ticket_price, // Replace with actual price format
+                ];
+
+                $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+                // return $translation['price'];
+                $price = $ticket_service['price'] * $discount_percentage;
+
+                $ticket_service['price_percentage'] = abs($price - $purchase_details->ambulance_service_price);
+                $total_price_percentage += $ticket_service['price_percentage']; // Add to total
+            }
+
             // Output the total price percentage
             // echo "Total Price Percentage: " . $total_price_percentage;
 
@@ -439,6 +491,17 @@ class CustomerPackageController extends BaseController
             if (!empty($visa_details)) {
 
                 $services[] = $visa_details;
+            }
+            if (!empty($translation)) {
+                $services[] = $translation;
+            }
+
+            if (!empty($ambulance_service)) {
+                $services[] = $ambulance_service;
+            }
+
+            if (!empty($ticket_service)) {
+                $services[] = $ticket_service;
             }
             $purchase_details['vehicle_model_name'] = !empty($purchase_details->vehicle_model_id) ? $purchase_details->vehicle_model_id : '';
             $purchase_details['treatment_period_in_days'] = !empty($purchase_details->treatment_period_in_days) ? $purchase_details->treatment_period_in_days : '';
@@ -1036,6 +1099,17 @@ class CustomerPackageController extends BaseController
                     if ($request->pending_amount > 0) {
                         $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
                     }
+
+                    if (!empty($request->patient_id)) {
+                        $purchase_id = [];
+                        $purchase_id = [
+                            'purchase_id' => $purchase_details_data->id,
+                        ];
+
+                        PatientInformation::where('id', $request->patient_id)
+                            ->where('status', 'active')
+                            ->update($purchase_id);
+                    }
                 }
 
 
@@ -1614,8 +1688,9 @@ class CustomerPackageController extends BaseController
                 'package_buy_for'
             )
             ->where('package_id', $request->id)
-            ->where('customer_id', Auth::user()->id)
-            ->get();
+            ->where('purchase_id', $request->purchase_id)
+            // ->where('customer_id', Auth::user()->id)
+            ->first();
 
         if (!empty($PatientInformation)) {
             return response()->json([
@@ -1873,6 +1948,8 @@ class CustomerPackageController extends BaseController
             ->select(
                 'md_other_patient_information.id',
                 'patient_full_name',
+                'patient_first_name',
+                'patient_last_name',
                 'md_other_patient_information.patient_relation',
                 'md_other_patient_information.patient_email',
                 'md_other_patient_information.patient_contact_no',
@@ -2110,10 +2187,41 @@ class CustomerPackageController extends BaseController
         $add_to_fav['created_by'] = Auth::user()->id;
 
         $add_to_favorite = CustomerFavouritePackages::create($add_to_fav);
-        if (!empty($customer_reviews_data)) {
+        if (!empty($add_to_favorite)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'This Package Added To Favourite.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function customer_favourite_list(Request $request)
+    {
+        $CustomerFavouritePackages=CustomerFavouritePackages::where('md_customer_favourite_packages.status','active')
+        ->select(
+            'md_customer_favourite_packages.id','md_packages.treatment_period_in_days',
+            'md_product_category.product_category_name',
+            'md_master_cities.city_name'
+        )
+        ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
+        ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+        ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+        ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+        ->where('md_customer_favourite_packages.customer_id',Auth::user()->id)
+        ->get();
+
+        if (!empty($CustomerFavouritePackages))
+        {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your Favourite list.',
+                'data' => $CustomerFavouritePackages,
+
             ]);
         } else {
             return response()->json([
