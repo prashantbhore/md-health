@@ -36,6 +36,7 @@ use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
 use App\Http\Controllers\Front\Registration\FoodProviderController;
+use App\Http\Controllers\Front\FoodProvider\UpdateFoodProviderAccount;
 use App\Models\MedicalProviderLogo;
 
 /*
@@ -585,9 +586,8 @@ Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_vi
 Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
 Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
 
+Route::get('food-provider-account',[UpdateFoodProviderAccount::class,'update_food_profile_list']);
 
- 
-   
 });
 
 //Food Vendor Route Ends By Mplus03
