@@ -40,7 +40,7 @@
                     <a href="javascript:void(0);" class="nav-link">Home Service</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('food-login') }}" class="nav-link">Food Provider</a>
+                    <a href="{{ url('food-provider-register') }}" class="nav-link">Food Provider</a>
                 </li>
             </ul>
 

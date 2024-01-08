@@ -35,6 +35,7 @@ use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
+use App\Http\Controllers\Front\Registration\FoodProviderController;
 use App\Models\MedicalProviderLogo;
 
 /*
@@ -362,7 +363,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 // Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 // Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
-Route::view('food-login', 'front/mdhealth/authentication/food-login');
+
 
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
@@ -567,6 +568,24 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 });
+
+
+
+
+//Food Vendor Route Starts By Mplus03
+
+Route::get('food-provider-register',[FoodProviderController::class,'index']);
+Route::post('create-food-provider-account',[FoodProviderController::class,'food_vendor_register']);
+
+Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], function (){
+
+ 
+   
+});
+
+//Food Vendor Route Ends By Mplus03
+
+
 
 
 
