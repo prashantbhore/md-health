@@ -196,16 +196,14 @@
                                                             id="package-details_{{ $active_package['package_id'] }}"
                                                             class="order-completed-btn w-100 bg-white  fsb-2 border border-black package-details">Package
                                                             Details</a>
-                                                        <a href="#"
+                                                        <a href="javascript:void(0)"
                                                             class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation"
-                                                            data-bs-toggle="modal"
-                                                            id="change_information_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}"
-                                                            data-bs-target="#UserChangeInformation">Change
+                                                            id="change_information_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Change
                                                             Patient Information</a>
                                                         <a href="#"
-                                                            class="order-completed-btn w-100 bg-red fsb-2 text-white"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#UserCancellationReq">Cancellation Request</a>
+                                                            class="order-completed-btn w-100 bg-red fsb-2 text-white UserCancelPackage"
+                                                            id="cancel_package_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Cancellation
+                                                            Request</a>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -345,7 +343,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="UserChangeInformation" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="UserChangeInformationModel" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -358,14 +356,15 @@
                 <div class="modal-body ">
                     <form id="UserChangeInformationForm">
                         <div class="row">
-                            <input type="hidden" name="package_buy_for"
+                            <input type="hidden" name="package_buy_for" id="package_buy_for"
                                 value="{{ !empty($patient_information_list['package_buy_for']) ? $patient_information_list['package_buy_for'] : '' }}">
-                            <input type="hidden" name="package_id"
+                            <input type="hidden" name="package_id" id="package_id"
                                 value="{{ !empty($patient_information_list['package_id']) ? $patient_information_list['package_id'] : '' }}">
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label class="form-label fsb-2 fw-600">*Patient Full Name</label>
-                                    <input type="text" class="form-control" name="patient_full_name" id=""
+                                    <input type="text" class="form-control" name="patient_full_name"
+                                        id="patient_full_name"
                                         value="{{ !empty($patient_information_list['patient_full_name']) ? $patient_information_list['patient_full_name'] : '' }}"
                                         aria-describedby="foodname"
                                         placeholder="{{ !empty($patient_information_list['patient_full_name']) ? $patient_information_list['patient_full_name'] : 'Patient Full Name' }}">
@@ -374,7 +373,8 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label class="form-label fsb-2 fw-600">*Relationship To You</label>
-                                    <input type="text" class="form-control" name="patient_relation" id=""
+                                    <input type="text" class="form-control" name="patient_relation"
+                                        id="patient_relation"
                                         value="{{ !empty($patient_information_list['patient_relation']) ? $patient_information_list['patient_relation'] : '' }}"
                                         aria-describedby="foodname"
                                         placeholder="{{ !empty($patient_information_list['patient_relation']) ? $patient_information_list['patient_relation'] : 'Relationship To You' }}">
@@ -383,7 +383,7 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label class="form-label fsb-2 fw-600">*Patient E-mail <b>*optional</b></label>
-                                    <input type="text" class="form-control" name="patient_email" id=""
+                                    <input type="text" class="form-control" name="patient_email" id="patient_email"
                                         value="{{ !empty($patient_information_list['patient_email']) ? $patient_information_list['patient_email'] : '' }}"
                                         aria-describedby="foodname"
                                         placeholder="{{ !empty($patient_information_list['patient_email']) ? $patient_information_list['patient_email'] : 'E-Mail' }}">
@@ -392,7 +392,8 @@
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label class="form-label fsb-2 fw-600">*Patient Contact Number</label>
-                                    <input type="text" class="form-control" name="patient_contact_no" id=""
+                                    <input type="text" class="form-control" name="patient_contact_no"
+                                        id="patient_contact_no"
                                         value="{{ !empty($patient_information_list['patient_contact_no']) ? $patient_information_list['patient_contact_no'] : '' }}"
                                         aria-describedby="foodname"
                                         placeholder="{{ !empty($patient_information_list['patient_contact_no']) ? $patient_information_list['patient_contact_no'] : 'Contact Number' }}">
@@ -400,30 +401,30 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">*Patient Country</label>
-                                <select name="patient_country_id" id="inputState" class="form-select h-40 mt-1">
-                                    @if (!empty($counties) && !empty($patient_information_list['patient_country_id']))
+                                <select name="patient_country_id" id="patient_country_id" class="form-select h-40 mt-1">
+                                    @if (!empty($counties))
                                         @foreach ($counties as $country)
-                                            @if ($patient_information_list['patient_country_id'] == $country->id)
+                                            {{-- @if ($patient_information_list['patient_country_id'] == $country->id)
                                                 <option value="{{ $country->id }}" selected>{{ $country->country_name }}
                                                 </option>
-                                            @else
-                                                <option value="{{ $country->id }}">{{ $country->country_name }}</option>
-                                            @endif
+                                            @else --}}
+                                            <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                            {{-- @endif --}}
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">*Patient City</label>
-                                <select name="patient_city_id" id="inputState" class="form-select h-40 mt-1">
-                                    @if (!empty($cities) && !empty($patient_information_list['patient_city_id']))
+                                <select name="patient_city_id" id="patient_city_id" class="form-select h-40 mt-1">
+                                    @if (!empty($cities))
                                         @foreach ($cities as $city)
-                                            @if ($patient_information_list['patient_city_id'] == $city->id)
+                                            {{-- @if ($patient_information_list['patient_city_id'] == $city->id)
                                                 <option value="{{ $city->id }}" selected>{{ $city->city_name }}
                                                 </option>
-                                            @else
-                                                <option value="{{ $city->id }}">{{ $city->city_name }}</option>
-                                            @endif
+                                            @else --}}
+                                            <option value="{{ $city->id }}">{{ $city->city_name }}</option>
+                                            {{-- @endif --}}
                                         @endforeach
                                     @endif
                                 </select>
@@ -434,7 +435,8 @@
                                         class="fw-900 fsb-1">packages</span></h6>
                             </div>
                             <div class="col-md-12 d-flex justify-content-center">
-                                <a href="javascript:void(0);" class="order-completed-btn bg-green">Submit</a>
+                                <a href="javascript:void(0);" id="submit_btn2"
+                                    class="order-completed-btn bg-green change-patient-from-submit">Submit</a>
                             </div>
                         </div>
                     </form>
@@ -455,45 +457,52 @@
                         aria-label="Close">X</button>
                 </div>
                 <div class="modal-body ">
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <div class="form-group d-flex flex-column">
-                                <label class="form-label fsb-2 fw-600">Reason for Cancellation</label>
-                                <select name="" id="">
-                                    <option value="">I don’t need this treatment</option>
-                                    <option value="">I don’t need this treatment 1</option>
-                                    <option value="">I don’t need this treatment 2</option>
-                                    <option value="">I don’t need this treatment 3</option>
-                                </select>
+                    <form id="UserCancelPackageForm">
+                        <div class="row">
+                            <input type="hidden" name="purchase_id" id="purchase_id" value="">
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label fsb-2 fw-600">Reason for Cancellation</label>
+                                    <select name="cancellation_reason" id="cancellation_reason">
+                                        <option value="">I don’t need this treatment</option>
+                                        <option value="">I don’t need this treatment 1</option>
+                                        <option value="">I don’t need this treatment 2</option>
+                                        <option value="">I don’t need this treatment 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label fsb-2 fw-600">Cancellation Detail</label>
+                                    <textarea name="cancellation_detail" id="cancellation_detail" rows="5" class="form-control border-2"
+                                        placeholder="Please write your treatment cancellation request in detail"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 my-5 d-flex align-items-center gap-2">
+                                <input class="form-check-input" type="checkbox" name="flexCheckChecked" value=""
+                                    id="flexCheckChecked">
+                                <label class="form-check-label fsb-2 fw-600" for="flexCheckChecked">
+                                    I confirm that I wish cancel my treatment.
+                                </label>
+                            </div>
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <a href="javascript:void(0);"
+                                    class="order-completed-btn bg-red text-white cancel-package-from-submit">Cancel
+                                    Treatment</a>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <div class="form-group d-flex flex-column">
-                                <label class="form-label fsb-2 fw-600">Cancellation Detail</label>
-                                <textarea name="" id="" rows="5" class="form-control border-2"
-                                    placeholder="Please write your treatment cancellation request in detail"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12 my-5 d-flex align-items-center gap-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label fsb-2 fw-600" for="flexCheckChecked">
-                                I confirm that I wish cancel my treatment.
-                            </label>
-                        </div>
-                        <div class="col-md-12 d-flex justify-content-center">
-                            <a href="javascript:void(0);" class="order-completed-btn bg-red text-white">Cancel
-                                Treatment</a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function() {
-
+            // alert('hi');
             var baseUrl = $('#base_url').val();
             var token = "{{ Session::get('login_token') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -501,14 +510,17 @@
             $(".upPackageLi").addClass("activeClass");
             $(".upPackage").addClass("md-active");
 
-            $(".UserChangeInformation").click(function() {
+            $(".UserChangeInformation").on('click', function(e) {
+
+                let id = this.id;
                 let rawId = this.id.split('-')[1];
                 let packageId = rawId.split('?')[0];
                 let purchaseId = rawId.split('?')[1];
-                alert();
-                formData.append("package_id", packageId);
+                let formData = new FormData();
+                formData.append("id", packageId);
                 formData.append("purchase_id", purchaseId);
                 e.preventDefault();
+                let clickedId = id;
                 $.ajax({
                     type: 'POST',
                     url: baseUrl + '/api/md-change-patient-information-list', // Your endpoint
@@ -520,8 +532,25 @@
                     },
                     data: formData,
                     success: function(response) {
-                        console.log("Success: " + response);
-                        $('#UserChangeInformation').modal('hide');
+                        // alert(clickedId);
+                        var id = this.id;
+                        console.log("Success: " + response.PatientInformation);
+                        var PatientInformation = response.PatientInformation;
+                        var patientId = 0;
+                        PatientInformation.forEach(function(patientInfo) {
+                            patientId++;
+                        });
+                        PatientInformation = PatientInformation[patientId - 1];
+                        $('#package_buy_for').val(PatientInformation.package_buy_for);
+                        $('#package_id').val(PatientInformation.package_id);
+                        $('#patient_full_name').val(PatientInformation.patient_full_name);
+                        $('#patient_relation').val(PatientInformation.patient_relation);
+                        $('#patient_email').val(PatientInformation.patient_email);
+                        $('#patient_contact_no').val(PatientInformation.patient_contact_no);
+                        $('#patient_country_id').val(PatientInformation.patient_country_id);
+                        $('#patient_city_id').val(PatientInformation.patient_city_id);
+
+                        $('#UserChangeInformationModel').modal('show');
                     },
                     error: function(xhr, status, error) {
 
@@ -529,61 +558,207 @@
                     }
                 });
             });
-            // $(".package-details").click(function() {
+
+            $('.change-patient-from-submit').click(function(e) {
+                e.preventDefault();
+                $('#UserChangeInformationForm').submit();
+            });
+
+            $('#UserChangeInformationForm').validate({
+                rules: {
+                    patient_full_name: {
+                        required: true,
+                    },
+                    patient_relation: {
+                        required: true,
+                    },
+                    patient_email: {
+                        required: true,
+                    },
+                    patient_contact_no: {
+                        required: true,
+                    },
+                    patient_country_id: {
+                        required: true,
+                    },
+                    patient_city_id: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    patient_full_name: {
+                        required: "Please enter patient full name",
+                    },
+                    patient_relation: {
+                        required: "Please enter patient relation",
+                    },
+                    patient_email: {
+                        required: "Please enter patient email",
+                    },
+                    patient_contact_no: {
+                        required: "Please enter patient contact no",
+                    },
+                    patient_country_id: {
+                        required: "Please select patient country",
+                    },
+                    patient_city_id: {
+                        required: "Please select patient city",
+                    },
+
+                },
+                submitHandler: function(form) {
+                    var formData = new FormData(form);
+                    formData.append('platform_type', 'web');
+                    $.ajax({
+                        type: 'POST',
+                        url: baseUrl + '/api/md-change-patient-information', // Your endpoint
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        data: formData,
+                        beforeSend: function() {
+                            $('#submit_btn2').attr('disabled', true);
+                            $('#submit_btn2').html(
+                                '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                            );
+                        },
+                        success: function(response) {
+                            $('#submit_btn2').attr('disabled', false);
+                            $('#submit_btn2').html('Submit');
+                            console.log("Success: " + response);
+                            $('#UserChangeInformationModel').modal('hide');
+                        },
+                        error: function(xhr, status, error) {
+                            $('#submit_btn2').attr('disabled', true);
+                            $('#UserChangeInformationModel').modal('hide');
+                            alert('Error:', error);
+                        },
+                    });
+                    return false;
+                }
+            });
 
 
-            //     alert(id);
-            //     var formData = new FormData();
-            //     formData.append("package_id", id);
+            $(".UserCancelPackage").on('click', function() {
 
-            //     $.ajax({
-            //         url: baseUrl + 'view_my_active_packages',
+                let rawId = this.id.split('-')[1];
+                let packageId = rawId.split('?')[0];
+                let purchaseId = rawId.split('?')[1];
+
+                $("#purchase_id").val(purchaseId);
+                $('#UserCancellationReq').modal('show');
+
+            });
+
+            $('.cancel-package-from-submit').click(function(e) {
+                e.preventDefault();
+                $('#UserCancelPackageForm').submit();
+            });
+
+            $('#UserCancelPackageForm').validate({
+                rules: {
+                    cancellation_reason: {
+                        required: true,
+                    },
+                    cancellation_detail: {
+                        required: true,
+                    },
+                    flexCheckChecked: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    cancellation_reason: {
+                        required: "Please select a cancellation reason",
+                    },
+                    cancellation_detail: {
+                        required: "Please enter your cancellation detail",
+                    },
+                    flexCheckChecked: {
+                        required: "Please Confirm if you want to cancel",
+                    },
+                },
+                submitHandler: function(form) {
+                    var formData = new FormData(form);
+                    formData.append('platform_type', 'web');
+                    var baseUrl = $('#base_url').val();
+                    var token = "{{ Session::get('login_token') }}";
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                        url: baseUrl + '/api/md-customer-change-package-list-active-cancelled',
+                        type: 'POST',
+                        data: formData,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function() {
+                            $('.cancel-package-from-submit').attr('disabled', true);
+                            $('.cancel-package-from-submit').html(
+                                '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                            );
+                        },
+                        success: function(response) {
+                            $('.cancel-package-from-submit').attr('disabled', false);
+                            $('.cancel-package-from-submit').html('CancelTreatment');
+                            $('#UserCancellationReq').modal('hide');
+                            console.log('Success:', response);
+                        },
+                        error: function(error) {
+                            $('.cancel-package-from-submit').attr('disabled', false);
+                            $('#UserCancellationReq').modal('hide');
+                            alert('Error:', error);
+                        },
+                    });
+                    return false;
+                }
+            });
+
+
+            // $.ajax({
             //         type: 'POST',
-            //         data: formData,
-            //         processData: false,
+            //         url: baseUrl + '/api/md-change-patient-information-list', // Your endpoint
             //         contentType: false,
+            //         processData: false,
             //         headers: {
+            //             'Authorization': 'Bearer ' + token,
             //             'X-CSRF-TOKEN': csrfToken
             //         },
-
+            //         data: formData,
             //         success: function(response) {
-            //             console.log('Success:', response);
+            //             // alert(clickedId);
+            //             var id = this.id;
+            //             console.log("Success: " + response.PatientInformation);
+            //             var PatientInformation = response.PatientInformation;
+            //             var patientId = 0;
+            //             PatientInformation.forEach(function(patientInfo) {
+            //                 patientId++;
+            //             });
+            //             PatientInformation = PatientInformation[patientId - 1];
+            //             $('#package_buy_for').val(PatientInformation.package_buy_for);
+            //             $('#package_id').val(PatientInformation.package_id);
+            //             $('#patient_full_name').val(PatientInformation.patient_full_name);
+            //             $('#patient_relation').val(PatientInformation.patient_relation);
+            //             $('#patient_email').val(PatientInformation.patient_email);
+            //             $('#patient_contact_no').val(PatientInformation.patient_contact_no);
+            //             $('#patient_country_id').val(PatientInformation.patient_country_id);
+            //             $('#patient_city_id').val(PatientInformation.patient_city_id);
+
+
             //         },
             //         error: function(xhr, status, error) {
-            //             console.error('Error:', error);
+
+            //             console.log(xhr.responseText);
             //         }
             //     });
-            // });
-
-            $('#UserChangeInformationForm').submit(function(e) {
-
-                var formData = new FormData(this);
-                var patientId =
-                    "{{ !empty($patient_information_list['id']) ? $patient_information_list['id'] : '' }}";
-                var id = $(".package-details").attr('id').split('_')[1];
-                formData.append("package_id", id);
-                formData.append("patient_id", patientId);
-                e.preventDefault();
-                $.ajax({
-                    type: 'POST',
-                    url: baseUrl + '/api/md-change-patient-information', // Your endpoint
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    data: formData,
-                    success: function(response) {
-                        console.log("Success: " + response);
-                        $('#UserChangeInformation').modal('hide');
-                    },
-                    error: function(xhr, status, error) {
-
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
+            // md-customer-change-package-list-active-cancelled
 
         });
     </script>
