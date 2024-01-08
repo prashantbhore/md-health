@@ -521,7 +521,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('medical-account', 'update_medical_profile_list');
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
         Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
-
     });
 
 });
