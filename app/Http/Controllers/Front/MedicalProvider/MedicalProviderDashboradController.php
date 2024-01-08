@@ -17,7 +17,7 @@ class MedicalProviderDashboradController extends Controller {
         $this->apiService = $apiService;
     }
 
-    public function index() {
+    public function index(){
 
         $token = Session::get( 'login_token' );
 
