@@ -214,6 +214,7 @@ class OtherServicesController extends Controller {
         }
 
         // $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+        dd($responmseData);
         if ( ( $responseData[ 'status' ] == 200 ) ) {
             return redirect( '/medical-other-services' )->with( 'success', $responseData[ 'message' ] );
         } else {

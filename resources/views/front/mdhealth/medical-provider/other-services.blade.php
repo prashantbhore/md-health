@@ -1,14 +1,14 @@
 @extends('front.layout.layout2')
 @section('content')
-    <style>
-        .section-heading.section-btns a {
-            width: 35%;
-        }
+<style>
+    .section-heading.section-btns a {
+        width: 35%;
+    }
 
-        .trmt-card-footer.icon-btns {
-            display: flex;
-            gap: 5px;
-        }
+    .trmt-card-footer.icon-btns {
+        display: flex;
+        gap: 5px;
+    }
 
         .no-data {
             border: solid #ededed 1px;
@@ -338,6 +338,6 @@
                 }
             });
 
-        }
-    </script>
+    }
+</script>
 @endsection

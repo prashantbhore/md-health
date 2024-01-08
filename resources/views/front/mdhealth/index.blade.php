@@ -17,6 +17,9 @@ $is_logged_in = false;
 @section('content')
 <div class="bg-f6">
     <div class="content-wrapper bg-f6">
+        <!-- =============================================================================================
+                                            1 : BANNER SECTION
+             ============================================================================================= -->
         <div class="banner-section df-center flex-column">
             <div class="container">
                 <div class="banner-content df-center flex-column">
@@ -25,7 +28,9 @@ $is_logged_in = false;
                     <h1 class="mb-5">NOW</h1>
                     <form method="POST" action="{{ url('health-search-result') }}">
                         @csrf
+                        <!-- SEARCH TREATMENT BAR -->
                         <div class="search-bar d-flex align-items-center p-3 gap-3">
+                            <!-- Treatments -->
                             <div class="form-floating">
                                 <input type="hidden" name="platform_type" value="web">
                                 <select class="form-select" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
@@ -36,6 +41,7 @@ $is_logged_in = false;
                                 </select>
                                 <label for="floatingSelect">Treatments</label>
                             </div>
+                            <!-- City -->
                             <div class="form-floating">
                                 <select class="form-select" name="city_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option data-display="Select" selected>Select City</option>
@@ -45,27 +51,23 @@ $is_logged_in = false;
                                 </select>
                                 <label for="floatingSelect">City</label>
                             </div>
+                            <!-- Treatment Date -->
                             <div class="form-floating">
-                                <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                                                                                            <option data-display="Select" selected>12 Aug</option>
-                                                                                                                            <option value="1">One</option>
-                                                                                                                            <option value="2">Two</option>
-                                                                                                                            <option value="3">Three</option>
-                                                                                                                        </select> -->
-                                <!-- <div class="datepickerContainer"> -->
                                 <input type="text" class="form-select" name="daterange" value="" />
-                                <!-- </div> -->
                                 <label for="floatingSelect">Treatment Date</label>
                             </div>
                             <button type="submit" class="btn btn-search-pill">Search</button>
                         </div>
+                        <!-- END -->
                     </form>
                 </div>
             </div>
         </div>
 
-
-        <!-- SECTION 2: MAKE REQUEST FORM -->
+        <!-- =============================================================================================
+                                            2 : MAKE REQUEST FORM/MODAL
+             ============================================================================================= -->
+        <!--  -->
         <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
             <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
             <h2>Couldn’t find your <span class="text-green text-decoration-underline">treatment</span> package?</h2>
@@ -81,11 +83,14 @@ $is_logged_in = false;
             </div>
         </div>
     </div>
-    <div class="py-100px pb-0 md-coin df-center flex-column gap-4 bg-f6 section-3 mb-5">
-        <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
-        <h1><span class="text-green text-decoration-underline camptonBold">Earn</span> as you spend<span class="text-green">!</span>
+    <div class="py-100px pb-0 md-coin df-center flex-column gap-5 bg-f6 section-3 mb-5">
+        <div>
+            <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
+        </div>
+        <h1 style="font-size: 83px;" class="position-relative">
+            <span class="text-green bb-green camptonBold">Earn</span> as you spend<span class="text-green">!</span>
         </h1>
-        <p class="mb-4 camptonBook text-center">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and spend <span class="camptonBold">MD</span>coin
+        <p class="mb-5 camptonBook text-center fs-18" style="font-weight: 400;">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your friends</span> and spend <span class="camptonBold">MD</span>coin
             for
             your health needs. </p>
     </div>
