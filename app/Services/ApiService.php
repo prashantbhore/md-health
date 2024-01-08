@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Route;
 
 class ApiService {
 
@@ -40,7 +39,7 @@ class ApiService {
                     $apiRequest->attach(
                         $image_input_field_name,
                         file_get_contents( $image ),
-                        time().Str::random( 5 ).'.'.$extension
+                        time() . Str::random( 5 ) . '.' . $extension
                     );
                 }
             }
@@ -49,7 +48,18 @@ class ApiService {
                 $method}
                 ( $url, $body ?? null );
                 // dd( $response->json() );
-                return $response->json();
+                try {
+                    if ( empty( $response->json() ) ) {
+
+                        throw new \Exception( $response );
+                    } else {
+                        return $response->json();
+                    }
+                    //  echo $response;
+                } catch ( \Exception $e ) {
+                    echo $e->getMessage();
+                    die;
+                }
 
                 // dd( $response );
             } else {
@@ -73,7 +83,7 @@ class ApiService {
                             $request->files->set( $image_input_field_name[ $index ], $singleImage );
                             $request->request->add( [
                                 $image_input_field_name[ $index ] => file_get_contents( $singleImage ),
-                                'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension
+                                'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension,
                             ] );
                         }
 
@@ -91,8 +101,19 @@ class ApiService {
                 // echo ( $response->getContent() );
                 // die;
                 // dd( jso n_decode( $response->getContent(), true ) );
+                try {
+                    if ( empty( $response->getContent() ) ) {
 
-                return json_decode( $response->getContent(), true );
+                        throw new \Exception( $response );
+                    } else {
+                        return json_decode( $response->getContent(), true );
+                    }
+                    //  echo $response;
+                } catch ( \Exception $e ) {
+                    echo $e->getMessage();
+                    die;
+                }
+                // return json_decode( $response->getContent(), true );
             }
         }
 
@@ -128,4 +149,3 @@ class ApiService {
     //     $method}
     //     ( $url, $body ?? null );
     // dd( time().Str::random( 5 ).'.'.$extension );
-
