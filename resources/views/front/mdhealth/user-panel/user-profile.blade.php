@@ -180,6 +180,7 @@
         $(".upProfile").addClass("md-active");
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script>
         var base_url = $('#base_url').val();
@@ -334,6 +335,20 @@
             $.validator.addMethod("nowhitespace", function(value, element) {
                 return this.optional(element) || /^\S+$/i.test(value);
             }, "Spaces are not allowed");
+
+
+            $(function() {
+                $('input[name="date_of_birth"]').daterangepicker({
+                    opens: 'left',
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'DD/MM/YYYY'
+                    }
+                    // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+                }, function(start, end, label) {});
+            });
+
         });
     </script>
 @endsection

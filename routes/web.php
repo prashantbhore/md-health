@@ -513,7 +513,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
     // });
 });
 
-//Food Vendor  By Mpluss03
 Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function(){
 
 
@@ -527,14 +526,10 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
 });
 
 
-
 //Mplus02
 Route::get('/', [CustomerPackageController::class, 'customer_home']);
 Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
-//Mplus02
-
-
 
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function (){
 
@@ -559,8 +554,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
   Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
 
   Route::post('user-all-reports-search', [CustomerPackageController::class,'customer_report_search']);
-   
-  
+
+
 
     //Mplus02
 

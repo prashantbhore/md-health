@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonUserLoginTable;
 use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderRegistrater;
+use App\Models\VendorRegister;
 use App\Services\ApiService;
 use Illuminate\Http\Request;
 use Auth;
@@ -132,9 +133,25 @@ class CommonLoginController extends Controller {
     // }
 }
 public function email_or_mobile_exist(Request $request){
-    $email_exist = CommonUserLoginTable::where('email', $request->email)->first();
-    $phone_exist = CommonUserLoginTable::where('mobile_no', $request->phone)->first();
-    $mobile_no_exist = CommonUserLoginTable::where('mobile_no', $request->mobile_no)->first();
+    // dd($request);
+    if($request->email){
+        $email_exist = CommonUserLoginTable::where('email', $request->email)
+        ->where('status','active')->first();
+    }
+
+    if($request->phone){
+        $phone_exist = CommonUserLoginTable::where('mobile_no', $request->phone)
+        ->where('status','active')
+        ->first();
+    }
+    
+    if($request->mobile_no){
+        $mobile_no_exist = CommonUserLoginTable::where('mobile_no', $request->mobile_no)
+        ->where('status','active')
+        ->first();
+    }
+
+
     if(!empty($email_exist)){
         return response()->json(['email_exist' => $email_exist]);
     }
@@ -360,7 +377,7 @@ public function email_or_mobile_exist(Request $request){
             }
 
 
-            elseif ($user_type == 'customer') {
+            elseif ($user_type == 'vendor') {
                 // $apiUrl = url('/api/md-customer-login');
 
                 // $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
@@ -372,7 +389,7 @@ public function email_or_mobile_exist(Request $request){
                 // Session::put('login_token', $responseData['success_token']['token']);
 
                 if (
-                    Auth::guard('md_customer_registration')->attempt([
+                    Auth::guard('md_health_medical_vendor_registers')->attempt([
                         'email' => $request->email,
                         'password' => $request->password,
                         'status' => 'active',
@@ -384,7 +401,7 @@ public function email_or_mobile_exist(Request $request){
                         'password' => $request->get('password')
                     );
 
-                    $apiUrl = url('/api/md-customer-login');
+                    $apiUrl = url('/api/md-vendor-login');
                     $method = 'POST';
                     $body = $user_datacust;
 
@@ -393,19 +410,21 @@ public function email_or_mobile_exist(Request $request){
                     // dd( $responseData['success_token']);
                     Session::put('login_token', $responseData['success_token']['token']);
 
-                    $providers = Auth::guard('md_customer_registration')->user();
-
+                    $providers = Auth::guard('md_health_medical_vendor_registers')->user();
+                    // dd($providers);
                     if ($login_type == 'login') {
-                        $otpcheck = CustomerRegistration::where('id', $providers->id)
+                        // dd($providers->id);
+                        $otpcheck = VendorRegister::where('id', $providers->id)
                             ->where('status', 'active')
                             ->first();
 
+                           
                         if ($otpcheck) {
-                            $user_id = Auth::guard('md_customer_registration')->user()->id;
-                            $user_email = Auth::guard('md_customer_registration')->user()->email;
-                            $user = Auth::guard('md_customer_registration')->user();
+                            $user_id = Auth::guard('md_health_medical_vendor_registers')->user()->id;
+                            $user_email = Auth::guard('md_health_medical_vendor_registers')->user()->email;
+                            $user = Auth::guard('md_health_medical_vendor_registers')->user();
 
-                            Session::put('MDCustomer*%', $user_id);
+                            Session::put('MDMedicalVendor*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
                             // dd(Session::all());
@@ -413,7 +432,7 @@ public function email_or_mobile_exist(Request $request){
                                 'status' => 200,
                                 'message' => 'Login successfully.',
                                 // 'url' => '/user-profile',
-                                'url' => '/my-profile'
+                                'url' => '/vendor-dashboard'
                             ] );
                         } else {
 
@@ -424,24 +443,24 @@ public function email_or_mobile_exist(Request $request){
                             ] );
                         }
                     } else {
-
-                        $otpcheck = CustomerRegistration::where('id', $providers->id)
+                        // dd('fdgfdvsdvbg');
+                        $otpcheck = VendorRegister::where('id', $providers->id)
                             ->where('status', 'active')
                             ->first();
 
                         if ($otpcheck) {
                             // dd($otpcheck);
-                            $user_id = Auth::guard('md_customer_registration')->user()->id;
-                            $user_email = Auth::guard('md_customer_registration')->user()->email;
-                            $user = Auth::guard('md_customer_registration')->user();
+                            $user_id = Auth::guard('md_health_medical_vendor_registers')->user()->id;
+                            $user_email = Auth::guard('md_health_medical_vendor_registers')->user()->email;
+                            $user = Auth::guard('md_health_medical_vendor_registers')->user();
 
-                            Session::put('MDCustomer*%', $user_id);
+                            Session::put('MDMedicalVendor*%', $user_id);
                             Session::put('email', $user_email);
                             Session::put('user', $user);
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Profile created successfully.',
-                                'url' => '/my-profile',
+                                'url' => '/vendor-dashboard',
                             ] );
                         } else {
                             return response()->json( [
@@ -454,6 +473,104 @@ public function email_or_mobile_exist(Request $request){
                     }
                 }
             }
+
+
+            // elseif ($user_type == 'food') {
+            //     // $apiUrl = url('/api/md-customer-login');
+
+            //     // $newRequest = Request::create($apiUrl, 'POST', $user_datacust);
+            //     // $response = app()->handle($newRequest);
+
+            //     // $respo = $response->getContent();
+            //     // $responseData = json_decode($respo, true);
+            //     // // dd($responseData);
+            //     // Session::put('login_token', $responseData['success_token']['token']);
+
+            //     if (
+            //         Auth::guard('md_health_food_registers')->attempt([
+            //             'email' => $request->email,
+            //             'password' => $request->password,
+            //             'status' => 'active',
+            //         ])
+            //     ) {
+            //         $user_datacust = array(
+            //             'platform_type' => 'web',
+            //             'email' => $request->get('email'),
+            //             'password' => $request->get('password')
+            //         );
+
+            //         $apiUrl = url('/api/md-vendor-login');
+            //         $method = 'POST';
+            //         $body = $user_datacust;
+
+            //         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+            //         // dd($responseData);
+            //         // dd( $responseData['success_token']);
+            //         Session::put('login_token', $responseData['success_token']['token']);
+
+            //         $providers = Auth::guard('md_health_food_registers')->user();
+            //         // dd($providers);
+            //         if ($login_type == 'login') {
+            //             // dd($providers->id);
+            //             $otpcheck = food::where('id', $providers->id)
+            //                 ->where('status', 'active')
+            //                 ->first();
+
+                           
+            //             if ($otpcheck) {
+            //                 $user_id = Auth::guard('md_health_food_registers')->user()->id;
+            //                 $user_email = Auth::guard('md_health_food_registers')->user()->email;
+            //                 $user = Auth::guard('md_health_food_registers')->user();
+
+            //                 Session::put('MDMedicalVendor*%', $user_id);
+            //                 Session::put('email', $user_email);
+            //                 Session::put('user', $user);
+            //                 // dd(Session::all());
+            //                 return response()->json( [
+            //                     'status' => 200,
+            //                     'message' => 'Login successfully.',
+            //                     // 'url' => '/user-profile',
+            //                     'url' => '/vendor-dashboard'
+            //                 ] );
+            //             } else {
+
+            //                 return response()->json( [
+            //                     'status' => 404,
+            //                     'message' => 'Credencials not match',
+            //                     'url' => '/sign-in-web',
+            //                 ] );
+            //             }
+            //         } else {
+            //             // dd('fdgfdvsdvbg');
+            //             $otpcheck = VendorRegister::where('id', $providers->id)
+            //                 ->where('status', 'active')
+            //                 ->first();
+
+            //             if ($otpcheck) {
+            //                 // dd($otpcheck);
+            //                 $user_id = Auth::guard('md_health_food_registers')->user()->id;
+            //                 $user_email = Auth::guard('md_health_food_registers')->user()->email;
+            //                 $user = Auth::guard('md_health_food_registers')->user();
+
+            //                 Session::put('MDMedicalVendor*%', $user_id);
+            //                 Session::put('email', $user_email);
+            //                 Session::put('user', $user);
+            //                 return response()->json( [
+            //                     'status' => 200,
+            //                     'message' => 'Profile created successfully.',
+            //                     'url' => '/vendor-dashboard',
+            //                 ] );
+            //             } else {
+            //                 return response()->json( [
+            //                     'status' => 404,
+            //                     'message' => 'Credencials not match',
+            //                     'url' => '/sign-in-web',
+            //                 ] );
+            //             }
+
+            //         }
+            //     }
+            // }
         }
 
         return redirect('/sign-in-web')->with('error', 'Invalid Login Details!' );

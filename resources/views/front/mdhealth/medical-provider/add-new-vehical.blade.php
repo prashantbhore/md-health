@@ -34,54 +34,56 @@
         width: 185px;
     }
 
-    .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
-        margin-right: 3px;
-    }
-</style>
-<div class="content-wrapper">
-    <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
-                @include('front.includes.sidebar')
-            </div>
-            <div class="col-md-9">
-                <div class="card mb-4">
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
-                        <span>Add New Vehicle</span>
-                        <a href="{{ url('medical-other-services') }}" class="d-flex align-items-center gap-1 text-decoration-none">
-                            <div>
+        .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
+            margin-right: 3px;
+        }
+    </style>
+    <div class="content-wrapper">
+        <div class="container py-100px for-cards">
+            <div class="row">
+                <div class="col-md-3">
+                    @include('front.includes.sidebar')
+                </div>
+                <div class="col-md-9">
+                    <div class="card mb-4">
+                        <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                            <span>Add New Vehicle</span>
+                            <a href="{{ url('medical-other-services') }}"
+                                class="d-flex align-items-center gap-1 text-decoration-none">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                            </div>
-                            <p class="card-h1 mb-0">Back</p>
-                        </a>
-                    </h5>
-                    <div class="card-body">
-                        <div class="form-div">
-                            {{-- @if (!empty($transportation_details['id']))
+                                <p class="mb-0 text-dark">Back</p>
+                            </a>
+                        </h5>
+                        <div class="card-body">
+                            <div class="form-div">
+                                {{-- @if (!empty($transportation_details['id']))
 
                                 <form action="{{ url('api/md-edit-transportation-details') }}" method="post"
-                            enctype="multipart/form-data" id="add_acommodition">
-                            @else --}}
-                            <form action="{{ url('md-add-transportation-details') }}" method="post" enctype="multipart/form-data" id="add_acommodition">
-                                {{-- @endif --}}
-                                @csrf
-                                <input type="hidden" name="transportation_id" value="{{ !empty($transportation_details['id']) ? $transportation_details['id'] : '' }}">
+                                    enctype="multipart/form-data" id="add_acommodition">
+                                    @else --}}
+                                <form action="{{ url('md-add-transportation-details') }}" method="post"
+                                    enctype="multipart/form-data" id="add_acommodition">
+                                    {{-- @endif --}}
+                                    @csrf
+                                    <input type="hidden" name="transportation_id"
+                                        value="{{ !empty($transportation_details['id']) ? $transportation_details['id'] : '' }}">
 
                                 <div class="input-group mb-3">
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Vehicle Brand</label>
 
-                                        <select id="vehicle_brand_id" name="vehicle_brand_id" class="form-select">
-                                            <option value="" selected disabled>Choose</option>
-                                            @foreach ($vehicle_details as $vehicle_detail)
-                                            @php
-                                            $isSelected = isset($transportation_details['brand_id']) && $transportation_details['brand_id'] == $vehicle_detail['id'];
-                                            @endphp
-                                            <option value="{{ $vehicle_detail['id'] }}" {{ $isSelected ? ' selected' : '' }}>
-                                                {{ $vehicle_detail['brand_name'] }}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                                            <select id="vehicle_brand_id" name="vehicle_brand_id" class="form-select">
+                                                <option value="" selected disabled>Choose</option>
+                                                @foreach ($vehicle_details as $vehicle_detail)
+                                                    @php
+                                                        $isSelected = isset($transportation_details['brand_id']) && $transportation_details['brand_id'] == $vehicle_detail['id'];
+                                                    @endphp
+                                                    <option
+                                                        value="{{ $vehicle_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                        {{ $vehicle_detail['brand_name'] }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
 
                                     </div>
                                 </div>
@@ -99,20 +101,22 @@
                                     <div class="form-group d-flex flex-column w-100">
                                         <label class="form-label">Comfort Level</label>
 
-                                        <select id="comfort_level_id" name="comfort_level_id" class="form-select">
-                                            <option value="" selected disabled>Choose</option>
-                                            @foreach ($comfort_level_details as $comfort_level_detail)
-                                            @php
-                                            $isSelected = isset($transportation_details['level_id']) && $transportation_details['level_id'] == $comfort_level_detail['id'];
-                                            @endphp
-                                            <option value="{{ $comfort_level_detail['id'] }}" {{ $isSelected ? ' selected' : '' }}>
-                                                {{ $comfort_level_detail['vehicle_level_name'] }}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                                            <select id="comfort_level_id" name="comfort_level_id" class="form-select">
+                                                <option value="" selected disabled>Choose</option>
+                                                @foreach ($comfort_level_details as $comfort_level_detail)
+                                                    @php
+                                                        $isSelected = isset($transportation_details['level_id']) && $transportation_details['level_id'] == $comfort_level_detail['id'];
+                                                    @endphp
+                                                    <option
+                                                        value="{{ $comfort_level_detail['id'] }}"{{ $isSelected ? ' selected' : '' }}>
+                                                        {{ $comfort_level_detail['vehicle_level_name'] }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
 
+                                        </div>
                                     </div>
-{{-- {{dd($transportation_details)}} --}}
+
                                     <div class="form-group mb-3">
                                         <label class="form-label">Vehicle Picture</label>
                                         <div class="form-group">
@@ -121,16 +125,10 @@
                                                 oninput="pic.src=window.URL.createObjectURL(this.files[0])">
                                         </div>
                                         <div class="prev-img-div">
-                                            <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/default-img.png' }}" alt="image"
-                                            id="pic">
-                                            <input type="hidden" name="old_image" id="old_image" value="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : '' }}">
+                                            <img src="front/assets/img/default-img.png" alt="image" id="pic">
+                                            <input type="hidden" name="old_image" id="old_image" value="">
                                         </div>
                                     </div>
-                                    <div class="prev-img-div">
-                                        <img src="front/assets/img/default-img.png" alt="image" id="pic">
-                                        <input type="hidden" name="old_image" id="old_image" value="">
-                                    </div>
-                                </div>
 
                                 <div class="form-group mb-3 section-heading-div">
                                     <label class="form-label">Vehicle Per Day Price (VAT Included)</label>
@@ -175,10 +173,10 @@
                                     <input type="hidden" name="platform_type" id="platform_type" value="web">
                                 </div>
 
-                                <div class="section-btns mb-4">
-                                    <button type="submit" class="btn save-btn-black">Save
-                                        Vehicle</button>
-                                </div>
+                                    <div class="section-btns mb-4">
+                                        <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save
+                                            Vehicle</button>
+                                    </div>
 
                             </form>
                         </div>

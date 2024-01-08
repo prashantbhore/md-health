@@ -10,7 +10,7 @@
 @endphp
 <nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
     <img class="mdFoodsNavBg" src="{{ URL('front/assets/img/mdBookings/mdBookingsHeader.png') }}" alt="">
-    <div class="container">
+    <div class="container p-0">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
         </a>
@@ -18,7 +18,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span

@@ -20,7 +20,7 @@ class AddSystemUserRole extends BaseController
 public function add_system_user(Request $request)
 {
    
-
+// return 'asdsa';
     // $request->validate([
     //     'name' => 'required|string',
     //     'email' => 'required|email|unique:common_user_login,email|unique:md_medical_provider_register,email',
@@ -76,6 +76,7 @@ public function add_system_user(Request $request)
         'roll_id'=>$request->roll_id,
         'email' => $request->email,
         'password' => Hash::make($request->password),
+        'previllages'=>$request->previlages,
         'modified_ip_address' => $request->ip(),
         //'created_by' =>Auth::guard('md_health_medical_providers_registers')->user()->id,
         'created_by'=>Auth::user()->id,
@@ -92,17 +93,17 @@ public function add_system_user(Request $request)
     ->update(['user_id' => $mdProviderRegistration->id, 'status' => 'active']);
    
 
-    // $roleId = $request->roll_id;
-    $roleId = $mdProviderRegistration->id;
+    // // $roleId = $request->roll_id;
+    // $roleId = $mdProviderRegistration->id;
 
-    $privileges = $request->previlages; // Ensure correct spelling here
+    // $privileges = $request->previlages; // Ensure correct spelling here
     
-    // $role = MedicalProviderRole::find($roleId);
-    $role = MedicalProviderRegistrater::find($roleId);
+    // // $role = MedicalProviderRole::find($roleId);
+    // $role = MedicalProviderRegistrater::find($roleId);
     
-    if ($role) {
-        $role->update(['privilege' => $privileges]); 
-    }
+    // if ($role) {
+    //     $role->update(['privilege' => $privileges]); 
+    // }
  if (!empty($commonUserRegistrationUpdate )){
             return response()->json([
                 'status' => 200,
@@ -124,7 +125,7 @@ public function update_system_user(Request $request)
 {
     // dd($request);
     $userId = $request->input('id');
-
+// return $userId;
     // Validate the incoming request data
     // $request-> $request->validate([
     //     'email' => 'required|email',
@@ -170,9 +171,11 @@ public function update_system_user(Request $request)
         $privileges = $request->previlages;
 
         // dd($request);
-        $role = MedicalProviderRole::find($roleId);
+        // $role = MedicalProviderRole::find($roleId);
+        $role = MedicalProviderRegistrater::find($userId);
+
         if ($role) {
-            $role->update(['privilege' => $privileges]);
+            $role->update(['previllages' => $privileges]);
            
         }
 
@@ -195,7 +198,11 @@ public function provider_system_user_list(){
        //$provider_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
        $provider_id =Auth::user()->id;
     //    $provider_id =Auth::user()->id;
-        $sytem_user_list=MedicalProviderRegistrater::where('roll_id','!=',1)->where('status','active')->where('created_by',$provider_id)->with('role')->get();
+        $sytem_user_list=MedicalProviderRegistrater::where('roll_id','!=',1)
+        ->where('status','active')
+        ->where('created_by',$provider_id)
+        ->with('role')
+        ->get();
 
         if (!empty( $sytem_user_list)){
 
@@ -252,11 +259,17 @@ public function edit_system_user(Request $request)
     // $provider_id = Auth::user()->id;
 
     $sytem_user_list = MedicalProviderRegistrater::where('roll_id', '!=', 1)
+        ->select('id','company_name',
+        'provider_unique_id',
+        'previllages',
+        'email',
+        'roll_id')
         ->where('status', 'active')
         ->where('created_by', $provider_id)
         ->with('role')
         ->where('id', $request->id)
         ->first(); 
+        
 // dd($sytem_user_list);
     if (!is_null($sytem_user_list)) {
         $selected_data = [
@@ -264,7 +277,7 @@ public function edit_system_user(Request $request)
             'provider_unique_id' => $sytem_user_list->provider_unique_id,
             'name' => $sytem_user_list->company_name,
             'email' => $sytem_user_list->email,
-            'previlages' => $sytem_user_list->role->privilege,
+            'previlages' => $sytem_user_list->previllages,
             'roll_id' => $sytem_user_list->role->id,
             'role_name' => $sytem_user_list->company_name,
         ];

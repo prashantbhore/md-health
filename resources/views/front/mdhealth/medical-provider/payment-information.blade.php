@@ -109,7 +109,7 @@
                            <div class="treatment-card df-start w-100 mb-3">
                             <div class="row card-row align-items-center">
                                 <div class="col-md-2 df-center px-0">
-                                    <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                                    <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" style="width: auto;height: 75px;">
                                 </div>
                                 <div class="col-md-6 justify-content-start ps-0">
                                     <div class="trmt-card-body">
