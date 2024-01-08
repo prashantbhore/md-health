@@ -227,7 +227,8 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+   
+    //$(document).ready(function () {
         // Function to validate the form
         function validateForm() {
             var isValid = true;
@@ -268,11 +269,12 @@
                 event.preventDefault();
             }
         });
-    });
+    //});
 </script>
 
 <script>
-    $(document).ready(function(){
+    //$(document).ready(function(){
+       
         performSearch();
 
         // Bind the function to the input event on the search box
@@ -281,7 +283,7 @@
         });
 
         function performSearch(){
-
+     
             let query = $('#liveSearchInput').val();
             var base_url = $("#base_url").val();
 
@@ -309,10 +311,8 @@
                 }
             });
         }
-    });
+   // });
 </script>
-
-
 
 
 @endsection
