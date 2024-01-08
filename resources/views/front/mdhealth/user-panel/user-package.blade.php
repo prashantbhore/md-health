@@ -505,8 +505,29 @@
                 let rawId = this.id.split('-')[1];
                 let packageId = rawId.split('?')[0];
                 let purchaseId = rawId.split('?')[1];
-                // alert(packageId + " " + purchaseId);
-                // var fullName =
+                alert();
+                formData.append("package_id", packageId);
+                formData.append("purchase_id", purchaseId);
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: baseUrl + '/api/md-change-patient-information-list', // Your endpoint
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    data: formData,
+                    success: function(response) {
+                        console.log("Success: " + response);
+                        $('#UserChangeInformation').modal('hide');
+                    },
+                    error: function(xhr, status, error) {
+
+                        console.log(xhr.responseText);
+                    }
+                });
             });
             // $(".package-details").click(function() {
 
