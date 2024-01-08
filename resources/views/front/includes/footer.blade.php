@@ -30,10 +30,14 @@
                  <div class="contact-no">0800 800 8080</div>
                  <div class="social-icons mt-auto">
                      <ul class="d-flex gap-4 align-items-center justify-content-end mb-0">
-                         <li><a href="javascript:;"><img src="{{('front/assets/img/Facebook.png')}}" alt=""></a></li>
-                         <li><a href="javascript:;"><img src="{{('front/assets/img/twitter.png')}}" alt=""></a></li>
-                         <li><a href="javascript:;"><img src="{{('front/assets/img/instagram.png')}}" alt=""></a></li>
-                         <li><a href="javascript:;"><img src="{{('front/assets/img/linkedin.png')}}" alt=""></a></li>
+                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/Facebook.png' }}" alt=""></a>
+                         </li>
+                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/twitter.png' }}" alt=""></a>
+                         </li>
+                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/instagram.png' }}"
+                                     alt=""></a></li>
+                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/linkedin.png' }}" alt=""></a>
+                         </li>
                      </ul>
                  </div>
              </div>
@@ -45,21 +49,22 @@
 
          <hr class="border border-white  my-3" />
          <div class="row">
-             <div class="d-flex justify-content-between">
-                 <div class="d-flex justify-content-center align-items-center gap-2">
+             <div class="d-flex justify-content-between mdLtd">
+                 <div class="d-flex justify-content-center">
                      <div style="color: #07f747;font-size:20px">MDhealth</div>
                      <div class="fl-text">is a brand of MD Sanglik Technology Ltd.Sti</div>
                  </div>
                  <div class="fs-6 text-end" style="width: 400px">
                      <p class="mext">MDhealth Technology LTD is an electronics
                          money and payment services institution authorised by CBRT to issue electronics
-                         money,within the framework of law numbered 6943 on payment Securities Settlement Systems,Payment
+                         money,within the framework of law numbered 6943 on payment Securities Settlement
+                         Systems,Payment
                          Services and Electronics Money Institution.
                      </p>
                  </div>
              </div>
              <hr class="border border-white my-3" />
-             <div class="d-flex align-items-center">
+             <div class="allRights">
                  <div class="me-auto copyText">
                      @2023.All rights reserved.
                  </div>

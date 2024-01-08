@@ -126,7 +126,7 @@ class MedicalProviderRegistrationController extends Controller
         //     'email' => $request->get( 'email' ),
         //     'password' => $request->get( 'password' )
         // );
-        // dd( $_FILES, $request );
+        dd( $_FILES, $request );
         $token = null;
         $apiUrl = url( '/api/md-register-medical-provider' );
 
@@ -146,11 +146,11 @@ class MedicalProviderRegistrationController extends Controller
                 $image_name[] = 'company_licence_image_path';
             }
 
-            $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method, $image, $image_name );
+            $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method, $image, $image_name );
         } else {
             $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
         }
-
+// dd($responseData);
         // $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
         Session::put( 'login_token', $responseData[ 'data' ][ 'access_token' ] );
 

@@ -69,7 +69,7 @@ class VendorProductController extends BaseController
 
     public function addProduct(Request $request)
     {
-        // dd($request);
+        dd($request);
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|string',
             'product_category_id' => 'required|integer',

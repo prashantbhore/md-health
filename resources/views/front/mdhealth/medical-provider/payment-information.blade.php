@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                         
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-4">
                                     <label class="form-label">Company Name</label>
                                     <div class="input-icon-div">
                                         <input type="text" name="bank_name" class="form-control" placeholder="MDhealth Ltd. Sti.">
@@ -49,7 +49,7 @@
                                 </div>
                         
                                 <div class="form-group mb-3">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn save-btn-black">Save Bank Account</button>
                                 </div>
                             </div>
                         </form>
@@ -109,7 +109,7 @@
                            <div class="treatment-card df-start w-100 mb-3">
                             <div class="row card-row align-items-center">
                                 <div class="col-md-2 df-center px-0">
-                                    <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                                    <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" style="width: auto;height: 75px;">
                                 </div>
                                 <div class="col-md-6 justify-content-start ps-0">
                                     <div class="trmt-card-body">

@@ -13,18 +13,26 @@
     .dropdown-toggle::after {
         display: none;
     }
+
+    .nav-login {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
 </style>
 
 <nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+    <div class="container p-0">
+        <!-- Logo -->
+        <a class="navbar-brand" style="padding-bottom: 0.8rem;" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+
+        <div class="collapse navbar-collapse justify-content-end align-items-center ms-5" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
@@ -238,10 +246,13 @@
                 @endif
             </ul>
         </div>
-        @if (Session::get('login_token') == null)
-            <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
+        <div class="nav-login">
+            @if (Session::get('login_token') == null)
+                <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
 
-            <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get Started</a>
-        @endif
+                <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get
+                    Started</a>
+            @endif
+        </div>
     </div>
 </nav>

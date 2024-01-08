@@ -35,6 +35,7 @@ use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\Front\MedicalProvider\PaymentController;
+use App\Http\Controllers\Front\Registration\FoodProviderController;
 use App\Models\MedicalProviderLogo;
 
 /*
@@ -191,7 +192,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CUSTOMERS
 
-    Route::controller(CustomerController::class)->group(function () {
+    Route::controller(CustomerController::class)->group(function (){
         Route::get('customers', 'index');
         Route::get('/customer-data-table', 'data_table');
         Route::get('admin/customer-details/{id}', 'show')->name('customer.details');
@@ -231,7 +232,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     // MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function () {
+    Route::controller(CityController::class)->group(function (){
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table', 'data_table');
@@ -283,7 +284,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
-    Route::controller(MDhealthController::class)->group(function () {
+    Route::controller(MDhealthController::class)->group(function (){
         Route::get('category-mdhealth', 'index');
         Route::post('category-mdhealth-store', 'store')->name('category.mdhealth.store');
         Route::get('/md-health-data-table', 'data_table');
@@ -292,7 +293,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     });
 
 
-    Route::controller(MDshopController::class)->group(function () {
+    Route::controller(MDshopController::class)->group(function (){
         Route::get('category-mdshop', 'index');
         Route::post('category-mdshop-store', 'store')->name('category.mdshop.store');
         Route::get('/md-shop-data-table', 'data_table');
@@ -362,7 +363,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
 // Route::view('medical-provider-login', 'front/mdhealth/authentication/medical-provider-login');
 // Route::view('vendor-login', 'front/mdhealth/authentication/vendor-login');
-Route::view('food-login', 'front/mdhealth/authentication/food-login');
+
 
 #Sign In
 Route::view('sign-in-web', 'front/mdhealth/authentication/sign-in');
@@ -402,7 +403,7 @@ Route::controller(CommonLoginController::class)->group(function () {
 //  });
 // AUTHENTICATION
 
-Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
+Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function (){
 
 
     Route::controller(UpdateProfileController::class)->group(function () {
@@ -427,7 +428,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::post('/delete-acommodition/{id}', 'delete_acommodition');
         // Route::post('/check-old-password', 'check_old_password');
     });
-    Route::controller(PackageController::class)->group(function () {
+
+    Route::controller(PackageController::class)->group(function(){
         Route::get('medical-packages', 'package_list');
         Route::get('md-packages-active-list', 'active_package_list');
         Route::get('md-packages-deactive-list', 'deactive_package_list');
@@ -512,8 +514,19 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
     // });
 });
 
+Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function(){
 
-//Mplu02
+
+    Route::controller(UpdateProfileController::class)->group(function (){
+        Route::get('medical-account', 'update_medical_profile_list');
+        Route::post('md-update-medical-profile', 'update_medical_provider_profile');
+        Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
+    });
+
+});
+
+
+//Mplus02
 Route::get('/', [CustomerPackageController::class, 'customer_home']);
 Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
@@ -538,8 +551,11 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     // });
 
     //Customer Report Controller Code By Mpluss03
-    Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
-    Route::post('user-all-reports-search', [CustomerPackageController::class,'customer_report_search']);
+  Route::any('user-all-reports', [CustomerPackageController::class,'customer_reports']);
+
+  Route::post('user-all-reports-search', [CustomerPackageController::class,'customer_report_search']);
+
+
 
     //Mplus02
 
@@ -551,6 +567,24 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 });
+
+
+
+
+//Food Vendor Route Starts By Mplus03
+
+Route::get('food-provider-register',[FoodProviderController::class,'index']);
+Route::post('create-food-provider-account',[FoodProviderController::class,'food_vendor_register']);
+
+Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], function (){
+
+ 
+   
+});
+
+//Food Vendor Route Ends By Mplus03
+
+
 
 
 

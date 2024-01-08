@@ -11,7 +11,7 @@
 <nav id="mdShopNav" class="navbar navbar-expand-lg navbar-light bg-f6 py-3">
     <img class="mdShopNavBg" src="{{ URL('front/assets/img/mdShopNavBg.png') }}" alt="">
 
-    <div class="container">
+    <div class="container p-0">
         <a class="navbar-brand" href="javascript:void(0)">
             <img src="{{ URL::asset('front/assets/img/MDShop.svg') }}" alt="" style="width: 180px;" />
         </a>
@@ -19,7 +19,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span

@@ -97,7 +97,7 @@ class UpdateProfileController extends Controller
 
     public function update_medical_provider_profile(Request $request)
     {
-      return Auth::guard('md_health_medical_providers_registers')->user()->id;
+    //   return Auth::guard('md_health_medical_providers_registers')->user()->id;
         $medical_provider_input = [];
         $medical_provider_input['company_name'] = $request->company_name;
         $medical_provider_input['company_address'] = $request->company_address;

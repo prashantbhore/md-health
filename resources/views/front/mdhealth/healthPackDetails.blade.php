@@ -23,7 +23,7 @@
         <!-- SECTION 1 -->
         <div class="searchBar backBtn bg-f6">
             <div class="container pt-4">
-                <a href="health-search-result" class="d-flex align-items-center mb-5 gap-2">
+                <a href="#" onclick="window.history.back()" class="d-flex align-items-center mb-5 gap-2">
                     <img src="{{ 'front/assets/img/ArrowLeftCircle.png' }}" alt="">
                     <p class="mb-0 fs-5 camptonBold">Back Treatments</p>
                 </a>
@@ -84,7 +84,7 @@
                                         <p class="camptonBook">*20% of the price is paid before booking.</p>
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
-                                        <button class="btn purchaseBtn">Purchase
+                                        <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
                                             Package</button>
                                         <button class="favouriteBtn">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
@@ -108,7 +108,7 @@
                             <img src="{{ 'front/assets/img/step1.svg' }}" alt="">
                             <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
                             <div class="d-flex align-items-center flex-column">
-                                <a href="{{ url('purchase-package/' . $packageDetails['id']) }}" type="button"
+                                <a href="{{ url('myself_as_patient/' . $packageDetails['id']) }}" type="button"
                                     class="btn btn-sm btn-md df-center mt-4">Myself</a>
                                 <a href="{{ url('#') }}" data-bs-dismiss="modal" data-bs-toggle="modal"
                                     data-bs-target="#treatmentForModal2_{{ $packageDetails['id'] }}" type="button"
@@ -216,17 +216,17 @@
                         <div class="tab-pane active container" id="home">
                             <div class="overview mt-4">
                                 <div class="row">
-                                    <div class="col-8 ps-0">
+                                    <div class="col-12 ps-0">
                                         <p>{{ $packageDetails['overview'] }}</p>
                                     </div>
-                                    <div class="col-4 pe-0">
+                                    {{-- <div class="col-4 pe-0">
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
-                                    </div>
+                                    </div> --}}
                                     <!-- <div class="col-12 px-0">
-                                                                                                                                                    <p>
+                                                                                                                                                                                                    <p>
 
-                                                                                                                                                    </p>
-                                                                                                                                                </div> -->
+                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                </div> -->
                                 </div>
                             </div>
                         </div>
@@ -433,6 +433,7 @@
 
             $('.purchaseBtn').click(function(e) {
                 e.preventDefault();
+                // alert('hi');
                 var user = "{{ $user }}";
                 var id = this.id;
                 // alert(id);
