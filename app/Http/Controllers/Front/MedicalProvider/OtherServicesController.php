@@ -206,7 +206,7 @@ class OtherServicesController extends Controller {
         $body = $request->all();
 
         $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
-
+        // dd( $plainArray );
         if ( $request->hasFile( 'vehicle_image_path' ) && $request->file( 'vehicle_image_path' )->isValid() ) {
             $image = $request->file( 'vehicle_image_path' );
             $image_name = 'vehicle_image_path';

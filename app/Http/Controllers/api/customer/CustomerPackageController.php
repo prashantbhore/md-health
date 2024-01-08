@@ -1572,10 +1572,19 @@ class CustomerPackageController extends BaseController
         $cancellation_reason['purchase_id'] = $request->purchase_id;
         $cancellation_reason['package_id'] = $request->package_id;
         $cancellation_reason['customer_id'] = Auth::user()->id;
+
         $cancellation_reason['cancellation_reason'] = $request->cancellation_reason;
+        $cancellation_reason['cancellation_detail'] = $request->cancellation_detail;
         $cancellation_reason['created_by'] = Auth::user()->id;
         $CustomerCancelledReason = CustomerCancelledReason::create($cancellation_reason);
-        if (!empty($CustomerCancelledReason)) {
+
+        if($CustomerCancelledReason){
+            $status_update['purchase_type'] = 'cancelled';
+            $status_update['modified_by'] = Auth::user()->id;
+            $status_update['modified_ip_address'] = $request->ip();
+            $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($status_update);
+        }
+        if (!empty($CustomerPurchaseDetails)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Thank You For Your Reason.We will get back to you.',
@@ -2124,7 +2133,7 @@ class CustomerPackageController extends BaseController
         }
     }
 
-    public function customer_favourite_list(Request $request)
+    public function customer_favourite_list()
     {
         $CustomerFavouritePackages=CustomerFavouritePackages::where('md_customer_favourite_packages.status','active')
         ->select(
@@ -2145,6 +2154,35 @@ class CustomerPackageController extends BaseController
                 'status' => 200,
                 'message' => 'Here is your Favourite list.',
                 'data' => $CustomerFavouritePackages,
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function remove_from_favourite(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $CustomerFavouritePackages = [];
+        $CustomerFavouritePackages['status'] = 'inactive';
+        $CustomerFavouritePackages['created_by'] = Auth::user()->id;
+
+        $CustomerPurchaseDetails = CustomerFavouritePackages::where('id', $request->id)->update($CustomerFavouritePackages);
+
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Package Removed From Favourite list.',
 
             ]);
         } else {
