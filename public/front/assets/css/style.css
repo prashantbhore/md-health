@@ -1358,7 +1358,7 @@ select {
     letter-spacing: -0.56px;
 }
 
-/* Shubham */
+/* Mpluss06 */
 .card-img-div {
     height: 80px;
     width: 80px;
@@ -2071,7 +2071,7 @@ span.popup-msg.active {
     cursor: pointer;
 }
 
-/* Shubham */
+/* Mpluss06 */
 
 .medical-pckg {
     height: 100vh;
@@ -2169,7 +2169,7 @@ span.popup-msg.active {
 }
 
 /* Scan QR */
-/* Shubham */
+/* Mpluss06 */
 
 /* DatePicker Start */
 
@@ -3129,6 +3129,15 @@ label.tc-text {
     align-items: center;
 }
 
+    .allRights {
+        display: flex;
+        align-items: center;
+    }
+
+    .md-booking-home-page{
+        z-index: 99;
+        background-color: transparent !important;
+    }
 .tox-statusbar__branding {
     display: none;
 }
