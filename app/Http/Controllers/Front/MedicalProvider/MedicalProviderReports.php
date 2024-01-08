@@ -101,7 +101,7 @@ class MedicalProviderReports extends Controller
 
         $resultHtml = '';
         if (!empty($provider_report_list)) {
-            foreach ($provider_report_list as $report) {
+            foreach ($provider_report_list as $report){
                 $resultHtml .= '<div class="card shadow-none" style="border-radius: 3px; background: #f6f6f6;">';
                 $resultHtml .= '<div class="card-body d-flex gap-3">';
                 $resultHtml .= '<div>';
@@ -117,7 +117,7 @@ class MedicalProviderReports extends Controller
                 $resultHtml .= '</div>';
     
                 if (!empty($report['reports'])) {
-                    foreach ($report['reports'] as $report_data) {
+                    foreach ($report['reports'] as $report_data){
                         $resultHtml .= '<div class="accordion" id="accordionExample">';
                         $resultHtml .= '<div class="accordion-item">';
                         $resultHtml .= '<h2 class="accordion-header" id="headingOne"></h2>';
