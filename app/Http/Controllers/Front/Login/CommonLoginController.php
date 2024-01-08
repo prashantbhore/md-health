@@ -531,7 +531,7 @@ public function email_or_mobile_exist(Request $request){
                                 'status' => 200,
                                 'message' => 'Login successfully.',
                                 // 'url' => '/user-profile',
-                                'url' => 'food-provider-panel-dashboard'
+                                'url' => '/food-provider-panel-dashboard'
                             ] );
                         } else {
 
@@ -559,7 +559,7 @@ public function email_or_mobile_exist(Request $request){
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Profile created successfully.',
-                                'url' => 'food-provider-panel-dashboard',
+                                'url' => '/food-provider-panel-dashboard',
                             ] );
                         } else {
                             return response()->json( [
