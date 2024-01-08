@@ -720,46 +720,6 @@
                     return false;
                 }
             });
-
-
-            // $.ajax({
-            //         type: 'POST',
-            //         url: baseUrl + '/api/md-change-patient-information-list', // Your endpoint
-            //         contentType: false,
-            //         processData: false,
-            //         headers: {
-            //             'Authorization': 'Bearer ' + token,
-            //             'X-CSRF-TOKEN': csrfToken
-            //         },
-            //         data: formData,
-            //         success: function(response) {
-            //             // alert(clickedId);
-            //             var id = this.id;
-            //             console.log("Success: " + response.PatientInformation);
-            //             var PatientInformation = response.PatientInformation;
-            //             var patientId = 0;
-            //             PatientInformation.forEach(function(patientInfo) {
-            //                 patientId++;
-            //             });
-            //             PatientInformation = PatientInformation[patientId - 1];
-            //             $('#package_buy_for').val(PatientInformation.package_buy_for);
-            //             $('#package_id').val(PatientInformation.package_id);
-            //             $('#patient_full_name').val(PatientInformation.patient_full_name);
-            //             $('#patient_relation').val(PatientInformation.patient_relation);
-            //             $('#patient_email').val(PatientInformation.patient_email);
-            //             $('#patient_contact_no').val(PatientInformation.patient_contact_no);
-            //             $('#patient_country_id').val(PatientInformation.patient_country_id);
-            //             $('#patient_city_id').val(PatientInformation.patient_city_id);
-
-
-            //         },
-            //         error: function(xhr, status, error) {
-
-            //             console.log(xhr.responseText);
-            //         }
-            //     });
-            // md-customer-change-package-list-active-cancelled
-
         });
     </script>
 @endsection
