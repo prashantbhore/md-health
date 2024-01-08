@@ -95,6 +95,8 @@ class AddNewAcommoditionController extends BaseController {
                 $original_name = $request->hotel_image_path->getClientOriginalName();
                 $hotel_input[ 'hotel_image_name' ] = $original_name;
             }
+            $hotel_input['distance_from_hospital'] = $request->distance_from_hospital;
+
             $hotel_input[ 'hotel_per_night_price' ] = $request->hotel_per_night_price;
             $hotel_input[ 'hotel_other_services' ] = $request->hotel_other_services;
             $hotel_input[ 'status' ] = 'inactive';
@@ -129,6 +131,7 @@ class AddNewAcommoditionController extends BaseController {
             'hotel_per_night_price',
             'hotel_other_services',
             'service_provider_id',
+            'distance_from_hospital',
             'status',
         )
         ->where( 'created_by', Auth::user()->id )
@@ -141,6 +144,7 @@ class AddNewAcommoditionController extends BaseController {
                 $AcommoditionHotelList[ $key ][ 'hotel_stars' ] = ( $value->hotel_stars );
                 $AcommoditionHotelList[ $key ][ 'hotel_image_path' ] = url( '/' ) . Storage::url( $value->hotel_image_path );
                 $AcommoditionHotelList[ $key ][ 'hotel_per_night_price' ] = ( $value->hotel_per_night_price );
+                $AcommoditionHotelList[$key]['distance_from_hospital'] = ($value->distance_from_hospital);
                 $AcommoditionHotelList[ $key ][ 'hotel_other_services' ] = ( $value->hotel_other_services );
             }
         }
@@ -170,6 +174,7 @@ class AddNewAcommoditionController extends BaseController {
             'hotel_image_name',
             'hotel_per_night_price',
             'hotel_other_services',
+            'distance_from_hospital',
             'service_provider_id',
             'status',
         )
@@ -184,6 +189,8 @@ class AddNewAcommoditionController extends BaseController {
             $AcommoditionHotelList[ 'hotel_image_path' ] = url( '/' ) . Storage::url( $AcommoditionHotelList->hotel_image_path );
             $AcommoditionHotelList[ 'hotel_per_night_price' ] = ( $AcommoditionHotelList->hotel_per_night_price );
             $AcommoditionHotelList[ 'hotel_other_services' ] = ( $AcommoditionHotelList->hotel_other_services );
+            $AcommoditionHotelList['distance_from_hospital'] = ($AcommoditionHotelList->distance_from_hospital);
+
             // }
         }
 
@@ -237,6 +244,8 @@ class AddNewAcommoditionController extends BaseController {
             }
             $hotel_input[ 'hotel_per_night_price' ] = $request->hotel_per_night_price;
             $hotel_input[ 'hotel_other_services' ] = $request->hotel_other_services;
+            $hotel_input['distance_from_hospital'] = $request->distance_from_hospital;
+
             $hotel_input[ 'status' ] = 'active';
             $hotel_input[ 'service_provider_id' ] = Auth::user()->id;
             $hotel_input[ 'created_by' ] = Auth::user()->id;
@@ -266,6 +275,8 @@ class AddNewAcommoditionController extends BaseController {
             $hotel_input['hotel_name'] = $request->hotel_name;
             $hotel_input['hotel_address'] = $request->hotel_address;
             $hotel_input['hotel_stars'] = $request->hotel_stars;
+            $hotel_input['distance_from_hospital'] = $request->distance_from_hospital;
+
             if ($request->file('hotel_image_path')) {
                 $hotel_input['hotel_image_path'] = $this->verifyAndUpload($request, 'hotel_image_path', 'hotel_images');
                 $original_name = $request->file('hotel_image_path')->getClientOriginalName();
