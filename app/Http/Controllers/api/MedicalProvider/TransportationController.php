@@ -295,6 +295,7 @@ class TransportationController extends BaseController
 
     public function delete_transportation(Request $request)
     {
+        // dd(Auth::user()->id);
         $validator = Validator::make($request->all(), [
             'transportation_id' => 'required',
         ]);
