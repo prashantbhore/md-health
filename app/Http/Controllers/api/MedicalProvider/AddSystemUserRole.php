@@ -70,7 +70,7 @@ public function add_system_user(Request $request)
     // dd($commonUserRegistration);
     // dd($commonUserRegistration);
     $lastInsertedId = $commonUserRegistration->id;
-   
+//    dd($request);
     $providerData = [
         'company_name' => $request->name,
         'roll_id'=>$request->roll_id,
