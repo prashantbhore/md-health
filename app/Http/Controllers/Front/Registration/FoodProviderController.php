@@ -27,11 +27,20 @@ class FoodProviderController extends Controller
     }
 
 
+    public function index()
+    {
+        $countries = Country::get();
+        $cities = Cities::get();
+        return view('front/mdhealth/authentication/food-provider-register', compact('countries', 'cities'));
+    }
+    
+
+
 
     
     public function food_vendor_register(request $request)
     {
-
+          
                 $token=null;
                 $apiUrl = url('api/md-food-registration');
 
@@ -39,13 +48,13 @@ class FoodProviderController extends Controller
                 $body = $request->all();
                 $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
                 
-            if ($request->hasFile('company_logo_image_path') && $request->file('company_logo_image_path')->isValid()) {
-                $image = $request->file('company_logo_image_path');
-                $image_name = 'company_logo_image_path';
-                $responseData = $this->apiService->getData($token,$apiUrl,$plainArray,$method,$image,$image_name);
-            }else{
+            // if ($request->hasFile('company_logo_image_path') && $request->file('company_logo_image_path')->isValid()) {
+            //     $image = $request->file('company_logo_image_path');
+            //     $image_name = 'company_logo_image_path';
+            //     $responseData = $this->apiService->getData($token,$apiUrl,$plainArray,$method,$image,$image_name);
+            // }else{
                 $responseData = $this->apiService->getData($token,$apiUrl,$plainArray,$method);
-            }
+            // }
 
                
                 Session::put('login_token', $responseData['data']['access_token']);
@@ -58,19 +67,19 @@ class FoodProviderController extends Controller
 
                     $email = $request->email;
                     $password = $request->password;
-                    if (Auth::guard('md_health_medical_providers_registers')->attempt($user_data)) {
+                    if (Auth::guard('md_health_food_registers')->attempt($user_data)) {
                         if (
-                            Auth::guard('md_health_medical_providers_registers')->attempt([
+                            Auth::guard('md_health_food_registers')->attempt([
                                 'email' => $request->email,
                                 'password' => $request->password,
                                 'status' => 'active',
                             ])
                         ) {
-                    $user_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
-                    $user_email = Auth::guard('md_health_medical_providers_registers')->user()->email;
-                    $user = Auth::guard('md_health_medical_providers_registers')->user();
+                    $user_id = Auth::guard('md_health_food_registers')->user()->id;
+                    $user_email = Auth::guard('md_health_food_registers')->user()->email;
+                    $user = Auth::guard('md_health_food_registers')->user();
 
-                    Session::put('MDMedicalProvider*%', $user_id);
+                    Session::put('MDFoodVendor*%', $user_id);
                     Session::put('email', $user_email);
                     Session::put('user', $user);
             }
@@ -81,14 +90,14 @@ class FoodProviderController extends Controller
             return response()->json([
                         'status' => 200,
                         'message' => $responseData['message'],
-                        'url' => '/medical-provider-dashboard',
+                        'url' => '/food-provider-panel-dashboard',
                     ]);
 
         } else{
             return response()->json([
                         'status' => 404,
                         'message' => $responseData['message'],
-                        'url' => '/medical-provider-login',
+                        'url' => '/food-provider-register',
                     ]);
 
         }
