@@ -521,7 +521,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('medical-account', 'update_medical_profile_list');
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
         Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
-
     });
 
 });
@@ -578,6 +577,14 @@ Route::get('food-provider-register',[FoodProviderController::class,'index']);
 Route::post('create-food-provider-account',[FoodProviderController::class,'food_vendor_register']);
 
 Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], function (){
+
+   
+Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
+Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
+Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
+Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
+Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
+
 
  
    
@@ -663,12 +670,6 @@ Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
 Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
 
-// MDFood Provider Panel
-Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
-Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
-Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
-Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
-Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
 
 // Medical Provider Panel
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
