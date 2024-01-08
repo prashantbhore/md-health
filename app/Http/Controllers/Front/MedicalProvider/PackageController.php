@@ -92,7 +92,7 @@ class PackageController extends Controller {
         $packages_active_list = $responseData[ 'packages_active_list' ];
 
         // Generate HTML for active packages
-        // dd( 'hi' );
+        // dd( $responseData );
         $html1 = '';
 
         foreach ( $packages_active_list as $package_active_list ) {

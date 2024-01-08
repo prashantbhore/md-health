@@ -141,6 +141,7 @@ class OtherServicesController extends Controller {
     public function md_add_new_acommodition( Request $request ) {
         $token = Session::get( 'login_token' );
         if ( empty( $request->hotel_id ) ) {
+           
             $apiUrl = url( '/api/md-add-new-acommodition' );
         } else {
             $apiUrl = url( '/api/md-edit-hotel-list' );
@@ -155,10 +156,11 @@ class OtherServicesController extends Controller {
             $image = $request->file( 'hotel_image_path' );
             $image_name = 'hotel_image_path';
             $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method, $image, $image_name );
+            // dd($responseData);
         } else {
             $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method );
         }
-        if ( ( $responseData[ 'status' ] == 200 ) ) {
+        if (!empty( $responseData)&&( $responseData[ 'status' ] == 200 ) ) {
             return redirect( '/medical-other-services' )->with( 'success', $responseData[ 'message' ] );
         } else {
             return redirect( '/medical-other-services' )->with( 'error', $responseData[ 'message' ] );
@@ -214,7 +216,6 @@ class OtherServicesController extends Controller {
         }
 
         // $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
-        dd($responmseData);
         if ( ( $responseData[ 'status' ] == 200 ) ) {
             return redirect( '/medical-other-services' )->with( 'success', $responseData[ 'message' ] );
         } else {
