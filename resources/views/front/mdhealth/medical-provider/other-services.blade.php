@@ -1,26 +1,24 @@
 @extends('front.layout.layout2')
 @section('content')
-<style>
-    .section-heading.section-btns a {
-        width: 35%;
-    }
+    <style>
+        .section-heading.section-btns a {
+            width: 35%;
+        }
 
-    .trmt-card-footer.icon-btns {
-        display: flex;
-        gap: 5px;
-    }
+        .trmt-card-footer.icon-btns {
+            display: flex;
+            gap: 5px;
+        }
 
         .no-data {
-            border: solid #ededed 1px;
+            border: solid #b8b8b8 1px;
             height: 150px;
-            border-radius: 3px;
+            border-radius: 5px;
+            text-align: center;
             margin-bottom: 20px;
-            font-size: 16px;
-            color: #aeaeae;
-            font-family: 'CamptonBook';
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            line-height: 150px;
+            font-size: 25px;
+            color: #a0a0a0;
         }
     </style>
     <div class="content-wrapper">
@@ -39,7 +37,8 @@
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Acommodition
-                                    <a href="{{ url('add-acommodition') }}" class="btn add-btn">Add New Acommodition</a>
+                                    <a href="{{ url('add-acommodition') }}"
+                                        class="green-plate bg-dark text-green fw-500 fs-6">Add New Acommodition</a>
                                 </h6>
                                 @if (!empty($hotel_details))
                                     @foreach ($hotel_details as $hotel_detail)
@@ -94,7 +93,8 @@
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Transportation
-                                    <a href="{{ url('add-new-vehical') }}" class="btn add-btn">Add New Vehicle</a>
+                                    <a href="{{ url('add-new-vehical') }}"
+                                        class="green-plate bg-dark text-green fw-500 fs-6">Add New Vehicle</a>
                                 </h6>
                                 @if (!empty($vehicle_details))
                                     @foreach ($vehicle_details as $vehicle_detail)
@@ -102,14 +102,12 @@
                                             id="divt_{{ $vehicle_detail['id'] }}">
                                             <div class="row card-row align-items-center">
                                                 <div class="col-md-2 df-center px-0">
-                                                    <img src="{{ url('/') . Storage::url($vehicle_detail['vehicle_image_path']) }}"
-                                                        alt="image" width="100px">
+                                                    <img src="{{ url( '/' ) . Storage::url($vehicle_detail['vehicle_image_path']) }}" alt="image"  width="100px">
                                                 </div>
                                                 <div class="col-md-6 justify-content-start ps-0">
                                                     <div class="trmt-card-body">
                                                         <h5 class="dashboard-card-title">
-                                                            {{ $vehicle_detail['vehicle_model_name'] }}
-                                                        </h5>
+                                                            {{ $vehicle_detail['vehicle_model_name'] }}</h5>
                                                         <a href="#"
                                                             class="btn-active">{{ $vehicle_detail['status'] }}</a>
                                                     </div>
@@ -152,7 +150,7 @@
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Tour
-                                    <a href="{{ url('add-tour') }}" class="btn add-btn">Add
+                                    <a href="{{ url('add-tour') }}" class="green-plate bg-dark text-green fw-500 fs-6">Add
                                         New Tour</a>
                                 </h6>
                                 @if (!empty($tour_details))
@@ -230,8 +228,7 @@
         function acommodition_delete(id) {
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-                                login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
             // alert(base_url);
             $.ajax({
                 url: base_url + '/api/md-delete-hotel',
@@ -268,8 +265,7 @@
             // Get the CSRF token from the meta tag
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-                                login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
             // Your AJAX call
             $.ajax({
                 url: base_url + '/api/md-delete-transportation',
@@ -307,8 +303,7 @@
             // Get the CSRF token from the meta tag
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-                                login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
             // Your AJAX call
             $.ajax({
                 url: base_url + '/api/md-delete-tour',
@@ -338,6 +333,6 @@
                 }
             });
 
-    }
-</script>
+        }
+    </script>
 @endsection

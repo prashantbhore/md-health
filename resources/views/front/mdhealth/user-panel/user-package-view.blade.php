@@ -683,6 +683,8 @@
                                                     <div class="view-menu mb-4">
                                                         <h6 class="fsb-1">Your Case Manager</h6>
                                                         <p class="text-orange">Abdul G.</p>
+                                                        <p>Boiled Vegetables</p>
+                                                        <p>Salad</p>
                                                     </div>
 
                                                     <div class="patient-details-div">
@@ -937,7 +939,6 @@
                                                             </a>
                                                         </div>
                                                     @endif
-
                                                 </div>
                                             </form>
                                         </div>
@@ -1184,6 +1185,7 @@
     <!-- Cancellation Request -->
 @endsection
 @section('script')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script>
         $(".upPackageLi").addClass("activeClass");
         $(".upPackage").addClass("md-active");

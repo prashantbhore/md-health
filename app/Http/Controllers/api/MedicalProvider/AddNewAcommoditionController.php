@@ -32,11 +32,11 @@ class AddNewAcommoditionController extends BaseController {
         if ( $validator->fails() ) {
             return $this->sendError( 'Validation Error.', $validator->errors() );
         }
-
+        
         if ( $request->button_type == 'active' ) {
             // dd( $request->hotel_name );
             $hotel_input = [];
-
+            
             $hotel_input['hotel_name'] = $request->hotel_name;
             $hotel_input['hotel_address'] = $request->hotel_address;
             $hotel_input['hotel_stars'] = $request->hotel_stars;

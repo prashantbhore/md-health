@@ -123,7 +123,7 @@
                                         <div class="form-group">
                                             <input type="hidden" name="hotel_stars" id="hotel_stars"
                                                 value="{{ !empty($hotel_details['hotel_stars']) ? $hotel_details['hotel_stars'] : '' }}">
-                                            <div class="star-rating">
+                                            <div class="star-rating" >
                                                 <i class="fa fa-star" data-value="1"></i>
                                                 <i class="fa fa-star" data-value="2"></i>
                                                 <i class="fa fa-star" data-value="3"></i>
@@ -157,6 +157,16 @@
                                             <input type="text" class="form-control" name="hotel_per_night_price"
                                                 id="hotel_per_night_price" placeholder="0"
                                                 value="{{ !empty($hotel_details['hotel_per_night_price']) ? $hotel_details['hotel_per_night_price'] : '' }}">
+                                            <span class="input-icon">₺</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3 section-heading-div">
+                                        <label class="form-label">Distance From Hospital</label>
+                                        <div class="input-icon-div">
+                                            <input type="text" class="form-control" name="distance_from_hospital"
+                                                id="distance_from_hospital" placeholder="0"
+                                                value="{{ !empty($hotel_details['distance_from_hospital']) ? $hotel_details['distance_from_hospital'] : '' }}">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -300,6 +310,14 @@
                         required: true,
                         number: true
                     },
+                    distance_from_hospital: {
+                        required: true,
+                        // number: true
+                    },
+                    hotel_stars: {
+                        required: true,
+                        // number: true
+                    },
                     hotel_image_path: {
                         required: function(element) {
                             // Check if an old image exists
@@ -321,6 +339,14 @@
                     hotel_per_night_price: {
                         required: "Please enter the price",
                         number: "Please enter a valid number"
+                    },
+                    distance_from_hospital: {
+                        required: "Please enter the distance",
+                        // number: "Please enter a valid number"
+                    },
+                    hotel_stars: {
+                        required: "Please select stars",
+                        // number: "Please enter a valid number"
                     },
                     hotel_image_path: {
                         required: "Please select a hotel picture"
