@@ -247,7 +247,10 @@ class RegistrationController extends BaseController {
 
     public function md_register_medical_provider( request $request ) {
 
-        // dd( $request );
+        // dd( $_$request );
+        // print_r($_POST);
+        // print_r($_FILES);
+        // exit();
         $validator = Validator::make( $request->all(), [
             'company_name' => 'required',
             'city_id' => 'required',

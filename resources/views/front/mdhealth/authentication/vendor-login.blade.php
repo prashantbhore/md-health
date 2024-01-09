@@ -421,7 +421,9 @@
                     var user = result.user;
                     $("#successOtpAuthot").text("OTP verified");
                     $("#successOtpAuthot").show();
-                    var formData = $('#myFormProvider').serialize();
+                    // var formData = $('#myFormProvider').serialize();
+                    var form = document.getElementById('myFormProvider');
+                    var formData = new FormData(form);
                     console.log(formData);
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     $.ajaxSetup({
@@ -434,7 +436,9 @@
                         url: base_url + '/md-vendor-register',
                         method: 'POST',
                         data: formData,
-
+                        cache: false,
+                        contentType: false,
+                        processData: false,
                         success: function(response) {
                             console.log(response);
                             if (response.url !== undefined) {

@@ -163,6 +163,7 @@
 .save-btn-green:hover {
     color: #000;
 }
+
 .card-h3 {
     color: #000;
     font-family: Campton;
@@ -3252,4 +3253,8 @@ label.tc-text {
 
 .tox-statusbar__branding {
     display: none;
+}
+
+.md-booking-middle-content .nav-item {
+    cursor: pointer;
 }

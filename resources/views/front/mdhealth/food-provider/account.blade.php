@@ -39,7 +39,7 @@
     <div class="container py-100px for-cards">
         <div class="row">
             <div class="col-md-3">
-                @include('front.includes.sidebar')
+                @include('front.includes.sidebar-food-provider')
             </div>
             <div class="col-md-9">
                 <div class="card mb-4">
@@ -48,7 +48,7 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            <form action="{{ url('md-update-medical-profile') }}" method="post" enctype="multipart/form-data" id="accountmedpro">
+                            <form action="{{ url('update-food-provider-account') }}" method="post" enctype="multipart/form-data" id="accountmedpro">
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label class="form-label">Company Name</label>

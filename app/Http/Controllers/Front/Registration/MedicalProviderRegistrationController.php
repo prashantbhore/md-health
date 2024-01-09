@@ -126,7 +126,7 @@ class MedicalProviderRegistrationController extends Controller
         //     'email' => $request->get( 'email' ),
         //     'password' => $request->get( 'password' )
         // );
-        dd( $_FILES, $request );
+        // dd( $_FILES, $request );
         $token = null;
         $apiUrl = url( '/api/md-register-medical-provider' );
 
