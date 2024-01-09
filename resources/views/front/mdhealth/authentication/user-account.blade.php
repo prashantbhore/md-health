@@ -130,6 +130,7 @@
                                                 <span toggle="#password"
                                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                             </div>
+
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-5 hide-eye-div">
@@ -145,8 +146,9 @@
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="UserflexCheckDefault" />
                                                 <label class="form-check-label" for="UserflexCheckDefault"> I accept <a
-                                                        href="#" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a
-                                                        href="#" class="text-decoration-underline">User Data Consent.</a> </label>
+                                                        href="#" class="text-decoration-underline">Terms and
+                                                        Condition</a> & I agree to the <a href="#"
+                                                        class="text-decoration-underline">User Data Consent.</a> </label>
                                             </div>
                                         </div>
                                         <div id="recaptcha-container"></div>
@@ -764,7 +766,7 @@
             });
         });
     </script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
         $(function() {
             $('input[name="date_of_birth"]').daterangepicker({

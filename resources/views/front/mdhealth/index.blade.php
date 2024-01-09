@@ -1,5 +1,5 @@
 @php
-$treatment_plans = App\Models\ProductCategory::all();
+$treatment_plans = App\Models\ProductCategory::where('status', 'active')->get();
 $cities = App\Models\Cities::where('country_id', '1')
 ->where('status', 'active')
 ->get();
@@ -17,8 +17,8 @@ $is_logged_in = false;
 <div class="bg-f6">
     <div class="content-wrapper bg-f6">
         <!-- =============================================================================================================
-                                                            1 : BANNER SECTION
-                             ============================================================================================================= -->
+                                                                            1 : BANNER SECTION
+                                             ============================================================================================================= -->
         <div class="banner-section df-center flex-column">
             <div class="container">
                 <div class="banner-content df-center flex-column">
@@ -28,12 +28,12 @@ $is_logged_in = false;
                     <form method="POST" action="{{ url('health-search-result') }}" class="w-100">
                         @csrf
                         <!-- SEARCH TREATMENT BAR -->
-                        <div class="search-bar d-flex align-items-center p-3">
+                        <div class="search-bar d-flex align-items-center p-3 gap-3">
                             <!-- Treatments -->
-                            <div class="form-floating pe-3">
+                            <div class="form-floating">
                                 <input type="hidden" name="platform_type" value="web">
                                 <select class="form-select" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
-                                    <option value="">Select Treatment</option>
+                                    <option value="Select Treatment">Select Treatment</option>
                                     @foreach ($treatment_plans as $treatment_plan)
                                     <option>{{ $treatment_plan->product_category_name }}</option>
                                     @endforeach
@@ -42,8 +42,8 @@ $is_logged_in = false;
                             </div>
                             <!-- City -->
                             <div class="form-floating">
-                                <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect" aria-label="Floating label select example">
-                                    <option data-display="Select" selected>Select City</option>
+                                <select class="form-select" name="city_name" id="floatingSelect" aria-label="Floating label select example">
+                                    <option value="Select City" selected>Select City</option>
                                     @foreach ($cities as $city)
                                     <option>{{ $city->city_name }}</option>
                                     @endforeach
@@ -51,8 +51,8 @@ $is_logged_in = false;
                                 <label for="floatingSelect">City</label>
                             </div>
                             <!-- Treatment Date -->
-                            <div class="form-floating pe-3">
-                                <input type="text" class="form-select bod-n-3" style="background-image: none;" name="daterange" value="" />
+                            <div class="form-floating">
+                                <input type="text" class="form-select" name="daterange" value="" />
                                 <label for="floatingSelect">Treatment Date</label>
                             </div>
                             <button type="submit" class="btn btn-search-pill">Search</button>
@@ -64,8 +64,8 @@ $is_logged_in = false;
         </div>
 
         <!-- =============================================================================================================
-                                                            2 : MAKE REQUEST FORM
-                             ============================================================================================================= -->
+                                                                            2 : MAKE REQUEST FORM
+                                             ============================================================================================================= -->
         <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
             <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
             <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span>
@@ -128,145 +128,252 @@ $is_logged_in = false;
     </div>
     <div class="bg-f6">
         <div class="container">
-            <div class="bod-bot pb-5">
-                <img src="{{ 'front/assets/img/add.png' }}" alt="">
+            <div class="banner-content df-center flex-column">
+                <h6>A NEW APPROACH IN MODERN TREATMENT</h6>
+                <h2>PLAN YOUR TREATMENT</h2>
+                <h1 class="mb-5">NOW</h1>
+                <form method="POST" action="{{ url('health-search-result') }}" class="w-100">
+                    @csrf
+                    <!-- SEARCH TREATMENT BAR -->
+                    <div class="search-bar d-flex align-items-center p-3">
+                        <!-- Treatments -->
+                        <div class="form-floating pe-3">
+                            <input type="hidden" name="platform_type" value="web">
+                            <select class="form-select" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
+                                <option value="">Select Treatment</option>
+                                @foreach ($treatment_plans as $treatment_plan)
+                                <option>{{ $treatment_plan->product_category_name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="floatingSelect">Treatments</label>
+                        </div>
+                        <!-- City -->
+                        <div class="form-floating">
+                            <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect" aria-label="Floating label select example">
+                                <option data-display="Select" selected>Select City</option>
+                                @foreach ($cities as $city)
+                                <option>{{ $city->city_name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="floatingSelect">City</label>
+                        </div>
+                        <!-- Treatment Date -->
+                        <div class="form-floating pe-3">
+                            <input type="text" class="form-select bod-n-3" style="background-image: none;" name="daterange" value="" />
+                            <label for="floatingSelect">Treatment Date</label>
+                        </div>
+                        <button type="submit" class="btn btn-search-pill">Search</button>
+                    </div>
+                    <!-- END -->
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- SECTION 3: TOP TREATMENT CARDS -->
-    <div class="bg-f6">
-        <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
-            <h1><span class="text-green">TOP 5</span> treatments</h1>
-            <div class="top5-card me-md-4 d-flex justify-content-between align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/brain.svg' }}" alt="">
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
-                        </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                    </div>
-                </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    </div>
-                </div>
+    <!-- =============================================================================================================
+                                                                2 : MAKE REQUEST FORM
+                                 ============================================================================================================= -->
+    <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
+        <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
+        <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span>
+            package?</h2>
+        <div class="card border-0 position-relative">
+            <div class="card-body df-center flex-column">
+                <p class="card-text">Contact us with your detail & our team will prepare your desired <br> treatment
+                    package!
+                </p>
+                <button class="btn btn-md-black position-absolute" data-bs-toggle="modal" data-bs-target="#exampleModal">Make a Request</button>
+                <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute doctorImg" alt="">
             </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/heart.svg' }}" alt="">
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
-                        </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                    </div>
-                </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
-                        </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                    </div>
-                </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
-                        </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                    </div>
-                </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
-                <div class="card">
-                    <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
-                        <div class="bg-black p-2 rounded-circle">
-                            <img src="{{ 'front/assets/img/mouth.svg' }}" alt="">
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Treatment Name</h6>
-                            <p class="mb-0">Treatment Category</p>
-                        </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
-                    </div>
-                </div>
-                <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
-                    <div class="stars">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                        <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
-                    </div>
-                </div>
-            </div>
-
-
+            <!-- exampleModal -->
         </div>
     </div>
+</div>
+<div class="py-100px pb-0 md-coin df-center flex-column gap-5 bg-f6 section-3 mb-5">
+    <div>
+        <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="">
+    </div>
+    <h1 style="font-size: 83px;" class="position-relative">
+        <span class="text-green bb-green camptonBold">Earn</span> as you spend<span class="text-green">!</span>
+    </h1>
+    <p class="mb-5 camptonBook text-center fs-18" style="font-weight: 400;">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your
+            friends</span> and spend <span class="camptonBold">MD</span>coin
+        for
+        your health needs. </p>
+</div>
+<div class="bg-f6">
+    <div class="df-center container md-earn">
+        <div>
+            <div class="mb-2">
+                <h1>2%</h1>
+                <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div>
+            <div class="mb-2">
+                <h1>4%</h1>
+                <img src="{{ 'front/assets/img/img2.png' }}" alt="">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div>
+            <div class="mb-2">
+                <h1>3%</h1>
+                <img src="{{ 'front/assets/img/img3.png' }}" alt="">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div>
+            <div class="mb-2">
+                <h1>5%</h1>
+                <img src="{{ 'front/assets/img/img1.png' }}" alt="">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+</div>
+<div class="bg-f6">
+    <div class="container">
+        <div class="bod-bot pb-5">
+            <img src="{{ 'front/assets/img/add.png' }}" alt="">
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: TOP TREATMENT CARDS -->
+<div class="bg-f6">
+    <div class="container section-wrapper treatment-section gap-3 py-5 section-3 d-flex flex-column gap-3">
+        <h1><span class="text-green">TOP 5</span> treatments</h1>
+        <div class="top5-card me-md-4 d-flex justify-content-between align-items-center">
+            <div class="card">
+                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                    <div class="bg-black p-2 rounded-circle">
+                        <img src="{{ 'front/assets/img/brain.svg' }}" alt="">
+                    </div>
+                    <div>
+                        <h6 class="mb-0">Treatment Name</h6>
+                        <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                </div>
+            </div>
+            <div class="rating">
+                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                <div class="stars">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+            <div class="card">
+                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                    <div class="bg-black p-2 rounded-circle">
+                        <img src="{{ 'front/assets/img/heart.svg' }}" alt="">
+                    </div>
+                    <div>
+                        <h6 class="mb-0">Treatment Name</h6>
+                        <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                </div>
+            </div>
+            <div class="rating">
+                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                <div class="stars">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+            <div class="card">
+                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                    <div class="bg-black p-2 rounded-circle">
+                        <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
+                    </div>
+                    <div>
+                        <h6 class="mb-0">Treatment Name</h6>
+                        <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                </div>
+            </div>
+            <div class="rating">
+                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
+                <div class="stars">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+            <div class="card">
+                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                    <div class="bg-black p-2 rounded-circle">
+                        <img src="{{ 'front/assets/img/eye.svg' }}" alt="">
+                    </div>
+                    <div>
+                        <h6 class="mb-0">Treatment Name</h6>
+                        <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                </div>
+            </div>
+            <div class="rating">
+                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
+                <div class="stars">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="top5-card me-md-4 d-flex justify-content-between  align-items-center">
+            <div class="card">
+                <div class="card-body d-flex gap-3 align-items-center justify-content-between position-relative">
+                    <div class="bg-black p-2 rounded-circle">
+                        <img src="{{ 'front/assets/img/mouth.svg' }}" alt="">
+                    </div>
+                    <div>
+                        <h6 class="mb-0">Treatment Name</h6>
+                        <p class="mb-0">Treatment Category</p>
+                    </div>
+                    <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                    <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                </div>
+            </div>
+            <div class="rating">
+                <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                <div class="stars">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
+                    <img src="{{ 'front/assets/img/star-black.svg' }}" alt="">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
 </div>
 
 
@@ -292,7 +399,8 @@ $is_logged_in = false;
             <div class="mb-4">
                 <h2 class="mb-0 pb-0">Download</h2>
                 <h2 class="my-0"><span class="camptonBold text-green">MD</span><span class="text-green camptonBook">health</span> <span class="camptonBold">Mobile</span></h2>
-                <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
             <div class="d-flex align-items-center gap-4">
                 <img class="align-self-center" src="{{ 'front/assets/img/playstore.png' }}" alt="">
@@ -331,7 +439,8 @@ $is_logged_in = false;
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -342,7 +451,8 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -353,7 +463,8 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -364,7 +475,8 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -375,7 +487,8 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -386,7 +499,8 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -397,7 +511,8 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
