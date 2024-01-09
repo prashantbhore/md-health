@@ -731,14 +731,14 @@ class PackageControllers extends BaseController
                 'md_packages.status',
             )
             ->where('md_packages.package_name', 'like', '%' . $request->package_name . '%')
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($packages_active_list_search)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'package list found.',
-                'packages_deactive_list' => $packages_active_list_search,
+                'packages_active_list' => $packages_active_list_search,
             ]);
         } else {
             return response()->json([
@@ -767,7 +767,7 @@ class PackageControllers extends BaseController
                 'md_packages.status',
             )
             ->where('md_packages.package_name', 'like', '%' . $request->package_name . '%')
-            // ->where('created_by', Auth::user()->id)
+            ->where('created_by', Auth::user()->id)
             ->get();
 
         if (!empty($packages_inactive_list_search)) {
