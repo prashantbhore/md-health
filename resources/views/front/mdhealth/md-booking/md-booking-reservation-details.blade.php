@@ -1,16 +1,16 @@
 @extends('front.layout.layout')
 @section('content')
     <div>
-        <div class="container mt-5 mb-3">
+        <div class="container my-5">
             <div class="row">
                 <div class="col d-flex flex-column align-items-center">
-                    <h6 class="reservation-p6">Reservaion Details</h6>
-                    <p class="reservation-p7"><ins>Delete All Items</ins></p>
+                    <h6 class="reservation-p6 fsb-1">Reservation Details</h6>
+                    <p class="reservation-p7 fsb-1"><ins>Delete All Items</ins></p>
                 </div>
             </div>
         </div>
 
-        <div class="container ">
+        <div class="container my-5 ">
             <div class="row  gap-3">
                 <div class="col-9 shadow-lg p-1 h-50 bg-body rounded p-2">
                     <div class="row border-bottom">
@@ -124,30 +124,31 @@
             </div>
             <div class="rev-border"></div>
         </div>
+        
 
-        <div class="container">
+        <div class="reservation-details-form container my-5">
             <div class="row text-center mb-5">
                 <div class="">
                     <img src="{{ 'front/assets/img/mdBookings/Group 11.png ' }}" class="" alt="">
                 </div>
-                <h3 class="reservation-p8">Next Step</h3>
-                <p class="vehicle-p3"><ins>Payment</ins></p>
+                <h3 class="reservation-p8 fsb-1 mt-4">Next Step</h3>
+                <p class="vehicle-p3 fsb-1 fw-500"><ins>Payment</ins></p>
             </div>
             <div class="row mb-5">
                 <div class="col d-flex gap-5">
-                    <div class="form-check">
+                    <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input reserv-check" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                             Credit or Debit Card
                         </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input reserv-check" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                             Bank Transfer
                         </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input reserv-check" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                             My Wallet
