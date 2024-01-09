@@ -68,9 +68,9 @@
 
                     <div class="reports-list">
 
-                    {{-- <div id="resultContainer"></div> --}}
+                    <div id="resultContainer"></div>
 
-                         @if($customer_reports)
+                         {{-- @if($customer_reports)
                          @foreach ($customer_reports as $report)
 
                         <div class="treatment-card df-start w-100 mb-3">
@@ -148,7 +148,7 @@
                              </div>
                           </div>
                           @endforeach
-                          @endif
+                          @endif --}}
 
 
                     </div>
@@ -165,7 +165,7 @@
     </script>
 
     <script>
-    $(document).ready(function(){
+    // $(document).ready(function(){
         $(".view-all-reports").hide();
         $("#ViewAllReports").click(function(){
         $(".view-all-reports").toggle();
@@ -173,11 +173,11 @@
             return $(this).hasClass('show-reports') ? 'View All Reports' : 'Close All Reports';
         });
         });
-    });
+    // });
     </script>
 
 <script>
-    $(document).ready(function(){
+    // $(document).ready(function(){
         
         performSearch();
 
@@ -218,7 +218,7 @@
                 }
             });
         }
-    });
+    // });
 </script>
     <script>
         function printDocument(reportPath) {

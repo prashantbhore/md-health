@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('patient_unique_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
             $table->bigInteger('package_id')->nullable();
+            $table->bigInteger('purchase_id')->nullable();
+            $table->string('patient_first_name')->nullable();
+            $table->string('patient_last_name')->nullable();
             $table->string('patient_full_name')->nullable();
             $table->string('patient_relation')->nullable();
             $table->string('patient_email')->nullable();

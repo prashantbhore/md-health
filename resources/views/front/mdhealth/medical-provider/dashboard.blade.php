@@ -34,6 +34,8 @@
                         @foreach ($recent_orders as $order)
 
                         {{-- {{dd($order)}} --}}
+
+                        {{-- {{dd($order)}} --}}
                         <!--  -->
                         <div class="card shadow-none" style="border-radius: 3px;background: #F6F6F6;">
                             <div class="p-3 d-flex gap-3">
@@ -45,7 +47,7 @@
                                     <p class="mb-0 pkg-name">{{!empty($order['package']['package_name'])?$order['package']['package_name']:''}}</p>
                                 </div>
                                 <div class="ms-auto d-flex flex-column justify-content-end align-items-end">
-                                    <h5 class="card-h3 mb-0">Total Price: <span class="card-p1">{{!empty($order['package']['package_price'])?$order['package']['package_price']:''}} ₺</span></h5>
+                                    <h5 class="card-h3 mb-0">Total Price: <span class="card-p1">{{!empty($order['package']['sale_price'])?$order['package']['sale_price']:''}} ₺</span></h5>
                                     <a href="{{ url('treatment-order-details/' . (!empty($order['id']) ?Crypt::encrypt($order['id']): '')) }}" class="mt-auto view-det">View Details</a>
                                 </div>
                             </div>
