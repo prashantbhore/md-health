@@ -68,9 +68,9 @@
 
                     <div class="reports-list">
 
-                    <div id="resultContainer"></div>
+                    {{-- <div id="resultContainer"></div> --}}
 
-                         {{-- @if($customer_reports)
+                         @if($customer_reports)
                          @foreach ($customer_reports as $report)
 
                         <div class="treatment-card df-start w-100 mb-3">
@@ -148,7 +148,7 @@
                              </div>
                           </div>
                           @endforeach
-                          @endif --}}
+                          @endif
 
 
                     </div>

@@ -209,20 +209,26 @@
                                                     </p>
                                                 </div>
 
+
+                                             
                                                 <div class="col-md-6 mb-3">
                                                     <div class="payment-div mb-4">
                                                         <h6 class="section-heading">Payment Info</h6>
-                                                        <h5>via Credit / Debit Card ( **** **** **** 9892 )</h5>
-                                                        <h3>3D Secure - 20% Payment</h3>
+                                                        <h5>via Credit / Debit Card (  {{ !empty($payment_details['card_no']) ? str_repeat('*', strlen($payment_details['card_no']) - 4) . substr($payment_details['card_no'], -4) : '' }}
+                                                            )</h5>
+                                                      
+                                                        <h3>3D Secure - {{!empty($payment_details['payment_percentage'])?$payment_details['payment_percentage']:0}} Payment</h3>
                                                     </div>
                                                     <div class="payment-div mb-4">
-                                                        <h4>First Payment - 20%</h4>
-                                                        <h3>Payment Date: 12/02/2023</h3>
+                                                        <h4>First Payment - {{!empty($payment_details['payment_percentage'])?$payment_details['payment_percentage']:0}}</h4>
+                                                        <h3>Payment Date: {{ !empty($payment_details['created_at']) ?  date('Y-m-d', strtotime($payment_details['created_at'])) : '' }}
+                                                        </h3>
                                                     </div>
                                                 </div>
+                                               
                                                 <div class="col-md-6 mb-3 align-self-end">
                                                     <div class="request-btn-div">
-                                                        <p class="mb-0 text-end">Remaining: <b>27.837,85 ₺</b></p>
+                                                        <p class="mb-0 text-end">Remaining: <b>{{!empty($payment_details['pending_payment'])?$payment_details['pending_payment']:''}} ₺</b></p>
                                                         <div class="section-btns pt-2 justify-content-end">
                                                             <a href="javascript:void(0);"
                                                                 class="green-plate bg-green text-dark fw-700 w-75 fsb-1">Request
@@ -327,12 +333,14 @@
                                                         <select class="form-control" name="case_manager_id"
                                                             id="" aria-describedby="">
                                                             <option value="">Select case manager</option>
+                                                            @if(!empty($case_manager))
                                                             @foreach ($case_manager as $manager)
                                                                 <option
                                                                     value="{{ !empty($manager['id']) ? $manager['id'] : '' }}">
                                                                     {{ !empty($manager['name']) ? $manager['name'] : '' }}
                                                                 </option>
                                                             @endforeach
+                                                            @endif
 
                                                             <!-- Add more options as needed -->
                                                         </select>
@@ -353,13 +361,34 @@
 
                                                 <div class="col-md-12 mb-3 payment-div">
                                                     <h6 class="section-heading mb-1">Acommodition Details</h6>
-                                                    <h6>Assign Hotel</h6>
-                                                    <div class="input-with-cross mb-3">
+                                                    {{-- <h6>Assign Hotel</h6> --}}
+                                                    {{-- <div class="input-with-cross mb-3">
                                                         <input type="text" name="hotel_id" class="form-control"
                                                             id="" aria-describedby=""
                                                             placeholder="Renaissence Hotel Besiktas">
                                                         <i class="fa fa-close"></i>
+                                                    </div>--}}
+
+                                                    <div class="form-group d-flex flex-column mb-2">
+                                                        <h6>Assign Hotel</h6>
+                                                        <select name="vehicle_id" id="" class="cstom-select-img form-control">
+
+                                                            <option value="">Select hotel</option>
+                                                            @if(!empty($hotel_lists)) 
+                                                            @foreach ($hotel_lists as $hotel)
+                                                            <option
+                                                                value="{{ !empty($hotel['id']) ? $hotel['id'] : '' }}">
+                                                                {{ !empty($hotel['hotel_name']) ? $hotel['hotel_name'] : '' }}
+                                                            </option>
+                                                           @endforeach
+                                                           @endif
+
+                                                            {{-- <option value="2">Mercedes Vito 7+1 VIP Diesel</option>
+                                                            <option value="3">Mercedes Vito 7+1 VIP Diesel</option> --}}
+                                                        </select>
                                                     </div>
+
+                                                    {{-- {{dd($patient_details['hotel']['distance_from_hospital'])}} --}}
 
                                                     <div class="example-div">
                                                         <p class="mb-1">
@@ -400,7 +429,7 @@
                                                                         d="M4.95833 6.72917C4.48868 6.72917 4.03826 6.5426 3.70617 6.2105C3.37407 5.87841 3.1875 5.42799 3.1875 4.95833C3.1875 4.48868 3.37407 4.03826 3.70617 3.70617C4.03826 3.37407 4.48868 3.1875 4.95833 3.1875C5.42799 3.1875 5.87841 3.37407 6.2105 3.70617C6.5426 4.03826 6.72917 4.48868 6.72917 4.95833C6.72917 5.19088 6.68336 5.42115 6.59437 5.636C6.50538 5.85085 6.37494 6.04606 6.2105 6.2105C6.04606 6.37494 5.85085 6.50538 5.636 6.59437C5.42115 6.68336 5.19088 6.72917 4.95833 6.72917ZM4.95833 0C3.6433 0 2.38213 0.522394 1.45226 1.45226C0.522394 2.38213 0 3.6433 0 4.95833C0 8.67708 4.95833 14.1667 4.95833 14.1667C4.95833 14.1667 9.91667 8.67708 9.91667 4.95833C9.91667 3.6433 9.39427 2.38213 8.46441 1.45226C7.53454 0.522394 6.27337 0 4.95833 0Z"
                                                                         fill="#111111" />
                                                                 </svg>
-                                                                Distance to hospital <span class="fw-800">3.7 KM</span>
+                                                                Distance to hospital <span class="fw-800">{{!empty($patient_details['hotel']['distance_from_hospital'])?$patient_details['hotel']['distance_from_hospital']:''}}KM</span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -412,9 +441,15 @@
                                                         <h6>Assign Vehicle</h6>
                                                         <select name="vehicle_id" id=""
                                                             class="cstom-select-img form-control">
-                                                            <option value="1">Mercedes Vito 7+1 VIP Diesel</option>
-                                                            <option value="2">Mercedes Vito 7+1 VIP Diesel</option>
-                                                            <option value="3">Mercedes Vito 7+1 VIP Diesel</option>
+                                                            <option value="1">Select Vehicle</option>
+                                                            @if(!empty($vehicle_list)) 
+                                                            @foreach ($vehicle_list as $vehicle)
+                                                            <option
+                                                                value="{{ !empty($vehicle['id']) ? $vehicle['id'] : '' }}">
+                                                                {{ !empty($vehicle['vehicle_model_name']) ? $vehicle['vehicle_model_name'] : '' }}
+                                                            </option>
+                                                           @endforeach
+                                                           @endif
                                                         </select>
                                                     </div>
                                                     <div class="example-div">

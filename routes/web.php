@@ -475,7 +475,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     #Medical Provider Dashboard By Mplus03
     Route::controller(MedicalProviderDashboradController::class)->group(function () {
         Route::get('medical-provider-dashboard', 'index');
-        Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
     });
 
 
