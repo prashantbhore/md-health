@@ -1,5 +1,4 @@
 @php
-<<<<<<< HEAD
     $treatment_plans = App\Models\ProductCategory::where('status', 'active')->get();
     $cities = App\Models\Cities::where('country_id', '1')
         ->where('status', 'active')
@@ -11,29 +10,15 @@
         $is_logged_in = false;
     }
     // dd(Session::all());
-=======
-$treatment_plans = App\Models\ProductCategory::all();
-$cities = App\Models\Cities::where('country_id', '1')
-->where('status', 'active')
-->get();
-// dd(Session::all());
-if (Session::get('login_token') != null) {
-$is_logged_in = true;
-} else {
-$is_logged_in = false;
-}
-// dd(Session::all());
->>>>>>> 1c8c1e0df94dd4d1b5cb98e003f29b4ea5ff42ec
 @endphp
 
 @extends('front.layout.layout')
 @section('content')
-<<<<<<< HEAD
     <div class="bg-f6">
         <div class="content-wrapper bg-f6">
             <!-- =============================================================================================================
-                                                                        1 : BANNER SECTION
-                                         ============================================================================================================= -->
+                                                                            1 : BANNER SECTION
+                                             ============================================================================================================= -->
             <div class="banner-section df-center flex-column">
                 <div class="container">
                     <div class="banner-content df-center flex-column">
@@ -81,8 +66,8 @@ $is_logged_in = false;
             </div>
 
             <!-- =============================================================================================================
-                                                                        2 : MAKE REQUEST FORM
-                                         ============================================================================================================= -->
+                                                                            2 : MAKE REQUEST FORM
+                                             ============================================================================================================= -->
             <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
                 <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
                 <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span>
@@ -146,14 +131,6 @@ $is_logged_in = false;
             </div>
         </div>
         <div class="bg-f6">
-=======
-<div class="bg-f6">
-    <div class="content-wrapper bg-f6">
-        <!-- =============================================================================================================
-                                                            1 : BANNER SECTION
-                             ============================================================================================================= -->
-        <div class="banner-section df-center flex-column">
->>>>>>> 1c8c1e0df94dd4d1b5cb98e003f29b4ea5ff42ec
             <div class="container">
                 <div class="banner-content df-center flex-column">
                     <h6>A NEW APPROACH IN MODERN TREATMENT</h6>
@@ -166,27 +143,30 @@ $is_logged_in = false;
                             <!-- Treatments -->
                             <div class="form-floating pe-3">
                                 <input type="hidden" name="platform_type" value="web">
-                                <select class="form-select" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
+                                <select class="form-select" name="treatment_name" id="floatingSelect"
+                                    aria-label="Floating label select example">
                                     <option value="">Select Treatment</option>
                                     @foreach ($treatment_plans as $treatment_plan)
-                                    <option>{{ $treatment_plan->product_category_name }}</option>
+                                        <option>{{ $treatment_plan->product_category_name }}</option>
                                     @endforeach
                                 </select>
                                 <label for="floatingSelect">Treatments</label>
                             </div>
                             <!-- City -->
                             <div class="form-floating">
-                                <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect" aria-label="Floating label select example">
+                                <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect"
+                                    aria-label="Floating label select example">
                                     <option data-display="Select" selected>Select City</option>
                                     @foreach ($cities as $city)
-                                    <option>{{ $city->city_name }}</option>
+                                        <option>{{ $city->city_name }}</option>
                                     @endforeach
                                 </select>
                                 <label for="floatingSelect">City</label>
                             </div>
                             <!-- Treatment Date -->
                             <div class="form-floating pe-3">
-                                <input type="text" class="form-select bod-n-3" style="background-image: none;" name="daterange" value="" />
+                                <input type="text" class="form-select bod-n-3" style="background-image: none;"
+                                    name="daterange" value="" />
                                 <label for="floatingSelect">Treatment Date</label>
                             </div>
                             <button type="submit" class="btn btn-search-pill">Search</button>
@@ -198,8 +178,8 @@ $is_logged_in = false;
         </div>
 
         <!-- =============================================================================================================
-                                                            2 : MAKE REQUEST FORM
-                             ============================================================================================================= -->
+                                                                2 : MAKE REQUEST FORM
+                                 ============================================================================================================= -->
         <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
             <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
             <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span>
@@ -209,7 +189,8 @@ $is_logged_in = false;
                     <p class="card-text">Contact us with your detail & our team will prepare your desired <br> treatment
                         package!
                     </p>
-                    <button class="btn btn-md-black position-absolute" data-bs-toggle="modal" data-bs-target="#exampleModal">Make a Request</button>
+                    <button class="btn btn-md-black position-absolute" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Make a Request</button>
                     <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute doctorImg" alt="">
                 </div>
                 <!-- exampleModal -->
@@ -223,7 +204,8 @@ $is_logged_in = false;
         <h1 style="font-size: 83px;" class="position-relative">
             <span class="text-green bb-green camptonBold">Earn</span> as you spend<span class="text-green">!</span>
         </h1>
-        <p class="mb-5 camptonBook text-center fs-18" style="font-weight: 400;">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your
+        <p class="mb-5 camptonBook text-center fs-18" style="font-weight: 400;">Earn <span
+                class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your
                 friends</span> and spend <span class="camptonBold">MD</span>coin
             for
             your health needs. </p>
@@ -283,11 +265,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -308,11 +292,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -333,11 +319,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(520)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(520)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -358,11 +346,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(400)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(400)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -383,11 +373,13 @@ $is_logged_in = false;
                             <p class="mb-0">Treatment Category</p>
                         </div>
                         <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
-                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
+                        <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}"
+                            alt="">
                     </div>
                 </div>
                 <div class="rating">
-                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span class="fw-normal">(480)</span></p>
+                    <p class="mb-0"><span class="text-green fs-4 fw-bold camptonBold">Reviews</span> <span
+                            class="fw-normal">(480)</span></p>
                     <div class="stars">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
                         <img src="{{ 'front/assets/img/star-green.svg' }}" alt="">
@@ -401,202 +393,215 @@ $is_logged_in = false;
 
         </div>
     </div>
-</div>
-
-
-
-
-<!-- SECTION 4 -->
-<div class="bg-green df-center" style="height: 151px;">
-    <div class="container py-5 text-center">
-        <p class="mb-0 card-h8">We made the treatment reliable and easier for you</p>
-        <p class="mb-0 card-p8">Get your treatment packages in Turkiye withing few
-            clicks
-            from professional healthcare providers.</p>
     </div>
-</div>
 
-<!-- SECTION 5 -->
-<div class="bg-e6">
-    <div class="container download-section d-flex justify-content-around">
-        <div>
-            <img src="{{ 'front/assets/img/appScreen.png' }}" alt="">
-        </div>
-        <div class="part2 section-2">
-            <div class="mb-4">
-                <h2 class="mb-0 pb-0">Download</h2>
-                <h2 class="my-0"><span class="camptonBold text-green">MD</span><span class="text-green camptonBook">health</span> <span class="camptonBold">Mobile</span></h2>
-                <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div class="d-flex align-items-center gap-4">
-                <img class="align-self-center" src="{{ 'front/assets/img/playstore.png' }}" alt="">
-                <p class="camptonBold fs-5">or</p>
-                <div>
-                    <img src="{{ 'front/assets/img/qrCode.png' }}" alt="">
-                    <p class="scanQR">scan the QR Code</p>
-                </div>
-            </div>
+
+
+
+    <!-- SECTION 4 -->
+    <div class="bg-green df-center" style="height: 151px;">
+        <div class="container py-5 text-center">
+            <p class="mb-0 card-h8">We made the treatment reliable and easier for you</p>
+            <p class="mb-0 card-p8">Get your treatment packages in Turkiye withing few
+                clicks
+                from professional healthcare providers.</p>
         </div>
     </div>
-</div>
 
-<!-- SECTION 6 -->
-<div class="bg-black position-relative section6">
-    <div class="container medical-pckg">
-        <p class="mb-0">Find your <span class="text-green">medical</span> package <span class="fw-normal camptonBook">&</span></p>
-        <p class="fnpp">flight to Turkiye!</p>
-        <a class="bookButton df-center">Book Now</a>
-    </div>
-    <img src="{{ 'front/assets/img/flight.png' }}" alt="">
-</div>
-<!-- <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt=""> -->
-</div>
-{{-- Make Payment Model box --}}
-
-
-<!-- SECTION 7: Testimonials -->
-<div class="bg-f6">
-    <div class="container testimonial section-2">
-        <div class="text-center mb-5">
-            <h2 class="camptonBook mb-0 pb-0">What our users</h2>
-            <h2 class="my-0 py-0 text-green">have to say</h2>
-        </div>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                            <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
-                        </div>
-                        <p class="mb-0 camptonBook fw-bolder">John Smith</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                            <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
-                        </div>
-                        <p class="mb-0 camptonBook fw-bolder">John Smith</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                            <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
-                        </div>
-                        <p class="mb-0 camptonBook fw-bolder">John Smith</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                            <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
-                        </div>
-                        <p class="mb-0 camptonBook fw-bolder">John Smith</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                            <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
-                        </div>
-                        <p class="mb-0 camptonBook fw-bolder">John Smith</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                            <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
-                        </div>
-                        <p class="mb-0 camptonBook fw-bolder">John Smith</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
-                            <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
-                        </div>
-                        <p class="mb-0 camptonBook fw-bolder">John Smith</p>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </div>
-</div>
-
-<!-- SECTION 8: SCAN QR -->
-<div class="bg-f6 scanQr">
-    <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
-</div>
-<!-- Modals -->
-<!-- MAKE REQUEST MODAL -->
-<div class="modal fade request-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" style="width:704px">
-        <div class="modal-content p-3">
+    <!-- SECTION 5 -->
+    <div class="bg-e6">
+        <div class="container download-section d-flex justify-content-around">
             <div>
-                <div class="text-end">
-                    <button type="button" class="btn-close m-3" data-bs-dismiss="modal" aria-label="Close">
-                        <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
-                    </button>
+                <img src="{{ 'front/assets/img/appScreen.png' }}" alt="">
+            </div>
+            <div class="part2 section-2">
+                <div class="mb-4">
+                    <h2 class="mb-0 pb-0">Download</h2>
+                    <h2 class="my-0"><span class="camptonBold text-green">MD</span><span
+                            class="text-green camptonBook">health</span> <span class="camptonBold">Mobile</span></h2>
+                    <p class="clr-grey camptonBook fs-5 fw-bolder">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
-
-                <div class="text-center" style="margin-top: -8px;">
-                    <h4 class="modal-title mb-2" id="exampleModalLabel">Couldn't find your <span class="green-color">treatment</span> package?</h4>
-                    <p class="mb-4">Fill the form & get your desired treatment plan</p>
+                <div class="d-flex align-items-center gap-4">
+                    <img class="align-self-center" src="{{ 'front/assets/img/playstore.png' }}" alt="">
+                    <p class="camptonBold fs-5">or</p>
+                    <div>
+                        <img src="{{ 'front/assets/img/qrCode.png' }}" alt="">
+                        <p class="scanQR">scan the QR Code</p>
+                    </div>
                 </div>
             </div>
-            <div class="modal-body">
-                <form class="row g-3">
-                    <div class="col-md-4 mb-3">
-                        <label for="inputEmail4" class="form-label fw-bold">*First Name</label>
-                        <input type="email" class="form-control  " id="inputEmail4" placeholder="First Name">
+        </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="bg-black position-relative section6">
+        <div class="container medical-pckg">
+            <p class="mb-0">Find your <span class="text-green">medical</span> package <span
+                    class="fw-normal camptonBook">&</span></p>
+            <p class="fnpp">flight to Turkiye!</p>
+            <a class="bookButton df-center">Book Now</a>
+        </div>
+        <img src="{{ 'front/assets/img/flight.png' }}" alt="">
+    </div>
+    <!-- <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt=""> -->
+    </div>
+    {{-- Make Payment Model box --}}
+
+
+    <!-- SECTION 7: Testimonials -->
+    <div class="bg-f6">
+        <div class="container testimonial section-2">
+            <div class="text-center mb-5">
+                <h2 class="camptonBook mb-0 pb-0">What our users</h2>
+                <h2 class="my-0 py-0 text-green">have to say</h2>
+            </div>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <p class="test-p1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="inputPassword4" class="form-label fw-bold">*Last Name</label>
-                        <input type="text" class="form-control " id="inputPassword4" placeholder="Last Name">
+                    <div class="swiper-slide">
+                        <p class="test-p1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="inputAddress" class="form-label fw-bold">*Email</label>
-                        <input type="email" class="form-control  " id="inputAddress" placeholder="Optional">
+                    <div class="swiper-slide">
+                        <p class="test-p1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="test-p1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="test-p1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="test-p1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="test-p1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
+                                <img src="{{ 'front/assets/img/user-light.svg' }}" alt="">
+                            </div>
+                            <p class="mb-0 camptonBook fw-bolder">John Smith</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 8: SCAN QR -->
+    <div class="bg-f6 scanQr">
+        <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
+    </div>
+    <!-- Modals -->
+    <!-- MAKE REQUEST MODAL -->
+    <div class="modal fade request-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="width:704px">
+            <div class="modal-content p-3">
+                <div>
+                    <div class="text-end">
+                        <button type="button" class="btn-close m-3" data-bs-dismiss="modal" aria-label="Close">
+                            <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
+                        </button>
                     </div>
 
-                    <div class="col-md-4 mb-3">
-                        <label for="inputState" class="form-label fw-bold">*Country</label>
-                        <select id="inputState" class="form-select ">
-                            <option selected disabled>Choose</option>
-                            <option>Turkey</option>
-                            <option>India</option>
-                            <option>China</option>
-                            <option>USA</option>
-                        </select>
+                    <div class="text-center" style="margin-top: -8px;">
+                        <h4 class="modal-title mb-2" id="exampleModalLabel">Couldn't find your <span
+                                class="green-color">treatment</span> package?</h4>
+                        <p class="mb-4">Fill the form & get your desired treatment plan</p>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
-                        <input type="tel" class="form-control " id="inputAddress33" placeholder="+ Contact Mobile">
-                        {{-- <div class="form-check form-check-inline">
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-md-4 mb-3">
+                            <label for="inputEmail4" class="form-label fw-bold">*First Name</label>
+                            <input type="email" class="form-control  " id="inputEmail4" placeholder="First Name">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="inputPassword4" class="form-label fw-bold">*Last Name</label>
+                            <input type="text" class="form-control " id="inputPassword4" placeholder="Last Name">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="inputAddress" class="form-label fw-bold">*Email</label>
+                            <input type="email" class="form-control  " id="inputAddress" placeholder="Optional">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="inputState" class="form-label fw-bold">*Country</label>
+                            <select id="inputState" class="form-select ">
+                                <option selected disabled>Choose</option>
+                                <option>Turkey</option>
+                                <option>India</option>
+                                <option>China</option>
+                                <option>USA</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
+                            <input type="tel" class="form-control " id="inputAddress33"
+                                placeholder="+ Contact Mobile">
+                            {{-- <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio1" value="option1">
                                 <label class="form-check-label" for="inlineRadio1">Whatsapp</label>
@@ -606,76 +611,82 @@ $is_logged_in = false;
                                     id="inlineRadio2" value="option2">
                                 <label class="form-check-label" for="inlineRadio2">Telegram</label>
                             </div> --}}
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
-                        <input type="text" class="form-control " id="inputAddress443" placeholder="Treatment Name">
-                    </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
+                            <input type="text" class="form-control " id="inputAddress443"
+                                placeholder="Treatment Name">
+                        </div>
 
-                    <div class="col-md-12 mb-3">
-                        <label for="inputAddress5" class="form-label fw-bold">*Details</label>
-                        <!-- <input type="text" class="form-control "  id="inputAddress5" placeholder="Please Write your treatment requirement in detail"> -->
-                        <textarea name="" id="" cols="" style="height: 66px;" class="form-control" id="inputAddress5" placeholder="Please write your treatment requirement in detail"></textarea>
-                    </div>
-                    <div class="col-md-6 mb-3 position-relative">
-                        <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
-                        <!-- <input type="text" class="form-control " id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details"> -->
-                        <div class="form-control position-relative" style="height:101px">
-                            <textarea name="" id="" class="form-control border-0 p-0" id="pre-treat" style="resize:none;" placeholder="Have you done / received any releted treatment before"></textarea>
-                            <span class="epic-span">If Yes, please write the detail</span>
+                        <div class="col-md-12 mb-3">
+                            <label for="inputAddress5" class="form-label fw-bold">*Details</label>
+                            <!-- <input type="text" class="form-control "  id="inputAddress5" placeholder="Please Write your treatment requirement in detail"> -->
+                            <textarea name="" id="" cols="" style="height: 66px;" class="form-control"
+                                id="inputAddress5" placeholder="Please write your treatment requirement in detail"></textarea>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="formFile" class="form-label fw-bold">Upload Your Treatment Documents</label>
-                        <input type="file" id="formFile">
-                        <img src="{{ 'front/assets/img/uploadFile.png' }}" alt="" class="pe-2">
-                        <span class="Campton fst-italic fs-14 align-top">*Optional</span>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <label for="inputAddress5" class="form-label fw-bold">*When do you need the
-                            treatment?</label>
-                        <input type="text" class="form-control " id="inputAddress5" placeholder="Write in week or month">
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <label for="inputAddress5" class="form-label fw-bold">*Do you need travel visa?</label>
-                        <div class="mt-2">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">No</label>
+                        <div class="col-md-6 mb-3 position-relative">
+                            <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
+                            <!-- <input type="text" class="form-control " id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details"> -->
+                            <div class="form-control position-relative" style="height:101px">
+                                <textarea name="" id="" class="form-control border-0 p-0" id="pre-treat" style="resize:none;"
+                                    placeholder="Have you done / received any releted treatment before"></textarea>
+                                <span class="epic-span">If Yes, please write the detail</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <button type="submit" class="btn save-btn-green">Submit
-                        </button>
-                    </div>
-                </form>
+                        <div class="col-md-6 mb-3">
+                            <label for="formFile" class="form-label fw-bold">Upload Your Treatment Documents</label>
+                            <input type="file" id="formFile">
+                            <img src="{{ 'front/assets/img/uploadFile.png' }}" alt="" class="pe-2">
+                            <span class="Campton fst-italic fs-14 align-top">*Optional</span>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="inputAddress5" class="form-label fw-bold">*When do you need the
+                                treatment?</label>
+                            <input type="text" class="form-control " id="inputAddress5"
+                                placeholder="Write in week or month">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="inputAddress5" class="form-label fw-bold">*Do you need travel visa?</label>
+                            <div class="mt-2">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                        value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                        value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn save-btn-green">Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
 @endsection
 @section('script')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script>
-    $(function() {
-        $('input[name="daterange"]').daterangepicker({
-            opens: 'left',
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left',
 
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
-            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        }, function(start, end, label) {});
-    });
-</script>
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            }, function(start, end, label) {});
+        });
+    </script>
 @endsection
 
 
