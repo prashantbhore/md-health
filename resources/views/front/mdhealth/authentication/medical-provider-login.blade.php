@@ -135,7 +135,7 @@
                                             <div class="mb-3 hide-eye-div">
                                                 <label for="password" class="form-label">*Password</label>
                                                 <input type="password" class="form-control" name="password" id="password"
-                                                    placeholder="Minimum 8 characters">
+                                                    placeholder="Minimum 8 characters" autocomplete="off">
                                                 <span toggle="#password"
                                                     class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                             </div>
@@ -144,7 +144,7 @@
                                             <div class="mb-3 hide-eye-div">
                                                 <label for="re-password" class="form-label">*Re-Password</label>
                                                 <input type="password" class="form-control" name="repassword"
-                                                    id="repassword" placeholder="Minimum 8 characters">
+                                                    id="repassword" placeholder="Minimum 8 characters" autocomplete="off">
                                                 <span toggle="#repassword"
                                                     class="fa fa-fw fa-eye field-icon toggle-password "></span>
                                             </div>
@@ -323,6 +323,7 @@
 @endsection
 @section('script')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -507,8 +508,10 @@
                 });
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function() {
+            // alert("hi");
             // Validation rules and messages
             $("#myForm").validate({
                 rules: {
@@ -542,8 +545,8 @@
         });
     </script>
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
 
     <script>
         $(document).ready(function() {
@@ -661,6 +664,7 @@
 
     <script>
         $(document).ready(function() {
+
             $.validator.addMethod("passwordMatch", function(value, element) {
                 return $('#password').val() === value;
             }, "Passwords do not match.");
