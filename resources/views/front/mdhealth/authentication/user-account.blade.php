@@ -116,6 +116,24 @@
                                             </select>
                                         </div>
 
+<<<<<<< HEAD
+                                    <div class="col-md-12 mb-3">
+                                        <label for="address" class="form-label">*Address</label>
+                                        <textarea name="address" id="address" cols="" rows="5" class="form-control" placeholder="Enter Address"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="hide-eye-div">
+                                            <label for="password" class="form-label">*Password</label>
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Minimum 8 characters" autocomplete="off" />
+                                            <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-5 hide-eye-div">
+                                            <label for="re-password" class="form-label">*Re-Password</label>
+                                            <input type="password" name="repassword" class="form-control" id="repassword" placeholder="Minimum 8 characters" autocomplete="off" />
+                                            <span toggle="#repassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+=======
                                         <div class="col-md-12 mb-3">
                                             <label for="address" class="form-label">*Address</label>
                                             <textarea name="address" id="address" cols="" rows="5" class="form-control"
@@ -129,6 +147,7 @@
                                                 <span toggle="#password"
                                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                             </div>
+>>>>>>> 575f7afc0a8896b227cde1c2c7d70a399da1121c
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-5 hide-eye-div">

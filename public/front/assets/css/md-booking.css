@@ -25,8 +25,8 @@
 }
 
 .main-mid-seaction {
-    height: 4.5rem;
-    width: 12rem;
+    width: 193px;
+    height: 53px;
 }
 
 .main-mid-seaction-h1 {
@@ -40,8 +40,8 @@
 }
 
 .image1 {
-    width: 110%;
-    margin-left: -5.5rem;
+    width: 111.2%;
+    margin-left: -7rem;
 }
 .vehical-tab-div .md-booking-middle-img .image1 {
     width: 104.5%;
@@ -410,7 +410,7 @@
 
 .booking-box-h {
     padding: 0;
-    height: calc(3.5rem + 2px) !important;
+    height: 57px !important;
     border-radius: 3px;
     width: 100%;
 }
@@ -436,10 +436,20 @@
 
 .md-booking-serach-filter {
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 999;
 }
 
 .md-booking-middle-content .nav-tabs {
     border: unset !important;
+    gap: 10px;
+}
+.md-booking-middle-content .nav-tabs .nav-link.active {
+    position: relative;
+    z-index: 9999;
+}
+.md-booking-middle-content .nav-tabs .nav-link {
+    background-color: #fff;
 }
 
 .md-booking-middle-content .nav-tabs .nav-item.show .nav-link,
