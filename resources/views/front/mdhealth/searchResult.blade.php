@@ -22,6 +22,44 @@
 
 @endphp
 
+<style>
+    .custom-dropdown .dropdown-header {
+        padding: 10px 10px 10px 40px;
+    }
+    .custom-dropdown {
+        position: unset;
+        z-index: 1;
+    }
+    .custom-dropdown .dropdown-list {
+        width: 285px;
+        left: 0;
+    }
+    .filter-label {
+        color: #A3A3A3;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .custom-dropdown-div.form-floating>label{
+        opacity: .65;
+        transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+    }
+    .for-custom-dropdown-div {
+        padding-top: 1.225rem;
+        padding-bottom: 0.625rem;
+        position: relative;
+    }
+    .for-custom-dropdown-div svg {
+        position: absolute;
+        z-index: 0;
+    }
+    .search-bar .form-floating:nth-child(2) {
+        padding: 8px 10px 10px 12px;
+    }
+    .search-bar .form-floating:nth-child(2) .for-custom-dropdown-div {
+        padding-top: 8px;
+    }
+</style>
+
  <form method="POST" action="{{ url('health-search-result') }}">
  @csrf
 {{-- {{dd($packages)}} --}}
@@ -29,23 +67,61 @@
     <div class="searchBar bg-f6">
         <div class="container pt-5 px-0">
             <div class="search-bar d-flex align-items-center justify-content-between p-3 gap-3 mb-5">
-                <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" name="treatment_name" aria-label="Floating label select example">
+                <div class="form-floating position-relative booking-box-h border d-flex flex-column custom-dropdown-div" style="padding: 0">
+                    <!-- <select class="form-select" id="floatingSelect" name="treatment_name" aria-label="Floating label select example">
                         <option data-display="Select" value="{{$treatment_name}}" selected>{{$treatment_name}}</option>
                             @foreach($treatment_plans as $treatment_plan){
                                     <option>{{$treatment_plan->product_category_name}}</option>
                                 }@endforeach
                             </select>
                     </select>
-                    <label for="floatingSelect">Service Type</label>
+                    <label for="floatingSelect">Service Type</label> -->
+                    
+                    <div class="for-custom-dropdown-div d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 20 20" fill="none"><g clip-path="url(#clip0_0_22639)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.99875 1.25C8.19753 1.24978 8.39122 1.31275 8.55187 1.42981C8.71252 1.54688 8.83181 1.71197 8.8925 1.90125L13 14.7375L14.6075 9.715C14.6679 9.52569 14.7869 9.36047 14.9473 9.24319C15.1077 9.12591 15.3013 9.06263 15.5 9.0625H17.0625C17.3111 9.0625 17.5496 9.16127 17.7254 9.33709C17.9012 9.5129 18 9.75136 18 10C18 10.2486 17.9012 10.4871 17.7254 10.6629C17.5496 10.8387 17.3111 10.9375 17.0625 10.9375H16.1838L13.8925 18.0988C13.8317 18.2877 13.7126 18.4525 13.5522 18.5694C13.3918 18.6863 13.1985 18.7493 13 18.7493C12.8015 18.7493 12.6082 18.6863 12.4478 18.5694C12.2874 18.4525 12.1683 18.2877 12.1075 18.0988L8.00625 5.2825L5.14375 14.345C5.08469 14.5317 4.96864 14.6953 4.81187 14.8127C4.6551 14.9301 4.4655 14.9955 4.26968 14.9996C4.07387 15.0038 3.88168 14.9465 3.72009 14.8358C3.5585 14.7251 3.43564 14.5666 3.36875 14.3825L1.78875 10.0375L1.70125 10.2975C1.6391 10.4841 1.51983 10.6464 1.36033 10.7615C1.20083 10.8766 1.00918 10.9386 0.8125 10.9388H-1.0625C-1.31114 10.9388 -1.5496 10.84 -1.72541 10.6642C-1.90123 10.4883 -2 10.2499 -2 10.0013C-2 9.75261 -1.90123 9.51415 -1.72541 9.33834C-1.5496 9.16252 -1.31114 9.06375 -1.0625 9.06375H0.1375L0.86 6.8925C0.921249 6.70756 1.03859 6.5463 1.19571 6.43113C1.35283 6.31595 1.54194 6.25259 1.73673 6.24984C1.93153 6.24709 2.12234 6.30509 2.28265 6.41579C2.44296 6.52648 2.56481 6.68437 2.63125 6.8675L4.1875 11.1488L7.10625 1.90625C7.16601 1.71624 7.28473 1.5502 7.4452 1.4322C7.60568 1.3142 7.79956 1.25039 7.99875 1.25Z" fill="#111111"/></g><defs><clipPath id="clip0_0_22639"><rect width="20" height="20" fill="white"/></clipPath></defs></svg>
+
+                        <div class="custom-dropdown">
+                            <div class="dropdown-header fsb-1 fw-500" tabindex="0">Select an option</div>
+                                <ul class="dropdown-list search-dropdown">
+                                    <span>
+                                        <input type="text" class="dropdown-search">
+                                        <button class="btn">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                    <li data-value="option1">Maharashtra</li>
+                                    <li data-value="option2">Delhi</li>
+                                    <li data-value="option3">Vizag</li>
+                                    <li data-value="option4">Bengaluru</li>
+                                </ul>
+                        </div>
+                    </div>
+                    <label for="floatingSelect">Treatment</label>
                 </div>
-                <div class="form-floating">
-                    <select class="form-select" id="floatingSelect" name="city_name" aria-label="Floating label select example">
+                <div class="form-floating position-relative booking-box-h border d-flex flex-column custom-dropdown-div">
+                    <!-- <select class="form-select" id="floatingSelect" name="city_name" aria-label="Floating label select example">
                         <option data-display="Select" value="{{$city_name}}" selected>{{$city_name}}</option>
                         @foreach($cities as $city){
                                     <option>{{$city->city_name}}</option>
                                 }@endforeach
-                    </select>
+                    </select> -->
+                    <div class="for-custom-dropdown-div d-flex align-items-center">
+                        <div class="custom-dropdown">
+                            <div class="dropdown-header fsb-1 fw-500 ps-0" tabindex="0">Select an option</div>
+                                <ul class="dropdown-list search-dropdown">
+                                    <span>
+                                        <input type="text" class="dropdown-search">
+                                        <button class="btn">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                    <li data-value="option1">Maharashtra</li>
+                                    <li data-value="option2">Delhi</li>
+                                    <li data-value="option3">Vizag</li>
+                                    <li data-value="option4">Bengaluru</li>
+                                </ul>
+                        </div>
+                    </div>
                     <label for="floatingSelect">City</label>
                 </div>
                 <div class="form-floating">
@@ -56,7 +132,7 @@
                                                                                                     <option value="3">Three</option>
                                                                                                 </select> -->
                     <!-- <div class="datepickerContainer"> -->
-                    <input type="text" class="form-select" name="daterange" value="{{$date}}" />
+                    <input type="text" class="form-select" name="daterange" value="{{$date}}" style="background-image: none;" />
                     <!-- </div> -->
                     <label for="floatingSelect">Treatment Date</label>
                 </div>
@@ -558,6 +634,28 @@
             }
             // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
         }, function(start, end, label) {});
+    });
+</script>
+
+<script>
+        $("#mdHealth").addClass('md-booking-home-page');
+    </script>
+    <script>
+    $(document).ready(function () {
+    $('.dropdown-header').on('click keypress', function (e) {
+        if (e.type === 'click' || (e.type === 'keypress' && e.key === 'Enter')) {
+        const dropdownList = $(this).next('.dropdown-list');
+        dropdownList.slideToggle();
+        }
+    });
+
+    $('.dropdown-list li').on('click', function () {
+        const selectedValue = $(this).data('value');
+        const header = $(this).parent().prev('.dropdown-header');
+        header.text($(this).text()).click(); // Close dropdown after selection
+        // Do something with the selected value if needed
+        console.log('Selected value:', selectedValue);
+    });
     });
 </script>
 

@@ -334,6 +334,13 @@
     opacity: 1;
 }
 
+.search-bar .form-select, .for-custom-dropdown-div  .custom-dropdown {
+    background-image: url("../img/SelectArrowDown.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position:  bottom 16px right 12px;
+}
+
 .request-modal .form-select,
 .authentication .form-select {
     background-image: url("../img/SelectArrowDown.png");
