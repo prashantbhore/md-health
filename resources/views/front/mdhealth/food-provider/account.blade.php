@@ -124,12 +124,13 @@
                                         <input type="file" id="company_logo_image_path" class="form-control" name="company_logo_image_path" oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
-                                        <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
-                                            Storage::exists($MedicalProviderLogo['company_logo_image_path'])
-                                                ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
+                                        
+                                        <img src="{{ !empty($MDFoodLogos['company_logo_image_path']) &&
+                                            Storage::exists($MDFoodLogos['company_logo_image_path'])
+                                                ? url('/') . Storage::url($MDFoodLogos['company_logo_image_path'])
                                                 : URL::asset('front/assets/img/default-img.png') }}" {{--
                                             src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic1">
-                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
+                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MDFoodLogos['company_logo_image_path']) ? $MDFoodLogos['company_logo_image_path'] : '' }}">
                                     </div>
 
                                 </div>
@@ -140,11 +141,11 @@
                                         <input type="file" id="company_licence_image_path" class="form-control" name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
-                                        <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
-                                            Storage::exists($MedicalProviderLicense['company_licence_image_path'])
-                                                ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
+                                        <img src="{{ !empty($MDFoodLicense['company_licence_image_path']) &&
+                                            Storage::exists($MDFoodLicense['company_licence_image_path'])
+                                                ? url('/') . Storage::url($MDFoodLicense['company_licence_image_path'])
                                                 : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
-                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
+                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MDFoodLicense['company_licence_image_path']) ?   $MDFoodLicense['company_licence_image_path'] : '' }}">
                                     </div>
                                 </div>
 
@@ -234,11 +235,12 @@
 
 <script>
     function deleteClientLogo(client_logo_id) {
+      
 
         if (client_logo_id != "") {
             if (confirm("Do you really want to delete this image ?")) {
                 $.ajax({
-                    url: base_url + "/md-delete-provider-images-videos",
+                    url: base_url + "/md-delete-food-provider-images-videos",
                     // url: "http://127.0.0.1:8000/md-delete-provider-images-videos",
 
                     headers: {
@@ -246,7 +248,7 @@
                     },
                     type: "POST",
                     data: {
-                        provider_id: client_logo_id
+                        food_id: client_logo_id
                     },
                     success: function(response) {
                         if (response.status == 200) {

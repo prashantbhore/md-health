@@ -90,6 +90,8 @@ class UpdateFoodProviderAccount extends Controller
         ->where('food_id',Session::get('MDFoodVendor*%'))
         ->first();
 
+        //dd($MDFoodLogos);
+
         $MDFoodLicense= MDFoodLicense::where('status','active')
         ->select('id', 'food_id', 'company_licence_image_path', 'company_licence_image_name')
         ->where('food_id',Session::get('MDFoodVendor*%'))
@@ -270,6 +272,33 @@ class UpdateFoodProviderAccount extends Controller
         }
     }
 
+
+
+    public function delete_food_provider_images_videos(Request $request)
+    {
+        
+
+        $delete_id = [];
+        $delete_id['status'] = 'delete';
+        $delete_id['modified_by'] = Session::get('MDFoodVendor*%');
+        $delete_id['modified_ip_address'] = $request->ip();
+
+        $delete_ProviderImagesVideos =  FoodImageVideos::where('id', $request->food_id)
+            ->update($delete_id);
+
+        if (!empty($delete_ProviderImagesVideos)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'data deleted successfully.'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'we are unable to delete your data at this time'
+
+            ]);
+        }
+    }
 
 
 
