@@ -1,204 +1,12 @@
 @extends('front.layout.layout')
 @section('content')
 
-<style>
-    .md-booking-serach-filter .select2-container .select2-selection--single {
-        height: 57px !important;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .md-booking-serach-filter .select2-container {
-        width: 100% !important;
-    }
-
-    .md-booking-serach-filter .select2-container--default .select2-selection--single .select2-selection__rendered {
-        padding-left: 40px;
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        display: flex;
-        position: unset !important;
-        height: unset !important;
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__arrow b {
-        position: unset !important;
-    }
-
-    .md-booking-serach-filter .select2-results {
-        cursor: pointer !important;
-    }
-
-    .md-booking-serach-filter .select2-container--default .select2-selection--single {
-        border: 1px solid #ced4da;
-    }
-    .custom-dropdown {
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        height: 57px !important;
-    }
-
-    .dropdown-header {
-    padding: 10px 10px 10px 40px;
-    font-size: 16px;
-    color: #212529;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    height: 57px !important;
-    display: flex;
-    align-items: center;
-    }
-
-    .dropdown-list {
-    display: none;
-    position: absolute;
-    list-style-type: none;
-    margin: 10px 0 0 0;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 1;
-    background-color: #F6F6F6;
-    width: 100%;
-    }
-    .md-booking-footer-details .dropdown-list {
-        width: 230px;
-    }
-    .md-booking-footer-details .dropdown-header {
-        padding: 10px 10px 10px 20px;
-    }
-    .dropdown-list li {
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-        justify-content: space-between;
-    }
-
-    .dropdown-list li:hover {
-    background-color: #f0f0f0;
-    }
-    .dropdown-counter {
-        width: 95px;
-        display: flex;
-        gap: 5px;
-        padding: 3px;
-        border-radius: 3px;
-        border: 1px solid #E9E9E9;
-        background: #FFF;
-
-    }
-    .dropdown-counter .count-span{
-        width: 35px;
-        text-align: center;
-    }
-    .dropdown-counter .sub, .dropdown-counter .add{
-        border-radius: 5px;
-        background: #4CDB06;
-        border: 1px solid transparent;
-        height: 20px;
-        width: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .dropdown-list span .dropdown-search{
-        height: 40px;
-        width: 100%;
-        border: 1px solid #E9E9E9;
-        border-radius: 5px;
-        padding: 10px 35px 10px 10px;
-        margin-bottom: 10px;
-        font-size: 16px;
-    }
-    .dropdown-list span button.btn{
-        position: absolute;
-        top: -10px;
-        right: 0px;
-        opacity: 0.5;
-        font-size: 16px;
-    }
-    .dropdown-list span {
-        position: relative;
-    }
-    .dropdown-list.search-dropdown li{
-        border-top: 1px solid #E9E9E9;
-        font-family: 'Campton';
-        font-size: 16px;
-    }
-    .no-border-left  {
-        border-left: 0;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-    .no-border-right .dropdown-header, .no-border-right {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    .flighttime {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 96%;
-        gap: 10px;
-    }
-    .flighttime input {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 100%;
-        gap: 10px;
-    }
-    .greenCheck input[type="checkbox"], .greenCheck input[type="checkbox"]::before {
-        border-radius: 3px !important;
-    }
-    .form-floating select {
-        color: #000 !important;
-    }
-    .form-floating .custom-dropdown .dropdown-header  {
-        /* padding: 0; */
-        border: unset;
-        height: auto !important;
-    }
-    .form-floating .custom-dropdown  {
-        height: auto !important;
-    }
-    .md-booking-serach-filter .md-booking-footer-details div {
-        font-size: 16px;
-        color: #212529;
-        align-items: center;
-    }
-    .vehical-date.d-flex {
-        padding: 0 10px;
-    }
-    .vehical-date.d-flex input.flex-row-reverse{
-        font-size: 16px !important;
-        font-weight: 900 !important;
-        padding-right: 0 !important;
-        width: 100px;
-    }
-    .md-booking-middle-content {
-        margin-bottom: 250px;
-    }
-    .md-booking-middle-content .nav-tabs .nav-link span{
-        font-weight: 500 !important;
-        font-size: 19px !important;
-    }
-    .md-booking-middle-content .nav-tabs .nav-link.active span, .md-booking-middle-content .nav-tabs .nav-link.hover span{
-        font-weight: 700 !important;
-    }
-    .md-booking-serach-filter input.form-control{
-        font-size: 16px;
-    }
-</style>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css">
 
 <div class="page-wrapper">
     {{-- banner --}}
-    <div class="md-booking-banner-div pb-5">
+    <div class="md-booking-banner-div">
         <img src="{{ 'front/assets/img/mdBookings/mdBookingsHeader.png' }}" class="position-absolute banner-img " alt="">
         <div class="position-relative  d-flex flex-column  align-items-center banner">
             <p class="green-color banner-p">BOOK RELIABLE & AFFORDABLE</p>
@@ -267,7 +75,12 @@
                                     <img src="{{ 'front/assets/img/mdBookings/mdi_person.png' }}" alt="" class="position-absolute booking-img2">
 
                                     <div class="custom-dropdown">
-                                        <div class="dropdown-header fsb-1 fw-500" tabindex="0">Select an option</div>
+                                        <div class="dropdown-header fsb-1 fw-500 d-flex align-items-center justify-content-between" tabindex="0">Select an option
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.4" d="M22 12C22 17.515 17.514 22 12 22C6.486 22 2 17.515 2 12C2 6.486 6.486 2 12 2C17.514 2 22 6.486 22 12Z" fill="black"></path>
+                                                <path d="M16.2211 10.5575C16.2211 10.7485 16.1481 10.9405 16.0021 11.0865L12.5321 14.5735C12.3911 14.7145 12.2001 14.7935 12.0001 14.7935C11.8011 14.7935 11.6101 14.7145 11.4691 14.5735L7.99707 11.0865C7.70507 10.7935 7.70507 10.3195 7.99907 10.0265C8.29307 9.73448 8.76807 9.73548 9.06007 10.0285L12.0001 12.9815L14.9401 10.0285C15.2321 9.73548 15.7061 9.73448 16.0001 10.0265C16.1481 10.1725 16.2211 10.3655 16.2211 10.5575Z" fill="black"></path>
+                                            </svg>
+                                        </div>
                                         <ul class="dropdown-list">
                                             <li data-value="option1">Adult
                                                 <div class="dropdown-counter">
@@ -498,6 +311,7 @@
             </div>
         </div>
     </div>
+
     <div class="md-booking-footer mt-3">
         <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="" class="footer-image">
     </div>
