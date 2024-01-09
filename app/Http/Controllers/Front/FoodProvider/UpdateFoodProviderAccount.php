@@ -116,8 +116,61 @@ class UpdateFoodProviderAccount extends Controller
 
 
 
+    // public function update_food_profile(Request $request)
+    // {
+    //     $medical_provider_input = [];
+    //     $medical_provider_input['company_name'] = $request->company_name;
+    //     $medical_provider_input['company_address'] = $request->company_address;
+    //     $medical_provider_input['country_id'] = $request->country_id;
+    //     $medical_provider_input['city_id'] = $request->city_id;
+    //     $medical_provider_input['tax_no'] = $request->tax_no;
+    //     $medical_provider_input['authorisation_full_name'] = $request->authorisation_full_name;
+    //     $medical_provider_input['company_overview'] = $request->company_overview;
+    //     $medical_provider_input['email'] = $request->email;
+    //     $medical_provider_input['mobile_no'] = $request->mobile_no;
+    //     $medical_provider_input['modified_ip_address'] = $request->ip();
+
+    //     $medical_provider_update = MDFoodRegisters::where('id', Auth::user()->id)->update($medical_provider_input);
+
+    //     if ($request->has('provider_image_path')) {
+    //         if ($files = $request->file('provider_image_path')) {
+    //             // $files=[];
+    //             foreach ($files as $file) {
+    //                 $accout_images = new FoodImageVideos;
+    //                 // return  $accout_images;
+    //                 $accout_images['food_id'] = Auth::user()->id;
+    //                 $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+    //                 $original_name = $file->getClientOriginalName();
+    //                 $filePath = $file->storeAs('public/vendorimagesvideos', $filename);
+    //                 $accout_images['provider_image_path'] = $filePath;
+    //                 $accout_images['provider_image_name'] = $original_name;
+    //                 $accout_images['modified_by'] = Auth::user()->id;
+    //                 $accout_images['modified_ip_address'] = $request->ip();
+    //                 $accout_images->save();
+    //             }
+    //         }
+    //     }
+
+    //     if (!empty($medical_provider_update)) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'message' => 'Profile details updated successfully.',
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'Something went wrong. Details not updated.',
+    //         ]);
+    //     }
+    // }
+
+
+
+
     public function update_food_profile(Request $request)
     {
+        //dd($request->all());
+       // return Auth::guard('md_health_medical_providers_registers')->user()->id;
         $medical_provider_input = [];
         $medical_provider_input['company_name'] = $request->company_name;
         $medical_provider_input['company_address'] = $request->company_address;
@@ -130,66 +183,14 @@ class UpdateFoodProviderAccount extends Controller
         $medical_provider_input['mobile_no'] = $request->mobile_no;
         $medical_provider_input['modified_ip_address'] = $request->ip();
 
-        $medical_provider_update = MDFoodRegisters::where('id', Auth::user()->id)->update($medical_provider_input);
-
-        if ($request->has('provider_image_path')) {
-            if ($files = $request->file('provider_image_path')) {
-                // $files=[];
-                foreach ($files as $file) {
-                    $accout_images = new FoodImageVideos;
-                    // return  $accout_images;
-                    $accout_images['food_id'] = Auth::user()->id;
-                    $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
-                    $original_name = $file->getClientOriginalName();
-                    $filePath = $file->storeAs('public/vendorimagesvideos', $filename);
-                    $accout_images['provider_image_path'] = $filePath;
-                    $accout_images['provider_image_name'] = $original_name;
-                    $accout_images['modified_by'] = Auth::user()->id;
-                    $accout_images['modified_ip_address'] = $request->ip();
-                    $accout_images->save();
-                }
-            }
-        }
-
-        if (!empty($medical_provider_update)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Profile details updated successfully.',
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong. Details not updated.',
-            ]);
-        }
-    }
-
-
-
-
-    public function update_food_profile(Request $request)
-    {
-    //   return Auth::guard('md_health_medical_providers_registers')->user()->id;
-        $medical_provider_input = [];
-        $medical_provider_input['company_name'] = $request->company_name;
-        $medical_provider_input['company_address'] = $request->company_address;
-        $medical_provider_input['country_id'] = $request->country_id;
-        $medical_provider_input['city_id'] = $request->city_id;
-        $medical_provider_input['tax_no'] = $request->tax_no;
-        $medical_provider_input['authorisation_full_name'] = $request->authorisation_full_name;
-        $medical_provider_input['company_overview'] = $request->company_overview;
-        $medical_provider_input['email'] = $request->email;
-        $medical_provider_input['mobile_no'] = $request->mobile_no;
-        $medical_provider_input['modified_ip_address'] = $request->ip();
-
-        $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::guard('md_health_medical_providers_registers')->user()->id)->update($medical_provider_input);
-        $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::guard('md_health_medical_providers_registers')->user()->id)->first();
+        $medical_provider_update = MDFoodRegisters::where('id',Session::get('MDFoodVendor*%'))->update($medical_provider_input);
+        $medical_provider_update = MDFoodRegisters::where('id', Session::get('MDFoodVendor*%'))->first();
         // return Auth::guard('md_health_medical_providers_registers')->user()->id;
         // dd($medical_provider_update);
         if(!empty($medical_provider_update))
         {
             $md_provider_input_image_logo=[];
-            $md_provider_input_image_logo['medical_provider_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
+            $md_provider_input_image_logo['food_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
     
             if ( $request->has( 'company_logo_image_path' ) ) {
                 
@@ -210,10 +211,10 @@ class UpdateFoodProviderAccount extends Controller
             // }
 
 
-            MDFoodLogos::where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)->update($md_provider_input_image_logo);
+            MDFoodLogos::where('food_id',Session::get('MDFoodVendor*%'))->update($md_provider_input_image_logo);
     
             $md_provider_input_image_license=[];
-            $md_provider_input_image_license['medical_provider_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
+            $md_provider_input_image_license['food_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
             if ( $request->has( 'company_licence_image_path' ) ) {
                 if ( $request->file( 'company_licence_image_path' ) ) {
                     // return 'asdsaddas';
@@ -222,22 +223,23 @@ class UpdateFoodProviderAccount extends Controller
                     $md_provider_input_image_license[ 'company_licence_image_name' ] = $original_name;
                 }
             }
-            MDFoodLicense::where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)->update($md_provider_input_image_license);
+            MDFoodLicense::where('food_id', Session::get('MDFoodVendor*%'))->update($md_provider_input_image_license);
         }
+
        
         if ($request->has('provider_image_path')){
-            if ($files = $request->file('provider_image_path')) {
+            if ($files = $request->file('provider_image_path')){
                 // $files=[];
                 foreach ($files as $file){
                     $accout_images = new FoodImageVideos;
-                    $accout_images['provider_id']= Auth::guard('md_health_medical_providers_registers')->user()->id;
+                    // return  $accout_images;
+                    $accout_images['food_id']= Session::get('MDFoodVendor*%');
                     $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
                     $original_name = $file->getClientOriginalName();
-                    $filePath = $file->storeAs('public/providerimagesvideos', $filename);
+                    $filePath = $file->storeAs('public/vendorimagesvideos', $filename);
                     $accout_images['provider_image_path'] = $filePath;
                     $accout_images['provider_image_name'] = $original_name;
-                    $accout_images['modified_by'] = Auth::guard('md_health_medical_providers_registers')->user()->id;
-                    $accout_images['modified_ip_address'] = $request->ip();
+                    $accout_images['modified_by'] = Session::get('MDFoodVendor*%');
                     $accout_images->save();
                 }
             }
@@ -249,7 +251,7 @@ class UpdateFoodProviderAccount extends Controller
             //     'status' => 200,
             //     'message' => 'Profile details updated successfully.',
             // ]);
-            return redirect('medical-account')->with('success','Profile details updated successfully.');
+            return redirect('food-provider-account')->with('success','Profile details updated successfully.');
            
         }
     }

@@ -558,6 +558,8 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
 Route::get('food-provider-account',[UpdateFoodProviderAccount::class,'update_food_profile_list']);
 
+Route::post('update-food-provider-account',[UpdateFoodProviderAccount::class,'update_food_profile']);
+
 });
 
 //Food Vendor Route Ends By Mplus03
