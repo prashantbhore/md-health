@@ -221,22 +221,22 @@ class CustomerPackageController extends Controller
         // dd($my_active_packages_list);
 
 
-        if (!empty($user_id) && !empty($my_active_packages_list)) {
+        // if (!empty($user_id) && !empty($my_active_packages_list)) {
 
-            $array= [];
-            foreach($my_active_packages_list as $key => $active_package){
+        //     $array= [];
+        //     foreach($my_active_packages_list as $key => $active_package){
 
-                $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $active_package['package_id'],'purchase_id' =>  $active_package['purchase_id']], 'POST');
-                $last = count($patient_information_list['PatientInformation']);
-                $my_active_packages_list[$key]['patient_information_list'] = !empty($patient_information_list['PatientInformation'])?$patient_information_list['PatientInformation'][$last-1]:'';
-            }
-        } else {
+        //         $patient_information_list = $this->apiService->getData($token, url('/api/md-change-patient-information-list'), ['id' => $active_package['package_id'],'purchase_id' =>  $active_package['purchase_id']], 'POST');
+        //         $last = count($patient_information_list['PatientInformation']);
+        //         $my_active_packages_list[$key]['patient_information_list'] = !empty($patient_information_list['PatientInformation'])?$patient_information_list['PatientInformation'][$last-1]:'';
+        //     }
+        // } else {
 
-            foreach($my_active_packages_list as $key => $active_package){
+        //     foreach($my_active_packages_list as $key => $active_package){
 
-                $my_active_packages_list[$key]['patient_information_list'] = [];
-            }
-        }
+        //         $my_active_packages_list[$key]['patient_information_list'] = [];
+        //     }
+        // }
 
         $counties = Country::where('status','active')->get();
         $cities = Cities::where('status', 'active')->where('country_id', 1)->get();

@@ -9,20 +9,22 @@
             color: red !important;
             font-size: 14px !important;
         }
+
         input[type="file"] {
             color: #000 !important;
             line-height: 2 !important;
         }
+
         .footer {
-        display: none;
-    }
+            display: none;
+        }
     </style>
     <div class="content-wrapper" id="regdiv">
         <div class="container text-center my-5 authentication">
-        <div class="position-relative">
-            <h3 class="mb-3 form-heading">Select Account Type</h3>
-            <h1 class="mb-3 form-heading p-abs">Go Super Admin Panel</h1>
-        </div>
+            <div class="position-relative">
+                <h3 class="mb-3 form-heading">Select Account Type</h3>
+                <h1 class="mb-3 form-heading p-abs">Go Super Admin Panel</h1>
+            </div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -52,11 +54,11 @@
                                 <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}"
                                         alt=""></a>
                                 <h1 class="reg-title mb-0">Create Vendor Account</h1>
-                                
+
                             </div>
                             <div class="form text-start">
                                 <form id="myFormProvider">
-                                    
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -98,7 +100,7 @@
                                                     placeholder="TAX Number">
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="*Company Address" class="form-label">*Company Address</label>
@@ -166,16 +168,17 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-4">
-                    <div>
-                        <img src="{{asset('front/assets/img/MDHealth.svg')}}" alt="" />
-                    </div>
-                    <h5 class="text-h1">Get your reliable & affordable</h5>
-                    <h4 class="text-green-h1b">Treatment Packages</h4>
-                    <p class="text-p1-gray">We are partnered with the top health service providers and vendors that gives you the best health experience!</p>
+                            <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-4">
+                                <div>
+                                    <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
+                                </div>
+                                <h5 class="text-h1">Get your reliable & affordable</h5>
+                                <h4 class="text-green-h1b">Treatment Packages</h4>
+                                <p class="text-p1-gray">We are partnered with the top health service providers and vendors
+                                    that gives you the best health experience!</p>
 
-                </div>
-            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -209,16 +212,21 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                                oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                                oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                                oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                                oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
@@ -282,7 +290,7 @@
 @section('script')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
     <script>
         $(document).on('click', '#regcustuser', function() {
             var base_url = $('#base_url').val();
@@ -389,11 +397,11 @@
                 $("#regdiv").hide();
             }).catch(function(error) {
                 $("#error").text(error.message);
-                if (error.message=="TOO_MANY_ATTEMPTS_TRY_LATER") {
+                if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
                     $("#error").text("Too many attempts try again later");
                 }
                 //  else {
-                    
+
                 // }
                 $("#error").show();
             });
@@ -426,7 +434,7 @@
                         url: base_url + '/md-vendor-register',
                         method: 'POST',
                         data: formData,
-                       
+
                         success: function(response) {
                             console.log(response);
                             if (response.url !== undefined) {
@@ -486,8 +494,8 @@
         });
     </script>
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
 
     <script>
         $(document).ready(function() {
@@ -724,5 +732,4 @@
             });
         });
     </script>
-
 @endsection
