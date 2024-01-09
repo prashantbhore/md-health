@@ -1,5 +1,5 @@
 @php
-    $treatment_plans = App\Models\ProductCategory::all();
+    $treatment_plans = App\Models\ProductCategory::where('status', 'active')->get();
     $cities = App\Models\Cities::where('country_id', '1')
         ->where('status', 'active')
         ->get();
@@ -17,8 +17,8 @@
     <div class="bg-f6">
         <div class="content-wrapper bg-f6">
             <!-- =============================================================================================================
-                                                            1 : BANNER SECTION
-                             ============================================================================================================= -->
+                                                                        1 : BANNER SECTION
+                                         ============================================================================================================= -->
             <div class="banner-section df-center flex-column">
                 <div class="container">
                     <div class="banner-content df-center flex-column">
@@ -34,7 +34,7 @@
                                     <input type="hidden" name="platform_type" value="web">
                                     <select class="form-select" name="treatment_name" id="floatingSelect"
                                         aria-label="Floating label select example">
-                                        <option value="">Select Treatment</option>
+                                        <option value="Select Treatment">Select Treatment</option>
                                         @foreach ($treatment_plans as $treatment_plan)
                                             <option>{{ $treatment_plan->product_category_name }}</option>
                                         @endforeach
@@ -45,7 +45,7 @@
                                 <div class="form-floating">
                                     <select class="form-select" name="city_name" id="floatingSelect"
                                         aria-label="Floating label select example">
-                                        <option data-display="Select" selected>Select City</option>
+                                        <option value="Select City" selected>Select City</option>
                                         @foreach ($cities as $city)
                                             <option>{{ $city->city_name }}</option>
                                         @endforeach
@@ -66,8 +66,8 @@
             </div>
 
             <!-- =============================================================================================================
-                                                            2 : MAKE REQUEST FORM
-                             ============================================================================================================= -->
+                                                                        2 : MAKE REQUEST FORM
+                                         ============================================================================================================= -->
             <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
                 <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
                 <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span>
