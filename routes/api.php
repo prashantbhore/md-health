@@ -317,6 +317,9 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('vendor-active-product-search', 'active_vendor_search_products');
         Route::post('vendor-inactive-product-search', 'inactive_vendor_search_products');
         Route::post('vendor-product-view', 'vendor_product_view');
+        Route::post('md-vendor-product-active-to-deactive', 'product_active_to_deactive');
+        Route::post('md-vendor-product-deactive-to-active', 'product_deactive_to_active');
+
         // Route::post('/products/bulk-import','addProductsBulk');
     });
 

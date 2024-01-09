@@ -19,7 +19,7 @@
                 <a class="nav-link" href="#">Payment Information</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
+                <a class="nav-link" href="{{url('vendor-account')}}">Account</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reports</a>

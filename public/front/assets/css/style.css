@@ -163,6 +163,7 @@
 .save-btn-green:hover {
     color: #000;
 }
+
 .card-h3 {
     color: #000;
     font-family: Campton;
@@ -307,6 +308,7 @@
 }
 
 .request-modal .form-control::placeholder,
+.authentication .form-control::placeholder,
 .epic-span {
     font-family: "CamptonThin" !important;
     font-weight: 600 !important;
@@ -332,7 +334,8 @@
     opacity: 1;
 }
 
-.request-modal .form-select {
+.request-modal .form-select,
+.authentication .form-select {
     background-image: url("../img/SelectArrowDown.png");
     background-size: unset;
 }
@@ -2989,7 +2992,7 @@ span.popup-msg.active {
 .p-abs {
     position: absolute;
     right: -75px;
-    top: 0;
+    top: -25px;
 }
 
 .tab-content .form.text-start {
@@ -3250,4 +3253,8 @@ label.tc-text {
 
 .tox-statusbar__branding {
     display: none;
+}
+
+.md-booking-middle-content .nav-item {
+    cursor: pointer;
 }

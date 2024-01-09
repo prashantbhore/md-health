@@ -529,6 +529,64 @@ class VendorProductController extends BaseController
         ]);
     }
 
+
+    public function product_active_to_deactive(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $status_update['status'] = 'inactive';
+        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_ip_address'] = $request->ip();
+
+        $activate_to_deactive_packages = VendorProduct::where('id', $request->id)->update($status_update);
+        if (!empty($activate_to_deactive_packages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'product is added in deactive list.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    //code by mplus01
+    public function product_deactive_to_active(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $status_update['status'] = 'active';
+        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_ip_address'] = $request->ip();
+
+        $activate_to_deactive_packages = VendorProduct::where('id', $request->id)->update($status_update);
+        if (!empty($activate_to_deactive_packages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'product is added in active list.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
 }
 
 
