@@ -29,12 +29,12 @@
                         <div class="card-body">
                             <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
                                 <p class="mb-0 fsb-2 fw-600">Active Packages</p>
-                                <h3 class="mb-0 fsb-2 fw-600" id="countsofpack">0</h3>
+                                <h3 class="my-0 fsb-2 fw-600" id="countsofpack">0</h3>
                             </div>
                             <a href="{{ url('medical-packages-view') }}"
                                 class="black-plate bg-black d-flex align-items-center justify-content-between mb-3">
                                 <p class="mb-0 fsb-2 fw-600">Add New Packages</p>
-                                <h3 class="mb-0 fsb-2 fw-600">+</h3>
+                                <h3 class="my-0 fsb-2 fw-600">+</h3>
                             </a>
                             <div
                                 class="green-plate bg-green text-green d-flex align-items-center justify-content-between mb-3">
@@ -312,9 +312,15 @@
                         success: function(response) {
                             if (response) {
                                 if (type === 'active') {
+                                    $('#activelist').hide();
+                                    $('#deactivelist').hide();
                                     $('#activelist').html(response);
+                                    $('#activelist').show();
                                 } else {
+                                    $('#deactivelist').hide();
+                                    $('#activelist').hide();
                                     $('#deactivelist').html(response);
+                                    $('#deactivelist').show();
                                 }
                             } else {
                                 if (type === 'active') {

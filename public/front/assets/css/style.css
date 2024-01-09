@@ -108,6 +108,36 @@
 }
 
 /* UTILITY CLASSES */
+.bod-3 {
+    border-radius: 3px 0 0px 3px !important;
+}
+
+.bod-n-3 {
+    border-radius: 0px 3px 3px 0px !important;
+}
+
+.card-h8 {
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.44px;
+}
+
+.card-p8 {
+    color: #FFF;
+    text-align: center;
+    font-family: CamptonBook;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -1.04px;
+}
+
 .add-btn {
     border-radius: 3px;
     background: #000;
@@ -245,11 +275,18 @@
 .search-bar .form-floating label {
     color: #a3a3a3;
     font-family: CamptonBook;
-    font-size: 14px !important;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.98px;
+}
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+    opacity: 1;
+    transform: scale(1) translateY(-0.5rem);
 }
 
 .search-bar {
@@ -334,11 +371,12 @@
     opacity: 1;
 }
 
-.search-bar .form-select, .for-custom-dropdown-div  .custom-dropdown {
+
+.search-bar .form-select {
     background-image: url("../img/SelectArrowDown.png");
     background-repeat: no-repeat;
     background-size: auto;
-    background-position:  bottom 16px right 12px;
+    background-position: bottom 16px right 12px;
 }
 
 .request-modal .form-select,
@@ -701,7 +739,7 @@ select {
 }
 
 .text-green {
-    color: #4cdb06;
+    color: #4cdb06 !important;
 }
 
 .text-gray {
@@ -2198,25 +2236,59 @@ span.popup-msg.active {
 /* Mpluss06 */
 
 .medical-pckg {
-    height: 100vh;
+    height: 579px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .medical-pckg p {
-    line-height: 50px;
+    color: #FFF;
+    font-family: Campton;
+    font-size: 39px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 45px;
+    /* 115.385% */
+    letter-spacing: -1.56px;
+}
+
+.medical-pckg .text-green {
+    color: #4CDB06;
+    font-family: Campton;
+    font-size: 39px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 45px;
+    letter-spacing: -1.56px;
+}
+
+.medical-pckg .fnpp {
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 39px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 45px;
+    letter-spacing: -1.56px;
 }
 
 .medical-pckg .bookButton {
-    border: 1.5px solid #4cdb06;
-    padding: 8px 60px;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-family: CamptonBold;
-    text-decoration: none;
-    color: #fff;
-    align-self: flex-start;
+    width: 234px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 70px;
+    border: 1px solid #4CDB06;
+
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+
+    cursor: pointer;
 }
 
 .section6 {
@@ -2234,8 +2306,8 @@ span.popup-msg.active {
 /* Testimonial */
 
 .testimonial {
-    height: 100vh;
-    padding: 8rem 0;
+    /* height: 100vh; */
+    padding-top: 8rem;
     /* display: flex;
     flex-direction: column;
     align-items: center; */
@@ -2253,9 +2325,9 @@ span.popup-msg.active {
     flex-direction: column;
 }
 
-.mySwiper .swiper-slide p:first-child {
+/* .mySwiper .swiper-slide p:first-child {
     width: 60%;
-}
+} */
 
 .mySwiper .swiper-button-next:after,
 .mySwiper .swiper-button-prev:after {
@@ -3269,4 +3341,26 @@ label.tc-text {
 
 .md-booking-middle-content .nav-item {
     cursor: pointer;
+}
+
+.scanQR {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 61px;
+    letter-spacing: -0.76px;
+    text-align: center;
+}
+
+.test-p1 {
+    color: #979797;
+    text-align: center;
+    font-family: CamptonBook;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.92px;
+    width: 618px;
 }

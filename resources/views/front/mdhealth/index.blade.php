@@ -28,9 +28,9 @@ $is_logged_in = false;
                     <form method="POST" action="{{ url('health-search-result') }}" class="w-100">
                         @csrf
                         <!-- SEARCH TREATMENT BAR -->
-                        <div class="search-bar d-flex align-items-center p-3 gap-3">
+                        <div class="search-bar d-flex align-items-center p-3">
                             <!-- Treatments -->
-                            <div class="form-floating">
+                            <div class="form-floating pe-3">
                                 <input type="hidden" name="platform_type" value="web">
                                 <select class="form-select" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option value="">Select Treatment</option>
@@ -42,7 +42,7 @@ $is_logged_in = false;
                             </div>
                             <!-- City -->
                             <div class="form-floating">
-                                <select class="form-select" name="city_name" id="floatingSelect" aria-label="Floating label select example">
+                                <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option data-display="Select" selected>Select City</option>
                                     @foreach ($cities as $city)
                                     <option>{{ $city->city_name }}</option>
@@ -51,8 +51,8 @@ $is_logged_in = false;
                                 <label for="floatingSelect">City</label>
                             </div>
                             <!-- Treatment Date -->
-                            <div class="form-floating">
-                                <input type="text" class="form-select" name="daterange" value="" />
+                            <div class="form-floating pe-3">
+                                <input type="text" class="form-select bod-n-3" style="background-image: none;" name="daterange" value="" />
                                 <label for="floatingSelect">Treatment Date</label>
                             </div>
                             <button type="submit" class="btn btn-search-pill">Search</button>
@@ -331,7 +331,7 @@ $is_logged_in = false;
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -342,7 +342,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -353,7 +353,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -364,7 +364,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -375,7 +375,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -386,7 +386,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -397,7 +397,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">

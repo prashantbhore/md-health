@@ -23,6 +23,9 @@ use App\Models\CustomerDocuments;
 use App\Models\CustomerReviews;
 use App\Models\CustomerCancelledReason;
 use App\Models\CustomerFavouritePackages;
+use App\Models\MedicalProviderLogo;
+use App\Models\MedicalProviderLicense;
+
 
 
 class CustomerPackageController extends BaseController
@@ -598,7 +601,7 @@ class CustomerPackageController extends BaseController
             'package_id' => 'required',
             'patient_full_name' => 'required',
             'patient_relation' => 'required',
-            'patient_email' => 'required',
+            // 'patient_email' => 'required',
             'patient_contact_no' => 'required',
             'patient_country_id' => 'required',
             'patient_city_id' => 'required',
@@ -1419,15 +1422,16 @@ class CustomerPackageController extends BaseController
                     )
                     ->where('id', $request->package_id)
                     ->first();
-                $purchase_details['package_treatment_price'] = !empty($packages->treatment_price)? $packages->treatment_price:'';
-                $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price)? $packages->hotel_acommodition_price:'';
-                $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price)? $packages->hotel_acommodition_price:'';
+                    // return  $packages;
+                $purchase_details['package_treatment_price'] = !empty($packages->treatment_price)? $packages->treatment_price:0;
+                $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price)? $packages->hotel_acommodition_price:0;
+                $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price)? $packages->hotel_acommodition_price:0;
                 // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
                 // $purchase_details['package_total_price'] = $request->package_total_price;
                 // $purchase_details['transaction_id'] = $request->transaction_id;
                 // $purchase_details['payment_method'] = $request->payment_method;
-                $purchase_details['hotel_id'] = !empty($packages->hotel_id)? $packages->hotel_id:'';
-                $purchase_details['vehicle_id'] = !empty($packages->vehicle_id)? $packages->vehicle_id:'';
+                $purchase_details['hotel_id'] = !empty($packages->hotel_id)? $packages->hotel_id:0;
+                $purchase_details['vehicle_id'] = !empty($packages->vehicle_id)? $packages->vehicle_id:0;
                 $purchase_details['provider_id'] = !empty($packages->created_by)? $packages->created_by:'';
                 $purchase_details['package_total_price'] = $request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
@@ -1464,21 +1468,22 @@ class CustomerPackageController extends BaseController
                 // ... (existing code)
                 if (!empty($update_unique_id)) {
                     $payment_details_pending = [];
-                    $payment_details_pending['order_id'] = !empty($purchase_details_data->id)? $purchase_details_data->id:'';
-                    $payment_details_pending['customer_id'] = !empty($purchase_details_data->customer_id)? $purchase_details_data->customer_id:'';
+                    $payment_details_pending['order_id'] = !empty($purchase_details_data->id)? $purchase_details_data->id:0;
+                    $payment_details_pending['customer_id'] = !empty($purchase_details_data->customer_id)? $purchase_details_data->customer_id:0;
                     $payment_details_pending['card_name'] = $request->card_name;
                     $payment_details_pending['card_no'] = $request->card_no;
                     $payment_details_pending['card_expiry_date'] = $request->card_expiry_date;
                     $payment_details_pending['card_cvv'] = $request->card_cvv;
                     $payment_details_pending['package_id'] = $request->package_id;
-                    $payment_details_pending['provider_id'] = !empty($packages->created_by)? $packages->created_by:'';
+                    $payment_details_pending['provider_id'] = !empty($packages->created_by)? $packages->created_by:0;
                     $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage)? $packages->created_by:'';
-                    $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount)? $purchase_details_data->paid_amount:'';
+                    $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount)? $purchase_details_data->paid_amount:0;
                     // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
 
                     // Calculate remaining amount after 'pending' payment
                     // $remaining_amount = $request->package_total_price - $request->pending_amount;
+                    $payment_details_pending['pending_payment'] = $pending_amount;
 
                     $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
                     // return $payment_details_completed;
@@ -1506,13 +1511,19 @@ class CustomerPackageController extends BaseController
                             ->update($purchase_id);
                     }
                 }
+                if(!empty($purchase_details_data->id)){
 
+                    $CustomerPurchaseDetails=CustomerPurchaseDetails::where('status','active')
+                    ->where('id', $purchase_details_data->id)
+                    ->select('order_id')
+                    ->first();
+                }
 
                 if (!empty($payment_completed) || !empty($payment_pending)) {
                     return response()->json([
                         'status' => 200,
                         'message' => 'package purchase successfully.',
-                        // 'payment_details' => $payment_details,
+                        'order_id' => $CustomerPurchaseDetails->order_id,
                     ]);
                 } else {
                     return response()->json([
@@ -1597,6 +1608,7 @@ class CustomerPackageController extends BaseController
                     }
                 }
             } else {
+                
                 $purchase_details = [];
 
                 $purchase_details['customer_id'] = Auth::user()->id;
@@ -1615,6 +1627,8 @@ class CustomerPackageController extends BaseController
                     )
                     ->where('id', $request->package_id)
                     ->first();
+
+                    // return  $packages;
                 // $purchase_details['package_treatment_price'] = !empty($packages->treatment_price)? $packages->treatment_price:'';
                 // $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price)? $packages->hotel_acommodition_price:'';
                 // $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price)? $packages->hotel_acommodition_price:'';
@@ -1635,16 +1649,16 @@ class CustomerPackageController extends BaseController
                 // $purchase_details['created_by'] = Auth::user()->id;
 
                 // $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
-                $purchase_details['package_treatment_price'] = !empty($packages->treatment_price) ? $packages->treatment_price : '';
+                $purchase_details['package_treatment_price'] = !empty($packages->treatment_price) ? $packages->treatment_price : 0;
                 $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price) ? $packages->hotel_acommodition_price : '';
-                $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price) ? $packages->hotel_acommodition_price : '';
+                $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price) ? $packages->hotel_acommodition_price : 0;
                 // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
                 // $purchase_details['package_total_price'] = $request->package_total_price;
                 // $purchase_details['transaction_id'] = $request->transaction_id;
                 // $purchase_details['payment_method'] = $request->payment_method;
-                $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : '';
-                $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : '';
-                $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
+                $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
+                $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
+                $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
                 $purchase_details['package_total_price'] = $request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
@@ -1682,21 +1696,22 @@ class CustomerPackageController extends BaseController
                 // ... (existing code)
                 if (!empty($update_unique_id)) {
                     $payment_details_pending = [];
-                    $payment_details_pending['order_id'] = !empty($purchase_details_data->id) ? $purchase_details_data->id : '';
-                    $payment_details_pending['customer_id'] = !empty($purchase_details_data->customer_id) ? $purchase_details_data->customer_id : '';
+                    $payment_details_pending['order_id'] = !empty($purchase_details_data->id) ? $purchase_details_data->id : 0;
+                    $payment_details_pending['customer_id'] = !empty($purchase_details_data->customer_id) ? $purchase_details_data->customer_id : 0;
                     $payment_details_pending['card_name'] = $request->card_name;
                     $payment_details_pending['card_no'] = $request->card_no;
                     $payment_details_pending['card_expiry_date'] = $request->card_expiry_date;
                     $payment_details_pending['card_cvv'] = $request->card_cvv;
                     $payment_details_pending['package_id'] = $request->package_id;
-                    $payment_details_pending['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
-                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->created_by : '';
-                    $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount) ? $purchase_details_data->paid_amount : '';
+                    $payment_details_pending['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
+                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->created_by : 0;
+                    $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount) ? $purchase_details_data->paid_amount : 0;
                     // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
 
                     // Calculate remaining amount after 'pending' payment
                     // $remaining_amount = $request->package_total_price - $request->pending_amount;
+                    $payment_details_pending['pending_payment'] = $pending_amount;
 
                     $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
 
@@ -1712,6 +1727,25 @@ class CustomerPackageController extends BaseController
                     if ($request->pending_amount > 0) {
                         $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
                     }
+
+                    if (!empty($request->patient_id)) {
+                        $purchase_id = [];
+                        $purchase_id = [
+                            'purchase_id' => $purchase_details_data->id,
+                        ];
+
+                        PatientInformation::where('id', $request->patient_id)
+                            ->where('status', 'active')
+                            ->update($purchase_id);
+                    }
+                }
+
+                if (!empty($purchase_details_data->id)) {
+
+                    $CustomerPurchaseDetails = CustomerPurchaseDetails::where('status', 'active')
+                        ->where('id', $purchase_details_data->id)
+                        ->select('order_id')
+                        ->first();
                 }
 
 
@@ -1719,7 +1753,7 @@ class CustomerPackageController extends BaseController
                     return response()->json([
                         'status' => 200,
                         'message' => 'package purchase successfully.',
-                        // 'payment_details' => $payment_details,
+                        'order_id' => $CustomerPurchaseDetails->order_id,
                     ]);
                 } else {
                     return response()->json([
@@ -1768,7 +1802,7 @@ class CustomerPackageController extends BaseController
             ->get();
 
         foreach ($customer_purchase_package_active_list as $key => $val) {
-            $customer_purchase_package_active_list[$key]['purchase_id'] = !empty($val->purchase_id) ? $val->purchase_id : '';
+            $customer_purchase_package_active_list[$key]['purchase_id'] = !empty($val->purchase_id) ? $val->purchase_id : 0;
             $customer_purchase_package_active_list[$key]['package_name'] = !empty($val->package_name) ? $val->package_name : '';
             $customer_purchase_package_active_list[$key]['city_name'] = !empty($val->city_name) ? $val->city_name : '';
             $customer_purchase_package_active_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
@@ -1831,7 +1865,7 @@ class CustomerPackageController extends BaseController
 
         $customer_purchase_package_active_list->get();
         foreach ($customer_purchase_package_active_list as $key => $val) {
-            $customer_purchase_package_active_list[$key]['id'] = !empty($val->id) ? $val->id : '';
+            $customer_purchase_package_active_list[$key]['id'] = !empty($val->id) ? $val->id : 0;
             $customer_purchase_package_active_list[$key]['package_name'] = !empty($val->package_name) ? $val->package_name : '';
             $customer_purchase_package_active_list[$key]['city_name'] = !empty($val->city_name) ? $val->city_name : '';
             $customer_purchase_package_active_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
@@ -1884,7 +1918,7 @@ class CustomerPackageController extends BaseController
             ->get();
 
         foreach ($customer_purchase_package_completed_list as $key => $val) {
-            $customer_purchase_package_completed_list[$key]['id'] = !empty($val->id) ? $val->id : '';
+            $customer_purchase_package_completed_list[$key]['id'] = !empty($val->id) ? $val->id : 0;
             $customer_purchase_package_completed_list[$key]['package_name'] = !empty($val->package_name) ? $val->package_name : '';
             $customer_purchase_package_completed_list[$key]['city_name'] = !empty($val->city_name) ? $val->city_name : '';
             $customer_purchase_package_completed_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
@@ -1943,7 +1977,7 @@ class CustomerPackageController extends BaseController
         $customer_purchase_package_completed_list->get();
 
         foreach ($customer_purchase_package_completed_list as $key => $val) {
-            $customer_purchase_package_completed_list[$key]['id'] = !empty($val->id) ? $val->id : '';
+            $customer_purchase_package_completed_list[$key]['id'] = !empty($val->id) ? $val->id : 0;
             $customer_purchase_package_completed_list[$key]['package_name'] = !empty($val->package_name) ? $val->package_name : '';
             $customer_purchase_package_completed_list[$key]['city_name'] = !empty($val->city_name) ? $val->city_name : '';
             $customer_purchase_package_completed_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
@@ -2206,7 +2240,7 @@ class CustomerPackageController extends BaseController
             ->first();
 
         // foreach ($customer_purchase_package_active_list as $key => $val) {
-        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? $customer_purchase_package_active_list->purchase_id : '';
+        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? $customer_purchase_package_active_list->purchase_id : 0;
         $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
         // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
         $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
@@ -2216,7 +2250,7 @@ class CustomerPackageController extends BaseController
         $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
         $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
-        $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
+        $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : 0;
         // $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? $customer_purchase_package_active_list->created_at : '';
         // }
 

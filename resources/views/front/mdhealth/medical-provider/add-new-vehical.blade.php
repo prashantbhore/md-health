@@ -51,7 +51,7 @@
                             <a href="{{ url('medical-other-services') }}"
                                 class="d-flex align-items-center gap-1 text-decoration-none">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                                <p class="mb-0 text-dark">Back</p>
+                                <p class="mb-0 card-h1">Back</p>
                             </a>
                         </h5>
                         <div class="card-body">
@@ -192,7 +192,7 @@
                                     </div>
 
                                     <div class="section-btns mb-4">
-                                        <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save
+                                        <button type="submit" class="btn save-btn-black">Save
                                             Vehicle</button>
                                     </div>
 
