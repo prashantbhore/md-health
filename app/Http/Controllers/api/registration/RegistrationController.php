@@ -357,7 +357,7 @@ class RegistrationController extends BaseController {
                     $provider_unique_id = '#MDPRVDR' . $value->id;
                 }
 
-                $update_unique_id = MedicalProviderRegistrater::where( 'id', $value->id )->update( [ 'provider_unique_id' => $provider_unique_id ] );
+                $update_unique_id = MedicalProviderRegistrater::where( 'id', $value->id )->update( [ 'provider_unique_no' => $provider_unique_id ] );
                 $common_data_registrationid = CommonUserLoginTable::where( 'id', $lastInsertedId )->update( [ 'user_id' => $value->id, 'status' => 'active' ] );
 
             }
