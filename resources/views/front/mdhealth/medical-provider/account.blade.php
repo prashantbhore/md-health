@@ -2,6 +2,9 @@
 @section('content')
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
+        #pic2 {
+            height: 150px;
+        }
         .video-div {
             height: 100px;
             width: 175px;
@@ -143,7 +146,7 @@
                                                     : URL::asset('front/assets/img/default-img.png') }}"
 {{-- 
                                             src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}}
-                                                alt="image" id="pic1">
+                                                alt="image" id="pic1" >
                                             <input type="hidden" name="old_image" id="old_image"
                                                 value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
                                         </div>
@@ -226,7 +229,7 @@
                                     </div>
 
                                     <div class="section-btns mb-4">
-                                        <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save
+                                        <button type="submit" class="btn save-btn-black">Save
                                             Changes</button>
                                     </div>
 

@@ -3,9 +3,8 @@
         // $my_active_packages_list;
         // $my_completed_packages_list;
         // $my_cancelled_packages_list;
-        // dd($patient_information_list);
+        //dd($my_active_packages_list);
         $patient_information_list = !empty($patient_information_list[0]) ? $patient_information_list[0] : '';
-        // dd($patient_information_list);
     @endphp
 @endsection
 @extends('front.layout.layout2')
@@ -138,7 +137,7 @@
                                                             <div class="col-md-8 justify-content-start ps-0">
                                                                 <div class="trmt-card-body">
                                                                     <h5 class="dashboard-card-title fw-600 mb-0">
-                                                                        {{ $active_package['company_name'] }}
+                                                                        {{ $active_package['package_name'] }}
                                                                     </h5>
                                                                     <h6 class="mb-1 fsb-1">
                                                                         {{ $active_package['product_category_name'] }}
@@ -225,7 +224,7 @@
                                                             <div class="col-md-6 justify-content-start ps-0">
                                                                 <div class="trmt-card-body">
                                                                     <h5 class="dashboard-card-title fw-600 mb-0">
-                                                                        {{ $completed_package['company_name'] }}
+                                                                        {{ $completed_package['package_name'] }}
                                                                     </h5>
                                                                     <h6 class="mb-1 fsb-1">
                                                                         {{ $completed_package['product_category_name'] }}
@@ -291,7 +290,7 @@
                                                             <div class="col-md-10 justify-content-start ps-0">
                                                                 <div class="trmt-card-body">
                                                                     <h5 class="dashboard-card-title fw-600 mb-0">
-                                                                        {{ $cancelled_package['company_name'] }}
+                                                                        {{ $cancelled_package['package_name'] }}
                                                                     </h5>
                                                                     <h6 class="mb-1 fsb-1">
                                                                         {{ $cancelled_package['product_category_name'] }}
@@ -575,12 +574,18 @@
                 rules: {
                     patient_full_name: {
                         required: true,
+                        minlength: 1,
+                        nowhitespace: true,
                     },
                     patient_relation: {
                         required: true,
+                        minlength: 1,
+                        nowhitespace: true,
                     },
                     patient_email: {
                         required: true,
+                        email: true,
+                        nowhitespace: true,
                     },
                     patient_contact_no: {
                         required: true,

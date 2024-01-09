@@ -183,7 +183,7 @@
                                         value="{{ !empty($system_users['previlages']) ? $system_users['previlages'] : '' }}">
 
                                     <div class="section-btns mb-5">
-                                        <button class="black-plate bg-black text-white fw-700 w-100">Save
+                                        <button class="btn save-btn-black">Save
                                             Personnel</button>
                                     </div>
                                 </form>
