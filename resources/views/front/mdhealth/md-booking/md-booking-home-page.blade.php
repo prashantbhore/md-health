@@ -3,7 +3,7 @@
 
 <style>
     .md-booking-serach-filter .select2-container .select2-selection--single {
-        height: calc(3.5rem + 2px) !important;
+        height: 57px !important;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -38,7 +38,7 @@
         position: relative;
         display: inline-block;
         width: 100%;
-        height: calc(3.5rem + 2px) !important;
+        height: 57px !important;
     }
 
     .dropdown-header {
@@ -48,7 +48,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
-    height: calc(3.5rem + 2px) !important;
+    height: 57px !important;
     display: flex;
     align-items: center;
     }
@@ -236,7 +236,7 @@
             </ul>
             <div class="tab-content main-mid-seaction-h1 rounded  " id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="md-booking-serach-filter p-3 mb-5 bg-white">
+                    <div class="md-booking-serach-filter p-3 mb-2 bg-white">
 
 
                         <div class="row">
@@ -308,7 +308,7 @@
                             <div class="col-md-2">
                                 {{-- hhhh --}}
                                 <a class="" href="{{URL('md-booking-search-hotel-page')}}">
-                                    <button class="btn-search-pill-booking3 " style="height: calc(3.5rem + 2px)">Search</button>
+                                    <button class="btn-search-pill-booking3 " style="height: 57px">Search</button>
                                 </a>
                             </div>
                         </div>
@@ -318,7 +318,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="md-booking-serach-filter p-3 mb-5 bg-white">
+                    <div class="md-booking-serach-filter p-3 mb-2 bg-white">
                         <div class="">
                             <div class="row">
                                 <div class="col-md-5">
@@ -370,7 +370,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <a class="" href="{{ URL('md-booking-search-flight-page') }}">
-                                        <button class="btn btn-search-pill-booking3" style="height: calc(3.5rem + 2px)">Search</button>
+                                        <button class="btn btn-search-pill-booking3" style="height: 57px">Search</button>
                                     </a>
                                 </div>
                             </div>
@@ -386,7 +386,7 @@
                                 <label class="fsb-2" for="twoway">Two Way</label>
                             </div>
                             <div class="d-flex gap-1">
-                                <p class="fsb-1 mb-0 fw-bold">Fight Details:</p>
+                                <p class="fsb-1 mb-0 fw-bold">Flight Details:</p>
                                 <div class="form-floating">
                                     <div class="custom-dropdown">
                                         <div class="dropdown-header fsb-2 fw-500" tabindex="0">First Class
@@ -440,7 +440,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade vehical-tab-div" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="md-booking-serach-filter p-3 mb-5 bg-white">
+                    <div class="md-booking-serach-filter p-3 mb-2 bg-white">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="d-flex flex-column justify-content-center align-items-start h-100 border booking-box-h">
@@ -487,7 +487,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 ">
-                                <button class="btn btn-search-pill-booking3" style="height: calc(3.5rem + 2px)">Search</button>
+                                <button class="btn btn-search-pill-booking3" style="height: 57px">Search</button>
                             </div>
                         </div>
                     </div>
