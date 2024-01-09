@@ -68,6 +68,9 @@
                                         <select id="treatment_category_id" name="treatment_category_id" class="form-select"
                                             onchange="categoryselect(this.value)">
                                             <option value="" selected disabled>Choose</option>
+                                           @if (!empty($treatment_categories))
+                                               
+                                          
                                             @foreach ($treatment_categories as $treatment_category)
                                                 @php
                                                     $isSelected = isset($packages_active_list['treatment_category_id']) && $packages_active_list['treatment_category_id'] == $treatment_category['id'];
@@ -77,6 +80,7 @@
                                                     {{ $treatment_category['product_category_name'] }}
                                                 </option>
                                             @endforeach
+                                            @endif
                                         </select>
                                     </div>
 
@@ -177,6 +181,9 @@
                                             <label class="form-label">Hotel Name</label>
                                             <select name="hotel_id" id="hotel_id">
                                                 <option value="" selected disabled>Choose</option>
+
+
+                                                @if (!empty($hotel_details))
                                                 @foreach ($hotel_details as $hotel_detail)
                                                     @php
                                                         $isSelected = isset($packages_active_list['hotel_id']) && $packages_active_list['hotel_id'] == $hotel_detail['id'];
@@ -186,7 +193,7 @@
                                                         {{ $hotel_detail['hotel_name'] }}
                                                     </option>
                                                 @endforeach
-
+                                                @endif
                                             </select>
                                         </div>
                                         <input type="hidden" id="hotel_details_input" name="hotel_details_input"
@@ -270,6 +277,7 @@
                                             <label class="form-label">Vehicle</label>
                                             <select name="vehicle_id" id="vehicle_id">
                                                 <option value="" selected disabled>Choose</option>
+                                                @if (!empty($vehicle_details))
                                                 @foreach ($vehicle_details as $vehicle_detail)
                                                     @php
                                                         $isSelected = isset($packages_active_list['vehicle_id']) && $packages_active_list['vehicle_id'] == $vehicle_detail['id'];
@@ -279,6 +287,7 @@
                                                         {{ $vehicle_detail['vehicle_model_name'] }}
                                                     </option>
                                                 @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                         <input type="hidden" id="vehicle_details_input" name="vehicle_details_input"
@@ -323,6 +332,7 @@
                                             {{-- {{dd($packages_active_list)}} --}}
                                             <select name="tour_id" id="tour_id">
                                                 <option value="" selected disabled>Choose</option>
+                                                @if (!empty($tour_details))
                                                 @foreach ($tour_details as $tour_detail)
                                                     @php
                                                         $isSelected = isset($packages_active_list['tour_id']) && $packages_active_list['tour_id'] == $tour_detail['id'];
@@ -332,6 +342,7 @@
                                                         {{ $tour_detail['tour_name'] }}
                                                     </option>
                                                 @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                         <input type="hidden" id="tour_details_input" name="tour_details_input" readonly>
@@ -480,11 +491,11 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="platform_type" value="web">
-                                    <div class="section-btns mb-3">
+                                    <div class="section-btns mb-3 d-flex gap-3">
                                         <button type="submit" name="button_type" value="active"
-                                            class="green-plate bg-green text-dark fw-700 fsb-1">Save Changes</button>
+                                            class="btn save-btn-black bg-green w-50">Save Changes</button>
                                         <button type="submit" name="button_type" value="inactive"
-                                            class="black-plate bg-black text-white fw-500 fsb-1">Deactivate
+                                            class="btn save-btn-black w-50">Deactivate
                                             Package</button>
                                     </div>
 
@@ -499,6 +510,7 @@
 @endsection
 
 @section('script')
+
     <script>
         $(".mpPackagesLi").addClass("activeClass");
         $(".mpPackages").addClass("md-active");
@@ -563,7 +575,11 @@
         });
     </script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+        
     <script>
         $(document).ready(function() {
             // Add custom validation method for checking if the input contains only spaces
