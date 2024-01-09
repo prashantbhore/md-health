@@ -363,12 +363,13 @@
     color: #000;
 }
 
-.request-modal .form-check-input {
+.request-modal .form-check-input,
+.tc .form-check-input {
     background: #F6F6F6;
     width: 18px;
-    height: 18px;
-    border-radius: 5px;
-    border: 1.5px solid #D6D6D6;
+    height: 18px !important;
+    border-radius: 5px !important;
+    border: 1.5px solid #D6D6D6 !important;
 }
 
 /*  */
@@ -2999,9 +3000,9 @@ span.popup-msg.active {
     padding: 0 57px;
 }
 
-.tab-content select {
+/* .tab-content select {
     color: #979797 !important;
-}
+} */
 
 .tab-content option:not(:first-of-type) {
     color: black;

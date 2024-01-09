@@ -48,14 +48,14 @@
         <div class="tab-content" id="myTabContent">
             <div class="login-form" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
                 <div class="row pt-4">
-                    <div class="col-md-6 bod-right pt-4">
+                    <div class="col-md-5 bod-right pt-4 pe-0 mb-5">
                         <div class="d-flex align-items-center gap-3 pt-5 pb-4">
                             <a href="{{ url('/') }}">
                                 <img src="{{ 'front/assets/img/back.svg' }}" alt="" />
                             </a>
-                            <h1 class="reg-title mt-0 mb-3">Create User Account</h1>
+                            <h1 class="reg-title my-3">Create User Account</h1>
                         </div>
-                        <div class="form text-start">
+                        <div class="form text-start mt-2">
                             <form id="mycustomerForm">
                                 {{-- action="{{ url('/md-customer-register') }}" method="post" --}}
                                 <input type="hidden" name="platform_type" value="web" />
@@ -79,12 +79,13 @@
                                             <option value="" selected disabled>Choose</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
+                                            <option value="Others">Others</option>
                                         </select>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label for="email" class="form-label">*E-mail</label>
-                                        <input type="text" class="form-control" name="email" id="email" placeholder="E-mail" />
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="E-mail" autocomplete="off" />
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="phone" class="form-label">*Phone</label>
@@ -113,7 +114,7 @@
 
                                     <div class="col-md-12 mb-3">
                                         <label for="address" class="form-label">*Address</label>
-                                        <textarea name="address" id="address" cols="" rows="5" class="form-control" placeholder="Enter Address"></textarea>
+                                        <textarea name="address" id="address" cols="" rows="5" class="form-control" style="font-family: 'CamptonBook'" placeholder="Enter Address"></textarea>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="hide-eye-div">
@@ -132,7 +133,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-check tc">
                                             <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
-                                            <label class="form-check-label" for="UserflexCheckDefault"> I accept <a href="#">Terms and Condition</a> & I agree to the <a href="#">User Data Consent.</a> </label>
+                                            <label class="form-check-label" for="UserflexCheckDefault"> I accept <a href="javascript:;" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a href="javascript:;" class="text-decoration-underline">User Data Consent.</a> </label>
                                         </div>
                                     </div>
                                     <div id="recaptcha-container"></div>
@@ -146,14 +147,14 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7  mb-5">
                         <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-5">
                             <div class="mb-2">
                                 <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
                             </div>
-                            <h5 class="text-h1 mb-0">Get your reliable & affordable</h5>
-                            <h4 class="text-green-h1b mb-2">Treatment Packages</h4>
-                            <p class="text-p1-gray mb-0">We are partnered with the top health service providers and
+                            <h5 class="text-h1 text-start my-0" style="font-size: 43px;">Get your reliable & affordable</h5>
+                            <h4 class="text-green-h1b my-0" style="font-size: 43px;">Treatment Packages</h4>
+                            <p class="text-p1-gray mb-0 camptonBook">We are partnered with the top health service providers and
                                 vendors that gives you the best health experience!</p>
                         </div>
                     </div>
