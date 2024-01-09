@@ -41,7 +41,7 @@
                 <div class="col-md-9">
                     <div class="card mb-4">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
-                            <span>{{ !empty($packages_active_list['package_unique_no']) ? $packages_active_list['package_unique_no'] : 'ADD PACKAGE' }}</span>
+                            <span>{{ !empty($packages_active_list['package_unique_no']) ? $packages_active_list['package_unique_no'] : 'Add Package' }}</span>
                             <a href="{{ url('medical-packages') }}"
                                 class="d-flex align-items-center gap-1 text-decoration-none text-dark">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
