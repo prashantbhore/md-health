@@ -321,21 +321,21 @@ class RegistrationController extends BaseController {
         $md_provider_input[ 'company_address' ] = $request->company_address;
         $md_provider_input[ 'password' ] = Hash::make( $request->password );
 
-        // if ( $request->has( 'company_logo_image_path' ) ) {
-        //     if ( $request->file( 'company_logo_image_path' ) ) {
-        //         $md_provider_input[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
-        //         $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
-        //         $md_provider_input[ 'company_logo_image_name' ] = $original_name;
-        //     }
-        // }
+        if ( $request->has( 'company_logo_image_path' ) ) {
+            if ( $request->file( 'company_logo_image_path' ) ) {
+                $md_provider_input[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
+                $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
+                $md_provider_input[ 'company_logo_image_name' ] = $original_name;
+            }
+        }
 
-        // if ( $request->has( 'company_licence_image_path' ) ) {
-        //     if ( $request->file( 'company_licence_image_path' ) ) {
-        //         $md_provider_input[ 'company_licence_image_path' ] = $this->verifyAndUpload( $request, 'company_licence_image_path', 'company/licence' );
-        //         $original_name = $request->file( 'company_licence_image_path' )->getClientOriginalName();
-        //         $md_provider_input[ 'company_licence_image_name' ] = $original_name;
-        //     }
-        // }
+        if ( $request->has( 'company_licence_image_path' ) ) {
+            if ( $request->file( 'company_licence_image_path' ) ) {
+                $md_provider_input[ 'company_licence_image_path' ] = $this->verifyAndUpload( $request, 'company_licence_image_path', 'company/licence' );
+                $original_name = $request->file( 'company_licence_image_path' )->getClientOriginalName();
+                $md_provider_input[ 'company_licence_image_name' ] = $original_name;
+            }
+        }
         $md_provider_input[ 'modified_ip_address' ] = $request->ip();
         $md_provider_registration = MedicalProviderRegistrater::create( $md_provider_input );
         // dd( $md_provider_registration );
@@ -357,7 +357,7 @@ class RegistrationController extends BaseController {
                     $provider_unique_id = '#MDPRVDR' . $value->id;
                 }
 
-                $update_unique_id = MedicalProviderRegistrater::where( 'id', $value->id )->update( [ 'provider_unique_id' => $provider_unique_id ] );
+                $update_unique_id = MedicalProviderRegistrater::where( 'id', $value->id )->update( [ 'provider_unique_no' => $provider_unique_id ] );
                 $common_data_registrationid = CommonUserLoginTable::where( 'id', $lastInsertedId )->update( [ 'user_id' => $value->id, 'status' => 'active' ] );
 
             }

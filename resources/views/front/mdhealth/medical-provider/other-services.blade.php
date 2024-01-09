@@ -38,7 +38,7 @@
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Acommodition
                                     <a href="{{ url('add-acommodition') }}"
-                                        class="green-plate bg-dark text-green fw-500 fs-6">Add New Acommodition</a>
+                                        class="btn add-btn">Add New Acommodition</a>
                                 </h6>
                                 @if (!empty($hotel_details))
                                     @foreach ($hotel_details as $hotel_detail)
@@ -94,7 +94,7 @@
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Transportation
                                     <a href="{{ url('add-new-vehical') }}"
-                                        class="green-plate bg-dark text-green fw-500 fs-6">Add New Vehicle</a>
+                                        class="btn add-btn">Add New Vehicle</a>
                                 </h6>
                                 @if (!empty($vehicle_details))
                                     @foreach ($vehicle_details as $vehicle_detail)
@@ -150,7 +150,7 @@
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
                                     Tour
-                                    <a href="{{ url('add-tour') }}" class="green-plate bg-dark text-green fw-500 fs-6">Add
+                                    <a href="{{ url('add-tour') }}" class="btn add-btn">Add
                                         New Tour</a>
                                 </h6>
                                 @if (!empty($tour_details))

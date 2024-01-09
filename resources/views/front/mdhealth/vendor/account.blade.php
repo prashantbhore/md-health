@@ -39,7 +39,7 @@
         <div class="container py-100px for-cards">
             <div class="row">
                 <div class="col-md-3">
-                    @include('front.includes.sidebar')
+                    @include('front.includes.sidebar-vendor')
                 </div>
                 <div class="col-md-9">
                     <div class="card mb-4">

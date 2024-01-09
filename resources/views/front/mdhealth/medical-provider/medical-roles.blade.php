@@ -183,7 +183,7 @@
                                         value="{{ !empty($system_users['previlages']) ? $system_users['previlages'] : '' }}">
 
                                     <div class="section-btns mb-5">
-                                        <button class="black-plate bg-black text-white fw-700 w-100">Save
+                                        <button class="btn save-btn-black">Save
                                             Personnel</button>
                                     </div>
                                 </form>
@@ -229,6 +229,10 @@
     </div>
 @endsection
 @section('script')
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
     <script>
         $(".mpRolesLi").addClass("activeClass");
         $(".mpRoles").addClass("md-active");

@@ -29,12 +29,12 @@
                         <div class="card-body">
                             <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
                                 <p class="mb-0 fsb-2 fw-600">Active Packages</p>
-                                <h3 class="mb-0 fsb-2 fw-600" id="countsofpack">0</h3>
+                                <h3 class="my-0 fsb-2 fw-600" id="countsofpack">0</h3>
                             </div>
                             <a href="{{ url('medical-packages-view') }}"
                                 class="black-plate bg-black d-flex align-items-center justify-content-between mb-3">
                                 <p class="mb-0 fsb-2 fw-600">Add New Packages</p>
-                                <h3 class="mb-0 fsb-2 fw-600">+</h3>
+                                <h3 class="my-0 fsb-2 fw-600">+</h3>
                             </a>
                             <div
                                 class="green-plate bg-green text-green d-flex align-items-center justify-content-between mb-3">
@@ -169,9 +169,13 @@
         $(".mpPackagesLi").addClass("activeClass");
         $(".mpPackages").addClass("md-active");
     </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
 
     <script>
-        // $(document).load(function() {
+        $(document).ready(function() {
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const bearer_token = '{{ Session::get('login_token') }}';
@@ -308,9 +312,15 @@
                         success: function(response) {
                             if (response) {
                                 if (type === 'active') {
+                                    $('#activelist').hide();
+                                    $('#deactivelist').hide();
                                     $('#activelist').html(response);
+                                    $('#activelist').show();
                                 } else {
+                                    $('#deactivelist').hide();
+                                    $('#activelist').hide();
                                     $('#deactivelist').html(response);
+                                    $('#deactivelist').show();
                                 }
                             } else {
                                 if (type === 'active') {
@@ -332,7 +342,7 @@
                     }
                 }
             });
-        // });
+        });
     </script>
 
     <script>

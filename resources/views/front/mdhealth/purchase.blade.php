@@ -211,6 +211,7 @@
             var isFiftySelected = false;
             var isHundredSelected = false;
             var cardNo;
+            var totaltoShowPrice;
             var cardExpiryDate;
             var cardCvv;
             var cardName;
@@ -372,7 +373,7 @@
                             otherServicesHtml +=
                                 '<div class="d-flex gap-5 justify-content-between">'
                             otherServicesHtml += '<div class="d-flex align-items-center gap-2">'
-                            otherServicesHtml += '<p class="mb-0 lctn">3 Stars Hotel</p>'
+                            // otherServicesHtml += '<p class="mb-0 lctn">3 Stars Hotel</p>'
                             otherServicesHtml += '</div>'
                             otherServicesHtml +=
                                 '<p class="mb-0 fs-5 camptonBold lh-base other-service-price">' +
@@ -469,6 +470,7 @@
                     }
                 });
                 // alert(totalPrice);
+                totaltoShowPrice = totalPrice;
                 proxyPrice = totalPrice;
 
                 twentyAmount = proxyPrice * (20 / 100);
@@ -496,7 +498,7 @@
 
                 // alert(totalPrice);
                 // $('.total_price').empty();
-                $('.total_price').text(proxyPrice + ' ₺');
+                $('.total_price').text(totaltoShowPrice + ' ₺');
             };
 
             function updateOtherServicesUi() {
@@ -519,7 +521,7 @@
                         .treatment_price) +
                     ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails.treatment_price +
                     '₺)</span>';
-                $('.total_price').text(totalPrice + ' ₺');
+                $('.total_price').text(totaltoShowPrice + ' ₺');
                 $('.treatment_price').append(treatmentPriceHtml);
 
             };

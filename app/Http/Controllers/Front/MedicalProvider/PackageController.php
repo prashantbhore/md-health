@@ -63,7 +63,7 @@ class PackageController extends Controller {
             $html1 .= '<div class="treatment-card df-start w-100 mb-3" id="div_' . $package_active_list[ 'id' ] . '">';
             $html1 .= '<div class="row card-row align-items-center">';
             $html1 .= '<div class="col-md-2 df-center px-0">';
-            $html1 .= '<img src="' . asset( 'front/assets/img/default-img.png' ) . '" alt="">';
+            $html1 .= '<img style="width: auto;height: 75px;" src="' . asset( 'front/assets/img/default-img.png' ) . '" alt="">';
             $html1 .= '</div>';
             $html1 .= '<div class="col-md-6 justify-content-start ps-0">';
             $html1 .= '<div class="trmt-card-body">';
@@ -136,7 +136,7 @@ class PackageController extends Controller {
             $html2 .= '<div class="treatment-card df-start w-100 mb-3" id="div_' . $package_deactive_list[ 'id' ] . '">';
             $html2 .= '<div class="row card-row align-items-center">';
             $html2 .= '<div class="col-md-2 df-center px-0">';
-            $html2 .= '<img src="' . asset( 'front/assets/img/default-img.png' )  . '" alt="">';
+            $html2 .= '<img style="width: auto;height: 75px;" src="' . asset( 'front/assets/img/default-img.png' )  . '" alt="">';
             $html2 .= '</div>';
             $html2 .= '<div class="col-md-6 justify-content-start ps-0">';
             $html2 .= '<div class="trmt-card-body">';
