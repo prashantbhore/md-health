@@ -1030,28 +1030,28 @@ class CustomerPackageController extends BaseController
 
         $twenty_percent = [
             'id' => 1,
-            'percentage' => '20 %',
-            'minimum_discount' => 'min.Requirement',
+            'percentage' => '20%',
+            'minimum_discount' => 'Min.Requirement',
             'title' => 'twenty_percent',
             'price' => number_format($twenty_percent, 2), // Replace with actual price format
         ];
         $thirty_percent = [
             'id' => 2,
-            'percentage' => '30 %',
+            'percentage' => '30%',
             'minimum_discount' => 'Get 5% Discount',
             'title' => 'thirty_percent',
             'price' => number_format($purchase_details['thirty_percent'], 2), // Replace with actual price format
         ];
         $fifty_percent = [
             'id' => 3,
-            'percentage' => '50 %',
+            'percentage' => '50%',
             'minimum_discount' => 'Get 8% Discount',
             'title' => 'fifty_percent',
             'price' => number_format($purchase_details['fifty_percent'], 2), // Replace with actual price format
         ];
         $hundred_percent = [
             'id' => 4,
-            'percentage' => '100 %',
+            'percentage' => '100%',
             'minimum_discount' => 'Get 10% Discount',
             'title' => 'hundred_percent',
             'price' => number_format($purchase_details['hundred_percent'], 2), // Replace with actual price format
@@ -1658,11 +1658,15 @@ class CustomerPackageController extends BaseController
                 // $purchase_details['payment_method'] = $request->payment_method;
                 $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
                 $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
-                $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
-                $purchase_details['package_total_price'] = $request->sale_price;
+                // $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
+                // $purchase_details['package_total_price'] = $request->sale_price;
+                // // $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                // $purchase_details['paid_amount'] = $request->paid_amount;
+                // $pending_amount = $request->sale_price - $request->paid_amount;
+                $purchase_details['package_total_price'] = (float)$request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
-                $purchase_details['paid_amount'] = $request->paid_amount;
-                $pending_amount = $request->sale_price - $request->paid_amount;
+                $purchase_details['paid_amount'] = (float)$request->paid_amount;
+                $pending_amount = (float)$request->sale_price - (float)$request->paid_amount;
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
                 $purchase_details['purchase_type'] = 'pending';
@@ -1724,7 +1728,7 @@ class CustomerPackageController extends BaseController
                     $payment_pending = CustomerPaymentDetails::create($payment_details_pending);
 
                     // Store 'completed' entry only if there's a remaining amount
-                    if ($request->pending_amount > 0) {
+                    if ($pending_amount > 0) {
                         $payment_completed = CustomerPaymentDetails::create($payment_details_completed);
                     }
 
@@ -2057,6 +2061,31 @@ class CustomerPackageController extends BaseController
 
     public function customer_change_package_list_active_cancelled(Request $request)
     {
+        // $validator = Validator::make($request->all(), [
+        //     'id' => 'required',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors());
+        // }
+
+        // $status_update['purchase_type'] = 'cancelled';
+        // $status_update['modified_by'] = Auth::user()->id;
+        // $status_update['modified_ip_address'] = $request->ip();
+
+        // $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->id)->update($status_update);
+        // if (!empty($CustomerPurchaseDetails)) {
+        //     return response()->json([
+        //         'status' => 200,
+        //         'message' => 'package details cancelled successfully.',
+        //     ]);
+        // } else {
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' => 'Something went wrong. Details not cancelled.',
+        //     ]);
+        // }
+
         $validator = Validator::make($request->all(), [
             'id' => 'required',
         ]);
@@ -2065,20 +2094,31 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $status_update['purchase_type'] = 'cancelled';
-        $status_update['modified_by'] = Auth::user()->id;
-        $status_update['modified_ip_address'] = $request->ip();
+        $cancellation_reason = [];
+        $cancellation_reason['purchase_id'] = $request->id;
+        $cancellation_reason['package_id'] = $request->package_id;
+        $cancellation_reason['customer_id'] = Auth::user()->id;
+        $cancellation_reason['cancellation_reason'] = $request->cancellation_reason;
+        $cancellation_reason['created_by'] = Auth::user()->id;
+        $CustomerCancelledReason = CustomerCancelledReason::create($cancellation_reason);
 
-        $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->id)->update($status_update);
+        if (!empty($CustomerCancelledReason)) {
+            $status_update['purchase_type'] = 'cancelled';
+            $status_update['modified_by'] = Auth::user()->id;
+            $status_update['modified_ip_address'] = $request->ip();
+            $CustomerPurchaseDetails = CustomerPurchaseDetails::where('id', $request->id)->update($status_update);
+        }
+
         if (!empty($CustomerPurchaseDetails)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'package details cancelled successfully.',
+                'message' => 'Thank You For Your Reason.We will get back to you.',
+                'CustomerCancelledReason' => $CustomerCancelledReason,
             ]);
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Something went wrong. Details not cancelled.',
+                'message' => 'Something went wrong.',
             ]);
         }
     }

@@ -92,6 +92,8 @@ class SalesController extends Controller
 
         $payment_details= $responseData['payment_details'];
 
+       // dd($payment_details);
+
         $apiUrl = url('api/md-provider-case-manager-list');
         $method = 'GET';
         $body=null;
@@ -100,10 +102,31 @@ class SalesController extends Controller
 
          $case_manager= $responseData ['case_managers'];
 
-        // dd($patient_details);
 
 
-        return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details','case_manager'));
+
+
+
+         $apiUrl2 = url( '/api/md-hotel-list' );
+         $apiUrl3 = url( '/api/md-transportation-list' );
+     
+         $method = 'GET';
+         $body = null;
+ 
+         
+ 
+         $responseData = $this->apiService->getData( $token, $apiUrl2, $body, $method );
+         $hotel_lists = !empty( $responseData[ 'hotel_details' ] ) ? $responseData[ 'hotel_details' ] : '';
+ 
+         $responseData = $this->apiService->getData( $token, $apiUrl3, $body, $method );
+         $vehicle_list= !empty( $responseData[ 'data' ] )?$responseData[ 'data' ]:[];
+ 
+        
+         //dd( $vehicle_list);
+      
+
+
+        return view('front.mdhealth.medical-provider.treatment-order-details',compact('patient_details','case_manager','payment_details','hotel_lists','vehicle_list'));
     }
 
 
@@ -238,15 +261,6 @@ class SalesController extends Controller
 
         return $resultHtml;
     }
-
-
-
-
-
-
-
-
-
 
 
 

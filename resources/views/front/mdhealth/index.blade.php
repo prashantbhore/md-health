@@ -83,17 +83,17 @@ $is_logged_in = false;
         </div>
     </div>
     <div class="py-100px pb-0 md-coin df-center flex-column gap-5 bg-f6 section-3 mb-5">
-        <div>
-            <img src="front/assets/img/mdcoin.png" alt="">
-        </div>
-        <h1 style="font-size: 83px;" class="position-relative">
-            <span class="text-green bb-green camptonBold">Earn</span> as you spend<span class="text-green">!</span>
-        </h1>
-        <p class="mb-5 camptonBook text-center fs-18" style="font-weight: 400;">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your
-                friends</span> and spend <span class="camptonBold">MD</span>coin
-            for
-            your health needs. </p>
+    <div>
+        <img src="front/assets/img/mdcoin.png" alt="">
     </div>
+    <h1 style="font-size: 83px;" class="position-relative">
+        <span class="text-green bb-green camptonBold">Earn</span> as you spend<span class="text-green">!</span>
+    </h1>
+    <p class="mb-5 camptonBook text-center fs-18" style="font-weight: 400;">Earn <span class="camptonBold">cashback</span> per transaction or <span class="camptonBold">invite your
+            friends</span> and spend <span class="camptonBold">MD</span>coin
+        for
+        your health needs. </p>
+</div>
     <div class="bg-f6">
         <div class="df-center container md-earn">
             <div>
@@ -331,7 +331,7 @@ $is_logged_in = false;
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -342,7 +342,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -353,7 +353,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -364,7 +364,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -375,7 +375,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -386,7 +386,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">
@@ -397,7 +397,7 @@ $is_logged_in = false;
                 </div>
                 <div class="swiper-slide">
                     <p class="test-p1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="d-flex gap-2 align-items-center">
                         <div class="bg-grey d-flex justify-content-center align-items-center rounded-circle p-1">

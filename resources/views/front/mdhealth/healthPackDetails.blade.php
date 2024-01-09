@@ -135,32 +135,35 @@
                                     <input type="hidden" name="platform_type" value="web">
                                     <input type="hidden" name="package_buy_for" value="other">
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label fw-bold">*Patient Full Name</label>
-                                        <input type="email" name="patient_full_name" class="form-control  h-75"
-                                            id="inputEmail4" placeholder="Full Name">
+                                        <label for="patient_full_name" class="form-label fw-bold">*Patient Full
+                                            Name</label>
+                                        <input type="text" name="patient_full_name" class="form-control  h-75"
+                                            id="patient_full_name" placeholder="Full Name">
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputPassword4" class="form-label fw-bold">*Relationship To
+                                        <label for="patient_relation" class="form-label fw-bold">*Relationship To
                                             You</label>
                                         <input type="text" name="patient_relation" class="form-control h-75"
-                                            id="inputPassword4" placeholder="Relationship To You">
+                                            id="patient_relation" placeholder="Relationship To You">
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">*Patient E-mail</label>
+                                        <label for="patient_email" class="form-label fw-bold">*Patient E-mail</label>
                                         <input type="email" name="patient_email" class="form-control  h-75"
-                                            id="inputAddress" placeholder="Email">
+                                            id="patient_email" placeholder="Email">
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputAddress" class="form-label fw-bold">*Patient Contact
+                                        <label for="patient_contact_no" class="form-label fw-bold">*Patient Contact
                                             Number</label>
-                                        <input type="email" name="patient_contact_no" class="form-control  h-75"
-                                            id="inputAddress" placeholder="Contact Number">
+                                        <input type="tel" name="patient_contact_no" class="form-control  h-75"
+                                            id="patient_contact_no" placeholder="Contact Number">
                                     </div>
 
                                     <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">*Patient Country</label>
-                                        <select name="patient_country_id" id="inputState" class="form-select h-75">
-                                            <option selected>Country</option>
+                                        <label for="patient_country_id" class="form-label fw-bold">*Patient
+                                            Country</label>
+                                        <select name="patient_country_id" id="patient_country_id"
+                                            class="form-select h-75">
+                                            <option value="" selected>Country</option>
                                             @foreach ($counties as $country)
                                                 <option value="{{ $country->id }}">{{ $country->country_name }}</option>
                                             @endforeach
@@ -168,9 +171,9 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputState" class="form-label fw-bold">*Patient City</label>
-                                        <select name="patient_city_id" id="inputState" class="form-select h-75">
-                                            <option selected>City</option>
+                                        <label for="patient_city_id" class="form-label fw-bold">*Patient City</label>
+                                        <select name="patient_city_id" id="patient_city_id" class="form-select h-75">
+                                            <option value=""" selected>City</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $country->id }}">{{ $city->city_name }}</option>
                                             @endforeach
@@ -223,10 +226,10 @@
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div> --}}
                                     <!-- <div class="col-12 px-0">
-                                                                                                                                                                                                        <p>
+                                                                                                                                                                                                                                                        <p>
 
-                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                        </p>
+                                                                                                                                                                                                                                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -397,6 +400,7 @@
 @endsection
 @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script type="text/javascript">
         var baseUrl = $('#base_url').val();
         var token = "{{ Session::get('login_token') }}";
@@ -406,31 +410,89 @@
             // const lightbox = GLightbox({
             //     ...options
             // });
+            var baseUrl = $('#base_url').val();
+            var token = "{{ Session::get('login_token') }}";
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             $('#other').click(function(e) {
                 e.preventDefault();
                 $('#other_form').submit();
             });
 
-            $('#other_form').submit(function(e) {
-                e.preventDefault();
-                var formData = $(this).serialize();
-                $.ajax({
-                    url: baseUrl + '/api/md-change-patient-information',
-                    type: 'POST',
-                    data: formData,
-                    headers: {
-                        'Authorization': 'Bearer ' + token
+            $('#other_form').validate({
+                rules: {
+                    patient_full_name: {
+                        required: true,
                     },
-                    success: function(response) {
-                        console.log('Success:', response);
-                        window.location.href = $('#hidden_url').val();
+                    patient_relation: {
+                        required: true,
                     },
-                    error: function(xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
+                    patient_email: {
+                        required: true,
+                        email: true,
+                    },
+                    patient_contact_no: {
+                        required: true,
+                    },
+                    patient_country_id: {
+                        required: true,
+                    },
+                    patient_city_id: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    patient_full_name: {
+                        required: "Please enter patient full name",
+                    },
+                    patient_relation: {
+                        required: "Please enter patient relation",
+                    },
+                    patient_email: {
+                        required: "Please enter patient email",
+                    },
+                    patient_contact_no: {
+                        required: "Please enter patient contact no",
+                    },
+                    patient_country_id: {
+                        required: "Please select patient country",
+                    },
+                    patient_city_id: {
+                        required: "Please select patient city",
+                    },
+
+                },
+                submitHandler: function(form) {
+                    var formData = $(this).serialize();
+                    $.ajax({
+                        url: baseUrl + '/api/md-change-patient-information',
+                        type: 'POST',
+                        data: formData,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        beforeSend: function() {
+                            $('#other').attr('disabled', true);
+                            $('#other').html(
+                                '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                            );
+                        },
+                        success: function(response) {
+                            $('#other').attr('disabled', false);
+                            // $('#other').html('<span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>');
+                            console.log('Success:', response);
+                            window.location.href = $('#hidden_url').val();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                    return false;
+                }
             });
+
 
             $('.purchaseBtn').click(function(e) {
                 e.preventDefault();

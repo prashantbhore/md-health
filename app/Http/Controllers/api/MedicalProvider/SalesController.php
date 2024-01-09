@@ -23,11 +23,6 @@ use App\Models\CustomerPaymentDetails;
 
 class SalesController extends BaseController{
 
-
-
-
-
-
     public function active_treatment_list()
     {
     
@@ -113,14 +108,17 @@ class SalesController extends BaseController{
 
         $patient_details = CustomerPurchaseDetails::where('id', $request->purchage_id)->with('customer','customer.city','customer.country','package','paymentDetails','case_manager','hotel','vehical')->first();
 
-        $payment_details=CustomerPaymentDetails::where('order_id', $patient_details->id)->get();
+        $latest_payment= CustomerPaymentDetails::where('order_id', $patient_details->id)
+        ->where('payment_status', 'completed')
+        ->orderBy('created_at', 'desc')
+        ->first();
 
         if (!empty($patient_details)){
             return response()->json([
                 'status' => 200,
                 'message' => 'patient details found.',
                 'patient_details' =>  $patient_details,
-                'payment_details'=>    $payment_details,
+                'payment_details'=>    $latest_payment,
             ]);
         } else{
             return response()->json([
@@ -303,7 +301,7 @@ class SalesController extends BaseController{
 
      public function treatment_search(Request $request)
      {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(),[
             'search_query' => 'required|string',
         ]);
 
@@ -348,10 +346,7 @@ class SalesController extends BaseController{
         }
     }
    
-
-
-
-    public function salesSummary(Request $request){
+public function salesSummary(Request $request){
 
         $providerId = Auth::user()->id;
         $currentDate = now()->toDateString();
@@ -376,6 +371,6 @@ class SalesController extends BaseController{
             'daily_sales' => $dailySales,
             'monthly_sales' => $monthlySales,
         ]);
-}
+    }
 
 }
