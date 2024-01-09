@@ -73,7 +73,7 @@
                      <li><a href="javascript:;">Information Society Services</a></li>
                      <li><a href="javascript:;">Privacy Policy</a></li>
                      <li><a href="javascript:;">Legal Information</a></li>
-                     <li><a href="javascript:;">Polices</a></li>
+                     <li><a href="javascript:;">Policies</a></li>
                  </ul>
              </div>
          </div>
