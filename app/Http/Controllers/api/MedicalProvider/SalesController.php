@@ -296,9 +296,6 @@ class SalesController extends BaseController{
        }
    }
 
-
-
-
      public function treatment_search(Request $request)
      {
         $validator = Validator::make($request->all(),[
@@ -346,7 +343,7 @@ class SalesController extends BaseController{
         }
     }
    
-public function salesSummary(Request $request){
+     public function salesSummary(Request $request){
 
         $providerId = Auth::user()->id;
         $currentDate = now()->toDateString();

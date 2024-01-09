@@ -167,7 +167,7 @@
                                             <input type="text" class="form-control" name="distance_from_hospital"
                                                 id="distance_from_hospital" placeholder="0"
                                                 value="{{ !empty($hotel_details['distance_from_hospital']) ? $hotel_details['distance_from_hospital'] : '' }}">
-                                            <span class="input-icon">₺</span>
+                                            <span class="input-icon">KM</span>
                                         </div>
                                     </div>
 

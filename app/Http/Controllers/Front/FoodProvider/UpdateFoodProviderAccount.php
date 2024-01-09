@@ -169,7 +169,7 @@ class UpdateFoodProviderAccount extends Controller
 
     public function update_food_profile(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
        // return Auth::guard('md_health_medical_providers_registers')->user()->id;
         $medical_provider_input = [];
         $medical_provider_input['company_name'] = $request->company_name;
@@ -189,15 +189,24 @@ class UpdateFoodProviderAccount extends Controller
         // dd($medical_provider_update);
         if(!empty($medical_provider_update))
         {
+
+            
             $md_provider_input_image_logo=[];
             $md_provider_input_image_logo['food_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
-    
-            if ( $request->has( 'company_logo_image_path' ) ) {
+           
+            if ( $request->has( 'company_logo_image_path' ) ){
+
+                
                 
                 if ( $request->file( 'company_logo_image_path' ) ) {
+                  
                     $md_provider_input_image_logo[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
+
+                   
                     $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
+                  
                     $md_provider_input_image_logo[ 'company_logo_image_name' ] = $original_name;
+                  
                 }
             }
 
@@ -211,7 +220,10 @@ class UpdateFoodProviderAccount extends Controller
             // }
 
 
-            MDFoodLogos::where('food_id',Session::get('MDFoodVendor*%'))->update($md_provider_input_image_logo);
+          
+            $foodId = Session::get('MDFoodVendor*%');
+
+            MDFoodLogos::updateOrInsert(['food_id' => $foodId], $md_provider_input_image_logo);
     
             $md_provider_input_image_license=[];
             $md_provider_input_image_license['food_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
@@ -223,7 +235,9 @@ class UpdateFoodProviderAccount extends Controller
                     $md_provider_input_image_license[ 'company_licence_image_name' ] = $original_name;
                 }
             }
-            MDFoodLicense::where('food_id', Session::get('MDFoodVendor*%'))->update($md_provider_input_image_license);
+            $foodId = Session::get('MDFoodVendor*%');
+
+            MDFoodLicense::updateOrInsert(['food_id' => $foodId], $md_provider_input_image_license);
         }
 
        
