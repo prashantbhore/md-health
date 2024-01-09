@@ -196,7 +196,7 @@
     </div>
 @endsection
 @section('script')
-    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -402,9 +402,11 @@
 
 
                 var formData = new FormData();
-
+                var patientId = "{{ Session::get('Patient_id') }}";
+                // alert(patientId);
                 var pendingAmount = proxyPrice - totalPrice;
                 formData.append('package_id', packageId);
+                formData.append('patient_id', patientId);
                 formData.append('sale_price', proxyPrice);
                 formData.append('paid_amount', totalPrice);
                 formData.append('platform_type', 'web');

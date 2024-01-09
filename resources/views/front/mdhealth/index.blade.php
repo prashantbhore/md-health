@@ -17,8 +17,8 @@
     <div class="bg-f6">
         <div class="content-wrapper bg-f6">
             <!-- =============================================================================================================
-                                                1 : BANNER SECTION
-                 ============================================================================================================= -->
+                                                            1 : BANNER SECTION
+                             ============================================================================================================= -->
             <div class="banner-section df-center flex-column">
                 <div class="container">
                     <div class="banner-content df-center flex-column">
@@ -66,8 +66,8 @@
             </div>
 
             <!-- =============================================================================================================
-                                                2 : MAKE REQUEST FORM
-                 ============================================================================================================= -->
+                                                            2 : MAKE REQUEST FORM
+                             ============================================================================================================= -->
             <div class="container section-wrapper df-center flex-column gap-5 py-100px pb-0 section-2">
                 <img src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
                 <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span>
@@ -742,9 +742,9 @@
     </div>
 @endsection
 @section('script')
-    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
-    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> --}}
-    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> --}}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
         $(function() {
             $('input[name="daterange"]').daterangepicker({
