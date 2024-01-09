@@ -118,14 +118,14 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="hide-eye-div">
                                             <label for="password" class="form-label">*Password</label>
-                                            <input type="password" name="password" class="form-control" id="password" placeholder="Minimum 8 characters" />
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Minimum 8 characters" autocomplete="off" />
                                             <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-5 hide-eye-div">
                                             <label for="re-password" class="form-label">*Re-Password</label>
-                                            <input type="password" name="repassword" class="form-control" id="repassword" placeholder="Minimum 8 characters" />
+                                            <input type="password" name="repassword" class="form-control" id="repassword" placeholder="Minimum 8 characters" autocomplete="off" />
                                             <span toggle="#repassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
