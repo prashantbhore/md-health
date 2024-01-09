@@ -500,8 +500,8 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function() {
             // alert('hi');
@@ -521,7 +521,7 @@
                 let formData = new FormData();
                 formData.append("id", packageId);
                 formData.append("purchase_id", purchaseId);
-                alert(packageId + " " + purchaseId);
+                // alert(packageId + " " + purchaseId);
                 e.preventDefault();
                 let clickedId = id;
                 $.ajax({
@@ -535,17 +535,17 @@
                     },
                     data: formData,
                     success: function(response) {
-                        alert(clickedId);
+                        // alert(clickedId);
                         var id = this.id;
                         console.log("Success: " + response.PatientInformation);
                         var PatientInformation = response.PatientInformation;
-                        var patientId = 0;
+                        // var patientId = 0;
 
-                        PatientInformation.forEach(function(patientInfo) {
-                            console.log(patientInfo);
-                            patientId++;
-                        });
-                        PatientInformation = PatientInformation[patientId - 1];
+                        // PatientInformation.forEach(function(patientInfo) {
+                        //     console.log(patientInfo);
+                        //     patientId++;
+                        // });
+                        // PatientInformation = PatientInformation[patientId - 1];
                         console.log(PatientInformation);
                         $('#package_buy_for').val(PatientInformation.package_buy_for);
                         $('#package_id').val(PatientInformation.package_id);
@@ -615,12 +615,13 @@
 
                 },
                 submitHandler: function(form) {
+                    // form.preventDefault();
                     var formData = new FormData(form);
                     formData.append('platform_type', 'web');
 
                     $.ajax({
                         type: 'POST',
-                        url: baseUrl + '/api/md-change-patient-information', // Your endpoint
+                        url: baseUrl + '/api/md-update-patient-information', // Your endpoint
                         contentType: false,
                         processData: false,
                         headers: {

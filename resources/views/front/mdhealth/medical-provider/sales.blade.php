@@ -76,6 +76,8 @@
 
                                         @if (!empty($active_sales))
                                             @foreach ($active_sales as $activeSale)
+
+                                                 {{-- {{dd($activeSale)}} --}}
                                                 <div class="treatment-card df-start w-100 mb-3">
 
                                                     <div class="row card-row align-items-center">
@@ -113,9 +115,10 @@
                                                         <div
                                                             class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                                             <div class="trmt-card-footer">
-                                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong> <span
+                                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong>      
+                                                                    <span
                                                                         class="">
-                                                                        {{ !empty($activeSale['package_total_price']) ? $activeSale['package_total_price'] : '' }}
+                                                                        {{ !empty($activeSale['package']['sale_price']) ? $activeSale['package']['sale_price'] : '' }}
                                                                         ₺</span></h6>
 
 
@@ -173,8 +176,9 @@
                                                             class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
                                                             <div class="trmt-card-footer">
                                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong>
-                                                                    <span
-                                                                        class="">{{ !empty($completedSale['package_total_price']) ? $completedSale['package_total_price'] : '' }}
+                                                                     <span
+                                                                        class="">
+                                                                        {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
                                                                         ₺</span>
                                                                 </h6>
 
@@ -244,8 +248,9 @@
                                                             <div class="trmt-card-footer">
                                                                 <h6 class="dbrd-order-total"><strong>Total Price:</strong>
                                                                     <span
-                                                                        class="">{{ !empty($completedSale['package_total_price']) ? $completedSale['package_total_price'] : '' }}
+                                                                        class=""> {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
                                                                         ₺</span>
+                                                                       
                                                                 </h6>
 
                                                                 <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ? Crypt::encrypt($completedSale['id']) : '')) }}"
