@@ -169,9 +169,13 @@
         $(".mpPackagesLi").addClass("activeClass");
         $(".mpPackages").addClass("md-active");
     </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
 
     <script>
-        // $(document).load(function() {
+        $(document).ready(function() {
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const bearer_token = '{{ Session::get('login_token') }}';
@@ -332,7 +336,7 @@
                     }
                 }
             });
-        // });
+        });
     </script>
 
     <script>
