@@ -355,6 +355,11 @@ class CustomerPackageController extends BaseController
             // $purchase_details['other_services'] = !empty($purchase_details->other_services) ? explode(',',$purchase_details->other_services) : [];
             // $purchase_details['hotel_name'] = !empty($purchase_details->hotel_name) ? $purchase_details->hotel_name : '';
             // $purchase_details['hotel_acommodition_price'] = !empty($purchase_details->hotel_acommodition_price) ? $purchase_details->hotel_acommodition_price : '';
+
+            $purchase_details['translation_price'] = !empty($purchase_details->translation_price) ? $purchase_details->translation_price : '';
+            $purchase_details['ambulance_service_price'] = !empty($purchase_details->ambulance_service_price) ? $purchase_details->ambulance_service_price : '';
+            $purchase_details['ticket_price'] = !empty($purchase_details->ticket_price) ? $purchase_details->ticket_price : '';
+
             $services = [];
 
             $total_price_percentage = 0; // Initialize total price percentage
@@ -700,6 +705,156 @@ class CustomerPackageController extends BaseController
         }
     }
 
+    // public function customer_get_percentage(Request $request)
+    // {
+    //     // $package_price = Packages::where('status', 'active')
+    //     // ->select('sale_price')
+    //     // ->where('id', $request->package_id)
+    //     // ->first();
+
+    //     $purchase_details = Packages::where('md_packages.status', 'active')
+    //         ->where('md_packages.id', $request->package_id)
+    //         ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
+    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+    //         ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
+    //         ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
+    //         ->first();
+    //     if ($purchase_details) {
+    //         $total_price_percentage = 0; // Initialize total price percentage
+
+    //         if (!empty($purchase_details->hotel_acommodition_price)) {
+    //             // Accommodation
+    //             $accommodation = [
+    //                 'id' => 1,
+    //                 'title' => 'Accommodation',
+    //                 'price' => $purchase_details->hotel_acommodition_price, // Replace with actual price format
+    //             ];
+
+    //             $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+    //             $price = $accommodation['price'] * $discount_percentage;
+    //             $accommodation['price_percentage'] = abs($price - $purchase_details->hotel_acommodition_price);
+
+    //             $total_price_percentage += $accommodation['price_percentage']; // Add to total
+    //         }
+
+    //         if (!empty($purchase_details->transportation_acommodition_price)) {
+    //             // Transportation
+    //             $transportation = [
+    //                 'id' => 2,
+    //                 'title' => 'Transportation',
+    //                 'price' => $purchase_details->transportation_acommodition_price, // Replace with actual price format
+    //             ];
+
+    //             $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+    //             $price = $transportation['price'] * $discount_percentage;
+    //             $transportation['price_percentage'] = abs($price - $purchase_details->transportation_acommodition_price);
+
+    //             $total_price_percentage += $transportation['price_percentage']; // Add to total
+    //         }
+
+    //         if (!empty($purchase_details->tour_price)) {
+    //             // Tour Details
+    //             $tour_details = [
+    //                 'id' => 3,
+    //                 'title' => 'Tour Details',
+    //                 'price' => $purchase_details->tour_price, // Replace with actual price format
+    //             ];
+
+    //             $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+    //             $price = $tour_details['price'] * $discount_percentage;
+    //             $tour_details['price_percentage'] = abs($price - $purchase_details->tour_price);
+
+    //             $total_price_percentage += $tour_details['price_percentage']; // Add to total
+    //         }
+
+    //         if (!empty($purchase_details->visa_service_price)) {
+    //             // Visa Details
+    //             $visa_details = [
+    //                 'id' => 4,
+    //                 'title' => 'Visa Details',
+    //                 'price' => $purchase_details->visa_service_price, // Replace with actual price format
+    //             ];
+
+    //             $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+    //             $price = $visa_details['price'] * $discount_percentage;
+    //             $visa_details['price_percentage'] = abs($price - $purchase_details->visa_service_price);
+
+    //             $total_price_percentage += $visa_details['price_percentage']; // Add to total
+    //         }
+    //     }
+    //     // return $purchase_details;
+    //     if ($request->sale_price) {
+    //         $sale_price = $request->sale_price;
+    //     } else {
+    //         $sale_price = $total_price_percentage;
+    //     }
+
+    //     $twenty_percent = $sale_price * 0.2; // 20% of sale_price
+    //     $thirty_percent = $sale_price * 0.3; // 30% of sale_price
+    //     $fifty_percent = $sale_price * 0.5; // 50% of sale_price
+    //     $hundred_percent = $sale_price; // 100% of sale_price
+
+    //     // Apply discounts
+    //     $thirty_percent_discounted = $thirty_percent - ($thirty_percent * 0.05); // 5% discount on 30%
+    //     $fifty_percent_discounted = $fifty_percent - ($fifty_percent * 0.08); // 8% discount on 50%
+    //     $hundred_percent_discounted = $hundred_percent - ($hundred_percent * 0.1); // 10% discount on 100%
+
+    //     $discount = [];
+    //     $purchase_details['twenty_percent'] = $twenty_percent;
+    //     $purchase_details['thirty_percent'] = $thirty_percent_discounted;
+    //     $purchase_details['fifty_percent'] = $fifty_percent_discounted;
+    //     $purchase_details['hundred_percent'] = $hundred_percent_discounted;
+
+    //     $twenty_percent = [
+    //         'id' => 1,
+    //         'percentage' => '20 %',
+    //         'minimum_discount' => 'min.Requirement',
+    //         'title' => 'twenty_percent',
+    //         'price' => number_format($twenty_percent, 2), // Replace with actual price format
+    //     ];
+    //     $thirty_percent = [
+    //         'id' => 2,
+    //         'percentage' => '30 %',
+    //         'minimum_discount' => 'Get 5% Discount',
+    //         'title' => 'thirty_percent',
+    //         'price' => number_format($purchase_details['thirty_percent'], 2), // Replace with actual price format
+    //     ];
+    //     $fifty_percent = [
+    //         'id' => 3,
+    //         'percentage' => '50 %',
+    //         'minimum_discount' => 'Get 8% Discount',
+    //         'title' => 'fifty_percent',
+    //         'price' => number_format($purchase_details['fifty_percent'], 2), // Replace with actual price format
+    //     ];
+    //     $hundred_percent = [
+    //         'id' => 4,
+    //         'percentage' => '100 %',
+    //         'minimum_discount' => 'Get 10% Discount',
+    //         'title' => 'hundred_percent',
+    //         'price' => number_format($purchase_details['hundred_percent'], 2), // Replace with actual price format
+
+    //     ];
+    //     $discount[] = $twenty_percent;
+    //     $discount[] = $thirty_percent;
+    //     $discount[] = $fifty_percent;
+    //     $discount[] = $hundred_percent;
+
+    //     if (!empty($discount)) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'message' => 'Here is your discount details.',
+    //             'discounts' => $discount,
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'your list is empty.',
+
+    //         ]);
+    //     }
+    // }
+
     public function customer_get_percentage(Request $request)
     {
         // $package_price = Packages::where('status', 'active')
@@ -708,8 +863,28 @@ class CustomerPackageController extends BaseController
         // ->first();
 
         $purchase_details = Packages::where('md_packages.status', 'active')
-            ->where('md_packages.id', $request->package_id)
-            ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
+        ->where('md_packages.id', $request->package_id)
+            ->select(
+                'md_packages.id',
+                'md_packages.package_name',
+                'md_packages.treatment_period_in_days',
+                'md_master_cities.city_name',
+                'md_packages.treatment_price',
+                'md_add_new_acommodition.hotel_name',
+                'md_packages.hotel_acommodition_price',
+                'md_add_transportation_details.vehicle_model_id',
+                'md_packages.transportation_acommodition_price',
+                'md_packages.tour_price',
+                'md_packages.visa_service_price',
+                'md_medical_provider_register.authorisation_full_name',
+                'md_medical_provider_register.id as provider_id',
+                'md_packages.sale_price',
+                'md_packages.package_price',
+                'md_packages.package_discount',
+                'md_packages.translation_price',
+                'md_packages.ambulance_service_price',
+                'md_packages.ticket_price'
+            )
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
@@ -777,6 +952,55 @@ class CustomerPackageController extends BaseController
 
                 $total_price_percentage += $visa_details['price_percentage']; // Add to total
             }
+        }
+
+        if (!empty($purchase_details->translation_price)) {
+            // Visa Details
+            $translation = [
+                'id' => 4,
+                'title' => 'Translation',
+                'price' => $purchase_details->translation_price, // Replace with actual price format
+            ];
+
+            $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+            // return $translation['price'];
+            $price = $translation['price'] * $discount_percentage;
+
+            $translation['price_percentage'] = abs($price - $purchase_details->translation_price);
+            $total_price_percentage += $translation['price_percentage']; // Add to total
+        }
+
+
+        if (!empty($purchase_details->ambulance_service_price)) {
+            // Visa Details
+            $ambulance_service = [
+                'id' => 4,
+                'title' => 'Ambulance Service',
+                'price' => $purchase_details->ambulance_service_price, // Replace with actual price format
+            ];
+
+            $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+            // return $translation['price'];
+            $price = $ambulance_service['price'] * $discount_percentage;
+
+            $ambulance_service['price_percentage'] = abs($price - $purchase_details->ambulance_service_price);
+            $total_price_percentage += $ambulance_service['price_percentage']; // Add to total
+        }
+
+        if (!empty($purchase_details->ticket_price)) {
+            // Visa Details
+            $ticket_service = [
+                'id' => 4,
+                'title' => 'Ticket Service',
+                'price' => $purchase_details->ticket_price, // Replace with actual price format
+            ];
+
+            $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
+            // return $translation['price'];
+            $price = $ticket_service['price'] * $discount_percentage;
+
+            $ticket_service['price_percentage'] = abs($price - $purchase_details->ambulance_service_price);
+            $total_price_percentage += $ticket_service['price_percentage']; // Add to total
         }
         // return $purchase_details;
         if ($request->sale_price) {
@@ -1024,16 +1248,16 @@ class CustomerPackageController extends BaseController
                     )
                     ->where('id', $request->package_id)
                     ->first();
-                $purchase_details['package_treatment_price'] = $packages->treatment_price;
-                $purchase_details['package_hotel_price'] = $packages->hotel_acommodition_price;
-                $purchase_details['package_transportation_price'] = $packages->transportation_acommodition_price;
+                $purchase_details['package_treatment_price'] = !empty($packages->treatment_price)? $packages->treatment_price:'';
+                $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price)? $packages->hotel_acommodition_price:'';
+                $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price)? $packages->hotel_acommodition_price:'';
                 // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
                 // $purchase_details['package_total_price'] = $request->package_total_price;
                 // $purchase_details['transaction_id'] = $request->transaction_id;
                 // $purchase_details['payment_method'] = $request->payment_method;
-                $purchase_details['hotel_id'] = $packages->hotel_id;
-                $purchase_details['vehicle_id'] = $packages->vehicle_id;
-                $purchase_details['provider_id'] = $packages->created_by;
+                $purchase_details['hotel_id'] = !empty($packages->hotel_id)? $packages->hotel_id:'';
+                $purchase_details['vehicle_id'] = !empty($packages->vehicle_id)? $packages->vehicle_id:'';
+                $purchase_details['provider_id'] = !empty($packages->created_by)? $packages->vehicle_id:'';
                 $purchase_details['package_total_price'] = $request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
@@ -1069,16 +1293,16 @@ class CustomerPackageController extends BaseController
                 // ... (existing code)
                 if (!empty($update_unique_id)) {
                     $payment_details_pending = [];
-                    $payment_details_pending['order_id'] = $purchase_details_data->id;
-                    $payment_details_pending['customer_id'] = $purchase_details_data->customer_id;
+                    $payment_details_pending['order_id'] = !empty($purchase_details_data->id)? $purchase_details_data->id:'';
+                    $payment_details_pending['customer_id'] = !empty($purchase_details_data->customer_id)? $purchase_details_data->customer_id:'';
                     $payment_details_pending['card_name'] = $request->card_name;
                     $payment_details_pending['card_no'] = $request->card_no;
                     $payment_details_pending['card_expiry_date'] = $request->card_expiry_date;
                     $payment_details_pending['card_cvv'] = $request->card_cvv;
                     $payment_details_pending['package_id'] = $request->package_id;
-                    $payment_details_pending['provider_id'] = $packages->created_by;
-                    $payment_details_pending['payment_percentage'] = $purchase_details_data->payment_percentage;
-                    $payment_details_pending['paid_amount'] = $purchase_details_data->paid_amount;
+                    $payment_details_pending['provider_id'] = !empty($packages->created_by)? $packages->created_by:'';
+                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage)? $packages->created_by:'';
+                    $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount)? $purchase_details_data->paid_amount:'';
                     // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
 
@@ -1220,16 +1444,36 @@ class CustomerPackageController extends BaseController
                     )
                     ->where('id', $request->package_id)
                     ->first();
-                $purchase_details['package_treatment_price'] = $packages->treatment_price;
-                $purchase_details['package_hotel_price'] = $packages->hotel_acommodition_price;
-                $purchase_details['package_transportation_price'] = $packages->transportation_acommodition_price;
+                // $purchase_details['package_treatment_price'] = !empty($packages->treatment_price)? $packages->treatment_price:'';
+                // $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price)? $packages->hotel_acommodition_price:'';
+                // $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price)? $packages->hotel_acommodition_price:'';
+                // // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
+                // // $purchase_details['package_total_price'] = $request->package_total_price;
+                // // $purchase_details['transaction_id'] = $request->transaction_id;
+                // // $purchase_details['payment_method'] = $request->payment_method;
+                // $purchase_details['hotel_id'] = !empty($packages->hotel_id)? $packages->hotel_id:'';
+                // $purchase_details['vehicle_id'] = !empty($packages->vehicle_id)? $packages->vehicle_id:'';
+                // $purchase_details['provider_id'] = !empty($packages->created_by)? $packages->vehicle_id:'';
+                // $purchase_details['package_total_price'] = $request->sale_price;
+                // // $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                // $purchase_details['paid_amount'] = $request->paid_amount;
+                // $pending_amount = $request->sale_price - $request->paid_amount;
+                // $purchase_details['pending_payment'] = $pending_amount;
+                // $purchase_details['payment_percentage'] = $request->percentage;
+                // $purchase_details['purchase_type'] = 'pending';
+                // $purchase_details['created_by'] = Auth::user()->id;
+
+                // $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
+                $purchase_details['package_treatment_price'] = !empty($packages->treatment_price) ? $packages->treatment_price : '';
+                $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price) ? $packages->hotel_acommodition_price : '';
+                $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price) ? $packages->hotel_acommodition_price : '';
                 // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
                 // $purchase_details['package_total_price'] = $request->package_total_price;
                 // $purchase_details['transaction_id'] = $request->transaction_id;
                 // $purchase_details['payment_method'] = $request->payment_method;
-                $purchase_details['hotel_id'] = $packages->hotel_id;
-                $purchase_details['vehicle_id'] = $packages->vehicle_id;
-                $purchase_details['provider_id'] = $packages->created_by;
+                $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : '';
+                $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : '';
+                $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->vehicle_id : '';
                 $purchase_details['package_total_price'] = $request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
@@ -1240,6 +1484,8 @@ class CustomerPackageController extends BaseController
                 $purchase_details['created_by'] = Auth::user()->id;
 
                 $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
+
+
 
                 $CustomerPurchaseDetails = CustomerPurchaseDetails::select('id')->get();
                 if (!empty($CustomerPurchaseDetails)) {
@@ -1265,16 +1511,16 @@ class CustomerPackageController extends BaseController
                 // ... (existing code)
                 if (!empty($update_unique_id)) {
                     $payment_details_pending = [];
-                    $payment_details_pending['order_id'] = $purchase_details_data->id;
-                    $payment_details_pending['customer_id'] = $purchase_details_data->customer_id;
+                    $payment_details_pending['order_id'] = !empty($purchase_details_data->id) ? $purchase_details_data->id : '';
+                    $payment_details_pending['customer_id'] = !empty($purchase_details_data->customer_id) ? $purchase_details_data->customer_id : '';
                     $payment_details_pending['card_name'] = $request->card_name;
                     $payment_details_pending['card_no'] = $request->card_no;
                     $payment_details_pending['card_expiry_date'] = $request->card_expiry_date;
                     $payment_details_pending['card_cvv'] = $request->card_cvv;
                     $payment_details_pending['package_id'] = $request->package_id;
-                    $payment_details_pending['provider_id'] = $packages->created_by;
-                    $payment_details_pending['payment_percentage'] = $purchase_details_data->payment_percentage;
-                    $payment_details_pending['paid_amount'] = $purchase_details_data->paid_amount;
+                    $payment_details_pending['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
+                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->created_by : '';
+                    $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount) ? $purchase_details_data->paid_amount : '';
                     // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
 
@@ -1285,7 +1531,7 @@ class CustomerPackageController extends BaseController
 
                     // Update 'completed' entry with remaining amount and status
                     // $payment_details_completed['paid_amount'] = $remaining_amount;
-                    $payment_details_completed['pending_payment'] = $request->pending_amount;
+                    $payment_details_completed['pending_payment'] = $pending_amount;
                     // No pending amount for completed
                     $payment_details_completed['payment_status'] = 'pending';
 
@@ -1762,7 +2008,7 @@ class CustomerPackageController extends BaseController
                 'md_customer_purchase_details.id as purchase_id',
                 // 'md_customer_purchase_details.status',
                 // 'md_customer_purchase_details.package_total_price',
-                'md_customer_purchase_details.created_at',
+                // 'md_customer_purchase_details.created_at',
                 'md_customer_purchase_details.payment_percentage',
                 'md_packages.id as package_id',
                 // 'md_packages.package_unique_no',

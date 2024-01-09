@@ -2303,6 +2303,10 @@ span.popup-msg.active {
     background-color: #4cdb060f;
 }
 
+.daterangepicker td.in-range.active {
+    background-color: #4cdb06;
+}
+
 /* DatePicker End */
 
 /* Purchase Package Start */

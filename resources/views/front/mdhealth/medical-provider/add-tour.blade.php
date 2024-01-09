@@ -59,14 +59,10 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                {{-- @if (!empty($tour_details['id']))
 
-                            <form action="{{ url('api/md-edit-tour-list') }}" method="post"
-                                enctype="multipart/form-data" id="add_acommodition">
-                                @else --}}
                                 <form action="{{ url('md-add-tour') }}" method="post" enctype="multipart/form-data"
                                     id="add_acommodition">
-                                    {{-- @endif --}}
+                                   
                                     @csrf
                                     <input type="hidden" name="tour_id"
                                         value="{{ !empty($tour_details['id']) ? $tour_details['id'] : '' }}">
@@ -202,11 +198,11 @@
                                         <input type="hidden" name="platform_type" id="platform_type" value="web">
                                     </div>
 
-                                    <div class="section-btns mb-4 d-flex gap-2">
+                                    <div class="section-btns mb-4 d-flex gap-3">
                                         <button type="submit" name="button_type" value="active"
-                                            class="green-plate bg-green text-dark fw-600 fsb-1">Save Tour</button>
+                                            class="btn save-btn-black bg-green w-50">Save Tour</button>
                                         <button type="submit" name="button_type" value="inactive"
-                                            class="black-plate bg-black text-white fw-500 fsb-1">Deactive Tour</button>
+                                            class="btn save-btn-black w-50">Deactive Tour</button>
                                     </div>
 
                                 </form>
@@ -242,7 +238,12 @@
             updateCheckedValues();
         });
     </script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="link-to-jquery-validation-plugin.js"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 
+ <script type="text/javascript"
+     src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#add_acommodition').validate({

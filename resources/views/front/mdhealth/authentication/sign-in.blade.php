@@ -40,8 +40,8 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
-                                </div>
+                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                            </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -90,36 +90,41 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                                oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                                oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                                oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                                oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)"
+                                class="form-control">
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
                                 onkeypress="return /[0-9]/i.test(event.key)" class="form-control">
                         </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mt-3">
-                            <button class="btn btn-md btn-text w-75 mb-3" id="verifyBtn" type="button"
-                                onclick="verify()" style="height: 47px;">Sign
-                                In</button>
-                        </div>
-                    </form>
-                    <script>
-                        function moveToNext(current, nextId) {
-                            if (current.value.length === current.maxLength) {
-                                document.getElementById(nextId).focus();
-                            }
+                </div>
+                <div class="d-flex align-items-center justify-content-center mt-3">
+                    <button class="btn btn-md btn-text w-75 mb-3" id="verifyBtn" type="button" onclick="verify()"
+                        style="height: 47px;">Sign
+                        In</button>
+                </div>
+                </form>
+                <script>
+                    function moveToNext(current, nextId) {
+                        if (current.value.length === current.maxLength) {
+                            document.getElementById(nextId).focus();
                         }
-                    </script>
+                    }
+                </script>
 
 
-                    {{-- <h6 class="mb-0 d-flex align-items-center gap-1">
+                {{-- <h6 class="mb-0 d-flex align-items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
                             <g clip-path="url(#clip0_0_28401)">
@@ -139,36 +144,34 @@
                          <a href="#" class="text-secondary">Resend Code In</a>
                     </div> --}}
 
-                </div>
             </div>
         </div>
+    </div>
 
-        <!-- LOADER  -->
-        <div class="card d-none">
-            <div class="card-body">
-                <div class="d-flex flex-column align-items-center gap-4">
-                    <div class="pt-3">
-                        <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
-                    </div>
-                    <h2 class="mb-0">Verification</h2>
-                    <p>Enter the 6 digit code sent to your mobile phone</p>
-                    <div class="w-100 df-center">
-                        <img src="{{ asset('front/assets/img/heart-rate.png') }}" alt="">
-                    </div>
+    <!-- LOADER  -->
+    <div class="card d-none">
+        <div class="card-body">
+            <div class="d-flex flex-column align-items-center gap-4">
+                <div class="pt-3">
+                    <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
+                </div>
+                <h2 class="mb-0">Verification</h2>
+                <p>Enter the 6 digit code sent to your mobile phone</p>
+                <div class="w-100 df-center">
+                    <img src="{{ asset('front/assets/img/heart-rate.png') }}" alt="">
                 </div>
             </div>
         </div>
     </div>
+    </div>
 @endsection
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- jQuery Validate -->
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
@@ -380,5 +383,4 @@
                 });
         }
     </script>
-
 @endsection
