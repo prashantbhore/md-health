@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Cities;
 use App\Models\Country;
 use App\Models\VendorRegister;
-use App\Models\VendorProductGallery;
+// use App\Models\VendorProductImagesVideos;
 use App\Models\VendorLogo;
 use App\Models\VendorLicense;
+use App\Models\VendorProductImagesVideos;
 use App\Services\ApiService;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -62,10 +63,11 @@ class UpdateVendorProfileController extends Controller
             $medical_provider_list['password'] = ($medical_provider_list->password);
         }
 
-        // $ProviderImagesVideos= VendorProductGallery::where('status','active')
-        // ->select('id','vendor_product_id', 'provider_image_path', 'provider_image_name')
-        // ->where('provider_id',Auth::guard('md_health_medical_vendor_registers')->user()->id)
-        // ->get();
+        $ProviderImagesVideos= VendorProductImagesVideos::where('status','active')
+        ->select('id','vendor_product_id', 'vendor_product_image_path', 'vendor_product_image_name')
+        ->where('vendor_product_id',Auth::guard('md_health_medical_vendor_registers')->user()->id)
+        ->get();
+        // return $ProviderImagesVideos;
 
         $MedicalProviderLogo=VendorLogo::where('status','active')
         ->select('id','company_logo_image_path','company_logo_image_name')
@@ -88,15 +90,16 @@ class UpdateVendorProfileController extends Controller
             ->get();
             // ,'ProviderImagesVideos'
         if (!empty($medical_provider_list)) {
-            return view('front/mdhealth/vendor/account',compact('medical_provider_list','MedicalProviderLogo','MedicalProviderLicense','countries','cities'));  
+            return view('front/mdhealth/vendor/account',compact('medical_provider_list','MedicalProviderLogo','MedicalProviderLicense','countries','cities','ProviderImagesVideos'));  
         } 
     }
 
     
 
-    public function update_medical_provider_profile(Request $request)
+    public function update_vendor_profile(Request $request)
     {
     //   return Auth::guard('md_health_medical_vendor_registers')->user()->id;
+    // dd($request);
         $medical_provider_input = [];
         $medical_provider_input['company_name'] = $request->company_name;
         $medical_provider_input['company_address'] = $request->company_address;
@@ -116,7 +119,7 @@ class UpdateVendorProfileController extends Controller
         if(!empty($medical_provider_update))
         {
             $md_provider_input_image_logo=[];
-            $md_provider_input_image_logo['medical_provider_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
+            $md_provider_input_image_logo['vendor_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
     
             if ( $request->has( 'company_logo_image_path' ) ) {
                 
@@ -137,10 +140,10 @@ class UpdateVendorProfileController extends Controller
             // }
 
 
-            VendorLogo::where('medical_provider_id', Auth::guard('md_health_medical_vendor_registers')->user()->id)->update($md_provider_input_image_logo);
+            VendorLogo::where('vendor_id', Auth::guard('md_health_medical_vendor_registers')->user()->id)->update($md_provider_input_image_logo);
     
             $md_provider_input_image_license=[];
-            $md_provider_input_image_license['medical_provider_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
+            $md_provider_input_image_license['vendor_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
             if ( $request->has( 'company_licence_image_path' ) ) {
                 if ( $request->file( 'company_licence_image_path' ) ) {
                     // return 'asdsaddas';
@@ -149,20 +152,20 @@ class UpdateVendorProfileController extends Controller
                     $md_provider_input_image_license[ 'company_licence_image_name' ] = $original_name;
                 }
             }
-            VendorLicense::where('medical_provider_id', Auth::guard('md_health_medical_vendor_registers')->user()->id)->update($md_provider_input_image_license);
+            VendorLicense::where('vendor_id', Auth::guard('md_health_medical_vendor_registers')->user()->id)->update($md_provider_input_image_license);
         }
        
         if ($request->has('provider_image_path')) {
             if ($files = $request->file('provider_image_path')) {
                 // $files=[];
                 foreach ($files as $file) {
-                    $accout_images = new VendorProductGallery;
-                    $accout_images['provider_id']= Auth::guard('md_health_medical_vendor_registers')->user()->id;
+                    $accout_images = new VendorProductImagesVideos;
+                    $accout_images['vendor_product_id']= Auth::guard('md_health_medical_vendor_registers')->user()->id;
                     $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
                     $original_name = $file->getClientOriginalName();
                     $filePath = $file->storeAs('public/providerimagesvideos', $filename);
-                    $accout_images['provider_image_path'] = $filePath;
-                    $accout_images['provider_image_name'] = $original_name;
+                    $accout_images['vendor_product_image_path'] = $filePath;
+                    $accout_images['vendor_product_image_name'] = $original_name;
                     $accout_images['modified_by'] = Auth::guard('md_health_medical_vendor_registers')->user()->id;
                     $accout_images['modified_ip_address'] = $request->ip();
                     $accout_images->save();
@@ -176,7 +179,7 @@ class UpdateVendorProfileController extends Controller
             //     'status' => 200,
             //     'message' => 'Profile details updated successfully.',
             // ]);
-            return redirect('medical-account')->with('success','Profile details updated successfully.');
+            return redirect('vendor-account')->with('success','Profile details updated successfully.');
            
         }
     }
@@ -184,7 +187,7 @@ class UpdateVendorProfileController extends Controller
    
 
 
-    public function delete_provider_images_videos(Request $request)
+    public function delete_vendor_images_videos(Request $request)
     {
         // $validator = Validator::make($request->all(), [
         //     'provider_id' => 'required',
@@ -205,7 +208,7 @@ class UpdateVendorProfileController extends Controller
         $delete_id['modified_by'] = Auth::guard('md_health_medical_vendor_registers')->user()->id;
         $delete_id['modified_ip_address'] = $request->ip();
 
-        $delete_ProviderImagesVideos = VendorProductGallery::where('id', $request->provider_id)
+        $delete_ProviderImagesVideos = VendorProductImagesVideos::where('id', $request->provider_id)
             ->update($delete_id);
 
         if (!empty($delete_ProviderImagesVideos)) {

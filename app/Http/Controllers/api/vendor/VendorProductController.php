@@ -69,7 +69,6 @@ class VendorProductController extends BaseController
 
     public function addProduct(Request $request)
     {
-        dd($request);
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|string',
             'product_category_id' => 'required|integer',
@@ -83,6 +82,7 @@ class VendorProductController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+       
 
         $vendor_id = Auth::user()->id;
         // dd($vendor_id);
@@ -102,10 +102,11 @@ class VendorProductController extends BaseController
             'featured' => !empty($request->featured) ? 'yes' : 'no',
             'created_by' => 1, // Assuming a fixed user ID for now
         ];
-
+      
         $storeProduct = null;
 
-        if ($request->has('id')) {
+        if (isset($request->id) && !empty($request->id)) {
+           
             // Update the existing product
             $existingProduct = VendorProduct::find($request->id);
 
@@ -115,8 +116,10 @@ class VendorProductController extends BaseController
 
 
                 if ($request->has('vendor_product_image_path')) {
+                    // dd('11111');
                     if ($files = $request->file('vendor_product_image_path')) {
                         // $files=[];
+                        // dd($request);
                         foreach ($files as $file) {
                             $accout_images = new VendorProductGallery;
                             $accout_images['vendor_product_id'] = $storeProduct->id;
@@ -135,12 +138,15 @@ class VendorProductController extends BaseController
                 }
 
             } else {
+                // dd('22222');
                 return response()->json([
                     'status' => 404,
                     'message' => 'Product not found.',
                 ]);
             }
         } else {
+            // dd($request);
+            // dd('33333');
             // Add a new product
             $storeProduct = VendorProduct::create($productData);
 
@@ -148,15 +154,16 @@ class VendorProductController extends BaseController
                 $unique_id = "MDH" . sprintf('%04d', $storeProduct->id);
                 $storeProduct->update(['product_unique_id' => $unique_id]);
             }
-
-
+            // dd($request);
             if ($request->has('vendor_product_image_path')) {
                 if ($files = $request->file('vendor_product_image_path')) {
+                    // dd('4');
                     // $files=[];
                     foreach ($files as $file) {
+                        // dd($file);
                         $accout_images = new VendorProductGallery;
                         $accout_images['vendor_product_id'] = $storeProduct->id;
-
+                        
                         $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
                         $original_name = $file->getClientOriginalName();
                         $filePath = $file->storeAs('public/vendorProductImages', $filename);
@@ -169,13 +176,15 @@ class VendorProductController extends BaseController
                     }
                 }
             }
+            // dd('41');
+
         }
 
 
         if (!empty($storeProduct)) {
             return response()->json([
                 'status' => 200,
-                'message' => $request->has('id') ? 'Product Updated Successfully.' : 'Product Added Successfully.',
+                'message' =>  (isset($request->id) && !empty($request->id)) ? 'Product Updated Successfully.' : 'Product Added Successfully.',
             ]);
         } else {
             return response()->json([
@@ -493,7 +502,7 @@ class VendorProductController extends BaseController
             'featured' => !empty($proudct_data->featured) ? $proudct_data->featured : '',
         ];
 
-
+// dd($product_gallery);
         if (!empty($data)) {
             return response()->json([
                 'status' => 200,

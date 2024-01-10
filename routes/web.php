@@ -85,12 +85,12 @@ Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
-Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
 
     Route::get('/dashboard', function (){
         return view('admin.dashboard.dashboard');
     });
-    
+
     Route::view('sign-in', 'admin/authentication/sign-in');
 
     //Admin DASHBOARD
@@ -123,8 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin MEDICAL TOURISM
 
-
-    Route::controller(MedicalTourismController::class)->group(function (){
+    Route::controller(MedicalTourismController::class)->group(function () {
         Route::get('service-provider', 'index');
         // Route::get('service-provider-details','show');
         Route::get('medical-tourism-data-table', 'data_table');
@@ -314,16 +313,6 @@ Route::get('buy-service', function () {
 //mdHealth Routes
 
 
-
-
-
-
-
-
-
-
-
-
 //mdShop Routes
 Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
 
@@ -415,15 +404,15 @@ Route::controller(CommonLoginController::class)->group(function () {
 //  });
 // AUTHENTICATION
 
-Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function (){
+Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
 
-    Route::controller(UpdateProfileController::class)->group(function (){
+    Route::controller(UpdateProfileController::class)->group(function () {
         Route::get('medical-account', 'update_medical_profile_list');
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
         Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
     });
 
-    Route::controller(OtherServicesController::class)->group(function (){
+    Route::controller(OtherServicesController::class)->group(function () {
         Route::get('medical-other-services', 'index');
         Route::get('/add-acommodition', 'add_acommodition');
         Route::get('/add-tour', 'add_tour');
@@ -504,8 +493,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
 
     Route::controller(UpdateVendorProfileController::class)->group(function () {
         Route::get('vendor-account', 'update_vendor_profile_list');
-        // Route::post('md-update-medical-profile', 'update_medical_provider_profile');
-        // Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
+        Route::post('md-update-vendor-profile', 'update_vendor_profile');
+        Route::post('md-delete-vendor-images-videos', 'delete_vendor_images_videos');
 
     });
 
@@ -572,11 +561,11 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
 
 
-Route::get('food-provider-account',[UpdateFoodProviderAccount::class,'update_food_profile_list']);
+    Route::get('food-provider-account', [UpdateFoodProviderAccount::class, 'update_food_profile_list']);
 
-Route::post('update-food-provider-account',[UpdateFoodProviderAccount::class,'update_food_profile']);
+    Route::post('update-food-provider-account', [UpdateFoodProviderAccount::class, 'update_food_profile']);
 
-Route::post('md-delete-food-provider-images-videos',[UpdateFoodProviderAccount::class,'delete_food_provider_images_videos']);
+    Route::post('md-delete-food-provider-images-videos', [UpdateFoodProviderAccount::class, 'delete_food_provider_images_videos']);
 
 
 

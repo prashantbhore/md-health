@@ -48,7 +48,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                <form action="{{ url('md-update-medical-profile') }}" method="post"
+                                <form action="{{ url('md-update-vendor-profile') }}" method="post"
                                     enctype="multipart/form-data" id="accountmedpro">
                                     @csrf
                                     <div class="form-group mb-3">
@@ -137,32 +137,31 @@
                                                 oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
                                         </div>
                                         <div class="prev-img-div">
-                                            <img  src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
-                                                Storage::exists($MedicalProviderLogo['company_logo_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}"
-{{-- 
-                                            src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}}
-                                                alt="image" id="pic1">
+                                            <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
+                                            Storage::exists($MedicalProviderLogo['company_logo_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}"
+                                                {{-- 
+                                            src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic1">
                                             <input type="hidden" name="old_image" id="old_image"
                                                 value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
                                         </div>
 
                                     </div>
-{{-- {{dd($MedicalProviderLogo)}} --}}
+                                    {{-- {{dd($MedicalProviderLogo)}} --}}
                                     <div class="multiple-upload-images">
                                         <h6 class="section-heading">Company License</h6>
                                         <div class="form-group">
                                             <input type="file" id="company_licence_image_path" class="form-control"
-                                                name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
+                                                name="company_licence_image_path"
+                                                oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
                                         </div>
                                         <div class="prev-img-div">
-                                            <img  src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
-                                                Storage::exists($MedicalProviderLicense['company_licence_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}"
-                                             {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}}
-                                                alt="image" id="pic2">
+                                            <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
+                                            Storage::exists($MedicalProviderLicense['company_licence_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}"
+                                                {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
                                             <input type="hidden" name="old_image" id="old_image"
                                                 value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
                                         </div>
@@ -177,52 +176,50 @@
                                         <div class="preview-img gallery">
 
                                             @if (!empty($ProviderImagesVideos))
-                                                
-                                           
-                                            @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
-                                                @php
-                                                    $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
-                                                @endphp
+                                                @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
+                                                    @php
+                                                        $fileExtension = pathinfo($ProviderImagesVideo->vendor_product_image_path, PATHINFO_EXTENSION);
+                                                    @endphp
 
-                                                @if ($fileExtension === 'mp4')
-                                                    <div class="prev-img-div video-card"
-                                                        id="img_div_{{ $ProviderImagesVideo->id }}">
-                                                        <video class="video-div" controls>
-                                                            <source
-                                                                src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
-                                                                Storage::exists($ProviderImagesVideo->provider_image_path)
-                                                                    ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                    : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
-                                                                type="video/mp4">
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                        <a href="javascript:void(0);"
-                                                            onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})"
-                                                            class="clear-btn">
-                                                            <div>X</div>
-                                                        </a>
-                                                    </div>
-                                                @else
-                                                    <div class="prev-img-div"
-                                                        id="img_div_{{ $ProviderImagesVideo->id }}">
-                                                        <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
-                                                        Storage::exists($ProviderImagesVideo->provider_image_path)
-                                                            ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                            : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
-                                                            class="glightbox">
-                                                            <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
-                                                            Storage::exists($ProviderImagesVideo->provider_image_path)
-                                                                ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                    @if ($fileExtension === 'mp4')
+                                                        <div class="prev-img-div video-card"
+                                                            id="img_div_{{ $ProviderImagesVideo->id }}">
+                                                            <video class="video-div" controls>
+                                                                <source
+                                                                    src="{{ !empty($ProviderImagesVideo->vendor_product_image_path) &&
+                                                                    Storage::exists($ProviderImagesVideo->vendor_product_image_path)
+                                                                        ? url('/') . Storage::url($ProviderImagesVideo->vendor_product_image_path)
+                                                                        : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                                    type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                            <a href="javascript:void(0);"
+                                                                onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})"
+                                                                class="clear-btn">
+                                                                <div>X</div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="prev-img-div"
+                                                            id="img_div_{{ $ProviderImagesVideo->id }}">
+                                                            <a href="{{ !empty($ProviderImagesVideo->vendor_product_image_path) &&
+                                                            Storage::exists($ProviderImagesVideo->vendor_product_image_path)
+                                                                ? url('/') . Storage::url($ProviderImagesVideo->vendor_product_image_path)
                                                                 : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
-                                                                alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
-                                                        </a>
-                                                        <a href="javascript:void(0);" class="clear-btn"
-                                                            onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
-                                                            <div>X</div>
-                                                        </a>
-                                                    </div>
-                                                @endif
-                                            @endforeach
+                                                                class="glightbox">
+                                                                <img src="{{ !empty($ProviderImagesVideo->vendor_product_image_path) &&
+                                                                Storage::exists($ProviderImagesVideo->vendor_product_image_path)
+                                                                    ? url('/') . Storage::url($ProviderImagesVideo->vendor_product_image_path)
+                                                                    : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                                    alt="{{ !empty($ProviderImagesVideo->vendor_product_image_name) ? $ProviderImagesVideo->vendor_product_image_name : '' }}" />
+                                                            </a>
+                                                            <a href="javascript:void(0);" class="clear-btn"
+                                                                onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
+                                                                <div>X</div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                             @endif
                                         </div>
 
@@ -271,7 +268,7 @@
             if (client_logo_id != "") {
                 if (confirm("Do you really want to delete this image ?")) {
                     $.ajax({
-                        url: base_url + "/md-delete-provider-images-videos",
+                        url: base_url + "/md-delete-vendor-images-videos",
                         // url: "http://127.0.0.1:8000/md-delete-provider-images-videos",
 
                         headers: {

@@ -18,7 +18,7 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            <form action="{{url('/add-vendor-product')}}" method="post" id="add_product_vender">
+                            <form action="{{url('/add-vendor-product')}}" method="post" id="add_product_vender"  enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ !empty($product_list['id']) ? $product_list['id'] : '' }}">
                                 <div class="form-group mb-3">
@@ -57,24 +57,20 @@
                                         <input type="file" class="form-control" id="vendor_product_image_path" name="vendor_product_image_path[]" multiple />
                                     </div>
                                     <div class="preview-img">
+                                        @if (!empty($product_gallery_list))
+                                          @foreach ($product_gallery_list as $product_gallery)
+                                              
+                                         
+                                        
                                         <div class="prev-img-div">
-                                            <img src="{{asset('front/assets/img/default.jpg')}}" alt="">
+                                            <img src="{{ !empty($product_gallery) ? $product_gallery : '' }}" alt="">
                                             <a href="javascript:void(0);" class="clear-btn">
                                                 <div>X</div>
                                             </a>
                                         </div>
-                                        <div class="prev-img-div">
-                                            <img src="{{asset('front/assets/img/default.jpg')}}" alt="">
-                                            <a href="javascript:void(0);" class="clear-btn">
-                                                <div>X</div>
-                                            </a>
-                                        </div>
-                                        <div class="prev-img-div">
-                                            <img src="{{asset('front/assets/img/default.jpg')}}" alt="">
-                                            <a href="javascript:void(0);" class="clear-btn">
-                                                <div>X</div>
-                                            </a>
-                                        </div>
+                                        @endforeach  
+                                        @endif
+                                        
                                     </div>
 
                                 </div>
