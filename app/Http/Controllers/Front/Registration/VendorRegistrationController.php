@@ -22,9 +22,24 @@ class VendorRegistrationController extends Controller
 
                 $method = 'POST';
                 $body = $request->all();
-                
+                $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+
+                if ( $request->hasFile( 'company_logo_image_path' ) && $request->hasFile( 'company_licence_image_path' ) ) {
+                    $image = [];
+                    $image_name = [];
+                    if ( $request->hasFile( 'company_logo_image_path' ) && $request->file( 'company_logo_image_path' )->isValid() ) {
+                        $image[] = $request->file( 'company_logo_image_path' );
+                        $image_name[] = 'company_logo_image_path';
+                    }
+                    if ( $request->hasFile( 'company_licence_image_path' ) && $request->file( 'company_licence_image_path' )->isValid() ) {
+                        $image[] = $request->file( 'company_licence_image_path' );
+                        $image_name[] = 'company_licence_image_path';
+                    }
         
-                $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+                    $responseData = $this->apiService->getData( $token, $apiUrl, $plainArray, $method, $image, $image_name );
+                } else {
+                    $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
+                }
                 // dd($responseData);
                 Session::put('login_token', $responseData['data']['access_token']);
 
