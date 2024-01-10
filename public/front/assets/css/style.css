@@ -3364,3 +3364,23 @@ label.tc-text {
     letter-spacing: -0.92px;
     width: 618px;
 }
+
+.daterangepicker .calendar-table .month {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
+.daterangepicker .calendar-table th,
+.daterangepicker .calendar-table td {
+    font-family: "CamptonBook";
+}
+
+.daterangepicker .calendar-table .next span {
+    background-image: url("../img/CalenederNext.png");
+    background-repeat: no-repeat;
+}

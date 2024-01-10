@@ -82,7 +82,7 @@
                                                 <option value="" selected disabled>Choose</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Preffered Not To Say">Preffered Not To Say</option>
+                                                <option value="Prefer not to say">Prefer not to say</option>
                                             </select>
                                         </div>
 
