@@ -1,7 +1,7 @@
 @section('php')
     @php
 
-        // dd($data);
+        //dd($my_details);
 
         $avialable_accomodation_services = false;
         $breakfast = $sauna = $smoking = $wifi = $fitness = false;
@@ -455,7 +455,7 @@
                                         <div class="col-md-10 justify-content-start ps-0">
                                             <div class="trmt-card-body">
                                                 <h5 class="dashboard-card-title fw-600 mb-0">
-                                                    {{ !empty($data['company_name']) ? $data['company_name'] : '' }}
+                                                    {{ !empty($data['package_name']) ? $data['package_name'] : '' }}
                                                 </h5>
                                                 <h6 class="mb-1 fsb-1">
                                                     {{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}
@@ -695,17 +695,17 @@
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" class="form-control"
-                                                                            placeholder="{{ !empty($my_details['patient_full_name']) ? $my_details['patient_full_name'] : '' }}"
-                                                                            id="foodname" aria-describedby="foodname"
-                                                                            readonly>
+                                                                            value="{{ !empty($my_details['patient_first_name']) ? $my_details['patient_first_name'] : '' }}"
+                                                                            placeholder="First Name" id="foodname"
+                                                                            aria-describedby="foodname" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Last Name</label>
                                                                         <input type="text" class="form-control"
-                                                                            value="sdfdshf" id="foodname"
-                                                                            aria-describedby="foodname"
+                                                                            value="{{ !empty($my_details['patient_last_name']) ? $my_details['patient_last_name'] : '' }}"
+                                                                            id="foodname" aria-describedby="Last Name"
                                                                             placeholder="Last Name" readonly>
                                                                     </div>
                                                                 </div>
@@ -1242,12 +1242,17 @@
                 });
             });
 
-        });
+            $(function() {
+                $('.showSingle').click(function() {
+                    var targetDiv = '#ShowDiv' + $(this).attr('target');
 
-        $(function() {
-            $('.showSingle').click(function() {
-                $('.targetDiv').hide('.view-menu-div');
-                $('#ShowDiv' + $(this).attr('target')).slideToggle();
+                    if ($(targetDiv).is(':visible')) {
+                        $(targetDiv).slideToggle();
+                    } else {
+                        $('.targetDiv').slideUp();
+                        $(targetDiv).slideToggle();
+                    }
+                });
             });
         });
     </script>

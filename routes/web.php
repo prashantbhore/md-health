@@ -77,110 +77,18 @@ Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_
 
 // Super Admin authentication
 
-Route::get('/admin-panel', [LoginController::class, 'index']);
+Route::get('/super-admin', [LoginController::class, 'index']);
 
 Route::post('super-admin-login', [LoginController::class, 'super_admin_login']);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
-
-//Home Service Routes
-Route::get(
-    'home-service',
-    [MdhomeController::class, 'home']
-    // return view('front.mdHome.index');
-);
-
-Route::get('search-result', function () {
-    return view('front.mdHome.searchResult');
-});
-
-Route::get('homeService-purchase', function () {
-    return view('front.mdHome.purchase');
-});
-
-Route::get('home-pack-details', function () {
-    return view('front.mdHome.homePackDetails');
-});
-
-Route::get('payment-status', function () {
-    return view('front.mdHome.paymentStatus');
-});
-
-Route::get('buy-service', function () {
-    return view('front.mdHome.buyService');
-});
-
-//mdHealth Routes
-
-
-
-
-
-
-
-
-
-
-
-
-//mdShop Routes
-Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
-
-Route::get('cart', function () {
-    return view('front.mdShop.cart');
-});
-
-Route::get('product', function () {
-    return view('front.mdShop.product');
-});
-
-Route::get('payment-status-shop', function () {
-    return view('front.mdShop.paymentStatus');
-});
-
-Route::get('view-products', function () {
-    return view('front.mdShop.allProducts');
-});
-
-// mdFood Routes
-Route::get('mdFoods', [MdFoodsController::class, 'mdfood_home']);
-
-Route::get('foods-search-result', function () {
-    return view('front.mdFoods.searchResult');
-});
-
-Route::get('food-pack-details', function () {
-    return view('front.mdFoods.foodPackDetails');
-});
-
-Route::get('purchase-food-pack', function () {
-    return view('front.mdFoods.purchase');
-});
-
-Route::get('food-payment-status', function () {
-    return view('front.mdFoods.paymentStatus');
-});
-
-// mdBooking Routes
-Route::get('mdBooking', function () {
-    return view('front.mdBooking.index');
-});
-
-// Route::group(['prefix' => 'admin'], function () {
-
-Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function(){
 
     Route::get('/dashboard', function () {
         return view('admin.dashboard.dashboard');
     });
-
-
-
-    // AUTHENTICATION
-
-
-
+    
     Route::view('sign-in', 'admin/authentication/sign-in');
 
     // DASHBOARD
@@ -214,7 +122,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     // MEDICAL TOURISM
 
 
-    Route::controller(MedicalTourismController::class)->group(function () {
+    Route::controller(MedicalTourismController::class)->group(function (){
         Route::get('service-provider', 'index');
         // Route::get('service-provider-details','show');
         Route::get('medical-tourism-data-table', 'data_table');
@@ -360,6 +268,102 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('food-supplier-details', 'admin/manage-md-foods/food-supplier-details');
 });
 
+
+
+
+
+
+
+
+
+
+
+//Home Service Routes
+Route::get(
+    'home-service',
+    [MdhomeController::class, 'home']
+    // return view('front.mdHome.index');
+);
+
+Route::get('search-result', function () {
+    return view('front.mdHome.searchResult');
+});
+
+Route::get('homeService-purchase', function () {
+    return view('front.mdHome.purchase');
+});
+
+Route::get('home-pack-details', function () {
+    return view('front.mdHome.homePackDetails');
+});
+
+Route::get('payment-status', function () {
+    return view('front.mdHome.paymentStatus');
+});
+
+Route::get('buy-service', function () {
+    return view('front.mdHome.buyService');
+});
+
+//mdHealth Routes
+
+
+
+
+
+
+
+
+
+
+
+
+//mdShop Routes
+Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
+
+Route::get('cart', function () {
+    return view('front.mdShop.cart');
+});
+
+Route::get('product', function () {
+    return view('front.mdShop.product');
+});
+
+Route::get('payment-status-shop', function () {
+    return view('front.mdShop.paymentStatus');
+});
+
+Route::get('view-products', function () {
+    return view('front.mdShop.allProducts');
+});
+
+// mdFood Routes
+Route::get('mdFoods', [MdFoodsController::class, 'mdfood_home']);
+
+Route::get('foods-search-result', function () {
+    return view('front.mdFoods.searchResult');
+});
+
+Route::get('food-pack-details', function () {
+    return view('front.mdFoods.foodPackDetails');
+});
+
+Route::get('purchase-food-pack', function () {
+    return view('front.mdFoods.purchase');
+});
+
+Route::get('food-payment-status', function () {
+    return view('front.mdFoods.paymentStatus');
+});
+
+// mdBooking Routes
+Route::get('mdBooking', function () {
+    return view('front.mdBooking.index');
+});
+
+// Route::group(['prefix' => 'admin'], function () {
+
+
 // FRONT ROUTES
 #User Account
 // Route::view('user-account', 'front/mdhealth/authentication/user-account');
@@ -405,16 +409,15 @@ Route::controller(CommonLoginController::class)->group(function () {
 //  });
 // AUTHENTICATION
 
-Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function () {
+Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], function (){
 
-    Route::controller(UpdateProfileController::class)->group(function () {
+    Route::controller(UpdateProfileController::class)->group(function (){
         Route::get('medical-account', 'update_medical_profile_list');
         Route::post('md-update-medical-profile', 'update_medical_provider_profile');
         Route::post('md-delete-provider-images-videos', 'delete_provider_images_videos');
-
     });
 
-    Route::controller(OtherServicesController::class)->group(function () {
+    Route::controller(OtherServicesController::class)->group(function (){
         Route::get('medical-other-services', 'index');
         Route::get('/add-acommodition', 'add_acommodition');
         Route::get('/add-tour', 'add_tour');
@@ -475,7 +478,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     #Medical Provider Dashboard By Mplus03
     Route::controller(MedicalProviderDashboradController::class)->group(function () {
         Route::get('medical-provider-dashboard', 'index');
-        Route::match(['get', 'post'], 'assign-case-manager', 'assign_case_manager')->name('assign.case.manager');
     });
 
 
@@ -567,6 +569,10 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 Route::get('food-provider-account',[UpdateFoodProviderAccount::class,'update_food_profile_list']);
 
 Route::post('update-food-provider-account',[UpdateFoodProviderAccount::class,'update_food_profile']);
+
+Route::post('md-delete-food-provider-images-videos',[UpdateFoodProviderAccount::class,'delete_food_provider_images_videos']);
+
+
 
 });
 
