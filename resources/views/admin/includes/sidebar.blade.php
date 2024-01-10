@@ -31,16 +31,17 @@
                     Manage Medical Tourism
                 </a>
             </li>
+            <li class="manageMDfoodsLi"> 
+                <a href="{{URL::asset('admin/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
+                    Manage MDFoods
+                </a>
+            </li>
             <li class="citiesLi">
                 <a href="{{URL::asset('admin/add-cities')}}" class="nav-link link-dark cities">
                     Manage Cities
                 </a>
             </li>
-            <li class="adminsLi">
-                <a href="{{URL::asset('admin/add-admins')}}" class="nav-link link-dark admins">
-                    Manage Admins
-                </a>
-            </li>
+           
             <li class="mlmLi">
                 <a href="{{URL::asset('admin/multi-level-marketing')}}" class="nav-link link-dark mlm">
                     MLM
@@ -66,11 +67,7 @@
                     Reviews
                 </a>
             </li>
-            <li class="notificationsLi">
-                <a href="{{URL::asset('admin/notifications')}}" class="nav-link link-dark notifications">
-                    Notifications
-                </a>
-            </li>
+         
             <li class="adsLi">
                 <a href="{{URL::asset('admin/ads')}}" class="nav-link link-dark ads">
                     Ads & Promo
@@ -81,11 +78,19 @@
                     Manage Request
                 </a>
             </li>
-            <li class="manageMDfoodsLi"> 
-                <a href="{{URL::asset('admin/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
-                    Manage MDFoods
+
+            <li class="notificationsLi">
+                <a href="{{URL::asset('admin/notifications')}}" class="nav-link link-dark notifications">
+                    Notifications
                 </a>
             </li>
+
+            <li class="adminsLi">
+                <a href="{{URL::asset('admin/add-admins')}}" class="nav-link link-dark admins">
+                    Manage Admins
+                </a>
+            </li>
+            
         </ul>
     </div>
 </main>

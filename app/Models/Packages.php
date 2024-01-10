@@ -74,7 +74,20 @@ class Packages extends Model
     {
         return $this->belongsTo(Cities::class, 'city_id');
     }
+
+    public function salesDetails()
+    {
+        return $this->hasMany(CustomerPurchaseDetails::class, 'package_id')->where('status','active');
+    }
+
     
+
+    public function salesCount()
+    {
+        return $this->salesDetails()->count();
+    }
+
+
     
 
 
