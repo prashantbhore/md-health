@@ -102,9 +102,14 @@
                                                 <option
                                                     value="Female"{{ $customer_list->gender == 'Female' ? 'selected' : '' }}>
                                                     Female</option>
+                                                <option
+                                                    value="Preffered Not To Say"{{ $customer_list->gender == 'Preffered Not To Say' ? 'selected' : '' }}>
+                                                    Preffered Not To Say</option>
                                             @else
                                                 <option value="Male"> Male </option>
                                                 <option value="Female">Female</option>
+                                                <option value="Preffered Not To Say">Preffered Not To Say</option>
+
                                             @endif
 
 

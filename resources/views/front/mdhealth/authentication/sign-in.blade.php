@@ -124,7 +124,7 @@
                 </script>
 
 
-                {{-- <h6 class="mb-0 d-flex align-items-center gap-1">
+                <h6 class="mb-0 d-flex align-items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
                             <g clip-path="url(#clip0_0_28401)">
@@ -138,11 +138,11 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                         <span class="text-danger">32 sec</span>
+                         <span class="text-danger" id="timer">32 sec</span>
                     </h6>
                     <div>
-                         <a href="#" class="text-secondary">Resend Code In</a>
-                    </div> --}}
+                         <a href="#" class="text-secondary" id="resendotp">Resend Code In</a>
+                    </div>
 
             </div>
         </div>
@@ -174,7 +174,37 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script>
+      function countdownTimer(duration) {
+        $('#resendotp').hide();
+        let timer = duration,
+          minutes, seconds;
+        const timerDisplay = $('#timer');
+        const timerInterval = setInterval(function () {
+          minutes = parseInt(timer / 60, 10);
+          seconds = parseInt(timer % 60, 10);
+    
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+          timerDisplay.text(minutes + ":" + seconds);
+    
+          if (--timer < 0) {
+            timer = duration;
+            clearInterval(timerInterval);
+            $('#resendotp').show();
+            timerDisplay.text("Timer completed!");
+          }
+        }, 1000);
+      }
+    
+      // Set the timer duration in seconds
+      let timerDuration = 32;
+    
+      countdownTimer(timerDuration);
+    </script>
+    
 
     <script>
         $(document).ready(function() {
