@@ -28,7 +28,7 @@
         <!-- SECTION 1 -->
         <div class="searchBar bg-f6">
             <div class="container pt-5 px-0">
-                <div class="search-bar d-flex align-items-center justify-content-between p-3 gap-3 mb-5">
+                <div class="search-bar d-flex align-items-center justify-content-between p-3 gap-3">
                     <div class="form-floating">
                         <select class="form-select" id="floatingSelect" name="treatment_name" aria-label="Floating label select example">
                             <option data-display="Select" value="{{$treatment_name}}" selected>{{$treatment_name}}</option>
@@ -68,7 +68,7 @@
 </div>
 
 <!-- SECTION 2 -->
-<div class="section-2 bg-f6">
+<div class="section-2 bg-f6 m-5">
     <div class="container">
         <div class="text-center">
             <h2 class="titleClass">Your <span style="color: #08fc34">search</span> results</h2>
@@ -77,22 +77,24 @@
 </div>
 
 <!-- SECTION 4 -->
-<div class="packageResults">
+<div class="packageResults package-results">
     <div class="container">
         <div class="row">
             <div class="col-8">
                 <div class="mb-3 position-relative">
-                    <img style="width: 100%;" src="{{('front/assets/img/mdHealthAd.png')}}" alt="">
-                    <img class="position-absolute" style="right: 0; bottom: 0;" src="{{('front/assets/img/plane.svg')}}" alt="">
+                    <a href="javascript:void(0);">
+                        <img style="width: 100%;" src="{{('front/assets/img/mdHealthAd.png')}}" alt="">
+                        <img class="position-absolute" style="right: 0; bottom: 0;" src="{{('front/assets/img/plane.svg')}}" alt="">
+                    </a>
                 </div>
                 @php
                 if(!empty($packages)){
                 @endphp
                 @foreach($packages as $key => $package_list)
-                <div class="packageResult rounded mb-3">
+                <div class="packageResult package-results-div rounded mb-3">
                     <div>
-                        <div class="d-flex gap-2 align-items-center">
-                            <p class="mb-0 fs-5 camptonBold lh-base">{{$packages[$key]['package_name']}}</p>
+                        <div class="d-flex gap-3 align-items-center mb-1">
+                            <p class="mb-0 fs-5 camptonBold lh-base preslt-title">{{$packages[$key]['package_name']}}</p>
                             <img src="{{('front/assets/img/verifiedBy.svg')}}" alt="">
                         </div>
                         <div class="d-flex gap-5 mb-4">
@@ -101,18 +103,18 @@
                                 <p class="mb-0 lctn">{{$packages[$key]['city_name']}}</p>
 
                             </div>
-                            <div class="d-flex align-items-center gap-1">
+                            <div class="d-flex gap-2 align-items-center">
                                 <img src="{{('front/assets/img/Diaganose.svg')}}" alt="">
                                 <p class="mb-0 lctn fst-italic">{{$packages[$key]['treatment_period_in_days']}}</p>
                             </div>
                         </div>
-                        <div class="d-flex gap-4">
+                        <div class="d-flex gap-4 package-results-details">
                             <div class="brdr-right">
-                                <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Includes</span></p>
+                                <p class="packageResult-title mb-3">Package Includes</p>
                                 @if(!empty($package_list['other_services']))
                                 @foreach($package_list['other_services'] as $key => $other_service)
                                 @if(!empty($package_list['other_services'][$key]))
-                                <div class="d-flex gap-1 align-items-baseline mb-1">
+                                <div class="d-flex gap-1 align-items-baseline mb-2 packageservices-list">
                                     <img style="width: 11px;" src="{{('front/assets/img/Varlik.svg')}}" alt="">
                                     <p class="mb-0 camptonBook smallFont">{{$package_list['other_services'][$key]}}</p>
                                 </div>
@@ -128,24 +130,22 @@
                                 @endif
                             </div>
                             <div class="brdr-right">
-                                <p class="mb-0"><span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Reviews</span><span class="fw-normal">(480)</span></p>
-                                <div class="stars">
-                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
-                                    <img src="{{('front/assets/img/star-green.svg')}}" style="width: 16px;" alt="">
+                                <p class="packageResult-title mb-2">Reviews <span class="">(480)</span></p>
+                                <div class="stars d-flex gap-2 mb-2">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                 </div>
-                                <p class="fs-6 camptonBold">Excellent</p>
+                                <p class="fs-6 camptonBold review-type">Excellent</p>
                             </div>
-                            <div class="d-flex flex-column align-items-end gap-4">
+                            <div class="d-flex flex-column gap-4 justify-content-between packageResult-price">
                                 <div>
-                                    <p class="mb-0">
-                                        <span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package Price</span>
-                                    </p>
+                                    <p class="packageResult-title mb-3">Package Price </p>
                                     <div class="my-2">
-                                        <p class="mb-0 fs-5 camptonBold lh-base">{{$package_list['package_price']}} ₺ <span class="smallFont fs-6">*{{"(".get_twenty_percent($package_list['package_price'])."₺)"}}</span></p>
-                                        <p class="camptonBook">*20% of the price is paid before booking.</p>
+                                        <p class="mb-1 camptonBold lh-base packageResult-price-title">{{$package_list['package_price']}} ₺ <span class="">*{{"(".get_twenty_percent($package_list['package_price'])."₺)"}}</span></p>
+                                        <p class=" mb-3 camptonBook packageResult-offer">*20% of the price is paid before booking.</p>
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
                                         <button class="btn purchaseBtn" id="{{$package_list['id']}}" data-bs-toggle="modal">Purchase Package</button>
@@ -154,7 +154,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <form method="POST" id="myForm_{{$package_list['id']}}" action="{{ url('health-pack-details') }}">
+                                <form method="POST" id="myForm_{{$package_list['id']}}" class="text-end" action="{{ url('health-pack-details') }}">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$package_list['id']}}">
                                     <a href="javascript:void(0)" id="submit_btn_{{$package_list['id']}}" class="underline smallFont view_btn">View All Details</a>
@@ -252,27 +252,27 @@
             </div>
             <div class="col-4">
                 <div class="packageFilter rounded mb-3">
-                    <p class="fs-5 camptonBold lh-base">Supplier Rating</p>
+                    <p class="packageFilter-heading camptonBold lh-base">Supplier Rating</p>
                     <div>
-                        <form action="" class="filter greenCheck">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle1">Excellent (4-5)</label><br>
+                        <form action="" class="filter">
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="supplierrating1" name="supplierrating" value="">
+                                    <label for="supplierrating1">Excellent (4-5)</label><br>
                                 </div>
                                 <p class="mb-1">(23)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">Good (4-5)</label><br>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="supplierrating2" name="supplierrating" value="">
+                                    <label for="supplierrating2">Good (4-5)</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Normal (4-5)</label>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="supplierrating3" name="supplierrating" value="">
+                                    <label for="supplierrating3">Normal (4-5)</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
@@ -280,41 +280,41 @@
                     </div>
                 </div>
                 <div class="packageFilter rounded mb-3">
-                    <p class="fs-5 camptonBold lh-base">Services</p>
+                    <p class="packageFilter-heading camptonBold lh-base">Services</p>
                     <div>
-                        <form action="" class="filter greenCheck">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle1">Full Package</label><br>
+                        <form action="" class="filter">
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterservices1" name="filterservices" value="">
+                                    <label for="filterservices1">Full Package</label><br>
                                 </div>
                                 <p class="mb-1">(23)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">Transporting</label><br>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterservices2" name="filterservices" value="">
+                                    <label for="filterservices2">Transporting</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Accomodation</label>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterservices3" name="filterservices" value="">
+                                    <label for="filterservices3">Accomodation</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Translate</label>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterservices4" name="filterservices" value="">
+                                    <label for="filterservices4">Translate</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Tour</label>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterservices5" name="filterservices" value="">
+                                    <label for="filterservices5">Tour</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
@@ -322,34 +322,34 @@
                     </div>
                 </div>
                 <div class="packageFilter rounded mb-3">
-                    <p class="fs-5 camptonBold lh-base">Price</p>
+                    <p class="packageFilter-heading camptonBold lh-base">Price</p>
                     <div>
-                        <form action="" class="filter greenCheck">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle1">10,000 ₺ - 20,000 ₺</label><br>
+                        <form action="" class="filter">
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterprice1" name="filterprice" value="">
+                                    <label for="filterprice1">10,000 ₺ - 20,000 ₺</label><br>
                                 </div>
                                 <p class="mb-1">(23)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">20,001 ₺ - 50,000 ₺</label><br>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterprice2" name="filterprice" value="">
+                                    <label for="filterprice2">20,001 ₺ - 50,000 ₺</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">50,001 ₺ - 70,000 ₺</label><br>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterprice3" name="filterprice" value="">
+                                    <label for="filterprice3">50,001 ₺ - 70,000 ₺</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">70,001 ₺ - 90,000 ₺</label><br>
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <input type="radio" class="mb-1 form-check-input" id="filterprice4" name="filterprice" value="">
+                                    <label for="filterprice4">70,001 ₺ - 90,000 ₺</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
@@ -449,6 +449,23 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-f6 mt-5 mdhealth-search-result-footer-text">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="titleClass">Couldn’t find your <span style="color: #08fc34">treatment</span> package?</h2>
+        </div>
+    </div>
+</div>
+
+<div class="bg-f6 mt-2 mb-2 mdhealth-search-result-footer">
+    <div class="container">
+        <div class="container d-flex flex-column justify-content-center align-items-center">
+            <img src="{{('front/assets/img/helth-search-result-footer.png')}}" alt="" class="w-100">
+            <a href="javascript:void(0);">Make an Request</a>
         </div>
     </div>
 </div>

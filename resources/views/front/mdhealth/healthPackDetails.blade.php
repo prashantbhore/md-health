@@ -24,13 +24,13 @@
         <div class="searchBar backBtn bg-f6">
             <div class="container pt-4">
                 <a href="#" onclick="window.history.back()" class="d-flex align-items-center mb-5 gap-2">
-                    <img src="{{ 'front/assets/img/ArrowLeftCircle.png' }}" alt="">
-                    <p class="mb-0 fs-5 camptonBold">Back Treatments</p>
+                    <img src="{{ 'front/assets/img/ArrowLeftCircle.png' }}" alt="" style="width:25px">
+                    <p class="mb-0 fs-5 text-black camptonBold">Back Treatments</p>
                 </a>
-                <div class="packageResult rounded mb-3">
+                <div class="packageResult package-results-div details rounded mb-5">
                     <div>
-                        <div class="d-flex gap-2 align-items-center">
-                            <p class="mb-0 fs-5 camptonBold lh-base">{{ $packageDetails['package_name'] }}</p>
+                        <div class="d-flex gap-3 align-items-center mb-1">
+                            <p class="mb-0 fs-5 camptonBold lh-base preslt-title">{{ $packageDetails['package_name'] }}</p>
                             <img src="{{ 'front/assets/img/verifiedBy.svg' }}" alt="">
                         </div>
                         <div class="d-flex gap-5 mb-4">
@@ -43,45 +43,39 @@
                                 <p class="mb-0 lctn fst-italic">{{ $packageDetails['treatment_period_in_days'] }}</p>
                             </div>
                         </div>
-                        <div class="d-flex gap-4">
+                        <div class="d-flex gap-4 package-results-details">
                             <div class="brdr-right">
-                                <p class="mb-0"><span class="text-green fw-bold camptonBold"
-                                        style="font-size: 1.125rem;">Package Includes</span></p>
+                                <p class="packageResult-title mb-3">Package Includes</p>
 
                                 @foreach ($packageDetails['other_services'] as $service)
                                     @if (!empty($service))
-                                        <div class="d-flex gap-1 align-items-baseline mb-1">
-                                            <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}"
-                                                alt="">
+                                        <div class="d-flex gap-1 align-items-baseline mb-2 packageservices-list">
+                                            <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}"alt="">
                                             <p class="mb-0 camptonBook smallFont">{{ $service }}</p>
                                         </div>
                                     @endif
                                 @endforeach
                             </div>
                             <div class="brdr-right">
-                                <p class="mb-0"><span class="text-green fw-bold camptonBold"
-                                        style="font-size: 1.125rem;">Reviews</span><span class="fw-normal">(480)</span></p>
-                                <div class="stars">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
+                                <p class="packageResult-title mb-2">Reviews <span class="">(480)</span></p>
+                                <div class="stars d-flex gap-2 mb-2">
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
                                 </div>
-                                <p class="fs-6 camptonBold">Excellent</p>
+                                <p class="fs-6 camptonBold review-type">Excellent</p>
                             </div>
-                            <div class="d-flex flex-column align-items-end gap-4">
+                            <div class="d-flex flex-column gap-4 justify-content-between packageResult-price">
                                 <div>
-                                    <p class="mb-0">
-                                        <span class="text-green fw-bold camptonBold" style="font-size: 1.125rem;">Package
-                                            Price</span>
-                                    </p>
+                                    <p class="packageResult-title mb-3">Package Price</p>
                                     <div class="my-2">
-                                        <p class="mb-0 fs-5 camptonBold lh-base">{{ $packageDetails['treatment_price'] }} ₺
-                                            <span
+                                        <p class="mb-1 camptonBold lh-base packageResult-price-title">{{ $packageDetails['treatment_price'] }} ₺
+                                             <span
                                                 class="smallFont fs-6">*{{ '(' . get_twenty_percent($packageDetails['treatment_price']) . ' ₺)' }}</span>
                                         </p>
-                                        <p class="camptonBook">*20% of the price is paid before booking.</p>
+                                        <p class=" mb-3 camptonBook packageResult-offer">*20% of the price is paid before booking.</p>
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
                                         <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
@@ -234,36 +228,26 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="menu1">
-                            <div class="reviews mt-4">
+                            <div class="reviews mt-4 mb-5">
                                 <div class="d-flex align-items-center gap-3">
                                     <p class="mb-0 fs-1 camptonBold">4,8</p>
                                     <p class="mb-0 u"><u>480 Reviews</u></p>
                                 </div>
-                                <div class="stars mb-5">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 30px;"
-                                        alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 30px;"
-                                        alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 30px;"
-                                        alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 30px;"
-                                        alt="">
-                                    <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 30px;"
-                                        alt="">
+                                <div class="stars d-flex gap-2 mb-5">
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
+                                    <i class="fa fa-star text-green"></i>
                                 </div>
                                 <div class="review mb-4">
                                     <div class="mb-4">
-                                        <div class="stars d-inline me-2">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
+                                        <div class="stars d-inline gap-1 me-2">
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-dark"></i>
                                         </div>
                                         <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing
                                             elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque
@@ -272,24 +256,19 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <p class="mb-1 fs-6 camptonBold">Ali G. / <span
+                                        <p class="mb-1 fs-6 camptonBold reviewauthor">Ali G. / <span
                                                 class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
-                                        <p class="fs-6 fst-italic">12/12/2023</p>
+                                        <p class="fs-6 fst-italic reviewdate">12/12/2023</p>
                                     </div>
                                 </div>
                                 <div class="review mb-4">
                                     <div class="mb-4">
-                                        <div class="stars d-inline me-2">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
+                                        <div class="stars d-inline gap-1 me-2">
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-dark"></i>
                                         </div>
                                         <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing
                                             elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque
@@ -298,24 +277,19 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <p class="mb-1 fs-6 camptonBold">Ali G. / <span
+                                        <p class="mb-1 fs-6 camptonBold reviewauthor">Ali G. / <span
                                                 class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
                                         <p class="fs-6 fst-italic">12/12/2023</p>
                                     </div>
                                 </div>
                                 <div class="review mb-4">
                                     <div class="mb-4">
-                                        <div class="stars d-inline me-2">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
-                                            <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 15px;"
-                                                alt="">
+                                        <div class="stars d-inline gap-1 me-2">
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-green"></i>
+                                            <i class="fa fa-star text-dark"></i>
                                         </div>
                                         <p class="d-inline camptonBook">Lorem ipsum dolor sit, amet consectetur adipisicing
                                             elit. Dignissimos beatae quia vero eaque officia, aperiam quas accusantium neque
@@ -324,11 +298,19 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <p class="mb-1 fs-6 camptonBold">Ali G. / <span
+                                        <p class="mb-1 fs-6 camptonBold reviewauthor">Ali G. / <span
                                                 class="fst-italic camptonBook">Heart Valve Replacement Surgery</span></p>
                                         <p class="fs-6 fst-italic">12/12/2023</p>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="reviews-button m-5 pt-5 pb-2">
+                                <ul class="pagination p-0 border-0 justify-content-center gap-1">
+                                    <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                </ul>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="menu2">

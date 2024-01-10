@@ -573,6 +573,7 @@ Route::post('update-food-provider-account',[UpdateFoodProviderAccount::class,'up
 //Food Vendor Route Ends By Mplus03
 
 
+Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
 
 
 
