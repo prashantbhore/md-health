@@ -635,4 +635,5 @@ Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 Route::view('user-favorites', 'front/mdhealth/user-panel/user-favorites');
 Route::view('membership', 'front/mdhealth/medical-provider/membership');
+Route::view('welcome', 'welcome');
 
