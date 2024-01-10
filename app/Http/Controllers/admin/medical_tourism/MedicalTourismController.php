@@ -45,27 +45,21 @@ class MedicalTourismController extends Controller
 
       $id=Crypt::decrypt($request->id);
 
-      
+        $medical_provider=MedicalProviderRegistrater::with(['city','providerPackages'])
+        ->where('id',$id)
+        ->first();
 
+        //dd($medical_provider);
 
-      $medical_provider=MedicalProviderRegistrater::with('city')
-      ->where('id',$id)
-      ->first();
+       $medical_provider_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
 
-
-      $medical_provider_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
-
-      $medical_provider_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
-
+       $medical_provider_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
 
       $gallary=ProviderImagesVideos::where('status','active')->where('provider_id',$id)->get();
 
 
 
-   
-   
-    
-    return view('admin.medical-tourism.service-provider-details',compact('medical_provider','medical_provider_logo','medical_provider_license','gallary'));
+     return view('admin.medical-tourism.service-provider-details',compact('medical_provider','medical_provider_logo','medical_provider_license','gallary'));
   }
 
 
@@ -254,6 +248,8 @@ class MedicalTourismController extends Controller
 
 
     public function verification_status(Request $request){
+
+      
         
         $input['verified'] =!empty($request->status)?$request->status:'';
    
@@ -300,12 +296,7 @@ class MedicalTourismController extends Controller
        
         
     }
-
-
-
-    
-
-
+   
     public function vendor_delete(Request $request)
     {
         $id = !empty($request->id) ? $request->id : '';
@@ -315,6 +306,17 @@ class MedicalTourismController extends Controller
             'modified_ip_address' => $_SERVER['REMOTE_ADDR']
         ]);
         return response()->json(['message' =>'Vendor Is Deleted', 'status' => 'true']);
+    }
+
+    public function package_delete(Request $request)
+    {
+        $id = !empty($request->productId) ? $request->productId : '';
+        $old_data = Packages::where('id', $id)->first();
+        $new_data = Packages::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+        return response()->json(['message' =>'Package Is Deleted', 'status' => 'true']);
     }
 
 

@@ -639,6 +639,7 @@
 .homeServicePackage .brdr-right {
     border-right: 1px solid #e1e1e1;
     padding-right: 2rem;
+
 }
 
 #buyService .brdr-right {
@@ -3363,4 +3364,184 @@ label.tc-text {
     line-height: normal;
     letter-spacing: -0.92px;
     width: 618px;
+}
+
+.package-results-div {
+    display: block;
+}
+
+.package-results-div .preslt-title {
+    font-size: 20px !important;
+}
+
+.package-results-div .packageResult-title {
+    font-size: 18px;
+    color: #4CDB06;
+    font-weight: 600;
+    font-family: 'Campton';
+    line-height: 1;
+}
+
+.package-results-div .packageResult-title span {
+    font-size: 11px;
+    color: #000;
+    font-weight: 500;
+}
+
+.package-results-div .packageservices-list {
+    letter-spacing: -0.56px;
+}
+
+.package-results-div .stars i {
+    font-size: 18px;
+    color: #4CDB06;
+}
+
+.packageResult-price {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.packageResult-price span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.packageResult-price .packageResult-offer {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.56px;
+}
+
+.searchBar .tab-card .nav-pills .nav-link {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.searchBar .tab-card .nav-pills .nav-link.active {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.package-results-details .brdr-right .review-type {
+    letter-spacing: -0.56px;
+}
+
+.package-results-details .brdr-right:nth-child(1) {
+    width: 30%;
+}
+
+.package-results-details .brdr-right:nth-child(2) {
+    width: 25%;
+}
+
+.details .package-results-details .brdr-right:nth-child(1) {
+    width: 23%;
+}
+
+.details .package-results-details .brdr-right:nth-child(2) {
+    width: 17%;
+}
+
+.packageResult-price {
+    width: 45%;
+}
+
+.packageResult-price .purchaseBtn {
+    padding: 0 3rem;
+    letter-spacing: -0.56px;
+}
+
+.packageResult-price .favouriteBtn {
+    padding: 12px 15px;
+}
+
+.packageResult-price .view_btn {
+    text-decoration: underline;
+}
+
+.package-results .packageFilter {
+    font-size: 20px;
+}
+
+.mdhealth-search-result-footer a {
+    border-radius: 5px;
+    background: #000;
+    font-size: 16px;
+    color: #FFF;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.64px;
+    padding: 10px 60px;
+    transform: translateY(-21px);
+}
+
+.mdhealth-search-result-footer-text span {
+    text-decoration: underline;
+}
+
+.reviews .stars i {
+    font-size: 23px;
+}
+
+.reviews .review .stars i,
+.reviews .review p {
+    font-size: 16px;
+}
+
+.review p span {
+    font-weight: 700;
+}
+
+.reviews-button .pagination .page-link {
+    padding: 2px 5px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #808080;
+}
+
+.reviews-button .page-item.active .page-link {
+    color: #000;
+    background-color: #0d6efd00;
+    border: 1px solid #4CDB06 !important;
+    font-weight: 900;
+}
+
+.reviews-button .page-item .page-link:focus {
+    box-shadow: unset;
+    background-color: transparent;
+}
+
+.reviewauthor,
+.reviewdate {
+    font-size: 16px !important;
+}
+
+.reviewdate {
+    font-weight: 600;
+}
+
+.packageResult-price-title {
+    letter-spacing: -0.8px;
+}
+
+.daterangepicker .calendar-table .month {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
+.daterangepicker .calendar-table th,
+.daterangepicker .calendar-table td {
+    font-family: "CamptonBook";
+}
+
+.daterangepicker .calendar-table .next span {
+    background-image: url("../img/CalenederNext.png");
+    background-repeat: no-repeat;
 }

@@ -129,16 +129,18 @@ class CustomerController extends Controller
 
 
     public function show(Request $request){
+
+
         $id=Crypt::decrypt($request->id);
 
-        $customer=CustomerRegistration::with('country')->with('city')->where('id', $id)->first();
+        $customer = CustomerRegistration::with(['country', 'city', 'customerOrders.package','customerOrders.paymentDetails.purchage'])->find($id);
+
+
+        //dd($customer);
 
         $logs=CustomerLogs::where('customer_id',$id)->get();
 
-       //dd($logs);
-
-        // dd($customer);
-
+   
        
          return view('admin.customers.customer-details',compact('customer','logs'));
         

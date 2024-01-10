@@ -252,11 +252,17 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
 
 
 
-    $(document).ready(function (){
+
+   // $(document).ready(function (){
         $('.verifiedcheckbox').click(function (){
+            
+            
            
             var id = $(this).data("id");
+          
             var isChecked = $(this).prop('checked');
+
+           
 
             $.ajax({
                 method: 'POST',
@@ -272,6 +278,7 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
                 },
                 url: base_url + "/admin/verification-status-chnage",
                 success: function (data){
+                   
 
                     success_toast("Success", data.message);
                 },
@@ -281,7 +288,7 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
                 }
             });
         });
-    });
+    //});
 
 
     $(document).ready(function(){
@@ -343,7 +350,47 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
             });
         });
     });
+
+
+
+    $(document).ready(function() {
+        $(".delete-product").on("click", function(e) {
+           
+            e.preventDefault();
+
+            var confirmed = window.confirm("Are you sure you want to delete this product?");
+            
+            if (!confirmed) {
+                return;
+            }
+
+            var productId = $(this).data("product-id");
+            var productCard = $(".product-card[data-product-id='" + productId + "']");
+
+            $.ajax({
+                method: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: base_url+'admin/delete-package',
+                data: { productId: productId },
+                success: function(data) {
+                    success_toast("Success", data.message);
+                    productCard.hide();
+
+                    var currentUrl = window.location.href;
+                    window.history.replaceState({}, document.title, currentUrl);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+
     
-    
-    
+
+
+   
         

@@ -63,4 +63,17 @@ class MedicalProviderRegistrater extends Authenticatable
             ->where('status', 'active');
     }
 
+
+    public function providerPackages()
+    {
+        return $this->hasMany(Packages::class, 'created_by', 'id')
+            ->where('status', '!=', 'delete');
+    }
+
+
+    
+    
+
+
+
 }
