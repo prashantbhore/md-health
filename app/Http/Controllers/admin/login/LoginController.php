@@ -39,8 +39,6 @@ class LoginController extends Controller
             'password' => $request->get('password')
         );
 
-      
-       
         if (Auth::guard('superadmin')->attempt($admin_data)){
          
 
@@ -48,14 +46,14 @@ class LoginController extends Controller
 
             // dd($user_id);
 
-            Session::put('md_super_admin*%', $user_id);
+            Session::put('md_super_admin*%',$user_id);
 
             return redirect('admin/dashboard')->with('success', 'Login successfull!');
 
 
         } else {
             
-            return redirect('/')->with('error', 'Invalid Login Details!');
+            return redirect('/super-admin')->with('error', 'Invalid Login Details!');
         }
     }
 
@@ -66,7 +64,7 @@ class LoginController extends Controller
     {
         Auth::logout();
         Session::flush();
-        return redirect('/')->with('success', 'Logged out Successfully!');
+        return redirect('/super-admin')->with('success', 'Logged out Successfully!');
     }
     
 

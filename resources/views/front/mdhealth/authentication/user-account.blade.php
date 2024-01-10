@@ -130,7 +130,6 @@
                                                 <span toggle="#password"
                                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                             </div>
-
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-5 hide-eye-div">

@@ -111,9 +111,11 @@
 .bod-3 {
     border-radius: 3px 0 0px 3px !important;
 }
+
 .bod-n-3 {
     border-radius: 0px 3px 3px 0px !important;
 }
+
 .card-h8 {
     color: #000;
     text-align: center;
@@ -273,7 +275,7 @@
 .search-bar .form-floating label {
     color: #a3a3a3;
     font-family: CamptonBook;
-    font-size: 14px ;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -369,12 +371,12 @@
     opacity: 1;
 }
 
+
 .search-bar .form-select {
     background-image: url("../img/SelectArrowDown.png");
     background-repeat: no-repeat;
     background-size: auto;
-    background-position:  bottom 16px right 12px;
-    /* float: inline-end; */
+    background-position: bottom 16px right 12px;
 }
 
 .request-modal .form-select,
