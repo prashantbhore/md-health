@@ -10,9 +10,9 @@
 @endphp
 
 <style>
-    .dropdown-toggle::after {
+    /* .dropdown-toggle::after {
         display: none;
-    }
+    } */
 
     .nav-login {
         display: flex;
@@ -33,14 +33,14 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-end align-items-center ms-5" id="navbarNavDropdown">
-            <ul class="navbar-nav align-items-center gap-5">
+            <ul class="navbar-nav align-items-center gap-5 me-auto">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Booking</a></li>
+                            class="camptonBold">MD</span>Booking</a></li>
                 <li class="nav-item"><a href="{{ url('mdFoods') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Foods</a></li>
+                            class="camptonBold">MD</span>Foods</a></li>
                 <li class="nav-item"><a href="{{ url('mdShop') }}" class="nav-link"><span
-                            class="fw-bold">MD</span>Shop</a></li>
+                            class="camptonBold">MD</span>Shop</a></li>
                 <!-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
