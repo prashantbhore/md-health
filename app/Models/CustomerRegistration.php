@@ -55,4 +55,16 @@ class CustomerRegistration extends Authenticatable
         return $this->belongsTo(Cities::class, 'city_id');
     }
 
+
+    
+
+            public function customerOrders()
+            {
+                return $this->hasMany(CustomerPurchaseDetails::class, 'customer_id');
+            }
+
+
+
+    
+
 }

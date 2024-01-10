@@ -260,10 +260,10 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span class="text-danger">32 sec</span>
+                        <span class="text-danger" id="timer">32 sec</span>
                     </h6>
                     <div>
-                        <a href="#" class="text-secondary">Resend Code In</a>
+                        <a href="#" class="text-secondary" id="resendotp">Resend Code In</a>
                     </div>
 
                 </div>
@@ -297,6 +297,36 @@
 
  <script type="text/javascript"
      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+     <script>
+        function countdownTimer(duration) {
+          $('#resendotp').hide();
+          let timer = duration,
+            minutes, seconds;
+          const timerDisplay = $('#timer');
+          const timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+      
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+      
+            timerDisplay.text(minutes + ":" + seconds);
+      
+            if (--timer < 0) {
+              timer = duration;
+              clearInterval(timerInterval);
+              $('#resendotp').show();
+              timerDisplay.text("Timer completed!");
+            }
+          }, 1000);
+        }
+      
+        // Set the timer duration in seconds
+        let timerDuration = 32;
+      
+        countdownTimer(timerDuration);
+      </script>
+      
     <script>
         $(document).on('click', '#regcustuser', function() {
             var base_url = $('#base_url').val();
