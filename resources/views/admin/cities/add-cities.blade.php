@@ -1,4 +1,8 @@
 @extends('admin.layout.layout') @section("content")
+<style>
+
+</style>
+
 <section class="main-content cityPage">
     <div class="content-wrapper">
         <div class="page-title">Manage Cities</div>
@@ -46,15 +50,17 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <!-- Filters -->
                             <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
                                 <div class="card-title me-auto">Cities</div>
-                                <!-- <input type="text" class="form-control" placeholder="Search"> -->
+                                
+                            {{-- <input type="text" class="form-control" placeholder="Search"> --}}
+
+                             {{-- <input type="search" class="form-control form-control-sm" placeholder aria-controls="example"> --}}
 
                                 <select class="form-select form-select-sm">
                                     <option selected disabled hidden>Active Cities</option>
-
                                     <option value="1">Active Orders</option>
                                     <option value="2">Denied Orders</option>
                                     <option value="3">Completed Orders</option>
@@ -101,4 +107,6 @@
     $(".citiesLi").addClass("activeClass");
     $(".cities").addClass("md-active");
 </script>
+
+
 @endsection

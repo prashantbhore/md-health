@@ -7,19 +7,19 @@
                 @include('front.includes.sidebar')
             </div>
             <div class="col-md-9">
-                <div class="card mb-4">
+                <div class="card mb-4" style="min-height: 245px;">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>Dashboard</span>
                         <img src="{{asset('front/assets/img/GoldMember.svg')}}" alt="">
                     </h5>
                     <div class="card-body">
                         <div class="green-plate bg-green d-flex align-items-center justify-content-between mb-3">
-                            <p class="mb-0">Orders (Monthly)</p>
-                            <h3 class="mb-0">{{!empty($monthly_orders['monthly_orders'])?$monthly_orders['monthly_orders']:0}}</h3>
+                            <p class="my-0">Orders (Monthly)</p>
+                            <h3 class="my-0">{{!empty($monthly_orders['monthly_orders'])?$monthly_orders['monthly_orders']:0}}</h3>
                         </div>
                         <div class="black-plate bg-black text-green d-flex align-items-center justify-content-between mb-3">
-                            <p class="mb-0">Sales (Monthly)</p>
-                            <h3 class="mb-0">{{!empty($monthly_sales_count['monthly_sales'])?$monthly_sales_count['monthly_sales']:0}} ₺</h3>
+                            <p class="my-0">Sales (Monthly)</p>
+                            <h3 class="my-0">{{!empty($monthly_sales_count['monthly_sales'])?$monthly_sales_count['monthly_sales']:0}} ₺</h3>
                         </div>
                     </div>
                 </div>

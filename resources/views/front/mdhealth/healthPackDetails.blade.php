@@ -71,11 +71,13 @@
                                 <div>
                                     <p class="packageResult-title mb-3">Package Price</p>
                                     <div class="my-2">
-                                        <p class="mb-1 camptonBold lh-base packageResult-price-title">{{ $packageDetails['treatment_price'] }} ₺
-                                             <span
+                                        <p class="mb-1 camptonBold lh-base packageResult-price-title">
+                                            {{ $packageDetails['treatment_price'] }} ₺
+                                            <span
                                                 class="smallFont fs-6">*{{ '(' . get_twenty_percent($packageDetails['treatment_price']) . ' ₺)' }}</span>
                                         </p>
-                                        <p class=" mb-3 camptonBook packageResult-offer">*20% of the price is paid before booking.</p>
+                                        <p class=" mb-3 camptonBook packageResult-offer">*20% of the price is paid before
+                                            booking.</p>
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
                                         <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
@@ -118,8 +120,8 @@
                         <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
                         <!-- </button> -->
                         <div class="modal-content">
-                            <img class="closeModal" data-bs-dismiss="modal"
-                                src="{{ 'front/assets/img/modalClose.png' }}" alt="">
+                            <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/modalClose.png' }}"
+                                alt="">
                             <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
                             <p class="camptonBook text-center">Fill the patient detail.</p>
                             <div class="modal-body">
@@ -220,10 +222,10 @@
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div> --}}
                                     <!-- <div class="col-12 px-0">
-                                                                                                                                                                                                                                                        <p>
+                                                                                                                                                                                                                                                            <p>
 
-                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                            </p>
+                                                                                                                                                                                                                                                        </div> -->
                                 </div>
                             </div>
                         </div>
@@ -446,7 +448,7 @@
 
                 },
                 submitHandler: function(form) {
-                    var formData = $(this).serialize();
+                    var formData = $(form).serialize();
                     $.ajax({
                         url: baseUrl + '/api/md-change-patient-information',
                         type: 'POST',
@@ -465,7 +467,9 @@
                             $('#other').attr('disabled', false);
                             // $('#other').html('<span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>');
                             console.log('Success:', response);
-                            window.location.href = $('#hidden_url').val();
+                            var url = $('#hidden_url').val() + '/' + response.id.patient_id;
+
+                            window.location.href = url;
                         },
                         error: function(xhr, status, error) {
                             console.error('Error:', error);

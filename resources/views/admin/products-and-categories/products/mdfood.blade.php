@@ -82,7 +82,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">MDfood Categories</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>

@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Route;
 
 class ApiService {
 
@@ -51,7 +50,18 @@ class ApiService {
                 $method}
                 ( $url, $body ?? null );
                 // dd( $response->json() );
-                return $response->json();
+                try {
+                    if ( empty( $response->json() ) ) {
+
+                        throw new \Exception( $response );
+                    } else {
+                        return $response->json();
+                    }
+                    //  echo $response;
+                } catch ( \Exception $e ) {
+                    echo $e->getMessage();
+                    die;
+                }
 
                 // dd( $response );
             } else {
@@ -69,14 +79,24 @@ class ApiService {
                 if ( $image ) {
                     if ( is_array( $image ) ) {
 
-                        foreach ( $image as $index => $singleImage ) {
+                        foreach ( $image as $fieldName => $imageFiles ) {
+                            $files = [];
 
-                            $extension = $singleImage->getClientOriginalExtension();
-                            $request->files->set( $image_input_field_name[ $index ], $singleImage );
-                            $request->request->add( [
-                                $image_input_field_name[ $index ] => file_get_contents( $singleImage ),
-                                'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension
-                            ] );
+                            foreach ( $imageFiles as $index => $singleImage ) {
+
+                                if ( $singleImage instanceof \Illuminate\Http\UploadedFile  && $singleImage->isValid() ) {
+                                    $extension = $singleImage->getClientOriginalExtension();
+                                    $filename = time() . Str::random( 5 ) . '_' . $index . '.' . $extension;
+
+                                    $files[ $index ] = $singleImage;
+
+                                    $request->request->add( [
+                                        $fieldName . '_' . $index => $filename,
+                                    ] );
+                                }
+                            }
+
+                            $request->files->set( $fieldName, $files );
                         }
 
                     } else {
@@ -94,7 +114,18 @@ class ApiService {
                 // die;
                 // dd( jso n_decode( $response->getContent(), true ) );
 
-                return json_decode( $response->getContent(), true );
+                try {
+                    if ( empty( $response->getContent() ) ) {
+
+                        throw new \Exception( $response );
+                    } else {
+                        return json_decode( $response->getContent(), true );
+                    }
+                    //  echo $response;
+                } catch ( \Exception $e ) {
+                    echo $e->getMessage();
+                    die;
+                }
             }
         }
         //     public function getData( $token = null, $url, $body = null, $method, $image = null, $image_input_field_name = null )
@@ -223,4 +254,3 @@ class ApiService {
     //     $method}
     //     ( $url, $body ?? null );
     // dd( time().Str::random( 5 ).'.'.$extension );
-

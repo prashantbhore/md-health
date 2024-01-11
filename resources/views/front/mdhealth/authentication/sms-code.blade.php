@@ -11,7 +11,7 @@
         }
     </style>
     <div class="container py-100px df-center sign-in-form">
-        <div class="card">
+        <div class="card" >
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="pt-3">
