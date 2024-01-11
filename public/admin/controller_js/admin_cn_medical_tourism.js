@@ -43,7 +43,10 @@ $(function (){
             },
           
           
-          
+            {
+                data: "status",
+                name: "status",
+            },
           
             {
                 data: "action",
