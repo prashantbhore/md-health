@@ -2281,6 +2281,7 @@ class CustomerPackageController extends BaseController
                 // 'md_customer_purchase_details.package_total_price',
                 // 'md_customer_purchase_details.created_at',
                 'md_customer_purchase_details.payment_percentage',
+                'md_customer_purchase_details.treatment_start_date',
                 'md_packages.id as package_id',
                 // 'md_packages.package_unique_no',
                 'md_packages.package_name',
@@ -2316,6 +2317,20 @@ class CustomerPackageController extends BaseController
         $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
         $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
         $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
+        $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
+        $treatmentStartTimestamp = strtotime($treatment_start_date);
+
+        // Get today's date as a UNIX timestamp
+        $todayTimestamp = time();
+
+        // Calculate the difference in seconds between the treatment start date and today's date
+        $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+
+        // Convert the time difference to days
+        $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+        $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? $daysRemaining : '';
+
         $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
         $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
@@ -2398,13 +2413,14 @@ class CustomerPackageController extends BaseController
 
         if ($customer_documents_data) {
             $CustomerDocuments = CustomerDocuments::where('status', 'active')
-                ->select('id', 'customer_document_image_path', 'package_id')
+                ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
                 ->where('customer_id', Auth::user()->id)
                 ->get();
 
             foreach ($CustomerDocuments as $key => $val) {
                 $CustomerDocuments[$key]['package_id'] = !empty($val->package_id) ? $val->package_id : '';
                 $CustomerDocuments[$key]['customer_document_image_path'] = !empty($val->customer_document_image_path) ? url('/') . Storage::url($val->customer_document_image_path) : '';
+                $CustomerDocuments[$key]['customer_document_image_name'] = !empty($val->customer_document_image_name) ? ($val->customer_document_image_name) : '';
             }
         }
 
@@ -2673,9 +2689,23 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        if (!empty($request->purchase_id)) {
+            $CustomerReviews = CustomerReviews::where('status', 'active')
+                ->where('purchase_id', $request->purchase_id)
+                ->first();
+
+            if (!empty($CustomerReviews)) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => "Dear customer, you have already provided a review for this package.",
+                ]);
+            }
+        }
+
         $customer_reviews = [];
         $customer_reviews['customer_id'] = Auth::user()->id;
         $customer_reviews['package_id'] = $request->package_id;
+        $customer_reviews['purchase_id'] = $request->purchase_id;
         $customer_reviews['treatment_reviews'] = $request->treatment_reviews;
         $customer_reviews['acommodation_reviews'] = $request->acommodation_reviews;
         $customer_reviews['transporatation_reviews'] = $request->transporatation_reviews;
@@ -2710,6 +2740,19 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        if (!empty($request->package_id)) {
+            $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
+                ->where('package_id', $request->package_id)
+                ->where('customer_id', Auth::user()->id)
+                ->first();
+            if (!empty($CustomerFavouritePackages)) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'You have already added this package to favourite list.',
+                ]);
+            }
+        }
+
         $add_to_fav = [];
         $add_to_fav['customer_id'] = Auth::user()->id;
         $add_to_fav['package_id'] = $request->package_id;
@@ -2720,6 +2763,36 @@ class CustomerPackageController extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'This Package Added To Favourite.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function remove_from_favourite(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $CustomerFavouritePackages = [];
+        $CustomerFavouritePackages['status'] = 'inactive';
+        $CustomerFavouritePackages['created_by'] = Auth::user()->id;
+
+        $CustomerPurchaseDetails = CustomerFavouritePackages::where('id', $request->id)->update($CustomerFavouritePackages);
+
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Package Removed From Favourite list.',
+
             ]);
         } else {
             return response()->json([
