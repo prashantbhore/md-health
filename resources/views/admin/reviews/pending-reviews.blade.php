@@ -43,10 +43,11 @@
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">
-                                <option selected disabled hidden>Status</option>
-                                <option value="1">Active Orders</option>
-                                <option value="2">Denied Orders</option>
-                                <option value="3">Completed Orders</option>
+                                <option selected>All</option>
+                                <option value="1">Medical Service Provider</option>
+                                <option value="2">Food Provider</option>
+                                <option value="3">Vendor</option>
+                                <option value="3">Home Service</option>
                             </select>
                         </div>
 
