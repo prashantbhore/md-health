@@ -1,6 +1,8 @@
 @extends('front.layout.layout') @section('content')
 <style>
-
+#otpDiv .form-control{
+    padding: 0.375rem 0.5rem;
+}
     .navbar,
     .footer {
         display: none;
@@ -183,13 +185,13 @@
 {{-- otp --}}
 
 <div class="container py-100px df-center sign-in-form d-none" id="otpDiv">
-    <div class="card">
+    <div class="card" style="background: #f6f6f6;">
         <div class="card-body">
             <div class="d-flex flex-column align-items-center gap-4">
-                <div class="pt-3">
+                <div class="pt-4">
                     <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="" />
                 </div>
-                <h2 class="mb-0">SMS Code</h2>
+                <h2 class="my-0">SMS Code</h2>
                 <p>Enter the 6 digit code sent to your mobile phone</p>
                 {{--
                 <form action="{{ url('otp-verify') }}" method="post" id="otpForm">
@@ -219,7 +221,7 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-md btn-text w-75 my-3 text-center" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        <button class="btn btn-md btn-text w-407p5 my-3 text-center" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
                 </form>
                 <script>
@@ -514,11 +516,6 @@
         });
     });
 </script>
-{{--
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
---}} {{--
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
---}}
 
 <script>
     $(document).ready(function() {

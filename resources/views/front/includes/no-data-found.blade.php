@@ -1,14 +1,19 @@
 <style>
     .no-data {
-        border: solid #b8b8b8 1px;
         height: 150px;
-        border-radius: 5px;
-        text-align: center;
-        margin-bottom: 20px;
-        line-height: 150px;
-        font-size: 25px;
-        color: #a0a0a0;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        border: 1px solid #F6F6F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        background: #F6F6F6;
     }
 </style>
 
-<div class="no-data">No Data Found</div>
+<div class="no-data">No Data Found !</div>

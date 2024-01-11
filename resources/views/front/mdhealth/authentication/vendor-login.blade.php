@@ -175,13 +175,13 @@
 {{-- otp --}}
 
 <div class="container py-100px df-center sign-in-form d-none" id="otpDiv">
-    <div class="card">
+    <div class="card" style=" background: #f6f6f6;">
         <div class="card-body">
             <div class="d-flex flex-column align-items-center gap-4">
                 <div class="pt-3">
                     <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="" />
                 </div>
-                <h2 class="mb-0">SMS Code</h2>
+                <h2 class="my-0">SMS Code</h2>
                 <p>Enter the 6 digit code sent to your mobile phone</p>
                 {{--
                 <form action="{{ url('otp-verify') }}" method="post" id="otpForm">

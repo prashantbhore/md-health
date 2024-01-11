@@ -170,9 +170,8 @@
     background: #000;
     color: #fff;
     text-align: center;
-    font-family: CamptonBook;
+    font-family: "CamptonBold";
     font-size: 15px;
-
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.6px;
@@ -390,6 +389,18 @@
     background-size: unset;
 }
 
+.list-div .form-select {
+    background-image: url("../img/select-filter.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-size: unset;
+    background-position: bottom 16px right 12px;
+}
+
+.list-div .form-select:focus {
+    border: 1px solid #EDEDED;
+}
+
 .btn-close:focus {
     box-shadow: none;
 }
@@ -413,6 +424,7 @@
     color: #000;
 }
 
+.section-heading-div .form-check-input,
 .request-modal .form-check-input,
 .tc .form-check-input {
     background: #D9D9D9;
@@ -421,6 +433,10 @@
     border-radius: 3px !important;
     border: 1.5px solid #D6D6D6 !important;
     transition: 0.15s all;
+}
+.section-heading-div .form-check-input {
+    background: transparent;
+    margin-right: 8px;
 }
 
 /*  */
@@ -893,7 +909,7 @@ select {
     color: #000002;
     font-family: CamptonBold;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: 25px;
     /* 156.25% */
@@ -1383,11 +1399,11 @@ select {
     border: 1px solid #4cdb06;
 }
 
-.green-plate p {
+.green-plate p,
+.white-plate p {
     color: #000002;
     font-family: Campton;
     font-size: 16px;
-
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -1399,22 +1415,20 @@ select {
 }
 
 .black-plate h3 {
-    color: #4cdb06;
-    font-size: 27px;
-    letter-spacing: -1.08px;
-    font-weight: 800;
+    color: #4cdb06 !important;
 }
 
 .green-plate h3,
+.black-plate h3,
 .white-plate h3 {
     color: #000;
     text-align: right;
-    font-family: Campton;
+    font-family: "CamptonExtraBold";
     font-size: 27px;
-
     font-weight: 800;
     line-height: normal;
     letter-spacing: -1.08px;
+    margin-right: 16px;
 }
 
 .sign-in-form .card {
@@ -1449,7 +1463,8 @@ select {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.68px;
-    padding: 0 100px;
+    /* padding: 0 100px; */
+    width: 225px;
 }
 
 .sign-in-form .form-control {
@@ -1458,14 +1473,13 @@ select {
 }
 
 .sms-input .form-control {
-    width: 60px;
-    height: 100px;
+    width: 45px;
+    height: 80px;
     flex-shrink: 0;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 45px;
-
     font-weight: 400;
     line-height: normal;
     letter-spacing: -1.8px;
@@ -1704,14 +1718,18 @@ select {
 .tab-div .nav-link.active {
     border: unset;
     border-bottom: 4px solid #4cdb06;
+    color: #000002;
+    font-weight: 700;
 }
 
 .tab-div .nav-link {
+    color: #000002;
+    text-align: center;
+    font-family: "Campton";
+    font-weight: 500;
     font-size: 16px;
-    font-weight: 700;
-    color: #000 !important;
-    position: relative;
-    border: unset;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }
 
 .tab-div .nav.nav-tabs .nav-item:focus-visible {
@@ -1736,9 +1754,21 @@ select {
 
 .filter-div input,
 .filter-div select {
-    border-radius: 5px;
-    padding: 6px 15px;
-    border: 1px solid #ededed;
+    width: 195px;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #EDEDED;
+    background: #FFF;
+    padding: 6px 14px;
+}
+
+.filter-div input::placeholder {
+    color: #979797;
+    font-family: CamptonBook;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
 }
 
 input:focus-visible,
@@ -1752,6 +1782,11 @@ select option {
 
 .form-div .form-label {
     color: #979797;
+    font-family: "CamptonThin";
+    font-size: 16px;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }
 
 
@@ -1775,8 +1810,11 @@ select option {
     font-size: 16px;
 }
 
-.form-div select {
+/* .form-div select {
     color: #979797;
+} */
+.form-div .form-select:focus {
+    border: 2px solid #d6d6d6;
 }
 
 .trmt-card-footer.footer-btns {
@@ -1879,7 +1917,32 @@ select option {
     margin: 40px 0;
 }
 
+.section-heading-div .form-control::placeholder {
+    color: #878787;
+    font-family: "Campton";
+    font-size: 19px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.76px;
+}
+
+.section-heading-div .form-control {
+    color: #878787;
+    font-family: "Campton";
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    line-height: normal;
+    letter-spacing: -0.76px;
+}
+
 .section-heading-div .section-heading {
+    color: #000;
+    font-family: "Campton";
+    font-size: 20px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
     margin-bottom: 10px !important;
 }
 
@@ -1925,9 +1988,12 @@ select option {
 
 .input-icon-div .input-icon {
     position: absolute;
-    top: 10px;
+    top: 14px;
     right: 20px;
     font-weight: 700;
+    color: #000;
+    font-size: 16px;
+
 }
 
 .section-btns {
@@ -3343,12 +3409,12 @@ span.popup-msg.active {
     background-color: transparent !important;
 }
 
-label.tc-text {
+label.tc-text,
+.section-heading-div .form-check-label {
     color: #979797;
-    font-family: CamptonBook;
+    font-family: "CamptonThin";
     font-size: 16px;
-
-    font-weight: 400;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
@@ -3368,7 +3434,8 @@ label.tc-text {
 
 .multiple-checks .form-check-label {
     color: #000;
-    font-size: 16px;
+    font-family: "Campton";
+    font-size: 18px;
 
     font-weight: 500;
     line-height: normal;
@@ -3639,4 +3706,24 @@ label.tc-text {
     margin-left: 2rem;
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
+}
+
+#resendotp {
+    color: #878787;
+    text-align: center;
+    font-family: Campton;
+    font-size: 12px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.48px;
+    text-decoration-line: underline;
+}
+
+.multiple-checks .form-check-input {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    margin-right: 8px;
 }
