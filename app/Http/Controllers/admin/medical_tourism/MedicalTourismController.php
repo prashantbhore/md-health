@@ -250,8 +250,6 @@ class MedicalTourismController extends Controller
 
     public function verification_status(Request $request){
 
-      
-        
         $input['verified'] =!empty($request->status)?$request->status:'';
    
         $provider=MedicalProviderRegistrater::find($request->id)->update($input);
@@ -313,8 +311,6 @@ class MedicalTourismController extends Controller
     {
         $id = !empty($request->productId) ? $request->productId : '';
 
-        // dd($id);
-    
         $old_data = Packages::where('id', $id)->first();
         $new_data = Packages::where('id', $id)->update([
             'status' => 'delete',

@@ -35,7 +35,7 @@
                                 @endif
                             </select>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table id="example" class="table">
                                 <thead>
                                     <tr>

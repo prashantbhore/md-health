@@ -3,12 +3,14 @@
     <div class="content-wrapper pb-5">
         <div class="page-title">Manage Vendors</div>
         <div class="row top-cards">
+
+            
             <div class="col-md-12 mb-3">
                 <!-- Pending Vendors -->
                 <div class="card card-details mb-3">
                     <div class="card-body">
                         <p class="card-title mb-3">Pending Vendors</p>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -47,13 +49,13 @@
                 <!-- END -->
             </div>
 
-            <!-- Active Vendors -->
+           <!-- Active Vendors -->
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
                         <!-- Filters -->
                         <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
-                            <div class="card-title me-auto">Active Vendors</div>
+                            <div class="card-title me-auto">Vendors</div>
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">
@@ -63,7 +65,7 @@
                                 <option value="3">Platinium Members</option>
                             </select>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -189,7 +191,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
 
     </div>

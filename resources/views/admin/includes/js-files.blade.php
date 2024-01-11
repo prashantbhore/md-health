@@ -163,3 +163,12 @@
     $('#example').DataTable();
   });
 </script>
+
+<script>
+  $(document).ready(function(){
+      $("th").each(function(){
+          $(this).removeClass('sorting_asc');
+      })
+
+  })
+</script>

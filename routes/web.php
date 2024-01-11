@@ -29,6 +29,8 @@ use App\Http\Controllers\admin\product\MDHomeServiceController;
 use App\Http\Controllers\admin\product\MDshopController;
 use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\admin\product\ProductController;
+use App\Http\Controllers\admin\review\reviewController;
+use App\Http\Controllers\admin\vendor\ManageVendorController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
@@ -117,9 +119,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('customer-details', 'admin/customers/customer-details');
 
     //Admin MANAGE VENDORS
-    Route::view('vendors', 'admin/vendors/vendors');
+   
     Route::view('vendor-details', 'admin/vendors/vendor-details');
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
+
+    Route::controller(ManageVendorController::class)->group(function (){
+        Route::get('vendors','index');
+    });
+
+
 
     //Admin MEDICAL TOURISM
 
@@ -252,8 +260,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('payment-requests', 'admin/payments/payment-requests');
 
     //Admin REVIEWS
-    Route::view('pending-reviews', 'admin/reviews/pending-reviews');
-    Route::view('published-reviews', 'admin/reviews/published-reviews');
+  
+   
+
+
+    Route::controller(reviewController::class)->group(function (){
+
+       Route::get('pending-reviews','pendingReview');
+       Route::get('published-reviews','publishedReview');
+
+    });
+
+
 
     //Admin NOTIFICATIONS
     Route::view('notifications', 'admin/notifications/notifications');
