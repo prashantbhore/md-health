@@ -160,7 +160,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::get('city-delete', 'delete_city');
     });
 
-
+    //Admin  MANAGE CITIES
+    Route::view('add-country', 'admin/country/add-country');
 
 
     //Admin  MANAGE CITIES
