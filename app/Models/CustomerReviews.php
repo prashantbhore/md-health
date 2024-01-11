@@ -13,6 +13,7 @@ class CustomerReviews extends Model
     protected $fillable = [
         'package_id',
         'customer_id',
+        'purchase_id',
         'treatment_reviews',
         'acommodation_reviews',
         'transporatation_reviews',

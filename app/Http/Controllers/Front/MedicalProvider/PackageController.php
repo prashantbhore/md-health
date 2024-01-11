@@ -113,7 +113,7 @@ class PackageController extends Controller {
             $html1 .= '</div></div></div></div>';
         }
         if ( $html1 == '' ) {
-            $html1 =  "<div class='no-data'>No Data Available</div>";
+            $html1 =  "<div class='no-data'>No Data Available !</div>";
         }
 
         return $html1;
@@ -185,7 +185,7 @@ class PackageController extends Controller {
         }
 
         if ( $html2 == '' ) {
-            $html2 =  "<div class='no-data'>No Data Available</div>";
+            $html2 =  "<div class='no-data'>No Data Available !</div>";
         }
 
         return $html2;

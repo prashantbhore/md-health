@@ -10,7 +10,7 @@
         }
 
         .multiple-checks .form-check {
-            width: 185px;
+            min-width: 185px;
         }
 
         .daterangepicker select.monthselect {
@@ -64,7 +64,6 @@
 
                                     <div class="form-group d-flex flex-column mb-3">
                                         <label class="form-label">*Treatments Category</label>
-
                                         <select id="treatment_category_id" name="treatment_category_id" class="form-select"
                                             onchange="categoryselect(this.value)">
                                             <option value="" selected disabled>Choose</option>
@@ -485,15 +484,15 @@
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="featureproducts"
                                                 {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
-                                            <label class="form-check-label text-secondary" for="featureproducts">I confirm
+                                            <label class="form-check-label" for="featureproducts">I confirm
                                                 that all details are correct and meets the <a href="#"
-                                                    class="text-green fw-700">Terms & Conditions.</a></label>
+                                                    class="text-green fw-700 text-decoration-underline camptonBold">Terms & Conditions.</a></label>
                                         </div>
                                     </div>
                                     <input type="hidden" name="platform_type" value="web">
                                     <div class="section-btns mb-3 d-flex gap-3">
                                         <button type="submit" name="button_type" value="active"
-                                            class="btn save-btn-black bg-green w-50">Save Changes</button>
+                                            class="btn save-btn-black text-black bg-green w-50">Save Changes</button>
                                         <button type="submit" name="button_type" value="inactive"
                                             class="btn save-btn-black w-50">Deactivate
                                             Package</button>
