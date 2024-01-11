@@ -2771,6 +2771,36 @@ class CustomerPackageController extends BaseController
         }
     }
 
+    public function remove_from_favourite(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $CustomerFavouritePackages = [];
+        $CustomerFavouritePackages['status'] = 'inactive';
+        $CustomerFavouritePackages['created_by'] = Auth::user()->id;
+
+        $CustomerPurchaseDetails = CustomerFavouritePackages::where('id', $request->id)->update($CustomerFavouritePackages);
+
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Package Removed From Favourite list.',
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
     public function customer_favourite_list(Request $request)
     {
         $CustomerFavouritePackages = CustomerFavouritePackages::where('md_customer_favourite_packages.status', 'active')
