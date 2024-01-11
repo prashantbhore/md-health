@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('md_customer_package_reviews', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('purchase_id')->nullable();
             $table->bigInteger('package_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
             $table->string('treatment_reviews')->nullable();

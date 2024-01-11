@@ -2688,9 +2688,23 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        if(!empty($request->purchase_id)){
+            $CustomerReviews=CustomerReviews::where('status','active')
+            ->where('purchase_id', $request->purchase_id)
+            ->first();
+
+            if(!empty($CustomerReviews)){
+                return response()->json([
+                    'status' => 404,
+                    'message' => "Dear customer, you have already provided a review for this package.",
+                ]);
+            }
+        }
+
         $customer_reviews = [];
         $customer_reviews['customer_id'] = Auth::user()->id;
         $customer_reviews['package_id'] = $request->package_id;
+        $customer_reviews['purchase_id'] = $request->purchase_id;
         $customer_reviews['treatment_reviews'] = $request->treatment_reviews;
         $customer_reviews['acommodation_reviews'] = $request->acommodation_reviews;
         $customer_reviews['transporatation_reviews'] = $request->transporatation_reviews;
@@ -2725,6 +2739,19 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        if(!empty($request->package_id)){
+            $CustomerFavouritePackages= CustomerFavouritePackages::where('status','active')
+            ->where('package_id',$request->package_id)
+            ->where('customer_id', Auth::user()->id)
+            ->first();
+            if(!empty($CustomerFavouritePackages)){
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'You have already added this package to favourite list.',
+                ]);
+            }
+        }
+
         $add_to_fav = [];
         $add_to_fav['customer_id'] = Auth::user()->id;
         $add_to_fav['package_id'] = $request->package_id;
@@ -2735,6 +2762,36 @@ class CustomerPackageController extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'This Package Added To Favourite.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function remove_from_favourite(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $CustomerFavouritePackages = [];
+        $CustomerFavouritePackages['status'] = 'inactive';
+        $CustomerFavouritePackages['created_by'] = Auth::user()->id;
+
+        $CustomerPurchaseDetails = CustomerFavouritePackages::where('id', $request->id)->update($CustomerFavouritePackages);
+
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Package Removed From Favourite list.',
+
             ]);
         } else {
             return response()->json([
