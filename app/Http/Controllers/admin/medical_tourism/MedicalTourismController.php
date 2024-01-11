@@ -9,6 +9,7 @@ use App\Models\MedicalProviderLogo;
 use App\Models\MedicalProviderLicense;
 use App\Models\ProviderImagesVideos;
 use App\Models\Cities;
+use App\Models\Packages;
 use DataTables;
 use Crypt;
 use DB;
@@ -311,6 +312,9 @@ class MedicalTourismController extends Controller
     public function package_delete(Request $request)
     {
         $id = !empty($request->productId) ? $request->productId : '';
+
+        // dd($id);
+    
         $old_data = Packages::where('id', $id)->first();
         $new_data = Packages::where('id', $id)->update([
             'status' => 'delete',

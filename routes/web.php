@@ -136,6 +136,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('verification-status-chnage', 'verification_status');
         Route::post('vendor-status-chnage', 'status');
         Route::post('vendor-delete', 'vendor_delete');
+        Route::post('/admin-delete-package','package_delete');
     });
 
 
@@ -233,7 +234,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('package-delete', 'package_delete');
         Route::post('package-store', 'store')->name('package.store');
         
-        Route::post('admin/delete-package/','package_delete');
+      
 
     });
 
