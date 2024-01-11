@@ -2413,13 +2413,14 @@ class CustomerPackageController extends BaseController
 
         if ($customer_documents_data) {
             $CustomerDocuments = CustomerDocuments::where('status', 'active')
-                ->select('id', 'customer_document_image_path', 'package_id')
+                ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
                 ->where('customer_id', Auth::user()->id)
                 ->get();
 
             foreach ($CustomerDocuments as $key => $val) {
                 $CustomerDocuments[$key]['package_id'] = !empty($val->package_id) ? $val->package_id : '';
                 $CustomerDocuments[$key]['customer_document_image_path'] = !empty($val->customer_document_image_path) ? url('/') . Storage::url($val->customer_document_image_path) : '';
+                $CustomerDocuments[$key]['customer_document_image_name'] = !empty($val->customer_document_image_name) ? ($val->customer_document_image_name) : '';
             }
         }
 
