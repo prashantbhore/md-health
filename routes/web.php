@@ -535,7 +535,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('test', [CustomerPackageController::class, 'test']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
-    Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
+    Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
 
 });

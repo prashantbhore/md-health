@@ -58,10 +58,10 @@ class CustomerPackageController extends Controller
         }
     }
 
-    public function purchase_package($id)
+    public function purchase_package($id,$patient_id)
     {
 
-        return view('front.mdhealth.purchase', compact('id'));
+        return view('front.mdhealth.purchase', compact('id','patient_id'));
     }
 
     public function customer_package_search_filter(Request $request)
@@ -266,6 +266,7 @@ class CustomerPackageController extends Controller
 
                     $patient_info = PatientInformation::where('customer_id', $user_id)->where('package_id', $data['package_id'])->where('purchase_id', $data['purchase_id'])->first();
                     // dd($user_id,$data['package_id'],$data['purchase_id']);
+                    // dd( $patient_info );
                     if (!empty($patient_info->id)) {
                         $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $id], 'POST');
 
@@ -277,7 +278,6 @@ class CustomerPackageController extends Controller
                             $my_details = !empty($response['PatientInformation']) ? $response['PatientInformation'] : [];
                             $treatment_information = !empty($response['treatment_information']) ? $response['treatment_information'] : [];
                         }
-                        // dd( $response );
                     } else {
                         $my_details = '';
                         $treatment_information = '';
@@ -285,9 +285,8 @@ class CustomerPackageController extends Controller
                 }
             }
 
-            $documents = $this->apiService->getData($token, url('/api/md-customer-all-reports-list'), null, 'GET');
-            $data['documents'] = !empty($documents['provider_report_list']) ? $documents['provider_report_list'] : [];
-
+            $documents = $this->apiService->getData($token, url('/api/md-customer-upload-documents'), ['package_id'=>$data['package_id']], 'POST');
+            $data['documents'] = !empty($documents['data']) ? $documents['data'] : [];
             if (!empty($data['hotel_id'])) {
                 $accomodation_view = $this->apiService->getData($token, url('/api/md-customer-acommodition-details-view'), ['hotel_id' => $data['hotel_id']], 'POST');
                 $data['accomodation_view'] = !empty($accomodation_view['hotel_list']) ? $accomodation_view['hotel_list'] : [];
@@ -304,7 +303,7 @@ class CustomerPackageController extends Controller
             $my_details = [];
             $treatment_information = [];
         }
-        // dd($data);
+        // dd($my_details);
         return view('front.mdhealth.user-panel.user-package-view', compact('data', 'my_details', 'treatment_information'));
 
     }
@@ -364,8 +363,8 @@ class CustomerPackageController extends Controller
             if ($patteint) {
 
                 $id = $package_id;
-                Session::put('Patient_id', $patient->id);
-                return view('front.mdhealth.purchase', compact('id'));
+                $patient_id = $patient->id;
+                return view('front.mdhealth.purchase', compact('id','patient_id'));
             } else {
 
                 $counties = Country::all();
@@ -514,7 +513,7 @@ class CustomerPackageController extends Controller
 
     }
 
-//Mplus02
+        //Mplus02
     public function user_favorites()
     {
         $user_id = Session::get('MDCustomer*%');

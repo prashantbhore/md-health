@@ -68,11 +68,11 @@
                         </div>
                         <div class="form-floating">
                             <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                                                                                                                                                                                                                                                                                                        <option data-display="Select" selected>12 Aug</option>
-                                                                                                                                                                                                                                                                                                                                        <option value="1">One</option>
-                                                                                                                                                                                                                                                                                                                                        <option value="2">Two</option>
-                                                                                                                                                                                                                                                                                                                                        <option value="3">Three</option>
-                                                                                                                                                                                                                                                                                                                                    </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                        <option data-display="Select" selected>12 Aug</option>
+                                                                                                                                                                                                                                                                                                                                                                                        <option value="1">One</option>
+                                                                                                                                                                                                                                                                                                                                                                                        <option value="2">Two</option>
+                                                                                                                                                                                                                                                                                                                                                                                        <option value="3">Three</option>
+                                                                                                                                                                                                                                                                                                                                                                                    </select> -->
                             <!-- <div class="datepickerContainer"> -->
                             <input type="text" class="form-select" name="daterange" value="{{ $date }}" />
                             <!-- </div> -->
@@ -143,9 +143,9 @@
 
 
                                                     <!-- <div class="d-flex gap-1 align-items-baseline mb-1">
-                                                                                                                                                                                                                                                                                <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
-                                                                                                                                                                                                                                                                                <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
-                                                                                                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                                                                                                                <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
+                                                                                                                                                                                                                                                                                                                                <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
+                                                                                                                                                                                                                                                                                                                            </div> -->
                                                 @endforeach
                                             @endif
                                         </div>
@@ -622,7 +622,7 @@
                         $('#fav-btn' + packageId).attr('disabled', false);
                         $('#other').html('<img src="front/assets/img/white-heart.svg" alt="">');
                         console.log('Success:', response);
-                        // window.location.href = $('#hidden_url').val();
+
                     },
                     error: function(xhr, status, error) {
                         $('#fav-btn' + packageId).attr('disabled', false);
@@ -677,7 +677,8 @@
 
                 },
                 submitHandler: function(form) {
-                    var formData = $(this).serialize();
+                    var formData = $(form).serialize();
+                    console.log(formData);
                     $.ajax({
                         url: baseUrl + '/api/md-change-patient-information',
                         type: 'POST',
@@ -696,7 +697,9 @@
                             $('#other').attr('disabled', false);
                             // $('#other').html('<span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>');
                             console.log('Success:', response);
-                            window.location.href = $('#hidden_url').val();
+                            var url = $('#hidden_url').val() + '/' + response.id.patient_id;
+
+                            window.location.href = url;
                         },
                         error: function(xhr, status, error) {
                             console.error('Error:', error);

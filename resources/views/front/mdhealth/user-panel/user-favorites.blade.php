@@ -50,6 +50,8 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            @else
+                                @include('front.includes.no-data-found')
                             @endif
                         </div>
                     </div>
@@ -59,20 +61,26 @@
     </div>
 @endsection
 @section('script')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            var baseUrl = $('#base_url').val();
+            var token = "{{ Session::get('login_token') }}";
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
             $(".upFavLi").addClass("activeClass");
             $(".upFav").addClass("md-active");
 
-            $(".fav-btn").on('click', function() {
-                var id = this.id.split("_")[1];
-                alert(id);
 
+            $(".fav-btn").on('click', function() {
+
+                var id = this.id.split("_")[1];
                 var formData = new FormData();
-                formData.append('package_id', packageId);
+                formData.append('id', id);
 
                 $.ajax({
-                    url: baseUrl + '/api/md-add-package-to-favourite',
+                    url: baseUrl + '/api/md-remove-from-favourite',
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -82,20 +90,22 @@
                         'X-CSRF-TOKEN': csrfToken
                     },
                     beforeSend: function() {
-                        $('#fav-btn' + packageId).attr('disabled', true);
-                        $('#fav-btn' + packageId).html(
+                        $('#img_' + id).attr('disabled', true);
+                        $('#img_' + id).html(
                             '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
                         );
                     },
                     success: function(response) {
-                        $('#fav-btn' + packageId).attr('disabled', false);
-                        $('#other').html('<img src="front/assets/img/white-heart.svg" alt="">');
+                        $('#img_' + id).attr('disabled', false);
+                        $('#img' + id).html(
+                            '<img src="front/assets/img/white-heart.svg" alt="">');
                         console.log('Success:', response);
-                        // window.location.href = $('#hidden_url').val();
+                        window.location.reload();
                     },
                     error: function(xhr, status, error) {
-                        $('#fav-btn' + packageId).attr('disabled', false);
-                        $('#other').html('<img src="front/assets/img/white-heart.svg" alt="">');
+                        $('#img_' + id).attr('disabled', false);
+                        $('#img' + id).html(
+                            '<img src="front/assets/img/white-heart.svg" alt="">');
                         alert('Error:', error);
                     }
                 });
