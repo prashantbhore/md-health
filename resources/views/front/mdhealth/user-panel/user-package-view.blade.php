@@ -88,7 +88,12 @@
         }
 
         if (!empty($data['payment_percentage'])) {
-            $pending_percent = strval(100 - explode('%', $data['payment_percentage'])[0]) . '%';
+            $pending_percent_raw = strval(100 - explode('%', $data['payment_percentage'])[0]);
+            if ($pending_percent_raw != 0) {
+                $pending_percent = $pending_percent . '%';
+            } else {
+                $pending_percent = 0;
+            }
         } else {
             $pending_percent = 0;
         }
@@ -680,12 +685,13 @@
 
 
                                                 <div id="ShowDiv1" class="view-menu-div targetDiv mt-5">
-                                                    <div class="view-menu mb-4">
-                                                        <h6 class="fsb-1">Your Case Manager</h6>
-                                                        <p class="text-orange">Abdul G.</p>
-                                                        <p>Boiled Vegetables</p>
-                                                        <p>Salad</p>
-                                                    </div>
+
+                                                    @if (!empty($data['case_manager']))
+                                                        <div class="view-menu mb-4">
+                                                            <h6 class="fsb-1">Your Case Manager</h6>
+                                                            <p class="text-orange">{{ $data['case_manager'] }}</p>
+                                                        </div>
+                                                    @endif
 
                                                     <div class="patient-details-div">
                                                         <div class="patient-details mb-5">
@@ -822,7 +828,19 @@
                                                     </form>
 
                                                     <div class="gallery">
-                                                        <a href="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
+                                                        @if (!empty($data['documents']))
+                                                            @foreach ($data['documents'] as $document)
+                                                                @if (!empty($document['customer_document_image_path']))
+                                                                    <a href="{{ $document['customer_document_image_path'] }}"
+                                                                        class="glightbox">
+                                                                        <img src="{{ $document['customer_document_image_path'] }}"
+                                                                            alt="image" />
+                                                                        <span class="clear-btn">X</span>
+                                                                    </a>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                        {{-- <a href="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
                                                             class=" video-card glightbox" id="">
                                                             <video class="video-div " controls>
                                                                 <source
@@ -831,7 +849,7 @@
                                                             </video>
                                                             <i class="fa fa-play"></i>
                                                             <span class="clear-btn">X</span>
-                                                        </a>
+                                                        </a> --}}
                                                         {{-- <a href="{{ 'front/assets/img/galleryImg1.png' }}"
                                                             class="glightbox">
                                                             <img src="{{ 'front/assets/img/galleryImg1.png' }}"
@@ -922,6 +940,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    {{-- {{ dd($pending_percent) }} --}}
                                                     @if ($pending_percent != 0)
                                                         <div class="payment-paid-div">
                                                             <div class="paid-percentage fsb-1 fw-600 d-flex flex-column">
@@ -1221,7 +1240,7 @@
 
                 formData.append('customer_document_image_path', $(this)[0].files[0]);
                 formData.append('package_id', packageId); // Assuming only one file is selected
-                // alert("filePath");
+                console.log(formData);
                 $.ajax({
                     url: baseUrl +
                         '/api/md-customer-upload-documents', // Replace with your upload endpoint
@@ -1235,6 +1254,7 @@
                     },
                     success: function(response) {
                         console.log('Upload successful:', response);
+                        document.location.reload();
                     },
                     error: function(error) {
                         console.error('Upload error:', error);
