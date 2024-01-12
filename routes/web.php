@@ -488,6 +488,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
         Route::get('md-vendor-active-list', 'active_product_list');
         Route::get('md-vendor-deactive-list', 'deactive_product_list');
         Route::get('/edit-product/{id}', 'edit_product');
+        Route::post('vendor-active-product-search', 'active_vendor_search_products');
+        Route::post('vendor-inactive-product-search', 'inactive_vendor_search_products');
     });
 
     Route::controller(UpdateVendorProfileController::class)->group(function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\VendorProductImagesVideos;
 use Illuminate\Http\Request;
 use App\Models\VendorRegister;
 use App\Models\VendorLogo;
@@ -69,130 +70,255 @@ class VendorProductController extends BaseController
 
     public function addProduct(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
-            'product_name' => 'required|string',
-            'product_category_id' => 'required|integer',
-            'product_subcategory_id' => 'required|integer',
-            'product_price' => 'required|string',
-            'shipping_fee' => 'required|string',
-            'discount_price' => 'required|string',
-            'sale_price' => 'required|string',
+            'product_name' => 'required',
+            'product_category_id' => 'required',
+            'product_subcategory_id' => 'required',
+            'product_price' => 'required',
+            // 'shipping_fee' => 'required',
+            'discount_price' => 'required',
+            'sale_price' => 'required',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-       
 
-        $vendor_id = Auth::user()->id;
-        // dd($vendor_id);
-        //  $vendor_id = 1; // Assuming a fixed vendor ID for now
+        if(!empty($request->button_type)){
+            if($request->button_type=='active'){
 
-        $productData = [
-            'vendor_id' => $vendor_id,
-            'product_name' => $request->product_name,
-            'product_category_id' => $request->product_category_id,
-            'product_subcategory_id' => $request->product_subcategory_id,
-            'product_description' => $request->product_description,
-            'product_price' => $request->product_price,
-            'shipping_fee' => $request->shipping_fee,
-            'free_shipping' => !empty($request->free_shipping) ? 'yes' : 'no',
-            'discount_price' => $request->discount_price,
-            'sale_price' => $request->sale_price,
-            'featured' => !empty($request->featured) ? 'yes' : 'no',
-            'created_by' => 1, // Assuming a fixed user ID for now
-        ];
-      
-        $storeProduct = null;
+                $vendor_id = Auth::user()->id;
+                // dd($vendor_id);
+                //  $vendor_id = 1; // Assuming a fixed vendor ID for now
+        
+                $productData = [
+                    'vendor_id' => $vendor_id??'',
+                    'product_name' => $request->product_name??'',
+                    'product_category_id' => $request->product_category_id??'',
+                    'product_subcategory_id' => $request->product_subcategory_id??'',
+                    'product_description' => $request->product_description??'',
+                    'product_price' => $request->product_price??'',
+                    'shipping_fee' => $request->shipping_fee??'',
+                    'free_shipping' => !empty($request->free_shipping) ? 'yes' : 'no',
+                    'discount_price' => $request->discount_price??'',
+                    'sale_price' => $request->sale_price??'',
+                    'featured' => !empty($request->featured) ? 'yes' : 'no',
+                    'status' => 'active',
 
-        if (isset($request->id) && !empty($request->id)) {
-           
-            // Update the existing product
-            $existingProduct = VendorProduct::find($request->id);
+                    'created_by' => 1, // Assuming a fixed user ID for now
+                ];
 
-            if ($existingProduct) {
+            //   dd($productData);
+                $storeProduct = null;
+        
+                if (isset($request->id) && !empty($request->id)) {
+                   
+                    // Update the existing product
+                    $existingProduct = VendorProduct::find($request->id);
 
-                $storeProduct = $existingProduct->update($productData);
-
-
-                if ($request->has('vendor_product_image_path')) {
-                    // dd('11111');
-                    if ($files = $request->file('vendor_product_image_path')) {
-                        // $files=[];
-                        // dd($request);
-                        foreach ($files as $file) {
-                            $accout_images = new VendorProductGallery;
-                            $accout_images['vendor_product_id'] = $storeProduct->id;
-
-                            $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
-                            $original_name = $file->getClientOriginalName();
-                            $filePath = $file->storeAs('public/vendorProductImages', $filename);
-                            $accout_images['vendor_product_image_path'] = $filePath;
-                            $accout_images['vendor_product_image_name'] = $original_name;
-                            // $accout_images['modified_by'] = 1;
-                            $accout_images['modified_by'] = Auth::user()->id;
-                            $accout_images['modified_ip_address'] = $request->ip();
-                            $accout_images->save();
+        
+                    if ($existingProduct) {
+                        // dd($existingProduct);
+ 
+                        $storeProduct =VendorProduct::where('id',$request->id)->update($productData);
+        // dd($storeProduct);
+        
+                        if ($request->has('vendor_product_image_path')) {
+                            // dd('11111');
+                            if ($files = $request->file('vendor_product_image_path')) {
+                                // $files=[];
+                                foreach ($files as $file) {
+                                    // dd($request);
+                                    $accout_images = new VendorProductGallery;
+                                    $accout_images['vendor_product_id'] = $request->id;
+        
+                                    $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                                    $original_name = $file->getClientOriginalName();
+                                    $filePath = $file->storeAs('public/vendorProductImages', $filename);
+                                    $accout_images['vendor_product_image_path'] = $filePath;
+                                    $accout_images['vendor_product_image_name'] = $original_name;
+                                    // $accout_images['modified_by'] = 1;
+                                    $accout_images['modified_by'] = Auth::user()->id;
+                                    $accout_images['modified_ip_address'] = $request->ip();
+                                    $accout_images->save();
+                                }
+                            }
+                        }
+        
+                    } else {
+                        // dd('22222');
+                        return response()->json([
+                            'status' => 404,
+                            'message' => 'Product not found.',
+                        ]);
+                    }
+                } else {
+                    // dd($request);
+                    // dd('33333');
+                    // Add a new product
+                    $storeProduct = VendorProduct::create($productData);
+        
+                    if (!empty($storeProduct)) {
+                        $unique_id = "MDH" . sprintf('%04d', $storeProduct->id);
+                        $storeProduct->update(['product_unique_id' => $unique_id]);
+                    }
+                    // dd($request);
+                    if ($request->has('vendor_product_image_path')) {
+                        if ($files = $request->file('vendor_product_image_path')) {
+                            // dd('4');
+                            // $files=[];
+                            foreach ($files as $file) {
+                                // dd($file);
+                                $accout_images = new VendorProductGallery;
+                                $accout_images['vendor_product_id'] = $storeProduct->id;
+                                
+                                $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                                $original_name = $file->getClientOriginalName();
+                                $filePath = $file->storeAs('public/vendorProductImages', $filename);
+                                $accout_images['vendor_product_image_path'] = $filePath;
+                                $accout_images['vendor_product_image_name'] = $original_name;
+                                //  $accout_images['modified_by'] = 1;
+                                $accout_images['modified_by'] = Auth::user()->id;
+                                $accout_images['modified_ip_address'] = $request->ip();
+                                $accout_images->save();
+                            }
                         }
                     }
+                    // dd('41');
+        
                 }
+        
+        
+                if (!empty($storeProduct)) {
+                    return response()->json([
+                        'status' => 200,
+                        'message' =>  (isset($request->id) && !empty($request->id)) ? 'Product Updated Successfully in active list.' : 'Product Added Successfully in active list.',
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Something went wrong. Vendor product cannot be added in active list.',
+                    ]);
+                }
+        
+            }else{
+                $vendor_id = Auth::user()->id;
+                // dd($vendor_id);
+                //  $vendor_id = 1; // Assuming a fixed vendor ID for now
+        
+                $productData = [
+                    'vendor_id' => $vendor_id??'',
+                    'product_name' => $request->product_name??'',
+                    'product_category_id' => $request->product_category_id??'',
+                    'product_subcategory_id' => $request->product_subcategory_id??'',
+                    'product_description' => $request->product_description??'',
+                    'product_price' => $request->product_price??'',
+                    'shipping_fee' => $request->shipping_fee??'',
+                    'free_shipping' => !empty($request->free_shipping) ? 'yes' : 'no',
+                    'discount_price' => $request->discount_price??'',
+                    'sale_price' => $request->sale_price??'',
+                    'featured' => !empty($request->featured) ? 'yes' : 'no',
+                    'status' => 'inactive',
 
-            } else {
-                // dd('22222');
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'Product not found.',
-                ]);
-            }
-        } else {
-            // dd($request);
-            // dd('33333');
-            // Add a new product
-            $storeProduct = VendorProduct::create($productData);
-
-            if (!empty($storeProduct)) {
-                $unique_id = "MDH" . sprintf('%04d', $storeProduct->id);
-                $storeProduct->update(['product_unique_id' => $unique_id]);
-            }
-            // dd($request);
-            if ($request->has('vendor_product_image_path')) {
-                if ($files = $request->file('vendor_product_image_path')) {
-                    // dd('4');
-                    // $files=[];
-                    foreach ($files as $file) {
-                        // dd($file);
-                        $accout_images = new VendorProductGallery;
-                        $accout_images['vendor_product_id'] = $storeProduct->id;
-                        
-                        $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
-                        $original_name = $file->getClientOriginalName();
-                        $filePath = $file->storeAs('public/vendorProductImages', $filename);
-                        $accout_images['vendor_product_image_path'] = $filePath;
-                        $accout_images['vendor_product_image_name'] = $original_name;
-                        //  $accout_images['modified_by'] = 1;
-                        $accout_images['modified_by'] = Auth::user()->id;
-                        $accout_images['modified_ip_address'] = $request->ip();
-                        $accout_images->save();
+                    'created_by' => 1, // Assuming a fixed user ID for now
+                ];
+              
+                $storeProduct = null;
+        
+                if (isset($request->id) && !empty($request->id)) {
+                   
+                    // Update the existing product
+                    $existingProduct = VendorProduct::find($request->id);
+        
+                    if ($existingProduct) {
+        
+                        $storeProduct = $existingProduct->update($productData);
+        
+        
+                        if ($request->has('vendor_product_image_path')) {
+                            // dd('11111');
+                            if ($files = $request->file('vendor_product_image_path')) {
+                                // $files=[];
+                                // dd($request);
+                                foreach ($files as $file) {
+                                    $accout_images = new VendorProductGallery;
+                                    $accout_images['vendor_product_id'] = $request->id;
+        
+                                    $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                                    $original_name = $file->getClientOriginalName();
+                                    $filePath = $file->storeAs('public/vendorProductImages', $filename);
+                                    $accout_images['vendor_product_image_path'] = $filePath;
+                                    $accout_images['vendor_product_image_name'] = $original_name;
+                                    // $accout_images['modified_by'] = 1;
+                                    $accout_images['modified_by'] = Auth::user()->id;
+                                    $accout_images['modified_ip_address'] = $request->ip();
+                                    $accout_images->save();
+                                }
+                            }
+                        }
+        
+                    } else {
+                        // dd('22222');
+                        return response()->json([
+                            'status' => 404,
+                            'message' => 'Product not found.',
+                        ]);
                     }
+                } else {
+                    // dd($request);
+                    // dd('33333');
+                    // Add a new product
+                    $storeProduct = VendorProduct::create($productData);
+        
+                    if (!empty($storeProduct)) {
+                        $unique_id = "MDH" . sprintf('%04d', $storeProduct->id);
+                        $storeProduct->update(['product_unique_id' => $unique_id]);
+                    }
+                    // dd($request);
+                    if ($request->has('vendor_product_image_path')) {
+                        if ($files = $request->file('vendor_product_image_path')) {
+                            // dd('4');
+                            // $files=[];
+                            foreach ($files as $file) {
+                                // dd($file);
+                                $accout_images = new VendorProductGallery;
+                                $accout_images['vendor_product_id'] = $storeProduct->id;
+                                
+                                $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                                $original_name = $file->getClientOriginalName();
+                                $filePath = $file->storeAs('public/vendorProductImages', $filename);
+                                $accout_images['vendor_product_image_path'] = $filePath;
+                                $accout_images['vendor_product_image_name'] = $original_name;
+                                //  $accout_images['modified_by'] = 1;
+                                $accout_images['modified_by'] = Auth::user()->id;
+                                $accout_images['modified_ip_address'] = $request->ip();
+                                $accout_images->save();
+                            }
+                        }
+                    }
+                    // dd('41');
+        
                 }
+        
+        
+                if (!empty($storeProduct)) {
+                    return response()->json([
+                        'status' => 200,
+                        'message' =>  (isset($request->id) && !empty($request->id)) ? 'Product Updated Successfully.' : 'Product Added Successfully in Inactive List.',
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Something went wrong. Vendor product cannot be added in inactive list.',
+                    ]);
+                }
+                
             }
-            // dd('41');
-
         }
+       
 
-
-        if (!empty($storeProduct)) {
-            return response()->json([
-                'status' => 200,
-                'message' =>  (isset($request->id) && !empty($request->id)) ? 'Product Updated Successfully.' : 'Product Added Successfully.',
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong. Vendor product can be added.',
-            ]);
-        }
-
+        
 
 
     }
@@ -255,16 +381,16 @@ class VendorProductController extends BaseController
         $selected_data = [];
 
         foreach ($activeProductList as $key => $product) {
-            $productImage = VendorProductGallery::where('status', 'active')
-                ->where('vendor_product_id', $product->id)
-                ->select('vendor_product_image_path')
+            $productImage = VendorLogo::where('status', 'active')
+                ->where('vendor_id', $vendor_id)
+                ->select('company_logo_image_path','company_logo_image_name')
                 ->first();
 
             $selected_data[] = [
                 'id' => !empty($product->id) ? $product->id : '',
                 'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
                 'product_name' => !empty($product->product_name) ? $product->product_name : '',
-                'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
+                'product_image' => !empty($productImage->company_logo_image_path) ? url(Storage::url($productImage->company_logo_image_path)) : '',
                 'status' => !empty($product->status) ? $product->status : '',
             ];
         }
@@ -297,16 +423,17 @@ class VendorProductController extends BaseController
         $selected_data = [];
 
         foreach ($inactiveProductList as $key => $product) {
-            $productImage = VendorProductGallery::where('status', 'active')
-                ->where('vendor_product_id', $product->id)
-                ->select('vendor_product_image_path')
+            $productImage = VendorLogo::where('status', 'active')
+                ->where('vendor_id', $vendor_id)
+                ->select('company_logo_image_path','company_logo_image_name')
                 ->first();
+
 
             $selected_data[] = [
                 'id' => !empty($product->id) ? $product->id : '',
                 'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
                 'product_name' => !empty($product->product_name) ? $product->product_name : '',
-                'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
+                'product_image' => !empty($productImage->company_logo_image_path) ? url(Storage::url($productImage->company_logo_image_path)) : '',
                 'status' => !empty($product->status) ? $product->status : '',
             ];
         }
@@ -337,14 +464,14 @@ class VendorProductController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-
-        $vendor_id = Auth::user()->id();
+        $vendor_id = Auth::user()->id;
+        // dd($vendor_id);
         // $vendor_id = 1;
-
-        $searchQuery = $request->input('search_query');
+        
+        $searchQuery = $request->search_query;
 
         $query = VendorProduct::where('vendor_id', $vendor_id)
-            ->where('status', '!=', 'delete')
+            ->where('status', '=', 'active')
             ->when($searchQuery, function ($query, $searchQuery) {
                 return $query->where(function ($query) use ($searchQuery) {
                     $query->where('product_name', 'like', '%' . $searchQuery . '%')
@@ -358,16 +485,16 @@ class VendorProductController extends BaseController
         $search_results = [];
 
         foreach ($query as $product) {
-            $productImage = VendorProductGallery::where('status', 'active')
-                ->where('vendor_product_id', $product->id)
-                ->select('vendor_product_image_path')
-                ->first();
+            $productImage = VendorLogo::where('status', 'active')
+            ->where('vendor_id', $vendor_id)
+            ->select('company_logo_image_path','company_logo_image_name')
+            ->first();
 
             $search_results[] = [
                 'id' => !empty($product->id) ? $product->id : '',
                 'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
                 'product_name' => !empty($product->product_name) ? $product->product_name : '',
-                'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
+                'product_image' => !empty($productImage->company_logo_image_path) ? url(Storage::url($productImage->company_logo_image_path)) : '',
                 'status' => !empty($product->status) ? $product->status : '',
             ];
         }
@@ -397,13 +524,13 @@ class VendorProductController extends BaseController
         }
 
 
-        $vendor_id = Auth::user()->id();
+        $vendor_id = Auth::user()->id;
         // $vendor_id = 1;
 
         $searchQuery = $request->input('search_query');
 
         $query = VendorProduct::where('vendor_id', $vendor_id)
-            ->where('status', '!=', 'delete')
+            ->where('status', '=', 'inactive')
             ->when($searchQuery, function ($query, $searchQuery) {
                 return $query->where(function ($query) use ($searchQuery) {
                     $query->where('product_name', 'like', '%' . $searchQuery . '%')
@@ -417,16 +544,16 @@ class VendorProductController extends BaseController
         $search_results = [];
 
         foreach ($query as $product) {
-            $productImage = VendorProductGallery::where('status', 'active')
-                ->where('vendor_product_id', $product->id)
-                ->select('vendor_product_image_path')
-                ->first();
+            $productImage = VendorLogo::where('status', 'active')
+            ->where('vendor_id', $vendor_id)
+            ->select('company_logo_image_path','company_logo_image_name')
+            ->first();
 
             $search_results[] = [
                 'id' => !empty($product->id) ? $product->id : '',
                 'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
                 'product_name' => !empty($product->product_name) ? $product->product_name : '',
-                'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
+                'product_image' => !empty($productImage->company_logo_image_path) ? url(Storage::url($productImage->company_logo_image_path)) : '',
                 'status' => !empty($product->status) ? $product->status : '',
             ];
         }
@@ -470,15 +597,16 @@ class VendorProductController extends BaseController
 
         $gallery = null;
         if (!empty($proudct_data->id)) {
-            $gallery = VendorProductGallery::where('vendor_product_id', $proudct_data->id)->get();
+            $gallery = VendorProductGallery::where('vendor_product_id', $proudct_data->id)->where('status', '=', 'active')->get();
         }
 
         $product_gallery = [];
 
         if (!empty($gallery)) {
 
-            foreach ($gallery as $val) {
-                $product_gallery[] = !empty($val->vendor_product_image_path) ? url(Storage::url($val->vendor_product_image_path)) : '';
+            foreach ($gallery as $key=>$val) {
+                $product_gallery[$key]['id'] = !empty($val->id) ? ($val->id) : '';
+                $product_gallery[$key]['image'] = !empty($val->vendor_product_image_path) ? url(Storage::url($val->vendor_product_image_path)) : '';
             }
         }
 
@@ -596,6 +724,81 @@ class VendorProductController extends BaseController
         }
     }
 
+    public function delete_provider_images_videos(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        $validation_message = '';
+
+        // if ($request->provider_id == '') {
+        //     $validation_message .= 'Provider Id field';
+        // }
+
+        if ($validator->fails()) {
+            return $this->sendError($validation_message . ' is required.');
+        }
+
+        $delete_id = [];
+        $delete_id['status'] = 'delete';
+        $delete_id['modified_by'] = Auth::user()->id;
+        $delete_id['modified_ip_address'] = $request->ip();
+
+        $delete_ProviderImagesVideos = VendorProductGallery::where('id', $request->id)
+            ->update($delete_id);
+
+        if (!empty($delete_ProviderImagesVideos)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'data deleted successfully.'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'we are unable to delete your data at this time'
+
+            ]);
+        }
+    }
+
+    public function delete_vendor_images_videos(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'provider_id' => 'required',
+        // ]);
+
+        // $validation_message = '';
+
+        // if ($request->provider_id == '') {
+        //     $validation_message .= 'Provider Id field';
+        // }
+
+        // if ($validator->fails()) {
+        //     return $this->sendError($validation_message . ' is required.');
+        // }
+// dd($request);
+        $delete_id = [];
+        $delete_id['status'] = 'delete';
+        $delete_id['modified_by'] = Auth::user()->id;
+        $delete_id['modified_ip_address'] = $request->ip();
+
+        $delete_ProviderImagesVideos = VendorProductGallery::where('id', $request->id)
+            ->update($delete_id);
+
+        if (!empty($delete_ProviderImagesVideos)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'data deleted successfully.'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'we are unable to delete your data at this time'
+
+            ]);
+        }
+    }
 }
 
 
