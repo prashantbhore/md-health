@@ -24,6 +24,7 @@ use App\Http\Controllers\api\vendor\VendorSalesController;
 use App\Http\Controllers\api\vendor\UpdateVendorProfileController;
 use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\food\UpdateFoodProfileController;
+use App\Http\Controllers\api\vendor\VendorDashboardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -486,6 +487,18 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::get('medical-provider-monthly-sales-count', 'monthlySales');
         Route::get('medical-provider-package-latest-orders', 'latestOrders');
     });
+
+
+    //Medical Provider Dashboard
+    Route::controller(VendorDashboardController::class)->group(function () {
+        Route::get('md-vendor-monthly-order-count', 'monthlyOrders');
+        Route::get('md-vendor-monthly-sales-count', 'monthlySales');
+        Route::get('md-vendor-package-latest-orders', 'latestOrders');
+    });
+
+
+
+    
 
 
 });

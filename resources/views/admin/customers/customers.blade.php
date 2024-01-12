@@ -1,4 +1,5 @@
 @extends('admin.layout.layout') @section("content")
+
 <section class="main-content">
     <div class="content-wrapper">
         <div class="page-title">Manage Customers</div>
@@ -9,16 +10,16 @@
 
                         <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
                             <div class="card-title me-auto">Customers</div>
-                            <input type="text" class="form-control" placeholder="Search">
+                            {{-- <input type="text" class="form-control" placeholder="Search"> --}}
                             
-                            <select class="form-select form-select-sm">
+                            {{-- <select class="form-select form-select-sm">
                                 <option selected>All</option>
                                 <option value="2">Active</option>
                                 <option value="3">Deactive</option>
-                            </select>
+                            </select> --}}
                         </div>
                         <div class="table-responsive" style="overflow-x: hidden">
-                            <table id="example"  class="table">
+                            <table id="example"  class="table" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">Name</th>
@@ -47,6 +48,8 @@
 </section>
 @endsection
 @section('script')
+
+
 <script src="{{url('admin\controller_js\admin_cn_customer.js')}}"></script>
 <script>
     $(".manageCustomersLi").addClass("activeClass");
