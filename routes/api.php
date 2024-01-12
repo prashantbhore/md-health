@@ -282,6 +282,13 @@ Route::middleware('auth:sanctum')->group(function ()
 
     //customer-upload-documents
     Route::post('md-customer-upload-documents', [CustomerPackageController::class, 'customer_upload_documents']);
+    
+    Route::get('md-customer-documents-list', [CustomerPackageController::class, 'customer_documents_list']);
+
+    //customer-remove-documents
+    Route::post('md-customer-remove-documents', [CustomerPackageController::class, 'customer_remove_documents']);
+
+
 
     //customer-pay-now
     Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_pay_now']);

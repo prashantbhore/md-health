@@ -1809,6 +1809,8 @@ class CustomerPackageController extends BaseController
                 // 'md_packages.package_unique_no',
                 'md_packages.package_name',
                 'md_packages.treatment_period_in_days',
+                'md_customer_purchase_details.treatment_start_date',
+
                 // 'md_packages.other_services',
                 // 'md_packages.package_price',
                 // 'md_packages.sale_price',
@@ -1836,6 +1838,23 @@ class CustomerPackageController extends BaseController
             $customer_purchase_package_active_list[$key]['city_name'] = !empty($val->city_name) ? $val->city_name : '';
             $customer_purchase_package_active_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
             $customer_purchase_package_active_list[$key]['treatment_name'] = !empty($val->product_category_name) ? $val->product_category_name : '';
+            $treatment_start_date = !empty($val->treatment_start_date) ? (string)$val->treatment_start_date : '';
+            if (!empty($treatment_start_date)) {
+                $treatmentStartTimestamp = strtotime($treatment_start_date);
+
+                // Get today's date as a UNIX timestamp
+                $todayTimestamp = time();
+
+                // Calculate the difference in seconds between the treatment start date and today's date
+                $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+
+                // Convert the time difference to days
+                $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+                $customer_purchase_package_active_list[$key]['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment:' . $daysRemaining . ' days' : '';
+            } else {
+                $customer_purchase_package_active_list[$key]['treatment_start_date'] = '';
+            }
             $customer_purchase_package_active_list[$key]['treatment_period_in_days'] = !empty($val->treatment_period_in_days) ? $val->treatment_period_in_days : '';
             $customer_purchase_package_active_list[$key]['company_logo_image_path'] = !empty($val->company_logo_image_path) ? url('/') . Storage::url($val->company_logo_image_path) : '';
         }
@@ -2317,6 +2336,7 @@ class CustomerPackageController extends BaseController
         $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
         $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
         $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
+        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ?  $customer_purchase_package_active_list->company_logo_image_path : '';
         $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
         $treatmentStartTimestamp = strtotime($treatment_start_date);
 
@@ -2329,7 +2349,7 @@ class CustomerPackageController extends BaseController
         // Convert the time difference to days
         $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
 
-        $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? $daysRemaining : '';
+        $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
 
         $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
@@ -2434,6 +2454,63 @@ class CustomerPackageController extends BaseController
             return response()->json([
                 'status' => 404,
                 'message' => 'documents not uploaded.',
+            ]);
+        }
+    }
+
+    public function customer_documents_list()
+    {
+        $CustomerDocuments = CustomerDocuments::where('status', 'active')
+            ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
+            ->where('customer_id', Auth::user()->id)
+            ->get();
+
+        foreach ($CustomerDocuments as $key => $val) {
+            $CustomerDocuments[$key]['package_id'] = !empty($val->package_id) ? $val->package_id : '';
+            $CustomerDocuments[$key]['customer_document_image_path'] = !empty($val->customer_document_image_path) ? url('/') . Storage::url($val->customer_document_image_path) : '';
+            $CustomerDocuments[$key]['customer_document_image_name'] = !empty($val->customer_document_image_name) ? ($val->customer_document_image_name) : '';
+        }
+
+        if (!empty($CustomerDocuments)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your document list.',
+                'data' => $CustomerDocuments,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'documents not uploaded.',
+            ]);
+        }
+    }
+
+    public function customer_remove_documents(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $CustomerDocuments = [];
+        $CustomerDocuments['status'] = 'inactive';
+        $CustomerDocuments['created_by'] = Auth::user()->id;
+
+        $CustomerPurchaseDetails = CustomerDocuments::where('id', $request->id)->update($CustomerDocuments);
+
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Document Removed Successfully.',
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
             ]);
         }
     }
@@ -2719,7 +2796,7 @@ class CustomerPackageController extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'Your Reviews Added Successfully.',
-                'customer_reviews_data' => $customer_reviews_data,
+                // 'customer_reviews_data' => $customer_reviews_data,
             ]);
         } else {
             return response()->json([
