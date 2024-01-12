@@ -13,6 +13,43 @@
 @endsection
 @extends('front.layout.layout2')
 @section('content')
+
+<style>
+    .package_name {
+        color: #000;
+        font-family: Campton;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.8px;
+    }
+
+    .city_name {
+        color: #000;
+        font-family: CamptonBook;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.56px;
+    }
+
+    .t_price {
+        color: #4CDB06;
+        font-family: Campton;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.72px;
+    }
+
+    .t_price_sm {
+        font-size: 12px;
+        letter-spacing: -0.48px;
+    }
+</style>
 <div class="content-wrapper paymentsPage bg-f6">
 
     <!-- SECTION 1 -->
@@ -23,11 +60,11 @@
             <div class="packageResult rounded mb-3">
                 <div class="flex-grow-1">
                     <div class="d-flex gap-2 justify-content-between align-items-center">
-                        <p class="mb-0 fs-5 camptonBold lh-base package_name">Heart Valve Replacement Surgery</p>
-                        <p class="mb-0 fs-6 camptonBold text-green ">Treatment Price</p>
+                        <p class="mb-0  lh-base package_name">Heart Valve Replacement Surgery</p>
+                        <p class="mb-0 t_price">Treatment Price</p>
                     </div>
                     <div class="d-flex gap-5 justify-content-between">
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center">
                             <img src="{{ 'front/assets/img/Location.svg' }}" alt="">
                             <p class="mb-0 lctn city_name">Besiktas/Istanbul</p>
                         </div>
@@ -44,8 +81,8 @@
             <div class="greenBorder pt-3 mb-4"></div>
             <div class="mb-4 discount-sctn">
                 <div class="d-flex justify-content-between mb-3">
-                    <p class="mb-0 fs-6 camptonBold text-green">Select Your Payment Plan</p>
-                    <p class="mb-0 fs-6 camptonBold text-green">Total Price <span class="total_price" style="color: #000;">34.560,00
+                    <p class="mb-0 t_price">Select Your Payment Plan</p>
+                    <p class="mb-0 t_price">Total Price <span class="total_price" style="color: #000;">34.560,00
                             ₺</span></p>
                 </div>
                 <div class="discounts">
@@ -74,7 +111,7 @@
                         </label>
                         <div class="d-flex align-items-baseline gap-2 ">
                             <p class="mb-0 fs-5 camptonBold lh-base fifty"></p>
-                            <p class="vSmallFont text-green camptonBold mb-0 min_discount_fifty">Min. Requirement</p>
+                            <p class="t_price_sm mb-0 min_discount_fifty">Min. Requirement</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-2">
@@ -83,7 +120,7 @@
                         </label>
                         <div class="d-flex align-items-baseline gap-2 ">
                             <p class="mb-0 fs-5 camptonBold lh-base hundred"></p>
-                            <p class="vSmallFont text-green camptonBold mb-0 min_discount_hundred">Min. Requirement</p>
+                            <p class="t_price_sm mb-0 min_discount_hundred">Min. Requirement</p>
                         </div>
                     </div>
                 </div>
@@ -97,19 +134,19 @@
             <div class="paymentSection mb-5">
                 <div class="row">
                     <div class="col-2">
-                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                        <label class="smallFont d-flex align-items-center gap-1">
                             <input type="radio" value="card" name="paymentMethod" checked />
                             Credit or Debit Card
                         </label>
                     </div>
                     <div class="col-2">
-                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                        <label class="smallFont d-flex align-items-center gap-1">
                             <input type="radio" value="bank" name="paymentMethod" />
                             Bank Transfer
                         </label>
                     </div>
                     <div class="col-2">
-                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                        <label class="smallFont d-flex align-items-center gap-1">
                             <input type="radio" value="wallet" name="paymentMethod" />
                             My Wallet
                         </label>

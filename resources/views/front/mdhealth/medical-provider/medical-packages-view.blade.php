@@ -106,7 +106,7 @@
                                                         {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Accomodition') !== false ? 'checked' : '' }}>
                                                     {{-- {{ $hotel_details['accommodation'] ? 'checked' : '' }} --}}
                                                     <label class="form-check-label fw-500 fsb-1"
-                                                        for="foraccomodition">Accomodition</label>
+                                                        for="foraccomodition">Accomodation</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" value="Transportation"
