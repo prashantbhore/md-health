@@ -4,25 +4,25 @@
              <div class="col-md-3">
                  <div class="card-text"><span>MD</span>health</div>
                  <ul>
-                     <li>About Us</li>
-                     <li>Company</li>
-                     <li>Career</li>
+                     <li><a href="javascript:;">About Us</a></li>
+                     <li><a href="javascript:;">Company</a></li>
+                     <li><a href="javascript:;">Career</a></li>
                  </ul>
              </div>
              <div class="col-md-3">
                  <div class="card-text">Support</div>
                  <ul>
-                     <li>Contact Us</li>
-                     <li>Support</li>
-                     <li>Purchase & Compliment</li>
+                     <li><a href="javascript:;">Contact Us</a></li>
+                     <li><a href="javascript:;">Support</a></li>
+                     <li><a href="javascript:;">Purchase & Compliment</a></li>
                  </ul>
              </div>
              <div class="col-md-3">
                  <div class="card-text">Other</div>
                  <ul>
-                     <li>FAQ</li>
-                     <li>Glossary</li>
-                     <li>Cancellation/Refund Transactions</li>
+                     <li><a href="javascript:;">FAQ</a></li>
+                     <li><a href="javascript:;">Glossary</a></li>
+                     <li><a href="javascript:;">Cancellation/Refund Transactions</a></li>
                  </ul>
              </div>
              <div class="col-md-3 text-end d-flex flex-column">
@@ -34,8 +34,7 @@
                          </li>
                          <li><a href="javascript:;"><img src="{{ 'front/assets/img/twitter.png' }}" alt=""></a>
                          </li>
-                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/instagram.png' }}"
-                                     alt=""></a></li>
+                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/instagram.png' }}" alt=""></a></li>
                          <li><a href="javascript:;"><img src="{{ 'front/assets/img/linkedin.png' }}" alt=""></a>
                          </li>
                      </ul>
@@ -83,7 +82,7 @@
  </footer>
  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
  {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
- {{--  <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script> --}}
+ {{-- <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script> --}}
  <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 
 

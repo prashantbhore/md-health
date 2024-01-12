@@ -63,7 +63,7 @@ class PackageController extends Controller {
             $html1 .= '<div class="treatment-card df-start w-100 mb-3" id="div_' . $package_active_list[ 'id' ] . '">';
             $html1 .= '<div class="row card-row align-items-center">';
             $html1 .= '<div class="col-md-2 df-center px-0">';
-            $html1 .= '<img style="width: auto;height: 75px;" src="' . asset( 'front/assets/img/default-img.png' ) . '" alt="">';
+            $html1 .= '<img style="width: 55px;height: 55px;" src="' . asset( 'front/assets/img/default-img.png' ) . '" alt="">';
             $html1 .= '</div>';
             $html1 .= '<div class="col-md-6 justify-content-start ps-0">';
             $html1 .= '<div class="trmt-card-body">';
@@ -99,12 +99,12 @@ class PackageController extends Controller {
             $html1 .= '<div class="treatment-card df-start w-100 mb-3" id="div_' . $package_active_list[ 'id' ] . '">';
             $html1 .= '<div class="row card-row align-items-center">';
             $html1 .= '<div class="col-md-2 df-center px-0">';
-            $html1 .= '<img style="width: auto;height: 75px;" src="' . asset( 'front/assets/img/default-img.png' ) . '" alt="">';
+            $html1 .= '<img style="width: 55px;height: 55px;object-fit:cover" src="' . asset( 'front/assets/img/default-img.png' ) . '" alt="">';
             $html1 .= '</div>';
             $html1 .= '<div class="col-md-6 justify-content-start ps-0">';
             $html1 .= '<div class="trmt-card-body">';
-            $html1 .= '<h5 class="dashboard-card-title fw-600">Package No:' . ( !empty( $package_active_list[ 'package_unique_no' ] ) ? $package_active_list[ 'package_unique_no' ] : '' ) . '<span class="active">Active</span></h5>';
-            $html1 .= '<h5 class="mb-0 fw-500">' . ( !empty( $package_active_list[ 'package_name' ] ) ? $package_active_list[ 'package_name' ] : '' ) . '</h5>';
+            $html1 .= '<h5 class="dashboard-card-title fw-600 mb-0">Package No:' . ( !empty( $package_active_list[ 'package_unique_no' ] ) ? $package_active_list[ 'package_unique_no' ] : '' ) . '<span class="active">Active</span></h5>';
+            $html1 .= '<h5 class="mt-0 fw-500">' . ( !empty( $package_active_list[ 'package_name' ] ) ? $package_active_list[ 'package_name' ] : '' ) . '</h5>';
             $html1 .= '</div></div>';
             $html1 .= '<div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">';
             $html1 .= '<div class="trmt-card-footer footer-btns">';
@@ -136,7 +136,7 @@ class PackageController extends Controller {
             $html2 .= '<div class="treatment-card df-start w-100 mb-3" id="div_' . $package_deactive_list[ 'id' ] . '">';
             $html2 .= '<div class="row card-row align-items-center">';
             $html2 .= '<div class="col-md-2 df-center px-0">';
-            $html2 .= '<img style="width: auto;height: 75px;" src="' . asset( 'front/assets/img/default-img.png' )  . '" alt="">';
+            $html2 .= '<img style="width: 55px;height: 55px;" src="' . asset( 'front/assets/img/default-img.png' )  . '" alt="">';
             $html2 .= '</div>';
             $html2 .= '<div class="col-md-6 justify-content-start ps-0">';
             $html2 .= '<div class="trmt-card-body">';
