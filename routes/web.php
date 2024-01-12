@@ -293,7 +293,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('notifications', 'admin/notifications/notifications');
 
     //Admin ADS & PROMO
-    Route::view('ads', 'admin/ads/ads');
+    Route::view('ads-promo', 'admin/ads/ads-promo');
+    Route::view('featured', 'admin/ads/featured');
     //Admin MANAGE REQUEST
     Route::view('manage-request', 'admin/manage-request/manage-request');
 
