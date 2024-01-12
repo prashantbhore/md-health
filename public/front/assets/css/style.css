@@ -860,7 +860,7 @@ select {
     font-family: "CamptonBook";
     color: #fff;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 16px;
     letter-spacing: -0.04em;
 }
@@ -3726,4 +3726,13 @@ label.tc-text,
     border-radius: 3px;
     border: 1px solid #CCC;
     margin-right: 8px;
+}
+
+.footer ul li a {
+    color: #878787;
+    font-family: "CamptonBook";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
 }

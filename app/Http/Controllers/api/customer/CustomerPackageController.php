@@ -2458,6 +2458,63 @@ class CustomerPackageController extends BaseController
         }
     }
 
+    public function customer_documents_list()
+    {
+        $CustomerDocuments = CustomerDocuments::where('status', 'active')
+                ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
+                ->where('customer_id', Auth::user()->id)
+                ->get();
+
+            foreach ($CustomerDocuments as $key => $val) {
+                $CustomerDocuments[$key]['package_id'] = !empty($val->package_id) ? $val->package_id : '';
+                $CustomerDocuments[$key]['customer_document_image_path'] = !empty($val->customer_document_image_path) ? url('/') . Storage::url($val->customer_document_image_path) : '';
+                $CustomerDocuments[$key]['customer_document_image_name'] = !empty($val->customer_document_image_name) ? ($val->customer_document_image_name) : '';
+            }
+
+        if (!empty($CustomerDocuments)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your document list.',
+                'data' => $CustomerDocuments,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'documents not uploaded.',
+            ]);
+        }
+    }
+
+       public function customer_remove_documents(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $CustomerDocuments = [];
+        $CustomerDocuments['status'] = 'inactive';
+        $CustomerDocuments['created_by'] = Auth::user()->id;
+
+        $CustomerPurchaseDetails = CustomerDocuments::where('id', $request->id)->update($CustomerDocuments);
+
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Document Removed Successfully.',
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
 
     public function customer_pay_now(Request $request)
     {
