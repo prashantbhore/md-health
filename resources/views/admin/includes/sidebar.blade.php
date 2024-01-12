@@ -22,13 +22,23 @@
                 </a>
             </li>
             <li class="manageVendorsLi">
-                <a href="{{URL::asset('admin/vendors')}}" class="nav-link link-dark manageVendors">
+                <a href="{{URL::asset('admin/pending-vendors')}}" class="nav-link link-dark manageVendors">
                     Manage Vendors
                 </a>
             </li>
-            <li class="medicalTourismLi">
+            <!-- <li class="medicalTourismLi">
                 <a href="{{URL::asset('admin/service-provider')}}" class="nav-link link-dark medicalTourism">
                     Manage Medical Tourism
+                </a>
+            </li>
+            <li class="manageMDfoodsLi"> 
+                <a href="{{URL::asset('admin/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
+                    Manage MDFoods
+                </a>
+            </li> -->
+            <li class="contryLi">
+                <a href="{{URL::asset('admin/add-country')}}" class="nav-link link-dark contry">
+                    Manage Country
                 </a>
             </li>
             <li class="citiesLi">
@@ -36,11 +46,7 @@
                     Manage Cities
                 </a>
             </li>
-            <li class="adminsLi">
-                <a href="{{URL::asset('admin/add-admins')}}" class="nav-link link-dark admins">
-                    Manage Admins
-                </a>
-            </li>
+           
             <li class="mlmLi">
                 <a href="{{URL::asset('admin/multi-level-marketing')}}" class="nav-link link-dark mlm">
                     MLM
@@ -66,11 +72,7 @@
                     Reviews
                 </a>
             </li>
-            <li class="notificationsLi">
-                <a href="{{URL::asset('admin/notifications')}}" class="nav-link link-dark notifications">
-                    Notifications
-                </a>
-            </li>
+         
             <li class="adsLi">
                 <a href="{{URL::asset('admin/ads')}}" class="nav-link link-dark ads">
                     Ads & Promo
@@ -81,11 +83,19 @@
                     Manage Request
                 </a>
             </li>
-            <li class="manageMDfoodsLi"> 
-                <a href="{{URL::asset('admin/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
-                    Manage MDFoods
+
+            <li class="notificationsLi">
+                <a href="{{URL::asset('admin/notifications')}}" class="nav-link link-dark notifications">
+                    Notifications
                 </a>
             </li>
+
+            <li class="adminsLi">
+                <a href="{{URL::asset('admin/add-admins')}}" class="nav-link link-dark admins">
+                    Manage Admins
+                </a>
+            </li>
+            
         </ul>
     </div>
 </main>

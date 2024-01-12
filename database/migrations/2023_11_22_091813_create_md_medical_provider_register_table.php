@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('country_id')->nullable();
             $table->bigInteger('city_id')->nullable();
             $table->string('roll_id')->nullable();
+            $table->string('previllages')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();
             $table->string('tax_no')->nullable();
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->string('company_licence_image_path')->nullable();
             $table->string('company_licence_image_name')->nullable();
             $table->string('authorisation_full_name')->nullable();
-            $table->string('company_overview')->nullable();
+            $table->longText('company_overview')->nullable();
             $table->string('registration_otp')->nullable();
             $table->string('login_otp')->nullable();
             $table->string('access_token')->nullable();

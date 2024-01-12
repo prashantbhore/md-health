@@ -13,6 +13,7 @@ class CustomerReviews extends Model
     protected $fillable = [
         'package_id',
         'customer_id',
+        'purchase_id',
         'treatment_reviews',
         'acommodation_reviews',
         'transporatation_reviews',
@@ -25,4 +26,20 @@ class CustomerReviews extends Model
         'created_by',
         'modified_by',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Packages::class,'package_id','id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(CustomerRegistration::class,'customer_id','id');
+    }
+
+
+
+    
+
+
 }

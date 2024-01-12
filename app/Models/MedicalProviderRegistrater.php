@@ -20,6 +20,7 @@ class MedicalProviderRegistrater extends Authenticatable
              'country_id',
              'city_id',
              'roll_id',
+             'previllages',
              'email',
              'mobile_no',
              'tax_no',
@@ -36,8 +37,8 @@ class MedicalProviderRegistrater extends Authenticatable
              'access_token',
              'fcm_token',
              'otp_expiring_time',
-              'verified', 
-               'platform_type', 
+             'verified', 
+             'platform_type', 
              'status', 
              'created_ip_address',
              'modified_ip_address',
@@ -61,5 +62,18 @@ class MedicalProviderRegistrater extends Authenticatable
         return $this->belongsTo(MedicalProviderRole::class, 'roll_id', 'id')
             ->where('status', 'active');
     }
+
+
+    public function providerPackages()
+    {
+        return $this->hasMany(Packages::class, 'created_by', 'id')
+            ->where('status', '!=', 'delete');
+    }
+
+
+    
+    
+
+
 
 }

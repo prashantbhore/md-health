@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerPaymentDetails extends Model
-{
+class CustomerPaymentDetails extends Model {
     use HasFactory;
     protected $table = 'md_customer_payment_details';
 
@@ -21,6 +20,7 @@ class CustomerPaymentDetails extends Model
         'bank_name',
         'receiver_name',
         'iban',
+        'provider_id',
         'md_coin',
         'payment_percentage',
         'paid_amount',
@@ -33,25 +33,14 @@ class CustomerPaymentDetails extends Model
         'modified_by',
     ];
 
-
-    public function provider_logo()
-    {
-        return $this->belongsTo(MedicalProviderLogo::class, 'provider_id','medical_provider_id')
-            ->where('status', 'active');
+    public function provider_logo() {
+        return $this->belongsTo( MedicalProviderLogo::class, 'provider_id', 'medical_provider_id' )
+        ->where( 'status', 'active' );
     }
 
-
-    public function purchage()
-    {
-        return $this->belongsTo(CustomerPurchaseDetails::class, 'order_id','id')
-            ->where('status', 'active');
+    public function purchage() {
+        return $this->belongsTo( CustomerPurchaseDetails::class, 'order_id', 'id' )
+        ->where( 'status', 'active' );
     }
-
-
-
-    
-
-
-
 
 }

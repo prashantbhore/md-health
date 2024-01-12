@@ -14,14 +14,14 @@ use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
 use Storage;
 
-class CustomerReportController extends Controller
+class CustomerReportController extends BaseController
 {
 
     
     public function customer_all_reports_list()
     {
         $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
-            ->where('custome_id', 1)
+            ->where('custome_id', Auth::user()->id)
             ->where('status', 'active')
             ->get();
     
@@ -75,10 +75,10 @@ class CustomerReportController extends Controller
     }
 
 
-    public function customer_reports_search(Request $request)
+   public function customer_reports_search(Request $request)
    {
    
-    $validator = Validator::make($request->all(), [
+    $validator = Validator::make($request->all(),[
         'search_query' => 'required|string',
     ]);
 
@@ -89,10 +89,10 @@ class CustomerReportController extends Controller
     $searchQuery = $request->input('search_query');
 
   
-   // $customerId = auth()->user()->id; 
+    $customerId = auth()->user()->id; 
 
     
-    $customerId=1; 
+    //$customerId=1; 
 
     $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
         $query->where('report_title', 'like', '%' . $searchQuery . '%')
@@ -156,7 +156,7 @@ class CustomerReportController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Search results found.',
-            'search_results' => $formattedResults,
+            'provider_report_list' => $formattedResults,
         ]);
     } else {
         return response()->json([
@@ -166,6 +166,9 @@ class CustomerReportController extends Controller
     }
 }
     
+
+
+
     
     
 

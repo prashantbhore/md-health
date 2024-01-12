@@ -68,6 +68,8 @@ class Kernel extends HttpKernel
         'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
         'IsMedicalProvider' => \App\Http\Middleware\IsMedicalProvider::class,
         'IsCustomer' => \App\Http\Middleware\IsCustomer::class,
+        'IsVendor' => \App\Http\Middleware\isVendor::class,
+        'isFoodVendor' => \App\Http\Middleware\isFoodVendor::class,
 
     ];
 }

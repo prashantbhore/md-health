@@ -32,6 +32,7 @@ class CustomerRegistration extends Authenticatable
         'address',
         'password',
         'user_type',
+        'platform_type',
         'registration_otp',
         'login_otp',
         'access_token',
@@ -53,5 +54,17 @@ class CustomerRegistration extends Authenticatable
     {
         return $this->belongsTo(Cities::class, 'city_id');
     }
+
+
+    
+
+            public function customerOrders()
+            {
+                return $this->hasMany(CustomerPurchaseDetails::class, 'customer_id');
+            }
+
+
+
+    
 
 }

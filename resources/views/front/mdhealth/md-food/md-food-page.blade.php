@@ -14,28 +14,25 @@
             </div>
         </div>
 
-        <div class="container shadow-lg bg-body rounded mid-sect-height">
-            <div class="row  align-items-center h-100 ms-2">
-                <div class="col h-75 borer-color">
+        <div class="container shadow-lg bg-body rounded p-3">
+            <div class="row g-0 gap-3">
+                <div class="col booking-box-h">
                     <div class="d-flex flex-column gap-2">
-                        <p class="green-color mb-0 fw-bold"> Calaries</p>
+                        <p class="green-color mb-0 fw-bold" style="font-size: small"> Calaries</p>
                         <div class="d-flex align-items-center">
-                            {{-- <img src="{{ 'front/assets/img/mdFoods/Ellipse 165.png' }}" alt="" class="">
-                            <span><img src="{{ 'front/assets/img/mdFoods/Vector 140.png' }}" alt=""
-                                    class=""></span> --}}
                             <input type="range" class="range1" min="50" max="250" step="0.5" value="50"
                                 id="customRange3">
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <p class="">50kcal</p>
-                            <p class="">250kcal</p>
+                            <p class="" style="font-size: small">50kcal</p>
+                            <p class="" style="font-size: small">250kcal</p>
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col booking-box-h">
                     <div class="form-floating ">
                         <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                            style="height: 75px">
+                            >
                             <option data-display="Select" selected>Beef & Vegetables</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -44,7 +41,7 @@
                         <label for="floatingSelect" class="mid-food-sub"> Food Type</label>
                     </div>
                 </div>
-                <div class="col  main-mid-seaction borer-color">
+                <div class="col booking-box-h border" style="padding-left: 6px">
                     <label for="floatingSelect" class="mid-food-sub mb-1">Subscription Type</label>
                     {{-- <div class="d-flex gap-2 m-0 p-0" id="custom-select-button">
                         <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="">
@@ -59,8 +56,8 @@
                         <span></span>
                     </div>
                 </div>
-                <div class="col ">
-                    <button class="btn btn-search-pill-food ms-1"><a href="{{ url('md-food-search-page') }}"
+                <div class="col">
+                    <button class="btn-search-pill-booking3" style="height: 57px"><a href="{{ url('md-food-search-page') }}"
                             class="nav-link">Search</a></button>
                 </div>
             </div>

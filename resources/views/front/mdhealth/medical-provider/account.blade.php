@@ -2,6 +2,9 @@
 @section('content')
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
+        #pic2 {
+            height: 150px;
+        }
         .video-div {
             height: 100px;
             width: 175px;
@@ -108,9 +111,18 @@
                                     </div>
 
                                     <div class="form-group mb-3">
+                                        <label class="form-label">Company Email</label>
+                                        <input type="text" name="email" value="{{ $medical_provider_list->email }}"
+                                            class="form-control" id="email" aria-describedby="foodname"
+                                            placeholder="Company Full Address">
+                                    </div>
+
+
+
+                                    <div class="form-group mb-3">
                                         <label class="form-label">Authorized Person Mobile Contact</label>
-                                        <input type="text" name="company_address"
-                                            value="{{ $medical_provider_list->company_address }}" class="form-control"
+                                        <input type="text" name="mobile_no"
+                                            value="{{ $medical_provider_list->mobile_no }}" class="form-control"
                                             id="foodname" aria-describedby="foodname" placeholder="+90">
                                     </div>
 
@@ -121,13 +133,52 @@
                                     </div>
 
                                     <div class="multiple-upload-images">
+                                        <h6 class="section-heading">Company Logo</h6>
+                                        <div class="form-group">
+                                            <input type="file" id="company_logo_image_path" class="form-control"
+                                                name="company_logo_image_path"
+                                                oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
+                                        </div>
+                                        <div class="prev-img-div">
+                                            <img  src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
+                                                Storage::exists($MedicalProviderLogo['company_logo_image_path'])
+                                                    ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
+                                                    : URL::asset('front/assets/img/default-img.png') }}"
+{{-- 
+                                            src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}}
+                                                alt="image" id="pic1" >
+                                            <input type="hidden" name="old_image" id="old_image"
+                                                value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
+                                        </div>
+
+                                    </div>
+{{-- {{dd($MedicalProviderLogo)}} --}}
+                                    <div class="multiple-upload-images">
+                                        <h6 class="section-heading">Company License</h6>
+                                        <div class="form-group">
+                                            <input type="file" id="company_licence_image_path" class="form-control"
+                                                name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
+                                        </div>
+                                        <div class="prev-img-div">
+                                            <img  src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
+                                                Storage::exists($MedicalProviderLicense['company_licence_image_path'])
+                                                    ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
+                                                    : URL::asset('front/assets/img/default-img.png') }}"
+                                             {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}}
+                                                alt="image" id="pic2">
+                                            <input type="hidden" name="old_image" id="old_image"
+                                                value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="multiple-upload-images">
                                         <h6 class="section-heading">Product Pictures</h6>
                                         <div class="form-group">
                                             <input type="file" id="provider_image_path" class="form-control"
                                                 name="provider_image_path[]" multiple="">
                                         </div>
                                         <div class="preview-img gallery">
-                                            
+
                                             @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
                                                 @php
                                                     $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
@@ -141,7 +192,7 @@
                                                                 src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                 Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                     ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                    : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                                    : '' }}"
                                                                 type="video/mp4">
                                                             Your browser does not support the video tag.
                                                         </video>
@@ -157,12 +208,12 @@
                                                         <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                         Storage::exists($ProviderImagesVideo->provider_image_path)
                                                             ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                            : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                            : '' }}"
                                                             class="glightbox">
                                                             <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                             Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                 ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                                : '' }}"
                                                                 alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
                                                         </a>
                                                         <a href="javascript:void(0);" class="clear-btn"
@@ -178,7 +229,7 @@
                                     </div>
 
                                     <div class="section-btns mb-4">
-                                        <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Save
+                                        <button type="submit" class="btn save-btn-black">Save
                                             Changes</button>
                                     </div>
 
@@ -216,11 +267,12 @@
 
     <script>
         function deleteClientLogo(client_logo_id) {
+
             if (client_logo_id != "") {
                 if (confirm("Do you really want to delete this image ?")) {
                     $.ajax({
-                        // url: base_url + "/md-delete-provider-images-videos",
-                        url: "http://127.0.0.1:8000/md-delete-provider-images-videos",
+                        url: base_url + "/md-delete-provider-images-videos",
+                        // url: "http://127.0.0.1:8000/md-delete-provider-images-videos",
 
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -232,11 +284,17 @@
                         success: function(response) {
                             if (response.status == 200) {
                                 $('#img_div_' + client_logo_id).css('display', 'none');
-                                alert(response.message);
-                                success_toast("success", response.message);
-                                alert(response.message);
+
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                                toastr.success(response.message);
+
+
                             } else {
-                                fail_toast("error", response.message);
+                                toastr.error(response.message);
                             }
                         },
                         error: function(response) {
@@ -271,56 +329,59 @@
             });
         }
     </script>
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-   <script>
-       $(document).ready(function () {
-           $('#accountmedpro').validate({
-               rules: {
-                   company_name: {
-                       required: true,
-                       minlength: 2,
-                       // Adding a custom rule for disallowing spaces
-                       nowhitespace: true
-                   },
-                   company_address: {
-                       required: true,
-                       minlength: 2,
-                       // Adding a custom rule for disallowing spaces
-                       nowhitespace: true
-                   },
-                   country_id: "required",
-                   city_id: "required",
-                   tax_no: {
-                       required: true,
-                       minlength: 2
-                   },
-                   authorisation_full_name: {
-                       required: true,
-                       minlength: 2,
-                       // Adding a custom rule for disallowing spaces
-                       nowhitespace: true
-                   },
-                   company_overview: {
-                       required: true,
-                       minlength: 10
-                   }
-                   // Add validation rules for other fields as needed
-               },
-               messages: {
-                   // Define error messages for each field if required
-               },
-               errorPlacement: function(error, element) {
-                   error.appendTo(element.parent());
-               }
-           });
-   
-           // Adding a custom method for disallowing spaces
-           $.validator.addMethod("nowhitespace", function(value, element) {
-               return value.trim().length !== 0;
-           }, "Spaces are not allowed");
-       });
-   </script>
-   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+
     
+    <script>
+        $(document).ready(function() {
+            $('#accountmedpro').validate({
+                rules: {
+                    company_name: {
+                        required: true,
+                        minlength: 2,
+                        // Adding a custom rule for disallowing spaces
+                        nowhitespace: true
+                    },
+                    company_address: {
+                        required: true,
+                        minlength: 2,
+                        // Adding a custom rule for disallowing spaces
+                        nowhitespace: true
+                    },
+                    country_id: "required",
+                    city_id: "required",
+                    tax_no: {
+                        required: true,
+                        minlength: 2
+                    },
+                    authorisation_full_name: {
+                        required: true,
+                        minlength: 2,
+                        // Adding a custom rule for disallowing spaces
+                        nowhitespace: true
+                    },
+                    company_overview: {
+                        required: true,
+                        minlength: 10
+                    }
+                    // Add validation rules for other fields as needed
+                },
+                messages: {
+                    // Define error messages for each field if required
+                },
+                errorPlacement: function(error, element) {
+                    error.appendTo(element.parent());
+                }
+            });
+
+            // Adding a custom method for disallowing spaces
+            $.validator.addMethod("nowhitespace", function(value, element) {
+                return value.trim().length !== 0;
+            }, "Spaces are not allowed");
+        });
+    </script>
 @endsection

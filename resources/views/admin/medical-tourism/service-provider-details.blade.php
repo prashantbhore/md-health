@@ -234,29 +234,64 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 mb-3">
+
+                        @if(!empty($medical_provider->providerPackages))
+                        @foreach ($medical_provider->providerPackages as $package)
+
+                          {{-- {{dd($package->package_price)}} --}}
+
+                          @php
+                          $product_count = App\Models\CustomerPurchaseDetails::where('package_id', $package->id ?? null)->count();
+                          @endphp
+                      
+
+                        {{-- {{dd($product_count)}} --}}
+                      
+                            
+                       
                         <div class="card shadow-none mb-3">
                             <div class="card-body d-flex w-full justify-content-between" style="background: #f6f6f6;">
                                 <div class="card-ls">
-                                    <h6 class="mb-1">Evony Medical Mask 50 Pc.</h6>
-                                    <h6>Sales Quantity: <span class="fw-light">49</span></h6>
+                                    <h6 class="mb-1">{{!empty($package->package_name)?$package->package_name:''}}</h6>
+                                    <h6>Sales Quantity: <span class="fw-light">{{$product_count}}</span></h6>
                                     <p class="mt-auto">Platform: <span class="ms-1 md-fw-bold">MD</span>health</p>
                                 </div>
                                 <div class="card-rs df-end">
-                                    <div class="mb-3">
-                                        <a href="{{URL::asset('admin/sales-details')}}" class="text-decoration-none mb-3">
+                                    {{-- <div class="mb-3">
+                                        <a href="{{URL::asset('admin/delete-package')}}" class="text-decoration-none mb-3">
                                             <span class="deleteCard">Delete Product</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />
                                                 <path d="M15.282 16H13.544L11.707 13.426L9.87 16H8.132L10.695 12.304L8.176 8.52H10.002L11.707 11.105L13.401 8.52H15.227L12.708 12.304L15.282 16Z" fill="black" />
                                             </svg>
                                         </a>
+                                    </div> --}}
+
+
+                                    <div class="mb-3 product-card" id="product_".{{!empty($package->id)?$package->id:''}} data-product-id="{{!empty($package->id)?$package->id:'' }}">
+                                        <a href="javascript:void(0);" class="text-decoration-none mb-3 delete-product" data-product-id="{{!empty($package->id)?$package->id:''}}">
+                                            <span class="deleteCard">Delete Package</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />
+                                                <path d="M15.282 16H13.544L11.707 13.426L9.87 16H8.132L10.695 12.304L8.176 8.52H10.002L11.707 11.105L13.401 8.52H15.227L12.708 12.304L15.282 16Z" fill="black" />
+                                            </svg>
+                                        </a>
                                     </div>
-                                    <h6>34.893,90 ₺</h6>
+
+
+                                
+
+
+                                    <h6> {{!empty($package->package_price)?$package->package_price:''}} ₺</h6>
                                     <a href="{{URL::asset('admin/products-on-sale')}}" class="completed text-decoration-none">On Sale</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card shadow-none mb-3">
+                        @endforeach
+                        @endif
+
+
+                        {{-- <div class="card shadow-none mb-3">
                             <div class="card-body d-flex w-full justify-content-between" style="background: #f6f6f6;">
                                 <div class="card-ls">
                                     <h6 class="mb-1">Braun Shaver</h6>
@@ -277,7 +312,9 @@
                                     <div class="deleted">Not Sale</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+
+
                     </div>
                 </div>
             </div>

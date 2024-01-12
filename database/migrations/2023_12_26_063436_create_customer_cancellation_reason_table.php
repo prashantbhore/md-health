@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('customer_id')->nullable();
             $table->string('package_id')->nullable();
             $table->string('cancellation_reason')->nullable();
+            $table->string('cancellation_detail')->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('modified_by')->nullable();

@@ -9,6 +9,7 @@ use App\Models\MedicalProviderLogo;
 use App\Models\MedicalProviderLicense;
 use App\Models\ProviderImagesVideos;
 use App\Models\Cities;
+use App\Models\Packages;
 use DataTables;
 use Crypt;
 use DB;
@@ -45,27 +46,21 @@ class MedicalTourismController extends Controller
 
       $id=Crypt::decrypt($request->id);
 
-      
+        $medical_provider=MedicalProviderRegistrater::with(['city','providerPackages'])
+        ->where('id',$id)
+        ->first();
 
+        //dd($medical_provider);
 
-      $medical_provider=MedicalProviderRegistrater::with('city')
-      ->where('id',$id)
-      ->first();
+       $medical_provider_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
 
-
-      $medical_provider_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
-
-      $medical_provider_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
-
+       $medical_provider_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
 
       $gallary=ProviderImagesVideos::where('status','active')->where('provider_id',$id)->get();
 
 
 
-   
-   
-    
-    return view('admin.medical-tourism.service-provider-details',compact('medical_provider','medical_provider_logo','medical_provider_license','gallary'));
+     return view('admin.medical-tourism.service-provider-details',compact('medical_provider','medical_provider_logo','medical_provider_license','gallary'));
   }
 
 
@@ -119,6 +114,12 @@ class MedicalTourismController extends Controller
                   return ucfirst($row->mobile_no);
                   }
               })
+
+              ->addColumn('status', function ($row){
+                if(!empty($row->status)){
+                return ucfirst($row->status);
+                }
+            })
   
              
         //       ->addColumn('action', function ($row) {
@@ -139,7 +140,10 @@ class MedicalTourismController extends Controller
           
           ->addColumn('action', function ($row){
        
-            $actionBtn= '<div class="text-end d-flex align-items-center justify-content-end gap-3">
+            $actionBtn= '
+           
+            
+            <div class="text-end d-flex align-items-center justify-content-end gap-3">
             <a href="' . route('medical_tourism.details', ['id' => Crypt::encrypt($row->id)]) . '" class="btn btn-info btn-xs" title="View">
             <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
         </a>
@@ -254,7 +258,7 @@ class MedicalTourismController extends Controller
 
 
     public function verification_status(Request $request){
-        
+
         $input['verified'] =!empty($request->status)?$request->status:'';
    
         $provider=MedicalProviderRegistrater::find($request->id)->update($input);
@@ -300,12 +304,7 @@ class MedicalTourismController extends Controller
        
         
     }
-
-
-
-    
-
-
+   
     public function vendor_delete(Request $request)
     {
         $id = !empty($request->id) ? $request->id : '';
@@ -315,6 +314,18 @@ class MedicalTourismController extends Controller
             'modified_ip_address' => $_SERVER['REMOTE_ADDR']
         ]);
         return response()->json(['message' =>'Vendor Is Deleted', 'status' => 'true']);
+    }
+
+    public function package_delete(Request $request)
+    {
+        $id = !empty($request->productId) ? $request->productId : '';
+
+        $old_data = Packages::where('id', $id)->first();
+        $new_data = Packages::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+        return response()->json(['message' =>'Package Is Deleted', 'status' => 'true']);
     }
 
 

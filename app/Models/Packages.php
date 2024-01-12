@@ -26,9 +26,15 @@ class Packages extends Model
         'vehicle_id',
         'vehicle_in_time',
         'vehicle_out_time',
+        'tour_id',
+        'tour_in_time',
+        'tour_price',
         'transportation_acommodition_price',
         'visa_details',
         'visa_service_price',
+        'translation_price',
+        'ambulance_service_price',
+        'ticket_price',
         'package_discount',
         'package_price',
         'sale_price',
@@ -68,7 +74,20 @@ class Packages extends Model
     {
         return $this->belongsTo(Cities::class, 'city_id');
     }
+
+    public function salesDetails()
+    {
+        return $this->hasMany(CustomerPurchaseDetails::class, 'package_id')->where('status','active');
+    }
+
     
+
+    public function salesCount()
+    {
+        return $this->salesDetails()->count();
+    }
+
+
     
 
 

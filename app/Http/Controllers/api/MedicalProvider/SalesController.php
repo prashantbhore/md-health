@@ -18,25 +18,26 @@ use App\Models\ProductSubCategory;
 use App\Models\MedicalProviderSystemUser;
 use App\Models\AddNewAcommodition;
 use APP\Models\VehicleBrand;
+use App\Models\CustomerPaymentDetails;
 
 
 class SalesController extends BaseController{
 
-
     public function active_treatment_list()
     {
-        $active_treatment_list = CustomerPurchaseDetails::whereIn('purchase_type', ['pending', 'inprogress'])
+    
+        $active_treatment_list = CustomerPurchaseDetails::whereIn('purchase_type', ['pending','in_progress'])->where('provider_id',Auth::user()->id)
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
 
-        if (!empty($active_treatment_list)) {
+        if (!empty($active_treatment_list)){
             return response()->json([
                 'status' => 200,
                 'message' => 'active treatment list found.',
                 'packages_active_list' => $active_treatment_list,
             ]);
-        } else {
+        } else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong. active treatment list not found.',
@@ -48,7 +49,7 @@ class SalesController extends BaseController{
     public function completed_treatment_list()
     {
 
-        $completed_treatment_list = CustomerPurchaseDetails::where('purchase_type', 'completed')
+        $completed_treatment_list = CustomerPurchaseDetails::where('purchase_type','completed')->where('provider_id',Auth::user()->id)
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
@@ -73,12 +74,12 @@ class SalesController extends BaseController{
     public function cancelled_treatment_list()
     {
 
-        $cancelled_treatment_list = CustomerPurchaseDetails::where('purchase_type', 'cancelled')
+        $cancelled_treatment_list = CustomerPurchaseDetails::where('purchase_type', 'cancelled')->where('provider_id',Auth::user()->id)
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
             ->get();
 
 
-        if (!empty($cancelled_treatment_list)) {
+        if (!empty($cancelled_treatment_list)){
             return response()->json([
                 'status' => 200,
                 'message' => 'cancelled treatment list found.',
@@ -96,24 +97,30 @@ class SalesController extends BaseController{
     public function patient_details(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'purchage_id' => 'required|string',
+        $validator = Validator::make($request->all(),[
+            'purchage_id' => 'required',
         ]);
 
-        if ($validator->fails()) {
+
+        if ($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $patient_details = CustomerPurchaseDetails::where('id', $request->purchage_id)->with('customer', 'package', 'paymentDetails')->first();
+        $patient_details = CustomerPurchaseDetails::where('id', $request->purchage_id)->with('customer','customer.city','customer.country','package','paymentDetails','case_manager','hotel','vehical')->first();
 
+        $latest_payment= CustomerPaymentDetails::where('order_id', $patient_details->id)
+        ->where('payment_status', 'completed')
+        ->orderBy('created_at', 'desc')
+        ->first();
 
-        if (!empty($patient_details)) {
+        if (!empty($patient_details)){
             return response()->json([
                 'status' => 200,
                 'message' => 'patient details found.',
                 'patient_details' =>  $patient_details,
+                'payment_details'=>    $latest_payment,
             ]);
-        } else {
+        } else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong.patient details not fond.',
@@ -132,20 +139,20 @@ class SalesController extends BaseController{
         ]);
 
 
-        if ($validator->fails()) {
+        if ($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $patient_details = CustomerPurchaseDetails::where('id', $request->treatment_purchage_id)->update(['purchase_type' => $request->treatment_status, 'treatment_start_date' => $request->treatment_start_date]);
 
 
-        if (!empty($patient_details)) {
+        if (!empty($patient_details)){
             return response()->json([
                 'status' => 200,
                 'message' => 'date and status store successfully.',
                 'patient_details' =>  $patient_details,
             ]);
-        } else {
+        } else{
             return response()->json([
                 'status' => 404,
                 'message' => 'Something went wrong.failed to store date and status.',
@@ -156,9 +163,9 @@ class SalesController extends BaseController{
 
     public function case_manager_list()
     {
-       // $provider_id = Auth::user()->id;
+       $provider_id = Auth::user()->id;
 
-        $provider_id = 1;
+        // $provider_id = 1;
 
         $caseManagers = MedicalProviderSystemUser::where('status', 'active')->where('medical_provider_id', $provider_id)->select('id', 'name')->get();
 
@@ -181,7 +188,7 @@ class SalesController extends BaseController{
 
 
      $validator = Validator::make($request->all(), [
-           'purchage_id' => 'required|string',
+           'purchage_id' => 'required',
        ]);
    
        if ($validator->fails()) {
@@ -289,12 +296,9 @@ class SalesController extends BaseController{
        }
    }
 
-
-
-
      public function treatment_search(Request $request)
      {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(),[
             'search_query' => 'required|string',
         ]);
 
@@ -308,20 +312,22 @@ class SalesController extends BaseController{
 
         $searchQuery = $request->search_query;
 
-        $result = CustomerPurchaseDetails::where(function ($query) use ($searchQuery){
-            $query->whereHas('customer', function ($subquery) use ($searchQuery){
-                $subquery->where('first_name', 'LIKE', '%' . $searchQuery . '%');
-            })
-            ->orWhereHas('package', function ($subquery) use ($searchQuery) {
-                $subquery->where('name', 'LIKE', '%' . $searchQuery . '%');
-            })
-            ->orWhereHas('package.provider', function ($subquery) use ($searchQuery){
-                $subquery->where('company_name', 'LIKE', '%' . $searchQuery . '%');
-            })
-            ->orWhere('purchase_type', 'LIKE', '%' . $searchQuery . '%');
+        $result = CustomerPurchaseDetails::where(function ($query) use ($searchQuery) {
+            $query->whereHas('customer', function ($subquery) use ($searchQuery) {
+                    $subquery->where('first_name', 'LIKE', '%' . $searchQuery . '%');
+                })
+                ->orWhereHas('package', function ($subquery) use ($searchQuery) {
+                    $subquery->where('name', 'LIKE', '%' . $searchQuery . '%');
+                })
+                ->orWhereHas('package.provider', function ($subquery) use ($searchQuery) {
+                    $subquery->where('company_name', 'LIKE', '%' . $searchQuery . '%');
+                })
+                ->orWhere('purchase_type', 'LIKE', '%' . $searchQuery . '%');
         })
+        ->where('provider_id', Auth::user()->id)
         ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
         ->get();
+        
 
         if ($result->isNotEmpty()) {
             return response()->json([
@@ -337,16 +343,31 @@ class SalesController extends BaseController{
         }
     }
    
+     public function salesSummary(Request $request){
 
+        $providerId = Auth::user()->id;
+        $currentDate = now()->toDateString();
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+    
+        // Daily Sales
+        $dailySales = CustomerPurchaseDetails::where('provider_id', $providerId)
+            ->whereDate('created_at', $currentDate)
+            ->sum('paid_amount');
+    
+        // Monthly Sales
+        $monthlySales = CustomerPurchaseDetails::where('provider_id', $providerId)
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
+            ->sum('paid_amount');
 
-
-
-
-
-
-
-
-
-
+    
+        return response()->json([
+            'status' => 200,
+            'message' => 'Sales summary retrieved successfully',
+            'daily_sales' => $dailySales,
+            'monthly_sales' => $monthlySales,
+        ]);
+    }
 
 }

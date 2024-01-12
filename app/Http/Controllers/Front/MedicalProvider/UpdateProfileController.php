@@ -7,6 +7,10 @@ use App\Models\Cities;
 use App\Models\Country;
 use App\Models\MedicalProviderRegistrater;
 use App\Models\ProviderImagesVideos;
+use App\Models\MedicalProviderLogo;
+use App\Models\MedicalProviderLicense;
+
+use App\Services\ApiService;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +22,10 @@ use Storage;
 class UpdateProfileController extends Controller
 {
     use MediaTrait;
-    
+    public function __construct(ApiService $apiService)
+    {
+        $this->apiService = $apiService;
+    }
     //update_medical_profile_list
     public function update_medical_profile_list()
     {
@@ -58,7 +65,18 @@ class UpdateProfileController extends Controller
 
         $ProviderImagesVideos= ProviderImagesVideos::where('status','active')
         ->select('id','provider_id', 'provider_image_path', 'provider_image_name')
+        ->where('provider_id',Auth::guard('md_health_medical_providers_registers')->user()->id)
         ->get();
+// dd($ProviderImagesVideos);
+        $MedicalProviderLogo=MedicalProviderLogo::where('status','active')
+        ->select('id','company_logo_image_path','company_logo_image_name')
+        ->where('medical_provider_id',Auth::guard('md_health_medical_providers_registers')->user()->id)
+        ->first();
+
+        $MedicalProviderLicense=MedicalProviderLicense::where('status','active')
+        ->select('id','company_licence_image_path','company_licence_image_name')
+        ->where('medical_provider_id',Auth::guard('md_health_medical_providers_registers')->user()->id)
+        ->first();
 
         $countries = Country::where('status', 'active')
         ->select('id', 'country_name')
@@ -71,8 +89,7 @@ class UpdateProfileController extends Controller
             ->get();
 
         if (!empty($medical_provider_list)) {
-            return view('front/mdhealth/medical-provider/account',compact('medical_provider_list','ProviderImagesVideos','countries','cities'));
-           
+            return view('front/mdhealth/medical-provider/account',compact('medical_provider_list','ProviderImagesVideos','MedicalProviderLogo','MedicalProviderLicense','countries','cities'));  
         } 
     }
 
@@ -80,22 +97,7 @@ class UpdateProfileController extends Controller
 
     public function update_medical_provider_profile(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'company_name'=>'required',
-        //     'email' => 'required',
-        //     'mobile_no' => 'required',
-        //     'company_address' => 'required',
-        //     'country_id' => 'required',
-        //     'city_id' => 'required',
-        //     'tax_no' => 'required',
-        //     'authorisation_full_name' => 'required',
-        //     'company_overview' => 'required',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return $this->sendError('Validation Error.', $validator->errors());
-        // }
-
+    //   return Auth::guard('md_health_medical_providers_registers')->user()->id;
         $medical_provider_input = [];
         $medical_provider_input['company_name'] = $request->company_name;
         $medical_provider_input['company_address'] = $request->company_address;
@@ -109,7 +111,48 @@ class UpdateProfileController extends Controller
         $medical_provider_input['modified_ip_address'] = $request->ip();
 
         $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::guard('md_health_medical_providers_registers')->user()->id)->update($medical_provider_input);
+        $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::guard('md_health_medical_providers_registers')->user()->id)->first();
+        // return Auth::guard('md_health_medical_providers_registers')->user()->id;
+        // dd($medical_provider_update);
+        if(!empty($medical_provider_update))
+        {
+            $md_provider_input_image_logo=[];
+            $md_provider_input_image_logo['medical_provider_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
+    
+            if ( $request->has( 'company_logo_image_path' ) ) {
+                
+                if ( $request->file( 'company_logo_image_path' ) ) {
+                    $md_provider_input_image_logo[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
+                    $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
+                    $md_provider_input_image_logo[ 'company_logo_image_name' ] = $original_name;
+                }
+            }
 
+
+            // if ($request->hasFile('company_logo_image_path') && $request->file('company_logo_image_path')->isValid()) {
+            //     $image = $request->file('company_logo_image_path');
+            //     $image_name = 'company_logo_image_path';
+            //     $responseData = $this->apiService->getData($token,$apiUrl,$body,$method,$image,$image_name);
+            // }else{
+            //     $responseData = $this->apiService->getData($token,$apiUrl,$body,$method);
+            // }
+
+
+            MedicalProviderLogo::where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)->update($md_provider_input_image_logo);
+    
+            $md_provider_input_image_license=[];
+            $md_provider_input_image_license['medical_provider_id']=!empty($medical_provider_update->id)?$medical_provider_update->id:'';
+            if ( $request->has( 'company_licence_image_path' ) ) {
+                if ( $request->file( 'company_licence_image_path' ) ) {
+                    // return 'asdsaddas';
+                    $md_provider_input_image_license[ 'company_licence_image_path' ] = $this->verifyAndUpload( $request, 'company_licence_image_path', 'company/licence' );
+                    $original_name = $request->file( 'company_licence_image_path' )->getClientOriginalName();
+                    $md_provider_input_image_license[ 'company_licence_image_name' ] = $original_name;
+                }
+            }
+            MedicalProviderLicense::where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)->update($md_provider_input_image_license);
+        }
+       
         if ($request->has('provider_image_path')) {
             if ($files = $request->file('provider_image_path')) {
                 // $files=[];
@@ -127,6 +170,7 @@ class UpdateProfileController extends Controller
                 }
             }
         }
+        
 
         if(!empty($medical_provider_update)){
             // return response()->json([

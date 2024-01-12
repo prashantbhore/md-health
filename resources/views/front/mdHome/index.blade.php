@@ -57,8 +57,8 @@
                     <div>
                         <img src="{{('front/assets/img/ProvidersLogo.png')}}" alt="">
                     </div>
-                    <div class="d-flex justify-content-between flex-grow-1">
-                        <div class="d-flex flex-column justify-content-between py-1">
+                    <div class="d-flex justify-content-between flex-grow-1 align-self-stretch">
+                        <div class="d-flex flex-column justify-content-between py-2">
                             <div>
                                 <p class="mb-0 fs-5 camptonBold lh-base">Home Service Provider 1</p>
                                 <p class="mb-0 lh-1 smallFont"><span class="camptonBold">Services:</span> Patient Care, Ambulance</p>
@@ -86,8 +86,8 @@
                     <div>
                         <img src="{{('front/assets/img/ProvidersLogo.png')}}" alt="">
                     </div>
-                    <div class="d-flex justify-content-between flex-grow-1">
-                        <div class="d-flex flex-column justify-content-between py-1">
+                    <div class="d-flex justify-content-between flex-grow-1 align-self-stretch">
+                        <div class="d-flex flex-column justify-content-between py-2">
                             <div>
                                 <p class="mb-0 fs-5 camptonBold lh-base">Home Service Provider 1</p>
                                 <p class="mb-0 lh-1 smallFont"><span class="camptonBold">Services:</span> Patient Care, Ambulance</p>
@@ -115,8 +115,8 @@
                     <div>
                         <img src="{{('front/assets/img/ProvidersLogo.png')}}" alt="">
                     </div>
-                    <div class="d-flex justify-content-between flex-grow-1">
-                        <div class="d-flex flex-column justify-content-between py-1">
+                    <div class="d-flex justify-content-between flex-grow-1 align-self-stretch">
+                        <div class="d-flex flex-column justify-content-between py-2">
                             <div>
                                 <p class="mb-0 fs-5 camptonBold lh-base">Home Service Provider 1</p>
                                 <p class="mb-0 lh-1 smallFont"><span class="camptonBold">Services:</span> Patient Care, Ambulance</p>

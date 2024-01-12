@@ -13,13 +13,63 @@
     src: url("../fonts/campton/CamptonBold.otf");
 }
 
+@font-face {
+    font-family: "CamptonExtraBold";
+    src: url("../fonts/campton/CamptonExtraBold.otf");
+}
+
+@font-face {
+    font-family: "CamptonLight";
+    src: url("../fonts/campton/CamptonLight.otf");
+}
+
+@font-face {
+    font-family: "CamptonThin";
+    src: url("../fonts/campton/CamptonThin.otf");
+}
+
 :root {
     --form-control-color: #4cdb06;
-  }
+}
 
 .body {
     scroll-behavior: smooth;
     font-family: "CamptonBook", sans-serif;
+}
+
+.gj-picker {
+    font-family: "CamptonBook";
+}
+
+.other-month>div,
+.gj-picker [role="week-days"] th>div,
+.gj-picker-bootstrap table tr td div {
+    font-family: CamptonBook;
+    font-size: 12px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.84px;
+}
+
+.gj-picker [role="period"] {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.gj-picker-bootstrap table tr td.selected.gj-cursor-pointer div {
+    color: #fff;
+    background-color: #4cdb06 !important;
+    border-color: transparent !important;
+    border-radius: 3px !important;
+    border: none !important;
+    text-shadow: none;
+}
+
+.datepicker table tr td.selected {
+    border-color: transparent !important;
+    border: none !important;
+    background-color: transparent !important;
 }
 
 *,
@@ -53,7 +103,7 @@
     font-size: 14px;
 }
 
-.vSmallFont{
+.vSmallFont {
     font-size: 12px !important;
 }
 
@@ -63,24 +113,384 @@
 }
 
 /* UTILITY CLASSES */
+.bod-3 {
+    border-radius: 3px 0 0px 3px !important;
+}
 
-#treatmentForModal .modal-content, #treatmentForModal2 .modal-content, 
-#serviceForModal .modal-content, #serviceForModal2 .modal-content {
-    border-radius: 0.5rem;
+.bod-n-3 {
+    border-radius: 0px 3px 3px 0px !important;
+}
+
+.card-h8 {
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 36px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.44px;
+}
+
+.card-p8 {
+    color: #FFF;
+    text-align: center;
+    font-family: CamptonBook;
+    font-size: 26px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -1.04px;
+}
+
+.add-btn {
+    border-radius: 3px;
+    background: #000;
+    width: 242px;
+    height: 36px;
+    flex-shrink: 0;
+    color: #4cdb06;
+    font-family: CamptonBook;
+    font-size: 16px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.add-btn:hover {
+    color: #4cdb06;
+}
+
+.save-btn-black {
+    width: 100%;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    font-family: "CamptonBold";
+    font-size: 15px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+}
+
+.save-btn-black:hover {
+    color: #fff;
+}
+
+.save-btn-green {
+    width: 405px;
+    height: 57px;
+    border-radius: 3px;
+    background: #4cdb06;
+
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -1.12px;
+}
+
+.save-btn-green:hover {
+    color: #000;
+}
+
+.card-h3 {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.card-h2 {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.card-h1 {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.card-p1 {
+    color: #000;
+    font-size: 14px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    font-family: CamptonBook;
+}
+
+.modal-h1 {
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 23px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.92px;
+}
+
+/* END */
+
+/* =============================================================================================
+                                1 : SEARCH TREATMENT BAR
+   =============================================================================================  */
+
+.search-bar .form-select {
+    height: 57px;
+    width: 256px;
+
+    border-radius: 3px;
+    border: 1px solid #ededed;
+    background: #fff;
+
+    color: #212121;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
+.search-bar .form-select:focus {
+    border: 1px solid #ededed;
+}
+
+.search-bar .form-floating label {
+    color: #a3a3a3;
+    font-family: CamptonBook;
+    font-size: 14px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.98px;
+}
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+    opacity: 1;
+    transform: scale(1) translateY(-0.5rem);
+}
+
+.search-bar {
+    background-color: #fff;
+    max-width: 1066px;
+    /* max-height: 84px; */
+    border-radius: 5px;
+    box-shadow: 0px 0px 24px 0px #00000040;
+    padding: 0.75rem;
+}
+
+.btn-search-pill {
+    width: 203px;
+    height: 57px;
+    border-radius: 3px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+}
+
+/* =============================================================================================
+                                2 : MAKE REQUEST FORM
+   =============================================================================================  */
+
+.request-modal .modal-content {
+    border: none;
+    border-radius: 10px;
+    background: #f6f6f6;
+}
+
+.request-modal .modal-title {
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 23px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.92px;
+}
+
+
+.request-modal .form-label {
+    color: #000002;
+    font-family: CamptonBook;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.request-modal .form-control::placeholder,
+.authentication .form-control::placeholder,
+.epic-span {
+    font-family: "CamptonThin" !important;
+    font-weight: 600 !important;
+}
+
+#formFile {
+    display: none;
+}
+
+
+.request-modal p {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.request-modal .btn-close {
+    background: url("../img/modalClose.png") no-repeat center center/cover;
+    opacity: 1;
+}
+
+
+.search-bar .form-select {
+    background-image: url("../img/SelectArrowDown.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: bottom 16px right 12px;
+}
+
+.request-modal .form-select,
+.authentication .form-select {
+    background-image: url("../img/SelectArrowDown.png");
+    background-size: unset;
+}
+
+.list-div .form-select {
+    background-image: url("../img/select-filter.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-size: unset;
+    background-position: bottom 16px right 12px;
+}
+
+.list-div .form-select:focus {
+    border: 1px solid #EDEDED;
+}
+
+.btn-close:focus {
+    box-shadow: none;
+}
+
+.request-modal select {
+    font-family: "CamptonBook";
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #979797;
+    background-clip: padding-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.request-modal select option:not(:checked) {
+    color: #000;
+}
+
+.section-heading-div .form-check-input,
+.request-modal .form-check-input,
+.tc .form-check-input {
+    background: #D9D9D9;
+    width: 18px;
+    height: 18px !important;
+    border-radius: 3px !important;
+    border: 1.5px solid #D6D6D6 !important;
+    transition: 0.15s all;
+}
+
+.section-heading-div .form-check-input {
+    background: transparent;
+    margin-right: 8px;
+}
+
+/*  */
+.treatmentForModal .modal-content,
+.treatmentForModal2 .modal-content,
+#serviceForModal .modal-content,
+#serviceForModal2 .modal-content,
+#foodForModal1 .modal-content,
+#foodForModal2 .modal-content,
+#foodForModal3 .modal-content,
+#addToCartModal .modal-content,
+.loginFirstModal .modal-content {
+    border-radius: 0.6rem;
     border: none;
     position: relative;
 }
 
-#treatmentForModal .modal-dialog, #serviceForModal .modal-dialog{
+.mdFoodsPurchaseFoodModal1 {
+    width: 60%;
+}
+
+.mdFoodsPurchaseFoodModal1 .form-select {
+    border-radius: 3px;
+}
+
+.mdFoodsPurchaseFoodModal1 .unselect {
+    background-image: unset;
+    display: flex;
+    gap: 1rem;
+}
+
+.treatmentForModal .modal-dialog,
+#serviceForModal .modal-dialog,
+#foodForModal1 .modal-dialog {
     max-width: 600px;
 }
 
-#treatmentForModal2 .modal-dialog, #serviceForModal2 .modal-dialog{
+.treatmentForModal2 .modal-dialog,
+#serviceForModal2 .modal-dialog,
+#foodForModal3 .modal-dialog,
+.loginFirstModal .modal-dialog {
     max-width: 700px;
 }
 
-#treatmentForModal .closeModal, #treatmentForModal2 .closeModal,
-#serviceForModal .closeModal, #serviceForModal2 .closeModal{
+.treatmentForModal .closeModal,
+.treatmentForModal2 .closeModal,
+#serviceForModal .closeModal,
+#serviceForModal2 .closeModal,
+#foodForModal1 .closeModal,
+#foodForModal2 .closeModal,
+#foodForModal3 .closeModal,
+#addToCartModal .closeModal,
+.loginFirstModal .closeModal {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -92,7 +502,9 @@
     padding: 12rem 0;
 }
 
-#homeService .nav-link {
+#homeService .nav-link,
+#mdFoodsNav .nav-link,
+#mdShopNav .nav-link {
     font-family: "CamptonBook";
     color: #000;
     font-size: 14px;
@@ -101,11 +513,15 @@
     letter-spacing: -0.04em;
 }
 
+.nav-link span {
+    font-family: "Campton";
+}
+
 #homeService .signIn {
     text-decoration: underline;
 }
 
-.titleClass{
+.titleClass {
     margin-bottom: 3rem;
     font-family: CamptonBold;
     font-size: 3rem;
@@ -144,12 +560,12 @@
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.tab-card ul .right-align{
+.tab-card ul .right-align {
     position: absolute;
     right: 100px;
 }
 
-.tab-card a{
+.tab-card a {
     font-family: CamptonBook;
     color: #000;
 }
@@ -212,7 +628,8 @@
 }
 
 .homeServicePackage,
-.packageResult {
+.packageResult,
+.foodsPackage {
     background-color: white;
     padding: 1.25rem;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
@@ -232,7 +649,7 @@
     color: #000;
 }
 
-.red-strike{
+.red-strike {
     text-decoration: line-through;
     text-decoration-color: red;
 }
@@ -245,9 +662,10 @@
 .homeServicePackage .brdr-right {
     border-right: 1px solid #e1e1e1;
     padding-right: 2rem;
+
 }
 
-#buyService .brdr-right{
+#buyService .brdr-right {
     padding-right: 5rem;
 }
 
@@ -260,12 +678,15 @@
     /* padding: 8px 0 16px 0; */
 }
 
-.homeServicePackage a, .packageResult a, .anchor {
+.homeServicePackage a,
+.packageResult a,
+.anchor,
+.foodsPackage a {
     color: #000;
     font-family: CamptonBold !important;
 }
 
-.anchor:hover{
+.anchor:hover {
     color: #000;
 }
 
@@ -276,7 +697,7 @@
     text-align: center;
     font-family: CamptonBold;
     font-size: 15px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.6px;
@@ -292,11 +713,31 @@ input[type="file"] {
 
 input,
 select {
-    font-family: 'CamptonBook' !important;
+    font-family: "CamptonBook" !important;
 }
 
 .py-100px {
     padding: 100px 0;
+}
+
+.pb-100px {
+    padding-bottom: 100px;
+}
+
+.pt-135px {
+    padding-top: 135px;
+}
+
+.pt-150px {
+    padding-top: 150px;
+}
+
+.pt-60px {
+    padding-top: 60px;
+}
+
+.pt-300px {
+    padding-top: 300px;
 }
 
 .form-check-input:focus {
@@ -304,13 +745,14 @@ select {
 }
 
 .bod-bot {
-    border-bottom: 2px solid #D0D0D0;
+    border-bottom: 2px solid #d0d0d0;
     display: flex;
     justify-content: center;
 }
 
 .bod-right {
-    border-right: 1px solid #4CDB06;
+    border-right: 1px solid #4cdb06;
+    height: 1394px;
 }
 
 .df-center {
@@ -325,24 +767,86 @@ select {
     justify-content: space-between;
 }
 
+.df-end {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
 .text-green {
-    color: #4cdb06;
+    color: #4cdb06 !important;
+}
+
+.text-gray {
+    color: #828282;
+}
+
+.text-red {
+    color: #f31d1d;
+}
+
+.text-orange {
+    color: #f3771d;
 }
 
 .bg-green {
-    background-color: #4CDB06 !important;
+    background-color: #4cdb06 !important;
 }
+
 .bg-orange {
-    background-color: #F3771D !important;
+    background-color: #f3771d !important;
 }
+
 .bg-black {
-    background-color: #000;
+    background-color: #000 !important;
+}
+
+.bg-red {
+    background: #f31d1d !important;
+}
+
+.border-black {
+    border: 1px solid #000 !important;
+}
+
+/* .bb-green {
+    border-bottom: 10px solid #4CDB06;
+} */
+
+.form-divider::before {
+    content: "";
+    position: absolute;
+    /* bottom: 0; */
+    border-bottom: 2.5px solid #4cdb06;
+    width: 45%;
+    /* height: 100px; */
+    transform: rotate(90deg);
+    left: 256px;
+    top: 256px;
+}
+
+.bb-green1::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 241px;
+    border-bottom: 10px solid #4cdb06;
+    width: 27%;
+}
+
+.bb-green::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 10px solid #4cdb06;
+    width: 29%;
 }
 
 .banner-section {
-    height: 100vh;
     background-color: black;
-    padding-top: 57.8px;
+    padding-top: 100px;
+    padding-bottom: 250px;
     border-bottom: 3px solid #4cdb06;
 }
 
@@ -360,7 +864,7 @@ select {
     font-family: "CamptonBook";
     color: #fff;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 16px;
     letter-spacing: -0.04em;
 }
@@ -369,10 +873,14 @@ select {
     color: #fff;
 }
 
+
+
 .btn-md {
-    font-size: 14px;
-    font-weight: 600;
-    font-family: CamptonBook;
+    color: #000002;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: "Campton";
+    font-weight: 400;
     line-height: 16px;
     letter-spacing: -0.04em;
     width: 149px;
@@ -383,10 +891,15 @@ select {
     transition: 0.15s all;
 }
 
+.btn-md:hover {
+    color: #000002;
+
+}
+
 .whiteBtn {
     font-size: 14px;
     font-weight: 600;
-    font-family: CamptonBook;
+    font-family: "CamptonBold";
     line-height: 16px;
     letter-spacing: -0.04em;
     width: 149px;
@@ -397,21 +910,33 @@ select {
     transition: 0.15s all;
 }
 
+.signIn-link {
+    color: #000002;
+    font-family: CamptonBold;
+    font-size: 16px;
+
+    font-weight: 700;
+    line-height: 25px;
+    /* 156.25% */
+    letter-spacing: -0.64px;
+    text-decoration-line: underline;
+}
+
+.signIn-link:hover {
+    color: #000002;
+    text-decoration-line: underline;
+}
+
 .whiteBtn:hover {
     background-color: #e1e1e1;
 }
 
-.btn-md:hover {
-    background-color: #3db303;
-    border-color: #3db303;
-}
+
 
 .banner-content,
 #homeServiceBanner .banner-content {
     font-family: "CamptonBook", sans-serif;
 }
-
-
 
 .banner-content h6 {
     color: #ffffff;
@@ -438,33 +963,6 @@ select {
     line-height: 80px;
     letter-spacing: -0.04em;
     text-align: center;
-}
-
-.search-bar {
-    background-color: #fff;
-    width: 1066px;
-    height: 84px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 24px 0px #00000040;
-}
-
-.search-bar .form-select {
-    height: 57px;
-    width: 256px;
-}
-
-.btn-search-pill {
-    width: 203px;
-    height: 57px;
-    border-radius: 3px;
-    background-color: #4cdb06;
-    border-color: #4cdb06;
-    font-family: Campton;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 19px;
-    letter-spacing: -0.07em;
-    transition: 0.15s all;
 }
 
 .purchaseBtn {
@@ -504,7 +1002,6 @@ select {
 .section-2 .btn-md-black {
     font-family: "CamptonBook";
     letter-spacing: -0.04em;
-
 }
 
 .section-2 h2,
@@ -519,10 +1016,10 @@ select {
 }
 
 .section-2 .card {
-    width: 1057px;
-    height: 191px;
+    width: inherit;
+    min-height: 191px;
     border-radius: 0px 0px 5px 5px;
-    background-color: #4CDB06;
+    background-color: #4cdb06;
     font-size: 22px;
     font-weight: 500;
     line-height: 26px;
@@ -531,20 +1028,19 @@ select {
 }
 
 .section-2 .card img {
-    right: 16px;
+    right: 55px;
     bottom: -2px;
 }
 
 .section-2 .card-text {
-    padding: 0 200px;
-    color: #1E1E1E;
-    font-family: Campton;
+    /* padding: 0 200px; */
+    color: #1e1e1e;
+    font-family: "CamptonBold";
     font-size: 22px;
     font-weight: 500;
     line-height: 26px;
     letter-spacing: -0.04em;
     text-align: center;
-
 }
 
 .btn-md-black {
@@ -621,26 +1117,25 @@ select {
     width: 855px;
     height: 86px;
     border-radius: 20px;
-    border: 2px solid #D6D6D6;
-
+    border: 2px solid #d6d6d6;
 }
-
 
 .section-3 h6 {
     color: #000;
     font-family: Campton;
     font-size: 20px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.8px;
 }
 
 .section-3 p {
+    max-width: 465px;
     color: #000;
     font-family: Campton;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -659,7 +1154,7 @@ select {
     text-align: right;
     font-family: Campton;
     font-size: 21px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.84px;
@@ -670,9 +1165,8 @@ select {
 
 .form-heading {
     color: #000;
-    font-family: Campton;
+    font-family: CamptonExtraBold;
     font-size: 20px;
-    font-style: normal;
     font-weight: 800;
     line-height: 25px;
     /* 125% */
@@ -697,12 +1191,20 @@ select {
     font-family: CamptonBold !important;
 }
 
+.camptonExtraBold {
+    font-family: CamptonExtraBold !important;
+}
+
+.camLight {
+    font-family: "CamptonLight";
+}
+
 .authentication .nav-tabs .nav-link {
     border: none;
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: 25px;
     /* 156.25% */
@@ -711,9 +1213,24 @@ select {
 }
 
 .authentication .nav-tabs .nav-link.active {
-    border-bottom: 2px solid #4CDB06;
+    border-bottom: 2px solid #4cdb06;
     font-weight: 700;
+    font-family: "Campton";
+}
 
+.authentication .form-control,
+.authentication .form-select {
+    padding: 0.375rem 1rem;
+}
+
+.authentication .form-control:focus,
+.authentication .form-select:focus {
+    background-color: #F6F6F6;
+}
+
+.authentication .nav-tabs .nav-item.show .nav-link,
+.authentication .nav-tabs .nav-link.active {
+    background-color: #F6F6F6;
 }
 
 .nav-tabs .nav-link:focus-visible {
@@ -734,19 +1251,21 @@ select {
     color: #000002;
     font-family: Campton;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
 }
 
 .user-profile-form input,
+.user-profile-form select,
 .authentication .tab-content input,
 .authentication .tab-content select {
     height: 48px;
 }
 
 .user-profile-form input,
+.user-profile-form select,
 .user-profile-form textarea,
 .sign-in-form input,
 .authentication .tab-content input,
@@ -755,32 +1274,42 @@ select {
     /* width: 189px; */
     flex-shrink: 0;
     border-radius: 5px;
-    border: 2px solid #D6D6D6;
+    border: 2px solid #d6d6d6;
     color: #000;
     font-family: Campton;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
 }
 
+.input-icon-div .form-control::placeholder {
+    font-family: Campton !important;
+    font-weight: 400 !important;
+}
 
-.form-control::placeholder {
+.epic-span {
+    position: absolute;
+    bottom: 12px;
+    font-style: italic !important;
+}
+
+.form-control::placeholder,
+.request-modal .form-check-label,
+.epic-span {
     color: #979797;
     font-family: CamptonBook;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
 }
 
 .reg-title {
-    color: #4CDB06;
-    font-family: Campton;
+    color: #4cdb06;
+    font-family: "CamptonBold";
     font-size: 33px;
-    font-style: normal;
     font-weight: 700;
     line-height: normal;
     letter-spacing: -1.32px;
@@ -796,7 +1325,6 @@ select {
     flex-shrink: 0;
     border-radius: 5px;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
-
 }
 
 .panel-left.card {
@@ -816,7 +1344,7 @@ select {
     color: #000;
     font-family: Campton;
     font-size: 20px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.8px;
@@ -824,23 +1352,22 @@ select {
 
 .for-cards .card-body {
     padding: 18px 30px;
-
 }
 
 .panel-left .nav-link {
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
     transition: 0.15s all;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
 }
 
 .panel-left .nav-link:hover {
-    color: #4CDB06;
+    color: #4cdb06;
 }
 
 .activeClass {
@@ -877,11 +1404,11 @@ select {
     border: 1px solid #4cdb06;
 }
 
-.green-plate p {
+.green-plate p,
+.white-plate p {
     color: #000002;
     font-family: Campton;
     font-size: 16px;
-    font-style: normal;
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -893,22 +1420,20 @@ select {
 }
 
 .black-plate h3 {
-    color: #4cdb06;
-    font-size: 27px;
-    letter-spacing: -1.08px;
-    font-weight: 800;
+    color: #4cdb06 !important;
 }
 
 .green-plate h3,
+.black-plate h3,
 .white-plate h3 {
     color: #000;
     text-align: right;
-    font-family: Campton;
+    font-family: "CamptonExtraBold";
     font-size: 27px;
-    font-style: normal;
     font-weight: 800;
     line-height: normal;
     letter-spacing: -1.08px;
+    margin-right: 16px;
 }
 
 .sign-in-form .card {
@@ -916,16 +1441,15 @@ select {
     min-height: 600px;
     flex-shrink: 0;
     border-radius: 10px;
-    border: 1px solid #D6D6D6;
-
+    border: 1px solid #d6d6d6;
 }
 
 .sign-in-form h2 {
-    color: #4CDB06;
+    color: #4cdb06;
     text-align: center;
     font-family: Campton;
     font-size: 26px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -1.04px;
@@ -933,7 +1457,6 @@ select {
 
 .sign-in-form h2 span {
     font-weight: 500;
-
 }
 
 .sign-in-form p {
@@ -941,11 +1464,12 @@ select {
     text-align: center;
     font-family: Campton;
     font-size: 17px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.68px;
-    padding: 0 100px;
+    /* padding: 0 100px; */
+    width: 225px;
 }
 
 .sign-in-form .form-control {
@@ -954,14 +1478,13 @@ select {
 }
 
 .sms-input .form-control {
-    width: 60px;
-    height: 100px;
+    width: 45px;
+    height: 80px;
     flex-shrink: 0;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 45px;
-    font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: -1.8px;
@@ -970,11 +1493,11 @@ select {
 .treatment-card {
     /* width: 687px; */
     /* height: 90px; */
-    padding: 15px 0;
+    padding: 16px;
     flex-shrink: 0;
     border-radius: 3px;
-    background: #F6F6F6;
-    background-color: #F6F6F6;
+    background: #f6f6f6;
+    background-color: #f6f6f6;
 }
 
 .pending {
@@ -984,25 +1507,24 @@ select {
     height: 19px; */
     flex-shrink: 0;
     border-radius: 2px;
-    background: #F3771D;
+    background: #f3771d;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
     padding: 5px 35px;
-
+    text-transform: capitalize;
 }
-
 
 .order-details .card-header p {
     color: #000002;
     font-family: Campton;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -1012,15 +1534,15 @@ select {
     color: #000;
     font-family: Campton;
     font-size: 18px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.72px;
 }
 
 .btn-msg {
-    background-color: #D9D9D9;
-    border-color: #D9D9D9;
+    background-color: #d9d9d9;
+    border-color: #d9d9d9;
     width: 165px;
     height: 47px;
     flex-shrink: 0;
@@ -1029,7 +1551,7 @@ select {
 .card-details label,
 .earners label {
     color: #4cdb06;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.64px;
 }
@@ -1044,10 +1566,11 @@ select {
 
 .card-details p {
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.56px;
+    font-family: CamptonBook;
 }
 
 .card-details h4 {
@@ -1070,12 +1593,41 @@ select {
 }
 
 .card-details h5 {
-    font-size: 12px;
+    font-size: 14px;
+    font-family: "CamptonBook";
     font-weight: 400;
     letter-spacing: -0.56px;
 }
 
-/* Shubham */
+/* Mpluss06 */
+.card-img-div {
+    height: 80px;
+    width: 80px;
+    background: lightgrey;
+    border-radius: 5px;
+}
+
+.card-img-div img {
+    width: 100%;
+}
+
+.search-bar {
+    max-width: 100%;
+}
+
+.search-bar .form-floating,
+.search-bar .form-select {
+    width: 100%;
+}
+
+.search-bar .btn-search-pill {
+    width: 75%;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}
+
 .order-card {
     display: flex;
     align-items: center;
@@ -1092,7 +1644,7 @@ select {
     display: flex;
     justify-content: space-between;
     font-weight: 700;
-    font-family: 'Campton';
+    font-family: "Campton";
 }
 
 .dashboard-card-title2 {
@@ -1156,25 +1708,33 @@ select {
 }
 
 .fsb-1 {
-    font-family: 'Campton' !important;
+    font-family: "Campton" !important;
     font-weight: 800;
 }
 
 .fsb-2 {
-    font-family: 'CamptonBook' !important;
+    font-family: "CamptonBook" !important;
+}
+
+.fs-18 {
+    font-size: 18px !important;
 }
 
 .tab-div .nav-link.active {
     border: unset;
-    border-bottom: 4px solid #4CDB06;
+    border-bottom: 4px solid #4cdb06;
+    color: #000002;
+    font-weight: 700;
 }
 
 .tab-div .nav-link {
+    color: #000002;
+    text-align: center;
+    font-family: "Campton";
+    font-weight: 500;
     font-size: 16px;
-    font-weight: 700;
-    color: #000 !important;
-    position: relative;
-    border: unset;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }
 
 .tab-div .nav.nav-tabs .nav-item:focus-visible {
@@ -1199,9 +1759,21 @@ select {
 
 .filter-div input,
 .filter-div select {
-    border-radius: 5px;
-    padding: 6px 15px;
+    width: 195px;
+    height: 35px;
+    border-radius: 3px;
     border: 1px solid #EDEDED;
+    background: #FFF;
+    padding: 6px 14px;
+}
+
+.filter-div input::placeholder {
+    color: #979797;
+    font-family: CamptonBook;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
 }
 
 input:focus-visible,
@@ -1215,20 +1787,39 @@ select option {
 
 .form-div .form-label {
     color: #979797;
+    font-family: "CamptonThin";
+    font-size: 16px;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }
 
+
+.request-modal .form-select,
+.request-modal .form-control {
+    background-color: #F6F6F6;
+}
+
+.request-modal .form-control,
+.request-modal .form-select,
+.payment-div .form-control,
 .form-div input.form-control,
 .form-div select,
 .form-div textarea,
 .card-details .form-group select,
 .card-details .form-group input {
-    border: 2px solid #D6D6D6;
+    border: 2px solid #d6d6d6;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 16px;
+    height: 48px;
+    font-size: 16px;
 }
 
-.form-div select {
+/* .form-div select {
     color: #979797;
+} */
+.form-div .form-select:focus {
+    border: 2px solid #d6d6d6;
 }
 
 .trmt-card-footer.footer-btns {
@@ -1246,7 +1837,7 @@ select option {
     font-weight: 800;
     letter-spacing: 0px;
     color: #000;
-    font-family: 'Campton';
+    font-family: "Campton";
 }
 
 .trmt-card-footer.footer-btns a i {
@@ -1257,12 +1848,12 @@ select option {
 
 .trmt-card-footer.footer-btns a:first-child i {
     background: #000;
-    color: #4CDB06;
+    color: #4cdb06;
     padding: 12px;
 }
 
 .trmt-card-footer.footer-btns a:last-child i {
-    background: #F55C5C;
+    background: #f55c5c;
     padding: 12px 14px;
     color: #000;
 }
@@ -1317,35 +1908,59 @@ select option {
     transition: all 0.3s ease-in-out;
 }
 
-.multiple-upload-images .form-control[type=file] {
+.multiple-upload-images .form-control[type="file"] {
     color: #000 !important;
 }
 
 .multiple-upload-images .preview-img .prev-img-div img {
     height: 100px;
     width: auto;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 
 .multiple-upload-images {
     margin: 40px 0;
 }
 
-.section-heading-div .section-heading {
-    margin-bottom: 10px !important;
+.section-heading-div .form-control::placeholder {
+    color: #878787;
+    font-family: "Campton";
+    font-size: 19px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.76px;
+}
 
+.section-heading-div .form-control {
+    color: #878787;
+    font-family: "Campton";
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    line-height: normal;
+    letter-spacing: -0.76px;
+}
+
+.section-heading-div .section-heading {
+    color: #000;
+    font-family: "Campton";
+    font-size: 20px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    margin-bottom: 10px !important;
 }
 
 .section-heading {
     font-size: 18px !important;
     font-weight: 700 !important;
-    font-family: 'Campton' !important;
+    font-family: "Campton" !important;
     margin-bottom: 20px !important;
 }
 
 .multiple-upload-images .preview-img .prev-img-div .clear-btn {
     position: absolute;
-    top: 7px;
+    top: -5px;
     right: -6px;
     background: black;
     padding: 0px 7px;
@@ -1378,9 +1993,12 @@ select option {
 
 .input-icon-div .input-icon {
     position: absolute;
-    top: 10px;
+    top: 14px;
     right: 20px;
     font-weight: 700;
+    color: #000;
+    font-size: 16px;
+
 }
 
 .section-btns {
@@ -1403,12 +2021,12 @@ select option {
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
-    background: #4CDB06;
+    background: #4cdb06;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
@@ -1416,107 +2034,89 @@ select option {
 }
 
 .treatment-card .btn-active {
-    width: 130px;
+    width: 150px;
     height: 24px;
     border-radius: 2px;
-    background: #4CDB06;
+    background: #4cdb06;
     color: #fff;
     text-align: center;
     font-size: 10px;
     /* font-weight: 700; */
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px 15px;
     text-decoration: none;
 }
 
 .dashboard-card-title span.in-progress {
-    width: 130px;
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
-    background: #F4D100;
+    background: #f4d100;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
 .trmt-card-footer span.in-progress {
-    width: 130px;
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
-    background: #F3771D;
+    background: #f3771d;
     color: #fff;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px;
 }
 
-.trmt-card-footer span.active {
-    width: 130px;
+.trmt-card-footer .active {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
-    background: #4CDB06;
+    background: #4cdb06;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 35px;
+    padding: 5px 15px;
 }
 
-.trmt-card-body span.active {
-    width: 130px;
+.trmt-card-body .active {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
-    background: #4CDB06;
+    background: #4cdb06;
     color: #fff;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
-    padding: 5px 32px;
+    padding: 5px;
 }
 
-.trmt-card-footer span.cancel {
-    width: 130px;
-    height: 24px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    background: #ff0000;
-    color: #fff;
-    text-align: center;
-    font-family: Campton;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.1px;
-    padding: 5px 35px;
-
-}
-
-.trmt-card-body span.cancel {
-    width: 130px;
+.trmt-card-footer .cancel {
+    width: 150px;
     height: 24px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -1525,18 +2125,34 @@ select option {
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.1px;
+    padding: 5px;
+}
+
+.trmt-card-body .cancel {
+    width: 150px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    background: #ff0000;
+    color: #fff;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
     padding: 5px 20px;
-
 }
 
 span.popup-msg.active {
     width: 95px;
     height: 20px;
-    background: #4CDB06;
+    background: #4cdb06;
     color: #000;
     text-align: center;
     font-family: Campton;
@@ -1545,8 +2161,8 @@ span.popup-msg.active {
     font-weight: 700;
     padding: 2px;
     position: absolute;
-    top: -2px;
-    right: 0;
+    top: 10px;
+    right: 10px;
 }
 
 .dashboard-card-title span.cancel {
@@ -1559,7 +2175,7 @@ span.popup-msg.active {
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
@@ -1570,12 +2186,12 @@ span.popup-msg.active {
     width: 130px;
     flex-shrink: 0;
     border-radius: 2px;
-    background: #4CDB06;
+    background: #4cdb06;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
@@ -1587,12 +2203,12 @@ span.popup-msg.active {
     width: 130px;
     flex-shrink: 0;
     border-radius: 2px;
-    background: #F4D100;
+    background: #f4d100;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
@@ -1601,7 +2217,7 @@ span.popup-msg.active {
 }
 
 .order-completed-btn {
-    background: #E0E0E0;
+    background: #e0e0e0;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -1620,7 +2236,7 @@ span.popup-msg.active {
 }
 
 .green-colored-text {
-    color: #4CDB06 !important;
+    color: #4cdb06 !important;
     font-weight: 400;
 }
 
@@ -1647,7 +2263,7 @@ span.popup-msg.active {
 
 .bar-graph>div {
     border-radius: 3px 0 0 3px;
-    background: #4CDB06;
+    background: #4cdb06;
     height: 30px;
 }
 
@@ -1698,13 +2314,13 @@ span.popup-msg.active {
     width: 100%;
 }
 
-.treatment-card .trmt-card-body h5:first-child {
+/* .treatment-card .trmt-card-body h5:first-child {
     font-size: 18px;
-}
+} */
 
-.treatment-card .trmt-card-body h5:last-child {
+/* .treatment-card .trmt-card-body h5:last-child {
     font-size: 17px;
-}
+} */
 
 .date-picker-card-div {
     display: flex;
@@ -1724,44 +2340,105 @@ span.popup-msg.active {
 }
 
 .date-picker-card-div .input-container input {
-    border: 2px solid #D6D6D6;
+    border: 2px solid #d6d6d6;
     border-radius: 5px;
     padding: 10px 20px;
-
 }
-.page-bradcrumb , .page-bradcrumb a {
-    color: #6A6262;
-    font-family: 'Campton';
+
+.page-bradcrumb,
+.page-bradcrumb a {
+    color: #6a6262;
+    font-family: "Campton";
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
     text-decoration: none;
 }
 
-/* Shubham */
+.hide-eye-div {
+    position: relative;
+}
+
+.hide-eye-div .fa {
+    position: absolute;
+    top: 46px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.hide-eye-div .mdi {
+    position: absolute;
+    top: 42px;
+    right: -16px;
+    cursor: pointer;
+}
+
+.up-abs {
+    position: absolute;
+    top: 42px;
+    right: 10px;
+}
+
+
+
+/* Mpluss06 */
 
 .medical-pckg {
-    height: 100vh;
+    height: 579px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .medical-pckg p {
-    line-height: 50px;
+    color: #FFF;
+    font-family: Campton;
+    font-size: 39px;
+
+    font-weight: 700;
+    line-height: 45px;
+    /* 115.385% */
+    letter-spacing: -1.56px;
+}
+
+.medical-pckg .text-green {
+    color: #4CDB06;
+    font-family: Campton;
+    font-size: 39px;
+
+    font-weight: 700;
+    line-height: 45px;
+    letter-spacing: -1.56px;
+}
+
+.medical-pckg .fnpp {
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 39px;
+
+    font-weight: 400;
+    line-height: 45px;
+    letter-spacing: -1.56px;
 }
 
 .medical-pckg .bookButton {
-    border: 1.5px solid #4cdb06;
-    padding: 8px 60px;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-family: CamptonBold;
-    text-decoration: none;
-    color: #fff;
-    align-self: flex-start;
+    width: 234px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 70px;
+    border: 1px solid #4CDB06;
+
+    color: #FFF;
+    font-family: CamptonBook;
+    font-size: 15px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+
+    cursor: pointer;
 }
 
 .section6 {
@@ -1769,6 +2446,7 @@ span.popup-msg.active {
 }
 
 .section6 img {
+    position: absolute;
     left: 50%;
     bottom: 0;
 }
@@ -1778,8 +2456,8 @@ span.popup-msg.active {
 /* Testimonial */
 
 .testimonial {
-    height: 100vh;
-    padding: 8rem 0;
+    /* height: 100vh; */
+    padding-top: 8rem;
     /* display: flex;
     flex-direction: column;
     align-items: center; */
@@ -1797,9 +2475,9 @@ span.popup-msg.active {
     flex-direction: column;
 }
 
-.mySwiper .swiper-slide p:first-child {
+/* .mySwiper .swiper-slide p:first-child {
     width: 60%;
-}
+} */
 
 .mySwiper .swiper-button-next:after,
 .mySwiper .swiper-button-prev:after {
@@ -1837,7 +2515,7 @@ span.popup-msg.active {
 }
 
 /* Scan QR */
-/* Shubham */
+/* Mpluss06 */
 
 /* DatePicker Start */
 
@@ -1854,13 +2532,18 @@ span.popup-msg.active {
     background-color: #4cdb060f;
 }
 
+.daterangepicker td.in-range.active {
+    background-color: #4cdb06;
+}
+
 /* DatePicker End */
 
 /* Purchase Package Start */
 
 .paymentSection input[type="radio"],
 .mdShop input[type="radio"],
-.mdShop input[type="checkbox"] {
+.mdShop input[type="checkbox"],
+.greenCheck input[type="checkbox"] {
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
@@ -1876,9 +2559,15 @@ span.popup-msg.active {
     border-radius: 3px;
     display: grid;
     place-content: center;
-  }
+}
 
-  .discount-sctn input[type="radio"]{
+.greenCheck input[type="checkbox"],
+.greenCheck input[type="checkbox"]::before {
+    border-radius: 50% !important;
+}
+
+.discount-sctn input[type="radio"],
+.mdFoodsPurchaseFoodModal1 input[type="checkbox"] {
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
@@ -1894,9 +2583,9 @@ span.popup-msg.active {
     border-radius: 3px;
     display: grid;
     place-content: center;
-  }
+}
 
-  .paymentsPage input[type="checkbox"] {
+.paymentsPage input[type="checkbox"] {
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
@@ -1913,11 +2602,12 @@ span.popup-msg.active {
     /* transform: translateY(-0.075em); */
     display: grid;
     place-content: center;
-  }
+}
 
-  .paymentSection [type="radio"]::before, 
-  .mdShop input[type="radio"]::before,
-  .mdShop input[type="checkbox"]::before {
+.paymentSection [type="radio"]::before,
+.mdShop input[type="radio"]::before,
+.mdShop input[type="checkbox"]::before,
+.greenCheck input[type="checkbox"]::before {
     content: "";
     width: 14px;
     height: 14px;
@@ -1925,9 +2615,10 @@ span.popup-msg.active {
     transform: scale(0);
     transition: 120ms transform ease-in-out;
     box-shadow: inset 1em 1em var(--form-control-color);
-  }
+}
 
-  .discount-sctn [type="radio"]::before {
+.discount-sctn [type="radio"]::before,
+.mdFoodsPurchaseFoodModal1 input[type="checkbox"]::before {
     content: "";
     width: 20px;
     height: 20px;
@@ -1935,27 +2626,28 @@ span.popup-msg.active {
     transform: scale(0);
     transition: 120ms transform ease-in-out;
     box-shadow: inset 20px 20px var(--form-control-color);
-  }
+}
 
-  .paymentsPage input[type="checkbox"]::before {
+.paymentsPage input[type="checkbox"]::before {
     content: "";
     width: 28px;
     height: 28px;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
     box-shadow: inset 2rem 2rem var(--form-control-color);
-  }
-  
+}
 
-  .paymentsPage input[type="checkbox"]:checked::before,
-  .paymentSection input[type="radio"]:checked::before, 
-  .discount-sctn input[type="radio"]:checked::before,
-  .mdShop input[type="radio"]:checked::before,
-  .mdShop input[type="checkbox"]:checked::before {
+.paymentsPage input[type="checkbox"]:checked::before,
+.paymentSection input[type="radio"]:checked::before,
+.discount-sctn input[type="radio"]:checked::before,
+.mdShop input[type="radio"]:checked::before,
+.mdShop input[type="checkbox"]:checked::before,
+.greenCheck input[type="checkbox"]:checked::before,
+.mdFoodsPurchaseFoodModal1 input[type="checkbox"]:checked::before {
     transform: scale(1);
-  }
+}
 
-.card-details input{
+.card-details input {
     width: 100%;
     border-radius: 5px;
     border: 1.5px solid #4cdb06;
@@ -1963,7 +2655,8 @@ span.popup-msg.active {
     padding: 8px;
 }
 
-#wallet, #bank{
+#wallet,
+#bank {
     display: none;
 }
 
@@ -1982,7 +2675,7 @@ span.popup-msg.active {
 }
 
 .mdCard {
-    background: linear-gradient(109.88deg, #4CDB06 1.33%, rgba(76, 219, 6, 0.4) 98.07%);
+    background: linear-gradient(109.88deg, #4cdb06 1.33%, rgba(76, 219, 6, 0.4) 98.07%);
     border-radius: 25px;
     display: flex;
     padding: 2.5rem;
@@ -1994,8 +2687,8 @@ span.popup-msg.active {
     padding: 2.5rem;
 } */
 
-.creditCardContainer{
-    background: linear-gradient(180deg, #0A0A0A 0%, #383838 100%);
+.creditCardContainer {
+    background: linear-gradient(180deg, #0a0a0a 0%, #383838 100%);
     display: flex;
     flex-direction: column;
     padding: 2.5rem;
@@ -2011,14 +2704,15 @@ span.popup-msg.active {
     margin-bottom: 8px;
 }
 
-.creditCardContainer .validity, .creditCardContainer .cardholder{
+.creditCardContainer .validity,
+.creditCardContainer .cardholder {
     margin-bottom: 0;
     color: white;
     font-family: CamptonBook;
     font-size: 14px;
 }
 
-.creditCardContainer .visa{
+.creditCardContainer .visa {
     transform: translateY(20px);
 }
 
@@ -2026,28 +2720,28 @@ span.popup-msg.active {
 
 /* mdShop Start */
 
-.white-box{
+.white-box {
     background-color: #fff;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.mdShop .tab-card{
+.mdShop .tab-card {
     padding: 0;
 }
 
-.mdShop .tab-content #aboutUs{
+.mdShop .tab-content #aboutUs {
     padding: 0.5rem;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 }
 
-.mdShop .tab-card .nav{
+.mdShop .tab-card .nav {
     padding: 1rem 2.5rem 10px 2.5rem;
     box-shadow: 0px 18px 24px 0px rgba(0, 0, 0, 0.25);
     border-radius: 0 0 5px 5px;
 }
 
-.mdShop .product-title-section{
+.mdShop .product-title-section {
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;
@@ -2056,29 +2750,30 @@ span.popup-msg.active {
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.mdShop .tab-content{
+.mdShop .tab-content {
     /* background-color: #fff; */
     margin-top: 2rem;
 }
 
-.mdShop #allProducts .white-box{
+.mdShop #allProducts .white-box {
     padding: 0.5rem;
     border-radius: 5px;
 }
 
-.mdShop #aboutUs p:first-child, .mdShop #allProducts .white-box .underline{
+.mdShop #aboutUs p:first-child,
+.mdShop #allProducts .white-box .underline {
     border-bottom: 1.5px solid #ededed;
     padding-bottom: 4px;
 }
 
-.mdShop .tab-card{
+.mdShop .tab-card {
     background-color: unset;
     box-shadow: unset;
     border-bottom: 2px solid #ededed;
     padding-bottom: 4rem;
 }
 
-.mdShop .product-view .container{
+.mdShop .product-view .container {
     border-bottom: 2px solid #ededed;
     padding-bottom: 4rem;
 }
@@ -2093,7 +2788,7 @@ span.popup-msg.active {
     align-items: center;
 }
 
-.mdShopNavBg{
+.mdShopNavBg {
     position: absolute;
     height: 165vh;
     width: 100%;
@@ -2101,6 +2796,13 @@ span.popup-msg.active {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.mdFoodsNavBg {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
 }
 
 #mdShopNav {
@@ -2115,11 +2817,12 @@ span.popup-msg.active {
     top: 0; */
 }
 
-#mdShopNav .container{
+#mdShopNav .container,
+#mdFoodsNav .container {
     z-index: 1;
 }
 
-#mdShopNav .nav2{
+#mdShopNav .nav2 {
     background-color: #fff;
     width: 100%;
     padding: 1rem 2rem;
@@ -2127,75 +2830,79 @@ span.popup-msg.active {
     box-shadow: 0px 0px 24px 0px #00000040;
     display: flex;
     justify-content: space-between;
-    font-family: 'CamptonBook';
+    font-family: "CamptonBook";
     font-size: 14px;
 }
 
-#mdShopNav .nav2 p{
+#mdShopNav .nav2 p {
     border-right: 1px solid #e1e1e1;
     padding: 0 2rem;
 }
 
-#mdShopNav .nav2 p:last-child{
+#mdShopNav .nav2 p:last-child {
     border: none;
 }
 
-#mdShopNav a{
+#mdShopNav a,
+#mdFoodsNav a {
     color: #000;
 }
-/* 
+
+/*
 .container-wrap{
     transform: translateY(-26rem);
 } */
 
-.mdShop{
+.mdShop {
     background-color: #f6f6f6;
     padding-top: 2.5rem;
     position: relative;
     z-index: 99;
 }
 
-.mdShop .hero-container{
+.mdShop .hero-container {
     padding: 3rem;
 }
 
-.mdShop .hero-container div:last-child{
+.mdShop .hero-container div:last-child {
     width: 50%;
 }
 
-.mdShop .hero-container div:last-child img{
+.mdShop .hero-container div:last-child img {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
 
-.mdShop .hero-text{
+.mdShop .hero-text {
     text-align: center;
-    font-family: 'CAMPTON';
+    font-family: "CAMPTON";
     letter-spacing: 4px;
 }
 
-.product-card-container .product-row .col-3{
+.product-card-container .product-row .col-3 {
     margin-bottom: 1.5rem;
 }
 
-.product-card-container .card, .mdShop .card{
+.product-card-container .card,
+.mdShop .card {
     padding: 1rem;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
 .product-card-container .card .card-body,
-.mdShop .card .card-body{
+.mdShop .card .card-body {
     padding: 1rem 0;
 }
 
-.product-card-container .card .card-body h5, 
-.mdShop .card .card-body h5{
+.product-card-container .card .card-body h5,
+.mdShop .card .card-body h5 {
     font-family: Campton;
     font-weight: 600;
 }
 
-.product-card-container .card-link, .mdShop .card-link{
+.product-card-container .card-link,
+.mdShop .card-link {
     text-decoration: none;
     color: #000;
 }
@@ -2206,12 +2913,12 @@ span.popup-msg.active {
     width: 100%;
     float: left;
     /* padding: 10px 20px; */
-  }
+}
 
 .price-range-slider .range-value {
-margin: 0;
+    margin: 0;
 }
-  
+
 .price-range-slider .range-value input {
     width: 50%;
     background: none;
@@ -2221,18 +2928,21 @@ margin: 0;
     box-shadow: none;
     border: none;
     /* margin: 20px 0 20px 0; */
-  }
-  .price-range-slider .range-bar {
+}
+
+.price-range-slider .range-bar {
     border: none;
     background: #000;
     height: 1px;
     width: 92%;
     margin-left: 8px;
-  }
-  .price-range-slider .range-bar .ui-slider-range {
+}
+
+.price-range-slider .range-bar .ui-slider-range {
     background: #4cdb06;
-  }
-  .price-range-slider .range-bar .ui-slider-handle {
+}
+
+.price-range-slider .range-bar .ui-slider-handle {
     border: none;
     border-radius: 25px;
     background: #4cdb06;
@@ -2241,11 +2951,810 @@ margin: 0;
     width: 17px;
     top: -0.52em;
     cursor: pointer;
-  }
-  .price-range-slider .range-bar .ui-slider-handle + span {
+}
+
+.price-range-slider .range-bar .ui-slider-handle+span {
     background: #4cdb06;
-  }
+}
 
 /* Price Range Picker */
 
 /* mdShop End */
+
+.mdFoods .section-2 {
+    margin-top: 15rem;
+}
+
+.download-section {
+    padding: 7rem;
+}
+
+.download-section .part2 {
+    width: 50%;
+    padding: 2.5rem 0;
+}
+
+.search-bar select {
+    cursor: pointer;
+}
+
+.no-msg-div p {
+    color: #b8b8b8;
+    font-family: Campton;
+    font-size: 12px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.48px;
+    text-decoration-line: underline;
+}
+
+.go-live {
+    width: 291px;
+    height: 32px;
+
+    border-radius: 43px;
+    background: #fe4949;
+
+    color: #fff;
+    text-align: right;
+    font-family: Campton;
+    font-size: 14px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.active-new-msg {
+    border-radius: 3px;
+    border: 1px solid #4cdb06;
+    background: #f6f6f6;
+}
+
+#LiveRequestModal .btn-close {
+    position: absolute;
+    right: 13px;
+    font-size: 13px;
+}
+
+.appTime button {
+    width: 54px;
+    height: 30px;
+    flex-shrink: 0;
+
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+    color: #000;
+
+    font-size: 14px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s all;
+}
+
+.appTime .btn:focus {
+    border: 1px solid #d6d6d6;
+}
+
+.appTime button:hover {
+    background: #f31d1d;
+    color: #fff;
+}
+
+.appTime .btn-selected {
+    background: #f31d1d;
+    color: #fff;
+    border: none;
+}
+
+.live-screen {
+    width: 992px;
+    height: 506px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #d9d9d9;
+}
+
+.live-screen h2 {
+    color: #8a8282;
+    text-align: center;
+    font-family: Campton;
+    font-size: 32px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.28px;
+}
+
+.customer-cam {
+    width: 216px;
+    height: 174px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #a8a2a2;
+
+    position: absolute;
+    bottom: 26px;
+    right: 26px;
+}
+
+.customer-cam h4 {
+    color: #fff;
+    text-align: center;
+    font-family: Campton;
+    font-size: 22px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.handset {
+    position: absolute;
+    left: 40%;
+    bottom: 65px;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-item .progress {
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.accordion-item .progress-bar {
+    color: #000;
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    background: #4cdb06;
+}
+
+.accordion .accordion-item {
+    border: none;
+}
+
+.accordion-button {
+    border-radius: 3px;
+    background: #f6f6f6;
+    margin-bottom: 1rem;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000;
+    background-color: #f6f6f6;
+    box-shadow: none;
+}
+
+.membership-card .progress {
+    height: 2rem;
+    font-size: 0.75rem;
+    background-color: #d9d9d9;
+    border-radius: 50px;
+}
+
+.membership-card .progress-bar {
+    background-color: #4cdb06;
+    border-radius: 50px;
+    font-weight: 700;
+    color: #000;
+}
+
+.mem-type {
+    color: #d9d9d9;
+    text-align: center;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.mem-type span {
+    color: #d9d9d9;
+    font-family: CamptonBook;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.text-h1 {
+    color: #000;
+    font-family: Campton;
+    font-size: 43px;
+    font-weight: 500;
+    line-height: 53px;
+    /* 123.256% */
+    letter-spacing: -1.72px;
+    text-align: left;
+}
+
+.text-green-h1b {
+    color: #4cdb06;
+    font-family: Campton;
+    font-size: 43px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.32px;
+}
+
+.text-p1-gray {
+    color: #979797;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    text-align: left;
+}
+
+.login-form #recaptcha-container {
+    padding: 1rem 2rem;
+}
+
+.tc label a {
+    color: #4cdb06;
+    font-family: "Campton";
+}
+
+.text-black {
+    color: #000;
+}
+
+.text-black:hover {
+    color: #000;
+}
+
+.p-abs {
+    position: absolute;
+    right: -75px;
+    top: 0;
+}
+
+.tab-content .form.text-start {
+    padding: 0 63px;
+    /* padding: 0 57px; */
+}
+
+/* .tab-content select {
+    color: #979797 !important;
+} */
+
+.tab-content option:not(:first-of-type) {
+    color: black;
+}
+
+.tab-content option:checked {
+    color: #000 !important;
+}
+
+.footer .card-text {
+    color: #fff;
+    font-family: CamptonBook;
+    font-size: 18px;
+
+    font-weight: 500;
+    line-height: 49px;
+    letter-spacing: -0.72px;
+    margin-bottom: 1rem;
+}
+
+.footer .card-text span {
+    font-weight: 700;
+}
+
+.footer .contact-no {
+    color: #fff;
+    text-align: right;
+    font-family: CamptonBook;
+    font-size: 26px;
+
+    font-weight: 400;
+    line-height: 49px;
+    /* 188.462% */
+    letter-spacing: -1.04px;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer ul li {
+    color: #878787;
+    font-family: CamptonBook;
+    font-size: 18px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    margin-bottom: 1rem;
+}
+
+.mext {
+    color: #878787;
+    text-align: right;
+    font-family: CamptonLight;
+    font-size: 11px;
+
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: -0.44px;
+}
+
+.fl-text {
+    width: 130px;
+    color: #878787;
+    font-family: CamptonBook;
+    font-size: 12px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.bottom-links li {
+    margin-bottom: 0 !important;
+}
+
+.bottom-links li a {
+    color: #878787;
+    text-align: right;
+    font-family: CamptonBook;
+    font-size: 14px !important;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    text-decoration-line: underline;
+}
+
+.copyText {
+    color: #fff;
+    font-family: CamptonBook;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.view-det {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    text-decoration-line: underline;
+}
+
+.view-det:hover {
+    color: #000;
+}
+
+.pkg-name {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.view,
+.print {
+    text-decoration: none;
+}
+
+.view p,
+.print p {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 10px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.4px;
+}
+
+/* DATEPICKER */
+.gj-picker {
+    font-family: "CamptonBook";
+}
+
+.other-month>div,
+.gj-picker [role="week-days"] th>div,
+.gj-picker-bootstrap table tr td div {
+    font-family: CamptonBook;
+    font-size: 12px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.84px;
+}
+
+.gj-picker [role="period"] {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.gj-picker-bootstrap table tr td.selected.gj-cursor-pointer div {
+    color: #fff;
+    background-color: #4cdb06 !important;
+    border-color: transparent !important;
+    border-radius: 3px !important;
+    border: none !important;
+    text-shadow: none;
+}
+
+.datepicker table tr td.selected {
+    border-color: transparent !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+label.tc-text,
+.section-heading-div .form-check-label {
+    color: #979797;
+    font-family: "CamptonThin";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.form-check-input:checked {
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+}
+
+.form-check-input:focus {
+    border-color: #4cdb06;
+}
+
+.form-check-input:checked[type="checkbox"] {
+    background-image: none;
+}
+
+.multiple-checks .form-check-label {
+    color: #000;
+    font-family: "Campton";
+    font-size: 18px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.trmt-card-body .dashboard-card-title {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.trmt-card-body h5:nth-child(2) {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.mdLtd div:first-child {
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.allRights {
+    display: flex;
+    align-items: center;
+}
+
+.allRights {
+    display: flex;
+    align-items: center;
+}
+
+.md-booking-home-page {
+    z-index: 99;
+    background-color: transparent !important;
+}
+
+.tox-statusbar__branding {
+    display: none;
+}
+
+.md-booking-middle-content .nav-item {
+    cursor: pointer;
+}
+
+.scanQR {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 61px;
+    letter-spacing: -0.76px;
+    text-align: center;
+}
+
+.test-p1 {
+    color: #979797;
+    text-align: center;
+    font-family: CamptonBook;
+    font-size: 23px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.92px;
+    width: 618px;
+}
+
+.package-results-div {
+    display: block;
+}
+
+.package-results-div .preslt-title {
+    font-size: 20px !important;
+}
+
+.package-results-div .packageResult-title {
+    font-size: 18px;
+    color: #4CDB06;
+    font-weight: 600;
+    font-family: 'Campton';
+    line-height: 1;
+}
+
+.package-results-div .packageResult-title span {
+    font-size: 11px;
+    color: #000;
+    font-weight: 500;
+}
+
+.package-results-div .packageservices-list {
+    letter-spacing: -0.56px;
+}
+
+.package-results-div .stars i {
+    font-size: 18px;
+    color: #4CDB06;
+}
+
+.packageResult-price {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.packageResult-price span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.packageResult-price .packageResult-offer {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.56px;
+}
+
+.searchBar .tab-card .nav-pills .nav-link {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.searchBar .tab-card .nav-pills .nav-link.active {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.package-results-details .brdr-right .review-type {
+    letter-spacing: -0.56px;
+}
+
+.package-results-details .brdr-right:nth-child(1) {
+    width: 30%;
+}
+
+.package-results-details .brdr-right:nth-child(2) {
+    width: 25%;
+}
+
+.details .package-results-details .brdr-right:nth-child(1) {
+    width: 23%;
+}
+
+.details .package-results-details .brdr-right:nth-child(2) {
+    width: 17%;
+}
+
+.packageResult-price {
+    width: 45%;
+}
+
+.packageResult-price .purchaseBtn {
+    padding: 0 3rem;
+    letter-spacing: -0.56px;
+}
+
+.packageResult-price .favouriteBtn {
+    padding: 12px 15px;
+}
+
+.packageResult-price .view_btn {
+    text-decoration: underline;
+}
+
+.package-results .packageFilter {
+    font-size: 20px;
+}
+
+.mdhealth-search-result-footer a {
+    border-radius: 5px;
+    background: #000;
+    font-size: 16px;
+    color: #FFF;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.64px;
+    padding: 10px 60px;
+    transform: translateY(-21px);
+}
+
+.mdhealth-search-result-footer-text span {
+    text-decoration: underline;
+}
+
+.reviews .stars i {
+    font-size: 23px;
+}
+
+.reviews .review .stars i,
+.reviews .review p {
+    font-size: 16px;
+}
+
+.review p span {
+    font-weight: 700;
+}
+
+.reviews-button .pagination .page-link {
+    padding: 2px 5px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #808080;
+}
+
+.reviews-button .page-item.active .page-link {
+    color: #000;
+    background-color: #0d6efd00;
+    border: 1px solid #4CDB06 !important;
+    font-weight: 900;
+}
+
+.reviews-button .page-item .page-link:focus {
+    box-shadow: unset;
+    background-color: transparent;
+}
+
+.reviewauthor,
+.reviewdate {
+    font-size: 16px !important;
+}
+
+.reviewdate {
+    font-weight: 600;
+}
+
+.packageResult-price-title {
+    letter-spacing: -0.8px;
+}
+
+.daterangepicker .calendar-table .month {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
+.daterangepicker .calendar-table th,
+.daterangepicker .calendar-table td {
+    font-family: "CamptonBook";
+}
+
+.daterangepicker .calendar-table .next span {
+    background-image: url("../img/CalenederNext.png");
+    background-repeat: no-repeat;
+}
+
+.w-189 {
+    width: 189px;
+}
+
+.w-407p5 {
+    width: 400.5px;
+}
+
+.bod-bot-5 {
+    border-bottom: 0.5px solid #4CDB06;
+    width: 400.5px;
+    margin-left: 2rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#resendotp {
+    color: #878787;
+    text-align: center;
+    font-family: Campton;
+    font-size: 12px;
+
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.48px;
+    text-decoration-line: underline;
+}
+
+.multiple-checks .form-check-input {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    margin-right: 8px;
+}
+
+.footer ul li a {
+    color: #878787;
+    font-family: "CamptonBook";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.get-started-btn {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    width: 149px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 70px;
+    background: #4CDB06;
+}
+.get-started-btn:hover {
+    color: #000;
+}

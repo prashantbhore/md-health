@@ -13,12 +13,10 @@ class MedicalProviderLogin extends Controller
     {
         return !empty(Session::has('MDMedicalProvider*%')) ? redirect('medical-provider-dashboard') :  view('front/mdhealth/authentication/sign-in');
     }
+    
 
     //already admin lagin in browser then direct show dashboard using session
-    public function dashboard_view()
-    {
-        return !empty(Session::has('MDMedicalProvider*%')) ? view('front/mdhealth/medical-provider/dashboard') : redirect('sign-in');
-    }
+ 
 
     //this function is used for check login details is present in database
 
