@@ -266,10 +266,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
     Route::controller(reviewController::class)->group(function (){
-
        Route::get('pending-reviews','pendingReview');
        Route::get('published-reviews','publishedReview');
-
     });
 
 

@@ -1,5 +1,11 @@
 @extends('admin.layout.layout') @section("content")
 <style>
+.col-sm-12.col-md-7 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 
 </style>
 
@@ -54,11 +60,11 @@
                             <!-- Filters -->
                             <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
                                 <div class="card-title me-auto">Cities</div>
-                                
-                            {{-- <input type="text" class="form-control" placeholder="Search"> --}}
+{{--                                 
+                            <input type="text" class="form-control" placeholder="Search">
 
-                             {{-- <input type="search" class="form-control form-control-sm" placeholder aria-controls="example"> --}}
-
+                             <input type="search" class="form-control form-control-sm" placeholder aria-controls="example"> --}}
+                              
                                 <select class="form-select form-select-sm">
                                     <option selected disabled hidden>Active Cities</option>
                                     <option value="1">Active Orders</option>
@@ -107,6 +113,21 @@
     $(".citiesLi").addClass("activeClass");
     $(".cities").addClass("md-active");
 </script>
+
+<script>
+    $(document).ready(function () {
+        var searchBox = $('#example_filter input');
+        searchBox.addClass('form-control form-control-sm');
+        searchBox.attr('placeholder', 'Search');
+        searchBox.parent().contents().filter(function () {
+            return this.nodeType === 3;
+        }).remove();
+        searchBox.wrap('<div class="custom-search-box"></div>');
+    });
+</script>
+    
+
+
 
 
 @endsection
