@@ -1456,3 +1456,11 @@ div.dataTables_wrapper div.dataTables_filter input {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     padding: 0.5em 0em;
 }
+
+form.admin-form label {
+    display: inline-block;
+    font-size: 14px;
+}
+.top-cards > .promo > .card{
+    min-height: 567px !important;
+}
