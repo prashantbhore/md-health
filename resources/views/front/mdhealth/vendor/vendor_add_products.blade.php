@@ -68,8 +68,8 @@
                                                         <img src="{{ !empty($product_gallery['image']) ? $product_gallery['image'] : '' }}"
                                                             alt="">
                                                         <a href="javascript:void(0);" class="clear-btn"
-                                                        onclick="deleteClientLogo({{ $product_gallery['id'] }})">
-                                                        {{--  --}}
+                                                            onclick="deleteClientLogo({{ $product_gallery['id'] }})">
+                                                            {{--  --}}
                                                             <div>X</div>
                                                         </a>
                                                     </div>
@@ -89,7 +89,7 @@
                                         <label class="form-label">Product Price (VAT Included Price)</label>
                                         <div class="input-icon-div p-relative">
                                             <input type="text" id="product_price" name="product_price"
-                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                 class="form-control"
                                                 value="{{ !empty($product_list['product_price']) ? $product_list['product_price'] : '' }}"
                                                 placeholder="Product Price">
@@ -102,13 +102,13 @@
                                         <label class="form-label">Shipping Fee</label>
                                         <div class="input-icon-div mb-3">
                                             <input type="text" class="form-control" name="shipping_fee" id="shipping_fee"
-                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                 value="{{ !empty($product_list['shipping_fee']) ? $product_list['shipping_fee'] : '' }}"placeholder="Shipping Fee">
                                             <span class="input-icon">₺</span>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="free_shipping"
-                                                {{ !empty($product_list['free_shipping']) ? 'checked' : false }}
+                                                {{ !empty($product_list['free_shipping'])&&($product_list['free_shipping']=='yes') ? 'checked' : false }}
                                                 name="free_shipping">
                                             <label class="form-check-label fw-700" for="free_shipping">Free Shipping</label>
                                         </div>
@@ -118,7 +118,8 @@
                                         <h6 class="section-heading">Total Price</h6>
                                         <label class="form-label">Discount </label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" name="discount_price" id="discount_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                                            <input type="text" name="discount_price" id="discount_price"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
                                                 value="{{ !empty($product_list['discount_price']) ? $product_list['discount_price'] : '' }}"
                                                 class="form-control" placeholder="0">
                                             <span class="input-icon">%</span>
@@ -126,7 +127,8 @@
 
                                         <label class="form-label">Sale Price </label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" name="sale_price" id="sale_price" readonly
+                                            <input type="text" class="form-control" name="sale_price" id="sale_price"
+                                                readonly
                                                 value="{{ !empty($product_list['sale_price']) ? $product_list['sale_price'] : '' }}"
                                                 placeholder="Calculated Automatically">
                                             <span class="input-icon">₺</span>
@@ -227,7 +229,7 @@
             }
         });
     </script>
-     <script>
+    <script>
         function deleteClientLogo(id) {
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -263,124 +265,123 @@
         }
     </script>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        // Function to calculate and update the sale price
-        function updateSalePrice() {
-            // Get values from inputs
-            var productPrice = parseFloat($('#product_price').val()) || 0;
-            var shippingFee = parseFloat($('#shipping_fee').val()) || 0;
-            var discountPercentage = parseFloat($('#discount_price').val()) || 0;
+    <script>
+        $(document).ready(function() {
+            // Function to calculate and update the sale price
+            function updateSalePrice() {
+                // Get values from inputs
+                var productPrice = parseFloat($('#product_price').val()) || 0;
+                var shippingFee = parseFloat($('#shipping_fee').val()) || 0;
+                var discountPercentage = parseFloat($('#discount_price').val()) || 0;
 
-            // Disable featured checkbox if shipping fee is entered
-            if (shippingFee > 0) {
-                $('#free_shipping').prop('disabled', true);
-            } else {
-                $('#free_shipping').prop('disabled', false);
+                // Disable featured checkbox if shipping fee is entered
+                if (shippingFee > 0) {
+                    $('#free_shipping').prop('disabled', true);
+                } else {
+                    $('#free_shipping').prop('disabled', false);
+                }
+
+                // Disable shipping fee if featured checkbox is checked
+                if ($('#free_shipping').prop('checked')) {
+                    $('#shipping_fee').prop('disabled', true);
+                } else {
+                    $('#shipping_fee').prop('disabled', false);
+                }
+
+                // Calculate total price
+                var totalPrice = productPrice + shippingFee;
+
+                // Calculate discounted price
+                var discountAmount = (discountPercentage / 100) * totalPrice;
+                var salePrice = totalPrice - discountAmount;
+
+                // Update the sale price input
+                $('#sale_price').val(salePrice.toFixed(2));
             }
 
-            // Disable shipping fee if featured checkbox is checked
-            if ($('#free_shipping').prop('checked')) {
-                $('#shipping_fee').prop('disabled', true);
-            } else {
-                $('#shipping_fee').prop('disabled', false);
-            }
+            // Event listener for input changes
+            $('#product_price, #shipping_fee, #discount_price, #free_shipping').on('input change', function() {
+                updateSalePrice();
+            });
 
-            // Calculate total price
-            var totalPrice = productPrice + shippingFee;
-
-            // Calculate discounted price
-            var discountAmount = (discountPercentage / 100) * totalPrice;
-            var salePrice = totalPrice - discountAmount;
-
-            // Update the sale price input
-            $('#sale_price').val(salePrice.toFixed(2));
-        }
-
-        // Event listener for input changes
-        $('#product_price, #shipping_fee, #discount_price, #free_shipping').on('input change', function () {
+            // Initial calculation on page load
             updateSalePrice();
         });
-
-        // Initial calculation on page load
-        updateSalePrice();
-    });
-</script>
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-<!-- Include jQuery Validation Plugin -->
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
-<!-- Your jQuery Validation Script -->
-<script>
-    $(document).ready(function () {
-        // Initialize the form validation
-        $("#add_product_vender").validate({
-            rules: {
-                product_name: {
-                    required: true,
-                   
-                },
-                product_category_id: {
-                    required: true
-                },
-                product_subcategory_id: {
-                    required: true
-                },
-                vendor_product_image_path: {
-                    required: true
-                },
-                product_description: {
-                    required: true,
-                  
-                },
-                product_price: {
-                    required: true,
-                    number: true
-                },
-               
-                discount_price: {
-                    required: true,
-                    number: true,
-                    max: 100 // Set the maximum value to 100
-                }
-            },
-            messages: {
-    product_name: {
-        required: "Please enter the product name."
-    },
-    product_category_id: {
-        required: "Please select a product category."
-    },
-    product_subcategory_id: {
-        required: "Please select a product subcategory."
-    },
-    vendor_product_image_path: {
-        required: "Please upload at least one product image."
-    },
-    product_description: {
-        required: "Please provide a product description."
-    },
-    product_price: {
-        required: "Please enter the product price.",
-        number: "Please enter a valid number for the product price."
-    },
-    discount_price: {
-        required: "Please enter the discount.",
-        number: "Please enter a valid number for the discount.",
-        max: "Discount cannot be greater than 100."
-    }
-},
-
-            submitHandler: function (form) {
-                // Your custom submit logic here, if needed
-                form.submit();
-            }
-        });
-    });
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include jQuery Validation Plugin -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+    <!-- Your jQuery Validation Script -->
+    <script>
+        $(document).ready(function() {
+            // Initialize the form validation
+            $("#add_product_vender").validate({
+                rules: {
+                    product_name: {
+                        required: true,
+
+                    },
+                    product_category_id: {
+                        required: true
+                    },
+                    product_subcategory_id: {
+                        required: true
+                    },
+                    vendor_product_image_path: {
+                        required: true
+                    },
+                    product_description: {
+                        required: true,
+
+                    },
+                    product_price: {
+                        required: true,
+                        number: true
+                    },
+
+                    discount_price: {
+                        required: true,
+                        number: true,
+                        max: 100 // Set the maximum value to 100
+                    }
+                },
+                messages: {
+                    product_name: {
+                        required: "Please enter the product name."
+                    },
+                    product_category_id: {
+                        required: "Please select a product category."
+                    },
+                    product_subcategory_id: {
+                        required: "Please select a product subcategory."
+                    },
+                    vendor_product_image_path: {
+                        required: "Please upload at least one product image."
+                    },
+                    product_description: {
+                        required: "Please provide a product description."
+                    },
+                    product_price: {
+                        required: "Please enter the product price.",
+                        number: "Please enter a valid number for the product price."
+                    },
+                    discount_price: {
+                        required: "Please enter the discount.",
+                        number: "Please enter a valid number for the discount.",
+                        max: "Discount cannot be greater than 100."
+                    }
+                },
+
+                submitHandler: function(form) {
+                    // Your custom submit logic here, if needed
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

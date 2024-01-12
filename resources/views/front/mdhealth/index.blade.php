@@ -23,8 +23,8 @@
                 <div class="container">
                     <div class="banner-content df-center flex-column">
                         <h6>A NEW APPROACH IN MODERN TREATMENT</h6>
-                        <h2>PLAN YOUR TREATMENT</h2>
-                        <h1 class="mb-5">NOW</h1>
+                        <h2 class="mb-0">PLAN YOUR TREATMENT</h2>
+                        <h1 class="mt-0" style="padding-bottom: 65px;">NOW</h1>
                         <form method="POST" action="{{ url('health-search-result') }}" class="w-100">
                             @csrf
                             <!-- SEARCH TREATMENT BAR -->

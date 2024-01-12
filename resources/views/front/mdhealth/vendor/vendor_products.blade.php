@@ -141,12 +141,10 @@
                 success: function(response) {
                     if (response.status == 200) {
                         $('#countsofpack').text(response.active_product_count);
-                        // console.log('Active tab API response:', response.packages_active_list.length);
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
-                    // Handle errors
                 }
             });
         }
