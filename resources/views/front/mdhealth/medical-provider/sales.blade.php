@@ -196,9 +196,11 @@
                                     <div class="treatment-card df-start w-100 mb-3">
                                         <div class="row card-row align-items-center">
                                             @php
+                                            if(!empty(Auth::user()->id)){
                                             $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
                                             ->where('medical_provider_id', Auth::user()->id)
                                             ->first();
+                                            }
                                             @endphp
 
                                             <div class="col-md-2 df-center px-0">

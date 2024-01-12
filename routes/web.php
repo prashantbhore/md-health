@@ -22,6 +22,7 @@ use App\Http\Controllers\admin\BaseController;
 use App\Http\Controllers\admin\customer\CustomerController;
 use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
+use App\Http\Controllers\admin\master\countryController;
 use App\Http\Controllers\admin\medical_tourism\MedicalTourismController;
 use App\Http\Controllers\admin\product\MDfoodController;
 use App\Http\Controllers\admin\product\MDhealthController;
@@ -153,6 +154,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
+       //Admin  MANAGE Country
+
+       Route::controller(countryController::class)->group(function (){
+        Route::get('add-country','index');
+        Route::post('/add-country','store')->name('add-country');
+        Route::get('/country-data-table','data_table');
+        Route::get('/country/{id}/edit','edit_country');
+        Route::get('country-delete','country_delete');
+       });
+
+
+
 
     //Admin  MANAGE CITIES
 
@@ -165,7 +178,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     });
 
     //Admin  MANAGE CITIES
-    Route::view('add-country', 'admin/country/add-country');
+   
 
 
     //Admin  MANAGE CITIES
