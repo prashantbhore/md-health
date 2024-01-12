@@ -63,9 +63,7 @@
                             <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
                                 <div class="card-title me-auto">Country List</div>
                                 
-                            {{-- <input type="text" class="form-control" placeholder="Search"> --}}
-
-                             {{-- <input type="search" class="form-control form-control-sm" placeholder aria-controls="example"> --}}
+                        
 
                                 <select class="form-select form-select-sm">
                                     <option selected >All</option>
@@ -87,21 +85,7 @@
 
                                 <tbody>
                                
-                                    {{-- <tr>
-                                    <td>1</td>
-                                        <th scope="row">+91</th>
-                                        <td>India</td>
-                                        <td>Active</td>
-                                       
-                                        <td class="text-end">
-                                        <a href="{{URL::asset('admin/vendor-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
-                                            </a>
-                                             <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr> --}}
+                                  
 
                                 </tbody>
                             </table>
@@ -132,6 +116,19 @@
     $(".contryLi").addClass("activeClass");
     $(".contry").addClass("md-active");
 </script>
+
+<script>
+    $(document).ready(function () {
+        var searchBox = $('#example_filter input');
+        searchBox.addClass('form-control form-control-sm');
+        searchBox.attr('placeholder', 'Search');
+        searchBox.parent().contents().filter(function () {
+            return this.nodeType === 3;
+        }).remove();
+        searchBox.wrap('<div class="custom-search-box"></div>');
+    });
+</script>
+    
 
 
 @endsection
