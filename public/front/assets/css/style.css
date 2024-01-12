@@ -980,9 +980,16 @@ select {
 }
 
 .deleteAll {
-    color: #f31d1d;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+
+    color: #F31D1D;
+    text-align: center;
+    font-family: Campton;
+    font-size: 17px;
+    
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.68px;
+    text-decoration-line: underline;
 }
 
 .favouriteBtn {
@@ -1839,7 +1846,7 @@ select option {
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+    
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.4px;
@@ -2565,6 +2572,16 @@ span.popup-msg.active {
     place-content: center;
 }
 
+.paymentSection label {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
 .greenCheck input[type="checkbox"],
 .greenCheck input[type="checkbox"]::before {
     border-radius: 50% !important;
@@ -2654,7 +2671,7 @@ span.popup-msg.active {
 .card-details input {
     width: 100%;
     border-radius: 5px;
-    /* width: 464px; */
+    width: 464px;
     height: 49px;
     flex-shrink: 0;
     border: 1px solid #4cdb06;
@@ -2720,7 +2737,7 @@ span.popup-msg.active {
     color: #FFF;
     font-family: Campton;
     font-size: 30px;
-    font-style: normal;
+    
     font-weight: 500;
     line-height: normal;
     margin-bottom: 8px;
@@ -2731,7 +2748,7 @@ span.popup-msg.active {
     color: #FFF;
     font-family: Campton;
     font-size: 20px;
-    font-style: normal;
+    
     font-weight: 500;
     line-height: normal;
     margin-bottom: 0;
@@ -3806,3 +3823,13 @@ label.tc-text,
     border-radius: 3px;
     background: #000;
 } */
+
+.packageFilter-heading {
+    color: #000;
+    font-family: Campton;
+    font-size: 20px;
+    
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}

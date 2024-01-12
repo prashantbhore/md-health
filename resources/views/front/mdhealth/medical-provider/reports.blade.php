@@ -29,7 +29,7 @@
 
         font-family: CamptonBook;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.56px;
