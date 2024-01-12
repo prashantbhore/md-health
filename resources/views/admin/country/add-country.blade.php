@@ -23,8 +23,11 @@
                                 <div class="col-md-6 mb-3">
                                     <input type="text" name="city" class="form-control" placeholder="Country Name" value="{{!empty($city->city_name)?$city->city_name:''}}">
                                 </div>
+                                <div class="col-md-3 mb-3">
+                                    <input type="text" name="city" class="form-control" placeholder="Country Code" value="{{!empty($city->city_name)?$city->city_name:''}}">
+                                </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <button type="submit" class="btn deactivate-btn w-100">Add Country</button>
                                 </div>
                             </div>
@@ -58,9 +61,10 @@
                             <table id="example" class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="w-25">Country ID</th>
+                                    <th scope="col" class="w-2">Sr. No.</th>
+                                        <th scope="col" class="w-15">Country ID</th>
                                         <th scope="col" class="w-25">Country Name</th>
-                                        <th class="w-25">Status</th>
+                                        <th  scope="col" class="w-10">Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -68,13 +72,17 @@
                                 <tbody>
                                
                                     <tr>
+                                    <td>1</td>
                                         <th scope="row">+91</th>
                                         <td>India</td>
                                         <td>Active</td>
                                        
                                         <td class="text-end">
-                                            <a href="{{URL('admin/sales-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
+                                        <a href="{{URL::asset('admin/vendor-details')}}">
+                                                <img src="{{URL::asset('admin/assets/img/editEntry.png')}}" alt="">
+                                            </a>
+                                             <a href="#">
+                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
                                             </a>
                                         </td>
                                     </tr>

@@ -1,5 +1,6 @@
 $(function (){
-    var table = $("#example").DataTable({
+    var table = $("#example").dataTable({
+        bFilter: false,
         ordering: false,
         processing: true,
         serverSide: true,
@@ -55,10 +56,15 @@ $(function (){
           ],
       });
   
-      $("#brand_category").change(function (){
-          table.draw();
-      });
+      function reload_table() {
+        table.DataTable().ajax.reload(null, false);
+    }
   });
+
+
+
+
+  
 
 
 

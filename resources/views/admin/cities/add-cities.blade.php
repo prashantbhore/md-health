@@ -1,5 +1,11 @@
 @extends('admin.layout.layout') @section("content")
 <style>
+.col-sm-12.col-md-7 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 
 </style>
 
@@ -18,7 +24,7 @@
                             <input type="hidden" name="id" value="{{!empty($city->id)?$city->id:''}}">
 
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <select class="form-control w-100" id="countrySelect" name="country">
                                         <option value="" selected disabled>Select Country</option>
                                         @if(!empty($countries))
@@ -35,7 +41,7 @@
                                     <input type="text" name="city" class="form-control" placeholder="City Name" value="{{!empty($city->city_name)?$city->city_name:''}}">
                                 </div>
 
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <button type="submit" class="btn deactivate-btn w-100">Add City</button>
                                 </div>
                             </div>
@@ -54,11 +60,11 @@
                             <!-- Filters -->
                             <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
                                 <div class="card-title me-auto">Cities</div>
-                                
-                            {{-- <input type="text" class="form-control" placeholder="Search"> --}}
+{{--                                 
+                            <input type="text" class="form-control" placeholder="Search">
 
-                             {{-- <input type="search" class="form-control form-control-sm" placeholder aria-controls="example"> --}}
-
+                             <input type="search" class="form-control form-control-sm" placeholder aria-controls="example"> --}}
+                              
                                 <select class="form-select form-select-sm">
                                     <option selected disabled hidden>Active Cities</option>
                                     <option value="1">Active Orders</option>
@@ -107,6 +113,21 @@
     $(".citiesLi").addClass("activeClass");
     $(".cities").addClass("md-active");
 </script>
+
+<script>
+    $(document).ready(function () {
+        var searchBox = $('#example_filter input');
+        searchBox.addClass('form-control form-control-sm');
+        searchBox.attr('placeholder', 'Search');
+        searchBox.parent().contents().filter(function () {
+            return this.nodeType === 3;
+        }).remove();
+        searchBox.wrap('<div class="custom-search-box"></div>');
+    });
+</script>
+    
+
+
 
 
 @endsection

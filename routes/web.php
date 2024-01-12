@@ -120,12 +120,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin MANAGE VENDORS
    
+    Route::view('pending-vendors', 'admin/vendors/pending-vendors');
+    Route::view('approved-vendors', 'admin/vendors/approved-vendors');
+    Route::view('rejected-vendors', 'admin/vendors/rejected-vendors');
     Route::view('vendor-details', 'admin/vendors/vendor-details');
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
+   
 
-    Route::controller(ManageVendorController::class)->group(function (){
-        Route::get('vendors','index');
-    });
+    // Route::controller(ManageVendorController::class)->group(function (){
+    //     Route::get('vendors','index');
+    // });
 
 
 
@@ -266,10 +270,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
     Route::controller(reviewController::class)->group(function (){
-
        Route::get('pending-reviews','pendingReview');
        Route::get('published-reviews','publishedReview');
-
     });
 
 
@@ -412,8 +414,8 @@ Route::controller(VendorRegistrationController::class)->group(function () {
 Route::controller(CommonLoginController::class)->group(function () {
     Route::post('user-login', 'user_login');
     Route::post('/otp-verify', 'otp_verify_for_register');
-    Route::post('/email-to-mobile', 'email_to_mobile');
-    Route::post('/email-password-exist', 'email_password_exist');
+    Route::post('/number-to-mobile', 'number_to_mobile');
+    Route::post('/number-password-exist', 'number_password_exist');
     Route::post('/email-or-mobile-exist', 'email_or_mobile_exist');
 });
 //     Route::post('/otp-verify','otp_verify_for_register');

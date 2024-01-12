@@ -22,11 +22,11 @@
                 </a>
             </li>
             <li class="manageVendorsLi">
-                <a href="{{URL::asset('admin/vendors')}}" class="nav-link link-dark manageVendors">
+                <a href="{{URL::asset('admin/pending-vendors')}}" class="nav-link link-dark manageVendors">
                     Manage Vendors
                 </a>
             </li>
-            <li class="medicalTourismLi">
+            <!-- <li class="medicalTourismLi">
                 <a href="{{URL::asset('admin/service-provider')}}" class="nav-link link-dark medicalTourism">
                     Manage Medical Tourism
                 </a>
@@ -35,7 +35,7 @@
                 <a href="{{URL::asset('admin/food-suppliers')}}" class="nav-link link-dark manageMDfoods">
                     Manage MDFoods
                 </a>
-            </li>
+            </li> -->
             <li class="contryLi">
                 <a href="{{URL::asset('admin/add-country')}}" class="nav-link link-dark contry">
                     Manage Country
