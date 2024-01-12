@@ -209,9 +209,14 @@ table,
     /* Microsoft Edge */
     color: #979797;
 }
-
+/* 
 .form-select {
     background-image: none;
+} */
+
+.form-control{
+    appearance:auto !important;
+    -webkit-appearance: auto !important;
 }
 
 .nice-select:after {
@@ -1017,8 +1022,8 @@ table td {
 .inner-text {
     position: absolute;
     top: 32px;
-    left: 111px;
-    width: 46px;
+    left: 42%;
+    width: 47px;
 }
 
 .signInCard {
@@ -1463,4 +1468,55 @@ form.admin-form label {
 }
 .top-cards > .promo > .card{
     min-height: 567px !important;
+}
+.scroll-300{
+    overflow-y: scroll; 
+    height:300px;
+}
+.scroll-600{
+    overflow-y: scroll; 
+    height:675px;
+}
+.page-title small{
+    margin-left: 15px;
+}
+.clear-fix{
+    clear: both;
+    margin: 0px 0px 20px 0px;
+}
+.card-active{
+    background-color: #4CDB06;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 15px;
+    padding: 0px 15px;
+    border-radius: 5px;
+    font-size: 13px;
+    line-height: 20px;
+    height: 20px;
+}
+.card-deactive{
+    background-color: #F55C5C;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 15px;
+    padding: 0px 15px;
+    border-radius: 5px;
+    font-size: 13px;
+    line-height: 20px;
+    height: 20px;
+    color: #fff;
+}
+
+.md-btn-48 {
+    width: 48%;
+    height: 42px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    text-align: center;
+    border-radius: 5px;
 }

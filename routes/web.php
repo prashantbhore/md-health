@@ -124,7 +124,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('pending-vendors', 'admin/vendors/pending-vendors');
     Route::view('approved-vendors', 'admin/vendors/approved-vendors');
     Route::view('rejected-vendors', 'admin/vendors/rejected-vendors');
-    Route::view('vendor-details', 'admin/vendors/vendor-details');
+    Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
+    Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
+    Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
    
 

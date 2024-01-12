@@ -2,7 +2,7 @@
 <section class="main-content">
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
-            <div class="page-title">Customers ID #273929</div>
+            <div class="page-title">Customers ID #273929  <small> Reg Date : 26 Jan 2023 11:45am </small></div>
             <a href="{{URL::asset('admin/customers')}}" class="page-title">
                 <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn"> Back Customers
             </a>
@@ -21,6 +21,14 @@
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Last Name</label>
                                 <p>{{!empty($customer->last_name)?$customer->last_name:''}}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="contactNo">Gender</label>
+                                <p>Male - 36 Age</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Date of Birth</label>
+                                <p>18 Oct 1987</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Contact Number</label>
@@ -53,8 +61,8 @@
                 <!-- Logs Activity -->
                 <div class="card card-details mb-3" style="min-height: 380px;">
                     <div class="card-body">
-                        <p class="card-title mb-3">Logs Activity</p>
-                        <div class="table-responsive" style="overflow-x: hidden">
+                        <p class="card-title mb-3">Logins Activity</p>
+                        <div class="table-responsive scroll-300">
                             <table class="table">
                             @if(!empty($logs))
                                @foreach ($logs as $log)
@@ -98,7 +106,7 @@
                             </select>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-3 scroll-600">
                                 @if(!empty($customer->customerOrders))
                                 @foreach ($customer->customerOrders as $orders)
 
