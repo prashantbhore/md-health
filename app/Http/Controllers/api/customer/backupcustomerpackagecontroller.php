@@ -711,10 +711,12 @@ class CustomerPackageController extends BaseController
                 }
             }
 
+            // $data=[];
             if (!empty($update_unique_id)) {
                 return response()->json([
                     'status' => 200,
                     'message' => 'patient information stored successfully in other.',
+                    'id' => ['patient_id' => $purchase_details_data->id],
                 ]);
             } else {
                 return response()->json([
@@ -1050,28 +1052,28 @@ class CustomerPackageController extends BaseController
             'percentage' => '20%',
             'minimum_discount' => 'Min.Requirement',
             'title' => 'twenty_percent',
-            'price' => number_format($twenty_percent, 2), // Replace with actual price format
+            'price' => (string)number_format($twenty_percent, 0, '', ''), // Replace with actual price format
         ];
         $thirty_percent = [
             'id' => 2,
             'percentage' => '30%',
             'minimum_discount' => 'Get 5% Discount',
             'title' => 'thirty_percent',
-            'price' => number_format($purchase_details['thirty_percent'], 2), // Replace with actual price format
+            'price' => (string)number_format($purchase_details['thirty_percent'], 0, '', ''), // Replace with actual price format
         ];
         $fifty_percent = [
             'id' => 3,
             'percentage' => '50%',
             'minimum_discount' => 'Get 8% Discount',
             'title' => 'fifty_percent',
-            'price' => number_format($purchase_details['fifty_percent'], 2), // Replace with actual price format
+            'price' => (string)number_format($purchase_details['fifty_percent'], 0, '', ''), // Replace with actual price format
         ];
         $hundred_percent = [
             'id' => 4,
             'percentage' => '100%',
             'minimum_discount' => 'Get 10% Discount',
             'title' => 'hundred_percent',
-            'price' => number_format($purchase_details['hundred_percent'], 2), // Replace with actual price format
+            'price' => (string)number_format($purchase_details['hundred_percent'], 0, '', ''), // Replace with actual price format
 
         ];
         $discount[] = $twenty_percent;
@@ -1196,6 +1198,7 @@ class CustomerPackageController extends BaseController
 
         if ($purchase_details) {
             $purchase_details['package_id'] = !empty($purchase_details->id) ? $purchase_details->id : '';
+            $purchase_details['purchase_id'] = !empty($request->purchase_id) ? $request->purchase_id : 0;
             // $purchase_details['package_name'] = !empty($purchase_details->package_name) ? $purchase_details->package_name : '';
             // $purchase_details['city_name'] = !empty($purchase_details->city_name) ? $purchase_details->city_name : '';
             $purchase_details['treatment_name'] = !empty($purchase_details->treatment_name) ? $purchase_details->treatment_name : '';
@@ -1334,7 +1337,7 @@ class CustomerPackageController extends BaseController
 
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
-            'sale_price' => 'required',
+            // 'sale_price' => 'required',
             'paid_amount' => 'required',
             'percentage' => 'required',
             'platform_type' => 'required',
@@ -1429,6 +1432,11 @@ class CustomerPackageController extends BaseController
                     ->select(
                         'hotel_id',
                         'vehicle_id',
+                        'tour_id',
+                        'visa_service_price',
+                        'translation_price',
+                        'ambulance_service_price',
+                        'ticket_price',
                         'created_by',
                         'sale_price',
                         'treatment_price',
@@ -1449,6 +1457,7 @@ class CustomerPackageController extends BaseController
                 // $purchase_details['payment_method'] = $request->payment_method;
                 $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
                 $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
+                $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
                 $purchase_details['package_total_price'] = $request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
@@ -1493,7 +1502,7 @@ class CustomerPackageController extends BaseController
                     $payment_details_pending['card_cvv'] = $request->card_cvv;
                     $payment_details_pending['package_id'] = $request->package_id;
                     $payment_details_pending['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
-                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->created_by : '';
+                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->payment_percentage : '';
                     $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount) ? $purchase_details_data->paid_amount : 0;
                     // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
@@ -1551,12 +1560,13 @@ class CustomerPackageController extends BaseController
             }
         } else {
             if (!empty($request->purchase_id)) {
+                // return $request->purchase_id;
                 $purchase_details = [];
                 $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
                 $purchase_details['pending_payment'] = $request->pending_amount;
                 // $package_percentage_price = $request->package_percentage_price;
-                // $purchase_details['purchase_type'] = 'pending';
+                $purchase_details['purchase_type'] = 'completed';
                 $purchase_details['created_by'] = Auth::user()->id;
                 $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
 
@@ -1634,6 +1644,11 @@ class CustomerPackageController extends BaseController
                     ->select(
                         'hotel_id',
                         'vehicle_id',
+                        'tour_id',
+                        'visa_service_price',
+                        'translation_price',
+                        'ambulance_service_price',
+                        'ticket_price',
                         'created_by',
                         'sale_price',
                         'treatment_price',
@@ -1645,25 +1660,7 @@ class CustomerPackageController extends BaseController
                     ->where('id', $request->package_id)
                     ->first();
 
-                // return  $packages;
-                // $purchase_details['package_treatment_price'] = !empty($packages->treatment_price)? $packages->treatment_price:'';
-                // $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price)? $packages->hotel_acommodition_price:'';
-                // $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price)? $packages->hotel_acommodition_price:'';
-                // // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
-                // // $purchase_details['package_total_price'] = $request->package_total_price;
-                // // $purchase_details['transaction_id'] = $request->transaction_id;
-                // // $purchase_details['payment_method'] = $request->payment_method;
-                // $purchase_details['hotel_id'] = !empty($packages->hotel_id)? $packages->hotel_id:'';
-                // $purchase_details['vehicle_id'] = !empty($packages->vehicle_id)? $packages->vehicle_id:'';
-                // $purchase_details['provider_id'] = !empty($packages->created_by)? $packages->vehicle_id:'';
-                // $purchase_details['package_total_price'] = $request->sale_price;
-                // // $purchase_details['payment_percentage'] = $request->package_percentage_price;
-                // $purchase_details['paid_amount'] = $request->paid_amount;
-                // $pending_amount = $request->sale_price - $request->paid_amount;
-                // $purchase_details['pending_payment'] = $pending_amount;
-                // $purchase_details['payment_percentage'] = $request->percentage;
-                // $purchase_details['purchase_type'] = 'pending';
-                // $purchase_details['created_by'] = Auth::user()->id;
+
 
                 // $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
                 $purchase_details['package_treatment_price'] = !empty($packages->treatment_price) ? $packages->treatment_price : 0;
@@ -1675,6 +1672,7 @@ class CustomerPackageController extends BaseController
                 // $purchase_details['payment_method'] = $request->payment_method;
                 $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
                 $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
+                $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
                 // $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
                 // $purchase_details['package_total_price'] = $request->sale_price;
                 // // $purchase_details['payment_percentage'] = $request->package_percentage_price;
@@ -1686,7 +1684,14 @@ class CustomerPackageController extends BaseController
                 $pending_amount = (float)$request->sale_price - (float)$request->paid_amount;
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
-                $purchase_details['purchase_type'] = 'pending';
+                if (!empty($request->percentage)) {
+                    if ($request->percentage == '100%') {
+                        $purchase_details['purchase_type'] = 'completed';
+                    } else {
+                        $purchase_details['purchase_type'] = 'pending';
+                    }
+                }
+
                 $purchase_details['created_by'] = Auth::user()->id;
 
                 $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
@@ -1725,7 +1730,7 @@ class CustomerPackageController extends BaseController
                     $payment_details_pending['card_cvv'] = $request->card_cvv;
                     $payment_details_pending['package_id'] = $request->package_id;
                     $payment_details_pending['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
-                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->created_by : 0;
+                    $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->payment_percentage : 0;
                     $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount) ? $purchase_details_data->paid_amount : 0;
                     // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
@@ -1774,7 +1779,8 @@ class CustomerPackageController extends BaseController
                     return response()->json([
                         'status' => 200,
                         'message' => 'package purchase successfully.',
-                        'order_id' => $CustomerPurchaseDetails->order_id,
+                        // 'order_id' => $CustomerPurchaseDetails->order_id,
+                        'order_id' => ['order_id' => $CustomerPurchaseDetails->order_id]
                     ]);
                 } else {
                     return response()->json([
@@ -1821,6 +1827,8 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
             ->where('md_customer_purchase_details.customer_id', Auth::user()->id)
             ->get();
+
+        // return   $customer_purchase_package_active_list;
 
         foreach ($customer_purchase_package_active_list as $key => $val) {
             $customer_purchase_package_active_list[$key]['purchase_id'] = !empty($val->purchase_id) ? $val->purchase_id : 0;
@@ -2255,6 +2263,7 @@ class CustomerPackageController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
+            'purchase_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -2272,6 +2281,7 @@ class CustomerPackageController extends BaseController
                 // 'md_customer_purchase_details.package_total_price',
                 // 'md_customer_purchase_details.created_at',
                 'md_customer_purchase_details.payment_percentage',
+                'md_customer_purchase_details.treatment_start_date',
                 'md_packages.id as package_id',
                 // 'md_packages.package_unique_no',
                 'md_packages.package_name',
@@ -2285,7 +2295,8 @@ class CustomerPackageController extends BaseController
                 // 'md_product_sub_category.product_sub_category_name',
                 'md_master_cities.city_name',
                 'md_medical_provider_register.company_name',
-                'md_medical_provider_logo.company_logo_image_path'
+                'md_medical_provider_logo.company_logo_image_path',
+                'md_medical_provider_system_users.name as case_manager'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
@@ -2293,23 +2304,47 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
+            ->leftjoin('md_medical_provider_system_users', 'md_customer_purchase_details.case_manager_id', '=', 'md_medical_provider_system_users.id')
             ->where('md_customer_purchase_details.package_id', $request->package_id)
+            ->where('md_customer_purchase_details.id', $request->purchase_id)
             ->first();
 
         // foreach ($customer_purchase_package_active_list as $key => $val) {
-        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? $customer_purchase_package_active_list->purchase_id : 0;
+        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string)$customer_purchase_package_active_list->purchase_id : '';
         $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
         // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
         $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
         $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
         $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
         $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
+        $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
+        $treatmentStartTimestamp = strtotime($treatment_start_date);
+
+        // Get today's date as a UNIX timestamp
+        $todayTimestamp = time();
+
+        // Calculate the difference in seconds between the treatment start date and today's date
+        $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+
+        // Convert the time difference to days
+        $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+        $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? $daysRemaining : '';
+
         $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
         $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
-        $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : 0;
+        $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
+        $customer_purchase_package_active_list['case_manager'] = !empty($customer_purchase_package_active_list->case_manager) ? $customer_purchase_package_active_list->case_manager : '';
         // $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? $customer_purchase_package_active_list->created_at : '';
         // }
+
+        $PatientInformation = PatientInformation::where('status', 'active')
+            ->select('id as patient_id')
+            ->where('purchase_id', $request->purchase_id)
+            ->first();
+
+        $customer_purchase_package_active_list['patient_id'] = !empty($PatientInformation->patient_id) ? $PatientInformation->patient_id : 0;
 
         $services = [];
         if (!empty($customer_purchase_package_active_list->hotel_id)) {
@@ -2378,13 +2413,14 @@ class CustomerPackageController extends BaseController
 
         if ($customer_documents_data) {
             $CustomerDocuments = CustomerDocuments::where('status', 'active')
-                ->select('id', 'customer_document_image_path', 'package_id')
+                ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
                 ->where('customer_id', Auth::user()->id)
                 ->get();
 
             foreach ($CustomerDocuments as $key => $val) {
                 $CustomerDocuments[$key]['package_id'] = !empty($val->package_id) ? $val->package_id : '';
                 $CustomerDocuments[$key]['customer_document_image_path'] = !empty($val->customer_document_image_path) ? url('/') . Storage::url($val->customer_document_image_path) : '';
+                $CustomerDocuments[$key]['customer_document_image_name'] = !empty($val->customer_document_image_name) ? ($val->customer_document_image_name) : '';
             }
         }
 
@@ -2483,12 +2519,12 @@ class CustomerPackageController extends BaseController
             'md_medical_provider_register.mobile_no'
         )
             ->where('md_packages.status', 'active')
-            ->where('md_product_category.status', 'active')
-            ->where('md_product_sub_category.status', 'active')
-            ->join('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->join('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->join('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->join('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            // ->where('md_product_category.status', 'active')
+            // ->where('md_product_sub_category.status', 'active')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->where('md_packages.id', $request->package_id)
             ->first();
 
@@ -2653,9 +2689,23 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        if (!empty($request->purchase_id)) {
+            $CustomerReviews = CustomerReviews::where('status', 'active')
+                ->where('purchase_id', $request->purchase_id)
+                ->first();
+
+            if (!empty($CustomerReviews)) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => "Dear customer, you have already provided a review for this package.",
+                ]);
+            }
+        }
+
         $customer_reviews = [];
         $customer_reviews['customer_id'] = Auth::user()->id;
         $customer_reviews['package_id'] = $request->package_id;
+        $customer_reviews['purchase_id'] = $request->purchase_id;
         $customer_reviews['treatment_reviews'] = $request->treatment_reviews;
         $customer_reviews['acommodation_reviews'] = $request->acommodation_reviews;
         $customer_reviews['transporatation_reviews'] = $request->transporatation_reviews;
@@ -2690,6 +2740,19 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        if (!empty($request->package_id)) {
+            $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
+                ->where('package_id', $request->package_id)
+                ->where('customer_id', Auth::user()->id)
+                ->first();
+            if (!empty($CustomerFavouritePackages)) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'You have already added this package to favourite list.',
+                ]);
+            }
+        }
+
         $add_to_fav = [];
         $add_to_fav['customer_id'] = Auth::user()->id;
         $add_to_fav['package_id'] = $request->package_id;
@@ -2700,6 +2763,36 @@ class CustomerPackageController extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'This Package Added To Favourite.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function remove_from_favourite(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $CustomerFavouritePackages = [];
+        $CustomerFavouritePackages['status'] = 'inactive';
+        $CustomerFavouritePackages['created_by'] = Auth::user()->id;
+
+        $CustomerPurchaseDetails = CustomerFavouritePackages::where('id', $request->id)->update($CustomerFavouritePackages);
+
+        if (!empty($CustomerPurchaseDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Package Removed From Favourite list.',
+
             ]);
         } else {
             return response()->json([

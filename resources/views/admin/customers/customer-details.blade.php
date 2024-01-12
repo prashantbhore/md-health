@@ -54,7 +54,7 @@
                 <div class="card card-details mb-3" style="min-height: 380px;">
                     <div class="card-body">
                         <p class="card-title mb-3">Logs Activity</p>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                             @if(!empty($logs))
                                @foreach ($logs as $log)

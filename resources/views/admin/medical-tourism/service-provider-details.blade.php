@@ -268,7 +268,7 @@
                                     </div> --}}
 
 
-                                    <div class="mb-3 product-card" data-product-id="{{!empty($package->id)?$package->id:'' }}">
+                                    <div class="mb-3 product-card" id="product_".{{!empty($package->id)?$package->id:''}} data-product-id="{{!empty($package->id)?$package->id:'' }}">
                                         <a href="javascript:void(0);" class="text-decoration-none mb-3 delete-product" data-product-id="{{!empty($package->id)?$package->id:''}}">
                                             <span class="deleteCard">Delete Package</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

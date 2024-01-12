@@ -12,13 +12,13 @@
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">
-                                <option selected disabled hidden>Active Orders</option>
-                                <option value="1">Active Orders</option>
-                                <option value="2">Denied Orders</option>
-                                <option value="3">Completed Orders</option>
+                                <option selected>All</option>
+                                <option value="1">Pending</option>
+                                <option value="2">Approved</option>
+                                <option value="3">Rejected</option>
                             </select>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table id="example" class="table">
                                 <thead>
                                     <tr>
@@ -28,112 +28,14 @@
                                         <th>City</th>
                                         {{-- <th>Country</th> --}}
                                         <th>Contact Number</th>
-                                        <th></th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
 
-                                    {{-- <tr>
-                                        <th scope="row">#MD7384</th>
-                                        <td>Memorial Hastaneleri</td>
-                                        <td>3834938493</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/service-provider-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">#MD7384</th>
-                                        <td>Acıbadem Hastaneleri</td>
-                                        <td>4943934943</td>
-                                        <td>Ankara</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/service-provider-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">#MD7384</th>
-                                        <td>Estethica Klinik</td>
-                                        <td>19282929392</td>
-                                        <td>Kocaeli</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/service-provider-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                 
-                                    <tr>
-                                        <th scope="row">#MD7384</th>
-                                        <td>Memorial Hastaneleri</td>
-                                        <td>3834938493</td>
-                                        <td>Istanbul</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/service-provider-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">#MD7384</th>
-                                        <td>Acıbadem Hastaneleri</td>
-                                        <td>4943934943</td>
-                                        <td>Ankara</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/service-provider-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">#MD7384</th>
-                                        <td>Estethica Klinik</td>
-                                        <td>19282929392</td>
-                                        <td>Kocaeli</td>
-                                        <td>Turkiye</td>
-                                        <td>+90 578 555 21 21</td>
-                                        <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/service-provider-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
-                                            </a>
-                                            <a href="#">
-                                                <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr> --}}
-                                 
-
-                           
+                         
                                 </tbody>
                             </table>
                             {{-- <nav aria-label="Page navigation example">

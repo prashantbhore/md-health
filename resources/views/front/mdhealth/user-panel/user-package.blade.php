@@ -191,7 +191,7 @@
                                                     </div>
 
                                                     <div class="treatment-card-btns d-flex justify-content-around gap-3">
-                                                        <a href="{{ url('view-my-active-packages/' . $active_package['package_id']) }}"
+                                                        <a href="{{ url('view-my-active-packages/' . $active_package['package_id'] . '/' . $active_package['purchase_id']) }}"
                                                             id="package-details_{{ $active_package['package_id'] }}"
                                                             class="order-completed-btn w-100 bg-white  fsb-2 border border-black package-details">Package
                                                             Details</a>

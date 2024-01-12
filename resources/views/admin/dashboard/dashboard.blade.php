@@ -117,7 +117,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Best Sales (This Month)</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -196,7 +196,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Recently Customer</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>

@@ -224,6 +224,7 @@
             var percentValue = 20;
             var otherServices;
             var packageId = "{{ $id }}";
+            var patientId = "{{ $patient_id }}";
             var formData = new FormData();
             formData.append('package_id', packageId);
             getData();
@@ -403,7 +404,7 @@
 
 
                 var formData = new FormData();
-                var patientId = "{{ Session::get('Patient_id') }}";
+                // var patientId = "{{ Session::get('Patient_id') }}";
                 // alert(patientId);
                 var pendingAmount = proxyPrice - totalPrice;
                 formData.append('package_id', packageId);

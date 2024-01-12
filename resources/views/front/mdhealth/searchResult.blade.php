@@ -68,11 +68,11 @@
                         </div>
                         <div class="form-floating">
                             <!-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                                                                                                                                                                <option data-display="Select" selected>12 Aug</option>
-                                                                                                                                                                                                <option value="1">One</option>
-                                                                                                                                                                                                <option value="2">Two</option>
-                                                                                                                                                                                                <option value="3">Three</option>
-                                                                                                                                                                                            </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                        <option data-display="Select" selected>12 Aug</option>
+                                                                                                                                                                                                                                                                                                                                                                                        <option value="1">One</option>
+                                                                                                                                                                                                                                                                                                                                                                                        <option value="2">Two</option>
+                                                                                                                                                                                                                                                                                                                                                                                        <option value="3">Three</option>
+                                                                                                                                                                                                                                                                                                                                                                                    </select> -->
                             <!-- <div class="datepickerContainer"> -->
                             <input type="text" class="form-select" name="daterange" value="{{ $date }}" />
                             <!-- </div> -->
@@ -143,9 +143,9 @@
 
 
                                                     <!-- <div class="d-flex gap-1 align-items-baseline mb-1">
-                                                                                                                                        <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
-                                                                                                                                        <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
-                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
+                                                                                                                                                                                                                                                                                                                                <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
+                                                                                                                                                                                                                                                                                                                            </div> -->
                                                 @endforeach
                                             @endif
                                         </div>
@@ -184,7 +184,7 @@
                                                     <button class="btn purchaseBtn"
                                                         id="{{ $package_list['id'] }}"data-bs-toggle="modal">Purchase
                                                         Package</button>
-                                                    <button class="favouriteBtn">
+                                                    <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                                         <img src="{{ 'front/assets/img/white-heart.svg' }}"
                                                             alt="">
                                                     </button>
@@ -580,9 +580,11 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> --}}
     <script type="text/javascript">
         $(document).ready(function() {
+
             var baseUrl = $('#base_url').val();
             var token = "{{ Session::get('login_token') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
             $(".view_btn").click(function() {
                 var id = this.id.split("_")[2];
                 $("#myForm_" + id).submit();
@@ -592,6 +594,42 @@
             $('#other').click(function(e) {
                 e.preventDefault();
                 $('#other_form').submit();
+            });
+
+            $('.favouriteBtn').on('click', function() {
+                var packageId = $(this).attr('id').split("_")[1];
+                // alert(packageId);
+                var formData = new FormData();
+                formData.append('package_id', packageId);
+
+                $.ajax({
+                    url: baseUrl + '/api/md-add-package-to-favourite',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    beforeSend: function() {
+                        $('#fav-btn' + packageId).attr('disabled', true);
+                        $('#fav-btn' + packageId).html(
+                            '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
+                        );
+                    },
+                    success: function(response) {
+                        $('#fav-btn' + packageId).attr('disabled', false);
+                        $('#other').html('<img src="front/assets/img/white-heart.svg" alt="">');
+                        console.log('Success:', response);
+
+                    },
+                    error: function(xhr, status, error) {
+                        $('#fav-btn' + packageId).attr('disabled', false);
+                        $('#other').html('<img src="front/assets/img/white-heart.svg" alt="">');
+                        alert('Error:', error);
+                    }
+                });
             });
 
             $('#other_form').validate({
@@ -639,7 +677,8 @@
 
                 },
                 submitHandler: function(form) {
-                    var formData = $(this).serialize();
+                    var formData = $(form).serialize();
+                    console.log(formData);
                     $.ajax({
                         url: baseUrl + '/api/md-change-patient-information',
                         type: 'POST',
@@ -658,7 +697,9 @@
                             $('#other').attr('disabled', false);
                             // $('#other').html('<span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>');
                             console.log('Success:', response);
-                            window.location.href = $('#hidden_url').val();
+                            var url = $('#hidden_url').val() + '/' + response.id.patient_id;
+
+                            window.location.href = url;
                         },
                         error: function(xhr, status, error) {
                             console.error('Error:', error);
@@ -668,31 +709,11 @@
                 }
             });
 
-            // $('#other_form').submit(function(e) {
-            //     e.preventDefault();
-            //     var formData = $(this).serialize();
-            //     $.ajax({
-            //         url: baseUrl + '/api/md-change-patient-information',
-            //         type: 'POST',
-            //         data: formData,
-            //         headers: {
-            //                 'Authorization': 'Bearer ' + token
-            //         },
-            //         beforeSend:function(){
-            //             $('#other').attr('disabled',true);
-            //             $('#other').html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
-            //         },
-            //         success: function(response) {
-            //             $('#other').attr('disabled',false);
-            //             // $('#other').html('<span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>');
-            //             console.log('Success:', response);
-            //             window.location.href = $('#hidden_url').val();
-            //         },
-            //         error: function(xhr, status, error) {
-            //             console.error('Error:', error);
-            //         }
-            //     });
-            // });
+
+
+
+
+            //md-add-package-to-favourite
 
             $('.purchaseBtn').click(function(e) {
                 e.preventDefault();
@@ -707,17 +728,16 @@
                     $('#loginFirstModal').modal('show');
                 }
             });
-        });
-    </script>
-    <script>
-        $(function() {
-            $('input[name="daterange"]').daterangepicker({
-                opens: 'left',
-                locale: {
-                    format: 'DD/MM/YYYY'
-                }
-                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-            }, function(start, end, label) {});
+
+            $(function() {
+                $('input[name="daterange"]').daterangepicker({
+                    opens: 'left',
+                    locale: {
+                        format: 'DD/MM/YYYY'
+                    }
+                    // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+                }, function(start, end, label) {});
+            });
         });
     </script>
 @endsection

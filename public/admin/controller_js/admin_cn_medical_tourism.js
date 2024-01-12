@@ -43,7 +43,10 @@ $(function (){
             },
           
           
-          
+            {
+                data: "status",
+                name: "status",
+            },
           
             {
                 data: "action",
@@ -355,8 +358,10 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
 
     $(document).ready(function() {
         $(".delete-product").on("click", function(e) {
+          
            
             e.preventDefault();
+          
 
             var confirmed = window.confirm("Are you sure you want to delete this product?");
             
@@ -372,11 +377,11 @@ $(document).on("click", ".medical-provier-gallary-delete", function (){
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
-                url: base_url+'admin/delete-package',
+                url: base_url+'/admin/admin-delete-package',
                 data: { productId: productId },
                 success: function(data) {
                     success_toast("Success", data.message);
-                    productCard.hide();
+                    'product_'+productId.hide();
 
                     var currentUrl = window.location.href;
                     window.history.replaceState({}, document.title, currentUrl);

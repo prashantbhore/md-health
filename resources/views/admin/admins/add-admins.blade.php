@@ -3,6 +3,7 @@
     .error {
         color: red;
     }
+   
 </style>
 <section class="main-content">
     <div class="content-wrapper">
@@ -63,7 +64,7 @@
                                 <option value="3">Completed Orders</option>
                             </select>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table id="example" class="table">
                                 <thead>
                                     <tr>
@@ -171,4 +172,13 @@
     $(".adminsLi").addClass("activeClass");
     $(".admins").addClass("md-active");
 </script>
+<script>
+    $(document).ready(function(){
+        $("th").each(function(){
+            $(this).removeClass('sorting_asc');
+        })
+  
+        
+    })
+  </script>
 @endsection
