@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VendorProductPayment;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class VendorDashboardController extends Controller
 {
@@ -36,6 +37,7 @@ class VendorDashboardController extends Controller
 
     public function latestOrders()
     {
+        // return Auth::user()->id;
 
         $latestOrders =
         DB::table('md_vendor_product_payment')
@@ -52,13 +54,15 @@ class VendorDashboardController extends Controller
         ->leftJoin('md_vendor_product', 'md_vendor_product.id', '=', 'md_vendor_product_payment.product_id')
         ->leftJoin('vendor_logo', 'vendor_logo.vendor_id', '=', 'md_vendor_register.id')
         ->where('md_vendor_product_payment.order_status', '=', 'pending')
-        ->where('md_vendor_register.id', '=', Auth::user()->id)
-        ->where('vendor_logo.status', '=', 'active')
-        ->where('md_customer_registration.status', '=', 'active')
-        ->where('md_vendor_register.status', '=', 'active')
+        ->where('md_vendor_product_payment.vendor_id', '=', Auth::user()->id)
+        // ->where('vendor_logo.status', '=', 'active')
+        // ->where('md_customer_registration.status', '=', 'active')
+        // ->where('md_vendor_register.status', '=', 'active')
         ->orderBy('md_vendor_product_payment.created_at', 'desc') // Assuming 'created_at' is your order creation time column
         ->limit(5)
         ->get();
+
+        // return  $latestOrders;
 
 
         if ($latestOrders->isNotEmpty()) {

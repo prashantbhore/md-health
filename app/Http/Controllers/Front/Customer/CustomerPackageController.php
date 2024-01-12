@@ -30,7 +30,7 @@ class CustomerPackageController extends Controller {
         // $sandbox_base_url = 'https://sandbox-api.iyzipay.com';
         $apiKey = 'sandbox-BOhpAyMe4ewgstkrnmQbhLnrI7kMlTfD';
         $secretKey = 'sandbox-5F4PXtaQLl8nxj4m2r8HRcQ9xT3NCe2S';
-        $options = new Options();
+        $options = new \Iyzipay\Options();
         $options->setApiKey( $apiKey );
         $options->setSecretKey( $secretKey );
         $options->setBaseUrl( 'https://sandbox-api.iyzipay.com' );
