@@ -63,6 +63,30 @@ class PaymentController extends BaseController{
         }
     }
 
+    public function bank_account_list()
+    {
+        $MedicalProviderAccountDetails= MedicalProviderAccountDetails::where('status','active')
+        ->select('id',
+            'medical_provider_id',
+            'account_number',
+            'bank_name')
+        ->where('medical_provider_id', Auth::user()->id)
+        ->first();
+
+        if (!empty($MedicalProviderAccountDetails)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your account details',
+                'data' => $MedicalProviderAccountDetails 
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
    
 
     public function transaction_list_view(){
