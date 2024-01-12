@@ -108,6 +108,10 @@ table,
     color: #000 !important;
 }
 
+.bg-red {
+    background: #F55C5C !important;
+}
+
 .bg-green {
     background: #4cdb06 !important;
 }
@@ -1415,13 +1419,13 @@ table.dataTable.no-footer {
 }
 
 
-.cityPage table.dataTable tbody th:nth-child(4),
+/* .cityPage table.dataTable tbody th:nth-child(4),
 .cityPage table.dataTable tbody td:nth-child(4) {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 
-}
+} */
 
 div.dataTables_wrapper div.dataTables_filter input {
     width: 195px;

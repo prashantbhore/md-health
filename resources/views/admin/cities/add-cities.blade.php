@@ -18,7 +18,7 @@
                             <input type="hidden" name="id" value="{{!empty($city->id)?$city->id:''}}">
 
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <select class="form-control w-100" id="countrySelect" name="country">
                                         <option value="" selected disabled>Select Country</option>
                                         @if(!empty($countries))
@@ -35,7 +35,7 @@
                                     <input type="text" name="city" class="form-control" placeholder="City Name" value="{{!empty($city->city_name)?$city->city_name:''}}">
                                 </div>
 
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <button type="submit" class="btn deactivate-btn w-100">Add City</button>
                                 </div>
                             </div>
