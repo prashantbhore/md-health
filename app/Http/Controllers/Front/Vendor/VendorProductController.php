@@ -58,9 +58,9 @@ class VendorProductController extends Controller
 
             $responseData['vendor_product_image_path'] = $imageData;
             // $imageData=$responseData['vendor_product_image_path'];
-            $responseData = $this->apiService->getData($token, $apiUrl1, $plainArray, $method, $responseData);
+            $responseData = $this->apiService->getDataofmultipleimg($token, $apiUrl1, $plainArray, $method, $responseData);
         } else {
-            $responseData = $this->apiService->getData($token, $apiUrl1, $body, $method);
+            $responseData = $this->apiService->getDataofmultipleimg($token, $apiUrl1, $body, $method);
         }
 
         // $responseData = $this->apiService->getData( $token, $apiUrl1, $body, $method );
