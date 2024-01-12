@@ -398,6 +398,9 @@ Route::middleware('auth:sanctum')->group(function ()
     //Provider account details saved
     Route::post('md-provider-add-bank-account', [PaymentController::class, 'add_provider_account']);
 
+    //
+    Route::get('md-provider-bank-account-list', [PaymentController::class, 'bank_account_list']);
+
     //Provider Transaction List
     Route::get('md-provider-transaction-list', [PaymentController::class, 'transaction_list_view']);
 
