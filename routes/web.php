@@ -120,12 +120,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin MANAGE VENDORS
    
+    Route::view('pending-vendors', 'admin/vendors/pending-vendors');
+    Route::view('approved-vendors', 'admin/vendors/approved-vendors');
+    Route::view('rejected-vendors', 'admin/vendors/rejected-vendors');
     Route::view('vendor-details', 'admin/vendors/vendor-details');
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
+   
 
-    Route::controller(ManageVendorController::class)->group(function (){
-        Route::get('vendors','index');
-    });
+    // Route::controller(ManageVendorController::class)->group(function (){
+    //     Route::get('vendors','index');
+    // });
 
 
 
@@ -506,6 +510,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
         Route::get('md-vendor-active-list', 'active_product_list');
         Route::get('md-vendor-deactive-list', 'deactive_product_list');
         Route::get('/edit-product/{id}', 'edit_product');
+        Route::post('vendor-active-product-search', 'active_vendor_search_products');
+        Route::post('vendor-inactive-product-search', 'inactive_vendor_search_products');
     });
 
     Route::controller(UpdateVendorProfileController::class)->group(function () {
@@ -526,6 +532,7 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 
 Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
 
+Route::any('test', [CustomerPackageController::class, 'test']);
 
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
 
@@ -549,7 +556,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
-    Route::any('test', [CustomerPackageController::class, 'test']);
+    Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');

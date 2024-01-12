@@ -434,6 +434,7 @@
     border: 1.5px solid #D6D6D6 !important;
     transition: 0.15s all;
 }
+
 .section-heading-div .form-check-input {
     background: transparent;
     margin-right: 8px;
@@ -727,6 +728,10 @@ select {
     padding-top: 135px;
 }
 
+.pt-150px {
+    padding-top: 150px;
+}
+
 .pt-60px {
     padding-top: 60px;
 }
@@ -839,10 +844,9 @@ select {
 }
 
 .banner-section {
-    height: 100vh;
     background-color: black;
-    padding-top: 57.8px;
-    padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 250px;
     border-bottom: 3px solid #4cdb06;
 }
 
@@ -860,7 +864,7 @@ select {
     font-family: "CamptonBook";
     color: #fff;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 16px;
     letter-spacing: -0.04em;
 }
@@ -875,7 +879,8 @@ select {
     color: #000002;
     font-size: 15px;
     font-weight: 700;
-    font-family: CamptonBold;
+    font-family: "Campton";
+    font-weight: 400;
     line-height: 16px;
     letter-spacing: -0.04em;
     width: 149px;
@@ -1910,7 +1915,7 @@ select option {
 .multiple-upload-images .preview-img .prev-img-div img {
     height: 100px;
     width: auto;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 
 .multiple-upload-images {
@@ -1955,7 +1960,7 @@ select option {
 
 .multiple-upload-images .preview-img .prev-img-div .clear-btn {
     position: absolute;
-    top: 7px;
+    top: -5px;
     right: -6px;
     background: black;
     padding: 0px 7px;
@@ -3726,4 +3731,30 @@ label.tc-text,
     border-radius: 3px;
     border: 1px solid #CCC;
     margin-right: 8px;
+}
+
+.footer ul li a {
+    color: #878787;
+    font-family: "CamptonBook";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.get-started-btn {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    width: 149px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 70px;
+    background: #4CDB06;
+}
+.get-started-btn:hover {
+    color: #000;
 }

@@ -192,7 +192,7 @@
                                                                 src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                 Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                     ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                    : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                                    : '' }}"
                                                                 type="video/mp4">
                                                             Your browser does not support the video tag.
                                                         </video>
@@ -208,12 +208,12 @@
                                                         <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                         Storage::exists($ProviderImagesVideo->provider_image_path)
                                                             ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                            : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                            : '' }}"
                                                             class="glightbox">
                                                             <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                             Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                 ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                : URL::asset('admin_panel/commonarea/dist/img/default.png') }}"
+                                                                : '' }}"
                                                                 alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
                                                         </a>
                                                         <a href="javascript:void(0);" class="clear-btn"

@@ -67,7 +67,7 @@ class UpdateProfileController extends Controller
         ->select('id','provider_id', 'provider_image_path', 'provider_image_name')
         ->where('provider_id',Auth::guard('md_health_medical_providers_registers')->user()->id)
         ->get();
-
+// dd($ProviderImagesVideos);
         $MedicalProviderLogo=MedicalProviderLogo::where('status','active')
         ->select('id','company_logo_image_path','company_logo_image_name')
         ->where('medical_provider_id',Auth::guard('md_health_medical_providers_registers')->user()->id)
