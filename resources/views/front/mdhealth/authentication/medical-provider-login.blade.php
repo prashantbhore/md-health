@@ -452,7 +452,7 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        $("#otp-btn").attr("disabled", true);
+                        // $("#otp-btn").attr("disabled", true);
                         $("#otp-btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                     },
                     success: function(response) {
