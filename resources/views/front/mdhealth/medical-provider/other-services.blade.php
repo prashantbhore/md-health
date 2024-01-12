@@ -28,7 +28,7 @@
                     @include('front.includes.sidebar')
                 </div>
                 <div class="col-md-9">
-                    <div class="card mb-4">
+                    <div class="card mb-4 other-services">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                             <span>Other Services</span>
                             <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
@@ -36,7 +36,7 @@
                         <div class="card-body">
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
-                                    Acommodition
+                                    <span>Accommodation</span>
                                     <a href="{{ url('add-acommodition') }}"
                                         class="btn add-btn">Add New Acommodition</a>
                                 </h6>
@@ -92,7 +92,7 @@
                             </div>
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
-                                    Transportation
+                                    <span>Transportation</span>
                                     <a href="{{ url('add-new-vehical') }}"
                                         class="btn add-btn">Add New Vehicle</a>
                                 </h6>
@@ -149,7 +149,7 @@
                             </div>
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
-                                    Tour
+                                    <span>Tour</span>
                                     <a href="{{ url('add-tour') }}" class="btn add-btn">Add
                                         New Tour</a>
                                 </h6>

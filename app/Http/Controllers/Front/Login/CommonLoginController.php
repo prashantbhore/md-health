@@ -21,15 +21,15 @@ class CommonLoginController extends Controller {
 
     public function user_login( Request $request ) {
         $request->validate( [
-            'email' => 'required|email',
+            'number' => 'required|number',
             'password' => 'required'
         ] );
-        $email = $request->email;
+        $number = $request->number;
         $password = $request->password;
         $login_type = $request->login_type;
 
         $user_data = array(
-            'email' => $request->get( 'email' ),
+            'number' => $request->get( 'number' ),
             'password' => $request->get( 'password' )
         );
 
@@ -40,7 +40,7 @@ class CommonLoginController extends Controller {
             if ( $user_type == 'medicalprovider' ) {
                 if (
                     Auth::guard( 'md_health_medical_providers_registers' )->attempt( [
-                        'email' => $request->email,
+                        'number' => $request->number,
                         'password' => $request->password,
                         'status' => 'active',
                     ] )
@@ -59,11 +59,11 @@ class CommonLoginController extends Controller {
                     ] );
                     return redirect( 'sms-code' )->with( [
                         // 'error' => 'OTP does not match.',
-                        'email' => $email,
+                        'number' => $number,
                         'password' => $password,
                         'login_type' => $login_type,
                     ] );
-                    // return view( 'front/mdhealth/authentication/sms-code', compact( 'password', 'email' ) );
+                    // return view( 'front/mdhealth/authentication/sms-code', compact( 'password', 'number' ) );
 
                 } else {
                     return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
@@ -72,7 +72,7 @@ class CommonLoginController extends Controller {
 
                 if (
                     Auth::guard( 'md_customer_registration' )->attempt( [
-                        'email' => $request->email,
+                        'number' => $request->number,
                         'password' => $request->password,
                         'status' => 'active',
                     ] )
@@ -91,11 +91,11 @@ class CommonLoginController extends Controller {
                     ] );
                     return redirect( 'sms-code' )->with( [
                         // 'error' => 'OTP does not match.',
-                        'email' => $email,
+                        'number' => $number,
                         'password' => $password,
                         'login_type' => $login_type,
                     ] );
-                    // return view( 'front/mdhealth/authentication/sms-code', compact( 'password', 'email' ) );
+                    // return view( 'front/mdhealth/authentication/sms-code', compact( 'password', 'number' ) );
 
                 } else {
                     return redirect( '/sign-in-web' )->with( 'error', 'Your credencials does not matched.' );
@@ -106,8 +106,9 @@ class CommonLoginController extends Controller {
         }
     }
 
-    public function email_to_mobile( Request $request ) {
-        $mobile_no = CommonUserLoginTable::where( 'email', $request->email )->select( 'mobile_no' )->first();
+    public function number_to_mobile( Request $request ) {
+        // dd($request);
+        $mobile_no = CommonUserLoginTable::where( 'mobile_no', $request->number )->select( 'mobile_no' )->first();
         // dd( $mobile_no );
         if ( !empty( $mobile_no ) ) {
             return $mobile_no;
@@ -117,8 +118,8 @@ class CommonLoginController extends Controller {
         //  }
     }
 
-    public function email_password_exist( Request $request ) {
-        $user_exist = CommonUserLoginTable::where( 'email', $request->email )->first();
+    public function number_password_exist( Request $request ) {
+        $user_exist = CommonUserLoginTable::where( 'mobile_no', $request->number )->first();
 
         // dd( $user_exist );
 
@@ -174,7 +175,7 @@ public function email_or_mobile_exist(Request $request){
         // dd($request);
         $user_datacust = array(
             'platform_type' => 'web',
-            'email' => $request->get('email'),
+            'number' => $request->get('number'),
             'password' => $request->get('password')
         );
         $token = Session::get('login_token');
@@ -182,10 +183,10 @@ public function email_or_mobile_exist(Request $request){
 
         // $otpverify = implode('', $request->input('otp'));
         $user_data = array(
-            'email' => $request->get('email'),
+            'mobile_no' => $request->get('number'),
             'password' => $request->get('password')
         );
-        $email = $request->email;
+        $number = $request->number;
         $password = $request->password;
         $login_type = $request->login_type;
         // dd($request.'<br>'.$otpverify);
@@ -205,14 +206,14 @@ public function email_or_mobile_exist(Request $request){
                 // Session::put('login_token', $responseData['success_token']['token']);
                 if (
                     Auth::guard('md_health_medical_providers_registers')->attempt([
-                        'email' => $request->email,
+                        'mobile_no' => $request->number,
                         'password' => $request->password,
                         'status' => 'active',
                     ])
                 ) {
                     $user_datacust = array(
                         'platform_type' => 'web',
-                        'email' => $request->get('email'),
+                        'mobile_no' => $request->get('number'),
                         'password' => $request->get('password')
                     );
 
@@ -230,11 +231,11 @@ public function email_or_mobile_exist(Request $request){
 
                         if ($otpcheck) {
                             $user_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
-                            $user_email = Auth::guard('md_health_medical_providers_registers')->user()->email;
+                            $user_number = Auth::guard('md_health_medical_providers_registers')->user()->mobile_no;
                             $user = Auth::guard('md_health_medical_providers_registers')->user();
 
                             Session::put('MDMedicalProvider*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('number', $user_number);
                             Session::put('user', $user);
                             return response()->json( [
                                 'status' => 200,
@@ -242,7 +243,7 @@ public function email_or_mobile_exist(Request $request){
                                 'url' => '/medical-provider-dashboard',
                             ] );
                         } else {
-                            dd($user_type);
+                            // dd($user_type);
                             return response()->json( [
                                 'status' => 200,
                                 'message' => 'Credencials not match',
@@ -257,11 +258,11 @@ public function email_or_mobile_exist(Request $request){
 
                         if ($otpcheck) {
                             $user_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
-                            $user_email = Auth::guard('md_health_medical_providers_registers')->user()->email;
+                            $user_number = Auth::guard('md_health_medical_providers_registers')->user()->mobile_no;
                             $user = Auth::guard('md_health_medical_providers_registers')->user();
 
                             Session::put('MDMedicalProvider*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('number', $user_number);
                             Session::put('user', $user);
                             return response()->json( [
                                 'status' => 200,
@@ -295,14 +296,14 @@ public function email_or_mobile_exist(Request $request){
 
                 if (
                     Auth::guard('md_customer_registration')->attempt([
-                        'email' => $request->email,
+                        'phone' => $request->number,
                         'password' => $request->password,
                         'status' => 'active',
                     ])
                 ) {
                     $user_datacust = array(
                         'platform_type' => 'web',
-                        'email' => $request->get('email'),
+                        'phone' => $request->get('number'),
                         'password' => $request->get('password')
                     );
 
@@ -324,11 +325,11 @@ public function email_or_mobile_exist(Request $request){
 
                         if ($otpcheck) {
                             $user_id = Auth::guard('md_customer_registration')->user()->id;
-                            $user_email = Auth::guard('md_customer_registration')->user()->email;
+                            $user_number = Auth::guard('md_customer_registration')->user()->mobile_no;
                             $user = Auth::guard('md_customer_registration')->user();
 
                             Session::put('MDCustomer*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('number', $user_number);
                             Session::put('user', $user);
                             // dd(Session::all());
                             return response()->json( [
@@ -354,11 +355,11 @@ public function email_or_mobile_exist(Request $request){
                         if ($otpcheck) {
                             // dd($otpcheck);
                             $user_id = Auth::guard('md_customer_registration')->user()->id;
-                            $user_email = Auth::guard('md_customer_registration')->user()->email;
+                            $user_number = Auth::guard('md_customer_registration')->user()->phone;
                             $user = Auth::guard('md_customer_registration')->user();
 
                             Session::put('MDCustomer*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('number', $user_number);
                             Session::put('user', $user);
                             return response()->json( [
                                 'status' => 200,
@@ -388,17 +389,17 @@ public function email_or_mobile_exist(Request $request){
                 // $responseData = json_decode($respo, true);
                 // // dd($responseData);
                 // Session::put('login_token', $responseData['success_token']['token']);
-
+// dd($request);
                 if (
                     Auth::guard('md_health_medical_vendor_registers')->attempt([
-                        'email' => $request->email,
+                        'mobile_no' => $request->number,
                         'password' => $request->password,
                         'status' => 'active',
                     ])
                 ) {
                     $user_datacust = array(
                         'platform_type' => 'web',
-                        'email' => $request->get('email'),
+                        'mobile_no' => $request->get('number'),
                         'password' => $request->get('password')
                     );
 
@@ -422,11 +423,11 @@ public function email_or_mobile_exist(Request $request){
                            
                         if ($otpcheck) {
                             $user_id = Auth::guard('md_health_medical_vendor_registers')->user()->id;
-                            $user_email = Auth::guard('md_health_medical_vendor_registers')->user()->email;
+                            $user_number = Auth::guard('md_health_medical_vendor_registers')->user()->mobile_no;
                             $user = Auth::guard('md_health_medical_vendor_registers')->user();
 
                             Session::put('MDMedicalVendor*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('number', $user_number);
                             Session::put('user', $user);
                             // dd(Session::all());
                             return response()->json( [
@@ -452,11 +453,11 @@ public function email_or_mobile_exist(Request $request){
                         if ($otpcheck) {
                             // dd($otpcheck);
                             $user_id = Auth::guard('md_health_medical_vendor_registers')->user()->id;
-                            $user_email = Auth::guard('md_health_medical_vendor_registers')->user()->email;
+                            $user_number = Auth::guard('md_health_medical_vendor_registers')->user()->mobile_no;
                             $user = Auth::guard('md_health_medical_vendor_registers')->user();
 
                             Session::put('MDMedicalVendor*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('number', $user_number);
                             Session::put('user', $user);
                             return response()->json( [
                                 'status' => 200,

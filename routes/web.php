@@ -427,8 +427,8 @@ Route::controller(VendorRegistrationController::class)->group(function () {
 Route::controller(CommonLoginController::class)->group(function () {
     Route::post('user-login', 'user_login');
     Route::post('/otp-verify', 'otp_verify_for_register');
-    Route::post('/email-to-mobile', 'email_to_mobile');
-    Route::post('/email-password-exist', 'email_password_exist');
+    Route::post('/number-to-mobile', 'number_to_mobile');
+    Route::post('/number-password-exist', 'number_password_exist');
     Route::post('/email-or-mobile-exist', 'email_or_mobile_exist');
 });
 //     Route::post('/otp-verify','otp_verify_for_register');
@@ -545,6 +545,7 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 
 Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
 
+Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 Route::any('test', [CustomerPackageController::class, 'test']);
 
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
@@ -569,7 +570,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
-    Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');

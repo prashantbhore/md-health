@@ -31,9 +31,9 @@
                             <input type="hidden" name="platform_type" value="web">
                             <input type="hidden" name="login_type" value="login">
                             <div class="mb-3">
-                                <label for="E-mail" class="form-label">E-mail</label>
-                                <input type="text" class="form-control" name="email" id="email"
-                                    placeholder="E-mail">
+                                <label for="number" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" name="number" id="number"
+                                    placeholder="Phone Number">
                                 {{-- --}}
                             </div>
                             <div class="mb-3 hide-eye-div">
@@ -48,7 +48,7 @@
                                     Remember Me
                                 </label>
                             </div>
-                            <input type="hidden" id="number" class="form-control" placeholder="+91 ********">
+                            {{-- <input type="hidden" id="number" class="form-control" placeholder="+91 ********"> --}}
                             <div id="recaptcha-container"></div>
                             <span id="error" class="text-danger"></span>
                             <div>
@@ -124,7 +124,7 @@
                 </script>
 
 
-                <h6 class="mb-0 d-flex align-items-center gap-1">
+                <h6 class="mb-0 d-flex align-items-center gap-1 df-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
                             <g clip-path="url(#clip0_0_28401)">
@@ -140,7 +140,7 @@
                         </svg>
                          <span class="text-danger" id="timer">32 sec</span>
                     </h6>
-                    <div>
+                    <div class="text-center">
                          <a href="#" class="text-secondary" id="resendotp">Resend Code In</a>
                     </div>
 
@@ -210,18 +210,18 @@
         $(document).ready(function() {
             $('#loginForm').validate({
                 rules: {
-                    email: {
+                    number: {
                         required: true,
-                        email: true
+                        // email: true
                     },
                     password: {
                         required: true
                     }
                 },
                 messages: {
-                    email: {
-                        required: "Please enter your email",
-                        email: "Please enter a valid email address"
+                    number: {
+                        required: "Please enter your Phone Number with country code",
+                        // email: "Please enter a valid email address"
                     },
                     password: {
                         required: "Please enter your password"
@@ -234,44 +234,44 @@
             });
         });
 
-        $(document).on('keyup', '#email', function() {
-            var base_url = $('#base_url').val();
-            var email = $(this).val();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            });
-            $.ajax({
-                url: base_url + '/email-to-mobile',
-                method: 'POST',
-                data: {
-                    email: email
-                },
-                success: function(response) {
-                    console.log(response.mobile_no);
-                    if (response.mobile_no !== undefined) {
-                        // alert(response.mobile_no);
-                        $('#number').val(response.mobile_no);
-                        $('#error').text('');
-                    } else {
-                        $('#number').val('');
-                        $('#error').text('Credentials do not match');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        });
+        // $(document).on('blur', '#number', function() {
+        //     var base_url = $('#base_url').val();
+        //     var number = $(this).val();
+        //     var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': csrfToken
+        //         }
+        //     });
+        //     $.ajax({
+        //         url: base_url + '/number-to-mobile',
+        //         method: 'POST',
+        //         data: {
+        //             number: number
+        //         },
+        //         success: function(response) {
+        //             console.log(response.mobile_no);
+        //             if (response.mobile_no !== undefined) {
+        //                 // alert(response.mobile_no);
+        //                 $('#number').val(response.mobile_no);
+        //                 $('#error').text('');
+        //             } else {
+        //                 $('#number').val('');
+        //                 $('#error').text('Credentials do not match');
+        //             }
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error(error);
+        //         }
+        //     });
+        // });
 
         $(document).on('click', '#signup', function() {
             var base_url = $('#base_url').val();
             // alert(base_url);
 
             if ($('#loginForm').valid()) {
-                var email = $('#email').val();
+                var number = $('#number').val();
                 var password = $('#password').val();
 
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -281,10 +281,10 @@
                     }
                 });
                 $.ajax({
-                    url: base_url + '/email-password-exist',
+                    url: base_url + '/number-password-exist',
                     method: 'POST',
                     data: {
-                        email: email,
+                        number: number,
                         password: password
                     },
                     beforeSend: function() {
@@ -352,7 +352,7 @@
                     var user = result.user;
                     $("#successOtpAuthot").text("Auth is successful");
                     $("#successOtpAuthot").show();
-                    var email = $('#email').val();
+                    var number = $('#number').val();
                     var password = $('#password').val();
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     $.ajaxSetup({
@@ -365,9 +365,9 @@
                         url: base_url + '/otp-verify',
                         method: 'POST',
                         data: {
-                            email: email, // Use the correct email variable here
-                            login_type: 'login', // Use the correct email variable here
-                            password: password // Use the correct email variable here
+                            number: number, // Use the correct number variable here
+                            login_type: 'login', // Use the correct number variable here
+                            password: password // Use the correct number variable here
                         },
                         success: function(response) {
                             $('#verifyBtn').attr('enable', true);

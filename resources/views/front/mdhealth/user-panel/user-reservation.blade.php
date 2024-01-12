@@ -47,7 +47,7 @@
         text-align: center;
         font-family: Campton;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.56px;
@@ -65,7 +65,7 @@
         text-align: center;
         font-family: Campton;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
 
@@ -82,7 +82,7 @@
         text-align: center;
         font-family: Campton;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.56px;
@@ -101,7 +101,7 @@
         color: #FFF;
         font-family: Campton;
         font-size: 16px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -1.12px;
@@ -117,7 +117,7 @@
         color: #000;
         font-family: Campton;
         font-size: 13px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.52px;
@@ -128,7 +128,7 @@
         color: #000;
         font-family: Campton;
         font-size: 20px;
-        font-style: normal;
+        
         font-weight: 600;
         line-height: normal;
         letter-spacing: -0.8px;
@@ -138,7 +138,7 @@
         color: #000;
         font-family: Campton;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: normal;
         /* letter-spacing: -0.56px; */
@@ -148,7 +148,7 @@
         color: #000;
         font-family: Campton;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.56px;
@@ -158,7 +158,7 @@
         color: #000;
         font-family: Campton;
         font-size: 16px;
-        font-style: normal;
+        
         font-weight: 600;
         line-height: normal;
         letter-spacing: -0.64px;
@@ -168,7 +168,7 @@
         color: #000;
         font-family: Campton;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.56px;
@@ -178,7 +178,7 @@
         color: #000;
         font-family: Campton;
         font-size: 12px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.48px;
@@ -188,7 +188,7 @@
         color: #000002;
         font-family: Campton;
         font-size: 16px;
-        font-style: normal;
+        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.64px;
@@ -198,7 +198,7 @@
         color: #979797;
         font-family: Campton;
         font-size: 16px;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.64px;
@@ -209,7 +209,7 @@
         text-align: center;
         font-family: Campton;
         font-size: 23px;
-        font-style: normal;
+        
         font-weight: 700;
         line-height: normal;
         letter-spacing: -0.92px;
@@ -219,7 +219,7 @@
         color: #000;
         font-family: Campton;
         font-size: 16px;
-        font-style: normal;
+        
         font-weight: 700;
         line-height: normal;
         letter-spacing: -1.12px;
@@ -229,7 +229,7 @@
         color: #F31D1D;
         font-family: Campton;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 700;
         line-height: normal;
         letter-spacing: -0.56px;
@@ -247,7 +247,7 @@
         text-align: center;
         font-family: Campton;
         font-size: 13px;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.52px;
