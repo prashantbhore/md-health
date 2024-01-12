@@ -38,6 +38,8 @@
 
 $(function (){
     var table = $("#example").DataTable({
+        bFilter: false,
+        ordering: false,
         processing: false,
         serverSide: true,
         paging: true,

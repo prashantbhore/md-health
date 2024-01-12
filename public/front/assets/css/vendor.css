@@ -237,8 +237,8 @@ select option {
 
 .multiple-upload-images .preview-img .prev-img-div img {
     height: 100px;
-    width: auto;
-    margin-top: 15px;
+    width: 150px;
+    margin-top: 0px;
 }
 
 .multiple-upload-images {
@@ -255,7 +255,7 @@ select option {
 
 .multiple-upload-images .preview-img .prev-img-div .clear-btn {
     position: absolute;
-    top: 7px;
+    top: -5px;
     right: -6px;
     background: black;
     padding: 0px 7px;
@@ -270,7 +270,8 @@ select option {
 
 .multiple-upload-images .preview-img {
     display: flex;
-    gap: 10px;
+    gap: 11px;
+    flex-wrap: wrap;
 }
 
 .input-icon-div {

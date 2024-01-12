@@ -3,16 +3,23 @@
 @extends('front.layout.layout2')
 @section('content')
     <style>
-        .no-data {
-            border: solid #b8b8b8 1px;
-            height: 150px;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 20px;
-            line-height: 150px;
-            font-size: 25px;
-            color: #a0a0a0;
-        }
+     .no-data {
+        height: 150px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        border: 1px solid #F6F6F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        background: #F6F6F6;
+    }
+
+    
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -28,17 +35,17 @@
                         </h5>
                         <div class="card-body">
                             <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
-                                <p class="mb-0 fsb-2 fw-600">Active Packages</p>
-                                <h3 class="my-0 fsb-2 fw-600" id="countsofpack">0</h3>
+                                <p class="my-0">Active Packages</p>
+                                <h3 class="my-0" id="countsofpack">0</h3>
                             </div>
                             <a href="{{ url('medical-packages-view') }}"
                                 class="black-plate bg-black d-flex align-items-center justify-content-between mb-3">
-                                <p class="mb-0 fsb-2 fw-600">Add New Packages</p>
-                                <h3 class="my-0 fsb-2 fw-600">+</h3>
+                                <p class="my-0">Add New Packages</p>
+                                <h3 class="my-0">+</h3>
                             </a>
                             <div
                                 class="green-plate bg-green text-green d-flex align-items-center justify-content-between mb-3">
-                                <p class="mb-0 fsb-2 fw-600">Create Campaign</p>
+                                <p class="my-0">Create Campaign</p>
                             </div>
                         </div>
                     </div>

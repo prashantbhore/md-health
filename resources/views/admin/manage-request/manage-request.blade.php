@@ -90,7 +90,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Pending Request</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -131,7 +131,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Completed Request</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                         <table class="table">
                                 <thead>
                                     <tr>

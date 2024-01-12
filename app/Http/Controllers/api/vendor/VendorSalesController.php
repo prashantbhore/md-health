@@ -214,26 +214,82 @@ class VendorSalesController extends BaseController
 
 
 
-public function searchSales(Request $request)
+public function searchSalesActive(Request $request)
 {
-
-    $validator = Validator::make($request->all(),[
+    $validator = Validator::make($request->all(), [
         'search_query' => 'required',
     ]);
 
-    if ($validator->fails()){
+    if ($validator->fails()) {
         return $this->sendError('Validation Error.', $validator->errors());
     }
 
-  
-
-     $vendorId = Auth::user()->id;
-
-   // $vendorId = 5;
+    $vendorId = Auth::user()->id;
 
     $query = VendorProductPayment::where('vendor_id', $vendorId);
 
-   
+    $searchQuery = $request->search_query;
+    if ($searchQuery) {
+        $query->where(function ($subquery) use ($searchQuery) {
+            $subquery->where('order_id', 'like', "%$searchQuery%")
+                ->orWhereHas('customer', function ($customerSubquery) use ($searchQuery) {
+                    $customerSubquery->where('full_name', 'like', "%$searchQuery%");
+                })
+                ->orWhereHas('product', function ($productSubquery) use ($searchQuery) {
+                    $productSubquery->where('product_name', 'like', "%$searchQuery%");
+                });
+        });
+    }
+
+    // Add the condition for order_status being "active" or "pending"
+    $query->whereIn('order_status', ['active', 'pending']);
+
+    $orders = $query->with(['customer', 'product'])->get();
+
+
+// Process the $orders variable as needed
+
+    if ($orders->isNotEmpty()) {
+        $selectedData = [];
+        foreach ($orders as $order) {
+            $selectedData[] = [
+                'order_id' => !empty($order->id)?$order->id:'',
+                'order_unique_id' => !empty($order->order_id)?$order->order_id:'',
+                'customer_name' => !empty($order->customer->full_name)?$order->customer->full_name:'',
+                'product_name' => !empty($order->product->product_name)?$order->product->product_name:'',
+                'order_status' => !empty($order->order_status)?$order->order_status:'',
+                'total_price' => !empty($order->amount)?$order->amount:'',
+            ];
+        }
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Sales active list Found',
+            'sales_list' => $selectedData,
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'No Sales Found',
+        ]);
+    }
+}
+
+
+public function searchSalesCompleted(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'search_query' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return $this->sendError('Validation Error.', $validator->errors());
+    }
+
+    $vendorId = Auth::user()->id;
+
+    $query = VendorProductPayment::where('vendor_id', $vendorId);
+
     $searchQuery = $request->input('search_query');
     if ($searchQuery) {
         $query->where(function ($subquery) use ($searchQuery) {
@@ -247,25 +303,26 @@ public function searchSales(Request $request)
         });
     }
 
-    $orders = $query->with(['customer', 'product'])->get();
+    // Add the condition for order_status being "active" or "pending"
+    $query->where('order_status', 'completed');
 
+    $orders = $query->with(['customer', 'product'])->get();
     if ($orders->isNotEmpty()) {
         $selectedData = [];
-
         foreach ($orders as $order) {
             $selectedData[] = [
-                'order_id' => $order->id,
-                'order_unique_id' => $order->order_id,
-                'customer_name' => $order->customer->full_name,
-                'product_name' => $order->product->product_name,
-                'order_status' => $order->order_status,
-                'total_price' => $order->amount,
+                'order_id' => !empty($order->id)?$order->id:'',
+                'order_unique_id' => !empty($order->order_id)?$order->order_id:'',
+                'customer_name' => !empty($order->customer->full_name)?$order->customer->full_name:'',
+                'product_name' => !empty($order->product->product_name)?$order->product->product_name:'',
+                'order_status' => !empty($order->order_status)?$order->order_status:'',
+                'total_price' => !empty($order->amount)?$order->amount:'',
             ];
         }
 
         return response()->json([
             'status' => 200,
-            'message' => 'Sales Found',
+            'message' => 'Sales completed list Found',
             'sales_list' => $selectedData,
         ]);
     } else {
@@ -277,24 +334,62 @@ public function searchSales(Request $request)
 }
 
 
+public function searchSalesCancelled(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'search_query' => 'required',
+    ]);
 
+    if ($validator->fails()) {
+        return $this->sendError('Validation Error.', $validator->errors());
+    }
 
+    $vendorId = Auth::user()->id;
 
+    $query = VendorProductPayment::where('vendor_id', $vendorId);
 
+    $searchQuery = $request->input('search_query');
+    if ($searchQuery) {
+        $query->where(function ($subquery) use ($searchQuery) {
+            $subquery->where('order_id', 'like', "%$searchQuery%")
+                ->orWhereHas('customer', function ($customerSubquery) use ($searchQuery) {
+                    $customerSubquery->where('full_name', 'like', "%$searchQuery%");
+                })
+                ->orWhereHas('product', function ($productSubquery) use ($searchQuery) {
+                    $productSubquery->where('product_name', 'like', "%$searchQuery%");
+                });
+        });
+    }
 
+    // Add the condition for order_status being "active" or "pending"
+    $query->where('order_status', 'cancelled');
 
+    $orders = $query->with(['customer', 'product'])->get();
+    if ($orders->isNotEmpty()) {
+        $selectedData = [];
+        foreach ($orders as $order) {
+            $selectedData[] = [
+                'order_id' => !empty($order->id)?$order->id:'',
+                'order_unique_id' => !empty($order->order_id)?$order->order_id:'',
+                'customer_name' => !empty($order->customer->full_name)?$order->customer->full_name:'',
+                'product_name' => !empty($order->product->product_name)?$order->product->product_name:'',
+                'order_status' => !empty($order->order_status)?$order->order_status:'',
+                'total_price' => !empty($order->amount)?$order->amount:'',
+            ];
+        }
 
-
-
-
-
-
-
-
-
-
-
-
+        return response()->json([
+            'status' => 200,
+            'message' => 'Sales cancelled list Found',
+            'sales_list' => $selectedData,
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'No Sales Found',
+        ]);
+    }
+}
 
 
 
