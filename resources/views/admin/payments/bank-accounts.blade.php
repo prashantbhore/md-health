@@ -15,7 +15,7 @@
                             <div class="card-title me-auto">MD Bank Accounts</div>
                             <div data-bs-toggle="modal" data-bs-target="#addNewBankAccountModal" class="btn btn-sm bg-black text-green px-3">+ Add New Bank Account</div>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>

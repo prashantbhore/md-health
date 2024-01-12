@@ -282,6 +282,13 @@ Route::middleware('auth:sanctum')->group(function ()
 
     //customer-upload-documents
     Route::post('md-customer-upload-documents', [CustomerPackageController::class, 'customer_upload_documents']);
+    
+    Route::get('md-customer-documents-list', [CustomerPackageController::class, 'customer_documents_list']);
+
+    //customer-remove-documents
+    Route::post('md-customer-remove-documents', [CustomerPackageController::class, 'customer_remove_documents']);
+
+
 
     //customer-pay-now
     Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_pay_now']);
@@ -319,6 +326,7 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('vendor-product-view', 'vendor_product_view');
         Route::post('md-vendor-product-active-to-deactive', 'product_active_to_deactive');
         Route::post('md-vendor-product-deactive-to-active', 'product_deactive_to_active');
+        Route::post('md-delete-vendor-images-videos', 'delete_vendor_images_videos');
 
         // Route::post('/products/bulk-import','addProductsBulk');
     });
@@ -466,7 +474,9 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::get('completed-sales-lists', 'completedSales');
         Route::get('cancelled-sales-lists', 'cancelledSales');
         Route::post('order-view', 'salesView');
-        Route::post('search-sales', 'searchSales');
+        Route::post('search-sales-active', 'searchSalesActive');
+        Route::post('search-sales-completed', 'searchSalesCompleted');
+        Route::post('search-sales-cancelled', 'searchSalesCancelled');     
     });
 
 

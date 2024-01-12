@@ -52,7 +52,7 @@
             <div class="card card-details mb-3">
                 <div class="card-body">
                     <p class="card-title mb-3">Admin Logs Activity</p>
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overflow-x: hidden">
                         <table class="table">
                             <tr>
                                 <td scope="row">Login</td>

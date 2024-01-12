@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Pending Food Supliers</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -49,7 +49,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Active Food Supliers</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>

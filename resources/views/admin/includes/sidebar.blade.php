@@ -36,6 +36,11 @@
                     Manage MDFoods
                 </a>
             </li>
+            <li class="contryLi">
+                <a href="{{URL::asset('admin/add-country')}}" class="nav-link link-dark contry">
+                    Manage Country
+                </a>
+            </li>
             <li class="citiesLi">
                 <a href="{{URL::asset('admin/add-cities')}}" class="nav-link link-dark cities">
                     Manage Cities

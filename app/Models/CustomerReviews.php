@@ -26,4 +26,20 @@ class CustomerReviews extends Model
         'created_by',
         'modified_by',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Packages::class,'package_id','id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(CustomerRegistration::class,'customer_id','id');
+    }
+
+
+
+    
+
+
 }

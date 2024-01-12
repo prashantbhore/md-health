@@ -65,7 +65,7 @@
                                 <option value="3">Completed Orders</option>
                             </select>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>
