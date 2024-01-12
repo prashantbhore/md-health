@@ -86,7 +86,7 @@
     </div>
 
     <!-- SECTION 2 -->
-    <div class="section-2 bg-f6">
+    <div class="section-2 bg-f6 pb-5">
         <div class="container">
             <div class="text-center">
                 <h2 class="titleClass">Your <span style="color: #08fc34">search</span> results</h2>
