@@ -19,7 +19,7 @@
         color: #000;
         font-family: Campton;
         font-size: 20px;
-        font-style: normal;
+        
         font-weight: 600;
         line-height: normal;
         letter-spacing: -0.8px;
@@ -29,7 +29,7 @@
         color: #000;
         font-family: CamptonBook;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.56px;
@@ -39,13 +39,14 @@
         color: #4CDB06;
         font-family: Campton;
         font-size: 18px;
-        font-style: normal;
         font-weight: 600;
         line-height: normal;
         letter-spacing: -0.72px;
     }
 
     .t_price_sm {
+        color: #4CDB06;
+        font-family: Campton;
         font-size: 12px;
         letter-spacing: -0.48px;
     }

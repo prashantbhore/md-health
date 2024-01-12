@@ -985,7 +985,7 @@ select {
     text-align: center;
     font-family: Campton;
     font-size: 17px;
-    font-style: normal;
+    
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.68px;
@@ -1846,7 +1846,7 @@ select option {
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-style: normal;
+    
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.4px;
@@ -2576,7 +2576,7 @@ span.popup-msg.active {
     color: #000;
     font-family: Campton;
     font-size: 16px;
-    font-style: normal;
+    
     font-weight: 500;
     line-height: normal;
     letter-spacing: -1.12px;
@@ -2737,7 +2737,7 @@ span.popup-msg.active {
     color: #FFF;
     font-family: Campton;
     font-size: 30px;
-    font-style: normal;
+    
     font-weight: 500;
     line-height: normal;
     margin-bottom: 8px;
@@ -2748,7 +2748,7 @@ span.popup-msg.active {
     color: #FFF;
     font-family: Campton;
     font-size: 20px;
-    font-style: normal;
+    
     font-weight: 500;
     line-height: normal;
     margin-bottom: 0;
@@ -3828,7 +3828,7 @@ label.tc-text,
     color: #000;
     font-family: Campton;
     font-size: 20px;
-    font-style: normal;
+    
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.8px;
