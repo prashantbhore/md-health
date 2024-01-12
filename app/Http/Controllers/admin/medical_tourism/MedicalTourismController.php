@@ -114,6 +114,12 @@ class MedicalTourismController extends Controller
                   return ucfirst($row->mobile_no);
                   }
               })
+
+              ->addColumn('status', function ($row){
+                if(!empty($row->status)){
+                return ucfirst($row->status);
+                }
+            })
   
              
         //       ->addColumn('action', function ($row) {
@@ -134,7 +140,10 @@ class MedicalTourismController extends Controller
           
           ->addColumn('action', function ($row){
        
-            $actionBtn= '<div class="text-end d-flex align-items-center justify-content-end gap-3">
+            $actionBtn= '
+           
+            
+            <div class="text-end d-flex align-items-center justify-content-end gap-3">
             <a href="' . route('medical_tourism.details', ['id' => Crypt::encrypt($row->id)]) . '" class="btn btn-info btn-xs" title="View">
             <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
         </a>

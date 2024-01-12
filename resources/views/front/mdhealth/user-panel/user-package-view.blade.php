@@ -86,16 +86,12 @@
                 }
             }
         }
-
+        $pending_percent = 0;
         if (!empty($data['payment_percentage'])) {
             $pending_percent_raw = strval(100 - explode('%', $data['payment_percentage'])[0]);
             if ($pending_percent_raw != 0) {
-                $pending_percent = $pending_percent . '%';
-            } else {
-                $pending_percent = 0;
+                $pending_percent = $pending_percent_raw . '%';
             }
-        } else {
-            $pending_percent = 0;
         }
         if (!empty($data['created_at'])) {
             $payment_time_and_date = explode('T', $data['created_at'])[0] . ' | ' . explode('T', explode('.', $data['created_at'])[0])[1];

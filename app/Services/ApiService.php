@@ -14,7 +14,7 @@ class ApiService {
 
         if ( $env == 'https' ) {
 
-            $headers = [];
+        $apiRequest = Http::withHeaders($headers);
 
             if ( $token ) {
                 $headers[ 'Authorization' ] = 'Bearer ' . $token;

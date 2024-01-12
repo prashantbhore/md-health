@@ -22,9 +22,12 @@
                             <p class="mb-0">Add New Products</p>
                             <h3 class="mb-0">+</h3>
                         </a>
-                        <div class="green-plate bg-green text-green d-flex align-items-center justify-content-between mb-3">
-                            <p class="mb-0">Import in bulk</p>
-                            <img src="{{asset('front/assets/img/import.svg')}}" alt="">
+                        
+                        <div>
+                            <label for="bulkimport" class="green-plate bg-green text-white d-flex align-items-center justify-content-between mb-3">
+                                <input type="file" class="w-100" id="bulkimport" hidden=""> Import in bulk
+                                <img src="{{asset('front/assets/img/import.svg')}}" alt="">
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -52,7 +55,7 @@
 
                             <div class="filter-div">
                                 <div class="search-div">
-                                    <input type="text" placeholder="Search">
+                                    <input type="text" placeholder="Search" id="searchpackage">
                                 </div>
                                 {{-- <div class="list-div">
                                     <select name="" id="">
@@ -182,8 +185,9 @@
                 },
                 success: function(response) {
                     // if (response.status == 200) {
-                    $('#deactivelist').html(response);
+                    $('#deactivelist').hide();
                     $('#activelist').html(response);
+                    $('#activelist').show();
                     console.log('Active tab API response:', response);
                     // }
                     fetchActiveCount();
@@ -208,6 +212,7 @@
                     // if (response.status == 200) {
                     $('#activelist').hide();
                     $('#deactivelist').html(response);
+                    $('#deactivelist').show();
                     console.log('Deactive tab API response:', response);
                     // }
                     fetchDeactiveCount();
@@ -238,56 +243,67 @@
             }
         });
         // Search package function
-        // $('#searchpackage').on('keyup', function() {
-        //     var package = $(this).val().trim();
-        //     var type = $('.nav-link[aria-selected="true"]').attr('aria-controls') === 'user' ?
-        //         'active' : 'deactive';
+        $('#searchpackage').on('keyup', function() {
+            var search_query = $(this).val().trim();
+            var type = $('.nav-link[aria-selected="true"]').attr('aria-controls') === 'user' ?
+                'active' : 'deactive';
 
-        //     if (package) {
-        //         var url = (type === 'active') ? base_url + '/md-packages-active-list-search' :
-        //             base_url + '/md-packages-inactive-list-search';
+            if (search_query) {
+                var url = (type === 'active') ? base_url + '/vendor-active-product-search' :
+                    base_url + '/vendor-inactive-product-search';
 
-        //         $.ajax({
-        //             url: url,
-        //             type: 'POST',
-        //             data: {
-        //                 package_name: package
-        //             },
-        //             headers: {
-        //                 'X-CSRF-TOKEN': token,
-        //                 'Authorization': 'Bearer ' + bearer_token
-        //             },
-        //             success: function(response) {
-        //                 if (response) {
-        //                     if (type === 'active') {
-        //                         $('#activelist').html(response);
-        //                     } else {
-        //                         $('#deactivelist').html(response);
-        //                     }
-        //                 } else {
-        //                     if (type === 'active') {
-        //                         $('#activelist').html('<h3>No Data Found</h3>');
-        //                     } else {
-        //                         $('#deactivelist').html('<h3>No Data Found</h3>');
-        //                     }
-        //                 }
-        //             },
-        //             error: function(xhr, status, error) {
-        //                 console.error(xhr.responseText);
-        //             }
-        //         });
-        //     } else {
-        //         if (type === 'active') {
-        //             fetchActiveDiv();
-        //         } else {
-        //             fetchDeactiveDiv();
-        //         }
-        //     }
-        // });
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        search_query: search_query
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Authorization': 'Bearer ' + bearer_token
+                    },
+                    success: function(response) {
+                        // console.log(response);
+                        if (response) {
+                            if (type === 'active') {
+                                    $('#activelist').hide();
+                                    $('#deactivelist').hide();
+                                    $('#activelist').html(response);
+                                    $('#activelist').show();
+                                } else {
+                                    $('#deactivelist').hide();
+                                    $('#activelist').hide();
+                                    $('#deactivelist').html(response);
+                                    $('#deactivelist').show();
+                                }
+                        } else {
+                            if (type === 'active') {
+                                $('#activelist').html('<h3>No Data Found</h3>');
+                            } else {
+                                $('#deactivelist').html('<h3>No Data Found</h3>');
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        if (type === 'active') {
+                                $('#activelist').html('<h3>No Data Found</h3>');
+                            } else {
+                                $('#deactivelist').html('<h3>No Data Found</h3>');
+                            }
+                    }
+                });
+            } else {
+                if (type === 'active') {
+                    fetchActiveDiv();
+                } else {
+                    fetchDeactiveDiv();
+                }
+            }
+        });
     });
 </script>
 
-{{-- <script>
+<script>
     function change_status(id, type) {
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -296,9 +312,9 @@
         var url = '';
 
         if (type === 'active') {
-            url = base_url + '/api/md-activate-to-deactivate-packages';
+            url = base_url + '/api/md-vendor-product-active-to-deactive';
         } else {
-            url = base_url + '/api/md-deactivate-to-activate-packages';
+            url = base_url + '/api/md-vendor-product-deactive-to-active';
         }
 
         $.ajax({
@@ -351,7 +367,7 @@
         // Detach the package element and append it to the target tab
         $(targetTabId + ' .tab-content').append(packageElement.detach());
     }
-</script> --}}
+</script>
 
 {{-- <script>
     $(document).ready(function() {
@@ -365,9 +381,9 @@
             var url = '';
 
             if (type === 'active') {
-                url = base_url + '/api/md-packages-active-list-search';
+                url = base_url + '/api/vendor-active-product-search';
             } else {
-                url = base_url + '/api/md-packages-inactive-list-search';
+                url = base_url + '/api/vendor-inactive-product-search';
             }
             if (package) {
                 $.ajax({
