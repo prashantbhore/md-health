@@ -65,7 +65,7 @@
                                 
                         
 
-                                <select id="country_status" class="form-select form-select-sm">
+                                <select id="status" class="form-select form-select-sm">
                                     <option selected >All</option>
                                     <option value="1">Active </option>
                                     <option value="1">Deactive </option>

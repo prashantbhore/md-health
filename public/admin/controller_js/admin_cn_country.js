@@ -94,6 +94,19 @@ function reload_table() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).on("click", ".city-delete", function (){
 
 var id = $(this).data("id");
