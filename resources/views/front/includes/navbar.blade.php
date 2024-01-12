@@ -21,10 +21,10 @@
     }
 </style>
 
-<nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-3" style="background-color: black;">
+<nav id="mdHealth" class="navbar navbar-expand-lg navbar-light md-navbar py-4" style="background-color: black;">
     <div class="container p-0">
         <!-- Logo -->
-        <a class="navbar-brand" style="padding-bottom: 0.8rem;" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ URL::asset('admin/assets/img/MDHealth_light.svg') }}" alt="" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -32,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-end align-items-center ms-5" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-end align-items-center me-auto" style="margin-left: 65px;" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5 me-auto">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
                 <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
@@ -248,9 +248,9 @@
         </div>
         <div class="nav-login">
             @if (Session::get('login_token') == null)
-                <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-underline">Sign In</a>
+                <a href="{{ url('sign-in-web') }}" class="nav-link underline text-white text-decoration-underline">Sign In</a>
 
-                <a href="{{ url('user-account') }}" type="button" class="btn btn-sm btn-md df-center">Get
+                <a href="{{ url('user-account') }}" type="button" class="btn get-started-btn df-center">Get
                     Started</a>
             @endif
         </div>
