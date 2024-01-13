@@ -113,6 +113,10 @@
 }
 
 /* UTILITY CLASSES */
+.ff-currency {
+    font-family: cursive;
+    font-weight: 400;
+}
 .bod-3 {
     border-radius: 3px 0 0px 3px !important;
 }
@@ -773,6 +777,12 @@ select {
     justify-content: end;
 }
 
+.df-start {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
 .text-green {
     color: #4cdb06 !important;
 }
@@ -816,13 +826,11 @@ select {
 .form-divider::before {
     content: "";
     position: absolute;
-    /* bottom: 0; */
     border-bottom: 2.5px solid #4cdb06;
     width: 45%;
-    /* height: 100px; */
     transform: rotate(90deg);
-    left: 256px;
-    top: 256px;
+    left: 27.5%;
+    top: 18%;
 }
 
 .bb-green1::before {
@@ -985,7 +993,7 @@ select {
     text-align: center;
     font-family: Campton;
     font-size: 17px;
-    
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.68px;
@@ -1846,7 +1854,7 @@ select option {
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.4px;
@@ -2382,14 +2390,14 @@ span.popup-msg.active {
 .hide-eye-div .mdi {
     position: absolute;
     top: 42px;
-    right: -16px;
+    right: 16px;
     cursor: pointer;
 }
 
 .up-abs {
     position: absolute;
     top: 42px;
-    right: 10px;
+    right: 26px;
 }
 
 
@@ -2576,7 +2584,7 @@ span.popup-msg.active {
     color: #000;
     font-family: Campton;
     font-size: 16px;
-    
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -1.12px;
@@ -2737,7 +2745,7 @@ span.popup-msg.active {
     color: #FFF;
     font-family: Campton;
     font-size: 30px;
-    
+
     font-weight: 500;
     line-height: normal;
     margin-bottom: 8px;
@@ -2748,7 +2756,7 @@ span.popup-msg.active {
     color: #FFF;
     font-family: Campton;
     font-size: 20px;
-    
+
     font-weight: 500;
     line-height: normal;
     margin-bottom: 0;
@@ -3749,11 +3757,12 @@ label.tc-text,
 
 .bod-bot-5 {
     border-bottom: 0.5px solid #4CDB06;
-    width: 400.5px;
-    margin-left: 2rem;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
+    width: 100%;
+    padding-bottom: 2rem;
+    margin: 0 0 32px 0;
 }
+
+
 
 #resendotp {
     color: #878787;
@@ -3828,8 +3837,59 @@ label.tc-text,
     color: #000;
     font-family: Campton;
     font-size: 20px;
-    
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.8px;
+}
+
+/*  ============================================================================================================= 
+                                            SERVICE PROVIDER
+    ============================================================================================================= */
+
+/* #otpDiv .form-control {
+    padding: 0.375rem 0.5rem;
+} */
+
+.service-provider-account .navbar,
+.service-provider-account .footer {
+    display: none;
+}
+
+.service-provider-account .mdi-eye-off::before,
+.service-provider-account .mdi-eye::before {
+    font-size: 19px;
+}
+
+.service-provider-account .error {
+    color: red !important;
+    font-size: 14px !important;
+}
+
+.service-provider-account input[type="file"] {
+    color: #979797 !important;
+    line-height: 2 !important;
+}
+
+.service-provider-account .g-5,
+.service-provider-account .gx-5 {
+    --bs-gutter-x: 4rem;
+}
+
+.service-provider-account .form-control,
+.service-provider-account .form-select {
+    background-color: #f6f6f6;
+}
+
+.service-provider-account select:required:invalid {
+    color: gray;
+}
+
+.service-provider-account option[value=""][disabled] {
+    display: none;
+}
+
+.service-provider-account .nav-tabs .nav-item.show .nav-link,
+.service-provider-account .nav-tabs .nav-link.active {
+    background-color: #f6f6f6;
 }

@@ -5,8 +5,6 @@
         display: none;
     }
 
-  
-
     .mdi-eye-off::before,
     .mdi-eye::before {
         font-size: 19px;
@@ -29,12 +27,12 @@
     }
 
     body {
-        background: #F6F6F6;
+        background: #f6f6f6;
     }
 
     .form-control,
     .form-select {
-        background-color: #F6F6F6;
+        background-color: #f6f6f6;
     }
 
     select:required:invalid {
@@ -47,7 +45,7 @@
 
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link.active {
-        background-color: #F6F6F6;
+        background-color: #f6f6f6;
     }
 </style>
 <div class="content-wrapper" id="regdiv">
@@ -80,12 +78,12 @@
         <div class="tab-content" id="myTabContent">
             <div class="login-form pb-100px" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
                 <div class="row position-relative">
-                    <div class="bod-right form-divider pt-4" style="width:45%">
+                    <div class="bod-right pt-4" style="width: 45%;">
                         <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                             <a href="{{ url('/') }}">
                                 <img src="{{ 'front/assets/img/back.svg' }}" alt="" />
                             </a>
-                            <h1 class="reg-title my-0">Create User Account </h1>
+                            <h1 class="reg-title my-0">Create User Account</h1>
                         </div>
                         <div class="form text-start">
                             <form id="mycustomerForm">
@@ -105,7 +103,7 @@
                                         <label for="dob" class="form-label">*Date of Birth</label>
                                         <input class="form-control dobj w-189" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
                                     </div>
-                                    <div class="col-md-6 mb-3 ">
+                                    <div class="col-md-6 mb-3">
                                         <label for="gender" class="form-label">*Gender</label>
                                         <select required name="gender" id="gender" class="form-select w-189">
                                             <option value="" selected disabled>Choose</option>
@@ -129,8 +127,7 @@
                                         <select required name="country_id" id="country_id" class="form-select w-189">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->country_name }}
-                                            </option>
+                                            <option value="{{ $country->id }}">{{ $country->country_name }} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -165,8 +162,9 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-check tc">
                                             <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
-                                            <label class="form-check-label" for="UserflexCheckDefault"> I accept <a href="#" class="text-decoration-underline">Terms and
-                                                    Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a> </label>
+                                            <label class="form-check-label" for="UserflexCheckDefault">
+                                                I accept <a href="#" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a>
+                                            </label>
                                         </div>
                                     </div>
                                     <div id="recaptcha-container" class="df-end"></div>
@@ -180,15 +178,14 @@
                             </form>
                         </div>
                     </div>
-                    <div class="" style="width:55%">
+                    <div class="" style="width: 55%;">
                         <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-5">
                             <div class="mb-2">
                                 <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
                             </div>
                             <h5 class="text-h1 my-0">Get your reliable & affordable</h5>
                             <h4 class="text-green-h1b my-2">Treatment Packages</h4>
-                            <p class="text-p1-gray my-0">We are partnered with the top health service providers and
-                                vendors that gives you the best health experience!</p>
+                            <p class="text-p1-gray my-0">We are partnered with the top health service providers and vendors that gives you the best health experience!</p>
                         </div>
                     </div>
                 </div>
@@ -210,7 +207,7 @@
                 <p>Enter the 6 digit code sent to your mobile phone</p>
                 {{--
                 <form action="{{ url('otp-verify') }}" method="post" id="otpForm">
-                --}} {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code" />
+                    --}} {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code" />
                     <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
                 </form>
                 --}}
@@ -250,7 +247,10 @@
                 <h6 class="mb-0 d-flex align-items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <g clip-path="url(#clip0_0_28401)">
-                            <path d="M12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4ZM12 6C12.2449 6.00003 12.4813 6.08996 12.6644 6.25272C12.8474 6.41547 12.9643 6.63975 12.993 6.883L13 7V11.586L15.707 14.293C15.8863 14.473 15.9905 14.7144 15.9982 14.9684C16.006 15.2223 15.9168 15.4697 15.7488 15.6603C15.5807 15.8508 15.3464 15.9703 15.0935 15.9944C14.8406 16.0185 14.588 15.9454 14.387 15.79L14.293 15.707L11.293 12.707C11.1376 12.5514 11.0378 12.349 11.009 12.131L11 12V7C11 6.73478 11.1054 6.48043 11.2929 6.29289C11.4804 6.10536 11.7348 6 12 6Z" fill="#F31D1D" />
+                            <path
+                                d="M12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4ZM12 6C12.2449 6.00003 12.4813 6.08996 12.6644 6.25272C12.8474 6.41547 12.9643 6.63975 12.993 6.883L13 7V11.586L15.707 14.293C15.8863 14.473 15.9905 14.7144 15.9982 14.9684C16.006 15.2223 15.9168 15.4697 15.7488 15.6603C15.5807 15.8508 15.3464 15.9703 15.0935 15.9944C14.8406 16.0185 14.588 15.9454 14.387 15.79L14.293 15.707L11.293 12.707C11.1376 12.5514 11.0378 12.349 11.009 12.131L11 12V7C11 6.73478 11.1054 6.48043 11.2929 6.29289C11.4804 6.10536 11.7348 6 12 6Z"
+                                fill="#F31D1D"
+                            />
                         </g>
                         <defs>
                             <clipPath id="clip0_0_28401">
@@ -283,19 +283,18 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
+@endsection @section('script')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
     function countdownTimer(duration) {
-        $('#resendotp').hide();
+        $("#resendotp").hide();
         let timer = duration,
-            minutes, seconds;
-        const timerDisplay = $('#timer');
-        const timerInterval = setInterval(function() {
+            minutes,
+            seconds;
+        const timerDisplay = $("#timer");
+        const timerInterval = setInterval(function () {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
 
@@ -307,7 +306,7 @@
             if (--timer < 0) {
                 timer = duration;
                 clearInterval(timerInterval);
-                $('#resendotp').show();
+                $("#resendotp").show();
                 timerDisplay.text("Timer completed!");
             }
         }, 1000);
@@ -319,7 +318,7 @@
     countdownTimer(timerDuration);
 </script>
 <script>
-    $(document).on("click", "#regcustuser", function() {
+    $(document).on("click", "#regcustuser", function () {
         var base_url = $("#base_url").val();
         if ($("#mycustomerForm").valid()) {
             var email = $("#email").val();
@@ -338,13 +337,11 @@
                     email: email,
                     phone: phone,
                 },
-                beforeSend: function() {
+                beforeSend: function () {
                     $("#regcustuser").attr("disabled", true);
-                    $("#regcustuser").html(
-                        '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-                    );
+                    $("#regcustuser").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                 },
-                success: function(response) {
+                success: function (response) {
                     $("#regcustuser").attr("disabled", false);
                     console.log(response);
                     if (response !== undefined) {
@@ -359,14 +356,14 @@
                         }
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error(error);
                 },
             });
         }
     });
 
-    $(document).on("click", "#medproreg", function() {
+    $(document).on("click", "#medproreg", function () {
         if ($("#myFormProvider").valid()) {
             var email = $("#email").val();
             var phone = $("#phone").val();
@@ -384,7 +381,7 @@
                     email: email,
                     phone: phone,
                 },
-                success: function(response) {
+                success: function (response) {
                     console.log(response);
                     if (response !== undefined) {
                         if (response.email_exist !== undefined) {
@@ -398,14 +395,14 @@
                         }
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error(error);
                 },
             });
         }
     });
 
-    window.onload = function() {
+    window.onload = function () {
         render();
     };
 
@@ -420,7 +417,7 @@
         firebase
             .auth()
             .signInWithPhoneNumber(number, window.recaptchaVerifier)
-            .then(function(confirmationResult) {
+            .then(function (confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
                 $("#successAuth").text("Message sent");
@@ -428,7 +425,7 @@
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 $("#error").text(error.message);
                 $("#error").show();
             });
@@ -446,7 +443,7 @@
         $("#login_otp_btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
         coderesult
             .confirm(code)
-            .then(function(result) {
+            .then(function (result) {
                 var user = result.user;
                 $("#successOtpAuthot").text("OTP verified");
                 $("#successOtpAuthot").show();
@@ -475,7 +472,7 @@
                     //     formData: formData,
                     //     password: password
                     // },
-                    success: function(response) {
+                    success: function (response) {
                         $("#login_otp_btn").attr("disabled", false);
                         console.log(response);
                         if (response.url !== undefined) {
@@ -500,14 +497,14 @@
                             toastr.error(response.message);
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error(error);
                     },
                 });
 
                 e.preventDefault();
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 $("#error").text(error.message);
                 $("#error").show();
             });
@@ -515,7 +512,7 @@
 </script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Validation rules and messages
         $("#myForm").validate({
             rules: {
@@ -542,7 +539,7 @@
             messages: {
                 // Define error messages for each field
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 form.submit();
             },
         });
@@ -550,17 +547,17 @@
 </script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $.validator.addMethod(
             "passwordMatch",
-            function(value, element) {
+            function (value, element) {
                 return $("#password").val() === value;
             },
             "Passwords do not match."
         );
         $.validator.addMethod(
             "spaceValidation",
-            function(value, element) {
+            function (value, element) {
                 return value.trim().length !== 0;
             },
             "Field should not contain only spaces."
@@ -659,10 +656,10 @@
                     required: "Please accept the terms and conditions.",
                 },
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 form.submit();
             },
-            normalizer: function(value) {
+            normalizer: function (value) {
                 return $.trim(value);
             },
         });
@@ -670,17 +667,17 @@
 </script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $.validator.addMethod(
             "passwordMatch",
-            function(value, element) {
+            function (value, element) {
                 return $("#password").val() === value;
             },
             "Passwords do not match."
         );
         $.validator.addMethod(
             "spaceValidation",
-            function(value, element) {
+            function (value, element) {
                 return value.trim().length !== 0;
             },
             "Field should not contain only spaces."
@@ -787,10 +784,10 @@
                     required: "Please accept the terms and conditions.",
                 },
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 form.submit();
             },
-            normalizer: function(value) {
+            normalizer: function (value) {
                 return $.trim(value);
             },
         });
@@ -798,16 +795,19 @@
 </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-    $(function() {
-        $('input[name="date_of_birth"]').daterangepicker({
-            opens: 'left',
-            singleDatePicker: true,
-            showDropdowns: true,
-            locale: {
-                format: 'DD-MMM-YYYY'
-            }
-            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        }, function(start, end, label) {});
+    $(function () {
+        $('input[name="date_of_birth"]').daterangepicker(
+            {
+                opens: "left",
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                    format: "DD-MMM-YYYY",
+                },
+                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            },
+            function (start, end, label) {}
+        );
     });
 </script>
 @endsection
