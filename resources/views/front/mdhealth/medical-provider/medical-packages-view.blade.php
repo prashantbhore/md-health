@@ -30,6 +30,33 @@
         cursor: default;
         font-weight: 600;
     }
+
+    .form-select,
+    .form-control {
+        color: #000;
+        font-family: CamptonBook !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
+
+    .section-btns a {
+        border-radius: 5px;
+        background: #4CDB06;
+        width: 342px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        color: #000;
+        font-family: CamptonBold;
+        font-size: 16px;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
 </style>
 
 <div class="content-wrapper">
@@ -40,7 +67,7 @@
             </div>
             <div class="col-md-9">
                 <div class="card mb-4">
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="card-header d-flex align-items-center justify-content-between" style="margin-bottom: 42px;">
                         <span>{{ !empty($packages_active_list['package_unique_no']) ? $packages_active_list['package_unique_no'] : 'Add Package' }}</span>
                         <a href="{{ url('medical-packages') }}" class="d-flex align-items-center gap-1 text-decoration-none text-dark">
                             <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
@@ -53,13 +80,13 @@
                                 @csrf
                                 <input type="hidden" name="platform_type" value="web">
                                 <input type="hidden" name="id" value="{{ !empty($packages_active_list['id']) ? $packages_active_list['id'] : '' }}">
-                                <div class="form-group mb-3">
-                                    <label class="form-label">*Package Name</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">*Package Name</label>
                                     <input type="text" class="form-control" id="package_name" name="package_name" value="{{ !empty($packages_active_list['package_name']) ? $packages_active_list['package_name'] : '' }}" aria-describedby="foodname" placeholder="Package Name">
                                 </div>
 
-                                <div class="form-group d-flex flex-column mb-3">
-                                    <label class="form-label">*Treatments Category</label>
+                                <div class="form-group d-flex flex-column mb-4">
+                                    <label class="form-label mb-3">*Treatments Category</label>
                                     <select id="treatment_category_id" name="treatment_category_id" class="form-select" onchange="categoryselect(this.value)">
                                         <option value="" selected disabled>Choose</option>
                                         @if (!empty($treatment_categories))
@@ -77,9 +104,9 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group d-flex flex-column mb-3">
-                                    <label class="form-label">*Treatments</label>
-                                    <select id="treatment_id" name="treatment_id">
+                                <div class="form-group d-flex flex-column mb-4">
+                                    <label class="form-label mb-3">*Treatments</label>
+                                    <select id="treatment_id" class="form-select" name="treatment_id">
                                         <option value="">Treatments</option>
                                         <!-- Options will be dynamically populated here -->
                                     </select>
@@ -87,7 +114,7 @@
 
                                 <div class="multiple-checkbox-div">
                                     <div class="form-group d-flex flex-column mb-5">
-                                        <label class="form-label">Other Services (Selectable)</label>
+                                        <label class="form-label mb-3">Other Services (Selectable)</label>
                                         {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
                                         <input type="hidden" name="other_services" id="other_services" value="{{ !empty($packages_active_list['other_services']) ? $packages_active_list['other_services'] : '' }}">
                                         {{-- value="{{!empty($hotel_details['other_services'])?$hotel_details['other_services']:''}}" --}}
@@ -135,7 +162,7 @@
 
                                 <div class="form-group d-flex flex-column mb-5 section-heading-div">
                                     <h6 class="section-heading">Treatment Price</h6>
-                                    <label class="form-label">Treatment Price (VAT Included Price) </label>
+                                    <label class="form-label my-3">Treatment Price (VAT Included Price) </label>
                                     <div class="input-icon-div">
                                         <input type="text" class="form-control" name="treatment_price" id="treatment_price" value="{{ !empty($packages_active_list['treatment_price']) ? $packages_active_list['treatment_price'] : '' }}" placeholder="Treatment Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');">
                                         <span class="input-icon">₺</span>
@@ -143,8 +170,8 @@
                                 </div>
                                 <div id="accommodationDiv">
                                     <div class="form-group d-flex flex-column mb-3 section-heading-div">
-                                        <h6 class="section-heading">Acommodition Details</h6>
-                                        <label class="form-label">Hotel Name</label>
+                                        <h6 class="section-heading">Accommodation Details</h6>
+                                        <label class="form-label my-3">Hotel Name</label>
                                         <select name="hotel_id" id="hotel_id">
                                             <option value="" selected disabled>Choose</option>
 
@@ -163,11 +190,11 @@
                                     </div>
                                     <input type="hidden" id="hotel_details_input" name="hotel_details_input" readonly>
                                     <div class="date-picker-div mb-5">
-                                        <label class="form-label">Reservation Days</label>
+                                        <label class="form-label mb-3">Reservation Days</label>
                                         <div class="date-picker-card-div">
-                                            <div class="input-container w-50" id="date-picker-container">
+                                            <div class="input-container w-25" id="date-picker-container">
                                                 <!-- <label for="date-from">check-in</label> -->
-                                                <input type="text" name="hotel_in_time" id="hotel_in_time" class="date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['hotel_in_time']) ? $packages_active_list['hotel_in_time'] : '' }}" />
+                                                <input type="text" name="hotel_in_time" id="hotel_in_time" class="form-control date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['hotel_in_time']) ? $packages_active_list['hotel_in_time'] : '' }}" />
                                                 {{-- <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -210,16 +237,16 @@
                     </div>
 
                     <div class="section-btns mb-5">
-                        <a class="green-plate bg-green text-dark fw-700 fsb-1">Total Accomodition
-                            Price <span id="accommodation_price_span">{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '0' }}
-                                ₺</span></a>
+                        <a>Total Accommodation Price
+                            <span id="accommodation_price_span" class="ms-2">{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '0' }} <span class="lira">₺</span></span>
+                        </a>
                         <input type="hidden" name="hotel_acommodition_price" id="hotel_acommodition_price" value="{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '' }}">
                     </div>
                 </div>
                 <div id="transportationDiv">
                     <div class="form-group d-flex flex-column mb-3 section-heading-div">
                         <h6 class="section-heading">Transportation Details</h6>
-                        <label class="form-label">Vehicle</label>
+                        <label class="form-label my-3">Vehicle</label>
                         <select name="vehicle_id" id="vehicle_id">
                             <option value="" selected disabled>Choose</option>
                             @if (!empty($vehicle_details))
@@ -234,14 +261,14 @@
                             @endif
                         </select>
                     </div>
-                    <input type="hidden" id="vehicle_details_input" name="vehicle_details_input" readonly>
+                    <input type="hidden" id="vehicle_details_input" name="vehicle_details_input" readonly> 
 
                     <div class="date-picker-div mb-5">
-                        <label class="form-label">Reservation Days</label>
+                        <label class="form-label mb-3">Reservation Days</label>
                         <div class="date-picker-card-div">
-                            <div class="input-container w-50" id="date-picker-container">
+                            <div class="input-container w-25" id="date-picker-container">
                                 <!-- <label for="date-from">check-in</label> -->
-                                <input type="text" name="vehicle_in_time" id="vehicle_in_time" class="date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['vehicle_in_time']) ? $packages_active_list['vehicle_in_time'] : '' }}" />
+                                <input type="text" name="vehicle_in_time" id="vehicle_in_time" class="form-control date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['vehicle_in_time']) ? $packages_active_list['vehicle_in_time'] : '' }}" />
                                 {{-- <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -255,16 +282,15 @@
                     </div>
 
                     <div class="section-btns mb-5">
-                        <a  class="green-plate bg-green text-dark fw-700 fsb-1">Total Transportation
-                            Price <span id="transportation_acommodition_span">{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '0' }}
-                                ₺</span></a>
+                        <a>Total Transportation Price <span id="transportation_acommodition_span" class="ms-2">{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '0' }}
+                                <span class="lira">₺</span></span></a>
                         <input type="hidden" name="transportation_acommodition_price" id="transportation_acommodition_price" value="{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '' }}">
                     </div>
                 </div>
                 <div id="tourDiv">
                     <div class="form-group d-flex flex-column mb-3 section-heading-div">
                         <h6 class="section-heading">Tour Name</h6>
-                        <label class="form-label">Tour</label>
+                        <label class="form-label my-3">Tour</label>
                         {{-- {{dd($packages_active_list)}} --}}
                         <select name="tour_id" id="tour_id">
                             <option value="" selected disabled>Choose</option>
@@ -283,11 +309,11 @@
                     <input type="hidden" id="tour_details_input" name="tour_details_input" readonly>
 
                     <div class="date-picker-div mb-5">
-                        <label class="form-label">Reservation Days</label>
+                        <label class="form-label mb-3">Reservation Days</label>
                         <div class="date-picker-card-div">
-                            <div class="input-container w-50" id="date-picker-container">
+                            <div class="input-container w-25" id="date-picker-container">
                                 <!-- <label for="date-from">check-in</label> -->
-                                <input type="text" name="tour_in_time" id="tour_in_time" class="date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['tour_in_time']) ? $packages_active_list['tour_in_time'] : '' }}" value="10/24/1984" />
+                                <input type="text" name="tour_in_time" id="tour_in_time" class="form-control date-icon w-100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['tour_in_time']) ? $packages_active_list['tour_in_time'] : '' }}" value="10/24/1984" />
                                 {{-- <svg class="input-icon" width="18" height="18"
                                                         viewBox="0 0 16 17" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -301,16 +327,16 @@
                     </div>
 
                     <div class="section-btns mb-5">
-                        <a class="green-plate bg-green text-dark fw-700 fsb-1">Total Tour Price
-                            <span id="tour_price_span">{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '0' }}
-                                ₺</span></a>
+                        <a>Total Tour Price
+                            <span id="tour_price_span" class="ms-2">{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '0' }}
+                                <span class="lira"><span class="lira">₺</span></span></span></a>
                         <input type="hidden" name="tour_price" id="tour_price" value="{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '' }}">
                     </div>
                 </div>
                 <div id="translationDiv">
                     <div class="form-group d-flex flex-column mb-5 section-heading-div">
                         <h6 class="section-heading">Translation Price</h6>
-                        <label class="form-label">Translation Price (VAT Included Price) </label>
+                        <label class="form-label my-3">Translation Price (VAT Included Price) </label>
                         <div class="input-icon-div">
                             <input type="text" class="form-control" name="translation_price" id="translation_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['translation_price']) ? $packages_active_list['translation_price'] : '' }}" placeholder="Translation Price">
                             <span class="input-icon">₺</span>
@@ -320,13 +346,13 @@
                 <div id="visaserviceDiv">
                     <div class="form-group mb-3 section-heading-div">
                         <h6 class="section-heading">Visa Service Details</h6>
-                        <label class="form-label" for="featureproducts">Please Written Visa Service
+                        <label class="form-label my-3" for="featureproducts">Please Written Visa Service
                             Details</label>
                         <input type="text" class="form-control" name="visa_details" id="visa_details" value="{{ !empty($packages_active_list['visa_details']) ? $packages_active_list['visa_details'] : '' }}" aria-describedby="foodname" placeholder="Write Here Please">
                     </div>
 
                     <div class="form-group d-flex flex-column mb-5">
-                        <label class="form-label">Visa Service Price</label>
+                        <label class="form-label mb-3">Visa Service Price</label>
                         <div class="input-icon-div ">
                             <input type="text" class="form-control" name="visa_service_price" id="visa_service_price" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['visa_service_price']) ? $packages_active_list['visa_service_price'] : '' }}">
                             <span class="input-icon">₺</span>
@@ -336,7 +362,7 @@
                 <div id="ticketserviceDiv">
                     <div class="form-group d-flex flex-column mb-5 section-heading-div">
                         <h6 class="section-heading">Ticket Service</h6>
-                        <label class="form-label">Ticket Price (VAT Included Price) </label>
+                        <label class="form-label my-3">Ticket Price (VAT Included Price) </label>
                         <div class="input-icon-div">
                             <input type="text" class="form-control" name="ticket_price" id="ticket_price" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['ticket_price']) ? $packages_active_list['ticket_price'] : '' }}">
                             <span class="input-icon">₺</span>
@@ -346,7 +372,7 @@
                 <div id="ambulanceserviceDiv">
                     <div class="form-group d-flex flex-column mb-5 section-heading-div">
                         <h6 class="section-heading">Ambulance Service</h6>
-                        <label class="form-label">Ambulance Price (One Time Pickup and Drop) </label>
+                        <label class="form-label mb-3">Ambulance Price (One Time Pickup and Drop) </label>
                         <div class="input-icon-div">
                             <input type="text" class="form-control" name="ambulance_service_price" id="ambulance_service_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['ambulance_service_price']) ? $packages_active_list['ambulance_service_price'] : '' }}" placeholder="Price">
                             <span class="input-icon">₺</span>
@@ -354,17 +380,17 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-3 section-heading-div">
+                <div class="form-group mb-4 section-heading-div">
                     <h6 class="section-heading">Package Price</h6>
-                    <label class="form-label">Discount </label>
+                    <label class="form-label my-3">Discount </label>
                     <div class="input-icon-div">
                         <input type="text" class="form-control" name="package_discount" id="package_discount" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['package_discount']) ? $packages_active_list['package_discount'] : '' }}" placeholder="0">
                         <span class="input-icon">%</span>
                     </div>
                 </div>
 
-                <div class="form-group d-flex flex-column mb-3">
-                    <label class="form-label">*Price (VAT Included)</label>
+                <div class="form-group d-flex flex-column mb-4">
+                    <label class="form-label mb-3">*Price (VAT Included)</label>
                     <div class="input-icon-div">
                         <input type="text" class="form-control" name="package_price" readonly id="package_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['package_price']) ? $packages_active_list['package_price'] : '' }}" placeholder="0">
                         <span class="input-icon">₺</span>
@@ -372,7 +398,7 @@
                 </div>
 
                 <div class="form-group d-flex flex-column mb-5">
-                    <label class="form-label">Sale Price</label>
+                    <label class="form-label mb-3">Sale Price</label>
                     <div class="input-icon-div">
                         <input type="text" class="form-control" name="sale_price" id="sale_price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" readonly value="{{ !empty($packages_active_list['sale_price']) ? $packages_active_list['sale_price'] : '' }}" placeholder="Calculated Automatically">
                         <span class="input-icon">₺</span>
@@ -380,7 +406,11 @@
                 </div>
 
                 <div class="form-group d-flex flex-column mb-5 section-heading-div">
-                    <h6 class="section-heading">Featured Request</h6>
+                    <!-- <h6 class="section-heading">Featured Request</h6> -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input">
+                        <label class="section-heading" for="featureproducts">Featured Request</label>
+                    </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="featureproducts" {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
                         <label class="form-check-label" for="featureproducts">I confirm

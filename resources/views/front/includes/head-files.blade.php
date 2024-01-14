@@ -7,7 +7,7 @@
 
     <!-- FavIcon -->
     <link rel="shortcut icon" href="{{ URL::asset('admin/assets/img/FavIcon.svg') }}" type="image/x-icon">
-    
+
     <!-- MDI Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
     <!-- RemixIcon -->
@@ -64,6 +64,10 @@
     <!-- Semantic UI -->
     <link href="{{ URL::asset('front/assets/css/semantic.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" /> -->
+    
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" /> -->
 
     <title>MDhealth</title>
 

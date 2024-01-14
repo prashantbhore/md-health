@@ -75,37 +75,39 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content position-relative" id="myTabContent">
             <div class="login-form pb-100px" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
-                <div class="row position-relative">
-                    <div class="bod-right pt-4" style="width: 45%;">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-6 bod-right form-divider pt-4">
+                        <!-- Form Heading -->
                         <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                             <a href="{{ url('/') }}">
                                 <img src="{{ 'front/assets/img/back.svg' }}" alt="" />
                             </a>
                             <h1 class="reg-title my-0">Create User Account</h1>
                         </div>
+                        <!-- Form -->
                         <div class="form text-start">
                             <form id="mycustomerForm">
                                 {{-- action="{{ url('/md-customer-register') }}" method="post" --}}
                                 <input type="hidden" name="platform_type" value="web" />
                                 <input type="hidden" name="user_type" value="customer" />
-                                <div class="row gx-5 gy-2">
+                                <div class="row ">
                                     <div class="col-md-6 mb-3">
                                         <label for="firstName" class="form-label">*First Name</label>
-                                        <input type="text" class="form-control w-189" name="first_name" id="first_name" placeholder="First Name" />
+                                        <input type="text" class="form-control " name="first_name" id="first_name" placeholder="First Name" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="lastName" class="form-label">*Last Name</label>
-                                        <input type="text" class="form-control w-189" name="last_name" id="last_name" placeholder="Last Name" />
+                                        <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Last Name" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="dob" class="form-label">*Date of Birth</label>
-                                        <input class="form-control dobj w-189" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
+                                        <input class="form-control dobj " name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="gender" class="form-label">*Gender</label>
-                                        <select required name="gender" id="gender" class="form-select w-189">
+                                        <select required name="gender" id="gender" class="form-select ">
                                             <option value="" selected disabled>Choose</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -115,16 +117,16 @@
 
                                     <div class="col-md-12 mb-3">
                                         <label for="email" class="form-label">*E-mail</label>
-                                        <input type="text" class="form-control w-407p5" name="email" id="email" placeholder="E-mail" autocomplete="off" />
+                                        <input type="text" class="form-control " name="email" id="email" placeholder="E-mail" autocomplete="off" />
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="phone" class="form-label">*Phone</label>
-                                        <input type="text" class="form-control w-407p5" name="phone" id="phone" placeholder="Phone" />
+                                        <input type="text" class="form-control " name="phone" id="phone" placeholder="Phone" />
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="country_id" class="form-label">*Country</label>
-                                        <select required name="country_id" id="country_id" class="form-select w-189">
+                                        <select required name="country_id" id="country_id" class="form-select ">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->country_name }} </option>
@@ -133,7 +135,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="city_id" class="form-label">*City</label>
-                                        <select required name="city_id" id="city_id" class="form-select w-189">
+                                        <select required name="city_id" id="city_id" class="form-select ">
                                             <option value="" selected disabled hidden>Choose</option>
                                             @foreach ($cities as $city)
                                             <option value="{{ $city->id }}">{{ $city->city_name }} </option>
@@ -143,23 +145,23 @@
 
                                     <div class="col-md-12 mb-3">
                                         <label for="address" class="form-label">*Address</label>
-                                        <textarea name="address" id="address" cols="" rows="5" class="form-control camptonBook w-407p5" placeholder="Enter Address"></textarea>
+                                        <textarea name="address" id="address" cols="" rows="5" class="form-control camptonBook " placeholder="Enter Address"></textarea>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12 mb-3 position-relative">
                                         <div class="hide-eye-div">
                                             <label for="password" class="form-label">*Password</label>
-                                            <input type="password" name="password" class="form-control w-407p5" id="password" placeholder="Minimum 8 characters" />
+                                            <input type="password" name="password" class="form-control " id="password" placeholder="Minimum 8 characters" />
                                             <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-5 hide-eye-div">
+                                    <div class="col-md-12 mb-5 position-relative">
+                                        <div class="hide-eye-div">
                                             <label for="re-password" class="form-label">*Re-Password</label>
-                                            <input type="password" name="repassword" class="form-control w-407p5" id="repassword" placeholder="Minimum 8 characters" />
+                                            <input type="password" name="repassword" class="form-control " id="repassword" placeholder="Minimum 8 characters" />
                                             <span toggle="#repassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12 mb-3 ">
                                         <div class="form-check tc">
                                             <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
                                             <label class="form-check-label" for="UserflexCheckDefault">
@@ -167,10 +169,10 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div id="recaptcha-container" class="df-end"></div>
+                                    <div id="recaptcha-container" class="df-center"></div>
                                     <span id="error" class="text-danger"></span>
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                        <button type="button" class="btn btn-md w-407p5 mb-5" id="regcustuser" style="height: 47px;">Create Account</button>
+                                        <button type="button" class="btn btn-md mb-5 w-100" id="regcustuser" style="height: 47px;">Create Account</button>
                                         <label for="" class="mt-auto">Already have an account?</label>
                                         <a href="{{ url('sign-in-web') }}" class="signIn-link">Sign In</a>
                                     </div>
@@ -178,7 +180,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="" style="width: 55%;">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
                         <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-5">
                             <div class="mb-2">
                                 <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
@@ -207,7 +209,7 @@
                 <p>Enter the 6 digit code sent to your mobile phone</p>
                 {{--
                 <form action="{{ url('otp-verify') }}" method="post" id="otpForm">
-                    --}} {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code" />
+                --}} {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code" />
                     <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
                 </form>
                 --}}
@@ -233,7 +235,7 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-md btn-text w-75 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        <button class="btn btn-md btn-text w-100 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
                 </form>
                 <script>
@@ -247,10 +249,7 @@
                 <h6 class="mb-0 d-flex align-items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <g clip-path="url(#clip0_0_28401)">
-                            <path
-                                d="M12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4ZM12 6C12.2449 6.00003 12.4813 6.08996 12.6644 6.25272C12.8474 6.41547 12.9643 6.63975 12.993 6.883L13 7V11.586L15.707 14.293C15.8863 14.473 15.9905 14.7144 15.9982 14.9684C16.006 15.2223 15.9168 15.4697 15.7488 15.6603C15.5807 15.8508 15.3464 15.9703 15.0935 15.9944C14.8406 16.0185 14.588 15.9454 14.387 15.79L14.293 15.707L11.293 12.707C11.1376 12.5514 11.0378 12.349 11.009 12.131L11 12V7C11 6.73478 11.1054 6.48043 11.2929 6.29289C11.4804 6.10536 11.7348 6 12 6Z"
-                                fill="#F31D1D"
-                            />
+                            <path d="M12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4ZM12 6C12.2449 6.00003 12.4813 6.08996 12.6644 6.25272C12.8474 6.41547 12.9643 6.63975 12.993 6.883L13 7V11.586L15.707 14.293C15.8863 14.473 15.9905 14.7144 15.9982 14.9684C16.006 15.2223 15.9168 15.4697 15.7488 15.6603C15.5807 15.8508 15.3464 15.9703 15.0935 15.9944C14.8406 16.0185 14.588 15.9454 14.387 15.79L14.293 15.707L11.293 12.707C11.1376 12.5514 11.0378 12.349 11.009 12.131L11 12V7C11 6.73478 11.1054 6.48043 11.2929 6.29289C11.4804 6.10536 11.7348 6 12 6Z" fill="#F31D1D" />
                         </g>
                         <defs>
                             <clipPath id="clip0_0_28401">
@@ -294,7 +293,7 @@
             minutes,
             seconds;
         const timerDisplay = $("#timer");
-        const timerInterval = setInterval(function () {
+        const timerInterval = setInterval(function() {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
 
@@ -318,7 +317,7 @@
     countdownTimer(timerDuration);
 </script>
 <script>
-    $(document).on("click", "#regcustuser", function () {
+    $(document).on("click", "#regcustuser", function() {
         var base_url = $("#base_url").val();
         if ($("#mycustomerForm").valid()) {
             var email = $("#email").val();
@@ -337,11 +336,11 @@
                     email: email,
                     phone: phone,
                 },
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#regcustuser").attr("disabled", true);
                     $("#regcustuser").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                 },
-                success: function (response) {
+                success: function(response) {
                     $("#regcustuser").attr("disabled", false);
                     console.log(response);
                     if (response !== undefined) {
@@ -356,14 +355,14 @@
                         }
                     }
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.error(error);
                 },
             });
         }
     });
 
-    $(document).on("click", "#medproreg", function () {
+    $(document).on("click", "#medproreg", function() {
         if ($("#myFormProvider").valid()) {
             var email = $("#email").val();
             var phone = $("#phone").val();
@@ -381,7 +380,7 @@
                     email: email,
                     phone: phone,
                 },
-                success: function (response) {
+                success: function(response) {
                     console.log(response);
                     if (response !== undefined) {
                         if (response.email_exist !== undefined) {
@@ -395,14 +394,14 @@
                         }
                     }
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.error(error);
                 },
             });
         }
     });
 
-    window.onload = function () {
+    window.onload = function() {
         render();
     };
 
@@ -417,7 +416,7 @@
         firebase
             .auth()
             .signInWithPhoneNumber(number, window.recaptchaVerifier)
-            .then(function (confirmationResult) {
+            .then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
                 $("#successAuth").text("Message sent");
@@ -425,7 +424,7 @@
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 $("#error").text(error.message);
                 $("#error").show();
             });
@@ -443,7 +442,7 @@
         $("#login_otp_btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
         coderesult
             .confirm(code)
-            .then(function (result) {
+            .then(function(result) {
                 var user = result.user;
                 $("#successOtpAuthot").text("OTP verified");
                 $("#successOtpAuthot").show();
@@ -472,7 +471,7 @@
                     //     formData: formData,
                     //     password: password
                     // },
-                    success: function (response) {
+                    success: function(response) {
                         $("#login_otp_btn").attr("disabled", false);
                         console.log(response);
                         if (response.url !== undefined) {
@@ -497,14 +496,14 @@
                             toastr.error(response.message);
                         }
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error(error);
                     },
                 });
 
                 e.preventDefault();
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 $("#error").text(error.message);
                 $("#error").show();
             });
@@ -512,7 +511,7 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Validation rules and messages
         $("#myForm").validate({
             rules: {
@@ -539,7 +538,7 @@
             messages: {
                 // Define error messages for each field
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form.submit();
             },
         });
@@ -547,17 +546,17 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $.validator.addMethod(
             "passwordMatch",
-            function (value, element) {
+            function(value, element) {
                 return $("#password").val() === value;
             },
             "Passwords do not match."
         );
         $.validator.addMethod(
             "spaceValidation",
-            function (value, element) {
+            function(value, element) {
                 return value.trim().length !== 0;
             },
             "Field should not contain only spaces."
@@ -656,10 +655,10 @@
                     required: "Please accept the terms and conditions.",
                 },
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form.submit();
             },
-            normalizer: function (value) {
+            normalizer: function(value) {
                 return $.trim(value);
             },
         });
@@ -667,17 +666,17 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $.validator.addMethod(
             "passwordMatch",
-            function (value, element) {
+            function(value, element) {
                 return $("#password").val() === value;
             },
             "Passwords do not match."
         );
         $.validator.addMethod(
             "spaceValidation",
-            function (value, element) {
+            function(value, element) {
                 return value.trim().length !== 0;
             },
             "Field should not contain only spaces."
@@ -784,10 +783,10 @@
                     required: "Please accept the terms and conditions.",
                 },
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form.submit();
             },
-            normalizer: function (value) {
+            normalizer: function(value) {
                 return $.trim(value);
             },
         });
@@ -795,9 +794,8 @@
 </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-    $(function () {
-        $('input[name="date_of_birth"]').daterangepicker(
-            {
+    $(function() {
+        $('input[name="date_of_birth"]').daterangepicker({
                 opens: "left",
                 singleDatePicker: true,
                 showDropdowns: true,
@@ -806,7 +804,7 @@
                 },
                 // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
             },
-            function (start, end, label) {}
+            function(start, end, label) {}
         );
     });
 </script>

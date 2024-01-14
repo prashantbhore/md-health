@@ -1,5 +1,8 @@
 @extends('front.layout.layout2')
 @section('content')
+<style>
+
+</style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
         <div class="row">
@@ -15,11 +18,11 @@
                     <div class="card-body">
                         <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
                             <p class="my-0">Sales (Daily)</p>
-                            <h3 class="my-0">{{ $daily_sales_amount }} ₺</h3>
+                            <h3 class="my-0">{{ $daily_sales_amount }} <span class="lira">₺</span></h3>
                         </div>
                         <div class="black-plate bg-black text-green d-flex align-items-center justify-content-between mb-3">
                             <p class="my-0">Sales (Monthly)</p>
-                            <h3 class="my-0">{{ $monthly_sales_amount }} ₺</h3>
+                            <h3 class="my-0">{{ $monthly_sales_amount }} <span class="lira">₺</span></h3>
                         </div>
                     </div>
                 </div>
@@ -50,11 +53,12 @@
                                 </div>
 
                                 <div class="list-div">
-                                    <select name="" id="" class="form-select">
+                                    <select name="" id="" class="form-select filter-list" >
                                         <option value="">List for Date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
+
                                 </div>
                             </div>
 
@@ -106,7 +110,7 @@
                                                     <h6 class="dbrd-order-total"><strong>Total Price:</strong>
                                                         <span class="">
                                                             {{ !empty($activeSale['package']['sale_price']) ? $activeSale['package']['sale_price'] : '' }}
-                                                            ₺</span>
+                                                            <span class="lira">₺</span></span>
                                                     </h6>
                                                     <a href="{{ url('treatment-order-details/' . (!empty($activeSale['id']) ? Crypt::encrypt($activeSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
                                                             Details</strong></a>
@@ -156,7 +160,7 @@
                                                     <h6 class="dbrd-order-total"><strong>Total Price:</strong>
                                                         <span class="">
                                                             {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
-                                                            ₺</span>
+                                                            <span class="lira">₺</span></span>
                                                     </h6>
 
                                                     <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ? Crypt::encrypt($completedSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
@@ -172,19 +176,6 @@
 
 
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -221,7 +212,7 @@
                                                 <div class="trmt-card-footer">
                                                     <h6 class="dbrd-order-total"><strong>Total Price:</strong>
                                                         <span class=""> {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
-                                                            ₺</span>
+                                                            <span class="lira">₺</span></span>
 
                                                     </h6>
 
@@ -282,6 +273,12 @@
                 }
             });
         });
+    });
+</script>
+<script>
+    const element = document.querySelector('.filter-list');
+    const choices = new Choices(element, {
+        // searchEnabled: true,
     });
 </script>
 @endsection

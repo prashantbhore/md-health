@@ -2,6 +2,21 @@
 @section('content')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
+    .form-control::placeholder {
+        font-family: "Campton";
+    }
+
+    .form-select,
+    .form-control {
+        color: #000;
+        font-family: CamptonBook !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
+
     #pic2 {
         height: 150px;
     }
@@ -38,42 +53,51 @@
         margin-top: 15px;
     }
 
-    .prev-img-div img {
-        height: 128px;
+    .form-group .prev-img-div img {
+        height: 150px;
         width: auto;
-        margin-top: 1rem;
+        object-fit: contain;
+        margin-top: 15px;
+        border-radius: 3px;
+    }
+
+    .prev-img-div img {
+        height: 150px;
+        width: auto;
+        object-fit: contain;
+        margin-top: 15px;
         border-radius: 3px;
     }
 </style>
 
 <div class="content-wrapper">
-    <div class="container py-100px for-cards">
+    <div class="container py-100px for-cards"> 
         <div class="row">
             <div class="col-md-3">
                 @include('front.includes.sidebar')
             </div>
             <div class="col-md-9">
                 <div class="card mb-4">
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                         <span>Account</span>
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
                             <form action="{{ url('md-update-medical-profile') }}" method="post" enctype="multipart/form-data" id="accountmedpro">
                                 @csrf
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Company Name</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Company Name</label>
                                     <input type="text" name="company_name" value="{{ $medical_provider_list->company_name }}" class="form-control" id="company_name" aria-describedby="foodname" placeholder="Memorial Hospitals Ltd. Sti.">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Company Address</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Company Address</label>
                                     <input type="text" name="company_address" value="{{ $medical_provider_list->company_address }}" class="form-control" id="company_address" aria-describedby="foodname" placeholder="Company Full Address">
                                 </div>
 
-                                <div class="input-group mb-3 d-flex justify-content-between">
+                                <div class="input-group mb-4 d-flex justify-content-between">
                                     <div class="form-group d-flex flex-column w-50 pe-2">
-                                        <label class="form-label">Country</label>
+                                        <label class="form-label mb-3">Country</label>
                                         <select name="country_id" id="country_id" class="form-select">
                                             @foreach ($countries as $country)
                                             <option value="{{ $country->id }}" {{ $country->id == $medical_provider_list->country_id ? 'selected' : '' }}>
@@ -83,7 +107,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group d-flex flex-column w-50 ps-2">
-                                        <label class="form-label">City</label>
+                                        <label class="form-label mb-3">City</label>
                                         <select name="city_id" id="city_id" class="form-select">
                                             @foreach ($cities as $city)
                                             <option value="{{ $city->id }}" {{ $city->id == $medical_provider_list->city_id ? 'selected' : '' }}>
@@ -94,36 +118,36 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">TAX Number</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">TAX Number</label>
                                     <input type="text" name="tax_no" value="{{ $medical_provider_list->tax_no }}" class="form-control" id="tax_no" aria-describedby="foodname" placeholder="TAX Number">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Authorized Person Full Name</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Authorized Person Full Name</label>
                                     <input type="text" name="authorisation_full_name" value="{{ $medical_provider_list->authorisation_full_name }}" class="form-control" id="authorisation_full_name" aria-describedby="foodname" placeholder="Authorized Person Full Name">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Company Email</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Company Email</label>
                                     <input type="text" name="email" value="{{ $medical_provider_list->email }}" class="form-control" id="email" aria-describedby="foodname" placeholder="Company Full Address">
                                 </div>
 
 
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Authorized Person Mobile Contact</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Authorized Person Mobile Contact</label>
                                     <input type="text" name="mobile_no" value="{{ $medical_provider_list->mobile_no }}" class="form-control" id="foodname" aria-describedby="foodname" placeholder="+90">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Company Overview</label>
-                                    <textarea class="form-control" name="company_overview" value="" id="company_overview" rows="4" placeholder="" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Company Overview</label>
+                                    <textarea class="form-control" name="company_overview" value="" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
                                 </div>
 
                                 <div class="multiple-upload-images">
                                     <h6 class="section-heading">Company Logo</h6>
-                                    <div class="form-group">
+                                    <div class="form-group my-3">
                                         <input type="file" id="company_logo_image_path" class="form-control" name="company_logo_image_path" oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
@@ -139,7 +163,7 @@
                                 {{-- {{dd($MedicalProviderLogo)}} --}}
                                 <div class="multiple-upload-images">
                                     <h6 class="section-heading">Company License</h6>
-                                    <div class="form-group">
+                                    <div class="form-group my-3">
                                         <input type="file" id="company_licence_image_path" class="form-control" name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">

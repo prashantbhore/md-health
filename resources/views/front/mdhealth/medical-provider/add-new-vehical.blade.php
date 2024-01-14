@@ -22,7 +22,9 @@
         width: auto;
         object-fit: contain;
         margin-top: 15px;
+        border-radius: 3px;
     }
+    
 
     .multiple-checkbox-div .multiple-checks {
         display: flex;
@@ -31,7 +33,7 @@
     }
 
     .multiple-checkbox-div .multiple-checks .form-check {
-        width: 185px;
+        min-width: 200px;
     }
 
     .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
@@ -48,7 +50,7 @@
             </div>
             <div class="col-md-9">
                 <div class="card mb-4">
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                         <span>Add New Vehicle</span>
                         <a href="{{ url('medical-other-services') }}" class="d-flex align-items-center gap-1 text-decoration-none">
                             <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
@@ -67,10 +69,9 @@
                                 @csrf
                                 <input type="hidden" name="transportation_id" value="{{ !empty($transportation_details['id']) ? $transportation_details['id'] : '' }}">
 
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-4">
                                     <div class="form-group d-flex flex-column w-100">
-                                        <label class="form-label">Vehicle Brand</label>
-
+                                        <label class="form-label mb-3">Vehicle Brand</label>
                                         <select id="vehicle_brand_id" name="vehicle_brand_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($vehicle_details as $vehicle_detail)
@@ -86,18 +87,18 @@
                                     </div>
                                 </div>
 
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-4">
                                     <div class="form-group d-flex flex-column w-100">
-                                        <label class="form-label">Vehicle Model</label>
+                                        <label class="form-label mb-3">Vehicle Model</label>
                                         <input type="text" class="form-control" placeholder="Enter Vehicle Model Name" name="vehicle_model_name" id="vehicle_model_name" value="{{ !empty($transportation_details['vehicle_model_name']) ? $transportation_details['vehicle_model_name'] : '' }}">
 
 
                                     </div>
                                 </div>
 
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-4">
                                     <div class="form-group d-flex flex-column w-100">
-                                        <label class="form-label">Comfort Level</label>
+                                        <label class="form-label mb-3">Comfort Level</label>
 
                                         <select id="comfort_level_id" name="comfort_level_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
@@ -114,9 +115,9 @@
                                     </div>
                                 </div>
                                 {{-- {{dd($transportation_details)}} --}}
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Vehicle Picture</label>
-                                    <div class="form-group">
+                                <div class="form-group mb-5">
+                                    <label class="form-label mb-3">Vehicle Picture</label>
+                                    <div class="form-group mb-3">
                                         <input type="file" name="vehicle_image_path" id="vehicle_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
@@ -125,17 +126,17 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group mb-3 section-heading-div">
-                                    <label class="form-label">Vehicle Per Day Price (VAT Included)</label>
+                                <div class="form-group mb-4 section-heading-div">
+                                    <label class="form-label mb-3">Vehicle Per Day Price (VAT Included)</label>
                                     <div class="input-icon-div">
                                         <input type="text" class="form-control" placeholder="0" name="vehicle_per_day_price" id="vehicle_per_day_price" value="{{ !empty($transportation_details['vehicle_per_day_price']) ? $transportation_details['vehicle_per_day_price'] : '' }}">
-                                        <span class="input-icon">₺</span>
+                                        <span class="input-icon me-4">₺</span>
                                     </div>
                                 </div>
                                 {{-- {{dd($transportation_details)}} --}}
                                 <div class="multiple-checkbox-div mb-5">
                                     <div class="form-group d-flex flex-column">
-                                        <label class="form-label">Other Services</label>
+                                        <label class="form-label mb-4">Other Services</label>
                                         <div class="multiple-checks">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" value="No Smoking" id="fornosmoking" {{ !empty($transportation_details['other_services']) && strpos($transportation_details['other_services'], 'No Smoking') !== false ? 'checked' : '' }}>

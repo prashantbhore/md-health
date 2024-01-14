@@ -113,10 +113,12 @@
 }
 
 /* UTILITY CLASSES */
-.ff-currency {
-    font-family: cursive;
-    font-weight: 400;
+
+.lira {
+    font-family: sans-serif !important;
+    font-weight: 600 !important;
 }
+
 .bod-3 {
     border-radius: 3px 0 0px 3px !important;
 }
@@ -150,13 +152,11 @@
 .add-btn {
     border-radius: 3px;
     background: #000;
-    width: 242px;
-    height: 36px;
-
+    width: 242px !important;
+    height: 36px !important;
     color: #4cdb06;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -169,13 +169,12 @@
 .save-btn-black {
     width: 100%;
     height: 48px;
-
     border-radius: 5px;
     background: #000;
     color: #fff;
     text-align: center;
     font-family: "Campton";
-    font-weight: 700;
+    /* font-weight: 700; */
     font-size: 15px;
     line-height: normal;
     letter-spacing: -0.6px;
@@ -864,7 +863,7 @@ select {
 .btn-check:focus+.btn,
 .btn:focus {
     box-shadow: none;
-    border-color: #4cdb06;
+    /* border-color: #4cdb06; */
 }
 
 .md-navbar .nav-item .nav-link,
@@ -1359,7 +1358,6 @@ select {
     color: #000;
     font-family: Campton;
     font-size: 20px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.8px;
@@ -1373,17 +1371,20 @@ select {
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
-    transition: 0.15s all;
+    transition: 0.3s all;
     padding: 0.5rem 0;
 }
 
 .panel-left .nav-link:hover {
     color: #4cdb06;
+    padding-left: 1.5rem;
+    font-weight: bold;
 }
+
+
 
 .activeClass {
     position: relative;
@@ -1419,12 +1420,11 @@ select {
     border: 1px solid #4cdb06;
 }
 
-.green-plate p,
-.white-plate p {
+.green-plate p, .white-plate p {
     color: #000002;
-    font-family: Campton;
+    font-family: 'CamptonBook';
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
@@ -1432,6 +1432,7 @@ select {
 .black-plate p {
     color: #4cdb06;
     font-size: 16px;
+    font-family: CamptonBook;
 }
 
 .black-plate h3 {
@@ -1806,9 +1807,9 @@ select option {
 
 .form-div .form-label {
     color: #979797;
-    font-family: "CamptonThin";
+    font-family: 'CamptonLight';
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
@@ -1838,7 +1839,14 @@ select option {
     color: #979797;
 } */
 .form-div .form-select:focus {
+    /* border: 2px solid #d6d6d6; */
     border: 2px solid #d6d6d6;
+    box-shadow: none;
+}
+
+.form-select.is-valid,
+.was-validated .form-select:valid {
+    border-color: #d6d6d6;
 }
 
 .trmt-card-footer.footer-btns {
@@ -2037,19 +2045,21 @@ select option {
     width: 49%;
 }
 
-.dashboard-card-title span.active {
-    width: 94px;
-    height: 19px;
+.dashboard-card-title span.active,
+.veh-status {
+    width: 94px !important;
+    height: 19px !important;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 500 !important;
     line-height: normal;
     letter-spacing: -0.4px;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-transform: capitalize;
 }
 
 .treatment-card .btn-active {
@@ -3490,7 +3500,7 @@ label.tc-text,
 .multiple-checks .form-check-label {
     color: #000;
     font-family: "Campton";
-    font-size: 18px;
+    font-size: 16px;
 
     font-weight: 500;
     line-height: normal;
@@ -3500,12 +3510,22 @@ label.tc-text,
 .trmt-card-body .dashboard-card-title {
     color: #000;
     font-family: Campton;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.52px;
+}
+
+/* .trmt-card-body .dashboard-card-title {
+    color: #000;
+    font-family: Campton;
     font-size: 16px;
 
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
-}
+} */
 
 .trmt-card-body h5:nth-child(2) {
     color: #000;
@@ -3892,4 +3912,37 @@ label.tc-text,
 .service-provider-account .nav-tabs .nav-item.show .nav-link,
 .service-provider-account .nav-tabs .nav-link.active {
     background-color: #f6f6f6;
+}
+
+.choices__inner {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    background-color: #fff;
+    padding: .25rem 3.6rem .1rem .5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 0.8125rem;
+    min-height: 37.5px;
+    overflow: hidden;
+}
+
+.choices__input {
+    display: block;
+    width: 100%;
+    padding: .5rem .9rem;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    font-size: 0.8125rem;
+    border-radius: 0.25rem;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.other-services .treatment-card:last-child {
+    margin-bottom: 100px !important;
+}
+
+.form-control:focus {
+    border-color:  #d6d6d6;
 }

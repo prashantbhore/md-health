@@ -1,6 +1,11 @@
 @extends('front.layout.layout2')
 @section('content')
 <style>
+    .form-control::placeholder {
+        font-family: "CamptonBook";
+        font-weight: 600;
+    }
+
     .stars-div .fa {
         font-size: 20px;
     }
@@ -14,8 +19,12 @@
     }
 
     .star-rating .fa.fa-star {
-        color: gray;
+        color: #B9B9B9;
         cursor: pointer;
+        width: 18px;
+        height: 17px;
+        flex-shrink: 0;
+        font-size: 1.5rem;
     }
 
     .star-rating .fa.fa-star.selected {
@@ -31,6 +40,7 @@
         width: auto;
         object-fit: contain;
         margin-top: 15px;
+        border-radius: 3px;
     }
 
     .multiple-checkbox-div .multiple-checks {
@@ -39,9 +49,7 @@
         gap: 10px;
     }
 
-    .multiple-checkbox-div .multiple-checks .form-check {
-        width: 189px;
-    }
+
 
     .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
         margin-right: 3px;
@@ -54,7 +62,7 @@
     }
 
     .multiple-checkbox-div .multiple-checks .form-check {
-        width: 185px;
+        min-width: 200px;
     }
 
     .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
@@ -64,8 +72,6 @@
     .multiple-checks .form-check-label {
         color: #000;
         font-family: Campton;
-        font-size: 12px;
-        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.48px;
@@ -82,7 +88,7 @@
             </div>
             <div class="col-md-9">
                 <div class="card mb-4">
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                         <span>Add New Acommodition</span>
                         <a href="{{ url('medical-other-services') }}" class="d-flex align-items-center gap-1 text-decoration-none">
                             <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
@@ -96,18 +102,18 @@
                                 @csrf
 
                                 <input type="hidden" name="hotel_id" value="{{ !empty($hotel_details['id']) ? $hotel_details['id'] : '' }}">
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Hotel Name</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Hotel Name</label>
                                     <input type="text" class="form-control" name="hotel_name" id="hotel_name" value="{{ !empty($hotel_details['hotel_name']) ? $hotel_details['hotel_name'] : '' }}" aria-describedby="foodname" placeholder="Please Write Here">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Hotel Address</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Hotel Address</label>
                                     <input type="text" class="form-control" name="hotel_address" id="hotel_address" value="{{ !empty($hotel_details['hotel_address']) ? $hotel_details['hotel_address'] : '' }}" aria-describedby="foodname" placeholder="Please Write Here">
                                 </div>
 
-                                {{-- <div class="form-group mb-3">
-                                    <label class="form-label">Hotel Stars (Selectable)</label>
+                                {{-- <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Hotel Stars (Selectable)</label>
                                     <div class="stars-div">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -121,11 +127,11 @@
 
                                 <!-- Display Selected Stars Count -->
                                 {{-- <div id="selectedStarsCount"></div> --}}
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Hotel Stars (Selectable)</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Hotel Stars (Selectable)</label>
                                     <div class="form-group">
                                         <input type="hidden" name="hotel_stars" id="hotel_stars" value="{{ !empty($hotel_details['hotel_stars']) ? $hotel_details['hotel_stars'] : '' }}">
-                                        <div class="star-rating">
+                                        <div class="star-rating d-flex gap-3">
                                             <i class="fa fa-star" data-value="1"></i>
                                             <i class="fa fa-star" data-value="2"></i>
                                             <i class="fa fa-star" data-value="3"></i>
@@ -138,9 +144,9 @@
 
 
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Hotel Picture</label>
-                                    <div class="form-group">
+                                <div class="form-group mb-5">
+                                    <label class="form-label mb-3">Hotel Picture</label>
+                                    <div class="form-group mb-3">
                                         <input type="file" name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
                                     </div>
                                     <div class="prev-img-div">
@@ -149,16 +155,16 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group mb-3 section-heading-div">
-                                    <label class="form-label">Hotel Per Night Price (VAT Included)</label>
+                                <div class="form-group mb-4 section-heading-div">
+                                    <label class="form-label mb-3">Hotel Per Night Price (VAT Included)</label>
                                     <div class="input-icon-div">
                                         <input type="text" class="form-control" name="hotel_per_night_price" id="hotel_per_night_price" placeholder="0" value="{{ !empty($hotel_details['hotel_per_night_price']) ? $hotel_details['hotel_per_night_price'] : '' }}">
                                         <span class="input-icon">₺</span>
                                     </div>
                                 </div>
 
-                                <div class="form-group mb-3 section-heading-div">
-                                    <label class="form-label">Distance From Hospital</label>
+                                <div class="form-group mb-4 section-heading-div">
+                                    <label class="form-label mb-3">Distance From Hospital</label>
                                     <div class="input-icon-div">
                                         <input type="text" class="form-control" name="distance_from_hospital" id="distance_from_hospital" placeholder="0" value="{{ !empty($hotel_details['distance_from_hospital']) ? $hotel_details['distance_from_hospital'] : '' }}">
                                         <span class="input-icon">KM</span>
@@ -167,7 +173,7 @@
 
                                 <div class="multiple-checkbox-div mb-5">
                                     <div class="form-group d-flex flex-column">
-                                        <label class="form-label">Other Services</label>
+                                        <label class="form-label mb-3">Other Services</label>
                                         <div class="multiple-checks">
                                             <div class="form-check">
                                                 <input type="checkbox" value="Breakfast & Dinner" class="form-check-input" id="fordinner" {{ !empty($hotel_details['hotel_other_services']) && strpos($hotel_details['hotel_other_services'], 'Breakfast & Dinner') !== false ? 'checked' : '' }}>
@@ -225,9 +231,8 @@
                                 </div>
 
                                 <div class="section-btns mb-4">
-                                    {{-- <a href="javascript:void(0);" --}}
-                                    <button type="submit" class="btn save-btn-black">Save
-                                        Acommodition</button>
+                                    <!-- {{-- <a href="javascript:void(0);" --}} -->
+                                    <button type="submit" class="btn save-btn-black">Save Accommodation</button>
                                 </div>
 
                             </form>
@@ -371,4 +376,5 @@
         });
     });
 </script>
+
 @endsection
