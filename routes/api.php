@@ -25,6 +25,8 @@ use App\Http\Controllers\api\vendor\UpdateVendorProfileController;
 use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\food\UpdateFoodProfileController;
 use App\Http\Controllers\api\vendor\VendorDashboardController;
+use App\Http\Controllers\api\food\FoodPackageController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -312,6 +314,9 @@ Route::middleware('auth:sanctum')->group(function ()
     //customer-favourite-list
     Route::get('md-customer-favourite-list', [CustomerPackageController::class, 'customer_favourite_list']);
 
+    //customer-favourite-list-count
+    Route::get('md-customer-favourite-list-count', [CustomerPackageController::class, 'customer_favourite_list_count']);
+
     //remove-from-favourite
     Route::post('md-remove-from-favourite', [CustomerPackageController::class, 'remove_from_favourite']);
 
@@ -497,6 +502,12 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::get('md-vendor-monthly-order-count', 'monthlyOrders');
         Route::get('md-vendor-monthly-sales-count', 'monthlySales');
         Route::get('md-vendor-package-latest-orders', 'latestOrders');
+    });
+
+
+    //Medical Provider Dashboard
+    Route::controller(FoodPackageController::class)->group(function () {
+        Route::get('md-add-food-packages', 'add_food_packages');
     });
 
 
