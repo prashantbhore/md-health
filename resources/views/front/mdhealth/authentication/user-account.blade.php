@@ -172,7 +172,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div id="recaptcha-container" class="df-center"></div>
+                                    {{-- <div id="recaptcha-container" class="df-center"></div> --}}
                                     <span id="error" class="text-danger"></span>
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
                                         <button type="button" class="btn btn-md mb-5 w-100" id="regcustuser" style="height: 47px;">Create Account</button>
@@ -197,7 +197,7 @@
             </div>
         </div>
     </div>
-
+</div>
     {{-- otp --}}
 
     <div class="container py-100px df-center sign-in-form d-none" id="otpDiv">
