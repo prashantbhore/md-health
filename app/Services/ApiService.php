@@ -53,28 +53,29 @@ class ApiService
 
                 // dd( $response );
             } else {
-
                 $headers = [];
-
+                
                 if ( $token ) {
                     $headers[ 'Authorization' ] = 'Bearer ' . $token;
                 }
-
+                
                 $request = Request::create( $url, $method, $body ?? [] );
-
+                
                 $request->headers->add( $headers );
-
+                
                 if ( $image ) {
                     if ( is_array( $image ) ) {
-
+                        
                         foreach ( $image as $index => $singleImage ) {
-
+                            
                             $extension = $singleImage->getClientOriginalExtension();
                             $request->files->set( $image_input_field_name[ $index ], $singleImage );
-                            $request->request->add( [
-                                $image_input_field_name[ $index ] => file_get_contents( $singleImage ),
-                                'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension
-                            ] );
+                            // $request->request->add( [
+                            //     $image_input_field_name[ $index ] => file_get_contents( $singleImage ),
+                            //     // 'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension
+                            // ] );
+                            // dd($request);
+
                         }
 
                     } else {
@@ -86,6 +87,7 @@ class ApiService
                         ] );
                     }
                 }
+                            // dd($request);
 
                 $response = app()->handle( $request );
                 // echo ( $response->getContent() );

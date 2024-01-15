@@ -381,11 +381,11 @@
 
                 // Add 'selected' class to stars up to the selected count
                 $(this).prevAll().addBack().addClass('selected');
-
+                var base_url = $('#base_url').val();
                 // Send an AJAX request to your Laravel endpoint with the selected stars count
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('saveStarRating') }}',
+                    url: base_url + '/saveStarRating',
                     data: {
                         selectedStars: newSelectedStars,
                         _token: '{{ csrf_token() }}'

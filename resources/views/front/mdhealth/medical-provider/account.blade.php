@@ -343,13 +343,11 @@
                     company_name: {
                         required: true,
                         minlength: 2,
-                        // Adding a custom rule for disallowing spaces
                         nowhitespace: true
                     },
                     company_address: {
                         required: true,
                         minlength: 2,
-                        // Adding a custom rule for disallowing spaces
                         nowhitespace: true
                     },
                     country_id: "required",
@@ -361,12 +359,11 @@
                     authorisation_full_name: {
                         required: true,
                         minlength: 2,
-                        // Adding a custom rule for disallowing spaces
                         nowhitespace: true
                     },
                     company_overview: {
                         required: true,
-                        minlength: 10
+                        // minlength: 10
                     }
                     // Add validation rules for other fields as needed
                 },

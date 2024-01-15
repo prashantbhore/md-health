@@ -153,7 +153,7 @@
                                         </div>
                                     </div>
 
-                                    <div id="recaptcha-container" class="df-end"></div>
+                                    
                                     <span id="error" class="text-danger"></span>
 
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
@@ -246,7 +246,7 @@
                     <span class="text-danger" id="timer">32 sec</span>
                 </h6>
                 <div>
-                    <a href="#" class="text-secondary" id="resendotp">Resend Code In</a>
+                    <a href="javascript:void(0);" class="text-secondary" id="resendotp" onclick="resendCode();">Resend Code In</a>
                 </div>
             </div>
         </div>
@@ -268,42 +268,54 @@
         </div>
     </div>
 </div>
+<div id="recaptcha-container" class="df-end"></div>
+
 @endsection @section('script')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script> 
+
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script>
+        function countdownTimer(duration) {
+            $('#resendotp').hide();
+            let timer = duration,
+                minutes, seconds;
+            const timerDisplay = $('#timer');
+            const timerInterval = setInterval(function() {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                timerDisplay.text(minutes + ":" + seconds);
+
+                if (--timer < 0) {
+                    timer = duration;
+                    clearInterval(timerInterval);
+                    $('#resendotp').show();
+                    timerDisplay.text("Timer completed!");
+                }
+            }, 1000);
+        }
+
+        // Set the timer duration in seconds
+        // let timerDuration = 32;
+
+        // countdownTimer(timerDuration);
+    </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 <script>
-    function countdownTimer(duration) {
-        $("#resendotp").hide();
-        let timer = duration,
-            minutes,
-            seconds;
-        const timerDisplay = $("#timer");
-        const timerInterval = setInterval(function() {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            timerDisplay.text(minutes + ":" + seconds);
-
-            if (--timer < 0) {
-                timer = duration;
-                clearInterval(timerInterval);
-                $("#resendotp").show();
-                timerDisplay.text("Timer completed!");
-            }
-        }, 1000);
-    }
-
-    // Set the timer duration in seconds
-    let timerDuration = 32;
-
-    countdownTimer(timerDuration);
-</script>
-
-<script>
+    
     $(document).on("click", "#regcustuser", function() {
         var base_url = $("#base_url").val();
         if ($("#mycustomerForm").valid()) {
@@ -398,6 +410,8 @@
     }
 
     function sendOTP() {
+        let timerDuration = 32;
+            countdownTimer(timerDuration);
         var number = $("#phone").val();
         firebase
             .auth()
@@ -409,6 +423,7 @@
                 $("#successAuth").show();
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
+                recaptchaVerifier.clear();
             })
             .catch(function(error) {
                 $("#error").text(error.message);
@@ -429,8 +444,10 @@
             .confirm(code)
             .then(function(result) {
                 var user = result.user;
+                // console.log(user);
                 $("#successOtpAuthot").text("OTP verified");
                 $("#successOtpAuthot").show();
+                recaptchaVerifier.clear();
 
                 // var formData = $('#myFormProvider').serialize();
                 var form = document.getElementById("myFormProvider");
@@ -444,7 +461,6 @@
                 });
 
                 $.ajax({
-                    // url: base_url+'/md-customer-register',
                     url: base_url + "/md-register-medical-provider",
                     method: "POST",
                     data: formData,
@@ -479,6 +495,48 @@
                 $("#error").show();
             });
     }
+
+
+    function resendCode() {
+        let timerDuration = 32;
+            countdownTimer(timerDuration);
+            var number = $("#phone").val();
+            var containerId = 'recaptcha-container';
+            var container = document.getElementById(containerId);
+            $('#recaptcha-container').show();
+
+            if (!container) {
+                $("#error").text("reCAPTCHA container is missing.");
+                $("#error").show();
+                return;
+            }
+
+            try {
+                container.innerHTML = '';
+                recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
+                recaptchaVerifier.render();
+
+                firebase
+            .auth()
+            .signInWithPhoneNumber(number, window.recaptchaVerifier)
+            .then(function(confirmationResult) {
+                window.confirmationResult = confirmationResult;
+                coderesult = confirmationResult;
+                        $("#sentSuccess").text("New code sent Successfully.");
+                        $("#sentSuccess").show();
+                        coderesult = confirmationResult;
+                        // recaptchaVerifier.clear();
+                        $('#recaptcha-container').hide();
+                    })
+                    .catch(function(error) {
+                        $("#error").text(error.message);
+                        $("#error").show();
+                    });
+            } catch (error) {
+                $("#error").text("Error initializing reCAPTCHA: " + error.message);
+                $("#error").show();
+            }
+        }
 </script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
