@@ -52,50 +52,12 @@ class ApiService
             // dd( $response->json() );
             return $response->json();
 
-                // dd( $response );
-            } else {
-                $headers = [];
-                
-                if ( $token ) {
-                    $headers[ 'Authorization' ] = 'Bearer ' . $token;
-                }
-                
-                $request = Request::create( $url, $method, $body ?? [] );
-                
-                $request->headers->add( $headers );
-                
-                if ( $image ) {
-                    if ( is_array( $image ) ) {
-                        
-                        foreach ( $image as $index => $singleImage ) {
-                            
-                            $extension = $singleImage->getClientOriginalExtension();
-                            $request->files->set( $image_input_field_name[ $index ], $singleImage );
-                            // $request->request->add( [
-                            //     $image_input_field_name[ $index ] => file_get_contents( $singleImage ),
-                            //     // 'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension
-                            // ] );
-                            // dd($request);
+            // dd( $response );
+        } else {
+            $headers = [];
 
-                        }
-
-                    } else {
-                        $extension = $image->getClientOriginalExtension();
-                        $request->files->set( $image_input_field_name, $image );
-                        $request->request->add( [
-                            $image_input_field_name => file_get_contents( $image ),
-                            'filename' => time() . Str::random( 5 ) . '.' . $extension,
-                        ] );
-                    }
-                }
-                            // dd($request);
-
-                $response = app()->handle( $request );
-                // echo ( $response->getContent() );
-                // die;
-                // dd( jso n_decode( $response->getContent(), true ) );
-
-                return json_decode( $response->getContent(), true );
+            if ($token) {
+                $headers['Authorization'] = 'Bearer ' . $token;
             }
 
             $request = Request::create($url, $method, $body ?? []);
@@ -109,10 +71,12 @@ class ApiService
 
                         $extension = $singleImage->getClientOriginalExtension();
                         $request->files->set($image_input_field_name[$index], $singleImage);
-                        $request->request->add([
-                            $image_input_field_name[$index] => file_get_contents($singleImage),
-                            'filename' => time() . Str::random(5) . '_' . $index . '.' . $extension,
-                        ]);
+                        // $request->request->add( [
+                        //     $image_input_field_name[ $index ] => file_get_contents( $singleImage ),
+                        //     // 'filename' => time() . Str::random( 5 ) . '_' . $index . '.' . $extension
+                        // ] );
+                        // dd($request);
+
                     }
 
                 } else {
@@ -124,6 +88,7 @@ class ApiService
                     ]);
                 }
             }
+            // dd($request);
 
             $response = app()->handle($request);
             // echo ( $response->getContent() );
@@ -132,7 +97,42 @@ class ApiService
 
             return json_decode($response->getContent(), true);
         }
+
+        $request = Request::create($url, $method, $body ?? []);
+
+        $request->headers->add($headers);
+
+        if ($image) {
+            if (is_array($image)) {
+
+                foreach ($image as $index => $singleImage) {
+
+                    $extension = $singleImage->getClientOriginalExtension();
+                    $request->files->set($image_input_field_name[$index], $singleImage);
+                    $request->request->add([
+                        $image_input_field_name[$index] => file_get_contents($singleImage),
+                        'filename' => time() . Str::random(5) . '_' . $index . '.' . $extension,
+                    ]);
+                }
+
+            } else {
+                $extension = $image->getClientOriginalExtension();
+                $request->files->set($image_input_field_name, $image);
+                $request->request->add([
+                    $image_input_field_name => file_get_contents($image),
+                    'filename' => time() . Str::random(5) . '.' . $extension,
+                ]);
+            }
+        }
+
+        $response = app()->handle($request);
+        // echo ( $response->getContent() );
+        // die;
+        // dd( jso n_decode( $response->getContent(), true ) );
+
+        return json_decode($response->getContent(), true);
     }
+    // }
 
     public function getDataofmultipleimg($token = null, $url, $body = null, $method, $image = null, $image_input_field_name = null)
     {
@@ -154,7 +154,7 @@ class ApiService
                         $files = [];
                         foreach ($imageFiles as $index => $singleImage) {
                             // Check if $singleImage is an instance of UploadedFile and is valid
-                            if ($singleImage instanceof \Illuminate\Http\UploadedFile  && $singleImage->isValid()) {
+                            if ($singleImage instanceof \Illuminate\Http\UploadedFile && $singleImage->isValid()) {
                                 $extension = $singleImage->getClientOriginalExtension();
                                 $filename = time() . Str::random(5) . '_' . $index . '.' . $extension;
                                 // Save the file to the files array
@@ -203,7 +203,7 @@ class ApiService
                         $files = [];
                         foreach ($imageFiles as $index => $singleImage) {
                             // Check if $singleImage is an instance of UploadedFile and is valid
-                            if ($singleImage instanceof \Illuminate\Http\UploadedFile  && $singleImage->isValid()) {
+                            if ($singleImage instanceof \Illuminate\Http\UploadedFile && $singleImage->isValid()) {
                                 $extension = $singleImage->getClientOriginalExtension();
                                 $filename = time() . Str::random(5) . '_' . $index . '.' . $extension;
                                 $files[$index] = $singleImage;

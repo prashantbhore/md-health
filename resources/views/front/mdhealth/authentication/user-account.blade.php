@@ -56,7 +56,26 @@
             <h1 class="my-0 form-heading p-abs">Go Super Admin Panel</h1>
         </div>
 
-        
+         <!-- Nav tabs -->
+         <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a href="{{ url('user-account') }}" class="nav-link active">User</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('medical-provider-login') }}" class="nav-link">Medical Provider</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('vendor-login') }}" class="nav-link">Vendor</a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:void(0);" class="nav-link">Home Service</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('food-provider-register') }}" class="nav-link">Food Provider</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
 
         <!-- Tab panes -->
         <div class="tab-content position-relative" id="myTabContent">
