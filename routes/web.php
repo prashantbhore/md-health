@@ -121,18 +121,36 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin MANAGE VENDORS
    
-    Route::view('pending-vendors', 'admin/vendors/pending-vendors');
-    Route::view('approved-vendors', 'admin/vendors/approved-vendors');
-    Route::view('rejected-vendors', 'admin/vendors/rejected-vendors');
+   
+  
+    
     Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
+
     Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
+
     Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
+
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
    
 
-    // Route::controller(ManageVendorController::class)->group(function (){
-    //     Route::get('vendors','index');
-    // });
+    Route::controller(ManageVendorController::class)->group(function (){
+       // Route::get('vendors','index');
+
+        Route::get('pending-vendors', 'pending_vendors');
+
+        Route::get('pending-vendors-data-table','pending_vendor_data_table');
+
+
+        Route::get('approved-vendors', 'approved_vendors');
+
+        Route::get('approved-vendors-data-table','approved_vendor_data_table');
+
+        Route::get('rejected-vendors','rejected_vendors');
+
+        Route::get('rejected-vendors-data-table','rejected_vendor_data_table');
+
+        Route::get('vendor-delete','vendor_delete');
+    });
 
 
 
@@ -150,7 +168,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('medical-tourism-store', 'store')->name('medical.tourism.store');
         Route::post('verification-status-chnage', 'verification_status');
         Route::post('vendor-status-chnage', 'status');
-        Route::post('vendor-delete', 'vendor_delete');
+        //Route::post('vendor-delete', 'vendor_delete');
         Route::post('/admin-delete-package','package_delete');
     });
 

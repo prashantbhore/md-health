@@ -23,6 +23,8 @@ class VendorRegister extends Authenticatable
              'roll_id',
              'email',
              'mobile_no',
+             'vendor_type',
+             'vendor_status',
              'tax_no',
              'company_address',
              'password',
@@ -51,6 +53,11 @@ class VendorRegister extends Authenticatable
     {
         return $this->belongsTo(VendorLogo::class, 'id','vendor_id')
             ->where('status', 'active');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
     }
 
 

@@ -12,6 +12,13 @@
         color: #00ff00;
         background-color: inherit;
         text-decoration: none;
+
+        
+    }
+
+    .dataTables_filter,
+    #dataTables_filter {
+        display: block !important
     }
 </style>
 
@@ -67,9 +74,8 @@
 
                                 <select id="status" class="form-select form-select-sm">
                                     <option selected >All</option>
-                                    <option value="1">Active </option>
-                                    <option value="1">Deactive </option>
-
+                                    <option value="active">Active </option>
+                                    <option value="inactive">Inactive</option>
                                 </select>
                             </div>
                             <table id="example" class="table">

@@ -21,6 +21,8 @@ class CityController extends Controller
         ->orderBy('country_name', 'asc')
         ->get();
 
+        
+
         // $cities = Cities::with('country')->where('status', '!=', 'delete')->get();
 
         // dd($cities);
@@ -97,6 +99,9 @@ class CityController extends Controller
     
                     return $actionBtn;
                 })
+
+
+                
                 ->rawColumns(['city_name', 'country_name','action'])
                 ->make(true);
         }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('roll_id')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();
+            $table->string('vendor_type')->nullable()->default('food_vendor');
+            $table->enum('vendor_status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string('tax_no')->nullable();
             $table->longText('company_address')->nullable();
             $table->string('password')->nullable();
