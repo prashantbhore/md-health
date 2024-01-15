@@ -113,6 +113,12 @@
 }
 
 /* UTILITY CLASSES */
+
+.lira {
+    font-family: sans-serif !important;
+    font-weight: 600 !important;
+}
+
 .bod-3 {
     border-radius: 3px 0 0px 3px !important;
 }
@@ -146,13 +152,11 @@
 .add-btn {
     border-radius: 3px;
     background: #000;
-    width: 242px;
-    height: 36px;
-    flex-shrink: 0;
+    width: 242px !important;
+    height: 36px !important;
     color: #4cdb06;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -165,14 +169,13 @@
 .save-btn-black {
     width: 100%;
     height: 48px;
-    flex-shrink: 0;
     border-radius: 5px;
     background: #000;
     color: #fff;
     text-align: center;
-    font-family: "CamptonBold";
+    font-family: "Campton";
+    /* font-weight: 700; */
     font-size: 15px;
-    font-weight: 700;
     line-height: normal;
     letter-spacing: -0.6px;
 }
@@ -773,6 +776,12 @@ select {
     justify-content: end;
 }
 
+.df-start {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
 .text-green {
     color: #4cdb06 !important;
 }
@@ -816,13 +825,11 @@ select {
 .form-divider::before {
     content: "";
     position: absolute;
-    /* bottom: 0; */
     border-bottom: 2.5px solid #4cdb06;
     width: 45%;
-    /* height: 100px; */
     transform: rotate(90deg);
-    left: 256px;
-    top: 256px;
+    left: 27.5%;
+    top: 18%;
 }
 
 .bb-green1::before {
@@ -856,7 +863,7 @@ select {
 .btn-check:focus+.btn,
 .btn:focus {
     box-shadow: none;
-    border-color: #4cdb06;
+    /* border-color: #4cdb06; */
 }
 
 .md-navbar .nav-item .nav-link,
@@ -980,9 +987,16 @@ select {
 }
 
 .deleteAll {
-    color: #f31d1d;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+
+    color: #F31D1D;
+    text-align: center;
+    font-family: Campton;
+    font-size: 17px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.68px;
+    text-decoration-line: underline;
 }
 
 .favouriteBtn {
@@ -1272,7 +1286,7 @@ select {
 .authentication .tab-content textarea,
 .authentication .tab-content select {
     /* width: 189px; */
-    flex-shrink: 0;
+
     border-radius: 5px;
     border: 2px solid #d6d6d6;
     color: #000;
@@ -1322,7 +1336,7 @@ select {
 .panel-left.card,
 .for-cards .card {
     border: 0;
-    flex-shrink: 0;
+
     border-radius: 5px;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
@@ -1344,7 +1358,6 @@ select {
     color: #000;
     font-family: Campton;
     font-size: 20px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.8px;
@@ -1358,17 +1371,20 @@ select {
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
-    transition: 0.15s all;
+    transition: 0.3s all;
     padding: 0.5rem 0;
 }
 
 .panel-left .nav-link:hover {
     color: #4cdb06;
+    padding-left: 1.5rem;
+    font-weight: bold;
 }
+
+
 
 .activeClass {
     position: relative;
@@ -1394,7 +1410,7 @@ select {
 .black-plate,
 .white-plate {
     height: 58px;
-    flex-shrink: 0;
+
     border-radius: 5px;
     padding: 0 1rem;
     text-decoration: none;
@@ -1404,12 +1420,11 @@ select {
     border: 1px solid #4cdb06;
 }
 
-.green-plate p,
-.white-plate p {
+.green-plate p, .white-plate p {
     color: #000002;
-    font-family: Campton;
+    font-family: 'CamptonBook';
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
@@ -1417,6 +1432,7 @@ select {
 .black-plate p {
     color: #4cdb06;
     font-size: 16px;
+    font-family: CamptonBook;
 }
 
 .black-plate h3 {
@@ -1439,7 +1455,7 @@ select {
 .sign-in-form .card {
     width: 563px;
     min-height: 600px;
-    flex-shrink: 0;
+
     border-radius: 10px;
     border: 1px solid #d6d6d6;
 }
@@ -1480,7 +1496,7 @@ select {
 .sms-input .form-control {
     width: 45px;
     height: 80px;
-    flex-shrink: 0;
+    padding: 0;
     color: #000;
     text-align: center;
     font-family: Campton;
@@ -1492,12 +1508,12 @@ select {
 
 .treatment-card {
     /* width: 687px; */
-    /* height: 90px; */
+    height: 90px;
     padding: 16px;
-    flex-shrink: 0;
     border-radius: 3px;
     background: #f6f6f6;
     background-color: #f6f6f6;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
 }
 
 .pending {
@@ -1505,7 +1521,7 @@ select {
     height: 25px;
     /* width: 94px;
     height: 19px; */
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f3771d;
     color: #000;
@@ -1545,7 +1561,7 @@ select {
     border-color: #d9d9d9;
     width: 165px;
     height: 47px;
-    flex-shrink: 0;
+
 }
 
 .card-details label,
@@ -1642,7 +1658,8 @@ select {
 
 .dashboard-card-title {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 3rem;
     font-weight: 700;
     font-family: "Campton";
 }
@@ -1661,6 +1678,7 @@ select {
 
 .view-detail-btn {
     color: #000;
+    cursor: pointer;
 }
 
 .fw-100 {
@@ -1725,6 +1743,8 @@ select {
     border-bottom: 4px solid #4cdb06;
     color: #000002;
     font-weight: 700;
+    font-family: "CamptonBold";
+    min-width: 100px;
 }
 
 .tab-div .nav-link {
@@ -1787,9 +1807,9 @@ select option {
 
 .form-div .form-label {
     color: #979797;
-    font-family: "CamptonThin";
+    font-family: 'CamptonLight';
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
@@ -1819,7 +1839,14 @@ select option {
     color: #979797;
 } */
 .form-div .form-select:focus {
+    /* border: 2px solid #d6d6d6; */
     border: 2px solid #d6d6d6;
+    box-shadow: none;
+}
+
+.form-select.is-valid,
+.was-validated .form-select:valid {
+    border-color: #d6d6d6;
 }
 
 .trmt-card-footer.footer-btns {
@@ -1830,14 +1857,16 @@ select option {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
-    gap: 5px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0px;
+    gap: 8px;
     color: #000;
-    font-family: "Campton";
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    margin-right: 1rem;
 }
 
 .trmt-card-footer.footer-btns a i {
@@ -1952,10 +1981,10 @@ select option {
 }
 
 .section-heading {
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    font-family: "Campton" !important;
-    margin-bottom: 20px !important;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Campton";
+    margin-bottom: 20px;
 }
 
 .multiple-upload-images .preview-img .prev-img-div .clear-btn {
@@ -2016,21 +2045,21 @@ select option {
     width: 49%;
 }
 
-.dashboard-card-title span.active {
-    width: 130px;
-    height: 24px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    background: #4cdb06;
+.dashboard-card-title span.active,
+.veh-status {
+    width: 94px !important;
+    height: 19px !important;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-
-    font-weight: 700;
+    font-weight: 500 !important;
     line-height: normal;
-    letter-spacing: 0.1px;
-    padding: 5px 35px;
+    letter-spacing: -0.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
 }
 
 .treatment-card .btn-active {
@@ -2050,7 +2079,7 @@ select option {
 .dashboard-card-title span.in-progress {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f4d100;
     color: #000;
@@ -2067,7 +2096,7 @@ select option {
 .trmt-card-footer span.in-progress {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f3771d;
     color: #fff;
@@ -2084,7 +2113,7 @@ select option {
 .trmt-card-footer .active {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #4cdb06;
     color: #000;
@@ -2101,7 +2130,7 @@ select option {
 .trmt-card-body .active {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #4cdb06;
     color: #fff;
@@ -2118,7 +2147,7 @@ select option {
 .trmt-card-footer .cancel {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #ff0000;
     color: #fff;
@@ -2135,7 +2164,7 @@ select option {
 .trmt-card-body .cancel {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #ff0000;
     color: #fff;
@@ -2168,7 +2197,7 @@ span.popup-msg.active {
 .dashboard-card-title span.cancel {
     width: 130px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #ff0000;
     color: #fff;
@@ -2184,7 +2213,7 @@ span.popup-msg.active {
 
 .section-heading span.active {
     width: 130px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #4cdb06;
     color: #000;
@@ -2201,7 +2230,7 @@ span.popup-msg.active {
 
 .section-heading span.in-progress {
     width: 130px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f4d100;
     color: #000;
@@ -2371,14 +2400,14 @@ span.popup-msg.active {
 .hide-eye-div .mdi {
     position: absolute;
     top: 42px;
-    right: -16px;
+    right: 16px;
     cursor: pointer;
 }
 
 .up-abs {
     position: absolute;
     top: 42px;
-    right: 10px;
+    right: 26px;
 }
 
 
@@ -2426,7 +2455,7 @@ span.popup-msg.active {
 .medical-pckg .bookButton {
     width: 234px;
     height: 47px;
-    flex-shrink: 0;
+
     border-radius: 70px;
     border: 1px solid #4CDB06;
 
@@ -2561,6 +2590,16 @@ span.popup-msg.active {
     place-content: center;
 }
 
+.paymentSection label {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
 .greenCheck input[type="checkbox"],
 .greenCheck input[type="checkbox"]::before {
     border-radius: 50% !important;
@@ -2650,9 +2689,18 @@ span.popup-msg.active {
 .card-details input {
     width: 100%;
     border-radius: 5px;
-    border: 1.5px solid #4cdb06;
+    width: 464px;
+    height: 49px;
+    flex-shrink: 0;
+    border: 1px solid #4cdb06;
     background-color: transparent;
-    padding: 8px;
+    /* padding: 8px; */
+    color: #000 !important;
+    font-family: "Campton" !important;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.8px;
 }
 
 #wallet,
@@ -2688,28 +2736,40 @@ span.popup-msg.active {
 } */
 
 .creditCardContainer {
+
+    width: 490px;
+    height: 297px;
+    border-radius: 24px;
     background: linear-gradient(180deg, #0a0a0a 0%, #383838 100%);
+
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 2.5rem;
-    border-radius: 25px;
-    gap: 4rem;
+    /* gap: 4rem; */
+
+
 }
 
 .cardNumber {
-    font-size: 1.25rem;
-    font-family: CamptonBook;
+    color: #FFF;
+    font-family: Campton;
+    font-size: 30px;
+
     font-weight: 500;
-    color: #fff;
+    line-height: normal;
     margin-bottom: 8px;
 }
 
 .creditCardContainer .validity,
 .creditCardContainer .cardholder {
+    color: #FFF;
+    font-family: Campton;
+    font-size: 20px;
+
+    font-weight: 500;
+    line-height: normal;
     margin-bottom: 0;
-    color: white;
-    font-family: CamptonBook;
-    font-size: 14px;
 }
 
 .creditCardContainer .visa {
@@ -3021,7 +3081,7 @@ span.popup-msg.active {
 .appTime button {
     width: 54px;
     height: 30px;
-    flex-shrink: 0;
+
 
     border-radius: 5px;
     border: 1px solid #d6d6d6;
@@ -3057,7 +3117,7 @@ span.popup-msg.active {
 .live-screen {
     width: 992px;
     height: 506px;
-    flex-shrink: 0;
+
     border-radius: 5px;
     background: #d9d9d9;
 }
@@ -3076,7 +3136,7 @@ span.popup-msg.active {
 .customer-cam {
     width: 216px;
     height: 174px;
-    flex-shrink: 0;
+
     border-radius: 5px;
     background: #a8a2a2;
 
@@ -3440,7 +3500,7 @@ label.tc-text,
 .multiple-checks .form-check-label {
     color: #000;
     font-family: "Campton";
-    font-size: 18px;
+    font-size: 16px;
 
     font-weight: 500;
     line-height: normal;
@@ -3450,12 +3510,22 @@ label.tc-text,
 .trmt-card-body .dashboard-card-title {
     color: #000;
     font-family: Campton;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.52px;
+}
+
+/* .trmt-card-body .dashboard-card-title {
+    color: #000;
+    font-family: Campton;
     font-size: 16px;
 
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
-}
+} */
 
 .trmt-card-body h5:nth-child(2) {
     color: #000;
@@ -3707,11 +3777,12 @@ label.tc-text,
 
 .bod-bot-5 {
     border-bottom: 0.5px solid #4CDB06;
-    width: 400.5px;
-    margin-left: 2rem;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
+    width: 100%;
+    padding-bottom: 2rem;
+    margin: 0 0 32px 0;
 }
+
+
 
 #resendotp {
     color: #878787;
@@ -3751,10 +3822,127 @@ label.tc-text,
     letter-spacing: -0.56px;
     width: 149px;
     height: 35px;
-    flex-shrink: 0;
+
     border-radius: 70px;
     background: #4CDB06;
 }
+
 .get-started-btn:hover {
     color: #000;
+}
+
+.other-services h6 span {
+    color: #000;
+    font-family: "Campton";
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+/* .add-new-btn {
+    color: #4CDB06;
+    font-family: "Campton";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    width: 242px;
+    height: 36px;
+    border-radius: 3px;
+    background: #000;
+} */
+
+.packageFilter-heading {
+    color: #000;
+    font-family: Campton;
+    font-size: 20px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+/*  ============================================================================================================= 
+                                            SERVICE PROVIDER
+    ============================================================================================================= */
+
+/* #otpDiv .form-control {
+    padding: 0.375rem 0.5rem;
+} */
+
+.service-provider-account .navbar,
+.service-provider-account .footer {
+    display: none;
+}
+
+.service-provider-account .mdi-eye-off::before,
+.service-provider-account .mdi-eye::before {
+    font-size: 19px;
+}
+
+.service-provider-account .error {
+    color: red !important;
+    font-size: 14px !important;
+}
+
+.service-provider-account input[type="file"] {
+    color: #979797 !important;
+    line-height: 2 !important;
+}
+
+.service-provider-account .g-5,
+.service-provider-account .gx-5 {
+    --bs-gutter-x: 4rem;
+}
+
+.service-provider-account .form-control,
+.service-provider-account .form-select {
+    background-color: #f6f6f6;
+}
+
+.service-provider-account select:required:invalid {
+    color: gray;
+}
+
+.service-provider-account option[value=""][disabled] {
+    display: none;
+}
+
+.service-provider-account .nav-tabs .nav-item.show .nav-link,
+.service-provider-account .nav-tabs .nav-link.active {
+    background-color: #f6f6f6;
+}
+
+.choices__inner {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    background-color: #fff;
+    padding: .25rem 3.6rem .1rem .5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 0.8125rem;
+    min-height: 37.5px;
+    overflow: hidden;
+}
+
+.choices__input {
+    display: block;
+    width: 100%;
+    padding: .5rem .9rem;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    font-size: 0.8125rem;
+    border-radius: 0.25rem;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.other-services .treatment-card:last-child {
+    margin-bottom: 100px !important;
+}
+
+.form-control:focus {
+    border-color:  #d6d6d6;
 }

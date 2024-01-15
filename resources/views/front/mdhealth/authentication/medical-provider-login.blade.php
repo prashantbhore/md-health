@@ -1,56 +1,10 @@
 @extends('front.layout.layout') @section('content')
 <style>
-#otpDiv .form-control{
-    padding: 0.375rem 0.5rem;
-}
-    .navbar,
-    .footer {
-        display: none;
-    }
-
-    .mdi-eye-off::before,
-    .mdi-eye::before {
-        font-size: 19px;
-    }
-
-    .error {
-        color: red !important;
-        font-size: 14px !important;
-    }
-
-    input[type="file"] {
-        color: #979797 !important;
-        line-height: 2 !important;
-    }
-
-    .g-5,
-    .gx-5 {
-        --bs-gutter-x: 4rem;
-    }
-
     body {
         background: #f6f6f6;
     }
-
-    .form-control,
-    .form-select {
-        background-color: #f6f6f6;
-    }
-
-    select:required:invalid {
-        color: gray;
-    }
-
-    option[value=""][disabled] {
-        display: none;
-    }
-
-    .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link.active {
-        background-color: #f6f6f6;
-    }
 </style>
-<div class="content-wrapper" id="regdiv">
+<div class="content-wrapper service-provider-account" id="regdiv">
     <div class="container text-center my-5 authentication">
         <div class="w-100 mb-4 position-relative">
             <h3 class="text-center form-heading">Select Account Type</h3>
@@ -76,25 +30,27 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content  position-relative" id="myTabContent">
             <div class="login-form pb-100px">
-                <div class="row position-relative">
-                    <div class="bod-right form-divider pt-4" style="width: 45%;height: 1494px;">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-6 bod-right form-divider pt-4" style="height: 1494px;">
+                        <!-- Form Heading -->
                         <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                             <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}" alt="" /></a>
                             <h1 class="reg-title my-0">Create Provider Account</h1>
                         </div>
+                        <!-- Form -->
                         <div class="form text-start">
                             <form id="myFormProvider">
                                 {{-- action="{{ url('/md-register-medical-provider') }}" method="post" enctype="multipart/form-data" --}}
-                                <div class="row gx-5 gy-2">
+                                <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="CompanyName" class="form-label">*Company Name</label>
-                                        <input type="text" class="form-control w-189" name="company_name" id="company_name" placeholder="Company Name" />
+                                        <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Company Name" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="city_id" class="form-label">*City</label>
-                                        <select required id="city_id" name="city_id" class="form-select w-189">
+                                        <select required id="city_id" name="city_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($cities as $city)
                                             <option value="{{ $city->id }}">{{ $city->city_name }} </option>
@@ -103,53 +59,57 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="email" class="form-label">*E-mail</label>
-                                        <input type="text" class="form-control w-407p5" name="email" id="email" placeholder="E-mail" />
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="E-mail" />
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="phone" class="form-label">*Phone</label>
-                                        <input type="text" class="form-control w-407p5" name="phone" id="phone" placeholder="Phone" />
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" />
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="TAXNumber" class="form-label">*TAX Number</label>
-                                        <input type="text" class="form-control w-407p5" name="tax_no" id="tax_no" placeholder="TAX Number" />
+                                        <input type="text" class="form-control" name="tax_no" id="tax_no" placeholder="TAX Number" />
                                     </div>
 
                                     <div class="col-md-12 mb-3">
                                         <label for="*Company Address" class="form-label">*Company Address</label>
-                                        <textarea name="company_address" id="company_address" cols="" rows="5" class="form-control w-407p5" placeholder="Company Address"></textarea>
+                                        <textarea name="company_address" id="company_address" cols="" rows="5" class="form-control" placeholder="Company Address"></textarea>
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <div class="mb-3 hide-eye-div">
+                                    <div class="col-md-12 mb-3 position-relative">
+                                        <div class="hide-eye-div">
                                             <label for="password" class="form-label">*Password</label>
-                                            <input type="password" class="form-control w-407p5" name="password" id="password" placeholder="Minimum 8 characters" autocomplete="off" />
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Minimum 8 characters" autocomplete="off" />
                                             <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-">
-                                        <div class="mb-3 hide-eye-div">
+                                    <div class="col-md-12 mb-3 position-relative">
+                                        <div class="hide-eye-div">
                                             <label for="re-password" class="form-label">*Re-Password</label>
-                                            <input type="password" class="form-control w-407p5" name="repassword" id="repassword" placeholder="Minimum 8 characters" autocomplete="off" />
+                                            <input type="password" class="form-control" name="repassword" id="repassword" placeholder="Minimum 8 characters" autocomplete="off" />
                                             <span toggle="#repassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="bod-bot-5"></div>
+                                    <div class="df-center">
+                                        <div class="bod-bot-5">
+                                        </div>
+                                    </div>
                                     <div class="col-md-12 mb-3 position-relative">
                                         <label for="*Upload Company Logo" class="form-label">*Upload Company Logo</label>
-                                        <input type="file" class="form-control w-407p5" name="company_logo_image_path" id="company_logo_image_path" placeholder="*Upload Company Logo" />
-                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs">
+                                        <input type="file" class="form-control" name="company_logo_image_path" id="company_logo_image_path" placeholder="*Upload Company Logo" />
+                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
                                     </div>
 
                                     <div class="col-md-12 mb-5 position-relative">
                                         <label for="*Upload Company License" class="form-label">*Upload Company License</label>
-                                        <input type="file" class="form-control w-407p5" name="company_licence_image_path" id="company_licence_image_path" placeholder="*Upload Company License" />
-                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs2" class="up-abs">
-
+                                        <input type="file" class="form-control" name="company_licence_image_path" id="company_licence_image_path" placeholder="*Upload Company License" />
+                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs2" class="up-abs" />
                                     </div>
 
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-check tc">
-                                            <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
-                                            <label class="form-check-label" for="UserflexCheckDefault"> I accept <a href="#" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a> </label>
+                                        <div class="form-check tc df-start gap-3">
+                                            <input class="form-check-input " type="checkbox" value="" id="UserflexCheckDefault" />
+                                            <label class="form-check-label" for="UserflexCheckDefault">
+                                                I accept <a href="#" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a>
+                                            </label>
                                         </div>
                                     </div>
 
@@ -157,7 +117,7 @@
                                     <span id="error" class="text-danger"></span>
 
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                        <button class="btn btn-md w-407p5 mb-5" type="button" id="medproreg" style="height: 47px;">Create Account</button>
+                                        <button class="btn btn-md mb-5 w-100" type="button" id="medproreg" style="height: 47px;">Create Account</button>
                                         <label for="" class="mt-auto">Already have an account?</label>
                                         <a href="{{ url('sign-in-web') }}" class="signIn-link">Sign In</a>
                                     </div>
@@ -165,15 +125,14 @@
                             </form>
                         </div>
                     </div>
-                    <div class="" style="width:55%">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
                         <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-5">
                             <div class="mb-2">
                                 <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
                             </div>
                             <h5 class="text-h1 my-0">Get your reliable & affordable</h5>
                             <h4 class="text-green-h1b my-2">Treatment Packages</h4>
-                            <p class="text-p1-gray my-0">We are partnered with the top health service providers and
-                                vendors that gives you the best health experience!</p>
+                            <p class="text-p1-gray my-0">We are partnered with the top health service providers and vendors that gives you the best health experience!</p>
                         </div>
                     </div>
                 </div>
@@ -221,7 +180,7 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-md btn-text w-407p5 my-3 text-center" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        <button class="btn btn-md btn-text my-3 text-center w-407p5" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
                 </form>
                 <script>
@@ -830,6 +789,5 @@
         $("#up-abs2").fadeOut(2000);
     });
 </script>
-
 
 @endsection

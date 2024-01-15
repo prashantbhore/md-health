@@ -106,7 +106,7 @@
                                         <td>Istanbul</td>
                                         <td>11 Dec 2024 9:35am</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/vendor-details')}}">
+                                            <a href="{{URL::asset('admin/rejected-vendor-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">

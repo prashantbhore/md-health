@@ -83,9 +83,6 @@ class CustomerController extends Controller
                 })
     
     
-    
-    
-    
                 ->addColumn('action', function ($row){
                     $actionBtn= '<div class="text-end d-flex align-items-center justify-content-end gap-3">
                     <a href="' . route('customer.details', ['id' => Crypt::encrypt($row->id)]) . '" class="btn btn-info btn-xs" title="View">
@@ -101,9 +98,6 @@ class CustomerController extends Controller
                 return $actionBtn;
             })
                 
-    
-    
-               
                 ->rawColumns(['action'])
                 ->make(true);
         }

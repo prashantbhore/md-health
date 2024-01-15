@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class PackagesMultipleImages extends Model
 {
     use HasFactory;
-    protected $table = 'md_master_country';
-
+    protected $table = 'md_food_multiple_images';
     protected $fillable = [
-        'country_name',
-        'country_code',
+        'package_id',
+        'food_image_path',
+        'food_image_name',
         'status',
         'created_ip_address',
         'modified_ip_address',

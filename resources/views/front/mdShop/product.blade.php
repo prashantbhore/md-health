@@ -42,7 +42,7 @@
     .product-content-header h6{
         color: #000;
         font-size: 23px;
-        font-style: normal;
+        
         font-weight: 500;
         letter-spacing: -0.92px;
         /* line-height: 25px; */
@@ -51,7 +51,7 @@
     .product-content-header .product-name span {
         color: #4CDB06;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 700;
         line-height: normal;
         letter-spacing: -0.56px;
@@ -77,7 +77,7 @@
     .product-price {
         color: #000;
         font-size: 30px;
-        font-style: normal;
+        
         font-weight: 600;
         line-height: normal;
     }
@@ -96,7 +96,7 @@
         text-align: center;
         color: #000;
         font-size: 15px;
-        font-style: normal;
+        
         font-weight: 600;
         text-decoration: none;
     }

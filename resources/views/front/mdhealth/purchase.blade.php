@@ -1,9 +1,9 @@
 @section('php')
     {{-- <form method="POST" name="init_form" action="{{ url('api/md-customer-package-purchase-details') }}">
-        @csrf
-        <input type="hidden" value="{{ $id }}" id="package_id" name="package_id">
-        {{ $id }}
-    </form> --}}
+@csrf
+<input type="hidden" value="{{ $id }}" id="package_id" name="package_id">
+{{ $id }}
+</form> --}}
 
     @php
 
@@ -13,6 +13,43 @@
 @endsection
 @extends('front.layout.layout2')
 @section('content')
+    <style>
+        .package_name {
+            color: #000;
+            font-family: Campton;
+            font-size: 20px;
+
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: -0.8px;
+        }
+
+        .city_name {
+            color: #000;
+            font-family: CamptonBook;
+            font-size: 14px;
+
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: -0.56px;
+        }
+
+        .t_price {
+            color: #4CDB06;
+            font-family: Campton;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: -0.72px;
+        }
+
+        .t_price_sm {
+            color: #4CDB06;
+            font-family: Campton;
+            font-size: 12px;
+            letter-spacing: -0.48px;
+        }
+    </style>
     <div class="content-wrapper paymentsPage bg-f6">
 
         <!-- SECTION 1 -->
@@ -23,11 +60,11 @@
                 <div class="packageResult rounded mb-3">
                     <div class="flex-grow-1">
                         <div class="d-flex gap-2 justify-content-between align-items-center">
-                            <p class="mb-0 fs-5 camptonBold lh-base package_name">Heart Valve Replacement Surgery</p>
-                            <p class="mb-0 fs-6 camptonBold text-green ">Treatment Price</p>
+                            <p class="mb-0  lh-base package_name">Heart Valve Replacement Surgery</p>
+                            <p class="mb-0 t_price">Treatment Price</p>
                         </div>
                         <div class="d-flex gap-5 justify-content-between">
-                            <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex align-items-center">
                                 <img src="{{ 'front/assets/img/Location.svg' }}" alt="">
                                 <p class="mb-0 lctn city_name">Besiktas/Istanbul</p>
                             </div>
@@ -44,9 +81,8 @@
                 <div class="greenBorder pt-3 mb-4"></div>
                 <div class="mb-4 discount-sctn">
                     <div class="d-flex justify-content-between mb-3">
-                        <p class="mb-0 fs-6 camptonBold text-green">Select Your Payment Plan</p>
-                        <p class="mb-0 fs-6 camptonBold text-green">Total Price <span class="total_price"
-                                style="color: #000;">34.560,00
+                        <p class="mb-0 t_price">Select Your Payment Plan</p>
+                        <p class="mb-0 t_price">Total Price <span class="total_price" style="color: #000;">34.560,00
                                 ₺</span></p>
                     </div>
                     <div class="discounts">
@@ -75,7 +111,7 @@
                             </label>
                             <div class="d-flex align-items-baseline gap-2 ">
                                 <p class="mb-0 fs-5 camptonBold lh-base fifty"></p>
-                                <p class="vSmallFont text-green camptonBold mb-0 min_discount_fifty">Min. Requirement</p>
+                                <p class="t_price_sm mb-0 min_discount_fifty">Min. Requirement</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-2">
@@ -84,7 +120,7 @@
                             </label>
                             <div class="d-flex align-items-baseline gap-2 ">
                                 <p class="mb-0 fs-5 camptonBold lh-base hundred"></p>
-                                <p class="vSmallFont text-green camptonBold mb-0 min_discount_hundred">Min. Requirement</p>
+                                <p class="t_price_sm mb-0 min_discount_hundred">Min. Requirement</p>
                             </div>
                         </div>
                     </div>
@@ -98,19 +134,19 @@
                 <div class="paymentSection mb-5">
                     <div class="row">
                         <div class="col-2">
-                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                            <label class="smallFont d-flex align-items-center gap-1">
                                 <input type="radio" value="card" name="paymentMethod" checked />
                                 Credit or Debit Card
                             </label>
                         </div>
                         <div class="col-2">
-                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                            <label class="smallFont d-flex align-items-center gap-1">
                                 <input type="radio" value="bank" name="paymentMethod" />
                                 Bank Transfer
                             </label>
                         </div>
                         <div class="col-2">
-                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                            <label class="smallFont d-flex align-items-center gap-1">
                                 <input type="radio" value="wallet" name="paymentMethod" />
                                 My Wallet
                             </label>
@@ -120,12 +156,30 @@
                 <div id="card">
                     <div class="row">
                         <div class="col-5 card-details me-5">
+                            <form id="procced_to_pay_form" action="{{ url('/sandbox') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                                <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
+                                <input type="hidden" name="payment_percent" id="payment_percent" value="">
+                                <input type="hidden" name="total_paying_price" id="total_paying_price" value="">
+                                <input type="hidden" name="card_name" id="card_name" value="">
+                                <input type="hidden" name="card_number" id="card_number" value="">
+                                <input type="hidden" name="cvv" id="cvv" value="">
+                                <input type="hidden" name="validity" id="validity" value="">
+                                {{-- <input type="hidden" id="package_id" value="{{ $id }}"> --}}
+                            </form>
                             <form action="" id="creditCardForm">
-                                <input type="text" class="mb-3" id="input1" placeholder="Card Holder Name">
-                                <input type="text" class="mb-3" id="input2" placeholder="Card Number">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="input1"
+                                        placeholder="Card Holder Name">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="input2" placeholder="Card Number">
+                                </div>
                                 <div class="d-flex gap-2 mb-4">
-                                    <input type="password" id="input3" placeholder="CVV">
-                                    <input type="text" id="input4" placeholder="Valid Till">
+                                    <input type="password" id="input3" class="form-control w-50" placeholder="CVV">
+                                    <input type="text" id="input4" class="form-control w-50"
+                                        placeholder="Valid Till">
                                 </div>
                                 <!-- <a href="{{ url('payment-status') }}"> -->
                                 <!-- <a href="{{ url('payment-status') }}" -->
@@ -293,23 +347,70 @@
                     case 'input1':
                         $('.cardholder').text(inputValue);
                         cardName = $(this).val().toString();
+                        $('#card_name').val(cardName);
                         break;
                     case 'input2':
                         $('.cardNumber').text(inputValue);
                         cardNo = $(this).val().toString()
+                        $('#card_number').val(cardNo);
+                        // Replace with the actual BIN
+                        var cardType = getCardType(cardNo);
+                        console.log('Card Type:', cardType);
                         break;
                     case 'input3':
                         cardCvv = $(this).val().toString();
+                        $('#cvv').val(cardCvv);
                         break;
                     case 'input4':
                         $('.validity').text(inputValue);
                         cardExpiryDate = $(this).val().toString();
+                        $('#validity').val(cardExpiryDate);
                         break;
                 }
             });
 
             $('.purchaseBtn').click(function() {
-                makePurchase();
+                // makePurchase();
+                var form = $('#procced_to_pay_form');
+
+                // Additional data
+                var pendingAmount = proxyPrice - totalPrice;
+
+                if (isTwentySelected) {
+                    var percentage = '20';
+                } else if (isThirtySelected) {
+                    var percentage = '30';
+                } else if (isFiftySelected) {
+                    var percentage = '50';
+                } else if (isHundredSelected) {
+                    var percentage = '100';
+                }
+
+                var additionalData = {
+                    'package_id': packageId,
+                    'patient_id': patientId,
+                    'sale_price': proxyPrice,
+                    'paid_amount': totalPrice,
+                    'platform_type': 'web',
+                    'card_no': cardNo || '',
+                    'card_expiry_date': cardExpiryDate || '',
+                    'card_cvv': cardCvv || '',
+                    'card_name': cardName || '',
+                    'pending_amount': pendingAmount,
+                    'percentage': percentage
+                };
+
+                // Add additional data to the form
+                $.each(additionalData, function(name, value) {
+                    form.append($('<input>').attr({
+                        type: 'hidden',
+                        name: name,
+                        value: value
+                    }));
+                });
+
+                // Submit the form
+                form.submit();
             })
             ////////////////////////////////////////////////////////////////////////////////
 
@@ -417,6 +518,7 @@
                 formData.append('card_cvv', cardCvv ?? '');
                 formData.append('card_name', cardName ?? '');
                 formData.append('pending_amount', pendingAmount);
+
                 if (isTwentySelected) {
                     formData.append('percentage', '20%');
                 } else if (isThirtySelected) {
@@ -484,21 +586,27 @@
 
                 if (isTwentySelected) {
                     totalPrice = totalPrice *= (20 / 100);
+                    $('#payment_percent').val('20');
                 } else if (isThirtySelected) {
                     totalPrice = totalPrice *= (30 / 100);
                     totalPrice = totalPrice - (totalPrice * (5 / 100));
                     proxyPrice = proxyPrice - (proxyPrice * (5 / 100));
+                    $('#payment_percent').val('30');
                 } else if (isFiftySelected) {
                     totalPrice = totalPrice *= (50 / 100);
                     totalPrice = totalPrice - (totalPrice * (8 / 100));
                     proxyPrice = proxyPrice - (proxyPrice * (8 / 100));
+                    $('#payment_percent').val('50');
                 } else if (isHundredSelected) {
                     totalPrice = totalPrice - (totalPrice * (10 / 100));
                     proxyPrice = proxyPrice - (proxyPrice * (10 / 100));
+                    $('#payment_percent').val('100');
                 }
 
                 // alert(totalPrice);
                 // $('.total_price').empty();
+                $('#payment_percent').val();
+                $("#total_paying_price").val(totalPrice);
                 $('.total_price').text(totaltoShowPrice + ' ₺');
             };
 
@@ -522,6 +630,7 @@
                         .treatment_price) +
                     ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails.treatment_price +
                     '₺)</span>';
+                $("#total_paying_price").val(totalPrice);
                 $('.total_price').text(totaltoShowPrice + ' ₺');
                 $('.treatment_price').append(treatmentPriceHtml);
 
@@ -566,6 +675,289 @@
                     }
                 });
             };
+
+
+            function getCardType(cardNumber) {
+                const cardTypes = {
+                    visa: {
+                        niceType: "Visa",
+                        type: "visa",
+                        patterns: [4],
+                        gaps: [4, 8, 12],
+                        lengths: [16, 18, 19],
+                        code: {
+                            name: "CVV",
+                            size: 3,
+                        },
+                    },
+                    mastercard: {
+                        niceType: "Mastercard",
+                        type: "mastercard",
+                        patterns: [
+                            [51, 55],
+                            [2221, 2229],
+                            [223, 229],
+                            [23, 26],
+                            [270, 271], 2720
+                        ],
+                        gaps: [4, 8, 12],
+                        lengths: [16],
+                        code: {
+                            name: "CVC",
+                            size: 3,
+                        },
+                    },
+                    "american-express": {
+                        niceType: "American Express",
+                        type: "american-express",
+                        patterns: [34, 37],
+                        gaps: [4, 10],
+                        lengths: [15],
+                        code: {
+                            name: "CID",
+                            size: 4,
+                        },
+                    },
+                    "diners-club": {
+                        niceType: "Diners Club",
+                        type: "diners-club",
+                        patterns: [
+                            [300, 305], 36, 38, 39
+                        ],
+                        gaps: [4, 10],
+                        lengths: [14, 16, 19],
+                        code: {
+                            name: "CVV",
+                            size: 3,
+                        },
+                    },
+                    discover: {
+                        niceType: "Discover",
+                        type: "discover",
+                        patterns: [6011, [644, 649], 65],
+                        gaps: [4, 8, 12],
+                        lengths: [16, 19],
+                        code: {
+                            name: "CID",
+                            size: 3,
+                        },
+                    },
+                    jcb: {
+                        niceType: "JCB",
+                        type: "jcb",
+                        patterns: [2131, 1800, [3528, 3589]],
+                        gaps: [4, 8, 12],
+                        lengths: [16],
+                        code: {
+                            name: "CVV",
+                            size: 3,
+                        },
+                    },
+                    unionpay: {
+                        niceType: "UnionPay",
+                        type: "unionpay",
+                        patterns: [
+                            620,
+                            [62100, 62182],
+                            [62184, 62187],
+                            [62185, 62197],
+                            [62200, 62205],
+                            [622010, 622999],
+                            622018,
+                            [62207, 62209],
+                            [623, 626],
+                            6270,
+                            6272,
+                            6276,
+                            [627700, 627779],
+                            [627781, 627799],
+                            [6282, 6289],
+                            6291,
+                            6292,
+                            810,
+                            [8110, 8131],
+                            [8132, 8151],
+                            [8152, 8163],
+                            [8164, 8171],
+                        ],
+                        gaps: [4, 8, 12],
+                        lengths: [14, 15, 16, 17, 18, 19],
+                        code: {
+                            name: "CVN",
+                            size: 3,
+                        },
+                    },
+                    maestro: {
+                        niceType: "Maestro",
+                        type: "maestro",
+                        patterns: [
+                            493698,
+                            [500000, 504174],
+                            [504176, 506698],
+                            [506779, 508999],
+                            [56, 59],
+                            63,
+                            67,
+                            6,
+                        ],
+                        gaps: [4, 8, 12],
+                        lengths: [12, 13, 14, 15, 16, 17, 18, 19],
+                        code: {
+                            name: "CVC",
+                            size: 3,
+                        },
+                    },
+                    elo: {
+                        niceType: "Elo",
+                        type: "elo",
+                        patterns: [
+                            401178,
+                            401179,
+                            438935,
+                            457631,
+                            457632,
+                            431274,
+                            451416,
+                            457393,
+                            504175,
+                            [506699, 506778],
+                            [509000, 509999],
+                            627780,
+                            636297,
+                            636368,
+                            [650031, 650033],
+                            [650035, 650051],
+                            [650405, 650439],
+                            [650485, 650538],
+                            [650541, 650598],
+                            [650700, 650718],
+                            [650720, 650727],
+                            [650901, 650978],
+                            [651652, 651679],
+                            [655000, 655019],
+                            [655021, 655058],
+                        ],
+                        gaps: [4, 8, 12],
+                        lengths: [16],
+                        code: {
+                            name: "CVE",
+                            size: 3,
+                        },
+                    },
+                    mir: {
+                        niceType: "Mir",
+                        type: "mir",
+                        patterns: [
+                            [2200, 2204]
+                        ],
+                        gaps: [4, 8, 12],
+                        lengths: [16, 17, 18, 19],
+                        code: {
+                            name: "CVP2",
+                            size: 3,
+                        },
+                    },
+                    hiper: {
+                        niceType: "Hiper",
+                        type: "hiper",
+                        patterns: [637095, 63737423, 63743358, 637568, 637599, 637609,
+                            637612
+                        ],
+                        gaps: [4, 8, 12],
+                        lengths: [16],
+                        code: {
+                            name: "CVC",
+                            size: 3,
+                        },
+                    },
+                    hipercard: {
+                        niceType: "Hipercard",
+                        type: "hipercard",
+                        patterns: [606282],
+                        gaps: [4, 8, 12],
+                        lengths: [16],
+                        code: {
+                            name: "CVC",
+                            size: 3,
+                        },
+                    },
+                    // Add other card types based on the provided React reference
+                    // ...
+
+                    // Default type for unknown cards
+                    unknown: {
+                        niceType: "Unknown",
+                        type: "unknown",
+                    },
+                };
+
+                const cleanedCardNumber = cardNumber.replace(/\D/g, '');
+
+                // Find the matching card type
+                for (const type in cardTypes) {
+                    const {
+                        patterns,
+                        lengths
+                    } = cardTypes[type];
+                    const flattenedPatterns = flattenPattern(patterns);
+                    if (flattenedPatterns && lengths && flattenedPatterns.length && flattenedPatterns.some(
+                            pattern => matchPattern(cleanedCardNumber, pattern)) && lengths.includes(
+                            cleanedCardNumber.length)) {
+                        switch (cardTypes[type].type) {
+                            case 'discover':
+                                $('.visa').attr('src', "{{ url('front/assets/img/discover.png') }}");
+                                break;
+                            case 'american-express':
+                                $('.visa').attr('src', "{{ url('front/assets/img/american-express.png') }}");
+                                break;
+                            case 'mastercard':
+                                $('.visa').attr('src', "{{ url('front/assets/img/mastercard.png') }}");
+                                break;
+                            case 'visa':
+                                $('.visa').attr('src', "{{ url('front/assets/img/visa.svg') }}");
+                                break;
+                        }
+                        return cardTypes[type].type;
+                    }
+                }
+
+
+
+                return cardTypes.unknown.type;
+            }
+
+            function flattenPattern(pattern) {
+                if (!pattern) {
+                    return [];
+                }
+                return [].concat(...pattern.map(item => (Array.isArray(item) ? flattenPattern(item) : item)));
+            }
+
+            function matchNestedPattern(value, pattern) {
+                if (Array.isArray(pattern)) {
+                    return pattern.some(innerPattern => matchNestedPattern(value, innerPattern));
+                } else {
+                    return value === pattern;
+                }
+            }
+
+            function matchPattern(cardNumber, pattern) {
+                if (Array.isArray(pattern)) {
+                    // Check if the card number matches any range of patterns
+                    return pattern.some(range => matchPattern(cardNumber, range));
+                }
+
+                // Check if the card number matches a specific pattern
+                const regex = new RegExp(`^${pattern}`);
+                return regex.test(cardNumber);
+            }
+
+            // Example usage
+
+
+            // Display the result
+            console.log('Card Type:', cardType);
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////
 

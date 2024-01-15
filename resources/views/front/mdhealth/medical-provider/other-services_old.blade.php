@@ -11,17 +11,20 @@
         }
 
         .no-data {
-            border: solid #ededed 1px;
-            height: 150px;
-            border-radius: 3px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #aeaeae;
-            font-family: 'CamptonBook';
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        height: 150px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        border: 1px solid #F6F6F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        background: #F6F6F6;
+    }
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -58,7 +61,7 @@
                                                     </div>
                                     @endforeach
                                 @else
-                                    <div class="no-data">No Acommoditions Added</div>
+                                    <div class="no-data">No Acommodations Added</div>
                                 @endif
                             </div>
                             <div>
@@ -115,7 +118,7 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="no-data">No Acommoditions Added</div>
+                                    <div class="no-data">No Acommodations Added</div>
                                 @endif
                             </div>
                             <div>

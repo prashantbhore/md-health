@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class MDCoins extends Model
 {
     use HasFactory;
-    protected $table = 'md_master_country';
-
+    protected $table = 'md_coins';
     protected $fillable = [
-        'country_name',
-        'country_code',
+        'customer_id',
+        'coins',
         'status',
         'created_ip_address',
         'modified_ip_address',
