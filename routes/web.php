@@ -22,6 +22,7 @@ use App\Http\Controllers\admin\BaseController;
 use App\Http\Controllers\admin\customer\CustomerController;
 use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
+use App\Http\Controllers\admin\master\countryController;
 use App\Http\Controllers\admin\medical_tourism\MedicalTourismController;
 use App\Http\Controllers\admin\product\MDfoodController;
 use App\Http\Controllers\admin\product\MDhealthController;
@@ -123,7 +124,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('pending-vendors', 'admin/vendors/pending-vendors');
     Route::view('approved-vendors', 'admin/vendors/approved-vendors');
     Route::view('rejected-vendors', 'admin/vendors/rejected-vendors');
-    Route::view('vendor-details', 'admin/vendors/vendor-details');
+    Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
+    Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
+    Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
    
 
@@ -153,6 +156,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
+       //Admin  MANAGE Country
+
+       Route::controller(countryController::class)->group(function (){
+        Route::get('add-country','index');
+        Route::post('/add-country','store')->name('add-country');
+        Route::get('/country-data-table','data_table');
+        Route::get('/country/{id}/edit','edit_country');
+        Route::get('country-delete','country_delete');
+       });
+
+
+
 
     //Admin  MANAGE CITIES
 
@@ -165,7 +180,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     });
 
     //Admin  MANAGE CITIES
-    Route::view('add-country', 'admin/country/add-country');
+   
 
 
     //Admin  MANAGE CITIES
@@ -280,7 +295,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('notifications', 'admin/notifications/notifications');
 
     //Admin ADS & PROMO
-    Route::view('ads', 'admin/ads/ads');
+    Route::view('ads-promo', 'admin/ads/ads-promo');
+    Route::view('featured', 'admin/ads/featured');
     //Admin MANAGE REQUEST
     Route::view('manage-request', 'admin/manage-request/manage-request');
 

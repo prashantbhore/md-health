@@ -2,7 +2,7 @@
 <section class="main-content">
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
-            <div class="page-title">Customers ID #273929</div>
+            <div class="page-title">Customers ID #273929  <small> Reg Date : 26 Jan 2023 11:45am </small></div>
             <a href="{{URL::asset('admin/customers')}}" class="page-title">
                 <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn"> Back Customers
             </a>
@@ -12,7 +12,7 @@
                 <!-- Patient Details -->
                 <div class="card card-details mb-3" style="min-height: 380px;">
                     <div class="card-body">
-                        <p class="card-title mb-3">Patient Details</p>
+                        <p class="card-title mb-3">Details</p>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First Name</label>
@@ -21,6 +21,14 @@
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Last Name</label>
                                 <p>{{!empty($customer->last_name)?$customer->last_name:''}}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="contactNo">Gender</label>
+                                <p>Male - 36 Age</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Date of Birth</label>
+                                <p>18 Oct 1987</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Contact Number</label>
@@ -53,8 +61,8 @@
                 <!-- Logs Activity -->
                 <div class="card card-details mb-3" style="min-height: 380px;">
                     <div class="card-body">
-                        <p class="card-title mb-3">Logs Activity</p>
-                        <div class="table-responsive" style="overflow-x: hidden">
+                        <p class="card-title mb-3">Logins Activity</p>
+                        <div class="table-responsive scroll-300">
                             <table class="table">
                             @if(!empty($logs))
                                @foreach ($logs as $log)
@@ -79,22 +87,32 @@
                 <div class="card card-details" style="min-height: 776px;">
                     <div class="card-body">
                         <div class="mb-3 d-flex align-items-center justify-content-between w-full filters">
-                            <p class="card-title ">Order History</p>
+                            <p class="card-title flex-grow-1">Order History</p>
                             <select class="form-select form-select-sm w-25">
-                                <option selected>All Orders</option>
-                                <option value="1"><span class="md-fw-bold">MD</span>health</option>
-                                <option value="2"><span class="md-fw-bold">MD</span>shop</option>
-                                <option value="3"><span class="md-fw-bold">MD</span>booking</option>
+                                <option selected>Select Type</option>
+                                <option value="1">Treatment Packages</option>
+                                <option value="2">Shop Orders</option>
+                                <option value="3">Food Orders</option>
+                                <option value="3">Home Service Orders</option>
+                                <option value="3">Booking Orders</option>
+                            </select>
+
+                            <select class="form-select form-select-sm w-25 ms-3">
+                                <option selected>Select Status</option>
+                                <option value="1">Pending</option>
+                                <option value="2">Inprocess</option>
+                                <option value="3">Completed</option>
+                                <option value="3">Cancelled</option>
                             </select>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-3 scroll-600">
                                 @if(!empty($customer->customerOrders))
                                 @foreach ($customer->customerOrders as $orders)
 
                                     {{-- {{dd($orders)}} --}}
                               
-                                <div class="card shadow-none">
+                                <div class="card shadow-none mb-3">
                                     <div class="card-body d-flex w-full justify-content-between" style="background: #F6F6F6;">
                                         <div class="card-ls">
                                             <h6>{{!empty($orders->package->package_name)?$orders->package->package_name:''}}</h6>

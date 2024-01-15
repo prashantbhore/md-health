@@ -233,7 +233,7 @@ $(document).on("click", ".package_delete", function (){
 $(document).ready(function(){
     $('.deactivate-btn').click(function (){
 
-        alert('HI');
+   
         var button = $(this); 
         var id = button.data("id");
 

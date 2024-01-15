@@ -101,7 +101,7 @@
                                         <td>+90 578 555 21 21</td>
                                      
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/vendor-details')}}">
+                                            <a href="{{URL::asset('admin/pending-vendor-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">

@@ -124,7 +124,7 @@
                 </script>
 
 
-                <h6 class="mb-0 d-flex align-items-center gap-1">
+                <h6 class="mb-0 d-flex align-items-center gap-1 df-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
                             <g clip-path="url(#clip0_0_28401)">
@@ -140,7 +140,7 @@
                         </svg>
                          <span class="text-danger" id="timer">32 sec</span>
                     </h6>
-                    <div>
+                    <div class="text-center">
                          <a href="#" class="text-secondary" id="resendotp">Resend Code In</a>
                     </div>
 

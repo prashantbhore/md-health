@@ -103,7 +103,7 @@ class PackageController extends Controller {
             $html1 .= '</div>';
             $html1 .= '<div class="col-md-6 justify-content-start ps-0">';
             $html1 .= '<div class="trmt-card-body">';
-            $html1 .= '<h5 class="dashboard-card-title fw-600 mb-0">Package No:' . ( !empty( $package_active_list[ 'package_unique_no' ] ) ? $package_active_list[ 'package_unique_no' ] : '' ) . '<span class="active">Active</span></h5>';
+            $html1 .= '<h5 class="dashboard-card-title fw-600 mb-1">Package No:' . ( !empty( $package_active_list[ 'package_unique_no' ] ) ? $package_active_list[ 'package_unique_no' ] : '' ) . '<span class="active">Active</span></h5>';
             $html1 .= '<h5 class="mt-0 fw-500">' . ( !empty( $package_active_list[ 'package_name' ] ) ? $package_active_list[ 'package_name' ] : '' ) . '</h5>';
             $html1 .= '</div></div>';
             $html1 .= '<div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">';

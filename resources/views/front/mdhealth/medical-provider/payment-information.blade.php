@@ -2,19 +2,26 @@
 @section("content")
 <style>
     .payment-card {
-        padding: 25px;
+        padding: 16px;
         border-radius: 5px;
     }
-    .payment-card  h5{
-        font-weight: 900;
-        line-height: 20px;
+
+    .payment-card h5 {
+        color: #000;
+        font-family: Campton;
         font-size: 23px;
-        margin-bottom: 0;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
     }
-    .payment-card  h6{
-        line-height: 15px;
+
+    .payment-card h6 {
+        color: #000;
+        font-family: Campton !important;
         font-size: 13px;
-        font-weight: 900 !important;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.52px;
     }
 </style>
 <div class="content-wrapper">
@@ -26,7 +33,7 @@
             <div class="col-md-9">
                 <div class="card mb-4">
                     <div class="form-div">
-                        <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                        <h5 class="card-header d-flex align-items-center justify-content-between mb-4">
                             <span>MY Bank Account Details</span>
                             <img src="{{asset('front/assets/img/GoldMember.svg')}}" alt="">
                         </h5>
@@ -34,26 +41,26 @@
                         <form method="POST" action="{{ route('store.vendor.bank.details') }}">
                             @csrf
                             <div class="card-body">
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Your Company IBAN</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Your Company IBAN</label>
                                     <div class="input-icon-div">
                                         <input type="text" name="account_number" class="form-control" placeholder="TR00 0000 0000 0000 0000 0000 00">
                                     </div>
                                 </div>
-                        
-                                <div class="form-group mb-4">
-                                    <label class="form-label">Company Name</label>
+
+                                <div class="form-group mb-5">
+                                    <label class="form-label mb-3">Company Name</label>
                                     <div class="input-icon-div">
                                         <input type="text" name="bank_name" class="form-control" placeholder="MDhealth Ltd. Sti.">
                                     </div>
                                 </div>
-                        
-                                <div class="form-group mb-3">
+
+                                <div class="form-group mb-4">
                                     <button type="submit" class="btn save-btn-black">Save Bank Account</button>
                                 </div>
                             </div>
                         </form>
-                        
+
 
                     </div>
                 </div>
@@ -63,19 +70,19 @@
                         <div class="col-md-4">
                             <div class="payment-card bg-warning">
                                 <h6 class="text-dark fsb-2">Total Payment</h6>
-                                <h5 class="text-dark fsb-1">{{$total_business_amount}} ₺</h5>
+                                <h5 class="text-dark fsb-1">{{$total_business_amount}} <span class="lira ps-1">₺</span></h5>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="payment-card bg-green" >
+                            <div class="payment-card bg-green">
                                 <h6 class="text-dark fsb-2">Total Completed Payment</h6>
-                                <h5 class="text-dark fsb-1">{{ $total_completed_amount}} ₺</h5>
+                                <h5 class="text-dark fsb-1">{{ $total_completed_amount}} <span class="lira">₺</span></h5>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="payment-card bg-orange">
                                 <h6 class="text-white fsb-2">Total Pending Payment</h6>
-                                <h5 class="text-white fsb-1">{{$total_pending_amount}} ₺</h5>
+                                <h5 class="text-white fsb-1">{{$total_pending_amount}} <span class="lira">₺</span></h5>
                             </div>
                         </div>
                     </div>
@@ -84,7 +91,7 @@
                 <!-- RECENT TRETMENTS -->
                 <div class="card">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
-                    Transaction 
+                        Transaction
                     </h5>
                     <div class="card-body">
 
@@ -102,92 +109,92 @@
                         </div>
 
                         <div class="transaction-list">
-                           @if($payment_list)
-                           @foreach ($payment_list as $payment)
+                            @if($payment_list)
+                            @foreach ($payment_list as $payment)
 
 
-                           <div class="treatment-card df-start w-100 mb-3">
-                            <div class="row card-row align-items-center">
-                                <div class="col-md-2 df-center px-0">
-                                    <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" style="width: auto;height: 75px;">
-                                </div>
-                                <div class="col-md-6 justify-content-start ps-0">
-                                    <div class="trmt-card-body">
-                                        <h5 class="dashboard-card-title">Payment ID: #{{!empty($payment['payment_id'])?$payment['payment_id']:''}}</h5>
-                                        <h5 class="mb-0 fw-500">{{!empty($payment['amount'])?$payment['amount']:''}} ₺</h5>
+                            <div class="treatment-card df-start w-100 mb-3">
+                                <div class="row card-row align-items-center">
+                                    <div class="col-md-2 df-center px-0">
+                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" style="width: auto;height: 75px;">
                                     </div>
-                                </div>
-                                @if($payment['payment_status']=='pending')
-                                <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                    <div class="trmt-card-footer">
-                                        <span class="in-progress">Pending</span>
+                                    <div class="col-md-6 justify-content-start ps-0">
+                                        <div class="trmt-card-body">
+                                            <h5 class="dashboard-card-title">Payment ID: #{{!empty($payment['payment_id'])?$payment['payment_id']:''}}</h5>
+                                            <h5 class="mb-0 fw-500">{{!empty($payment['amount'])?$payment['amount']:''}} <span class="lira">₺</span></h5>
+                                        </div>
                                     </div>
-                                </div>
-                                @endif
-
-
-                                @if($payment['payment_status']=='completed')
-                                <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                    <div class="trmt-card-footer">
-                                        <span class="active">Completed</span>
+                                    @if($payment['payment_status']=='pending')
+                                    <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                        <div class="trmt-card-footer">
+                                            <span class="in-progress">Pending</span>
+                                        </div>
                                     </div>
-                                </div>
-                               @endif
+                                    @endif
 
+
+                                    @if($payment['payment_status']=='completed')
+                                    <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                        <div class="trmt-card-footer">
+                                            <span class="active">Completed</span>
+                                        </div>
+                                    </div>
+                                    @endif
+
+                                </div>
                             </div>
-                        </div>
-                               
-                           @endforeach
-                           @endif
+
+                            @endforeach
+                            @endif
 
 
                             {{-- <div class="treatment-card df-start w-100 mb-3">
                                 <div class="row card-row align-items-center">
                                     <div class="col-md-2 df-center px-0">
                                         <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                    </div>
-                                    <div class="col-md-6 justify-content-start ps-0">
-                                        <div class="trmt-card-body">
-                                            <h5 class="dashboard-card-title">Payment ID: #MD3726378</h5>
-                                            <h5 class="mb-0 fw-500">34.847,90 ₺</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                        <div class="trmt-card-footer">
-                                            <span class="in-progress">Progress</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="treatment-card df-start w-100 mb-3">
-                                <div class="row card-row align-items-center">
-                                    <div class="col-md-2 df-center px-0">
-                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                    </div>
-                                    <div class="col-md-6 justify-content-start ps-0">
-                                        <div class="trmt-card-body">
-                                            <h5 class="dashboard-card-title">Payment ID: #MD3726378</h5>
-                                            <h5 class="mb-0 fw-500">34.847,90 ₺</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                        <div class="trmt-card-footer">
-                                            <span class="active">Active</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-
-
                         </div>
-                        
+                        <div class="col-md-6 justify-content-start ps-0">
+                            <div class="trmt-card-body">
+                                <h5 class="dashboard-card-title">Payment ID: #MD3726378</h5>
+                                <h5 class="mb-0 fw-500">34.847,90 <span class="lira">₺</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                            <div class="trmt-card-footer">
+                                <span class="in-progress">Progress</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="treatment-card df-start w-100 mb-3">
+                    <div class="row card-row align-items-center">
+                        <div class="col-md-2 df-center px-0">
+                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+                        </div>
+                        <div class="col-md-6 justify-content-start ps-0">
+                            <div class="trmt-card-body">
+                                <h5 class="dashboard-card-title">Payment ID: #MD3726378</h5>
+                                <h5 class="mb-0 fw-500">34.847,90 ₺</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                            <div class="trmt-card-footer">
+                                <span class="active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+
+
+
             </div>
+
         </div>
     </div>
+</div>
+</div>
+</div>
 </div>
 @endsection
 @section('script')

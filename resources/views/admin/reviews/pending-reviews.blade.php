@@ -4,7 +4,7 @@
         <div class="page-title">Reviews</div>
         <div class="row top-cards productsPage">
             <div class="col-md-3 mb-3">
-                <!-- <a href="{{URL('admin/category-mdhealth')}}" class="text-decoration-none text-dark"> -->
+                <a href="{{URL('admin/category-mdhealth')}}" class="text-decoration-none text-dark">
                 <div class="card position-relative bg-yellow">
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- </a> -->
+                </a>
             </div>
             <div class="col-md-3 mb-3">
                 <a href="{{URL('admin/published-reviews')}}" class="text-decoration-none text-dark">
@@ -43,12 +43,22 @@
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">
-                                <option selected>All</option>
+                                <option selected>All Type</option>
                                 <option value="1">Medical Service Provider</option>
                                 <option value="2">Food Provider</option>
-                                <option value="3">Vendor</option>
-                                <option value="3">Home Service</option>
+                                <option value="3">Product Vendor </option>
+                                <option value="4">Home Service</option>
                             </select>
+
+                            <select class="form-select form-select-sm">
+                                <option selected>All Stars</option>
+                                <option value="1">Excellent</option>
+                                <option value="2">Very Good</option>
+                                <option value="3">Good </option>
+                                <option value="4">Fair</option>
+                                <option value="5">Bad</option>
+                            </select>
+
                         </div>
 
 
@@ -74,7 +84,7 @@
                                         <p class="mb-0">{{!empty($review->product->package_name)?$review->product->package_name:''}}</p>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="The Score">The Score :</label>
+                                        <label for="The Score"> Very Good :</label>
                                         <p class="mb-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
                                                 <path d="M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26Z" fill="rgba(76,219,6,1)"></path>
