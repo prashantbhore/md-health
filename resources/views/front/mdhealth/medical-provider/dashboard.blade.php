@@ -19,7 +19,7 @@
                         </div>
                         <div class="black-plate bg-black text-green d-flex align-items-center justify-content-between mb-3">
                             <p class="my-0">Sales (Monthly)</p>
-                            <h3 class="my-0">{{!empty($monthly_sales_count['monthly_sales'])?$monthly_sales_count['monthly_sales']:0}} ₺</h3>
+                            <h3 class="my-0">{{!empty($monthly_sales_count['monthly_sales'])?$monthly_sales_count['monthly_sales']:0}} <span class="lira">₺</span></h3>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                                     <p class="mb-0 pkg-name">{{!empty($order['package']['package_name'])?$order['package']['package_name']:''}}</p>
                                 </div>
                                 <div class="ms-auto d-flex flex-column justify-content-end align-items-end">
-                                    <h5 class="card-h3 mb-0">Total Price: <span class="card-p1">{{!empty($order['package']['sale_price'])?$order['package']['sale_price']:''}} ₺</span></h5>
+                                    <h5 class="card-h3 mb-0">Total Price: <span class="card-p1">{{!empty($order['package']['sale_price'])?$order['package']['sale_price']:''}} <span class="lira">₺</span></span></h5>
                                     <a href="{{ url('treatment-order-details/' . (!empty($order['id']) ?Crypt::encrypt($order['id']): '')) }}" class="mt-auto view-det">View Details</a>
                                 </div>
                             </div>

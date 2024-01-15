@@ -1,6 +1,24 @@
 @extends('front.layout.layout2')
 @section('content')
 <style>
+    .form-select,
+    .form-control {
+        color: #000;
+        font-family: CamptonBook !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
+
+    .green-plate,
+    .black-plate,
+    .white-plate {
+        height: 63px;
+        padding: 0 2rem;
+    }
+
     .payment-card {
         padding: 25px;
         border-radius: 5px;
@@ -26,7 +44,13 @@
     }
 
     .multiple-checkbox-div .multiple-checks .form-check {
-        width: 189px;
+        min-width: 200px;
+        display: flex;
+        align-items: center;
+    }
+
+    .multiple-checks .form-check-input {
+        margin-top: 0;
     }
 
     .roles-card {
@@ -40,15 +64,25 @@
 
     .roles-card h6 {
         color: #878787;
+        font-family: 'Campton';
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.64px;
     }
 
     .roles-card .roles-card-footer {
         display: flex;
-        gap: 7px;
+        gap: 16px;
+        align-items: center;
     }
 
     .multiple-checks .form-check-label {
         font-size: 15px;
+    }
+
+    .form-control::placeholder {
+        font-family: "Campton";
     }
 </style>
 <div class="content-wrapper">
@@ -60,7 +94,7 @@
             <div class="col-md-9">
                 <div class="card mb-4">
                     <div class="form-div">
-                        <h5 class="card-header d-flex align-items-center justify-content-between mb-4">
+                        <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                             <span>Roles</span>
                             <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
                         </h5>
@@ -68,24 +102,24 @@
                             <form action="{{ url('roles-add') }}" method="post" id="rolesprivilages">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ !empty($system_users['id']) ? $system_users['id'] : '' }}">
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Your Personnel E-Mail Address</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Your Personnel E-Mail Address</label>
                                     <input type="text" class="form-control" name="email" id="email" placeholder="your-personnel@mail.com" value="{{ !empty($system_users['email']) ? $system_users['email'] : '' }}">
                                 </div>
 
-                                <div class="form-group mb-3{{ !empty($system_users['id']) ? ' d-none' : '' }}">
-                                    <label class="form-label">Enter Password</label>
+                                <div class="form-group mb-4 {{ !empty($system_users['id']) ? ' d-none' : '' }}">
+                                    <label class="form-label mb-3">Enter Password</label>
                                     <input type="text" class="form-control" name="password" id="password" placeholder="Password@2023" value="{{ !empty($system_users['password']) ? $system_users['password'] : '' }}">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Your Personnel Full Name</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Your Personnel Full Name</label>
                                     <input type="text" class="form-control" name="name" id="name" placeholder="Full Name" value="{{ !empty($system_users['name']) ? $system_users['name'] : '' }}">
                                 </div>
 
                                 <div class="form-group d-flex flex-column mb-5">
-                                    <label class="form-label">Role</label>
-                                    <select name="roll_id" id="roll_id">
+                                    <label class="form-label mb-3">Role</label>
+                                    <select name="roll_id" class="form-select" id="roll_id">
                                         <option value="">Choose Role</option>
                                         <option value="2" {{ !empty($system_users['roll_id']) && $system_users['roll_id'] == 2 ? 'selected' : 'gdfvg' }}>
                                             Super Admin</option>

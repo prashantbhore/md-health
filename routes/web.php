@@ -22,6 +22,7 @@ use App\Http\Controllers\admin\BaseController;
 use App\Http\Controllers\admin\customer\CustomerController;
 use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
+use App\Http\Controllers\admin\master\countryController;
 use App\Http\Controllers\admin\medical_tourism\MedicalTourismController;
 use App\Http\Controllers\admin\product\MDfoodController;
 use App\Http\Controllers\admin\product\MDhealthController;
@@ -123,7 +124,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('pending-vendors', 'admin/vendors/pending-vendors');
     Route::view('approved-vendors', 'admin/vendors/approved-vendors');
     Route::view('rejected-vendors', 'admin/vendors/rejected-vendors');
-    Route::view('vendor-details', 'admin/vendors/vendor-details');
+    Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
+    Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
+    Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
    
 
@@ -153,6 +156,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
 
+       //Admin  MANAGE Country
+
+       Route::controller(countryController::class)->group(function (){
+        Route::get('add-country','index');
+        Route::post('/add-country','store')->name('add-country');
+        Route::get('/country-data-table','data_table');
+        Route::get('/country/{id}/edit','edit_country');
+        Route::get('country-delete','country_delete');
+       });
+
+
+
 
     //Admin  MANAGE CITIES
 
@@ -165,7 +180,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     });
 
     //Admin  MANAGE CITIES
-    Route::view('add-country', 'admin/country/add-country');
+   
 
 
     //Admin  MANAGE CITIES
@@ -280,7 +295,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('notifications', 'admin/notifications/notifications');
 
     //Admin ADS & PROMO
-    Route::view('ads', 'admin/ads/ads');
+    Route::view('ads-promo', 'admin/ads/ads-promo');
+    Route::view('featured', 'admin/ads/featured');
     //Admin MANAGE REQUEST
     Route::view('manage-request', 'admin/manage-request/manage-request');
 
@@ -531,12 +547,11 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 
 
 Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
-
-Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 Route::any('test', [CustomerPackageController::class, 'test']);
+Route::post('complete_3ds',[CustomerPackageController::class, 'complete_3ds']);
 
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
-
+    
     Route::controller(UserRegistrationController::class)->group(function () {
         // Route::get('/medical-provider-dashboard', 'dashboard_view');
         Route::get('/my-profile', 'edit_customer');
@@ -546,22 +561,23 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
         Route::post('/reset-customer-password', 'update_customer_password');
         // Route::post('/check-old-password', 'check_old_password');
     });
-
+    
     //Customer Report Controller Code By Mpluss03
     Route::any('user-all-reports', [CustomerPackageController::class, 'customer_reports']);
     Route::post('user-all-reports-search', [CustomerPackageController::class, 'customer_report_search']);
-
-
-
+    
+    
+    
     //Mplus02
-
+    
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
-
+    Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
+    
 });
 
 

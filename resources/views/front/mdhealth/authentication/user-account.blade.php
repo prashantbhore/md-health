@@ -5,8 +5,6 @@
         display: none;
     }
 
-  
-
     .mdi-eye-off::before,
     .mdi-eye::before {
         font-size: 19px;
@@ -29,12 +27,12 @@
     }
 
     body {
-        background: #F6F6F6;
+        background: #f6f6f6;
     }
 
     .form-control,
     .form-select {
-        background-color: #F6F6F6;
+        background-color: #f6f6f6;
     }
 
     select:required:invalid {
@@ -47,7 +45,7 @@
 
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link.active {
-        background-color: #F6F6F6;
+        background-color: #f6f6f6;
     }
 </style>
 <div class="content-wrapper" id="regdiv">
@@ -77,37 +75,39 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content position-relative" id="myTabContent">
             <div class="login-form pb-100px" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
-                <div class="row position-relative">
-                    <div class="bod-right form-divider pt-4" style="width:45%">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-6 bod-right form-divider pt-4">
+                        <!-- Form Heading -->
                         <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                             <a href="{{ url('/') }}">
                                 <img src="{{ 'front/assets/img/back.svg' }}" alt="" />
                             </a>
-                            <h1 class="reg-title my-0">Create User Account </h1>
+                            <h1 class="reg-title my-0">Create User Account</h1>
                         </div>
+                        <!-- Form -->
                         <div class="form text-start">
                             <form id="mycustomerForm">
                                 {{-- action="{{ url('/md-customer-register') }}" method="post" --}}
                                 <input type="hidden" name="platform_type" value="web" />
                                 <input type="hidden" name="user_type" value="customer" />
-                                <div class="row gx-5 gy-2">
+                                <div class="row ">
                                     <div class="col-md-6 mb-3">
                                         <label for="firstName" class="form-label">*First Name</label>
-                                        <input type="text" class="form-control w-189" name="first_name" id="first_name" placeholder="First Name" />
+                                        <input type="text" class="form-control " name="first_name" id="first_name" placeholder="First Name" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="lastName" class="form-label">*Last Name</label>
-                                        <input type="text" class="form-control w-189" name="last_name" id="last_name" placeholder="Last Name" />
+                                        <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Last Name" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="dob" class="form-label">*Date of Birth</label>
-                                        <input class="form-control dobj w-189" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
+                                        <input class="form-control dobj " name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
                                     </div>
-                                    <div class="col-md-6 mb-3 ">
+                                    <div class="col-md-6 mb-3">
                                         <label for="gender" class="form-label">*Gender</label>
-                                        <select required name="gender" id="gender" class="form-select w-189">
+                                        <select required name="gender" id="gender" class="form-select ">
                                             <option value="" selected disabled>Choose</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -117,26 +117,25 @@
 
                                     <div class="col-md-12 mb-3">
                                         <label for="email" class="form-label">*E-mail</label>
-                                        <input type="text" class="form-control w-407p5" name="email" id="email" placeholder="E-mail" autocomplete="off" />
+                                        <input type="text" class="form-control " name="email" id="email" placeholder="E-mail" autocomplete="off" />
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="phone" class="form-label">*Phone</label>
-                                        <input type="text" class="form-control w-407p5" name="phone" id="phone" placeholder="Phone" />
+                                        <input type="text" class="form-control " name="phone" id="phone" placeholder="Phone" />
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="country_id" class="form-label">*Country</label>
-                                        <select required name="country_id" id="country_id" class="form-select w-189">
+                                        <select required name="country_id" id="country_id" class="form-select ">
                                             <option value="" selected disabled>Choose</option>
                                             @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->country_name }}
-                                            </option>
+                                            <option value="{{ $country->id }}">{{ $country->country_name }} </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="city_id" class="form-label">*City</label>
-                                        <select required name="city_id" id="city_id" class="form-select w-189">
+                                        <select required name="city_id" id="city_id" class="form-select ">
                                             <option value="" selected disabled hidden>Choose</option>
                                             @foreach ($cities as $city)
                                             <option value="{{ $city->id }}">{{ $city->city_name }} </option>
@@ -146,33 +145,34 @@
 
                                     <div class="col-md-12 mb-3">
                                         <label for="address" class="form-label">*Address</label>
-                                        <textarea name="address" id="address" cols="" rows="5" class="form-control camptonBook w-407p5" placeholder="Enter Address"></textarea>
+                                        <textarea name="address" id="address" cols="" rows="5" class="form-control camptonBook " placeholder="Enter Address"></textarea>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12 mb-3 position-relative">
                                         <div class="hide-eye-div">
                                             <label for="password" class="form-label">*Password</label>
-                                            <input type="password" name="password" class="form-control w-407p5" id="password" placeholder="Minimum 8 characters" />
+                                            <input type="password" name="password" class="form-control " id="password" placeholder="Minimum 8 characters" />
                                             <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-5 hide-eye-div">
+                                    <div class="col-md-12 mb-5 position-relative">
+                                        <div class="hide-eye-div">
                                             <label for="re-password" class="form-label">*Re-Password</label>
-                                            <input type="password" name="repassword" class="form-control w-407p5" id="repassword" placeholder="Minimum 8 characters" />
+                                            <input type="password" name="repassword" class="form-control " id="repassword" placeholder="Minimum 8 characters" />
                                             <span toggle="#repassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12 mb-3 ">
                                         <div class="form-check tc">
                                             <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
-                                            <label class="form-check-label" for="UserflexCheckDefault"> I accept <a href="#" class="text-decoration-underline">Terms and
-                                                    Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a> </label>
+                                            <label class="form-check-label" for="UserflexCheckDefault">
+                                                I accept <a href="#" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a>
+                                            </label>
                                         </div>
                                     </div>
-                                    <div id="recaptcha-container" class="df-end"></div>
+                                    <div id="recaptcha-container" class="df-center"></div>
                                     <span id="error" class="text-danger"></span>
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                        <button type="button" class="btn btn-md w-407p5 mb-5" id="regcustuser" style="height: 47px;">Create Account</button>
+                                        <button type="button" class="btn btn-md mb-5 w-100" id="regcustuser" style="height: 47px;">Create Account</button>
                                         <label for="" class="mt-auto">Already have an account?</label>
                                         <a href="{{ url('sign-in-web') }}" class="signIn-link">Sign In</a>
                                     </div>
@@ -180,15 +180,14 @@
                             </form>
                         </div>
                     </div>
-                    <div class="" style="width:55%">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
                         <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-5">
                             <div class="mb-2">
                                 <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
                             </div>
                             <h5 class="text-h1 my-0">Get your reliable & affordable</h5>
                             <h4 class="text-green-h1b my-2">Treatment Packages</h4>
-                            <p class="text-p1-gray my-0">We are partnered with the top health service providers and
-                                vendors that gives you the best health experience!</p>
+                            <p class="text-p1-gray my-0">We are partnered with the top health service providers and vendors that gives you the best health experience!</p>
                         </div>
                     </div>
                 </div>
@@ -236,7 +235,7 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-md btn-text w-75 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        <button class="btn btn-md btn-text w-100 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
                 </form>
                 <script>
@@ -283,18 +282,17 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
+@endsection @section('script')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
     function countdownTimer(duration) {
-        $('#resendotp').hide();
+        $("#resendotp").hide();
         let timer = duration,
-            minutes, seconds;
-        const timerDisplay = $('#timer');
+            minutes,
+            seconds;
+        const timerDisplay = $("#timer");
         const timerInterval = setInterval(function() {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
@@ -307,7 +305,7 @@
             if (--timer < 0) {
                 timer = duration;
                 clearInterval(timerInterval);
-                $('#resendotp').show();
+                $("#resendotp").show();
                 timerDisplay.text("Timer completed!");
             }
         }, 1000);
@@ -340,9 +338,7 @@
                 },
                 beforeSend: function() {
                     $("#regcustuser").attr("disabled", true);
-                    $("#regcustuser").html(
-                        '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-                    );
+                    $("#regcustuser").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                 },
                 success: function(response) {
                     $("#regcustuser").attr("disabled", false);
@@ -800,14 +796,16 @@
 <script>
     $(function() {
         $('input[name="date_of_birth"]').daterangepicker({
-            opens: 'left',
-            singleDatePicker: true,
-            showDropdowns: true,
-            locale: {
-                format: 'DD-MMM-YYYY'
-            }
-            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        }, function(start, end, label) {});
+                opens: "left",
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                    format: "DD-MMM-YYYY",
+                },
+                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            },
+            function(start, end, label) {}
+        );
     });
 </script>
 @endsection

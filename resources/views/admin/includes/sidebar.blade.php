@@ -74,8 +74,13 @@
             </li>
          
             <li class="adsLi">
-                <a href="{{URL::asset('admin/ads')}}" class="nav-link link-dark ads">
+                <a href="{{URL::asset('admin/ads-promo')}}" class="nav-link link-dark ads">
                     Ads & Promo
+                </a>
+            </li>
+            <li class="featuredLi">
+                <a href="{{URL::asset('admin/featured')}}" class="nav-link link-dark featured">
+                    Featured List
                 </a>
             </li>
             <li class="manageRequestLi">

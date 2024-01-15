@@ -157,6 +157,18 @@
             <div id="card">
                 <div class="row">
                     <div class="col-5 card-details me-5">
+                            <form id="procced_to_pay_form" action="{{ url('/sandbox') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                                <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
+                                <input type="hidden" name="payment_percent" id="payment_percent" value="">
+                                <input type="hidden" name="total_paying_price" id="total_paying_price" value="">
+                                <input type="hidden" name="card_name" id="card_name" value="">
+                                <input type="hidden" name="card_number" id="card_number" value="">
+                                <input type="hidden" name="cvv" id="cvv" value="">
+                                <input type="hidden" name="validity" id="validity" value="">
+                                {{-- <input type="hidden" id="package_id" value="{{ $id }}"> --}}
+                            </form>
                         <form action="" id="creditCardForm">
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="input1" placeholder="Card Holder Name">
@@ -323,29 +335,73 @@
 
             var inputValue = $(this).val();
 
-            switch ($(this).attr('id')) {
-                case 'input1':
-                    $('.cardholder').text(inputValue);
-                    cardName = $(this).val().toString();
-                    break;
-                case 'input2':
-                    $('.cardNumber').text(inputValue);
-                    cardNo = $(this).val().toString()
-                    break;
-                case 'input3':
-                    cardCvv = $(this).val().toString();
-                    break;
-                case 'input4':
-                    $('.validity').text(inputValue);
-                    cardExpiryDate = $(this).val().toString();
-                    break;
-            }
-        });
+                switch ($(this).attr('id')) {
+                    case 'input1':
+                        $('.cardholder').text(inputValue);
+                        cardName = $(this).val().toString();
+                        $('#card_name').val(cardName);
+                        break;
+                    case 'input2':
+                        $('.cardNumber').text(inputValue);
+                        cardNo = $(this).val().toString()
+                        $('#card_number').val(cardNo);
+                        break;
+                    case 'input3':
+                        cardCvv = $(this).val().toString();
+                        $('#cvv').val(cardCvv);
+                        break;
+                    case 'input4':
+                        $('.validity').text(inputValue);
+                        cardExpiryDate = $(this).val().toString();
+                        $('#validity').val(cardExpiryDate);
+                        break;
+                }
+            });
 
-        $('.purchaseBtn').click(function() {
-            makePurchase();
-        })
-        ////////////////////////////////////////////////////////////////////////////////
+            $('.purchaseBtn').click(function() {
+                // makePurchase();
+                var form = $('#procced_to_pay_form');
+
+                // Additional data
+                var pendingAmount = proxyPrice - totalPrice;
+
+                if (isTwentySelected) {
+                    var percentage = '20';
+                } else if (isThirtySelected) {
+                    var percentage = '30';
+                } else if (isFiftySelected) {
+                    var percentage = '50';
+                } else if (isHundredSelected) {
+                    var percentage = '100';
+                }
+
+                var additionalData = {
+                    'package_id': packageId,
+                    'patient_id': patientId,
+                    'sale_price': proxyPrice,
+                    'paid_amount': totalPrice,
+                    'platform_type': 'web',
+                    'card_no': cardNo || '',
+                    'card_expiry_date': cardExpiryDate || '',
+                    'card_cvv': cardCvv || '',
+                    'card_name': cardName || '',
+                    'pending_amount': pendingAmount,
+                    'percentage': percentage
+                };
+
+                // Add additional data to the form
+                $.each(additionalData, function(name, value) {
+                    form.append($('<input>').attr({
+                        type: 'hidden',
+                        name: name,
+                        value: value
+                    }));
+                });
+
+                // Submit the form
+                form.submit();
+            })
+            ////////////////////////////////////////////////////////////////////////////////
 
         function getData() {
 
@@ -437,29 +493,30 @@
         function makePurchase() {
 
 
-            var formData = new FormData();
-            // var patientId = "{{ Session::get('Patient_id') }}";
-            // alert(patientId);
-            var pendingAmount = proxyPrice - totalPrice;
-            formData.append('package_id', packageId);
-            formData.append('patient_id', patientId);
-            formData.append('sale_price', proxyPrice);
-            formData.append('paid_amount', totalPrice);
-            formData.append('platform_type', 'web');
-            formData.append('card_no', cardNo ?? '');
-            formData.append('card_expiry_date', cardExpiryDate ?? '');
-            formData.append('card_cvv', cardCvv ?? '');
-            formData.append('card_name', cardName ?? '');
-            formData.append('pending_amount', pendingAmount);
-            if (isTwentySelected) {
-                formData.append('percentage', '20%');
-            } else if (isThirtySelected) {
-                formData.append('percentage', '30%');
-            } else if (isFiftySelected) {
-                formData.append('percentage', '50%');
-            } else if (isHundredSelected) {
-                formData.append('percentage', '100%');
-            }
+                var formData = new FormData();
+                // var patientId = "{{ Session::get('Patient_id') }}";
+                // alert(patientId);
+                var pendingAmount = proxyPrice - totalPrice;
+                formData.append('package_id', packageId);
+                formData.append('patient_id', patientId);
+                formData.append('sale_price', proxyPrice);
+                formData.append('paid_amount', totalPrice);
+                formData.append('platform_type', 'web');
+                formData.append('card_no', cardNo ?? '');
+                formData.append('card_expiry_date', cardExpiryDate ?? '');
+                formData.append('card_cvv', cardCvv ?? '');
+                formData.append('card_name', cardName ?? '');
+                formData.append('pending_amount', pendingAmount);
+
+                if (isTwentySelected) {
+                    formData.append('percentage', '20%');
+                } else if (isThirtySelected) {
+                    formData.append('percentage', '30%');
+                } else if (isFiftySelected) {
+                    formData.append('percentage', '50%');
+                } else if (isHundredSelected) {
+                    formData.append('percentage', '100%');
+                }
 
             $.ajax({
                 url: baseUrl + '/api/md-customer-purchase-package',
@@ -516,25 +573,31 @@
             hundredAmount = proxyPrice * (100 / 100);
             hundredAmount = hundredAmount - (hundredAmount * (10 / 100));
 
-            if (isTwentySelected) {
-                totalPrice = totalPrice *= (20 / 100);
-            } else if (isThirtySelected) {
-                totalPrice = totalPrice *= (30 / 100);
-                totalPrice = totalPrice - (totalPrice * (5 / 100));
-                proxyPrice = proxyPrice - (proxyPrice * (5 / 100));
-            } else if (isFiftySelected) {
-                totalPrice = totalPrice *= (50 / 100);
-                totalPrice = totalPrice - (totalPrice * (8 / 100));
-                proxyPrice = proxyPrice - (proxyPrice * (8 / 100));
-            } else if (isHundredSelected) {
-                totalPrice = totalPrice - (totalPrice * (10 / 100));
-                proxyPrice = proxyPrice - (proxyPrice * (10 / 100));
-            }
+                if (isTwentySelected) {
+                    totalPrice = totalPrice *= (20 / 100);
+                    $('#payment_percent').val('20');
+                } else if (isThirtySelected) {
+                    totalPrice = totalPrice *= (30 / 100);
+                    totalPrice = totalPrice - (totalPrice * (5 / 100));
+                    proxyPrice = proxyPrice - (proxyPrice * (5 / 100));
+                    $('#payment_percent').val('30');
+                } else if (isFiftySelected) {
+                    totalPrice = totalPrice *= (50 / 100);
+                    totalPrice = totalPrice - (totalPrice * (8 / 100));
+                    proxyPrice = proxyPrice - (proxyPrice * (8 / 100));
+                    $('#payment_percent').val('50');
+                } else if (isHundredSelected) {
+                    totalPrice = totalPrice - (totalPrice * (10 / 100));
+                    proxyPrice = proxyPrice - (proxyPrice * (10 / 100));
+                    $('#payment_percent').val('100');
+                }
 
-            // alert(totalPrice);
-            // $('.total_price').empty();
-            $('.total_price').text(totaltoShowPrice + ' ₺');
-        };
+                // alert(totalPrice);
+                // $('.total_price').empty();
+                $('#payment_percent').val();
+                $("#total_paying_price").val(totalPrice);
+                $('.total_price').text(totaltoShowPrice + ' ₺');
+            };
 
         function updateOtherServicesUi() {
 
@@ -550,14 +613,15 @@
             // });
 
 
-            var treatmentPriceHtml = numberToDiscount(
-                    parseInt(purchaseDetails.package_discount),
-                    purchaseDetails
-                    .treatment_price) +
-                ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails.treatment_price +
-                '₺)</span>';
-            $('.total_price').text(totaltoShowPrice + ' ₺');
-            $('.treatment_price').append(treatmentPriceHtml);
+                var treatmentPriceHtml = numberToDiscount(
+                        parseInt(purchaseDetails.package_discount),
+                        purchaseDetails
+                        .treatment_price) +
+                    ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails.treatment_price +
+                    '₺)</span>';
+                $("#total_paying_price").val(totalPrice);
+                $('.total_price').text(totaltoShowPrice + ' ₺');
+                $('.treatment_price').append(treatmentPriceHtml);
 
         };
 

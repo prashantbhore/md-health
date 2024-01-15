@@ -25,7 +25,7 @@
 
                             <div class="row">
                                 <div class="col-md-3 mb-3">
-                                    <select class="form-control w-100" id="countrySelect" name="country">
+                                    <select class="form-control w-100" id="countrySelect" name="country" >
                                         <option value="" selected disabled>Select Country</option>
                                         @if(!empty($countries))
                                         @foreach ($countries as $country_data)

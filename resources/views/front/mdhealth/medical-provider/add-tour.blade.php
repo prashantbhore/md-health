@@ -20,12 +20,15 @@
         color: #000 !important;
     }
 
+
     .form-group .prev-img-div img {
         height: 150px;
         width: auto;
         object-fit: contain;
         margin-top: 15px;
+        border-radius: 3px;
     }
+    
 
     .multiple-checkbox-div .multiple-checks {
         display: flex;
@@ -34,7 +37,7 @@
     }
 
     .multiple-checkbox-div .multiple-checks .form-check {
-        width: 189px;
+        min-width: 200px;
     }
 
     .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
@@ -44,8 +47,6 @@
     .multiple-checks .form-check-label {
         color: #000;
         font-family: Campton;
-        font-size: 12px;
-        
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.48px;
@@ -59,11 +60,11 @@
             </div>
             <div class="col-md-9">
                 <div class="card mb-4">
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                         <span>Add Tour</span>
                         <a href="{{ url('medical-other-services') }}" class="d-flex align-items-center gap-1 text-decoration-none">
                             <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                            <p class="mb-0 text-dark">Back</p>
+                            <p class="mb-0 card-h1">Back</p>
                         </a>
                     </h5>
                     <div class="card-body">
@@ -74,24 +75,24 @@
                                 @csrf
                                 <input type="hidden" name="tour_id" value="{{ !empty($tour_details['id']) ? $tour_details['id'] : '' }}">
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Tour Name</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Tour Name</label>
                                     <input type="text" class="form-control" id="tour_name" name="tour_name" value="{{ !empty($tour_details['tour_name']) ? $tour_details['tour_name'] : '' }}" aria-describedby="foodname" placeholder="Please Write Here">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Tour Description</label>
-                                    <textarea class="form-control" id="tour_description" name="tour_description" rows="3" placeholder="Your message here" data-gramm="false" wt-ignore-input="true">{{ !empty($tour_details['tour_description']) ? $tour_details['tour_description'] : '' }}</textarea>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Tour Description</label>
+                                    <textarea class="form-control" id="tour_description" name="tour_description" rows="5" style="height: 150px;" placeholder="Your message here" data-gramm="false" wt-ignore-input="true">{{ !empty($tour_details['tour_description']) ? $tour_details['tour_description'] : '' }}</textarea>
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Number of Days</label>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Number of Days</label>
                                     <input type="text" class="form-control" id="tour_days" name="tour_days" value="{{ !empty($tour_details['tour_days']) ? $tour_details['tour_days'] : '' }}" aria-describedby="foodname" placeholder="Please Write Here">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Tour Picture</label>
-                                    <div class="form-group">
+                                <div class="form-group mb-5">
+                                    <label class="form-label mb-3">Tour Picture</label>
+                                    <div class="form-group mb-3">
                                         <input type="file" name="tour_image_path" id="tour_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
                                     </div>
                                     <div class="prev-img-div">
@@ -100,8 +101,8 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group mb-3 section-heading-div">
-                                    <label class="form-label">Tour Price</label>
+                                <div class="form-group mb-4 section-heading-div">
+                                    <label class="form-label mb-3">Tour Price</label>
                                     <div class="input-icon-div">
                                         <input type="text" class="form-control" name="tour_price" id="tour_price" value="{{ !empty($tour_details['tour_price']) ? $tour_details['tour_price'] : '' }}" placeholder="0">
                                         <span class="input-icon">₺</span>
@@ -110,7 +111,7 @@
 
                                 <div class="multiple-checkbox-div mb-5">
                                     <div class="form-group d-flex flex-column">
-                                        <label class="form-label">Other Services</label>
+                                        <label class="form-label mb-4">Other Services</label>
                                         <div class="multiple-checks">
                                             <div class="form-check">
                                                 <input type="checkbox" value="Breakfast & Dinner" class="form-check-input" id="fordinner" {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Breakfast & Dinner') !== false ? 'checked' : '' }}>

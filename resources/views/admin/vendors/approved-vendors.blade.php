@@ -111,7 +111,7 @@
                                         <td>Istanbul</td>
                                         <td>Active</td>
                                         <td class="text-end d-flex justify-content-end gap-2">
-                                            <a href="{{URL::asset('admin/vendor-details')}}">
+                                            <a href="{{URL::asset('admin/approved-vendor-details')}}">
                                                 <img src="{{URL::asset('admin/assets/img/viewEntry.png')}}" alt="">
                                             </a>
                                             <a href="#">

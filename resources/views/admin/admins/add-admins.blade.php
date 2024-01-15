@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <div class="card-title">Add New Admins</div>
 
-                        <form id="adminForm" action="{{ route('admin.store') }}" method="post">
+                        <form id="adminForm" action="{{ route('admin.store') }}" method="post" class="admin-form">
                             @csrf
                         
                             <div class="row">
@@ -25,20 +25,174 @@
                                 <div class="col-md-6 mb-3">
                                     <input type="text" name="email" class="form-control" placeholder="E-mail">
                                 </div>
-                            </div>
-                        
-                            <div class="row">
+                           
                                 <div class="col-md-6 mb-3">
                                     <input type="password" name="password" class="form-control" placeholder="Password">
                                 </div>
                         
                                 <div class="col-md-6 mb-3">
-                                    <select name="adminRole" id="adminRole" class="form-select form-select-sm w-100">
-                                        <option selected disabled hidden>Role</option>
-                                        <option value="superAdmin">Super Admin</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
+                                <input type="text" name="text" class="form-control" placeholder="Role Name">
                                 </div>
+
+                                <div class="card-title">Privileges</div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="all">
+                                    <label class="form-check-label" for="all">
+                                    All Privileges
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Dashboard">
+                                    <label class="form-check-label" for="Dashboard">
+                                    Dashboard
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Sales">
+                                    <label class="form-check-label" for="Sales">
+                                    Sales
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Customers">
+                                    <label class="form-check-label" for="Customers">
+                                    Manage Customers
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Vendors">
+                                    <label class="form-check-label" for="Vendors">
+                                    Manage Vendors
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Country">
+                                    <label class="form-check-label" for="Country">
+                                    Manage Country
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Cities">
+                                    <label class="form-check-label" for="Cities">
+                                    Manage Cities
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="MLM">
+                                    <label class="form-check-label" for="MLM">
+                                    MLM
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Brands">
+                                    <label class="form-check-label" for="Brands">
+                                    Manage Brands
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Categories">
+                                    <label class="form-check-label" for="Categories">
+                                    Manage Products & Categories
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Payments">
+                                    <label class="form-check-label" for="Payments">
+                                    Payments
+                                    </label>
+                                </div>
+                                </div>
+
+                                
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Reviews">
+                                    <label class="form-check-label" for="Reviews">
+                                    Reviews
+                                    </label>
+                                </div>
+                                </div>
+
+                            
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Promo">
+                                    <label class="form-check-label" for="Promo">
+                                    Ads & Promo
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Request">
+                                    <label class="form-check-label" for="Request">
+                                    Manage Request
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Notifications">
+                                    <label class="form-check-label" for="Notifications">
+                                    Notifications
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Memberships">
+                                    <label class="form-check-label" for="Memberships">
+                                    Memberships
+                                    </label>
+                                </div>
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Admins">
+                                    <label class="form-check-label" for="Admins">
+                                    Manage Admins
+                                    </label>
+                                </div>
+                                </div>
+                                
+                            </div>
                         
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn deactivate-btn w-100">Add New Admin</button>
@@ -58,10 +212,9 @@
                             <input type="text" class="form-control" placeholder="Search">
 
                             <select class="form-select form-select-sm">
-                                <option selected disabled hidden>Active Admins</option>
-                                <option value="1">Active Orders</option>
-                                <option value="2">Denied Orders</option>
-                                <option value="3">Completed Orders</option>
+                                <option selected>Select Status</option>
+                                <option value="1">Active</option>
+                                <option value="3">Deactive</option>
                             </select>
                         </div>
                         <div class="table-responsive" style="overflow-x: hidden">
