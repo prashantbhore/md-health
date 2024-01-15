@@ -507,7 +507,7 @@ Route::middleware('auth:sanctum')->group(function ()
 
     //Medical Provider Dashboard
     Route::controller(FoodPackageController::class)->group(function () {
-        Route::get('md-add-food-packages', 'add_food_packages');
+        Route::post('md-add-food-packages', 'add_food_packages');
     });
 
 
