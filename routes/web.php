@@ -531,12 +531,11 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 
 
 Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
-
-Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 Route::any('test', [CustomerPackageController::class, 'test']);
+Route::post('complete_3ds',[CustomerPackageController::class, 'complete_3ds']);
 
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
-
+    
     Route::controller(UserRegistrationController::class)->group(function () {
         // Route::get('/medical-provider-dashboard', 'dashboard_view');
         Route::get('/my-profile', 'edit_customer');
@@ -546,22 +545,23 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
         Route::post('/reset-customer-password', 'update_customer_password');
         // Route::post('/check-old-password', 'check_old_password');
     });
-
+    
     //Customer Report Controller Code By Mpluss03
     Route::any('user-all-reports', [CustomerPackageController::class, 'customer_reports']);
     Route::post('user-all-reports-search', [CustomerPackageController::class, 'customer_report_search']);
-
-
-
+    
+    
+    
     //Mplus02
-
+    
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
-
+    Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
+    
 });
 
 
