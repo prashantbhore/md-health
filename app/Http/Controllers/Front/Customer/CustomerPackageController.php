@@ -38,6 +38,11 @@ class CustomerPackageController extends Controller
         $validator = Validator::make($controller_request->all(),
             [
                 'package_id' => 'required',
+                'sale_price'  => 'required',
+                'paid_amount'  => 'required',
+                'platform_type'  => 'required',
+                'pending_amount'  => 'required',
+                'percentage'  => 'required',
                 'patient_id' => 'required',
                 'payment_percent' => 'required',
                 'total_paying_price' => 'required',

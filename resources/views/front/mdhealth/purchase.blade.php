@@ -172,18 +172,20 @@
                                 <input type="hidden" name="cvv" id="cvv" value="">
                                 <input type="hidden" name="validity" id="validity" value="">
                                 {{-- <input type="hidden" id="package_id" value="{{ $id }}"> --}}
-                            </form>
-                            <form action="" id="creditCardForm">
+                                {{-- </form>
+                            <form action="" id="creditCardForm"> --}}
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" id="input1"
+                                    <input type="text" name="input1" class="form-control" id="input1"
                                         placeholder="Card Holder Name">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="number" class="form-control" id="input2" placeholder="Card Number">
+                                    <input type="number" name="input2" class="form-control" id="input2"
+                                        placeholder="Card Number">
                                 </div>
                                 <div class="d-flex gap-2 mb-4">
-                                    <input type="password" id="input3" class="form-control w-50" placeholder="CVV">
-                                    <input type="text" id="input4" class="form-control w-50"
+                                    <input type="password" id="input3" name="input3" class="form-control w-50"
+                                        placeholder="CVV">
+                                    <input type="text" id="input4" name="input4" class="form-control w-50"
                                         placeholder="Valid Till">
                                 </div>
                                 <!-- <a href="{{ url('payment-status') }}"> -->
@@ -255,6 +257,7 @@
 @endsection
 @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -343,7 +346,7 @@
                     "<br>" + isHundredSelected);
             });
 
-            $('#creditCardForm input').on('input', function() {
+            $('#procced_to_pay_form input').on('input', function() {
 
                 var inputValue = $(this).val();
 
@@ -356,6 +359,8 @@
                     case 'input2':
                         $('.cardNumber').text(inputValue);
                         cardNo = $(this).val().toString();
+                        // cardNo.replace(/\s/g, '');
+                        // alert('cardNo: '+cardNo)
                         $('#card_number').val(cardNo);
                         // Replace with the actual BIN
                         // var cardType = getCardType(cardNo);
@@ -363,11 +368,11 @@
                         var cardNumberInput = $(this).val();
 
                         // Format the card number
-                        var formattedCardNumber = formatCardNumber(cardNumberInput).parseInt;
-
+                        var formattedCardNumber = formatCardNumber(cardNumberInput)
+                        formattedCardNumber.replace(/\D/g, '');
                         // Update the input field value
                         // $(this).val(formattedCardNumber);
-
+                        // alert(formattedCardNumber);
                         // Update the paragraph content
                         // $('#input2').val(formattedCardNumber);
                         $('.cardNumber').text(formattedCardNumber);
@@ -382,6 +387,16 @@
                         $('.validity').text(inputValue);
                         cardExpiryDate = $(this).val().toString();
                         $('#validity').val(cardExpiryDate);
+                        var inputValue = $(this).val();
+
+                        // Remove all non-numeric characters
+                        var numericValue = inputValue.replace(/\D/g, '');
+
+                        // Format the value as MM/YY
+                        var formattedValue = formatValidityDate(numericValue);
+
+                        // Update the input field with the formatted value
+                        $(this).val(formattedValue);
                         break;
                 }
             });
@@ -474,6 +489,44 @@
                 // Submit the form
                 form.submit();
             })
+
+            ////////////////////////////////////////////////////////////////////////////////
+
+            $('#procced_to_pay_form').validate({
+                rules: {
+                    input1: {
+                        required: true,
+                    },
+                    input2: {
+                        required: true,
+                    },
+                    input3: {
+                        required: true,
+                    },
+                    input4: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    input1: {
+                        required: "Please enter card holder name",
+                    },
+                    input2: {
+                        required: "Please enter card number",
+                    },
+                    input3: {
+                        required: "Please enter cvv",
+                    },
+                    input4: {
+                        required: "Please enter card expiry date",
+                    }
+
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
 
             ////////////////////////////////////////////////////////////////////////////////
 
@@ -615,6 +668,26 @@
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////
+
+            function formatValidityDate(value) {
+                // Ensure value is not empty
+                if (value.length === 0) {
+                    return '';
+                }
+
+                // Ensure the first two characters represent a valid month
+                var month = value.slice(0, 2);
+                if (parseInt(month) > 12) {
+                    month = '12';
+                }
+
+                // Add a slash after the first two characters
+                if (value.length >= 2) {
+                    return month + '/' + value.slice(2, 4);
+                }
+
+                return month;
+            }
 
             function numberToPercent(percent, number) {
                 console.log("///////////number//////////", number);
