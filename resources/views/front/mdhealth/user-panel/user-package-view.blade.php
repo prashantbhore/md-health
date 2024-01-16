@@ -256,32 +256,9 @@ $payment_time_and_date = '';
         align-items: center;
     }
 
-
-
-    .patient-details-div label {
-        position: absolute;
-        top: -11px;
-        right: 20px;
-        background: #f6f6f6;
-        padding: 0 5px;
-        border-radius: 5px;
-        font-size: 14px;
-        color: #9F9E9E;
-        font-family: 'CamptonBook';
-    }
-
-    .patient-details-div input {
-        background: #f6f6f6;
-        color: #9F9E9E;
-    }
-
     .patient-details:last-child {
         margin-bottom: 160px;
     }
-
-
-
-
 
     .payment-paid-div {
         border-radius: 3px;
@@ -290,9 +267,6 @@ $payment_time_and_date = '';
         justify-content: space-between;
         border-radius: 0 100px 100px 0;
     }
-
- 
-
 
 
     .view-menu-div .fa-cloud-upload {
@@ -304,41 +278,50 @@ $payment_time_and_date = '';
 
     .cloud-upload-file span {
         vertical-align: bottom;
+        color: #000002;
+        font-family: Campton;
         font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.64px;
+        margin-left: 1.5rem;
     }
 
     .gallery {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 1.5rem;
     }
 
     .gallery a {
         position: relative;
-        width: 140px;
-        height: 140px;
+        width: 83px;
+        height: 62px;
         z-index: 99;
+        border-radius: 10px;
+    }
+
+    .gallery img {
+        width: 83px;
+        height: 62px;
+        object-fit: cover;
+        border-radius: 10px;
     }
 
     .gallery .clear-btn {
         position: absolute;
-        top: 5px;
+        top: -5px;
         right: -5px;
-        background: black;
-        padding: 3px 7px;
+        background: #000000ad;
+        padding: 3px 6px;
         border-radius: 100%;
         color: #fff;
         text-decoration: none;
         font-weight: 100;
-        line-height: 20px;
         z-index: 9999;
     }
 
-    .gallery img {
-        width: 140px;
-        height: 140px;
-        object-fit: contain;
-    }
+
 
     .video-div {
         width: 140px;
@@ -416,8 +399,8 @@ $payment_time_and_date = '';
                                             <div class="d-flex justify-content-between mb-3">
                                                 <p class="card-h1">Package Other Details </p>
                                                 <span>
-                                                    <span>Your Case No </span>
-                                                    <span class="text-green">#MD829</span>
+                                                    <h5 class="card-h4 d-inline-block camptonBold">Your Case No <p class="text-green mb-0 d-inline-block">#MD829</p></h5>
+                                                    
                                                 </span>
                                             </div>
 
@@ -557,90 +540,90 @@ $payment_time_and_date = '';
 
                                                 @if (!empty($data['case_manager']))
                                                 <div class="view-menu mb-4">
-                                                    <h6 class="fsb-1">Your Case Manager</h6>
-                                                    <p class="text-orange">{{ $data['case_manager'] }}</p>
+                                                    <h6 class="card-h1">Your Case Manager</h6>
+                                                    <p class="text-orange card-h2 text-capitalize camptonBook">{{ $data['case_manager'] }}</p>
                                                 </div>
                                                 @endif
 
                                                 <div class="patient-details-div">
                                                     <div class="patient-details mb-5">
-                                                        <h6 class="section-heading">Patient Details</h6>
-                                                        <div class="row">
+                                                        <h6 class="card-h1 mb-4">Patient Details</h6>
+                                                        <div class="row gy-3">
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">First Name</label>
-                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['patient_first_name']) ? $my_details['patient_first_name'] : '' }}" placeholder="First Name" id="foodname" aria-describedby="foodname" readonly>
+                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['patient_first_name']) ? $my_details['patient_first_name'] : '' }}" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Last Name</label>
-                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['patient_last_name']) ? $my_details['patient_last_name'] : '' }}" id="foodname" aria-describedby="Last Name" placeholder="Last Name" readonly>
+                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['patient_last_name']) ? $my_details['patient_last_name'] : '' }}" id="foodname" aria-describedby="Last Name" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Email</label>
-                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['patient_email']) ? $my_details['patient_email'] : '' }}" id="foodname" aria-describedby="foodname" placeholder="E-Mail" readonly>
+                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['patient_email']) ? $my_details['patient_email'] : '' }}" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Country</label>
-                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['country_name']) ? $my_details['country_name'] : '' }}" id="foodname" aria-describedby="foodname" placeholder="Country" readonly>
+                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['country_name']) ? $my_details['country_name'] : '' }}" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">City</label>
-                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['city_name']) ? $my_details['city_name'] : '' }}" id="foodname" aria-describedby="foodname" placeholder="City" readonly>
+                                                                    <input type="text" class="form-control" value="{{ !empty($my_details['city_name']) ? $my_details['city_name'] : '' }}" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="patient-details">
-                                                        <h6 class="section-heading">Treatment Details</h6>
-                                                        <div class="row">
+                                                    <div class="patient-details mb-5">
+                                                        <h6 class="card-h1 mb-4">Treatment Details</h6>
+                                                        <div class="row gy-3">
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Hospital Name</label>
-                                                                    <input type="text" class="form-control" value="{{ !empty($data['company_name']) ? $data['company_name'] : '' }}" id="foodname" aria-describedby="foodname" placeholder="Hospital Name" readonly>
+                                                                    <input type="text" class="form-control" value="{{ !empty($data['company_name']) ? $data['company_name'] : '' }}" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Treatment</label>
-                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" value="{{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}" placeholder="Treatment" readonly>
+                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" value="{{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Treatment Period</label>
-                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" value="{{ !empty($data['treatment_period_in_days']) ? $data['treatment_period_in_days'] : '' }}" placeholder="Treatment Period" readonly>
+                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" value="{{ !empty($data['treatment_period_in_days']) ? $data['treatment_period_in_days'] : '' }}" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Contact Number</label>
-                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" placeholder="Contact Number" readonly>
+                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Country</label>
-                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" placeholder="Country" readonly>
+                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">City</label>
-                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" value="{{ !empty($data['city_name']) ? $data['city_name'] : '' }}" placeholder="City" readonly>
+                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" value="{{ !empty($data['city_name']) ? $data['city_name'] : '' }}" readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-12 pb-5">
                                                                 <div class="form-group position-relative mb-3">
                                                                     <label class="form-label">Address</label>
-                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" placeholder="Address" readonly>
+                                                                    <input type="text" class="form-control" id="foodname" aria-describedby="foodname" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -649,11 +632,12 @@ $payment_time_and_date = '';
                                             </div>
 
                                             <div id="ShowDiv2" class="view-menu-div targetDiv mt-5">
-                                                <form id="my_form">
+                                                <form id="my_form" class="mb-5">
                                                     <div class="view-menu mb-4">
-                                                        <h6 class="fsb-1 mb-4">Upload Documents & Video</h6>
+                                                        <h6 class="card-h1 mb-4">Upload Documents & Video</h6>
                                                         <label for="cloud-upload-file" class="cloud-upload-file">
-                                                            <i class="fa fa-cloud-upload text-green"></i>
+                                                            <!-- <i class="fa fa-cloud-upload text-green"></i> -->
+                                                            <img src="{{asset('front/assets/img/uploadFile.png')}}" alt="">
                                                             <input type="file" name="customer_document_image_path" id="cloud-upload-file" hidden>
                                                             <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4,
                                                                 HEIC,
@@ -661,6 +645,8 @@ $payment_time_and_date = '';
                                                         </label>
                                                     </div>
                                                 </form>
+
+                                                <h6 class="card-h1 mb-4">My Documents</h6>
 
                                                 <div class="gallery">
                                                     @if (!empty($data['documents']))
@@ -732,7 +718,7 @@ $payment_time_and_date = '';
                                                             <div class="user-percentage fsb-1 fw-600">
                                                                 @if ($pending_percent == 0)
                                                                 {{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
-                                                               <span class="lira">₺</span>
+                                                                <span class="lira">₺</span>
                                                                 @else
                                                                 {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] : '' }}
                                                                 (<span>{{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }} <span class="lira">₺</span>)</span>
@@ -743,7 +729,7 @@ $payment_time_and_date = '';
                                                         </div>
                                                         <div class="payment-right-div df-end flex-column">
                                                             <div class="fsb-2 text-green paymt-green-text">Payment Date</div>
-                                                            
+
                                                             <div class="fsb-1">{{ $payment_time_and_date }}</div>
                                                             <!-- <div class="fsb-1"> 15:33:50  |   12/02/2023</div> -->
                                                         </div>
