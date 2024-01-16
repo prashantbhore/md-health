@@ -603,7 +603,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
     //Mplus02
     Route::post('purchase-by-mdcoins',[CustomerPackageController::class,'purchase_by_mdcoins']);
-
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');

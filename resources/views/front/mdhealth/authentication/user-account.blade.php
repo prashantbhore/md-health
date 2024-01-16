@@ -34,6 +34,10 @@
     .nav-tabs .nav-link.active {
         background-color: #f6f6f6;
     }
+
+
+
+
 </style>
 <div class="content-wrapper" id="regdiv">
     <div class="container text-center my-5 authentication">
@@ -270,7 +274,7 @@
         </div>
     </div>
 </div>
-<div id="recaptcha-container" class="df-end"></div>
+<div id="recaptcha-container"></div>
 @endsection
 
 @section('script')

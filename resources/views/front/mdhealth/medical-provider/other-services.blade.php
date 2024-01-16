@@ -40,7 +40,7 @@
                 <div class="card mb-4 other-services">
                     <h5 class="card-header d-flex align-items-center justify-content-between" style="margin-bottom: 65px;">
                         <span>Other Services</span>
-                        <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
+                        <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt=""  >
                     </h5>
                     <div class="card-body">
                         <div>
@@ -53,9 +53,9 @@
                             <div class="treatment-card df-start w-100 mb-5" id="div_{{ $hotel_detail['id'] }}">
                                 <div class="row card-row align-items-center w-100">
                                     <div class="col-md-1 df-center">
-                                        <img src="{{ $hotel_detail['hotel_image_path'] }}" alt="" class="hotel-image">
+                                        <img src="{{ $hotel_detail['hotel_image_path'] }}" alt="" class="tour-img">
                                     </div>
-                                    <div class="col-md-8 justify-content-start ps-0">
+                                    <div class="col-md-8 justify-content-start">
                                         <div class="trmt-card-body">
                                             <h5 class="dashboard-card-title mb-1">{{ $hotel_detail['hotel_name'] }}
                                             </h5>
