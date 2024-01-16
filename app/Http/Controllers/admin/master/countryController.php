@@ -66,6 +66,7 @@ class countryController extends Controller
 
     public function data_table(Request $request)
     {
+       
         $country = Country::where('status', '!=', 'delete')->orderBy('created_at', 'desc')->get();
     
         if ($request->ajax()) {

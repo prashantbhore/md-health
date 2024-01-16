@@ -76,6 +76,17 @@
         line-height: normal;
         letter-spacing: -0.48px;
     }
+
+    .form-control,
+    .form-select {
+        color: #000;
+        font-family: "Campton" !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
 </style>
 <!-- Include jQuery -->
 
@@ -357,11 +368,11 @@
             // Add 'selected' class to stars up to the selected count
             $(this).prevAll().addBack().addClass('selected');
 
+            var base_url = $('#base_url').val();
             // Send an AJAX request to your Laravel endpoint with the selected stars count
             $.ajax({
                 type: 'POST',
-                url: '{{ route('
-                saveStarRating ') }}',
+                url: base_url + '/saveStarRating',
                 data: {
                     selectedStars: newSelectedStars,
                     _token: '{{ csrf_token() }}'
@@ -377,4 +388,43 @@
     });
 </script>
 
+
+
+    <!-- JavaScript for Star Rating & AJAX -->
+    <script>
+        $(document).ready(function() {
+            // Fetch the value of hotel_stars
+            var selectedStars = "{{ !empty($hotel_details['hotel_stars']) ? $hotel_details['hotel_stars'] : 0 }}";
+
+            // Add 'selected' class to stars up to the selected count
+            $('.star-rating i').slice(0, selectedStars).addClass('selected');
+
+            $('.star-rating i').click(function() {
+                var newSelectedStars = $(this).data('value');
+                $('#hotel_stars').val(newSelectedStars);
+
+                // Remove 'selected' class from all stars
+                $('.star-rating i').removeClass('selected');
+
+                // Add 'selected' class to stars up to the selected count
+                $(this).prevAll().addBack().addClass('selected');
+                var base_url = $('#base_url').val();
+                // Send an AJAX request to your Laravel endpoint with the selected stars count
+                $.ajax({
+                    type: 'POST',
+                    url: base_url + '/saveStarRating',
+                    data: {
+                        selectedStars: newSelectedStars,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        console.log(response.message); // Handle success response if needed
+                    },
+                    error: function(error) {
+                        console.error(error); // Handle error if needed
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

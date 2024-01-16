@@ -23,6 +23,8 @@ class MDFoodRegisters extends Authenticatable
         'roll_id',
         'email',
         'mobile_no',
+        'vendor_type',
+        'vendor_status',
         'tax_no',
         'company_address',
         'password',
@@ -45,4 +47,9 @@ class MDFoodRegisters extends Authenticatable
         'created_by',
         'modified_by',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
+    }
 }

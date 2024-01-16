@@ -2,7 +2,7 @@
 <div class="card panel-left">
     <h5 class="card-header">Service Provider Panel</h5>
     <div class="card-body">
-        <ul class="nav flex-column nav-stuff">
+        <ul class="nav flex-column nav-stuff"  style="min-height: 480px;">
             <li class="nav-item mpDashboardLi">
                 <a class="nav-link mpDashboard" aria-current="page" href="{{url('medical-provider-dashboard')}}">Dashboard</a>
             </li>
@@ -34,7 +34,7 @@
                 <a class="nav-link mpMembership" href="{{url('membership')}}">Membership</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item mt-auto">
                 <a class="nav-link disabled text-black fw-bold" href="#" tabindex="-1" aria-disabled="true">Version 1.0</a>
             </li>
 

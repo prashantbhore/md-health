@@ -23,6 +23,8 @@ class MedicalProviderRegistrater extends Authenticatable
              'previllages',
              'email',
              'mobile_no',
+             'vendor_type',
+             'vendor_status',
              'tax_no',
              'company_address',
              'password',

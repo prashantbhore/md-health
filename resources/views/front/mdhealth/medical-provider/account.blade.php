@@ -297,18 +297,81 @@
                 });
             }
         }
-    }
-</script>
-<script>
-    function success_toast(title = '', message = '') {
-        // alert(message);
-        $.toast({
-            heading: title,
-            text: message,
-            icon: 'success',
-            loader: true, // Change it to false to disable loader
-            loaderBg: '#9EC600', // To change the background,
-            position: "bottom-right"
+    </script>
+    <script>
+        function success_toast(title = '', message = '') {
+            // alert(message);
+            $.toast({
+                heading: title,
+                text: message,
+                icon: 'success',
+                loader: true, // Change it to false to disable loader
+                loaderBg: '#9EC600', // To change the background,
+                position: "bottom-right"
+            });
+        }
+
+        function fail_toast(title = '', message = '') {
+            $.toast({
+                heading: title,
+                text: message,
+                icon: 'error',
+                loader: true, // Change it to false to disable loader
+                loaderBg: '#9EC600', // To change the background,
+                position: "bottom-right"
+            });
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+
+    
+    <script>
+        $(document).ready(function() {
+            $('#accountmedpro').validate({
+                rules: {
+                    company_name: {
+                        required: true,
+                        minlength: 2,
+                        nowhitespace: true
+                    },
+                    company_address: {
+                        required: true,
+                        minlength: 2,
+                        nowhitespace: true
+                    },
+                    country_id: "required",
+                    city_id: "required",
+                    tax_no: {
+                        required: true,
+                        minlength: 2
+                    },
+                    authorisation_full_name: {
+                        required: true,
+                        minlength: 2,
+                        nowhitespace: true
+                    },
+                    company_overview: {
+                        required: true,
+                        // minlength: 10
+                    }
+                    // Add validation rules for other fields as needed
+                },
+                messages: {
+                    // Define error messages for each field if required
+                },
+                errorPlacement: function(error, element) {
+                    error.appendTo(element.parent());
+                }
+            });
+
+            // Adding a custom method for disallowing spaces
+            $.validator.addMethod("nowhitespace", function(value, element) {
+                return value.trim().length !== 0;
+            }, "Spaces are not allowed");
         });
     }
 

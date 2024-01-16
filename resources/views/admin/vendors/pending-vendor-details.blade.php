@@ -33,6 +33,7 @@
                                 <label for="lastName"> Authorized Person Full Name</label>
                                 <p>Manish Kumar </p>
                             </div>
+                            
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Authorized Person Mobile Contact</label>
                                 <p>+44 4444 44 44</p>
@@ -190,6 +191,7 @@
     </div>
 </section>
 @endsection @section('script')
+
 <script>
     $(".manageVendorsLi").addClass("activeClass");
     $(".manageVendors").addClass("md-active");

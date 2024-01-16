@@ -1,11 +1,24 @@
 @extends('front.layout.layout2')
 @section('content')
 <style>
-.reports-div {
-    border-bottom: 2px solid #d5d5d5;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-}
+    .list-div select {
+        width: 195px;
+        height: 35px;
+        border-radius: 3px;
+        border: 1px solid #EDEDED;
+        background: #FFF;
+        padding: 6px 14px;
+        font-size: 14px;
+
+    }
+
+
+
+    .reports-div {
+        border-bottom: 2px solid #d5d5d5;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
 
     .form-group input.form-control {
         color: #000 !important;
@@ -70,6 +83,22 @@
     .error-message {
         color: red;
         margin-top: 5px;
+    }
+
+    .no-data {
+        height: 150px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        border: 1px solid #F6F6F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        background: #F6F6F6;
     }
 </style>
 
@@ -151,11 +180,11 @@
                             <!-- FILTER -->
                             <div class="filter-div">
                                 <div class="search-div">
-                                    <input type="text" class="form-control" placeholder="Search" id="liveSearchInput" />
+                                    <input type="text" placeholder="Search" id="liveSearchInput" />
                                 </div>
 
                                 <div class="list-div">
-                                    <select name="" id="" class="form-select">
+                                    <select name="" id="">
                                         <option value="">List for Date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
@@ -335,7 +364,7 @@
                     $('#resultContainer').html(html);
                 } else {
                     // Show "No report found" message when HTML is empty
-                    $('#resultContainer').html("<p>No report found</p>");
+                    $('#resultContainer').html("<p>No Reports Found</p>").addClass('no-data');
                 }
             },
             error: function(error) {

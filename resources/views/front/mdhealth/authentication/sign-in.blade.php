@@ -5,10 +5,7 @@
             display: none;
         }
 
-        .error {
-            color: red !important;
-            font-size: 14px !important;
-        }
+   
     </style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
         <div class="card">
@@ -49,8 +46,9 @@
                                 </label>
                             </div>
                             {{-- <input type="hidden" id="number" class="form-control" placeholder="+91 ********"> --}}
-                            <div id="recaptcha-container"></div>
+
                             <span id="error" class="text-danger"></span>
+                            <span id="success" class="text-success"></span>
                             <div>
                                 <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup"
                                     style="height: 47px;">Sign
@@ -124,29 +122,30 @@
                 </script>
 
 
-                <h6 class="mb-0 d-flex align-items-center gap-1 df-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <g clip-path="url(#clip0_0_28401)">
-                                <path
-                                    d="M12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4ZM12 6C12.2449 6.00003 12.4813 6.08996 12.6644 6.25272C12.8474 6.41547 12.9643 6.63975 12.993 6.883L13 7V11.586L15.707 14.293C15.8863 14.473 15.9905 14.7144 15.9982 14.9684C16.006 15.2223 15.9168 15.4697 15.7488 15.6603C15.5807 15.8508 15.3464 15.9703 15.0935 15.9944C14.8406 16.0185 14.588 15.9454 14.387 15.79L14.293 15.707L11.293 12.707C11.1376 12.5514 11.0378 12.349 11.009 12.131L11 12V7C11 6.73478 11.1054 6.48043 11.2929 6.29289C11.4804 6.10536 11.7348 6 12 6Z"
-                                    fill="#F31D1D" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_0_28401">
-                                    <rect width="24" height="24" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-                         <span class="text-danger" id="timer">32 sec</span>
-                    </h6>
-                    <div class="text-center">
-                         <a href="#" class="text-secondary" id="resendotp">Resend Code In</a>
-                    </div>
+                <h6 class="mb-0 d-flex align-items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none">
+                        <g clip-path="url(#clip0_0_28401)">
+                            <path
+                                d="M12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4ZM12 6C12.2449 6.00003 12.4813 6.08996 12.6644 6.25272C12.8474 6.41547 12.9643 6.63975 12.993 6.883L13 7V11.586L15.707 14.293C15.8863 14.473 15.9905 14.7144 15.9982 14.9684C16.006 15.2223 15.9168 15.4697 15.7488 15.6603C15.5807 15.8508 15.3464 15.9703 15.0935 15.9944C14.8406 16.0185 14.588 15.9454 14.387 15.79L14.293 15.707L11.293 12.707C11.1376 12.5514 11.0378 12.349 11.009 12.131L11 12V7C11 6.73478 11.1054 6.48043 11.2929 6.29289C11.4804 6.10536 11.7348 6 12 6Z"
+                                fill="#F31D1D" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_0_28401">
+                                <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <span class="text-danger" id="timer">32 sec</span>
+                </h6>
+                <div>
+                    <a href="javascript:void(0);" class="text-secondary" id="resendotp" onclick="resendCode();">Resend Code In</a>
+                </div>
 
             </div>
         </div>
     </div>
+    <div id="recaptcha-container"></div>
 
     <!-- LOADER  -->
     <div class="card d-none">
@@ -176,35 +175,35 @@
 
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script>
-      function countdownTimer(duration) {
-        $('#resendotp').hide();
-        let timer = duration,
-          minutes, seconds;
-        const timerDisplay = $('#timer');
-        const timerInterval = setInterval(function () {
-          minutes = parseInt(timer / 60, 10);
-          seconds = parseInt(timer % 60, 10);
-    
-          minutes = minutes < 10 ? "0" + minutes : minutes;
-          seconds = seconds < 10 ? "0" + seconds : seconds;
-    
-          timerDisplay.text(minutes + ":" + seconds);
-    
-          if (--timer < 0) {
-            timer = duration;
-            clearInterval(timerInterval);
-            $('#resendotp').show();
-            timerDisplay.text("Timer completed!");
-          }
-        }, 1000);
-      }
-    
-      // Set the timer duration in seconds
-      let timerDuration = 32;
-    
-      countdownTimer(timerDuration);
+        function countdownTimer(duration) {
+            $('#resendotp').hide();
+            let timer = duration,
+                minutes, seconds;
+            const timerDisplay = $('#timer');
+            const timerInterval = setInterval(function() {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                timerDisplay.text(minutes + ":" + seconds);
+
+                if (--timer < 0) {
+                    timer = duration;
+                    clearInterval(timerInterval);
+                    $('#resendotp').show();
+                    timerDisplay.text("Timer completed!");
+                }
+            }, 1000);
+        }
+
+        // Set the timer duration in seconds
+        // let timerDuration = 32;
+
+        // countdownTimer(timerDuration);
     </script>
-    
+
 
     <script>
         $(document).ready(function() {
@@ -297,7 +296,7 @@
                         if (response.user_exist !== undefined) {
                             // alert(JSON.stringify(response.user_exist));
                             sendOTP();
-                            $('#error').text('Message Sent Successfully');
+                            $('#success').text('Message Sent Successfully');
                         } else {
                             $('#error').text('Credentials do not match');
                         }
@@ -318,8 +317,11 @@
             window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
             recaptchaVerifier.render();
         }
+        
 
         function sendOTP() {
+            let timerDuration = 32;
+            countdownTimer(timerDuration);
             var number = $("#number").val();
             firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
@@ -328,6 +330,7 @@
                 $("#successAuth").show();
                 $("#otpDiv").removeClass('d-none');
                 $("#logDiv").hide();
+                recaptchaVerifier.clear();
             }).catch(function(error) {
                 $("#error").text(error.message);
                 $("#error").show();
@@ -335,7 +338,6 @@
         }
 
         function verify(e) {
-            // verifyBtn
             $('#verifyBtn').attr('disabled', true);
             $('#verifyBtn').html(
                 '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
@@ -365,9 +367,9 @@
                         url: base_url + '/otp-verify',
                         method: 'POST',
                         data: {
-                            number: number, // Use the correct number variable here
-                            login_type: 'login', // Use the correct number variable here
-                            password: password // Use the correct number variable here
+                            number: number,
+                            login_type: 'login',
+                            password: password
                         },
                         success: function(response) {
                             $('#verifyBtn').attr('enable', true);
@@ -382,21 +384,16 @@
                                 };
 
                                 toastr.success(response.message);
-
+                                recaptchaVerifier.clear();
                                 //$('#error').text('');
                             } else {
                                 // $('#number').val('');
-
-
                                 toastr.options = {
                                     "positionClass": "toast-bottom-right",
                                     "timeOut": "5000",
                                 };
-
                                 toastr.error('Credentials do not match');
-
                                 //toastr.success(response.message);
-
                                 //$('#error').text('Credentials do not match');
                             }
                         },
@@ -411,6 +408,42 @@
                     $("#error").text(error.message);
                     $("#error").show();
                 });
+        }
+
+        function resendCode() {
+            let timerDuration = 32;
+            countdownTimer(timerDuration);
+            var number = $("#number").val();
+            var containerId = 'recaptcha-container';
+            var container = document.getElementById(containerId);
+
+            if (!container) {
+                $("#error").text("reCAPTCHA container is missing.");
+                $("#error").show();
+                return;
+            }
+
+            try {
+                container.innerHTML = '';
+                recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
+                recaptchaVerifier.render();
+
+                firebase.auth().signInWithPhoneNumber(number, recaptchaVerifier)
+                    .then(function(result) {
+                        confirmationResult = result;
+                        console.log(confirmationResult);
+                        $("#sentSuccess").text("New code sent Successfully.");
+                        $("#sentSuccess").show();
+                        confirmationResult = confirmationResult;
+                    })
+                    .catch(function(error) {
+                        $("#error").text(error.message);
+                        $("#error").show();
+                    });
+            } catch (error) {
+                $("#error").text("Error initializing reCAPTCHA: " + error.message);
+                $("#error").show();
+            }
         }
     </script>
 @endsection
