@@ -2388,7 +2388,7 @@ class CustomerPackageController extends BaseController
         if (isset($accommodation)) {
             $services[] = $accommodation;
         }
-        if (isset($accommodation)) {
+        if (isset($transportation)) {
             $services[] = $transportation;
         }
         /////// Ali has made this change do not remove while resolving confilct //////

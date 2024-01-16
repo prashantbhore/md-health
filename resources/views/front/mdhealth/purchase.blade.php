@@ -6,7 +6,9 @@
 </form> --}}
 
     @php
-
+        // $mybin = PhpBIN::getInstance('BinList');
+        // var_dump($mybin->getInfo("580116"));
+        // die;
         // dd(Session::all());
         // dd(Session::all());
     @endphp
@@ -156,6 +158,9 @@
                 <div id="card">
                     <div class="row">
                         <div class="col-5 card-details me-5">
+                            <form id="purchase_by_mdcoins" action="{{ url('/purchase-by-mdcoins') }}" method="POST">
+                                @csrf
+                            </form>
                             <form id="procced_to_pay_form" action="{{ url('/sandbox') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
@@ -174,7 +179,7 @@
                                         placeholder="Card Holder Name">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" id="input2" placeholder="Card Number">
+                                    <input type="number" class="form-control" id="input2" placeholder="Card Number">
                                 </div>
                                 <div class="d-flex gap-2 mb-4">
                                     <input type="password" id="input3" class="form-control w-50" placeholder="CVV">
@@ -201,8 +206,7 @@
                                             <p class="validity">02/24</p>
                                         </div>
                                         <div>
-                                            <img class="visa" src="{{ url('front/assets/img/visa.svg') }}"
-                                                alt="">
+                                            <img class="visa" src="" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +235,7 @@
                                         <p class="mb-0 camptonBook fw-bold lh-1">Available <span
                                                 class="camptonBold">MD</span>coin</p>
                                         <p class="mb-0 camptonBold fs-3">500</p>
-                                        <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold"
+                                        <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" id="purchase_by_coins"
                                             style="border-color: #000;">Use My MD<span class="camptonBook">coin</span></a>
                                     </div>
                                     <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="" style="width: 200px;">
@@ -351,11 +355,24 @@
                         break;
                     case 'input2':
                         $('.cardNumber').text(inputValue);
-                        cardNo = $(this).val().toString()
+                        cardNo = $(this).val().toString();
                         $('#card_number').val(cardNo);
                         // Replace with the actual BIN
-                        var cardType = getCardType(cardNo);
-                        console.log('Card Type:', cardType);
+                        // var cardType = getCardType(cardNo);
+                        var cardType2 = getCardIssuer(cardNo);
+                        var cardNumberInput = $(this).val();
+
+                        // Format the card number
+                        var formattedCardNumber = formatCardNumber(cardNumberInput).parseInt;
+
+                        // Update the input field value
+                        // $(this).val(formattedCardNumber);
+
+                        // Update the paragraph content
+                        // $('#input2').val(formattedCardNumber);
+                        $('.cardNumber').text(formattedCardNumber);
+
+                        console.log('Card Type:', cardType2);
                         break;
                     case 'input3':
                         cardCvv = $(this).val().toString();
@@ -371,6 +388,10 @@
 
             $('.purchaseBtn').click(function() {
                 // makePurchase();
+                $('card_name').val($('#input1').val());
+                $('card_number').val($('#input2').val());
+                $('cvv').val($('#input3').val());
+                $('validity').val($('#input4').val());
                 var form = $('#procced_to_pay_form');
 
                 // Additional data
@@ -412,6 +433,48 @@
                 // Submit the form
                 form.submit();
             })
+
+            $('#purchase_by_coins').click(function() {
+                // makePurchase();
+                var form = $('#purchase_by_mdcoins');
+
+                // Additional data
+                var pendingAmount = proxyPrice - totalPrice;
+
+                if (isTwentySelected) {
+                    var percentage = '20';
+                } else if (isThirtySelected) {
+                    var percentage = '30';
+                } else if (isFiftySelected) {
+                    var percentage = '50';
+                } else if (isHundredSelected) {
+                    var percentage = '100';
+                }
+                // $('#card_number').val(cardNo);
+
+                var additionalData = {
+                    'package_id': packageId,
+                    'patient_id': patientId,
+                    'sale_price': proxyPrice,
+                    'paid_amount': totalPrice,
+                    'platform_type': 'web',
+                    'pending_amount': pendingAmount,
+                    'percentage': percentage
+                };
+
+                // Add additional data to the form
+                $.each(additionalData, function(name, value) {
+                    form.append($('<input>').attr({
+                        type: 'hidden',
+                        name: name,
+                        value: value
+                    }));
+                });
+
+                // Submit the form
+                form.submit();
+            })
+
             ////////////////////////////////////////////////////////////////////////////////
 
             function getData() {
@@ -547,6 +610,10 @@
                 });
             }
 
+            function makePaymentByCoins() {
+
+            }
+
             ////////////////////////////////////////////////////////////////////////////////////////////
 
             function numberToPercent(percent, number) {
@@ -676,6 +743,79 @@
                 });
             };
 
+            function getCardIssuer(iin) {
+                const cardPatterns = [{
+                        name: 'VISA',
+                        expression: '^4[0-9]{5,}$'
+                    },
+                    {
+                        name: 'MASTERCARD',
+                        expression: '^5[1-5][0-9]{3,}$'
+                    },
+                    {
+                        name: 'AMEX',
+                        expression: '^3[47][0-9]{5,}$'
+                    },
+                    {
+                        name: 'DISCOVER',
+                        expression: '^6(?:011|5[0-9]{2})[0-9]{3,}$'
+                    },
+                    {
+                        name: 'DINERS',
+                        expression: '^3(?:0[0-5]|[68][0-9])[0-9]{4,}$'
+                    },
+                    {
+                        name: 'JCB',
+                        expression: '^(?:2131|1800|35[0-9]{3})[0-9]{3,}$'
+                    },
+                    {
+                        name: 'MAESTRO',
+                        expression: '^(5[06-8]|6\\d)\\d{10,17}$'
+                    },
+                    {
+                        name: 'LASER',
+                        expression: '^(6304|6706|6771|6709)\\d{8}(\\d{4}|\\d{6,7})?$'
+                    },
+                    {
+                        name: 'UNKNOWN',
+                        expression: '.*'
+                    }
+                ];
+
+                for (const pattern of cardPatterns) {
+                    const regex = new RegExp(pattern.expression);
+                    if (regex.test(iin)) {
+                        switch (pattern.name) {
+                            case 'DISCOVER':
+                                $('.visa').attr('src', "{{ url('front/assets/img/discover.png') }}");
+                                break;
+                            case 'AMEX':
+                                $('.visa').attr('src', "{{ url('front/assets/img/american-express.png') }}");
+                                break;
+                            case 'MASTERCARD':
+                                $('.visa').attr('src', "{{ url('front/assets/img/mastercard.png') }}");
+                                break;
+                            case 'MAESTRO':
+                                $('.visa').attr('src', "{{ url('front/assets/img/mastercard.png') }}");
+                                break;
+                            case 'VISA':
+                                $('.visa').attr('src', "{{ url('front/assets/img/visa.svg') }}");
+                                break;
+                            case 'JCB':
+                                $('.visa').attr('src', "{{ url('front/assets/img/jcb.png') }}");
+                                break;
+                            case 'DINERS':
+                                $('.visa').attr('src', "{{ url('front/assets/img/dinners.png') }}");
+                                break;
+                            default:
+                                $('.visa').attr('src', "");
+                                break;
+                        }
+                        return pattern.name;
+                    }
+                }
+                return 'UNKNOWN';
+            }
 
             function getCardType(cardNumber) {
                 const cardTypes = {
@@ -788,8 +928,8 @@
                         },
                     },
                     maestro: {
-                        niceType: "Maestro",
-                        type: "maestro",
+                        niceType: "Mastercard",
+                        type: "mastercard",
                         patterns: [
                             493698,
                             [500000, 504174],
@@ -924,6 +1064,10 @@
 
 
                 return cardTypes.unknown.type;
+            }
+
+            function formatCardNumber(cardNumber) {
+                return cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
             }
 
             function flattenPattern(pattern) {
