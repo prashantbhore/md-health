@@ -148,4 +148,16 @@
     $(".brands").addClass("md-active");
 </script>
 
+<script>
+    $(document).ready(function () {
+        var searchBox = $('#example_filter input');
+        searchBox.addClass('form-control form-control-sm');
+        searchBox.attr('placeholder', 'Search');
+        searchBox.parent().contents().filter(function () {
+            return this.nodeType === 3;
+        }).remove();
+        searchBox.wrap('<div class="custom-search-box"></div>');
+    });
+</script>
+
 @endsection

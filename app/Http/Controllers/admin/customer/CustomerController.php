@@ -51,8 +51,8 @@ class CustomerController extends Controller
 
 
             ->addColumn('id', function ($row){
-                if(!empty($row->id)){
-                return ucfirst($row->id);
+                if(!empty($row->customer_unique_no)){
+                return ucfirst($row->customer_unique_no);
                 }
             })
                 

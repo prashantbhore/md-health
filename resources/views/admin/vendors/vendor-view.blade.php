@@ -19,7 +19,19 @@
                
                  <small> Reg Date :{{ !empty($vendor->created_at) ? date('d M Y h:ia', strtotime($vendor->created_at)) : '' }}
                 </small></div>
-            <a href="{{URL::asset('admin/service-provider')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors</a>
+
+                @if($vendor->vendor_status=='pending')    
+                <a href="{{URL::asset('admin/pending-vendors')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors</a>
+                @endif
+
+                @if($vendor->vendor_status=='approved')    
+                <a href="{{URL::asset('admin/approved-vendors')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors</a>
+                @endif
+
+                @if($vendor->vendor_status=='rejected')    
+                <a href="{{URL::asset('admin/rejected-vendors')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors</a>
+                @endif
+
         </div>
         <div class="row top-cards">
             <div class="col-md-6">
@@ -28,7 +40,7 @@
                     <div class="card-body">
                         <p class="card-title mb-3">Service Provider Details</p>
                         @if($vendor->vendor_status=='approved')
-                        <div class="card card-active df-end bg-success"> Active </div>
+                        <div class="card card-active df-end bg-success">Approved</div>
                     @elseif($vendor->vendor_status=='rejected')
                         <div class="card card-deactive df-end bg-danger text-white"> Rejected </div>
                     @elseif($vendor->vendor_status=='pending')
@@ -208,17 +220,74 @@
                                     </textarea>
                                 </div>
 
+
+                                @if($vendor->vendor_status)
+                                @if($vendor->vendor_status=='approved')  
+                                <div class="col-md-12 mb-3">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="firstName">Current Status</label>
+                                            <p>Rejected</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="firstName">Date</label>
+                                            <p>23 Dec 2023 11:24am</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email">Approved By</label>
+                                            <p>Vishal Mehta</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                @endif
+
+                           
+
                                 <div class="col-md-12 mb-3">
                                     <div class="d-flex flex-wrap justify-content-between">
+                                        @if($vendor->vendor_status)
+                                        @if($vendor->vendor_status=='approved') 
                                         <button type="submit" class="btn md-btn deactivate-btn">Save Changes</button>
+                                        @endif
+                                        @endif
                             </form>
+
+                            @if($vendor->vendor_status)
+                            @if($vendor->vendor_status=='rejected')  
+                            <div class="col-md-12 mb-3">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="firstName">Current Status</label>
+                                        <p>Rejected</p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName">Date</label>
+                                        <p>23 Dec 2023 11:24am</p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email">Rejected By</label>
+                                        <p>Vishal Mehta</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @endif
+
+
+                   
+
 
 
                             
                             {{-- <div class="col-md-12 mb-3">
                                 <div class="d-flex flex-wrap justify-content-between"> --}}
+                                    @if($vendor->vendor_status)
+                                    @if($vendor->vendor_status=='approved') 
                                     <button type="submit" class="btn md-btn save-btn">Approve Vendor</button>
                                     <button type="submit" class="btn md-btn delete-btn">Reject Vendor</button>
+                                    @endif
+                                    @endif
                                 {{-- </div>
                             </div> --}}
 
@@ -230,6 +299,26 @@
 
 
                             <button type="button" data-id="{{ !empty($vendor->id) ? $vendor->id : '' }}" class="btn md-btn delete-btn"> {{ $vendor->status == 'delete' ? 'Deleted' : 'Delete Vendor' }}</button> --}}
+                          
+                            @if($vendor->vendor_status)
+                            @if($vendor->vendor_status=='pending')  
+                            
+                                    <button type="submit" class="btn md-btn-48 save-btn">Approve Vendor</button>
+                                    <button type="submit" class="btn md-btn-48 delete-btn">Reject Vendor</button>
+                               
+                            @endif
+                            @endif
+
+
+
+                            @if($vendor->vendor_status)
+                            @if($vendor->vendor_status=='rejected')  
+                            
+                              <button type="submit" class="btn md-btn-48 save-btn">Approve Vendor</button>
+                              <button type="submit" class="btn md-btn-48 delete-btn">Delete Vendor</button>
+                               
+                            @endif
+                            @endif
 
                         </div>
                     </div>

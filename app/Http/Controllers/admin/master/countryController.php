@@ -66,9 +66,20 @@ class countryController extends Controller
 
     public function data_table(Request $request)
     {
-       
-        $country = Country::where('status', '!=', 'delete')->orderBy('created_at', 'desc')->get();
+
+        $country = Country::when($request->status == 'all', function ($query) {
+            return $query->where('status', '!=', 'delete');
+        })
+        ->when($request->status == 'active', function ($query) {
+            return $query->where('status', 'active');
+        })
+        ->when($request->status == 'inactive', function ($query) {
+            return $query->where('status', 'inactive');
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
     
+
         if ($request->ajax()) {
             return DataTables::of($country)
                 ->addIndexColumn()
