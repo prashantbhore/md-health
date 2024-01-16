@@ -103,7 +103,7 @@ public function data_table(Request $request)
             ->addColumn('status', function ($row){
                 $status = $row->status;
             
-                if ($status == 'active') {
+                if ($status == 'inactive') {
                     $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_brand" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactivate</a>';
                 } else {
                     $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_brand" data-flash="Status Changed Successfully!" class="md-change-status activateLink mt-0 activate-btn">Activate</a>';
