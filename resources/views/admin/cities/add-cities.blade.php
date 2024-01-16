@@ -87,7 +87,7 @@
                                 <select id="status" class="form-select form-select-sm">
                                     <option selected value="all" >All</option>
                                     <option value="active">Active</option>
-                                    <option value="deactive">Deactive</option>
+                                    <option value="inactive">Deactive</option>
                                 </select>
                             </div>
                             <table id="example" class="table">
@@ -96,7 +96,7 @@
                                         <th scope="col" class="w-25">Sr.No.</th>
                                         <th scope="col" class="w-25">City Name</th>
                                         <th class="w-25">Country</th>
-                                        <th >Status</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

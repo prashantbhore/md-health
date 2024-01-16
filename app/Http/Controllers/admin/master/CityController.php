@@ -70,11 +70,16 @@ class CityController extends Controller
 
     public function data_table(Request $request)
     {
+         // dd($request->status);
+        //  if($request->status=='all'){
         $cities = Cities::with('country')->where('status', '!=', 'delete')->get();
-    
+        //  }
+
+
         if ($request->ajax()) {
             return DataTables::of($cities)
                 ->addIndexColumn()
+
                 ->addColumn('city_name', function ($row) {
                     if(!empty($row->city_name)){
                     return ucfirst($row->city_name);
