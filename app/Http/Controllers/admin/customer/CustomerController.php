@@ -51,8 +51,8 @@ class CustomerController extends Controller
 
 
             ->addColumn('id', function ($row){
-                if(!empty($row->gender)){
-                return ucfirst($row->gender);
+                if(!empty($row->id)){
+                return ucfirst($row->id);
                 }
             })
                 
@@ -106,9 +106,9 @@ class CustomerController extends Controller
                     $status = $row->status;
                 
                     if ($status == 'active') {
-                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_customer_registration" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactivate</a>';
-                    } else {
                         $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_customer_registration" data-flash="Status Changed Successfully!" class="md-change-status activateLink mt-0 activate-btn">Activate</a>';
+                    } else {
+                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_customer_registration" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactivate</a>';
                     }
                 
                     return $statusBtn;
