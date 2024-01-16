@@ -70,11 +70,16 @@ class CityController extends Controller
 
     public function data_table(Request $request)
     {
+         // dd($request->status);
+        //  if($request->status=='all'){
         $cities = Cities::with('country')->where('status', '!=', 'delete')->get();
-    
+        //  }
+
+
         if ($request->ajax()) {
             return DataTables::of($cities)
                 ->addIndexColumn()
+
                 ->addColumn('city_name', function ($row) {
                     if(!empty($row->city_name)){
                     return ucfirst($row->city_name);
@@ -85,6 +90,21 @@ class CityController extends Controller
                     return ucfirst($row->country->country_name);
                     }
                 })
+
+
+                
+                ->addColumn('status', function ($row){
+                    $status = $row->status;
+                
+                    if ($status == 'active') {
+                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_cities" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactivate</a>';
+                    } else {
+                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_cities" data-flash="Status Changed Successfully!" class="md-change-status activateLink mt-0 activate-btn">Activate</a>';
+                    }
+                
+                    return $statusBtn;
+                })
+                
 
                 ->addColumn('action', function ($row) {
                     $editUrl = url('admin/cities/' . Crypt::encrypt($row->id) . '/edit');
@@ -102,7 +122,7 @@ class CityController extends Controller
 
 
                 
-                ->rawColumns(['city_name', 'country_name','action'])
+                ->rawColumns(['city_name', 'country_name','action','status'])
                 ->make(true);
         }
     }

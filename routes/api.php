@@ -505,9 +505,11 @@ Route::middleware('auth:sanctum')->group(function ()
     });
 
 
-    //Medical Provider Dashboard
+    //Food Provider 
     Route::controller(FoodPackageController::class)->group(function () {
         Route::post('md-add-food-packages', 'add_food_packages');
+        Route::post('md-add-food-packages-with-price', 'add_food_packages_with_price');
+        Route::post('md-food-packages-menu-list', 'food_packages_menu_list');
     });
 
 

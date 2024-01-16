@@ -3341,13 +3341,13 @@ span.popup-msg.active {
 
 .p-abs {
     position: absolute;
-    right: -75px;
+    right: -175px;
     top: 0;
 }
 
 .tab-content .form.text-start {
-    padding: 0 63px;
-    /* padding: 0 57px; */
+    /* padding: 0 63px; */
+    padding: 0 57px;
 }
 
 /* .tab-content select {
