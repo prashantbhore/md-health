@@ -34,8 +34,6 @@
 
 
 
-
-
 $(function (){
     var table = $("#example").DataTable({
         bFilter: false,
@@ -63,6 +61,11 @@ $(function (){
                 data: "country_name",
                 name: "country_name",
             },
+
+            {
+                data: "status",
+                name: "status",
+            },
           
             {
                 data: "action",
@@ -75,6 +78,89 @@ $(function (){
         table.DataTable().ajax.reload(null, false);
     }
 });
+
+
+
+
+
+
+// $(function (){
+//     var table = $("#example").DataTable({
+//         processing: true,
+//         serverSide: true,
+//         searchable: true,
+//         deferRender: true,
+//         pagingType: 'numbers',
+//         destroy: true,
+//         clear: true,
+//           ajax: {
+//               url: base_url + "/admin/customer-data-table",
+//               data: function (d) {
+//                   d.status = $('#status').val();
+//               },
+//           },
+//           columns: [
+
+
+
+
+//             {
+//                 data: "DT_RowIndex",
+//                 name: "DT_RowIndex",
+//                 orderable: false,
+//             },
+
+//             {
+//                 data: "city_name",
+//                 name: "city_name",
+//                 orderable: false,
+//             },
+
+//             {
+//                 data: "country_name",
+//                 name: "country_name",
+//                 orderable: false,
+//             },
+
+//             {
+//                 data: "status",
+//                 name: "status",
+//                 orderable: false,
+//                 searchable: false,
+//             },
+          
+//             {
+//                 data: "action",
+//                 name: "action",
+//                 orderable: false,
+//                 searchable: false,
+//             },
+
+            
+
+
+
+//           ],
+//       });
+  
+//       $("#status").change(function (){
+//           table.draw();
+//       });
+//   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

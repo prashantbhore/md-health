@@ -146,8 +146,8 @@ $patient_information_list = !empty($patient_information_list[0]) ? $patient_info
 
                                     <div class="treatment-card-btns d-flex justify-content-around gap-3">
                                         <a href="{{ url('view-my-active-packages/' . $active_package['package_id'] . '/' . $active_package['purchase_id']) }}" id="package-details_{{ $active_package['package_id'] }}" class="order-completed-btn w-100 bg-white text-black fsb-2 border border-black package-details">Package Details</a>
-                                        <!-- <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation" id="change_information_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Change Patient Information</a> -->
-                                        <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation" data-bs-toggle="modal" data-bs-target="#UserChangeInformationModel">Change Patient Information</a>
+                                        <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation" id="change_information_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Change Patient Information</a>
+                                        {{-- <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation" data-bs-toggle="modal" data-bs-target="#UserChangeInformationModel">Change Patient Information</a> --}}
                                         <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white UserCancelPackage" id="cancel_package_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Cancellation Request</a>
                                     </div>
                                     @endforeach
@@ -464,18 +464,13 @@ $patient_information_list = !empty($patient_information_list[0]) ? $patient_info
             rules: {
                 patient_full_name: {
                     required: true,
-                    minlength: 1,
-                    nowhitespace: true,
                 },
                 patient_relation: {
                     required: true,
-                    minlength: 1,
-                    nowhitespace: true,
                 },
                 patient_email: {
                     required: true,
                     email: true,
-                    nowhitespace: true,
                 },
                 patient_contact_no: {
                     required: true,

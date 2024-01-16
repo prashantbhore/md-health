@@ -2,7 +2,23 @@
 <section class="main-content">
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
-            <div class="page-title">Vendors ID #273929 <small> Reg Date : 26 Jan 2023 11:45am </small></div>
+            {{-- {{dd($vendor)}} --}}
+            <div class="page-title">Vendors ID
+                @if($vendor->vendor_type=='food_vendor')
+                {{!empty($vendor->food_unique_no)?$vendor->food_unique_no:''}}
+                @endif
+
+                @if($vendor->vendor_type=='shop_vendor')
+                {{!empty($vendor->vendor_unique_no)?$vendor->vendor_unique_no:''}}
+                @endif
+
+                @if($vendor->vendor_type=='medical_service_provider')
+                {{!empty($vendor->provider_unique_no)?$vendor->provider_unique_no:''}}
+                @endif
+
+               
+                 <small> Reg Date :{{ !empty($vendor->created_at) ? date('d M Y h:ia', strtotime($vendor->created_at)) : '' }}
+                </small></div>
             <a href="{{URL::asset('admin/service-provider')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors</a>
         </div>
         <div class="row top-cards">
@@ -11,21 +27,29 @@
                 <div class="card card-details mb-3" style="min-height: 380px;">
                     <div class="card-body">
                         <p class="card-title mb-3">Service Provider Details</p>
-                        <div class="card-active df-end"> Active </div>
+                        @if($vendor->vendor_status=='approved')
+                        <div class="card card-active df-end bg-success"> Active </div>
+                    @elseif($vendor->vendor_status=='rejected')
+                        <div class="card card-deactive df-end bg-danger text-white"> Rejected </div>
+                    @elseif($vendor->vendor_status=='pending')
+                        <div class="card card-active df-end bg-warning"> Pending </div>
+                    @endif
+                    
+
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="firstName">Company Name</label>
-                                <p>{{ !empty($medical_provider->company_name) ? ucfirst($medical_provider->company_name) : '' }}</p>
+                                <p>{{ !empty($vendor->company_name) ? ucfirst($vendor->company_name) : '' }}</p>
 
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">TAX Number</label>
-                                <p>{{ !empty($medical_provider->tax_no) ?$medical_provider->tax_no: '' }}</p>
+                                <p>{{ !empty($vendor->tax_no) ?$vendor->tax_no: '' }}</p>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="email">Company Email</label>
-                                <p>{{ !empty($medical_provider->email) ?$medical_provider->email: '' }}</p>
+                                <p>{{ !empty($vendor->email) ?$vendor->email: '' }}</p>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -35,7 +59,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Authorized Person Mobile Contact</label>
-                                <p>{{ !empty($medical_provider->mobile_no) ?$medical_provider->mobile_no: '' }}</p>
+                                <p>{{ !empty($vendor->mobile_no) ?$vendor->mobile_no: '' }}</p>
                             </div>
 
                          
@@ -43,16 +67,16 @@
                             <div class="col-md-12 mb-3">
                                 <label for="address">Company Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>{{ !empty($medical_provider->company_address) ?ucfirst($medical_provider->company_address): '' }}</span>
-                                    <span>{{ !empty($medical_provider->city->city_name) ?ucfirst($medical_provider->city->city_name): '' }}</span>
+                                    <span>{{ !empty($vendor->company_address) ?ucfirst($vendor->company_address): '' }}</span>
+                                    <span>{{ !empty($vendor->city->city_name) ?ucfirst($vendor->city->city_name): '' }}</span>
                                 </p>
                             </div>
 
                             {{-- <div class="col-md-6 mb-3">
                                 <label for="address">Invoice Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>{{ !empty($medical_provider->company_address) ?ucfirst($medical_provider->company_address): '' }}</span>
-                                    <span>{{ !empty($medical_provider->city->city_name) ?ucfirst($medical_provider->city->city_name): '' }}</span>
+                                    <span>{{ !empty($vendor->company_address) ?ucfirst($vendor->company_address): '' }}</span>
+                                    <span>{{ !empty($vendor->city->city_name) ?ucfirst($vendor->city->city_name): '' }}</span>
                                 </p>
                             </div> --}}
                             <div class="col-md-6 mb-3">
@@ -60,13 +84,13 @@
                                     <div class="col-md-6 d-flex flex-column">
                                         <label for="logo" class="mb-2">Company Logo</label>
                                         <div>
-                                            <img src="{{!empty($medical_provider_logo->company_logo_image_path)?url('/').Storage::url($medical_provider_logo->company_logo_image_path):''}}" alt="" style="height: 75px;" />
+                                            <img src="{{!empty($vendor_logo->company_logo_image_path)?url('/').Storage::url($vendor_logo->company_logo_image_path):''}}" alt="" style="height: 75px;" />
 
 
                                         </div>
-                                        @if(!empty($medical_provider_logo->company_logo_image_path))
+                                        @if(!empty($vendor_logo->company_logo_image_path))
 
-                                        <a class="medical-provier-logo-delete" href="javascript:void(0)" data-id="{{!empty($medical_provider_logo->id)?$medical_provider_logo->id:''}}" data-table="md_medical_provider_logo" data-flash="Logo Deleted Succesfully">
+                                        <a class="medical-provier-logo-delete" href="javascript:void(0)" data-id="{{!empty($vendor_logo->id)?$vendor_logo->id:''}}" data-table="md_medical_provider_logo" data-flash="Logo Deleted Succesfully">
                                             <span class="deleteImg">Delete Logo</span>
                                         </a>
                                         @endif
@@ -81,14 +105,14 @@
                                     <div class="col-md-6 d-flex flex-column">
                                         <label for="license" class="mb-2">Company License</label>
                                         <div>
-                                            <img src="{{!empty($medical_provider_license->company_licence_image_path)?url('/').Storage::url($medical_provider_license->company_licence_image_path):''}}" alt="" style="height: 75px;" />
+                                            <img src="{{!empty($vendor_license->company_licence_image_path)?url('/').Storage::url($vendor_license->company_licence_image_path):''}}" alt="" style="height: 75px;" />
 
                                         </div>
 
 
-                                        @if(!empty($medical_provider_license->company_licence_image_path))
+                                        @if(!empty($vendor_license->company_licence_image_path))
 
-                                        <a class="medical-provier-license-delete" href="javascript:void(0)" data-id="{{!empty($medical_provider_license->id)?$medical_provider_license->id:''}}" data-table="md_medical_provider_license" data-flash="License Deleted Succesfully">
+                                        <a class="medical-provier-license-delete" href="javascript:void(0)" data-id="{{!empty($vendor_license->id)?$vendor_license->id:''}}" data-table="md_medical_provider_license" data-flash="License Deleted Succesfully">
                                             <span class="deleteImg">Delete License</span>
                                         </a>
                                         @endif
@@ -99,7 +123,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="mb-3">
                                     <label for="membershipType">Membership Type</label>
-                                    <p>Silver</p>
+                                    <div><img src="https://projects.m-staging.in/md-health-testing/front/assets/img/GoldMember.svg" alt=""></div>
                                     {{-- <input type="text" class="form-control" placeholder="Silver" /> --}}
                                 </div>
 
@@ -107,7 +131,7 @@
 
                                 <label for="verified">Verified</label>
                                 <div class="form-check mt-2 d-flex align-items-center gap-2">
-                                    <input class="form-check-input verifiedcheckbox" type="checkbox" value="" id="flexCheckDefault" data-id="{{!empty($medical_provider->id)?$medical_provider->id:''}}" {{(!empty($medical_provider->verified) && $medical_provider->verified == 'yes') ? 'checked' : ''}} />
+                                    <input class="form-check-input verifiedcheckbox" type="checkbox" value="" id="flexCheckDefault" data-id="{{!empty($vendor->id)?$vendor->id:''}}" {{(!empty($vendor->verified) && $vendor->verified == 'yes') ? 'checked' : ''}} />
                                     <img src="{{ URL::asset('admin/assets/img/verifiedBy.png') }}" alt="" />
                                 </div>
 
@@ -174,12 +198,13 @@
                                 </div>
                             </div>
 
-                            <form action="{{ route('medical.tourism.store') }}" method="post">
+                            <form action="{{ route('vendor.store') }}" method="post">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ !empty($medical_provider->id) ? $medical_provider->id: '' }}">
+                                <input type="hidden" name="vendor_type" value="{{ !empty($vendor->vendor_type) ? $vendor->vendor_type: '' }}">
+                                <input type="hidden" name="id" value="{{ !empty($vendor->id) ? $vendor->id: '' }}">
                                 <div class="col-md-12 my-3">
                                     <label for="overview" class="mb-2">Overview</label>
-                                    <textarea name="overview" id="" cols="30" rows="10" class="form-control overviewText">{{ !empty($medical_provider->company_overview) ? ucfirst($medical_provider->company_overview) : '' }}
+                                    <textarea name="overview" id="" cols="30" rows="10" class="form-control overviewText">{{ !empty($vendor->company_overview) ? ucfirst($vendor->company_overview) : '' }}
                                     </textarea>
                                 </div>
 
@@ -199,12 +224,12 @@
 
 
 {{-- 
-                            <button type="button" data-id="{{ !empty($medical_provider->id) ? $medical_provider->id : '' }}" class="btn md-btn deactivate-btn">
-                                {{ $medical_provider->status == 'active' ? 'Deactivate Vendors' : 'Activate Vendors' }}
+                            <button type="button" data-id="{{ !empty($vendor->id) ? $vendor->id : '' }}" class="btn md-btn deactivate-btn">
+                                {{ $vendor->status == 'active' ? 'Deactivate Vendors' : 'Activate Vendors' }}
                             </button>
 
 
-                            <button type="button" data-id="{{ !empty($medical_provider->id) ? $medical_provider->id : '' }}" class="btn md-btn delete-btn"> {{ $medical_provider->status == 'delete' ? 'Deleted' : 'Delete Vendor' }}</button> --}}
+                            <button type="button" data-id="{{ !empty($vendor->id) ? $vendor->id : '' }}" class="btn md-btn delete-btn"> {{ $vendor->status == 'delete' ? 'Deleted' : 'Delete Vendor' }}</button> --}}
 
                         </div>
                     </div>
@@ -244,17 +269,18 @@
                 <div class="mb-3 d-flex align-items-center justify-content-between w-full filters">
                     <p class="card-title">Product History</p>
                     <select class="form-select form-select-sm w-25">
-                        <option selected>All Orders</option>
-                        <option value="1">Active Orders</option>
-                        <option value="2">Completed Orders</option>
-                        <option value="3">Denied Orders</option>
+                        <option selected>Select Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Deactive</option>
                     </select>
                 </div>
                 <div class="row">
                     <div class="col-md-12 mb-3">
 
-                        @if(!empty($medical_provider->providerPackages))
-                        @foreach ($medical_provider->providerPackages as $package)
+                        @if($vendor->vendor_type=='medical_service_provider')
+                     
+                        @if(!empty($vendor->providerPackages))
+                        @foreach ($vendor->providerPackages as $package)
 
                           {{-- {{dd($package->package_price)}} --}}
 
@@ -306,6 +332,8 @@
                             </div>
                         </div>
                         @endforeach
+                        @endif
+                        
                         @endif
 
 

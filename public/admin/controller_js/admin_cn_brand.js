@@ -98,6 +98,10 @@ $(function (){
           },
           columns: [
             {
+                data: "DT_RowIndex",
+                name: "DT_RowIndex",
+            },
+            {
                 data: "brand_unique_id",
                 name: "brand_unique_id",
             },
@@ -110,6 +114,11 @@ $(function (){
             {
                 data: "brand_category",
                 name: "brand_category",
+            },
+
+            {
+                data: "status",
+                name: "status",
             },
           
             {
