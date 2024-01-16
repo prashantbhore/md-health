@@ -3346,8 +3346,8 @@ span.popup-msg.active {
 }
 
 .tab-content .form.text-start {
-    padding: 0 63px;
-    /* padding: 0 57px; */
+    /* padding: 0 63px; */
+    padding: 0 57px;
 }
 
 /* .tab-content select {

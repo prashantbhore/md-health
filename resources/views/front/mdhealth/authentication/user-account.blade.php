@@ -16,8 +16,6 @@
         line-height: 2 !important;
     }
 
-
-
     body {
         background: #f6f6f6;
     }
