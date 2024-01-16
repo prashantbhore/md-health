@@ -10,12 +10,7 @@
         font-size: 19px;
     }
 
-    .error {
-        color: red !important;
-        font-size: 13.5px !important;
-        font-family: "CamptonBook" !important;
-    }
-
+ 
     input[type="file"] {
         color: #979797 !important;
         line-height: 2 !important;
@@ -78,7 +73,7 @@
         <div class="tab-content position-relative" id="myTabContent">
             <div class="login-form pb-100px" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
                 <div class="row">
-                    <div class="col-md-6 col-lg-6 col-xl-6 bod-right form-divider pt-4">
+                    <div class="col-md-6 col-lg-6 col-xl-6 bod-right  pt-4">
                         <!-- Form Heading -->
                         <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                             <a href="{{ url('/') }}">

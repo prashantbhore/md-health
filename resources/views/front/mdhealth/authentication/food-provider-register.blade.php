@@ -5,11 +5,7 @@
             display: none;
         }
 
-        .error {
-            color: red !important;
-            font-size: 14px !important;
-        }
-
+   
         input[type="file"] {
             color: #000 !important;
             line-height: 2 !important;

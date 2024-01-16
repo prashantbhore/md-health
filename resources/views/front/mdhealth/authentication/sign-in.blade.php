@@ -5,10 +5,7 @@
             display: none;
         }
 
-        .error {
-            color: red !important;
-            font-size: 14px !important;
-        }
+   
     </style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
         <div class="card">

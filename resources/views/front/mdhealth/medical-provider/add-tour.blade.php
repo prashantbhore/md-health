@@ -28,7 +28,7 @@
         margin-top: 15px;
         border-radius: 3px;
     }
-    
+
 
     .multiple-checkbox-div .multiple-checks {
         display: flex;
@@ -50,6 +50,17 @@
         font-weight: 500;
         line-height: normal;
         letter-spacing: -0.48px;
+    }
+
+    .form-control,
+    .form-select {
+        color: #000;
+        font-family: "Campton" !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.64px;
     }
 </style>
 <div class="content-wrapper">
