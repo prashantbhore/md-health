@@ -10,16 +10,13 @@
         font-size: 19px;
     }
 
- 
+
     input[type="file"] {
         color: #979797 !important;
         line-height: 2 !important;
     }
 
-    .g-5,
-    .gx-5 {
-        --bs-gutter-x: 4rem;
-    }
+
 
     body {
         background: #f6f6f6;
@@ -30,12 +27,9 @@
         background-color: #f6f6f6;
     }
 
+
     select:required:invalid {
         color: gray;
-    }
-
-    option[value=""][disabled] {
-        display: none;
     }
 
     .nav-tabs .nav-item.show .nav-link,
@@ -68,6 +62,8 @@
                 <a href="{{ url('food-provider-register') }}" class="nav-link">Food Provider</a>
             </li>
         </ul>
+
+        <!-- Tab panes -->
 
         <!-- Tab panes -->
         <div class="tab-content position-relative" id="myTabContent">
@@ -164,7 +160,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div id="recaptcha-container" class="df-center"></div>
+                                    {{-- <div id="recaptcha-container" class="df-center"></div> --}}
                                     <span id="error" class="text-danger"></span>
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
                                         <button type="button" class="btn btn-md mb-5 w-100" id="regcustuser" style="height: 47px;">Create Account</button>
@@ -190,7 +186,6 @@
         </div>
     </div>
 </div>
-
 {{-- otp --}}
 
 <div class="container py-100px df-center sign-in-form d-none" id="otpDiv">
@@ -211,7 +206,7 @@
                 <form>
                     <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                     <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
-                    <div class="alert alert-success" id="successAuth" style="display: none;"></div>
+                    {{-- <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
                     <div class="w-100 df-center mb-3 sms-input gap-3">
                         <input type="hidden" name="email" value="{{ session('email') }}" />
                         <input type="hidden" name="password" value="{{ session('password') }}" />
@@ -230,7 +225,7 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-md btn-text w-100 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        <button class="btn btn-md btn-text w-75 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
                 </form>
                 <script>
@@ -255,7 +250,7 @@
                     <span class="text-danger" id="timer">32 sec</span>
                 </h6>
                 <div>
-                    <a href="#" class="text-secondary" id="resendotp">Resend Code In</a>
+                    <a href="javascript:void(0);" class="text-secondary" id="resendotp" onclick="resendCode();">Resend Code In</a>
                 </div>
             </div>
         </div>
@@ -277,17 +272,19 @@
         </div>
     </div>
 </div>
-@endsection @section('script')
+<div id="recaptcha-container" class="df-end"></div>
+@endsection
+
+@section('script')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
     function countdownTimer(duration) {
-        $("#resendotp").hide();
+        $('#resendotp').hide();
         let timer = duration,
-            minutes,
-            seconds;
-        const timerDisplay = $("#timer");
+            minutes, seconds;
+        const timerDisplay = $('#timer');
         const timerInterval = setInterval(function() {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
@@ -300,16 +297,16 @@
             if (--timer < 0) {
                 timer = duration;
                 clearInterval(timerInterval);
-                $("#resendotp").show();
+                $('#resendotp').show();
                 timerDisplay.text("Timer completed!");
             }
         }, 1000);
     }
 
     // Set the timer duration in seconds
-    let timerDuration = 32;
+    // let timerDuration = 32;
 
-    countdownTimer(timerDuration);
+    // countdownTimer(timerDuration);
 </script>
 <script>
     $(document).on("click", "#regcustuser", function() {
@@ -333,7 +330,9 @@
                 },
                 beforeSend: function() {
                     $("#regcustuser").attr("disabled", true);
-                    $("#regcustuser").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+                    $("#regcustuser").html(
+                        '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                    );
                 },
                 success: function(response) {
                     $("#regcustuser").attr("disabled", false);
@@ -406,6 +405,8 @@
     }
 
     function sendOTP() {
+        let timerDuration = 32;
+        countdownTimer(timerDuration);
         var number = $("#phone").val();
         // alert(number);
         firebase
@@ -502,6 +503,47 @@
                 $("#error").text(error.message);
                 $("#error").show();
             });
+    }
+
+    function resendCode() {
+        let timerDuration = 32;
+        countdownTimer(timerDuration);
+        var number = $("#phone").val();
+        var containerId = 'recaptcha-container';
+        var container = document.getElementById(containerId);
+        $('#recaptcha-container').show();
+
+        if (!container) {
+            $("#error").text("reCAPTCHA container is missing.");
+            $("#error").show();
+            return;
+        }
+
+        try {
+            container.innerHTML = '';
+            recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
+            recaptchaVerifier.render();
+
+            firebase
+                .auth()
+                .signInWithPhoneNumber(number, window.recaptchaVerifier)
+                .then(function(confirmationResult) {
+                    window.confirmationResult = confirmationResult;
+                    coderesult = confirmationResult;
+                    $("#sentSuccess").text("New code sent Successfully.");
+                    $("#sentSuccess").show();
+                    coderesult = confirmationResult;
+                    // recaptchaVerifier.clear();
+                    $('#recaptcha-container').hide();
+                })
+                .catch(function(error) {
+                    $("#error").text(error.message);
+                    $("#error").show();
+                });
+        } catch (error) {
+            $("#error").text("Error initializing reCAPTCHA: " + error.message);
+            $("#error").show();
+        }
     }
 </script>
 
@@ -791,16 +833,14 @@
 <script>
     $(function() {
         $('input[name="date_of_birth"]').daterangepicker({
-                opens: "left",
-                singleDatePicker: true,
-                showDropdowns: true,
-                locale: {
-                    format: "DD-MMM-YYYY",
-                },
-                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-            },
-            function(start, end, label) {}
-        );
+            opens: 'left',
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'DD-MMM-YYYY'
+            }
+            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        }, function(start, end, label) {});
     });
 </script>
 @endsection

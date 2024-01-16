@@ -29,101 +29,101 @@ class CustomerShopController extends BaseController
 
     public function featured_product_list()
     {
-    
-       $activeProductList = VendorProduct::where('status', 'active')->where('featured','yes')
-             ->select('id', 'product_unique_id', 'product_name','product_description')
-             ->get();
 
-      $selected_data = [];
+        $activeProductList = VendorProduct::where('status', 'active')->where('featured', 'yes')
+        ->select('id', 'product_unique_id', 'product_name', 'product_description', 'sale_price', 'status')
+        ->get();
 
-    foreach ($activeProductList as $key => $product){
-        $productImage = VendorProductGallery::where('status', 'active')
+        $selected_data = [];
+
+        foreach ($activeProductList as $key => $product) {
+            $productImage = VendorProductGallery::where('status', 'active')
             ->where('vendor_product_id', $product->id)
-            ->select('vendor_product_image_path')
-            ->first();
+                ->select('vendor_product_image_path')
+                ->first();
 
-        $selected_data[] = [
-            'id' => !empty($product->id) ? $product->id : '',
-            'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
-            'product_name' => !empty($product->product_name) ? $product->product_name : '',
-            'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
+            $selected_data[] = [
+                'id' => !empty($product->id) ? $product->id : '',
+                'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
+                'product_name' => !empty($product->product_name) ? $product->product_name : '',
+                'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
+                'sale_price' => !empty($product->sale_price) ? $product->sale_price : '',
+                'status' => !empty($product->status) ? $product->status : '',
+            ];
+        }
 
-        ];
+        if (!empty($selected_data)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Featured Product List Found.',
+                'featured_products' => $selected_data,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Featured Product List Not Found',
+            ]);
+        }
     }
 
-    if (!empty($selected_data)){
-        return response()->json([
-            'status' => 200,
-            'message' => 'Featured Product List Found.',
-            'featured_products' => $selected_data,
-        ]);
-    } else{
-        return response()->json([
-            'status' => 404,
-            'message' => 'Something went wrong. Featured Product List Not Found',
-        ]);
-    }
-}
 
+    public function product_view(Request $request)
+    {
 
-
-public function product_view(Request $request)
-{
-
-      $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'id' => 'required',
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-       $proudct_data= VendorProduct::where('status','!=','delete')->where('id',$request->id)->first();
+        $proudct_data = VendorProduct::where('status', '!=', 'delete')->where('id', $request->id)->first();
 
-       $product_category=null;
-        if(!empty($proudct_data->product_category_id)){
-           $product_category=VendorProductCategory::where('id',$proudct_data->product_category_id)->first();
+        $product_category = null;
+        if (!empty($proudct_data->product_category_id)) {
+            $product_category = VendorProductCategory::where('id', $proudct_data->product_category_id)->first();
         }
 
-        $product_sub_category=null;
-        if(!empty($proudct_data->product_subcategory_id)){
-            $product_sub_category=VendorProductSubCategory::where('id',$proudct_data->product_subcategory_id)->first();
-         }
-         
-         $gallery=null;
-         if(!empty($proudct_data->id)){
-            $gallery=VendorProductGallery::where('vendor_product_id',$proudct_data->id)->get();
-         }
+        $product_sub_category = null;
+        if (!empty($proudct_data->product_subcategory_id)) {
+            $product_sub_category = VendorProductSubCategory::where('id', $proudct_data->product_subcategory_id)->first();
+        }
 
-         $vendor=null;
-         if(!empty($proudct_data->vendor_id)){
-            $vendor=VendorRegister::where('id',$proudct_data->vendor_id)->first();
-         }
+        $gallery = null;
+        if (!empty($proudct_data->id)) {
+            $gallery = VendorProductGallery::where('vendor_product_id', $proudct_data->id)->get();
+        }
 
-         $product_gallery = [];
+        $vendor = null;
+        if (!empty($proudct_data->vendor_id)) {
+            $vendor = VendorRegister::where('id', $proudct_data->vendor_id)->first();
+        }
 
-         if(!empty($gallery)){
-       
-         foreach ( $gallery as $val) {
-            $product_gallery[] = !empty($val->vendor_product_image_path) ? url(Storage::url($val->vendor_product_image_path)) : '';
-         }
+        $product_gallery = [];
+
+        if (!empty($gallery)) {
+
+            foreach ($gallery as $val) {
+                $product_gallery[] = !empty($val->vendor_product_image_path) ? url(Storage::url($val->vendor_product_image_path)) : '';
+            }
         }
 
         $otherProducts = [];
 
         if ($proudct_data) {
             $randomProducts = VendorProduct::where('status', '!=', 'delete')
-                ->where('id', '!=', $request->id)
+            ->where('id', '!=', $request->id)
                 ->inRandomOrder()
                 ->limit(4)
                 ->get();
-        
+
             foreach ($randomProducts as $val) {
                 // Use firstOrNew to ensure a default empty object if no image is found
                 $product_image = VendorProductGallery::where('vendor_product_id', $val->id)
                     ->select('vendor_product_image_path')
                     ->firstOrNew();
-        
+
                 $product = [
                     'id' => $val->id ? $val->id : '',
                     'product_name' => $val->product_name ? $val->product_name : '',
@@ -136,51 +136,51 @@ public function product_view(Request $request)
                     'featured' => $val->featured ? $val->featured : '',
                     'vendor_product_image_path' => $product_image->vendor_product_image_path ?? '',
                 ];
-        
+
                 $otherProducts[] = $product;
             }
         }
-        
-        
 
-       $data = [];
 
-    
 
-        $data[] = [
-            'id' => !empty( $proudct_data->id) ?  $proudct_data->id : '',
-            'product_name' => !empty( $proudct_data->product_name) ?  $proudct_data->product_name: '',
-            'product_category_id' => !empty( $proudct_data->product_category_id) ?  $proudct_data->product_category_id: '',
-            'product_category_name' => !empty($product_category->category_name) ? $product_category->category_name: '',
-            'product_sub_category_id' => !empty( $proudct_data->product_subcategory_id) ?  $proudct_data->product_subcategory_id: '',
-            'product_sub_category_name' => !empty($product_sub_category->sub_category_name) ? $product_sub_category->sub_category_name:'',
-            'product_descrition' => !empty( $proudct_data->product_description) ?  $proudct_data->product_description: '',
-            'product_price' => !empty( $proudct_data->product_price) ?  $proudct_data->product_price: '',
-            'shipping_fee' => !empty( $proudct_data->shipping_fee) ?  $proudct_data->shipping_fee: '',
-            'free_shipping' => !empty( $proudct_data->free_shipping) ?  $proudct_data->free_shipping: '',
-            'discount' => !empty( $proudct_data->discount_price) ?  $proudct_data->discount_price: '',
-            'sale_price' => !empty( $proudct_data->sale_price) ?  $proudct_data->sale_price: '',
-            'featured' => !empty( $proudct_data->featured) ?  $proudct_data->featured: '',
-            'vendor_id' => !empty($vendor->id) ? $vendor->id: '',
-            'vendor_name' => !empty($vendor->company_name) ? $vendor->company_name: '',
-      ];
-    
+        //   $data = [];
 
-    if (!empty( $data)){
-        return response()->json([
-            'status' => 200,
-            'message' => 'Product Data Found.',
-            'product_data' =>  $data,
-            'product_gallery' =>  $product_gallery,
-            'other_products' =>  $otherProducts,
-        ]);
-    } else {
-        return response()->json([
-            'status' => 404,
-            'message' => 'No Product Data Found',
-        ]);
+
+
+        $data = [
+            'id' => !empty($proudct_data->id) ?  $proudct_data->id : '',
+            'product_name' => !empty($proudct_data->product_name) ?  $proudct_data->product_name : '',
+            'product_category_id' => !empty($proudct_data->product_category_id) ?  $proudct_data->product_category_id : '',
+            'product_category_name' => !empty($product_category->category_name) ? $product_category->category_name : '',
+            'product_sub_category_id' => !empty($proudct_data->product_subcategory_id) ?  $proudct_data->product_subcategory_id : '',
+            'product_sub_category_name' => !empty($product_sub_category->sub_category_name) ? $product_sub_category->sub_category_name : '',
+            'product_descrition' => !empty($proudct_data->product_description) ?  $proudct_data->product_description : '',
+            'product_price' => !empty($proudct_data->product_price) ?  $proudct_data->product_price : '',
+            'shipping_fee' => !empty($proudct_data->shipping_fee) ?  $proudct_data->shipping_fee : '',
+            'free_shipping' => !empty($proudct_data->free_shipping) ?  $proudct_data->free_shipping : '',
+            'discount' => !empty($proudct_data->discount_price) ?  $proudct_data->discount_price : '',
+            'sale_price' => !empty($proudct_data->sale_price) ?  $proudct_data->sale_price : '',
+            'featured' => !empty($proudct_data->featured) ?  $proudct_data->featured : '',
+            'vendor_id' => !empty($vendor->id) ? $vendor->id : '',
+            'vendor_name' => !empty($vendor->company_name) ? $vendor->company_name : '',
+        ];
+
+
+        if (!empty($data)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Product Data Found.',
+                'product_data' =>  $data,
+                'product_gallery' =>  $product_gallery,
+                'other_products' =>  $otherProducts,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No Product Data Found',
+            ]);
+        }
     }
-}
 
 
 
