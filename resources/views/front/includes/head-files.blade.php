@@ -66,15 +66,15 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" /> -->
-    
+
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" /> -->
 
     <title>MDhealth</title>
 
     <style>
         .error {
-            color: red !important;
-            font-size: 14px !important;
+            color: #F31D1D;
+            font-size: 14px;
         }
     </style>
 
