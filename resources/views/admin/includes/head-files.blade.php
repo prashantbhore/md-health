@@ -23,6 +23,11 @@
     <!-- Nice Select -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/nice-select.css')}}">
 
+    <link rel="stylesheet" href="{{ URL::asset('admin/commonarea/dist/css/jquery.datatables.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('admin/commonarea/plugins/dataTables/fixedHeader.dataTables.min.css')}}">
+
+    
+
     <!-- GLightbox -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 

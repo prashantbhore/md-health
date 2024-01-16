@@ -90,7 +90,7 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'superadmin']], function () {
 
-    Route::get('/dashboard', function (){
+    Route::get('/dashboard', function () {
         return view('admin.dashboard.dashboard');
     });
 
@@ -121,18 +121,36 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin MANAGE VENDORS
    
-    Route::view('pending-vendors', 'admin/vendors/pending-vendors');
-    Route::view('approved-vendors', 'admin/vendors/approved-vendors');
-    Route::view('rejected-vendors', 'admin/vendors/rejected-vendors');
-    Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
-    Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
-    Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
-    Route::view('products-on-sale', 'admin/vendors/products-on-sale');
    
+  
+    
+    Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
 
-    // Route::controller(ManageVendorController::class)->group(function (){
-    //     Route::get('vendors','index');
-    // });
+    Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
+
+    Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
+
+    Route::view('products-on-sale', 'admin/vendors/products-on-sale');
+
+
+    Route::controller(ManageVendorController::class)->group(function (){
+       // Route::get('vendors','index');
+
+        Route::get('pending-vendors', 'pending_vendors');
+
+        Route::get('pending-vendors-data-table','pending_vendor_data_table');
+
+
+        Route::get('approved-vendors', 'approved_vendors');
+
+        Route::get('approved-vendors-data-table','approved_vendor_data_table');
+
+        Route::get('rejected-vendors','rejected_vendors');
+
+        Route::get('rejected-vendors-data-table','rejected_vendor_data_table');
+
+        Route::get('vendor-delete','vendor_delete');
+    });
 
 
 
@@ -150,21 +168,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('medical-tourism-store', 'store')->name('medical.tourism.store');
         Route::post('verification-status-chnage', 'verification_status');
         Route::post('vendor-status-chnage', 'status');
-        Route::post('vendor-delete', 'vendor_delete');
+        //Route::post('vendor-delete', 'vendor_delete');
         Route::post('/admin-delete-package','package_delete');
     });
 
 
 
-       //Admin  MANAGE Country
+    //Admin  MANAGE Country
 
-       Route::controller(countryController::class)->group(function (){
-        Route::get('add-country','index');
-        Route::post('/add-country','store')->name('add-country');
-        Route::get('/country-data-table','data_table');
-        Route::get('/country/{id}/edit','edit_country');
-        Route::get('country-delete','country_delete');
-       });
+    Route::controller(countryController::class)->group(function () {
+        Route::get('add-country', 'index');
+        Route::post('/add-country', 'store')->name('add-country');
+        Route::get('/country-data-table', 'data_table');
+        Route::get('/country/{id}/edit', 'edit_country');
+        Route::get('country-delete', 'country_delete');
+    });
 
 
 
@@ -180,7 +198,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     });
 
     //Admin  MANAGE CITIES
-   
+
 
 
     //Admin  MANAGE CITIES
@@ -253,7 +271,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('category-mdbooking', 'admin/products-and-categories/categories/mdbooking');
 
     #Admin Products
-    Route::controller(ProductMDhealthPackageController::class)->group(function (){
+    Route::controller(ProductMDhealthPackageController::class)->group(function () {
         Route::get('product-mdhealth', 'index');
         Route::get('/md-health-package-data-table', 'data_table');
         Route::get('md-health-package-delete', 'delete_md_health_package_delete');
@@ -280,13 +298,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('payment-requests', 'admin/payments/payment-requests');
 
     //Admin REVIEWS
-  
-   
 
 
-    Route::controller(reviewController::class)->group(function (){
-       Route::get('pending-reviews','pendingReview');
-       Route::get('published-reviews','publishedReview');
+
+
+    Route::controller(reviewController::class)->group(function () {
+        Route::get('pending-reviews', 'pendingReview');
+        Route::get('published-reviews', 'publishedReview');
     });
 
 
@@ -548,10 +566,10 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 
 Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
 Route::any('test', [CustomerPackageController::class, 'test']);
-Route::post('complete_3ds',[CustomerPackageController::class, 'complete_3ds']);
+Route::post('complete_3ds', [CustomerPackageController::class, 'complete_3ds']);
 
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
-    
+
     Route::controller(UserRegistrationController::class)->group(function () {
         // Route::get('/medical-provider-dashboard', 'dashboard_view');
         Route::get('/my-profile', 'edit_customer');
@@ -561,15 +579,16 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
         Route::post('/reset-customer-password', 'update_customer_password');
         // Route::post('/check-old-password', 'check_old_password');
     });
-    
+
     //Customer Report Controller Code By Mpluss03
     Route::any('user-all-reports', [CustomerPackageController::class, 'customer_reports']);
     Route::post('user-all-reports-search', [CustomerPackageController::class, 'customer_report_search']);
-    
-    
-    
+
+
+
     //Mplus02
     Route:post('purchase-by-mdcoins',[CustomerPackageController::class,'purchase_by_mdcoins']);
+
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
@@ -577,7 +596,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
-    
+
 });
 
 

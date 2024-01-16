@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('previllages')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile_no')->nullable();
+            $table->string('vendor_type')->nullable()->default('medical_service_provider');
+            $table->enum('vendor_status', ['pending','approved','rejected'])->default('pending');
             $table->string('tax_no')->nullable();
             $table->longText('company_address')->nullable();
             $table->string('password')->nullable();

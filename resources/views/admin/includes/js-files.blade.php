@@ -46,12 +46,12 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-
-
-
-
-
-
+<script src="{{ URL::asset('admin/commonarea/plugins/dataTables/jszip.min.js')}}"></script>
+<script src="{{ URL::asset('admin/commonarea/plugins/dataTables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ URL::asset('admin/commonarea/plugins/dataTables/dataTables.buttons.min.js')}}"></script>
+<script src="{{ URL::asset('admin/commonarea/plugins/dataTables/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{ URL::asset('admin/commonarea/plugins/dataTables/buttons.html5.min.js')}}"></script>
+<script src="{{ URL::asset('admin/commonarea/plugins/dataTables/dataTables.fixedHeader.min.js')}}"></script>
 
 
 <script>
