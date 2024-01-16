@@ -63,6 +63,11 @@ $(function (){
                 data: "country_name",
                 name: "country_name",
             },
+
+            {
+                data: "status",
+                name: "status",
+            },
           
             {
                 data: "action",

@@ -1,65 +1,169 @@
-$(function (){
-    var table = $("#example").dataTable({
-        bFilter: false,
-        ordering: false,
+// $(function (){
+//     var table = $("#example").dataTable({
+//         bFilter: false,
+//         ordering: false,
+//         processing: true,
+//         serverSide: true,
+//         paging: true,
+//         searching: true,
+//         destroy: true,
+//         clear: true,
+//         deferRender: true,
+//           ajax: {
+//               url: base_url + "/admin/customer-data-table",
+//               data: function (d){
+//                 d.status = $('#status').val();
+//             },
+             
+//           },
+//           columns: [
+
+//             {
+//                 data: "DT_RowIndex",
+//                 name: "DT_RowIndex",
+//                 orderable: false,
+              
+//             },
+
+//             {
+//                 data: "id",
+//                 name: "id",
+//             },
+
+//             {
+//                 data: "name",
+//                 name: "name",
+//             },
+
+
+//             {
+//                 data: "country",
+//                 name: "country",
+//             },
+
+//             {
+//                 data: "city",
+//                 name: "city",
+//             },
+
+            
+//             {
+//                 data: "phone",
+//                 name: "phone",
+//             },
+
+//             {
+//                 data: "status",
+//                 name: "status",
+//             },
+          
+//             {
+//                 data: "action",
+//                 name: "action",
+//             },
+//           ],
+//       });
+
+    
+//     $("#status").change(function (){
+//         table.draw();
+//     });
+
+//   });
+
+
+
+
+
+
+  
+  $(function (){
+    var table = $("#example").DataTable({
         processing: true,
         serverSide: true,
-        paging: true,
-        searching: true,
+        searchable: true,
+        deferRender: true,
+        pagingType: 'numbers',
         destroy: true,
         clear: true,
-        deferRender: true,
           ajax: {
               url: base_url + "/admin/customer-data-table",
-             
+              data: function (d) {
+                  d.status = $('#status').val();
+              },
           },
           columns: [
+            {
+                data: "DT_RowIndex",
+                name: "DT_RowIndex",
+                orderable: false,
+              
+            },
+
+            {
+                data: "id",
+                name: "id",
+                orderable: false,
+            },
 
             {
                 data: "name",
                 name: "name",
+                orderable: false,
             },
 
-            {
-                data: "gender",
-                name: "gender",
-            },
-
-            {
-                data: "age",
-                name: "age",
-            },
 
             {
                 data: "country",
                 name: "country",
+                orderable: false,
             },
 
             {
                 data: "city",
                 name: "city",
+                orderable: false,
             },
 
             
             {
                 data: "phone",
                 name: "phone",
+                orderable: false,
             },
-          
-          
-          
+
+            {
+                data: "status",
+                name: "status",
+                orderable: false,
+                searchable: false,
+            },
           
             {
                 data: "action",
                 name: "action",
+                orderable: false,
+                searchable: false,
             },
           ],
       });
   
-      function reload_table() {
-        table.DataTable().ajax.reload(null, false);
-    }
+      $("#status").change(function (){
+          table.draw();
+      });
   });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

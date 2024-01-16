@@ -24,11 +24,12 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Gender</label>
-                                <p>Male - 36 Age</p>
+                                <p>{{!empty($customer->gender)?$customer->gender:''}} - {{!empty($age)?$age:'0'}} Age</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email">Date of Birth</label>
-                                <p>18 Oct 1987</p>
+                                <p>{{ !empty($customer->date_of_birth) ? date('d M Y', strtotime(str_replace('/', '-', $customer->date_of_birth))) : '' }}
+                                </p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Contact Number</label>

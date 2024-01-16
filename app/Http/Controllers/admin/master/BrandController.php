@@ -77,6 +77,7 @@ public function data_table(Request $request)
 
     if ($request->ajax()) {
         return DataTables::of($brands)
+           ->addIndexColumn()
             
 
             ->addColumn('brand_unique_id', function ($row){
@@ -99,6 +100,18 @@ public function data_table(Request $request)
                 }
             })
 
+            ->addColumn('status', function ($row){
+                $status = $row->status;
+            
+                if ($status == 'active') {
+                    $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_brand" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactivate</a>';
+                } else {
+                    $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_brand" data-flash="Status Changed Successfully!" class="md-change-status activateLink mt-0 activate-btn">Activate</a>';
+                }
+            
+                return $statusBtn;
+            })
+
 
 
             ->addColumn('action', function ($row) {
@@ -116,7 +129,7 @@ public function data_table(Request $request)
 
 
            
-            ->rawColumns(['action'])
+            ->rawColumns(['action','status'])
             ->make(true);
     }
 }

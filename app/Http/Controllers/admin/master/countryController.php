@@ -86,7 +86,7 @@ class countryController extends Controller
 
                 
 
-                ->addColumn('status', function ($row) {
+                ->addColumn('status', function ($row){
                     $status = $row->status;
                 
                     if ($status == 'active') {

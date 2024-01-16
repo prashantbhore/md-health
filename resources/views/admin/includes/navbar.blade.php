@@ -27,7 +27,7 @@
                             <path d="M1 1.00042L6.5 6.35449L12 1.00042" stroke="#4CDB06" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg></a>
                     <ul class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
-                        <li>
+                        {{-- <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12" fill="none">
                                     <g clip-path="url(#clip0_187_7253)">
@@ -43,6 +43,8 @@
                                 Profile
                             </a>
                         </li>
+
+
                         <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -60,6 +62,8 @@
                                 Packages
                             </a>
                         </li>
+
+
                         <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 10 10" fill="none">
@@ -75,6 +79,8 @@
                                 Reservations
                             </a>
                         </li>
+
+
                         <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -83,6 +89,7 @@
                                 Messages
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12" fill="none">
@@ -91,6 +98,7 @@
                                 Orders
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12" fill="none">
@@ -102,6 +110,7 @@
                                 Wallet
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -110,6 +119,7 @@
                                 Reports
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 13 13" fill="none">
@@ -117,7 +127,8 @@
                                 </svg>
                                 Favorites
                             </a>
-                        </li>
+                        </li> --}}
+
                         <li>
                             <a class="dropdown-item" href="{{url('logout')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 11 12" fill="none">
