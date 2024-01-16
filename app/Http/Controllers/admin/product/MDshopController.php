@@ -139,6 +139,7 @@ class MDshopController extends Controller
 
          if ($request->ajax()){
               return DataTables::of($porodcut_category)
+              ->addIndexColumn()
             
 
           

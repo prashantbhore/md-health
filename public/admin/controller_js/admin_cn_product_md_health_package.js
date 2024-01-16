@@ -142,6 +142,12 @@ $(function (){
         ajax:base_url + "/admin/md-health-package-data-table",
         method:'get',
         columns: [
+
+            {
+                data: "DT_RowIndex",
+                name: "DT_RowIndex",
+            },
+
             {
                 data: "id",
                 name: "id",

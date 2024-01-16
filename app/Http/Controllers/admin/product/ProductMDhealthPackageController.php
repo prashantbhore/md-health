@@ -42,6 +42,7 @@ class ProductMDhealthPackageController extends Controller
 
     if ($request->ajax()){
         return DataTables::of($packages)
+        ->addIndexColumn()
         
         ->addColumn('id', function ($row){
                 if(!empty($row->package_unique_no)){
