@@ -10,6 +10,7 @@ use App\Models\CustomerRegistration;
 use App\Models\Packages;
 use App\Models\PatientInformation;
 use App\Models\ProductCategory;
+use App\Models\MDCoins;
 use App\Services\ApiService;
 use App\Traits\MediaTrait;
 use Auth;
@@ -888,6 +889,47 @@ class CustomerPackageController extends Controller
         }
 
         return view('front.mdhealth.user-panel.user-favorites', compact('fav_list'));
+    }
+
+    //Mplus02
+
+    public function purchase_by_mdcoins(Request $request){
+
+        // formData.append('package_id', packageId);
+        // formData.append('patient_id', patientId);
+        // formData.append('sale_price', proxyPrice);
+        // formData.append('paid_amount', totalPrice);
+        // formData.append('platform_type', 'web');
+        // formData.append('card_no', cardNo ?? '');
+        // formData.append('card_expiry_date', cardExpiryDate ?? '');
+        // formData.append('card_cvv', cardCvv ?? '');
+        // formData.append('card_name', cardName ?? '');
+        // formData.append('pending_amount', pendingAmount);
+        // formData.append('percentage', '20%');
+
+        $validator = Validator::make($request->all(),[
+            'package_id' => 'required',
+            // 'sale_price' => 'required',
+            'paid_amount' => 'required',
+            'percentage' => 'required',
+            'platform_type' => 'required',
+        ]);
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $user_id = Auth::guard('md_customer_registration')->user()->id;
+        if(!empty($user_id)){
+           $coins_data = MDCoins::where('customer_id',$user_id)->where('status','active')->first();
+           $avilable_coins = $coins_data->coins;
+           if(!empty($avilable_coins)){
+                if($avilable_coins > $request->paid_amount){
+                    $balance_coins = $avilable_coins - $request->paid_amount;
+                }else{
+                    return $this->sendError('Not Enough Coins');
+                }
+           }
+        }
     }
 
     //Mplus03
