@@ -40,13 +40,19 @@ class PaymentController extends BaseController{
        
         // $input['medical_provider_id'] = Auth::user()->id;
 
-        $input['medical_provider_id'] = 1;
+        $input['medical_provider_id'] = Auth::user()->id;
 
         $input['account_number'] = $request->account_number;
         $input['bank_name'] =  $request->bank_name;
+ 
+       
+       
 
-        $AddAccountNumber = MedicalProviderAccountDetails::create($input);
-
+        if(!empty($request->id)){
+            $AddAccountNumber = MedicalProviderAccountDetails::where('id',$request->id)->update($input);
+        }else{
+            $AddAccountNumber = MedicalProviderAccountDetails::create($input);
+        }
 
 
         if (!empty($AddAccountNumber)){
@@ -63,8 +69,16 @@ class PaymentController extends BaseController{
         }
     }
 
+
+
+
+
+    
+
     public function bank_account_list()
     {
+       // return Auth::user()->id;
+
         $MedicalProviderAccountDetails= MedicalProviderAccountDetails::where('status','active')
         ->select('id',
             'medical_provider_id',
@@ -72,6 +86,9 @@ class PaymentController extends BaseController{
             'bank_name')
         ->where('medical_provider_id', Auth::user()->id)
         ->first();
+
+      
+
 
         if (!empty($MedicalProviderAccountDetails)) {
             return response()->json([

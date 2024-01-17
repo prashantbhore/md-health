@@ -413,11 +413,58 @@
 
             firebase.auth().signInWithPhoneNumber(number, recaptchaVerifier)
                 .then(function(result) {
-                    confirmationResult = result;
-                    console.log(confirmationResult);
-                    $("#sentSuccess").text("New code sent Successfully.");
-                    $("#sentSuccess").show();
-                    confirmationResult = confirmationResult;
+                    var user = result.user;
+                    $("#successOtpAuthot").text("Auth is successful");
+                    $("#successOtpAuthot").show();
+                    var number = $('#number').val();
+                    var password = $('#password').val();
+                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    });
+
+                    $.ajax({
+                        url: base_url + '/otp-verify',
+                        method: 'POST',
+                        data: {
+                            number: number,
+                            login_type: 'login',
+                            password: password
+                        },
+                        success: function(response) {
+                            $('#verifyBtn').attr('enable', true);
+                            console.log(response);
+                            if (response.url !== undefined) {
+                                // alert(response.url);
+                                window.location.href = base_url + response.url;
+
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+
+                                toastr.success(response.message);
+                                // recaptchaVerifier.clear();
+                                //$('#error').text('');
+                            } else {
+                                // $('#number').val('');
+                                toastr.options = {
+                                    "positionClass": "toast-bottom-right",
+                                    "timeOut": "5000",
+                                };
+                                toastr.error('Credentials do not match');
+                                //toastr.success(response.message);
+                                //$('#error').text('Credentials do not match');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+
+                    e.preventDefault();
                 })
                 .catch(function(error) {
                     $("#error").text(error.message);

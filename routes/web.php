@@ -3,6 +3,7 @@
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\RolesController;
 use App\Http\Controllers\admin\admin\AdminController;
+use App\Http\Controllers\admin\ads_and_promo\AdsPromoController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
 use App\Http\Controllers\Front\Customer\CustomerPackageController;
@@ -301,9 +302,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('package-delete', 'package_delete');
         Route::post('package-store', 'store')->name('package.store');
 
-
-
-    });
+     });
 
     Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
 
@@ -334,7 +333,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('notifications', 'admin/notifications/notifications');
 
     //Admin ADS & PROMO
-    Route::view('ads-promo', 'admin/ads/ads-promo');
+
+    Route::controller(AdsPromoController::class)->group(function () {
+        Route::get('ads-promo','index');
+    });
+
+   
+
+
+
     Route::view('featured', 'admin/ads/featured');
     //Admin MANAGE REQUEST
     Route::view('manage-request', 'admin/manage-request/manage-request');
@@ -390,23 +397,34 @@ Route::get('buy-service', function () {
 
 
 //mdShop Routes
+// {{-- mplus04 --}}
 Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
+Route::post('get-product', [MdShoppingController::class, 'get_product']);
+Route::get('featured-product', [MdShoppingController::class, 'featured_product']);
+Route::get('product/{id}', [MdShoppingController::class, 'product_view']);
+Route::get('view-products/{id}', [MdShoppingController::class, 'view_all_products']);
+Route::get('cart', [MdShoppingController::class, 'cart']);
+Route::get('view-products', [MdShoppingController::class, 'catgorywisefilter']);
 
-Route::get('cart', function () {
-    return view('front.mdShop.cart');
-});
+// Route::get('cart', function () {
+//     return view('front.mdShop.cart');
+// });
 
-Route::get('product', function () {
-    return view('front.mdShop.product');
-});
+// Route::get('product', function () {
+//     return view('front.mdShop.product');
+// });
 
 Route::get('payment-status-shop', function () {
     return view('front.mdShop.paymentStatus');
 });
 
-Route::get('view-products', function () {
-    return view('front.mdShop.allProducts');
-});
+// Route::get('view-products', function () {
+//     return view('front.mdShop.categorisedProduct');
+// });
+// {{-- mplus04 --}}
+
+
+
 
 // mdFood Routes
 Route::get('mdFoods', [MdFoodsController::class, 'mdfood_home']);

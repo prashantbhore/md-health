@@ -349,4 +349,102 @@ class FoodPackageController extends BaseController
             ]);
         }
     }
+
+    public function food_active_list()
+    {
+        $FoodPackages=FoodPackages::where('status','active')
+        ->select('unique_id','package_name')
+        ->where('created_by',Auth::user()->id)
+        ->get();
+
+        if (!empty($FoodPackages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your active list.',
+                'data'=> $FoodPackages
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function food_deactive_list()
+    {
+        $FoodPackages = FoodPackages::where('status', 'inactive')
+        ->select('unique_id', 'package_name')
+        ->where('created_by', Auth::user()->id)
+        ->get();
+
+        if (!empty($FoodPackages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your active list.',
+                'data' => $FoodPackages
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function active_list_to_deactive(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $status_update['status'] = 'inactive';
+        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_ip_address'] = $request->ip();
+
+        $activate_to_deactive_packages = FoodPackages::where('id', $request->id)->update($status_update);
+        if (!empty($activate_to_deactive_packages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'food is added in in-active list.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong..',
+            ]);
+        }
+    }
+
+    public function deactive_list_to_active(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $status_update['status'] = 'active';
+        $status_update['modified_by'] = Auth::user()->id;
+        $status_update['modified_ip_address'] = $request->ip();
+
+        $activate_to_deactive_packages = FoodPackages::where('id', $request->id)->update($status_update);
+        if (!empty($activate_to_deactive_packages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'food is added in active list.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong..',
+            ]);
+        }
+    }
 }
