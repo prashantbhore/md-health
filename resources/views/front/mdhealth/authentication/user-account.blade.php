@@ -538,11 +538,11 @@
                 .then(function(confirmationResult) {
                     window.confirmationResult = confirmationResult;
                     coderesult = confirmationResult;
-                    $("#sentSuccess").text("New code sent Successfully.");
-                    $("#sentSuccess").show();
-                    coderesult = confirmationResult;
-                    // recaptchaVerifier.clear();
-                    $('#recaptcha-container').hide();
+                    $("#successAuth").text("Message sent");
+                    $("#successAuth").show();
+                    $("#otpDiv").removeClass("d-none");
+                    $("#regdiv").hide();
+                    recaptchaVerifier.clear();
                 })
                 .catch(function(error) {
                     $("#error").text(error.message);

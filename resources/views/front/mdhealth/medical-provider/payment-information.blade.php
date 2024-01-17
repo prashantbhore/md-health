@@ -26,11 +26,11 @@
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4">
                     <div class="form-div">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-4">
@@ -38,25 +38,28 @@
                             <img src="{{asset('front/assets/img/GoldMember.svg')}}" alt="">
                         </h5>
 
+                        {{-- {{dd($medical_provider_bank_details)}} --}}
+
                         <form method="POST" action="{{ route('store.vendor.bank.details') }}">
                             @csrf
+                            <input type="hidden" name="id" value="{{!empty($medical_provider_bank_details['id'])?$medical_provider_bank_details['id']:''}}">
                             <div class="card-body">
                                 <div class="form-group mb-4">
                                     <label class="form-label mb-3">Your Company IBAN</label>
                                     <div class="input-icon-div">
-                                        <input type="text" name="account_number" class="form-control" placeholder="TR00 0000 0000 0000 0000 0000 00">
+                                        <input type="text" name="account_number" class="form-control" value="{{!empty($medical_provider_bank_details['account_number'])?$medical_provider_bank_details['account_number']:''}}">
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-5">
                                     <label class="form-label mb-3">Company Name</label>
                                     <div class="input-icon-div">
-                                        <input type="text" name="bank_name" class="form-control" placeholder="MDhealth Ltd. Sti.">
+                                        <input type="text" name="bank_name" class="form-control" placeholder="MDhealth Ltd. Sti." value="{{!empty($medical_provider_bank_details['bank_name'])?$medical_provider_bank_details['bank_name']:''}}">
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-4">
-                                    <button type="submit" class="btn save-btn-black">Save Bank Account</button>
+                                    <button type="submit" class="btn save-btn-black">{{!empty($medical_provider_bank_details['id'])?'Update':'Save'}} Bank Account</button>
                                 </div>
                             </div>
                         </form>
@@ -101,7 +104,7 @@
                             </div>
                             <div class="list-div">
                                 <select name="" id="">
-                                    <option value="">List for Date</option>
+                                    <option value="">List for date</option>
                                     <option value="">List for Price</option>
                                     <option value="">List for Distance</option>
                                 </select>

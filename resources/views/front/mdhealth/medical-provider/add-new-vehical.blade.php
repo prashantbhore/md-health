@@ -47,14 +47,18 @@
         line-height: normal;
         letter-spacing: -0.64px;
     }
+
+    select {
+        color: #878787 !important;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                         <span>Add New Vehicle</span>
@@ -124,7 +128,7 @@
                                 <div class="form-group mb-5">
                                     <label class="form-label mb-3">Vehicle Picture</label>
                                     <div class="form-group mb-3">
-                                        <input type="file" name="vehicle_image_path" id="vehicle_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                        <input type="file" name="vehicle_image_path" id="vehicle_image_path" placeholder="Vehicle Picture" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/default-img.png' }}" alt="image" id="pic">

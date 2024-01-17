@@ -5,11 +5,11 @@
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4" style="min-height: 245px;">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>Sale</span>
@@ -54,7 +54,7 @@
 
                                 <div class="list-div">
                                     <select name="" id="" class="form-select filter-list" >
-                                        <option value="">List for Date</option>
+                                        <option value="">List for date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
@@ -79,7 +79,7 @@
                                         <div class="row card-row align-items-center">
                                             @php
 
-                                            $id = Session::get('MDMedicalProvider*%');
+                                            $id = Auth::guard('md_health_medical_providers_registers')->user()->id;
                                             $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
                                             ->where('medical_provider_id', $id)
                                             ->first();
@@ -137,7 +137,7 @@
 
                                             @php
                                             $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            ->where('medical_provider_id', Auth::user()->id)
+                                            ->where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)
                                             ->first();
                                             @endphp
 
@@ -187,9 +187,9 @@
                                     <div class="treatment-card df-start w-100 mb-3">
                                         <div class="row card-row align-items-center">
                                             @php
-                                            if(!empty(Auth::user()->id)){
+                                            if(!empty(Auth::guard('md_health_medical_providers_registers')->user()->id)){
                                             $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            ->where('medical_provider_id', Auth::user()->id)
+                                            ->where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)
                                             ->first();
                                             }
                                             @endphp

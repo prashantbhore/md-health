@@ -114,9 +114,15 @@ $name = 'MDHealth';
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5">
                 <li class="nav-item"><a href="{{ url('home-service') }}" class="nav-link">Home Service</a></li>
-                <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span class="fw-bold">MD</span>Booking</a></li>
-                <li class="nav-item"><a href="{{ url('mdFoods') }}" class="nav-link"><span class="fw-bold">MD</span>Foods</a></li>
-                <li class="nav-item"><a href="{{ url('/') }}" class="nav-link"><span class="fw-bold">MD</span>Health</a></li>
+                <li class="nav-item"><a href="{{ url('md-booking-home-page') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Booking</a></li>
+                <li class="nav-item"><a href="{{ url('mdFoods') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Foods</a></li>
+                <li class="nav-item"><a href="{{ url('/') }}" class="nav-link"><span
+                            class="fw-bold">MD</span>Health</a></li>
+                <li class="nav-item"><a href="{{ url('/cart') }}" class="nav-link">cart</a></li>
+
+
                 @if (Session::get('login_token') != null)
 
                 <li class="nav-item dropdown">
@@ -278,7 +284,8 @@ $name = 'MDHealth';
         </div>
 
     </div>
-
+ {{-- mplus04 --}}
+ {{-- ====================================================================================== --}}
     <div class="container">
         <!-- <div class="nav2">
             <p class="mb-0 brdr-right">Equipment</p>
@@ -297,54 +304,122 @@ $name = 'MDHealth';
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-5">
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Equipment
-                                </a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-
-                                    </ul>
-                                    <ul>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-
-                                    </ul>
-                                    <ul>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-                                        <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Injection & Infusion</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Emergency & First Aid Kit</a>
-                            </li>
+                            {{-- @foreach ($product_categories as $product_category)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ !empty($product_category['category_name']) ? $product_category['category_name'] : '' }}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <ul>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endforeach --}}
+                            {{-- mplus04 --}}
+                            @foreach ($product_categories as $product_category)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle category-link" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false"
+                                        data-category-id="{{ $product_category['id'] }}">
+                                        {{ !empty($product_category['category_name']) ? $product_category['category_name'] : '' }}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <ul class="subcategories-list">
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
-
                     </div>
                 </div>
             </nav>
 
-            <p class="mt-5 text-center">Get a step-by-step written explanation here: <a href="https://codingyaar.com/bootstrap-mega-menu-1/" target="_blank">Bootstrap 5 Mega Menu</a> </p>
+            <p class="mt-5 text-center">Get a step-by-step written explanation here: <a
+                    href="https://codingyaar.com/bootstrap-mega-menu-1/" target="_blank">Bootstrap 5 Mega Menu</a>
+            </p>
 
-            <p class="mt-5 text-center">Get a step-by-step video explanation here: <a href="https://youtu.be/V5MquVuKlU4" target="_blank">Bootstrap 5 Mega Menu</a> </p>
+            <p class="mt-5 text-center">Get a step-by-step video explanation here: <a
+                    href="https://youtu.be/V5MquVuKlU4" target="_blank">Bootstrap 5 Mega Menu</a> </p>
         </div>
 
         <!-- <h1 class="c-text"> Bootstrap Mega Menu </h1> -->
     </div>
 </nav>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var base_url = $('#base_url').val();
+        $('.category-link').on('mouseenter', function() {
+            var categoryId = $(this).data('category-id');
+            $.ajax({
+                url: base_url +'/api/product-sub-category', 
+                method: 'POST',
+                data: {
+                    category_id: categoryId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                },
+                success: function(response) {
+                    var subcategoriesList = $('.subcategories-list');
+                    subcategoriesList.empty();
+                    response.product_category.forEach(function(subcategory) {
+                        subcategoriesList.append(
+                            '<li><a class="dropdown-item subcategory-link" href="#" data-subcategory-id="' +
+                            subcategory.id + '">' + subcategory
+                            .sub_category_name +
+                            '</a></li>');
+                    });
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+
+        $(document).on('click', '.subcategory-link', function() {
+            var subcategoryId = $(this).data('subcategory-id');
+            sessionStorage.setItem('subcategory_id', subcategoryId);
+            window.location.href = base_url + '/view-products';
+        });
+        var subcategoryId = sessionStorage.getItem('subcategory_id');
+        if (subcategoryId) {
+            $.ajax({
+                url: base_url + '/get-product',
+                method: 'POST',
+                data: {
+                    subcategory_id: subcategoryId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                },
+                success: function(response) {
+                    console.log(response.url);
+                    $('#productslist').html(response.html);
+                    $('#productslist').show();
+                    sessionStorage.removeItem('subcategory_id');
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+    });
+</script>
+ {{-- mplus04 --}}
+ {{-- ==================================================================================================== --}}

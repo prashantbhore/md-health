@@ -53,7 +53,7 @@
     <div class="container py-100px for-cards">
     <div class="d-flex gap-3">
             <div class="w-292">
-                @include('front.includes.sidebar')
+            @include('front.includes.sidebar-user')
             </div>
             <div class="w-761">
                 <div class="card mb-4">
@@ -129,7 +129,7 @@
 @endsection
 @section('script')
 <script>
-    $(".mpMessagesLi").addClass("activeClass");
-    $(".mpMessages").addClass("md-active");
+    $(".upMessagesLi").addClass("activeClass");
+    $(".upMessages").addClass("md-active");
 </script>
 @endsection
