@@ -579,7 +579,7 @@ Route::any('health-search-result', [CustomerPackageController::class, 'customer_
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
 
-Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
+// Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
 Route::any('test', [CustomerPackageController::class, 'test']);
 Route::post('complete_3ds', [CustomerPackageController::class, 'complete_3ds']);
 

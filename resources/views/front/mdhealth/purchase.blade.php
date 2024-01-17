@@ -492,41 +492,41 @@
 
             ////////////////////////////////////////////////////////////////////////////////
 
-            $('#procced_to_pay_form').validate({
-                rules: {
-                    input1: {
-                        required: true,
-                    },
-                    input2: {
-                        required: true,
-                    },
-                    input3: {
-                        required: true,
-                    },
-                    input4: {
-                        required: true,
-                    },
+            // $('#procced_to_pay_form').validate({
+            //     rules: {
+            //         input1: {
+            //             required: true,
+            //         },
+            //         input2: {
+            //             required: true,
+            //         },
+            //         input3: {
+            //             required: true,
+            //         },
+            //         input4: {
+            //             required: true,
+            //         },
 
-                },
-                messages: {
-                    input1: {
-                        required: "Please enter card holder name",
-                    },
-                    input2: {
-                        required: "Please enter card number",
-                    },
-                    input3: {
-                        required: "Please enter cvv",
-                    },
-                    input4: {
-                        required: "Please enter card expiry date",
-                    }
+            //     },
+            //     messages: {
+            //         input1: {
+            //             required: "Please enter card holder name",
+            //         },
+            //         input2: {
+            //             required: "Please enter card number",
+            //         },
+            //         input3: {
+            //             required: "Please enter cvv",
+            //         },
+            //         input4: {
+            //             required: "Please enter card expiry date",
+            //         }
 
-                },
-                submitHandler: function(form) {
-                    form.submit();
-                }
-            });
+            //     },
+            //     submitHandler: function(form) {
+            //         form.submit();
+            //     }
+            // });
 
             ////////////////////////////////////////////////////////////////////////////////
 
