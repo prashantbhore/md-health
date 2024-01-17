@@ -1226,7 +1226,7 @@ select {
 }
 
 .treatment-section .rating {
-    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 .treatment-price {
@@ -3496,7 +3496,7 @@ span.popup-msg.active {
     color: #fff;
     font-family: CamptonBook;
     font-size: 16px;
-
+    margin: 12px 0px ;
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -4418,5 +4418,16 @@ label.tc-text,
 .purchase-details-card input[type="checkbox"]::before {
     width: 24px;
     height: 24px;
-
 }
+
+hr:not([size]) {
+    height: 0px !important;
+}
+.mdLtd{
+    margin: 35px 0px;
+}
+
+.mt-150 {
+    margin-top: 150px !important;
+}
+
