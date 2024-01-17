@@ -124,13 +124,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
    
   
     
+    
+
+    Route::view('products-on-sale', 'admin/vendors/products-on-sale');
+
+
+
     Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
 
     Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
 
     Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
-
-    Route::view('products-on-sale', 'admin/vendors/products-on-sale');
 
 
     Route::controller(ManageVendorController::class)->group(function (){
@@ -150,27 +154,44 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::get('rejected-vendors-data-table','rejected_vendor_data_table');
 
         Route::get('vendor-delete','vendor_delete');
+
+        Route::get('view-vendor-details/{id}/{vendor_type}','vendor_view')->name('view.vendor.details');
+
+
+        Route::post('vendor-store', 'store')->name('vendor.store');
+
+        Route::post('approve-vendor', 'approve_vendor')->name('approve.vendor');
+
+        Route::post('reject-vendor','reject_vendor')->name('reject.vendor');
+
+        Route::post('delete-vendor','delete_vendor')->name('delete.vendor');
+
+
+      
+
+
+
     });
 
 
 
     //Admin MEDICAL TOURISM
 
-    Route::controller(MedicalTourismController::class)->group(function () {
-        Route::get('service-provider', 'index');
-        // Route::get('service-provider-details','show');
-        Route::get('medical-tourism-data-table', 'data_table');
-        Route::get('medical-tourism-details/{id}', 'show')->name('medical_tourism.details');
-        Route::get('medical-tourism-delete', 'delete_medical_tourism');
-        Route::get('medical-tourism-delete-logo', 'delete_logo');
-        Route::get('medical-tourism-delete-license', 'delete_license');
-        Route::get('medical-tourism-delete-gallery', 'delete_gallery');
-        Route::post('medical-tourism-store', 'store')->name('medical.tourism.store');
-        Route::post('verification-status-chnage', 'verification_status');
-        Route::post('vendor-status-chnage', 'status');
-        //Route::post('vendor-delete', 'vendor_delete');
-        Route::post('/admin-delete-package','package_delete');
-    });
+    // Route::controller(MedicalTourismController::class)->group(function () {
+    //     Route::get('service-provider', 'index');
+    //     // Route::get('service-provider-details','show');
+    //     Route::get('medical-tourism-data-table', 'data_table');
+    //     Route::get('medical-tourism-details/{id}', 'show')->name('medical_tourism.details');
+    //     Route::get('medical-tourism-delete', 'delete_medical_tourism');
+    //     Route::get('medical-tourism-delete-logo', 'delete_logo');
+    //     Route::get('medical-tourism-delete-license', 'delete_license');
+    //     Route::get('medical-tourism-delete-gallery', 'delete_gallery');
+    //     Route::post('medical-tourism-store', 'store')->name('medical.tourism.store');
+    //     Route::post('verification-status-chnage', 'verification_status');
+    //     Route::post('vendor-status-chnage', 'status');
+    //     //Route::post('vendor-delete', 'vendor_delete');
+    //     Route::post('/admin-delete-package','package_delete');
+    // });
 
 
 
@@ -444,7 +465,7 @@ Route::controller(MedicalProviderRegistrationController::class)->group(function 
     Route::post('/md-register-medical-provider', 'md_register_medical_provider');
     Route::get('/logout', 'logout');
 });
-Route::controller(UserRegistrationController::class)->group(function () {
+Route::controller(UserRegistrationController::class)->group(function (){
     // Route::get('user-account', 'index');
     Route::post('/md-customer-register', 'customer_register');
     // Route::get('/logout','logout');
@@ -545,7 +566,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
 });
 
 
-Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function () {
+Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function (){
 
     Route::controller(VendorProductController::class)->group(function () {
         Route::get('/vendor-dashboard', 'vendor_dashboard');
@@ -575,7 +596,7 @@ Route::any('health-search-result', [CustomerPackageController::class, 'customer_
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
 
-Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
+// Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
 Route::any('test', [CustomerPackageController::class, 'test']);
 Route::post('complete_3ds', [CustomerPackageController::class, 'complete_3ds']);
 
@@ -598,7 +619,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
 
     //Mplus02
-
+    Route::post('purchase-by-mdcoins',[CustomerPackageController::class,'purchase_by_mdcoins']);
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');

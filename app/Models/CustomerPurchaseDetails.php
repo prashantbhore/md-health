@@ -14,6 +14,7 @@ class CustomerPurchaseDetails extends Model {
         'customer_id',
         'package_id',
         'transaction_id',
+        'conversation_id',
         'case_no',
         'case_manager_id',
         'hotel_id',

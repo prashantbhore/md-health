@@ -13,9 +13,7 @@
         color: #B9B9B9;
     }
 
-    .form-group input.form-control {
-        color: #000 !important;
-    }
+
 
     .form-group .prev-img-div img {
         height: 150px;
@@ -24,7 +22,7 @@
         margin-top: 15px;
         border-radius: 3px;
     }
-    
+
 
     .multiple-checkbox-div .multiple-checks {
         display: flex;
@@ -39,16 +37,24 @@
     .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
         margin-right: 3px;
     }
-
-
+    .form-control,
+    .form-select {
+        color: #000;
+        font-family: "Campton" !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                         <span>Add New Vehicle</span>

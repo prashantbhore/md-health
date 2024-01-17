@@ -101,6 +101,47 @@ class CustomerShopController extends BaseController
             $vendor = VendorRegister::where('id', $proudct_data->vendor_id)->first();
         }
 
+        // return Auth::user()->id;
+        if(!empty(Auth::user()->id)){
+            $ShoppingCart = ShoppingCart::where('status', 'active')
+                ->where('product_id', $request->id)
+                ->where('customer_id', Auth::user()->id)
+                ->first();
+
+            if (!empty($ShoppingCart)) {
+                $ShoppingCartexist = 'yes';
+            } else {
+                $ShoppingCartexist = 'no';
+            }
+        }else{
+            $ShoppingCartexist = 'no';
+
+        }
+
+        if(Auth::user()->id){
+            $VendorProduct = VendorProduct::where('status', 'active')
+                ->select('vendor_id')
+                ->where('id', $request->id)
+                ->first();
+
+            $VendorCustomerFollower = VendorCustomerFollower::where('status', 'active')
+                ->select('vendor_id')
+                ->where('customer_id', Auth::user()->id)
+                ->first();
+
+            if ($VendorProduct && $VendorCustomerFollower && $VendorProduct->vendor_id == $VendorCustomerFollower->vendor_id) {
+                // vendor_id is the same, send 'yes'
+                $following_status = 'yes';
+            } else {
+                // vendor_id is different or one of the variables is null, send 'no'
+                $following_status = 'no';
+            }
+        }else{
+            $following_status = 'no';
+        }
+        
+        
+
         $product_gallery = [];
 
         if (!empty($gallery)) {
@@ -126,7 +167,7 @@ class CustomerShopController extends BaseController
                     ->firstOrNew();
 
                 $product = [
-                    'id' => $val->id ? $val->id : '',
+                    'id' => $val->id ? $val->id : 0,
                     'product_name' => $val->product_name ? $val->product_name : '',
                     'product_descrition' => $val->product_description ? $val->product_description : '',
                     'product_price' => $val->product_price ? $val->product_price : '',
@@ -150,7 +191,7 @@ class CustomerShopController extends BaseController
 
 
         $data = [
-            'id' => !empty($proudct_data->id) ?  $proudct_data->id : '',
+            'id' => !empty($proudct_data->id) ?  $proudct_data->id : 0,
             'product_name' => !empty($proudct_data->product_name) ?  $proudct_data->product_name : '',
             'product_category_id' => !empty($proudct_data->product_category_id) ?  $proudct_data->product_category_id : '',
             'product_category_name' => !empty($product_category->category_name) ? $product_category->category_name : '',
@@ -175,6 +216,8 @@ class CustomerShopController extends BaseController
                 'product_data' =>  $data,
                 'product_gallery' =>  $product_gallery,
                 'other_products' =>  $otherProducts,
+                'product_exist' =>  $ShoppingCartexist,
+                'following_status' =>  $following_status,
             ]);
         } else {
             return response()->json([

@@ -32,15 +32,15 @@
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4 other-services">
                     <h5 class="card-header d-flex align-items-center justify-content-between" style="margin-bottom: 65px;">
                         <span>Other Services</span>
-                        <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
+                        <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt=""  >
                     </h5>
                     <div class="card-body">
                         <div>
@@ -52,17 +52,17 @@
                             @foreach ($hotel_details as $hotel_detail)
                             <div class="treatment-card df-start w-100 mb-5" id="div_{{ $hotel_detail['id'] }}">
                                 <div class="row card-row align-items-center w-100">
-                                    <div class="col-md-2 df-center px-0">
-                                        <img src="{{ $hotel_detail['hotel_image_path'] }}" alt="" width="100px">
+                                    <div class="col-md-1 df-center">
+                                        <img src="{{ $hotel_detail['hotel_image_path'] }}" alt="" class="tour-img">
                                     </div>
-                                    <div class="col-md-8 justify-content-start ps-0">
+                                    <div class="col-md-8 justify-content-start">
                                         <div class="trmt-card-body">
                                             <h5 class="dashboard-card-title mb-1">{{ $hotel_detail['hotel_name'] }}
                                             </h5>
-                                            <a href="#" class="btn-active veh-status">{{ $hotel_detail['status'] }}</a>
+                                            <a class="btn-active veh-status">{{ $hotel_detail['status'] }}</a>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 d-flex flex-column justify-content-between align-items-end text-end px-0">
+                                    <div class="col-md-3 d-flex flex-column justify-content-between align-items-end text-end px-0">
                                         <div class="trmt-card-footer icon-btns px-0">
                                             <a href="{{ url('edit-acommodition/' . Crypt::encrypt($hotel_detail['id'])) }}" class="mt-auto view-detail-btn">
                                                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,18 +93,18 @@
                             @foreach ($vehicle_details as $vehicle_detail)
                             <div class="treatment-card df-start w-100 mb-4" id="divt_{{ $vehicle_detail['id'] }}">
                                 <div class="row card-row align-items-center w-100">
-                                    <div class="col-md-2 df-center px-0">
-                                        <img src="{{ url( '/' ) . Storage::url($vehicle_detail['vehicle_image_path']) }}" alt="image" width="100px">
+                                    <div class="col-md-1 df-center">
+                                        <img src="{{ url( '/' ) . Storage::url($vehicle_detail['vehicle_image_path']) }}" alt="image" class="transport-img">
                                     </div>
-                                    <div class="col-md-8 justify-content-start ps-0">
+                                    <div class="col-md-8 justify-content-start">
                                         <div class="trmt-card-body">
                                             <h5 class="dashboard-card-title mb-1">
                                                 {{ $vehicle_detail['vehicle_model_name'] }}
                                             </h5>
-                                            <a href="#" class="active veh-status">{{ $vehicle_detail['status'] }}</a>
+                                            <a class="active veh-status">{{ $vehicle_detail['status'] }}</a>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 d-flex flex-column justify-content-between align-items-end text-end px-0">
+                                    <div class="col-md-3 d-flex flex-column justify-content-between align-items-end text-end px-0">
                                         <div class="trmt-card-footer icon-btns px-0">
                                             <a href="{{ url('edit-vehicle/' . Crypt::encrypt($vehicle_detail['id'])) }}" class="mt-auto view-detail-btn">
                                                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,23 +137,21 @@
                             @foreach ($tour_details as $tour_detail)
                             <div class="treatment-card df-start w-100 mb-4" id="divtr_{{ $tour_detail['id'] }}">
                                 <div class="row card-row align-items-center w-100">
-                                    <div class="col-md-2 df-center px-0">
-                                        <img src="{{ !empty($tour_detail['tour_image_path']) ? $tour_detail['tour_image_path'] : 'front/assets/img/Memorial.svg' }}" alt="" width="100px">
+                                    <div class="col-md-1 df-center">
+                                        <img src="{{ !empty($tour_detail['tour_image_path']) ? $tour_detail['tour_image_path'] : 'front/assets/img/Memorial.svg' }}" alt="" class="tour-img">
                                     </div>
-                                    <div class="col-md-8 justify-content-start ps-0">
+                                    <div class="col-md-8 justify-content-start">
                                         <div class="trmt-card-body">
                                             <h5 class="dashboard-card-title mb-1">{{ $tour_detail['tour_name'] }}
                                             </h5>
                                             @if ($tour_detail['status'] == 'active')
-                                            <a href="#" class="btn-active veh-status">{{ $tour_detail['status'] }}</a>
+                                            <a class="btn-active veh-status">{{ $tour_detail['status'] }}</a>
                                             @else
-                                            <a href="#" class="btn-active veh-status" style="background-color:black;">{{ $tour_detail['status'] }}</a>
+                                            <a class="btn-active veh-status" style="background-color:black;">{{ $tour_detail['status'] }}</a>
                                             @endif
-
-
                                         </div>
                                     </div>
-                                    <div class="col-md-2 d-flex flex-column justify-content-between align-items-end text-end px-0">
+                                    <div class="col-md-3 d-flex flex-column justify-content-between align-items-end text-end px-0">
                                         <div class="trmt-card-footer icon-btns px-0">
                                             <a href="{{ url('edit-tour/' . Crypt::encrypt($tour_detail['id'])) }}" class="mt-auto view-detail-btn">
                                                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">

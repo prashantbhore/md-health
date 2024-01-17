@@ -89,9 +89,9 @@
                                         <th scope="col">Vendor ID</th>
                                         <th>Type</th>
                                         <th>Company</th>
-                                        <th>Contact Number</th>
                                         <th>City</th>
-                                        {{-- <th>Rejected Date</th> --}}
+                                        <th>Contact Number</th>
+                                        <th>Rejected Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

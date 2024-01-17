@@ -25,8 +25,8 @@
                         $fitness = true;
                         break;
                     // case 'ambulanceservices':
-                    //     $ambulance = true;
-                    //     break;
+                    // $ambulance = true;
+                    // break;
                 }
             }
         }
@@ -50,11 +50,11 @@
                         $wifi = true;
                         break;
                     // case 'fitnesscenter':
-                    //     $fitness = true;
-                    //     break;
+                    // $fitness = true;
+                    // break;
                     // case 'ambulanceservices':
-                    //     $ambulance = true;
-                    //     break;
+                    // $ambulance = true;
+                    // break;
                 }
             }
         }
@@ -132,7 +132,7 @@
             background: gray;
             color: #000;
             line-height: 0;
-            padding: 5px 5px;
+            padding: 6px;
             border-radius: 100%;
             display: flex;
             align-items: center;
@@ -179,17 +179,10 @@
             margin-bottom: 0;
         }
 
-        .user-details-body span {
-            font-size: 20px;
-            font-weight: 800;
-        }
 
-        .user-details-body ul li {
-            padding: 5px 0;
-            font-weight: 600;
-        }
 
-        #AcommoditionView .acmdn-hotel-details {
+
+        #AccommodationView .acmdn-hotel-details {
             margin-bottom: 100px;
         }
 
@@ -202,78 +195,40 @@
         }
 
         .acmdn-hotel-details ul li {
-            padding: 3px 0;
-            font-weight: 600;
-            font-size: 14px;
+            color: #000;
+            font-family: Campton;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: -0.48px;
+            margin-bottom: 8px;
         }
 
         .user-details-body ul li svg {
             margin-right: 5px;
         }
 
-        .user-details-body .section-btns button {
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: auto;
-            width: 35%;
-        }
 
-        .user-details-body {
-            border-bottom: 1px solid #000;
-            padding-bottom: 25px;
-        }
 
-        .view-menu-divm {
-            border-top: 1px solid #000;
-            padding-top: 25px;
-        }
 
-        #AcommoditionView .modal-content {
-            background-image: url('../front/assets/img/Accombg-2.png');
-            background-position: right;
-            background-repeat: no-repeat;
-            background-size: contain;
-            border-radius: 10px;
-        }
-
-        #TransportationView .modal-content {
-            background-image: url('../front/assets/img/TransporBg2.png');
-            background-position: right;
-            background-repeat: no-repeat;
-            background-size: contain;
-            border-radius: 10px;
-        }
 
         .acmdn-star p {
             font-size: 20px;
         }
 
-
-        .acmdn-head h6:last-child,
-        .acmdn-hotel-details h6:last-child {
-            font-size: 15px;
-        }
+        /*
+            .acmdn-head h6:last-child,
+            .acmdn-hotel-details h6:last-child {
+                font-size: 15px;
+            } */
 
         .package-view-div .treatment-card {
             padding: 15px;
         }
 
-        .acdm-btns.section-btns button {
-            width: 49%;
-        }
 
-        .textarea-btn {
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            padding: 12px 15px;
-            font-size: 13px;
-            color: #787878;
-            line-height: 0;
-        }
+
 
         .for-textarea-div {
             width: 300px;
@@ -301,47 +256,8 @@
             align-items: center;
         }
 
-        .view-menu-div {
-            border-top: 1px solid #000;
-            padding-top: 20px;
-            margin-top: 25px;
-        }
-
-        .patient-details-div label {
-            position: absolute;
-            top: -11px;
-            right: 20px;
-            background: #f6f6f6;
-            padding: 0 5px;
-            border-radius: 5px;
-            font-size: 14px;
-            color: #9F9E9E;
-            font-family: 'CamptonBook';
-        }
-
-        .patient-details-div input {
-            background: #f6f6f6;
-            color: #9F9E9E;
-        }
-
         .patient-details:last-child {
             margin-bottom: 160px;
-        }
-
-        .user-payment-date .user-percentage {
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .user-payment-date .user-percentage span {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .paymt-green-text {
-            font-size: 12px;
         }
 
         .payment-paid-div {
@@ -352,22 +268,6 @@
             border-radius: 0 100px 100px 0;
         }
 
-        .payment-paid-div .paid-percentage {
-            width: 80%;
-            padding: 5px 10px;
-
-        }
-
-        .payment-paid-div .payment-pay-btn {
-            width: 35%;
-            background: #4cdb06;
-            border-radius: 0 100px 100px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            text-decoration: none;
-        }
 
         .view-menu-div .fa-cloud-upload {
             padding: 25px;
@@ -378,41 +278,50 @@
 
         .cloud-upload-file span {
             vertical-align: bottom;
+            color: #000002;
+            font-family: Campton;
             font-size: 16px;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: -0.64px;
+            margin-left: 1.5rem;
         }
 
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 1.5rem;
         }
 
         .gallery a {
             position: relative;
-            width: 140px;
-            height: 140px;
+            width: 83px;
+            height: 62px;
             z-index: 99;
+            border-radius: 10px;
+        }
+
+        .gallery img {
+            width: 83px;
+            height: 62px;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .gallery .clear-btn {
             position: absolute;
-            top: 5px;
+            top: -5px;
             right: -5px;
-            background: black;
-            padding: 3px 7px;
+            background: #000000ad;
+            padding: 3px 6px;
             border-radius: 100%;
             color: #fff;
             text-decoration: none;
             font-weight: 100;
-            line-height: 20px;
             z-index: 9999;
         }
 
-        .gallery img {
-            width: 140px;
-            height: 140px;
-            object-fit: contain;
-        }
+
 
         .video-div {
             width: 140px;
@@ -429,39 +338,43 @@
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="d-flex gap-3">
+                <div class="" style="width: 292px;">
                     @include('front.includes.sidebar-user')
                 </div>
-                <div class="col-md-9">
-
+                <div class="" style="width: 761px;">
                     <div class="card">
                         <h5 class="card-header mb-3">
                             Packages
                             <a href="{{ url('my-packages-list') }}"
-                                class="fw-800 d-flex align-items-center gap-1 text-decoration-none text-dark">
+                                class="fw-800 d-flex align-items-center gap-1 text-decoration-none text-black float-end m-auto">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
                                 <p class="mb-0">Booked Packages</p>
                             </a>
                         </h5>
+
                         <div class="card-body">
-                            <div class="package-view-div">
-                                <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row">
-                                        <div class="col-md-2 df-center ps-4">
+                            <div class="card shadow-none mb-4 pkgCard">
+                                <div class="card-body p-4">
+                                    <div class="d-flex gap-3 w-100">
+                                        <div class="df-center">
                                             @if (!empty($data['company_logo_image_path']))
-                                                <img src="{{ asset($data['company_logo_image_path']) }}" alt="">
+                                                <img src="{{ asset($data['company_logo_image_path']) }}" alt=""
+                                                    style="height: 109px;border-radius:3px">
                                             @endif
+                                            <!-- <img src="{{ asset('front/assets/img/packageImg.png') }}" alt="" class="pkgImg"> -->
+
                                         </div>
-                                        <div class="col-md-10 justify-content-start ps-0">
+
+                                        <div class="df-column">
                                             <div class="trmt-card-body">
-                                                <h5 class="dashboard-card-title fw-600 mb-0">
+                                                <h5 class="mb-0">
                                                     {{ !empty($data['package_name']) ? $data['package_name'] : '' }}
                                                 </h5>
-                                                <h6 class="mb-1 fsb-1">
+                                                <h6 class="card-h1">
                                                     {{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}
                                                 </h6>
-                                                <div class="trmt-card-location d-flex align-items-center gap-3 mb-3">
+                                                <div class="d-flex align-items-center gap-3 mb-3">
                                                     <p class="fsb-2 mb-0 d-flex align-items-center gap-1">
                                                         <svg width="10" height="15" viewBox="0 0 10 15"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -481,24 +394,28 @@
                                                         <i>{{ !empty($data['treatment_period_in_days']) ? $data['treatment_period_in_days'] : '' }}</i>
                                                     </p>
                                                 </div>
-                                                <h6 class="mb-1 fsb-1">Time left to treatment: 12 days</h6>
+                                                <h6 class="card-p2 fw-bold">Time left to treatment: 12 days</h6>
                                             </div>
                                         </div>
                                     </div>
 
+
+                                    <!-- OTHER DETAILS -->
                                     <div class="user-package-details">
                                         <div class="user-package-body">
                                             <div class="user-details-body mb-4">
-                                                <div class="d-flex justify-content-between">
-                                                    <p class="fsb-2">Package Other Details </p>
+                                                <div class="d-flex justify-content-between mb-3">
+                                                    <p class="card-h1">Package Other Details </p>
                                                     <span>
-                                                        <span class="fsb-1">Your Case No </span>
-                                                        <span class="fsb-1 text-green">#MD829</span>
+                                                        <h5 class="card-h4 d-inline-block camptonBold">Your Case No <p
+                                                                class="text-green mb-0 d-inline-block">#MD829</p>
+                                                        </h5>
+
                                                     </span>
                                                 </div>
 
-                                                <ul style="padding: 0;list-style: none;">
-                                                    <li class="fsb-2">
+                                                <ul class="ps-0 list-unstyled">
+                                                    <li>
                                                         @if ($accomodation == 1)
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="15"
                                                                 height="15" viewBox="0 0 10 10" fill="none">
@@ -524,11 +441,11 @@
                                                         @endif
                                                         Accomodation
                                                         <a href="javascript:void(0);" id="accomodation_modal"
-                                                            data-toggle="modal" data-target="#AcommoditionView"
-                                                            class="fsb-1 ps-2">View
+                                                            data-bs-toggle="modal" data-bs-target="#AccommodationView">View
                                                             Details</a>
                                                     </li>
-                                                    <li class="fsb-2">
+
+                                                    <li>
                                                         @if ($transportation == 1)
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="15"
                                                                 height="15" viewBox="0 0 10 10" fill="none">
@@ -553,11 +470,10 @@
                                                             </svg>
                                                         @endif
                                                         Transportation
-                                                        <a href="#" data-toggle="modal" id="transportation_modal"
-                                                            data-target="#TransportationView"class="fsb-1 ps-2">View
-                                                            Details</a>
+                                                        <a href="#" id="transportation_modal" data-bs-toggle="modal"
+                                                            data-bs-target="#TransportationView">View Details</a>
                                                     </li>
-                                                    <li class="fsb-2">
+                                                    <li>
                                                         @if ($tour == 1)
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="15"
                                                                 height="15" viewBox="0 0 10 10" fill="none">
@@ -582,11 +498,11 @@
                                                             </svg>
                                                         @endif
                                                         Tour
-                                                        <a href="javascript:void(0);"
-                                                            class="fsb-1 ps-2 text-secondary text-decoration-none">View
-                                                            Details</a>
+                                                        <a href="#" id="" data-bs-toggle="modal"
+                                                            data-bs-target="#TourView">View Details</a>
+
                                                     </li>
-                                                    <li class="fsb-2">
+                                                    <li>
                                                         @if ($visa == 1)
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="15"
                                                                 height="15" viewBox="0 0 10 10" fill="none">
@@ -613,7 +529,7 @@
                                                         Visa Service
 
                                                     </li>
-                                                    <li class="fsb-2">
+                                                    <li>
                                                         @if ($translate == 1)
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="15"
                                                                 height="15" viewBox="0 0 10 10" fill="none">
@@ -669,12 +585,12 @@
                                                     </li>
                                                 </ul>
 
-                                                <div class="acdm-btns section-btns pt-3">
+                                                <div class="acdm-btns pt-3 df-start gap-3">
                                                     <button target="1"
-                                                        class="showSingle green-plate bg-black text-white boder border-1 border-dark fw-700">My
+                                                        class="showSingle btn add-btn text-white fw-lighter">My
                                                         Details</button>
                                                     <button target="2"
-                                                        class="showSingle green-plate bg-white text-dark fw-700 border border-1 border-dark">My
+                                                        class="showSingle btn add-btn bg-transparent text-black">My
                                                         Documents</button>
                                                 </div>
 
@@ -684,22 +600,23 @@
 
                                                     @if (!empty($data['case_manager']))
                                                         <div class="view-menu mb-4">
-                                                            <h6 class="fsb-1">Your Case Manager</h6>
-                                                            <p class="text-orange">{{ $data['case_manager'] }}</p>
+                                                            <h6 class="card-h1">Your Case Manager</h6>
+                                                            <p class="text-orange card-h2 text-capitalize camptonBook">
+                                                                {{ $data['case_manager'] }}</p>
                                                         </div>
                                                     @endif
 
                                                     <div class="patient-details-div">
                                                         <div class="patient-details mb-5">
-                                                            <h6 class="section-heading">Patient Details</h6>
-                                                            <div class="row">
+                                                            <h6 class="card-h1 mb-4">Patient Details</h6>
+                                                            <div class="row gy-3">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($my_details['patient_first_name']) ? $my_details['patient_first_name'] : '' }}"
-                                                                            placeholder="First Name" id="foodname"
-                                                                            aria-describedby="foodname" readonly>
+                                                                            id="foodname" aria-describedby="foodname"
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -708,7 +625,7 @@
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($my_details['patient_last_name']) ? $my_details['patient_last_name'] : '' }}"
                                                                             id="foodname" aria-describedby="Last Name"
-                                                                            placeholder="Last Name" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -717,7 +634,7 @@
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($my_details['patient_email']) ? $my_details['patient_email'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="E-Mail" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -726,7 +643,7 @@
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($my_details['country_name']) ? $my_details['country_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Country" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -735,21 +652,21 @@
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($my_details['city_name']) ? $my_details['city_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="City" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="patient-details">
-                                                            <h6 class="section-heading">Treatment Details</h6>
-                                                            <div class="row">
+                                                        <div class="patient-details mb-5">
+                                                            <h6 class="card-h1 mb-4">Treatment Details</h6>
+                                                            <div class="row gy-3">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Hospital Name</label>
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($data['company_name']) ? $data['company_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Hospital Name" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -757,7 +674,7 @@
                                                                         <label class="form-label">Treatment</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            value="{{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}"placeholder="Treatment"
+                                                                            value="{{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
@@ -767,7 +684,7 @@
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
                                                                             value="{{ !empty($data['treatment_period_in_days']) ? $data['treatment_period_in_days'] : '' }}"
-                                                                            placeholder="Treatment Period" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -775,7 +692,7 @@
                                                                         <label class="form-label">Contact Number</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Contact Number" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -783,7 +700,7 @@
                                                                         <label class="form-label">Country</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Country" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -792,15 +709,15 @@
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
                                                                             value="{{ !empty($data['city_name']) ? $data['city_name'] : '' }}"
-                                                                            placeholder="City" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-12">
+                                                                <div class="col-md-12 pb-5">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Address</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            placeholder="Address" readonly>
+                                                                            readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -809,11 +726,13 @@
                                                 </div>
 
                                                 <div id="ShowDiv2" class="view-menu-div targetDiv mt-5">
-                                                    <form id="my_form">
+                                                    <form id="my_form" class="mb-5">
                                                         <div class="view-menu mb-4">
-                                                            <h6 class="fsb-1 mb-4">Upload Documents & Video</h6>
+                                                            <h6 class="card-h1 mb-4">Upload Documents & Video</h6>
                                                             <label for="cloud-upload-file" class="cloud-upload-file">
-                                                                <i class="fa fa-cloud-upload text-green"></i>
+                                                                <!-- <i class="fa fa-cloud-upload text-green"></i> -->
+                                                                <img src="{{ asset('front/assets/img/uploadFile.png') }}"
+                                                                    alt="">
                                                                 <input type="file" name="customer_document_image_path"
                                                                     id="cloud-upload-file" hidden>
                                                                 <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4,
@@ -823,6 +742,8 @@
                                                         </div>
                                                     </form>
 
+                                                    <h6 class="card-h1 mb-4">My Documents</h6>
+
                                                     <div class="gallery">
                                                         @if (!empty($data['documents']))
                                                             @foreach ($data['documents'] as $document)
@@ -831,125 +752,112 @@
                                                                         class="glightbox">
                                                                         <img src="{{ $document['customer_document_image_path'] }}"
                                                                             alt="image" />
-                                                                        <span class="clear-btn">X</span>
+                                                                        <span class="clear-btn"
+                                                                            id="{{ $document['id'] }}">X</span>
                                                                     </a>
                                                                 @endif
                                                             @endforeach
                                                         @endif
                                                         {{-- <a href="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
-                                                            class=" video-card glightbox" id="">
-                                                            <video class="video-div " controls>
-                                                                <source
-                                                                    src="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}"
-                                                                    type="video/mp4">
-                                                            </video>
-                                                            <i class="fa fa-play"></i>
-                                                            <span class="clear-btn">X</span>
-                                                        </a> --}}
+                                                    class=" video-card glightbox" id="">
+                                                    <video class="video-div " controls>
+                                                        <source src="{{ asset('../front/assets/img/homepage/ajooba_banner_video.mp4') }}" type="video/mp4">
+                                                    </video>
+                                                    <i class="fa fa-play"></i>
+                                                    <span class="clear-btn">X</span>
+                                                    </a> --}}
                                                         {{-- <a href="{{ 'front/assets/img/galleryImg1.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg1.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a>
-                                                        <a href="{{ 'front/assets/img/galleryImg2.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg2.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a>
-                                                        <a href="{{ 'front/assets/img/galleryImg3.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg3.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a>
-                                                        <a href="{{ 'front/assets/img/galleryImg4.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg4.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a>
-                                                        <a href="{{ 'front/assets/img/galleryImg3.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg3.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a>
-                                                        <a href="{{ 'front/assets/img/galleryImg4.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg4.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a>
-                                                        <a href="{{ 'front/assets/img/galleryImg1.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg1.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a>
-                                                        <a href="{{ 'front/assets/img/galleryImg2.png' }}"
-                                                            class="glightbox">
-                                                            <img src="{{ 'front/assets/img/galleryImg2.png' }}"
-                                                                alt="image" />
-                                                            <span class="clear-btn">X</span>
-                                                        </a> --}}
+                                                    class="glightbox">
+                                                    <img src="{{ 'front/assets/img/galleryImg1.png' }}" alt="image" />
+                                                    <span class="clear-btn">X</span>
+                                                    </a>
+                                                    <a href="{{ 'front/assets/img/galleryImg2.png' }}" class="glightbox">
+                                                        <img src="{{ 'front/assets/img/galleryImg2.png' }}" alt="image" />
+                                                        <span class="clear-btn">X</span>
+                                                    </a>
+                                                    <a href="{{ 'front/assets/img/galleryImg3.png' }}" class="glightbox">
+                                                        <img src="{{ 'front/assets/img/galleryImg3.png' }}" alt="image" />
+                                                        <span class="clear-btn">X</span>
+                                                    </a>
+                                                    <a href="{{ 'front/assets/img/galleryImg4.png' }}" class="glightbox">
+                                                        <img src="{{ 'front/assets/img/galleryImg4.png' }}" alt="image" />
+                                                        <span class="clear-btn">X</span>
+                                                    </a>
+                                                    <a href="{{ 'front/assets/img/galleryImg3.png' }}" class="glightbox">
+                                                        <img src="{{ 'front/assets/img/galleryImg3.png' }}" alt="image" />
+                                                        <span class="clear-btn">X</span>
+                                                    </a>
+                                                    <a href="{{ 'front/assets/img/galleryImg4.png' }}" class="glightbox">
+                                                        <img src="{{ 'front/assets/img/galleryImg4.png' }}" alt="image" />
+                                                        <span class="clear-btn">X</span>
+                                                    </a>
+                                                    <a href="{{ 'front/assets/img/galleryImg1.png' }}" class="glightbox">
+                                                        <img src="{{ 'front/assets/img/galleryImg1.png' }}" alt="image" />
+                                                        <span class="clear-btn">X</span>
+                                                    </a>
+                                                    <a href="{{ 'front/assets/img/galleryImg2.png' }}" class="glightbox">
+                                                        <img src="{{ 'front/assets/img/galleryImg2.png' }}" alt="image" />
+                                                        <span class="clear-btn">X</span>
+                                                    </a> --}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <form action="{{ url('/user-credit-card-pay') }}" id="payment_form"
                                                 method="POST">
                                                 @csrf
-                                                <input type="hidden"
-                                                    name="package_id"value="{{ !empty($data['package_id']) ? $data['package_id'] : '' }}">
-                                                <input type="hidden"
-                                                    name="package_percentage_price"value="{{ !empty($pending_percent) ? $pending_percent : '' }}">
-                                                <input type="hidden"
-                                                    name="sale_price"value="{{ !empty($treatment_information['sale_price']) ? $treatment_information['sale_price'] : '' }}">
-                                                <input type="hidden"
-                                                    name="pending_payment"value="{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}">
-                                                <input type="hidden"
-                                                    name="purchase_id"value="{{ !empty($data['purchase_id']) ? $data['purchase_id'] : '' }}">
+                                                <input type="hidden" name="package_id"
+                                                    value="{{ !empty($data['package_id']) ? $data['package_id'] : '' }}">
+                                                <input type="hidden" name="package_percentage_price"
+                                                    value="{{ !empty($pending_percent) ? $pending_percent : '' }}">
+                                                <input type="hidden" name="sale_price"
+                                                    value="{{ !empty($treatment_information['sale_price']) ? $treatment_information['sale_price'] : '' }}">
+                                                <input type="hidden" name="pending_payment"
+                                                    value="{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}">
+                                                <input type="hidden" name="purchase_id"
+                                                    value="{{ !empty($data['purchase_id']) ? $data['purchase_id'] : '' }}">
                                                 <div class="user-details-footer">
-                                                    <h6 class="section-heading">You paid</h6>
+                                                    <h6 class="card-h4 mb-4">You paid</h6>
                                                     <div class="user-payment-date mb-3">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="payment-left-div">
                                                                 <div class="user-percentage fsb-1 fw-600">
                                                                     @if ($pending_percent == 0)
                                                                         {{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
-                                                                        ₺
+                                                                        <span class="lira">₺</span>
                                                                     @else
-                                                                        {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] : '' }}<span>(
-                                                                            {{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
-                                                                            ₺)</span>
+                                                                        {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] : '' }}
+                                                                        (<span>{{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
+                                                                            <span class="lira">₺</span>)</span>
                                                                     @endif
                                                                 </div>
 
                                                                 <div class="fsb-2 text-green paymt-green-text">Payment
                                                                     Completed.</div>
                                                             </div>
-                                                            <div class="payment-right-div">
+                                                            <div class="payment-right-div df-end flex-column">
                                                                 <div class="fsb-2 text-green paymt-green-text">Payment Date
                                                                 </div>
+
                                                                 <div class="fsb-1">{{ $payment_time_and_date }}</div>
+                                                                <!-- <div class="fsb-1"> 15:33:50  |   12/02/2023</div> -->
                                                             </div>
                                                         </div>
                                                     </div>
                                                     {{-- {{ dd($pending_percent) }} --}}
                                                     @if ($pending_percent != 0)
                                                         <div class="payment-paid-div">
-                                                            <div class="paid-percentage fsb-1 fw-600 d-flex flex-column">
-                                                                <span>
-                                                                    {{ $pending_percent }} <span>(
-                                                                        {{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}
-                                                                        ₺)</span>
+                                                            <div
+                                                                class="user-payment-date paid-percentage fsb-1 fw-600 d-flex flex-column ps-3 justify-content-center">
+                                                                <span class="user-percentage fsb-1 fw-600">
+                                                                    {{ $pending_percent }}
+                                                                    (<span>{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}
+                                                                        <span class="lira">₺</span>)</span>
                                                                 </span>
-                                                                <span
-                                                                    class="fsb-2 text-orange paymt-green-text">Pending</span>
+                                                                <span class="fsb-2 paymt-green-text"
+                                                                    style="color: #F3771D;">Pending</span>
                                                             </div>
                                                             <a href="javascript:void(0)"
-                                                                class="payment-pay-btn fsb-1 text-dark">
+                                                                class="payment-pay-btn df-center">
                                                                 Pay Now
                                                             </a>
                                                         </div>
@@ -958,7 +866,11 @@
                                             </form>
                                         </div>
                                     </div>
+                                    <!-- END -->
+
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -967,27 +879,27 @@
         </div>
     </div>
 
-    <!-- Change Patient Information -->
-    <div class="modal fade" id="AcommoditionView" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <!-- Accommodation Details MODAL -->
+    <div class="modal fade" id="AccommodationView" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title fsb-1" id="">Acommodition Details</h5>
-                    <button type="button" class="btn-close fw-700" data-bs-dismiss="modal"
-                        aria-label="Close">X</button>
+            <div class="modal-content border-0">
+                <div class="modal-header border-0 p-5 pb-0">
+                    <h5 class="modal-title modal-h1 text-start camptonExtraBold" id="">Accommodation Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-5">
                     <div class="acommodition-content">
-                        <div class="acmdn-head mb-3">
-                            <h6 class="fsb-1">Hotel</h6>
-                            <h6 class="fsb-2 fw-500">
+                        <div class="acmdn-head mb-4">
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Hotel</h6>
+                            <h6 class="card-p2 fw-bold">
                                 {{ !empty($data['accomodation_view']['hotel_name']) ? $data['accomodation_view']['hotel_name'] : '' }}
                             </h6>
                         </div>
+
                         <div class="acmdn-star mb-4">
-                            <h6 class="fsb-1">Hotel Stars</h6>
-                            <p class="text-green">
+                            <h6 class="card-h1  camptonBold" style="letter-spacing: -1.12px;">Hotel Stars</h6>
+                            <p class="text-green d-flex gap-2">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -995,9 +907,10 @@
                                 <i class="fa fa-star"></i>
                             </p>
                         </div>
+
                         <div class="acmdn-hotel-details">
-                            <h6 class="fsb-1">Hotel Details</h6>
-                            <h6 class="fsb-2 fw-500">Everything Included</h6>
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Hotel Details</h6>
+                            <h6 class="card-p2 fw-bold mb-3">Everything Included</h6>
 
                             <ul style="padding: 0;list-style: none;" class="mt-2">
                                 @if ($avialable_accomodation_services == 1)
@@ -1074,13 +987,14 @@
 
                         </div>
                         <div class="acmdn-notes mb-1">
-                            <h6 class="fsb-1">Notes<i class="fsb-2">*Optional</i></h6>
+                            <h6 class="card-h1 camptonBold" style="letter-spacing: -1.12px;">Notes <span
+                                    class="campton fst-italic fs-14">*Optional</span></h6>
                             <div class="for-textarea-div position-relative">
                                 <textarea name="" id="" rows="4" class="form-control border-2"
-                                    placeholder="Write notes if any"></textarea>
+                                    placeholder="Write notes if any" style="resize: none;"></textarea>
                                 <div class="text-area-footer">
                                     <span>0 / 200</span>
-                                    <button class="textarea-btn">Submit</button>
+                                    <button class="btn textarea-btn df-center">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -1089,34 +1003,35 @@
             </div>
         </div>
     </div>
-    <!-- Change Patient Information -->
-    <!-- Cancellation Request -->
+    <!-- END -->
+
+    <!-- Transportation Details MODAL -->
     <div class="modal fade" id="TransportationView" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title fsb-1" id="">Transportation Details</h5>
-                    <button type="button" class="btn-close fw-700" data-bs-dismiss="modal"
-                        aria-label="Close">X</button>
+            <div class="modal-content border-0">
+                <div class="modal-header border-0 p-5 pb-0">
+                    <h5 class="modal-title modal-h1 text-start camptonExtraBold" id="">Transportation Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-5">
                     <div class="acommodition-content">
-                        <div class="acmdn-head mb-3">
-                            <h6 class="fsb-1">Vehicle Brand </h6>
-                            <h6 class="fsb-2 fw-500">
+                        <div class="acmdn-head mb-4">
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Vehicle Brand </h6>
+                            <h6 class="card-p2 fw-bold">
                                 {{ !empty($data['transportation_view']['brand_name']) ? $data['transportation_view']['brand_name'] : '' }}
                             </h6>
                         </div>
-                        <div class="acmdn-head mb-3">
-                            <h6 class="fsb-1">Model</h6>
-                            <h6 class="fsb-2 fw-500">
+                        <div class="acmdn-head mb-4">
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Model</h6>
+                            <h6 class="card-p2 fw-bold">
                                 {{ !empty($data['transportation_view']['vehicle_model_id']) ? $data['transportation_view']['vehicle_model_id'] : '' }}
                             </h6>
                         </div>
                         <div class="acmdn-hotel-details">
-                            <h6 class="fsb-1">Vehicle Class</h6>
-                            <h6 class="fsb-2 fw-500">
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Vehicle Class</h6>
+                            <h6 class="card-p2 fw-bold">
                                 {{ !empty($data['transportation_view']['vehicle_level_name']) ? $data['transportation_view']['vehicle_level_name'] : '' }}
                             </h6>
 
@@ -1178,17 +1093,18 @@
                             </ul>
                         </div>
                         <div class="acmdn-repsntve-img">
-                            <h6 class=""><i class="fsb-2">*Representative image</i></h6>
+                            <h6 class="card-p2 fw-bold fst-italic">*Representative image</h6>
                         </div>
 
                         <div class="acmdn-notes mb-1">
-                            <h6 class="fsb-1">Notes<i class="fsb-2">*Optional</i></h6>
+                            <h6 class="card-h1 camptonBold" style="letter-spacing: -1.12px;">Notes<i
+                                    class="fsb-2">*Optional</i></h6>
                             <div class="for-textarea-div position-relative">
                                 <textarea name="" id="" rows="4" class="form-control border-2"
-                                    placeholder="Write notes if any"></textarea>
+                                    placeholder="Write notes if any" style="resize: none;"></textarea>
                                 <div class="text-area-footer">
                                     <span>0 / 200</span>
-                                    <button class="textarea-btn">Submit</button>
+                                    <button class="btn textarea-btn df-center">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -1197,7 +1113,117 @@
             </div>
         </div>
     </div>
-    <!-- Cancellation Request -->
+    <!-- END -->
+
+    <!-- Tour Details MODAL -->
+    <div class="modal fade" id="TourView" tabindex="-1" aria-labelledby="TourViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+                <div class="modal-header border-0 p-5 pb-0">
+                    <h5 class="modal-title modal-h1 text-start camptonExtraBold" id="">Tour Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 position-relative">
+                    <div class="acommodition-content ">
+                        <div class="acmdn-head mb-4">
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Tour Name </h6>
+                            <h6 class="card-p2 fw-bold">
+                                <!-- {{ !empty($data['transportation_view']['brand_name']) ? $data['transportation_view']['brand_name'] : '' }} -->
+                                Tour de france le!
+                            </h6>
+                        </div>
+                        <div class="acmdn-head mb-4">
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Number of Days</h6>
+                            <h6 class="card-p2 fw-bold">
+                                <!-- {{ !empty($data['transportation_view']['vehicle_model_id']) ? $data['transportation_view']['vehicle_model_id'] : '' }} -->
+                                14
+                            </h6>
+                        </div>
+                        <div class="acmdn-hotel-details">
+                            <h6 class="card-h1 mb-0 camptonBold" style="letter-spacing: -1.12px;">Vehicle Class</h6>
+                            <h6 class="card-p2 fw-bold">
+                                {{ !empty($data['transportation_view']['vehicle_level_name']) ? $data['transportation_view']['vehicle_level_name'] : '' }}
+                            </h6>
+
+                            <ul style="padding: 0;list-style: none;" class="mt-2">
+                                @if ($avialable_transportation_services == 1)
+                                    @if ($seven == 1)
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 20 20" fill="none">
+                                                <path
+                                                    d="M7.49967 15.8334H12.4997V17.5001H7.49967C5.19967 17.5001 3.33301 15.6334 3.33301 13.3334V5.83343H4.99967V13.3334C4.99967 14.7168 6.11634 15.8334 7.49967 15.8334ZM8.68301 4.50843C9.33301 3.85843 9.33301 2.8001 8.68301 2.1501C8.03301 1.5001 6.97467 1.5001 6.32467 2.1501C5.67467 2.8001 5.67467 3.85843 6.32467 4.50843C6.97467 5.16676 8.02467 5.16676 8.68301 4.50843ZM9.58301 7.5001C9.58301 6.58343 8.83301 5.83343 7.91634 5.83343H7.49967C6.58301 5.83343 5.83301 6.58343 5.83301 7.5001V12.5001C5.83301 13.8834 6.94967 15.0001 8.33301 15.0001H12.558L15.4747 17.9168L16.6663 16.7251L12.4413 12.5001H9.58301V7.5001Z"
+                                                    fill="#111111" />
+                                            </svg>
+                                            7+1
+                                        </li>
+                                    @endif
+                                    @if ($gas == 1)
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 20 20" fill="none">
+                                                <path
+                                                    d="M5 1.66675H7.5C7.73333 1.66675 7.94167 1.75841 8.09167 1.90841L9.825 3.65008L10.4917 2.99175C10.8333 2.66675 11.25 2.50008 11.6667 2.50008H16.6667C17.0833 2.50008 17.5 2.66675 17.8417 2.99175L18.675 3.82508C19 4.16675 19.1667 4.58341 19.1667 5.00008V15.8334C19.1667 16.2754 18.9911 16.6994 18.6785 17.0119C18.3659 17.3245 17.942 17.5001 17.5 17.5001H9.16667C8.72464 17.5001 8.30072 17.3245 7.98816 17.0119C7.67559 16.6994 7.5 16.2754 7.5 15.8334V6.66675C7.5 6.25008 7.66667 5.83341 7.99167 5.49175L8.65 4.82508L7.15833 3.33341H5V1.66675ZM11.6667 4.16675V5.83341H16.6667V4.16675H11.6667ZM12.0083 9.16675L10.3417 7.50008H9.16667V8.67508L10.8333 10.3417V12.9917L9.16667 14.6584V15.8334H10.3417L12.0083 14.1667H14.6583L16.325 15.8334H17.5V14.6584L15.8333 12.9917V10.3417L17.5 8.67508V7.50008H16.325L14.6583 9.16675H12.0083ZM12.5 10.8334H14.1667V12.5001H12.5V10.8334Z"
+                                                    fill="#111111" />
+                                            </svg>
+                                            Gasoline
+                                        </li>
+                                    @endif
+                                    @if ($smoking == 1)
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 20 20" fill="none">
+                                                <path
+                                                    d="M6.66667 10.8333V14.1667M13.3333 4.16667V4.58333C13.3333 5.02536 13.5089 5.44928 13.8215 5.76184C14.134 6.07441 14.558 6.25 15 6.25C15.442 6.25 15.866 6.42559 16.1785 6.73816C16.4911 7.05072 16.6667 7.47464 16.6667 7.91667V8.33333M2.5 2.5L17.5 17.5M14.1667 10.8333H16.6667C16.8877 10.8333 17.0996 10.9211 17.2559 11.0774C17.4122 11.2337 17.5 11.4457 17.5 11.6667V13.3333C17.5 13.5667 17.4042 13.7775 17.25 13.9283M14.1667 14.1667H3.33333C3.11232 14.1667 2.90036 14.0789 2.74408 13.9226C2.5878 13.7663 2.5 13.5543 2.5 13.3333V11.6667C2.5 11.4457 2.5878 11.2337 2.74408 11.0774C2.90036 10.9211 3.11232 10.8333 3.33333 10.8333H10.8333"
+                                                    stroke="#111111" stroke-width="1.66667" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                            No Smoking
+                                        </li>
+                                    @endif
+                                    @if ($wifi == 1)
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 16 12" fill="none">
+                                                <g clip-path="url(#clip0_0_29559)">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M12.4214 1.95638C11.3285 0.7545 9.75232 0 7.99998 0C6.24763 0 4.67146 0.7545 3.57859 1.95638H12.4213H12.4214ZM3.57865 9.99438C4.67152 11.1962 6.2477 11.9508 8.00004 11.9508C9.75238 11.9508 11.3286 11.1962 12.4214 9.99438H3.57865ZM2.65464 2.46444C1.18908 2.46444 0.000976562 3.65269 0.000976562 5.1185V6.83225C0.000976562 8.298 1.18908 9.48625 2.65464 9.48625H13.3453C14.8109 9.48625 15.999 8.298 15.999 6.83225V5.1185C15.999 3.65269 14.8109 2.46444 13.3453 2.46444H2.65464ZM15.726 5.08819C15.726 3.78988 14.6737 2.73744 13.3756 2.73744H10.7219C9.4238 2.73744 8.37149 3.78988 8.37149 5.08813V6.87012C8.37149 8.16844 7.31919 9.22087 6.0211 9.22087H13.3756C14.6736 9.22087 15.7259 8.16838 15.7259 6.87012V5.08813L15.726 5.08819ZM6.50641 5.24731V7.75731H7.26457V5.24731H6.50641ZM6.43055 4.45494C6.43055 4.5746 6.47808 4.68936 6.56268 4.77398C6.64728 4.85859 6.76203 4.90613 6.88168 4.90613C7.00133 4.90613 7.11607 4.85859 7.20068 4.77398C7.28528 4.68936 7.33281 4.5746 7.33281 4.45494C7.33281 4.33528 7.28528 4.22051 7.20068 4.1359C7.11607 4.05129 7.00133 4.00375 6.88168 4.00375C6.76203 4.00375 6.64728 4.05129 6.56268 4.1359C6.47808 4.22051 6.43055 4.33528 6.43055 4.45494ZM1.3733 4.09481L2.35137 7.75731H2.98067L3.7162 5.22463L4.45161 7.75737H5.10365L6.06659 4.09481H5.33106L4.77007 6.50619L4.07253 4.09481H3.39774L2.70014 6.4455L2.16946 4.09481H1.3733ZM9.57703 4.09481V7.75731H10.3807V6.32419H12.2005V5.58106H10.3807V4.83794H12.3217V4.09481H9.57703ZM12.8676 5.24738V7.75737H13.6258V5.24738H12.8676ZM12.7994 4.44737C12.7994 4.56704 12.8469 4.6818 12.9315 4.76641C13.0161 4.85103 13.1309 4.89856 13.2505 4.89856C13.3702 4.89856 13.4849 4.85103 13.5695 4.76641C13.6541 4.6818 13.7016 4.56704 13.7016 4.44737C13.7016 4.32771 13.6541 4.21295 13.5695 4.12834C13.4849 4.04372 13.3702 3.99619 13.2505 3.99619C13.1309 3.99619 13.0161 4.04372 12.9315 4.12834C12.8469 4.21295 12.7994 4.32771 12.7994 4.44737Z"
+                                                        fill="black" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_0_29559">
+                                                        <rect width="16" height="12" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            Wi-Fi
+                                        </li>
+                                    @endif
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="acmdn-repsntve-img">
+                            <h6 class="card-p2 fw-bold fst-italic">*Representative image</h6>
+                        </div>
+
+                        <div class="acmdn-notes mb-1" style="position: absolute;bottom:40px">
+                            <h6 class="card-h1 camptonBold" style="letter-spacing: -1.12px;">Notes<i
+                                    class="fsb-2">*Optional</i></h6>
+                            <div class="for-textarea-div position-relative">
+                                <textarea name="" id="" rows="4" class="form-control border-2"
+                                    placeholder="Write notes if any" style="resize: none;"></textarea>
+                                <div class="text-area-footer">
+                                    <span>0 / 200</span>
+                                    <button class="btn textarea-btn df-center">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END -->
 @endsection
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -1213,7 +1239,7 @@
             $(".view-menu-div").hide();
 
             $("#accomodation_modal").click(function() {
-                $("#AcommoditionView").modal('show');
+                $("#AccommodationView").modal('show');
             });
 
             $("#transportation_modal").click(function() {
@@ -1254,6 +1280,34 @@
                     },
                     error: function(error) {
                         console.error('Upload error:', error);
+                    }
+                });
+            });
+
+            $('.clear-btn').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var id = this.id;
+                var formData = new FormData();
+                formData.append('id', id); 
+                // alert('Id: ' + id);
+                $.ajax({
+                    url: baseUrl +
+                        '/api/md-customer-remove-documents', // Replace with your upload endpoint
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                    success: function(response) {
+                        console.log('remove successful:', response);
+                        document.location.reload();
+                    },
+                    error: function(error) {
+                        console.error('remove error:', error);
                     }
                 });
             });

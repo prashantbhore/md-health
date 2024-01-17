@@ -10,15 +10,10 @@
             font-size: 19px;
         }
 
-        .error {
-            color: red !important;
-            font-size: 14px !important;
-        }
-
-        input[type="file"] {
-            color: #979797 !important;
-            line-height: 2 !important;
-        }
+    input[type="file"] {
+        color: #979797 !important;
+        line-height: 2 !important;
+    }
 
         .g-5,
         .gx-5 {

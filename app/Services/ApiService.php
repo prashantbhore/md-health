@@ -49,7 +49,18 @@ class ApiService
                 $method}
                 ( $url, $body ?? null );
                 // dd( $response->json() );
-                return $response->json();
+                try {
+                    if (empty($response->json())) {
+    
+                        throw new \Exception($response);
+                    } else {
+                        return $response->json();
+                    }
+                    //  echo $response;
+                } catch (\Exception $e) {
+                    echo $e->getMessage();
+                    die;
+                }
 
                 // dd( $response );
             } else {
@@ -92,7 +103,18 @@ class ApiService
                 // die;
                 // dd( jso n_decode( $response->getContent(), true ) );
 
-                return json_decode( $response->getContent(), true );
+                try {
+                    if (empty($response->getContent())) {
+    
+                        throw new \Exception($response->getContent());
+                    } else {
+                        return json_decode($response->getContent(), true);
+                    }
+                    //  echo $response;
+                } catch (\Exception $e) {
+                    echo $e->getMessage();
+                    die;
+                }
             }
         }
     public function getDataofmultipleimg($token = null, $url, $body = null, $method, $image = null, $image_input_field_name = null)
@@ -115,7 +137,7 @@ class ApiService
                         $files = [];
                         foreach ($imageFiles as $index => $singleImage) {
                             // Check if $singleImage is an instance of UploadedFile and is valid
-                            if ($singleImage instanceof \Illuminate\Http\UploadedFile && $singleImage->isValid()) {
+                            if ($singleImage instanceof \Illuminate\Http\UploadedFile  && $singleImage->isValid()) {
                                 $extension = $singleImage->getClientOriginalExtension();
                                 $filename = time() . Str::random(5) . '_' . $index . '.' . $extension;
                                 // Save the file to the files array
@@ -164,7 +186,7 @@ class ApiService
                         $files = [];
                         foreach ($imageFiles as $index => $singleImage) {
                             // Check if $singleImage is an instance of UploadedFile and is valid
-                            if ($singleImage instanceof \Illuminate\Http\UploadedFile && $singleImage->isValid()) {
+                            if ($singleImage instanceof \Illuminate\Http\UploadedFile  && $singleImage->isValid()) {
                                 $extension = $singleImage->getClientOriginalExtension();
                                 $filename = time() . Str::random(5) . '_' . $index . '.' . $extension;
                                 $files[$index] = $singleImage;

@@ -73,9 +73,9 @@
                         
 
                                 <select id="status" class="form-select form-select-sm">
-                                    <option selected >All</option>
+                                    <option id="status" selected value="all" >All</option>
                                     <option value="active">Active </option>
-                                    <option value="inactive">Inactive</option>
+                                    <option value="inactive">Deactive</option>
                                 </select>
                             </div>
                             <table id="example" class="table">

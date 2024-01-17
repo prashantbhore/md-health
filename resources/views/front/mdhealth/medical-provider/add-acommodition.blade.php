@@ -76,17 +76,28 @@
         line-height: normal;
         letter-spacing: -0.48px;
     }
+
+    .form-control,
+    .form-select {
+        color: #000;
+        font-family: "Campton" !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
 </style>
 <!-- Include jQuery -->
 
 
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
                         <span>Add New Acommodition</span>
@@ -357,11 +368,11 @@
             // Add 'selected' class to stars up to the selected count
             $(this).prevAll().addBack().addClass('selected');
 
+            var base_url = $('#base_url').val();
             // Send an AJAX request to your Laravel endpoint with the selected stars count
             $.ajax({
                 type: 'POST',
-                url: '{{ route('
-                saveStarRating ') }}',
+                url: base_url + '/saveStarRating',
                 data: {
                     selectedStars: newSelectedStars,
                     _token: '{{ csrf_token() }}'

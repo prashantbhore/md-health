@@ -56,7 +56,13 @@ class ToursController extends BaseController
                 $tour_input['tour_image_name'] = $original_name;
             }
             $tour_input['tour_price'] = $request->tour_price;
-            $tour_input['tour_other_services'] = $request->tour_other_services;
+            $tour_other_services = $request->tour_other_services;
+            $tour_other_services_array = explode(',', $tour_other_services);
+            $tour_other_services_array = array_map('trim', $tour_other_services_array);
+            $tour_other_services_array = array_filter($tour_other_services_array, function ($service) {
+                return $service !== 'on';
+            });
+            $tour_input['tour_other_services'] = implode(', ', $tour_other_services_array);
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'active';
             $tour_input['created_by'] = Auth::user()->id;
@@ -100,7 +106,13 @@ class ToursController extends BaseController
                 $tour_input['tour_image_name'] = $original_name;
             }
             $tour_input['tour_price'] = $request->tour_price;
-            $tour_input['tour_other_services'] = $request->tour_other_services;
+            $tour_other_services = $request->tour_other_services;
+            $tour_other_services_array = explode(',', $tour_other_services);
+            $tour_other_services_array = array_map('trim', $tour_other_services_array);
+            $tour_other_services_array = array_filter($tour_other_services_array, function ($service) {
+                return $service !== 'on';
+            });
+            $tour_input['tour_other_services'] = implode(', ', $tour_other_services_array);
             $tour_input['platform_type'] = $request->platform_type;
             $tour_input['status'] = 'inactive';
             $tour_input['created_by'] = Auth::user()->id;

@@ -6,7 +6,26 @@
 }
 
 
+    .deactivate-btn,
+    .deactivate-btn:hover {
+        color: #ff0000;
+        background-color: inherit;
+        text-decoration: none; 
+    }
 
+    .activate-btn,
+    .activate-btn:hover {
+        color: #00ff00;
+        background-color: inherit;
+        text-decoration: none;
+
+        
+    }
+
+    .dataTables_filter,
+    #dataTables_filter {
+        display: block !important
+    }
 </style>
 
 <section class="main-content cityPage">
@@ -42,7 +61,10 @@
                                 </div>
 
                                 <div class="col-md-3 mb-3">
-                                    <button type="submit" class="btn deactivate-btn w-100">Add City</button>
+                                    {{-- <button type="submit" class="btn deactivate-btn w-100">Add City</button> --}}
+
+                                    <button type="submit" class="btn deactivate-btn w-100" style="background: #000;
+                                    color: #fff;">{{!empty($city->id)?'Update ':'Add '}}City</button>
                                 </div>
                             </div>
                         </form>
@@ -65,21 +87,20 @@
 
                              <input type="search" class="form-control form-control-sm" placeholder aria-controls="example"> --}}
                               
-                                <select class="form-select form-select-sm">
-                                    <option selected disabled hidden>Active Cities</option>
-                                    <option value="1">Active Orders</option>
-                                    <option value="2">Denied Orders</option>
-                                    <option value="3">Completed Orders</option>
-
+                                <select id="status" class="form-select form-select-sm">
+                                    <option selected value="all" >All</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Deactive</option>
                                 </select>
                             </div>
                             <table id="example" class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="w-25">ID</th>
-                                        <th scope="col" class="w-25">City Name</th>
-                                        <th class="w-25">Country</th>
-                                        <th></th>
+                                        <th scope="col" class="w-25">Sr.No.</th>
+                                        <th>City Name</th>
+                                        <th>Country</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -113,6 +134,8 @@
     $(".citiesLi").addClass("activeClass");
     $(".cities").addClass("md-active");
 </script>
+
+
 
 <script>
     $(document).ready(function () {
