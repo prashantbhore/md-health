@@ -61,7 +61,10 @@
                                 </div>
 
                                 <div class="col-md-3 mb-3">
-                                    <button type="submit" class="btn deactivate-btn w-100">Add City</button>
+                                    {{-- <button type="submit" class="btn deactivate-btn w-100">Add City</button> --}}
+
+                                    <button type="submit" class="btn deactivate-btn w-100" style="background: #000;
+                                    color: #fff;">{{!empty($city->id)?'Update ':'Add '}}City</button>
                                 </div>
                             </div>
                         </form>
@@ -94,8 +97,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="w-25">Sr.No.</th>
-                                        <th scope="col" class="w-25">City Name</th>
-                                        <th class="w-25">Country</th>
+                                        <th>City Name</th>
+                                        <th>Country</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -131,6 +134,8 @@
     $(".citiesLi").addClass("activeClass");
     $(".cities").addClass("md-active");
 </script>
+
+
 
 <script>
     $(document).ready(function () {

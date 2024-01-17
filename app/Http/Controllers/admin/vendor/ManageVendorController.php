@@ -235,7 +235,7 @@ class ManageVendorController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
             <div class="text-end d-flex align-items-center justify-content-end gap-3">
-            <a href="' . url('admin/pending-vendor-details') . '" class="btn btn-info btn-xs" title="View">
+            <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
                 <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
             </a>
         
@@ -469,9 +469,9 @@ class ManageVendorController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
         <div class="text-end d-flex align-items-center justify-content-end gap-3">
-           <a href="' . url('admin/approved-vendor-details') . '" class="btn btn-info btn-xs" title="View">
-                <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
-            </a>
+        <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
+        <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
+    </a>
     
         <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Medical Tourism Deleted Successfully!" class="btn btn-danger medical-tourism-delete btn-xs" title="Delete">
             <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
@@ -700,7 +700,7 @@ class ManageVendorController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
                 <div class="text-end d-flex align-items-center justify-content-end gap-3">
-               <a href="' . url('admin/rejected-vendor-details') . '" class="btn btn-info btn-xs" title="View">
+                <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
                 <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
             </a>
             
@@ -834,9 +834,9 @@ public function vendor_view(Request $request){
 
 
 public function store(Request $request){
-    // dd($request->all());
+   // dd($request->all());
       
-    // if($)
+    //if($)
     $input['company_overview'] =!empty($request->overview)?$request->overview:'';
     $provider=MedicalProviderRegistrater::find($request->id)->update($input);
 

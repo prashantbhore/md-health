@@ -53,7 +53,7 @@ Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
 
 // get treatment list
-Route::get('md-treatment-list', [CommonController::class, 'get_treatment_list']);
+// Route::get('md-treatment-list', [CommonController::class, 'get_treatment_list']);
 
 // get city list
 Route::post('md-city-list', [CommonController::class, 'get_cities_list']);
@@ -510,6 +510,10 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('md-add-food-packages', 'add_food_packages');
         Route::post('md-add-food-packages-with-price', 'add_food_packages_with_price');
         Route::post('md-food-packages-menu-list', 'food_packages_menu_list');
+        Route::post('md-food-edit-menu-list', 'food_edit_menu_list');
+        Route::post('md-food-edit-menu', 'food_edit_menu');
+        Route::post('md-food-delete-menu', 'food_delete_menu');
+
     });
 
 

@@ -34,6 +34,15 @@
     .nav-tabs .nav-link.active {
         background-color: #f6f6f6;
     }
+
+    #recaptcha-container {
+    bottom: 300px;
+    position: relative;
+    /* right: -21%; */
+    left: -19%;
+}
+
+
 </style>
 <div class="content-wrapper" id="regdiv">
     <div class="container text-center my-5 authentication">
@@ -160,7 +169,7 @@
                                     </div>
                                     {{-- <div id="recaptcha-container" class="df-center"></div> --}}
                                     <span id="error" class="text-danger"></span>
-                                    <div class="col-md-12 text-center d-flex flex-column gap-3">
+                                    <div class="col-md-12 text-center d-flex flex-column gap-3 pt-100px">
                                         <button type="button" class="btn btn-md mb-5 w-100" id="regcustuser" style="height: 47px;">Create Account</button>
                                         <label for="" class="mt-auto">Already have an account?</label>
                                         <a href="{{ url('sign-in-web') }}" class="signIn-link">Sign In</a>
@@ -270,7 +279,8 @@
         </div>
     </div>
 </div>
-<div id="recaptcha-container" class="df-end"></div>
+
+<div id="recaptcha-container"></div>
 @endsection
 
 @section('script')

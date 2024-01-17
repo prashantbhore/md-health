@@ -103,6 +103,7 @@
                             <table id="example" class="table">
                                 <thead>
                                     <tr>
+                                        <th>Sr.No.</th>
                                         <th scope="col">ID</th>
                                         <th>Product Name</th>
                                         <th>Provider</th>

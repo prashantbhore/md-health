@@ -124,13 +124,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
    
   
     
+    
+
+    Route::view('products-on-sale', 'admin/vendors/products-on-sale');
+
+
+
     Route::view('approved-vendor-details', 'admin/vendors/approved-vendor-details');
 
     Route::view('pending-vendor-details', 'admin/vendors/pending-vendor-details');
 
     Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
-
-    Route::view('products-on-sale', 'admin/vendors/products-on-sale');
 
 
     Route::controller(ManageVendorController::class)->group(function (){
@@ -155,6 +159,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
         Route::post('vendor-store', 'store')->name('vendor.store');
+
+
+      
+
+
+
     });
 
 
