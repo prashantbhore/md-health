@@ -34,7 +34,7 @@ $name = 'MDHealth';
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end ms-5" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-end ms-5 w-100" id="navbarNavDropdown">
             <ul class="navbar-nav align-items-center gap-5 w-100">
                 <li class="nav-item">
                     <a href="{{ url('home-service') }}" class="nav-link">Home Service</a>
@@ -268,3 +268,4 @@ $name = 'MDHealth';
         </div>
     </div>
 </nav>
+
