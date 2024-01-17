@@ -44,6 +44,7 @@
 .w-292 {
     width: 292px;
 }
+
 .w-761 {
     width: 761px;
 }
@@ -2541,16 +2542,19 @@ span.popup-msg.active {
 
     cursor: pointer;
 }
+
 .reservations-nav .bookButton {
     font-family: "Campton";
     border-radius: 70px;
-border: 1px solid #000;
-    
+    border: 1px solid #000;
+
 }
+
 .reservations-nav .active {
     background: #4CDB06;
     border: 1px solid #4CDB06;
 }
+
 .section6 {
     overflow: hidden;
 }
@@ -4119,6 +4123,17 @@ label.tc-text,
     max-width: 704px;
 }
 
+/* #yourCartModal .modal-content {
+    max-width: 366px;
+    height: 265px;
+} */
+
+#yourCartModal .modal-dialog {
+   border-radius: 5px;
+
+}
+
+
 #UserCancellationReq .modal-content,
 #AccommodationView .modal-content,
 #TransportationView .modal-content,
@@ -4198,11 +4213,16 @@ label.tc-text,
     background: url("../img/Accombg.png") no-repeat center center/ contain;
     height: 707px;
 }
+
 #ReviewModal .modal-content {
     background: url("../img/reviewBg.png") no-repeat center center/ contain;
     height: 707px;
 }
 
+/* #yourCartModal .modal-content {
+    background: url("../img/your-cart-bg.png") no-repeat center center/ contain;
+    height: 231px;
+} */
 .textarea-btn {
     width: 87px;
     height: 26px;
@@ -4342,18 +4362,41 @@ label.tc-text,
 }
 
 .reviewsStar {
- display: flex;   
- align-items: center;
- gap: 8px;
- 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
 }
 
 .reviewsStar .fa.filled {
     font-size: 18px;
-    color:  #4CDB06;
+    color: #4CDB06;
 }
 
 .reviewsStar .fa {
     font-size: 18px;
-    color:  #B9B9B9;
+    color: #B9B9B9;
+}
+
+.purchase-details-card {
+    /* width: 1066px; */
+    height: 91px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #FFF;
+    border: none;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 32px;
+}
+
+.purchase-details-card input[type="checkbox"] {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.purchase-details-card input[type="checkbox"]::before {
+    width: 24px;
+    height: 24px;
+    
 }

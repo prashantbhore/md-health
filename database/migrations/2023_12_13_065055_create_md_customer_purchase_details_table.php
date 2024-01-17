@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('customer_id')->nullable();
             $table->bigInteger('package_id')->nullable();
             $table->string('transaction_id')->nullable();
+            $table->string('conversation_id')->nullable();
             $table->string('case_no')->nullable();
             $table->bigInteger('case_manager_id')->nullable();
             $table->bigInteger('hotel_id')->nullable();
