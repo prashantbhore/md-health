@@ -10,4 +10,15 @@ class AdsPromoController extends Controller
     public function index(){
         return view('admin.ads.ads-promo');
     }
+
+
+
+    public function store(Request $request){
+    
+
+        return view('admin.ads.ads-promo');
+    }
+
+
+
 }

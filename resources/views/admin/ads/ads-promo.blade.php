@@ -8,10 +8,10 @@
                     <div class="card-body">
                         <div class="card-title">New Promo</div>
                         <div class="row">
-                            <form method="post">
+                            <form method="post" action="{{route('store.ads')}}" enctype="multipart/form-data">
                             <div class="col-md-12 mb-3">
                                 <label for="*Choose Page" class="mb-2">*Choose Page</label>
-                                <select name="" id="choosePage" class="form-select">
+                                <select name="page_name" id="choosePage" class="form-select">
                                     <option value="MDhealth Home Page Advertise Area" selected disabled>MDhealth Home Page Advertise Area</option>
                                     <option value="Home Service Advertise Area">Home Service Advertise Area</option>
                                     <option value="MDfood Advertise Area">MDfood Advertise Area</option>
@@ -21,7 +21,7 @@
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="MDhealth URL" class="mb-2">MDhealth URL</label>
+                                <label for="MDhealth URL" class="mb-2">Ad URL</label>
                                 <input type="text" class="form-control" placeholder="URL">
 
                             </div>
@@ -44,9 +44,8 @@
                             <div class="col-md-12 mb-3">
                                 <label for="*Time" class="mb-2 d-block">*Time</label>
                                 <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" class="form-control" />
-
-
                             </div>
+                            
 
                             <div class="col-md-12 mb-3">
                                 <div class="d-flex flex-wrap gap-3 ">

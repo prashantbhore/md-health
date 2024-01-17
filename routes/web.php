@@ -336,6 +336,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::controller(AdsPromoController::class)->group(function () {
         Route::get('ads-promo','index');
+        Route::post('ads-store-promo','store')->name('store.ads');
     });
 
    
