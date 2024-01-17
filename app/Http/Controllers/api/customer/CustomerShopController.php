@@ -100,7 +100,6 @@ class CustomerShopController extends BaseController
             $vendor = VendorRegister::where('id', $proudct_data->vendor_id)->first();
         }
 
-        // return Auth::user()->id;
         if(!empty(Auth::user()->id)){
             $ShoppingCart = ShoppingCart::where('status', 'active')
                 ->where('product_id', $request->id)
