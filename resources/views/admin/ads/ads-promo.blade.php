@@ -8,16 +8,16 @@
                     <div class="card-body">
                         <div class="card-title">New Promo</div>
                         <div class="row">
+                            <form method="post">
                             <div class="col-md-12 mb-3">
                                 <label for="*Choose Page" class="mb-2">*Choose Page</label>
                                 <select name="" id="choosePage" class="form-select">
-                                    <option value="" selected disabled>MDhealth Home Page Advertise Area</option>
-                                    <option value="">Home Service Advertise Area</option>
-                                    <option value="">MDfood Advertise Area</option>
-                                    <option value="">MDbooking Advertise Area</option>
-                                    <option value="">MDbooking Flight Advertise Area</option>
-                                    <option value="">MDbooking Hotel Advertise Area</option>
-                                    <option value="">MDbooking Vehicle Advertise Area</option>
+                                    <option value="MDhealth Home Page Advertise Area" selected disabled>MDhealth Home Page Advertise Area</option>
+                                    <option value="Home Service Advertise Area">Home Service Advertise Area</option>
+                                    <option value="MDfood Advertise Area">MDfood Advertise Area</option>
+                                    <option value="MDbooking Advertise Area">MDbooking Advertise Area</option>
+                                    <option value="MDbooking Flight Advertise Area">MDbooking Flight Advertise Area</option>
+                                    <option value=">MDbooking Hotel Advertise Area">MDbooking Hotel Advertise Area</option>
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">
@@ -54,7 +54,7 @@
                                     <button type="submit" class="btn md-btn deactivate-btn">Schedule Promo</button>
                                 </div>
                             </div>
-
+                            </form>
 
                         </div>
                     </div>
