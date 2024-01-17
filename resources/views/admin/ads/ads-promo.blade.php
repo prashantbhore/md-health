@@ -20,6 +20,14 @@
                                     <option value=">MDbooking Hotel Advertise Area">MDbooking Hotel Advertise Area</option>
                                 </select>
                             </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label for="*Time" class="mb-2 d-block">Date </label>
+                                <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" class="form-control" />
+
+
+                            </div>
+
                             <div class="col-md-12 mb-3">
                                 <label for="MDhealth URL" class="mb-2">Ad URL</label>
                                 <input type="text" class="form-control" placeholder="URL">
@@ -41,11 +49,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 mb-3">
-                                <label for="*Time" class="mb-2 d-block">*Time</label>
-                                <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" class="form-control" />
-                            </div>
-                            
+                         
 
                             <div class="col-md-12 mb-3">
                                 <div class="d-flex flex-wrap gap-3 ">
@@ -151,12 +155,29 @@
     $(".ads").addClass("md-active");
     $('.drp-buttons .applyBtn').removeClass('btn-primary');
 </script>
-<script>
+<!-- <script>
     $(function() {
         $('input[name="daterange"]').daterangepicker({
             applyButtonClasses: "save-btn",
             showISOWeekNumbers: true
         })
+    });
+</script> -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left',
+            singleDatePicker: false,
+
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+            // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        }, function(start, end, label) {});
     });
 </script>
 

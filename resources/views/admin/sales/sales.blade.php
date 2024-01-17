@@ -125,24 +125,30 @@
                         <div class="w-full d-flex align-items-center justify-content-end gap-2 mb-3 filters">
                             <div class="card-title me-auto">Orders</div>
                             <input type="text" class="form-control" placeholder="Search">
-                            <select class="form-select form-select-sm">
-                                <option selected>All Orders</option>
-                                <option value="1"><span class="md-fw-bold">MD</span>health</option>
-                                <option value="2"><span class="md-fw-bold">MD</span>shop</option>
-                                <option value="3"><span class="md-fw-bold">MD</span>booking</option>
+                            <select class="form-select form-select-sm w-15">
+                                <option selected>Select Type</option>
+                                <option value="1">Treatment Packages</option>
+                                <option value="2">Shop Orders</option>
+                                <option value="3">Food Orders</option>
+                                <option value="3">Home Service Orders</option>
+                                <option value="3">Booking Orders</option>
                             </select>
-                            <select class="form-select form-select-sm">
-                                <option selected>Active Orders</option>
-                                <option value="2">Completed Orders</option>
-                                <option value="3">Denied Orders</option>
+                            <select class="form-select form-select-sm w-15 ms-3">
+                                <option selected>Select Status</option>
+                                <option value="1">Pending</option>
+                                <option value="2">Inprocess</option>
+                                <option value="3">Completed</option>
+                                <option value="3">Cancelled</option>
                             </select>
                         </div>
                         <div class="table-responsive" style="overflow-x: hidden">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Created</th>
+                                        <th scope="col">Sr. No.</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Order ID</th>
+                                        <th scope="col">Date</th>
                                         <th scope="col">Customer</th>
                                         <th scope="col">Product</th>
                                         <th scope="col">Price</th>
@@ -152,26 +158,12 @@
                                 </thead>
 
                                 <tbody>
+                                   
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
-                                        <td>Ali Danish</td>
-                                        <td>Hearth Valve Replacement Surgery</td>
-                                        <td>₺ 34.382,90</td>
-                                        <td>
-                                            <div class="completed">
-                                                Completed
-                                            </div>
-                                        </td>
-                                        <td class="text-end">
-                                            <a href="{{URL('admin/sales-details')}}">
-                                                <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>1</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Melissa Pod</td>
                                         <td>Home Patient Care Service</td>
                                         <td>₺ 29.382,90</td>
@@ -187,8 +179,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>2</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Ali Danish</td>
                                         <td>Hearth Valve Replacement Surgery</td>
                                         <td>₺ 34.382,90</td>
@@ -204,8 +198,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>3</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Melissa Pod</td>
                                         <td>Home Patient Care Service</td>
                                         <td>₺ 29.382,90</td>
@@ -221,8 +217,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>4</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Ali Danish</td>
                                         <td>Hearth Valve Replacement Surgery</td>
                                         <td>₺ 34.382,90</td>
@@ -239,8 +237,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>5</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Melissa Pod</td>
                                         <td>Home Patient Care Service</td>
                                         <td>₺ 29.382,90</td>
@@ -256,8 +256,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>6</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Ali Danish</td>
                                         <td>Hearth Valve Replacement Surgery</td>
                                         <td>₺ 34.382,90</td>
@@ -273,8 +275,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>7</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Melissa Pod</td>
                                         <td>Home Patient Care Service</td>
                                         <td>₺ 29.382,90</td>
@@ -290,8 +294,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>8</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Ali Danish</td>
                                         <td>Hearth Valve Replacement Surgery</td>
                                         <td>₺ 34.382,90</td>
@@ -307,8 +313,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">#MD8739</th>
-                                        <td>8 Min Ago</td>
+                                        <td>9</td>
+                                        <td>Shop Orders</td>
+                                        <td scope="row">#MD8739</td>
+                                        <td>22 Dec 2023 10:23am</td>
                                         <td>Melissa Pod</td>
                                         <td>Home Patient Care Service</td>
                                         <td>₺ 29.382,90</td>
