@@ -513,7 +513,10 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('md-food-edit-menu-list', 'food_edit_menu_list');
         Route::post('md-food-edit-menu', 'food_edit_menu');
         Route::post('md-food-delete-menu', 'food_delete_menu');
-
+        Route::post('md-food-active-list', 'food_active_list');
+        Route::post('md-food-deactive-list', 'food_deactive_list');
+        Route::post('md-food-active-list-to-deactive', 'active_list_to_deactive');
+        Route::post('md-food-deactive-list-to-active', 'deactive_list_to_active');
     });
 
 
