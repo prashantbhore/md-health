@@ -13,7 +13,7 @@
         <div class="container">
             <div class="tab-card rounded mb-3 position-relative">
                 <!-- Product Title Section -->
-                <div class="product-title-section">
+                {{-- <div class="product-title-section">
                     <div class="d-flex gap-2">
                         <div class="bg-f6 d-flex p-2 gap-1" style="border-radius: 3px;">
                             <span class="bg-green campton" style="border-radius: 3px; padding: 2px;">4.7</span>
@@ -30,7 +30,7 @@
                         </div>
                         <p class="mb-0">120 Followers</p>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Nav pills -->
                 <ul class="nav nav-pills bg-f6">
                     <li class="nav-item">
@@ -198,8 +198,7 @@
                                     </div>
                                 </div>
                                 <div class="col-9">
-                                    <div class="row">
-                                         {{-- mplus04 --}}
+                                    <div class="row" id="productslist">
                                         {!! !empty($html) ? $html : '' !!}
                                         {{-- <div class="col-4">
                                         <a href="{{url('product')}}" class="mt-4 card-link">
@@ -342,18 +341,15 @@
                                             </div>
                                         </a>
                                     </div> --}}
-                                     {{-- mplus04 --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                         {{-- mplus04 --}}
                         <div class="tab-pane fade" id="aboutUs">
                             <p class="campton">About</p>
                             <p class="camptonBook">
                                 {{ !empty($product_data[0]['vendor_about']) ? $product_data[0]['vendor_about'] : '' }}</p>
                         </div>
-                         {{-- mplus04 --}}
                     </div>
                 </div>
             </div>
@@ -428,7 +424,7 @@
             $("#endRange").val($("#slider-range").slider("values", 1) + "₺")
         });
     </script>
- {{-- mplus04 --}}
+
     <script>
         //    function follow_unfollow(){
         //     login='{{ !empty(Session::get('login_token')) }}';
@@ -455,5 +451,4 @@
             }
         });
     </script>
-     {{-- mplus04 --}}
 @endsection

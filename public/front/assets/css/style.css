@@ -14,6 +14,11 @@
 }
 
 @font-face {
+    font-family: "CamptonBold";
+    src: url("../fonts/campton/CamptonSemiBold.otf");
+}
+
+@font-face {
     font-family: "CamptonExtraBold";
     src: url("../fonts/campton/CamptonExtraBold.otf");
 }
@@ -1266,6 +1271,10 @@ select {
     font-family: CamptonBold !important;
 }
 
+.camptonSB {
+    font-family: CamptonSemiBold !important;
+}
+
 .camptonExtraBold {
     font-family: CamptonExtraBold !important;
 }
@@ -1403,7 +1412,7 @@ select {
 
 .panel-left.card {
     /* min-height: 467px; */
-    min-height: 350px;
+    min-height: 300px;
 }
 
 .text-white {
@@ -4129,7 +4138,7 @@ label.tc-text,
 } */
 
 #yourCartModal .modal-dialog {
-   border-radius: 5px;
+    border-radius: 5px;
 
 }
 
@@ -4398,5 +4407,5 @@ label.tc-text,
 .purchase-details-card input[type="checkbox"]::before {
     width: 24px;
     height: 24px;
-    
+
 }

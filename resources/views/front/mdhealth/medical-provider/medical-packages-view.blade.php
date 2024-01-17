@@ -61,11 +61,11 @@
 
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4">
                     <h5 class="card-header d-flex align-items-center justify-content-between" style="margin-bottom: 42px;">
                         <span>{{ !empty($packages_active_list['package_unique_no']) ? $packages_active_list['package_unique_no'] : 'Add Package' }}</span>
@@ -584,8 +584,8 @@
     function categoryselect(value) {
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('
-        login_token ') }}';
+        const bearer_token = '{{ Session::get('login_token') }}';
+        // alert(bearer_token);
 
         $.ajax({
             url: base_url + '/api/md-treatment-list',
@@ -715,10 +715,8 @@
         $('#vehicle_id').on('change', function() {
             var selectedvehicleid = $(this).val();
             // alert(selectedvehicleid);
-            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
-                'content');
-            const bearer_token = '{{ Session::get('
-            login_token ') }}';
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
 
             if (selectedvehicleid) {
                 $.ajax({
@@ -771,10 +769,8 @@
 
         $('#hotel_id').on('change', function() {
             var selectedHotelId = $(this).val();
-            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
-                'content');
-            const bearer_token = '{{ Session::get('
-            login_token ') }}';
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
 
             if (selectedHotelId) {
                 $.ajax({
@@ -824,10 +820,8 @@
 
         $('#tour_id').on('change', function() {
             var selectedtourid = $(this).val();
-            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
-                'content');
-            const bearer_token = '{{ Session::get('
-            login_token ') }}';
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
 
             if (selectedtourid) {
                 $.ajax({
