@@ -1,4 +1,26 @@
 @extends('admin.layout.layout') @section("content")
+<style>
+    .deactivate-btn,
+    .deactivate-btn:hover {
+        color: #ff0000;
+        background-color: inherit;
+        text-decoration: none; 
+    }
+
+    .activate-btn,
+    .activate-btn:hover {
+        color: #00ff00;
+        background-color: inherit;
+        text-decoration: none;
+
+        
+    }
+
+    .dataTables_filter,
+    #dataTables_filter {
+        display: block !important
+    }
+</style>
 <section class="main-content">
     <div class="content-wrapper pb-5">
         <div class="page-title">Manage Vendors</div>
@@ -96,7 +118,8 @@
                                         <th>Company</th>
                                         <th>Membership</th>
                                         <th>City</th>
-                                        {{-- <th>Status</th> --}}
+                                        <th>Phone</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

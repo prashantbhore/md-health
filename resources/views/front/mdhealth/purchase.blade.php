@@ -337,18 +337,314 @@
 
         });
 
-        $('.discounts').on('change', 'input[type="radio"]', function() {
-            if ($(this).is(':checked')) {
-                console.log($(this).attr('value') + ' is checked');
-                console.log($(this).attr('value'));
-                switch ($(this).attr('value')) {
-                    case "20":
-                        isTwentySelected = true;
-                        isThirtySelected = false;
-                        isFiftySelected = false;
-                        isHundredSelected = false;
-                        percentValue = 20;
-                        updateOtherServicesUi();
+            $('.discounts').on('change', 'input[type="radio"]', function() {
+                if ($(this).is(':checked')) {
+                    console.log($(this).attr('value') + ' is checked');
+                    console.log($(this).attr('value'));
+                    switch ($(this).attr('value')) {
+                        case "20":
+                            isTwentySelected = true;
+                            isThirtySelected = false;
+                            isFiftySelected = false;
+                            isHundredSelected = false;
+                            percentValue = 20;
+                            updateOtherServicesUi();
+                            updateDiscountedPrice();
+                            break;
+                        case "30":
+                            isTwentySelected = false;
+                            isThirtySelected = true;
+                            isFiftySelected = false;
+                            isHundredSelected = false;
+                            percentValue = 30;
+                            updateOtherServicesUi();
+                            updateDiscountedPrice();
+                            break;
+                        case "50":
+                            isTwentySelected = false;
+                            isThirtySelected = false;
+                            isFiftySelected = true;
+                            isHundredSelected = false;
+                            percentValue = 50;
+                            updateOtherServicesUi();
+                            updateDiscountedPrice();
+                            break;
+                        case "100":
+                            isTwentySelected = false;
+                            isThirtySelected = false;
+                            isFiftySelected = false;
+                            isHundredSelected = true;
+                            percentValue = 100;
+                            updateOtherServicesUi();
+                            updateDiscountedPrice();
+                            break;
+                    }
+                }
+                console.log(isTwentySelected + "<br>" + isThirtySelected + "<br>" + isFiftySelected +
+                    "<br>" + isHundredSelected);
+            });
+
+            $('#procced_to_pay_form input').on('input', function() {
+
+                var inputValue = $(this).val();
+
+                switch ($(this).attr('id')) {
+                    case 'input1':
+                        $('.cardholder').text(inputValue);
+                        cardName = $(this).val().toString();
+                        $('#card_name').val(cardName);
+                        break;
+                    case 'input2':
+                        $('.cardNumber').text(inputValue);
+                        cardNo = $(this).val().toString();
+                        // cardNo.replace(/\s/g, '');
+                        // alert('cardNo: '+cardNo)
+                        $('#card_number').val(cardNo);
+                        // Replace with the actual BIN
+                        // var cardType = getCardType(cardNo);
+                        var cardType2 = getCardIssuer(cardNo);
+                        var cardNumberInput = $(this).val();
+
+                        // Format the card number
+                        var formattedCardNumber = formatCardNumber(cardNumberInput)
+                        formattedCardNumber.replace(/\D/g, '');
+                        // Update the input field value
+                        // $(this).val(formattedCardNumber);
+                        // alert(formattedCardNumber);
+                        // Update the paragraph content
+                        // $('#input2').val(formattedCardNumber);
+                        $('.cardNumber').text(formattedCardNumber);
+
+                        console.log('Card Type:', cardType2);
+                        break;
+                    case 'input3':
+                        cardCvv = $(this).val().toString();
+                        $('#cvv').val(cardCvv);
+                        break;
+                    case 'input4':
+                        $('.validity').text(inputValue);
+                        cardExpiryDate = $(this).val().toString();
+                        $('#validity').val(cardExpiryDate);
+                        var inputValue = $(this).val();
+
+                        // Remove all non-numeric characters
+                        var numericValue = inputValue.replace(/\D/g, '');
+
+                        // Format the value as MM/YY
+                        var formattedValue = formatValidityDate(numericValue);
+
+                        // Update the input field with the formatted value
+                        $(this).val(formattedValue);
+                        break;
+                }
+            });
+
+            $('.purchaseBtn').click(function() {
+                // makePurchase();
+                $('card_name').val($('#input1').val());
+                $('card_number').val($('#input2').val());
+                $('cvv').val($('#input3').val());
+                $('validity').val($('#input4').val());
+                var form = $('#procced_to_pay_form');
+
+                // Additional data
+                var pendingAmount = proxyPrice - totalPrice;
+
+                if (isTwentySelected) {
+                    var percentage = '20';
+                } else if (isThirtySelected) {
+                    var percentage = '30';
+                } else if (isFiftySelected) {
+                    var percentage = '50';
+                } else if (isHundredSelected) {
+                    var percentage = '100';
+                }
+
+                var additionalData = {
+                    'package_id': packageId,
+                    'patient_id': patientId,
+                    'sale_price': proxyPrice,
+                    'paid_amount': totalPrice,
+                    'platform_type': 'web',
+                    'card_no': cardNo || '',
+                    'card_expiry_date': cardExpiryDate || '',
+                    'card_cvv': cardCvv || '',
+                    'card_name': cardName || '',
+                    'pending_amount': pendingAmount,
+                    'percentage': percentage
+                };
+
+                // Add additional data to the form
+                $.each(additionalData, function(name, value) {
+                    form.append($('<input>').attr({
+                        type: 'hidden',
+                        name: name,
+                        value: value
+                    }));
+                });
+
+                // Submit the form
+                form.submit();
+            })
+
+            $('#purchase_by_coins').click(function() {
+                // makePurchase();
+                var form = $('#purchase_by_mdcoins');
+
+                // Additional data
+                var pendingAmount = proxyPrice - totalPrice;
+
+                if (isTwentySelected) {
+                    var percentage = '20';
+                } else if (isThirtySelected) {
+                    var percentage = '30';
+                } else if (isFiftySelected) {
+                    var percentage = '50';
+                } else if (isHundredSelected) {
+                    var percentage = '100';
+                }
+                // $('#card_number').val(cardNo);
+
+                var additionalData = {
+                    'package_id': packageId,
+                    'patient_id': patientId,
+                    'sale_price': proxyPrice,
+                    'paid_amount': totalPrice,
+                    'platform_type': 'web',
+                    'pending_amount': pendingAmount,
+                    'percentage': percentage
+                };
+
+                // Add additional data to the form
+                $.each(additionalData, function(name, value) {
+                    form.append($('<input>').attr({
+                        type: 'hidden',
+                        name: name,
+                        value: value
+                    }));
+                });
+
+                // Submit the form
+                form.submit();
+            })
+
+            ////////////////////////////////////////////////////////////////////////////////
+
+            // $('#procced_to_pay_form').validate({
+            //     rules: {
+            //         input1: {
+            //             required: true,
+            //         },
+            //         input2: {
+            //             required: true,
+            //         },
+            //         input3: {
+            //             required: true,
+            //         },
+            //         input4: {
+            //             required: true,
+            //         },
+
+            //     },
+            //     messages: {
+            //         input1: {
+            //             required: "Please enter card holder name",
+            //         },
+            //         input2: {
+            //             required: "Please enter card number",
+            //         },
+            //         input3: {
+            //             required: "Please enter cvv",
+            //         },
+            //         input4: {
+            //             required: "Please enter card expiry date",
+            //         }
+
+            //     },
+            //     submitHandler: function(form) {
+            //         form.submit();
+            //     }
+            // });
+
+            ////////////////////////////////////////////////////////////////////////////////
+
+            function getData() {
+
+                // alert(token);
+                $.ajax({
+                    url: baseUrl + '/api/md-customer-package-purchase-details',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+
+                    success: function(response) {
+                        console.log('Success:', response);
+                        if (response.status == '404') {
+                            window.location.href = baseUrl + '/health-search-result';
+                        }
+                        var otherServicesHtml = '';
+                        purchaseDetails = response.purchase_details;
+                        otherServices = response.other_services;
+                        discounts = response.discounts;
+                        var treatmentPriceHtml = numberToDiscount(
+                                parseInt(purchaseDetails.package_discount),
+                                purchaseDetails
+                                .treatment_price) +
+                            ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails
+                            .treatment_price + '₺)</span>';
+
+                        totalPrice = parseFloat(purchaseDetails.treatment_price);
+
+                        otherServices.forEach(function(service) {
+                            totalPrice += parseFloat(numberToDiscount(parseInt(purchaseDetails
+                                .package_discount), service.price));
+                        });
+                        // alert(totalPrice);
+
+                        $('.package_name').text(purchaseDetails.package_name);
+                        $('.city_name').text(purchaseDetails.city_name);
+                        $('.treatment_price').append(treatmentPriceHtml);
+
+                        otherServices.forEach(function(service) {
+                            otherServicesHtml += '<div class="packageResult rounded mb-3">'
+                            otherServicesHtml +=
+                                '<div class="flex-grow-1 d-flex align-items-center gap-2">'
+                            otherServicesHtml += '<label class="">'
+                            otherServicesHtml += '<input id=' + service.title +
+                                ' type="checkbox" name="checkbox" checked />'
+                            otherServicesHtml += '</label>'
+                            otherServicesHtml += '<div class="flex-grow-1">'
+                            otherServicesHtml +=
+                                '<div class="d-flex gap-2 justify-content-between align-items-center">'
+                            otherServicesHtml += '<p class="mb-0 fs-5 camptonBold lh-base">' +
+                                service.title + '</p>'
+                            otherServicesHtml +=
+                                '<p class="mb-0 fs-6 camptonBold text-green">Per Night Price</p>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml +=
+                                '<div class="d-flex gap-5 justify-content-between">'
+                            otherServicesHtml += '<div class="d-flex align-items-center gap-2">'
+                            // otherServicesHtml += '<p class="mb-0 lctn">3 Stars Hotel</p>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml +=
+                                '<p class="mb-0 fs-5 camptonBold lh-base other-service-price">' +
+                                numberToDiscount(
+                                    parseInt(purchaseDetails.package_discount),
+                                    service.price) + ' ₺ <span class="smallFont">(' + service
+                                .price +
+                                '₺)</span></p>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                        });
+                        $('.other_services_items').append(otherServicesHtml);
+                        calcOtherServices();
                         updateDiscountedPrice();
                         break;
                     case "30":

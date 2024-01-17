@@ -6,18 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Cities;
 use App\Models\Country;
 use App\Models\CustomerLogs;
-use App\Models\CustomerRegistration;
-use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerPaymentDetails;
+use App\Models\CustomerPurchaseDetails;
+use App\Models\CustomerRegistration;
 use App\Models\MDCoins;
 use App\Models\Packages;
 use App\Models\PatientInformation;
 use App\Models\ProductCategory;
 use App\Services\ApiService;
 use App\Traits\MediaTrait;
-use Auth;
 use Crypt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Session;
 use Storage;
@@ -38,11 +38,11 @@ class CustomerPackageController extends Controller
         $validator = Validator::make($controller_request->all(),
             [
                 'package_id' => 'required',
-                'sale_price'  => 'required',
-                'paid_amount'  => 'required',
-                'platform_type'  => 'required',
-                'pending_amount'  => 'required',
-                'percentage'  => 'required',
+                'sale_price' => 'required',
+                'paid_amount' => 'required',
+                'platform_type' => 'required',
+                'pending_amount' => 'required',
+                'percentage' => 'required',
                 'patient_id' => 'required',
                 'payment_percent' => 'required',
                 'total_paying_price' => 'required',
@@ -54,7 +54,12 @@ class CustomerPackageController extends Controller
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+        $conversation_id = mt_rand(100000000, 999999999);
         Session::put('payment_request', $controller_request->all());
+        $body = $controller_request->all();
+        $plainArray = $body instanceof \Illuminate\Support\Collection  ? $body->toArray() : $body;
+        $plainArray['conversation_id'] = strval($conversation_id);
+
         // dd(Session::get('payment_request'));
         $bin_number = substr($controller_request->card_number, 0, 6);
         $user_id = Auth::guard('md_customer_registration')->user()->id;
@@ -83,14 +88,14 @@ class CustomerPackageController extends Controller
         $cvv = $controller_request->cvv;
         $validity = $controller_request->validity;
 
-        $conversation_id = mt_rand(100000000, 999999999);
         if ($controller_request->payment_percent != '100') {
             $installment = 2;
         } else {
             $installment = 1;
         }
         if (!str_contains($validity, '/')) {
-            return $this->sendError('please enter card validity date in proper format month/year');
+            // redirect()->back()->with('error', "User data not found");
+            return redirect()->back()->with('please enter card validity date in proper format month/year');
         } else {
             $expire_month = explode('/', $validity)[0];
             $current_year = date("Y"); // Get the current year as a four-digit number (e.g., 2024)
@@ -107,11 +112,11 @@ class CustomerPackageController extends Controller
                     $user_first_name = explode(' ', $user_data->full_name)[0];
                     $user_last_name = explode(' ', $user_data->full_name)[1];
                 } else {
-                    return $this->sendError('User first and last name not found');
+                    return redirect()->back()->with('User first and last name not found');
                 }
             }
         } else {
-            return $this->sendError('User data not found');
+            return redirect()->back()->with('error', "User data not found");
         }
 
         $live_base_url = 'https://api.iyzipay.com';
@@ -137,7 +142,7 @@ class CustomerPackageController extends Controller
 
         }
         $json_response = json_decode($json_response, true);
-        // dd($payment_response);
+        // dd($json_response);
         if ($json_response['status'] == 'success') {
             //init 3DS
             $request = new \Iyzipay\Request\CreatePaymentRequest();
@@ -225,23 +230,48 @@ class CustomerPackageController extends Controller
             // $request->setConversationData('hi');
             # make request
             // dd($request);
-            $threedsInitialize = \Iyzipay\Model\ThreedsInitialize::create($request, $options);
-            $threedsInitialize_array = (array) $threedsInitialize;
 
-            # print result
-            // echo "<pre>";
-            foreach ($threedsInitialize_array as $key => $response) {
-                // echo $key;
-                $three_json_response = $response;
-                // print_r($response);
-                break;
+            /////////////////////////////////////////////////////////////////
+
+            $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), $plainArray, 'POST');
+            Session::forget('payment_request');
+            if (!empty($repsonse_data)) {
+                if ($repsonse_data['status'] == '200') {
+
+                    $threedsInitialize = \Iyzipay\Model\ThreedsInitialize::create($request, $options);
+                    $threedsInitialize_array = (array) $threedsInitialize;
+
+                    # print result
+                    // echo "<pre>";
+                    foreach ($threedsInitialize_array as $key => $response) {
+                        // echo $key;
+                        $three_json_response = $response;
+                        // print_r($response);
+                        break;
+                    }
+                    // echo($three_json_response);die;
+                    $three_json_response = json_decode($three_json_response, true);
+                    if ($three_json_response['status'] == 'success') {
+                        print_r($threedsInitialize);
+
+                    } else {
+                        return redirect()->back()->with('error', $three_json_response['errorMessage']);
+                    }
+
+                } else {
+
+                    return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_03");
+                    echo "Something went wrong, payment not completed, err code: API_03";
+                }
+            } else {
+                return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_02");
+                echo "Something went wrong, payment not completed, err code: API_02";
             }
-            // echo($three_json_response);die;
-            print_r($threedsInitialize);
-            // $three_json_response = json_decode($three_json_response, true);
-            // echo'<pre>';print_r( $three_json_response['threeDSHtmlContent'] );
+
+            /////////////////////////////////////////////////////////////////
+
         } else {
-            dd('invalid card');
+            return redirect()->back()->with('error', "Something went wrong, card info is incorrect, err code: API_00");
         }
         //
 
@@ -288,21 +318,95 @@ class CustomerPackageController extends Controller
         // print_r($three_json_response);die;
         if (!empty($three_json_response)) {
             if ($three_json_response['status'] == 'success') {
-                $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), Session::get('payment_request'), 'POST');
-                Session::forget('payment_request');
-                if (!empty($repsonse_data)) {
-                    if ($repsonse_data['status'] == '200') {
-                        return view('front.mdhealth.user-panel.user-payment-successfull');
-                    } else {
-                        echo "Something went wrong, payment not completed, err code: API_03";
-                    }
-                } else {
-                    echo "Something went wrong, payment not completed, err code: API_02";
-                }
+
+                return view('front.mdhealth.user-panel.user-payment-successfull');
+
+                // $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), Session::get('payment_request'), 'POST');
+                // Session::forget('payment_request');
+                // if (!empty($repsonse_data)) {
+                //     if ($repsonse_data['status'] == '200') {
+                // print_r($three_json_response);die;
+                // if (!empty($customer_purchase_details->customer_id)) {
+                //     $user = CustomerRegistration::where('id', $customer_purchase_details->customer_id);
+                //     $credentials = [
+                //         'phone' => !empty($user->phone) ? $user->phone : '',
+                //         'password' => !empty($user->password) ? $user->password : '',
+                //     ];
+                //     if (Auth::guard('md_customer_registration')->attempt($credentials)) {
+                //         // Authentication successful
+                //         // The user is now logged in, and you can perform further actions if needed.
+                //         // For example, you might want to redirect the user to a dashboard.
+
+                //         // If you need to access the authenticated user instance, you can use Auth::user()
+                //         $authenticatedUser = Auth::guard('md_customer_registration')->user();
+                //         // return redirect()->route('/')->with('error', 'Payment Not Completed');
+
+                //         // Your further actions here, such as redirecting
+                //         return view('front.mdhealth.user-panel.user-payment-successfull');
+                //     } else {
+                //         // Authentication failed
+                //         // Handle the case where the provided credentials are incorrect.
+                //         // You might want to redirect back to the login page with an error message.
+                //         // For example:
+                //         echo "hi";
+                //         return redirect()->route(url('/'))->with('error', 'PaymentCompleted but user session destroyed err code: USER_00');
+                //     }
+                // }
+
+                //     } else {
+                //         echo "Something went wrong, payment not completed, err code: API_03";
+                //     }
+                // } else {
+                //     echo "Something went wrong, payment not completed, err code: API_02";
+                // }
             } else {
+                $conversation_id = $three_json_response['conversationId'];
+
+                // dd($conversation_id);
+
+                $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
+                if (!empty($customer_purchase_details)) {
+                    CustomerPaymentDetails::where('order_id', $customer_purchase_details->id)->delete();
+                    PatientInformation::where('purchase_id', $customer_purchase_details->id)->delete();
+                    $customer_purchase_details->delete();
+                }
+
+                return redirect()->back()->with('error', 'Payment Not Completed');
+
+                // if (!empty($customer_purchase_details->customer_id)) {
+                //     $user = CustomerRegistration::where('id', $customer_purchase_details->customer_id);
+                //     $credentials = [
+                //         'phone' => !empty($user->phone) ? $user->phone : '',
+                //         'password' => !empty($user->password) ? $user->password : '',
+                //     ];
+
+                //     if (Auth::guard('md_customer_registration')->attempt($credentials)) {
+                //         // Authentication successful
+                //         // The user is now logged in, and you can perform further actions if needed.
+                //         // For example, you might want to redirect the user to a dashboard.
+
+                //         // If you need to access the authenticated user instance, you can use Auth::guard('md_customer_registration')->user()
+                //         $authenticatedUser = Auth::guard('md_customer_registration')->user();
+                //         return redirect(url('/'))->with('error', 'Payment Not Completed');
+                //         // Your further actions here, such as redirecting
+                //     } else {
+                //         // Authentication failed
+                //         // Handle the case where the provided credentials are incorrect.
+                //         // You might want to redirect back to the login page with an error message.
+                //         // For example:
+                //         return redirect(url('/'))->with('error', 'Something Went Wrong. err code: USER_00');
+                //     }
+                // }
+
+                // Assuming you have the user credentials (username/email and password)
+
+                // Attempt to log in the user
+
                 echo "Something went wrong, payment not completed, err code: API_01";
+
             }
         } else {
+            return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_00");
             echo "Something went wrong, payment not completed, err code: API_00";
         }
     }
@@ -351,6 +455,17 @@ class CustomerPackageController extends Controller
     {
         // echo phpinfo();
         // die;
+        if (Auth::guard('md_customer_registration')->attempt([
+            'phone' => '+919926786266',
+            'password' => '12345678',
+            'status' => 'active',
+        ])) {
+            $customer = Auth::guard('md_customer_registration')->user();
+            return redirect('/');
+        } else {
+            echo "no";die;
+        }
+
         dd(phpinfo());
         $token = null;
         $sandbox_base_url = 'https://sandbox-api.iyzipay.com';
@@ -881,7 +996,17 @@ class CustomerPackageController extends Controller
     public function sendError($message, $code = 404)
     {
         // dd($code);
-        return response()->json($code);
+        $code = (array) $code;
+        // dd($code);
+        $errorString='';
+        foreach ( $code["\x00*\x00messages"] as $m) {
+           foreach($m as $e){
+            $errorString = $errorString . $e." ";
+           }
+        }
+       
+        
+        return redirect()->back()->with('error', $errorString);
     }
 
     //Mplus02
@@ -931,7 +1056,7 @@ class CustomerPackageController extends Controller
                 try {
                     $decrypted = Crypt::decrypt($avilable_coins);
                 } catch (Illuminate\Contracts\Encryption\DecryptException) {
-                    return  redirect()->back()->withErrors('Somthing went wrong , err code: CRYPT_00')->withInput();
+                    return redirect()->back()->withErrors('Somthing went wrong , err code: CRYPT_00')->withInput();
                 }
                 //$avilable_coins == $request->avilable_coins
                 if (true) {
