@@ -53,7 +53,13 @@ class AddNewAcommoditionController extends BaseController {
 
             $hotel_input['distance_from_hospital'] = $request->distance_from_hospital;
             $hotel_input[ 'hotel_per_night_price' ] = $request->hotel_per_night_price;
-            $hotel_input[ 'hotel_other_services' ] = $request->hotel_other_services;
+            $hotel_other_services = $request->hotel_other_services;
+            $hotel_other_services_array = explode(',', $hotel_other_services);
+            $hotel_other_services_array = array_map('trim', $hotel_other_services_array);
+            $hotel_other_services_array = array_filter($hotel_other_services_array, function ($service) {
+                return $service !== 'on';
+            });
+            $hotel_input['hotel_other_services'] = implode(', ', $hotel_other_services_array);
             $hotel_input[ 'status' ] = 'active';
             $hotel_input[ 'service_provider_id' ] = Auth::user()->id;
             $hotel_input[ 'created_by' ] = Auth::user()->id;
@@ -98,7 +104,13 @@ class AddNewAcommoditionController extends BaseController {
             $hotel_input['distance_from_hospital'] = $request->distance_from_hospital;
 
             $hotel_input[ 'hotel_per_night_price' ] = $request->hotel_per_night_price;
-            $hotel_input[ 'hotel_other_services' ] = $request->hotel_other_services;
+            $hotel_other_services = $request->hotel_other_services;
+            $hotel_other_services_array = explode(',', $hotel_other_services);
+            $hotel_other_services_array = array_map('trim', $hotel_other_services_array);
+            $hotel_other_services_array = array_filter($hotel_other_services_array, function ($service) {
+                return $service !== 'on';
+            });
+            $hotel_input['hotel_other_services'] = implode(', ', $hotel_other_services_array);
             $hotel_input[ 'status' ] = 'inactive';
             $hotel_input[ 'service_provider_id' ] = Auth::user()->id;
             $hotel_input[ 'created_by' ] = Auth::user()->id;
