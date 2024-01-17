@@ -154,7 +154,8 @@ class ManageVendorController extends Controller
 
                 ->addColumn('reg_date', function ($row) {
                     if (!empty($row->created_at)) {
-                        return ucfirst($row->created_at);
+                        $date = new \DateTime($row->created_at);
+                        return $date->format('j M Y');
                     }
                 })
 
@@ -262,17 +263,17 @@ class ManageVendorController extends Controller
     public function approved_vendors()
     {
 
-        $medical_pending = MedicalProviderRegistrater::where('status', 'active')->where('vendor_status', 'pending')->with('city')->get();
-        $medical_approved = MedicalProviderRegistrater::where('status', 'active')->where('vendor_status', 'approved')->with('city')->get();
-        $medical_rejected = MedicalProviderRegistrater::where('status', 'active')->where('vendor_status', 'rejected')->with('city')->get();
+        $medical_pending = MedicalProviderRegistrater::where('status','!=','delete')->where('vendor_status', 'pending')->with('city')->get();
+        $medical_approved = MedicalProviderRegistrater::where('status','!=','delete')->where('vendor_status', 'approved')->with('city')->get();
+        $medical_rejected = MedicalProviderRegistrater::where('status','!=','delete')->where('vendor_status', 'rejected')->with('city')->get();
 
-        $food_pending = MDFoodRegisters::where('status', 'active')->where('vendor_status', 'pending')->with('city')->get();
-        $food_approved = MDFoodRegisters::where('status', 'active')->where('vendor_status', 'approved')->with('city')->get();
-        $food_rejected = MDFoodRegisters::where('status', 'active')->where('vendor_status', 'rejected')->with('city')->get();
+        $food_pending = MDFoodRegisters::where('status','!=','delete')->where('vendor_status', 'pending')->with('city')->get();
+        $food_approved = MDFoodRegisters::where('status','!=','delete')->where('vendor_status', 'approved')->with('city')->get();
+        $food_rejected = MDFoodRegisters::where('status','!=','delete')->where('vendor_status', 'rejected')->with('city')->get();
 
-        $shop_pending = VendorRegister::where('status', 'active')->where('vendor_status', 'pending')->with('city')->get();
-        $shop_approved = VendorRegister::where('status', 'active')->where('vendor_status', 'approved')->with('city')->get();
-        $shop_rejected = VendorRegister::where('status', 'active')->where('vendor_status', 'rejected')->with('city')->get();
+        $shop_pending = VendorRegister::where('status','!=','delete')->where('vendor_status', 'pending')->with('city')->get();
+        $shop_approved = VendorRegister::where('status','!=','delete')->where('vendor_status', 'approved')->with('city')->get();
+        $shop_rejected = VendorRegister::where('status','!=','delete')->where('vendor_status', 'rejected')->with('city')->get();
 
         $all_pending_vendors = collect([]);
 
@@ -333,37 +334,37 @@ class ManageVendorController extends Controller
 
     public function approved_vendor_data_table(Request $request)
     {
-        $medical_vendor = [];
+        $medical_vendor =[];
         $food_vendor = [];
         $shop_vendor = [];
 
         if ($request->vendor_type == 'all') {
-            $medical_vendor = MedicalProviderRegistrater::where('status', 'active')
+            $medical_vendor = MedicalProviderRegistrater::where('status','!=','delete')
                 ->where('vendor_status', 'approved') // Updated to 'approved'
                 ->with('city')
                 ->get();
 
-            $food_vendor = MDFoodRegisters::where('status', 'active')
+            $food_vendor = MDFoodRegisters::where('status','!=','delete')
                 ->where('vendor_status', 'approved') // Updated to 'approved'
                 ->with('city')
                 ->get();
 
-            $shop_vendor = VendorRegister::where('status', 'active')
+            $shop_vendor = VendorRegister::where('status','!=','delete')
                 ->where('vendor_status', 'approved') // Updated to 'approved'
                 ->with('city')
                 ->get();
         } elseif ($request->vendor_type == 'medical_service_provider') {
-            $medical_vendor = MedicalProviderRegistrater::where('status', 'active')
+            $medical_vendor = MedicalProviderRegistrater::where('status','!=','delete')
                 ->where('vendor_status', 'approved') // Updated to 'approved'
                 ->with('city')
                 ->get();
         } elseif ($request->vendor_type == 'food_vendor') {
-            $food_vendor = MDFoodRegisters::where('status', 'active')
+            $food_vendor = MDFoodRegisters::where('status','!=','delete')
                 ->where('vendor_status', 'approved') // Updated to 'approved'
                 ->with('city')
                 ->get();
         } elseif ($request->vendor_type == 'shop_vendor') {
-            $shop_vendor = VendorRegister::where('status', 'active')
+            $shop_vendor = VendorRegister::where('status','!=','delete')
                 ->where('vendor_status', 'approved') // Updated to 'approved'
                 ->with('city')
                 ->get();
@@ -388,7 +389,8 @@ class ManageVendorController extends Controller
 
                 ->addColumn('reg_date', function ($row) {
                     if (!empty($row->created_at)) {
-                        return ucfirst($row->created_at);
+                        $date = new \DateTime($row->created_at);
+                        return $date->format('j M Y');
                     }
                 })
 
@@ -448,6 +450,14 @@ class ManageVendorController extends Controller
                     }
                 })
 
+                
+                ->addColumn('membership_type', function ($row){
+                    if (!empty($row->membership_type)) {
+                        return ucfirst($row->membership_type);
+                    }
+                })
+
+
 
                 ->addColumn('city', function ($row) {
                     if (!empty($row->city->city_name)) {
@@ -463,26 +473,52 @@ class ManageVendorController extends Controller
                 })
 
 
+             
+               
+
+                    ->addColumn('status', function ($row){
+                        $status = $row->status;
+                        if($row->vendor_type=='food_vendor'){
+                          $table='md_food_register';
+                        }elseif($row->vendor_type=='shop_vendor'){
+                            $table='md_vendor_register';
+                        }elseif($row->vendor_type=='medical_service_provider'){
+                            $table='md_medical_provider_register';
+                        }
+        
+
+                        if ($status == 'active') {
+                            
+                            $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="'.$table.'" data-flash="Status Changed Successfully!" class="md-change-status activateLink mt-0 activate-btn">Activate</a>';
+                        } else {
+                            $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="'.$table.'" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactivate</a>';
+                        }
+                    
+                        return $statusBtn;
+                    })
+                
+
+
 
 
 
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
-        <div class="text-end d-flex align-items-center justify-content-end gap-3">
-        <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
-        <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
-    </a>
-    
-        <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Medical Tourism Deleted Successfully!" class="btn btn-danger medical-tourism-delete btn-xs" title="Delete">
-            <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
-        </a>
-        </div>';
+                        <div class="text-end d-flex align-items-center justify-content-end gap-3">
+                        <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
+                        <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
+                    </a>
+                    
+                        <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Medical Tourism Deleted Successfully!" class="btn btn-danger medical-tourism-delete btn-xs" title="Delete">
+                            <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
+                        </a>
+                        </div>';
 
                     return $actionBtn;
                 })
 
 
-                ->rawColumns(['action'])
+                ->rawColumns(['action','status'])
                 ->make(true);
         }
     }
@@ -619,7 +655,8 @@ class ManageVendorController extends Controller
 
                 ->addColumn('reg_date', function ($row) {
                     if (!empty($row->created_at)) {
-                        return ucfirst($row->created_at);
+                        $date = new \DateTime($row->created_at);
+                        return $date->format('j M Y');
                     }
                 })
 
@@ -690,6 +727,17 @@ class ManageVendorController extends Controller
                 ->addColumn('contact_no', function ($row) {
                     if (!empty($row->mobile_no)) {
                         return ucfirst($row->mobile_no);
+                    }
+                })
+
+
+               
+
+                
+                ->addColumn('rejected_date', function ($row) {
+                    if (!empty($row->rejected_date)) {
+                        $date = new \DateTime($row->rejected_date);
+                        return $date->format('j M Y');
                     }
                 })
 
@@ -847,6 +895,93 @@ public function store(Request $request){
    }
 
 }
+
+
+public function approve_vendor(Request $request){
+    $approvalData = [
+        'vendor_status' => 'approved',
+        'approved_by' => 'Super Admin',
+        'approved_date' => now(), 
+    ];
+
+    if ($request->vendor_type == 'food_vendor') {
+        $vendor = MDFoodRegisters::where('id', $request->id)->update($approvalData);
+    }
+
+    if ($request->vendor_type == 'shop_vendor') {
+        $vendor = VendorRegister::where('id', $request->id)->update($approvalData);
+    }
+
+    if ($request->vendor_type == 'medical_service_provider') {
+        $vendor = MedicalProviderRegistrater::where('id', $request->id)->update($approvalData);
+    }
+
+    if ($vendor) {
+        return redirect('admin/approved-vendors')->with('success', 'Vendor Approved');
+    } else {
+        return redirect('admin/approved-vendors')->with('error', 'Vendor Not Approved');
+    }
+}
+
+
+
+
+public function reject_vendor(Request $request){
+    $rejectionData = [
+        'vendor_status' => 'rejected',
+        'rejected_by' => 'Super Admin',
+        'rejected_date' => now(), 
+    ];
+
+    if ($request->vendor_type == 'food_vendor') {
+        $vendor = MDFoodRegisters::where('id', $request->id)->update($rejectionData);
+    }
+
+    if ($request->vendor_type == 'shop_vendor') {
+        $vendor = VendorRegister::where('id', $request->id)->update($rejectionData);
+    }
+
+    if ($request->vendor_type == 'medical_service_provider') {
+        $vendor = MedicalProviderRegistrater::where('id', $request->id)->update($rejectionData);
+    }
+
+    if ($vendor) {
+        return redirect('admin/rejected-vendors')->with('success', 'Vendor Rejected');
+    } else {
+        return redirect('admin/rejected-vendors')->with('error', 'Vendor Not Rejected');
+    }
+}
+
+
+
+  public function delete_vendor(Request $request){
+
+    // dd($request->all());
+  
+     if ($request->vendor_type == 'food_vendor'){
+       $vendor = MDFoodRegisters::where('id', $request->id)->update(['status' => 'delete']);
+     }
+  
+     if ($request->vendor_type == 'shop_vendor'){
+      $vendor = VendorRegister::where('id', $request->id)->update(['status' => 'delete']);
+    }
+  
+     
+    if ($request->vendor_type == 'medical_service_provider'){
+      $vendor = MedicalProviderRegistrater::where('id', $request->id)->update(['status' => 'delete']);
+    }
+  
+  
+      if($vendor){
+      return redirect('admin/rejected-vendors')->with('success','Vendor Deleted');
+      }else{
+        return redirect('admin/approved-vendors')->with('error','Vendor Not Deleted');  
+      }
+  }
+  
+  
+
+
 
 
 

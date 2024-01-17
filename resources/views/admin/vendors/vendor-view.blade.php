@@ -227,15 +227,15 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label for="firstName">Current Status</label>
-                                            <p>Rejected</p>
+                                            <p>Approved</p>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="firstName">Date</label>
-                                            <p>23 Dec 2023 11:24am</p>
+                                            <p>{{ !empty($vendor->approved_date) ? date('d M Y', strtotime($vendor->approved_date)) : '' }}</p>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="email">Approved By</label>
-                                            <p>Vishal Mehta</p>
+                                            <p>{{!empty($vendor->approved_by)?$vendor->approved_by:''}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +248,7 @@
                                     <div class="d-flex flex-wrap justify-content-between">
                                         @if($vendor->vendor_status)
                                         @if($vendor->vendor_status=='approved') 
-                                        <button type="submit" class="btn md-btn deactivate-btn">Save Changes</button>
+                                        <button type="submit" class="btn md-btn-100 deactivate-btn">Save Changes</button>
                                         @endif
                                         @endif
                             </form>
@@ -263,11 +263,11 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="firstName">Date</label>
-                                        <p>23 Dec 2023 11:24am</p>
+                                        <p>{{ !empty($vendor->rejected_date) ? date('d M Y', strtotime($vendor->rejected_date)) : '' }}</p>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="email">Rejected By</label>
-                                        <p>Vishal Mehta</p>
+                                        <p>{{!empty($vendor->rejected_by)?$vendor->rejected_by:''}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -279,17 +279,25 @@
 
 
 
-                            
-                            {{-- <div class="col-md-12 mb-3">
-                                <div class="d-flex flex-wrap justify-content-between"> --}}
+                        
                                     @if($vendor->vendor_status)
                                     @if($vendor->vendor_status=='approved') 
-                                    <button type="submit" class="btn md-btn save-btn">Approve Vendor</button>
-                                    <button type="submit" class="btn md-btn delete-btn">Reject Vendor</button>
+                                    <form method="post" action="{{route('approve.vendor')}}">
+                                        @csrf
+                                        <input type="hidden" name="vendor_type" value="{{$vendor->vendor_type}}">
+                                        <input type="hidden" name="id" value="{{$vendor->id}}">
+                                    <button type="submit" class="btn md-btn-100 save-btn">Approve Vendor</button>
+                                    </form>
+
+                                    <form method="post" action="{{route('reject.vendor')}}">
+                                        @csrf
+                                        <input type="hidden" name="vendor_type" value="{{$vendor->vendor_type}}">
+                                        <input type="hidden" name="id" value="{{$vendor->id}}">
+                                    <button type="submit" class="btn md-btn-100 delete-btn">Reject Vendor</button>
+                                    </form>
                                     @endif
                                     @endif
-                                {{-- </div>
-                            </div> --}}
+                              
 
 
 {{-- 
@@ -302,9 +310,19 @@
                           
                             @if($vendor->vendor_status)
                             @if($vendor->vendor_status=='pending')  
-                            
-                                    <button type="submit" class="btn md-btn-48 save-btn">Approve Vendor</button>
-                                    <button type="submit" class="btn md-btn-48 delete-btn">Reject Vendor</button>
+                                    <form method="post" action="{{route('approve.vendor')}}">
+                                        @csrf
+                                        <input type="hidden" name="vendor_type" value="{{$vendor->vendor_type}}">
+                                        <input type="hidden" name="id" value="{{$vendor->id}}">
+                                     <button type="submit" class="btn md-btn-100 save-btn">Approve Vendor</button>
+                                    </form>  
+
+                                    <form method="post" action="{{route('reject.vendor')}}">
+                                        @csrf
+                                        <input type="hidden" name="vendor_type" value="{{$vendor->vendor_type}}">
+                                        <input type="hidden" name="id" value="{{$vendor->id}}">
+                                        <button type="submit" class="btn md-btn-100 delete-btn">Reject Vendor</button>
+                                    </form>
                                
                             @endif
                             @endif
@@ -313,9 +331,19 @@
 
                             @if($vendor->vendor_status)
                             @if($vendor->vendor_status=='rejected')  
-                            
-                              <button type="submit" class="btn md-btn-48 save-btn">Approve Vendor</button>
-                              <button type="submit" class="btn md-btn-48 delete-btn">Delete Vendor</button>
+                            <form method="post" action="{{route('approve.vendor')}}">
+                                @csrf
+                                <input type="hidden" name="vendor_type" value="{{$vendor->vendor_type}}">
+                                <input type="hidden" name="id" value="{{$vendor->id}}">
+                              <button type="submit" class="btn md-btn-100 save-btn">Approve Vendor</button>
+                            </form>
+
+                            <form method="post" action="{{route('delete.vendor')}}">
+                                @csrf
+                                <input type="hidden" name="vendor_type" value="{{$vendor->vendor_type}}">
+                                <input type="hidden" name="id" value="{{$vendor->id}}">
+                              <button type="submit" class="btn md-btn-100 delete-btn">Delete Vendor</button>
+                            </form>  
                                
                             @endif
                             @endif

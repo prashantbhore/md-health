@@ -33,6 +33,7 @@
     {{-- <link rel="stylesheet" href="{{URL::asset('front/assets/css/responsiveStyles.css')}}"> --}}
 
     <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}">
+    
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -78,7 +79,7 @@
         }
     </style>
 
-    <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}"> -->
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 

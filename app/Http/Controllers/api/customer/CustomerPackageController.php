@@ -1335,6 +1335,7 @@ class CustomerPackageController extends BaseController
     public function customer_purchase_package(Request $request)
     {
 
+
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             // 'sale_price' => 'required',
@@ -1467,6 +1468,11 @@ class CustomerPackageController extends BaseController
                 $purchase_details['payment_percentage'] = $request->percentage;
                 $purchase_details['purchase_type'] = 'pending';
                 $purchase_details['created_by'] = Auth::user()->id;
+                
+                //////////////////////////////////
+                // dd($request->all());
+                $purchase_details['conversation_id'] = !empty($request->conversation_id) ?$request->conversation_id:'' ;
+                //////////////////////////////////
 
                 $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
 
