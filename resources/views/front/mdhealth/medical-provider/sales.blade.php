@@ -79,7 +79,7 @@
                                         <div class="row card-row align-items-center">
                                             @php
 
-                                            $id = Session::get('MDMedicalProvider*%');
+                                            $id = Auth::guard('md_health_medical_providers_registers')->user()->id;
                                             $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
                                             ->where('medical_provider_id', $id)
                                             ->first();
@@ -137,7 +137,7 @@
 
                                             @php
                                             $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            ->where('medical_provider_id', Auth::user()->id)
+                                            ->where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)
                                             ->first();
                                             @endphp
 
@@ -187,9 +187,9 @@
                                     <div class="treatment-card df-start w-100 mb-3">
                                         <div class="row card-row align-items-center">
                                             @php
-                                            if(!empty(Auth::user()->id)){
+                                            if(!empty(Auth::guard('md_health_medical_providers_registers')->user()->id)){
                                             $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            ->where('medical_provider_id', Auth::user()->id)
+                                            ->where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)
                                             ->first();
                                             }
                                             @endphp

@@ -450,30 +450,9 @@ Route::middleware('auth:sanctum')->group(function ()
 
 
 
-    //Vendor Prodcut
-    Route::controller(VendorProductController::class)->group(function () {
-        Route::get('product-category', 'vendor_product_category');
-        Route::post('product-sub-category', 'vendor_product_sub_category');
-    });
+   
 
-
-
-    //customer MD Shop
-
-    Route::controller(CustomerShopController::class)->group(function () {
-        Route::get('featured-product', 'featured_product_list');
-        Route::post('customer-product-view', 'product_view');
-        Route::post('vendor-product-lists', 'vendor_product_list');
-        Route::post('/shopping-cart/add', 'addToCart');
-        Route::get('/shopping-cart/view', 'viewCart');
-        Route::post('/shopping-cart/delete-item', 'deleteCartItem');
-        Route::get('/shopping-cart/clear', 'clearCart');
-        Route::post('filter-product-list', 'filteredProductList');
-        Route::post('store-payment-details', 'processPayment');
-        Route::post('/follow-vendor', 'followVendor');
-        Route::post('/unfollow-vendor', 'unfollowVendor');
-        Route::post('/favorites/add', 'addToFavorites');
-    });
+   
 
 
 
@@ -525,4 +504,26 @@ Route::middleware('auth:sanctum')->group(function ()
 
 
 });
+ //Vendor Prodcut
+ Route::controller(VendorProductController::class)->group(function () {
+    Route::get('product-category', 'vendor_product_category');
+    Route::post('product-sub-category', 'vendor_product_sub_category');
+});
+  //customer MD Shop
+
+  Route::controller(CustomerShopController::class)->group(function () {
+    Route::get('featured-product', 'featured_product_list');
+    Route::post('customer-product-view', 'product_view');
+    Route::post('vendor-product-lists', 'vendor_product_list');
+    Route::post('/shopping-cart/add', 'addToCart');
+    Route::get('/shopping-cart/view', 'viewCart');
+    Route::post('/shopping-cart/delete-item', 'deleteCartItem');
+    Route::get('/shopping-cart/clear', 'clearCart');
+    Route::post('filter-product-list', 'filteredProductList');
+    Route::post('store-payment-details', 'processPayment');
+    Route::post('/follow-vendor', 'followVendor');
+    Route::post('/unfollow-vendor', 'unfollowVendor');
+    Route::post('/favorites/add', 'addToFavorites');
+});
+
 
