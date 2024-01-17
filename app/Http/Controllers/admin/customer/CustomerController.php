@@ -10,6 +10,7 @@ use DataTables;
 use Crypt;
 use DB;
 use App\Library\LogActivity;
+use Carbon\Carbon;
 
 
 class CustomerController extends Controller
@@ -26,13 +27,34 @@ class CustomerController extends Controller
 
     public function data_table(Request $request)
     {
-      
+        $query = CustomerRegistration::with('country')->with('city');
+
+            if ($request->status == 'all') {
+                $query->where('status', '!=', 'delete');
+            } elseif ($request->status == 'active') {
+                $query->where('status', 'active');
+            } elseif ($request->status == 'inactive') {
+                $query->where('status', 'inactive');
+            }
+
+           
+            $customers = $query->get();
+        
+       
+        $customers = $query->get();
     
-        $customers=CustomerRegistration::with('country')->with('city')->where('status','!=','delete')->get();
     
-    
-        if ($request->ajax()) {
+        if ($request->ajax()){
             return DataTables::of($customers)
+            ->addIndexColumn()
+
+
+
+            ->addColumn('id', function ($row){
+                if(!empty($row->customer_unique_no)){
+                return ucfirst($row->customer_unique_no);
+                }
+            })
                 
     
             ->addColumn('name', function ($row) {
@@ -50,16 +72,12 @@ class CustomerController extends Controller
             })
             
               
-                ->addColumn('gender', function ($row){
-                    if(!empty($row->gender)){
-                    return ucfirst($row->gender);
-                    }
-                })
+               
     
     
-                ->addColumn('age', function ($row){
-                    return ucfirst(0);
-                })
+                // ->addColumn('age', function ($row){
+                //     return ucfirst(0);
+                // })
 
 
                 
@@ -81,6 +99,20 @@ class CustomerController extends Controller
                     return ucfirst($row->phone);
                     }
                 })
+
+
+
+                ->addColumn('status', function ($row){
+                    $status = $row->status;
+                
+                    if ($status == 'active') {
+                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_customer_registration" data-flash="Status Changed Successfully!" class="md-change-status activateLink mt-0 activate-btn">Activate</a>';
+                    } else {
+                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_customer_registration" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactivate</a>';
+                    }
+                
+                    return $statusBtn;
+                })
     
     
                 ->addColumn('action', function ($row){
@@ -95,10 +127,11 @@ class CustomerController extends Controller
                     </div>';
                 
 
-                return $actionBtn;
-            })
+                  return $actionBtn;
+               })
+
                 
-                ->rawColumns(['action'])
+                ->rawColumns(['action','status'])
                 ->make(true);
         }
     }
@@ -131,6 +164,18 @@ class CustomerController extends Controller
 
         $customer = CustomerRegistration::with(['country', 'city', 'customerOrders.package','customerOrders.paymentDetails.purchage'])->find($id);
 
+        //dd($customer->date_of_birth);
+        $age=0;
+
+        if(!empty($customer->date_of_birth)){
+        $dateOfBirth = Carbon::createFromFormat('d/m/Y', $customer->date_of_birth);
+        $today = Carbon::now();
+
+         $age = $dateOfBirth->diffInYears($today);
+        }
+    // Now, $age contains the age of the customer
+   // dd($age);
+
 
         //dd($customer);
 
@@ -138,7 +183,7 @@ class CustomerController extends Controller
 
    
        
-         return view('admin.customers.customer-details',compact('customer','logs'));
+         return view('admin.customers.customer-details',compact('customer','logs','age'));
         
 
        

@@ -41,6 +41,13 @@
     max-width: 1067px;
 }
 
+.w-292 {
+    width: 292px;
+}
+.w-761 {
+    width: 761px;
+}
+
 .gj-picker {
     font-family: "CamptonBook";
 }
@@ -149,7 +156,6 @@
     color: #000;
     font-family: Campton;
     font-size: 14px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.56px;
@@ -168,7 +174,6 @@
     color: #000;
     font-family: Campton;
     font-size: 16px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -406,6 +411,7 @@
 
 #AccommodationView .btn-close,
 #TourView .btn-close,
+#ReviewModal .btn-close,
 #TransportationView .btn-close {
     background: url("../img/closeModal.png") no-repeat center center/cover;
     opacity: 1;
@@ -415,6 +421,7 @@
 #UserCancellationReq .modal-header .btn-close,
 #AccommodationView .modal-header .btn-close,
 #TransportationView .modal-header .btn-close,
+#ReviewModal .modal-header .btn-close,
 #TourView .modal-header .btn-close,
 #UserChangeInformationModel .modal-header .btn-close {
     top: 20px;
@@ -778,6 +785,10 @@ select {
     padding-bottom: 100px;
 }
 
+.pt-100px {
+    padding-top: 100px;
+}
+
 .pt-135px {
     padding-top: 135px;
 }
@@ -806,7 +817,7 @@ select {
 
 .bod-right {
     border-right: 1px solid #4cdb06;
-    height: 1394px;
+    height: 1180px;
 }
 
 .df-center {
@@ -1423,13 +1434,12 @@ select {
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
-    transition: 0.3s all;
+    transition: 0.15s all;
     padding: 0.5rem 0;
 }
 
 .panel-left .nav-link:hover {
     color: #4cdb06;
-    padding-left: 1.5rem;
     font-weight: bold;
 }
 
@@ -1559,7 +1569,7 @@ select {
 .treatment-card {
     /* width: 687px; */
     height: 90px;
-    padding: 16px;
+    padding: 32px;
     border-radius: 3px;
     background: #f6f6f6;
     background-color: #f6f6f6;
@@ -1782,6 +1792,10 @@ select {
 
 .fsb-2 {
     font-family: "CamptonBook" !important;
+}
+
+.fs-20 {
+    font-size: 20px !important;
 }
 
 .fs-18 {
@@ -2509,7 +2523,8 @@ span.popup-msg.active {
     letter-spacing: -1.56px;
 }
 
-.medical-pckg .bookButton {
+.medical-pckg .bookButton,
+.reservations-nav .bookButton {
     width: 234px;
     height: 47px;
 
@@ -2526,7 +2541,16 @@ span.popup-msg.active {
 
     cursor: pointer;
 }
-
+.reservations-nav .bookButton {
+    font-family: "Campton";
+    border-radius: 70px;
+border: 1px solid #000;
+    
+}
+.reservations-nav .active {
+    background: #4CDB06;
+    border: 1px solid #4CDB06;
+}
 .section6 {
     overflow: hidden;
 }
@@ -2780,10 +2804,12 @@ span.popup-msg.active {
 }
 
 .mdCard {
-    background: linear-gradient(109.88deg, #4cdb06 1.33%, rgba(76, 219, 6, 0.4) 98.07%);
-    border-radius: 25px;
+    width: 490px;
+    height: 297px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    background: linear-gradient(110deg, #4CDB06 1.33%, rgba(76, 219, 6, 0.40) 98.07%);
     display: flex;
-    padding: 2.5rem;
     justify-content: space-around;
     align-items: center;
 }
@@ -3566,7 +3592,6 @@ label.tc-text,
     color: #000;
     font-family: Campton;
     font-size: 13px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.52px;
@@ -4088,6 +4113,7 @@ label.tc-text,
 #UserCancellationReq .modal-dialog,
 #AccommodationView .modal-dialog,
 #TransportationView .modal-dialog,
+#ReviewModal .modal-dialog,
 #TourView .modal-dialog,
 #UserChangeInformationModel .modal-dialog {
     max-width: 704px;
@@ -4096,6 +4122,7 @@ label.tc-text,
 #UserCancellationReq .modal-content,
 #AccommodationView .modal-content,
 #TransportationView .modal-content,
+#ReviewModal .modal-content,
 #TourView .modal-content,
 #UserChangeInformationModel .modal-content {
     border-radius: 10px;
@@ -4112,8 +4139,7 @@ label.tc-text,
     letter-spacing: -0.52px;
 }
 
-.user-details-body
- {
+.user-details-body {
     border-bottom: 1px solid #C5C5C5;
     padding-bottom: 28px;
 }
@@ -4128,7 +4154,7 @@ label.tc-text,
     color: #000002;
     text-align: center;
     font-family: CamptonBold;
-    font-size: 23px;
+    font-size: 8px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -4170,7 +4196,10 @@ label.tc-text,
 
 #TourView .modal-content {
     background: url("../img/Accombg.png") no-repeat center center/ contain;
-    /* background-color: red; */
+    height: 707px;
+}
+#ReviewModal .modal-content {
+    background: url("../img/reviewBg.png") no-repeat center center/ contain;
     height: 707px;
 }
 
@@ -4240,4 +4269,91 @@ label.tc-text,
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.6px;
+}
+
+#recaptcha-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.patient-details-div label {
+    position: absolute;
+    top: -11px;
+    right: 20px;
+    background: #f6f6f6;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #9F9E9E;
+    font-family: 'CamptonBook';
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.patient-details-div .form-control {
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #DBDBDB;
+    background: transparent;
+    color: #000;
+    font-family: Campton !important;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.coinsMD {
+    color: #000;
+    font-family: CamptonBold;
+    font-size: 41px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.64px;
+}
+
+.andInv {
+    font-family: Campton;
+    font-size: 47px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 111.2%;
+    letter-spacing: -1.88px;
+}
+
+.inviteBtn2 {
+    width: 234px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 70px;
+    border: 1px solid #4CDB06;
+    color: #000;
+    font-family: Campton;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+}
+
+.reviewsStar {
+ display: flex;   
+ align-items: center;
+ gap: 8px;
+ 
+}
+
+.reviewsStar .fa.filled {
+    font-size: 18px;
+    color:  #4CDB06;
+}
+
+.reviewsStar .fa {
+    font-size: 18px;
+    color:  #B9B9B9;
 }

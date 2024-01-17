@@ -46,50 +46,112 @@ $(document).ready(function () {
 
 
 
-$(function (){
-var table = $("#example").DataTable({
-    bFilter: false,
-    ordering: false,
-    processing: false,
-    serverSide: true,
-    paging: true,
-    searching: true,
-    destroy: true,
-    clear: true,
-    ajax: base_url + "/admin/country-data-table",
-    method:'get',
-    columns: [
-        {
-            data: "DT_RowIndex",
-            name: "DT_RowIndex",
-        },
+// $(function (){
+// var table = $("#example").DataTable({
+//     bFilter: false,
+//     ordering: false,
+//     processing: false,
+//     serverSide: true,
+//     paging: true,
+//     searching: true,
+//     destroy: true,
+//     clear: true,
+//     ajax: base_url + "/admin/country-data-table",
+//     method:'get',
+//     columns: [
+//         {
+//             data: "DT_RowIndex",
+//             name: "DT_RowIndex",
+//         },
 
-        {
-            data: "country_code",
-            name: "country_code",
-        },
+//         {
+//             data: "country_code",
+//             name: "country_code",
+//         },
 
-        {
-            data: "country_name",
-            name: "country_name",
-        },
+//         {
+//             data: "country_name",
+//             name: "country_name",
+//         },
 
-        {
-            data: "status",
-            name: "status",
-        },
+//         {
+//             data: "status",
+//             name: "status",
+//         },
       
-        {
-            data: "action",
-            name: "action",
-        },
-    ],
-});
+//         {
+//             data: "action",
+//             name: "action",
+//         },
+//     ],
+// });
 
-function reload_table() {
-    table.DataTable().ajax.reload(null, false);
-}
-});
+// function reload_table() {
+//     table.DataTable().ajax.reload(null, false);
+// }
+// });
+
+
+
+
+
+
+$(function (){
+    var table = $("#example").DataTable({
+        processing: true,
+        serverSide: true,
+        searchable: true,
+        deferRender: true,
+        pagingType: 'numbers',
+        destroy: true,
+        clear: true,
+          ajax: {
+              url: base_url + "/admin/country-data-table",
+              data: function (d) {
+                  d.status = $('#status').val();
+              },
+          },
+          columns: [
+            {
+                data: "DT_RowIndex",
+                name: "DT_RowIndex",
+                orderable: false,
+                
+            },
+    
+            {
+                data: "country_code",
+                name: "country_code",
+                orderable: false,
+            },
+    
+            {
+                data: "country_name",
+                name: "country_name",
+                orderable: false,
+            },
+    
+            {
+                data: "status",
+                name: "status",
+                orderable: false,
+                searchable: false,
+            },
+          
+            {
+                data: "action",
+                name: "action",
+                orderable: false,
+                searchable: false,
+            },
+            
+         ],
+      });
+  
+      $("#status").change(function (){
+          table.draw();
+      });
+  });
 
 
 

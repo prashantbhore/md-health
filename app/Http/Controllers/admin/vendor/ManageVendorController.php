@@ -9,6 +9,9 @@ use App\Models\Packages;
 use App\Models\MDFoodRegisters;
 use App\Models\MedicalProviderRegistrater;
 use App\Models\VendorRegister;
+use App\Models\MedicalProviderLogo;
+use App\Models\ProviderImagesVideos;
+use App\Models\MedicalProviderLicense;
 
 use DataTables;
 use Crypt;
@@ -232,9 +235,9 @@ class ManageVendorController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
             <div class="text-end d-flex align-items-center justify-content-end gap-3">
-            <a href="' . route('medical_tourism.details', ['id' => Crypt::encrypt($row->id)]) . '" class="btn btn-info btn-xs" title="View">
-            <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
-           </a>
+            <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
+                <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
+            </a>
         
             <a href="javascript:void(0)" data-id="' . $row->id . '"  data-table="' . $row->vendor_type . '" data-flash="Vendor Deleted Successfully!" class="btn btn-danger vendor-delete btn-xs" title="Delete">
                 <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
@@ -466,9 +469,9 @@ class ManageVendorController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
         <div class="text-end d-flex align-items-center justify-content-end gap-3">
-        <a href="' . route('medical_tourism.details', ['id' => Crypt::encrypt($row->id)]) . '" class="btn btn-info btn-xs" title="View">
+        <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
         <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
-       </a>
+    </a>
     
         <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Medical Tourism Deleted Successfully!" class="btn btn-danger medical-tourism-delete btn-xs" title="Delete">
             <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
@@ -696,15 +699,15 @@ class ManageVendorController extends Controller
 
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
-        <div class="text-end d-flex align-items-center justify-content-end gap-3">
-        <a href="' . route('medical_tourism.details', ['id' => Crypt::encrypt($row->id)]) . '" class="btn btn-info btn-xs" title="View">
-        <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
-       </a>
-    
-        <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Medical Tourism Deleted Successfully!" class="btn btn-danger medical-tourism-delete btn-xs" title="Delete">
-            <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
-        </a>
-        </div>';
+                <div class="text-end d-flex align-items-center justify-content-end gap-3">
+                <a href="' . route('view.vendor.details', ['id' => Crypt::encrypt($row->id),'vendor_type' => $row->vendor_type]) . '" class="btn btn-info btn-xs" title="View">
+                <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
+            </a>
+            
+                <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_customer_registration" data-flash="Medical Tourism Deleted Successfully!" class="btn btn-danger medical-tourism-delete btn-xs" title="Delete">
+                    <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
+                </a>
+                </div>';
 
                     return $actionBtn;
                 })
@@ -760,5 +763,95 @@ public function vendor_delete(Request $request)
 
     return response()->json(['message' =>'Vendor Is Deleted', 'status' => 'true']);
 }
+
+
+
+
+
+public function vendor_view(Request $request){
+
+   // dd($request->vendor_type);
+
+    $id=Crypt::decrypt($request->id);
+
+      if($request->vendor_type=='medical_service_provider'){
+      $vendor=MedicalProviderRegistrater::with(['city','providerPackages'])
+      ->where('id',$id)
+      ->first();
+
+      //dd($medical_provider);
+
+     $vendor_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
+
+     $vendor_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
+
+     $gallary=ProviderImagesVideos::where('status','active')->where('provider_id',$id)->get();
+    }
+
+
+
+    if($request->vendor_type=='food_vendor'){
+
+        $vendor=MDFoodRegisters::with(['city'])
+        ->where('id',$id)
+        ->first();
+  
+        //dd($medical_provider);
+  
+        $vendor_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
+  
+        $vendor_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
+  
+       $gallary=ProviderImagesVideos::where('status','active')->where('provider_id',$id)->get();
+      }
+
+
+      
+    if($request->vendor_type=='shop_vendor'){
+
+        $vendor=VendorRegister::with(['city'])
+        ->where('id',$id)
+        ->first();
+  
+        //dd($medical_provider);
+  
+        $vendor_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
+  
+        $vendor_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
+  
+        $gallary=ProviderImagesVideos::where('status','active')->where('provider_id',$id)->get();
+      }
+
+
+
+
+
+
+
+   return view('admin.vendors.vendor-view',compact('vendor','vendor_logo','vendor_license','gallary'));
+}
+
+
+
+public function store(Request $request){
+   // dd($request->all());
+      
+    //if($)
+    $input['company_overview'] =!empty($request->overview)?$request->overview:'';
+    $provider=MedicalProviderRegistrater::find($request->id)->update($input);
+
+   if(!empty($provider)){
+    return redirect()->back()->with('success', 'Vendor Updated Successfully!');
+   }else{
+    return redirect()->back()->with('fail', 'Vendor Not Updated Successfully!');
+   }
+
+}
+
+
+
+
+
+
 
 }

@@ -70,23 +70,52 @@ class CityController extends Controller
 
     public function data_table(Request $request)
     {
-        $cities = Cities::with('country')->where('status', '!=', 'delete')->get();
-    
+        $cities = Cities::with('country')
+        ->when($request->status == 'all', function ($query) {
+            return $query->where('status', '!=', 'delete');
+        })
+        ->when($request->status == 'active', function ($query) {
+            return $query->where('status', 'active');
+        })
+        ->when($request->status == 'inactive', function ($query) {
+            return $query->where('status', 'inactive');
+        })
+        ->get();
+
+
         if ($request->ajax()) {
             return DataTables::of($cities)
+            
                 ->addIndexColumn()
-                ->addColumn('city_name', function ($row) {
+
+                ->addColumn('city_name', function ($row){
                     if(!empty($row->city_name)){
                     return ucfirst($row->city_name);
                     }
                 })
+
                 ->addColumn('country_name', function ($row) {
-                    if(!empty($row->city_name)){
+                    if(!empty($row->country->country_name)){
                     return ucfirst($row->country->country_name);
                     }
                 })
 
-                ->addColumn('action', function ($row) {
+
+                
+                ->addColumn('status', function ($row){
+                    $status = $row->status;
+                
+                    if ($status == 'active'){
+                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_cities" data-flash="Status Changed Successfully!" class="md-change-status activateLink mt-0 activate-btn">Active</a>';
+                    } else {
+                        $statusBtn = '<a href="javascript:void(0)" data-id="' . Crypt::encrypt($row->id) . '" data-table="md_master_cities" data-flash="Status Changed Successfully!" class="md-change-status deleteImg mt-0 deactivate-btn">Deactive</a>';
+                    }
+                
+                    return $statusBtn;
+                   })
+                
+
+                ->addColumn('action', function ($row){
                     $editUrl = url('admin/cities/' . Crypt::encrypt($row->id) . '/edit');
                     $actionBtn = '<a href="' . $editUrl . '">
                         <button type="button" data-id="' . $row->id . '" class="btn btn-warning btn-xs Edit_button" title="Edit">
@@ -100,12 +129,13 @@ class CityController extends Controller
                     return $actionBtn;
                 })
 
-
-                
-                ->rawColumns(['city_name', 'country_name','action'])
+                ->rawColumns(['action','status'])
                 ->make(true);
         }
     }
+
+
+
 
 
 

@@ -146,6 +146,7 @@ public function data_table(Request $request)
 
     if ($request->ajax()){
         return DataTables::of($porodcut_category)
+        ->addIndexColumn()
             
 
           

@@ -80,6 +80,11 @@ $(function (){
           columns: [
 
             {
+                data: "DT_RowIndex",
+                name: "DT_RowIndex",
+            },
+
+            {
                 data: "id",
                 name: "id",
             },
