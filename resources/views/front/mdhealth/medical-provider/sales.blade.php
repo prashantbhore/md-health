@@ -5,11 +5,11 @@
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4" style="min-height: 245px;">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>Sale</span>

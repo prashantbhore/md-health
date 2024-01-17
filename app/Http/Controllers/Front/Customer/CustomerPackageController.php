@@ -1175,14 +1175,14 @@ class CustomerPackageController extends Controller
         if ($customer_reports) {
             foreach ($customer_reports as $report) {
 
-                $htmlResult .= '<div class="treatment-card df-start w-100 mb-3">';
-                $htmlResult .= '<div class="row card-row align-items-center justify-content-evenly m-0">';
-                $htmlResult .= '<div class="col-md-2 df-center px-0">';
+                $htmlResult .= '<div class="card shadow-none mb-4 pkgCard mb-4">';
+                $htmlResult .= '<div class="card-body d-flex gap-3 w-100 p-4">';
+                $htmlResult .= '<div class="df-center">';
                 $htmlResult .= '<img src="' . !empty($report['provider_data']['logo_path']) ? $report['provider_data']['logo_path'] : url('/front/assets/img/Memorial.svg') . '" alt="">';
                 $htmlResult .= '</div>';
 
-                $htmlResult .= ' <div class="col-md-6 justify-content-start ps-0">';
-                $htmlResult .= ' <div class="trmt-card-body">';
+                $htmlResult .= ' <div class="df-column">';
+               
                 $htmlResult .= '<h5 class="dashboard-card-title">' . !empty($report['provider_data']['company_name']) ? $report['provider_data']['company_name'] : '' . '</h5>';
                 $htmlResult .= '<h5 class="mb-0 fw-500 d-flex align-items-center gap-2">';
                 $htmlResult .= ' <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">';
@@ -1190,9 +1190,9 @@ class CustomerPackageController extends Controller
                 $htmlResult .= '</svg>';
                 $htmlResult .= '<span class="fsb-2">' . !empty($report['report_count']) ? $report['report_count'] : '' . 'Reports</span>';
                 $htmlResult .= ' </h5>';
+                
                 $htmlResult .= '</div>';
-                $htmlResult .= '</div>';
-                $htmlResult .= '<div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">';
+                $htmlResult .= '<div class="ms-auto pkgMsg">';
                 $htmlResult .= '<div class="trmt-card-footer">';
                 $htmlResult .= ' <a href="javascript:void(0);" class="fsb-2 fw-600 bg-green text-dark show-reports" id="ViewAllReports"><strong>View All Reports</strong></a>';
                 $htmlResult .= '</div>';

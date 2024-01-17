@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="TAXNumber" class="form-label">*TAX Number</label>
-                                        <input type="text" class="form-control" name="tax_no" id="tax_no" placeholder="TAX Number" />
+                                        <input type="text" class="form-control" name="tax_no" id="tax_no" placeholder="TAX Sheet Number" />
                                     </div>
 
                                     <div class="col-md-12 mb-3">
@@ -108,7 +108,7 @@
                                         <div class="form-check tc d-flex gap-3">
                                             <input class="form-check-input " type="checkbox" value="" id="UserflexCheckDefault" />
                                             <label class="form-check-label" for="UserflexCheckDefault">
-                                                I accept <a href="#" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a>
+                                                I accept <a href="#" class="text-decoration-underline camptonBold">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a>
                                             </label>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                                     <span id="error" class="text-danger"></span>
 
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                        <button class="btn btn-md mb-5 w-100" type="button" id="medproreg" style="height: 47px;">Create Account</button>
+                                        <button class="btn btn-md mb-5 w-100 camptonExtraBold" type="button" id="medproreg" style="height: 47px;">Create Account</button>
                                         <label for="" class="mt-auto">Already have an account?</label>
                                         <a href="{{ url('sign-in-web') }}" class="signIn-link">Sign In</a>
                                     </div>
