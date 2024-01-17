@@ -291,7 +291,7 @@ class CustomerPackageController extends Controller
                 $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), Session::get('payment_request'), 'POST');
                 Session::forget('payment_request');
                 if (!empty($repsonse_data)) {
-                    if (!empty($repsonse_data['status'] == '200')) {
+                    if ($repsonse_data['status'] == '200') {
                         return view('front.mdhealth.user-panel.user-payment-successfull');
                     } else {
                         echo "Something went wrong, payment not completed, err code: API_03";

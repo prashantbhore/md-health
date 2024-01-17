@@ -166,7 +166,13 @@ class TransportationController extends BaseController
             $vehicle_input['comfort_level_id'] = $request->comfort_level_id;
             $vehicle_input['status'] = 'active';
             $vehicle_input['vehicle_per_day_price'] = $request->vehicle_per_day_price;
-            $vehicle_input['other_services'] = $request->other_services;
+            $other_services = $request->other_services;
+            $other_services_array = explode(',', $other_services);
+            $other_services_array = array_map('trim', $other_services_array);
+            $other_services_array = array_filter($other_services_array, function ($service) {
+                return $service !== 'on';
+            });
+            $vehicle_input['other_services'] = implode(', ', $other_services_array);
             if ($request->file('vehicle_image_path')) {
                 $vehicle_input['vehicle_image_path'] = $this->verifyAndUpload($request, 'vehicle_image_path', 'vehicle_image');
                 $original_name = $request->file('vehicle_image_path')->getClientOriginalName();
@@ -197,7 +203,13 @@ class TransportationController extends BaseController
             $vehicle_input['vehicle_model_id'] = $request->vehicle_model_name;
             $vehicle_input['comfort_level_id'] = $request->comfort_level_id;
             $vehicle_input['vehicle_per_day_price'] = $request->vehicle_per_day_price;
-            $vehicle_input['other_services'] = $request->other_services;
+            $other_services = $request->other_services;
+            $other_services_array = explode(',', $other_services);
+            $other_services_array = array_map('trim', $other_services_array);
+            $other_services_array = array_filter($other_services_array, function ($service) {
+                return $service !== 'on';
+            });
+            $vehicle_input['other_services'] = implode(', ', $other_services_array);
             $vehicle_input['status'] = 'inactive';
             $vehicle_input['created_by'] = Auth::user()->id;
             if ($request->file('vehicle_image_path')) {

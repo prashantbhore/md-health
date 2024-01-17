@@ -211,6 +211,14 @@ class FoodPackageController extends BaseController
 
     public function food_packages_menu_list(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'package_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        
         $FoodMenus=FoodMenus::where('status','active')
         ->select(
             'id',
@@ -221,10 +229,124 @@ class FoodPackageController extends BaseController
             // 'menu_image_path',
             // 'menu_image_name',
             'menu')
-        ->where('created_by',Auth::user()->id)
-
+        // ->where('created_by',Auth::user()->id)
         ->where('package_id',$request->package_id)
         ->get();
 
+
+        if (!empty($FoodMenus)) 
+        {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Menu details found.',
+                'food_menus' => $FoodMenus,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+
+    }
+
+
+    public function food_edit_menu_list(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'package_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        
+        $FoodMenus = FoodMenus::where('status', 'active')
+        ->select(
+            'id',
+            'package_id',
+            'days',
+            'calories',
+            'meal_type',
+            // 'menu_image_path',
+            // 'menu_image_name',
+            'menu'
+        )
+            // ->where('created_by',Auth::user()->id)
+        ->where('id', $request->id)
+        ->where('package_id', $request->package_id)
+        ->first();
+
+        if (!empty($FoodMenus)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Menu details found.',
+                'food_menus' => $FoodMenus,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Details not found.',
+            ]);
+        }
+    }
+
+    public function food_edit_menu(Request $request)
+    {
+
+        $food_menus = [];
+        $food_menus['days'] = $request->days;
+        $food_menus['calories'] = $request->calories;
+        $food_menus['meal_type'] = $request->meal_type;
+
+        if ($request->file('menu_image_path')) {
+            $food_menus['menu_image_path'] = $this->verifyAndUpload($request, 'menu_image_path', 'menu_images');
+            $original_name = $request->file('menu_image_path')->getClientOriginalName();
+            $food_menus['menu_image_name'] = $original_name;
+        }
+
+        $food_menus['menu'] = $request->menu;
+        $food_menus['created_by'] = Auth::user()->id;
+
+        $FoodMenus =FoodMenus::where('id', $request->id)->update($food_menus);
+        if (!empty($FoodMenus)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Menu updated successfully.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+    public function food_delete_menu(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $food_menus = [];
+        $food_menus['status'] = 'inactive';
+        $FoodMenus = FoodMenus::where('id', $request->id)->update($food_menus);
+        
+        if (!empty($FoodMenus)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Menu deleted successfully.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
     }
 }
