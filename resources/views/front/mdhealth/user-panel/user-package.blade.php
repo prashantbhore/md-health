@@ -62,12 +62,11 @@ $patient_information_list = !empty($patient_information_list[0]) ? $patient_info
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
-                @include('front.includes.sidebar-user')
+    <div class="d-flex gap-3">
+            <div class="w-292">
+            @include('front.includes.sidebar-user')
             </div>
-            <div class="col-md-9">
-
+            <div class="w-761">
                 <div class="card">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         Packages
@@ -93,7 +92,7 @@ $patient_information_list = !empty($patient_information_list[0]) ? $patient_info
                                 </div>
                                 <div class="list-div">
                                     <select name="" id="">
-                                        <option value="">List for Date</option>
+                                        <option value="">List for date</option>
                                         <option value="">List for Stars</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
@@ -109,7 +108,7 @@ $patient_information_list = !empty($patient_information_list[0]) ? $patient_info
                                     <div class="card shadow-none mb-4 pkgCard">
                                         <div class="card-body d-flex gap-3 w-100 p-4">
                                             <div class="df-center">
-                                                <img src="{{ asset($active_package['company_logo_image_path']) }}" alt="" style="height: 109px;width:109px;border-radius: 3px;object-fit:cover">
+                                                <img src="{{ asset($active_package['company_logo_image_path']) }}" alt="" style="height: 109px;width:109px;border-radius: 3px;object-fit:contain;background:#fff;padding:5px">
                                                 <!-- <img src="{{asset('front/assets/img/packageImg.png')}}" alt="" class="pkgImg"> -->
                                             </div>
                                             <div class="df-column">
@@ -146,8 +145,8 @@ $patient_information_list = !empty($patient_information_list[0]) ? $patient_info
 
                                     <div class="treatment-card-btns d-flex justify-content-around gap-3">
                                         <a href="{{ url('view-my-active-packages/' . $active_package['package_id'] . '/' . $active_package['purchase_id']) }}" id="package-details_{{ $active_package['package_id'] }}" class="order-completed-btn w-100 bg-white text-black fsb-2 border border-black package-details">Package Details</a>
-                                        <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation" id="change_information_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Change Patient Information</a>
-                                        {{-- <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation" data-bs-toggle="modal" data-bs-target="#UserChangeInformationModel">Change Patient Information</a> --}}
+                                        <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation "  id="change_information_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Change Patient Information</a>
+                                        {{-- <a href="javascript:void(0)" class="order-completed-btn w-100 bg-black fsb-2 text-white UserChangeInformation "  data-bs-toggle="modal" data-bs-target="#UserChangeInformationModel">Change Patient Information</a> --}}
                                         <a href="#" class="order-completed-btn w-100 bg-red fsb-2 text-white UserCancelPackage" id="cancel_package_model-{{ $active_package['package_id'] . '?' . $active_package['purchase_id'] }}">Cancellation Request</a>
                                     </div>
                                     @endforeach
@@ -211,7 +210,7 @@ $patient_information_list = !empty($patient_information_list[0]) ? $patient_info
                                     <div class="card shadow-none mb-4 pkgCard">
                                         <div class="card-body d-flex gap-3 w-100 p-4">
                                             <div class="df-center">
-                                                <img src="{{ asset($cancelled_package['company_logo_image_path']) }}" alt="" style="height: 109px;width:109px;border-radius: 3px;object-fit:cover">
+                                                <img src="{{ asset($cancelled_package['company_logo_image_path']) }}" alt="" style="height: 109px;width:109px;border-radius: 3px;object-fit:contain;background:#fff;padding:5px">
                                             </div>
                                             <div class="df-column">
                                                 <h5 class="mb-0">

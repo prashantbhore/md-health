@@ -42,12 +42,11 @@
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar-user')
             </div>
-            
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card card-body">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>Reports</span>
@@ -59,7 +58,7 @@
                         </div>
                         <div class="list-div">
                             <select name="" id="">
-                                <option value="">List for Date</option>
+                                <option value="">List for date</option>
                                 <option value="">List for Price</option>
                                 <option value="">List for Distance</option>
                             </select>

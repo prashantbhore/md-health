@@ -677,6 +677,8 @@ Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
 Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');
 Route::view('user-message', 'front/mdhealth/user-panel/user-message');
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
+Route::view('user-live-appoinment', 'front/mdhealth/user-panel/live-consultation-appoinment');
+
 Route::view('user-reports', 'front/mdhealth/user-panel/user-reports');
 
 

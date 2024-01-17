@@ -1317,6 +1317,12 @@ select {
     background-color: #F6F6F6;
 }
 
+.nav-tabs .nav-link {
+    border: unset;
+    border-bottom: 4px solid transparent;
+    min-width: 100px;
+    transition: 0.3s all;
+}
 .nav-tabs .nav-link:focus-visible {
     outline: unset;
 }
@@ -1426,7 +1432,7 @@ select {
     padding: 18px 30px;
     padding-bottom: 0;
     color: #000;
-    font-family: Campton;
+    font-family: "Campton";
     font-size: 20px;
     font-weight: 600;
     line-height: normal;
@@ -1439,7 +1445,7 @@ select {
 
 .panel-left .nav-link {
     color: #000;
-    font-family: CamptonBook;
+    font-family: "CamptonBook";
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
@@ -1473,6 +1479,7 @@ select {
     color: #4cdb06;
     padding-left: 1.5rem;
     font-weight: bold;
+    font-family: "Campton";
 }
 
 .green-plate,
@@ -1492,7 +1499,7 @@ select {
 .green-plate p,
 .white-plate p {
     color: #000002;
-    font-family: 'CamptonBook';
+    font-family: 'Campton';
     font-size: 16px;
     font-weight: 600;
     line-height: normal;
@@ -1502,7 +1509,7 @@ select {
 .black-plate p {
     color: #4cdb06;
     font-size: 16px;
-    font-family: CamptonBook;
+    font-family: "Campton";
 }
 
 .black-plate h3 {
@@ -1700,6 +1707,8 @@ select {
 .search-bar {
     max-width: 100%;
 }
+
+
 
 .search-bar .form-floating,
 .search-bar .form-select {
@@ -2120,7 +2129,7 @@ select option {
 .section-btns a {
     height: unset;
     padding: 10px 15px;
-    font-size: 15px;
+    font-size: 16px;
     text-align: center;
     border-radius: 5px;
     width: 49%;
@@ -2329,7 +2338,9 @@ span.popup-msg.active {
 .order-completed-btn {
     background: #e0e0e0;
     text-decoration: none;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
+    height: 35px;
+    font-size: 14px;
     border-radius: 5px;
     display: flex;
     align-items: center;
