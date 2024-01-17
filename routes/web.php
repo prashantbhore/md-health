@@ -369,23 +369,34 @@ Route::get('buy-service', function () {
 
 
 //mdShop Routes
+// {{-- mplus04 --}}
 Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
+Route::post('get-product', [MdShoppingController::class, 'get_product']);
+Route::get('featured-product', [MdShoppingController::class, 'featured_product']);
+Route::get('product/{id}', [MdShoppingController::class, 'product_view']);
+Route::get('view-products/{id}', [MdShoppingController::class, 'view_all_products']);
+Route::get('cart', [MdShoppingController::class, 'cart']);
+Route::get('view-products', [MdShoppingController::class, 'catgorywisefilter']);
 
-Route::get('cart', function () {
-    return view('front.mdShop.cart');
-});
+// Route::get('cart', function () {
+//     return view('front.mdShop.cart');
+// });
 
-Route::get('product', function () {
-    return view('front.mdShop.product');
-});
+// Route::get('product', function () {
+//     return view('front.mdShop.product');
+// });
 
 Route::get('payment-status-shop', function () {
     return view('front.mdShop.paymentStatus');
 });
 
-Route::get('view-products', function () {
-    return view('front.mdShop.allProducts');
-});
+// Route::get('view-products', function () {
+//     return view('front.mdShop.categorisedProduct');
+// });
+// {{-- mplus04 --}}
+
+
+
 
 // mdFood Routes
 Route::get('mdFoods', [MdFoodsController::class, 'mdfood_home']);

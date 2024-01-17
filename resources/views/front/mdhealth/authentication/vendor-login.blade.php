@@ -447,6 +447,9 @@
                     if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
                         $("#error").text("Too many attempts try again later");
                     }
+                    if (error.message == "TOO_SHORT") {
+                        $("#error").text("Mobile number short or missing country code");
+                    }
                     //  else {
 
                     // }
@@ -470,7 +473,7 @@
                     $("#successOtpAuthot").text("OTP verified");
                     $("#successOtpAuthot").show();
 
-                    recaptchaVerifier.clear();
+                    // recaptchaVerifier.clear();
                     // var formData = $('#myFormProvider').serialize();
                     var form = document.getElementById("myFormProvider");
                     var formData = new FormData(form);

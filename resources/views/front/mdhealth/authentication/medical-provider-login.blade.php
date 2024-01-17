@@ -406,7 +406,7 @@
                 // console.log(user);
                 $("#successOtpAuthot").text("OTP verified");
                 $("#successOtpAuthot").show();
-                recaptchaVerifier.clear();
+                // recaptchaVerifier.clear();
 
                 // var formData = $('#myFormProvider').serialize();
                 var form = document.getElementById("myFormProvider");

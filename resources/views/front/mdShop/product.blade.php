@@ -203,47 +203,26 @@
                     <a href="#">Category</a> >
                     <a href="#">Product Name</a>
                 </div>
+                 {{-- mplus04 --}}
                 <div class="row">
                     <div class="col-4">
                         <div class="product-img-view">
                             <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mb-5 swiper myProductsSwiper">
                                 <div class="swiper-wrapper">
+                                    @foreach ($product_gallery as $product_gallery_img)
                                     <div class="swiper-slide">
-                                        <img src="" />
+                                        <img src="{{$product_gallery_img}}" />
                                     </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                   
+                                    @endforeach
                                 </div>
                             </div>
                             <div thumbsSlider="" class="swiper myProductDotsSwiper">
                                 <div class="swiper-wrapper">
+                                    @foreach ($product_gallery as $product_gallery_img)
                                     <div class="swiper-slide">
-                                        <img src="" />
+                                        <img src="{{$product_gallery_img}}" />
                                     </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="" />
-                                    </div>
-                                    
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -252,8 +231,8 @@
                         <div class="product-content">
                             <div class="product-content-header">
                                 <div class="product-name mb-2">
-                                    <h6>Evony Medical Mask 50 pc.</h6>
-                                    <span class="text-green">Nivea</span>
+                                    <h6>{{(!empty($product_data['product_name']))?$product_data['product_name']:''}}</h6>
+                                    <span class="text-green">{{(!empty($product_data['product_category_name']))?$product_data['product_category_name']:''}}</span>
                                 </div>
                                 <div class="product-rating d-flex fsb-1">
                                     <p class="mb-0">5.0</p>
@@ -266,7 +245,7 @@
                                     </div>
                                     <p class="mb-0">(120 Reviews)</p>
                                 </div>
-                                <h3 class="product-price"> 299,99 ₺ </h3>
+                                <h3 class="product-price"> {{(!empty($product_data['sale_price']))?$product_data['sale_price']:''}} ₺ </h3>
                             </div>
                             <div class="product-buttons mb-4">
                                 <a data-bs-toggle="modal" data-bs-target="#addToCartModal">Add To Cart</a>
@@ -281,24 +260,44 @@
                                 </a>
                             </div>
                             <div class="product-content-div">
-                                <h4 class="text-green fsb-1">Product Spesifications</h4>
-                                <ul>
+                                <h4 class="text-green fsb-1">Product Specifications</h4>
+                                <p>{{(!empty($product_data['product_descrition']))?$product_data['product_descrition']:''}}</p>
+                                {{-- <ul>
                                     <li>Lorem ipsum dolor sit amet</li>
                                     <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</li>
                                     <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ur adipiscing elit, sed do</li>
                                 </ul>
                                 <h6 class="fsb-1">Lorem Ipsum</h6>
-                                <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
-                            </div>
+                                <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p> --}}
+                            </div> 
+                            
                         </div>
                     </div>
+                    {{-- {{dd($other_products)}} --}}
+{{-- 
+                    "id" => 84
+  "product_name" => "Home Loan"
+  "product_category_id" => 1
+  "product_category_name" => "cardio products"
+  "product_sub_category_id" => 1
+  "product_sub_category_name" => "stethoscope"
+  "product_descrition" => "gvrtgfdevgcv  ded"
+  "product_price" => "1000"
+  "shipping_fee" => ""
+  "free_shipping" => "no"
+  "discount" => "10"
+  "sale_price" => "909.00"
+  "featured" => "yes"
+  "vendor_id" => 30
+  "vendor_name" => "Mplus soft tech......" --}}
+
                     <div class="col-3">
                         <div class="right-side-div">
                             <div class="product-request">
                                 <div class="product-div1">
                                     <p class="fsw-1 product-div1-heading">
                                         <span>4.7</span>
-                                        evony medikal
+                                        {{(!empty($product_data['vendor_name']))?$product_data['vendor_name']:''}} 
                                     </p>
                                     <div class="product-follow-div">
                                         <div class="product-follow-logo">
@@ -311,12 +310,13 @@
                                             <p class="mb-0 fsb-2">120 Followers</p>
                                         </div>
                                     </div>
-                                    <a href="{{URL('view-products')}}" class="product-btn">
+                                    <a href="{{ URL('view-products/'.Crypt::encrypt($product_data['vendor_id'])) }}"
+                                    class="product-btn">
                                         View All Products
                                     </a>
                                 </div>
 
-                                <div class="product-div2 mb-4">
+                                <div class="product-div2 mb-4 {{(!empty($product_data['free_shipping'])&&($product_data['free_shipping']=='no'))?'d-none':''}}">
                                     <svg width="28" height="28" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M5.97404 1.37575C6.13494 1.28639 6.31595 1.2395 6.5 1.2395C6.68405 1.2395 6.86506 1.28639 7.02596 1.37575L11.0966 3.63666C11.181 3.68359 11.2513 3.75223 11.3002 3.83547C11.3492 3.9187 11.375 4.01351 11.375 4.11008V8.5707C11.375 8.76389 11.3233 8.95354 11.2253 9.12002C11.1272 9.2865 10.9865 9.42375 10.8176 9.51754L7.02596 11.6246C6.86506 11.714 6.68405 11.7609 6.5 11.7609C6.31595 11.7609 6.13494 11.714 5.97404 11.6246L2.18237 9.51754C2.01357 9.42379 1.87288 9.28663 1.77489 9.12026C1.67689 8.95388 1.62514 8.76434 1.625 8.57125V4.11008C1.625 4.01351 1.65081 3.9187 1.69976 3.83547C1.74871 3.75223 1.81902 3.68359 1.90342 3.63666L5.97404 1.37575Z" stroke="#4CDB06" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M4.0625 2.4375L8.9375 5.14583V7.04167M3.25 6.67767L4.875 7.58333" stroke="#4CDB06" stroke-linecap="round" stroke-linejoin="round"/>
@@ -324,6 +324,7 @@
                                     </svg>
                                     <h6 class="fsb-2 mb-0">Free Shipping</h6>
                                 </div>
+                                 {{-- mplus04 --}}
                                 <div class="product-div3">
                                     <img src="{{('front/assets/img/product/adv-1.jpg')}}" alt="">
                                 </div>
@@ -341,7 +342,9 @@
         <p class="titleClass text-center mt-4">Other <span class="text-green">Products</span></p>
                 <div class="product-card-container container">
                     <div class="row product-row">
-                        <div class="col-3">
+                         {{-- mplus04 --}}
+                        {!! (!empty($html))?$html:'' !!}
+                        {{-- <div class="col-3">
                             <a href="{{url('product')}}" class="mt-4 card-link">
                                 <div class="card" >
                                     <img src="{{('front/assets/img/productPic.svg')}}" class="card-img-top" alt="...">
@@ -408,7 +411,9 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
+
+ {{-- mplus04 --}}
                     </div>
                     <div class="white-box container" style="border-radius: 5px;">
                         <div class="p-3" id="">

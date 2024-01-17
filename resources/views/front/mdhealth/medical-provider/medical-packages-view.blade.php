@@ -584,8 +584,8 @@
     function categoryselect(value) {
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('
-        login_token ') }}';
+        const bearer_token = '{{ Session::get('login_token') }}';
+        // alert(bearer_token);
 
         $.ajax({
             url: base_url + '/api/md-treatment-list',

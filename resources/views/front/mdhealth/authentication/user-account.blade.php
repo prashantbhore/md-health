@@ -448,6 +448,7 @@
                     $("#successAuth").show();
                     $("#otpDiv").removeClass("d-none");
                     $("#regdiv").hide();
+                    recaptchaVerifier.clear();
                 })
                 .catch(function(error) {
                     $("#error").text(error.message);

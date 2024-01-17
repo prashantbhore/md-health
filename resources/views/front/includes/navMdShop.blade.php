@@ -8,6 +8,99 @@
         $name = 'MDHealth';
     }
 @endphp
+
+<style>
+    @media only screen and (min-width: 992px) {
+        .nav2-menu .dropdown:hover .dropdown-menu {
+            display: flex;
+        }
+
+        .nav2-menu .dropdown-menu.show {
+            display: flex;
+        }
+    }
+
+    .nav2-menu .dropdown-menu ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .nav2-menu .dropdown-menu li .dropdown-item {
+        color: gray;
+        font-size: 1em;
+        padding: 0.5em 1em;
+    }
+
+    .nav2-menu .dropdown-menu li .dropdown-item:hover {
+        background-color: #f1f1f1;
+    }
+
+    .nav2-menu .dropdown-menu li:first-child a {
+        font-weight: bold;
+        font-size: 1.1em;
+        text-transform: uppercase;
+        color: #516beb;
+    }
+
+    .nav2-menu .dropdown-menu li:first-child a:hover {
+        background-color: #f1f1f1;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .nav2-menu .dropdown-menu.show {
+            flex-wrap: wrap;
+            max-height: 350px;
+            overflow-y: scroll;
+        }
+    }
+
+    @media only screen and (min-width: 992px) and (max-width: 1140px) {
+        .nav2-menu .dropdown:hover .dropdown-menu {
+            width: 40vw;
+            flex-wrap: wrap;
+        }
+    }
+
+    .dropdown-menu {
+        border-radius: 0;
+        border: none;
+        padding: 0.5em;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    .nav2-menu .dropdown-menu ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .nav2-menu .dropdown-menu li a {
+        color: gray;
+        padding: 0.5em 1em;
+    }
+
+    .nav2-menu .dropdown-menu li:first-child a {
+        font-weight: bold;
+        font-size: 1.1em;
+        color: #516beb;
+    }
+
+    @media screen and (min-width: 993px) {
+        .nav2-menu .dropdown:hover .dropdown-menu {
+            display: flex;
+        }
+
+        .nav2-menu .dropdown-menu.show {
+            display: flex;
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .nav2-menu .dropdown-menu.show {
+            max-height: 60vh;
+            overflow-y: scroll;
+        }
+    }
+</style>
 <nav id="mdShopNav" class="navbar navbar-expand-lg navbar-light bg-f6 py-3">
     <img class="mdShopNavBg" src="{{ URL('front/assets/img/mdShopNavBg.png') }}" alt="">
 
@@ -28,6 +121,9 @@
                             class="fw-bold">MD</span>Foods</a></li>
                 <li class="nav-item"><a href="{{ url('/') }}" class="nav-link"><span
                             class="fw-bold">MD</span>Health</a></li>
+                <li class="nav-item"><a href="{{ url('/cart') }}" class="nav-link">cart</a></li>
+
+
                 @if (Session::get('login_token') != null)
 
                     <li class="nav-item dropdown">
@@ -244,15 +340,142 @@
         </div>
 
     </div>
-
+ {{-- mplus04 --}}
+ {{-- ====================================================================================== --}}
     <div class="container">
-        <div class="nav2">
+        <!-- <div class="nav2">
             <p class="mb-0 brdr-right">Equipment</p>
             <p class="mb-0">Injection & Infusion</p>
             <p class="mb-0">Emergency & First Aid</p>
             <p class="mb-0">Hygience & Disinfection</p>
             <p class="mb-0">Instruments</p>
             <p class="mb-0">More</p>
+        </div> -->
+        <div class="container nav2-menu">
+            <nav class="navbar navbar-expand-lg navbar-dark shadow" style="background-color: #fff;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-5">
+
+                            {{-- @foreach ($product_categories as $product_category)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ !empty($product_category['category_name']) ? $product_category['category_name'] : '' }}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <ul>
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                            <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endforeach --}}
+                            {{-- mplus04 --}}
+                            @foreach ($product_categories as $product_category)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle category-link" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false"
+                                        data-category-id="{{ $product_category['id'] }}">
+                                        {{ !empty($product_category['category_name']) ? $product_category['category_name'] : '' }}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <ul class="subcategories-list">
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <p class="mt-5 text-center">Get a step-by-step written explanation here: <a
+                    href="https://codingyaar.com/bootstrap-mega-menu-1/" target="_blank">Bootstrap 5 Mega Menu</a>
+            </p>
+
+            <p class="mt-5 text-center">Get a step-by-step video explanation here: <a
+                    href="https://youtu.be/V5MquVuKlU4" target="_blank">Bootstrap 5 Mega Menu</a> </p>
         </div>
     </div>
 </nav>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var base_url = $('#base_url').val();
+        $('.category-link').on('mouseenter', function() {
+            var categoryId = $(this).data('category-id');
+            $.ajax({
+                url: base_url +'/api/product-sub-category', 
+                method: 'POST',
+                data: {
+                    category_id: categoryId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                },
+                success: function(response) {
+                    var subcategoriesList = $('.subcategories-list');
+                    subcategoriesList.empty();
+                    response.product_category.forEach(function(subcategory) {
+                        subcategoriesList.append(
+                            '<li><a class="dropdown-item subcategory-link" href="#" data-subcategory-id="' +
+                            subcategory.id + '">' + subcategory
+                            .sub_category_name +
+                            '</a></li>');
+                    });
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+
+        $(document).on('click', '.subcategory-link', function() {
+            var subcategoryId = $(this).data('subcategory-id');
+            sessionStorage.setItem('subcategory_id', subcategoryId);
+            window.location.href = base_url + '/view-products';
+        });
+        var subcategoryId = sessionStorage.getItem('subcategory_id');
+        if (subcategoryId) {
+            $.ajax({
+                url: base_url + '/get-product',
+                method: 'POST',
+                data: {
+                    subcategory_id: subcategoryId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                },
+                success: function(response) {
+                    console.log(response.url);
+                    $('#productslist').html(response.html);
+                    $('#productslist').show();
+                    sessionStorage.removeItem('subcategory_id');
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+    });
+</script>
+ {{-- mplus04 --}}
+ {{-- ==================================================================================================== --}}

@@ -48,6 +48,7 @@ class CustomerShopController extends BaseController
                 'product_name' => !empty($product->product_name) ? $product->product_name : '',
                 'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
                 'sale_price' => !empty($product->sale_price) ? $product->sale_price : '',
+                'product_description' => !empty($product->product_description) ? $product->product_description : '',
                 'status' => !empty($product->status) ? $product->status : '',
             ];
         }
@@ -134,7 +135,8 @@ class CustomerShopController extends BaseController
                     'discount' => $val->discount_price ? $val->discount_price : '',
                     'sale_price' => $val->sale_price ? $val->sale_price : '',
                     'featured' => $val->featured ? $val->featured : '',
-                    'vendor_product_image_path' => $product_image->vendor_product_image_path ?? '',
+                    // 'vendor_product_image_path' => $product_image->vendor_product_image_path ?? '',
+                    'vendor_product_image_path' => !empty($product_image->vendor_product_image_path) ? url(Storage::url($product_image->vendor_product_image_path)) : '',
                 ];
 
                 $otherProducts[] = $product;
@@ -223,7 +225,8 @@ public function vendor_product_list(Request $request)
                     'discount' => $val->discount_price ? $val->discount_price : '',
                     'sale_price' => $val->sale_price ? $val->sale_price : '',
                     'featured' => $val->featured ? $val->featured : '',
-                    'vendor_product_image_path' => $product_image->vendor_product_image_path ?? '',
+                    // 'vendor_product_image_path' => $product_image->vendor_product_image_path ?? '',
+                    'vendor_product_image_path' => !empty($product_image->vendor_product_image_path) ? url(Storage::url($product_image->vendor_product_image_path)) : '',
                 ];
         
                 $vendorProductsList[] = $product;
@@ -456,7 +459,7 @@ public function filteredProductList(Request $request)
 {
 
     $validator = Validator::make($request->all(),[
-        'category_id' => 'required',
+        // 'category_id' => 'required',
         'subcategory_id' => 'required',
     ]);
 
@@ -471,16 +474,16 @@ public function filteredProductList(Request $request)
     
     $query = VendorProduct::where('status', 'active');
 
-    if ($category) {
-        $query->where('product_category_id',$category);
-    }
+    // if ($category) {
+    //     $query->where('product_category_id',$category);
+    // }
 
     if ($subcategory) {
         $query->where('product_subcategory_id',$subcategory);
     }
 
    
-    $filteredProducts = $query->select('id', 'product_unique_id', 'product_name', 'product_description')->get();
+    $filteredProducts = $query->select('id', 'product_unique_id', 'product_name', 'product_description','sale_price')->get();
 
     $selected_data = [];
 
@@ -494,6 +497,8 @@ public function filteredProductList(Request $request)
             'id' => !empty($product->id) ? $product->id : '',
             'product_unique_id' => !empty($product->product_unique_id) ? $product->product_unique_id : '',
             'product_name' => !empty($product->product_name) ? $product->product_name : '',
+            'sale_price' => !empty($product->sale_price) ? $product->sale_price : '',
+            'product_description' => !empty($product->product_description) ? $product->product_description : '',
             'product_image' => !empty($productImage->vendor_product_image_path) ? url(Storage::url($productImage->vendor_product_image_path)) : '',
         ];
     }

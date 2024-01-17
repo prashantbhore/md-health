@@ -387,7 +387,7 @@
                                 };
 
                                 toastr.success(response.message);
-                                recaptchaVerifier.clear();
+                                // recaptchaVerifier.clear();
                                 //$('#error').text('');
                             } else {
                                 // $('#number').val('');
