@@ -47,6 +47,10 @@
         line-height: normal;
         letter-spacing: -0.64px;
     }
+
+    select {
+        color: #878787 !important;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -124,7 +128,7 @@
                                 <div class="form-group mb-5">
                                     <label class="form-label mb-3">Vehicle Picture</label>
                                     <div class="form-group mb-3">
-                                        <input type="file" name="vehicle_image_path" id="vehicle_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                        <input type="file" name="vehicle_image_path" id="vehicle_image_path" placeholder="Vehicle Picture" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/default-img.png' }}" alt="image" id="pic">

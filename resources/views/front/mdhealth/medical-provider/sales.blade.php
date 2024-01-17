@@ -54,7 +54,7 @@
 
                                 <div class="list-div">
                                     <select name="" id="" class="form-select filter-list" >
-                                        <option value="">List for Date</option>
+                                        <option value="">List for date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>

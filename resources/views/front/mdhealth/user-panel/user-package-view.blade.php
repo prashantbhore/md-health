@@ -335,14 +335,21 @@
             color: #4cdb06;
             font-size: 30px;
         }
+
+        .add-btn {
+            width: 207px !important;
+height: 35px;
+flex-shrink: 0;
+font-size: 14px
+        }
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
-            <div class="d-flex gap-3">
-                <div class="" style="width: 292px;">
-                    @include('front.includes.sidebar-user')
-                </div>
-                <div class="" style="width: 761px;">
+        <div class="d-flex gap-3">
+            <div class="w-292">
+            @include('front.includes.sidebar-user')
+            </div>
+            <div class="w-761">
                     <div class="card">
                         <h5 class="card-header mb-3">
                             Packages
@@ -360,7 +367,7 @@
                                         <div class="df-center">
                                             @if (!empty($data['company_logo_image_path']))
                                                 <img src="{{ asset($data['company_logo_image_path']) }}" alt=""
-                                                    style="height: 109px;border-radius:3px">
+                                                    style="height: 109px;width:109px;border-radius:3px">
                                             @endif
                                             <!-- <img src="{{ asset('front/assets/img/packageImg.png') }}" alt="" class="pkgImg"> -->
 
@@ -634,6 +641,15 @@
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($my_details['patient_email']) ? $my_details['patient_email'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
+                                                                            readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group position-relative mb-3">
+                                                                        <label class="form-label">Contact Number</label>
+                                                                        <input type="text" class="form-control"
+                                                                            value="{{ !empty($my_details['patient_phone']) ? $my_details['patient_phone'] : '' }}"
+                                                                            id="ContactNumber" aria-describedby="Contact Number"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
