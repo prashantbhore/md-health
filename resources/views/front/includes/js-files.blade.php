@@ -62,7 +62,12 @@
 
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script> -->
-
+<script>
+    // $('.navbar-collapse').css({'': ''});
+    // $('.navbar-collapse').removeAttr("flex-basis")
+    document.getElementsByClassName("navbar-collapse").removeAttribute("flex-basis")
+    console.log("Hello")
+</script>
 
 <script>
     // PASSWORD HIDE/SHOW
@@ -77,9 +82,9 @@
     });
 </script>
 <script>
-    $(document).ready(function() {
-        $('select').niceSelect();
-    });
+    // $(document).ready(function() {
+    //     $('select').niceSelect();
+    // });
 
     $('.ui.dropdown')
         .dropdown();

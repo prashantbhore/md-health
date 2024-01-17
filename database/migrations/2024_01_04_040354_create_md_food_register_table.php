@@ -22,6 +22,14 @@ return new class extends Migration
             $table->string('mobile_no')->nullable();
             $table->string('vendor_type')->nullable()->default('food_vendor');
             $table->enum('vendor_status', ['pending', 'approved', 'rejected'])->default('pending');
+             
+            $table->enum('membership_type', ['silver', 'gold', 'platinum'])->default('silver');
+
+            $table->string('approved_by')->nullable();
+            $table->string('approved_date')->nullable();
+            $table->string('rejected_by')->nullable();
+            $table->string('rejected_date')->nullable();
+
             $table->string('tax_no')->nullable();
             $table->longText('company_address')->nullable();
             $table->string('password')->nullable();

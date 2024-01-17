@@ -160,6 +160,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
         Route::post('vendor-store', 'store')->name('vendor.store');
 
+        Route::post('approve-vendor', 'approve_vendor')->name('approve.vendor');
+
+        Route::post('reject-vendor','reject_vendor')->name('reject.vendor');
+
+        Route::post('delete-vendor','delete_vendor')->name('delete.vendor');
+
 
       
 

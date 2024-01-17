@@ -137,6 +137,13 @@ $(function (){
                   orderable: false,
                 
               },
+
+              {
+                data: "membership_type",
+                name: "membership_type",
+                orderable: false,
+              
+              },
               {
                   data: "city",
                   name: "city",
@@ -150,6 +157,13 @@ $(function (){
                 orderable: false,
               
               },
+
+              {
+                data: "status",
+                name: "status",
+                orderable: false,
+                searchable: false,
+            },
 
 
            
@@ -233,6 +247,16 @@ $(function (){
                 orderable: false,
               
               },
+
+              
+              {
+                data: "rejected_date",
+                name: "rejected_date",
+                orderable: false,
+              
+              },
+
+              
 
 
            
