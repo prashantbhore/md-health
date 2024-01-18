@@ -250,28 +250,28 @@ class UserRegistrationController extends Controller {
 
     public function update_customer_profile( Request $request ) {
 
-       $email_exist=CustomerRegistration::where('status','active')
-        ->where('email',$request->email)
-        ->first();
+    //    $email_exist=CustomerRegistration::where('status','active')
+    //     ->where('email',$request->email)
+    //     ->first();
 
-        $email_exist_common = CommonUserLoginTable::where('status', 'active')
-        ->where('email', $request->email)
-        ->first();
+    //     $email_exist_common = CommonUserLoginTable::where('status', 'active')
+    //     ->where('email', $request->email)
+    //     ->first();
 
-        if($email_exist || $email_exist_common){
-            return redirect('/my-profile')->with('error', 'Email address already exist');
-        }
+    //     if($email_exist || $email_exist_common){
+    //         return redirect('/my-profile')->with('error', 'Email address already exist');
+    //     }
 
-        $mobile_no= CustomerRegistration::where('status', 'active')
-        ->where('mobile_no', $request->phone)
-        ->first();
-        $mobile_no_common = CommonUserLoginTable::where('status', 'active')
-        ->where('mobile_no', $request->phone)
-        ->first();
+    //     $mobile_no= CustomerRegistration::where('status', 'active')
+    //     ->where('mobile_no', $request->phone)
+    //     ->first();
+    //     $mobile_no_common = CommonUserLoginTable::where('status', 'active')
+    //     ->where('mobile_no', $request->phone)
+    //     ->first();
 
-        if ($mobile_no || $mobile_no_common) {
-            return redirect('/my-profile')->with('error', 'Mobile number already exist');
-        }
+    //     if ($mobile_no || $mobile_no_common) {
+    //         return redirect('/my-profile')->with('error', 'Mobile number already exist');
+    //     }
 
         $customer_input = [];
         $customer_input[ 'first_name' ] = $request->first_name;
