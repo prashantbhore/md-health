@@ -71,7 +71,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="login-form pb-100px">
                     <div class="row position-relative">
-                        <div class="bod-right form-divider pt-4" style="width: 45%; height: 1494px;">
+                        <div class="bod-right  pt-4" style="width: 45%; height: 1494px;">
                             <div class="d-flex align-items-center gap-3 pt-5 pb-4">
                                 <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}"
                                         alt="" /></a>

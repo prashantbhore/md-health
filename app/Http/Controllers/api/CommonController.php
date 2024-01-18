@@ -80,6 +80,7 @@ class CommonController extends BaseController {
     }
 
 
+    
     public function get_treatment_list()
     {
         $treatment_list=ProductCategory::where('status','active')

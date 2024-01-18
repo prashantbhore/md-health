@@ -237,7 +237,7 @@ class UserRegistrationController extends Controller {
         ->orderBy( 'city_name' )
         ->select( 'id', 'city_name' )
         ->get();
-
+// dd($customer_list);
         if ( !empty( $customer_list ) ) {
 
             return view( 'front.mdhealth.user-panel.user-profile', compact( 'customer_list', 'countries', 'cities' ) );

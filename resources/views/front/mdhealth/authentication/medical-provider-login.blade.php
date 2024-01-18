@@ -3,6 +3,9 @@
     body {
         background: #f6f6f6;
     }
+    .navbar {
+        display:none;
+    }
 </style>
 <div class="content-wrapper service-provider-account" id="regdiv">
     <div class="container text-center my-5 authentication">
@@ -383,10 +386,19 @@
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
                 recaptchaVerifier.clear();
-            })
-            .catch(function(error) {
-                $("#error").text(error.message);
-                $("#error").show();
+                })
+                .catch(function(error) {
+                    $("#error").text(error.message);
+                    if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
+                        $("#error").text("Too many attempts try again later");
+                    }
+                    if (error.message == "TOO_SHORT") {
+                        $("#error").text("Mobile number short or missing country code");
+                    }
+                    //  else {
+
+                    // }
+                    $("#error").show();
             });
     }
 

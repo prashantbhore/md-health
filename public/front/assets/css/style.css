@@ -58,8 +58,8 @@
     font-family: "CamptonBook";
 }
 
-.other-month>div,
-.gj-picker [role="week-days"] th>div,
+.other-month > div,
+.gj-picker [role="week-days"] th > div,
 .gj-picker-bootstrap table tr td div {
     font-family: CamptonBook;
     font-size: 12px;
@@ -130,8 +130,9 @@
 
 /* UTILITY CLASSES */
 .error {
-    color: #F31D1D;
+    color: #F31D1D !important; 
     font-family: "Campton";
+    font-size: 14px !important;
     letter-spacing: -0.64px;
     transition: 0.15s all;
 }
@@ -224,7 +225,7 @@
 }
 
 .card-p8 {
-    color: #FFF;
+    color: #fff;
     text-align: center;
     font-family: CamptonBook;
     font-size: 26px;
@@ -285,8 +286,6 @@
     color: #000;
 }
 
-
-
 /* END */
 
 /* =============================================================================================
@@ -324,9 +323,9 @@
     letter-spacing: -0.98px;
 }
 
-.form-floating>.form-control:focus~label,
-.form-floating>.form-control:not(:placeholder-shown)~label,
-.form-floating>.form-select~label {
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
     opacity: 1;
     transform: scale(1) translateY(-0.5rem);
 }
@@ -375,7 +374,6 @@
     letter-spacing: -0.92px;
 }
 
-
 .request-modal .form-label {
     color: #000002;
     font-family: CamptonBook;
@@ -396,7 +394,6 @@
 #formFile {
     display: none;
 }
-
 
 .request-modal p {
     color: #000;
@@ -423,7 +420,6 @@
     opacity: 1;
 }
 
-
 #UserCancellationReq .modal-header .btn-close,
 #AccommodationView .modal-header .btn-close,
 #TransportationView .modal-header .btn-close,
@@ -446,9 +442,7 @@
 #UserCancellationReq .form-select,
 #UserChangeInformationModel .form-select {
     background-position: bottom 10px right 10px;
-
 }
-
 
 .request-modal .form-select,
 .authentication .form-select {
@@ -465,7 +459,7 @@
 }
 
 .list-div .form-select:focus {
-    border: 1px solid #EDEDED;
+    border: 1px solid #ededed;
 }
 
 .btn-close:focus {
@@ -483,8 +477,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .request-modal select option:not(:checked) {
@@ -494,11 +488,11 @@
 .section-heading-div .form-check-input,
 .request-modal .form-check-input,
 .tc .form-check-input {
-    background: #D9D9D9;
+    background: #d9d9d9;
     width: 18px;
     height: 18px !important;
     border-radius: 3px !important;
-    border: 1.5px solid #D6D6D6 !important;
+    border: 1.5px solid #d6d6d6 !important;
     transition: 0.15s all;
 }
 
@@ -729,7 +723,6 @@
 .homeServicePackage .brdr-right {
     border-right: 1px solid #e1e1e1;
     padding-right: 2rem;
-
 }
 
 #buyService .brdr-right {
@@ -928,7 +921,7 @@ select {
 .form-control:focus,
 .textarea:focus,
 .form-select:focus,
-.btn-check:focus+.btn,
+.btn-check:focus + .btn,
 .btn:focus {
     box-shadow: none;
     /* border-color: #4cdb06; */
@@ -948,8 +941,6 @@ select {
     color: #fff;
 }
 
-
-
 .btn-md {
     color: #000002;
     font-size: 15px;
@@ -968,7 +959,6 @@ select {
 
 .btn-md:hover {
     color: #000002;
-
 }
 
 .whiteBtn {
@@ -1005,8 +995,6 @@ select {
 .whiteBtn:hover {
     background-color: #e1e1e1;
 }
-
-
 
 .banner-content,
 #homeServiceBanner .banner-content {
@@ -1055,8 +1043,7 @@ select {
 }
 
 .deleteAll {
-
-    color: #F31D1D;
+    color: #f31d1d;
     text-align: center;
     font-family: Campton;
     font-size: 17px;
@@ -1226,7 +1213,7 @@ select {
 }
 
 .treatment-section .rating {
-    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 .treatment-price {
@@ -1309,14 +1296,20 @@ select {
 
 .authentication .form-control:focus,
 .authentication .form-select:focus {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
 }
 
 .authentication .nav-tabs .nav-item.show .nav-link,
 .authentication .nav-tabs .nav-link.active {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
 }
 
+.nav-tabs .nav-link {
+    border: unset;
+    border-bottom: 4px solid transparent;
+    min-width: 100px;
+    transition: 0.3s all;
+}
 .nav-tabs .nav-link:focus-visible {
     outline: unset;
 }
@@ -1426,7 +1419,7 @@ select {
     padding: 18px 30px;
     padding-bottom: 0;
     color: #000;
-    font-family: Campton;
+    font-family: "Campton";
     font-size: 20px;
     font-weight: 600;
     line-height: normal;
@@ -1439,7 +1432,7 @@ select {
 
 .panel-left .nav-link {
     color: #000;
-    font-family: CamptonBook;
+    font-family: "CamptonBook";
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
@@ -1452,8 +1445,6 @@ select {
     color: #4cdb06;
     font-weight: bold;
 }
-
-
 
 .activeClass {
     position: relative;
@@ -1473,6 +1464,7 @@ select {
     color: #4cdb06;
     padding-left: 1.5rem;
     font-weight: bold;
+    font-family: "Campton";
 }
 
 .green-plate,
@@ -1492,7 +1484,7 @@ select {
 .green-plate p,
 .white-plate p {
     color: #000002;
-    font-family: 'CamptonBook';
+    font-family: "Campton";
     font-size: 16px;
     font-weight: 600;
     line-height: normal;
@@ -1502,7 +1494,7 @@ select {
 .black-plate p {
     color: #4cdb06;
     font-size: 16px;
-    font-family: CamptonBook;
+    font-family: "Campton";
 }
 
 .black-plate h3 {
@@ -1631,7 +1623,6 @@ select {
     border-color: #d9d9d9;
     width: 165px;
     height: 47px;
-
 }
 
 .card-details label,
@@ -1860,8 +1851,8 @@ select {
     width: 195px;
     height: 35px;
     border-radius: 3px;
-    border: 1px solid #EDEDED;
-    background: #FFF;
+    border: 1px solid #ededed;
+    background: #fff;
     padding: 6px 14px;
 }
 
@@ -1885,19 +1876,17 @@ select option {
 
 .form-div .form-label {
     color: #979797;
-    font-family: 'CamptonLight';
+    font-family: "CamptonLight";
     font-size: 16px;
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
 
-
 .request-modal .form-select,
 .request-modal .form-control {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
 }
-
 
 #UserCancellationReq .form-select,
 #UserChangeInformationModel .form-select,
@@ -2108,7 +2097,6 @@ select option {
     font-weight: 700;
     color: #000;
     font-size: 16px;
-
 }
 
 .section-btns {
@@ -2120,7 +2108,7 @@ select option {
 .section-btns a {
     height: unset;
     padding: 10px 15px;
-    font-size: 15px;
+    font-size: 16px;
     text-align: center;
     border-radius: 5px;
     width: 49%;
@@ -2329,7 +2317,9 @@ span.popup-msg.active {
 .order-completed-btn {
     background: #e0e0e0;
     text-decoration: none;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
+    height: 35px;
+    font-size: 14px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -2371,7 +2361,7 @@ span.popup-msg.active {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.bar-graph>div {
+.bar-graph > div {
     border-radius: 3px 0 0 3px;
     background: #4cdb06;
     height: 30px;
@@ -2384,43 +2374,43 @@ span.popup-msg.active {
     font-weight: 700;
 }
 
-.bar-graph>div[data-pourcent="10"] {
+.bar-graph > div[data-pourcent="10"] {
     width: 10%;
 }
 
-.bar-graph>div[data-pourcent="20"] {
+.bar-graph > div[data-pourcent="20"] {
     width: 20%;
 }
 
-.bar-graph>div[data-pourcent="30"] {
+.bar-graph > div[data-pourcent="30"] {
     width: 30%;
 }
 
-.bar-graph>div[data-pourcent="40"] {
+.bar-graph > div[data-pourcent="40"] {
     width: 40%;
 }
 
-.bar-graph>div[data-pourcent="50"] {
+.bar-graph > div[data-pourcent="50"] {
     width: 50%;
 }
 
-.bar-graph>div[data-pourcent="60"] {
+.bar-graph > div[data-pourcent="60"] {
     width: 60%;
 }
 
-.bar-graph>div[data-pourcent="70"] {
+.bar-graph > div[data-pourcent="70"] {
     width: 70%;
 }
 
-.bar-graph>div[data-pourcent="80"] {
+.bar-graph > div[data-pourcent="80"] {
     width: 80%;
 }
 
-.bar-graph>div[data-pourcent="90"] {
+.bar-graph > div[data-pourcent="90"] {
     width: 90%;
 }
 
-.bar-graph>div[data-pourcent="100"] {
+.bar-graph > div[data-pourcent="100"] {
     width: 100%;
 }
 
@@ -2491,8 +2481,6 @@ span.popup-msg.active {
     right: 26px;
 }
 
-
-
 /* Mpluss06 */
 
 .medical-pckg {
@@ -2503,7 +2491,7 @@ span.popup-msg.active {
 }
 
 .medical-pckg p {
-    color: #FFF;
+    color: #fff;
     font-family: Campton;
     font-size: 39px;
 
@@ -2514,7 +2502,7 @@ span.popup-msg.active {
 }
 
 .medical-pckg .text-green {
-    color: #4CDB06;
+    color: #4cdb06;
     font-family: Campton;
     font-size: 39px;
 
@@ -2524,7 +2512,7 @@ span.popup-msg.active {
 }
 
 .medical-pckg .fnpp {
-    color: #FFF;
+    color: #fff;
     font-family: CamptonBook;
     font-size: 39px;
 
@@ -2539,9 +2527,9 @@ span.popup-msg.active {
     height: 47px;
 
     border-radius: 70px;
-    border: 1px solid #4CDB06;
+    border: 1px solid #4cdb06;
 
-    color: #FFF;
+    color: #fff;
     font-family: CamptonBook;
     font-size: 15px;
 
@@ -2556,12 +2544,11 @@ span.popup-msg.active {
     font-family: "Campton";
     border-radius: 70px;
     border: 1px solid #000;
-
 }
 
 .reservations-nav .active {
-    background: #4CDB06;
-    border: 1px solid #4CDB06;
+    background: #4cdb06;
+    border: 1px solid #4cdb06;
 }
 
 .section6 {
@@ -2821,7 +2808,7 @@ span.popup-msg.active {
     height: 297px;
     flex-shrink: 0;
     border-radius: 24px;
-    background: linear-gradient(110deg, #4CDB06 1.33%, rgba(76, 219, 6, 0.40) 98.07%);
+    background: linear-gradient(110deg, #4cdb06 1.33%, rgba(76, 219, 6, 0.4) 98.07%);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -2832,7 +2819,6 @@ span.popup-msg.active {
 } */
 
 .creditCardContainer {
-
     width: 490px;
     height: 297px;
     border-radius: 24px;
@@ -2843,12 +2829,10 @@ span.popup-msg.active {
     justify-content: space-between;
     padding: 2.5rem;
     /* gap: 4rem; */
-
-
 }
 
 .cardNumber {
-    color: #FFF;
+    color: #fff;
     font-family: Campton;
     font-size: 30px;
 
@@ -2859,7 +2843,7 @@ span.popup-msg.active {
 
 .creditCardContainer .validity,
 .creditCardContainer .cardholder {
-    color: #FFF;
+    color: #fff;
     font-family: Campton;
     font-size: 20px;
 
@@ -3109,7 +3093,7 @@ span.popup-msg.active {
     cursor: pointer;
 }
 
-.price-range-slider .range-bar .ui-slider-handle+span {
+.price-range-slider .range-bar .ui-slider-handle + span {
     background: #4cdb06;
 }
 
@@ -3176,7 +3160,6 @@ span.popup-msg.active {
 .appTime button {
     width: 54px;
     height: 30px;
-
 
     border-radius: 5px;
     border: 1px solid #d6d6d6;
@@ -3485,7 +3468,7 @@ span.popup-msg.active {
     color: #fff;
     font-family: CamptonBook;
     font-size: 16px;
-
+    margin: 12px 0px;
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -3537,8 +3520,8 @@ span.popup-msg.active {
     font-family: "CamptonBook";
 }
 
-.other-month>div,
-.gj-picker [role="week-days"] th>div,
+.other-month > div,
+.gj-picker [role="week-days"] th > div,
 .gj-picker-bootstrap table tr td div {
     font-family: CamptonBook;
     font-size: 12px;
@@ -3690,9 +3673,9 @@ label.tc-text,
 
 .package-results-div .packageResult-title {
     font-size: 18px;
-    color: #4CDB06;
+    color: #4cdb06;
     font-weight: 600;
-    font-family: 'Campton';
+    font-family: "Campton";
     line-height: 1;
 }
 
@@ -3708,7 +3691,7 @@ label.tc-text,
 
 .package-results-div .stars i {
     font-size: 18px;
-    color: #4CDB06;
+    color: #4cdb06;
 }
 
 .packageResult-price {
@@ -3782,7 +3765,7 @@ label.tc-text,
     border-radius: 5px;
     background: #000;
     font-size: 16px;
-    color: #FFF;
+    color: #fff;
     text-align: center;
     font-weight: 700;
     letter-spacing: -0.64px;
@@ -3818,7 +3801,7 @@ label.tc-text,
 .reviews-button .page-item.active .page-link {
     color: #000;
     background-color: #0d6efd00;
-    border: 1px solid #4CDB06 !important;
+    border: 1px solid #4cdb06 !important;
     font-weight: 900;
 }
 
@@ -3869,13 +3852,11 @@ label.tc-text,
 }
 
 .bod-bot-5 {
-    border-bottom: 0.5px solid #4CDB06;
+    border-bottom: 0.5px solid #4cdb06;
     width: 100%;
     padding-bottom: 2rem;
     margin: 0 0 32px 0;
 }
-
-
 
 #resendotp {
     color: #878787;
@@ -3893,7 +3874,7 @@ label.tc-text,
     width: 18px;
     height: 18px;
     border-radius: 3px;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     margin-right: 8px;
 }
 
@@ -3917,7 +3898,7 @@ label.tc-text,
     height: 35px;
 
     border-radius: 70px;
-    background: #4CDB06;
+    background: #4cdb06;
 }
 
 .get-started-btn:hover {
@@ -3976,9 +3957,8 @@ label.tc-text,
 }
 
 .service-provider-account .error {
-    color: #F31D1D !important;
+    color: #f31d1d !important;
     font-size: 14px !important;
-
 }
 
 .service-provider-account input[type="file"] {
@@ -4014,7 +3994,7 @@ label.tc-text,
     vertical-align: middle;
     width: 100%;
     background-color: #fff;
-    padding: .25rem 3.6rem .1rem .5rem;
+    padding: 0.25rem 3.6rem 0.1rem 0.5rem;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     font-size: 0.8125rem;
@@ -4025,7 +4005,7 @@ label.tc-text,
 .choices__input {
     display: block;
     width: 100%;
-    padding: .5rem .9rem;
+    padding: 0.5rem 0.9rem;
     background-color: #fff;
     border: 1px solid #ced4da;
     font-size: 0.8125rem;
@@ -4058,7 +4038,6 @@ label.tc-text,
     width: 41px;
     height: 41px;
     border-radius: 3px;
-
 }
 
 .pkgImg {
@@ -4069,7 +4048,7 @@ label.tc-text,
 
 .pkgCard {
     min-height: 143px;
-    background-color: #f6f6f6
+    background-color: #f6f6f6;
 }
 
 .md-gray {
@@ -4113,8 +4092,8 @@ label.tc-text,
     height: 57px;
     flex-shrink: 0;
     border-radius: 3px;
-    background: #F31D1D;
-    color: #FFF;
+    background: #f31d1d;
+    color: #fff;
     font-family: Campton;
     font-size: 16px;
 
@@ -4139,9 +4118,7 @@ label.tc-text,
 
 #yourCartModal .modal-dialog {
     border-radius: 5px;
-
 }
-
 
 #UserCancellationReq .modal-content,
 #AccommodationView .modal-content,
@@ -4150,7 +4127,7 @@ label.tc-text,
 #TourView .modal-content,
 #UserChangeInformationModel .modal-content {
     border-radius: 10px;
-    background: #FFF;
+    background: #fff;
 }
 
 .verNo {
@@ -4164,12 +4141,12 @@ label.tc-text,
 }
 
 .user-details-body {
-    border-bottom: 1px solid #C5C5C5;
+    border-bottom: 1px solid #c5c5c5;
     padding-bottom: 28px;
 }
 
 .view-menu-div {
-    border-top: 1px solid #C5C5C5;
+    border-top: 1px solid #c5c5c5;
     padding-top: 28px;
     /* margin-bottom: 32px; */
 }
@@ -4197,7 +4174,7 @@ label.tc-text,
 }
 
 .user-details-body ul li a {
-    color: #4CDB06;
+    color: #4cdb06;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -4237,7 +4214,7 @@ label.tc-text,
     height: 26px;
     flex-shrink: 0;
     border-radius: 5px;
-    background: #D9D9D9;
+    background: #d9d9d9;
     color: #787878;
     font-family: Campton;
     font-size: 13px;
@@ -4276,7 +4253,7 @@ label.tc-text,
 }
 
 .paymt-green-text {
-    color: #4CDB06;
+    color: #4cdb06;
     font-family: Campton;
     font-size: 12px;
     font-style: normal;
@@ -4290,7 +4267,7 @@ label.tc-text,
     height: 47px;
     flex-shrink: 0;
     border-radius: 0px 70px 70px 0px;
-    background: #4CDB06;
+    background: #4cdb06;
 
     color: #000;
     font-family: Campton;
@@ -4315,8 +4292,8 @@ label.tc-text,
     padding: 0 5px;
     border-radius: 5px;
     font-size: 14px;
-    color: #9F9E9E;
-    font-family: 'CamptonBook';
+    color: #9f9e9e;
+    font-family: "CamptonBook";
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.56px;
@@ -4325,7 +4302,7 @@ label.tc-text,
 .patient-details-div .form-control {
     height: 35px;
     border-radius: 5px;
-    border: 1px solid #DBDBDB;
+    border: 1px solid #dbdbdb;
     background: transparent;
     color: #000;
     font-family: Campton !important;
@@ -4360,7 +4337,7 @@ label.tc-text,
     height: 47px;
     flex-shrink: 0;
     border-radius: 70px;
-    border: 1px solid #4CDB06;
+    border: 1px solid #4cdb06;
     color: #000;
     font-family: Campton;
     font-size: 15px;
@@ -4374,17 +4351,16 @@ label.tc-text,
     display: flex;
     align-items: center;
     gap: 8px;
-
 }
 
 .reviewsStar .fa.filled {
     font-size: 18px;
-    color: #4CDB06;
+    color: #4cdb06;
 }
 
 .reviewsStar .fa {
     font-size: 18px;
-    color: #B9B9B9;
+    color: #b9b9b9;
 }
 
 .purchase-details-card {
@@ -4392,7 +4368,7 @@ label.tc-text,
     height: 91px;
     flex-shrink: 0;
     border-radius: 5px;
-    background: #FFF;
+    background: #fff;
     border: none;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
     margin-bottom: 32px;
@@ -4407,5 +4383,24 @@ label.tc-text,
 .purchase-details-card input[type="checkbox"]::before {
     width: 24px;
     height: 24px;
+}
 
+hr:not([size]) {
+    height: 0px !important;
+}
+.mdLtd {
+    margin: 35px 0px;
+}
+
+.mt-150 {
+    margin-top: 150px !important;
+}
+
+.md-img {
+    height: 109px;
+    width: 109px;
+    border-radius: 3px;
+    object-fit: contain;
+    padding: 5px;
+    background: #fff;
 }
