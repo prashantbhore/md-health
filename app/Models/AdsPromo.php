@@ -11,15 +11,14 @@ class AdsPromo extends Model
     protected $table = 'md_ads_and_promo';
     protected $fillable = [
            'ads_for_page',
-            'ads_url',
-            'ads_image_path',
-            'ads_image_name',
-            'ads_image_name',
-            'promo_status', 
-            'time',
-            'status', 
-            'created_ip_address',
-            'modified_ip_address',
+           'ads_url',
+           'ads_image_path',
+           'ads_image_name',
+           'promo_status', 
+           'date',
+           'status', 
+           'created_ip_address',
+           'modified_ip_address',
             'created_by',
             'modified_by',
     ];

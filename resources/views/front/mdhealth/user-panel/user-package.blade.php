@@ -886,23 +886,26 @@ letter-spacing: -0.64px;
                 $('#UserCancelPackageForm').submit();
             });
 
+            var cleanValid = false;
+            var comfortValid = false;
+            var foodValid = false;
+            var behaviourValid = false;
+            var rateValid = false;
+
             $('i').click(function() {
                 var id = this.id;
                 var category = id.split('_')[0];
                 id = id.split('_')[1];
-                // alert(category);
+
                 for (var i = 5; i > 0; i--) {
                     $('#' + category + "_" + i).removeClass('selectable');
                 }
                 for (var i = id; i > 0; i--) {
-                    var str = category + '_' + i;
-
-                    // alert(str);
                     $('#' + category + "_" + i).addClass('selectable');
-
                 }
-                // stars.removeClass('selected');
-                // $(this).addClass('selected');
+
+                
+
             });
 
             $('.star').click(function() {
@@ -923,92 +926,8 @@ letter-spacing: -0.64px;
                 // $(this).addClass('selected');
             });
 
-            $('.star-rating').each(function() {
-                var container = $(this);
-                var stars = container.find('.fa-star');
-                var errorMessage = container.find('.error-message');
+            $('.user-review-from-submit').click(function(){
 
-
-                stars.on('click', function() {
-                    alert('hi');
-                    stars.removeClass('selected');
-                    $(this).addClass('selected');
-                });
-
-                container.find('.user-review-from-submit').on('click', function() {
-                    var selectedStar = container.find('.reviewsStar .selected');
-
-                    if (!selectedStar.length) {
-                        errorMessage.text('Please select at least one star for ' + container.data(
-                            'category'));
-                    } else {
-                        errorMessage.text('');
-                        // Include logic to submit the form or perform other actions
-                    }
-                });
-            });
-
-            $('#UserCancelPackageForm').validate({
-                rules: {
-                    // cancellation_reason: {
-                    //     required: true,
-                    // },
-                    cancellation_detail: {
-                        required: true,
-                    },
-                    flexCheckChecked: {
-                        required: true,
-                    },
-                },
-                messages: {
-                    // cancellation_reason: {
-                    //     required: "Please select a cancellation reason",
-                    // },
-                    cancellation_detail: {
-                        required: "Please enter your cancellation detail",
-                    },
-                    flexCheckChecked: {
-                        required: "Please Confirm if you want to cancel",
-                    },
-                },
-                submitHandler: function(form) {
-                    var formData = new FormData(form);
-                    formData.append('platform_type', 'web');
-                    var baseUrl = $('#base_url').val();
-                    var token = "{{ Session::get('login_token') }}";
-                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-                    $.ajax({
-                        url: baseUrl + '/api/md-customer-change-package-list-active-cancelled',
-                        type: 'POST',
-                        data: formData,
-                        headers: {
-                            'Authorization': 'Bearer ' + token,
-                            'X-CSRF-TOKEN': csrfToken,
-                        },
-                        processData: false,
-                        contentType: false,
-                        beforeSend: function() {
-                            $('.cancel-package-from-submit').attr('disabled', true);
-                            $('.cancel-package-from-submit').html(
-                                '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-                            );
-                        },
-                        success: function(response) {
-                            $('.cancel-package-from-submit').attr('disabled', false);
-                            $('.cancel-package-from-submit').html('CancelTreatment');
-                            $('#UserCancellationReq').modal('hide');
-                            location.reload();
-                            console.log('Success:', response);
-                        },
-                        error: function(error) {
-                            $('.cancel-package-from-submit').attr('disabled', false);
-                            $('#UserCancellationReq').modal('hide');
-                            alert('Error:', error);
-                        },
-                    });
-                    return false;
-                }
             });
         });
     </script>

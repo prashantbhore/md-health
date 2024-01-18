@@ -100,20 +100,24 @@
 
                         <div class="filter-div">
                             <div class="search-div">
-                                <input type="text" placeholder="Search">
+                                <input type="text" placeholder="Search" id="liveSearchInput">
                             </div>
-                            <div class="list-div">
+
+                            {{-- <div class="list-div">
                                 <select name="" id="">
                                     <option value="">List for date</option>
                                     <option value="">List for Price</option>
                                     <option value="">List for Distance</option>
                                 </select>
-                            </div>
+                            </div> --}}
+
                         </div>
 
-                        <div class="transaction-list">
+                        <div class="transaction-list" id="paymentList">
                             @if($payment_list)
                             @foreach ($payment_list as $payment)
+
+
                             <div class="card shadow-none mb-4 pkgCard">
                                 <div class="card-body d-flex align-items-center gap-3 w-100 p-4">
                                        <div class="df-center">
@@ -143,55 +147,14 @@
                                     @endif
 
                                 </div>
+                            </div>
+
                             
 
                             @endforeach
                             @endif
-
-
-                            {{-- <div class="treatment-card df-start w-100 mb-3">
-                                <div class="row card-row align-items-center">
-                                    <div class="col-md-2 df-center px-0">
-                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
+               
                         </div>
-                        <div class="col-md-6 justify-content-start ps-0">
-                            <div class="trmt-card-body">
-                                <h5 class="dashboard-card-title">Payment ID: #MD3726378</h5>
-                                <h5 class="mb-0 fw-500">34.847,90 <span class="lira">₺</span></h5>
-                            </div>
-                        </div>
-                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                            <div class="trmt-card-footer">
-                                <span class="in-progress">Progress</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="treatment-card df-start w-100 mb-3">
-                    <div class="row card-row align-items-center">
-                        <div class="col-md-2 df-center px-0">
-                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                        </div>
-                        <div class="col-md-6 justify-content-start ps-0">
-                            <div class="trmt-card-body">
-                                <h5 class="dashboard-card-title">Payment ID: #MD3726378</h5>
-                                <h5 class="mb-0 fw-500">34.847,90 ₺</h5>
-                            </div>
-                        </div>
-                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                            <div class="trmt-card-footer">
-                                <span class="active">Active</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-
-            </div>
-
-        </div>
     </div>
 </div>
 </div>
@@ -202,5 +165,38 @@
 <script>
     $(".mpPaymentLi").addClass("activeClass");
     $(".mpPayment").addClass("md-active");
+</script>
+<script>
+    $(document).ready(function() {
+        $('#liveSearchInput').on('input', function(){
+
+            let query = $(this).val();
+
+            var base_url = $("#base_url").val();
+
+            $.ajax({
+                url: base_url + "/medical-provider-payment-search",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    query: query
+                },
+                success: function(html) {
+                    // Update only if the search box is not empty
+                    if (query.trim() !== "") {
+                        $('#searchResultsContainer').html(html);
+                    } else {
+                        // Clear the results when the search box is empty
+                        $('#searchResultsContainer').html("");
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
 </script>
 @endsection

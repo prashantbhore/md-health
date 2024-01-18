@@ -517,7 +517,7 @@ class LoginControllers extends BaseController
     public function food_login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
+            'mobile_no' => 'required',
             'password' => 'required'
         ]);
 
@@ -527,7 +527,7 @@ class LoginControllers extends BaseController
 
         if (
             Auth::guard('md_health_food_registers')->attempt([
-                'email' => $request->email,
+                'mobile_no' => $request->mobile_no,
                 'password' => $request->password,
                 'status' => 'active',
             ])

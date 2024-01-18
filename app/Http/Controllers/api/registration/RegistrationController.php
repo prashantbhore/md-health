@@ -603,7 +603,7 @@ class RegistrationController extends BaseController
 
     public function food_registration(Request $request)
     {
-        // return $request;
+       
         $validator = Validator::make($request->all(), [
             'company_name' => 'required',
             'city_id' => 'required',
@@ -619,7 +619,7 @@ class RegistrationController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-
+        // dd($request);
         $email_exist = MDFoodRegisters::where('status', 'active')
             ->where('email', $request->email)
             ->first();
@@ -630,9 +630,6 @@ class RegistrationController extends BaseController
 
         if (!empty($email_exist || $email_exist_common)) {
 
-            // if ( $request->platform_type != 'ios' && $request->platform_type != 'android' ) {
-            //     return redirect( '/user-account' )->with( 'error', 'Email id already exist.' );
-            // }
             return response()->json([
                 'status' => 404,
                 'message' => 'email id already exist.',
@@ -646,16 +643,14 @@ class RegistrationController extends BaseController
                 ->first();
 
             if (!empty($phone_exist || $phone_exist_common)) {
-                // if ( $request->platform_type != 'ios' && $request->platform_type != 'android' ) {
-                //     return redirect( '/user-account' )->with( 'error', 'Mobile number already exist.' );
-                // }
+               
                 return response()->json([
                     'status' => 404,
                     'message' => 'mobile number already exist.',
                 ]);
             }
         }
-
+       
         $commonData = [];
         $commonData['email'] = $request->email;
         $commonData['mobile_no'] = $request->phone;
@@ -697,34 +692,35 @@ class RegistrationController extends BaseController
                 } else {
                     $provider_unique_id = '#FOODPRVDR' . $value->id;
                 }
-
+              
                 $update_unique_id = MDFoodRegisters::where('id', $value->id)->update(['food_unique_no' => $provider_unique_id]);
             }
         }
 
-        // $md_provider_input_image_logo = [];
-        //  $md_provider_input_image_logo[ 'food_id' ] = !empty( $md_provider_registration->id )?$md_provider_registration->id:'';
+        $md_provider_input_image_logo = [];
+         $md_provider_input_image_logo[ 'food_id' ] = !empty( $md_provider_registration->id )?$md_provider_registration->id:'';
 
-        // if ( $request->has( 'company_logo_image_path' ) ) {
-        //     if ( $request->file( 'company_logo_image_path' ) ) {
-        //         $md_provider_input_image_logo[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
-        //         $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
-        //         $md_provider_input_image_logo[ 'company_logo_image_name' ] = $original_name;
-        //     }
-        // }
-        // MDFoodLogos::create( $md_provider_input_image_logo );
+       
+        if ( $request->has( 'company_logo_image_path' ) ) {
+            if ( $request->file( 'company_logo_image_path' ) ) {
+                $md_provider_input_image_logo[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
+                $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
+                $md_provider_input_image_logo[ 'company_logo_image_name' ] = $original_name;
+            }
+        }
+        MDFoodLogos::create( $md_provider_input_image_logo );
 
-        // $md_provider_input_image_license = [];
-        // $md_provider_input_image_license[ 'food_id' ] = !empty( $md_provider_registration->id )?$md_provider_registration->id:'';
+        $md_provider_input_image_license = [];
+        $md_provider_input_image_license[ 'food_id' ] = !empty( $md_provider_registration->id )?$md_provider_registration->id:'';
 
-        // if ( $request->has( 'company_licence_image_path' ) ) {
-        //     if ( $request->file( 'company_licence_image_path' ) ) {
-        //         $md_provider_input_image_license[ 'company_licence_image_path' ] = $this->verifyAndUpload( $request, 'company_licence_image_path', 'company/licence' );
-        //         $original_name = $request->file( 'company_licence_image_path' )->getClientOriginalName();
-        //         $md_provider_input_image_license[ 'company_licence_image_name' ] = $original_name;
-        //     }
-        // }
-        // MDFoodLicense::create( $md_provider_input_image_license );
+        if ( $request->has( 'company_licence_image_path' ) ) {
+            if ( $request->file( 'company_licence_image_path' ) ) {
+                $md_provider_input_image_license[ 'company_licence_image_path' ] = $this->verifyAndUpload( $request, 'company_licence_image_path', 'company/licence' );
+                $original_name = $request->file( 'company_licence_image_path' )->getClientOriginalName();
+                $md_provider_input_image_license[ 'company_licence_image_name' ] = $original_name;
+            }
+        }
+        MDFoodLicense::create( $md_provider_input_image_license );
 
         if (
             Auth::guard('md_health_food_registers')->attempt([

@@ -45,6 +45,9 @@
     <link rel="stylesheet" href="{{ URL::asset('admin/js/jquery.toast.min.css') }}">
 
 
+
+
+
     <title>MDhealth | Admin</title>
 
 </head>
