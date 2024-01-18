@@ -36,13 +36,12 @@
     }
 
     .form-group .prev-img-div img {
-        height: 150px;
-        width: auto;
-        object-fit: contain;
-        margin-top: 15px;
-        border-radius: 3px;
-    }
-
+    height: 128px;
+    width: 142px;
+    object-fit: contain;
+    margin-top: 15px;
+    border-radius: 3px;
+}
     .multiple-checkbox-div .multiple-checks {
         display: flex;
         flex-wrap: wrap;
@@ -87,6 +86,11 @@
         line-height: normal;
         letter-spacing: -0.64px;
     }
+
+    .up-abs {
+    top: 47px;
+    right: 16px;
+}
 </style>
 <!-- Include jQuery -->
 
@@ -100,7 +104,7 @@
             <div class="w-761">
                 <div class="card mb-4">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
-                        <span>Add New Acommodition</span>
+                        <span>Add New Accommodation</span>
                         <a href="{{ url('medical-other-services') }}" class="d-flex align-items-center gap-1 text-decoration-none">
                             <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
                             <p class="mb-0 card-h1">Back</p>
@@ -155,13 +159,14 @@
 
 
 
-                                <div class="form-group mb-5">
+                                <div class="form-group mb-5 position-relative" >
                                     <label class="form-label mb-3">Hotel Picture</label>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-3 ">
                                         <input type="file" name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
+                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
                                     </div>
                                     <div class="prev-img-div">
-                                        <img src="{{ !empty($hotel_details['hotel_image_path']) ? $hotel_details['hotel_image_path'] : 'front/assets/img/default-img.png' }}" alt="image" id="pic" />
+                                        <img src="{{ !empty($hotel_details['hotel_image_path']) ? $hotel_details['hotel_image_path'] : 'front/assets/img/uploadHere.png' }}" alt="image" id="pic" />
                                         <input type="hidden" name="old_image" id="old_image" value="{{ !empty($hotel_details['hotel_image_path']) ? $hotel_details['hotel_image_path'] : '' }}">
                                     </div>
                                 </div>

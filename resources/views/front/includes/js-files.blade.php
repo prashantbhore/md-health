@@ -13,6 +13,8 @@
 </script>
 <!-- DATE-PICKER JS -->
 <script src="{{ URL::asset('front/assets/js/bootstrap-datepicker.min.js') }}"></script>
+
+<script src="{{ URL::asset('front/assets/js/waves.min.js') }}"></script>
 <!-- GLightbox -->
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 

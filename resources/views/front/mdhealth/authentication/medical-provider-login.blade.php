@@ -3,8 +3,9 @@
     body {
         background: #f6f6f6;
     }
+
     .navbar {
-        display:none;
+        display: none;
     }
 </style>
 <div class="content-wrapper service-provider-account" id="regdiv">
@@ -116,7 +117,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                     <span id="error" class="text-danger"></span>
 
                                     <div class="col-md-12 text-center d-flex flex-column gap-3">
@@ -176,12 +177,12 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" /> --}}
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
-                                </div>
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
+                    </div>
                     <div class="d-flex justify-content-center">
                         <button class="btn btn-md btn-text my-3 text-center w-407p5" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
@@ -192,7 +193,7 @@
                             document.getElementById(nextId).focus();
                         }
                     }
-                
+
                     function handleBackspace(event, currentId) {
                         if (event.code === 'Backspace' && event.target.value.length === 0 && currentId) {
                             document.getElementById(currentId).focus();
@@ -242,48 +243,47 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
 
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    <script>
-        function countdownTimer(duration) {
-            $('#resendotp').hide();
-            let timer = duration,
-                minutes, seconds;
-            const timerDisplay = $('#timer');
-            const timerInterval = setInterval(function() {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script>
+    function countdownTimer(duration) {
+        $('#resendotp').hide();
+        let timer = duration,
+            minutes, seconds;
+        const timerDisplay = $('#timer');
+        const timerInterval = setInterval(function() {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
 
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                timerDisplay.text(minutes + ":" + seconds);
+            timerDisplay.text(minutes + ":" + seconds);
 
-                if (--timer < 0) {
-                    timer = duration;
-                    clearInterval(timerInterval);
-                    $('#resendotp').show();
-                    timerDisplay.text("Timer completed!");
-                }
-            }, 1000);
-        }
+            if (--timer < 0) {
+                timer = duration;
+                clearInterval(timerInterval);
+                $('#resendotp').show();
+                timerDisplay.text("Timer completed!");
+            }
+        }, 1000);
+    }
 
-        // Set the timer duration in seconds
-        // let timerDuration = 32;
+    // Set the timer duration in seconds
+    // let timerDuration = 32;
 
-        // countdownTimer(timerDuration);
-    </script>
+    // countdownTimer(timerDuration);
+</script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
 <script>
-    
     $(document).on("click", "#regcustuser", function() {
         var base_url = $("#base_url").val();
         if ($("#mycustomerForm").valid()) {
@@ -379,7 +379,7 @@
 
     function sendOTP() {
         let timerDuration = 32;
-            countdownTimer(timerDuration);
+        countdownTimer(timerDuration);
         var number = $("#phone").val();
         firebase
             .auth()
@@ -392,19 +392,19 @@
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
                 recaptchaVerifier.clear();
-                })
-                .catch(function(error) {
-                    $("#error").text(error.message);
-                    if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
-                        $("#error").text("Too many attempts try again later");
-                    }
-                    if (error.message == "TOO_SHORT") {
-                        $("#error").text("Mobile number short or missing country code");
-                    }
-                    //  else {
+            })
+            .catch(function(error) {
+                $("#error").text(error.message);
+                if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
+                    $("#error").text("Too many attempts try again later");
+                }
+                if (error.message == "TOO_SHORT") {
+                    $("#error").text("Mobile number short or missing country code");
+                }
+                //  else {
 
-                    // }
-                    $("#error").show();
+                // }
+                $("#error").show();
             });
     }
 
@@ -476,44 +476,44 @@
 
     function resendCode() {
         let timerDuration = 32;
-            countdownTimer(timerDuration);
-            var number = $("#phone").val();
-            var containerId = 'recaptcha-container';
-            var container = document.getElementById(containerId);
-            $('#recaptcha-container').show();
+        countdownTimer(timerDuration);
+        var number = $("#phone").val();
+        var containerId = 'recaptcha-container';
+        var container = document.getElementById(containerId);
+        $('#recaptcha-container').show();
 
-            if (!container) {
-                $("#error").text("reCAPTCHA container is missing.");
-                $("#error").show();
-                return;
-            }
-
-            try {
-                container.innerHTML = '';
-                recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
-                recaptchaVerifier.render();
-
-                firebase
-            .auth()
-            .signInWithPhoneNumber(number, window.recaptchaVerifier)
-            .then(function(confirmationResult) {
-                window.confirmationResult = confirmationResult;
-                coderesult = confirmationResult;
-                        $("#sentSuccess").text("New code sent Successfully.");
-                        $("#sentSuccess").show();
-                        coderesult = confirmationResult;
-                        // recaptchaVerifier.clear();
-                        $('#recaptcha-container').hide();
-                    })
-                    .catch(function(error) {
-                        $("#error").text(error.message);
-                        $("#error").show();
-                    });
-            } catch (error) {
-                $("#error").text("Error initializing reCAPTCHA: " + error.message);
-                $("#error").show();
-            }
+        if (!container) {
+            $("#error").text("reCAPTCHA container is missing.");
+            $("#error").show();
+            return;
         }
+
+        try {
+            container.innerHTML = '';
+            recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
+            recaptchaVerifier.render();
+
+            firebase
+                .auth()
+                .signInWithPhoneNumber(number, window.recaptchaVerifier)
+                .then(function(confirmationResult) {
+                    window.confirmationResult = confirmationResult;
+                    coderesult = confirmationResult;
+                    $("#sentSuccess").text("New code sent Successfully.");
+                    $("#sentSuccess").show();
+                    coderesult = confirmationResult;
+                    // recaptchaVerifier.clear();
+                    $('#recaptcha-container').hide();
+                })
+                .catch(function(error) {
+                    $("#error").text(error.message);
+                    $("#error").show();
+                });
+        } catch (error) {
+            $("#error").text("Error initializing reCAPTCHA: " + error.message);
+            $("#error").show();
+        }
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
