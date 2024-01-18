@@ -18,6 +18,12 @@
             } else {
                 $user = false;
             }
+            // $isCustomer = null;
+            if (Session::get('MDCustomer*%') != null) {
+                $isCustomer = true;
+            } else {
+                $isCustomer = false;
+            }
 
             if (!function_exists('extractNumericRange')) {
                 function extractNumericRange($inputString)
@@ -183,7 +189,7 @@
                                         @endif
                                     </div>
                                     <div class="brdr-right">
-                                        <p class="packageResult-title">Reviews<span class="">(480)</span></p>
+                                        <p class="packageResult-title">Reviews<span class=""> (0)</span></p>
                                         <div class="stars">
                                             <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;"
                                                 alt="">
@@ -213,13 +219,27 @@
                                                 {{-- <p class="camptonBook">*20% of the price is paid before booking.</p> --}}
                                             </div>
                                             <div class="d-flex gap-2 mb-2">
-                                                <button class="btn purchaseBtn" id="{{ $package_list['id'] }}"
-                                                    data-bs-toggle="modal">Purchase
-                                                    Package</button>
-                                                <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
-                                                    <img src="{{ 'front/assets/img/white-heart.svg' }}"
-                                                        alt="">
-                                                </button>
+
+                                                @if ($isCustomer == true && $user == true)
+                                                    <button class="btn purchaseBtn" id="{{ $package_list['id'] }}"
+                                                        data-bs-toggle="modal">Purchase
+                                                        Package</button>
+                                                    <button class="favouriteBtn"
+                                                        id="fav-btn_{{ $package_list['id'] }}">
+                                                        <img src="{{ 'front/assets/img/white-heart.svg' }}"
+                                                            alt="">
+                                                    </button>
+                                                @elseif($user == false)
+                                                    <button class="btn purchaseBtn" id="{{ $package_list['id'] }}"
+                                                        data-bs-toggle="modal">Purchase
+                                                        Package</button>
+                                                    <button class="favouriteBtn"
+                                                        id="fav-btn_{{ $package_list['id'] }}">
+                                                        <img src="{{ 'front/assets/img/white-heart.svg' }}"
+                                                            alt="">
+                                                    </button>
+                                                @endif
+
                                             </div>
                                         </div>
                                         <form method="POST" id="myForm_{{ $package_list['id'] }}"
@@ -617,7 +637,7 @@
         var baseUrl = $('#base_url').val();
         var token = "{{ Session::get('login_token') }}";
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
+        var user = "{{ $user }}";
         $(".view_btn").click(function() {
             var id = this.id.split("_")[2];
             $("#myForm_" + id).submit();
@@ -630,39 +650,46 @@
         });
 
         $('.favouriteBtn').on('click', function() {
-            var packageId = $(this).attr('id').split("_")[1];
-            // alert(packageId);
-            var formData = new FormData();
-            formData.append('package_id', packageId);
+            if (user == '1') {
 
-            $.ajax({
-                url: baseUrl + '/api/md-add-package-to-favourite',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                beforeSend: function() {
-                    $('#fav-btn' + packageId).attr('disabled', true);
-                    $('#fav-btn' + packageId).html(
-                        '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
-                    );
-                },
-                success: function(response) {
-                    $('#fav-btn' + packageId).attr('disabled', false);
-                    $('#other').html('<img src="front/assets/img/white-heart.svg" alt="">');
-                    console.log('Success:', response);
+                var packageId = $(this).attr('id').split("_")[1];
+                // alert(packageId);
+                var formData = new FormData();
+                formData.append('package_id', packageId);
 
-                },
-                error: function(xhr, status, error) {
-                    $('#fav-btn' + packageId).attr('disabled', false);
-                    $('#other').html('<img src="front/assets/img/white-heart.svg" alt="">');
-                    alert('Error:', error);
-                }
-            });
+                $.ajax({
+                    url: baseUrl + '/api/md-add-package-to-favourite',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    beforeSend: function() {
+                        $('#fav-btn' + packageId).attr('disabled', true);
+                        $('#fav-btn' + packageId).html(
+                            '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
+                        );
+                    },
+                    success: function(response) {
+                        $('#fav-btn' + packageId).attr('disabled', false);
+                        $('#other').html(
+                            '<img src="front/assets/img/white-heart.svg" alt="">');
+                        console.log('Success:', response);
+
+                    },
+                    error: function(xhr, status, error) {
+                        $('#fav-btn' + packageId).attr('disabled', false);
+                        $('#other').html(
+                            '<img src="front/assets/img/white-heart.svg" alt="">');
+                        alert('Error:', error);
+                    }
+                });
+            }else{
+                $('#loginFirstModal').modal('show');
+            }
         });
 
         $('#other_form').validate({
@@ -750,7 +777,7 @@
 
         $('.purchaseBtn').click(function(e) {
             e.preventDefault();
-            var user = "{{ $user }}";
+
             var id = this.id;
             // alert(id);
             // $('.treatmentForModal_'+id).modal('hide');
