@@ -218,10 +218,10 @@
         }
 
         /*
-            .acmdn-head h6:last-child,
-            .acmdn-hotel-details h6:last-child {
-                font-size: 15px;
-            } */
+                        .acmdn-head h6:last-child,
+                        .acmdn-hotel-details h6:last-child {
+                            font-size: 15px;
+                        } */
 
         .package-view-div .treatment-card {
             padding: 15px;
@@ -338,18 +338,18 @@
 
         .add-btn {
             width: 207px !important;
-height: 35px;
-flex-shrink: 0;
-font-size: 14px
+            height: 35px;
+            flex-shrink: 0;
+            font-size: 14px
         }
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
-        <div class="d-flex gap-3">
-            <div class="w-292">
-            @include('front.includes.sidebar-user')
-            </div>
-            <div class="w-761">
+            <div class="d-flex gap-3">
+                <div class="w-292">
+                    @include('front.includes.sidebar-user')
+                </div>
+                <div class="w-761">
                     <div class="card">
                         <h5 class="card-header mb-3">
                             Packages
@@ -649,8 +649,8 @@ font-size: 14px
                                                                         <label class="form-label">Contact Number</label>
                                                                         <input type="text" class="form-control"
                                                                             value="{{ !empty($my_details['patient_phone']) ? $my_details['patient_phone'] : '' }}"
-                                                                            id="ContactNumber" aria-describedby="Contact Number"
-                                                                            readonly>
+                                                                            id="ContactNumber"
+                                                                            aria-describedby="Contact Number" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -750,7 +750,7 @@ font-size: 14px
                                                                 <img src="{{ asset('front/assets/img/uploadFile.png') }}"
                                                                     alt="">
                                                                 <input type="file" name="customer_document_image_path"
-                                                                    id="cloud-upload-file" hidden>
+                                                                    id="cloud-upload-file" hidden multiple>
                                                                 <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4,
                                                                     HEIC,
                                                                     H.264</span>
@@ -1277,8 +1277,11 @@ font-size: 14px
                 // var filePath = ""
 
                 formData.append('customer_document_image_path', $(this)[0].files[0]);
-                formData.append('package_id', packageId); // Assuming only one file is selected
-                console.log(formData);
+                formData.append('package_id', packageId);
+                // Assuming only one file is selected
+                for (var pair of formData.entries()) {
+                    console.log(pair[0] + ', ' + pair[1]);
+                }
                 $.ajax({
                     url: baseUrl +
                         '/api/md-customer-upload-documents', // Replace with your upload endpoint
@@ -1292,7 +1295,38 @@ font-size: 14px
                     },
                     success: function(response) {
                         console.log('Upload successful:', response);
-                        document.location.reload();
+                        var updatedImages = response.data;
+
+                        // Iterate through the updated images and append them to the gallery
+                        // for (var j = 0; j < updatedImages.length; j++) {
+                        //     var document = updatedImages[j];
+                        //     if (document.customer_document_image_path) {
+                        //         var galleryLink = $('<a>', {
+                        //             href: document.customer_document_image_path,
+                        //             class: 'glightbox'
+                        //         });
+
+                        //         var img = $('<img>', {
+                        //             src: document.customer_document_image_path,
+                        //             alt: 'image'
+                        //         });
+
+                        //         var clearBtn = $('<span>', {
+                        //             class: 'clear-btn',
+                        //             id: document.package_id,
+                        //             text: 'X'
+                        //         });
+
+                        //         galleryLink.append(img);
+                        //         galleryLink.append(clearBtn);
+
+                        //         $('.gallery').append(galleryLink);
+                        //     }
+                        // }
+
+                        // // Optionally, you can reload the lightbox here if needed
+                        // lightbox.reload();
+                        window.lightbox.reload();
                     },
                     error: function(error) {
                         console.error('Upload error:', error);
@@ -1300,12 +1334,13 @@ font-size: 14px
                 });
             });
 
-            $('.clear-btn').on('click', function(e) {
+            $('.clear-btn').click( function(e) {
+                // alert('hi');
                 e.preventDefault();
                 e.stopPropagation();
                 var id = this.id;
                 var formData = new FormData();
-                formData.append('id', id); 
+                formData.append('id', id);
                 // alert('Id: ' + id);
                 $.ajax({
                     url: baseUrl +

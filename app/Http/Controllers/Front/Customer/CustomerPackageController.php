@@ -90,6 +90,9 @@ class CustomerPackageController extends Controller
 
         if ($controller_request->payment_percent != '100') {
             $installment = 2;
+            if (!empty($controller_request->purchase_id)) {
+                $installment = 1;
+            }
         } else {
             $installment = 1;
         }
@@ -683,11 +686,11 @@ class CustomerPackageController extends Controller
             'md_product_sub_category.product_sub_category_name',
             'md_master_cities.city_name'
         )
-            // ->where('md_packages.status', 'active')
-            // ->where('md_product_category.status', 'active')
-            // ->where('md_product_sub_category.status', 'active')
-            // ->where('md_packages.purchase_status', 'not_purchased')
-            // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
+        // ->where('md_packages.status', 'active')
+        // ->where('md_product_category.status', 'active')
+        // ->where('md_product_sub_category.status', 'active')
+        // ->where('md_packages.purchase_status', 'not_purchased')
+        // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
@@ -718,8 +721,19 @@ class CustomerPackageController extends Controller
         // print_r( $request );
 
         if ($packages->count() > 0) {
-            $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
-            $treatment_plans = ProductCategory::where('status', 'active')->where('main_product_category_id', '1')->get();
+            $treatment_plans = ProductCategory::where('md_packages.status', 'active')
+                ->join('md_packages', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                ->where('md_product_category.status', 'active')
+                ->select('md_product_category.*')
+                ->distinct()
+                ->get();
+            $cities = Packages::where('md_packages.status', 'active')
+                ->join('md_medical_provider_register', 'md_packages.created_by', '=', 'md_medical_provider_register.id')
+                ->where('md_master_cities.status', 'active')
+                ->join('md_master_cities', 'md_master_cities.id', '=', 'md_medical_provider_register.city_id')
+                ->select('md_master_cities.*')
+                ->distinct()
+                ->get();
 
             $treatment_name = $request->treatment_name ?? 'Select Treatment';
             // $city_name = $packages[ 0 ][ 'city_name' ] ?? 'Select City' ?? $request->city_name;
@@ -731,13 +745,24 @@ class CustomerPackageController extends Controller
             return view('front.mdhealth.searchResult', compact('packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
 
         } else {
-            // dd( 'hi' );
             $counties = Country::all();
-            $city_name = !empty($request->city_name) ? $request->city_name : '';
-            $treatment_name = !empty($request->treatment_name) ? $request->treatment_name : '';
+            $city_name = !empty($request->city_name) ? $request->city_name : 'Select City';
+            $treatment_name = !empty($request->treatment_name) ? $request->treatment_name : 'Select Treatment';
+            // dd( $request->treatment_name );
             $date = $request->daterange ?? '';
-            $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
-            $treatment_plans = ProductCategory::where('status', 'active')->where('main_product_category_id', '1')->get();
+            $treatment_plans = ProductCategory::where('md_packages.status', 'active')
+                ->join('md_packages', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                ->where('md_product_category.status', 'active')
+                ->select('md_product_category.*')
+                ->distinct()
+                ->get();
+            $cities = Packages::where('md_packages.status', 'active')
+                ->join('md_medical_provider_register', 'md_packages.created_by', '=', 'md_medical_provider_register.id')
+                ->where('md_master_cities.status', 'active')
+                ->join('md_master_cities', 'md_master_cities.id', '=', 'md_medical_provider_register.city_id')
+                ->select('md_master_cities.*')
+                ->distinct()
+                ->get();
             // dd( $treatment_name, $city_name );
             return view('front.mdhealth.searchResult', compact('cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
 
@@ -998,14 +1023,13 @@ class CustomerPackageController extends Controller
         // dd($code);
         $code = (array) $code;
         // dd($code);
-        $errorString='';
-        foreach ( $code["\x00*\x00messages"] as $m) {
-           foreach($m as $e){
-            $errorString = $errorString . $e." ";
-           }
+        $errorString = '';
+        foreach ($code["\x00*\x00messages"] as $m) {
+            foreach ($m as $e) {
+                $errorString = $errorString . $e . " ";
+            }
         }
-       
-        
+
         return redirect()->back()->with('error', $errorString);
     }
 
@@ -1307,7 +1331,7 @@ class CustomerPackageController extends Controller
                 $htmlResult .= '</div>';
 
                 $htmlResult .= ' <div class="df-column">';
-               
+
                 $htmlResult .= '<h5 class="dashboard-card-title">' . !empty($report['provider_data']['company_name']) ? $report['provider_data']['company_name'] : '' . '</h5>';
                 $htmlResult .= '<h5 class="mb-0 fw-500 d-flex align-items-center gap-2">';
                 $htmlResult .= ' <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15" fill="none">';
@@ -1315,7 +1339,7 @@ class CustomerPackageController extends Controller
                 $htmlResult .= '</svg>';
                 $htmlResult .= '<span class="fsb-2">' . !empty($report['report_count']) ? $report['report_count'] : '' . 'Reports</span>';
                 $htmlResult .= ' </h5>';
-                
+
                 $htmlResult .= '</div>';
                 $htmlResult .= '<div class="ms-auto pkgMsg">';
                 $htmlResult .= '<div class="trmt-card-footer">';
