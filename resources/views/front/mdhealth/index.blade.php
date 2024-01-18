@@ -32,9 +32,10 @@ $is_logged_in = false;
                         <!-- SEARCH TREATMENT BAR -->
                         <div class="search-bar d-flex align-items-center p-3">
                             <!-- Treatments -->
-                            <div class="form-floating pe-3">
+                            <div class="form-floating pe-3 position-relative">
                                 <input type="hidden" name="platform_type" value="web">
-                                <select class="form-select" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
+                                <img src="{{ 'front/assets/img/Icon-treatment.png' }}" alt="" class="mx-2 pill-calender">
+                                <select class="form-select" style="padding-left:35px" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option value="">Select Treatment</option>
                                     @foreach ($treatment_plans as $treatment_plan)
                                     <option>{{ $treatment_plan->product_category_name }}</option>
@@ -53,8 +54,17 @@ $is_logged_in = false;
                                 <label for="floatingSelect">City</label>
                             </div>
                             <!-- Treatment Date -->
-                            <div class="form-floating pe-3">
-                                <input type="text" class="form-select bod-n-3" style="background-image: none;" name="daterange" value="" />
+                            <!-- <div class="border booking-box-h no-border-left form-floating pe-3">
+                                    <div id="reportrange" class="date-range-picker-div d-flex justify-content-center align-items-center h-100 " name="daterange">
+                                        <input type="text" name="hoteldaterange" class="form-control fsb-1 fw-500 m-0 p-0 border-0" value="" />
+                                        <span></span>
+                                    </div>
+                                    <label for="floatingSelect">Treatment Date</label>
+
+                                </div> -->
+                            <div class="form-floating pe-3 position-relative">
+                                 <input type="text" class="form-select bod-n-3" style="background-image: none;padding-left:32px" name="daterange" value="" />
+                                <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
                                 <label for="floatingSelect">Treatment Date</label>
                             </div>
                             <button type="submit" class="btn btn-search-pill">Search</button>

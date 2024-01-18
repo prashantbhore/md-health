@@ -1,6 +1,16 @@
 @extends('front.layout.layout')
 @section('content')
     <style>
+
+.tab-div .nav.nav-tabs {
+    display: flex;
+    /* flex-wrap: nowrap; */
+    gap:12px;
+    justify-content: flex-start !important;
+
+}
+
+
         .date-range-picker-div {
             position: relative;
             border: 2px solid #D6D6D6 !important;
@@ -64,17 +74,30 @@
         }
 
         .treatment-dashboard-tab .nav-link {
-            border-radius: 25px;
-            padding: 15px 40px;
-            border: 1px solid #000000 !important;
+            width: 228px !important;
+height: 47px;
+flex-shrink: 0;
+border-radius: 70px;
+border: 1px solid #000;
+/* background: #4CDB06; */
+            /* padding: 15px 40px; */
             width: 240px;
-        }
 
+            color: #000;
+text-align: center;
+font-family: Campton;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: -0.6px;
+        }
+    
         .treatment-dashboard-tab .nav-link.active,
         .treatment-dashboard-tab .nav-link:hover {
             border-bottom: 0;
             background-color: #4CDB06;
-            border: 1px solid #4CDB06 !important;
+            border: 1px solid transparent !important;
         }
 
         .input-with-cross {
@@ -107,12 +130,11 @@
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards order-details">
-            <div class="row">
-                <div class="col-md-3">
-                    @include('front.includes.sidebar')
-                </div>
-
-                <div class="col-md-9">
+        <div class="d-flex gap-3">
+            <div class="w-292">
+                @include('front.includes.sidebar')
+            </div>
+            <div class="w-761">
                     <div class="card mb-4">
                         <h5 class="card-header d-flex justify-content-between mb-2">
                             <div>
@@ -145,8 +167,8 @@
                                             role="tab" aria-controls="patient-package-details" aria-selected="true">In
                                             Progress</button>
                                     </li>
-                                    <li class="  nav-item" role="presentation">
-                                        <button class="btn btn-md btn-text nav-link" id="patient-message-tab"
+                                    <li class="nav-item"  role="presentation">
+                                        <button class="btn btn-md btn-text nav-link" style="width:165px !important;background: #D9D9D9;border-color:#D9D9D9" id="patient-message-tab"
                                             data-bs-toggle="tab" data-bs-target="#patient-message" role="tab"
                                             aria-controls="patient-message" aria-selected="true">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
