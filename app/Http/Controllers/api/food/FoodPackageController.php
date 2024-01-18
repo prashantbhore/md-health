@@ -34,92 +34,157 @@ class FoodPackageController extends BaseController
         //     return $this->sendError('Validation Error.', $validator->errors());
         // }
 
-         if(empty($request->package_id))
-         {
-                    $package_input = [];
-                    $package_input['package_name'] = $request->package_name;
-                    $package_input['food_type_id'] = $request->food_type_id;
-                    $package_input['calories'] = $request->calories;
-                    $package_input['food_description'] = $request->food_description;
-                    $package_input['created_by'] = Auth::user()->id;
+        if (isset($request->id) && !empty($request->id)) {
+            if (empty($request->package_id)) {
+                $package_input = [];
+                $package_input['package_name'] = $request->package_name;
+                $package_input['food_type_id'] = $request->food_type_id;
+                $package_input['calories'] = $request->calories;
+                $package_input['food_description'] = $request->food_description;
+                $package_input['breakfast_price'] = $request->breakfast_price;
+                $package_input['lunch_price'] = $request->lunch_price;
+                $package_input['dinner_price'] = $request->dinner_price;
+                $package_input['package_price'] = $request->package_price;
+                $package_input['sales_price'] = $request->sales_price;
+                $package_input['status'] = 'active';
+                $package_input['created_by'] = Auth::user()->id;
+                // $FoodPackages = FoodPackages::create($package_input);
+                $FoodPackages = FoodPackages::where('id', $request->id)->update($package_input);
 
-                    $FoodPackages = FoodPackages::create($package_input);
-
-                    $Packages = FoodPackages::select('id')->get();
-                    if (!empty($Packages)) {
-                        foreach ($Packages as $key => $value) {
-
-                            $length = strlen($value->id);
-
-                            if ($length == 1) {
-                                $package_unique_id = '#MDF00D' . $value->id;
-                            } elseif ($length == 2) {
-                                $package_unique_id = '#MDF00D' . $value->id;
-                            } elseif ($length == 3) {
-                                $package_unique_id = '#MDF00D' . $value->id;
-                            } elseif ($length == 4) {
-                                $package_unique_id = '#MDF00D' . $value->id;
-                            } elseif ($length == 5) {
-                                $package_unique_id = '#MDF00D' . $value->id;
-                            } else {
-                                $package_unique_id = '#MD' . $value->id;
-                            }
-
-                            $update_unique_id = FoodPackages::where('id', $value->id)->update(['unique_id' => $package_unique_id]);
+                if ($request->has('food_image_path')) {
+                    if ($files = $request->file('food_image_path')) {
+                        // $files=[];
+                        foreach ($files as $file) {
+                            $accout_images = new PackagesMultipleImages;
+                            $accout_images['package_id'] = $FoodPackages->id;
+                            $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                            $original_name = $file->getClientOriginalName();
+                            $filePath = $file->storeAs('public/foodpackage', $filename);
+                            $accout_images['food_image_path'] = $filePath;
+                            $accout_images['food_image_name'] = $original_name;
+                            $accout_images['modified_by'] = Auth::user()->id;
+                            $accout_images['modified_ip_address'] = $request->ip();
+                            $accout_images->save();
                         }
                     }
-                    if ($request->has('food_image_path')) {
-                        if ($files = $request->file('food_image_path')) {
-                            // $files=[];
-                            foreach ($files as $file) {
-                                $accout_images = new PackagesMultipleImages;
-                                $accout_images['package_id'] = $FoodPackages->id;
-                                $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
-                                $original_name = $file->getClientOriginalName();
-                                $filePath = $file->storeAs('public/foodpackage', $filename);
-                                $accout_images['food_image_path'] = $filePath;
-                                $accout_images['food_image_name'] = $original_name;
-                                $accout_images['modified_by'] = Auth::user()->id;
-                                $accout_images['modified_ip_address'] = $request->ip();
-                                $accout_images->save();
-                            }
-                        }
+                }
+
+                if (!empty($FoodPackages)) {
+                    $food_menus = [];
+                    $food_menus['package_id'] = $FoodPackages->id;
+                    $food_menus['days'] = $request->days;
+                    $food_menus['calories'] = $request->calories;
+                    $food_menus['meal_type'] = $request->meal_type;
+
+                    if ($request->file('menu_image_path')) {
+                        $food_menus['menu_image_path'] = $this->verifyAndUpload($request, 'menu_image_path', 'menu_images');
+                        $original_name = $request->file('menu_image_path')->getClientOriginalName();
+                        $food_menus['menu_image_name'] = $original_name;
                     }
+                    $food_menus['menu'] = $request->menu;
+                    $food_menus['created_by'] = Auth::user()->id;
 
-                    if (!empty($FoodPackages)) {
-                        $food_menus = [];
-                        $food_menus['package_id'] = $FoodPackages->id;
-                        $food_menus['days'] = $request->days;
-                        $food_menus['calories'] = $request->calories;
-                        $food_menus['meal_type'] = $request->meal_type;
+                    // $FoodMenus = FoodMenus::create($food_menus);
+                    $FoodMenus = FoodMenus::where('id', $request->id)->update($food_menus);
 
-                        if ($request->file('menu_image_path')) {
-                            $food_menus['menu_image_path'] = $this->verifyAndUpload($request, 'menu_image_path', 'menu_images');
-                            $original_name = $request->file('menu_image_path')->getClientOriginalName();
-                            $food_menus['menu_image_name'] = $original_name;
-                        }
-                        $food_menus['menu'] = $request->menu;
-                        $food_menus['created_by'] = Auth::user()->id;
 
-                        $FoodMenus = FoodMenus::create($food_menus);
+                    if (!empty($FoodMenus)) {
+                        return response()->json([
+                            'status' => 200,
+                            'message' => 'menu updated successfully in active list.',
+                            'id' => $FoodPackages->id,
+                            'data' => $FoodPackages,
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 404,
+                            'message' => 'Something went wrong.',
+                        ]);
+                    }
+                }
+            } else {
+                $food_menus['package_id'] = $request->id;
 
-                        if (!empty($FoodMenus)) {
-                            return response()->json([
-                                'status' => 200,
-                                'message' => 'menu created successfully in active list.',
-                                'id' => $FoodPackages->id,
-                                'data' => $FoodPackages,
-                            ]);
+                $food_menus['days'] = $request->days;
+                $food_menus['calories'] = $request->calories;
+                $food_menus['meal_type'] = $request->meal_type;
+
+                if ($request->file('menu_image_path')) {
+                    $food_menus['menu_image_path'] = $this->verifyAndUpload($request, 'menu_image_path', 'menu_images');
+                    $original_name = $request->file('menu_image_path')->getClientOriginalName();
+                    $food_menus['menu_image_name'] = $original_name;
+                }
+                $food_menus['menu'] = $request->menu;
+                $food_menus['created_by'] = Auth::user()->id;
+
+                $FoodMenus = FoodMenus::create($food_menus);
+                if (!empty($FoodMenus)) {
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Menu created successfully in active list..',
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Something went wrong.',
+                    ]);
+                }
+            }
+        }else{
+            if (empty($request->package_id)) {
+                $package_input = [];
+                $package_input['package_name'] = $request->package_name;
+                $package_input['food_type_id'] = $request->food_type_id;
+                $package_input['calories'] = $request->calories;
+                $package_input['food_description'] = $request->food_description;
+                $package_input['created_by'] = Auth::user()->id;
+
+                $FoodPackages = FoodPackages::create($package_input);
+
+                $Packages = FoodPackages::select('id')->get();
+                if (!empty($Packages)) {
+                    foreach ($Packages as $key => $value) {
+
+                        $length = strlen($value->id);
+
+                        if ($length == 1) {
+                            $package_unique_id = '#MDF00D' . $value->id;
+                        } elseif ($length == 2) {
+                            $package_unique_id = '#MDF00D' . $value->id;
+                        } elseif ($length == 3) {
+                            $package_unique_id = '#MDF00D' . $value->id;
+                        } elseif ($length == 4) {
+                            $package_unique_id = '#MDF00D' . $value->id;
+                        } elseif ($length == 5) {
+                            $package_unique_id = '#MDF00D' . $value->id;
                         } else {
-                            return response()->json([
-                                'status' => 404,
-                                'message' => 'Something went wrong.',
-                            ]);
+                            $package_unique_id = '#MD' . $value->id;
+                        }
+
+                        $update_unique_id = FoodPackages::where('id', $value->id)->update(['unique_id' => $package_unique_id]);
+                    }
+                }
+                if ($request->has('food_image_path')) {
+                    if ($files = $request->file('food_image_path')) {
+                        // $files=[];
+                        foreach ($files as $file) {
+                            $accout_images = new PackagesMultipleImages;
+                            $accout_images['package_id'] = $FoodPackages->id;
+                            $filename = time() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                            $original_name = $file->getClientOriginalName();
+                            $filePath = $file->storeAs('public/foodpackage', $filename);
+                            $accout_images['food_image_path'] = $filePath;
+                            $accout_images['food_image_name'] = $original_name;
+                            $accout_images['modified_by'] = Auth::user()->id;
+                            $accout_images['modified_ip_address'] = $request->ip();
+                            $accout_images->save();
                         }
                     }
-                }else{
-                    $food_menus['package_id'] = $request->package_id;
+                }
 
+                if (!empty($FoodPackages)) {
+                    $food_menus = [];
+                    $food_menus['package_id'] = $FoodPackages->id;
                     $food_menus['days'] = $request->days;
                     $food_menus['calories'] = $request->calories;
                     $food_menus['meal_type'] = $request->meal_type;
@@ -133,10 +198,13 @@ class FoodPackageController extends BaseController
                     $food_menus['created_by'] = Auth::user()->id;
 
                     $FoodMenus = FoodMenus::create($food_menus);
+
                     if (!empty($FoodMenus)) {
                         return response()->json([
                             'status' => 200,
-                            'message' => 'Menu created successfully in active list..',
+                            'message' => 'menu created successfully in active list.',
+                            'id' => $FoodPackages->id,
+                            'data' => $FoodPackages,
                         ]);
                     } else {
                         return response()->json([
@@ -145,6 +213,40 @@ class FoodPackageController extends BaseController
                         ]);
                     }
                 }
+            } else {
+                $food_menus['package_id'] = $request->package_id;
+
+                $food_menus['days'] = $request->days;
+                $food_menus['calories'] = $request->calories;
+                $food_menus['meal_type'] = $request->meal_type;
+
+                if ($request->file('menu_image_path')) {
+                    $food_menus['menu_image_path'] = $this->verifyAndUpload($request, 'menu_image_path', 'menu_images');
+                    $original_name = $request->file('menu_image_path')->getClientOriginalName();
+                    $food_menus['menu_image_name'] = $original_name;
+                }
+                $food_menus['menu'] = $request->menu;
+                $food_menus['created_by'] = Auth::user()->id;
+
+                $FoodMenus = FoodMenus::create($food_menus);
+                if (!empty($FoodMenus)) {
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Menu created successfully in active list..',
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Something went wrong.',
+                    ]);
+                }
+            }
+
+        }
+
+
+
+        
     }
 
 
@@ -353,7 +455,7 @@ class FoodPackageController extends BaseController
     public function food_active_list()
     {
         $FoodPackages=FoodPackages::where('md_food_packages.status','active')
-        ->select('md_food_packages.unique_id', 'md_food_packages.package_name', 'md_food_logo.company_logo_image_path', 'md_food_logo.company_logo_image_name','md_food_packages.status')
+        ->select('md_food_packages.id','md_food_packages.unique_id', 'md_food_packages.package_name', 'md_food_logo.company_logo_image_path', 'md_food_logo.company_logo_image_name','md_food_packages.status')
         ->leftjoin('md_food_register', 'md_food_register.id', 'md_food_packages.created_by')
         ->leftjoin('md_food_logo', 'md_food_logo.food_id', 'md_food_register.id')
         ->where('md_food_packages.created_by',Auth::user()->id)
@@ -376,7 +478,7 @@ class FoodPackageController extends BaseController
     public function food_deactive_list()
     {
         $FoodPackages = FoodPackages::where('md_food_packages.status','inactive')
-        ->select('md_food_packages.unique_id', 'md_food_packages.package_name', 'md_food_logo.company_logo_image_path', 'md_food_logo.company_logo_image_name','md_food_packages.status')
+        ->select('md_food_packages.id','md_food_packages.unique_id', 'md_food_packages.package_name', 'md_food_logo.company_logo_image_path', 'md_food_logo.company_logo_image_name','md_food_packages.status')
         ->leftjoin('md_food_register', 'md_food_register.id', 'md_food_packages.created_by')
         ->leftjoin('md_food_logo', 'md_food_logo.food_id', 'md_food_register.id')
         ->where('md_food_packages.created_by',Auth::user()->id)
@@ -455,7 +557,85 @@ class FoodPackageController extends BaseController
 
     public function food_view(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+        ]);
 
-        
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $FoodPackages=FoodPackages::where('status','active')
+        ->select('id',
+            'unique_id',
+            'package_name',
+            'food_type_id',
+            'calories',
+            'food_description',
+            'breakfast_price',
+            'lunch_price',
+            'dinner_price',
+            'package_price',
+            'sales_price',
+            'featured_request',
+            'status')
+        ->where('id',$request->id)
+        ->first();
+
+        $FoodMenus = FoodMenus::where('status', 'active')
+        ->select(
+            'id',
+            'package_id',
+            'days',
+            'calories',
+            'meal_type',
+            // 'menu_image_path',
+            // 'menu_image_name',
+            'menu'
+        )
+            // ->where('created_by',Auth::user()->id)
+            ->where('package_id', $request->id)
+            ->get();
+
+
+        if (!empty($FoodPackages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your food package view.',
+                'data' => $FoodPackages,
+                'FoodMenus' => $FoodMenus
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+
+    public function food_update(Request $request)
+    {
+        $package_input = [];
+        $package_input['breakfast_price'] = $request->breakfast_price;
+        $package_input['lunch_price'] = $request->lunch_price;
+        $package_input['dinner_price'] = $request->dinner_price;
+        $package_input['package_price'] = $request->package_price;
+        $package_input['sales_price'] = $request->sales_price;
+        // $package_input['featured_request'] = $request->featured_request;
+        $package_input['status'] = 'inactive';
+        $FoodPackages = FoodPackages::where('id', $request->package_id)->update($package_input);
+        if (!empty($FoodPackages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Package created successfully in active list..',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
     }
 }

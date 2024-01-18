@@ -153,6 +153,7 @@ class TransportationController extends BaseController
             'comfort_level_id' => 'required',
             'vehicle_per_day_price' => 'required',
             'other_services' => 'required',
+            'vehicle_image_path'=>'required',
             'button_type' => 'required',
         ]);
 
@@ -237,6 +238,7 @@ class TransportationController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'transportation_id' => 'required',
+            'vehicle_image_path' => $request->hasFile('vehicle_image_path') ? 'image|mimes:jpeg,png,jpg,gif|max:2048' : '', // Validate only if file is present
         ]);
 
         if ($validator->fails()) {

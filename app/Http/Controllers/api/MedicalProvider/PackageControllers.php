@@ -140,11 +140,11 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
-                if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['created_by'] = Auth::user()->id;
@@ -156,17 +156,17 @@ class PackageControllers extends BaseController
                         $length = strlen($value->id);
 
                         if ($length == 1) {
-                            $package_unique_id = '#MD00000' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 2) {
-                            $package_unique_id = '#MD0000' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 3) {
-                            $package_unique_id = '#MD000' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 4) {
-                            $package_unique_id = '#MD00' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 5) {
-                            $package_unique_id = '#MD0' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } else {
-                            $package_unique_id = '#MD' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         }
 
                         $update_unique_id = Packages::where('id', $value->id)->update(['package_unique_no' => $package_unique_id]);
@@ -222,11 +222,11 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
-                if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['status'] = $request->button_type;
@@ -299,8 +299,11 @@ class PackageControllers extends BaseController
                 'md_packages.package_unique_no',
                 'md_packages.package_name',
                 'md_packages.status',
+                'md_medical_provider_logo.company_logo_image_path',
+                'md_medical_provider_logo.company_logo_image_name'
             )
-            ->where('created_by', Auth::user()->id)
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
             ->get();
 
 
@@ -322,14 +325,18 @@ class PackageControllers extends BaseController
     public function packages_deactive_list()
     {
         $packages_deactive_list = Packages::where('md_packages.status', 'inactive')
-            ->select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.status',
-            )
-            ->where('created_by', Auth::user()->id)
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+            'md_medical_provider_logo.company_logo_image_path',
+            'md_medical_provider_logo.company_logo_image_name'
+        )
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
             ->get();
+
 
         if (!empty($packages_deactive_list)) {
             return response()->json([
@@ -500,7 +507,12 @@ class PackageControllers extends BaseController
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
-                $package_input['other_services'] = $request->other_services;
+                // $package_input['other_services'] = $request->other_services;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
                 $package_input['hotel_id'] = $request->hotel_id;
@@ -522,11 +534,11 @@ class PackageControllers extends BaseController
                 $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
-                 if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['status'] = 'active';
@@ -549,7 +561,12 @@ class PackageControllers extends BaseController
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
-                $package_input['other_services'] = $request->other_services;
+                // $package_input['other_services'] = $request->other_services;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
                 $package_input['hotel_id'] = $request->hotel_id;
@@ -572,11 +589,11 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
-                if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['status'] = 'inactive';
