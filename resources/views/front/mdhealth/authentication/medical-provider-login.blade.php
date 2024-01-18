@@ -182,6 +182,7 @@
                                 <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
                                 <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
                                 </div>
+
                     <div class="d-flex justify-content-center">
                         <button class="btn btn-md btn-text my-3 text-center w-407p5" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
@@ -343,8 +344,8 @@
                     phone: phone,
                 },
                 beforeSend: function() {
-                    $("#medproreg").attr("disabled", true);
-                    $("#medproreg").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+                    // $("#medproreg").attr("disabled", true);
+                    // $("#medproreg").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                 },
                 success: function(response) {
                     $("#medproreg").attr("disabled", false);
@@ -387,8 +388,8 @@
             .then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
-                $("#successAuth").text("Message sent");
-                $("#successAuth").show();
+                // $("#successAuth").text("Message sent");
+                // $("#successAuth").show();
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
                 recaptchaVerifier.clear();
@@ -422,8 +423,8 @@
             .then(function(result) {
                 var user = result.user;
                 // console.log(user);
-                $("#successOtpAuthot").text("OTP verified");
-                $("#successOtpAuthot").show();
+                // $("#successOtpAuthot").text("OTP verified");
+                // $("#successOtpAuthot").show();
                 // recaptchaVerifier.clear();
 
                 // var formData = $('#myFormProvider').serialize();
@@ -446,10 +447,10 @@
                     processData: false,
                     beforeSend: function() {
                         // $("#otp-btn").attr("disabled", true);
-                        $("#otp-btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+                        // $("#otp-btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                     },
                     success: function(response) {
-                        $("#otp-btn").attr("disabled", false);
+                        // $("#otp-btn").attr("disabled", false);
                         console.log(response);
                         if (response.url !== undefined) {
                             // alert(response.url);
@@ -499,8 +500,8 @@
             .then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
-                        $("#sentSuccess").text("New code sent Successfully.");
-                        $("#sentSuccess").show();
+                        // $("#sentSuccess").text("New code sent Successfully.");
+                        // $("#sentSuccess").show();
                         coderesult = confirmationResult;
                         // recaptchaVerifier.clear();
                         $('#recaptcha-container').hide();

@@ -89,13 +89,25 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
-                                
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                                oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                                oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                                oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                                oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
+                                oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')"
+                                class="form-control">
+
                         </div>
                         <div id="errorMessage" class="text-danger d-none"></div>
                 </div>
@@ -111,7 +123,7 @@
                             document.getElementById(nextId).focus();
                         }
                     }
-                
+
                     function handleBackspace(event, currentId) {
                         if (event.code === 'Backspace' && event.target.value.length === 0 && currentId) {
                             document.getElementById(currentId).focus();
@@ -291,7 +303,7 @@
                         //     '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
                     },
                     success: function(response) {
-                        $('#signup').attr('enable', true);
+                        // $('#signup').attr('enable', true);
                         if (response.user_exist !== undefined) {
                             // alert(JSON.stringify(response.user_exist));
                             sendOTP();
@@ -357,12 +369,12 @@
         }
 
         function isValidCode(code) {
-        return (code.length === 6);
-    }
+            return (code.length === 6);
+        }
 
-    function showErrorMessage(message) {
-        $('#errorMessage').removeClass('d-none').text(message);
-    }
+        function showErrorMessage(message) {
+            $('#errorMessage').removeClass('d-none').text(message);
+        }
         // $('#verifyBtn').attr('disabled', true);
         // $('#verifyBtn').html('<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
         function verify(e) {
@@ -374,9 +386,9 @@
             var code6 = $("#ot6").val();
             var code = code1 + code2 + code3 + code4 + code5 + code6;
             if (!isValidCode(code)) {
-            showErrorMessage('Please enter the correct code.');
-            return;
-        }
+                showErrorMessage('Please enter the correct code.');
+                return;
+            }
             coderesult.confirm(code)
                 .then(function(result) {
 

@@ -179,9 +179,9 @@
                                     <input type="hidden" name="platform_type" id="platform_type" value="web">
                                 </div>
 
-                                <div class="section-btns mb-4">
-                                    <button type="submit" class="btn save-btn-black">Save
-                                        Vehicle</button>
+                                <div class="section-btns mb-4 d-flex gap-3">
+                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50">Save Vehicle</button>
+                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50">Deactive Vehicle</button>
                                 </div>
 
                             </form>
