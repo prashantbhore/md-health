@@ -451,4 +451,11 @@ class FoodPackageController extends BaseController
             ]);
         }
     }
+
+
+    public function food_view(Request $request)
+    {
+
+        
+    }
 }

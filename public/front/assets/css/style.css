@@ -32,6 +32,10 @@
     font-family: "CamptonThin";
     src: url("../fonts/campton/CamptonThin.otf");
 }
+@font-face {
+    font-family: "CamptonExtraLight";
+    src: url("../fonts/campton/CamptonExtraLight.otf");
+}
 
 :root {
     --form-control-color: #4cdb06;
@@ -145,6 +149,7 @@
 .md-pad {
     padding: .375rem .75rem !important;
 }
+
 .bod-3 {
     border-radius: 3px 0 0px 3px !important;
 }
@@ -1261,7 +1266,7 @@ select {
     font-family: CamptonBold !important;
 }
 
-.camptonSB {
+.camptonSemiBold {
     font-family: CamptonSemiBold !important;
 }
 
@@ -1270,7 +1275,7 @@ select {
 }
 
 .camLight {
-    font-family: "CamptonLight";
+    font-family: "CamptonLight" !important;
 }
 
 .authentication .nav-tabs .nav-link {
@@ -1278,18 +1283,19 @@ select {
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 400;
     line-height: 25px;
-    /* 156.25% */
     letter-spacing: -0.64px;
     transition: 0.15s all;
+    padding-bottom: 0;
+    min-width: 55px;
 }
 
 .authentication .nav-tabs .nav-link.active {
     border-bottom: 2px solid #4cdb06;
-    font-weight: 700;
-    font-family: "Campton";
+    /* font-weight: 700; */
+    font-family: "CamptonExtraBold";
+    padding-bottom: 0;
 }
 
 .authentication .form-control,
@@ -1334,7 +1340,7 @@ select {
     font-size: 16px;
 
     font-weight: 500;
-    line-height: normal;
+    line-height: 18.62px;
     letter-spacing: -0.64px;
 }
 
@@ -1389,10 +1395,10 @@ select {
 
 .reg-title {
     color: #4cdb06;
-    font-family: "CamptonBold";
+    font-family: "Campton";
     font-size: 33px;
     font-weight: 700;
-    line-height: normal;
+    line-height: 38.41px;
     letter-spacing: -1.32px;
 }
 
@@ -1682,9 +1688,9 @@ select {
 
 /* Mpluss06 */
 .card-img-div {
-    height: 80px;
-    width: 80px;
-    background: lightgrey;
+    height: 52px;
+    width: 52px;
+    background: #fff;
     border-radius: 5px;
 }
 
@@ -1805,6 +1811,10 @@ select {
 
 .fs-18 {
     font-size: 18px !important;
+}
+
+.fs-13 {
+    font-size: 13px !important;
 }
 
 .fs-14 {
@@ -3326,6 +3336,7 @@ span.popup-msg.active {
     /* 123.256% */
     letter-spacing: -1.72px;
     text-align: left;
+    inline-size: max-content;
 }
 
 .text-green-h1b {
@@ -3390,9 +3401,8 @@ span.popup-msg.active {
 
 .footer .card-text {
     color: #fff;
-    font-family: CamptonBook;
+    font-family: "Campton";
     font-size: 18px;
-
     font-weight: 500;
     line-height: 49px;
     letter-spacing: -0.72px;
@@ -3400,7 +3410,8 @@ span.popup-msg.active {
 }
 
 .footer .card-text span {
-    font-weight: 700;
+    /* font-weight: 700; */
+    font-family: "CamptonBold";
 }
 
 .footer .contact-no {
@@ -3432,12 +3443,11 @@ span.popup-msg.active {
 }
 
 .mext {
-    color: #878787;
+    color: #fff;
     text-align: right;
-    font-family: CamptonLight;
+    font-family: "CamptonThin";
     font-size: 11px;
-
-    font-weight: 300;
+    font-weight: 100;
     line-height: normal;
     letter-spacing: -0.44px;
 }
@@ -3884,11 +3894,11 @@ label.tc-text,
 
 .footer ul li a {
     color: #878787;
-    font-family: "CamptonBook";
+    font-family: "Campton";
     font-size: 18px;
     font-weight: 500;
     line-height: normal;
-    letter-spacing: -0.72px;
+    letter-spacing: -0.56px;
 }
 
 .get-started-btn {
@@ -4039,8 +4049,8 @@ label.tc-text,
 }
 
 .hotel-img {
-    width: 41px;
-    height: 41px;
+    width: 52px;
+    height: 52px;
     border-radius: 3px;
 }
 
@@ -4408,4 +4418,68 @@ hr:not([size]) {
     object-fit: contain;
     padding: 5px;
     background: #fff;
+}
+
+.md-img-sm {
+    width: 41px;
+    height: 41px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    object-fit: contain;
+    padding: 5px;
+    background: #fff;
+}
+
+.md-img-2 {
+    height: 52px;
+    width: 52px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    object-fit: contain;
+    padding: 3px;
+    background: #fff;
+}
+
+.review-sub-btn {
+    width: 312px;
+    height: 36px;
+    border-radius: 5px;
+    background: #4CDB06;
+    font-family: "Campton";
+}
+
+.write-rev-btn {
+    color: #FFF !important;
+    text-align: center;
+    font-family: Campton;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    width: 173px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #F3771D;
+}
+
+.md-span {
+    /* font-weight: 700; */
+    font-family: "CamptonBold";
+}
+
+.md-main {
+    color: #4CDB06;
+    font-family: CamptonBook;
+    font-size: 22px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.pill-calender {
+    position: absolute;
+    top: 27px;
+    left: 6px;
 }
