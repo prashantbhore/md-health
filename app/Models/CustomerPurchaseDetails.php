@@ -72,9 +72,9 @@ class CustomerPurchaseDetails extends Model {
     }
 
     public function case_manager() {
-        return $this->belongsTo( MedicalProviderSystemUser::class, 'case_manager_id', 'id' );
+        return $this->belongsTo( MedicalProviderRegistrater::class, 'case_manager_id', 'id' );
     }
-
+    
     public function hotel() {
         return $this->belongsTo( AddNewAcommodition::class, 'hotel_id', 'id' );
     }
