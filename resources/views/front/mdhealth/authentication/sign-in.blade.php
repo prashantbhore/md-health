@@ -1,14 +1,47 @@
 @extends('front.layout.layout')
 @section('content')
-    <style>
-        .navbar {
-            display: none;
-        }
+<style>
+    .navbar,
+    footer {
+        display: none;
+    }
 
-        #recaptcha-container {
-            bottom: 290px;
-        }
-    </style>
+    #recaptcha-container {
+        bottom: 330px;
+    }
+
+    .mdi-eye-off::before,
+    .mdi-eye::before {
+        font-size: 19px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #D6D6D6 !important;
+    }
+
+    .cont-btn {
+        width: 404px;
+        height: 47px;
+        flex-shrink: 0;
+        border-radius: 25px;
+        background: #4CDB06;
+        color: #000002;
+        text-align: center;
+        font-family: Campton;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.6px;
+        transition: 0.15s all;
+    }
+
+    .cont-btn:hover {
+        background: #47cc05;
+        color: #000002;
+    }
+</style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
         <div class="card">
             <div class="card-body">
@@ -39,7 +72,7 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                    <span toggle="#password" class="mdi mdi-eye field-icon toggle-password "></span>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -52,8 +85,8 @@
                             <span id="error" class="text-danger"></span>
                             <span id="success" class="text-success"></span>
                             <div class="pt-100px">
-                                <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup"
-                                    style="height: 47px;">Continue...</button>
+                                <button class="btn cont-btn w-100 mb-4 df-center" type="button" id="signup"
+                                    >Continue</button>
                             </div>
                             <div class="text-center">
                                 <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
