@@ -408,12 +408,12 @@
                 <div class="form-group d-flex flex-column mb-5 section-heading-div">
                     <!-- <h6 class="section-heading">Featured Request</h6> -->
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input">
-                        <label class="section-heading" for="featureproducts" name="featured_product" id="featured_product"
-                         {{ !empty($packages_active_list['featured_product']) ? 'checked' : '' }}>Featured Request</label>
+                        <input type="checkbox" class="form-check-input" name="featured_product" id="featured_product"
+                        {{ (!empty($packages_active_list['featured_product']) && $packages_active_list['featured_product']=="yes") ? 'checked' : '' }}>
+                        <label class="section-heading" for="featureproducts" >Featured Request</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="featureproducts" {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
+                        <input type="checkbox" class="form-check-input" name="featureproducts" id="featureproducts" {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
                         <label class="form-check-label" for="featureproducts">I confirm
                             that all details are correct and meets the <a href="#" class="text-green fw-700 text-decoration-underline camptonBold">Terms & Conditions.</a></label>
                     </div>
@@ -536,6 +536,9 @@
                 package_discount: {
                     required: true,
                     maxDiscount: true // Use the custom validation method for discount percentage
+                },
+                featureproducts: {
+                    required: true
                 }
                 // Add more rules for other fields as needed
             },
@@ -555,6 +558,9 @@
                 },
                 package_discount: {
                     required: "Please enter a Discount percentage"
+                },
+                featureproducts: {
+                    required: "Please check the Terms & Conditions box."
                 }
                 // Add more messages for other fields as needed
             },
