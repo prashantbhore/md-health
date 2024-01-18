@@ -552,6 +552,7 @@
                     $("#successAuth").show();
                     $("#otpDiv").removeClass("d-none");
                     $("#regdiv").hide();
+                    $('#recaptcha-container').hide();
                     
                 })
                 .catch(function(error) {

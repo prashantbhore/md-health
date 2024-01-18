@@ -486,14 +486,14 @@ class CommonLoginController extends Controller
 
                 if (
                     Auth::guard('md_health_food_registers')->attempt([
-                        'email' => $request->email,
+                        'mobile_no' => $request->number,
                         'password' => $request->password,
                         'status' => 'active',
                     ])
                 ) {
                     $user_datacust = array(
                         'platform_type' => 'web',
-                        'email' => $request->get('email'),
+                        'mobile_no' => $request->get('number'),
                         'password' => $request->get('password')
                     );
 
@@ -517,11 +517,11 @@ class CommonLoginController extends Controller
 
                         if ($otpcheck) {
                             $user_id = Auth::guard('md_health_food_registers')->user()->id;
-                            $user_email = Auth::guard('md_health_food_registers')->user()->email;
+                            $mobile_no = Auth::guard('md_health_food_registers')->user()->mobile_no;
                             $user = Auth::guard('md_health_food_registers')->user();
 
                             Session::put('MDFoodVendor*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('email', $mobile_no);
                             Session::put('user', $user);
                             // dd(Session::all());
                             return response()->json([
@@ -547,11 +547,11 @@ class CommonLoginController extends Controller
                         if ($otpcheck) {
                             // dd($otpcheck);
                             $user_id = Auth::guard('md_health_food_registers')->user()->id;
-                            $user_email = Auth::guard('md_health_food_registers')->user()->email;
+                            $mobile_no = Auth::guard('md_health_food_registers')->user()->mobile_no;
                             $user = Auth::guard('md_health_food_registers')->user();
 
                             Session::put('MDFoodVendor*%', $user_id);
-                            Session::put('email', $user_email);
+                            Session::put('email', $mobile_no);
                             Session::put('user', $user);
                             return response()->json([
                                 'status' => 200,

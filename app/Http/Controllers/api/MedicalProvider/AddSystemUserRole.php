@@ -174,7 +174,10 @@ class AddSystemUserRole extends BaseController
             $role = MedicalProviderRegistrater::find($userId);
 
             if ($role) {
-                $role->update(['previllages' => $privileges]);
+                $role->update([
+                    'roll_id'=> $roleId ,
+                    'previllages' => $privileges
+            ]);
             }
 
             return response()->json([
