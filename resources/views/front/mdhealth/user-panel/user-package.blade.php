@@ -278,8 +278,8 @@
                                                     <div class="card-body d-flex gap-3 w-100 p-4">
                                                         <div class="df-center">
                                                             <img src="{{ asset($cancelled_package['company_logo_image_path']) }}"
-                                                                alt=""
-                                                                style="height: 109px;width:109px;border-radius: 3px;object-fit:cover">
+                                                                alt="" class="md-img"
+                                                                >
                                                         </div>
                                                         <div class="df-column">
                                                             <h5 class="mb-0">
