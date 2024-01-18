@@ -2970,7 +2970,7 @@ class CustomerPackageController extends BaseController
             'md_packages.id',
             'md_packages.package_unique_no',
             'md_packages.package_name',
-            // 'md_packages.treatment_period_in_days',
+            'md_packages.treatment_period_in_days',
             // 'md_packages.other_services',
             // 'md_packages.package_price',
             // 'md_packages.sale_price',
