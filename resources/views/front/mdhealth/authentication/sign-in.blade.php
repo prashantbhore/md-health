@@ -50,8 +50,7 @@
                         <span id="error" class="text-danger"></span>
                         <span id="success" class="text-success"></span>
                         <div class="pt-100px">
-                            <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup" style="height: 47px;">Sign
-                                In</button>
+                            <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup" style="height: 47px;">Continue...</button>
                         </div>
                         <div class="text-center">
                             <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
@@ -314,9 +313,19 @@
             $("#otpDiv").removeClass('d-none');
             $("#logDiv").hide();
             recaptchaVerifier.clear();
-        }).catch(function(error) {
-            $("#error").text(error.message);
-            $("#error").show();
+                })
+                .catch(function(error) {
+                    $("#error").text(error.message);
+                    if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
+                        $("#error").text("Too many attempts try again later");
+                    }
+                    if (error.message == "TOO_SHORT") {
+                        $("#error").text("Mobile number short or missing country code");
+                    }
+                    //  else {
+
+                    // }
+                    $("#error").show();
         });
     }
 

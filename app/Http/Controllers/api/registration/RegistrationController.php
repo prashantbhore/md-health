@@ -30,6 +30,7 @@ class RegistrationController extends BaseController
 
     public function customer_register(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',

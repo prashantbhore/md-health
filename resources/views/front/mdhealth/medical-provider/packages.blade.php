@@ -308,14 +308,18 @@
                             }
                         } else {
                             if (type === 'active') {
-                                $('#activelist').html('<h3>No Data Found</h3>');
+                                $('#activelist').html('<div class="no-data">No Data Available !</div>');
                             } else {
-                                $('#deactivelist').html('<h3>No Data Found</h3>');
+                                $('#deactivelist').html('<div class="no-data">No Data Available !</div>');
                             }
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
+                        if (type === 'active') {
+                                $('#activelist').html('<div class="no-data">No Data Available !</div>');
+                            } else {
+                                $('#deactivelist').html('<div class="no-data">No Data Available !</div>');
+                            }
                     }
                 });
             } else {

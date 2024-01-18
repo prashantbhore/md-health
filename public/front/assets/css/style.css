@@ -130,8 +130,9 @@
 
 /* UTILITY CLASSES */
 .error {
-    color: #f31d1d;
+    color: #F31D1D !important; 
     font-family: "Campton";
+    font-size: 14px !important;
     letter-spacing: -0.64px;
     transition: 0.15s all;
 }

@@ -190,8 +190,7 @@
     function acommodition_delete(id) {
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('
-        login_token ') }}';
+        const bearer_token = '{{ Session::get('login_token') }}';
         // alert(base_url);
         $.ajax({
             url: base_url + '/api/md-delete-hotel',
@@ -228,8 +227,7 @@
         // Get the CSRF token from the meta tag
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('
-        login_token ') }}';
+        const bearer_token = '{{ Session::get('login_token') }}';
         // Your AJAX call
         $.ajax({
             url: base_url + '/api/md-delete-transportation',
@@ -267,8 +265,7 @@
         // Get the CSRF token from the meta tag
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('
-        login_token ') }}';
+        const bearer_token = '{{ Session::get('login_token') }}';
         // Your AJAX call
         $.ajax({
             url: base_url + '/api/md-delete-tour',
