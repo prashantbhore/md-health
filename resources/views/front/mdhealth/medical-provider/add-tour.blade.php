@@ -62,6 +62,10 @@
         line-height: normal;
         letter-spacing: -0.64px;
     }
+    .up-abs {
+    top: 47px;
+    right: 16px;
+}
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -101,10 +105,12 @@
                                     <input type="text" class="form-control" id="tour_days" name="tour_days" value="{{ !empty($tour_details['tour_days']) ? $tour_details['tour_days'] : '' }}" aria-describedby="foodname" placeholder="Please Write Here">
                                 </div>
 
-                                <div class="form-group mb-5">
+                                <div class="form-group mb-5 position-relative">
                                     <label class="form-label mb-3">Tour Picture</label>
                                     <div class="form-group mb-3">
                                         <input type="file" name="tour_image_path" id="tour_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
+                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
+
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : 'front/assets/img/default-img.png' }}" alt="image" id="pic" />
@@ -180,8 +186,8 @@
                                 </div>
 
                                 <div class="section-btns mb-4 d-flex gap-3">
-                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50">Save Tour</button>
-                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50">Deactive Tour</button>
+                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold">Save Tour</button>
+                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold">Deactive Tour</button>
                                 </div>
 
                             </form>

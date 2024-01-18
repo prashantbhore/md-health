@@ -137,27 +137,26 @@
                                 <div class="col-md-12 position-relative">
                                 <div class="hide-eye-div">
                                     <label for="oldPassword" class="form-label">Old Password</label>
-                                    <input type="text" class="form-control w-100 bg-white text-start md-pad" placeholder="*********" name="oldPassword" id="oldPassword">
-                                    <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
+                                    <input type="password" class="form-control w-100 bg-white text-start md-pad" placeholder="*********" name="oldPassword" id="oldPassword">
+                                    <span toggle="#oldPassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                 </div>
                                 </div>
                                 <div class="col-md-6 mb-4 position-relative">
                                     <div class="hide-eye-div">
                                         <label for="newPassword" class="form-label">New Password</label>
-                                        <input type="text" class="form-control" placeholder="*********" name="newPassword" id="newPassword">
-                                        <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
+                                        <input type="password" class="form-control" placeholder="*********" name="newPassword" id="newPassword">
+                                        <span toggle="#newPassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4 position-relative">
                                     <div class="hide-eye-div">
                                         <label for="confirmPassword" class="form-label">Re-New Password</label>
-                                        <input type="text" class="form-control" placeholder="*********" name="confirmPassword" id="confirmPassword">
-                                        <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
+                                        <input type="password" class="form-control" placeholder="*********" name="confirmPassword" id="confirmPassword">
+                                        <span toggle="#confirmPassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn btn-md w-100 rounded btn-text" id="passchange" style="height: 48px;">Change Password</button>
-
                                 </div>
                             </div>
                         </form>
