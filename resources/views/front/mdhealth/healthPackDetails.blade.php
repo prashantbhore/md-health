@@ -99,10 +99,10 @@
                                     <p class="packageResult-title mb-3">Package Price</p>
                                     <div class="my-2">
                                         <p class="mb-1 camptonBold lh-base packageResult-price-title">
-                                            {{ !empty($packageDetails['treatment_price']) ? $packageDetails['treatment_price'] : '' }}
+                                            {{ !empty($packageDetails['sale_price']) ? $packageDetails['sale_price'] : '' }}
                                             ₺
                                             <span
-                                                class="smallFont fs-6">*{{ '(' . get_twenty_percent(!empty($packageDetails['treatment_price']) ? $packageDetails['treatment_price'] : 0) . ' ₺)' }}</span>
+                                                class="smallFont fs-6">*{{ '(' . get_twenty_percent(!empty($packageDetails['sale_price']) ? $packageDetails['sale_price'] : 0) . ' ₺)' }}</span>
                                         </p>
                                         <p class=" mb-3 camptonBook packageResult-offer">*20% of the price is paid before
                                             booking.</p>

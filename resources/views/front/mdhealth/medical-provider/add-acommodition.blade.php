@@ -2,8 +2,7 @@
 @section('content')
 <style>
     .form-control::placeholder {
-        font-family: "CamptonBook";
-        font-weight: 600;
+        font-family: "Campton";
     }
 
     .stars-div .fa {
@@ -247,8 +246,8 @@
                                 </div>
 
                                 <div class="section-btns mb-4 d-flex gap-3">
-                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50">Save Accommodation</button>
-                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50">Deactive Accommodation</button>
+                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold">Save Accommodation</button>
+                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold">Deactive Accommodation</button>
                                 </div>
 
                             </form>

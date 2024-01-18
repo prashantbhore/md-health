@@ -129,31 +129,28 @@ class PaymentController extends Controller
 
     public function peymentsearch(Request $request){
 
-        dd($request->all());
-
-
+       
         $token = Session::get('login_token');
 
         $apiUrl = url('api/md-provider-transaction-search');
 
 
 
-        $account_number = $request->account_number;
+        $search_query = $request['query'];
 
-        $bank_name= $request->bank_name;
-
-         $id=$request->id;
-
+      
         
-       $body=['account_number' =>  $account_number,
-                'bank_name' =>  $bank_name,
-                'id'=>$id,
-            ];
+       $body=['search_query' => $search_query ];
 
        $method = 'POST';
 
 
         $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+
+        dd($responseData);
+
+
       
     }
 

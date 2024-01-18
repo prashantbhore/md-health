@@ -16,13 +16,12 @@
 
 
     .form-group .prev-img-div img {
-        height: 150px;
-        width: auto;
-        object-fit: contain;
-        margin-top: 15px;
-        border-radius: 3px;
-    }
-
+    height: 128px;
+    width: 142px;
+    object-fit: contain;
+    margin-top: 15px;
+    border-radius: 3px;
+}
 
     .multiple-checkbox-div .multiple-checks {
         display: flex;
@@ -51,6 +50,10 @@
     select {
         color: #878787 !important;
     }
+    .up-abs {
+    top: 47px;
+    right: 16px;
+}
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -125,13 +128,15 @@
                                     </div>
                                 </div>
                                 {{-- {{dd($transportation_details)}} --}}
-                                <div class="form-group mb-5">
+                                <div class="form-group mb-5 position-relative">
                                     <label class="form-label mb-3">Vehicle Picture</label>
                                     <div class="form-group mb-3">
                                         <input type="file" name="vehicle_image_path" id="vehicle_image_path" placeholder="Vehicle Picture" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
+
                                     </div>
                                     <div class="prev-img-div">
-                                        <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/default-img.png' }}" alt="image" id="pic">
+                                        <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/uploadHere.png' }}" alt="image" id="pic">
                                         <input type="hidden" name="old_image" id="old_image" value="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : '' }}">
                                     </div>
                                 </div>
@@ -180,8 +185,8 @@
                                 </div>
 
                                 <div class="section-btns mb-4 d-flex gap-3">
-                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50">Save Vehicle</button>
-                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50">Deactive Vehicle</button>
+                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold">Save Vehicle</button>
+                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold">Deactive Vehicle</button>
                                 </div>
 
                             </form>

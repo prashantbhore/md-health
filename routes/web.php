@@ -553,6 +553,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     Route::controller(PaymentController::class)->group(function () {
         Route::get('payment-information', 'index');
         Route::post('store-vendor-bank-details', 'storeBankDetails')->name('store.vendor.bank.details');
+        Route::post('medical-provider-payment-search','peymentsearch');
     });
 
     Route::controller(MedicalProviderReports::class)->group(function () {
