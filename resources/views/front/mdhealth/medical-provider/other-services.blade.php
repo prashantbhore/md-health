@@ -59,7 +59,12 @@
                                         <div class="trmt-card-body">
                                             <h5 class="dashboard-card-title mb-1">{{ $hotel_detail['hotel_name'] }}
                                             </h5>
+                                            {{-- <a class="btn-active veh-status">{{ $hotel_detail['status'] }}</a> --}}
+                                            @if ($hotel_detail['status'] == 'active')
                                             <a class="btn-active veh-status">{{ $hotel_detail['status'] }}</a>
+                                            @else
+                                            <a class="btn-active veh-status" style="background-color:black;">{{ $hotel_detail['status'] }}</a>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-3 d-flex flex-column justify-content-between align-items-end text-end px-0">
@@ -101,7 +106,12 @@
                                             <h5 class="dashboard-card-title mb-1">
                                                 {{ $vehicle_detail['vehicle_model_name'] }}
                                             </h5>
-                                            <a class="active veh-status">{{ $vehicle_detail['status'] }}</a>
+                                            {{-- <a class="active veh-status">{{ $vehicle_detail['status'] }}</a> --}}
+                                            @if ($vehicle_detail['status'] == 'active')
+                                            <a class="btn-active veh-status">{{ $vehicle_detail['status'] }}</a>
+                                            @else
+                                            <a class="btn-active veh-status" style="background-color:black;">{{ $vehicle_detail['status'] }}</a>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-3 d-flex flex-column justify-content-between align-items-end text-end px-0">

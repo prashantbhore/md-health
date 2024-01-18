@@ -98,7 +98,7 @@
                             </label>
                             <div class="d-flex align-items-baseline gap-2">
                                 <p class="mb-0 fs-5 camptonBold lh-base twenty"></p>
-                                <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min. Requirement</p>
+                                <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min.Requirement</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-2">
@@ -627,14 +627,16 @@
 
                         otherServices.forEach(function(service) {
 
-                            otherServicesHtml += '<div class="card purchase-details-card">'
+                            if (service.title == 'Accommodation') {
+                                otherServicesHtml += '<div class="card purchase-details-card">'
                             otherServicesHtml +=
                                 ' <div class="card-body d-flex flex-column justify-content-center">'
                             otherServicesHtml += '<div class="row">'
                             otherServicesHtml += '<div class="col-md-9">'
+
                             otherServicesHtml += '<div class="form-check df-start">'
                             otherServicesHtml +=
-                                '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">'
+                                '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>'
                             otherServicesHtml += '<div class="d-flex flex-column gap-1">'
                             otherServicesHtml +=
                                 '<label class="form-check-label card-h4 ms-3 mb-0" for="flexCheckDefault">'
@@ -650,8 +652,10 @@
                             otherServicesHtml += '<div class="df-end">'
                             otherServicesHtml +=
                                 '<div class="d-flex align-items-start flex-column">'
+
                             otherServicesHtml +=
-                                '<h5 class="t_price mb-0 text-start">Per Night Price</h5>'
+                                '<h5 class="t_price mb-0 text-start">' + service.title +
+                                ' Price</h5>'
                             otherServicesHtml += '<h5 class="card-h4 mt-0">' + numberToDiscount(
                                     parseInt(purchaseDetails.package_discount), service.price) +
                                 '<span class="lira">₺</span> <span class="card-h1">*(' + service
@@ -663,6 +667,47 @@
                             otherServicesHtml += '</div>'
                             otherServicesHtml += '</div>'
                             otherServicesHtml += '</div>'
+                            } else {
+                                otherServicesHtml += '<div class="card purchase-details-card">'
+                            otherServicesHtml +=
+                                ' <div class="card-body d-flex flex-column justify-content-center">'
+                            otherServicesHtml += '<div class="row">'
+                            otherServicesHtml += '<div class="col-md-9">'
+                            otherServicesHtml += '<div class="form-check df-start">'
+                            otherServicesHtml +=
+                                '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>'
+                            otherServicesHtml += '<div class="d-flex flex-column gap-1">'
+                            otherServicesHtml +=
+                                '<label class="form-check-label card-h4 ms-3 mb-0" for="flexCheckDefault">'
+                            otherServicesHtml += service.title
+                            otherServicesHtml += '</label>'
+                            //  otherServicesHtml +=  ' <label class="form-check-label card-p1 ms-3 mb-0" for="flexCheckDefault">'
+                            // otherServicesHtml +=   ' 3 Stars Hotel'
+                            // otherServicesHtml +=        '</label>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += ' <div class="col-md-3 ">'
+                            otherServicesHtml += '<div class="df-end">'
+                            otherServicesHtml +=
+                                '<div class="d-flex align-items-start flex-column">'
+
+                            otherServicesHtml +=
+                                '<h5 class="t_price mb-0 text-start">' + service.title +
+                                ' Price</h5>'
+                            otherServicesHtml += '<h5 class="card-h4 mt-0">' + numberToDiscount(
+                                    parseInt(purchaseDetails.package_discount), service.price) +
+                                '<span class="lira">₺</span> <span class="card-h1">*(' + service
+                                .price + ' <span class="lira">₺</span> ) </span></h5>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += ' </div>'
+                            otherServicesHtml += '</div>'
+
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            }
+                            
 
                             // otherServicesHtml += '<div class="packageResult rounded mb-3">'
                             // otherServicesHtml +=
@@ -870,7 +915,8 @@
                         case 1:
                             $('.twenty').empty();
                             $('.twenty').append("20% " +
-                                '<span class="smallFont twentyPercent">(' + twentyAmount +
+                                '<span class="smallFont twentyPercent">(' + parseFloat(twentyAmount)
+                                .toFixed(2) +
                                 ' ₺)</span>');
                             $('.min_discount_twenty').text(discounts.minimum_discount);
                             calcOtherServices();
@@ -878,7 +924,8 @@
                         case 2:
                             $('.thirty').empty();
                             $('.thirty').append("30% " +
-                                '<span class="smallFont thirtyPercent">(' + thirtyAmount +
+                                '<span class="smallFont thirtyPercent">(' + parseFloat(thirtyAmount)
+                                .toFixed(2) +
                                 ' ₺)</span>');
                             $('.min_discount_thirty').text(discounts.minimum_discount);
                             calcOtherServices();
@@ -886,7 +933,8 @@
                         case 3:
                             $('.fifty').empty();
                             $('.fifty').append("50% " +
-                                '<span class="smallFont fiftyPercent">(' + fiftyAmount +
+                                '<span class="smallFont fiftyPercent">(' + parseFloat(fiftyAmount)
+                                .toFixed(2) +
                                 ' ₺)</span>');
                             $('.min_discount_fifty').text(discounts.minimum_discount);
                             calcOtherServices();
@@ -894,7 +942,8 @@
                         case 4:
                             $('.hundred').empty();
                             $('.hundred').append("100% " +
-                                '<span class="smallFont hundredPercent">(' + hundredAmount +
+                                '<span class="smallFont hundredPercent">(' + parseFloat(hundredAmount)
+                                .toFixed(2) +
                                 ' ₺)</span>');
                             $('.min_discount_hundred').text(discounts.minimum_discount);
                             calcOtherServices();

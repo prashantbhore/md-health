@@ -774,7 +774,7 @@ class CustomerPackageController extends Controller
 
     public function packages_view_on_search_result(Request $request)
     {
-
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'id' => 'required',
         ]);
@@ -783,9 +783,11 @@ class CustomerPackageController extends Controller
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+
         $id = $request->id;
 
         $packages_view = Packages::with(['provider', 'providerGallery', 'provider.city'])->where('id', $id)->first();
+
 
         if (!empty($packages_view)) {
 
@@ -794,24 +796,26 @@ class CustomerPackageController extends Controller
                 $provider_gallery[] = !empty($val->provider_image_path) ? url(Storage::url($val->provider_image_path)) : '';
             }
 
+
             $packageDetails = [
+                "id" => !empty($packages_view->id) ? $packages_view->id : '',
+                "package_unique_no" => !empty($packages_view->package_unique_no) ? $packages_view->package_unique_no : '',
+                "city_id" => !empty($packages_view->provider->city->id) ? $packages_view->provider->city->id : '',
+                "review_stars" => !empty($packages_view->review->start) ? $packages_view->review->start : '',
+                "total_reviews" => !empty($packages_view->review_count) ? $packages_view->review_count : '',
+                "verbose_review" => !empty($packages_view->review_words) ? $packages_view->review_words : '',
+                "overview" => !empty($packages_view->provider->company_overview) ? $packages_view->provider->company_overview : '',
+                "package_name" => !empty($packages_view->package_name) ? $packages_view->package_name : '',
+                "treatment_category_id" => !empty($packages_view->treatment_category_id) ? $packages_view->treatment_category_id : '',
+                "treatment_id" => !empty($packages_view->treatment_id) ? $packages_view->treatment_id : '',
+                "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
+                "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
+                "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
 
-                'id' => !empty($packages_view->id) ? $packages_view->id : '',
-                'package_unique_no' => !empty($packages_view->package_unique_no) ? $packages_view->package_unique_no : '',
-                'city_id' => !empty($packages_view->provider->city->id) ? $packages_view->provider->city->id : '',
-                'review_stars' => !empty($packages_view->review->start) ? $packages_view->review->start : '',
-                'total_reviews' => !empty($packages_view->review_count) ? $packages_view->review_count : '',
-                'verbose_review' => !empty($packages_view->review_words) ? $packages_view->review_words : '',
-                'overview' => !empty($packages_view->provider->company_overview) ? $packages_view->provider->company_overview : '',
-                'package_name' => !empty($packages_view->package_name) ? $packages_view->package_name : '',
-                'treatment_category_id' => !empty($packages_view->treatment_category_id) ? $packages_view->treatment_category_id : '',
-                'treatment_id' => !empty($packages_view->treatment_id) ? $packages_view->treatment_id : '',
-                'other_services' => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
-                'treatment_period_in_days' => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
-                'treatment_price' => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
 
-                'city_name' => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
+                "city_name" => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
             ];
+
 
             if (!empty($packageDetails)) {
 
@@ -825,7 +829,7 @@ class CustomerPackageController extends Controller
                 $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
                 $counties = Country::all();
 
-                return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties'));
+                return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties','provider_gallery'));
 
             } else {
                 return view('front.mdhealth.searchResult');
