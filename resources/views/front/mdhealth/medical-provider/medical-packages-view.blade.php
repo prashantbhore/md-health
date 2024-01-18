@@ -409,7 +409,8 @@
                     <!-- <h6 class="section-heading">Featured Request</h6> -->
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input">
-                        <label class="section-heading" for="featureproducts">Featured Request</label>
+                        <label class="section-heading" for="featureproducts" name="featured_product" id="featured_product"
+                         {{ !empty($packages_active_list['featured_product']) ? 'checked' : '' }}>Featured Request</label>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="featureproducts" {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
