@@ -1283,18 +1283,19 @@ select {
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 400;
     line-height: 25px;
-    /* 156.25% */
     letter-spacing: -0.64px;
     transition: 0.15s all;
+    padding-bottom: 0;
+    min-width: 55px;
 }
 
 .authentication .nav-tabs .nav-link.active {
     border-bottom: 2px solid #4cdb06;
-    font-weight: 700;
-    font-family: "Campton";
+    /* font-weight: 700; */
+    font-family: "CamptonExtraBold";
+    padding-bottom: 0;
 }
 
 .authentication .form-control,

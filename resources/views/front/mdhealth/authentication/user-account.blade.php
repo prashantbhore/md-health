@@ -35,18 +35,22 @@
         background-color: #f6f6f6;
     }
 
-    #recaptcha-container {
-    bottom: 300px;
-    position: relative;
-    /* right: -21%; */
-    left: -19%;
+#recaptcha-container {
+    position: absolute;
+    left: 285px;
+    bottom: 185px;
 }
 
+.pill-calender {
+    top: 43px;
+    left: 16px;
+}
 
 </style>
+<div class="position-relative">
 <div class="content-wrapper" id="regdiv">
-    <div class="container text-center my-5 authentication">
-        <div class="w-100 mb-4 position-relative">
+    <div class="container text-center my-5 authentication pt-3">
+        <div class="w-100 position-relative" style="margin-bottom:2rem;">
             <h3 class="text-center form-heading">Select Account Type</h3>
             <h1 class="my-0 form-heading p-abs">Go Super Admin Panel</h1>
         </div>
@@ -99,9 +103,11 @@
                                         <label for="lastName" class="form-label">*Last Name</label>
                                         <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Last Name" />
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3 position-relative">
                                         <label for="dob" class="form-label">*Date of Birth</label>
-                                        <input class="form-control dobj " name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
+                                        <input class="form-control dobj" style="padding-left:32px;" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
+                                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
+
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="gender" class="form-label">*Gender</label>
@@ -280,7 +286,8 @@
     </div>
 </div>
 
-<div id="recaptcha-container"></div>
+    <div id="recaptcha-container"></div>
+</div>
 @endsection
 
 @section('script')

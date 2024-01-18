@@ -14,6 +14,7 @@ $is_logged_in = false;
 
 @extends('front.layout.layout')
 @section('content')
+
 <div class="bg-f6">
     <div class="content-wrapper bg-f6">
         <!-- =============================================================================================================
@@ -33,8 +34,8 @@ $is_logged_in = false;
                         <div class="search-bar d-flex align-items-center p-3">
                             <!-- Treatments -->
                             <div class="form-floating pe-3 position-relative">
-                                <input type="hidden" name="platform_type" value="web">
                                 <img src="{{ 'front/assets/img/Icon-treatment.png' }}" alt="" class="mx-2 pill-calender">
+                                <input type="hidden" name="platform_type" value="web">
                                 <select class="form-select" style="padding-left:35px" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option value="">Select Treatment</option>
                                     @foreach ($treatment_plans as $treatment_plan)

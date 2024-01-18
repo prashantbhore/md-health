@@ -8,6 +8,11 @@
     #recaptcha-container {
         bottom: 290px;
     }
+
+      .mdi-eye-off::before,
+    .mdi-eye::before {
+        font-size: 19px;
+    }
 </style>
 <div class="container py-100px df-center sign-in-form" id="logDiv">
     <div class="card">
@@ -37,7 +42,8 @@
                         <div class="mb-3 hide-eye-div">
                             <label for="Password" class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                            <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                            <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
+
                         </div>
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
