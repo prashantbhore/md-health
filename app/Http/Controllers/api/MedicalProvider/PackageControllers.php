@@ -140,11 +140,11 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
-                if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['created_by'] = Auth::user()->id;
@@ -222,11 +222,11 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
-                if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['status'] = $request->button_type;
@@ -500,7 +500,12 @@ class PackageControllers extends BaseController
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
-                $package_input['other_services'] = $request->other_services;
+                // $package_input['other_services'] = $request->other_services;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
                 $package_input['hotel_id'] = $request->hotel_id;
@@ -522,11 +527,11 @@ class PackageControllers extends BaseController
                 $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
-                 if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['status'] = 'active';
@@ -549,7 +554,12 @@ class PackageControllers extends BaseController
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
-                $package_input['other_services'] = $request->other_services;
+                // $package_input['other_services'] = $request->other_services;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
                 $package_input['hotel_id'] = $request->hotel_id;
@@ -572,11 +582,11 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
-                if(!empty($request->featured_product)){
-                    if($request->featured_product=='on'){
-                        $package_input['featured_product'] ='yes';
-                    }else{
-                        $package_input['featured_product'] ='no';
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
                     }
                 }
                 $package_input['status'] = 'inactive';

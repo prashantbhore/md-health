@@ -501,6 +501,7 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('md-food-active-list-to-deactive', 'active_list_to_deactive');
         Route::post('md-food-deactive-list-to-active', 'deactive_list_to_active');
         Route::post('md-food-view', 'food_view');
+        Route::post('md-food-update', 'food_update');
     });
 
 

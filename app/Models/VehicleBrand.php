@@ -10,7 +10,6 @@ class VehicleBrand extends Model
     use HasFactory;
     protected $table = 'md_master_brand';
     protected $fillable = [
-
         'brand_category_id',
         'brand_name',
         'status',
