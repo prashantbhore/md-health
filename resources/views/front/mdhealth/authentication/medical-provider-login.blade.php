@@ -3,6 +3,9 @@
     body {
         background: #f6f6f6;
     }
+    .navbar {
+        display:none;
+    }
 </style>
 <div class="content-wrapper service-provider-account" id="regdiv">
     <div class="container text-center my-5 authentication">

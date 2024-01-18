@@ -38,6 +38,7 @@ class Packages extends Model
         'package_discount',
         'package_price',
         'sale_price',
+        'featured_product',
         'platform_type',
         'status',
         'created_ip_address',

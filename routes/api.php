@@ -53,7 +53,7 @@ Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
 
 // get treatment list
-// Route::get('md-treatment-list', [CommonController::class, 'get_treatment_list']);
+Route::get('md-treatment-list', [CommonController::class, 'get_treatment_list']);
 
 // get city list
 Route::post('md-city-list', [CommonController::class, 'get_cities_list']);
@@ -321,7 +321,8 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-remove-from-favourite', [CustomerPackageController::class, 'remove_from_favourite']);
 
 
-    Route::controller(VendorProductController::class)->group(function () {
+    Route::controller(VendorProductController::class)->group(function () 
+    {
         Route::post('add-vendor-product', 'addProduct');
         Route::get('active-product-count', 'active_product_count');
         Route::get('inactive-product-count', 'deactive_product_count');
@@ -492,8 +493,8 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('md-food-edit-menu-list', 'food_edit_menu_list');
         Route::post('md-food-edit-menu', 'food_edit_menu');
         Route::post('md-food-delete-menu', 'food_delete_menu');
-        Route::post('md-food-active-list', 'food_active_list');
-        Route::post('md-food-deactive-list', 'food_deactive_list');
+        Route::get('md-food-active-list', 'food_active_list');
+        Route::get('md-food-deactive-list', 'food_deactive_list');
         Route::post('md-food-active-list-to-deactive', 'active_list_to_deactive');
         Route::post('md-food-deactive-list-to-active', 'deactive_list_to_active');
     });

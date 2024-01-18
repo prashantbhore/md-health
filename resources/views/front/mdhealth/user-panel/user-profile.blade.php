@@ -4,7 +4,6 @@
 
 @extends('front.layout.layout2')
 @section('content')
-
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
         <div class="d-flex gap-3">

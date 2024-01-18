@@ -133,7 +133,7 @@
                                                         <div class="df-center">
                                                             <img src="{{ asset($active_package['company_logo_image_path']) }}"
                                                                 alt=""
-                                                                style="height: 109px;width:109px;border-radius: 3px;object-fit:cover">
+                                                                class="md-img">
                                                             <!-- <img src="{{ asset('front/assets/img/packageImg.png') }}" alt="" class="pkgImg"> -->
                                                         </div>
                                                         <div class="df-column">
@@ -213,12 +213,8 @@
                                                 <div class="card shadow-none mb-4 pkgCard">
                                                     <div class="card-body d-flex gap-3 w-100 p-4">
                                                         <div class="df-center">
-
-                                                            <img src="{{ asset($completed_package['company_logo_image_path']) }}"
-                                                                alt="">
-
+                                                            <img src="{{ asset($completed_package['company_logo_image_path']) }}" alt="" class="md-img">
                                                         </div>
-
                                                         <div class="df-column">
                                                             <div class="trmt-card-body">
                                                                 <h5 class="mb-0">
