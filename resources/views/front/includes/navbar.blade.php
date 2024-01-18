@@ -10,9 +10,9 @@ $name = 'MDHealth';
 @endphp
 
 <style>
-    /* .dropdown-toggle::after {
+    .dropdown-toggle::after {
         display: none;
-    } */
+    }
 
     .nav-login {
         display: flex;

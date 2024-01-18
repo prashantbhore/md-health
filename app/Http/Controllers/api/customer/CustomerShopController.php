@@ -117,11 +117,13 @@ class CustomerShopController extends BaseController
 
         }
 
-        if(!empty($request->auth_id)){
+        if(!empty($request->auth_id))
+        {
             $VendorProduct = VendorProduct::where('status', 'active')
                 ->select('vendor_id')
                 ->where('id', $request->id)
                 ->first();
+
 
             $VendorCustomerFollower = VendorCustomerFollower::where('status', 'active')
                 ->select('vendor_id')

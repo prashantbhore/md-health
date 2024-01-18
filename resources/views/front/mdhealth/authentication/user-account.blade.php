@@ -35,18 +35,22 @@
         background-color: #f6f6f6;
     }
 
-    #recaptcha-container {
-    bottom: 300px;
-    position: relative;
-    /* right: -21%; */
-    left: -19%;
+#recaptcha-container {
+    position: absolute;
+    left: 285px;
+    bottom: 185px;
 }
 
+.pill-calender {
+    top: 43px;
+    left: 16px;
+}
 
 </style>
+<div class="position-relative">
 <div class="content-wrapper" id="regdiv">
-    <div class="container text-center my-5 authentication">
-        <div class="w-100 mb-4 position-relative">
+    <div class="container text-center my-5 authentication pt-3">
+        <div class="w-100 position-relative" style="margin-bottom:2rem;">
             <h3 class="text-center form-heading">Select Account Type</h3>
             <h1 class="my-0 form-heading p-abs">Go Super Admin Panel</h1>
         </div>
@@ -99,9 +103,11 @@
                                         <label for="lastName" class="form-label">*Last Name</label>
                                         <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Last Name" />
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3 position-relative">
                                         <label for="dob" class="form-label">*Date of Birth</label>
-                                        <input class="form-control dobj " name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
+                                        <input class="form-control dobj" style="padding-left:32px;" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
+                                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
+
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="gender" class="form-label">*Gender</label>
@@ -135,9 +141,9 @@
                                         <label for="city_id" class="form-label">*City</label>
                                         <select required name="city_id" id="city_id" class="form-select ">
                                             <option value="" selected disabled hidden>Choose</option>
-                                            @foreach ($cities as $city)
+                                            {{-- @foreach ($cities as $city)
                                             <option value="{{ $city->id }}">{{ $city->city_name }} </option>
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                     </div>
 
@@ -280,7 +286,8 @@
     </div>
 </div>
 
-<div id="recaptcha-container"></div>
+    <div id="recaptcha-container"></div>
+</div>
 @endsection
 
 @section('script')
@@ -427,10 +434,20 @@
                 $("#successAuth").show();
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
-            })
-            .catch(function(error) {
-                $("#error").text(error.message);
-                $("#error").show();
+                recaptchaVerifier.clear();
+                })
+                .catch(function(error) {
+                    $("#error").text(error.message);
+                    if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
+                        $("#error").text("Too many attempts try again later");
+                    }
+                    if (error.message == "TOO_SHORT") {
+                        $("#error").text("Mobile number short or missing country code");
+                    }
+                    //  else {
+
+                    // }
+                    $("#error").show();
             });
     }
 
@@ -542,7 +559,7 @@
                     $("#successAuth").show();
                     $("#otpDiv").removeClass("d-none");
                     $("#regdiv").hide();
-                    recaptchaVerifier.clear();
+                    
                 })
                 .catch(function(error) {
                     $("#error").text(error.message);
@@ -553,6 +570,48 @@
             $("#error").show();
         }
     }
+</script>
+<script>
+    $(document).ready(function() {
+        var base_url = $("#base_url").val();
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+        $('#country_id').change(function() {
+            var selectedCountryId = $(this).val();
+            // alert(selectedCountryId);
+            if (selectedCountryId) {
+                $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": csrfToken,
+                },
+            });
+                $.ajax({
+                    url: base_url+ '/md-city-list', // Replace with your route to fetch cities
+                    method: 'POST',
+                    data: {
+                        country_id: selectedCountryId
+                    },
+                    success: function(response) {
+                        // console.log(response);
+                        $('#city_id').empty();
+
+                        // Append new options based on the AJAX response
+                        $.each(response.data, function(index, city) {
+                            $('#city_id').append('<option value="' + city.id + '">' + city.city_name + '</option>');
+                        });
+
+                        // Show the city select
+                        $('#city_id').show();
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                // If no country is selected, hide and reset the city select
+                $('#city_id').hide().val('');
+            }
+        });
+    });
 </script>
 
 <script>
@@ -731,11 +790,11 @@
             rules: {
                 first_name: {
                     required: true,
-                    spaceValidation: true,
+                    // spaceValidation: true,
                 },
                 last_name: {
                     required: true,
-                    spaceValidation: true,
+                    // spaceValidation: true,
                 },
                 city_id: {
                     required: true,
@@ -781,11 +840,11 @@
             messages: {
                 first_name: {
                     required: "Please enter the first name.",
-                    spaceValidation: "Company name should not contain only spaces.",
+                    // spaceValidation: "Company name should not contain only spaces.",
                 },
                 last_name: {
                     required: "Please enter the last name.",
-                    spaceValidation: "Company name should not contain only spaces.",
+                    // spaceValidation: "Company name should not contain only spaces.",
                 },
                 city_id: {
                     required: "Please select a city.",

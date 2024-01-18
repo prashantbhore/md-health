@@ -3,7 +3,7 @@
 
 @yield('content')
 
-@include('front.includes.footer')
+@include('front.includes.footer2')
 @include('front.includes.js-files')
 
 @yield('script')

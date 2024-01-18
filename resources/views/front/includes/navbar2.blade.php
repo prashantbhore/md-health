@@ -14,12 +14,15 @@ $name = 'MDHealth';
 <style>
     .dropdown-toggle::after {
         display: none;
+        
     }
 
     .md-navbar .nav-item .nav-link,
     .md-navbar .nav-link {
         padding-bottom: 0;
     }
+
+    
 </style>
 
 

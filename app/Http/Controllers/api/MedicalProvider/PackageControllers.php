@@ -140,6 +140,13 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
+                if(!empty($request->featured_product)){
+                    if($request->featured_product=='on'){
+                        $package_input['featured_product'] ='yes';
+                    }else{
+                        $package_input['featured_product'] ='no';
+                    }
+                }
                 $package_input['created_by'] = Auth::user()->id;
                 $AddPackages = Packages::create($package_input);
                 $Packages = Packages::select('id')->get();
@@ -215,6 +222,13 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
+                if(!empty($request->featured_product)){
+                    if($request->featured_product=='on'){
+                        $package_input['featured_product'] ='yes';
+                    }else{
+                        $package_input['featured_product'] ='no';
+                    }
+                }
                 $package_input['status'] = $request->button_type;
                 $package_input['created_by'] = Auth::user()->id;
                 $AddPackages = Packages::create($package_input);
@@ -372,6 +386,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_discount',
                 'md_packages.package_price',
                 'md_packages.sale_price',
+                'md_packages.featured_product',
                 'md_packages.platform_type',
                 'md_packages.status',
                 'md_add_new_acommodition.hotel_name',
@@ -442,6 +457,7 @@ class PackageControllers extends BaseController
                 'md_packages.sale_price',
                 'md_packages.platform_type',
                 'md_packages.status',
+                'md_packages.featured_product',
                 'md_add_new_acommodition.hotel_name',
                 'md_add_transportation_details.vehicle_model_id',
             )
@@ -506,6 +522,13 @@ class PackageControllers extends BaseController
                 $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
+                 if(!empty($request->featured_product)){
+                    if($request->featured_product=='on'){
+                        $package_input['featured_product'] ='yes';
+                    }else{
+                        $package_input['featured_product'] ='no';
+                    }
+                }
                 $package_input['status'] = 'active';
                 $package_input['platform_type'] = $request->platform_type;
                 $package_input['created_by'] = Auth::user()->id;
@@ -549,6 +572,13 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
+                if(!empty($request->featured_product)){
+                    if($request->featured_product=='on'){
+                        $package_input['featured_product'] ='yes';
+                    }else{
+                        $package_input['featured_product'] ='no';
+                    }
+                }
                 $package_input['status'] = 'inactive';
                 $package_input['created_by'] = Auth::user()->id;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);

@@ -30,6 +30,33 @@ class MedicalProviderRegistrationController extends Controller
         $cities = Cities::get();
         return view('front/mdhealth/authentication/user-account', compact('countries', 'cities'));
     }
+
+    public function get_cities_list( Request $request ) {
+        // $validator = Validator::make( $request->all(), [
+        //     'country_id' => 'required',
+        // ] );
+        
+        // if ( $validator->fails() ) {
+        //     return $this->sendError( 'Validation Error.', $validator->errors() );
+        // }
+
+        $cities = Cities::where( 'status', 'active' )
+        ->where( 'country_id', $request->country_id )
+        ->orderBy( 'city_name' )
+        ->select( 'id', 'city_name' )
+        ->get();
+
+        if ( !empty( $cities ) ) {
+            return response()->json( [
+                'status' => 200,
+                'data' => $cities,
+            ] );
+        } else {
+            return response()->json( [
+                'status' => 404,
+            ] );
+        }
+    }
     public function indexmedpro()
     {
         $countries = Country::get();
