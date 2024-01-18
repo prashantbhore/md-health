@@ -685,6 +685,7 @@ class CustomerPackageController extends BaseController
             $PatientInformation['patient_email'] = $request->patient_email;
             $PatientInformation['patient_contact_no'] = $request->patient_contact_no;
             $PatientInformation['patient_country_id'] = $request->patient_country_id;
+            $PatientInformation['birth_date'] = $request->birth_date;
             $PatientInformation['patient_city_id'] = $request->patient_city_id;
             $PatientInformation['package_buy_for'] = 'other';
             $PatientInformation['created_by'] = Auth::user()->id;

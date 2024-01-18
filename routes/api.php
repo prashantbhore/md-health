@@ -235,6 +235,9 @@ Route::middleware('auth:sanctum')->group(function ()
     //customer-package-purchase-details
     Route::post('md-customer-package-purchase-details', [CustomerPackageController::class, 'customer_package_purchase_details']);
 
+    //customer-package-purchase-details
+    Route::post('md-customer-price-ten-to-twenty', [CustomerPackageController::class, 'customer_price_ten_to_twenty']);
+
     //change-patient-information
     Route::post('md-change-patient-information', [CustomerPackageController::class, 'change_patient_information']);
 
@@ -497,6 +500,7 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::get('md-food-deactive-list', 'food_deactive_list');
         Route::post('md-food-active-list-to-deactive', 'active_list_to_deactive');
         Route::post('md-food-deactive-list-to-active', 'deactive_list_to_active');
+        Route::post('md-food-view', 'food_view');
     });
 
 
