@@ -101,11 +101,10 @@ class CustomerShopController extends BaseController
             $vendor = VendorRegister::where('id', $proudct_data->vendor_id)->first();
         }
 
-        // return Auth::user()->id;
-        if(!empty(Auth::user()->id)){
+        if(!empty($request->auth_id)){
             $ShoppingCart = ShoppingCart::where('status', 'active')
                 ->where('product_id', $request->id)
-                ->where('customer_id', Auth::user()->id)
+                ->where('customer_id', ($request->auth_id))
                 ->first();
 
             if (!empty($ShoppingCart)) {
@@ -118,7 +117,7 @@ class CustomerShopController extends BaseController
 
         }
 
-        if(!empty(Auth::user()->id)){
+        if(!empty($request->auth_id)){
             $VendorProduct = VendorProduct::where('status', 'active')
                 ->select('vendor_id')
                 ->where('id', $request->id)
@@ -126,7 +125,7 @@ class CustomerShopController extends BaseController
 
             $VendorCustomerFollower = VendorCustomerFollower::where('status', 'active')
                 ->select('vendor_id')
-                ->where('customer_id', Auth::user()->id)
+                ->where('customer_id', $request->auth_id)
                 ->first();
 
             if ($VendorProduct && $VendorCustomerFollower && $VendorProduct->vendor_id == $VendorCustomerFollower->vendor_id) {
@@ -138,6 +137,21 @@ class CustomerShopController extends BaseController
             }
         }else{
             $following_status = 'no';
+        }
+
+
+        if (!empty($request->auth_id)) {
+        $MdShopFavorite=MdShopFavorite::where('status','active')
+        ->where('customer_id', $request->auth_id)
+        ->first();
+
+        if(!empty($MdShopFavorite)){
+                $favourite_status = 'yes';
+        }else{
+                $favourite_status = 'no';
+        }
+        }else{
+            $favourite_status = 'no';
         }
         
         
@@ -206,6 +220,9 @@ class CustomerShopController extends BaseController
             'featured' => !empty($proudct_data->featured) ?  $proudct_data->featured : '',
             'vendor_id' => !empty($vendor->id) ? $vendor->id : '',
             'vendor_name' => !empty($vendor->company_name) ? $vendor->company_name : '',
+            'product_exist' => !empty($ShoppingCartexist) ? $ShoppingCartexist : '',
+            'following_status' => !empty($following_status) ? $following_status : '',
+            'favourite_status' => !empty($favourite_status) ? $favourite_status : '',
         ];
 
 
@@ -218,6 +235,7 @@ class CustomerShopController extends BaseController
                 'other_products' =>  $otherProducts,
                 'product_exist' =>  $ShoppingCartexist,
                 'following_status' =>  $following_status,
+                'favourite_status' =>  $favourite_status,
             ]);
         } else {
             return response()->json([

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\RolesController;
 use App\Http\Controllers\admin\admin\AdminController;
+use App\Http\Controllers\admin\ads_and_promo\AdsPromoController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
 use App\Http\Controllers\Front\Customer\CustomerPackageController;
@@ -301,9 +302,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('package-delete', 'package_delete');
         Route::post('package-store', 'store')->name('package.store');
 
-
-
-    });
+     });
 
     Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
 
@@ -334,7 +333,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('notifications', 'admin/notifications/notifications');
 
     //Admin ADS & PROMO
-    Route::view('ads-promo', 'admin/ads/ads-promo');
+
+    Route::controller(AdsPromoController::class)->group(function () {
+        Route::get('ads-promo','index');
+        Route::post('ads-store-promo','store')->name('store.ads');
+    });
+
+   
+
+
+
     Route::view('featured', 'admin/ads/featured');
     //Admin MANAGE REQUEST
     Route::view('manage-request', 'admin/manage-request/manage-request');
@@ -689,6 +697,8 @@ Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
 Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');
 Route::view('user-message', 'front/mdhealth/user-panel/user-message');
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
+Route::view('user-live-appoinment', 'front/mdhealth/user-panel/live-consultation-appoinment');
+
 Route::view('user-reports', 'front/mdhealth/user-panel/user-reports');
 
 

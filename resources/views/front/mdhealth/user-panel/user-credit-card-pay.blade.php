@@ -107,15 +107,18 @@
     #wallet .mdCard {
         margin: 0 100px;
     }
+
+    .paymentSection label{
+        cursor: pointer;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
-                @include('front.includes.sidebar-user')
+    <div class="d-flex gap-3">
+            <div class="w-292">
+            @include('front.includes.sidebar-user')
             </div>
-            <div class="col-md-9">
-
+            <div class="w-761">
                 <div class="card">
                     <h5 class="card-header mb-3">
                         Packages

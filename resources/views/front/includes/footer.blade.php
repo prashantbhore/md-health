@@ -1,6 +1,6 @@
  <footer class="footer text-light py-4" style="background-color:#080808">
      <div class="container">
-         <div class="row pb-5">
+         <div class="row pb-1">
              <div class="col-md-3">
                  <div class="card-text"><span>MD</span>health</div>
                  <ul>
@@ -28,7 +28,7 @@
              <div class="col-md-3 text-end d-flex flex-column">
                  <div class="card-text text-end mb-0" style="line-height: normal;">support@mdhealth.com</div>
                  <div class="contact-no">0800 800 8080</div>
-                 <div class="social-icons mt-auto">
+                 <div class="social-icons mt-150">
                      <ul class="d-flex gap-4 align-items-center justify-content-end mb-0">
                          <li><a href="javascript:;"><img src="{{ 'front/assets/img/Facebook.png' }}" alt=""></a>
                          </li>
@@ -47,7 +47,7 @@
          <!-- v -->
 
          <hr class="border border-white  my-3" />
-         <div class="row">
+        
              <div class="d-flex justify-content-between mdLtd">
                  <div class="d-flex justify-content-center">
                      <div style="color: #07f747;font-size:20px">MDhealth</div>
@@ -65,7 +65,7 @@
              <hr class="border border-white my-3" />
              <div class="allRights">
                  <div class="me-auto copyText">
-                     @2023.All rights reserved.
+                     @2023. All rights reserved.
                  </div>
                  <ul class="bottom-links d-flex gap-5 mb-0">
                      <li><a href="javascript:;">Enlignment Text</a></li>
@@ -75,7 +75,7 @@
                      <li><a href="javascript:;">Policies</a></li>
                  </ul>
              </div>
-         </div>
+         
      </div>
 
 
