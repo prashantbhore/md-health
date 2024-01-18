@@ -322,6 +322,7 @@ class CustomerPackageController extends BaseController
                 "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
                 "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
                 "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
+                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price: '',
 
 
                 "city_name" => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
@@ -587,7 +588,7 @@ class CustomerPackageController extends BaseController
             $twenty_percent = [
                 'id' => 1,
                 'percentage' => '20 %',
-                'minimum_discount' => 'Min.Requirement',
+                'minimum_discount' => 'Min. Requirement',
                 'title' => 'twenty_percent',
                 'price' => number_format($twenty_percent, 2), // Replace with actual price format
             ];
@@ -2953,7 +2954,7 @@ class CustomerPackageController extends BaseController
                 'md_other_patient_information.patient_email',
                 'md_other_patient_information.patient_contact_no',
                 'md_master_cities.city_name',
-                'md_master_country.country_name'
+                'md_master_country.country_name',
             )
             ->leftjoin('md_master_cities', 'md_master_cities.id', 'md_other_patient_information.patient_city_id')
             ->leftjoin('md_master_country', 'md_master_country.id', 'md_other_patient_information.patient_country_id')
@@ -2977,7 +2978,9 @@ class CustomerPackageController extends BaseController
             'md_product_sub_category.product_sub_category_name',
             'md_master_cities.city_name',
             'md_master_country.country_name',
-            'md_medical_provider_register.mobile_no'
+            'md_medical_provider_register.mobile_no',
+            'md_medical_provider_register.company_address',
+            'md_medical_provider_register.company_name',
         )
             ->where('md_packages.status', 'active')
             // ->where('md_product_category.status', 'active')

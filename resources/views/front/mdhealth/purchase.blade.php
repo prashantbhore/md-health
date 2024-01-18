@@ -98,7 +98,7 @@
                             </label>
                             <div class="d-flex align-items-baseline gap-2">
                                 <p class="mb-0 fs-5 camptonBold lh-base twenty"></p>
-                                <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min.Requirement</p>
+                                <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min. Requirement</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-2">
@@ -610,8 +610,8 @@
                                 parseInt(purchaseDetails.package_discount),
                                 purchaseDetails
                                 .treatment_price) +
-                            ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails
-                            .treatment_price + '₺)</span>';
+                            ' ₺<span class="smallFont treatment_price_discount"> (' + purchaseDetails
+                            .treatment_price + ' ₺)</span>';
 
                         totalPrice = parseFloat(purchaseDetails.treatment_price);
 
@@ -629,85 +629,107 @@
 
                             if (service.title == 'Accommodation') {
                                 otherServicesHtml += '<div class="card purchase-details-card">'
-                            otherServicesHtml +=
-                                ' <div class="card-body d-flex flex-column justify-content-center">'
-                            otherServicesHtml += '<div class="row">'
-                            otherServicesHtml += '<div class="col-md-9">'
+                                otherServicesHtml +=
+                                    ' <div class="card-body d-flex flex-column justify-content-center">'
+                                otherServicesHtml += '<div class="row">'
+                                otherServicesHtml += '<div class="col-md-9">'
 
-                            otherServicesHtml += '<div class="form-check df-start">'
-                            otherServicesHtml +=
-                                '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>'
-                            otherServicesHtml += '<div class="d-flex flex-column gap-1">'
-                            otherServicesHtml +=
-                                '<label class="form-check-label card-h4 ms-3 mb-0" for="flexCheckDefault">'
-                            otherServicesHtml += service.title
-                            otherServicesHtml += '</label>'
-                            //  otherServicesHtml +=  ' <label class="form-check-label card-p1 ms-3 mb-0" for="flexCheckDefault">'
-                            // otherServicesHtml +=   ' 3 Stars Hotel'
-                            // otherServicesHtml +=        '</label>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += ' <div class="col-md-3 ">'
-                            otherServicesHtml += '<div class="df-end">'
-                            otherServicesHtml +=
-                                '<div class="d-flex align-items-start flex-column">'
+                                otherServicesHtml += '<div class="form-check df-start">'
+                                otherServicesHtml +=
+                                    '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>'
+                                otherServicesHtml += '<div class="d-flex flex-column gap-1">'
+                                otherServicesHtml +=
+                                    '<label class="form-check-label card-h4 ms-3 mb-0" for="flexCheckDefault">'
+                                otherServicesHtml += service.title
+                                otherServicesHtml += '</label>'
+                                if (purchaseDetails.hotel_stars.length != '') {
 
-                            otherServicesHtml +=
-                                '<h5 class="t_price mb-0 text-start">' + service.title +
-                                ' Price</h5>'
-                            otherServicesHtml += '<h5 class="card-h4 mt-0">' + numberToDiscount(
-                                    parseInt(purchaseDetails.package_discount), service.price) +
-                                '<span class="lira">₺</span> <span class="card-h1">*(' + service
-                                .price + ' <span class="lira">₺</span> ) </span></h5>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += ' </div>'
-                            otherServicesHtml += '</div>'
+                                    otherServicesHtml +=
+                                        ' <label class="form-check-label card-p1 ms-3 mb-0" for="flexCheckDefault">'
+                                    otherServicesHtml += purchaseDetails.hotel_stars +
+                                        ' Stars Hotel'
+                                    otherServicesHtml += '</label>'
+                                }
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += ' <div class="col-md-3 ">'
+                                otherServicesHtml += '<div class="df-end">'
+                                otherServicesHtml +=
+                                    '<div class="d-flex align-items-start flex-column">'
 
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
+                                otherServicesHtml +=
+                                    '<h5 class="t_price mb-0 text-start">' + service.title +
+                                    ' Price</h5>'
+                                otherServicesHtml += '<h5 class="card-h4 mt-0">' +
+                                    numberToDiscount(
+                                        parseInt(purchaseDetails.package_discount), service
+                                        .price) +
+                                    '<span class="lira"> ₺</span> <span class="card-h1">*(' +
+                                    service
+                                    .price + ' <span class="lira">₺</span>) </span></h5>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += ' </div>'
+                                otherServicesHtml += '</div>'
+
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
                             } else {
                                 otherServicesHtml += '<div class="card purchase-details-card">'
-                            otherServicesHtml +=
-                                ' <div class="card-body d-flex flex-column justify-content-center">'
-                            otherServicesHtml += '<div class="row">'
-                            otherServicesHtml += '<div class="col-md-9">'
-                            otherServicesHtml += '<div class="form-check df-start">'
-                            otherServicesHtml +=
-                                '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>'
-                            otherServicesHtml += '<div class="d-flex flex-column gap-1">'
-                            otherServicesHtml +=
-                                '<label class="form-check-label card-h4 ms-3 mb-0" for="flexCheckDefault">'
-                            otherServicesHtml += service.title
-                            otherServicesHtml += '</label>'
-                            //  otherServicesHtml +=  ' <label class="form-check-label card-p1 ms-3 mb-0" for="flexCheckDefault">'
-                            // otherServicesHtml +=   ' 3 Stars Hotel'
-                            // otherServicesHtml +=        '</label>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += ' <div class="col-md-3 ">'
-                            otherServicesHtml += '<div class="df-end">'
-                            otherServicesHtml +=
-                                '<div class="d-flex align-items-start flex-column">'
+                                otherServicesHtml +=
+                                    ' <div class="card-body d-flex flex-column justify-content-center">'
+                                otherServicesHtml += '<div class="row">'
+                                otherServicesHtml += '<div class="col-md-9">'
+                                otherServicesHtml += '<div class="form-check df-start">'
+                                otherServicesHtml +=
+                                    '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>'
+                                otherServicesHtml += '<div class="d-flex flex-column gap-1">'
+                                otherServicesHtml +=
+                                    '<label class="form-check-label card-h4 ms-3 mb-0" for="flexCheckDefault">'
+                                otherServicesHtml += service.title
+                                otherServicesHtml += '</label>'
+                                if (service.title == 'Transportation') {
+                                    otherServicesHtml +=
+                                        ' <label class="form-check-label card-p1 ms-3 mb-0" for="flexCheckDefault">'
+                                    otherServicesHtml += purchaseDetails.brand_name +
+                                        ' ' + purchaseDetails.vehicle_model_name +
+                                        ' ' + purchaseDetails.vehicle_level_name
+                                    otherServicesHtml += '</label>'
+                                } else if (service.title == 'Tour Details') {
 
-                            otherServicesHtml +=
-                                '<h5 class="t_price mb-0 text-start">' + service.title +
-                                ' Price</h5>'
-                            otherServicesHtml += '<h5 class="card-h4 mt-0">' + numberToDiscount(
-                                    parseInt(purchaseDetails.package_discount), service.price) +
-                                '<span class="lira">₺</span> <span class="card-h1">*(' + service
-                                .price + ' <span class="lira">₺</span> ) </span></h5>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += ' </div>'
-                            otherServicesHtml += '</div>'
+                                    otherServicesHtml +=
+                                        ' <label class="form-check-label card-p1 ms-3 mb-0" for="flexCheckDefault">'
+                                    otherServicesHtml += purchaseDetails.tour_name
+                                    otherServicesHtml += '</label>'
+                                }
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += ' <div class="col-md-3 ">'
+                                otherServicesHtml += '<div class="df-end">'
+                                otherServicesHtml +=
+                                    '<div class="d-flex align-items-start flex-column">'
 
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
+                                otherServicesHtml +=
+                                    '<h5 class="t_price mb-0 text-start">' + service.title +
+                                    ' Price</h5>'
+                                otherServicesHtml += '<h5 class="card-h4 mt-0">' +
+                                    numberToDiscount(
+                                        parseInt(purchaseDetails.package_discount), service
+                                        .price) +
+                                    '<span class="lira"> ₺</span> <span class="card-h1">*(' +
+                                    service
+                                    .price + ' <span class="lira">₺</span>) </span></h5>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += ' </div>'
+                                otherServicesHtml += '</div>'
+
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
+                                otherServicesHtml += '</div>'
                             }
-                            
+
 
                             // otherServicesHtml += '<div class="packageResult rounded mb-3">'
                             // otherServicesHtml +=

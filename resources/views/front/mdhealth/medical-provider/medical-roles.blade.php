@@ -118,18 +118,22 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{ !empty($system_users['id']) ? $system_users['id'] : '' }}">
                                 <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Your Personnel E-Mail Address</label>
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="your-personnel@mail.com" value="{{ !empty($system_users['email']) ? $system_users['email'] : '' }}">
+                                    <label class="form-label mb-3">E-Mail Address</label>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Enter E-Mail Address" value="{{ !empty($system_users['email']) ? $system_users['email'] : '' }}">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Phone Number</label>
+                                    <input type="text" class="form-control" name="mobile_no" id="mobile_no" placeholder="Enter Phone Number" value="{{ !empty($system_users['mobile_no']) ? $system_users['mobile_no'] : '' }}">
                                 </div>
 
                                 <div class="form-group mb-4 {{ !empty($system_users['id']) ? ' d-none' : '' }}">
                                     <label class="form-label mb-3">Enter Password</label>
-                                    <input type="text" class="form-control" name="password" id="password" placeholder="Password@2023" value="{{ !empty($system_users['password']) ? $system_users['password'] : '' }}">
+                                    <input type="text" class="form-control" name="password" id="password" placeholder="**********" value="{{ !empty($system_users['password']) ? $system_users['password'] : '' }}">
                                 </div>
 
                                 <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Your Personnel Full Name</label>
-                                    <input type="text" class="form-control" name="name" id="name" placeholder="Full Name" value="{{ !empty($system_users['name']) ? $system_users['name'] : '' }}">
+                                    <label class="form-label mb-3">Full Name</label>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Full Name" value="{{ !empty($system_users['name']) ? $system_users['name'] : '' }}">
                                 </div>
 
                                 <div class="form-group d-flex flex-column mb-5">

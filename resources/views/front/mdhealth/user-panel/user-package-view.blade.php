@@ -99,7 +99,7 @@
             $payment_time_and_date = '';
         }
 
-        // dd($data);
+        // dd($my_details,$treatment_information);
 
     @endphp
 @endsection
@@ -218,10 +218,10 @@
         }
 
         /*
-                        .acmdn-head h6:last-child,
-                        .acmdn-hotel-details h6:last-child {
-                            font-size: 15px;
-                        } */
+                            .acmdn-head h6:last-child,
+                            .acmdn-hotel-details h6:last-child {
+                                font-size: 15px;
+                            } */
 
         .package-view-div .treatment-card {
             padding: 15px;
@@ -438,6 +438,11 @@
                                                                     </clipPath>
                                                                 </defs>
                                                             </svg>
+                                                            Accomodation
+                                                            <a href="javascript:void(0);" id="accomodation_modal"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#AccommodationView">View
+                                                                Details</a>
                                                         @else
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="17"
                                                                 height="17" viewBox="0 0 13 13" fill="none">
@@ -445,11 +450,9 @@
                                                                     d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z"
                                                                     fill="#111111" />
                                                             </svg>
+                                                            Accomodation
                                                         @endif
-                                                        Accomodation
-                                                        <a href="javascript:void(0);" id="accomodation_modal"
-                                                            data-bs-toggle="modal" data-bs-target="#AccommodationView">View
-                                                            Details</a>
+
                                                     </li>
 
                                                     <li>
@@ -468,6 +471,10 @@
                                                                     </clipPath>
                                                                 </defs>
                                                             </svg>
+                                                            Transportation
+                                                            <a href="#" id="transportation_modal"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#TransportationView">View Details</a>
                                                         @else
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="17"
                                                                 height="17" viewBox="0 0 13 13" fill="none">
@@ -475,10 +482,9 @@
                                                                     d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z"
                                                                     fill="#111111" />
                                                             </svg>
+                                                            Transportation
                                                         @endif
-                                                        Transportation
-                                                        <a href="#" id="transportation_modal" data-bs-toggle="modal"
-                                                            data-bs-target="#TransportationView">View Details</a>
+
                                                     </li>
                                                     <li>
                                                         @if ($tour == 1)
@@ -496,6 +502,9 @@
                                                                     </clipPath>
                                                                 </defs>
                                                             </svg>
+                                                            Tour
+                                                            <a href="#" id="" data-bs-toggle="modal"
+                                                                data-bs-target="#TourView">View Details</a>
                                                         @else
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="17"
                                                                 height="17" viewBox="0 0 13 13" fill="none">
@@ -503,10 +512,9 @@
                                                                     d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z"
                                                                     fill="#111111" />
                                                             </svg>
+                                                            Tour
                                                         @endif
-                                                        Tour
-                                                        <a href="#" id="" data-bs-toggle="modal"
-                                                            data-bs-target="#TourView">View Details</a>
+
 
                                                     </li>
                                                     <li>
@@ -621,12 +629,12 @@
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" class="form-control"
-                                                                            value="{{ !empty($my_details['patient_first_name']) ? $my_details['patient_first_name'] : '' }}"
+                                                                            value="{{ !empty($my_details['patient_full_name']) ? $my_details['patient_full_name'] : '' }}"
                                                                             id="foodname" aria-describedby="foodname"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                                {{-- <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Last Name</label>
                                                                         <input type="text" class="form-control"
@@ -634,7 +642,7 @@
                                                                             id="foodname" aria-describedby="Last Name"
                                                                             readonly>
                                                                     </div>
-                                                                </div>
+                                                                </div> --}}
                                                                 <div class="col-md-6">
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Email</label>
@@ -648,7 +656,7 @@
                                                                     <div class="form-group position-relative mb-3">
                                                                         <label class="form-label">Contact Number</label>
                                                                         <input type="text" class="form-control"
-                                                                            value="{{ !empty($my_details['patient_phone']) ? $my_details['patient_phone'] : '' }}"
+                                                                            value="{{ !empty($my_details['patient_contact_no']) ? $my_details['patient_contact_no'] : '' }}"
                                                                             id="ContactNumber"
                                                                             aria-describedby="Contact Number" readonly>
                                                                     </div>
@@ -690,7 +698,7 @@
                                                                         <label class="form-label">Treatment</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            value="{{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}"
+                                                                            value="{{ !empty($treatment_information['package_name']) ? $treatment_information['package_name'] : '' }}"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
@@ -708,6 +716,7 @@
                                                                         <label class="form-label">Contact Number</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
+                                                                            value="{{ !empty($treatment_information['mobile_no'])?$treatment_information['mobile_no']:'' }}"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
@@ -716,6 +725,7 @@
                                                                         <label class="form-label">Country</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
+                                                                            value="{{ !empty($treatment_information['mobile_no'])?$treatment_information['mobile_no']:'' }}"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
@@ -724,7 +734,7 @@
                                                                         <label class="form-label">City</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
-                                                                            value="{{ !empty($data['city_name']) ? $data['city_name'] : '' }}"
+                                                                            value="{{ !empty($treatment_information['city_name']) ? $treatment_information['city_name'] : '' }}"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
@@ -733,6 +743,7 @@
                                                                         <label class="form-label">Address</label>
                                                                         <input type="text" class="form-control"
                                                                             id="foodname" aria-describedby="foodname"
+                                                                            value="{{ !empty($treatment_information['address']) ? $treatment_information['address'] : '' }}"
                                                                             readonly>
                                                                     </div>
                                                                 </div>
@@ -841,8 +852,7 @@
                                                                         {{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
                                                                         <span class="lira">₺</span>
                                                                     @else
-                                                                        {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] : '' }}
-                                                                        (<span>{{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
+                                                                        {{ !empty($data['payment_percentage']) ? $data['payment_percentage'] . '%' : '' }}(<span>{{ !empty($data['paid_amount']) ? $data['paid_amount'] : '' }}
                                                                             <span class="lira">₺</span>)</span>
                                                                     @endif
                                                                 </div>
@@ -865,8 +875,7 @@
                                                             <div
                                                                 class="user-payment-date paid-percentage fsb-1 fw-600 d-flex flex-column ps-3 justify-content-center">
                                                                 <span class="user-percentage fsb-1 fw-600">
-                                                                    {{ $pending_percent }}
-                                                                    (<span>{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}
+                                                                    {{ $pending_percent }}(<span>{{ !empty($data['pending_payment']) ? $data['pending_payment'] : '' }}
                                                                         <span class="lira">₺</span>)</span>
                                                                 </span>
                                                                 <span class="fsb-2 paymt-green-text"
@@ -1326,7 +1335,7 @@
 
                         // // Optionally, you can reload the lightbox here if needed
                         // lightbox.reload();
-                        window.lightbox.reload();
+                        document.location.reload();
                     },
                     error: function(error) {
                         console.error('Upload error:', error);
@@ -1334,7 +1343,7 @@
                 });
             });
 
-            $('.clear-btn').click( function(e) {
+            $('.clear-btn').click(function(e) {
                 // alert('hi');
                 e.preventDefault();
                 e.stopPropagation();

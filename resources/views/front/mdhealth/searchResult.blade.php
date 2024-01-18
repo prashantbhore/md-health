@@ -41,7 +41,7 @@
                 }
             }
 
-            // dd($packages);
+            // dd($packages[0]['brand_name']);
             // dd($treatment_name, $city_name);
 
         @endphp
@@ -161,21 +161,39 @@
                                     <div class="brdr-right">
                                         <p class="packageResult-title mb-3">Package Includes</p>
                                         @if (!empty($package_list['other_services']))
-                                            @foreach ($package_list['other_services'] as $key => $other_service)
-                                                @if (!empty($package_list['other_services'][$key]))
+                                            @foreach ($package_list['other_services'] as $index => $other_service)
+                                                @if (!empty($package_list['other_services'][$index]))
                                                     <div
                                                         class="d-flex gap-1 align-items-baseline mb-1 packageservices-list">
                                                         <img style="width: 11px;"
                                                             src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
-                                                        @if ($package_list['other_services'][$key] == 'Ambulance Services')
+                                                        @if ($package_list['other_services'][$index] == 'Ambulance Services')
                                                             <p class="mb-0 camptonBook smallFont red">
-                                                                {{ $package_list['other_services'][$key] }}
+                                                                {{ $package_list['other_services'][$index] }}
                                                             </p>
-                                                        @else
+                                                            
+                                                        @elseif($package_list['other_services'][$index] == 'Accomodition')
+                                                            <p class="mb-0 camptonBook smallFont red">
+                                                                {{ $package_list['other_services'][$index] }}
+                                                                (*{{ !empty($packages[$key]['hotel_stars']) ? $packages[$key]['hotel_stars'].' ' : '' }}Stars)
+                                                            </p>
+                                                            
+                                                        @elseif($package_list['other_services'][$index] == ' Transportation')
+                                                            <p class="mb-0 camptonBook smallFont red">
+                                                                {{ $package_list['other_services'][$index] }}
+                                                                (*{{  $packages[$key]['brand_name']  .' '. $packages[$key]['vehicle_model_id'] }})
+                                                            </p>
+                                                            
+                                                        @elseif($package_list['other_services'][$index] == ' Tour')
+                                                            <p class="mb-0 camptonBook smallFont red">
+                                                                {{ $package_list['other_services'][$index] }}
+                                                                (*{{ !empty($packages[$key]['tour_name']) ? $packages[$key]['tour_name'] : '' }})
+                                                            </p>
+                                                            @else  
                                                             <p class="mb-0 camptonBook smallFont">
-                                                                {{ $package_list['other_services'][$key] }}
+                                                                {{ $package_list['other_services'][$index] }}
                                                             </p>
-                                                        @endif
+                                                            @endif
                                                     </div>
                                                 @endif
 
@@ -209,7 +227,7 @@
                                             <p class="packageResult-title">Package Price</p>
                                             <div class="my-2">
                                                 <p class='strike'>
-                                                    {{ !empty($package_list['package_price']) ? $package_list['package_price'] : '' }}
+                                                    {{ !empty($package_list['package_price']) ? $package_list['package_price'] : '' }} ₺
                                                 </p>
                                                 <p class="mb-0 fs-5 camptonBold lh-base">
                                                     {{ !empty($package_list['sale_price']) ? $package_list['sale_price'] : '' }}
@@ -687,7 +705,7 @@
                         alert('Error:', error);
                     }
                 });
-            }else{
+            } else {
                 $('#loginFirstModal').modal('show');
             }
         });
