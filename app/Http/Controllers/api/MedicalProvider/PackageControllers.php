@@ -15,6 +15,7 @@ use App\Models\ToursDetails;
 use App\Models\TransportationDetails;
 use App\Models\ProductCategory;
 use App\Models\ProductSubCategory;
+use Storage;
 
 class PackageControllers extends BaseController
 {
@@ -156,17 +157,17 @@ class PackageControllers extends BaseController
                         $length = strlen($value->id);
 
                         if ($length == 1) {
-                            $package_unique_id = '#MD00000' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 2) {
-                            $package_unique_id = '#MD0000' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 3) {
-                            $package_unique_id = '#MD000' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 4) {
-                            $package_unique_id = '#MD00' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } elseif ($length == 5) {
-                            $package_unique_id = '#MD0' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         } else {
-                            $package_unique_id = '#MD' . $value->id;
+                            $package_unique_id = 'MDT-0' . $value->id;
                         }
 
                         $update_unique_id = Packages::where('id', $value->id)->update(['package_unique_no' => $package_unique_id]);
@@ -299,9 +300,18 @@ class PackageControllers extends BaseController
                 'md_packages.package_unique_no',
                 'md_packages.package_name',
                 'md_packages.status',
+                'md_medical_provider_logo.company_logo_image_path',
+                'md_medical_provider_logo.company_logo_image_name'
             )
-            ->where('created_by', Auth::user()->id)
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
             ->get();
+            // $packages_active_list= [];
+
+            foreach($packages_active_list as $key=>$val){
+                $packages_active_list[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)? url('/').Storage::url($val->company_logo_image_path):'';
+            }
 
 
         if (!empty($packages_active_list)) {
@@ -322,14 +332,23 @@ class PackageControllers extends BaseController
     public function packages_deactive_list()
     {
         $packages_deactive_list = Packages::where('md_packages.status', 'inactive')
-            ->select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.status',
-            )
-            ->where('created_by', Auth::user()->id)
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+            'md_medical_provider_logo.company_logo_image_path',
+            'md_medical_provider_logo.company_logo_image_name'
+        )
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
             ->get();
+            // $packages_deactive_list= [];
+            foreach($packages_deactive_list as $key=>$val){
+                $packages_deactive_list[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)? url('/').Storage::url($val->company_logo_image_path):'';
+            }
+
 
         if (!empty($packages_deactive_list)) {
             return response()->json([
@@ -774,15 +793,27 @@ class PackageControllers extends BaseController
         }
 
         $packages_active_list_search = Packages::where('md_packages.status', 'active')
-            ->select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.status',
-            )
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+            'md_medical_provider_logo.company_logo_image_path',
+            'md_medical_provider_logo.company_logo_image_name'
+        )
             ->where('md_packages.package_name', 'like', '%' . $request->package_name . '%')
-            ->where('created_by', Auth::user()->id)
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
             ->get();
+            // return $packages_active_list_search;
+
+            foreach($packages_active_list_search as $key=>$val)
+            {
+                $packages_active_list_search[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)?url('/').Storage::url($val->company_logo_image_path):'';
+            }
+           
+           
 
         if (!empty($packages_active_list_search)) {
             return response()->json([
@@ -810,15 +841,25 @@ class PackageControllers extends BaseController
         }
 
         $packages_inactive_list_search = Packages::where('md_packages.status', 'inactive')
-            ->select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.status',
-            )
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+            'md_medical_provider_logo.company_logo_image_path',
+            'md_medical_provider_logo.company_logo_image_name'
+        )
             ->where('md_packages.package_name', 'like', '%' . $request->package_name . '%')
-            ->where('created_by', Auth::user()->id)
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
+
             ->get();
+
+            foreach($packages_inactive_list_search as $key=>$val)
+            {
+                $packages_inactive_list_search[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)?url('/').Storage::url($val->company_logo_image_path):'';
+            }
 
         if (!empty($packages_inactive_list_search)) {
             return response()->json([

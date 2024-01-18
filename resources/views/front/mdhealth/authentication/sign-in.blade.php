@@ -1,14 +1,47 @@
 @extends('front.layout.layout')
 @section('content')
-    <style>
-        .navbar {
-            display: none;
-        }
+<style>
+    .navbar,
+    footer {
+        display: none;
+    }
 
-        #recaptcha-container {
-            bottom: 290px;
-        }
-    </style>
+    #recaptcha-container {
+        bottom: 330px;
+    }
+
+    .mdi-eye-off::before,
+    .mdi-eye::before {
+        font-size: 19px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #D6D6D6 !important;
+    }
+
+    .cont-btn {
+        width: 404px;
+        height: 47px;
+        flex-shrink: 0;
+        border-radius: 25px;
+        background: #4CDB06;
+        color: #000002;
+        text-align: center;
+        font-family: Campton;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.6px;
+        transition: 0.15s all;
+    }
+
+    .cont-btn:hover {
+        background: #47cc05;
+        color: #000002;
+    }
+</style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
         <div class="card">
             <div class="card-body">
@@ -39,7 +72,7 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                                    <span toggle="#password" class="mdi mdi-eye field-icon toggle-password "></span>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -52,8 +85,8 @@
                             <span id="error" class="text-danger"></span>
                             <span id="success" class="text-success"></span>
                             <div class="pt-100px">
-                                <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup"
-                                    style="height: 47px;">Continue...</button>
+                                <button class="btn cont-btn w-100 mb-4 df-center" type="button" id="signup"
+                                    >Continue</button>
                             </div>
                             <div class="text-center">
                                 <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
@@ -89,13 +122,25 @@
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
-                                
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
+                                oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
+                                oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
+                                oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
+                                oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
+                                oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')"
+                                class="form-control">
+                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
+                                oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')"
+                                class="form-control">
+
                         </div>
                         <div id="errorMessage" class="text-danger d-none"></div>
                 </div>
@@ -111,7 +156,7 @@
                             document.getElementById(nextId).focus();
                         }
                     }
-                
+
                     function handleBackspace(event, currentId) {
                         if (event.code === 'Backspace' && event.target.value.length === 0 && currentId) {
                             document.getElementById(currentId).focus();
@@ -291,7 +336,7 @@
                         //     '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
                     },
                     success: function(response) {
-                        $('#signup').attr('enable', true);
+                        // $('#signup').attr('enable', true);
                         if (response.user_exist !== undefined) {
                             // alert(JSON.stringify(response.user_exist));
                             sendOTP();
@@ -357,12 +402,12 @@
         }
 
         function isValidCode(code) {
-        return (code.length === 6);
-    }
+            return (code.length === 6);
+        }
 
-    function showErrorMessage(message) {
-        $('#errorMessage').removeClass('d-none').text(message);
-    }
+        function showErrorMessage(message) {
+            $('#errorMessage').removeClass('d-none').text(message);
+        }
         // $('#verifyBtn').attr('disabled', true);
         // $('#verifyBtn').html('<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
         function verify(e) {
@@ -374,9 +419,9 @@
             var code6 = $("#ot6").val();
             var code = code1 + code2 + code3 + code4 + code5 + code6;
             if (!isValidCode(code)) {
-            showErrorMessage('Please enter the correct code.');
-            return;
-        }
+                showErrorMessage('Please enter the correct code.');
+                return;
+            }
             coderesult.confirm(code)
                 .then(function(result) {
 

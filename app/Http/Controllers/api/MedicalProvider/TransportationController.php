@@ -105,7 +105,7 @@ class TransportationController extends BaseController
 
     public function edit_transportation_details_view(Request $request)
     {
-        $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', '=', 'active')
+        $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', '!=', 'delete')
         ->select(
             'md_add_transportation_details.id',
             'md_add_transportation_details.status',
