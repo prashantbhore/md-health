@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('md_ads_and_promo', function (Blueprint $table) {
             $table->id();
             $table->longText('ads_for_page')->nullable();
-            $table->string('ads_url')->nullable();
+            $table->longText('ads_url')->nullable();
             $table->string('ads_image_path')->nullable();
             $table->string('ads_image_name')->nullable();
             $table->enum('promo_status', ['publish','schedule'])->default('schedule');
-            $table->string('time')->nullable();
+            $table->string('date')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();

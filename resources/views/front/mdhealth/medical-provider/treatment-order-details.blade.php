@@ -337,7 +337,7 @@
                                                             @foreach ($case_manager as $manager)
                                                                 <option
                                                                     value="{{ !empty($manager['id']) ? $manager['id'] : '' }}">
-                                                                    {{ !empty($manager['name']) ? $manager['name'] : '' }}
+                                                                    {{ !empty($manager['company_name']) ? $manager['company_name'] : '' }}
                                                                 </option>
                                                             @endforeach
                                                             @endif
