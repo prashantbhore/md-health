@@ -5,64 +5,62 @@
             display: none;
         }
 
-    #recaptcha-container {
-        bottom: 290px;
-    }
-
-      .mdi-eye-off::before,
-    .mdi-eye::before {
-        font-size: 19px;
-    }
-</style>
-<div class="container py-100px df-center sign-in-form" id="logDiv">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex flex-column align-items-center gap-4">
-                <div class="pt-3">
-                    <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
-                </div>
-                <h2 class="mb-0">Sign In to MD<span>health</span></h2>
-                <p>The device is not yours? Use private or incognito mode to log in.</p>
+        #recaptcha-container {
+            bottom: 290px;
+        }
+    </style>
+    <div class="container py-100px df-center sign-in-form" id="logDiv">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-column align-items-center gap-4">
+                    <div class="pt-3">
+                        <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
+                    </div>
+                    <h2 class="mb-0">Sign In to MD<span>health</span></h2>
+                    <p>The device is not yours? Use private or incognito mode to log in.</p>
 
                     <div class="w-100 df-center">
                         {{-- <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
                         <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
                         {{-- <span class="alert alert-danger" id="error" ></span> --}}
 
-                    <form id="loginForm">
-                        {{-- action="{{ url('user-login') }}" method="post" --}}
-                        {{-- @csrf --}}
-                        <input type="hidden" name="platform_type" value="web">
-                        <input type="hidden" name="login_type" value="login">
-                        <div class="mb-3">
-                            <label for="number" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="number" id="number" placeholder="Phone Number">
-                            {{-- --}}
-                        </div>
-                        <div class="mb-3 hide-eye-div">
-                            <label for="Password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                            <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
+                        <form id="loginForm">
+                            {{-- action="{{ url('user-login') }}" method="post" --}}
+                            {{-- @csrf --}}
+                            <input type="hidden" name="platform_type" value="web">
+                            <input type="hidden" name="login_type" value="login">
+                            <div class="mb-3">
+                                <label for="number" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" name="number" id="number"
+                                    placeholder="Phone Number">
+                                {{-- --}}
+                            </div>
+                            <div class="mb-3 hide-eye-div">
+                                <label for="Password" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    placeholder="Password">
+                                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Remember Me
+                                </label>
+                            </div>
+                            {{-- <input type="hidden" id="number" class="form-control" placeholder="+91 ********"> --}}
 
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Remember Me
-                            </label>
-                        </div>
-                        {{-- <input type="hidden" id="number" class="form-control" placeholder="+91 ********"> --}}
-
-                        <span id="error" class="text-danger"></span>
-                        <span id="success" class="text-success"></span>
-                        <div class="pt-100px">
-                            <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup" style="height: 47px;">Continue</button>
-                        </div>
-                        <div class="text-center">
-                            <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
-                        </div>
-                        {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
-                    </form>
+                            <span id="error" class="text-danger"></span>
+                            <span id="success" class="text-success"></span>
+                            <div class="pt-100px">
+                                <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup"
+                                    style="height: 47px;">Continue...</button>
+                            </div>
+                            <div class="text-center">
+                                <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
+                            </div>
+                            {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
