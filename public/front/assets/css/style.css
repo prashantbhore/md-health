@@ -1266,7 +1266,7 @@ select {
     font-family: CamptonBold !important;
 }
 
-.camptonSB {
+.camptonSemiBold {
     font-family: CamptonSemiBold !important;
 }
 
@@ -1340,7 +1340,7 @@ select {
     font-size: 16px;
 
     font-weight: 500;
-    line-height: normal;
+    line-height: 18.62px;
     letter-spacing: -0.64px;
 }
 
@@ -1395,10 +1395,10 @@ select {
 
 .reg-title {
     color: #4cdb06;
-    font-family: "CamptonBold";
+    font-family: "Campton";
     font-size: 33px;
     font-weight: 700;
-    line-height: normal;
+    line-height: 38.41px;
     letter-spacing: -1.32px;
 }
 
@@ -3336,6 +3336,7 @@ span.popup-msg.active {
     /* 123.256% */
     letter-spacing: -1.72px;
     text-align: left;
+    inline-size: max-content;
 }
 
 .text-green-h1b {
