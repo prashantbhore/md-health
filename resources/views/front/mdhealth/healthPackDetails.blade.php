@@ -18,6 +18,28 @@
                 $user = false;
             }
 
+            if (Session::get('MDCustomer*%') != null) {
+                $isCustomer = true;
+            } else {
+                $isCustomer = false;
+            }
+
+            if (!function_exists('extractNumericRange')) {
+                function extractNumericRange($inputString)
+                {
+                    // Use regular expression to match the numeric range
+                    preg_match('/\b\d+-\d+\b/', $inputString, $matches);
+
+                    // Check if a match is found
+                    if (!empty($matches)) {
+                        return $matches[0];
+                    }
+
+                    // Return null if no match is found
+                    return null;
+                }
+            }
+            // dd($provider_gallery);
         @endphp
 
         <!-- SECTION 1 -->
@@ -30,34 +52,39 @@
                 <div class="packageResult package-results-div details rounded mb-5">
                     <div>
                         <div class="d-flex gap-3 align-items-center mb-1">
-                            <p class="mb-0 fs-5 camptonBold lh-base preslt-title">{{ $packageDetails['package_name'] }}</p>
+                            <p class="mb-0 fs-5 camptonBold lh-base preslt-title">
+                                {{ !empty($packageDetails['package_name']) ? $packageDetails['package_name'] : '' }}</p>
                             <img src="{{ 'front/assets/img/verifiedBy.svg' }}" alt="">
                         </div>
                         <div class="d-flex gap-5 mb-4">
                             <div class="d-flex gap-2 align-items-center">
                                 <img src="{{ 'front/assets/img/Location.svg' }}" alt="">
-                                <p class="mb-0 lctn">{{ $packageDetails['city_name'] }}</p>
+                                <p class="mb-0 lctn">
+                                    {{ !empty($packageDetails['city_name']) ? $packageDetails['city_name'] : '' }}</p>
                             </div>
                             <div class="d-flex align-items-center gap-1">
                                 <img src="{{ 'front/assets/img/Diaganose.svg' }}" alt="">
-                                <p class="mb-0 lctn fst-italic">{{ $packageDetails['treatment_period_in_days'] }}</p>
+                                <p class="mb-0 lctn fst-italic">
+                                    {{ !empty($packageDetails['treatment_period_in_days']) ? extractNumericRange('Treatment Period ' . $packageDetails['treatment_period_in_days']) . ' Days' : '' }}
+                                </p>
                             </div>
                         </div>
                         <div class="d-flex gap-4 package-results-details">
                             <div class="brdr-right">
                                 <p class="packageResult-title mb-3">Package Includes</p>
-
-                                @foreach ($packageDetails['other_services'] as $service)
-                                    @if (!empty($service))
-                                        <div class="d-flex gap-1 align-items-baseline mb-2 packageservices-list">
-                                            <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}"alt="">
-                                            <p class="mb-0 camptonBook smallFont">{{ $service }}</p>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                @if (!empty($packageDetails['other_services']))
+                                    @foreach ($packageDetails['other_services'] as $service)
+                                        @if (!empty($service))
+                                            <div class="d-flex gap-1 align-items-baseline mb-2 packageservices-list">
+                                                <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}"alt="">
+                                                <p class="mb-0 camptonBook smallFont">{{ $service }}</p>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </div>
                             <div class="brdr-right">
-                                <p class="packageResult-title mb-2">Reviews <span class="">(480)</span></p>
+                                <p class="packageResult-title mb-2">Reviews <span class=""> (0)</span></p>
                                 <div class="stars d-flex gap-2 mb-2">
                                     <i class="fa fa-star text-green"></i>
                                     <i class="fa fa-star text-green"></i>
@@ -72,19 +99,28 @@
                                     <p class="packageResult-title mb-3">Package Price</p>
                                     <div class="my-2">
                                         <p class="mb-1 camptonBold lh-base packageResult-price-title">
-                                            {{ $packageDetails['treatment_price'] }} ₺
+                                            {{ !empty($packageDetails['treatment_price']) ? $packageDetails['treatment_price'] : '' }}
+                                            ₺
                                             <span
-                                                class="smallFont fs-6">*{{ '(' . get_twenty_percent($packageDetails['treatment_price']) . ' ₺)' }}</span>
+                                                class="smallFont fs-6">*{{ '(' . get_twenty_percent(!empty($packageDetails['treatment_price']) ? $packageDetails['treatment_price'] : 0) . ' ₺)' }}</span>
                                         </p>
                                         <p class=" mb-3 camptonBook packageResult-offer">*20% of the price is paid before
                                             booking.</p>
                                     </div>
                                     <div class="d-flex gap-2 mb-2">
-                                        <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
-                                            Package</button>
-                                        <button class="favouriteBtn">
-                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                        </button>
+                                        @if ($isCustomer == true && $user == true)
+                                            <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
+                                                Package</button>
+                                            <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                            </button>
+                                        @elseif($user == false)
+                                            <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
+                                                Package</button>
+                                            <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +205,7 @@
                                     <div class="col-md-4">
                                         <label for="patient_city_id" class="form-label fw-bold">*Patient City</label>
                                         <select name="patient_city_id" id="patient_city_id" class="form-select h-75">
-                                            <option value=""" selected>City</option>
+                                            <option value="" selected>City</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $country->id }}">{{ $city->city_name }}</option>
                                             @endforeach
@@ -216,16 +252,16 @@
                             <div class="overview mt-4">
                                 <div class="row">
                                     <div class="col-12 ps-0">
-                                        <p>{{ $packageDetails['overview'] }}</p>
+                                        <p>{{ !empty($packageDetails['overview']) ? $packageDetails['overview'] : '' }}</p>
                                     </div>
                                     {{-- <div class="col-4 pe-0">
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
                                     </div> --}}
                                     <!-- <div class="col-12 px-0">
-                                                                                                                                                                                                                                                            <p>
+                                                                                                                                                                                                                                                                            <p>
 
-                                                                                                                                                                                                                                                            </p>
-                                                                                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                                                                                            </p>
+                                                                                                                                                                                                                                                                        </div> -->
                                 </div>
                             </div>
                         </div>
@@ -316,38 +352,15 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="menu2">
-                            <div class="gallery">
-                                <a href="{{ 'front/assets/img/galleryImg1.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg1.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg2.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg2.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg3.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg3.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg4.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg4.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg5.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg5.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg3.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg3.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg4.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg4.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg5.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg5.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg1.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg1.png' }}" alt="image" />
-                                </a>
-                                <a href="{{ 'front/assets/img/galleryImg2.png' }}" class="glightbox">
-                                    <img src="{{ 'front/assets/img/galleryImg2.png' }}" alt="image" />
-                                </a>
-                            </div>
+                            @if (!empty($provider_gallery))
+                                <div class="gallery">
+                                    @foreach ($provider_gallery as $image)
+                                        <a href="{{ $image }}" class="glightbox">
+                                            <img src="{{ $image }}" alt="image" />
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -394,6 +407,7 @@
             // const lightbox = GLightbox({
             //     ...options
             // });
+            var user = "{{ $user }}";
             var baseUrl = $('#base_url').val();
             var token = "{{ Session::get('login_token') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -480,10 +494,55 @@
             });
 
 
+            $('.favouriteBtn').on('click', function() {
+
+                if (user == '1') {
+
+                    var packageId = $(this).attr('id').split("_")[1];
+                    // alert(packageId);
+                    var formData = new FormData();
+                    formData.append('package_id', packageId);
+
+                    $.ajax({
+                        url: baseUrl + '/api/md-add-package-to-favourite',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        beforeSend: function() {
+                            $('#fav-btn' + packageId).attr('disabled', true);
+                            $('#fav-btn' + packageId).html(
+                                '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
+                            );
+                        },
+                        success: function(response) {
+                            $('#fav-btn' + packageId).attr('disabled', false);
+                            $('#other').html(
+                                '<img src="front/assets/img/white-heart.svg" alt="">');
+                            console.log('Success:', response);
+
+                        },
+                        error: function(xhr, status, error) {
+                            $('#fav-btn' + packageId).attr('disabled', false);
+                            $('#other').html(
+                                '<img src="front/assets/img/white-heart.svg" alt="">');
+                            alert('Error:', error);
+                        }
+                    });
+                } else {
+                    $('#loginFirstModal').modal('show');
+                }
+            });
+
+
             $('.purchaseBtn').click(function(e) {
                 e.preventDefault();
                 // alert('hi');
-                var user = "{{ $user }}";
+
                 var id = this.id;
                 // alert(id);
                 // $('.treatmentForModal_'+id).modal('hide');
