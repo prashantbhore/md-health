@@ -427,8 +427,8 @@
                 .then(function(confirmationResult) {
                     window.confirmationResult = confirmationResult;
                     coderesult = confirmationResult;
-                    $("#successAuth").text("Message sent");
-                    $("#successAuth").show();
+                    // $("#successAuth").text("Message sent");
+                    // $("#successAuth").show();
                     $("#otpDiv").removeClass("d-none");
                     $("#regdiv").hide();
                     recaptchaVerifier.clear();
@@ -461,8 +461,8 @@
                 .confirm(code)
                 .then(function(result) {
                     var user = result.user;
-                    $("#successOtpAuthot").text("OTP verified");
-                    $("#successOtpAuthot").show();
+                    // $("#successOtpAuthot").text("OTP verified");
+                    // $("#successOtpAuthot").show();
 
                     // recaptchaVerifier.clear();
                     // var formData = $('#myFormProvider').serialize();
@@ -532,8 +532,8 @@
                     .then(function(confirmationResult) {
                         window.confirmationResult = confirmationResult;
                         coderesult = confirmationResult;
-                        $("#sentSuccess").text("New code sent Successfully.");
-                        $("#sentSuccess").show();
+                        // $("#sentSuccess").text("New code sent Successfully.");
+                        // $("#sentSuccess").show();
                         coderesult = confirmationResult;
                         // recaptchaVerifier.clear();
                         $('#recaptcha-container').hide();

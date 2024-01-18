@@ -130,17 +130,17 @@ class RegistrationController extends BaseController
                 $length = strlen($value->id);
 
                 if ($length == 1) {
-                    $customer_unique_id = '#MDCUST00000' . $value->id;
+                    $customer_unique_id = 'MDC-0' . $value->id;
                 } elseif ($length == 2) {
-                    $customer_unique_id = '#MDCUST0000' . $value->id;
+                    $customer_unique_id = 'MDC-0' . $value->id;
                 } elseif ($length == 3) {
-                    $customer_unique_id = '#MDCUST000' . $value->id;
+                    $customer_unique_id = 'MDC-0' . $value->id;
                 } elseif ($length == 4) {
-                    $customer_unique_id = '#MDCUST00' . $value->id;
+                    $customer_unique_id = 'MDC-0' . $value->id;
                 } elseif ($length == 5) {
-                    $customer_unique_id = '#MDCUST0' . $value->id;
+                    $customer_unique_id = 'MDC-0' . $value->id;
                 } else {
-                    $customer_unique_id = '#MDCUST' . $value->id;
+                    $customer_unique_id = 'MDC-0' . $value->id;
                 }
 
                 $update_unique_id = CustomerRegistration::where('id', $value->id)->update(['customer_unique_no' => $customer_unique_id]);
@@ -345,17 +345,17 @@ class RegistrationController extends BaseController
             foreach ($MedicalProviderRegistrater as $key => $value) {
                 $length = strlen($value->id);
                 if ($length == 1) {
-                    $provider_unique_id = '#MDPRVDR00000' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 2) {
-                    $provider_unique_id = '#MDPRVDR0000' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 3) {
-                    $provider_unique_id = '#MDPRVDR000' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 4) {
-                    $provider_unique_id = '#MDPRVDR00' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 5) {
-                    $provider_unique_id = '#MDPRVDR0' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } else {
-                    $provider_unique_id = '#MDPRVDR' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 }
 
                 $update_unique_id = MedicalProviderRegistrater::where('id', $value->id)->update(['provider_unique_no' => $provider_unique_id]);
@@ -511,17 +511,17 @@ class RegistrationController extends BaseController
             foreach ($MedicalProviderRegistrater as $key => $value) {
                 $length = strlen($value->id);
                 if ($length == 1) {
-                    $provider_unique_id = '#MDPRVDR00000' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 2) {
-                    $provider_unique_id = '#MDPRVDR0000' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 3) {
-                    $provider_unique_id = '#MDPRVDR000' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 4) {
-                    $provider_unique_id = '#MDPRVDR00' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } elseif ($length == 5) {
-                    $provider_unique_id = '#MDPRVDR0' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 } else {
-                    $provider_unique_id = '#MDPRVDR' . $value->id;
+                    $provider_unique_id = 'MDV-0' . $value->id;
                 }
 
                 $update_unique_id = VendorRegister::where('id', $value->id)->update(['vendor_unique_no' => $provider_unique_id]);
@@ -680,17 +680,17 @@ class RegistrationController extends BaseController
             foreach ($MedicalProviderRegistrater as $key => $value) {
                 $length = strlen($value->id);
                 if ($length == 1) {
-                    $provider_unique_id = '#FOODPRVDR00000' . $value->id;
+                    $provider_unique_id = 'MDF-0' . $value->id;
                 } elseif ($length == 2) {
-                    $provider_unique_id = '#FOODPRVDR0000' . $value->id;
+                    $provider_unique_id = 'MDF-0' . $value->id;
                 } elseif ($length == 3) {
-                    $provider_unique_id = '#FOODPRVDR000' . $value->id;
+                    $provider_unique_id = 'MDF-0' . $value->id;
                 } elseif ($length == 4) {
-                    $provider_unique_id = '#FOODPRVDR00' . $value->id;
+                    $provider_unique_id = 'MDF-0' . $value->id;
                 } elseif ($length == 5) {
-                    $provider_unique_id = '#FOODPRVDR0' . $value->id;
+                    $provider_unique_id = 'MDF-0' . $value->id;
                 } else {
-                    $provider_unique_id = '#FOODPRVDR' . $value->id;
+                    $provider_unique_id = 'MDF-0' . $value->id;
                 }
               
                 $update_unique_id = MDFoodRegisters::where('id', $value->id)->update(['food_unique_no' => $provider_unique_id]);

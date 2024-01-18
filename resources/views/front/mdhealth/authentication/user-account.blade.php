@@ -355,13 +355,13 @@
                     phone: phone,
                 },
                 beforeSend: function() {
-                    $("#regcustuser").attr("disabled", true);
-                    $("#regcustuser").html(
-                        '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
-                    );
+                    // $("#regcustuser").attr("disabled", true);
+                    // $("#regcustuser").html(
+                    //     '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...'
+                    // );
                 },
                 success: function(response) {
-                    $("#regcustuser").attr("disabled", false);
+                    // $("#regcustuser").attr("disabled", false);
                     console.log(response);
                     if (response !== undefined) {
                         if (response.email_exist !== undefined) {
@@ -441,8 +441,8 @@
             .then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
-                $("#successAuth").text("Message sent");
-                $("#successAuth").show();
+                // $("#successAuth").text("Message sent");
+                // $("#successAuth").show();
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
                 recaptchaVerifier.clear();
@@ -470,14 +470,14 @@
         var code5 = $("#ot5").val();
         var code6 = $("#ot6").val();
         var code = code1 + code2 + code3 + code4 + code5 + code6;
-        $("#login_otp_btn").attr("disabled", true);
-        $("#login_otp_btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+        // $("#login_otp_btn").attr("disabled", true);
+        // $("#login_otp_btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
         coderesult
             .confirm(code)
             .then(function(result) {
                 var user = result.user;
-                $("#successOtpAuthot").text("OTP verified");
-                $("#successOtpAuthot").show();
+                // $("#successOtpAuthot").text("OTP verified");
+                // $("#successOtpAuthot").show();
                 // var user_type = $('#user_type').val();
                 // console.log(user_type);
                 // alert(user_type);
@@ -504,7 +504,7 @@
                     //     password: password
                     // },
                     success: function(response) {
-                        $("#login_otp_btn").attr("disabled", false);
+                        // $("#login_otp_btn").attr("disabled", false);
                         console.log(response);
                         if (response.url !== undefined) {
                             // alert(response.url);
@@ -566,8 +566,8 @@
                 .then(function(confirmationResult) {
                     window.confirmationResult = confirmationResult;
                     coderesult = confirmationResult;
-                    $("#successAuth").text("Message sent");
-                    $("#successAuth").show();
+                    // $("#successAuth").text("Message sent");
+                    // $("#successAuth").show();
                     $("#otpDiv").removeClass("d-none");
                     $("#regdiv").hide();
                     $('#recaptcha-container').hide();

@@ -177,12 +177,13 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" /> --}}
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
-                    </div>
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
+                                </div>
+
                     <div class="d-flex justify-content-center">
                         <button class="btn btn-md btn-text my-3 text-center w-407p5" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
@@ -343,8 +344,8 @@
                     phone: phone,
                 },
                 beforeSend: function() {
-                    $("#medproreg").attr("disabled", true);
-                    $("#medproreg").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+                    // $("#medproreg").attr("disabled", true);
+                    // $("#medproreg").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                 },
                 success: function(response) {
                     $("#medproreg").attr("disabled", false);
@@ -387,8 +388,8 @@
             .then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
-                $("#successAuth").text("Message sent");
-                $("#successAuth").show();
+                // $("#successAuth").text("Message sent");
+                // $("#successAuth").show();
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
                 recaptchaVerifier.clear();
@@ -422,8 +423,8 @@
             .then(function(result) {
                 var user = result.user;
                 // console.log(user);
-                $("#successOtpAuthot").text("OTP verified");
-                $("#successOtpAuthot").show();
+                // $("#successOtpAuthot").text("OTP verified");
+                // $("#successOtpAuthot").show();
                 // recaptchaVerifier.clear();
 
                 // var formData = $('#myFormProvider').serialize();
@@ -446,10 +447,10 @@
                     processData: false,
                     beforeSend: function() {
                         // $("#otp-btn").attr("disabled", true);
-                        $("#otp-btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+                        // $("#otp-btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
                     },
                     success: function(response) {
-                        $("#otp-btn").attr("disabled", false);
+                        // $("#otp-btn").attr("disabled", false);
                         console.log(response);
                         if (response.url !== undefined) {
                             // alert(response.url);
@@ -482,10 +483,37 @@
         var container = document.getElementById(containerId);
         $('#recaptcha-container').show();
 
-        if (!container) {
-            $("#error").text("reCAPTCHA container is missing.");
-            $("#error").show();
-            return;
+            if (!container) {
+                $("#error").text("reCAPTCHA container is missing.");
+                $("#error").show();
+                return;
+            }
+
+            try {
+                container.innerHTML = '';
+                recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
+                recaptchaVerifier.render();
+
+                firebase
+            .auth()
+            .signInWithPhoneNumber(number, window.recaptchaVerifier)
+            .then(function(confirmationResult) {
+                window.confirmationResult = confirmationResult;
+                coderesult = confirmationResult;
+                        // $("#sentSuccess").text("New code sent Successfully.");
+                        // $("#sentSuccess").show();
+                        coderesult = confirmationResult;
+                        // recaptchaVerifier.clear();
+                        $('#recaptcha-container').hide();
+                    })
+                    .catch(function(error) {
+                        $("#error").text(error.message);
+                        $("#error").show();
+                    });
+            } catch (error) {
+                $("#error").text("Error initializing reCAPTCHA: " + error.message);
+                $("#error").show();
+            }
         }
 
         try {
