@@ -11,7 +11,7 @@
                 <div class="card mb-4">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         Order ID: #MD3726378
-                        <a href="{{url('medical-provider-dashboard')}}" class="d-flex align-items-center gap-1 text-decoration-none text-dark">
+                        <a href="{{url('vendor-sales')}}" class="d-flex align-items-center gap-1 text-decoration-none text-dark">
                             <img src="{{asset('front/assets/img/backPage.png')}}" alt="">
                             <p class="mb-0">Back</p>
                         </a>

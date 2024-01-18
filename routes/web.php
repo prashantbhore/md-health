@@ -42,6 +42,7 @@ use App\Http\Controllers\Front\MedicalProvider\PaymentController;
 use App\Http\Controllers\Front\Registration\FoodProviderController;
 use App\Http\Controllers\Front\Vendor\UpdateVendorProfileController;
 use App\Http\Controllers\Front\FoodProvider\UpdateFoodProviderAccount;
+use App\Http\Controllers\Front\Vendor\VendorSalesController;
 use App\Models\MedicalProviderLogo;
 
 /*
@@ -335,8 +336,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     //Admin ADS & PROMO
 
     Route::controller(AdsPromoController::class)->group(function () {
-        Route::get('ads-promo','index');
+        Route::get('ads-promo','index')->name('filter.ads');
         Route::post('ads-store-promo','store')->name('store.ads');
+
+        Route::get('ads-edit/{id}','edit');
+
+        Route::get('ads-delete/{id}','delete')->name('ads.delete');
+
+
     });
 
    
@@ -468,6 +475,7 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // Route::post('md-register-medical-provider', [RegistrationController::class, 'md_register_medical_provider']);
 Route::controller(MedicalProviderRegistrationController::class)->group(function () {
     Route::get('user-account', 'index');
+    Route::post('md-city-list', 'get_cities_list');
     Route::get('medical-provider-login', 'indexmedpro');
     Route::get('vendor-login', 'vendor_login');
     Route::post('/md-register-medical-provider', 'md_register_medical_provider');
@@ -588,12 +596,32 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
         Route::post('vendor-inactive-product-search', 'inactive_vendor_search_products');
     });
 
-    Route::controller(UpdateVendorProfileController::class)->group(function () {
+    Route::controller(UpdateVendorProfileController::class)->group(function (){
         Route::get('vendor-account', 'update_vendor_profile_list');
         Route::post('md-update-vendor-profile', 'update_vendor_profile');
         Route::post('md-delete-vendor-images-videos', 'delete_vendor_images_videos');
 
     });
+
+
+
+    Route::controller(VendorSalesController::class)->group(function (){
+        
+        Route::get('vendor-sales','index');
+
+    });
+
+    // Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
+
+    Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
+    //Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
+
+
+
+
+
+
+
 
 });
 
@@ -723,9 +751,11 @@ Route::view('md-food-purchase-details', 'front/mdhealth/md-food/md-food-purchase
 
 // Shubham
 // Vendor Panel
-Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
-Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
-Route::view('vendor-order-view', 'front/mdhealth/vendor/vendor_order_view');
+
+
+
+
+
 
 
 // Medical Provider Panel

@@ -1,53 +1,5 @@
- <footer class="footer text-light py-5" style="background-color:#080808">
+<footer class="footer text-light py-2" style="background-color:#080808">
      <div class="container">
-         <div class="row pb-1">
-             <div class="col-md-3">
-                 <div class="card-text camptonBook"><span>MD</span>health</div>
-                 <ul>
-                     <li><a href="javascript:;">About Us</a></li>
-                     <li><a href="javascript:;">Company</a></li>
-                     <li><a href="javascript:;">Career</a></li>
-                 </ul>
-             </div>
-             <div class="col-md-3">
-                 <div class="card-text">Support</div>
-                 <ul>
-                     <li><a href="javascript:;">Contact Us</a></li>
-                     <li><a href="javascript:;">Support</a></li>
-                     <li><a href="javascript:;">Purchase & Compliment</a></li>
-                 </ul>
-             </div>
-             <div class="col-md-3">
-                 <div class="card-text">Other</div>
-                 <ul>
-                     <li><a href="javascript:;">FAQ</a></li>
-                     <li><a href="javascript:;">Glossary</a></li>
-                     <li><a href="javascript:;">Cancellation/Refund Transactions</a></li>
-                 </ul>
-             </div>
-             <div class="col-md-3 text-end d-flex flex-column">
-                 <div class="card-text text-end mb-0 camLight" >support@mdhealth.com</div>
-                 <div class="contact-no">0800 800 8080</div>
-                 <div class="social-icons mt-150">
-                     <ul class="d-flex gap-4 align-items-center justify-content-end mb-0">
-                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/Facebook.png' }}" alt=""></a>
-                         </li>
-                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/twitter.png' }}" alt=""></a>
-                         </li>
-                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/instagram.png' }}" alt=""></a></li>
-                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/linkedin.png' }}" alt=""></a>
-                         </li>
-                     </ul>
-                 </div>
-             </div>
-
-
-         </div>
-
-         <!-- v -->
-
-         <hr class="border border-white  my-3" />
-        
              <div class="d-flex justify-content-between mdLtd">
                  <div class="d-flex justify-content-center">
                      <div class="md-main"><span class="md-span">MD</span>health</div>

@@ -98,36 +98,30 @@ class UpdateProfileController extends Controller
 
     public function update_medical_provider_profile(Request $request)
     {
-        //   return Auth::guard('md_health_medical_providers_registers')->user()->id;
+        // $email_exist = MedicalProviderRegistrater::where('status', 'active')
+        //     ->where('email', $request->email)
+        //     ->first();
 
-        $email_exist = MedicalProviderRegistrater::where('status', 'active')
-            ->where('email', $request->email)
-            ->first();
-        $email_exist_common = CommonUserLoginTable::where('status', 'active')
-            ->where('email', $request->email)
-            ->first();
+        // $email_exist_common = CommonUserLoginTable::where('status', 'active')
+        // ->where('email', $request->email)
+        // ->first();
 
-        if (!empty($email_exist || $email_exist_common)) {
+        // if ($email_exist || $email_exist_common) {
+        //     return redirect('medical-account')->with('error', 'Email address already exist');
+        // }
 
-            return response()->json([
-                'status' => 404,
-                'message' => 'email id already exist.',
-            ]);
-        } else {
-            $phone_exist = MedicalProviderRegistrater::where('status', 'active')
-                ->where('mobile_no', $request->mobile_no)
-                ->first();
-            $phone_exist_common = CommonUserLoginTable::where('status', 'active')
-                ->where('mobile_no', $request->mobile_no)
-                ->first();
+        // $mobile_no = MedicalProviderRegistrater::where('status', 'active')
+        // ->where('mobile_no', $request->phone)
+        // ->first();
+        // $mobile_no_common = CommonUserLoginTable::where('status', 'active')
+        //     ->where('mobile_no', $request->phone)
+        //     ->first();
 
-            if (!empty($phone_exist || $phone_exist_common)) {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'mobile number already exist.',
-                ]);
-            }
-        }
+        // if ($mobile_no || $mobile_no_common) {
+        //     return redirect('medical-account')->with('error', 'Mobile number already exist');
+        // }
+
+        
         // dd($request);
 
         $commonData = [];

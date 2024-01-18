@@ -19,7 +19,7 @@ use App\Models\MedicalProviderSystemUser;
 use App\Models\AddNewAcommodition;
 use APP\Models\VehicleBrand;
 use App\Models\CustomerPaymentDetails;
-
+use App\Models\MedicalProviderRegistrater;
 
 class SalesController extends BaseController{
 
@@ -167,7 +167,7 @@ class SalesController extends BaseController{
 
         // $provider_id = 1;
 
-        $caseManagers = MedicalProviderSystemUser::where('status', 'active')->where('medical_provider_id', $provider_id)->select('id', 'name')->get();
+        $caseManagers =MedicalProviderRegistrater::where('status', 'active')->where('created_by', $provider_id)->select('id','company_name')->get();
 
         if (!empty($caseManagers)) {
             return response()->json([
@@ -216,7 +216,7 @@ class SalesController extends BaseController{
             'treatment_name' => !empty($package_details->package->package_name) ? $package_details->package->package_name : '',
             'treatment_period' => !empty($package_details->package->treatment_period_in_days) ? $package_details->package->treatment_period_in_days : '',
             'case_manger_id' => !empty($case_manager->id) ? $case_manager->id : '',
-            'case_manger_name' => !empty($case_manager->name) ? $case_manager->name : '',
+            'case_manger_name' => !empty($case_manager->company_name) ? $case_manager->company_name : '',
             'hotel_id' => !empty($hotel->id) ? $hotel->id : '',
             'hotel_name' => !empty($hotel->hotel_name) ? $hotel->hotel_name : '',
             'hotel_address' => !empty($hotel->hotel_address) ? $hotel->hotel_address : '',

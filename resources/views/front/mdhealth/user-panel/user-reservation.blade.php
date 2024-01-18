@@ -182,12 +182,12 @@
 
     .user-res-p8 {
         color: #979797;
-        font-family: Campton;
-        font-size: 16px;
-
-        font-weight: 400;
-        line-height: normal;
-        letter-spacing: -0.64px;
+font-family: Campton;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -0.64px;
     }
 
     .user-res-p9 {
@@ -1089,7 +1089,7 @@
                 <div class="modal-body p-5">
                     <div class="acommodition-content">
                         <div class="mb-4">
-                            <h6 class="user-res-p10 mb-2">Cleanliness</h6>
+                            <h6 class="card-h1 mb-2">Cleanliness</h6>
                             <div class="reviewsStar">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -1099,7 +1099,7 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <h6 class="user-res-p10 mb-2">Comfort</h6>
+                            <h6 class="card-h1 mb-2">Comfort</h6>
                             <div class="reviewsStar">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -1110,7 +1110,7 @@
                             {{-- <h6 class="fsb-2 fw-500">Min 2022 Model</h6> --}}
                         </div>
                         <div class="mb-4">
-                            <h6 class="user-res-p10 mb-2">Food Quality</h6>
+                            <h6 class="card-h1 mb-2">Food Quality</h6>
                             <div class="reviewsStar">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -1120,7 +1120,7 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <h6 class="user-res-p10 mb-2">Behavior / Professionalism
+                            <h6 class="card-h1 mb-2">Behavior / Professionalism
                             </h6>
                             <div class="reviewsStar">
                                 <i class="fa fa-star"></i>
@@ -1132,7 +1132,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <h6 class="user-res-p10 mb-1">Do you recommend this
+                            <h6 class="card-h1 mb-1">Do you recommend this
                                 hotel?
                             </h6>
                             <div class="d-flex" style="gap: 9px;">
@@ -1209,7 +1209,7 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button class="user-res-btn4" data-bs-toggle="modal" data-bs-target="#hotelcompletedmodel2" data-bs-dismiss="modal">Submit</button>
+                            <button class="review-sub-btn" data-bs-toggle="modal" data-bs-target="#hotelcompletedmodel2" data-bs-dismiss="modal">Submit</button>
                         </div>
                     </div>
                 </div>

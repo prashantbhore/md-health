@@ -226,7 +226,7 @@ class PackageController extends Controller {
     }
 
     public function md_add_packages( Request $request ) {
-        // dd( 'hjdvhjv' );
+        // dd( $request);
         $token = Session::get( 'login_token' );
         // dd( $token );
         if ( empty( $request->id ) ) {

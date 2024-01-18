@@ -28,59 +28,67 @@
 
 @extends('front.layout.layout')
 @section('content')
-    <div class="bg-f6">
-        <div class="content-wrapper bg-f6">
-            <!-- =============================================================================================================
-                                                                        1 : BANNER SECTION
-                     ============================================================================================================= -->
-            <div class="banner-section">
-                <div class="container">
-                    <div class="banner-content df-center flex-column pt-150px pb-100px">
-                        <h6>A NEW APPROACH IN MODERN TREATMENT</h6>
-                        <h2 class="mb-0">PLAN YOUR TREATMENT</h2>
-                        <h1 class="mt-0">NOW</h1>
-                    </div>
-                    <div>
-                        <form method="POST" action="{{ url('health-search-result') }}" class="w-100">
-                            @csrf
-                            <!-- SEARCH TREATMENT BAR -->
-                            <div class="search-bar d-flex align-items-center p-3">
-                                <!-- Treatments -->
-                                <div class="form-floating pe-3">
-                                    <input type="hidden" name="platform_type" value="web">
-                                    <select class="form-select" name="treatment_name" id="floatingSelect"
-                                        aria-label="Floating label select example">
-                                        <option value="">Select Treatment</option>
-                                        @foreach ($treatment_plans as $treatment_plan)
-                                            <option>{{ $treatment_plan->product_category_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingSelect">Treatments</label>
-                                </div>
-                                <!-- City -->
-                                <div class="form-floating">
-                                    <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect"
-                                        aria-label="Floating label select example">
-                                        <option data-display="Select" selected>Select City</option>
-                                        @foreach ($cities as $city)
-                                            <option>{{ $city->city_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingSelect">City</label>
-                                </div>
-                                <!-- Treatment Date -->
-                                <div class="form-floating pe-3">
-                                    <input type="text" class="form-select bod-n-3" style="background-image: none;"
-                                        name="daterange" value="" />
-                                    <label for="floatingSelect">Treatment Date</label>
-                                </div>
-                                <button type="submit" class="btn btn-search-pill">Search</button>
+
+<div class="bg-f6">
+    <div class="content-wrapper bg-f6">
+        <!-- =============================================================================================================
+                                                                1 : BANNER SECTION
+             ============================================================================================================= -->
+        <div class="banner-section">
+            <div class="container">
+                <div class="banner-content df-center flex-column pt-150px pb-100px">
+                    <h6>A NEW APPROACH IN MODERN TREATMENT</h6>
+                    <h2 class="mb-0">PLAN YOUR TREATMENT</h2>
+                    <h1 class="mt-0">NOW</h1>
+                </div>
+                <div>
+                    <form method="POST" action="{{ url('health-search-result') }}" class="w-100">
+                        @csrf
+                        <!-- SEARCH TREATMENT BAR -->
+                        <div class="search-bar d-flex align-items-center p-3">
+                            <!-- Treatments -->
+                            <div class="form-floating pe-3 position-relative">
+                                <img src="{{ 'front/assets/img/Icon-treatment.png' }}" alt="" class="mx-2 pill-calender">
+                                <input type="hidden" name="platform_type" value="web">
+                                <select class="form-select" style="padding-left:35px" name="treatment_name" id="floatingSelect" aria-label="Floating label select example">
+                                    <option value="">Select Treatment</option>
+                                    @foreach ($treatment_plans as $treatment_plan)
+                                    <option>{{ $treatment_plan->product_category_name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="floatingSelect">Treatments</label>
                             </div>
-                            <!-- END -->
-                        </form>
-                    </div>
+                            <!-- City -->
+                            <div class="form-floating">
+                                <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect" aria-label="Floating label select example">
+                                    <option data-display="Select" selected>Select City</option>
+                                    @foreach ($cities as $city)
+                                    <option>{{ $city->city_name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="floatingSelect">City</label>
+                            </div>
+                            <!-- Treatment Date -->
+                            <!-- <div class="border booking-box-h no-border-left form-floating pe-3">
+                                    <div id="reportrange" class="date-range-picker-div d-flex justify-content-center align-items-center h-100 " name="daterange">
+                                        <input type="text" name="hoteldaterange" class="form-control fsb-1 fw-500 m-0 p-0 border-0" value="" />
+                                        <span></span>
+                                    </div>
+                                    <label for="floatingSelect">Treatment Date</label>
+
+                                </div> -->
+                            <div class="form-floating pe-3 position-relative">
+                                 <input type="text" class="form-select bod-n-3" style="background-image: none;padding-left:32px" name="daterange" value="" />
+                                <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
+                                <label for="floatingSelect">Treatment Date</label>
+                            </div>
+                            <button type="submit" class="btn btn-search-pill">Search</button>
+                        </div>
+                        <!-- END -->
+                    </form>
                 </div>
             </div>
+        </div>
 
             <!-- =============================================================================================================
                                                                         2 : MAKE REQUEST FORM

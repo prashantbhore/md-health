@@ -237,7 +237,7 @@ class UserRegistrationController extends Controller {
         ->orderBy( 'city_name' )
         ->select( 'id', 'city_name' )
         ->get();
-
+// dd($customer_list);
         if ( !empty( $customer_list ) ) {
 
             return view( 'front.mdhealth.user-panel.user-profile', compact( 'customer_list', 'countries', 'cities' ) );
@@ -249,6 +249,29 @@ class UserRegistrationController extends Controller {
     }
 
     public function update_customer_profile( Request $request ) {
+
+    //    $email_exist=CustomerRegistration::where('status','active')
+    //     ->where('email',$request->email)
+    //     ->first();
+
+    //     $email_exist_common = CommonUserLoginTable::where('status', 'active')
+    //     ->where('email', $request->email)
+    //     ->first();
+
+    //     if($email_exist || $email_exist_common){
+    //         return redirect('/my-profile')->with('error', 'Email address already exist');
+    //     }
+
+    //     $mobile_no= CustomerRegistration::where('status', 'active')
+    //     ->where('mobile_no', $request->phone)
+    //     ->first();
+    //     $mobile_no_common = CommonUserLoginTable::where('status', 'active')
+    //     ->where('mobile_no', $request->phone)
+    //     ->first();
+
+    //     if ($mobile_no || $mobile_no_common) {
+    //         return redirect('/my-profile')->with('error', 'Mobile number already exist');
+    //     }
 
         $customer_input = [];
         $customer_input[ 'first_name' ] = $request->first_name;

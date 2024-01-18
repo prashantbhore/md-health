@@ -114,21 +114,19 @@
                         <div class="transaction-list">
                             @if($payment_list)
                             @foreach ($payment_list as $payment)
-
-
-                            <div class="treatment-card df-start w-100 mb-3">
-                                <div class="row card-row align-items-center">
-                                    <div class="col-md-2 df-center px-0">
-                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" style="width: auto;height: 75px;">
-                                    </div>
-                                    <div class="col-md-6 justify-content-start ps-0">
+                            <div class="card shadow-none mb-4 pkgCard">
+                                <div class="card-body d-flex align-items-center gap-3 w-100 p-4">
+                                       <div class="df-center">
+                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" class="md-img-sm">
+                               </div>
+                                    <div class="df-coloumn">
                                         <div class="trmt-card-body">
-                                            <h5 class="dashboard-card-title">Payment ID: #{{!empty($payment['payment_id'])?$payment['payment_id']:''}}</h5>
-                                            <h5 class="mb-0 fw-500">{{!empty($payment['amount'])?$payment['amount']:''}} <span class="lira">₺</span></h5>
+                                            <h5 class="mb-0 fs-13">Payment ID: #{{!empty($payment['payment_id'])?$payment['payment_id']:''}}</h5>
+                                            <h6 class="my-0 card-h1">{{!empty($payment['amount'])?$payment['amount']:''}} <span class="lira">₺</span></h6>
                                         </div>
                                     </div>
                                     @if($payment['payment_status']=='pending')
-                                    <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                    <div class="d-flex align-items-center gap-3 mb-3 ms-auto">
                                         <div class="trmt-card-footer">
                                             <span class="in-progress">Pending</span>
                                         </div>
@@ -137,7 +135,7 @@
 
 
                                     @if($payment['payment_status']=='completed')
-                                    <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                    <div class="d-flex align-items-center gap-3 mb-3 ms-auto">
                                         <div class="trmt-card-footer">
                                             <span class="active">Completed</span>
                                         </div>
@@ -145,7 +143,7 @@
                                     @endif
 
                                 </div>
-                            </div>
+                            
 
                             @endforeach
                             @endif

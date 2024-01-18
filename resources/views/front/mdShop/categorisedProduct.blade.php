@@ -32,7 +32,7 @@
                     </div>
                 </div> --}}
                 <!-- Nav pills -->
-                <ul class="nav nav-pills bg-f6">
+                {{-- <ul class="nav nav-pills bg-f6">
                     <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="pill" href="#allProducts">All Products</a>
                     </li>
@@ -43,7 +43,12 @@
                         <a class="nav-link" disabled style="color: #8a8a8a;">Posts <span class="smallFont">(Coming
                                 Soon)</span></a>
                     </li>
-                </ul>
+                </ul> --}}
+                <div class="page-bradcrumb mb-5">
+                    <a href="{{ URL('mdShop') }}">Home Page</a> >
+                    <a href="#">Category</a> >
+                    {{-- <a href="#">Product Name</a> --}}
+                </div>
 
                 <!-- Tab panes -->
                 <div>
