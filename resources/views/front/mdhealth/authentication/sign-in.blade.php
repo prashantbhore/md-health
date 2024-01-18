@@ -97,6 +97,7 @@
                                 <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
                                 
                         </div>
+                        <div id="errorMessage" class="text-danger d-none"></div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-3">
                     <button class="btn btn-md btn-text w-75 mb-3" id="verifyBtn" type="button" onclick="verify()"
@@ -356,8 +357,12 @@
         }
 
         function isValidCode(code) {
-            return (code.length === 6);
-        }
+        return (code.length === 6);
+    }
+
+    function showErrorMessage(message) {
+        $('#errorMessage').removeClass('d-none').text(message);
+    }
         // $('#verifyBtn').attr('disabled', true);
         // $('#verifyBtn').html('<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
         function verify(e) {
@@ -369,9 +374,9 @@
             var code6 = $("#ot6").val();
             var code = code1 + code2 + code3 + code4 + code5 + code6;
             if (!isValidCode(code)) {
-                alert('Invalid OTP code. Please enter the correct code.');
-                return;
-            }
+            showErrorMessage('Please enter the correct code.');
+            return;
+        }
             coderesult.confirm(code)
                 .then(function(result) {
 
