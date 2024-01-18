@@ -190,23 +190,13 @@
                             <input type="hidden" name="password" value="{{ session('password') }}" />
                             <input type="hidden" name="login_type"
                                 value="{{ session('login_type') ? session('login_type') : '' }}" />
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1"
-                                oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)"
-                                class="form-control" />
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2"
-                                oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)"
-                                class="form-control" />
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3"
-                                oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)"
-                                class="form-control" />
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4"
-                                oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)"
-                                class="form-control" />
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5"
-                                oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)"
-                                class="form-control" />
-                            <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6"
-                                onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
+                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
+                                
                         </div>
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()"
@@ -214,9 +204,15 @@
                         </div>
                     </form>
                     <script>
-                        function moveToNext(current, nextId) {
-                            if (current.value.length === current.maxLength) {
+                        function handleInput(current, nextId) {
+                            if (current.value.length === current.maxLength && nextId) {
                                 document.getElementById(nextId).focus();
+                            }
+                        }
+                    
+                        function handleBackspace(event, currentId) {
+                            if (event.code === 'Backspace' && event.target.value.length === 0 && currentId) {
+                                document.getElementById(currentId).focus();
                             }
                         }
                     </script>
