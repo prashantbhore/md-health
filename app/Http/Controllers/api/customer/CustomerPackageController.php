@@ -1374,7 +1374,7 @@ class CustomerPackageController extends BaseController
                         $payment_details_pending = [
                             'payment_percentage' => $request->package_percentage_price,
                             'paid_amount' => $request->pending_amount,
-                            'payment_status' => 'completed',
+                            // 'payment_status' => 'completed',
                             'pending_payment' => 0 // Assuming no pending amount for completed status
                         ];
 
@@ -1590,7 +1590,7 @@ class CustomerPackageController extends BaseController
                         $payment_details_pending = [
                             'payment_percentage' => $request->package_percentage_price,
                             'paid_amount' => $request->pending_amount,
-                            'payment_status' => 'completed',
+                            // 'payment_status' => 'completed',
                             'pending_payment' => 0 // Assuming no pending amount for completed status
                         ];
 
