@@ -21,7 +21,7 @@ class PaymentController extends BaseController{
     public function add_provider_account(Request $request){
        
         $validator = Validator::make($request->all(), [
-            'account_number' => 'required|string|min:10|max:20',
+            'account_number' => 'required|string|min:10|max:34',
             'bank_name' => 'required|string|min:2|max:50',
         ], [
             'account_number.required' => 'The account number is required.',
@@ -154,11 +154,11 @@ class PaymentController extends BaseController{
     
 
 
-    public function search_transactions(Request $request) {
+    public function search_transactions(Request $request){
 
-        //$provider_id=Auth::user()->id;
+        $provider_id=Auth::user()->id;
 
-        $provider_id = 1; // Replace this with the actual provider ID
+       // $provider_id = Auth; // Replace this with the actual provider ID
     
         $validator = Validator::make($request->all(), [
             'search_query' => 'required|string|min:2', // Add validation rules for the search query
@@ -171,6 +171,8 @@ class PaymentController extends BaseController{
         }
     
         $search_query = $request->search_query;
+
+        //return  $search_query;
     
         $customer_transaction_details = CustomerPaymentDetails::where('status', 'active')
             ->where('provider_id', $provider_id)
@@ -181,17 +183,17 @@ class PaymentController extends BaseController{
             ->with('provider_logo')
             ->get();
     
-        if ($customer_transaction_details->isNotEmpty()) {
+        if ($customer_transaction_details->isNotEmpty()){
             $order_details = [];
     
-            foreach ($customer_transaction_details as $transaction) {
+            foreach ($customer_transaction_details as $transaction){
                 $order_id = !empty($transaction->order_id) ? $transaction->order_id : '';
                 $provider_logo = !empty($transaction->provider_logo->company_logo_image_path) ? url(Storage::url($transaction->provider_logo->company_logo_image_path)) : '';
     
                 $completed_payments = !empty($transaction->paid_amount) ? $transaction->paid_amount : 0;
                 $pending_payments = !empty($transaction->pending_payment) ? $transaction->pending_payment : 0;
     
-                if (!isset($order_details[$transaction->id])) {
+                if (!isset($order_details[$transaction->id])){
                     $order_details[$transaction->id] = [
                         'transaction_id' => $transaction->id,
                         'order_id' => $order_id,

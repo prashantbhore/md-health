@@ -307,6 +307,7 @@ class CustomerPackageController extends BaseController
                 "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
                 "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
                 "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
+                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price: '',
 
 
                 "city_name" => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',

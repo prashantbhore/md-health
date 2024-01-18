@@ -1,6 +1,8 @@
 @extends('front.layout.layout2')
 @section('content')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.css')}}">
 <style>
     .form-control::placeholder {
         font-family: "Campton";
@@ -140,10 +142,22 @@
                                     <input type="text" name="mobile_no" value="{{ $medical_provider_list->mobile_no }}" class="form-control" id="foodname" aria-describedby="foodname" placeholder="+90">
                                 </div>
 
-                                <div class="form-group mb-4">
+                                {{-- <div class="form-group mb-4">
                                     <label class="form-label mb-3">Company Overview</label>
                                     <textarea class="form-control" name="company_overview" value="" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
+
+                                   
+                                </div> --}}
+
+
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Company Overview</label>
+                                    <textarea class="form-control summernote summernote-1" name="company_overview" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
                                 </div>
+
+                               
+                                   
+                                 
 
                                 <div class="multiple-upload-images">
                                     <h6 class="section-heading">Company Logo</h6>
@@ -243,6 +257,35 @@
 @endsection
 
 @section('script')
+{{-- <script>
+    $(document).ready(function() {
+        $('#company_overview').summernote({
+            height: 150 
+        });
+    });
+</script> --}}
+
+<script src="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        $('.summernote-1').summernote({
+            height: 200,
+        }).on('summernote.keyup', function() {
+            var text = $(".summernote-1").summernote("code").replace(/&nbsp;|<\/?[^>]+(>|$)/g, "").trim();
+            //alert(text);
+            if (text.length == 0) {
+                $('.section_1_description-error').show();
+            } else {
+                $('.section_1_description-error').hide();
+            }
+        });
+    });
+
+</script>
+
+
+
+
 <script>
     $(".mpAccountLi").addClass("activeClass");
     $(".mpAccount").addClass("md-active");
@@ -440,4 +483,7 @@
         }, "Spaces are not allowed");
     });
 </script>
+
+
+
 @endsection
