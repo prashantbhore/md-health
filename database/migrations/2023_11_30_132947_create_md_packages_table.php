@@ -41,6 +41,7 @@ return new class extends Migration
             $table->string('package_discount')->nullable();
             $table->string('package_price')->nullable();
             $table->string('sale_price')->nullable();
+            $table->enum('featured_product', ['yes','no'])->default('no');
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();

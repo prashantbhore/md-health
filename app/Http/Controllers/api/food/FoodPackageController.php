@@ -352,9 +352,11 @@ class FoodPackageController extends BaseController
 
     public function food_active_list()
     {
-        $FoodPackages=FoodPackages::where('status','active')
-        ->select('unique_id','package_name')
-        ->where('created_by',Auth::user()->id)
+        $FoodPackages=FoodPackages::where('md_food_packages.status','active')
+        ->select('md_food_packages.unique_id', 'md_food_packages.package_name', 'md_food_logo.company_logo_image_path', 'md_food_logo.company_logo_image_name','md_food_packages.status')
+        ->leftjoin('md_food_register', 'md_food_register.id', 'md_food_packages.created_by')
+        ->leftjoin('md_food_logo', 'md_food_logo.food_id', 'md_food_register.id')
+        ->where('md_food_packages.created_by',Auth::user()->id)
         ->get();
 
         if (!empty($FoodPackages)) {
@@ -373,9 +375,11 @@ class FoodPackageController extends BaseController
 
     public function food_deactive_list()
     {
-        $FoodPackages = FoodPackages::where('status', 'inactive')
-        ->select('unique_id', 'package_name')
-        ->where('created_by', Auth::user()->id)
+        $FoodPackages = FoodPackages::where('md_food_packages.status','inactive')
+        ->select('md_food_packages.unique_id', 'md_food_packages.package_name', 'md_food_logo.company_logo_image_path', 'md_food_logo.company_logo_image_name','md_food_packages.status')
+        ->leftjoin('md_food_register', 'md_food_register.id', 'md_food_packages.created_by')
+        ->leftjoin('md_food_logo', 'md_food_logo.food_id', 'md_food_register.id')
+        ->where('md_food_packages.created_by',Auth::user()->id)
         ->get();
 
         if (!empty($FoodPackages)) {
