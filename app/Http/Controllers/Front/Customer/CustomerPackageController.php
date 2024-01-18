@@ -850,6 +850,7 @@ class CustomerPackageController extends Controller
                 $provider_gallery[] = !empty($val->provider_image_path) ? url(Storage::url($val->provider_image_path)) : '';
             }
 
+
             $packageDetails = [
                 "id" => !empty($packages_view->id) ? $packages_view->id : '',
                 "package_unique_no" => !empty($packages_view->package_unique_no) ? $packages_view->package_unique_no : '',
@@ -864,7 +865,9 @@ class CustomerPackageController extends Controller
                 "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
                 "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
                 "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
+                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price: '',
 
+                "sale_price" => !empty($packages_view->sale_price) ? $packages_view->sale_price: '',
                 "city_name" => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
             ];
 
