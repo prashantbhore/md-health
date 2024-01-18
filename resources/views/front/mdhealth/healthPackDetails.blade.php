@@ -65,7 +65,7 @@
                             <div class="d-flex align-items-center gap-1">
                                 <img src="{{ 'front/assets/img/Diaganose.svg' }}" alt="">
                                 <p class="mb-0 lctn fst-italic">
-                                    {{ !empty($packageDetails['treatment_period_in_days']) ? extractNumericRange('Treatment Period ' . $packageDetails['treatment_period_in_days']) . ' Days' : '' }}
+                                    {{ !empty($packageDetails['treatment_period_in_days']) ? 'Treatment Period ' .extractNumericRange($packageDetails['treatment_period_in_days']) . ' Days' : '' }}
                                 </p>
                             </div>
                         </div>
