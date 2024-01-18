@@ -147,7 +147,6 @@ class VendorProductController extends BaseController
                         }
         
                     } else {
-                        // dd('22222');
                         return response()->json([
                             'status' => 404,
                             'message' => 'Product not found.',
@@ -155,7 +154,6 @@ class VendorProductController extends BaseController
                     }
                 } else {
                     // dd($request);
-                    // dd('33333');
                     // Add a new product
                     $storeProduct = VendorProduct::create($productData);
         
@@ -166,7 +164,6 @@ class VendorProductController extends BaseController
                     // dd($request);
                     if ($request->has('vendor_product_image_path')) {
                         if ($files = $request->file('vendor_product_image_path')) {
-                            // dd('4');
                             // $files=[];
                             foreach ($files as $file) {
                                 // dd($file);
@@ -185,7 +182,6 @@ class VendorProductController extends BaseController
                             }
                         }
                     }
-                    // dd('41');
         
                 }
         
@@ -259,15 +255,13 @@ class VendorProductController extends BaseController
                         }
         
                     } else {
-                        // dd('22222');
                         return response()->json([
                             'status' => 404,
                             'message' => 'Product not found.',
                         ]);
                     }
                 } else {
-                    // dd($request);
-                    // dd('33333');
+                    
                     // Add a new product
                     $storeProduct = VendorProduct::create($productData);
         
