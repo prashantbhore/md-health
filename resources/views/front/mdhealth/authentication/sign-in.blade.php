@@ -50,7 +50,7 @@
                         <span id="error" class="text-danger"></span>
                         <span id="success" class="text-success"></span>
                         <div class="pt-100px">
-                            <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup" style="height: 47px;">Continue...</button>
+                            <button class="btn btn-md btn-text w-100 mb-3 df-center" type="button" id="signup" style="height: 47px;">Continue</button>
                         </div>
                         <div class="text-center">
                             <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
