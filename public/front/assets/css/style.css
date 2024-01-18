@@ -58,8 +58,8 @@
     font-family: "CamptonBook";
 }
 
-.other-month > div,
-.gj-picker [role="week-days"] th > div,
+.other-month>div,
+.gj-picker [role="week-days"] th>div,
 .gj-picker-bootstrap table tr td div {
     font-family: CamptonBook;
     font-size: 12px;
@@ -130,7 +130,7 @@
 
 /* UTILITY CLASSES */
 .error {
-    color: #F31D1D !important; 
+    color: #F31D1D !important;
     font-family: "Campton";
     font-size: 14px !important;
     letter-spacing: -0.64px;
@@ -142,6 +142,9 @@
     font-weight: 600 !important;
 }
 
+.md-pad {
+    padding: .375rem .75rem !important;
+}
 .bod-3 {
     border-radius: 3px 0 0px 3px !important;
 }
@@ -323,9 +326,9 @@
     letter-spacing: -0.98px;
 }
 
-.form-floating > .form-control:focus ~ label,
-.form-floating > .form-control:not(:placeholder-shown) ~ label,
-.form-floating > .form-select ~ label {
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
     opacity: 1;
     transform: scale(1) translateY(-0.5rem);
 }
@@ -921,7 +924,7 @@ select {
 .form-control:focus,
 .textarea:focus,
 .form-select:focus,
-.btn-check:focus + .btn,
+.btn-check:focus+.btn,
 .btn:focus {
     box-shadow: none;
     /* border-color: #4cdb06; */
@@ -1310,6 +1313,7 @@ select {
     min-width: 100px;
     transition: 0.3s all;
 }
+
 .nav-tabs .nav-link:focus-visible {
     outline: unset;
 }
@@ -2361,7 +2365,7 @@ span.popup-msg.active {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.bar-graph > div {
+.bar-graph>div {
     border-radius: 3px 0 0 3px;
     background: #4cdb06;
     height: 30px;
@@ -2374,43 +2378,43 @@ span.popup-msg.active {
     font-weight: 700;
 }
 
-.bar-graph > div[data-pourcent="10"] {
+.bar-graph>div[data-pourcent="10"] {
     width: 10%;
 }
 
-.bar-graph > div[data-pourcent="20"] {
+.bar-graph>div[data-pourcent="20"] {
     width: 20%;
 }
 
-.bar-graph > div[data-pourcent="30"] {
+.bar-graph>div[data-pourcent="30"] {
     width: 30%;
 }
 
-.bar-graph > div[data-pourcent="40"] {
+.bar-graph>div[data-pourcent="40"] {
     width: 40%;
 }
 
-.bar-graph > div[data-pourcent="50"] {
+.bar-graph>div[data-pourcent="50"] {
     width: 50%;
 }
 
-.bar-graph > div[data-pourcent="60"] {
+.bar-graph>div[data-pourcent="60"] {
     width: 60%;
 }
 
-.bar-graph > div[data-pourcent="70"] {
+.bar-graph>div[data-pourcent="70"] {
     width: 70%;
 }
 
-.bar-graph > div[data-pourcent="80"] {
+.bar-graph>div[data-pourcent="80"] {
     width: 80%;
 }
 
-.bar-graph > div[data-pourcent="90"] {
+.bar-graph>div[data-pourcent="90"] {
     width: 90%;
 }
 
-.bar-graph > div[data-pourcent="100"] {
+.bar-graph>div[data-pourcent="100"] {
     width: 100%;
 }
 
@@ -3093,7 +3097,7 @@ span.popup-msg.active {
     cursor: pointer;
 }
 
-.price-range-slider .range-bar .ui-slider-handle + span {
+.price-range-slider .range-bar .ui-slider-handle+span {
     background: #4cdb06;
 }
 
@@ -3520,8 +3524,8 @@ span.popup-msg.active {
     font-family: "CamptonBook";
 }
 
-.other-month > div,
-.gj-picker [role="week-days"] th > div,
+.other-month>div,
+.gj-picker [role="week-days"] th>div,
 .gj-picker-bootstrap table tr td div {
     font-family: CamptonBook;
     font-size: 12px;
@@ -4388,6 +4392,7 @@ label.tc-text,
 hr:not([size]) {
     height: 0px !important;
 }
+
 .mdLtd {
     margin: 35px 0px;
 }
