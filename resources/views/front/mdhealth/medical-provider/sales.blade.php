@@ -52,14 +52,14 @@
                                     <input type="text" placeholder="Search" id="liveSearchInput">
                                 </div>
 
-                                <div class="list-div">
+                                {{-- <div class="list-div">
                                     <select name="" id="" class="form-select filter-list" >
                                         <option value="">List for date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
-
-                                </div>
+                                </div> --}}
+                                
                             </div>
 
                             <!-- Tab panes -->
