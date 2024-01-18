@@ -131,16 +131,19 @@
                             <div class="row gx-5 gy-4">
                                 @csrf
                                 <div class="col-md-12">
-                                    <label for="oldPassword" class="form-label">Password</label>
+                                    <label for="oldPassword" class="form-label">Old Password</label>
                                     <input type="text" class="form-control" placeholder="*********" name="oldPassword" id="oldPassword">
+                                    <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="newPassword" class="form-label">New Password</label>
                                     <input type="text" class="form-control" placeholder="*********" name="newPassword" id="newPassword">
+                                    <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="confirmPassword" class="form-label">Re-New Password</label>
                                     <input type="text" class="form-control" placeholder="*********" name="confirmPassword" id="confirmPassword">
+                                    <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn btn-md w-100 rounded btn-text" id="passchange" style="height: 48px;">Change Password</button>
@@ -320,18 +323,39 @@
         }, "Spaces are not allowed");
 
 
+        // $(function() {
+        //     $('input[name="date_of_birth"]').daterangepicker({
+        //         opens: 'left',
+        //         singleDatePicker: true,
+        //         showDropdowns: true,
+        //         locale: {
+        //             format: 'DD/MM/YYYY'
+        //         }
+        //         // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        //     }, function(start, end, label) {});
+        // });
         $(function() {
-            $('input[name="date_of_birth"]').daterangepicker({
-                opens: 'left',
-                singleDatePicker: true,
-                showDropdowns: true,
-                locale: {
-                    format: 'DD/MM/YYYY'
-                }
-                // $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-            }, function(start, end, label) {});
-        });
+    var dateOfBirth = "{{ $customer_list->date_of_birth ? $customer_list->date_of_birth : '' }}";
+
+    // Convert string to Date object
+    var startDate = dateOfBirth ? new Date(dateOfBirth) : null;
+
+    $('input[name="date_of_birth"]').daterangepicker({
+        opens: 'left',
+        singleDatePicker: true,
+        showDropdowns: true,
+        locale: {
+            format: 'DD-MMM-YYYY'
+        },
+        startDate: startDate // Set the initial date
+    }, function(start, end, label) {});
+});
 
     });
 </script>
+<script>
+   
+</script>
+
+
 @endsection

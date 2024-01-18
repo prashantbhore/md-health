@@ -118,7 +118,7 @@ class CustomerShopController extends BaseController
 
         }
 
-        if(Auth::user()->id){
+        if(!empty(Auth::user()->id)){
             $VendorProduct = VendorProduct::where('status', 'active')
                 ->select('vendor_id')
                 ->where('id', $request->id)

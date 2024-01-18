@@ -460,6 +460,7 @@ Route::view('sms-code', 'front/mdhealth/authentication/sms-code');
 // Route::post('md-register-medical-provider', [RegistrationController::class, 'md_register_medical_provider']);
 Route::controller(MedicalProviderRegistrationController::class)->group(function () {
     Route::get('user-account', 'index');
+    Route::post('md-city-list', 'get_cities_list');
     Route::get('medical-provider-login', 'indexmedpro');
     Route::get('vendor-login', 'vendor_login');
     Route::post('/md-register-medical-provider', 'md_register_medical_provider');

@@ -135,9 +135,9 @@
                                         <label for="city_id" class="form-label">*City</label>
                                         <select required name="city_id" id="city_id" class="form-select ">
                                             <option value="" selected disabled hidden>Choose</option>
-                                            @foreach ($cities as $city)
+                                            {{-- @foreach ($cities as $city)
                                             <option value="{{ $city->id }}">{{ $city->city_name }} </option>
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                     </div>
 
@@ -427,10 +427,20 @@
                 $("#successAuth").show();
                 $("#otpDiv").removeClass("d-none");
                 $("#regdiv").hide();
-            })
-            .catch(function(error) {
-                $("#error").text(error.message);
-                $("#error").show();
+                recaptchaVerifier.clear();
+                })
+                .catch(function(error) {
+                    $("#error").text(error.message);
+                    if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
+                        $("#error").text("Too many attempts try again later");
+                    }
+                    if (error.message == "TOO_SHORT") {
+                        $("#error").text("Mobile number short or missing country code");
+                    }
+                    //  else {
+
+                    // }
+                    $("#error").show();
             });
     }
 
@@ -542,7 +552,7 @@
                     $("#successAuth").show();
                     $("#otpDiv").removeClass("d-none");
                     $("#regdiv").hide();
-                    recaptchaVerifier.clear();
+                    
                 })
                 .catch(function(error) {
                     $("#error").text(error.message);
@@ -553,6 +563,48 @@
             $("#error").show();
         }
     }
+</script>
+<script>
+    $(document).ready(function() {
+        var base_url = $("#base_url").val();
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+        $('#country_id').change(function() {
+            var selectedCountryId = $(this).val();
+            // alert(selectedCountryId);
+            if (selectedCountryId) {
+                $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": csrfToken,
+                },
+            });
+                $.ajax({
+                    url: base_url+ '/md-city-list', // Replace with your route to fetch cities
+                    method: 'POST',
+                    data: {
+                        country_id: selectedCountryId
+                    },
+                    success: function(response) {
+                        // console.log(response);
+                        $('#city_id').empty();
+
+                        // Append new options based on the AJAX response
+                        $.each(response.data, function(index, city) {
+                            $('#city_id').append('<option value="' + city.id + '">' + city.city_name + '</option>');
+                        });
+
+                        // Show the city select
+                        $('#city_id').show();
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                // If no country is selected, hide and reset the city select
+                $('#city_id').hide().val('');
+            }
+        });
+    });
 </script>
 
 <script>
@@ -731,11 +783,11 @@
             rules: {
                 first_name: {
                     required: true,
-                    spaceValidation: true,
+                    // spaceValidation: true,
                 },
                 last_name: {
                     required: true,
-                    spaceValidation: true,
+                    // spaceValidation: true,
                 },
                 city_id: {
                     required: true,
@@ -781,11 +833,11 @@
             messages: {
                 first_name: {
                     required: "Please enter the first name.",
-                    spaceValidation: "Company name should not contain only spaces.",
+                    // spaceValidation: "Company name should not contain only spaces.",
                 },
                 last_name: {
                     required: "Please enter the last name.",
-                    spaceValidation: "Company name should not contain only spaces.",
+                    // spaceValidation: "Company name should not contain only spaces.",
                 },
                 city_id: {
                     required: "Please select a city.",
