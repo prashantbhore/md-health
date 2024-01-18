@@ -366,6 +366,30 @@
         $(targetTabId + ' .tab-content').append(packageElement.detach());
     }
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var toastMessage = sessionStorage.getItem('toastMessage');
+    var toastType = sessionStorage.getItem('toastType');
+
+    if (toastMessage && toastType) {
+        toastr.options = {
+            "positionClass": "toast-bottom-right",
+            "timeOut": "5000",
+        };
+
+        if (toastType === 'success') {
+            toastr.success(toastMessage);
+        } else {
+            toastr.error(toastMessage);
+        }
+
+        // Clear the stored notification details
+        sessionStorage.removeItem('toastMessage');
+        sessionStorage.removeItem('toastType');
+    }
+});
+
+</script>
 
 {{-- <script>
     $(document).ready(function() {

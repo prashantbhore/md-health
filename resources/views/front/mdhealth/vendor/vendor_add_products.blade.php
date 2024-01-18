@@ -19,8 +19,8 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                <form action="{{ url('/add-vendor-product') }}" method="post" id="add_product_vender"
-                                    enctype="multipart/form-data">
+                                {{-- action="{{ url('/add-vendor-product') }}" method="post" --}}
+                                <form id="add_product_vender" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id"
                                         value="{{ !empty($product_list['id']) ? $product_list['id'] : '' }}">
@@ -108,7 +108,7 @@
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="free_shipping"
-                                                {{ !empty($product_list['free_shipping'])&&($product_list['free_shipping']=='yes') ? 'checked' : false }}
+                                                {{ !empty($product_list['free_shipping']) && $product_list['free_shipping'] == 'yes' ? 'checked' : false }}
                                                 name="free_shipping">
                                             <label class="form-check-label fw-700" for="free_shipping">Free Shipping</label>
                                         </div>
@@ -149,10 +149,10 @@
                                     </div>
 
                                     <div class="section-btns mb-3">
-                                        <button class="green-plate bg-green text-dark fw-700" name="button_type"
-                                            value="active">Product Active</button>
-                                        <button class="black-plate bg-black text-white fw-700" name="button_type"
-                                            value="inactive">Product Inactive</button>
+                                        <button class="green-plate bg-green text-dark fw-700 submitform"
+                                            name="button_type" value="active">Product Active</button>
+                                        <button class="black-plate bg-black text-white fw-700 submitform"
+                                            name="button_type" value="inactive">Product Inactive</button>
                                     </div>
 
                                 </form>
@@ -173,7 +173,55 @@
         $(".mpProductsLi").addClass("activeClass");
         $(".mpProducts").addClass("md-active");
     </script>
+    <script>
+        //         $('#add_product_vender').submit(function(e){
+        // e.preventDefault();
+        //         })
+        $('.submitform').on('click', function() {
+            var button = $(this).val()
+            var form = document.getElementById("add_product_vender");
+            var formData = new FormData(form);
+            var base_url = $('#base_url').val();
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
+            formData.append('button_type', button);
+            // var files = $('#vendor_product_image_path')[0].files;
+            // for (var i = 0; i < files.length; i++) {
+            //     formData.append('vendor_product_image_path[]', files[i]);
+            // }
 
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+            $.ajax({
+                url: base_url + '/api/add-vendor-product',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'Authorization': 'Bearer ' + bearer_token,
+                    'X-CSRF-TOKEN': token,
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.status == 200) {
+                        sessionStorage.setItem('toastMessage', response.message);
+                        sessionStorage.setItem('toastType', 'success');
+                    } else {
+                        sessionStorage.setItem('toastMessage', response.message);
+                        sessionStorage.setItem('toastType', 'error');
+                    }
+
+                    window.location.href = base_url + '/vendor-products';
+
+                },
+                error: function(error) {
+                    console.error('Upload error:', error);
+                }
+            });
+        });
+    </script>
     <script>
         function categoryselect(value) {
             var base_url = $('#base_url').val();
@@ -320,7 +368,7 @@
     <script>
         $(document).ready(function() {
             // Initialize the form validation
-            $("#add_product_vender").validate({
+            $("#add_product_venders").validate({
                 rules: {
                     product_name: {
                         required: true,
@@ -378,6 +426,7 @@
                 },
 
                 submitHandler: function(form) {
+
                     // Your custom submit logic here, if needed
                     form.submit();
                 }

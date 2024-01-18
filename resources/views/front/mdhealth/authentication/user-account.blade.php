@@ -46,17 +46,23 @@
     left: 16px;
 }
 
+.daterangepicker,
+.daterangepicker .calendar-table {
+    background: #f6f6f6;
+    background-color: #f6f6f6;
+}
+
 </style>
 <div class="position-relative">
 <div class="content-wrapper" id="regdiv">
-    <div class="container text-center my-5 authentication pt-3">
+    <div class="container text-center my-4 authentication pt-3">
         <div class="w-100 position-relative" style="margin-bottom:2rem;">
             <h3 class="text-center form-heading">Select Account Type</h3>
             <h1 class="my-0 form-heading p-abs">Go Super Admin Panel</h1>
         </div>
 
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <ul class="nav nav-tabs mb-5" id="myTab" role="tablist">
             <li class="nav-item">
                 <a href="{{ url('user-account') }}" class="nav-link active">User</a>
             </li>
@@ -80,7 +86,7 @@
         <div class="tab-content position-relative" id="myTabContent">
             <div class="login-form pb-100px" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
                 <div class="row">
-                    <div class="col-md-6 col-lg-6 col-xl-6 bod-right  pt-4">
+                    <div class="col-md-6 col-lg-6 col-xl-6 bod-right   pt-4">
                         <!-- Form Heading -->
                         <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                             <a href="{{ url('/') }}">
@@ -94,22 +100,22 @@
                                 {{-- action="{{ url('/md-customer-register') }}" method="post" --}}
                                 <input type="hidden" name="platform_type" value="web" />
                                 <input type="hidden" name="user_type" value="customer" />
-                                <div class="row ">
-                                    <div class="col-md-6 mb-3">
+                                <div class="row gy-4">
+                                    <div class="col-md-6">
                                         <label for="firstName" class="form-label">*First Name</label>
                                         <input type="text" class="form-control " name="first_name" id="first_name" placeholder="First Name" />
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6">
                                         <label for="lastName" class="form-label">*Last Name</label>
                                         <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Last Name" />
                                     </div>
-                                    <div class="col-md-6 mb-3 position-relative">
+                                    <div class="col-md-6 position-relative">
                                         <label for="dob" class="form-label">*Date of Birth</label>
                                         <input class="form-control dobj" style="padding-left:32px;" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" />
                                         <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
 
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6">
                                         <label for="gender" class="form-label">*Gender</label>
                                         <select required name="gender" id="gender" class="form-select ">
                                             <option value="" selected disabled>Choose</option>
@@ -118,17 +124,15 @@
                                             <option value="Prefer not to say">Prefer not to say</option>
                                         </select>
                                     </div>
-
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12">
                                         <label for="email" class="form-label">*E-mail</label>
                                         <input type="text" class="form-control " name="email" id="email" placeholder="E-mail" autocomplete="off" />
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12">
                                         <label for="phone" class="form-label">*Phone</label>
                                         <input type="text" class="form-control " name="phone" id="phone" placeholder="Phone" />
                                     </div>
-
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6">
                                         <label for="country_id" class="form-label">*Country</label>
                                         <select required name="country_id" id="country_id" class="form-select ">
                                             <option value="" selected disabled>Choose</option>
@@ -137,7 +141,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6">
                                         <label for="city_id" class="form-label">*City</label>
                                         <select required name="city_id" id="city_id" class="form-select ">
                                             <option value="" selected disabled hidden>Choose</option>
@@ -146,26 +150,25 @@
                                             @endforeach --}}
                                         </select>
                                     </div>
-
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12">
                                         <label for="address" class="form-label">*Address</label>
                                         <textarea name="address" id="address" cols="" rows="5" class="form-control camptonBook " placeholder="Enter Address"></textarea>
                                     </div>
-                                    <div class="col-md-12 mb-3 position-relative">
+                                    <div class="col-md-12 position-relative">
                                         <div class="hide-eye-div">
                                             <label for="password" class="form-label">*Password</label>
                                             <input type="password" name="password" class="form-control " id="password" placeholder="Minimum 8 characters" />
                                             <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-5 position-relative">
+                                    <div class="col-md-12 position-relative">
                                         <div class="hide-eye-div">
                                             <label for="re-password" class="form-label">*Re-Password</label>
                                             <input type="password" name="repassword" class="form-control " id="repassword" placeholder="Minimum 8 characters" />
                                             <span toggle="#repassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-3 ">
+                                    <div class="col-md-12">
                                         <div class="form-check tc">
                                             <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
                                             <label class="form-check-label" for="UserflexCheckDefault">
@@ -230,21 +233,27 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" /> --}}
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="moveToNext(this, 'ot2')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="moveToNext(this, 'ot3')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="moveToNext(this, 'ot4')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="moveToNext(this, 'ot5')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="moveToNext(this, 'ot6')" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
-                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
-                    </div>
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
+                        </div>
                     <div class="d-flex justify-content-center">
                         <button class="btn btn-md btn-text w-75 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
                     </div>
                 </form>
                 <script>
-                    function moveToNext(current, nextId) {
-                        if (current.value.length === current.maxLength) {
+                    function handleInput(current, nextId) {
+                        if (current.value.length === current.maxLength && nextId) {
                             document.getElementById(nextId).focus();
+                        }
+                    }
+                
+                    function handleBackspace(event, currentId) {
+                        if (event.code === 'Backspace' && event.target.value.length === 0 && currentId) {
+                            document.getElementById(currentId).focus();
                         }
                     }
                 </script>
@@ -559,6 +568,7 @@
                     $("#successAuth").show();
                     $("#otpDiv").removeClass("d-none");
                     $("#regdiv").hide();
+                    $('#recaptcha-container').hide();
                     
                 })
                 .catch(function(error) {

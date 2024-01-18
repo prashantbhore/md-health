@@ -175,9 +175,7 @@
                                 <input type="hidden" name="card_number" id="card_number" value="">
                                 <input type="hidden" name="cvv" id="cvv" value="">
                                 <input type="hidden" name="validity" id="validity" value="">
-                                {{-- <input type="hidden" id="package_id" value="{{ $id }}"> --}}
-                                {{-- </form>
-                            <form action="" id="creditCardForm"> --}}
+
                                 <div class="mb-3">
                                     <input type="text" name="input1" class="form-control" id="input1"
                                         placeholder="Card Holder Name">
@@ -186,26 +184,26 @@
                                     </h5>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="number" name="input2" class="form-control" id="input2"
-                                        placeholder="Card Number">
+                                    <input type="text" onkeypress="return /[0-9 ]/i.test(event.key)" name="input2"
+                                        class="form-control" id="input2" placeholder="Card Number">
                                     <h5 id="verifyinput2" class="mt-4" style="color: red;">
                                         Please Enter Card Number
                                     </h5>
                                 </div>
                                 <div class="d-flex gap-2 mb-4">
+                                    <input type="text" id="input4" name="input4" class="form-control w-50"
+                                        placeholder="00/00">
                                     <input type="password" id="input3" name="input3" class="form-control w-50"
                                         placeholder="CVV">
 
-                                    <input type="text" id="input4" name="input4" class="form-control w-50"
-                                        placeholder="00/00">
-
                                 </div>
                                 <div class="d-flex gap-2 mb-4">
-                                    <h5 id="verifyinput3" class="mt-0" style="color: red;">
-                                       Please Enter CVV
-                                    </h5>
+
                                     <h5 id="verifyinput4" class="mt-0" style="color: red;">
-                                       Please Enter Expiry Date
+                                        Please Enter Expiry Date
+                                    </h5>
+                                    <h5 id="verifyinput3" class="mt-0" style="color: red;">
+                                        Please Enter CVV
                                     </h5>
                                 </div>
                                 <!-- <a href="{{ url('payment-status') }}"> -->
@@ -394,7 +392,7 @@
                         // $(this).val(formattedCardNumber);
                         // alert(formattedCardNumber);
                         // Update the paragraph content
-                        // $('#input2').val(formattedCardNumber);
+                        $('#input2').val(formattedCardNumber);
                         $('.cardNumber').text(formattedCardNumber);
 
                         console.log('Card Type:', cardType2);
@@ -421,7 +419,7 @@
                 }
             });
 
-            $('.purchaseBtn').click(function() {
+            $('.purchaseBtn').click(function(event) {
                 // makePurchase();
                 $('card_name').val($('#input1').val());
                 $('card_number').val($('#input2').val());
@@ -465,23 +463,42 @@
                     }));
                 });
 
-                validateCardName();
-                validateCardNumber();
-                validateCardCvv();
-                validateCardValidity();
-                if (
-                    input1Error == true &&
-                    input12Error == true &&
-                    input3Error == true &&
-                    input4Error == true
-                ) {
-                    return true;
-                } else {
-                    return false;
+                event.preventDefault();
+
+                // Reset previous error messages
+                $("h5[id^='verify']").hide();
+
+                // Validate Card Holder Name
+                var input1 = $("#input1").val().trim();
+                if (input1 === "") {
+                    $("#verifyinput1").show();
+                    return;
                 }
 
+                // Validate Card Number
+                var input2 = $("#input2").val().trim();
+                if (input2 === "") {
+                    $("#verifyinput2").show();
+                    return;
+                }
+
+                // Validate CVV
+                var input3 = $("#input3").val().trim();
+                if (input3.length < 1 || input3.length > 3) {
+                    $("#verifyinput3").show();
+                    return;
+                }
+
+                // Validate Expiry Date
+                var input4 = $("#input4").val().trim();
+                if (input4 === "") {
+                    $("#verifyinput4").show();
+                    return;
+                }
+
+                // If all validations pass, submit the form
+                $("#procced_to_pay_form").submit();
                 // Submit the form
-                form.submit();
             })
 
             $('#purchase_by_coins').click(function() {
@@ -609,37 +626,75 @@
                         $('.treatment_price').append(treatmentPriceHtml);
 
                         otherServices.forEach(function(service) {
-                            otherServicesHtml += '<div class="packageResult rounded mb-3">'
+
+                            otherServicesHtml += '<div class="card purchase-details-card">'
                             otherServicesHtml +=
-                                '<div class="flex-grow-1 d-flex align-items-center gap-2">'
-                            otherServicesHtml += '<label class="">'
-                            otherServicesHtml += '<input id=' + service.title +
-                                ' type="checkbox" name="checkbox" checked />'
+                                ' <div class="card-body d-flex flex-column justify-content-center">'
+                            otherServicesHtml += '<div class="row">'
+                            otherServicesHtml += '<div class="col-md-9">'
+                            otherServicesHtml += '<div class="form-check df-start">'
+                            otherServicesHtml +=
+                                '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">'
+                            otherServicesHtml += '<div class="d-flex flex-column gap-1">'
+                            otherServicesHtml +=
+                                '<label class="form-check-label card-h4 ms-3 mb-0" for="flexCheckDefault">'
+                            otherServicesHtml += service.title
                             otherServicesHtml += '</label>'
-                            otherServicesHtml += '<div class="flex-grow-1">'
+                            //  otherServicesHtml +=  ' <label class="form-check-label card-p1 ms-3 mb-0" for="flexCheckDefault">'
+                            // otherServicesHtml +=   ' 3 Stars Hotel'
+                            // otherServicesHtml +=        '</label>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += '</div>'
+                            otherServicesHtml += ' <div class="col-md-3 ">'
+                            otherServicesHtml += '<div class="df-end">'
                             otherServicesHtml +=
-                                '<div class="d-flex gap-2 justify-content-between align-items-center">'
-                            otherServicesHtml += '<p class="mb-0 fs-5 camptonBold lh-base">' +
-                                service.title + '</p>'
+                                '<div class="d-flex align-items-start flex-column">'
                             otherServicesHtml +=
-                                '<p class="mb-0 fs-6 camptonBold text-green">Per Night Price</p>'
+                                '<h5 class="t_price mb-0 text-start">Per Night Price</h5>'
+                            otherServicesHtml += '<h5 class="card-h4 mt-0">' + numberToDiscount(
+                                    parseInt(purchaseDetails.package_discount), service.price) +
+                                '<span class="lira">₺</span> <span class="card-h1">*(' + service
+                                .price + ' <span class="lira">₺</span> ) </span></h5>'
                             otherServicesHtml += '</div>'
-                            otherServicesHtml +=
-                                '<div class="d-flex gap-5 justify-content-between">'
-                            otherServicesHtml += '<div class="d-flex align-items-center gap-2">'
-                            // otherServicesHtml += '<p class="mb-0 lctn">3 Stars Hotel</p>'
+                            otherServicesHtml += ' </div>'
                             otherServicesHtml += '</div>'
-                            otherServicesHtml +=
-                                '<p class="mb-0 fs-5 camptonBold lh-base other-service-price">' +
-                                numberToDiscount(
-                                    parseInt(purchaseDetails.package_discount),
-                                    service.price) + ' ₺ <span class="smallFont">(' + service
-                                .price +
-                                '₺)</span></p>'
+
                             otherServicesHtml += '</div>'
                             otherServicesHtml += '</div>'
                             otherServicesHtml += '</div>'
-                            otherServicesHtml += '</div>'
+
+                            // otherServicesHtml += '<div class="packageResult rounded mb-3">'
+                            // otherServicesHtml +=
+                            //     '<div class="flex-grow-1 d-flex align-items-center gap-2">'
+                            // otherServicesHtml += '<label class="">'
+                            // otherServicesHtml += '<input id=' + service.title +
+                            //     ' type="checkbox" name="checkbox" checked />'
+                            // otherServicesHtml += '</label>'
+                            // otherServicesHtml += '<div class="flex-grow-1">'
+                            // otherServicesHtml +=
+                            //     '<div class="d-flex gap-2 justify-content-between align-items-center">'
+                            // otherServicesHtml += '<p class="mb-0 fs-5 camptonBold lh-base">' +
+                            //     service.title + '</p>'
+                            // otherServicesHtml +=
+                            //     '<p class="mb-0 fs-6 camptonBold text-green">Per Night Price</p>'
+                            // otherServicesHtml += '</div>'
+                            // otherServicesHtml +=
+                            //     '<div class="d-flex gap-5 justify-content-between">'
+                            // otherServicesHtml += '<div class="d-flex align-items-center gap-2">'
+                            // // otherServicesHtml += '<p class="mb-0 lctn">3 Stars Hotel</p>'
+                            // otherServicesHtml += '</div>'
+                            // otherServicesHtml +=
+                            // '<p class="mb-0 fs-5 camptonBold lh-base other-service-price">' +
+                            // numberToDiscount(
+                            //     parseInt(purchaseDetails.package_discount),
+                            //     service.price) + ' ₺ <span class="smallFont">(' + service
+                            // .price +
+                            // '₺)</span></p>'
+                            // otherServicesHtml += '</div>'
+                            // otherServicesHtml += '</div>'
+                            // otherServicesHtml += '</div>'
+                            // otherServicesHtml += '</div>'
                         });
                         $('.other_services_items').append(otherServicesHtml);
                         calcOtherServices();
@@ -936,7 +991,8 @@
                     return false;
                 } else if (usernameValue.length < 4 || usernameValue.length > 30) {
                     $("#verifyinput1").show();
-                    $("#verifyinput1").html("The length of the card holder name should be between 4 and 30 characters.");
+                    $("#verifyinput1").html(
+                        "The length of the card holder name should be between 4 and 30 characters.");
                     input1Error = false;
                     return false;
                 } else {
@@ -951,14 +1007,14 @@
             });
 
             function validateCardNumber() {
-                let usernameValue = $("#input2").val();
+                let usernameValue = $("#input2").val().replace(/\D/g, '');
                 if (usernameValue.length == "") {
                     $("#verifyinput2").show();
                     input2Error = false;
                     return false;
                 } else if (usernameValue.length < 4 || usernameValue.length >= 17) {
                     $("#verifyinput2").show();
-                    $("#verifyinput2").html("The length of the card number should be between 12 and 16 characters.");
+                    $("#verifyinput2").html("The length of the card number should be between 12 and 16 digits.");
                     input2Error = false;
                     return false;
                 } else {
@@ -978,9 +1034,9 @@
                     $("#verifyinput3").show();
                     input3Error = false;
                     return false;
-                } else if (usernameValue.length < 1 || usernameValue.length > 4) {
+                } else if (usernameValue.length < 1 || usernameValue.length > 3) {
                     $("#verifyinput3").show();
-                    $("#verifyinput3").html("The length of the cvv should be between 1 and 3 characters.");
+                    $("#verifyinput3").html("The length of the cvv should be between 1 and 3 digits.");
                     input3Error = false;
                     return false;
                 } else {
