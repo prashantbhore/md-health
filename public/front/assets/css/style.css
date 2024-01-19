@@ -1385,7 +1385,7 @@ select {
     color: #000002;
     font-family: Campton;
     font-size: 16px;
-
+    margin-top: 5px;
     font-weight: 500;
     line-height: 18.62px;
     letter-spacing: -0.64px;
@@ -4781,4 +4781,33 @@ input[type="radio"] {
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.88px;
+}
+
+.no-data-vendor {
+    height: 250px;
+    font-family: "CamptonBook";
+    color: #979797;
+    font-weight: 400;
+    letter-spacing: -0.56px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #F6F6F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    background: #F6F6F6;
+}
+
+.no-data-vendor img {
+    width: 100px;
+    height: auto;
+}
+
+.other-services .card-body .section-heading{
+    margin-bottom: 20px !important;
+    margin-top: 25px !important;
+}
+.reservations-box{
+    min-height: 449px !important;
 }

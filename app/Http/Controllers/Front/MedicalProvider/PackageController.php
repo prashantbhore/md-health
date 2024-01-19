@@ -115,7 +115,7 @@ class PackageController extends Controller {
             $html1 .= '</div></div></div></div>';
         }
         if ( $html1 == '' ) {
-            $html1 =  "<div class='no-data'>No Data Available !</div>";
+            $html1 .=  '  <div class="no-data-vendor"> <img src="' . asset('front/assets/img/No-Data-Found-1.svg') . '"> </div>';
         }
 
         return $html1;
@@ -188,7 +188,8 @@ class PackageController extends Controller {
         }
 
         if ( $html2 == '' ) {
-            $html2 =  "<div class='no-data'>No Data Available !</div>";
+            // $html2 =  "<div class='no-data'>No Data Available !</div>";
+            $html2 .=  '  <div class="no-data-vendor"> <img src="' . asset('front/assets/img/No-Data-Found-1.svg') . '"> </div>';
         }
 
         return $html2;

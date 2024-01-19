@@ -278,7 +278,7 @@ letter-spacing: -0.64px;
                         </li>
                     </ul>
                     {{-- Tab planes --}}
-                    <div class="card">
+                    <div class="card reservations-box">
                         <div class="card-body">
                             <div class="tab-content" id="myTabContent">
                                 {{-- Hotel --}}
@@ -315,7 +315,7 @@ letter-spacing: -0.64px;
                                         <div class="container tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="saleactive" role="tabpanel" aria-labelledby="saleactive-tab">
                                                 <!--  -->
-                                                <div class="card shadow-none mb-4 pkgCard">
+                                                <div class="card  shadow-none mb-4 pkgCard">
                                                     <div class="card-body d-flex gap-3 w-100 p-4">
                                                         <div class="df-center">
                                                             <img src="{{ 'front/assets/img/user/Rectangle_233.png' }}" alt="">
