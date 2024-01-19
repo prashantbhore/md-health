@@ -109,19 +109,21 @@ class ReportsController extends BaseController
         }
     }
 
-    public function provider_all_reports_list()
-    {
-        $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
-            ->where('medical_provider_id',Auth::user()->id)
-            ->where('status', 'active')
-            ->get();
+public function provider_all_reports_list()
+{
+    $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
+        ->where('medical_provider_id', Auth::user()->id)
+        ->where('status', 'active')
+        ->get();
 
-        $formatted_data = [];
+    $formatted_data = [];
 
-        foreach ($provider_report_list as $report) {
-            $customerPurchasePackage = $report->customerPackagePurchase;
-            $providerData = $report->provider;
-            $providerLogo = $report->provider_logo;
+    foreach ($provider_report_list as $report) {
+        $customerPurchasePackage = $report->customerPackagePurchase;
+        $providerData = $report->provider;
+        $providerLogo = $report->provider_logo;
+
+        if ($customerPurchasePackage !== null && $providerData !== null) {
             $customerData = $customerPurchasePackage->customer;
 
             $packageIndex = null;
@@ -152,7 +154,7 @@ class ReportsController extends BaseController
                         'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
                     ],
                     'customer_data' => [
-                        'name' => $customerData->first_name . ' ' . $customerData->last_name,
+                        'name' => $customerData !== null ? $customerData->first_name . ' ' . $customerData->last_name : null,
                     ],
                     'reports' => [
                         [
@@ -167,20 +169,22 @@ class ReportsController extends BaseController
                 ];
             }
         }
-
-        if (!empty($formatted_data)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Provider report list found.',
-                'provider_report_list' => $formatted_data,
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong. Provider report list not found.',
-            ]);
-        }
     }
+
+    if (!empty($formatted_data)){
+        return response()->json([
+            'status' => 200,
+            'message' => 'Provider report list found.',
+            'provider_report_list' => $formatted_data,
+        ]);
+    } else{
+        return response()->json([
+            'status' => 404,
+            'message' => 'Something went wrong. Provider report list not found.',
+        ]);
+    }
+}
+
 
 
     public function provider_reports_search(Request $request)

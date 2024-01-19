@@ -542,7 +542,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
 
     });
     // Mplus04
-    Route::controller(RolesController::class)->group(function () {
+    Route::controller(RolesController::class)->group(function(){
         Route::get('/medical-roles', 'index');
         Route::post('/roles-add', 'roles_add');
         Route::get('/edit-role/{id}', 'edit_role');

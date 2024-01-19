@@ -376,7 +376,7 @@
                                         <div class="df-column">
                                             <div class="trmt-card-body">
                                                 <h5 class="mb-0">
-                                                    {{ !empty($data['package_name']) ? $data['package_name'] : '' }}
+                                                    {{ !empty($data['company_name']) ? $data['company_name'] : '' }}
                                                 </h5>
                                                 <h6 class="card-h1">
                                                     {{ !empty($data['treatment_name']) ? $data['treatment_name'] : '' }}
