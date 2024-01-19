@@ -5,7 +5,7 @@
     <!-- SECTION 1 -->
     <div class="searchBar backBtn bg-f6">
         <div class="container pt-4">
-            <p class="fs-1 camptonBold text-center lh-1">Purchase Details</p>
+            <p class="fs-1 camptonExtraBold text-center lh-1">Purchase Details</p>
             <p class="fs-6 camptonBold text-center deleteAll mb-4">Delete All Items</p>
             <div class="packageResult rounded mb-3">
                 <div class="flex-grow-1">
