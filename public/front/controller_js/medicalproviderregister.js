@@ -272,7 +272,7 @@ function resendCode() {
                 coderesult = confirmationResult;
                 // $("#sentSuccess").text("New code sent Successfully.");
                 // $("#sentSuccess").show();
-                coderesult = confirmationResult;
+                // coderesult = confirmationResult;
                 // recaptchaVerifier.clear();
                 $('#recaptcha-container').hide();
             })
