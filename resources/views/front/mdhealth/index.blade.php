@@ -312,8 +312,8 @@
 
 
     <!-- SECTION 4 -->
-    <div class="bg-green df-center" style="height: 151px;">
-        <div class="container py-5 text-center">
+    <div class="bg-green df-center" style="height: 155px;">
+        <div class="py-5 text-center">
             <p class="mb-0 card-h8">We made the treatment reliable and easier for you</p>
             <p class="mb-0 card-p8">Get your treatment packages in Turkiye withing few
                 clicks

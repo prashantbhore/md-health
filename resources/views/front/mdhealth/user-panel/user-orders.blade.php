@@ -7,7 +7,7 @@
             @include('front.includes.sidebar-user')
             </div>
             <div class="w-761">
-                <div class="card mb-4" style="min-height: 470px;">
+                <div class="card panel-right mb-4">
                     <h5 class="card-header mb-3">
                         <span>Orders</span>
                     </h5>
