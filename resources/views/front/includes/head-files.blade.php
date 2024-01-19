@@ -91,6 +91,7 @@
 
 <!-- Place the first-->
 <script src="https://cdn.tiny.cloud/1/bjb2ddu6e56m3tkx46k66z7gvds3q7lpwsrg7s0jz38d39i9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 
 

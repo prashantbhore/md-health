@@ -139,20 +139,20 @@
                 </div>
                 <div class="paymentSection mb-6">
                     <div class="row">
-                        <div class="col-2">
-                            <label class="smallFont d-flex align-items-center gap-1">
+                        <div class="col-3">
+                            <label class="smallFont d-flex align-items-center gap-2">
                                 <input type="radio" value="card" name="paymentMethod" checked />
                                 Credit or Debit Card
                             </label>
                         </div>
                         <div class="col-2">
-                            <label class="smallFont d-flex align-items-center gap-1">
+                            <label class="smallFont d-flex align-items-center gap-2">
                                 <input type="radio" value="bank" name="paymentMethod" />
                                 Bank Transfer
                             </label>
                         </div>
-                        <div class="col-2">
-                            <label class="smallFont d-flex align-items-center gap-1">
+                        <div class="col-2 mrg-68">
+                            <label class="smallFont d-flex align-items-center gap-2">
                                 <input type="radio" value="wallet" name="paymentMethod" />
                                 My Wallet
                             </label>
@@ -190,22 +190,22 @@
                                         Please Enter Card Number
                                     </h5>
                                 </div>
-                                <div class="d-flex gap-2 mb-4-input">
-                                    <input type="text" id="input4" name="input4" class="form-control w-50"
+                                <div class="d-flex gap-3 mb-4-input">
+                                    <div class="w-50"><input type="text" id="input4" name="input4" class="form-control "
                                         placeholder="00/00">
-                                    <input type="password" id="input3" name="input3" class="form-control w-50"
-                                        placeholder="CVV">
-
-                                </div>
-                                <div class="d-flex gap-2 mb-4-input">
-
-                                    <h5 id="verifyinput4" class="mt-0" style="color: red;">
+                                        <h5 id="verifyinput4" class="mt-0" style="color: red;">
                                         Please Enter Expiry Date
                                     </h5>
-                                    <h5 id="verifyinput3" class="mt-0" style="color: red;">
+                                </div>
+                                <div class="w-50">
+                                    <input type="password" id="input3" name="input3" class="form-control"
+                                        placeholder="CVV">
+                                        <h5 id="verifyinput3" class="mt-0" style="color: red;">
                                         Please Enter CVV
                                     </h5>
                                 </div>
+                                </div>
+                               
                                 <!-- <a href="{{ url('payment-status') }}"> -->
                                 <!-- <a href="{{ url('payment-status') }}" -->
                                 <a href="javascript:void(0)" style="color: #fff; height: unset; padding: 12px 2rem;"
