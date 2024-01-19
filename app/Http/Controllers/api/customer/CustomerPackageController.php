@@ -1720,6 +1720,8 @@ class CustomerPackageController extends BaseController
                 // // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 // $purchase_details['paid_amount'] = $request->paid_amount;
                 // $pending_amount = $request->sale_price - $request->paid_amount;
+                $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
+
                 $purchase_details['package_total_price'] = (float)$request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = (float)$request->paid_amount;
@@ -2783,10 +2785,11 @@ class CustomerPackageController extends BaseController
         }
     }
 
-    public function customer_documents_list()
+    public function customer_documents_list(Request $request)
     {
         $CustomerDocuments = CustomerDocuments::where('status', 'active')
             ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
+            ->where('package_id',$request->package_id)
             ->where('customer_id', Auth::user()->id)
             ->get();
 
