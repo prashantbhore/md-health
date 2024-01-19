@@ -2,6 +2,26 @@
 @section('content')
 
 <style>
+    .greenCheck input[type="checkbox"],
+    .greenCheck input[type="checkbox"]::before {
+        border-radius: 50% !important;
+        height: 12px;
+        width: 12px;
+    }
+
+    .purchaseBtn {
+        width: 195px;
+        height: 41px;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Campton;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.56px;
+    }
+
     .red {
         color: red;
     }
@@ -9,6 +29,19 @@
     body {
         background-color: #F6F6F6;
         background: #F6F6F6;
+    }
+
+    .form-floating>label {
+        padding: 0.75rem 0.75rem;
+    }
+
+    .packageResult {
+        padding: 18px 32px;
+        border-radius: 5px;
+    }
+
+    .scanQr {
+        height: 60vh;
     }
 </style>
 <div class="content-wrapper bg-f6">
@@ -66,9 +99,8 @@
         <!-- SECTION 1 -->
         <div class="searchBar bg-f6">
             <div class="container pt-5 px-0">
-
                 <!-- SEARCH PILL BAR -->
-                <div class="search-bar d-flex align-items-center justify-content-between p-3 gap-3 mb-5">
+                <div class="search-bar d-flex align-items-center justify-content-between p-3 mb-5">
                     <div class="form-floating pe-3 position-relative">
                         <img src="{{ 'front/assets/img/Icon-treatment.png' }}" alt="" class="mx-2 pill-calender">
                         <select class="form-select" style="padding-left:35px" id="floatingSelect" name="treatment_name" aria-label="Floating label select example">
@@ -89,7 +121,7 @@
                         <label for="floatingSelect">Service Type</label>
                     </div>
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelect" name="city_name" aria-label="Floating label select example">
+                        <select class="form-select border-end-0 bod-3" id="floatingSelect" name="city_name" aria-label="Floating label select example">
                             @if ($city_name == 'Select City')
                             <option value="Select City" selected>Select City</option>
                             @endif
@@ -105,7 +137,7 @@
                         </select>
                         <label for="floatingSelect">City</label>
                     </div>
-                    <div class="form-floating position-relative">
+                    <div class="form-floating pe-3 position-relative">
                         <input type="text" class="form-select bod-n-3" style="background-image: none;padding-left:32px" name="daterange" value="{{ $date }}" />
                         <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
                         <label for="floatingSelect">Treatment Date</label>
@@ -132,8 +164,10 @@
 <!-- SECTION 4 -->
 <div class="packageResults">
     <div class="container">
-        <div class="row">
-            <div class="col-8">
+        <div class="d-flex gap-3">
+            <!-- TREATMENT CARDS -->
+            <div class="w-761">
+                <!-- MDBooking Adv. Image -->
                 <div class="mb-3 position-relative">
                     <img style="width: 100%;" src="{{ 'front/assets/img/mdHealthAd.png' }}" alt="">
                     <img class="position-absolute" style="right: 0; bottom: 0;" src="{{ 'front/assets/img/plane.svg' }}" alt="">
@@ -141,21 +175,21 @@
 
                 @if (!empty($packages))
                 @foreach ($packages as $key => $package_list)
-                <div class="packageResult package-results-div rounded mb-3">
+                <div class="packageResult package-results-div mb-3 position-relative">
                     <div>
-                        <div class="d-flex gap-2 align-items-center">
-                            <p class="mb-0 fs-5 camptonBold lh-base">{{ $packages[$key]['package_name'] }}</p>
+                        <div class="d-flex gap-4 align-items-center mb-2">
+                            <p class="mb-0 card-h4">{{ $packages[$key]['package_name'] }}</p>
                             <img src="{{ 'front/assets/img/verifiedBy.svg' }}" alt="">
                         </div>
                         <div class="d-flex gap-5 mb-4">
                             <div class="d-flex gap-2 align-items-center">
                                 <img src="{{ 'front/assets/img/Location.svg' }}" alt="">
-                                <p class="mb-0 lctn">{{ $packages[$key]['city_name'] }}</p>
+                                <p class="mb-0 card-p1 fst-italic">{{ $packages[$key]['city_name'] }}</p>
 
                             </div>
                             <div class="d-flex align-items-center gap-1">
                                 <img src="{{ 'front/assets/img/Diaganose.svg' }}" alt="">
-                                <p class="mb-0 lctn fst-italic">
+                                <p class="mb-0 card-p1 fst-italic">
                                     {{ !empty($packages[$key]['treatment_period_in_days']) ? 'Treatment Period ' . extractNumericRange($packages[$key]['treatment_period_in_days']) . ' days ' : '' }}
                                 </p>
                             </div>
@@ -169,29 +203,29 @@
                                 <div class="d-flex gap-1 align-items-baseline mb-1 packageservices-list">
                                     <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
                                     @if ($package_list['other_services'][$index] == 'Ambulance Services')
-                                    <p class="mb-0 camptonBook smallFont red">
+                                    <p class="mb-2 card-p1">
                                         {{ $package_list['other_services'][$index] }}
                                     </p>
 
                                     @elseif($package_list['other_services'][$index] == 'Accomodition')
-                                    <p class="mb-0 camptonBook smallFont red">
+                                    <p class="mb-2 card-p1">
                                         {{ $package_list['other_services'][$index] }}
-                                        (*{{ !empty($packages[$key]['hotel_stars']) ? $packages[$key]['hotel_stars'].' ' : '' }}Stars)
+                                        <span class="gray-p1"> (*{{ !empty($packages[$key]['hotel_stars']) ? $packages[$key]['hotel_stars'].' ' : '' }}Stars)</span>
                                     </p>
 
                                     @elseif($package_list['other_services'][$index] == ' Transportation')
-                                    <p class="mb-0 camptonBook smallFont red">
+                                    <p class="mb-2 card-p1">
                                         {{ $package_list['other_services'][$index] }}
-                                        (*{{ $packages[$key]['brand_name']  .' '. $packages[$key]['vehicle_model_id'] }})
+                                        <span class="gray-p1"> (*{{ $packages[$key]['brand_name']  .' '. $packages[$key]['vehicle_model_id'] }})</span>
                                     </p>
 
                                     @elseif($package_list['other_services'][$index] == ' Tour')
-                                    <p class="mb-0 camptonBook smallFont red">
+                                    <p class="mb-2 card-p1">
                                         {{ $package_list['other_services'][$index] }}
-                                        (*{{ !empty($packages[$key]['tour_name']) ? $packages[$key]['tour_name'] : '' }})
+                                        <span class="gray-p1"> (*{{ !empty($packages[$key]['tour_name']) ? $packages[$key]['tour_name'] : '' }})</span>
                                     </p>
                                     @else
-                                    <p class="mb-0 camptonBook smallFont">
+                                    <p class="mb-2 card-p1">
                                         {{ $package_list['other_services'][$index] }}
                                     </p>
                                     @endif
@@ -208,26 +242,27 @@
                                 @endif
                             </div>
                             <div class="brdr-right">
-                                <p class="packageResult-title">Reviews<span class=""> (0)</span></p>
-                                <div class="stars">
+                                <p class="packageResult-title mb-0">Reviews<span class=""> (0)</span></p>
+                                <div class="stars mb-2">
                                     <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
                                     <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
                                     <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
                                     <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
                                     <img src="{{ 'front/assets/img/star-green.svg' }}" style="width: 16px;" alt="">
                                 </div>
-                                <p class="fs-6 camptonBold">Excellent</p>
+                                <p class="card-h3">Excellent</p>
                             </div>
-                            <div class="d-flex flex-column align-items-end gap-4">
+                            <div class="d-flex flex-column align-items-end gap-4 ">
                                 <div>
-                                    <p class="packageResult-title">Package Price</p>
+                                    <p class="packageResult-title mb-3">Package Price</p>
                                     <div class="my-2">
-                                        <p class='strike'>
-                                            {{ !empty($package_list['package_price']) ? $package_list['package_price'] : '' }} ₺
-                                        </p>
-                                        <p class="mb-0 fs-5 camptonBold lh-base">
+
+                                        <strikethrough class="mb-2 strike strikePrice">
+                                            {{ !empty($package_list['package_price']) ? $package_list['package_price'] : '' }} <span class="lira">₺</span>
+                                        </strikethrough>
+                                        <p class="mb-3 card-h4">
                                             {{ !empty($package_list['sale_price']) ? $package_list['sale_price'] : '' }}
-                                            ₺ <span class="smallFont fs-6">*{{ '(' . get_twenty_percent(!empty($package_list['sale_price']) ? $package_list['sale_price'] : 0) . '₺)' }}</span>
+                                            <span class="lira">₺</span> <span class="card-h1">*{{ '(' . get_twenty_percent(!empty($package_list['sale_price']) ? $package_list['sale_price'] : 0) . ' ₺)' }} </span>
                                         </p>
                                         {{-- <p class="camptonBook">*20% of the price is paid before booking.</p> --}}
                                     </div>
@@ -249,10 +284,10 @@
 
                                     </div>
                                 </div>
-                                <form method="POST" id="myForm_{{ $package_list['id'] }}" action="{{ url('health-pack-details') }}">
+                                <form method="POST" id="myForm_{{ $package_list['id'] }}" action="{{ url('health-pack-details') }}" class="mt-auto">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $package_list['id'] }}">
-                                    <a href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="underline smallFont view_btn">View All Details</a>
+                                    <a href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</a>
                                 </form>
                             </div>
                         </div>
@@ -354,30 +389,33 @@
                 @endif
 
 
+
+
             </div>
-            <div class="col-4">
+            <!-- FILTERS -->
+            <div class="w-292">
                 <div class="packageFilter rounded mb-3">
-                    <p class="packageFilter-heading camptonBold lh-base">Supplier Rating</p>
+                    <p class="card-h4">Supplier Rating</p>
                     <div>
                         <form action="" class="filter greenCheck">
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle1">Excellent (4-5)</label><br>
+                                    <label for="vehicle1" class="card-p1">Excellent (4-5)</label><br>
                                 </div>
                                 <p class="mb-1">(23)</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">Good (4-5)</label><br>
+                                    <label for="vehicle2" class="card-p1">Good (4-5)</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Normal (4-5)</label>
+                                    <label for="vehicle3" class="card-p1">Normal (4-5)</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
@@ -385,41 +423,41 @@
                     </div>
                 </div>
                 <div class="packageFilter rounded mb-3">
-                    <p class="fs-5 camptonBold lh-base">Services</p>
+                    <p class="card-h4">Services</p>
                     <div>
                         <form action="" class="filter greenCheck">
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-1 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle1">Full Package</label><br>
+                                    <label for="vehicle1" class="card-p1">Full Package</label><br>
                                 </div>
                                 <p class="mb-1">(23)</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-1 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">Transporting</label><br>
+                                    <label for="vehicle2" class="card-p1">Transporting</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-1 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Accomodation</label>
+                                    <label for="vehicle3" class="card-p1">Accomodation</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-1 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Translate</label>
+                                    <label for="vehicle3" class="card-p1">Translate</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex gap-1 align-items-center">
+                                <div class="d-flex gap-1 align-items-center mb-2">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3">Tour</label>
+                                    <label for="vehicle3" class="card-p1">Tour</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
@@ -427,34 +465,34 @@
                     </div>
                 </div>
                 <div class="packageFilter rounded mb-3">
-                    <p class="fs-5 camptonBold lh-base">Price</p>
+                    <p class="card-h4">Price</p>
                     <div>
                         <form action="" class="filter greenCheck">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-1 align-items-center">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle1">10,000 ₺ - 20,000 ₺</label><br>
+                                    <label for="vehicle1">10,000 <span class="lira">₺</span> - 20,000 <span class="lira">₺</span></label><br>
                                 </div>
                                 <p class="mb-1">(23)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-1 align-items-center">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">20,001 ₺ - 50,000 ₺</label><br>
+                                    <label for="vehicle2">20,001 <span class="lira">₺</span> - 50,000 <span class="lira">₺</span></label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-1 align-items-center">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">50,001 ₺ - 70,000 ₺</label><br>
+                                    <label for="vehicle2">50,001 <span class="lira">₺</span> - 70,000 <span class="lira">₺</span></label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-1 align-items-center">
                                     <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2">70,001 ₺ - 90,000 ₺</label><br>
+                                    <label for="vehicle2">70,001 <span class="lira">₺</span> - 90,000 <span class="lira">₺</span></label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
@@ -462,6 +500,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -556,6 +595,23 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- =============================================================================================================
+                                                                     MAKE REQUEST FORM
+        ============================================================================================================= -->
+    <div class="container section-wrapper df-center flex-column gap-5 py-100px section-2">
+        <h2 class="position-relative">Couldn’t find your <span class="text-green bb-green1">treatment</span>
+            package?</h2>
+        <div class="card border-0 position-relative">
+            <div class="card-body df-center flex-column">
+                <p class="card-text">Contact us with your detail & our team will prepare your desired <br> treatment
+                    package!
+                </p>
+                <button class="btn btn-md-black position-absolute" data-bs-toggle="modal" data-bs-target="#exampleModal">Make a Request</button>
+                <img src="{{ 'front/assets/img/doctor.png' }}" class="position-absolute doctorImg" alt="">
+            </div>
+            <!-- exampleModal -->
         </div>
     </div>
 </div>
@@ -756,6 +812,7 @@
         $(function() {
             $('input[name="daterange"]').daterangepicker({
                 opens: 'left',
+                singleDatePicker: true,
                 locale: {
                     format: 'DD/MM/YYYY'
                 }

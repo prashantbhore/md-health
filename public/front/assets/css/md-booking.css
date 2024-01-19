@@ -633,7 +633,7 @@
         border-radius: 3px !important;
     }
     .form-floating select {
-        color: #000 !important;
+        color: #212121 !important;
     }
     .form-floating .custom-dropdown .dropdown-header  {
         /* padding: 0; */

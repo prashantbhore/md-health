@@ -32,6 +32,7 @@
     font-family: "CamptonThin";
     src: url("../fonts/campton/CamptonThin.otf");
 }
+
 @font-face {
     font-family: "CamptonExtraLight";
     src: url("../fonts/campton/CamptonExtraLight.otf");
@@ -158,6 +159,15 @@
     border-radius: 0px 3px 3px 0px !important;
 }
 
+.card-h6 {
+    color: #000;
+    font-family: Campton;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
 .card-h4 {
     color: #000;
     font-family: Campton;
@@ -192,6 +202,12 @@
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
+}
+
+.gray-p1 {
+    color: #949494 !important;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .card-p1 {
@@ -323,7 +339,7 @@
 
 .search-bar .form-floating label {
     color: #a3a3a3;
-    font-family: CamptonBook;
+    font-family: "CamptonBook";
     font-size: 14px;
 
     font-weight: 500;
@@ -720,8 +736,26 @@
 }
 
 .red-strike {
-    text-decoration: line-through;
-    text-decoration-color: red;
+    /* text-decoration: line-through; */
+    /* text-decoration-color: red; */
+    position: relative;
+}
+
+.red-strike::before {
+    position: absolute;
+    content: "";
+    left: -5px;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid #F31D1D;
+    border-color: inherit;
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-4deg);
+    width: 100px;
+    color: #F31D1D;
 }
 
 .packageResult .lctn {
@@ -731,7 +765,7 @@
 .packageResult .brdr-right,
 .homeServicePackage .brdr-right {
     border-right: 1px solid #e1e1e1;
-    padding-right: 2rem;
+    /* padding-right: 2rem; */
 }
 
 #buyService .brdr-right {
@@ -800,6 +834,7 @@ select {
 .pt-135px {
     padding-top: 135px;
 }
+
 .pt-115px {
     padding-top: 115px;
 }
@@ -1059,7 +1094,7 @@ select {
     text-align: center;
     font-family: Campton;
     font-size: 16px !important;
-margin-bottom: 35px !important;
+    margin-bottom: 35px !important;
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.68px;
@@ -1069,9 +1104,9 @@ margin-bottom: 35px !important;
 .favouriteBtn {
     background-color: #f55c5c;
     border: none;
-    height: 45px;
-    border-radius: 3px;
-    padding: 12px;
+    /* height: 45px; */
+    border-radius: 5px;
+    /* padding: 12px; */
 }
 
 .btn-search-pill:hover {
@@ -3695,12 +3730,24 @@ label.tc-text,
     font-size: 20px !important;
 }
 
-.package-results-div .packageResult-title {
-    font-size: 18px;
-    color: #4cdb06;
+.strikePrice {
+    color: #000;
+    font-family: Campton;
+    font-size: 17px;
+    font-style: normal;
     font-weight: 600;
-    font-family: "Campton";
-    line-height: 1;
+    line-height: normal;
+    letter-spacing: -0.68px;
+}
+
+.package-results-div .packageResult-title {
+    color: #4CDB06;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.72px;
 }
 
 .package-results-div .packageResult-title span {
@@ -3749,11 +3796,14 @@ label.tc-text,
 }
 
 .package-results-details .brdr-right:nth-child(1) {
-    width: 30%;
+    /* width: 30%; */
+    width: 239px;
+    ;
 }
 
 .package-results-details .brdr-right:nth-child(2) {
-    width: 25%;
+    /* width: 25%; */
+    width: 150px;
 }
 
 .details .package-results-details .brdr-right:nth-child(1) {
@@ -3882,7 +3932,7 @@ label.tc-text,
     margin: 0 0 32px 0;
 }
  */
- .bod-bot-5 {
+.bod-bot-5 {
     border-bottom: 0.5px solid #4cdb06;
     width: 100%;
     padding-bottom: 20px;
@@ -4513,6 +4563,7 @@ hr:not([size]) {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
+
 .cont-btn {
     width: 404px;
     height: 47px;
@@ -4534,33 +4585,42 @@ hr:not([size]) {
     background: #47cc05;
     color: #000002;
 }
-.mb-8{
-    margin-bottom:80px;
+
+.mb-8 {
+    margin-bottom: 80px;
 }
-.mb-6{
-    margin-bottom:60px;
+
+.mb-6 {
+    margin-bottom: 60px;
 }
-.next-step{
+
+.next-step {
     font-size: 31px !important;
 }
+
 .me-8 {
-    margin-right: 6rem!important;
+    margin-right: 6rem !important;
 }
+
 .mb-4-input {
-    margin-bottom: 1.9rem!important;
+    margin-bottom: 1.9rem !important;
 }
-.card-details{
+
+.card-details {
     width: 45% !important;
 }
+
 .purchase-details-card input[type="checkbox"] {
     width: 32px !important;
     height: 32px !important;
     flex-shrink: 0;
 }
+
 .purchase-details-card input[type="checkbox"]::before {
     width: 26px !important;
     height: 26px !important;
 }
+
 .purchaseBtn-new {
     height: 49px !important;
     padding: 0px !important;
@@ -4575,27 +4635,64 @@ hr:not([size]) {
     transition: 0.15s all;
     width: 50%;
 }
-.purchase-details-card > .card-body {
+
+.purchase-details-card>.card-body {
     padding-right: 2rem !important;
 }
-.paymentsPage > .searchBar > .container > .packageResult{
+
+.paymentsPage>.searchBar>.container>.packageResult {
     padding: 1.25rem 2.25rem !important;
 }
-.f-s30{
+
+.f-s30 {
     font-size: 53px !important;
     margin-top: 25px !important;
     margin-bottom: 20px;
     letter-spacing: -0.04em;
 }
-.twenty, .thirty, .fifty, .hundred{
+
+.twenty,
+.thirty,
+.fifty,
+.hundred {
     font-size: 19px !important;
 }
+
 .lh-base span.smallFont {
     font-size: 15px !important;
 }
-.mb30{
+
+.mb30 {
     margin-bottom: 30px !important;
 }
-.fnt20{
+
+.fnt20 {
     font-size: 20px !important;
+}
+
+.details-abs {
+    position: absolute;
+    right: 18px;
+    bottom: 16px;
+}
+
+.strikePrice {
+    position: relative;
+}
+
+.strikePrice:before {
+    position: absolute;
+    content: "";
+    color: #f31d1d;
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid #f31d1d;
+    border-color: inherit;
+
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg);
 }
