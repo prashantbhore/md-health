@@ -229,7 +229,7 @@ class CustomerPackageController extends BaseController
                 ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
                 ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
                 ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-             
+
                 ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
                 ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', '=', 'md_packages.hotel_id')
                 ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
@@ -322,7 +322,7 @@ class CustomerPackageController extends BaseController
                 "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
                 "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
                 "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
-                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price: '',
+                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price : '',
 
 
                 "city_name" => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
@@ -415,7 +415,7 @@ class CustomerPackageController extends BaseController
                     'title' => 'Accommodation',
                     'price' => $purchase_details->hotel_acommodition_price,
                     'hotel_stars' => $purchase_details->hotel_stars, // Replace with actual price format
-                     // Replace with actual price format
+                    // Replace with actual price format
                 ];
 
                 $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
@@ -431,9 +431,9 @@ class CustomerPackageController extends BaseController
                     'id' => 2,
                     'title' => 'Transportation',
                     'price' => $purchase_details->transportation_acommodition_price,
-                    'vehicle_model_name' => $purchase_details->brand_name.','. $purchase_details->vehicle_model_id,
+                    'vehicle_model_name' => $purchase_details->brand_name . ',' . $purchase_details->vehicle_model_id,
                     'comfort_level_name' => $purchase_details->vehicle_level_name // Replace with actual price format
-                     // Replace with actual price format
+                    // Replace with actual price format
                 ];
 
                 $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
@@ -450,7 +450,7 @@ class CustomerPackageController extends BaseController
                     'title' => 'Tour Details',
                     'price' => $purchase_details->tour_price,
                     'tour_name' => $purchase_details->tour_name, // Replace with actual price format
-                     // Replace with actual price format
+                    // Replace with actual price format
                 ];
 
                 $discount_percentage = (float) filter_var($purchase_details->package_discount, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) / 100;
@@ -647,7 +647,7 @@ class CustomerPackageController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
-            'patient_full_name' => 'required',
+            // 'patient_full_name' => 'required',
             'patient_relation' => 'required',
             // 'patient_email' => 'required',
             'patient_contact_no' => 'required',
@@ -666,6 +666,8 @@ class CustomerPackageController extends BaseController
             $PatientInformation['customer_id'] = Auth::user()->id;
             $PatientInformation['package_id'] = $request->package_id;
             $PatientInformation['address'] = $request->address;
+            $PatientInformation['patient_first_name'] = $request->patient_first_name;
+            $PatientInformation['patient_last_name'] = $request->patient_last_name;
             $PatientInformation['patient_full_name'] = $request->patient_full_name;
             $PatientInformation['patient_country_id'] = $request->patient_country_id;
             $PatientInformation['patient_city_id'] = $request->patient_city_id;
@@ -710,6 +712,8 @@ class CustomerPackageController extends BaseController
             $PatientInformation = [];
             $PatientInformation['customer_id'] = Auth::user()->id;
             $PatientInformation['package_id'] = $request->package_id;
+            $PatientInformation['patient_first_name'] = $request->patient_first_name;
+            $PatientInformation['patient_last_name'] = $request->patient_last_name;
             $PatientInformation['patient_full_name'] = $request->patient_full_name;
             $PatientInformation['patient_relation'] = $request->patient_relation;
             $PatientInformation['package_transportation_price'] = $request->package_transportation_price;
@@ -1604,7 +1608,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['paid_amount'] = $request->paid_amount;
                 $purchase_details['pending_payment'] = $request->pending_amount;
                 // $package_percentage_price = $request->package_percentage_price;
-                $purchase_details['purchase_type'] = 'completed';
+                // $purchase_details['purchase_type'] = 'completed';
                 $purchase_details['created_by'] = Auth::user()->id;
                 $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
 
@@ -2297,8 +2301,11 @@ class CustomerPackageController extends BaseController
                 'md_other_patient_information.patient_unique_id',
                 'md_other_patient_information.customer_id',
                 'md_other_patient_information.package_id',
+                'md_other_patient_information.patient_first_name',
+                'md_other_patient_information.patient_last_name',
                 'md_other_patient_information.patient_full_name',
                 'md_other_patient_information.patient_relation',
+                'md_other_patient_information.birth_date',
                 'md_other_patient_information.patient_email',
                 'md_other_patient_information.patient_contact_no',
                 'md_other_patient_information.patient_city_id',
@@ -2317,6 +2324,9 @@ class CustomerPackageController extends BaseController
             $PatientInformationList['id'] = !empty($PatientInformation->id) ? $PatientInformation->id : 0;
             $PatientInformationList['patient_unique_id'] = !empty($PatientInformation->patient_unique_id) ? $PatientInformation->patient_unique_id : '';
             $PatientInformationList['package_id'] = !empty($PatientInformation->package_id) ? $PatientInformation->package_id : 0;
+            $PatientInformationList['patient_first_name'] = !empty($PatientInformation->patient_first_name) ? $PatientInformation->patient_first_name : '';
+            $PatientInformationList['patient_last_name'] = !empty($PatientInformation->patient_last_name) ? $PatientInformation->patient_last_name : '';
+            $PatientInformationList['birth_date'] = !empty($PatientInformation->birth_date) ? $PatientInformation->birth_date : '';
             $PatientInformationList['patient_full_name'] = !empty($PatientInformation->patient_full_name) ? $PatientInformation->patient_full_name : '';
             $PatientInformationList['patient_relation'] = !empty($PatientInformation->patient_relation) ? $PatientInformation->patient_relation : '';
             $PatientInformationList['patient_email'] = !empty($PatientInformation->patient_email) ? $PatientInformation->patient_email : '';
@@ -2352,6 +2362,8 @@ class CustomerPackageController extends BaseController
 
         $patient_information = [];
         $patient_information['patient_full_name'] = $request->patient_full_name;
+        $patient_information['patient_first_name'] = $request->patient_first_name;
+        $patient_information['patient_last_name'] = $request->patient_last_name;
         $patient_information['patient_relation'] = $request->patient_relation;
         $patient_information['patient_email'] = $request->patient_email;
         $patient_information['patient_contact_no'] = $request->patient_contact_no;
@@ -2962,7 +2974,7 @@ class CustomerPackageController extends BaseController
             ->first();
 
         if (!empty($PatientInformation)) {
-            $PatientInformation['patient_first_name'] = !empty($PatientInformation->first_name) ? $PatientInformation->first_name : '';
+            $PatientInformation['patient_first_name'] = !empty($PatientInformation->patient_first_name) ? $PatientInformation->patient_first_name : '';
             $PatientInformation['patient_last_name'] = !empty($PatientInformation->patient_last_name) ? $PatientInformation->patient_last_name : '';
         }
 
