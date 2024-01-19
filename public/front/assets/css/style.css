@@ -828,7 +828,7 @@ select {
 
 .bod-right {
     border-right: 1px solid #4cdb06;
-    height: 1180px;
+    height: 1300px;
 }
 
 .df-center {
@@ -1046,9 +1046,9 @@ select {
     border-radius: 3px;
     background-color: #4cdb06;
     border-color: #4cdb06;
-    font-family: Campton;
+    font-family: "Campton";
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 19px;
     letter-spacing: -0.07em;
     transition: 0.15s all;
@@ -1399,7 +1399,7 @@ margin-bottom: 35px !important;
 
 .reg-title {
     color: #4cdb06;
-    font-family: "Campton";
+    font-family: "CamptonExtraBold";
     font-size: 33px;
     font-weight: 700;
     line-height: 38.41px;
@@ -1579,6 +1579,7 @@ margin-bottom: 35px !important;
     font-weight: 400;
     line-height: normal;
     letter-spacing: -1.8px;
+    background: transparent;
 }
 
 .treatment-card {
@@ -2807,6 +2808,11 @@ span.popup-msg.active {
     letter-spacing: -0.8px;
 }
 
+.card-details .form-control:focus {
+    border: 1px solid #4cdb06 !important;
+    background-color: transparent;
+}
+
 #wallet,
 #bank {
     display: none;
@@ -3874,11 +3880,18 @@ label.tc-text,
     width: 400.5px;
 }
 
-.bod-bot-5 {
+/* .bod-bot-5 {
     border-bottom: 0.5px solid #4cdb06;
     width: 100%;
     padding-bottom: 2rem;
     margin: 0 0 32px 0;
+}
+ */
+ .bod-bot-5 {
+    border-bottom: 0.5px solid #4cdb06;
+    width: 100%;
+    padding-bottom: 20px;
+    margin: 0 0 20px 0;
 }
 
 #resendotp {
@@ -4505,7 +4518,27 @@ hr:not([size]) {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
+.cont-btn {
+    width: 404px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 25px;
+    background: #4CDB06;
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+    transition: 0.15s all;
+}
 
+.cont-btn:hover {
+    background: #47cc05;
+    color: #000002;
+}
 .mb-8{
     margin-bottom:80px;
 }

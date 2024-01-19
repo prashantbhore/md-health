@@ -41,8 +41,8 @@
                         <div class="card-body">
                             <div>
                                 <h6 class="section-heading section-btns justify-content-between align-items-center">
-                                    Acommodition
-                                    <a href="{{ url('add-acommodition') }}" class="btn add-btn">Add New Acommodition</a>
+                                Accommodation
+                                    <a href="{{ url('add-acommodition') }}" class="btn add-btn">Add New Accommodation</a>
                                 </h6>
                                 @if (!empty($hotel_details))
                                     @foreach ($hotel_details as $hotel_detail)

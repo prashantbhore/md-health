@@ -89,7 +89,7 @@
                     <div class="d-flex justify-content-between mb-4">
                         <p class="mb-0 t_price">Select Your Payment Plan</p>
                         <p class="mb-0 t_price fnt20">Total Price <span class="total_price" style="color: #000;">34.560,00
-                                ₺</span></p>
+                               <span class="lira">₺</span> </span></p>
                     </div>
                     <div class="discounts d-flex flex-column gap-3">
                         <div class="d-flex align-items-center gap-2">
