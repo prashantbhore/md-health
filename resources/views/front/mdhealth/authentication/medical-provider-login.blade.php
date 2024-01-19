@@ -200,7 +200,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-md btn-text my-3 text-center w-407p5" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        <button class="btn cont-btn w-75 mb-4 df-center" id="otp-btn" type="button" onclick="verify()" >Sign In</button>
                     </div>
                 </form>
                 <script>

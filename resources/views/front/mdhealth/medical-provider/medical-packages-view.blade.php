@@ -354,7 +354,7 @@
                     <div class="form-group d-flex flex-column mb-5">
                         <label class="form-label mb-3">Visa Service Price</label>
                         <div class="input-icon-div ">
-                            <input type="text" class="form-control" name="visa_service_price" id="visa_service_price" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['visa_service_price']) ? $packages_active_list['visa_service_price'] : '' }}">
+                            <input type="text" class="form-control" name="visa_service_price" id="visa_service_price" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['visa_service_price']) ? $packages_active_list['visa_service_price'] : '' }}">
                             <span class="input-icon">₺</span>
                         </div>
                     </div>
