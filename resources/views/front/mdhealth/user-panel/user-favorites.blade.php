@@ -14,24 +14,24 @@
                 @include('front.includes.sidebar-user')
             </div>
             <div class="w-761">
-                    <div class="card mb-4" style="min-height: 470px;">
-                        <h5 class="card-header mb-3">
+                    <div class="card panel-right mb-4" >
+                        <h5 class="card-header">
                             <span>My Favorites</span>
                         </h5>
                         <div class="card-body">
                             @if (!empty($fav_list))
                                 @foreach ($fav_list as $fav)
                                     <div class="card shadow-none mb-3" style="border-radius: 3px;background: #EDEDED;">
-                                        <div class="card-body d-flex justify-content-between">
+                                        <div class="card-body remove-cardb d-flex justify-content-between">
                                             <div>
-                                                <h5 class="card-h1 mb-0">{{ $fav['product_category_name'] }}<img
+                                                <h5 class="card-h1 card-h1-fav mb-0">{{ $fav['product_category_name'] }}<img
                                                         src="{{ asset('front/assets/img/verifiedBy.png') }}" alt=""
                                                         class="ms-3" /></h5>
                                                 <p class="mb-0 d-inline-block card-p1"><img
                                                         src="{{ asset('front/assets/img/Location.svg') }}" alt="" />
                                                     {{ $fav['city_name'] }}</p>
                                                 <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                                                    {{ $fav['treatment_period_in_days'] }}</p>
+                                                    {{ 'Treatment period '.$fav['treatment_period_in_days'].' days' }}</p>
                                             </div>
                                             <div
                                                 class="d-flex align-items-center justify-content-center flex-column gap-2 ">
@@ -41,7 +41,7 @@
                                                         alt="" />
                                                 </div>
                                                 <p
-                                                    id="p_{{ $fav['id'] }}"class="mb-0 d-inline-block card-p1 fst-italic fav-btn">
+                                                    id="p_{{ $fav['id'] }}"class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
                                                     Remove Favorite
                                                 </p>
                                             </div>

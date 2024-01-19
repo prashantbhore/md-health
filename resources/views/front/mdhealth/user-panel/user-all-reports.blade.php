@@ -47,7 +47,7 @@
                 @include('front.includes.sidebar-user')
             </div>
             <div class="w-761">
-                <div class="card card-body">
+                <div class="card panel-right card-body">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>Reports</span>
                     </h5>

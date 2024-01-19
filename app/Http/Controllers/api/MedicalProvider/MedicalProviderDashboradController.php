@@ -40,8 +40,7 @@ class MedicalProviderDashboradController extends Controller
        
         $latestOrders = CustomerPurchaseDetails::where('provider_id', Auth::user()->id)->where('purchase_type','pending')
             ->with(['customer', 'package.provider', 'package.provider.provider_logo'])
-            ->orderBy('created_at', 'desc')
-            ->take(5) 
+            ->orderBy('created_at', 'desc') 
             ->get();
 
 

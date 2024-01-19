@@ -41,7 +41,7 @@
             @include('front.includes.sidebar-user')
             </div>
             <div class="w-761">
-                <div class="card mb-4">
+                <div class="card panel-right mb-4">
                     <div class="form-div">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                             <span>Message</span>
