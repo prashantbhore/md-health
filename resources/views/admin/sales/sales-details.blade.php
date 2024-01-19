@@ -105,7 +105,7 @@
                             <div class="col-md-6 mb-3">
                                 <p class="card-title mb-3">Package Details</p>
                                 <div class="col-md-12 mb-4">
-                                    <label for="accomodation">Acommodition</label>
+                                    <label for="accomodation">Accommodation</label>
                                     <p>Renaissence Istanbul Hotel</p>
                                     <p>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 17" fill="none">

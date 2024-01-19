@@ -1,49 +1,27 @@
 @extends('front.layout.layout')
 @section('content')
-<style>
-    .navbar,
-    footer {
-        display: none;
-    }
+    <style>
+        .navbar,
+        footer {
+            display: none;
+        }
 
-    #recaptcha-container {
-        bottom: 330px;
-    }
+        #recaptcha-container {
+            bottom: 330px;
+        }
 
-    .mdi-eye-off::before,
-    .mdi-eye::before {
-        font-size: 19px;
-    }
+        .mdi-eye-off::before,
+        .mdi-eye::before {
+            font-size: 19px;
+        }
 
-    .form-control {
-        border-radius: 5px;
-        border: 1px solid #D6D6D6 !important;
-    }
-
-    .cont-btn {
-        width: 404px;
-        height: 47px;
-        flex-shrink: 0;
-        border-radius: 25px;
-        background: #4CDB06;
-        color: #000002;
-        text-align: center;
-        font-family: Campton;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: -0.6px;
-        transition: 0.15s all;
-    }
-
-    .cont-btn:hover {
-        background: #47cc05;
-        color: #000002;
-    }
-</style>
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #D6D6D6 !important;
+        }
+    </style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
-        <div class="card">
+        <div class="card sign-in-card">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="pt-3">
@@ -72,7 +50,7 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                    <span toggle="#password" class="mdi mdi-eye field-icon toggle-password "></span>
+                                <span toggle="#password" class="mdi mdi-eye field-icon toggle-password "></span>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -85,11 +63,12 @@
                             <span id="error" class="text-danger"></span>
                             <span id="success" class="text-success"></span>
                             <div class="pt-100px">
-                                <button class="btn cont-btn w-100 mb-4 df-center" type="button" id="signup"
-                                    >Continue</button>
+                                <button class="btn cont-btn w-100 mb-4 df-center" type="button"
+                                    id="signup">Continue</button>
                             </div>
                             <div class="text-center">
-                                <a href="{{ url('/') }}" class="btn-text">Back to MDhealth.co</a>
+                                <a href="{{ url('/') }}" class="btn-text text-black text-decoration-underline">Back to
+                                    MDhealth.co</a>
                             </div>
                             {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
                         </form>
@@ -145,7 +124,7 @@
                         <div id="errorMessage" class="text-danger d-none"></div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-3">
-                    <button class="btn btn-md btn-text w-75 mb-3" id="verifyBtn" type="button" onclick="verify()"
+                    <button class="btn cont-btn w-75 mb-4 df-center" id="verifyBtn" type="button" onclick="verify()"
                         style="height: 47px;">Sign
                         In</button>
                 </div>
@@ -209,397 +188,8 @@
     </div>
 @endsection
 @section('script')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    <script>
-        function countdownTimer(duration) {
-            $('#resendotp').hide();
-            let timer = duration,
-                minutes, seconds;
-            const timerDisplay = $('#timer');
-            const timerInterval = setInterval(function() {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                timerDisplay.text(minutes + ":" + seconds);
-
-                if (--timer < 0) {
-                    timer = duration;
-                    clearInterval(timerInterval);
-                    $('#resendotp').show();
-                    timerDisplay.text("Timer completed!");
-                }
-            }, 1000);
-        }
-
-        // Set the timer duration in seconds
-        // let timerDuration = 32;
-
-        // countdownTimer(timerDuration);
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $('#loginForm').validate({
-                rules: {
-                    number: {
-                        required: true,
-                        // email: true
-                    },
-                    password: {
-                        required: true
-                    }
-                },
-                messages: {
-                    number: {
-                        required: "Please enter your Phone Number with country code",
-                        // email: "Please enter a valid email address"
-                    },
-                    password: {
-                        required: "Please enter your password"
-                    }
-                },
-                submitHandler: function(form) {
-                    // Perform form submission if all validation passes
-                    form.submit();
-                }
-            });
-        });
-
-        // $(document).on('blur', '#number', function() {
-        //     var base_url = $('#base_url').val();
-        //     var number = $(this).val();
-        //     var csrfToken = $('meta[name="csrf-token"]').attr('content');
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': csrfToken
-        //         }
-        //     });
-        //     $.ajax({
-        //         url: base_url + '/number-to-mobile',
-        //         method: 'POST',
-        //         data: {
-        //             number: number
-        //         },
-        //         success: function(response) {
-        //             console.log(response.mobile_no);
-        //             if (response.mobile_no !== undefined) {
-        //                 // alert(response.mobile_no);
-        //                 $('#number').val(response.mobile_no);
-        //                 $('#error').text('');
-        //             } else {
-        //                 $('#number').val('');
-        //                 $('#error').text('Credentials do not match');
-        //             }
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error(error);
-        //         }
-        //     });
-        // });
-
-        $(document).on('click', '#signup', function() {
-            var base_url = $('#base_url').val();
-            // alert(base_url);
-
-            if ($('#loginForm').valid()) {
-                var number = $('#number').val();
-                var password = $('#password').val();
-
-                var csrfToken = $('meta[name="csrf-token"]').attr('content');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    }
-                });
-                $.ajax({
-                    url: base_url + '/number-password-exist',
-                    method: 'POST',
-                    data: {
-                        number: number,
-                        password: password
-                    },
-                    beforeSend: function() {
-                        // $('#signup').attr('disabled', true);
-                        // $('#signup').html(
-                        //     '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
-                    },
-                    success: function(response) {
-                        // $('#signup').attr('enable', true);
-                        if (response.user_exist !== undefined) {
-                            // alert(JSON.stringify(response.user_exist));
-                            sendOTP();
-                            // $('#success').text('Message Sent Successfully');
-                        } else {
-                            $('#error').text('Credentials do not match');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            }
-        });
-
-
-        window.onload = function() {
-            render();
-        };
-
-        function render() {
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-            recaptchaVerifier.render();
-        }
-        //     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('#signup', {
-        //   'size': 'invisible',
-        //   'callback': (response) => {
-        //     onSignInSubmit();
-        //   }
-        // });
-
-        // function onSignInSubmit(){alert('frfggg');}
-
-        function sendOTP() {
-            let timerDuration = 32;
-            countdownTimer(timerDuration);
-            var number = $("#number").val();
-            firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
-                    window.confirmationResult = confirmationResult;
-                    coderesult = confirmationResult;
-                    // $("#successAuth").text("Message sent");
-                    // $("#successAuth").show();
-                    $("#otpDiv").removeClass('d-none');
-                    $("#logDiv").hide();
-                    recaptchaVerifier.clear();
-                })
-                .catch(function(error) {
-                    $("#error").text(error.message);
-                    if (error.message == "TOO_MANY_ATTEMPTS_TRY_LATER") {
-                        $("#error").text("Too many attempts try again later");
-                    }
-                    if (error.message == "TOO_SHORT") {
-                        $("#error").text("Mobile number short or missing country code");
-                    }
-                    if (error.message == "INVALID_CODE") {
-                        $("#error").text("OTP does not match.");
-                    }
-                    //  else {
-
-                    // }
-                    $("#error").show();
-                });
-        }
-
-        function isValidCode(code) {
-            return (code.length === 6);
-        }
-
-        function showErrorMessage(message) {
-            $('#errorMessage').removeClass('d-none').text(message);
-        }
-        // $('#verifyBtn').attr('disabled', true);
-        // $('#verifyBtn').html('<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
-        function verify(e) {
-            var code1 = $("#ot1").val();
-            var code2 = $("#ot2").val();
-            var code3 = $("#ot3").val();
-            var code4 = $("#ot4").val();
-            var code5 = $("#ot5").val();
-            var code6 = $("#ot6").val();
-            var code = code1 + code2 + code3 + code4 + code5 + code6;
-            if (!isValidCode(code)) {
-                showErrorMessage('Please enter the correct code.');
-                return;
-            }
-            coderesult.confirm(code)
-                .then(function(result) {
-
-                    var user = result.user;
-                    var number = $('#number').val();
-                    var password = $('#password').val();
-                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': csrfToken
-                        }
-                    });
-
-                    $.ajax({
-                        url: base_url + '/otp-verify',
-                        method: 'POST',
-                        data: {
-                            number: number,
-                            login_type: 'login',
-                            password: password
-                        },
-                        success: function(response) {
-                            // $('#verifyBtn').attr('enable', true);
-                            console.log(response);
-                            if (response.url !== undefined) {
-                                window.location.href = base_url + response.url;
-                                toastr.options = {
-                                    "positionClass": "toast-bottom-right",
-                                    "timeOut": "5000",
-                                };
-                                toastr.success(response.message);
-                                recaptchaVerifier.clear();
-                            } else {
-                                // $('#number').val('');
-                                toastr.options = {
-                                    "positionClass": "toast-bottom-right",
-                                    "timeOut": "5000",
-                                };
-                                toastr.error('Credentials do not match');
-                                //toastr.success(response.message);
-                                //$('#error').text('Credentials do not match');
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('tggg', error);
-                        }
-                    });
-
-                    e.preventDefault();
-                })
-                .catch(function(error) {
-                    $("#error").text(error.message);
-                    $("#error").show();
-                });
-        }
-
-        function resendCode() {
-            let timerDuration = 32;
-            countdownTimer(timerDuration);
-            var number = $("#number").val();
-            var containerId = 'recaptcha-container';
-            var container = document.getElementById(containerId);
-            $('#recaptcha-container').show();
-
-            if (!container) {
-                $("#error").text("reCAPTCHA container is missing.");
-                $("#error").show();
-                return;
-            }
-
-            try {
-                container.innerHTML = '';
-                recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
-                recaptchaVerifier.render();
-
-                firebase
-                    .auth()
-                    .signInWithPhoneNumber(number, window.recaptchaVerifier)
-                    .then(function(confirmationResult) {
-                        window.confirmationResult = confirmationResult;
-                        coderesult = confirmationResult;
-
-                        $("#otpDiv").removeClass("d-none");
-                        $("#regdiv").hide();
-                        $('#recaptcha-container').hide();
-
-                    })
-                    .catch(function(error) {
-                        $("#error").text(error.message);
-                        $("#error").show();
-                    });
-            } catch (error) {
-                $("#error").text("Error initializing reCAPTCHA: " + error.message);
-                $("#error").show();
-            }
-        }
-
-        // function resendCode() {
-        //     let timerDuration = 32;
-        //     countdownTimer(timerDuration);
-        //     var number = $("#number").val();
-        //     var containerId = 'recaptcha-container';
-        //     var container = document.getElementById(containerId);
-
-        //     if (!container) {
-        //         $("#error").text("reCAPTCHA container is missing.");
-        //         $("#error").show();
-        //         return;
-        //     }
-
-        //     try {
-        //         container.innerHTML = '';
-        //         recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId);
-        //         recaptchaVerifier.render();
-
-        //         firebase.auth().signInWithPhoneNumber(number, recaptchaVerifier)
-        //             .then(function(result) {
-        //                 var user = result.user;
-        //                 $("#successOtpAuthot").text("Auth is successful");
-        //                 $("#successOtpAuthot").show();
-        //                 var number = $('#number').val();
-        //                 var password = $('#password').val();
-        //                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
-        //                 $.ajaxSetup({
-        //                     headers: {
-        //                         'X-CSRF-TOKEN': csrfToken
-        //                     }
-        //                 });
-
-        //                 $.ajax({
-        //                     url: base_url + '/otp-verify',
-        //                     method: 'POST',
-        //                     data: {
-        //                         number: number,
-        //                         login_type: 'login',
-        //                         password: password
-        //                     },
-        //                     success: function(response) {
-        //                         $('#verifyBtn').attr('enable', true);
-        //                         console.log(response);
-        //                         if (response.url !== undefined) {
-        //                             // alert(response.url);
-        //                             window.location.href = base_url + response.url;
-
-        //                             toastr.options = {
-        //                                 "positionClass": "toast-bottom-right",
-        //                                 "timeOut": "5000",
-        //                             };
-
-        //                             toastr.success(response.message);
-        //                             // recaptchaVerifier.clear();
-        //                             //$('#error').text('');
-        //                         } else {
-        //                             // $('#number').val('');
-        //                             toastr.options = {
-        //                                 "positionClass": "toast-bottom-right",
-        //                                 "timeOut": "5000",
-        //                             };
-        //                             toastr.error('Credentials do not match');
-        //                             //toastr.success(response.message);
-        //                             //$('#error').text('Credentials do not match');
-        //                         }
-        //                     },
-        //                     error: function(xhr, status, error) {
-        //                         console.error(error);
-        //                     }
-        //                 });
-
-        //                 e.preventDefault();
-        //             })
-        //             .catch(function(error) {
-        //                 $("#error").text(error.message);
-        //                 $("#error").show();
-        //             });
-        //     } catch (error) {
-        //         $("#error").text("Error initializing reCAPTCHA: " + error.message);
-        //         $("#error").show();
-        //     }
-        // }
-    </script>
+    <script src={{ asset('front\controller_js\signin.js') }}></script>
 @endsection

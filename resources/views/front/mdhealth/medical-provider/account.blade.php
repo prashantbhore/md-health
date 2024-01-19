@@ -73,8 +73,8 @@
 </style>
 
 <div class="content-wrapper">
-    <div class="container py-100px for-cards"> 
-    <div class="d-flex gap-3">
+    <div class="container py-100px for-cards">
+        <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
@@ -146,117 +146,122 @@
                                     <label class="form-label mb-3">Company Overview</label>
                                     <textarea class="form-control" name="company_overview" value="" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
 
-                                   
-                                </div> --}}
+
+                        </div> --}}
 
 
-                                <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Company Overview</label>
-                                    <textarea class="form-control summernote summernote-1" name="company_overview" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
-                                </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label mb-3">Company Overview</label>
+                            <textarea class="form-control summernote summernote-1" name="company_overview" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
+                        </div>
 
-                               
-                                   
-                                 
 
-                                <div class="multiple-upload-images">
-                                    <h6 class="section-heading">Company Logo</h6>
-                                    <div class="form-group my-3">
-                                        <input type="file" id="company_logo_image_path" class="form-control" name="company_logo_image_path" oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
-                                    </div>
-                                    <div class="prev-img-div">
-                                        <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
+
+
+
+                        <div class="multiple-upload-images">
+                            <h6 class="section-heading">Company Logo</h6>
+                            <div class="form-group my-3">
+                                <input type="file" id="company_logo_image_path" class="form-control" name="company_logo_image_path" oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
+                            </div>
+                            <div class="prev-img-div">
+                                <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
                                                 Storage::exists($MedicalProviderLogo['company_logo_image_path'])
                                                     ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
                                                     : URL::asset('front/assets/img/default-img.png') }}" {{-- 
                                             src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic1">
-                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
-                                    </div>
+                                <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
+                            </div>
 
-                                </div>
-                                {{-- {{dd($MedicalProviderLogo)}} --}}
-                                <div class="multiple-upload-images">
-                                    <h6 class="section-heading">Company License</h6>
-                                    <div class="form-group my-3">
-                                        <input type="file" id="company_licence_image_path" class="form-control" name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
-                                    </div>
-                                    <div class="prev-img-div">
-                                        <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
+                        </div>
+                        {{-- {{dd($MedicalProviderLogo)}} --}}
+                        <div class="multiple-upload-images">
+                            <h6 class="section-heading">Company License</h6>
+                            <div class="form-group my-3">
+                                <input type="file" id="company_licence_image_path" class="form-control" name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
+                            </div>
+                            <div class="prev-img-div">
+                                <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
                                                 Storage::exists($MedicalProviderLicense['company_licence_image_path'])
                                                     ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
                                                     : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
-                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
-                                    </div>
-                                </div>
+                                <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
+                            </div>
+                        </div>
 
-                                <div class="multiple-upload-images">
-                                    <h6 class="section-heading">Product Pictures</h6>
-                                    <div class="form-group">
-                                        <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
-                                    </div>
-                                    <div class="preview-img gallery">
+                        <div class="multiple-upload-images">
+                            <h6 class="section-heading">Product Pictures</h6>
+                            <div class="form-group">
+                                <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
+                            </div>
+                            <div class="preview-img gallery">
 
-                                        @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
-                                        @php
-                                        $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
-                                        @endphp
+                                @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
+                                @php
+                                $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
+                                @endphp
 
-                                        @if ($fileExtension === 'mp4')
-                                        <div class="prev-img-div video-card" id="img_div_{{ $ProviderImagesVideo->id }}">
-                                            <video class="video-div" controls>
-                                                <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                @if ($fileExtension === 'mp4')
+                                <div class="prev-img-div video-card" id="img_div_{{ $ProviderImagesVideo->id }}">
+                                    <video class="video-div" controls>
+                                        <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                 Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                     ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                     : '' }}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                            <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
-                                                <div>X</div>
-                                            </a>
-                                        </div>
-                                        @else
-                                        <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
-                                            <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
+                                        <div>X</div>
+                                    </a>
+                                </div>
+                                @else
+                                <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
+                                    <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                         Storage::exists($ProviderImagesVideo->provider_image_path)
                                                             ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                             : '' }}" class="glightbox">
-                                                <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                        <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                             Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                 ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                 : '' }}" alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
-                                            </a>
-                                            <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
-                                                <div>X</div>
-                                            </a>
-                                        </div>
-                                        @endif
-                                        @endforeach
-
-                                    </div>
-
+                                    </a>
+                                    <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
+                                        <div>X</div>
+                                    </a>
                                 </div>
+                                @endif
+                                @endforeach
 
-                                <div class="section-btns mb-4">
-                                    <button type="submit" class="btn save-btn-black">Save
-                                        Changes</button>
-                                </div>
+                            </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label fst-italic fsb-2">*Please make sure the photo/video meets
-                                        the MDhealth policy.</label>
-                                </div>
-
-                            </form>
                         </div>
+
+                        <div class="section-btns mb-4">
+                            <button type="submit" class="btn save-btn-black">Save
+                                Changes</button>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label fst-italic fsb-2">*Please make sure the photo/video meets
+                                the MDhealth policy.</label>
+                        </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 @endsection
 
 @section('script')
+<script>
+    tinymce.init({
+        selector: 'textarea#company_overview'
+    });
+</script>
 {{-- <script>
     $(document).ready(function() {
         $('#company_overview').summernote({
@@ -280,7 +285,6 @@
             }
         });
     });
-
 </script>
 
 
@@ -340,81 +344,17 @@
                 });
             }
         }
-    </script>
-    <script>
-        function success_toast(title = '', message = '') {
-            // alert(message);
-            $.toast({
-                heading: title,
-                text: message,
-                icon: 'success',
-                loader: true, // Change it to false to disable loader
-                loaderBg: '#9EC600', // To change the background,
-                position: "bottom-right"
-            });
-        }
-
-        function fail_toast(title = '', message = '') {
-            $.toast({
-                heading: title,
-                text: message,
-                icon: 'error',
-                loader: true, // Change it to false to disable loader
-                loaderBg: '#9EC600', // To change the background,
-                position: "bottom-right"
-            });
-        }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
-
-    
-    <script>
-        $(document).ready(function() {
-            $('#accountmedpro').validate({
-                rules: {
-                    company_name: {
-                        required: true,
-                        minlength: 2,
-                        nowhitespace: true
-                    },
-                    company_address: {
-                        required: true,
-                        minlength: 2,
-                        nowhitespace: true
-                    },
-                    country_id: "required",
-                    city_id: "required",
-                    tax_no: {
-                        required: true,
-                        minlength: 2
-                    },
-                    authorisation_full_name: {
-                        required: true,
-                        minlength: 2,
-                        nowhitespace: true
-                    },
-                    company_overview: {
-                        required: true,
-                        // minlength: 10
-                    }
-                    // Add validation rules for other fields as needed
-                },
-                messages: {
-                    // Define error messages for each field if required
-                },
-                errorPlacement: function(error, element) {
-                    error.appendTo(element.parent());
-                }
-            });
-
-            // Adding a custom method for disallowing spaces
-            $.validator.addMethod("nowhitespace", function(value, element) {
-                return value.trim().length !== 0;
-            }, "Spaces are not allowed");
+</script>
+<script>
+    function success_toast(title = '', message = '') {
+        // alert(message);
+        $.toast({
+            heading: title,
+            text: message,
+            icon: 'success',
+            loader: true, // Change it to false to disable loader
+            loaderBg: '#9EC600', // To change the background,
+            position: "bottom-right"
         });
     }
 
@@ -434,6 +374,68 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
 
+
+<script>
+    $(document).ready(function() {
+        $('#accountmedpro').validate({
+            rules: {
+                company_name: {
+                    required: true,
+                    minlength: 2,
+                    nowhitespace: true
+                },
+                company_address: {
+                    required: true,
+                    minlength: 2,
+                    nowhitespace: true
+                },
+                country_id: "required",
+                city_id: "required",
+                tax_no: {
+                    required: true,
+                    minlength: 2
+                },
+                authorisation_full_name: {
+                    required: true,
+                    minlength: 2,
+                    nowhitespace: true
+                },
+                company_overview: {
+                    required: true,
+                    // minlength: 10
+                }
+                // Add validation rules for other fields as needed
+            },
+            messages: {
+                // Define error messages for each field if required
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent());
+            }
+        });
+
+        // Adding a custom method for disallowing spaces
+        $.validator.addMethod("nowhitespace", function(value, element) {
+            return value.trim().length !== 0;
+        }, "Spaces are not allowed");
+    });
+    }
+
+    function fail_toast(title = '', message = '') {
+        $.toast({
+            heading: title,
+            text: message,
+            icon: 'error',
+            loader: true, // Change it to false to disable loader
+            loaderBg: '#9EC600', // To change the background,
+            position: "bottom-right"
+        });
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
 
 <script>
     $(document).ready(function() {
