@@ -14,15 +14,13 @@ $name = 'MDHealth';
 <style>
     .dropdown-toggle::after {
         display: none;
-        
+
     }
 
     .md-navbar .nav-item .nav-link,
     .md-navbar .nav-link {
         padding-bottom: 0;
     }
-
-    
 </style>
 
 
@@ -64,7 +62,7 @@ $name = 'MDHealth';
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span class="text-green me-1">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome <span class="text-green me-1 ms-2">
                             {{ $name }}</span> <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
                             {{-- {{(session('user')->company_name)?session('user')->company_name:MDHealth}} --}}
                             <path d="M1 1.00042L6.5 6.35449L12 1.00042" stroke="#4CDB06" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -271,4 +269,3 @@ $name = 'MDHealth';
         </div>
     </div>
 </nav>
-
