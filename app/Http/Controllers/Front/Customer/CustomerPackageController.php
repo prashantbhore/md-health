@@ -13,6 +13,7 @@ use App\Models\MDCoins;
 use App\Models\Packages;
 use App\Models\PatientInformation;
 use App\Models\ProductCategory;
+use App\Models\CustomerFavouritePackages;
 use App\Services\ApiService;
 use App\Traits\MediaTrait;
 use Crypt;
@@ -756,7 +757,12 @@ class CustomerPackageController extends Controller
         $data['package_list'] = [];
         if (!empty($packages)) {
             foreach ($packages as $key => $value) {
+                $CustomerFavouritePackages= CustomerFavouritePackages::where('status','active')
+                                            ->select('package_id')
+                                            ->where('customer_id',Auth::guard('md_customer_registration')->user()->id)
+                                            ->first();
                 $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
+                $data['package_list'][$key]['favourite_check'] = !empty($CustomerFavouritePackages->package_id) ?'yes' : 'no';
                 $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                 $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
                 $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
@@ -798,6 +804,8 @@ class CustomerPackageController extends Controller
             $city_name = $request->city_name ?? 'Select City';
 
             $counties = Country::where('status', 'active')->get();
+
+            
 
             return view('front.mdhealth.searchResult', compact('packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
 

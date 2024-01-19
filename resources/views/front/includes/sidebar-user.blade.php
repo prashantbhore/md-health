@@ -1,7 +1,7 @@
 <div class="card panel-left">
     <h5 class="card-header">User Panel</h5>
     <div class="card-body">
-        <ul class="nav flex-column nav-stuff" style="min-height: 350px;">
+        <ul class="nav flex-column nav-stuff" style="min-height: 523px;">
             <li class="nav-item upProfileLi">
                 <a class="nav-link upProfile" aria-current="page" href="{{ url('my-profile') }}">Profile</a>
             </li>
@@ -28,7 +28,7 @@
             </li>
 
             <li class="nav-item mt-auto">
-                <a class="nav-link disabled text-black fw-bold verNo" href="#" tabindex="-1" aria-disabled="true">Version 1.0</a>
+                <a class="nav-link disabled text-black fw-bold verNo" href="#" tabindex="-1" aria-disabled="true">MD Health - Version 1.0</a>
             </li>
 
         </ul>

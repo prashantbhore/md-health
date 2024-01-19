@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\FoodProvider\FoodsController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\RolesController;
 use App\Http\Controllers\admin\admin\AdminController;
@@ -660,7 +661,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
-    Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
+    Route::any('my-packages-list', [CustomerPackageController::class,'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
@@ -680,12 +681,20 @@ Route::post('create-food-provider-account', [FoodProviderController::class, 'foo
 
 Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], function () {
 
+    Route::controller(FoodsController::class)->group(function (){
+        Route::get('food-provider-foods', 'index');
+        Route::get('food-provider-foods-view', 'add_food');
+        // Route::post('md-update-vendor-profile', 'update_vendor_profile');
+        // Route::post('md-delete-vendor-images-videos', 'delete_vendor_images_videos');
 
+    });
+
+   
     Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
     Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
     Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
-    Route::view('food-provider-foods', 'front/mdhealth/food-provider/food_provider_foods');
-    Route::view('food-provider-foods-view', 'front/mdhealth/food-provider/food_provider_foods_view');
+    
+    // Route::view('', '');
 
 
 
