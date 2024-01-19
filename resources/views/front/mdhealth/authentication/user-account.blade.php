@@ -38,7 +38,7 @@
     #recaptcha-container {
         position: absolute;
         left: 285px;
-        bottom: 185px;
+        bottom: 275px;
     }
 
     .pill-calender {
@@ -51,6 +51,12 @@
         background: #f6f6f6;
         background-color: #f6f6f6;
     }
+
+    .authentication .tab-content .form-check-input {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
 </style>
 <div class="position-relative">
     <div class="content-wrapper" id="regdiv">
@@ -85,13 +91,13 @@
             <div class="tab-content position-relative" id="myTabContent">
                 <div class="login-form pb-100px" id="medical-provider" role="tabpanel" aria-labelledby="medical-provider-tab">
                     <div class="row">
-                        <div class="col-md-6 col-lg-6 col-xl-6 bod-right   pt-4">
+                        <div class="col-md-6 col-lg-6 col-xl-6 bod-right pt-4">
                             <!-- Form Heading -->
                             <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                                 <a href="{{ url('/') }}">
                                     <img src="{{ 'front/assets/img/back.svg' }}" alt="" />
                                 </a>
-                                <h1 class="reg-title my-0">Create User Account</h1>
+                                <h1 class="reg-title my-0 pb-3">Create User Account</h1>
                             </div>
                             <!-- Form -->
                             <div class="form text-start">
@@ -153,6 +159,7 @@
                                             <label for="address" class="form-label">*Address</label>
                                             <textarea name="address" id="address" cols="" rows="5" class="form-control camptonBook " placeholder="Enter Address"></textarea>
                                         </div>
+
                                         <div class="col-md-12 position-relative">
                                             <div class="hide-eye-div">
                                                 <label for="password" class="form-label">*Password</label>
@@ -160,25 +167,27 @@
                                                 <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 position-relative">
+
+                                        <div class="col-md-12 mb-3 position-relative">
                                             <div class="hide-eye-div">
                                                 <label for="re-password" class="form-label">*Re-Password</label>
                                                 <input type="password" name="repassword" class="form-control " id="repassword" placeholder="Minimum 8 characters" />
                                                 <span toggle="#repassword" class="mdi mdi-eye field-icon toggle-password"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-md-12">
-                                            <div class="form-check tc">
+                                            <div class="form-check tc d-flex gap-3">
                                                 <input class="form-check-input" type="checkbox" value="" id="UserflexCheckDefault" />
                                                 <label class="form-check-label" for="UserflexCheckDefault">
-                                                    I accept <a href="#" class="text-decoration-underline">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a>
+                                                    I accept <a href="#" class="text-decoration-underline camptonBold">Terms and Condition</a> & I agree to the <a href="#" class="text-decoration-underline">User Data Consent.</a>
                                                 </label>
                                             </div>
                                         </div>
                                         {{-- <div id="recaptcha-container" class="df-center"></div> --}}
                                         <span id="error" class="text-danger"></span>
-                                        <div class="col-md-12 text-center d-flex flex-column gap-3 pt-100px">
-                                            <button type="button" class="btn btn-md mb-5 w-100" id="regcustuser" style="height: 47px;">Create Account</button>
+                                        <div class="col-md-12 text-center d-flex flex-column gap-3 py-100px">
+                                            <button type="button" class="btn cont-btn w-100 mb-4 df-center" id="regcustuser">Create Account</button>
                                             <label for="" class="mt-auto">Already have an account?</label>
                                             <a href="{{ url('sign-in-web') }}" class="signIn-link">Sign In</a>
                                         </div>
@@ -240,7 +249,7 @@
                             <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-md btn-text w-75 my-3 text-center" id="login_otp_btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                            <button class="btn cont-btn w-75 mb-4 df-center" id="login_otp_btn" type="button" onclick="verify()">Sign In</button>
                         </div>
                     </form>
                     <script>

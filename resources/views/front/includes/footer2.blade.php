@@ -1,4 +1,4 @@
-<footer class="footer text-light py-2" style="background-color:#080808">
+<footer class="footer text-light py-2 hide1" style="background-color:#080808">
      <div class="container">
              <div class="d-flex justify-content-between mdLtd">
                  <div class="d-flex justify-content-center">
