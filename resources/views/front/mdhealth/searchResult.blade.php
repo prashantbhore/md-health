@@ -271,9 +271,19 @@
                                         @if ($isCustomer == true && $user == true)
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
-                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
-                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                        </button>
+
+                                        @if($package_list['favourite_check']=='yes') 
+                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                            </button>
+                                        @endif
+
+                                        @if($package_list['favourite_check']=='no') 
+                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                            </button>
+                                        @endif
+
                                         @elseif($user == false)
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
@@ -289,6 +299,7 @@
                                     <input type="hidden" name="id" value="{{ $package_list['id'] }}">
                                     <a href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</a>
                                 </form>
+                                
                             </div>
                         </div>
                     </div>

@@ -280,6 +280,7 @@
                                     oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')"
                                     class="form-control">
                             </div>
+                            <div id="errorMessage" class="text-danger d-none"></div>
                             <div class="d-flex justify-content-center">
                                 <button class="btn cont-btn w-75 mb-4 df-center" id="login_otp_btn" type="button"
                                     onclick="verify()">Sign In</button>
