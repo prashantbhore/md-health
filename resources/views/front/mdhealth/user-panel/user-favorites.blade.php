@@ -31,7 +31,7 @@
                                                         src="{{ asset('front/assets/img/Location.svg') }}" alt="" />
                                                     {{ $fav['city_name'] }}</p>
                                                 <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                                                    {{ $fav['treatment_period_in_days'] }}</p>
+                                                    {{ 'Treatment period '.$fav['treatment_period_in_days'].' days' }}</p>
                                             </div>
                                             <div
                                                 class="d-flex align-items-center justify-content-center flex-column gap-2 ">

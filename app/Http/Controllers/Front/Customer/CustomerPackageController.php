@@ -13,6 +13,7 @@ use App\Models\MDCoins;
 use App\Models\Packages;
 use App\Models\PatientInformation;
 use App\Models\ProductCategory;
+use App\Models\CustomerFavouritePackages;
 use App\Services\ApiService;
 use App\Traits\MediaTrait;
 use Crypt;
@@ -61,7 +62,8 @@ class CustomerPackageController extends Controller
         $plainArray['conversation_id'] = strval($conversation_id);
 
         // dd(Session::get('payment_request'));
-        $bin_number = substr($controller_request->card_number, 0, 6);
+        $credit_card_number = str_replace(' ','',$controller_request->card_number);
+        $bin_number = substr($credit_card_number, 0, 6);
         $user_id = Auth::guard('md_customer_registration')->user()->id;
         $user_data = CustomerRegistration::where('id', $user_id)->where('status', 'active')->first();
         $user_login_info = CustomerLogs::where('customer_id', $user_id)->where('status', 'active')->first();
@@ -84,7 +86,7 @@ class CustomerPackageController extends Controller
         $patient_id = $controller_request->patient_id;
         $total_paying_price = $controller_request->total_paying_price;
         $card_name = $controller_request->card_name;
-        $card_number = $controller_request->card_number;
+        $card_number = $credit_card_number;
         $cvv = $controller_request->cvv;
         $validity = $controller_request->validity;
 
@@ -145,7 +147,7 @@ class CustomerPackageController extends Controller
 
         }
         $json_response = json_decode($json_response, true);
-        // dd($json_response);
+        // dd($request,$json_response);
         if ($json_response['status'] == 'success') {
             //init 3DS
             $request = new \Iyzipay\Request\CreatePaymentRequest();
@@ -755,7 +757,12 @@ class CustomerPackageController extends Controller
         $data['package_list'] = [];
         if (!empty($packages)) {
             foreach ($packages as $key => $value) {
+                $CustomerFavouritePackages= CustomerFavouritePackages::where('status','active')
+                                            ->select('package_id')
+                                            ->where('customer_id',Auth::guard('md_customer_registration')->user()->id)
+                                            ->first();
                 $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
+                $data['package_list'][$key]['favourite_check'] = !empty($CustomerFavouritePackages->package_id) ?'yes' : 'no';
                 $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                 $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
                 $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
@@ -797,6 +804,8 @@ class CustomerPackageController extends Controller
             $city_name = $request->city_name ?? 'Select City';
 
             $counties = Country::where('status', 'active')->get();
+
+            
 
             return view('front.mdhealth.searchResult', compact('packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
 
@@ -904,6 +913,9 @@ class CustomerPackageController extends Controller
         // dd( $token );
         $method = 'GET';
         $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
+          
+          //dd($data);
+        
         $data_two = $this->apiService->getData($token, url('/api/md-customer-purchase-package-completed-list'), null, $method);
         $data_three = $this->apiService->getData($token, url('/api/md-customer-purchase-package-cancelled-list'), null, $method);
 
@@ -1125,6 +1137,7 @@ class CustomerPackageController extends Controller
 
     public function purchase_by_mdcoins(Request $request)
     {
+        // dd(Crypt::encrypt('100000000'));
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'paid_amount' => 'required',
@@ -1138,21 +1151,22 @@ class CustomerPackageController extends Controller
         $user_id = Auth::guard('md_customer_registration')->user()->id;
         if (!empty($user_id)) {
             $coins_data = MDCoins::where('customer_id', $user_id)->where('status', 'active')->first();
+            if (!empty($coins_data->coins)) {
             $avilable_coins = $coins_data->coins;
-            if (!empty($avilable_coins)) {
                 try {
-                    $decrypted = Crypt::decrypt($avilable_coins);
+                    $avilable_coins = Crypt::decrypt($avilable_coins);
                 } catch (Illuminate\Contracts\Encryption\DecryptException) {
                     return redirect()->back()->withErrors('Somthing went wrong , err code: CRYPT_00')->withInput();
                 }
                 //$avilable_coins == $request->avilable_coins
                 if (true) {
-
-                    if ($avilable_coins > $request->paid_amount) {
-                        $balance_coins = floatval($avilable_coins) - floatval($request->paid_amount);
+                        $paid_amount = intval($request->paid_amount);
+                        // dd($avilable_coins,$paid_amount);
+                    if ($avilable_coins > $paid_amount) {
+                        $balance_coins = $avilable_coins - $paid_amount;
                         $hashed_coins = Crypt::encrypt($balance_coins);
                         $coins_data->update(['coins' => $hashed_coins]);
-
+// $coins_data->update(['coins' => $balance_coins]);
                         if (!empty($request->purchase_id)) {
                             $purchase_details = [];
                             $purchase_details['payment_percentage'] = $request->package_percentage_price;
@@ -1240,6 +1254,7 @@ class CustomerPackageController extends Controller
                             $purchase_details['pending_payment'] = $pending_amount;
                             $purchase_details['payment_percentage'] = $request->percentage;
                             $purchase_details['purchase_type'] = 'pending';
+                            $purchase_details['payment_method'] = 'md_coin'; 
                             $purchase_details['created_by'] = $user_id;
 
                             $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
