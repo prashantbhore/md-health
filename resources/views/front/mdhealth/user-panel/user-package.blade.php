@@ -86,13 +86,13 @@ letter-spacing: -0.64px;
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="d-flex gap-3">
+                <div class="w-292">
                     @include('front.includes.sidebar-user')
                 </div>
-                <div class="col-md-9">
+                <div class="w-761">
 
-                    <div class="card">
+                    <div class="card panel-right">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                             Packages
                         </h5>
