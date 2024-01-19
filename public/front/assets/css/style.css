@@ -663,8 +663,15 @@
     background-color: transparent;
     text-decoration: underline;
     text-decoration-color: #4cdb06;
-    text-underline-offset: 15px;
+    text-underline-offset: 10px;
     text-decoration-thickness: 3px;
+
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }
 
 .tab-card .nav-link:hover {
@@ -672,8 +679,8 @@
 }
 
 .tab-card ul {
-    border-bottom: 1px solid #ececec;
-    padding-bottom: 1.6rem;
+    border-bottom: 2px solid #ececec;
+    padding-bottom: 30px;
 }
 
 .tab-card .nav-link {
@@ -1453,10 +1460,12 @@ select {
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.panel-left.card, .panel-right.card {
+.panel-left.card,
+.panel-right.card {
     /* min-height: 467px; */
     min-height: 600px;
 }
+
 .text-white {
     color: #fff;
 }
@@ -1509,7 +1518,7 @@ select {
     /* left: -4px; */
 }
 
-.nav-link.md-active { 
+.nav-link.md-active {
     color: #4cdb06;
     padding-left: 1.8rem;
     font-family: "CamptonBold";
@@ -3883,6 +3892,7 @@ label.tc-text,
     background-color: #0d6efd00;
     border: 1px solid #4cdb06 !important;
     font-weight: 900;
+    font-family: "CamptonExtraBold";
 }
 
 .reviews-button .page-item .page-link:focus {
@@ -4732,12 +4742,26 @@ input[type="radio"] {
 .mrg-68 {
     margin-left: 68px;
 }
-.remove-fav{
+
+.remove-fav {
     font-size: 12px !important;
 }
-.remove-cardb{
+
+.remove-cardb {
     padding: 20px 20px !important;
 }
-.card-h1-fav{
+
+.card-h1-fav {
     font-size: 20px !important;
+}
+
+.back-treat {
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.88px;
 }
