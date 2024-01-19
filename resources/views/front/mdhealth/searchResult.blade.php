@@ -278,18 +278,26 @@
                                             </button>
                                         @endif
 
-                                        @if($package_list['favourite_check']=='no') 
-                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}">
+                                        @if($package_list['favourite_check'] == 'no')
+                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}" style="background-color: gray;">
                                                 <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                             </button>
-                                        @endif
-
+                                       @endif
                                         @elseif($user == false)
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
+                                        @if($package_list['favourite_check']=='yes')     
                                         <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
+                                        @endif
+
+                                        @if($package_list['favourite_check'] == 'no')
+                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}" style="background-color: gray;">
+                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                        </button>
+                                        @endif
+
                                         @endif
 
                                     </div>
