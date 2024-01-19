@@ -66,6 +66,7 @@
 
     <!-- Semantic UI -->
     <link href="{{ URL::asset('front/assets/css/semantic.min.css') }}" rel="stylesheet" type="text/css" />
+    
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" /> -->

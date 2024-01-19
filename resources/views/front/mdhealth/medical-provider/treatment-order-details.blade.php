@@ -382,7 +382,7 @@ letter-spacing: -0.6px;
                                                 </div>
 
                                                 <div class="col-md-12 mb-3 payment-div">
-                                                    <h6 class="section-heading mb-1">Acommodition Details</h6>
+                                                    <h6 class="section-heading mb-1">Accommodation Details</h6>
                                                     {{-- <h6>Assign Hotel</h6> --}}
                                                     {{-- <div class="input-with-cross mb-3">
                                                         <input type="text" name="hotel_id" class="form-control"

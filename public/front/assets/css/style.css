@@ -14,7 +14,7 @@
 }
 
 @font-face {
-    font-family: "CamptonBold";
+    font-family: "CamptonSemiBold";
     src: url("../fonts/campton/CamptonSemiBold.otf");
 }
 
@@ -828,7 +828,7 @@ select {
 
 .bod-right {
     border-right: 1px solid #4cdb06;
-    height: 1180px;
+    height: 1300px;
 }
 
 .df-center {
@@ -1046,9 +1046,9 @@ select {
     border-radius: 3px;
     background-color: #4cdb06;
     border-color: #4cdb06;
-    font-family: Campton;
+    font-family: "Campton";
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 19px;
     letter-spacing: -0.07em;
     transition: 0.15s all;
@@ -1058,8 +1058,8 @@ select {
     color: #f31d1d;
     text-align: center;
     font-family: Campton;
-    font-size: 17px;
-
+    font-size: 16px !important;
+margin-bottom: 35px !important;
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.68px;
@@ -1399,7 +1399,7 @@ select {
 
 .reg-title {
     color: #4cdb06;
-    font-family: "Campton";
+    font-family: "CamptonExtraBold";
     font-size: 33px;
     font-weight: 700;
     line-height: 38.41px;
@@ -1579,6 +1579,7 @@ select {
     font-weight: 400;
     line-height: normal;
     letter-spacing: -1.8px;
+    background: transparent;
 }
 
 .treatment-card {
@@ -1687,6 +1688,7 @@ select {
     font-family: "CamptonBook";
     font-weight: 400;
     letter-spacing: -0.56px;
+    margin-top: 5px !important;
 }
 
 /* Mpluss06 */
@@ -2680,8 +2682,8 @@ span.popup-msg.active {
     margin: 0;
     font: inherit;
     background-color: #d9d9d9;
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     border: 0.15em solid #d9d9d9;
     border-radius: 3px;
     display: grid;
@@ -2714,8 +2716,8 @@ span.popup-msg.active {
     margin: 0;
     font: inherit;
     background-color: #d9d9d9;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border: 0.15em solid #d9d9d9;
     border-radius: 3px;
     display: grid;
@@ -2734,7 +2736,7 @@ span.popup-msg.active {
     /* color: currentColor; */
     width: 32px;
     height: 32px;
-    border: 0.15em solid #d9d9d9;
+    border: 0.23em solid #d9d9d9;
     border-radius: 3px;
     /* transform: translateY(-0.075em); */
     display: grid;
@@ -2757,8 +2759,8 @@ span.popup-msg.active {
 .discount-sctn [type="radio"]::before,
 .mdFoodsPurchaseFoodModal1 input[type="checkbox"]::before {
     content: "";
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 3px;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
@@ -2783,12 +2785,17 @@ span.popup-msg.active {
 .mdFoodsPurchaseFoodModal1 input[type="checkbox"]:checked::before {
     transform: scale(1);
 }
+.card-details .form-control:focus {
+    border: 1px solid #4cdb06 !important;
+    background-color: transparent;
+}
 
-.card-details input {
+.card-details .form-control {
     width: 100%;
     border-radius: 5px;
-    width: 464px;
+    /* width: 464px; */
     height: 49px;
+    width: 101.5%;
     flex-shrink: 0;
     border: 1px solid #4cdb06;
     background-color: transparent;
@@ -2799,6 +2806,11 @@ span.popup-msg.active {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.8px;
+}
+
+.card-details .form-control:focus {
+    border: 1px solid #4cdb06 !important;
+    background-color: transparent;
 }
 
 #wallet,
@@ -3868,11 +3880,18 @@ label.tc-text,
     width: 400.5px;
 }
 
-.bod-bot-5 {
+/* .bod-bot-5 {
     border-bottom: 0.5px solid #4cdb06;
     width: 100%;
     padding-bottom: 2rem;
     margin: 0 0 32px 0;
+}
+ */
+ .bod-bot-5 {
+    border-bottom: 0.5px solid #4cdb06;
+    width: 100%;
+    padding-bottom: 20px;
+    margin: 0 0 20px 0;
 }
 
 #resendotp {
@@ -4498,4 +4517,114 @@ hr:not([size]) {
     -ms-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+}
+.cont-btn {
+    width: 404px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 25px;
+    background: #4CDB06;
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+    transition: 0.15s all;
+}
+
+.cont-btn:hover {
+    background: #47cc05;
+    color: #000002;
+}
+.mb-8{
+    margin-bottom:80px;
+}
+.mb-6{
+    margin-bottom:60px;
+}
+.next-step{
+    font-size: 31px !important;
+}
+.me-8 {
+    margin-right: 6rem!important;
+}
+.mb-4-input {
+    margin-bottom: 1.9rem!important;
+}
+.card-details{
+    width: 45% !important;
+}
+.purchase-details-card input[type="checkbox"] {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0;
+}
+.purchase-details-card input[type="checkbox"]::before {
+    width: 26px !important;
+    height: 26px !important;
+}
+.purchaseBtn-new {
+    height: 49px !important;
+    padding: 0px !important;
+    border-radius: 5px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 49px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+    width: 50%;
+}
+.purchase-details-card > .card-body {
+    padding-right: 2rem !important;
+}
+.paymentsPage > .searchBar > .container > .packageResult{
+    padding: 1.25rem 2.25rem !important;
+}
+.f-s30{
+    font-size: 53px !important;
+    margin-top: 25px !important;
+    margin-bottom: 20px;
+    letter-spacing: -0.04em;
+}
+.twenty, .thirty, .fifty, .hundred{
+    font-size: 19px !important;
+}
+.lh-base span.smallFont {
+    font-size: 15px !important;
+}
+.mb30{
+    margin-bottom: 30px !important;
+}
+.fnt20{
+    font-size: 20px !important;
+}
+input[type="checkbox"], input[type="radio"]{
+    cursor: pointer !important;
+}
+.t_price_sm {
+    color: #4CDB06;
+    font-family: 'CamptonSemiBold' !important;
+    font-size: 12px;
+    letter-spacing: normal !important;
+}
+.sms-input .form-control:focus {
+    border-color: #4cdb06 !important;
+
+}
+/* .sms-input .form-control:valid {
+    border-color: #4cdb06 !important;
+} */
+
+.creditCardContainer p.validity{
+    letter-spacing:5px !important;
+    margin-top: 13px !important;
+}
+.mrg-68{
+    margin-left: 68px;
 }

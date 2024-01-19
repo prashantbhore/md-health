@@ -61,7 +61,7 @@
 
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-    <div class="d-flex gap-3">
+        <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
@@ -261,7 +261,7 @@
                             @endif
                         </select>
                     </div>
-                    <input type="hidden" id="vehicle_details_input" name="vehicle_details_input" readonly> 
+                    <input type="hidden" id="vehicle_details_input" name="vehicle_details_input" readonly>
 
                     <div class="date-picker-div mb-5">
                         <label class="form-label mb-3">Reservation Days</label>
@@ -354,7 +354,7 @@
                     <div class="form-group d-flex flex-column mb-5">
                         <label class="form-label mb-3">Visa Service Price</label>
                         <div class="input-icon-div ">
-                            <input type="text" class="form-control" name="visa_service_price" id="visa_service_price" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['visa_service_price']) ? $packages_active_list['visa_service_price'] : '' }}">
+                            <input type="text" class="form-control" name="visa_service_price" id="visa_service_price" placeholder="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" value="{{ !empty($packages_active_list['visa_service_price']) ? $packages_active_list['visa_service_price'] : '' }}">
                             <span class="input-icon">₺</span>
                         </div>
                     </div>
@@ -408,14 +408,12 @@
                 <div class="form-group d-flex flex-column mb-5 section-heading-div">
                     <!-- <h6 class="section-heading">Featured Request</h6> -->
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="featured_product" id="featured_product"
-                        {{ (!empty($packages_active_list['featured_product']) && $packages_active_list['featured_product']=="yes") ? 'checked' : '' }}>
-                        <label class="section-heading" for="featureproducts" >Featured Request</label>
+                        <input type="checkbox" class="form-check-input" name="featured_product" id="featured_product" {{ (!empty($packages_active_list['featured_product']) && $packages_active_list['featured_product']=="yes") ? 'checked' : '' }}>
+                        <label class="section-heading" for="featureproducts">Featured Request</label>
                     </div>
                     <div class="form-check">
+                        <label class="form-check-label" for="featureproducts">I confirm that all details are correct and meets the <a href="#" class="text-green fw-700 text-decoration-underline camptonBold">Terms & Conditions.</a></label>
                         <input type="checkbox" class="form-check-input" name="featureproducts" id="featureproducts" {{ !empty($packages_active_list['id']) ? 'checked disabled' : '' }}>
-                        <label class="form-check-label" for="featureproducts">I confirm
-                            that all details are correct and meets the <a href="#" class="text-green fw-700 text-decoration-underline camptonBold">Terms & Conditions.</a></label>
                     </div>
                 </div>
                 <input type="hidden" name="platform_type" value="web">
@@ -591,7 +589,8 @@
     function categoryselect(value) {
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('login_token') }}';
+        const bearer_token = '{{ Session::get('
+        login_token ') }}';
         // alert(bearer_token);
 
         $.ajax({
@@ -723,7 +722,8 @@
             var selectedvehicleid = $(this).val();
             // alert(selectedvehicleid);
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('login_token') }}';
+            const bearer_token = '{{ Session::get('
+            login_token ') }}';
 
             if (selectedvehicleid) {
                 $.ajax({
@@ -777,7 +777,8 @@
         $('#hotel_id').on('change', function() {
             var selectedHotelId = $(this).val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('login_token') }}';
+            const bearer_token = '{{ Session::get('
+            login_token ') }}';
 
             if (selectedHotelId) {
                 $.ajax({
@@ -828,7 +829,8 @@
         $('#tour_id').on('change', function() {
             var selectedtourid = $(this).val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('login_token') }}';
+            const bearer_token = '{{ Session::get('
+            login_token ') }}';
 
             if (selectedtourid) {
                 $.ajax({

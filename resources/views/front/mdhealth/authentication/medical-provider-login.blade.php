@@ -4,10 +4,25 @@
         background: #f6f6f6;
     }
 
-    .navbar {
+    .navbar,
+    footer {
         display: none;
     }
+
+    #recaptcha-container {
+        position: absolute;
+        left: 285px;
+        bottom: 275px;
+    }
+
+    .authentication .tab-content .form-check-input {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
 </style>
+
+<div class="position-relative">
 <div class="content-wrapper service-provider-account" id="regdiv">
     <div class="container text-center my-5 authentication">
         <div class="w-100 mb-4 position-relative">
@@ -41,18 +56,18 @@
                         <!-- Form Heading -->
                         <div class="d-flex align-items-center gap-4 pt-5" style="padding-bottom: 2rem;">
                             <a href="{{ url('/') }}"><img src="{{ 'front/assets/img/back.svg' }}" alt="" /></a>
-                            <h1 class="reg-title my-0">Create Provider Account</h1>
+                            <h1 class="reg-title my-0 pb-3">Create Provider Account</h1>
                         </div>
                         <!-- Form -->
                         <div class="form text-start">
                             <form id="myFormProvider">
                                 {{-- action="{{ url('/md-register-medical-provider') }}" method="post" enctype="multipart/form-data" --}}
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                <div class="row gy-4">
+                                    <div class="col-md-6">
                                         <label for="CompanyName" class="form-label">*Company Name</label>
                                         <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Company Name" />
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6">
                                         <label for="city_id" class="form-label">*City</label>
                                         <select required id="city_id" name="city_id" class="form-select">
                                             <option value="" selected disabled>Choose</option>
@@ -61,24 +76,24 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12">
                                         <label for="email" class="form-label">*E-mail</label>
                                         <input type="text" class="form-control" name="email" id="email" placeholder="E-mail" />
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12">
                                         <label for="phone" class="form-label">*Phone</label>
                                         <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" />
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12">
                                         <label for="TAXNumber" class="form-label">*TAX Number</label>
                                         <input type="text" class="form-control" name="tax_no" id="tax_no" placeholder="TAX Sheet Number" />
                                     </div>
 
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12">
                                         <label for="*Company Address" class="form-label">*Company Address</label>
                                         <textarea name="company_address" id="company_address" cols="" rows="5" class="form-control" placeholder="Company Address"></textarea>
                                     </div>
-                                    <div class="col-md-12 mb-3 position-relative">
+                                    <div class="col-md-12 position-relative">
                                         <div class="hide-eye-div">
                                             <label for="password" class="form-label">*Password</label>
                                             <input type="password" class="form-control" name="password" id="password" placeholder="Minimum 8 characters" autocomplete="off" />
@@ -96,13 +111,13 @@
                                         <div class="bod-bot-5">
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-3 position-relative">
+                                    <div class="col-md-12 position-relative">
                                         <label for="*Upload Company Logo" class="form-label">*Upload Company Logo</label>
                                         <input type="file" class="form-control" name="company_logo_image_path" id="company_logo_image_path" placeholder="*Upload Company Logo" />
                                         <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
                                     </div>
 
-                                    <div class="col-md-12 mb-5 position-relative">
+                                    <div class="col-md-12 mb-3 position-relative">
                                         <label for="*Upload Company License" class="form-label">*Upload Company License</label>
                                         <input type="file" class="form-control" name="company_licence_image_path" id="company_licence_image_path" placeholder="*Upload Company License" />
                                         <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs2" class="up-abs" />
@@ -120,8 +135,8 @@
 
                                     <span id="error" class="text-danger"></span>
 
-                                    <div class="col-md-12 text-center d-flex flex-column gap-3">
-                                        <button class="btn btn-md mb-5 w-100 camptonExtraBold" type="button" id="medproreg" style="height: 47px;">Create Account</button>
+                                    <div class="col-md-12 text-center d-flex flex-column gap-3  py-100px">
+                                        <button class="btn cont-btn w-100 mb-4 df-center" type="button" id="medproreg">Create Account</button>
                                         <label for="" class="mt-auto">Already have an account?</label>
                                         <a href="{{ url('sign-in-web') }}" class="signIn-link">Sign In</a>
                                     </div>
@@ -177,15 +192,15 @@
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" />
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" /> --}}
                         <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot1" oninput="handleInput(this, 'ot2')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
-                                <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
-                                </div>
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot2" oninput="handleInput(this, 'ot3')" onkeydown="handleBackspace(event, 'ot1')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot3" oninput="handleInput(this, 'ot4')" onkeydown="handleBackspace(event, 'ot2')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot4" oninput="handleInput(this, 'ot5')" onkeydown="handleBackspace(event, 'ot3')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot5" oninput="handleInput(this, 'ot6')" onkeydown="handleBackspace(event, 'ot4')" class="form-control">
+                        <input type="text" name="otp[]" minlength="1" maxlength="1" id="ot6" oninput="handleInput(this, '')" onkeydown="handleBackspace(event, 'ot5')" class="form-control">
+                    </div>
 
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-md btn-text my-3 text-center w-407p5" id="otp-btn" type="button" onclick="verify()" style="height: 47px;">Sign In</button>
+                        <button class="btn cont-btn w-75 mb-4 df-center" id="otp-btn" type="button" onclick="verify()" >Sign In</button>
                     </div>
                 </form>
                 <script>
@@ -239,7 +254,7 @@
     </div>
 </div>
 <div id="recaptcha-container" class="df-end"></div>
-
+</div>
 @endsection @section('script')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
