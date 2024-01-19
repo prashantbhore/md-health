@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->enum('membership_type', ['silver', 'gold', 'platinum'])->unique();
             $table->enum('vendor_type', ['medical_service_provider','food_vendor','shop_vendor','home_service'])->nullable();
+
+            $table->string('membership_amount')->nullable();
             $table->string('commission_percent')->nullable();
             $table->bigInteger('facility')->nullable();
             $table->string('commission_percent')->nullable();
