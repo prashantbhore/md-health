@@ -19,6 +19,20 @@
     .trmt-card-body .dashboard-card-title {
         font-size:16px
     }
+    .status-label {
+        width: 94px !important;
+height: 19px !important;
+flex-shrink: 0;
+color: #000;
+text-align: center;
+font-family: Campton;
+font-size: 10px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: -0.4px;
+padding: unset !important;
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -92,7 +106,7 @@
                                                 <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="" />
                                             </div>
                                             <div class="df-column">
-                                                <h5 class="mb-0">Package No:{{ !empty($package_active_list['package_unique_no']) ? $package_active_list['package_unique_no'] : '' }}<span class="active">Active</span></h5>
+                                                <h5 class="mb-0">Package No:{{ !empty($package_active_list['package_unique_no']) ? $package_active_list['package_unique_no'] : '' }}<span class="active camptonBold">Active</span></h5>
                                                 <h5 class="card-p1">
                                                     {{ !empty($package_active_list['package_name']) ? $package_active_list['package_name'] : '' }}
                                                 </h5>
@@ -100,7 +114,7 @@
                                             <div class="ms-auto pkgMsg">
                                                 <div class="trmt-card-footer footer-btns">
                                                     <a href="{{ url('edit-package/' . Crypt::encrypt($package_active_list['id'])) }}" class="view-btn">
-                                                    <img src="{{ asset('front/assets/img/viewEntry.png') }}" alt="" /> View </a>
+                                                    <img src="{{ asset('front/assets/img/view.png') }}" alt="" /> View </a>
                                                     <a href="javascript:void(0);" onclick="change_status('{{ $package_active_list['id'] }}', 'active')" class="close-btn">
                                                     <img src="{{ asset('front/assets/img/reject.png') }}" alt="" /> Deactivate </a>
                                                 </div>
@@ -119,9 +133,9 @@
                                             </div>
                                             <div class="df-coloumn">
                                                     <h5 class="mb-0">
-                                                        Package No: {{ !empty($package_deactive_list['package_unique_no']) ? $package_deactive_list['package_unique_no'] : '' }}<span class="cancel">Deactive</span>
+                                                        Package No: {{ !empty($package_deactive_list['package_unique_no']) ? $package_deactive_list['package_unique_no'] : '' }}<span class="cancel status-label df-center">Deactive</span>
                                                     </h5>
-                                                    <h5 class="card-h1">
+                                                    <h5 class="card-h1 d-inline-block">
                                                         {{ !empty($package_deactive_list['package_name']) ? $package_deactive_list['package_name'] : '' }}
                                                     </h5>
                                             </div>

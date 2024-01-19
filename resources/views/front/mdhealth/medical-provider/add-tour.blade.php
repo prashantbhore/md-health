@@ -22,12 +22,12 @@
 
 
     .form-group .prev-img-div img {
-        height: 150px;
-        width: auto;
-        object-fit: contain;
-        margin-top: 15px;
-        border-radius: 3px;
-    }
+    height: 128px;
+    width: 142px;
+    object-fit: contain;
+    margin-top: 15px;
+    border-radius: 3px;
+}
 
 
     .multiple-checkbox-div .multiple-checks {
@@ -65,6 +65,11 @@
     .up-abs {
     top: 47px;
     right: 16px;
+}
+
+.form-control::placeholder {
+    font-family: "CamptonBook";
+    font-weight: 600;
 }
 </style>
 <div class="content-wrapper">
@@ -113,7 +118,7 @@
 
                                     </div>
                                     <div class="prev-img-div">
-                                        <img src="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : 'front/assets/img/default-img.png' }}" alt="image" id="pic" />
+                                        <img src="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : 'front/assets/img/uploadHere.png' }}" alt="image" id="pic" />
                                         <input type="hidden" name="old_image" id="old_image" value="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : '' }}">
                                     </div>
                                 </div>
