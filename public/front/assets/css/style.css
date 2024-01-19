@@ -1687,6 +1687,7 @@ margin-bottom: 35px !important;
     font-family: "CamptonBook";
     font-weight: 400;
     letter-spacing: -0.56px;
+    margin-top: 5px !important;
 }
 
 /* Mpluss06 */
@@ -2680,8 +2681,8 @@ span.popup-msg.active {
     margin: 0;
     font: inherit;
     background-color: #d9d9d9;
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     border: 0.15em solid #d9d9d9;
     border-radius: 3px;
     display: grid;
@@ -2783,8 +2784,12 @@ span.popup-msg.active {
 .mdFoodsPurchaseFoodModal1 input[type="checkbox"]:checked::before {
     transform: scale(1);
 }
+.card-details .form-control:focus {
+    border: 1px solid #4cdb06 !important;
+    background-color: transparent;
+}
 
-.card-details input {
+.card-details .form-control {
     width: 100%;
     border-radius: 5px;
     /* width: 464px; */
@@ -4565,4 +4570,28 @@ hr:not([size]) {
 }
 .fnt20{
     font-size: 20px !important;
+}
+input[type="checkbox"], input[type="radio"]{
+    cursor: pointer !important;
+}
+.t_price_sm {
+    color: #4CDB06;
+    font-family: 'CamptonSemiBold' !important;
+    font-size: 12px;
+    letter-spacing: normal !important;
+}
+.sms-input .form-control:focus {
+    border-color: #4cdb06 !important;
+
+}
+/* .sms-input .form-control:valid {
+    border-color: #4cdb06 !important;
+} */
+
+.creditCardContainer p.validity{
+    letter-spacing:5px !important;
+    margin-top: 13px !important;
+}
+.mrg-68{
+    margin-left: 68px;
 }
