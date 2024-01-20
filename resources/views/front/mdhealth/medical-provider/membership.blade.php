@@ -11,8 +11,33 @@
                     <h5 class="card-header">
                         <span>Your Membership</span>
                     </h5>
+
                     <div class="card-body">
-                        <img src="{{asset('front/assets/img/gold-md.png')}}" alt="">
+
+                       
+                        @if(!empty($membership))
+                        @if($membership->membership_type == 'silver')
+                            <img src="{{ asset('front/assets/img/silver-md.png') }}" alt="">
+                           
+                        @elseif($membership->membership_type == 'gold')
+                            <img src="{{ asset('front/assets/img/gold-md.png') }}" alt="">
+                            
+                        @elseif($membership->membership_type == 'platinum')
+                            <img src="{{ asset('front/assets/img/platinum-md.png') }}" alt="">
+                            
+                        @else
+                            <p>Unknown Membership Type: {{ $membership->membership_type }}</p>
+                        @endif
+                    @endif
+                    
+                      
+                      
+                      
+
+
+
+
+
                     </div>
                 </div>
 
@@ -20,19 +45,48 @@
                 <div class="card membership-card">
                     <h5 class="card-header mb-3">Memberships</h5>
                     <div class="card-body">
+
+
                         <div class="w-100">
-                            <div class="d-flex align-items-center gap-3">
-                                <h5 class="card-h3 mb-1">400.000 ₺</h5>
-                                <h5><img src="{{asset('front/assets/img/GoldMember.svg')}}" alt="" /></h5>
-                                <h5 class="card-h3 mb-1 ms-auto">1.000.000 ₺</h5>
-                            </div>
-                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar" style="width: 79%">79%</div>
-                            </div>
-                            <div class="w-100">
-                                <h5 class="mem-type text-end pt-2">Platinum<span>member</span></h5>
-                            </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <h5 class="card-h3 mb-1">{{$provider_amount}} ₺</h5>
+                            @if(!empty($membership))
+                                @if($membership->membership_type == 'silver')
+                                    <h5><img src="{{ asset('front/assets/img/silver-md.png') }}" alt=""></h5>
+                                @elseif($membership->membership_type == 'gold')
+                                    <h5><img src="{{ asset('front/assets/img/gold-md.png') }}" alt=""></h5>
+                                @elseif($membership->membership_type == 'platinum')
+                                    <h5><img src="{{ asset('front/assets/img/platinum-md.png') }}" alt=""></h5>
+                                @endif
+                            @endif
+                            {{-- Display the remaining amount needed for the next membership --}}
+                            <h5 class="card-h3 mb-1 ms-auto">
+                                {{$next_membership_amount}} ₺
+                            </h5>
                         </div>
+
+                       
+                        <div class="progress" role="progressbar" aria-label="Membership Progress" aria-valuenow="{{ $progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width: {{ $progress_percentage }}%">{{ $progress_percentage }}%</div>
+                        </div>
+                       
+
+                     
+
+                        <div class="w-100">
+                            @if(!empty($membership))
+                                @if($membership->membership_type == 'silver')
+                                    <h5 class="mem-type text-end pt-2">Gold<span>member</span></h5>
+                                @elseif($membership->membership_type == 'gold')
+                                    <h5 class="mem-type text-end pt-2">Platinum<span>member</span></h5>
+                                @elseif($membership->membership_type == 'platinum')
+                                    <h5 class="mem-type text-end pt-2">Platinum<span>member</span></h5>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+
+                        
 
                         <!--  -->
                         <h5 class="card-header mb-3 ps-0">Memberships Specification</h5>
