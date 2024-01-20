@@ -67,7 +67,7 @@
 
                        
                         <div class="progress" role="progressbar" aria-label="Membership Progress" aria-valuenow="{{ $progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: {{ $progress_percentage }}%">{{ $progress_percentage }}%</div>
+                            <div class="progress-bar" style="width: {{ $progress_percentage }}%">{{ number_format($progress_percentage, 2) }}%</div>
                         </div>
                        
 
