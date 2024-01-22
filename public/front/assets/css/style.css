@@ -3959,13 +3959,12 @@ label.tc-text,
     margin: 0 0 32px 0;
 }
  */
-.bod-bot-5 {
-    border-bottom: 0.5px solid #4cdb06;
+ .bod-bot-5 {
+    border-bottom: 0.5px solid #A1E97E;
     width: 100%;
-    padding-bottom: 20px;
-    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    margin: 0 0 12px 0;
 }
-
 #resendotp {
     color: #878787;
     text-align: center;
