@@ -325,7 +325,7 @@ $is_logged_in = false;
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
             <div class="d-flex align-items-center gap-4">
-                <img class="align-self-center" src="{{asset('front/assets/img/playstore.png')}}" alt="">
+                <img class="align-self-center" src="{{asset('front/assets/img/playStore.png')}}" alt="">
                 <p class="camptonBold fs-5">or</p>
                 <div>
                     <img src="{{asset('front/assets/img/qrCode.png')}}" alt="">

@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
+
+
     .multiple-checks {
         display: flex;
         flex-wrap: wrap;
@@ -121,7 +123,7 @@
 
                                         <div class="multiple-checks">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" value="Accomodition" id="foraccommodation" {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Accomodition') !== false ? 'checked' : '' }}>
+                                                <input type="checkbox" class="form-check-input" value="Accomodition" id="foraccomodition" {{ !empty($packages_active_list['other_services']) && strpos($packages_active_list['other_services'], 'Accomodition') !== false ? 'checked' : '' }}>
                                                 {{-- {{ $hotel_details['accommodation'] ? 'checked' : '' }} --}}
                                                 <label class="form-check-label fw-500 fsb-1" for="foraccomodition">Accomodation</label>
                                             </div>

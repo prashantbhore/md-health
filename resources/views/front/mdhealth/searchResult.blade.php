@@ -43,6 +43,15 @@
     .scanQr {
         height: 60vh;
     }
+
+    .treatmentForModal2 .form-control,
+    .treatmentForModal2 .form-select {
+        border: 2px solid #d6d6d6;
+    border-radius: 5px;
+    padding: 10px 16px;
+    height: 48px;
+    font-size: 16px;
+    }
 </style>
 <div class="content-wrapper bg-f6">
 
@@ -330,13 +339,26 @@
                 </div>
 
                 <div class="modal fade treatmentForModal2" id="treatmentForModal2_{{ $package_list['id'] }}" tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered position-relative">
+                    <div class="modal-dialog modal-dialog-centered position-relative" style="width:704px">
                         <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
                         <!-- </button> -->
-                        <div class="modal-content">
-                            <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/modalClose.png' }}" alt="">
-                            <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
-                            <p class="camptonBook text-center">Fill the patient detail.</p>
+                        <div class="modal-content p-4">
+
+                        <div>
+                <div class="text-end">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
+                    </button>
+                </div>
+
+                <div class="text-center" style="margin-top: -8px;">
+                    <h4 class="modal-title modal-h1 mb-2" id="exampleModalLabel">Change Patient Information</h4>
+                    <p class="mb-4 card-p2">Fill the patient detail.</p>
+                </div>
+            </div>
+                            <!-- <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/modalClose.png' }}" alt="">
+                            <p class="modal-h1 mt-4 text-center">Change Patient Information</p>
+                            <p class="card-p1 text-center">Fill the patient detail.</p> -->
                             <div class="modal-body">
                                 <form id="other_form" class="row g-4">
                                     @csrf
@@ -347,29 +369,29 @@
                                         <label for="patient_full_name" class="form-label fw-bold">*Patient
                                             Full
                                             Name</label>
-                                        <input type="text" name="patient_full_name" class="form-control  h-75" id="patient_full_name" placeholder="Full Name">
+                                        <input type="text" name="patient_full_name" class="form-control  " id="patient_full_name" placeholder="Full Name">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="patient_relation" class="form-label fw-bold">*Relationship
                                             To You</label>
-                                        <input type="text" name="patient_relation" class="form-control h-75" id="patient_relation" placeholder="Relationship To You">
+                                        <input type="text" name="patient_relation" class="form-control " id="patient_relation" placeholder="Relationship To You">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="patient_email" class="form-label fw-bold">*Patient
                                             E-mail</label>
-                                        <input type="email" name="patient_email" class="form-control  h-75" id="patient_email" placeholder="Email">
+                                        <input type="email" name="patient_email" class="form-control  " id="patient_email" placeholder="Email">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="patient_contact_no" class="form-label fw-bold">*Patient
                                             Contact
                                             Number</label>
-                                        <input type="tel" name="patient_contact_no" class="form-control  h-75" id="patient_contact_no" placeholder="Contact Number">
+                                        <input type="tel" name="patient_contact_no" class="form-control  " id="patient_contact_no" placeholder="Contact Number">
                                     </div>
 
                                     <div class="col-md-4">
                                         <label for="patient_country_id" class="form-label fw-bold">*Patient
                                             Country</label>
-                                        <select name="patient_country_id" id="patient_country_id" class="form-select h-75">
+                                        <select name="patient_country_id" id="patient_country_id" class="form-select ">
                                             <option value="" selected>Country</option>
                                             @foreach ($counties as $country)
                                             <option value="{{ $country->id }}">
@@ -382,7 +404,7 @@
                                     <div class="col-md-4">
                                         <label for="patient_city_id" class="form-label fw-bold">*Patient
                                             City</label>
-                                        <select name="patient_city_id" id="patient_city_id" class="form-select h-75">
+                                        <select name="patient_city_id" id="patient_city_id" class="form-select ">
                                             <option value="" selected>City</option>
                                             @foreach ($cities as $city)
                                             <option value="{{ $city->id }}">{{ $city->city_name }}
@@ -390,10 +412,10 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <p class="mt-5 mb-0 camptonBook">*You can also change the patient
-                                        information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
-                                    <div class="col-12 text-center ">
-                                        <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                    <p class="mt-5 mb-0 card-p1 fw-bold">*You can also change the patient
+                                        information from <span class="card-h1">panel</span> <span class="camptonBold text-green">></span> <span class="card-h1">packages</span></p>
+                                    <div class="col-12 df-center">
+                                        <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4 df-center">
                                             <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>
                                         </a>
                                     </div>

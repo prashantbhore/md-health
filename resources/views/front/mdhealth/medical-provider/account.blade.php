@@ -344,6 +344,7 @@
                 });
             }
         }
+    }
 </script>
 <script>
     function success_toast(title = '', message = '') {
@@ -444,13 +445,11 @@
                 company_name: {
                     required: true,
                     minlength: 2,
-                    // Adding a custom rule for disallowing spaces
                     nowhitespace: true
                 },
                 company_address: {
                     required: true,
                     minlength: 2,
-                    // Adding a custom rule for disallowing spaces
                     nowhitespace: true
                 },
                 country_id: "required",
