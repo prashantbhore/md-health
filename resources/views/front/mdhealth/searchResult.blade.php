@@ -305,7 +305,7 @@
                                 <form method="POST" id="myForm_{{ $package_list['id'] }}" action="{{ url('health-pack-details') }}" class="mt-auto">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $package_list['id'] }}">
-                                    <button type="submit" href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</buttom>
+                                    <a href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="view_btn card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</a>
                                 </form>
                                 
                             </div>
@@ -392,8 +392,8 @@
                                     </div>
                                     <p class="mt-5 mb-0 camptonBook">*You can also change the patient
                                         information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
-                                    <div class="col-12 text-center ">
-                                        <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                    <div class="col-12 df-center">
+                                        <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4 df-center">
                                             <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span>
                                         </a>
                                     </div>

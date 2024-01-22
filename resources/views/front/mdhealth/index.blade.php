@@ -62,9 +62,11 @@ $is_logged_in = false;
                             <div class="form-floating">
                                 <select class="form-select border-end-0 bod-3" name="city_name" id="floatingSelect" aria-label="Floating label select example">
                                     <option data-display="Select" selected>Select City</option>
+                                    @if(!empty($cities))
                                     @foreach ($cities as $city)
-                                    <option>{{ $city->city_name }}</option>
+                                      <option>{{$city->city_name}}</option>
                                     @endforeach
+                                    @endif
                                 </select>
                                 <label for="floatingSelect">City</label>
                             </div>

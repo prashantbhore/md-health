@@ -65,7 +65,7 @@
 
 <script>
   var titleElement = document.getElementById("example_filter");
-  var titleChildren = titleElement.getElementsByTagName("label");
+ // var titleChildren = titleElement.getElementsByTagName("label");
 
   // Do something with children.
   // In your example code, you'll only have one element returned

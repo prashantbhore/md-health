@@ -1209,7 +1209,7 @@ letter-spacing: -0.64px;
                             </div>
                         </div>
                         <div class="mt-3">
-                            <button class="review-sub-btn" data-bs-toggle="modal" data-bs-target="#hotelcompletedmodel2" data-bs-dismiss="modal">Submit</button>
+                            <button class="btn review-sub-btn" data-bs-toggle="modal" data-bs-target="#hotelcompletedmodel2" data-bs-dismiss="modal">Submit</button>
                         </div>
                     </div>
                 </div>
