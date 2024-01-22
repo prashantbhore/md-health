@@ -305,7 +305,7 @@
                                 <form method="POST" id="myForm_{{ $package_list['id'] }}" action="{{ url('health-pack-details') }}" class="mt-auto">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $package_list['id'] }}">
-                                    <button type="submit" href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</buttom>
+                                    <a href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="view_btn card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</a>
                                 </form>
                                 
                             </div>
