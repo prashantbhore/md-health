@@ -56,7 +56,7 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                <span toggle="#password" class="mdi mdi-eye field-icon toggle-password "></span>
+                                <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password "></span>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">

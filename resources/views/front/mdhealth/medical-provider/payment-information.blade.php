@@ -28,13 +28,13 @@
         border-radius: 2px;
         background: #F3771D;
         color: #FFF;
-text-align: center;
-font-family: Campton;
-font-size: 10px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-letter-spacing: -0.4px;
+        text-align: center;
+        font-family: Campton;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.4px;
     }
 
     .in-progress,

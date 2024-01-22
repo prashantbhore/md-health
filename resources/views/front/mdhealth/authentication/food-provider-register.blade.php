@@ -94,7 +94,7 @@
                                                 <input type="password" class="form-control w-407p5" name="password"
                                                     id="password" placeholder="Minimum 8 characters" />
                                                 <span toggle="#password"
-                                                    class="mdi mdi-eye field-icon toggle-password"></span>
+                                                    class="mdi mdi-eye-off field-icon toggle-password"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
