@@ -148,7 +148,7 @@ class PackageController extends Controller {
             $html2 .= '<div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">';
             $html2 .= '<div class="trmt-card-footer footer-btns">';
             $html2 .= '<a href="' . url( 'edit-package/' . Crypt::encrypt( $package_deactive_list[ 'id' ] ) ) . '" class="view-btn"><img src="' . asset('front/assets/img/view.png') . '" alt="" /> View</a>';
-            $html2 .= '<a href="javascript:void(0);" onclick="change_status(\'' . $package_deactive_list['id'] . '\', \'deactive\')" class="close-btn"><img src="' . asset('front/assets/img/reject.png') . '" alt="" /> Deactivate</a>';
+            $html2 .= '<a href="javascript:void(0);" onclick="change_status(\'' . $package_deactive_list['id'] . '\', \'deactive\')" class="close-btn"><img src="' . asset('front/assets/img/reject.png') . '" alt="" /> Activate</a>';
             $html2 .= '</div></div></div></div>';
         }
 
@@ -183,7 +183,7 @@ class PackageController extends Controller {
             $html2 .= '<div class="ms-auto">';
             $html2 .= '<div class="trmt-card-footer footer-btns pe-0">';
             $html2 .= '<a href="' . url( 'edit-package/' . Crypt::encrypt( $package_deactive_list[ 'id' ] ) ) . '" class="view-btn"><img src="' . asset('front/assets/img/view.png') . '" alt="" /> View</a>';
-            $html2 .= '<a href="javascript:void(0);" onclick="change_status(\'' . $package_deactive_list['id'] . '\', \'deactive\')"  class="close-btn"><img src="' . asset('front/assets/img/reject.png') . '" alt="" /> Deactivate</a>';
+            $html2 .= '<a href="javascript:void(0);" onclick="change_status(\'' . $package_deactive_list['id'] . '\', \'deactive\')"  class="close-btn"><img src="' . asset('front/assets/img/reject.png') . '" alt="" /> Activate</a>';
             $html2 .= '</div></div></div></div>';
         }
 

@@ -24,7 +24,7 @@
                                     <div class="card shadow-none mb-3" style="border-radius: 3px;background: #EDEDED;">
                                         <div class="card-body remove-cardb d-flex justify-content-between">
                                             <div>
-                                                <h5 class="card-h1 card-h1-fav mb-0">{{ $fav['product_category_name'] }}<img
+                                                <h5 class="card-h1 card-h1-fav mb-0">{{ $fav['package_name'] }}<img
                                                         src="{{ asset('front/assets/img/verifiedBy.png') }}" alt=""
                                                         class="ms-3" /></h5>
                                                 <p class="mb-0 d-inline-block card-p1"><img
