@@ -29,9 +29,9 @@ letter-spacing: -0.64px;
         }
 
         .treatment-card-btns {
-            border-bottom: 2px solid #d7d7d7;
-            margin-bottom: 24px;
-            padding-bottom: 24px;
+            border-bottom: 1px solid #bebebe;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
         }
 
         .modal-header {
@@ -140,8 +140,8 @@ letter-spacing: -0.64px;
                                             @foreach ($my_active_packages_list as $key => $active_package)
                                             
                                             
-                                                <div class="card shadow-none mb-4 pkgCard">
-                                                    <div class="card-body d-flex gap-3 w-100 p-4">
+                                                <div class="card shadow-none mb-3 pkgCard">
+                                                    <div class="card-body d-flex gap-3 w-100 p-3">
                                                         <div class="df-center">
                                                             <img src="{{ asset($active_package['company_logo_image_path']) }}"
                                                                 alt=""
@@ -224,8 +224,8 @@ letter-spacing: -0.64px;
                                         aria-labelledby="user-completed-tab">
                                         @if (!empty($my_completed_packages_list))
                                             @foreach ($my_completed_packages_list as $completed_package)
-                                                <div class="card shadow-none mb-4 pkgCard">
-                                                    <div class="card-body d-flex gap-3 w-100 p-4">
+                                                <div class="card shadow-none mb-3 pkgCard">
+                                                    <div class="card-body d-flex gap-3 w-100 p-3">
                                                         <div class="df-center">
                                                             <img src="{{ asset($completed_package['company_logo_image_path']) }}" alt="" class="md-img">
                                                         </div>
@@ -288,8 +288,8 @@ letter-spacing: -0.64px;
                                         aria-labelledby="user-cancelled-tab">
                                         @if (!empty($my_cancelled_packages_list))
                                             @foreach ($my_cancelled_packages_list as $cancelled_package)
-                                                <div class="card shadow-none mb-4 pkgCard">
-                                                    <div class="card-body d-flex gap-3 w-100 p-4">
+                                                <div class="card shadow-none mb-3 pkgCard">
+                                                    <div class="card-body d-flex gap-3 w-100 p-3">
                                                         <div class="df-center">
                                                             <img src="{{ asset($cancelled_package['company_logo_image_path']) }}"
                                                                 alt="" class="md-img"

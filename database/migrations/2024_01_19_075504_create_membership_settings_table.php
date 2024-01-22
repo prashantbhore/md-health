@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('vendor_type', ['medical_service_provider','food_vendor','shop_vendor','home_service'])->nullable();
             $table->string('membership_amount')->nullable();
             $table->string('commission_percent')->nullable();
-            $table->bigInteger('facility')->nullable();
+            $table->longText('facility')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();

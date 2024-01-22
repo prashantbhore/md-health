@@ -757,10 +757,13 @@ class CustomerPackageController extends Controller
         $data['package_list'] = [];
         if (!empty($packages)) {
             foreach ($packages as $key => $value) {
+
+                 if(!empty(Auth::guard('md_customer_registration')->user()->id)){
                 $CustomerFavouritePackages= CustomerFavouritePackages::where('status','active')
                                             ->select('package_id')
                                             ->where('customer_id',Auth::guard('md_customer_registration')->user()->id)
                                             ->first();
+                }  
                 $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
                 $data['package_list'][$key]['favourite_check'] = !empty($CustomerFavouritePackages->package_id) ?'yes' : 'no';
                 $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
@@ -790,6 +793,7 @@ class CustomerPackageController extends Controller
                 ->select('md_product_category.*')
                 ->distinct()
                 ->get();
+                
             $cities = Packages::where('md_packages.status', 'active')
                 ->join('md_medical_provider_register', 'md_packages.created_by', '=', 'md_medical_provider_register.id')
                 ->where('md_master_cities.status', 'active')

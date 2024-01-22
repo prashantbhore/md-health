@@ -1,4 +1,4 @@
-//alert('Hello');
+// alert('Hello');
 
 $(function (){
     var table = $("#pending_vendors_list").DataTable({
@@ -88,6 +88,7 @@ $(function (){
 
 
   $(function (){
+    
     var table = $("#approved_vendor_list").DataTable({
         processing: true,
         serverSide: true,

@@ -2,8 +2,9 @@
 <style>
     .mdCard {
         width: 694px;
-        height: 297px;
+        height: 305px;
         flex-shrink: 0;
+        margin-bottom:25px;
     }
 </style>
 <div class="content-wrapper">
@@ -20,7 +21,8 @@
                     <div class="card-body">
                         <div class="mdCard">
                             <div class="mt-3">
-                                <p class="mb-0 card-h4 camptonBook lh-1">Available <span class="camptonBold">MD</span>coin</p>
+                            <p class="mb-0 card-h3 camptonBook lh-1"><span class="camptonBold">1 MD</span> Coin <span class="camptonBold">= 1 Turkish Lira</span></p>    
+                            <p class="mb-0 card-h4 camptonBook lh-1">Available <span class="camptonBold">MD</span>coin</p>
                                 <p class="mb-0 coinsMD">500</p>
                                 <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" style="border-color: #000;" data-bs-toggle="modal" data-bs-target="#UseMyMDCoin">Use My MD<span class="camptonBook">coin</span></a>
                             </div>
@@ -34,11 +36,11 @@
                             <div class="invite-content">
                                 <p class="mb-0 camptonBook fs-3 fw-bold lh-sm">invite your friends</p>
                                 <p class="mb-0 camptonBold fs-1">
-                                    and <span class="text-green"><u>earn</u></span> MD<span class="camptonBook fw-bold">coin</span>.
+                                    and <span class="text-green">earn</span> MD<span class="camptonBook fw-bold">coin</span>.
                                 </p>
                             </div>
                             <div class="d-flex justify-content-center pe-4">
-                                <a href="{{url('user-invite')}}" type="button" class="btn border-dark btn-sm inviteBtn df-center m-3">Invite Friends</a>
+                                <a href="{{url('user-invite')}}" type="button" class="btn border-dark btn-sm inviteBtn df-center m-3">Invite Now</a>
                             </div>
                         </div>
                     </div>
