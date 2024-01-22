@@ -23,10 +23,31 @@
         line-height: normal;
         letter-spacing: -0.52px;
     }
+
+    .in-progress {
+        border-radius: 2px;
+        background: #F3771D;
+        color: #FFF;
+text-align: center;
+font-family: Campton;
+font-size: 10px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: -0.4px;
+    }
+
+    .in-progress,
+    .active {
+        width: 94px !important;
+        height: 19px !important;
+        flex-shrink: 0;
+
+    }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-    <div class="d-flex gap-3">
+        <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
@@ -118,11 +139,11 @@
                             @foreach ($payment_list as $payment)
 
 
-                            <div class="card shadow-none mb-4 pkgCard">
+                            <div class="card shadow-none mb-4 pkgCard" style="min-height: 75px;">
                                 <div class="card-body d-flex align-items-center gap-3 w-100 p-4">
-                                       <div class="df-center">
+                                    <div class="df-center">
                                         <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" class="md-img-sm">
-                               </div>
+                                    </div>
                                     <div class="df-coloumn">
                                         <div class="trmt-card-body">
                                             <h5 class="mb-0 fs-13">Payment ID: #{{!empty($payment['payment_id'])?$payment['payment_id']:''}}</h5>
@@ -132,7 +153,7 @@
                                     @if($payment['payment_status']=='pending')
                                     <div class="d-flex align-items-center gap-3 mb-3 ms-auto">
                                         <div class="trmt-card-footer">
-                                            <span class="in-progress">Pending</span>
+                                            <span class="in-progress df-center">Pending</span>
                                         </div>
                                     </div>
                                     @endif
@@ -141,7 +162,7 @@
                                     @if($payment['payment_status']=='completed')
                                     <div class="d-flex align-items-center gap-3 mb-3 ms-auto">
                                         <div class="trmt-card-footer">
-                                            <span class="active">Completed</span>
+                                            <span class=" df-center">Completed</span>
                                         </div>
                                     </div>
                                     @endif
@@ -149,54 +170,54 @@
                                 </div>
                             </div>
 
-                            
+
 
                             @endforeach
                             @endif
-               
+
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-</div>
-</div>
-@endsection
-@section('script')
-<script>
-    $(".mpPaymentLi").addClass("activeClass");
-    $(".mpPayment").addClass("md-active");
-</script>
-<script>
-    $(document).ready(function() {
-        $('#liveSearchInput').on('input', function(){
+    @endsection
+    @section('script')
+    <script>
+        $(".mpPaymentLi").addClass("activeClass");
+        $(".mpPayment").addClass("md-active");
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#liveSearchInput').on('input', function() {
 
-            let query = $(this).val();
+                let query = $(this).val();
 
-            var base_url = $("#base_url").val();
+                var base_url = $("#base_url").val();
 
-            $.ajax({
-                url: base_url + "/medical-provider-payment-search",
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                data: {
-                    query: query
-                },
-                success: function(html) {
-                    // Update only if the search box is not empty
-                    if (query.trim() !== "") {
-                        $('#searchResultsContainer').html(html);
-                    } else {
-                        // Clear the results when the search box is empty
-                        $('#searchResultsContainer').html("");
+                $.ajax({
+                    url: base_url + "/medical-provider-payment-search",
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        query: query
+                    },
+                    success: function(html) {
+                        // Update only if the search box is not empty
+                        if (query.trim() !== "") {
+                            $('#searchResultsContainer').html(html);
+                        } else {
+                            // Clear the results when the search box is empty
+                            $('#searchResultsContainer').html("");
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
-                },
-                error: function(error) {
-                    console.log(error);
-                }
+                });
             });
         });
-    });
-</script>
-@endsection
+    </script>
+    @endsection

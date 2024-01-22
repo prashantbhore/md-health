@@ -400,8 +400,7 @@
 }
 
 .request-modal .form-label,
-.treatmentForModal2 .form-label
- {
+.treatmentForModal2 .form-label {
     color: #000002;
     font-family: CamptonBook;
     font-size: 16px;
@@ -1622,7 +1621,7 @@ select {
 .sms-input .form-control {
     width: 60px;
     height: 100px;
-flex-shrink: 0;
+    flex-shrink: 0;
     /* width: 45px;
     height: 80px; */
     padding: 0;
@@ -2886,16 +2885,20 @@ span.popup-msg.active {
     border: 1.5px solid #4cdb06;
     transition: 0.15s all;
 }
+
 span.camptonBook.fw-bold {
     font-size: 3.2rem !important;
 }
+
 .mt-3 .card-h3 {
     margin-bottom: 50px !important;
     margin-top: 15px;
 }
-.mdCard img{
+
+.mdCard img {
     margin-top: 50px;
 }
+
 .mdCard {
     width: 490px;
     height: 297px;
@@ -3969,12 +3972,13 @@ label.tc-text,
     margin: 0 0 32px 0;
 }
  */
- .bod-bot-5 {
+.bod-bot-5 {
     border-bottom: 0.5px solid #A1E97E;
     width: 100%;
     padding-bottom: 12px;
     margin: 0 0 12px 0;
 }
+
 #resendotp {
     color: #878787;
     text-align: center;
@@ -4748,7 +4752,7 @@ input[type="radio"] {
 .sms-input .form-control:focus {
     /* border-color: #4cdb06 !important; */
     border-radius: 5px;
-border: 2px solid #4CDB06 !important;
+    border: 2px solid #4CDB06 !important;
 
 }
 
@@ -4776,11 +4780,13 @@ border: 2px solid #4CDB06 !important;
 .card-h1-fav {
     font-size: 20px !important;
 }
-.invite-content .camptonBook{
-    font-size: 2.5rem!important;
+
+.invite-content .camptonBook {
+    font-size: 2.5rem !important;
 }
-.invite-content .camptonBold{
-    font-size: 3.4rem!important;
+
+.invite-content .camptonBold {
+    font-size: 3.4rem !important;
 }
 
 .back-treat {
@@ -4815,10 +4821,16 @@ border: 2px solid #4CDB06 !important;
     height: auto;
 }
 
-.other-services .card-body .section-heading{
+.other-services .card-body .section-heading {
     margin-bottom: 20px !important;
     margin-top: 25px !important;
 }
-.reservations-box{
+
+.reservations-box {
     min-height: 449px !important;
+}
+
+#go_to_packages,
+#go_to_home {
+    cursor: pointer;
 }
