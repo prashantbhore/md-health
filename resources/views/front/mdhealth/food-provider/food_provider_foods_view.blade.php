@@ -158,14 +158,80 @@
                                         <textarea class="form-control" id="food_description" name="food_description" rows="20" placeholder="Product Description"></textarea>
                                     </div>
 
-                                    <div class="section-btns pt-3 mb-4">
+                                    <div class="section-btns pt-3 mb-4" >
                                         <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100"
                                             data-bs-toggle="modal" data-bs-target="#AddMenuModal">Add Menu</a>
                                     </div>
 
+
+
+                                    <!-- Modal for Add Menu -->
+<!-- Modal -->
+<div class="modal fade add-menu-modal" id="AddMenuModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="">Add Menu</h5>
+            <h5 class="modal-title2" id="">Add New Menu for Meal Package</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+        </div>
+        <div class="modal-body form-div">
+            <div class="form-group d-flex flex-column mb-3">
+                <label class="form-label">Day</label>
+                <select name="days" id="days">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+            </div>
+            <div class="form-group d-flex flex-column mb-3">
+                <label class="form-label">Calories</label>
+                <select name="calories" id="calories">
+                    <option value="">Max 1500 kcal Daily</option>
+                    <option value="">Max 2000 kcal Daily</option>
+                    <option value="">Max 2500 kcal Daily</option>
+                    <option value="">Max 3000 kcal Daily</option>
+                </select>
+            </div>
+            <div class="form-group d-flex flex-column mb-3">
+                <label class="form-label">Meal</label>
+                <select name="meal_type" id="meal_type">
+                    <option value="">Breakfast</option>
+                    <option value="">Lunch </option>
+                    <option value="">Dinner</option>
+                </select>
+            </div>
+            <div class="modal-upload-img mb-3">
+                <label class="form-label">Food Picture</label>
+                <div class="small-12 large-4 columns">
+                    <div class="imageWrapper">
+                        <img class="image" src="{{ asset('front/assets/img/default.jpg') }}">
+                    </div>
+                    <button class="file-upload"> <input type="file" name="menu_image_path" id="menu_image_path" class="file-input"></button>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="form-label">Menu</label>
+                <textarea class="form-control" id="menu" name="menu" rows="3" placeholder="Description"></textarea>
+            </div>
+            <div class="section-btns pt-3 mb-4" onclick="saveMenu();">
+                <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100">Save Menu</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal for Add Menu -->
+
+
+
+
+
                                     <div class="menu-list-div mb-4">
                                         <h6 class="section-heading">Menu's</h6>
-                                        <div class="row">
+                                        <div class="row"  id="menuList">
                                             <div class="col-md-3 mb-5">
                                                 <div class="menu-div">
                                                     <label class="form-menu-label fw-600 mb-2 fsb-1">Day 1 - Menu</label>
@@ -236,7 +302,7 @@
                                         <h6 class="section-heading">Breakfast Price</h6>
                                         <label class="form-label">Breakfast Price (VAT Included Price)</label>
                                         <div class="input-icon-div p-relative">
-                                            <input type="text" class="form-control" placeholder="Breakfast Price">
+                                            <input type="text" class="form-control" id="breakfast_price" name="breakfast_price" placeholder="Breakfast Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -245,7 +311,7 @@
                                         <h6 class="section-heading">Lunch Price</h6>
                                         <label class="form-label">Lunch Price (VAT Included Price)</label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" placeholder="Lunch Price">
+                                            <input type="text" class="form-control" id="lunch_price" name="lunch_price" placeholder="Lunch Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -254,7 +320,7 @@
                                         <h6 class="section-heading">Dinner Price</h6>
                                         <label class="form-label">Dinner Price (VAT Included Price) </label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" placeholder="Dinner Price">
+                                            <input type="text" class="form-control" id="dinner_price" name="dinner_price" placeholder="Dinner Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -263,7 +329,7 @@
                                         <h6 class="section-heading">Total Price</h6>
                                         <label class="form-label">Discount </label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" placeholder="0">
+                                            <input type="text" class="form-control" id="package_price" name="package_price" placeholder="0">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -271,7 +337,7 @@
                                     <div class="form-group d-flex flex-column mb-4">
                                         <label class="form-label">Sale Price</label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control" id="sales_price" name="sales_price"
                                                 placeholder="Calculated Automatically for Daily, Weekly, Monthly">
                                             <span class="input-icon">₺</span>
                                         </div>
@@ -281,7 +347,7 @@
                                         <h6 class="section-heading d-flex justify-content-between">Featured Request
                                             <span>%</span></h6>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="featureproducts">
+                                            <input type="checkbox" class="form-check-input" id="featureproducts" name="featureproducts">
                                             <label class="form-check-label fw-700 text-secondary"
                                                 for="featureproducts">Featured this product</label>
                                             <p class="text-muted fw-400"><i>*You pay 3% more commission on this
@@ -291,7 +357,7 @@
 
                                     <div class="section-btns mb-3">
                                         <a href="javascript:void(0);"
-                                            class="green-plate bg-green text-dark fw-700">Product Active</a>
+                                            class="green-plate bg-green text-dark fw-700" onclick="activateProduct()">Product Active</a>
                                         <a href="javascript:void(0);"
                                             class="black-plate bg-black text-white fw-700">Cancel</a>
                                     </div>
@@ -306,65 +372,10 @@
     </div>
 @endsection
 
-<!-- Modal for Add Menu -->
-<!-- Modal -->
-<div class="modal fade add-menu-modal" id="AddMenuModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="">Add Menu</h5>
-                <h5 class="modal-title2" id="">Add New Menu for Meal Package</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-            </div>
-            <div class="modal-body form-div">
-                <div class="form-group d-flex flex-column mb-3">
-                    <label class="form-label">Day</label>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                    </select>
-                </div>
-                <div class="form-group d-flex flex-column mb-3">
-                    <label class="form-label">Calories</label>
-                    <select name="" id="">
-                        <option value="">Max 1500 kcal Daily</option>
-                        <option value="">Max 2000 kcal Daily</option>
-                        <option value="">Max 2500 kcal Daily</option>
-                        <option value="">Max 3000 kcal Daily</option>
-                    </select>
-                </div>
-                <div class="form-group d-flex flex-column mb-3">
-                    <label class="form-label">Meal</label>
-                    <select name="" id="">
-                        <option value="">Breakfast</option>
-                        <option value="">Lunch </option>
-                        <option value="">Dinner</option>
-                    </select>
-                </div>
-                <div class="modal-upload-img mb-3">
-                    <label class="form-label">Food Picture</label>
-                    <div class="small-12 large-4 columns">
-                        <div class="imageWrapper">
-                            <img class="image" src="{{ asset('front/assets/img/default.jpg') }}">
-                        </div>
-                        <button class="file-upload"> <input type="file" class="file-input"></button>
-                    </div>
-                </div>
-                <div class="form-group mb-4">
-                    <label class="form-label">Menu</label>
-                    <textarea class="form-control" id="productstext" rows="3" placeholder="Description"></textarea>
-                </div>
-                <div class="section-btns pt-3 mb-4">
-                    <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100">Save Menu</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal for Add Menu -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
 
 @section('script')
     <script>
@@ -387,6 +398,103 @@
             reader.readAsDataURL(this.files[0]);
         });
     </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Your existing scripts... -->
+
+<script>
+    // Function to handle "Add Menu" button click
+    function addMenu() {
+        // Your logic to show the "Add Menu" modal
+        alert('11');
+        $('#AddMenuModal').modal('show');
+    }
+
+    // Function to handle "Save Menu" button click in the Add Menu modal
+    function saveMenu() {
+    try {
+        alert('Before API Call'); // Debugging alert
+
+        // var button = $(this).val();
+        var form = document.getElementById("foodaddform");
+        var formData = new FormData(form);
+        var base_url = $('#base_url').val();
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const bearer_token = '{{ Session::get('login_token') }}';
+        // formData.append('button_type', button);
+
+        alert('Before AJAX Call'); // Debugging alert
+
+        $.ajax({
+            url: base_url + '/api/md-add-food-packages',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'Authorization': 'Bearer ' + bearer_token,
+                'X-CSRF-TOKEN': token,
+            },
+            success: function(response) {
+                console.log(response.id);
+                alert('API Call Success'); // Debugging alert
+
+                // Continue with your success logic
+            },
+            error: function(error) {
+                console.error('Upload error:', error);
+                alert('API Call Error'); // Debugging alert
+            }
+        });
+
+        // Make sure this part is reachable
+        alert('After AJAX Call'); // Debugging alert
+
+        // Continue with your logic
+        
+        // var returnedMenuId = yourApiCallToAddMenuAndGetId();
+        // Close the modal
+        $('#AddMenuModal').modal('hide');
+
+        // Add the menu to the menu list in the main form
+        // addMenuToList(returnedMenuId);
+    } catch (error) {
+        console.error("Error in saveMenu:", error);
+    }
+}
+
+    // Function to add the menu to the menu list
+    function addMenuToList(menuId) {
+        alert('33');
+        // Your logic to fetch menu details based on the menuId
+        var menuDetails = getMenuDetailsById(menuId);
+
+        // Create HTML for the new menu item
+        var newMenuItem = '<div class="col-md-3 mb-5">' +
+            '<div class="menu-div">' +
+            // Include details of the menu here based on menuDetails
+            '</div>' +
+            '</div>';
+
+        // Append the new menu item to the menu list
+        $('#menuList').append(newMenuItem);
+    }
+
+    // Function to handle "Product Active" button click
+    function activateProduct() {
+        alert('44');
+        // Your logic to submit prices data including menu IDs
+        // You can collect menu IDs from the menu list and submit them as needed
+        var menuIds = getMenuIdsFromList();
+
+        // Make API call to submit prices data including menu IDs
+        yourApiCallToSubmitPricesData(menuIds);
+    }
+
+    // Additional functions as needed...
+
+</script>
 
     {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 

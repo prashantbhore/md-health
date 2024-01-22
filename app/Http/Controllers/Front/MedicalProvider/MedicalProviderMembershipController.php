@@ -57,13 +57,13 @@ $next_membership = null;
 $progress_percentage = ($membership && $membership->membership_type == 'platinum') ? 100 : ($provider_amount / ($next_membership ? $next_membership->membership_amount : 1)) * 100;
 $progress_percentage = min(100, $progress_percentage); // Ensure it does not exceed 100%
 
-return view('front.mdhealth.medical-provider.membership', compact(
-'provider_amount',
-'membership',
-'next_membership_amount',
-'progress_percentage',
-));
-  }
+    return view('front.mdhealth.medical-provider.membership', compact(
+    'provider_amount',
+    'membership',
+    'next_membership_amount',
+    'progress_percentage',
+    ));
+}
   
 
 

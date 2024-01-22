@@ -589,8 +589,7 @@
     function categoryselect(value) {
         var base_url = $('#base_url').val();
         const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('
-        login_token ') }}';
+        const bearer_token = '{{ Session::get('login_token') }}';
         // alert(bearer_token);
 
         $.ajax({
@@ -722,8 +721,7 @@
             var selectedvehicleid = $(this).val();
             // alert(selectedvehicleid);
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-            login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
 
             if (selectedvehicleid) {
                 $.ajax({
@@ -738,8 +736,7 @@
                     },
                     success: function(response) {
                         console.log(response);
-                        $('#vehicle_details_input').val(response.price
-                            .vehicle_per_day_price);
+                        $('#vehicle_details_input').val(response.price.vehicle_per_day_price);
                         updateAccommodationPrice();
                     },
                     error: function(xhr, status, error) {
@@ -777,8 +774,7 @@
         $('#hotel_id').on('change', function() {
             var selectedHotelId = $(this).val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-            login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
 
             if (selectedHotelId) {
                 $.ajax({
@@ -829,8 +825,7 @@
         $('#tour_id').on('change', function() {
             var selectedtourid = $(this).val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const bearer_token = '{{ Session::get('
-            login_token ') }}';
+            const bearer_token = '{{ Session::get('login_token') }}';
 
             if (selectedtourid) {
                 $.ajax({

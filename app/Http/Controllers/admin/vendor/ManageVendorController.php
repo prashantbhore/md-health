@@ -87,7 +87,7 @@ class ManageVendorController extends Controller
         $total_approved_count = $sorted_approved_vendors->count();
         $total_rejected_count = $sorted_rejected_vendors->count();
 
-        return view('admin.vendors.pending-vendors', compact('total_pending_count', 'total_approved_count', 'total_rejected_count'));
+        return view('admin.vendors.pending-vendors', compact('total_pending_count','total_approved_count','total_rejected_count'));
     }
 
 
@@ -97,6 +97,8 @@ class ManageVendorController extends Controller
 
     public function pending_vendor_data_table(Request $request)
     {
+
+       
 
         $medical_vendor = [];
         $food_vendor = [];
