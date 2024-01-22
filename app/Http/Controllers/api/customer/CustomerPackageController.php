@@ -142,7 +142,7 @@ class CustomerPackageController extends BaseController
                 'md_product_sub_category.product_sub_category_name',
                 'md_master_cities.city_name'
             )
-                // ->where('md_packages.status', 'active')
+                ->where('md_packages.status', 'active')
                 // ->where('md_product_category.status', 'active')
                 // ->where('md_product_sub_category.status', 'active')
                 // ->where('md_packages.purchase_status', 'not_purchased')
@@ -223,7 +223,7 @@ class CustomerPackageController extends BaseController
                 'md_master_vehicle_comfort_levels.vehicle_level_name',
                 'md_tours.tour_name'
             )
-                // ->where('md_packages.status', 'active')
+                ->where('md_packages.status', 'active')
                 // ->where('md_product_category.status', 'active')
                 // ->where('md_product_sub_category.status', 'active')
                 ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
@@ -2543,7 +2543,7 @@ class CustomerPackageController extends BaseController
                 'md_customer_purchase_details.id as purchase_id',
                 // 'md_customer_purchase_details.status',
                 // 'md_customer_purchase_details.package_total_price',
-                // 'md_customer_purchase_details.created_at',
+                'md_customer_purchase_details.created_at',
                 'md_customer_purchase_details.payment_percentage',
                 'md_customer_purchase_details.treatment_start_date',
                 'md_packages.id as package_id',
@@ -2576,25 +2576,47 @@ class CustomerPackageController extends BaseController
         // foreach ($customer_purchase_package_active_list as $key => $val) {
         $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string)$customer_purchase_package_active_list->purchase_id : '';
         $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
+        $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? (string)$customer_purchase_package_active_list->created_at : '';
         // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
         $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
         $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
         $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
         $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ?  $customer_purchase_package_active_list->company_logo_image_path : '';
+        // $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
+        // $treatmentStartTimestamp = strtotime($treatment_start_date);
+
+        // // Get today's date as a UNIX timestamp
+        // $todayTimestamp = time();
+
+        // // Calculate the difference in seconds between the treatment start date and today's date
+        // $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+
+        // // Convert the time difference to days
+        // $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+        // $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
         $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
-        $treatmentStartTimestamp = strtotime($treatment_start_date);
 
-        // Get today's date as a UNIX timestamp
-        $todayTimestamp = time();
+        if (!empty($treatment_start_date)) {
+            // Treatment start date is provided
+            $treatmentStartTimestamp = strtotime($treatment_start_date);
 
-        // Calculate the difference in seconds between the treatment start date and today's date
-        $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+            // Get today's date as a UNIX timestamp
+            $todayTimestamp = time();
 
-        // Convert the time difference to days
-        $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+            // Calculate the difference in seconds between the treatment start date and today's date
+            $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
 
-        $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
+            // Convert the time difference to days
+            $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+            $customer_purchase_package_active_list['treatment_start_date'] = 'Time left to treatment: ' . $daysRemaining . ' days';
+        } else {
+            // Treatment start date is not provided
+            $customer_purchase_package_active_list['treatment_start_date'] = 'Treatment start date not available';
+        }
+
 
         $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
@@ -2789,7 +2811,7 @@ class CustomerPackageController extends BaseController
     {
         $CustomerDocuments = CustomerDocuments::where('status', 'active')
             ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
-            ->where('package_id',$request->package_id)
+            ->where('package_id', $request->package_id)
             ->where('customer_id', Auth::user()->id)
             ->get();
 
@@ -3290,13 +3312,15 @@ class CustomerPackageController extends BaseController
                 'md_customer_favourite_packages.id',
                 'md_packages.treatment_period_in_days',
                 'md_product_category.product_category_name',
-                'md_master_cities.city_name'
+                'md_master_cities.city_name',
+                'md_packages.package_name'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
+            ->orderBy('md_customer_favourite_packages.id', 'desc')
             ->get();
 
         if (!empty($CustomerFavouritePackages)) {
