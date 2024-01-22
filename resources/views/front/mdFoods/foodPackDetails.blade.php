@@ -113,8 +113,8 @@
                     <div class="modal-content">
                         <img class="closeModal" data-bs-dismiss="modal"
                             src="{{ 'front/assets/img/modalClose.png' }}" alt="">
-                        <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
-                        <p class="camptonBook text-center">Fill the patient detail.</p>
+                        <p class="modal-h1 mt-4 text-center">Change Patient Information</p>
+                        <p class="card-p1 text-center">Fill the patient detail.</p>
                         <div class="modal-body">
                             <form id="other_form" class="row g-4">
                                 <input type="hidden" name="package_id" value="">

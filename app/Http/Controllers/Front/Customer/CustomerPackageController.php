@@ -732,7 +732,7 @@ class CustomerPackageController extends Controller
             'md_master_vehicle_comfort_levels.vehicle_level_name',
             'md_tours.tour_name'
         )
-        // ->where('md_packages.status', 'active')
+        ->where('md_packages.status', 'active')
         // ->where('md_product_category.status', 'active')
         // ->where('md_product_sub_category.status', 'active')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
@@ -793,7 +793,7 @@ class CustomerPackageController extends Controller
                 ->select('md_product_category.*')
                 ->distinct()
                 ->get();
-                
+
             $cities = Packages::where('md_packages.status', 'active')
                 ->join('md_medical_provider_register', 'md_packages.created_by', '=', 'md_medical_provider_register.id')
                 ->where('md_master_cities.status', 'active')
