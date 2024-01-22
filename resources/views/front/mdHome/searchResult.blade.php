@@ -1,5 +1,14 @@
 @extends('front.layout.layout2')
 @section('content')
+<style>
+    #serviceForModal2 .form-control {
+        border: 2px solid #d6d6d6;
+    border-radius: 5px;
+    padding: 10px 16px;
+    height: 48px;
+    font-size: 16px;
+    }
+</style>
 <div class="content-wrapper bg-f6">
 
     <!-- SECTION 1 -->
@@ -284,8 +293,8 @@
                 <!-- </button> -->
             <div class="modal-content">
                 <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/modalClose.png')}}" alt="">
-                <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
-                <p class="camptonBook text-center">Fill the patient detail.</p>
+                <p class="card-h1 mt-4 text-center">Change Patient Information</p>
+                <p class="card-p1 text-center">Fill the patient detail.</p>
                 <div class="modal-body">
                     <form class="row g-4">
                             <div class="col-md-4">
