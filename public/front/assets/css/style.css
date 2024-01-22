@@ -1613,11 +1613,8 @@ select {
 }
 
 .sms-input .form-control {
-    width: 60px;
-    height: 100px;
-flex-shrink: 0;
-    /* width: 45px;
-    height: 80px; */
+    width: 45px;
+    height: 80px;
     padding: 0;
     color: #000;
     text-align: center;
@@ -1639,6 +1636,61 @@ flex-shrink: 0;
     /* box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important; */
 }
 
+.treatment-card-report {
+    /* width: 687px; */
+    height: auto !important;
+    padding: 15px 5px !important;
+    border-radius: 3px;
+    background: #f6f6f6;
+    background-color: #f6f6f6;
+    /* box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important; */
+}
+.report-text {
+    margin-top: 0px !important;
+}
+.report-img{
+    padding: 3px 10px;
+    float: left;
+    width: 75px;
+    background-color: #fff;
+    height: 75px;
+    text-align: center;
+    vertical-align: middle !important;
+    border-radius: 5px;
+}
+.report-img img{
+    width: 100%;
+}
+.treatment-card-report .trmt-card-footer{
+    padding-right:0px !important;
+}
+.treatment-card-report .dashboard-card-title{
+    margin-bottom:5px !important;
+} 
+.report-text span {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 3px;
+}
+.view-more-reports {
+    margin: 20px 10px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid #CFCFCF !important;
+}
+.view-more-reports .view-more-content h5:last-child {
+    font-size: 11px !important;
+    margin-top: 5px !important;
+    font-family: "Camptonlight" !important;
+}
+.head-report{
+    padding: 0px !important;
+}
+.hide-reports{
+    background-color: #f55c5c !important;
+    color: #fff !important;
+}
+
+
 .pending {
     width: 130px;
     height: 25px;
@@ -1651,12 +1703,14 @@ flex-shrink: 0;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
     padding: 5px 35px;
     text-transform: capitalize;
+}
+.favorites-bt{
+    cursor: pointer;
 }
 
 .order-details .card-header p {
@@ -3962,12 +4016,13 @@ label.tc-text,
     margin: 0 0 32px 0;
 }
  */
- .bod-bot-5 {
-    border-bottom: 0.5px solid #A1E97E;
+.bod-bot-5 {
+    border-bottom: 0.5px solid #4cdb06;
     width: 100%;
-    padding-bottom: 12px;
-    margin: 0 0 12px 0;
+    padding-bottom: 20px;
+    margin: 0 0 20px 0;
 }
+
 #resendotp {
     color: #878787;
     text-align: center;
@@ -4739,9 +4794,7 @@ input[type="radio"] {
 }
 
 .sms-input .form-control:focus {
-    /* border-color: #4cdb06 !important; */
-    border-radius: 5px;
-border: 2px solid #4CDB06 !important;
+    border-color: #4cdb06 !important;
 
 }
 
@@ -4814,4 +4867,21 @@ border: 2px solid #4CDB06 !important;
 }
 .reservations-box{
     min-height: 449px !important;
+}
+.wd100{
+    width: 100% !important;
+}
+.purchaseBtn-new-user {
+    height: 49px !important;
+    padding: 0px !important;
+    border-radius: 5px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 49px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+    width: 48%;
 }

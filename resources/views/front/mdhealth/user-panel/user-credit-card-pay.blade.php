@@ -155,7 +155,7 @@
                             <div id="card">
                                 <div class="row">
                                     <div class="col-8">
-                                        <form action="" id="creditCardForm" class="card-details">
+                                        <form action="" id="creditCardForm" class="card-details wd100">
 
                                             <h1 class="card-h1 mb-2">Remaining Amount: <span class="camptonExtraBold fs-18">{{ !empty($data['package_percentage_price']) ? $data['package_percentage_price'] : '' }}</span></h1>
 
@@ -179,7 +179,7 @@
                                                 </div>
 
                                                 <div class="col-md-12">
-                                                    <a href="#" class="btn purchaseBtn fsb-2" style="color: #fff; height: unset; padding: 12px 2rem;">Proceed Payment</a>
+                                                    <a href="#" class="btn purchaseBtn purchaseBtn-new-user fsb-2" style="color: #fff; height: unset; padding: 12px 2rem;">Proceed Payment</a>
                                                 </div>
                                             </div>
 
