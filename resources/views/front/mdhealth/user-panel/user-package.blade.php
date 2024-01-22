@@ -154,7 +154,7 @@ letter-spacing: -0.64px;
                                                             </h5>
 
                                                             <h6 class="card-h1">
-                                                                {{ !empty($active_package['product_category_name']) ? $active_package['product_category_name'] : '' }}
+                                                                {{ !empty($active_package['package_name']) ? $active_package['package_name'] : '' }}
                                                             </h6>
 
                                                             <div class="d-flex align-items-center gap-3 mb-3">
@@ -235,7 +235,7 @@ letter-spacing: -0.64px;
                                                                     {{ !empty($completed_package['company_name']) ? $completed_package['company_name'] : '' }}
                                                                 </h5>
                                                                 <h6 class="card-h1">
-                                                                    {{ !empty($completed_package['product_category_name']) ? $completed_package['product_category_name'] : '' }}
+                                                                    {{ !empty($completed_package['package_name']) ? $completed_package['package_name'] : '' }}
                                                                 </h6>
                                                                 <div class="d-flex align-items-center gap-3 mb-3">
                                                                     <p class="fsb-2 mb-0 d-flex align-items-center gap-1">
@@ -300,7 +300,7 @@ letter-spacing: -0.64px;
                                                                 {{ !empty($cancelled_package['company_name']) ? $cancelled_package['company_name'] : '' }}
                                                             </h5>
                                                             <h6 class="card-h1">
-                                                                {{ !empty($cancelled_package['product_category_name']) ? $cancelled_package['product_category_name'] : '' }}
+                                                                {{ !empty($cancelled_package['package_name']) ? $cancelled_package['package_name'] : '' }}
                                                             </h6>
                                                             <div class="d-flex align-items-center gap-3 mb-3">
                                                                 <p class="fsb-2 mb-0 d-flex align-items-center gap-1">
