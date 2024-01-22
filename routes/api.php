@@ -53,7 +53,7 @@ Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
 
 // get treatment list
-Route::get('md-treatment-list', [CommonController::class, 'get_treatment_list']);
+Route::get('md-treatment-list-all', [CommonController::class, 'get_treatment_list']);
 
 // get city list
 Route::post('md-city-list', [CommonController::class, 'get_cities_list']);

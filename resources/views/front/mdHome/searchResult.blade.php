@@ -1,5 +1,14 @@
 @extends('front.layout.layout2')
 @section('content')
+<style>
+    #serviceForModal2 .form-control {
+        border: 2px solid #d6d6d6;
+    border-radius: 5px;
+    padding: 10px 16px;
+    height: 48px;
+    font-size: 16px;
+    }
+</style>
 <div class="content-wrapper bg-f6">
 
     <!-- SECTION 1 -->
@@ -284,8 +293,8 @@
                 <!-- </button> -->
             <div class="modal-content">
                 <img class="closeModal" data-bs-dismiss="modal" src="{{('front/assets/img/modalClose.png')}}" alt="">
-                <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
-                <p class="camptonBook text-center">Fill the patient detail.</p>
+                <p class="card-h1 mt-4 text-center">Change Patient Information</p>
+                <p class="card-p1 text-center">Fill the patient detail.</p>
                 <div class="modal-body">
                     <form class="row g-4">
                             <div class="col-md-4">
@@ -324,8 +333,8 @@
                                 <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="Full Address">
                             </div>
                             <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span></p>
-                            <div class="col-12 text-center ">
-                                <a href="{{url('homeService-purchase')}}" type="submit" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                            <div class="col-12 df-center">
+                                <a href="{{url('homeService-purchase')}}" type="submit" class="btn purchaseBtn my-4 df-center">
                                     <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment Page</span> 
                                 </a>
                             </div>

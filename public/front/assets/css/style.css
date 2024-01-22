@@ -399,7 +399,9 @@
     letter-spacing: -0.92px;
 }
 
-.request-modal .form-label {
+.request-modal .form-label,
+.treatmentForModal2 .form-label
+ {
     color: #000002;
     font-family: CamptonBook;
     font-size: 16px;
@@ -431,6 +433,7 @@
 }
 
 .request-modal .btn-close,
+.treatmentForModal2 .btn-close,
 #UserCancellationReq .btn-close,
 #UserChangeInformationModel .btn-close {
     background: url("../img/modalClose.png") no-repeat center center/cover;
@@ -702,9 +705,10 @@
 
 .tab-card .gallery {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin: 2rem 0;
     flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
 .tab-card .gallery a {
@@ -714,6 +718,9 @@
 
 .tab-card .gallery a img {
     width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .tab-card .overview p {
@@ -1613,8 +1620,11 @@ select {
 }
 
 .sms-input .form-control {
-    width: 45px;
-    height: 80px;
+    width: 60px;
+    height: 100px;
+flex-shrink: 0;
+    /* width: 45px;
+    height: 80px; */
     padding: 0;
     color: #000;
     text-align: center;
@@ -4736,7 +4746,9 @@ input[type="radio"] {
 }
 
 .sms-input .form-control:focus {
-    border-color: #4cdb06 !important;
+    /* border-color: #4cdb06 !important; */
+    border-radius: 5px;
+border: 2px solid #4CDB06 !important;
 
 }
 

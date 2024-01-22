@@ -6,12 +6,14 @@
             display: none;
         }
 
-        body {
+        body,
+        .form-control,
+        .form-control:focus {
         background: #f6f6f6;
     }
 
         #recaptcha-container {
-            bottom: 330px;
+            bottom: 350px;
         }
 
         .mdi-eye-off::before,
@@ -25,7 +27,7 @@
         }
     </style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
-        <div class="card sign-in-card">
+        <div class="card sign-in-card" style="background: #f6f6f6;">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="pt-3">
@@ -84,14 +86,14 @@
 
 
     <div class="container py-100px df-center sign-in-form d-none" id="otpDiv">
-        <div class="card" style="min-height: 650px;">
+        <div class="card" style="min-height: 650px;background: #f6f6f6;">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="pt-3">
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
 
-                    <h2 class="mb-0">SMS Code</h2>
+                    <h2 class="my-0">SMS Code</h2>
 
                     <p>Enter the 6 digit code sent to your mobile phone</p>
 
@@ -103,7 +105,7 @@
                         {{-- <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                         <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                         <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
-                        <div class="w-100 df-center mb-3 sms-input gap-3">
+                        <div class="w-100 df-center mb-5 sms-input gap-3">
                             <input type="hidden" name="email" value="{{ session('email') }}">
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
@@ -131,8 +133,8 @@
                         <div id="errorMessage" class="text-danger d-none"></div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-auto">
-                    <button class="btn cont-btn w-75 mb-4 df-center" id="verifyBtn" type="button" onclick="verify()"
-                        style="height: 47px;">Sign
+                    <button class="btn cont-btn mb-5 df-center" id="verifyBtn" type="button" onclick="verify()"
+                        style="height: 49px;width:475px">Sign
                         In</button>
                 </div>
                 </form>
