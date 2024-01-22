@@ -521,7 +521,7 @@ $is_logged_in = false;
                         <textarea name="" id="" cols="" style="height: 66px;" class="form-control" id="inputAddress5" placeholder="Please write your treatment requirement in detail"></textarea>
                     </div>
                     <div class="col-md-6 mb-3 position-relative">
-                        <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
+                        <label for="inputAddress5" class="form-label fw-bold">*Previous Treatment</label>
                         <!-- <input type="text" class="form-control " id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details"> -->
                         <div class="form-control position-relative" style="height:101px">
                             <textarea name="" id="" class="form-control border-0 p-0" id="pre-treat" style="resize:none;" placeholder="Have you done / received any releted treatment before"></textarea>

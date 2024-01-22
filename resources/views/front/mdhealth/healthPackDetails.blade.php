@@ -300,7 +300,7 @@
                         <div class="overview mt-4">
                             <div class="row">
                                 <div class="col-12 ps-0">
-                                    <p>{{ !empty($packageDetails['overview']) ? $packageDetails['overview'] : '' }}</p>
+                                    <p>{{ !empty($packageDetails['overview']) ? strip_tags($packageDetails['overview']) : '' }}</p>
                                 </div>
                                 {{-- <div class="col-4 pe-0">
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">

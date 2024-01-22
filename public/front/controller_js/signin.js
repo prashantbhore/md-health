@@ -4,7 +4,6 @@
 // {/* {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}} */}
 function countdownTimer(duration) {
     $('#resendotp').hide();
-    // $('#signup').attr('enable', true);
     let timer = duration,
         minutes, seconds;
     const timerDisplay = $('#timer');
@@ -22,7 +21,6 @@ function countdownTimer(duration) {
             clearInterval(timerInterval);
             $('#resendotp').show();
             timerDisplay.text("Timer completed!");
-            // $('#signup').attr('disabled', true);
         }
     }, 1000);
 }
