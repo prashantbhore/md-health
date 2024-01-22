@@ -38,7 +38,7 @@
             </div>
             <div class="w-761">
                 <div class="card mb-4 other-services">
-                    <h5 class="card-header d-flex align-items-center justify-content-between" style="margin-bottom: 65px;">
+                    <h5 class="card-header d-flex align-items-center justify-content-between">
                         <span>Other Services</span>
                         <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt=""  >
                     </h5>
@@ -86,7 +86,10 @@
                             </div>
                             @endforeach
                             @else
-                            <div class="no-data">No Accommodations Added</div>
+                            <!-- <div class="no-data">No Accommodations Added</div> -->
+                            <div class="no-data-vendor">
+                                <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">
+                            </div>
                             @endif
                         </div>
                         <div>
@@ -133,7 +136,10 @@
                             </div>
                             @endforeach
                             @else
-                            <div class="no-data">No Vehicles Added</div>
+                            <!-- <div class="no-data">No Vehicles Added</div> -->
+                            <div class="no-data-vendor">
+                                <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">
+                            </div>
                             @endif
 
                         </div>
@@ -180,7 +186,10 @@
                             </div>
                             @endforeach
                             @else
-                            <div class="no-data">No Tours Added</div>
+                            <!-- <div class="no-data">No Tours Added</div> -->
+                            <div class="no-data-vendor">
+                                <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">
+                            </div>
                             @endif
 
                         </div>

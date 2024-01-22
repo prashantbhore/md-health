@@ -278,18 +278,26 @@
                                             </button>
                                         @endif
 
-                                        @if($package_list['favourite_check']=='no') 
-                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}">
+                                        @if($package_list['favourite_check'] == 'no')
+                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}" style="background-color: gray;">
                                                 <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                             </button>
-                                        @endif
-
+                                       @endif
                                         @elseif($user == false)
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
+                                        @if($package_list['favourite_check']=='yes')     
                                         <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
+                                        @endif
+
+                                        @if($package_list['favourite_check'] == 'no')
+                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}" style="background-color: gray;">
+                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                        </button>
+                                        @endif
+
                                         @endif
 
                                     </div>
@@ -297,7 +305,7 @@
                                 <form method="POST" id="myForm_{{ $package_list['id'] }}" action="{{ url('health-pack-details') }}" class="mt-auto">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $package_list['id'] }}">
-                                    <a href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</a>
+                                    <button type="submit" href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</buttom>
                                 </form>
                                 
                             </div>
@@ -310,9 +318,9 @@
                         <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
                         <!-- </button> -->
                         <div class="modal-content">
-                            <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/closeModal.png' }}" alt="">
+                            <img class="closeModal" style="cursor:pointer" data-bs-dismiss="modal" src="{{ 'front/assets/img/closeModal.png' }}" alt="">
                             <img src="{{ 'front/assets/img/step1.svg' }}" alt="">
-                            <p class="camptonBook fw-bold text-center mt-4">Who is this treatment for?</p>
+                            <p class="card-h1 text-center mt-4">Who is this treatment for?</p>
                             <div class="d-flex align-items-center flex-column">
                                 <a href="{{ url('myself_as_patient/' . $package_list['id']) }}" type="button" class="btn btn-sm btn-md df-center mt-4">Myself</a>
                                 <a href="{{ url('#') }}" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#treatmentForModal2_{{ $package_list['id'] }}" type="button" class="btn btn-sm whiteBtn df-center mt-3 mb-5">Other</a>

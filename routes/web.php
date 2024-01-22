@@ -43,6 +43,7 @@ use App\Http\Controllers\Front\MedicalProvider\PaymentController;
 use App\Http\Controllers\Front\Registration\FoodProviderController;
 use App\Http\Controllers\Front\Vendor\UpdateVendorProfileController;
 use App\Http\Controllers\Front\FoodProvider\UpdateFoodProviderAccount;
+use App\Http\Controllers\Front\MedicalProvider\MedicalProviderMembershipController;
 use App\Http\Controllers\Front\Vendor\VendorSalesController;
 use App\Models\MedicalProviderLogo;
 
@@ -581,6 +582,16 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
 
 
+    //Medical Provider Membership
+
+    Route::controller(MedicalProviderMembershipController::class)->group(function (){
+         Route::get('membership','index');
+    });
+
+
+    
+
+
 });
 
 
@@ -777,6 +788,8 @@ Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');
 #Orders
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 
-Route::view('membership', 'front/mdhealth/medical-provider/membership');
+
+
+
 Route::view('welcome', 'welcome');
 
