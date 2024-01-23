@@ -148,7 +148,7 @@
                     </div>
                     <div class="form-floating pe-3 position-relative">
                         <input type="text" class="form-select bod-n-3" style="background-image: none;padding-left:32px" name="daterange" value="{{ $date }}" />
-                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
+                        <img src="{{ asset('front/assets/img/mdBookings/Calendar.png') }}" alt="" class="mx-2 pill-calender">
                         <label for="floatingSelect">Treatment Date</label>
                     </div>
                     <button class="btn btn-search-pill">Search</button>

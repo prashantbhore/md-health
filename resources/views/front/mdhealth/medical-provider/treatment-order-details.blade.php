@@ -150,7 +150,7 @@
                         <div>
                             <a href="{{ url('medical-provider-dashboard') }}" class="d-flex align-items-center gap-1 text-decoration-none">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                                <p class="mb-0 card-h1 camptonBold">Back Dashboard</p>
+                                <p class="mb-0 card-h1 camptonBold">Back</p>
                             </a>
                         </div>
                     </h5>
@@ -254,11 +254,12 @@
                                                 <div class="col-md-12 mb-4">
                                                     <h6 class="section-heading">Treatment Start Date</h6>
                                                     <!-- <div id="reportrange" class="date-range-picker-div" name="daterange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%"> -->
-                                                    <div>
+                                                    <div class="position-relative">
                                                         <!-- <i class="fa fa-calendar"></i>&nbsp; -->
-                                                        <input type="text" id="datepicker" class="form-control" style="border: 2px solid #d6d6d6;" name="treatment_start_date" value="{{ !empty($patient_details['treatment_start_date']) ? $patient_details['treatment_start_date'] : '' }}" />
-
+                                                        <input type="text" id="datepicker" class="form-control" style="border: 2px solid #d6d6d6;border-radius:5px;" name="treatment_start_date" value="{{ !empty($patient_details['treatment_start_date']) ? $patient_details['treatment_start_date'] : '' }}" />
+                                                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
                                                     </div>
+                                                    
                                                 </div>
 
 
