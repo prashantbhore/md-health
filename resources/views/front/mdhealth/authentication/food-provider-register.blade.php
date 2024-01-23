@@ -212,7 +212,7 @@
                         </div>
                         <div id="errorMessage" class="text-danger d-none"></div>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()"
+                            <button class="btn btn-md btn-text w-75 my-3 text-center" id="verifyBtn" type="button" onclick="verify()"
                                 style="height: 47px;">Sign In</button>
                         </div>
                     </form>

@@ -279,7 +279,7 @@
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
 
-                                        @if($package_list['favourite_check']=='yes')
+                                         @if($package_list['favourite_check']=='yes')     
                                         <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
@@ -290,10 +290,12 @@
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
                                         @endif
+                                        
                                         @elseif($user == false)
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
-                                        @if($package_list['favourite_check']=='yes')
+                                            
+                                        @if($package_list['favourite_check']=='yes')     
                                         <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
@@ -549,7 +551,7 @@
                             </button>
                         </div>
 
-                        <div class="text-center">
+                        <div class="text-center mb-4">
                             <h4 class="modal-title" id="exampleModalLabel">Couldn't find your <span style="color: #08fc34">treatment</span> package?</h4>
                             <p>Fill the form & get your desired treatment plan</p>
                         </div>
@@ -558,27 +560,27 @@
                         <form class="row g-4">
                             <div class="col-md-4">
                                 <label for="inputEmail4" class="form-label fw-bold">*First Name</label>
-                                <input type="email" class="form-control " id="inputEmail4" placeholder="First Name">
+                                <input type="email" class="form-control  h-75" id="inputEmail4" placeholder="First Name">
                             </div>
                             <div class="col-md-4">
                                 <label for="inputPassword4" class="form-label fw-bold">*Last Name</label>
-                                <input type="text" class="form-control" id="inputPassword4" placeholder="Last Name">
+                                <input type="text" class="form-control h-75" id="inputPassword4" placeholder="Last Name">
                             </div>
                             <div class="col-md-4">
                                 <label for="inputAddress" class="form-label fw-bold">*Email</label>
-                                <input type="email" class="form-control " id="inputAddress" placeholder="Optional">
+                                <input type="email" class="form-control  h-75" id="inputAddress" placeholder="Optional">
                             </div>
 
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label fw-bold">*Country</label>
-                                <select id="inputState" class="form-select">
+                                <select id="inputState" class="form-select h-75">
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
-                                <input type="tel" class="form-control" id="inputAddress33" placeholder="+Contact Mobile">
+                                <input type="tel" class="form-control h-75" id="inputAddress33" placeholder="+Contact Mobile">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                     <label class="form-check-label" for="inlineRadio1">Whatsapp</label>
@@ -590,26 +592,26 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
-                                <input type="text" class="form-control" id="inputAddress443" placeholder="Treatment Name">
+                                <input type="text" class="form-control h-75" id="inputAddress443" placeholder="Treatment Name">
                             </div>
 
                             <div class="col-md-12">
                                 <label for="inputAddress5" class="form-label fw-bold">*Details</label>
-                                <input type="text" class="form-control" id="inputAddress5" placeholder="Please Write your treatment requirement in detail">
+                                <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Please Write your treatment requirement in detail">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
-                                <input type="text" class="form-control" id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details">
+                                <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details">
                             </div>
                             <div class="col-md-6">
                                 <label for="formFile" class="form-label fw-bold">Upload Your Treatment
                                     Documents</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control h-75" type="file" id="formFile">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputAddress5" class="form-label fw-bold">When do you need the
                                     treatment?</label>
-                                <input type="text" class="form-control" id="inputAddress5" placeholder="Apartment, studio, or floor">
+                                <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Apartment, studio, or floor">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputAddress5" class="form-label fw-bold">Do you need travel visa?</label>
@@ -626,7 +628,7 @@
 
                             </div>
                             <div class="col-12 text-center ">
-                                <button type="submit" class="btn w-50 mt-4" style="height: 50px;background-color:#08fc34">Submit
+                                <button type="submit" class="btn save-btn-green">Submit
                                 </button>
                             </div>
                         </form>
@@ -732,12 +734,24 @@
                         );
                     },
                     success: function(response) {
+                        
                         $('#fav-btn' + packageId).attr('disabled', false);
                         $('#other').html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
+                            
+                            
+                            
+                        $('#fav-btn_' + packageId).css('background-color', '');
+                        
                         console.log('Success:', response);
-
+                        
+                        toastr.success(response.message, 'Success', {
+                            positionClass: 'toast-bottom-right',
+                            backgroundcolor: '#006400', 
+                        });
+                    
                     },
+                    
                     error: function(xhr, status, error) {
                         $('#fav-btn' + packageId).attr('disabled', false);
                         $('#other').html(

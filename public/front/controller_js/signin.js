@@ -4,6 +4,7 @@
 // {/* {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}} */}
 function countdownTimer(duration) {
     $('#resendotp').hide();
+    $('#verifyBtn').prop('disabled', false);
     let timer = duration,
         minutes, seconds;
     const timerDisplay = $('#timer');
@@ -20,7 +21,11 @@ function countdownTimer(duration) {
             timer = duration;
             clearInterval(timerInterval);
             $('#resendotp').show();
+            $('#verifyBtn').attr('disabled',true);
             timerDisplay.text("Timer completed!");
+            // $('#signup').attr('disabled');
+            
+
         }
     }, 1000);
 }
@@ -111,12 +116,12 @@ $(document).on('click', '#signup', function () {
                 password: password
             },
             beforeSend: function () {
-                // $('#signup').attr('disabled', true);
-                // $('#signup').html(
-                //     '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+                $('#signup').attr('disabled', true);
+                $('#signup').html(
+                    '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
             },
             success: function (response) {
-                // $('#signup').attr('enable', true);
+                $('#signup').attr('enable', true);
                 if (response.user_exist !== undefined) {
                     // alert(JSON.stringify(response.user_exist));
                     sendOTP();
@@ -127,6 +132,7 @@ $(document).on('click', '#signup', function () {
             },
             error: function (xhr, status, error) {
                 console.error(error);
+                $('#signup').attr('enable', true);
             }
         });
     }
@@ -186,8 +192,6 @@ function isValidCode(code) {
 function showErrorMessage(message) {
     $('#errorMessage').removeClass('d-none').text(message);
 }
-// $('#verifyBtn').attr('disabled', true);
-// $('#verifyBtn').html('<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
 function verify(e) {
     var code1 = $("#ot1").val();
     var code2 = $("#ot2").val();
@@ -196,8 +200,11 @@ function verify(e) {
     var code5 = $("#ot5").val();
     var code6 = $("#ot6").val();
     var code = code1 + code2 + code3 + code4 + code5 + code6;
+    // $('#verifyBtn').attr('disabled', true);
+    // $('#verifyBtn').html('<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
     if (!isValidCode(code)) {
         showErrorMessage('Please enter the correct code.');
+        // $('#signup').attr('enable', true);
         return;
     }
     coderesult.confirm(code)
