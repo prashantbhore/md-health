@@ -12,6 +12,10 @@ use App\Models\VendorRegister;
 use App\Models\MedicalProviderLogo;
 use App\Models\ProviderImagesVideos;
 use App\Models\MedicalProviderLicense;
+use App\Models\VendorLogo;
+use App\Models\MDFoodLogos;
+use App\Models\MDFoodLicense;
+use App\Models\VendorLicense;
 
 use DataTables;
 use Crypt;
@@ -825,9 +829,12 @@ public function vendor_view(Request $request){
     $id=Crypt::decrypt($request->id);
 
       if($request->vendor_type=='medical_service_provider'){
+
       $vendor=MedicalProviderRegistrater::with(['city','providerPackages'])
       ->where('id',$id)
       ->first();
+
+      //dd($vendor);
 
       //dd($medical_provider);
 
@@ -836,6 +843,7 @@ public function vendor_view(Request $request){
      $vendor_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
 
      $gallary=ProviderImagesVideos::where('status','active')->where('provider_id',$id)->get();
+     
     }
 
 
@@ -980,6 +988,93 @@ public function reject_vendor(Request $request){
         return redirect('admin/approved-vendors')->with('error','Vendor Not Deleted');  
       }
   }
+
+
+
+  public function delete_logo(Request $request){
+
+    //dd($request->vendor_type);
+
+    $id = !empty($request->id) ? $request->id : '';
+
+    if($request->vendor_type=='medical_service_provider'){
+    $old_data =MedicalProviderLogo::where('id', $id)->first();
+    $new_data = MedicalProviderLogo::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+    }    
+
+    if($request->vendor_type=='food_vendor'){
+        $old_data =MDFoodLogos::where('id', $id)->first();
+        $new_data = MDFoodLogos::where('id', $id)->update([
+                'status' => 'delete',
+                'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+            ]);
+    }   
+
+    if($request->vendor_type=='shop_vendor'){
+        $old_data =VendorLogo::where('id', $id)->first();
+        $new_data = VendorLogo::where('id', $id)->update([
+                'status' => 'delete',
+                'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+            ]);
+    }   
+
+    if($request->vendor_type=='home_service'){
+        $old_data =VendorLogo::where('id', $id)->first();
+        $new_data = VendorLogo::where('id', $id)->update([
+                'status' => 'delete',
+                'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+            ]);
+    } 
+
+   return response()->json(['message' => $request->flash, 'status' => 'true']);
+
+}
+
+
+
+
+public function delete_license(Request $request){
+
+    $id = !empty($request->id) ? $request->id : '';
+
+
+    if($request->vendor_type=='medical_service_provider'){
+    $old_data =MedicalProviderLicense::where('id', $id)->first();
+
+    $new_data = MedicalProviderLicense::where('id', $id)->update([
+        'status' => 'delete',
+        'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+    ]);
+    }
+
+    
+    if($request->vendor_type=='shop_vendor'){
+        $old_data =VendorLicense::where('id', $id)->first();
+    
+        $new_data = VendorLicense::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+        }
+
+        
+    if($request->vendor_type=='food_vendor'){
+        $old_data =MDFoodLicense::where('id', $id)->first();
+    
+        $new_data = MDFoodLicense::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+        }
+
+
+
+    return response()->json(['message' => $request->flash, 'status' => 'true']);
+
+}
   
   
 
