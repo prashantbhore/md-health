@@ -318,6 +318,7 @@
   "vendor_id" => 30
   "vendor_name" => "Mplus soft tech......" --}}
 
+
                     <div class="col-3">
                         <div class="right-side-div">
                             <div class="product-request">
@@ -340,6 +341,7 @@
                                             <p class="mb-0 fsb-2">120 Followers</p>
                                         </div>
                                     </div>
+                                    
                                     <a href="{{ URL('view-products/' . Crypt::encrypt($product_data['vendor_id'])) }}"
                                         class="product-btn">
                                         View All Products

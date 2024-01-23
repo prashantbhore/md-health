@@ -64,9 +64,11 @@
                                 <p>{{ !empty($vendor->email) ?$vendor->email: '' }}</p>
                             </div>
 
+                            
+
                             <div class="col-md-6 mb-3">
                                 <label for="lastName"> Authorized Person Full Name</label>
-                                <p>Manish Kumar </p>
+                                <p>{{ !empty($vendor->authorisation_full_name) ?$vendor->authorisation_full_name: '' }}</p>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -102,7 +104,9 @@
                                         </div>
                                         @if(!empty($vendor_logo->company_logo_image_path))
 
-                                        <a class="medical-provier-logo-delete" href="javascript:void(0)" data-id="{{!empty($vendor_logo->id)?$vendor_logo->id:''}}" data-table="md_medical_provider_logo" data-flash="Logo Deleted Succesfully">
+                                      
+
+                                        <a class="vendor-logo-delete" href="javascript:void(0)" data-id="{{!empty($vendor_logo->id)?$vendor_logo->id:''}}" data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" data-flash="Logo Deleted Succesfully">
                                             <span class="deleteImg">Delete Logo</span>
                                         </a>
                                         @endif
@@ -124,7 +128,7 @@
 
                                         @if(!empty($vendor_license->company_licence_image_path))
 
-                                        <a class="medical-provier-license-delete" href="javascript:void(0)" data-id="{{!empty($vendor_license->id)?$vendor_license->id:''}}" data-table="md_medical_provider_license" data-flash="License Deleted Succesfully">
+                                        <a class="vendor-license-delete" href="javascript:void(0)" data-id="{{!empty($vendor_license->id)?$vendor_license->id:''}}" data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" data-flash="License Deleted Succesfully">
                                             <span class="deleteImg">Delete License</span>
                                         </a>
                                         @endif
@@ -487,7 +491,7 @@
     </div>
 </section>
 @endsection @section('script')
-<script src="{{url('admin\controller_js\admin_cn_medical_tourism.js')}}"></script>
+<script src="{{url('admin\controller_js\admin_cn_manage_vendors.js')}}"></script>
 <script>
     $(".medicalTourismLi").addClass("activeClass");
     $(".medicalTourism").addClass("md-active");
