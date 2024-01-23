@@ -32,7 +32,7 @@ class VendorProductController extends BaseController
 
         $product_category = VendorProductCategory::where('status', 'active')->select('id', 'category_name')->get();
 
-        if (!empty($product_category)) {
+        if (!empty($product_category)){
             return response()->json([
                 'status' => 200,
                 'message' => 'Vendor Product Category Found',

@@ -99,6 +99,7 @@
                         <div class="card-body">
                             <div class="form-div">
                                 <form enctype="multipart/form-data" id="foodaddform">
+                                    <input type="text" name="id" id="id" >
                                     <div class="form-group mb-3">
                                         <label class="form-label">*Food Name</label>
                                         <input type="text" class="form-control" id="package_name" name="package_name"
@@ -180,10 +181,13 @@ aria-hidden="true">
             <div class="form-group d-flex flex-column mb-3">
                 <label class="form-label">Day</label>
                 <select name="days" id="days">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
                 </select>
             </div>
             <div class="form-group d-flex flex-column mb-3">
@@ -439,7 +443,7 @@ aria-hidden="true">
             success: function(response) {
                 console.log(response.id);
                 alert('API Call Success'); // Debugging alert
-
+$('#id').val(response.id);
                 // Continue with your success logic
             },
             error: function(error) {

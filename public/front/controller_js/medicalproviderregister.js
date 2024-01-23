@@ -1,6 +1,7 @@
 //  alert('hfyuf');
 function countdownTimer(duration) {
     $('#resendotp').hide();
+    $('#otp-btn').prop('disabled', false);
     let timer = duration,
         minutes, seconds;
     const timerDisplay = $('#timer');
@@ -17,6 +18,7 @@ function countdownTimer(duration) {
             timer = duration;
             clearInterval(timerInterval);
             $('#resendotp').show();
+            $('#otp-btn').attr('disabled',true);
             timerDisplay.text("Timer completed!");
         }
     }, 1000);

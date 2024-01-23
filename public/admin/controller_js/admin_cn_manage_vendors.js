@@ -324,3 +324,110 @@ $(function (){
         });
     }
 });
+
+
+
+
+$(document).on("click", ".vendor-logo-delete", function (){
+
+    
+
+
+
+    var id = $(this).data("id");
+    
+    var flash = $(this).data("flash");
+
+    var vendor_type = $(this).data("vendor_type");
+
+ 
+
+
+
+    var actionDiv = $(this);
+
+    var base_url = $("#base_url").val();
+    
+    if (confirm("Do you really want to delete logo?")) {
+        $.ajax({
+            type: "get",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: { id: id, vendor_type: vendor_type, flash: flash },
+            url: base_url + "/admin/vendor-delete-logo",
+            beforeSend: function () {
+                actionDiv
+                    .html(
+                        "<i class='fa fa-spin fa-spinner' style='color: #000000 !important;'></i>"
+                    )
+                    .show();
+            },
+            success: function (data) {
+
+                var imageContainer = actionDiv.closest('div');
+                var image = imageContainer.find('img'); 
+                image.remove();
+            
+              
+                imageContainer.find('.fa-spin').remove();
+
+                success_toast("Success", data.message);
+            },
+            error: function (data) {
+                console.log("Error:", data);
+            },
+        });
+    }
+});
+
+
+
+
+$(document).on("click", ".vendor-license-delete", function (){
+
+    var id = $(this).data("id");
+    var vendor_type = $(this).data("vendor_type");
+    var flash = $(this).data("flash");
+
+    
+    var actionDiv = $(this);
+
+    var base_url = $("#base_url").val();
+    
+    if (confirm("Do you really want to delete license?")) {
+        $.ajax({
+            type: "get",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: { id: id, vendor_type: vendor_type, flash: flash },
+            url: base_url + "/admin/vendor-delete-license",
+            beforeSend: function () {
+                actionDiv
+                    .html(
+                        "<i class='fa fa-spin fa-spinner' style='color: #000000 !important;'></i>"
+                    )
+                    .show();
+            },
+            success: function (data) {
+
+                var imageContainer = actionDiv.closest('div');
+                var image = imageContainer.find('img'); 
+                image.remove();
+            
+              
+                imageContainer.find('.fa-spin').remove();
+
+                success_toast("Success", data.message);
+            },
+            error: function (data) {
+                console.log("Error:", data);
+            },
+        });
+    }
+});
+
+
+
+

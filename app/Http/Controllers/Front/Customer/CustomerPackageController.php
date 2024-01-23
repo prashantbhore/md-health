@@ -35,7 +35,7 @@ class CustomerPackageController extends Controller
 
     public function sandbox(Request $controller_request)
     {
-        // dd($controller_request->all());
+        // dd( $controller_request->all() );
         $validator = Validator::make(
             $controller_request->all(),
             [
@@ -63,7 +63,7 @@ class CustomerPackageController extends Controller
         $plainArray = $body instanceof \Illuminate\Support\Collection  ? $body->toArray() : $body;
         $plainArray['conversation_id'] = strval($conversation_id);
 
-        // dd(Session::get('payment_request'));
+        // dd( Session::get( 'payment_request' ) );
         $credit_card_number = str_replace(' ', '', $controller_request->card_number);
         $bin_number = substr($credit_card_number, 0, 6);
         $user_id = Auth::guard('md_customer_registration')->user()->id;
@@ -71,10 +71,10 @@ class CustomerPackageController extends Controller
         $user_login_info = CustomerLogs::where('customer_id', $user_id)->where('status', 'active')->first();
         $country_data = Country::where('id', $user_data->country_id)->first();
         $city_data = Cities::where('id', $user_data->city_id)->first();
-        // dd($country_data,$city_data);
+        // dd( $country_data, $city_data );
         $user_country = $country_data->country_name;
         $user_city = $city_data->city_name;
-        // dd($user_city,$user_country);
+        // dd( $user_city, $user_country );
         $user_last_login = $user_login_info->created_at->format('Y-m-d H:i:s');
         $user_email = $user_data->email;
         $user_mobile_no = $user_data->phone;
@@ -101,11 +101,12 @@ class CustomerPackageController extends Controller
             $installment = 1;
         }
         if (!str_contains($validity, '/')) {
-            // redirect()->back()->with('error', "User data not found");
+            // redirect()->back()->with( 'error', 'User data not found' );
             return redirect()->back()->with('please enter card validity date in proper format month/year');
         } else {
             $expire_month = explode('/', $validity)[0];
-            $current_year = date("Y"); // Get the current year as a four-digit number (e.g., 2024)
+            $current_year = date('Y');
+            // Get the current year as a four-digit number ( e.g., 2024 )
             $expire_year = explode('/', $validity)[1];
             $current_year = substr($current_year, 0, 2);
             $expire_year = $current_year . $expire_year;
@@ -123,7 +124,7 @@ class CustomerPackageController extends Controller
                 }
             }
         } else {
-            return redirect()->back()->with('error', "User data not found");
+            return redirect()->back()->with('error', 'User data not found');
         }
 
         $live_base_url = 'https://api.iyzipay.com';
@@ -144,11 +145,11 @@ class CustomerPackageController extends Controller
         foreach ($payment_response as $key => $response) {
             // echo $key;
             $json_response = $response;
-            // print_r($response);
+            // print_r( $response );
             break;
         }
         $json_response = json_decode($json_response, true);
-        // dd($request,$json_response);
+        // dd( $request, $json_response );
         if ($json_response['status'] == 'success') {
             //init 3DS
             $request = new \Iyzipay\Request\CreatePaymentRequest();
@@ -158,22 +159,24 @@ class CustomerPackageController extends Controller
             $request->setPaidPrice($total_paying_price);
             $request->setCurrency(\Iyzipay\Model\Currency::TL);
             $request->setInstallment($installment);
-            $request->setBasketId("B" . $package_id);
+            $request->setBasketId('B' . $package_id);
             $request->setPaymentChannel(\Iyzipay\Model\PaymentChannel::WEB);
             $request->setPaymentGroup(\Iyzipay\Model\PaymentGroup::PRODUCT);
             $request->setCallbackUrl(url('/complete_3ds'));
 
             $paymentCard = new \Iyzipay\Model\PaymentCard();
             $paymentCard->setCardHolderName($user_first_name . ' ' . $user_last_name);
-            $paymentCard->setCardNumber($card_number); //dummy "5528790000000008"
+            $paymentCard->setCardNumber($card_number);
+            //dummy '5528790000000008'
             $paymentCard->setExpireMonth($expire_month);
-            $paymentCard->setExpireYear($expire_year); //dummy "2030"
+            $paymentCard->setExpireYear($expire_year);
+            //dummy '2030'
             $paymentCard->setCvc($cvv);
             $paymentCard->setRegisterCard(0);
             $request->setPaymentCard($paymentCard);
 
             $buyer = new \Iyzipay\Model\Buyer();
-            $buyer->setId("BY" . $user_id);
+            $buyer->setId('BY' . $user_id);
             $buyer->setName($user_first_name);
             $buyer->setSurname($user_last_name);
             $buyer->setGsmNumber($user_mobile_no);
@@ -185,7 +188,7 @@ class CustomerPackageController extends Controller
             $buyer->setIp($_SERVER['REMOTE_ADDR']);
             $buyer->setCity($user_city);
             $buyer->setCountry($user_country);
-            $buyer->setZipCode("34732");
+            $buyer->setZipCode('34732');
             $request->setBuyer($buyer);
 
             $shippingAddress = new \Iyzipay\Model\Address();
@@ -193,7 +196,7 @@ class CustomerPackageController extends Controller
             $shippingAddress->setCity($user_city);
             $shippingAddress->setCountry($user_country);
             $shippingAddress->setAddress($user_address);
-            $shippingAddress->setZipCode("34742");
+            $shippingAddress->setZipCode('34742');
             $request->setShippingAddress($shippingAddress);
 
             $billingAddress = new \Iyzipay\Model\Address();
@@ -201,41 +204,41 @@ class CustomerPackageController extends Controller
             $billingAddress->setCity($user_city);
             $billingAddress->setCountry($user_country);
             $billingAddress->setAddress($user_address);
-            $billingAddress->setZipCode("34742");
+            $billingAddress->setZipCode('34742');
             $request->setBillingAddress($billingAddress);
 
             $basketItems = array();
             $firstBasketItem = new \Iyzipay\Model\BasketItem();
-            $firstBasketItem->setId("BI" . $package_id);
+            $firstBasketItem->setId('BI' . $package_id);
             $firstBasketItem->setName($package_name);
-            $firstBasketItem->setCategory1("Medical Treatment Package");
-            // $firstBasketItem->setCategory2("Accessories");
+            $firstBasketItem->setCategory1('Medical Treatment Package');
+            // $firstBasketItem->setCategory2( 'Accessories' );
             $firstBasketItem->setItemType(\Iyzipay\Model\BasketItemType::PHYSICAL);
             $firstBasketItem->setPrice($total_paying_price);
             $basketItems[0] = $firstBasketItem;
 
             // $secondBasketItem = new \Iyzipay\Model\BasketItem();
-            // $secondBasketItem->setId("BI102");
-            // $secondBasketItem->setName("Game code");
-            // $secondBasketItem->setCategory1("Game");
-            // $secondBasketItem->setCategory2("Online Game Items");
-            // $secondBasketItem->setItemType(\Iyzipay\Model\BasketItemType::VIRTUAL);
-            // $secondBasketItem->setPrice("0.5");
-            // $basketItems[1] = $secondBasketItem;
+            // $secondBasketItem->setId( 'BI102' );
+            // $secondBasketItem->setName( 'Game code' );
+            // $secondBasketItem->setCategory1( 'Game' );
+            // $secondBasketItem->setCategory2( 'Online Game Items' );
+            // $secondBasketItem->setItemType( \Iyzipay\Model\BasketItemType::VIRTUAL );
+            // $secondBasketItem->setPrice( '0.5' );
+            // $basketItems[ 1 ] = $secondBasketItem;
 
             // $thirdBasketItem = new \Iyzipay\Model\BasketItem();
-            // $thirdBasketItem->setId("BI103");
-            // $thirdBasketItem->setName("Usb");
-            // $thirdBasketItem->setCategory1("Electronics");
-            // $thirdBasketItem->setCategory2("Usb / Cable");
-            // $thirdBasketItem->setItemType(\Iyzipay\Model\BasketItemType::PHYSICAL);
-            // $thirdBasketItem->setPrice("0.2");
-            // $basketItems[2] = $thirdBasketItem;
+            // $thirdBasketItem->setId( 'BI103' );
+            // $thirdBasketItem->setName( 'Usb' );
+            // $thirdBasketItem->setCategory1( 'Electronics' );
+            // $thirdBasketItem->setCategory2( 'Usb / Cable' );
+            // $thirdBasketItem->setItemType( \Iyzipay\Model\BasketItemType::PHYSICAL );
+            // $thirdBasketItem->setPrice( '0.2' );
+            // $basketItems[ 2 ] = $thirdBasketItem;
 
             $request->setBasketItems($basketItems);
-            // $request->setConversationData('hi');
+            // $request->setConversationData( 'hi' );
             # make request
-            // dd($request);
+            // dd( $request );
 
             /////////////////////////////////////////////////////////////////
 
@@ -248,34 +251,35 @@ class CustomerPackageController extends Controller
                     $threedsInitialize_array = (array) $threedsInitialize;
 
                     # print result
-                    // echo "<pre>";
+                    // echo '<pre>';
                     foreach ($threedsInitialize_array as $key => $response) {
                         // echo $key;
                         $three_json_response = $response;
-                        // print_r($response);
+                        // print_r( $response );
                         break;
                     }
-                    // echo($three_json_response);die;
+                    // echo( $three_json_response );
+                    // die;
                     $three_json_response = json_decode($three_json_response, true);
                     if ($three_json_response['status'] == 'success') {
-                        print_r($threedsInitialize);
+                        print_r($threedsInitialize->getHtmlContent());
                     } else {
                         return redirect()->back()->with('error', $three_json_response['errorMessage']);
                     }
                 } else {
 
-                    return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_03");
-                    echo "Something went wrong, payment not completed, err code: API_03";
+                    return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_03');
+                    echo 'Something went wrong, payment not completed, err code: API_03';
                 }
             } else {
-                return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_02");
-                echo "Something went wrong, payment not completed, err code: API_02";
+                return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_02');
+                echo 'Something went wrong, payment not completed, err code: API_02';
             }
 
             /////////////////////////////////////////////////////////////////
 
         } else {
-            return redirect()->back()->with('error', "Something went wrong, card info is incorrect, err code: API_00");
+            return redirect()->back()->with('error', 'Something went wrong, card info is incorrect, err code: API_00');
         }
         //
 
@@ -283,10 +287,10 @@ class CustomerPackageController extends Controller
 
     public function complete_3ds(Request $request)
     {
-        // dd($request->all());
-        // dd(Session::get('payment_request'));
+        // dd( $request->all() );
+        // dd( Session::get( 'payment_request' ) );
         //ezzzzzz
-        // dd($request->all());
+        // dd( $request->all() );
 
         $apiKey = 'sandbox-BOhpAyMe4ewgstkrnmQbhLnrI7kMlTfD';
         $secretKey = 'sandbox-5F4PXtaQLl8nxj4m2r8HRcQ9xT3NCe2S';
@@ -308,65 +312,67 @@ class CustomerPackageController extends Controller
         $threeds_payment_array = (array) $threedsPayment;
 
         # print result
-        // echo "<pre>";
+        // echo '<pre>';
         foreach ($threeds_payment_array as $key => $response) {
             // echo $key;
             $three_json_response = $response;
-            // print_r($response);
+            // print_r( $response );
             break;
         }
 
         $three_json_response = json_decode($three_json_response, true);
-        // echo $three_json_response['threeDSHtmlContent'];
-        // echo "<pre>";
-        // print_r($three_json_response);die;
+        // echo $three_json_response[ 'threeDSHtmlContent' ];
+        // echo '<pre>';
+        // print_r( $three_json_response );
+        // die;
         if (!empty($three_json_response)) {
             if ($three_json_response['status'] == 'success') {
 
                 return view('front.mdhealth.user-panel.user-payment-successfull');
 
-                // $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), Session::get('payment_request'), 'POST');
-                // Session::forget('payment_request');
-                // if (!empty($repsonse_data)) {
-                //     if ($repsonse_data['status'] == '200') {
-                // print_r($three_json_response);die;
-                // if (!empty($customer_purchase_details->customer_id)) {
-                //     $user = CustomerRegistration::where('id', $customer_purchase_details->customer_id);
+                // $repsonse_data = $this->apiService->getData( Session::get( 'login_token' ), url( '/api/md-customer-purchase-package' ), Session::get( 'payment_request' ), 'POST' );
+                // Session::forget( 'payment_request' );
+                // if ( !empty( $repsonse_data ) ) {
+                //     if ( $repsonse_data[ 'status' ] == '200' ) {
+                // print_r( $three_json_response );
+                // die;
+                // if ( !empty( $customer_purchase_details->customer_id ) ) {
+                //     $user = CustomerRegistration::where( 'id', $customer_purchase_details->customer_id );
                 //     $credentials = [
-                //         'phone' => !empty($user->phone) ? $user->phone : '',
-                //         'password' => !empty($user->password) ? $user->password : '',
-                //     ];
-                //     if (Auth::guard('md_customer_registration')->attempt($credentials)) {
+                //         'phone' => !empty( $user->phone ) ? $user->phone : '',
+                //         'password' => !empty( $user->password ) ? $user->password : '',
+                // ];
+                //     if ( Auth::guard( 'md_customer_registration' )->attempt( $credentials ) ) {
                 //         // Authentication successful
                 //         // The user is now logged in, and you can perform further actions if needed.
                 //         // For example, you might want to redirect the user to a dashboard.
 
                 //         // If you need to access the authenticated user instance, you can use Auth::user()
-                //         $authenticatedUser = Auth::guard('md_customer_registration')->user();
-                //         // return redirect()->route('/')->with('error', 'Payment Not Completed');
+                //         $authenticatedUser = Auth::guard( 'md_customer_registration' )->user();
+                //         // return redirect()->route( '/' )->with( 'error', 'Payment Not Completed' );
 
                 //         // Your further actions here, such as redirecting
-                //         return view('front.mdhealth.user-panel.user-payment-successfull');
+                //         return view( 'front.mdhealth.user-panel.user-payment-successfull' );
                 //     } else {
                 //         // Authentication failed
                 //         // Handle the case where the provided credentials are incorrect.
                 //         // You might want to redirect back to the login page with an error message.
                 //         // For example:
-                //         echo "hi";
-                //         return redirect()->route(url('/'))->with('error', 'PaymentCompleted but user session destroyed err code: USER_00');
+                //         echo 'hi';
+                //         return redirect()->route( url( '/' ) )->with( 'error', 'PaymentCompleted but user session destroyed err code: USER_00' );
                 //     }
                 // }
 
                 //     } else {
-                //         echo "Something went wrong, payment not completed, err code: API_03";
+                //         echo 'Something went wrong, payment not completed, err code: API_03';
                 //     }
                 // } else {
-                //     echo "Something went wrong, payment not completed, err code: API_02";
+                //     echo 'Something went wrong, payment not completed, err code: API_02';
                 // }
             } else {
                 $conversation_id = $three_json_response['conversationId'];
 
-                // dd($conversation_id);
+                // dd( $conversation_id );
 
                 $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
                 if (!empty($customer_purchase_details)) {
@@ -377,40 +383,40 @@ class CustomerPackageController extends Controller
 
                 return redirect()->back()->with('error', 'Payment Not Completed');
 
-                // if (!empty($customer_purchase_details->customer_id)) {
-                //     $user = CustomerRegistration::where('id', $customer_purchase_details->customer_id);
+                // if ( !empty( $customer_purchase_details->customer_id ) ) {
+                //     $user = CustomerRegistration::where( 'id', $customer_purchase_details->customer_id );
                 //     $credentials = [
-                //         'phone' => !empty($user->phone) ? $user->phone : '',
-                //         'password' => !empty($user->password) ? $user->password : '',
-                //     ];
+                //         'phone' => !empty( $user->phone ) ? $user->phone : '',
+                //         'password' => !empty( $user->password ) ? $user->password : '',
+                // ];
 
-                //     if (Auth::guard('md_customer_registration')->attempt($credentials)) {
+                //     if ( Auth::guard( 'md_customer_registration' )->attempt( $credentials ) ) {
                 //         // Authentication successful
                 //         // The user is now logged in, and you can perform further actions if needed.
                 //         // For example, you might want to redirect the user to a dashboard.
 
-                //         // If you need to access the authenticated user instance, you can use Auth::guard('md_customer_registration')->user()
-                //         $authenticatedUser = Auth::guard('md_customer_registration')->user();
-                //         return redirect(url('/'))->with('error', 'Payment Not Completed');
+                //         // If you need to access the authenticated user instance, you can use Auth::guard( 'md_customer_registration' )->user()
+                //         $authenticatedUser = Auth::guard( 'md_customer_registration' )->user();
+                //         return redirect( url( '/' ) )->with( 'error', 'Payment Not Completed' );
                 //         // Your further actions here, such as redirecting
                 //     } else {
                 //         // Authentication failed
                 //         // Handle the case where the provided credentials are incorrect.
                 //         // You might want to redirect back to the login page with an error message.
                 //         // For example:
-                //         return redirect(url('/'))->with('error', 'Something Went Wrong. err code: USER_00');
+                //         return redirect( url( '/' ) )->with( 'error', 'Something Went Wrong. err code: USER_00' );
                 //     }
                 // }
 
-                // Assuming you have the user credentials (username/email and password)
+                // Assuming you have the user credentials ( username/email and password )
 
                 // Attempt to log in the user
 
-                echo "Something went wrong, payment not completed, err code: API_01";
+                echo 'Something went wrong, payment not completed, err code: API_01';
             }
         } else {
-            return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_00");
-            echo "Something went wrong, payment not completed, err code: API_00";
+            return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_00');
+            echo 'Something went wrong, payment not completed, err code: API_00';
         }
     }
 
@@ -466,7 +472,7 @@ class CustomerPackageController extends Controller
             $customer = Auth::guard('md_customer_registration')->user();
             return redirect('/');
         } else {
-            echo "no";
+            echo 'no';
             die;
         }
 
@@ -479,7 +485,7 @@ class CustomerPackageController extends Controller
 
         $url0 = $sandbox_base_url . '/payment/iyzipos/installment';
         $url1 = $sandbox_base_url . '/payment/bin/check';
-        $url2 = $sandbox_base_url . '/payment/iyzipos/checkoutform/initialize/auth/ecom';
+        $url2 = $sandbox_base_url . '/payment/bkm/initialize';
 
         $method = 'POST';
 
@@ -681,30 +687,30 @@ class CustomerPackageController extends Controller
         //     'md_product_sub_category.product_sub_category_name',
         //     'md_master_cities.city_name'
         // )
-        //     ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-        //     ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-        //     ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-        //     ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
+        //     ->leftjoin( 'md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id' )
+        //     ->leftjoin( 'md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id' )
+        //     ->leftjoin( 'md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by' )
+        //     ->leftjoin( 'md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id' );
 
-        // if (!empty($request->treatment_name)) {
-        //     $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
+        // if ( !empty( $request->treatment_name ) ) {
+        //     $packages = $packages->where( 'md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%' );
         // }
-        // if (!empty($request->city_name)) {
-        //     $packages = $packages->orWhere('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
+        // if ( !empty( $request->city_name ) ) {
+        //     $packages = $packages->orWhere( 'md_master_cities.city_name', 'like', '%' . $request->city_name . '%' );
         // }
         // $packages = $packages->get();
-        // if (!empty($packages)) {
-        //     foreach ($packages as $key => $value) {
-        //         $packages[$key]['id'] = !empty($value->id) ? $value->id : '';
-        //         $packages[$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-        //         $packages[$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-        //         $packages[$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-        //         $packages[$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-        //         $packages[$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-        //         $packages[$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-        //         $packages[$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-        //         $packages[$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-        //         $packages[$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+        // if ( !empty( $packages ) ) {
+        //     foreach ( $packages as $key => $value ) {
+        //         $packages[ $key ][ 'id' ] = !empty( $value->id ) ? $value->id : '';
+        //         $packages[ $key ][ 'package_unique_no' ] = !empty( $value->package_unique_no ) ? $value->package_unique_no : '';
+        //         $packages[ $key ][ 'package_name' ] = !empty( $value->package_name ) ? $value->package_name : '';
+        //         $packages[ $key ][ 'treatment_period_in_days' ] = !empty( $value->treatment_period_in_days ) ? $value->treatment_period_in_days : '';
+        //         $packages[ $key ][ 'other_services' ] = !empty( $value->other_services ) ? explode( ',', $value->other_services ) : '';
+        //         $packages[ $key ][ 'package_price' ] = !empty( $value->package_price ) ? $value->package_price : '';
+        //         $packages[ $key ][ 'sale_price' ] = !empty( $value->sale_price ) ? $value->sale_price : '';
+        //         $packages[ $key ][ 'product_category_name' ] = !empty( $value->product_category_name ) ? $value->product_category_name : '';
+        //         $packages[ $key ][ 'product_sub_category_name' ] = !empty( $value->product_sub_category_name ) ? $value->product_sub_category_name : '';
+        //         $packages[ $key ][ 'city_name' ] = !empty( $value->city_name ) ? $value->city_name : '';
         //     }
         // }
 
@@ -726,8 +732,8 @@ class CustomerPackageController extends Controller
             'md_tours.tour_name'
         )
             ->where('md_packages.status', 'active')
-            // ->where('md_product_category.status', 'active')
-            // ->where('md_product_sub_category.status', 'active')
+            // ->where( 'md_product_category.status', 'active' )
+            // ->where( 'md_product_sub_category.status', 'active' )
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
@@ -754,7 +760,6 @@ class CustomerPackageController extends Controller
                 if (!empty(Auth::guard('md_customer_registration')->user()->id)) {
                     $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
                         ->select('package_id')
-                        ->where('package_id', $value->id)
                         ->where('customer_id', Auth::guard('md_customer_registration')->user()->id)
                         ->first();
                 }
@@ -777,7 +782,7 @@ class CustomerPackageController extends Controller
             }
         }
 
-        // dd( $data['package_list']);
+        // dd( $data[ 'package_list' ] );
         // print_r( $request );
         $packages = $data['package_list'];
         if (!empty($packages)) {
@@ -802,8 +807,6 @@ class CustomerPackageController extends Controller
             $city_name = $request->city_name ?? 'Select City';
 
             $counties = Country::where('status', 'active')->get();
-
-
 
             return view('front.mdhealth.searchResult', compact('packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
         } else {
@@ -834,7 +837,7 @@ class CustomerPackageController extends Controller
 
     public function packages_view_on_search_result(Request $request)
     {
-        // dd($request->all());
+        // dd( $request->all() );
         $validator = Validator::make($request->all(), [
             'id' => 'required',
         ]);
@@ -854,34 +857,24 @@ class CustomerPackageController extends Controller
                 $provider_gallery[] = !empty($val->provider_image_path) ? url(Storage::url($val->provider_image_path)) : '';
             }
 
-            if (!empty(Auth::user()->id)) {
-                $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
-                    ->select('package_id')
-                    ->where('package_id', $packages_view->id)
-                    ->where('customer_id', Auth::user()->id)
-                    ->first();
-            }
-
-
             $packageDetails = [
-                "id" => !empty($packages_view->id) ? $packages_view->id : '',
-                "favourite_check" => !empty($CustomerFavouritePackages->package_id) ? 'yes' : 'no',
-                "package_unique_no" => !empty($packages_view->package_unique_no) ? $packages_view->package_unique_no : '',
-                "city_id" => !empty($packages_view->provider->city->id) ? $packages_view->provider->city->id : '',
-                "review_stars" => !empty($packages_view->review->start) ? $packages_view->review->start : '',
-                "total_reviews" => !empty($packages_view->review_count) ? $packages_view->review_count : '',
-                "verbose_review" => !empty($packages_view->review_words) ? $packages_view->review_words : '',
-                "overview" => !empty($packages_view->provider->company_overview) ? $packages_view->provider->company_overview : '',
-                "package_name" => !empty($packages_view->package_name) ? $packages_view->package_name : '',
-                "treatment_category_id" => !empty($packages_view->treatment_category_id) ? $packages_view->treatment_category_id : '',
-                "treatment_id" => !empty($packages_view->treatment_id) ? $packages_view->treatment_id : '',
-                "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
-                "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
-                "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
-                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price : '',
+                'id' => !empty($packages_view->id) ? $packages_view->id : '',
+                'package_unique_no' => !empty($packages_view->package_unique_no) ? $packages_view->package_unique_no : '',
+                'city_id' => !empty($packages_view->provider->city->id) ? $packages_view->provider->city->id : '',
+                'review_stars' => !empty($packages_view->review->start) ? $packages_view->review->start : '',
+                'total_reviews' => !empty($packages_view->review_count) ? $packages_view->review_count : '',
+                'verbose_review' => !empty($packages_view->review_words) ? $packages_view->review_words : '',
+                'overview' => !empty($packages_view->provider->company_overview) ? $packages_view->provider->company_overview : '',
+                'package_name' => !empty($packages_view->package_name) ? $packages_view->package_name : '',
+                'treatment_category_id' => !empty($packages_view->treatment_category_id) ? $packages_view->treatment_category_id : '',
+                'treatment_id' => !empty($packages_view->treatment_id) ? $packages_view->treatment_id : '',
+                'other_services' => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
+                'treatment_period_in_days' => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
+                'treatment_price' => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
+                'package_price' => !empty($packages_view->package_price) ? $packages_view->package_price : '',
 
-                "sale_price" => !empty($packages_view->sale_price) ? $packages_view->sale_price : '',
-                "city_name" => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
+                'sale_price' => !empty($packages_view->sale_price) ? $packages_view->sale_price : '',
+                'city_name' => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
             ];
 
             if (!empty($packageDetails)) {
@@ -915,7 +908,7 @@ class CustomerPackageController extends Controller
         $method = 'GET';
         $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
 
-        //dd($data);
+        //dd( $data );
 
         $data_two = $this->apiService->getData($token, url('/api/md-customer-purchase-package-completed-list'), null, $method);
         $data_three = $this->apiService->getData($token, url('/api/md-customer-purchase-package-cancelled-list'), null, $method);
@@ -988,7 +981,7 @@ class CustomerPackageController extends Controller
                     }
                 }
             }
-            // dd($data);
+            // dd( $data );
             $documents = $this->apiService->getData($token, url('/api/md-customer-upload-documents'), ['package_id' => $data['package_id']], 'POST');
             $data['documents'] = !empty($documents['data']) ? $documents['data'] : [];
             if (!empty($data['hotel_id'])) {
@@ -1090,15 +1083,15 @@ class CustomerPackageController extends Controller
 
     public function sendError($message, $code = 404)
     {
-        // dd($code);
+        // dd( $code );
         $e_code = (array) $code;
-        // dd($code);
+        // dd( $code );
         $errorString = '';
-        if (!empty($e_code["\x00*\x00messages"])) {
+        if (!empty($e_code['\x00*\x00messages'])) {
 
-            foreach ($e_code["\x00*\x00messages"] as $m) {
+            foreach ($e_code['\x00*\x00messages'] as $m) {
                 foreach ($m as $e) {
-                    $errorString = $errorString . $e . " ";
+                    $errorString = $errorString . $e . ' ';
                 }
             }
         } else {
@@ -1137,7 +1130,7 @@ class CustomerPackageController extends Controller
 
     public function purchase_by_mdcoins(Request $request)
     {
-        // dd(Crypt::encrypt('100000000'));
+        // dd( Crypt::encrypt( '100000000' ) );
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'paid_amount' => 'required',
@@ -1161,19 +1154,19 @@ class CustomerPackageController extends Controller
                 //$avilable_coins == $request->avilable_coins
                 if (true) {
                     $paid_amount = intval($request->paid_amount);
-                    // dd($avilable_coins,$paid_amount);
+                    // dd( $avilable_coins, $paid_amount );
                     if ($avilable_coins > $paid_amount) {
                         $balance_coins = $avilable_coins - $paid_amount;
                         $hashed_coins = Crypt::encrypt($balance_coins);
                         $coins_data->update(['coins' => $hashed_coins]);
-                        // $coins_data->update(['coins' => $balance_coins]);
+                        // $coins_data->update( [ 'coins' => $balance_coins ] );
                         if (!empty($request->purchase_id)) {
                             $purchase_details = [];
                             $purchase_details['payment_percentage'] = $request->package_percentage_price;
                             $purchase_details['paid_amount'] = $request->paid_amount;
                             $purchase_details['pending_payment'] = $request->pending_amount;
                             // $package_percentage_price = $request->package_percentage_price;
-                            // $purchase_details['purchase_type'] = 'pending';
+                            // $purchase_details[ 'purchase_type' ] = 'pending';
                             $purchase_details['created_by'] = $user_id;
                             $purchase_details_data = CustomerPurchaseDetails::where('id', $request->purchase_id)->update($purchase_details);
 

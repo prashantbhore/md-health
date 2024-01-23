@@ -95,6 +95,9 @@ class RolesController extends Controller
         $html = '';
 
         foreach ($system_userslist as $system_user) {
+            if($system_user['id']==$decryptedId){
+                continue;
+            }
             $html .= '<div class="roles-card df-start w-100 mb-3" id="div_' . $system_user['id'] . '">';
             $html .= '<h6 class="mb-0">' . (!empty($system_user['email']) ? $system_user['email'] : '') . '| ' . (!empty($system_user['role_name']) ? $system_user['role_name'] : '') . '</h6>';
             $html .= ' <div class="roles-card-footer">';
