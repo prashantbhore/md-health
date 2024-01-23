@@ -161,7 +161,7 @@
                                 <div class="form-group mb-5 position-relative" >
                                     <label class="form-label mb-3">Hotel Picture</label>
                                     <div class="form-group mb-3 ">
-                                        <input type="file" name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
+                                        <input type="file"  name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
                                         <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
                                     </div>
                                     <div class="prev-img-div">
