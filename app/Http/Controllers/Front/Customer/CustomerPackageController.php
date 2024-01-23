@@ -783,7 +783,8 @@ class CustomerPackageController extends Controller {
                     // dd( $data[ 'package_list' ] );
                     // print_r( $request );
                     $packages = $data[ 'package_list' ];
-                    if ( !empty( $packages ) ) {
+                    if ( !empty( $packages ) ){
+                        
                         $treatment_plans = ProductCategory::where( 'md_packages.status', 'active' )
                         ->join( 'md_packages', 'md_packages.treatment_category_id', '=', 'md_product_category.id' )
                         ->where( 'md_product_category.status', 'active' )
