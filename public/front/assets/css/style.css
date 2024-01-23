@@ -1330,6 +1330,9 @@ select {
 .camLight {
     font-family: "CamptonLight" !important;
 }
+.camThin {
+    font-family: "CamptonThin" !important;
+}
 
 .authentication .nav-tabs .nav-link {
     border: none;
@@ -1983,6 +1986,13 @@ select {
     border: 1px solid #ededed;
     background: #fff;
     padding: 6px 14px;
+
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    /* text-align: left; */
 }
 
 .filter-div input::placeholder {
@@ -4905,4 +4915,14 @@ input[type="radio"] {
     letter-spacing: -0.07em;
     transition: 0.15s all;
     width: 48%;
+}
+
+.pkgCard i {
+    font-family: 'CamptonBook';
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    text-align: left;
 }
