@@ -36,7 +36,8 @@ class CustomerPackageController extends Controller
     public function sandbox(Request $controller_request)
     {
         // dd($controller_request->all());
-        $validator = Validator::make($controller_request->all(),
+        $validator = Validator::make(
+            $controller_request->all(),
             [
                 'package_id' => 'required',
                 'sale_price' => 'required',
@@ -51,7 +52,8 @@ class CustomerPackageController extends Controller
                 'card_number' => 'required',
                 'cvv' => 'required',
                 'validity' => 'required',
-            ]);
+            ]
+        );
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
@@ -62,7 +64,7 @@ class CustomerPackageController extends Controller
         $plainArray['conversation_id'] = strval($conversation_id);
 
         // dd(Session::get('payment_request'));
-        $credit_card_number = str_replace(' ','',$controller_request->card_number);
+        $credit_card_number = str_replace(' ', '', $controller_request->card_number);
         $bin_number = substr($credit_card_number, 0, 6);
         $user_id = Auth::guard('md_customer_registration')->user()->id;
         $user_data = CustomerRegistration::where('id', $user_id)->where('status', 'active')->first();
@@ -144,7 +146,6 @@ class CustomerPackageController extends Controller
             $json_response = $response;
             // print_r($response);
             break;
-
         }
         $json_response = json_decode($json_response, true);
         // dd($request,$json_response);
@@ -258,11 +259,9 @@ class CustomerPackageController extends Controller
                     $three_json_response = json_decode($three_json_response, true);
                     if ($three_json_response['status'] == 'success') {
                         print_r($threedsInitialize);
-
                     } else {
                         return redirect()->back()->with('error', $three_json_response['errorMessage']);
                     }
-
                 } else {
 
                     return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_03");
@@ -408,7 +407,6 @@ class CustomerPackageController extends Controller
                 // Attempt to log in the user
 
                 echo "Something went wrong, payment not completed, err code: API_01";
-
             }
         } else {
             return redirect()->back()->with('error', "Something went wrong, payment not completed, err code: API_00");
@@ -468,7 +466,8 @@ class CustomerPackageController extends Controller
             $customer = Auth::guard('md_customer_registration')->user();
             return redirect('/');
         } else {
-            echo "no";die;
+            echo "no";
+            die;
         }
 
         dd(phpinfo());
@@ -586,9 +585,7 @@ class CustomerPackageController extends Controller
 
         $apiRequest = Http::withHeaders($headers);
 
-        $responseData = $response = $apiRequest->{
-            $method}
-        ($url1, $body1 ?? null);
+        $responseData = $response = $apiRequest->{$method}($url1, $body1 ?? null);
         // dd( $response->json() );
         try {
             if (empty($response->json())) {
@@ -614,9 +611,7 @@ class CustomerPackageController extends Controller
 
         $apiRequest = Http::withHeaders($headers);
 
-        $responseData = $response = $apiRequest->{
-            $method}
-        ($url1, $body1 ?? null);
+        $responseData = $response = $apiRequest->{$method}($url1, $body1 ?? null);
         // dd( $response->json() );
         try {
             if (empty($response->json())) {
@@ -643,9 +638,7 @@ class CustomerPackageController extends Controller
 
         $apiRequest = Http::withHeaders($headers);
 
-        $responseData2 = $response = $apiRequest->{
-            $method}
-        ($url2, $body2 ?? null);
+        $responseData2 = $response = $apiRequest->{$method}($url2, $body2 ?? null);
         // dd( $response->json() );
         try {
             if (empty($response->json())) {
@@ -732,9 +725,9 @@ class CustomerPackageController extends Controller
             'md_master_vehicle_comfort_levels.vehicle_level_name',
             'md_tours.tour_name'
         )
-        ->where('md_packages.status', 'active')
-        // ->where('md_product_category.status', 'active')
-        // ->where('md_product_sub_category.status', 'active')
+            ->where('md_packages.status', 'active')
+            // ->where('md_product_category.status', 'active')
+            // ->where('md_product_sub_category.status', 'active')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
@@ -758,14 +751,15 @@ class CustomerPackageController extends Controller
         if (!empty($packages)) {
             foreach ($packages as $key => $value) {
 
-                 if(!empty(Auth::guard('md_customer_registration')->user()->id)){
-                $CustomerFavouritePackages= CustomerFavouritePackages::where('status','active')
-                                            ->select('package_id')
-                                            ->where('customer_id',Auth::guard('md_customer_registration')->user()->id)
-                                            ->first();
-                }  
+                if (!empty(Auth::guard('md_customer_registration')->user()->id)) {
+                    $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
+                        ->select('package_id')
+                        ->where('package_id', $value->id)
+                        ->where('customer_id', Auth::guard('md_customer_registration')->user()->id)
+                        ->first();
+                }
                 $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                $data['package_list'][$key]['favourite_check'] = !empty($CustomerFavouritePackages->package_id) ?'yes' : 'no';
+                $data['package_list'][$key]['favourite_check'] = !empty($CustomerFavouritePackages->package_id) ? 'yes' : 'no';
                 $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                 $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
                 $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
@@ -809,10 +803,9 @@ class CustomerPackageController extends Controller
 
             $counties = Country::where('status', 'active')->get();
 
-            
+
 
             return view('front.mdhealth.searchResult', compact('packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
-
         } else {
             $counties = Country::all();
             $city_name = !empty($request->city_name) ? $request->city_name : 'Select City';
@@ -834,9 +827,7 @@ class CustomerPackageController extends Controller
                 ->get();
             // dd( $treatment_name, $city_name );
             return view('front.mdhealth.searchResult', compact('cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date'));
-
         }
-
     }
 
     //Mplus02
@@ -863,9 +854,18 @@ class CustomerPackageController extends Controller
                 $provider_gallery[] = !empty($val->provider_image_path) ? url(Storage::url($val->provider_image_path)) : '';
             }
 
+            if (!empty(Auth::user()->id)) {
+                $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
+                    ->select('package_id')
+                    ->where('package_id', $packages_view->id)
+                    ->where('customer_id', Auth::user()->id)
+                    ->first();
+            }
+
 
             $packageDetails = [
                 "id" => !empty($packages_view->id) ? $packages_view->id : '',
+                "favourite_check" => !empty($CustomerFavouritePackages->package_id) ? 'yes' : 'no',
                 "package_unique_no" => !empty($packages_view->package_unique_no) ? $packages_view->package_unique_no : '',
                 "city_id" => !empty($packages_view->provider->city->id) ? $packages_view->provider->city->id : '',
                 "review_stars" => !empty($packages_view->review->start) ? $packages_view->review->start : '',
@@ -878,9 +878,9 @@ class CustomerPackageController extends Controller
                 "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
                 "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
                 "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
-                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price: '',
+                "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price : '',
 
-                "sale_price" => !empty($packages_view->sale_price) ? $packages_view->sale_price: '',
+                "sale_price" => !empty($packages_view->sale_price) ? $packages_view->sale_price : '',
                 "city_name" => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
             ];
 
@@ -897,12 +897,9 @@ class CustomerPackageController extends Controller
                 $counties = Country::all();
 
                 return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties', 'provider_gallery'));
-
             } else {
                 return view('front.mdhealth.searchResult');
-
             }
-
         } else {
             return view('front.mdhealth.searchResult');
         }
@@ -917,9 +914,9 @@ class CustomerPackageController extends Controller
         // dd( $token );
         $method = 'GET';
         $data = $this->apiService->getData($token, url('/api/md-customer-purchase-package-active-list'), null, $method);
-          
-          //dd($data);
-        
+
+        //dd($data);
+
         $data_two = $this->apiService->getData($token, url('/api/md-customer-purchase-package-completed-list'), null, $method);
         $data_three = $this->apiService->getData($token, url('/api/md-customer-purchase-package-cancelled-list'), null, $method);
 
@@ -976,7 +973,6 @@ class CustomerPackageController extends Controller
                     // dd( $patient_info );
                     if (!empty($patient_info->id)) {
                         $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $id], 'POST');
-
                     }
                     // dd( $token );
                     // dd( $token );
@@ -1013,7 +1009,6 @@ class CustomerPackageController extends Controller
         }
         // dd( $my_details );
         return view('front.mdhealth.user-panel.user-package-view', compact('data', 'my_details', 'treatment_information'));
-
     }
 
     //Mplus02
@@ -1028,7 +1023,8 @@ class CustomerPackageController extends Controller
             'sale_price' => 'required',
             'pending_payment' => 'required',
         ]);
-        $data = array('package_id' => $request->package_id,
+        $data = array(
+            'package_id' => $request->package_id,
             'package_percentage_price' => $request->package_percentage_price,
             'sale_price' => $request->sale_price,
             'purchase_id' => $request->purchase_id,
@@ -1105,7 +1101,7 @@ class CustomerPackageController extends Controller
                     $errorString = $errorString . $e . " ";
                 }
             }
-        }else{
+        } else {
             $errorString = $message;
         }
 
@@ -1156,7 +1152,7 @@ class CustomerPackageController extends Controller
         if (!empty($user_id)) {
             $coins_data = MDCoins::where('customer_id', $user_id)->where('status', 'active')->first();
             if (!empty($coins_data->coins)) {
-            $avilable_coins = $coins_data->coins;
+                $avilable_coins = $coins_data->coins;
                 try {
                     $avilable_coins = Crypt::decrypt($avilable_coins);
                 } catch (Illuminate\Contracts\Encryption\DecryptException) {
@@ -1164,13 +1160,13 @@ class CustomerPackageController extends Controller
                 }
                 //$avilable_coins == $request->avilable_coins
                 if (true) {
-                        $paid_amount = intval($request->paid_amount);
-                        // dd($avilable_coins,$paid_amount);
+                    $paid_amount = intval($request->paid_amount);
+                    // dd($avilable_coins,$paid_amount);
                     if ($avilable_coins > $paid_amount) {
                         $balance_coins = $avilable_coins - $paid_amount;
                         $hashed_coins = Crypt::encrypt($balance_coins);
                         $coins_data->update(['coins' => $hashed_coins]);
-// $coins_data->update(['coins' => $balance_coins]);
+                        // $coins_data->update(['coins' => $balance_coins]);
                         if (!empty($request->purchase_id)) {
                             $purchase_details = [];
                             $purchase_details['payment_percentage'] = $request->package_percentage_price;
@@ -1218,7 +1214,6 @@ class CustomerPackageController extends Controller
                                         'status' => 404,
                                         'message' => 'Something went wrong .payment not completed.',
                                     ]);
-
                                 }
                             }
                         } else {
@@ -1258,7 +1253,7 @@ class CustomerPackageController extends Controller
                             $purchase_details['pending_payment'] = $pending_amount;
                             $purchase_details['payment_percentage'] = $request->percentage;
                             $purchase_details['purchase_type'] = 'pending';
-                            $purchase_details['payment_method'] = 'md_coin'; 
+                            $purchase_details['payment_method'] = 'md_coin';
                             $purchase_details['created_by'] = $user_id;
 
                             $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
@@ -1338,15 +1333,12 @@ class CustomerPackageController extends Controller
                                 return redirect()->back()->withErrors('Something went wrong Payment Not Completed')->withInput();
                             }
                         }
-
                     } else {
                         return $this->sendError('Not Enough Coins');
                     }
-
                 } else {
                     return redirect()->back()->withErrors('Coins Tampered Payment Not Completed')->withInput();
                 }
-
             } else {
                 return $this->sendError('Couldn\'t get your Coins');
             }
@@ -1476,10 +1468,7 @@ class CustomerPackageController extends Controller
                 $htmlResult .= '</div>';
                 $htmlResult .= '</div>';
             }
-
         }
         return $htmlResult;
-
     }
-
 }
