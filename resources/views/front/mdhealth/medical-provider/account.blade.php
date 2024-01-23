@@ -2,7 +2,7 @@
 @section('content')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<link rel="stylesheet" href="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.css') }}">
 <style>
     .form-control::placeholder {
         font-family: "Campton";
@@ -85,7 +85,7 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            <form action="{{ url('md-update-medical-profile') }}" method="post" enctype="multipart/form-data" id="accountmedpro">
+                            <form action="{{ url('md-update-medical-profile') }}" method="post" enctype="multipart/form-data" id="accountmedpro" class="from-prevent-multiple-submits">
                                 @csrf
                                 <div class="form-group mb-4">
                                     <label class="form-label mb-3">Company Name</label>
@@ -166,9 +166,9 @@
                             </div>
                             <div class="prev-img-div">
                                 <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
-                                                Storage::exists($MedicalProviderLogo['company_logo_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}" {{-- 
+                                            Storage::exists($MedicalProviderLogo['company_logo_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}" {{-- 
                                             src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic1">
                                 <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
                             </div>
@@ -182,9 +182,9 @@
                             </div>
                             <div class="prev-img-div">
                                 <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
-                                                Storage::exists($MedicalProviderLicense['company_licence_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
+                                            Storage::exists($MedicalProviderLicense['company_licence_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
                                 <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                         </div>
 
                         <div class="section-btns mb-4">
-                            <button type="submit" class="btn save-btn-black">Save
+                            <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits">Save
                                 Changes</button>
                         </div>
 
@@ -270,13 +270,14 @@
     });
 </script> --}}
 
-<script src="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.js')}}"></script>
+<script src="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('.summernote-1').summernote({
             height: 200,
         }).on('summernote.keyup', function() {
-            var text = $(".summernote-1").summernote("code").replace(/&nbsp;|<\/?[^>]+(>|$)/g, "").trim();
+            var text = $(".summernote-1").summernote("code").replace(/&nbsp;|<\/?[^>]+(>|$)/g, "")
+                .trim();
             //alert(text);
             if (text.length == 0) {
                 $('.section_1_description-error').show();
@@ -304,7 +305,13 @@
 
 <!-- JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+<script>
+    (function() {
+        $('.from-prevent-multiple-submits').on('submit', function() {
+            $('.from-prevent-multiple-submits').attr('disabled', 'true');
+        })
+    })();
+</script>
 
 <script>
     function deleteClientLogo(client_logo_id) {
@@ -420,7 +427,7 @@
             return value.trim().length !== 0;
         }, "Spaces are not allowed");
     });
-    }
+    // }
 
     function fail_toast(title = '', message = '') {
         $.toast({
@@ -484,7 +491,4 @@
         }, "Spaces are not allowed");
     });
 </script>
-
-
-
 @endsection

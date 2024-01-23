@@ -100,10 +100,11 @@
             margin-bottom: 16px;
             background: #F6F6F6;
         }
-        #anycheckbox-error{
+
+        #anycheckbox-error {
             position: absolute;
-    bottom: -32px;
-    left: 0;
+            bottom: -32px;
+            left: 0;
         }
     </style>
     <div class="content-wrapper">
@@ -170,86 +171,96 @@
 
                                     <div class="multiple-checkbox-div mb-5">
                                         <div class="form-group d-flex flex-column">
-                                            <div class="multiple-checks position-relative" >
+                                            <div class="multiple-checks position-relative">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="fordashboard" name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="fordashboard"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Dashboard') !== false ? 'checked' : '' }}
                                                         value="Dashboard">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="fordashboard">Dashboard</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forsales"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="forsales"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Sales') !== false ? 'checked' : '' }}
                                                         value="Sales">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forsales">Sales</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forpackages"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="forpackages"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Packages') !== false ? 'checked' : '' }}
                                                         value="Packages">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forpackages">Packages</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forpaymentinfo"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="forpaymentinfo"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Payment Information') !== false ? 'checked' : '' }}
                                                         value="Payment Information">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forpaymentinfo">Payment Information</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="formessages"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="formessages"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Messages') !== false ? 'checked' : '' }}
                                                         value="Messages">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="formessages">Messages</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forroles"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="forroles"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Roles') !== false ? 'checked' : '' }}
                                                         value="Roles">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forroles">Roles</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forotherservices"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="forotherservices"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Other Services') !== false ? 'checked' : '' }}
                                                         value="Other Services">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forotherservices">Other Services</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="foraccount"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="foraccount"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Account') !== false ? 'checked' : '' }}
                                                         value="Account">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="foraccount">Account</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="forreports"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="forreports"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Reports') !== false ? 'checked' : '' }}
                                                         value="Reports">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="forreports">Reports</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="formembership"  name="anycheckbox"
+                                                    <input type="checkbox" class="form-check-input" id="formembership"
+                                                        name="anycheckbox"
                                                         {{ !empty($system_users['previlages']) && strpos($system_users['previlages'], 'Membership') !== false ? 'checked' : '' }}
                                                         value="Membership">
                                                     <label class="form-check-label fw-500 fsb-1"
                                                         for="formembership">Membership</label>
                                                 </div>
                                             </div>
-                                             {{-- <div id="anycheckbox-error" class="error"></div> --}}
+                                            {{-- <div id="anycheckbox-error" class="error"></div> --}}
                                         </div>
                                     </div>
                                     <input type="hidden" name="previlages" id="previlages"
                                         value="{{ !empty($system_users['previlages']) ? $system_users['previlages'] : '' }}">
 
                                     <div class="section-btns mb-5">
-                                        <button class="btn save-btn-black">Save
+                                        <button class="btn save-btn-black" onclick="return confirmSubmit();">Save
                                             Personnel</button>
                                     </div>
                                 </form>
@@ -306,51 +317,62 @@
 
     <script>
         $(document).ready(function() {
-        function updateCheckedValues() {
-            const checkedValues = $('.form-check-input:checked').map(function() {
-                return $(this).val();
-            }).get().join(', ');
-            // $('#checkedValues').text(checkedValues);
-            $('#previlages').val(checkedValues);
-        }
-        $('.form-check-input').change(updateCheckedValues);
-        updateCheckedValues();
+            function updateCheckedValues() {
+                const checkedValues = $('.form-check-input:checked').map(function() {
+                    return $(this).val();
+                }).get().join(', ');
+                // $('#checkedValues').text(checkedValues);
+                $('#previlages').val(checkedValues);
+            }
+            $('.form-check-input').change(updateCheckedValues);
+            updateCheckedValues();
         });
     </script>
+   <script>
+    function confirmSubmit() {
+        var confirmation = window.confirm('Are you sure you want to save this record?');
+        if (confirmation) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 
     <script>
         function delete_role(id) {
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const bearer_token = '{{ Session::get('login_token') }}';
-            $.ajax({
-                url: base_url + '/api/md-provider-system-user-delete',
-                type: 'POST',
-                data: {
-                    id: id,
-                },
-                headers: {
-                    'X-CSRF-TOKEN': token,
-                    'Authorization': 'Bearer ' + bearer_token
-                },
-                success: function(response) {
-                    if (response.status == 200) {
-                        $('#div_' + id).css('display', 'none');
-                        toastr.options = {
-                            "positionClass": "toast-bottom-right",
-                            "timeOut": "5000",
-                        };
-                        toastr.success(response.message);
-                    } else {
-                        toastr.error(response.message);
+            if (confirm("Do you really want to delete this record ?")) {
+                $.ajax({
+                    url: base_url + '/api/md-provider-system-user-delete',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Authorization': 'Bearer ' + bearer_token
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            $('#div_' + id).css('display', 'none');
+                            toastr.options = {
+                                "positionClass": "toast-bottom-right",
+                                "timeOut": "5000",
+                            };
+                            toastr.success(response.message);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                        console.log('Success:', response.message);
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr);
                     }
-                    console.log('Success:', response.message);
-                },
-                error: function(xhr) {
-                    console.error('Error:', xhr);
-                }
-            });
-
+                });
+            }
         }
     </script>
 
@@ -364,7 +386,7 @@
                     },
                     password: {
                         required: true,
-                        minlength: 8 
+                        minlength: 8
                     },
                     name: {
                         required: true
@@ -386,7 +408,7 @@
                     },
                     password: {
                         required: "Please enter a password",
-                        minlength: "Password must be at least 8 characters long" 
+                        minlength: "Password must be at least 8 characters long"
                     },
                     name: {
                         required: "Please enter full name"
@@ -401,15 +423,15 @@
                         required: "Please choose atleast one access"
                     },
                 },
-            //     errorPlacement: function(error, element) {
-            //     // Custom error placement for anycheckbox
-            //     if (element.attr("name") === "anycheckbox[]") {
-            //         error.insertAfter("#anycheckbox-error");
-            //     } else {
-            //         // Default placement for other fields
-            //         error.insertAfter(element);
-            //     }
-            // },
+                //     errorPlacement: function(error, element) {
+                //     // Custom error placement for anycheckbox
+                //     if (element.attr("name") === "anycheckbox[]") {
+                //         error.insertAfter("#anycheckbox-error");
+                //     } else {
+                //         // Default placement for other fields
+                //         error.insertAfter(element);
+                //     }
+                // },
                 submitHandler: function(form) {
                     form.submit();
                 }

@@ -9,12 +9,12 @@
             letter-spacing: -0.56px;
             font-size: 16px;
             border-radius: 3px;
-            border: 1px solid #f6f6f6;
+            /* border: 1px solid #f6f6f6; */
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 16px;
-            background: #f6f6f6;
+            /* background: #f6f6f6; */
         }
 
         .trmt-card-body .dashboard-card-title {
@@ -34,6 +34,28 @@
             line-height: normal;
             letter-spacing: -0.4px;
             padding: unset !important;
+        }
+    </style>
+    <style>
+        .no-data {
+            height: 362px;
+            font-family: "CamptonBook";
+            color: #979797;
+            font-weight: 400;
+            letter-spacing: -0.56px;
+            font-size: 16px;
+            border-radius: 3px;
+            /* border: 1px solid #F6F6F6; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            /* background: #F6F6F6; */
+        }
+
+        .no-data img {
+            width: 150px;
+            height: auto;
         }
     </style>
     <div class="content-wrapper">
@@ -334,21 +356,25 @@
                                 }
                             } else {
                                 if (type === 'active') {
-                                    $('#activelist').html(
-                                        '<div class="no-data">No Data Available !</div>');
+                                    $('#activelist').html('<div class="no-data">\
+        <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+    </div>');
                                 } else {
-                                    $('#deactivelist').html(
-                                        '<div class="no-data">No Data Available !</div>');
+                                    $('#deactivelist').html('<div class="no-data">\
+        <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+    </div>');
                                 }
                             }
                         },
                         error: function(xhr, status, error) {
                             if (type === 'active') {
-                                $('#activelist').html(
-                                    '<div class="no-data">No Data Available !</div>');
+                                $('#activelist').html('<div class="no-data">\
+        <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+    </div>');
                             } else {
-                                $('#deactivelist').html(
-                                    '<div class="no-data">No Data Available !</div>');
+                                $('#deactivelist').html('<div class="no-data">\
+        <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+    </div>');
                             }
                         }
                     });
@@ -361,8 +387,8 @@
                 }
             });
         });
-    
-    
+
+
 
         function change_status(id, type) {
             var base_url = $('#base_url').val();
@@ -376,7 +402,7 @@
             } else {
                 url = base_url + '/api/md-deactivate-to-activate-packages';
             }
-// alert(type);
+            // alert(type);
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -393,7 +419,7 @@
                             "positionClass": "toast-bottom-right",
                             "timeOut": "5000",
                         };
-                       
+
                         toastr.success(response.message);
 
                         // Move the package to the corresponding tab
@@ -401,17 +427,21 @@
                     } else {
                         toastr.error(response.message);
                     }
-                    
+
                 },
                 error: function(xhr) {
                     console.error('Error:', xhr);
                 }
             });
             if (type == 'active') {
-                            fetchActiveCount();
-                        } else {
-                            fetchDeactiveCount();
-                        }
+                var val = $('#countsofpack').text();
+                value = val - 1;
+                var val = $('#countsofpack').text(value);
+            } else {
+                var val = $('#countsofpack').text();
+                value = val - 1;
+                var val = $('#countsofpack').text(value);
+            }
         }
 
         function movePackageToTab(id, type) {
