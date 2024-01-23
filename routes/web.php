@@ -124,17 +124,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('customer-details', 'admin/customers/customer-details');
 
     //Admin MANAGE VENDORS
-<<<<<<< HEAD
 
-    Route::view('vendor-details', 'admin/vendors/vendor-details');
-=======
-   
-   
-  
-    
-    
 
->>>>>>> e9a3f420fd8bf298f639e60ee7caa409cc588c98
+
+
+
+
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
 
 
@@ -176,7 +171,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('delete-vendor','delete_vendor')->name('delete.vendor');
 
 
-      
+
 
 
 
@@ -326,11 +321,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('payment-requests', 'admin/payments/payment-requests');
 
     //Admin REVIEWS
-<<<<<<< HEAD
-
-
-=======
->>>>>>> e9a3f420fd8bf298f639e60ee7caa409cc588c98
 
 
 
@@ -358,7 +348,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     });
 
-   
+
 
 
 
@@ -599,7 +589,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
 
 
-    
+
 
 
 });
@@ -629,7 +619,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
 
 
     Route::controller(VendorSalesController::class)->group(function (){
-        
+
         Route::get('vendor-sales','index');
 
     });
@@ -655,13 +645,7 @@ Route::any('health-search-result', [CustomerPackageController::class, 'customer_
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
 
-<<<<<<< HEAD
-Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
-
-Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
-=======
 // Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
->>>>>>> e9a3f420fd8bf298f639e60ee7caa409cc588c98
 Route::any('test', [CustomerPackageController::class, 'test']);
 Route::post('complete_3ds', [CustomerPackageController::class, 'complete_3ds']);
 
@@ -716,11 +700,11 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
     });
 
-   
+
     Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
     Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
     Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
-    
+
     // Route::view('', '');
 
 
