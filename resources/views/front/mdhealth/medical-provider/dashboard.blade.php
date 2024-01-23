@@ -4,16 +4,16 @@
 <style>
     .pending {
         width: 94px;
-height: 19px;
-flex-shrink: 0;
-padding:unset;
+        height: 19px;
+        flex-shrink: 0;
+        padding: unset;
         color: #000;
-text-align: center;
-font-family: Campton;
-font-size: 10px;
-font-weight: 600;
-line-height: normal;
-letter-spacing: -0.4px;
+        text-align: center;
+        font-family: Campton;
+        font-size: 10px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.4px;
     }
 </style>
 <div class="content-wrapper">

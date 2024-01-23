@@ -34,7 +34,7 @@
                                                     {{ 'Treatment period '.$fav['treatment_period_in_days'].' days' }}</p>
                                             </div>
                                             <div
-                                                class="d-flex align-items-center justify-content-center flex-column gap-2 ">
+                                                class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
                                                 <div>
                                                     <img id="img_{{ $fav['id'] }}"
                                                         class="fav-btn"src="{{ asset('front/assets/img/Favourite.svg') }}"

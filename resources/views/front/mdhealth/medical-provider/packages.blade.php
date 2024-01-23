@@ -157,7 +157,7 @@
                                                         View
                                                     </a>
                                                     <a href="javascript:void(0);" onclick="change_status('{{ $package_deactive_list['id'] }}', 'deactive')" class="close-btn">
-                                                        <img src="{{('front/assets/img/Deactive.png')}}" alt="" />
+                                                        <img src="{{('front/assets/img/re-activate.png')}}" alt="" />
                                                         Activate
                                                     </a>
                                                 </div>

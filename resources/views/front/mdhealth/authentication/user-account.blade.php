@@ -165,7 +165,7 @@
                                             <div class="hide-eye-div">
                                                 <label for="password" class="form-label">*Password</label>
                                                 <input type="password" name="password" class="form-control " id="password" placeholder="Minimum 8 characters" />
-                                                <span toggle="#password" class="mdi mdi-eye field-icon toggle-password"></span>
+                                                <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password"></span>
                                             </div>
                                         </div>
 
@@ -173,7 +173,7 @@
                                             <div class="hide-eye-div">
                                                 <label for="re-password" class="form-label">*Re-Password</label>
                                                 <input type="password" name="repassword" class="form-control " id="repassword" placeholder="Minimum 8 characters" />
-                                                <span toggle="#repassword" class="mdi mdi-eye field-icon toggle-password"></span>
+                                                <span toggle="#repassword" class="mdi mdi-eye-off field-icon toggle-password"></span>
                                             </div>
                                         </div>
 
