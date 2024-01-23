@@ -8,18 +8,18 @@
     <!-- FavIcon -->
     <link rel="shortcut icon" href="{{ URL::asset('admin/assets/img/FavIcon.svg') }}" type="image/x-icon">
 
-    <link rel="shortcut icon" href="{{ URL::asset('admin/assets/img/FavIcon.svg') }}" type="image/x-icon">
-
+    <!-- MDI Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+    <!-- RemixIcon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <!-- Simplebar Scrollbar -->
     <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
 
-    <!-- RemixIcon -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ URL::asset('front/assets/css/waves.min.css') }}">
 
     <!-- Nice Select -->
     <link rel="stylesheet" href="{{ URL::asset('admin/assets/css/nice-select.css') }}">
@@ -35,6 +35,7 @@
     {{-- <link rel="stylesheet" href="{{URL::asset('front/assets/css/responsiveStyles.css')}}"> --}}
 
     <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}">
+    
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -65,18 +66,23 @@
 
     <!-- Semantic UI -->
     <link href="{{ URL::asset('front/assets/css/semantic.min.css') }}" rel="stylesheet" type="text/css" />
+    
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css" /> -->
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" /> -->
 
     <title>MDhealth</title>
 
     <style>
         .error {
-            color: red !important;
-            font-size: 14px !important;
+            color: #F31D1D;
+            font-size: 14px;
         }
     </style>
 
-    <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ URL::asset('admin_panel/js/jquery.toast.min.css') }}"> -->
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -85,6 +91,7 @@
 
 <!-- Place the first-->
 <script src="https://cdn.tiny.cloud/1/bjb2ddu6e56m3tkx46k66z7gvds3q7lpwsrg7s0jz38d39i9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 
 

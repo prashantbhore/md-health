@@ -41,12 +41,12 @@
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
-                @include('front.includes.sidebar-user')
+    <div class="d-flex gap-3">
+            <div class="w-292">
+            @include('front.includes.sidebar-user')
             </div>
-            <div class="col-md-9">
-                <div class="card mb-4">
+            <div class="w-761">
+                <div class="card panel-right mb-4">
                     <div class="card-body d-flex" style="min-height:650px">
                         <div class="message-div d-flex justify-content-between flex-column w-100 ">
                             <div class="message-header">

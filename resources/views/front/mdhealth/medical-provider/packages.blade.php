@@ -1,37 +1,52 @@
 @section('css')
-@endsection
-@extends('front.layout.layout2')
-@section('content')
+    @endsection @extends('front.layout.layout2') @section('content')
     <style>
-     .no-data {
-        height: 150px;
-        font-family: "CamptonBook";
-        color: #979797;
-        font-weight: 400;
-        letter-spacing: -0.56px;
-        font-size: 16px;
-        border-radius: 3px;
-        border: 1px solid #F6F6F6;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 16px;
-        background: #F6F6F6;
-    }
+        .no-data {
+            height: 150px;
+            font-family: "CamptonBook";
+            color: #979797;
+            font-weight: 400;
+            letter-spacing: -0.56px;
+            font-size: 16px;
+            border-radius: 3px;
+            border: 1px solid #f6f6f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            background: #f6f6f6;
+        }
 
-    
+        .trmt-card-body .dashboard-card-title {
+            font-size: 16px
+        }
+
+        .status-label {
+            width: 94px !important;
+            height: 19px !important;
+            flex-shrink: 0;
+            color: #000;
+            text-align: center;
+            font-family: Campton;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: -0.4px;
+            padding: unset !important;
+        }
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="d-flex gap-3">
+                <div class="w-292">
                     @include('front.includes.sidebar')
                 </div>
-                <div class="col-md-9">
+                <div class="w-761">
                     <div class="card mb-4">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                             <span>Packages</span>
-                            <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
+                            <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="" />
                         </h5>
                         <div class="card-body">
                             <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
@@ -74,16 +89,19 @@
 
                                 <div class="filter-div">
                                     <div class="search-div">
-                                        <input type="text" name="searchpackage" id="searchpackage" placeholder="Search">
+                                        <input type="text" name="searchpackage" id="searchpackage"
+                                            placeholder="Search" />
                                     </div>
-                                    {{-- <div class="list-div">
-                                        <select name="" id="">
-                                            <option value="">List for Date</option>
-                                            <option value="">List for Stars</option>
-                                            <option value="">List for Price</option>
-                                            <option value="">List for Distance</option>
-                                        </select>
-                                    </div> --}}
+                                    {{--
+                                <div class="list-div">
+                                    <select name="" id="">
+                                        <option value="">List for date</option>
+                                        <option value="">List for Stars</option>
+                                        <option value="">List for Price</option>
+                                        <option value="">List for Distance</option>
+                                    </select>
+                                </div>
+                                --}}
                                 </div>
 
                                 <!-- Tab panes -->
@@ -91,76 +109,62 @@
                                     <div class="tab-pane fade show active" id="user" role="tabpanel"
                                         aria-labelledby="user-tab">
                                         <div id="activelist"></div>
-                                        {{-- {!! $html1 !!} --}}
-                                        {{-- @foreach ($packages_active_list as $package_active_list)
-                                            <div class="treatment-card df-start w-100 mb-3" id="div_{{$package_active_list['id']}}">
-                                                <div class="row card-row align-items-center">
-                                                    <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ asset('front/assets/img/Memorial.svg') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="col-md-6 justify-content-start ps-0">
-                                                        <div class="trmt-card-body">
-                                                            <h5 class="dashboard-card-title fw-600">Package
-                                                                No:{{ !empty($package_active_list['package_unique_no']) ? $package_active_list['package_unique_no'] : '' }}<span
-                                                                    class="active">Active</span></h5>
-                                                            <h5 class="mb-0 fw-500">
-                                                                {{ !empty($package_active_list['package_name']) ? $package_active_list['package_name'] : '' }}
-                                                            </h5>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                                        <div class="trmt-card-footer footer-btns">
-                                                            <a href="{{ url('edit-package/' . Crypt::encrypt($package_active_list['id'])) }}"
-                                                                class="view-btn"><i class="fa fa-eye"></i>
-                                                                View </a>
-                                                            <a href="javascript:void(0);" onclick="change_status('{{ $package_active_list['id'] }}', 'active')" class="close-btn"><i class="fa fa-close"></i>
-                                                                Deactivate </a>
-                                                        </div>
-                                                    </div>
+                                        {{-- {!! $html1 !!} --}} {{-- @foreach ($packages_active_list as $package_active_list)
+                                    <div class="card shadow-none mb-4 pkgCard mb-4" id="div_{{$package_active_list['id']}}">
+                                        <div class="card-body d-flex gap-3 w-100 p-4">
+                                            <div class="df-center">
+                                                <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="" />
+                                            </div>
+                                            <div class="df-column">
+                                                <h5 class="mb-0">Package No:{{ !empty($package_active_list['package_unique_no']) ? $package_active_list['package_unique_no'] : '' }}<span class="active camptonBold">Active</span></h5>
+                                                <h5 class="card-p1">
+                                                    {{ !empty($package_active_list['package_name']) ? $package_active_list['package_name'] : '' }}
+                                                </h5>
+                                            </div>
+                                            <div class="ms-auto pkgMsg">
+                                                <div class="trmt-card-footer footer-btns">
+                                                    <a href="{{ url('edit-package/' . Crypt::encrypt($package_active_list['id'])) }}" class="view-btn">
+                                                    <img src="{{ asset('front/assets/img/view.png') }}" alt="" /> View </a>
+                                                    <a href="javascript:void(0);" onclick="change_status('{{ $package_active_list['id'] }}', 'active')" class="close-btn">
+                                                    <img src="{{ asset('front/assets/img/reject.png') }}" alt="" /> Deactivate </a>
                                                 </div>
                                             </div>
-                                        @endforeach --}}
-
+                                        </div>
+                                    </div>
+                                    @endforeach --}}
                                     </div>
                                     <div class="tab-pane fade" id="medical-provider" role="tabpanel"
                                         aria-labelledby="medical-provider-tab">
                                         <div id="deactivelist"></div>
-                                        {{-- {!! $html2 !!} --}}
-                                        {{-- @foreach ($packages_deactive_list as $package_deactive_list)
-                                            <div class="treatment-card df-start w-100 mb-3" id="div_{{$package_deactive_list['id']}}">
-                                                <div class="row card-row align-items-center">
-                                                    <div class="col-md-2 df-center px-0">
-                                                        <img src="{{ asset('front/assets/img/Memorial.svg') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="col-md-6 justify-content-start ps-0">
-                                                        <div class="trmt-card-body">
-                                                            <h5 class="dashboard-card-title fw-600">Package No:
-                                                                {{ !empty($package_deactive_list['package_unique_no']) ? $package_deactive_list['package_unique_no'] : '' }}<span
-                                                                    class="cancel">Deactive</span></h5>
-                                                            <h5 class="mb-0 fw-500">
-                                                                {{ !empty($package_deactive_list['package_name']) ? $package_deactive_list['package_name'] : '' }}
-                                                            </h5>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                                        <div class="trmt-card-footer footer-btns">
-                                                            <a href="{{ url('edit-package/' . Crypt::encrypt($package_deactive_list['id'])) }}"
-                                                                class="view-btn"><i class="fa fa-eye"></i>
-                                                                View </a>
-                                                                <a href="javascript:void(0);" onclick="change_status('{{ $package_deactive_list['id'] }}', 'deactive')" class="close-btn">
-                                                                    <i class="fa fa-close"></i>
-                                                                    Activate
-                                                                </a>
-
-                                                        </div>
-                                                    </div>
+                                        {{-- {!! $html2 !!} --}} {{-- @foreach ($packages_deactive_list as $package_deactive_list)
+                                    <div class="card shadow-none mb-4 pkgCard w-100" id="div_{{$package_deactive_list['id']}}">
+                                        <div class="card-body d-flex gap-3 w-100 p-4">
+                                            <div class="df-center">
+                                                <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="" />
+                                            </div>
+                                            <div class="df-coloumn">
+                                                    <h5 class="mb-0">
+                                                        Package No: {{ !empty($package_deactive_list['package_unique_no']) ? $package_deactive_list['package_unique_no'] : '' }}<span class="cancel status-label df-center">Deactive</span>
+                                                    </h5>
+                                                    <h5 class="card-h1 d-inline-block">
+                                                        {{ !empty($package_deactive_list['package_name']) ? $package_deactive_list['package_name'] : '' }}
+                                                    </h5>
+                                            </div>
+                                            <div class="ms-auto pkgMsg">
+                                                <div class="trmt-card-footer footer-btns">
+                                                    <a href="{{ url('edit-package/' . Crypt::encrypt($package_deactive_list['id'])) }}" class="view-btn">
+                                                        <img src="{{('front/assets/img/view.png')}}" alt="" />
+                                                        View
+                                                    </a>
+                                                    <a href="javascript:void(0);" onclick="change_status('{{ $package_deactive_list['id'] }}', 'deactive')" class="close-btn">
+                                                        <img src="{{('front/assets/img/re-activate.png')}}" alt="" />
+                                                        Activate
+                                                    </a>
                                                 </div>
                                             </div>
-                                        @endforeach --}}
+                                        </div>
+                                    </div>
+                                    @endforeach --}}
                                     </div>
                                 </div>
                             </div>
@@ -170,8 +174,7 @@
             </div>
         </div>
     </div>
-@endsection
-@section('script')
+    @endsection @section('script')
     <script>
         $(".mpPackagesLi").addClass("activeClass");
         $(".mpPackages").addClass("md-active");
@@ -331,14 +334,22 @@
                                 }
                             } else {
                                 if (type === 'active') {
-                                    $('#activelist').html('<h3>No Data Found</h3>');
+                                    $('#activelist').html(
+                                        '<div class="no-data">No Data Available !</div>');
                                 } else {
-                                    $('#deactivelist').html('<h3>No Data Found</h3>');
+                                    $('#deactivelist').html(
+                                        '<div class="no-data">No Data Available !</div>');
                                 }
                             }
                         },
                         error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
+                            if (type === 'active') {
+                                $('#activelist').html(
+                                    '<div class="no-data">No Data Available !</div>');
+                            } else {
+                                $('#deactivelist').html(
+                                    '<div class="no-data">No Data Available !</div>');
+                            }
                         }
                     });
                 } else {
@@ -350,9 +361,9 @@
                 }
             });
         });
-    </script>
+    
+    
 
-    <script>
         function change_status(id, type) {
             var base_url = $('#base_url').val();
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -365,7 +376,7 @@
             } else {
                 url = base_url + '/api/md-deactivate-to-activate-packages';
             }
-
+// alert(type);
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -382,6 +393,7 @@
                             "positionClass": "toast-bottom-right",
                             "timeOut": "5000",
                         };
+                       
                         toastr.success(response.message);
 
                         // Move the package to the corresponding tab
@@ -389,11 +401,17 @@
                     } else {
                         toastr.error(response.message);
                     }
+                    
                 },
                 error: function(xhr) {
                     console.error('Error:', xhr);
                 }
             });
+            if (type == 'active') {
+                            fetchActiveCount();
+                        } else {
+                            fetchDeactiveCount();
+                        }
         }
 
         function movePackageToTab(id, type) {
@@ -426,6 +444,7 @@
                 const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
                     'content');
                 const bearer_token = '{{ Session::get('login_token') }}';
+
 
                 var url = '';
 

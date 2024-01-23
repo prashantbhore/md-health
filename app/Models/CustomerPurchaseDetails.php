@@ -14,6 +14,7 @@ class CustomerPurchaseDetails extends Model {
         'customer_id',
         'package_id',
         'transaction_id',
+        'conversation_id',
         'case_no',
         'case_manager_id',
         'hotel_id',
@@ -71,9 +72,9 @@ class CustomerPurchaseDetails extends Model {
     }
 
     public function case_manager() {
-        return $this->belongsTo( MedicalProviderSystemUser::class, 'case_manager_id', 'id' );
+        return $this->belongsTo( MedicalProviderRegistrater::class, 'case_manager_id', 'id' );
     }
-
+    
     public function hotel() {
         return $this->belongsTo( AddNewAcommodition::class, 'hotel_id', 'id' );
     }

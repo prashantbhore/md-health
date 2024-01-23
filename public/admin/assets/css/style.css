@@ -108,6 +108,10 @@ table,
     color: #000 !important;
 }
 
+.bg-red {
+    background: #F55C5C !important;
+}
+
 .bg-green {
     background: #4cdb06 !important;
 }
@@ -205,9 +209,14 @@ table,
     /* Microsoft Edge */
     color: #979797;
 }
-
+/* 
 .form-select {
     background-image: none;
+} */
+
+.form-control{
+    appearance:auto !important;
+    -webkit-appearance: auto !important;
 }
 
 .nice-select:after {
@@ -460,7 +469,7 @@ table td {
     transition: 0.15s all;
     color: #000;
     font-size: 14px;
-    font-style: normal;
+    
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -599,7 +608,7 @@ table td {
 .pkg-card,
 .patient-details {
     color: #000;
-    font-style: normal;
+    
     line-height: normal;
 }
 
@@ -635,7 +644,7 @@ table td {
 .pkg-card h3 {
     text-align: right;
     font-size: 24px;
-    font-style: normal;
+    
     font-weight: 600;
     letter-spacing: -1.04px;
     margin-bottom: 0;
@@ -1013,8 +1022,8 @@ table td {
 .inner-text {
     position: absolute;
     top: 32px;
-    left: 111px;
-    width: 46px;
+    left: 42%;
+    width: 47px;
 }
 
 .signInCard {
@@ -1415,13 +1424,13 @@ table.dataTable.no-footer {
 }
 
 
-.cityPage table.dataTable tbody th:nth-child(4),
+/* .cityPage table.dataTable tbody th:nth-child(4),
 .cityPage table.dataTable tbody td:nth-child(4) {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 
-}
+} */
 
 div.dataTables_wrapper div.dataTables_filter input {
     width: 195px;
@@ -1444,11 +1453,71 @@ div.dataTables_wrapper div.dataTables_filter input {
     display: none;
 }
 
-.dataTables_filter {
+.dataTables_filter{
     position: absolute;
     top: -51px;
     right: 211px;
 }
+
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     padding: 0.5em 0em;
+}
+
+form.admin-form label {
+    display: inline-block;
+    font-size: 14px;
+}
+.top-cards > .promo > .card{
+    min-height: 567px !important;
+}
+.scroll-300{
+    overflow-y: scroll; 
+    height:300px;
+}
+.scroll-600{
+    overflow-y: scroll; 
+    height:675px;
+}
+.page-title small{
+    margin-left: 15px;
+}
+.clear-fix{
+    clear: both;
+    margin: 0px 0px 20px 0px;
+}
+.card-active{
+    background-color: #4CDB06;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 15px;
+    padding: 0px 15px;
+    border-radius: 5px;
+    font-size: 13px;
+    line-height: 20px;
+    height: 20px;
+}
+.card-deactive{
+    background-color: #F55C5C;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 15px;
+    padding: 0px 15px;
+    border-radius: 5px;
+    font-size: 13px;
+    line-height: 20px;
+    height: 20px;
+    color: #fff;
+}
+
+.md-btn-48 {
+    width: 48%;
+    height: 42px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    text-align: center;
+    border-radius: 5px;
 }

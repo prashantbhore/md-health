@@ -14,6 +14,11 @@
 }
 
 @font-face {
+    font-family: "CamptonSemiBold";
+    src: url("../fonts/campton/CamptonSemiBold.otf");
+}
+
+@font-face {
     font-family: "CamptonExtraBold";
     src: url("../fonts/campton/CamptonExtraBold.otf");
 }
@@ -28,6 +33,11 @@
     src: url("../fonts/campton/CamptonThin.otf");
 }
 
+@font-face {
+    font-family: "CamptonExtraLight";
+    src: url("../fonts/campton/CamptonExtraLight.otf");
+}
+
 :root {
     --form-control-color: #4cdb06;
 }
@@ -35,6 +45,18 @@
 .body {
     scroll-behavior: smooth;
     font-family: "CamptonBook", sans-serif;
+}
+
+.container {
+    max-width: 1067px;
+}
+
+.w-292 {
+    width: 292px;
+}
+
+.w-761 {
+    width: 761px;
 }
 
 .gj-picker {
@@ -46,7 +68,6 @@
 .gj-picker-bootstrap table tr td div {
     font-family: CamptonBook;
     font-size: 12px;
-
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.84px;
@@ -113,6 +134,23 @@
 }
 
 /* UTILITY CLASSES */
+.error {
+    color: #F31D1D !important;
+    font-family: "Campton";
+    font-size: 14px !important;
+    letter-spacing: -0.64px;
+    transition: 0.15s all;
+}
+
+.lira {
+    font-family: sans-serif !important;
+    font-weight: 600 !important;
+}
+
+.md-pad {
+    padding: .375rem .75rem !important;
+}
+
 .bod-3 {
     border-radius: 3px 0 0px 3px !important;
 }
@@ -121,38 +159,114 @@
     border-radius: 0px 3px 3px 0px !important;
 }
 
+.card-h6 {
+    color: #000;
+    font-family: Campton;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.card-h4 {
+    color: #000;
+    font-family: Campton;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.card-h3 {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.card-h2 {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.card-h1 {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.gray-p1 {
+    color: #949494 !important;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.card-p1 {
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    font-family: CamptonBook;
+}
+
+.card-p2 {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.modal-h1 {
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.92px;
+}
+
 .card-h8 {
     color: #000;
     text-align: center;
-    font-family: Campton;
+    font-family: CamptonBold;
     font-size: 36px;
-
     font-weight: 700;
     line-height: normal;
     letter-spacing: -1.44px;
+    margin-bottom: 15px !important;
 }
 
 .card-p8 {
-    color: #FFF;
+    color: #fff;
     text-align: center;
-    font-family: CamptonBook;
-    font-size: 26px;
-
-    font-weight: 600;
+    font-family: CamptonSemiBold;
+    font-size: 25px;
+    font-weight: 700;
     line-height: normal;
-    letter-spacing: -1.04px;
+    letter-spacing: -0.8px;
 }
 
 .add-btn {
     border-radius: 3px;
     background: #000;
-    width: 242px;
-    height: 36px;
-    flex-shrink: 0;
+    width: 242px !important;
+    height: 36px !important;
     color: #4cdb06;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -165,14 +279,13 @@
 .save-btn-black {
     width: 100%;
     height: 48px;
-    flex-shrink: 0;
     border-radius: 5px;
     background: #000;
     color: #fff;
     text-align: center;
-    font-family: "CamptonBold";
+    font-family: "Campton";
+    /* font-weight: 700; */
     font-size: 15px;
-    font-weight: 700;
     line-height: normal;
     letter-spacing: -0.6px;
 }
@@ -196,57 +309,6 @@
 
 .save-btn-green:hover {
     color: #000;
-}
-
-.card-h3 {
-    color: #000;
-    font-family: Campton;
-    font-size: 14px;
-
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: -0.56px;
-}
-
-.card-h2 {
-    color: #000;
-    font-family: CamptonBook;
-    font-size: 16px;
-
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.64px;
-}
-
-.card-h1 {
-    color: #000;
-    font-family: Campton;
-    font-size: 16px;
-
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: -0.64px;
-}
-
-.card-p1 {
-    color: #000;
-    font-size: 14px;
-
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.56px;
-    font-family: CamptonBook;
-}
-
-.modal-h1 {
-    color: #000002;
-    text-align: center;
-    font-family: Campton;
-    font-size: 23px;
-
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.92px;
 }
 
 /* END */
@@ -278,7 +340,7 @@
 
 .search-bar .form-floating label {
     color: #a3a3a3;
-    font-family: CamptonBook;
+    font-family: "CamptonBook";
     font-size: 14px;
 
     font-weight: 500;
@@ -337,8 +399,8 @@
     letter-spacing: -0.92px;
 }
 
-
-.request-modal .form-label {
+.request-modal .form-label,
+.treatmentForModal2 .form-label {
     color: #000002;
     font-family: CamptonBook;
     font-size: 16px;
@@ -359,7 +421,6 @@
     display: none;
 }
 
-
 .request-modal p {
     color: #000;
     font-family: CamptonBook;
@@ -370,17 +431,44 @@
     letter-spacing: -0.64px;
 }
 
-.request-modal .btn-close {
+.request-modal .btn-close,
+.treatmentForModal2 .btn-close,
+#UserCancellationReq .btn-close,
+#UserChangeInformationModel .btn-close {
     background: url("../img/modalClose.png") no-repeat center center/cover;
     opacity: 1;
 }
 
+#AccommodationView .btn-close,
+#TourView .btn-close,
+#ReviewModal .btn-close,
+#TransportationView .btn-close {
+    background: url("../img/closeModal.png") no-repeat center center/cover;
+    opacity: 1;
+}
 
-.search-bar .form-select {
+#UserCancellationReq .modal-header .btn-close,
+#AccommodationView .modal-header .btn-close,
+#TransportationView .modal-header .btn-close,
+#ReviewModal .modal-header .btn-close,
+#TourView .modal-header .btn-close,
+#UserChangeInformationModel .modal-header .btn-close {
+    top: 20px;
+    right: 24px;
+}
+
+.search-bar .form-select,
+#UserCancellationReq .form-select,
+#UserChangeInformationModel .form-select {
     background-image: url("../img/SelectArrowDown.png");
     background-repeat: no-repeat;
     background-size: auto;
     background-position: bottom 16px right 12px;
+}
+
+#UserCancellationReq .form-select,
+#UserChangeInformationModel .form-select {
+    background-position: bottom 10px right 10px;
 }
 
 .request-modal .form-select,
@@ -398,7 +486,7 @@
 }
 
 .list-div .form-select:focus {
-    border: 1px solid #EDEDED;
+    border: 1px solid #ededed;
 }
 
 .btn-close:focus {
@@ -416,8 +504,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .request-modal select option:not(:checked) {
@@ -425,15 +513,17 @@
 }
 
 .section-heading-div .form-check-input,
+.sign-in-card .form-check-input,
 .request-modal .form-check-input,
 .tc .form-check-input {
-    background: #D9D9D9;
+    background: #d9d9d9;
     width: 18px;
     height: 18px !important;
     border-radius: 3px !important;
-    border: 1.5px solid #D6D6D6 !important;
+    border: 1.5px solid #d6d6d6 !important;
     transition: 0.15s all;
 }
+
 .section-heading-div .form-check-input {
     background: transparent;
     margin-right: 8px;
@@ -575,8 +665,15 @@
     background-color: transparent;
     text-decoration: underline;
     text-decoration-color: #4cdb06;
-    text-underline-offset: 15px;
+    text-underline-offset: 10px;
     text-decoration-thickness: 3px;
+
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
 }
 
 .tab-card .nav-link:hover {
@@ -584,8 +681,8 @@
 }
 
 .tab-card ul {
-    border-bottom: 1px solid #ececec;
-    padding-bottom: 1.6rem;
+    border-bottom: 2px solid #ececec;
+    padding-bottom: 30px;
 }
 
 .tab-card .nav-link {
@@ -607,9 +704,10 @@
 
 .tab-card .gallery {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin: 2rem 0;
     flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
 .tab-card .gallery a {
@@ -619,6 +717,9 @@
 
 .tab-card .gallery a img {
     width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .tab-card .overview p {
@@ -649,8 +750,26 @@
 }
 
 .red-strike {
-    text-decoration: line-through;
-    text-decoration-color: red;
+    /* text-decoration: line-through; */
+    /* text-decoration-color: red; */
+    position: relative;
+}
+
+.red-strike::before {
+    position: absolute;
+    content: "";
+    left: -5px;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid #F31D1D;
+    border-color: inherit;
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-4deg);
+    width: 100px;
+    color: #F31D1D;
 }
 
 .packageResult .lctn {
@@ -660,8 +779,7 @@
 .packageResult .brdr-right,
 .homeServicePackage .brdr-right {
     border-right: 1px solid #e1e1e1;
-    padding-right: 2rem;
-
+    /* padding-right: 2rem; */
 }
 
 #buyService .brdr-right {
@@ -723,8 +841,20 @@ select {
     padding-bottom: 100px;
 }
 
+.pt-100px {
+    padding-top: 100px;
+}
+
 .pt-135px {
     padding-top: 135px;
+}
+
+.pt-115px {
+    padding-top: 115px;
+}
+
+.pt-150px {
+    padding-top: 150px;
 }
 
 .pt-60px {
@@ -747,7 +877,7 @@ select {
 
 .bod-right {
     border-right: 1px solid #4cdb06;
-    height: 1394px;
+    height: 1300px;
 }
 
 .df-center {
@@ -766,6 +896,12 @@ select {
     display: flex;
     align-items: end;
     justify-content: end;
+}
+
+.df-start {
+    display: flex;
+    align-items: center;
+    justify-content: start;
 }
 
 .text-green {
@@ -811,13 +947,11 @@ select {
 .form-divider::before {
     content: "";
     position: absolute;
-    /* bottom: 0; */
     border-bottom: 2.5px solid #4cdb06;
     width: 45%;
-    /* height: 100px; */
     transform: rotate(90deg);
-    left: 256px;
-    top: 256px;
+    left: 27.5%;
+    top: 18%;
 }
 
 .bb-green1::before {
@@ -839,10 +973,9 @@ select {
 }
 
 .banner-section {
-    height: 100vh;
     background-color: black;
-    padding-top: 57.8px;
-    padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 250px;
     border-bottom: 3px solid #4cdb06;
 }
 
@@ -852,7 +985,7 @@ select {
 .btn-check:focus+.btn,
 .btn:focus {
     box-shadow: none;
-    border-color: #4cdb06;
+    /* border-color: #4cdb06; */
 }
 
 .md-navbar .nav-item .nav-link,
@@ -860,7 +993,7 @@ select {
     font-family: "CamptonBook";
     color: #fff;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 16px;
     letter-spacing: -0.04em;
 }
@@ -869,13 +1002,12 @@ select {
     color: #fff;
 }
 
-
-
 .btn-md {
     color: #000002;
     font-size: 15px;
     font-weight: 700;
-    font-family: CamptonBold;
+    font-family: "Campton";
+    font-weight: 400;
     line-height: 16px;
     letter-spacing: -0.04em;
     width: 149px;
@@ -888,7 +1020,6 @@ select {
 
 .btn-md:hover {
     color: #000002;
-
 }
 
 .whiteBtn {
@@ -925,8 +1056,6 @@ select {
 .whiteBtn:hover {
     background-color: #e1e1e1;
 }
-
-
 
 .banner-content,
 #homeServiceBanner .banner-content {
@@ -966,9 +1095,9 @@ select {
     border-radius: 3px;
     background-color: #4cdb06;
     border-color: #4cdb06;
-    font-family: Campton;
+    font-family: "Campton";
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 19px;
     letter-spacing: -0.07em;
     transition: 0.15s all;
@@ -976,16 +1105,22 @@ select {
 
 .deleteAll {
     color: #f31d1d;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    text-align: center;
+    font-family: Campton;
+    font-size: 16px !important;
+    margin-bottom: 35px !important;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.68px;
+    text-decoration-line: underline;
 }
 
 .favouriteBtn {
     background-color: #f55c5c;
     border: none;
-    height: 45px;
-    border-radius: 3px;
-    padding: 12px;
+    /* height: 45px; */
+    border-radius: 5px;
+    /* padding: 12px; */
 }
 
 .btn-search-pill:hover {
@@ -1023,7 +1158,7 @@ select {
 }
 
 .section-2 .card img {
-    right: 55px;
+    right: 16px;
     bottom: -2px;
 }
 
@@ -1119,7 +1254,6 @@ select {
     color: #000;
     font-family: Campton;
     font-size: 20px;
-
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.8px;
@@ -1130,7 +1264,6 @@ select {
     color: #000;
     font-family: Campton;
     font-size: 16px;
-
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -1141,7 +1274,7 @@ select {
 }
 
 .treatment-section .rating {
-    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 .treatment-price {
@@ -1186,12 +1319,19 @@ select {
     font-family: CamptonBold !important;
 }
 
+.camptonSemiBold {
+    font-family: CamptonSemiBold !important;
+}
+
 .camptonExtraBold {
     font-family: CamptonExtraBold !important;
 }
 
 .camLight {
-    font-family: "CamptonLight";
+    font-family: "CamptonLight" !important;
+}
+.camThin {
+    font-family: "CamptonThin" !important;
 }
 
 .authentication .nav-tabs .nav-link {
@@ -1199,18 +1339,19 @@ select {
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 400;
     line-height: 25px;
-    /* 156.25% */
     letter-spacing: -0.64px;
     transition: 0.15s all;
+    padding-bottom: 0;
+    min-width: 55px;
 }
 
 .authentication .nav-tabs .nav-link.active {
     border-bottom: 2px solid #4cdb06;
-    font-weight: 700;
-    font-family: "Campton";
+    /* font-weight: 700; */
+    font-family: "CamptonExtraBold";
+    padding-bottom: 0;
 }
 
 .authentication .form-control,
@@ -1220,12 +1361,19 @@ select {
 
 .authentication .form-control:focus,
 .authentication .form-select:focus {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
 }
 
 .authentication .nav-tabs .nav-item.show .nav-link,
 .authentication .nav-tabs .nav-link.active {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
+}
+
+.nav-tabs .nav-link {
+    border: unset;
+    border-bottom: 4px solid transparent;
+    min-width: 100px;
+    transition: 0.3s all;
 }
 
 .nav-tabs .nav-link:focus-visible {
@@ -1246,9 +1394,9 @@ select {
     color: #000002;
     font-family: Campton;
     font-size: 16px;
-
+    margin-top: 5px;
     font-weight: 500;
-    line-height: normal;
+    line-height: 18.62px;
     letter-spacing: -0.64px;
 }
 
@@ -1267,7 +1415,7 @@ select {
 .authentication .tab-content textarea,
 .authentication .tab-content select {
     /* width: 189px; */
-    flex-shrink: 0;
+
     border-radius: 5px;
     border: 2px solid #d6d6d6;
     color: #000;
@@ -1303,10 +1451,10 @@ select {
 
 .reg-title {
     color: #4cdb06;
-    font-family: "CamptonBold";
+    font-family: "CamptonExtraBold";
     font-size: 33px;
     font-weight: 700;
-    line-height: normal;
+    line-height: 38.41px;
     letter-spacing: -1.32px;
 }
 
@@ -1317,13 +1465,14 @@ select {
 .panel-left.card,
 .for-cards .card {
     border: 0;
-    flex-shrink: 0;
     border-radius: 5px;
     box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
-.panel-left.card {
-    min-height: 467px;
+.panel-left.card,
+.panel-right.card {
+    /* min-height: 467px; */
+    min-height: 600px;
 }
 
 .text-white {
@@ -1337,9 +1486,8 @@ select {
     padding: 18px 30px;
     padding-bottom: 0;
     color: #000;
-    font-family: Campton;
+    font-family: "Campton";
     font-size: 20px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.8px;
@@ -1351,9 +1499,8 @@ select {
 
 .panel-left .nav-link {
     color: #000;
-    font-family: CamptonBook;
+    font-family: "CamptonBook";
     font-size: 16px;
-
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -1363,6 +1510,7 @@ select {
 
 .panel-left .nav-link:hover {
     color: #4cdb06;
+    font-weight: bold;
 }
 
 .activeClass {
@@ -1371,8 +1519,8 @@ select {
 
 .nav-stuff .activeClass::before {
     content: "";
-    width: 16px;
-    height: 6px;
+    width: 17px;
+    height: 7px;
     background-color: #4cdb06;
     position: absolute;
     top: 15px;
@@ -1381,15 +1529,16 @@ select {
 
 .nav-link.md-active {
     color: #4cdb06;
-    padding-left: 1.5rem;
-    font-weight: bold;
+    padding-left: 1.8rem;
+    font-family: "CamptonBold";
+    line-height: 26px;
 }
 
 .green-plate,
 .black-plate,
 .white-plate {
     height: 58px;
-    flex-shrink: 0;
+
     border-radius: 5px;
     padding: 0 1rem;
     text-decoration: none;
@@ -1402,9 +1551,9 @@ select {
 .green-plate p,
 .white-plate p {
     color: #000002;
-    font-family: Campton;
+    font-family: "Campton";
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
@@ -1412,6 +1561,7 @@ select {
 .black-plate p {
     color: #4cdb06;
     font-size: 16px;
+    font-family: "Campton";
 }
 
 .black-plate h3 {
@@ -1432,9 +1582,8 @@ select {
 }
 
 .sign-in-form .card {
-    width: 563px;
-    min-height: 600px;
-    flex-shrink: 0;
+    width: 575px;
+    min-height: 709px;
     border-radius: 10px;
     border: 1px solid #d6d6d6;
 }
@@ -1464,7 +1613,7 @@ select {
     line-height: normal;
     letter-spacing: -0.68px;
     /* padding: 0 100px; */
-    width: 225px;
+    width: 300px;
 }
 
 .sign-in-form .form-control {
@@ -1473,9 +1622,12 @@ select {
 }
 
 .sms-input .form-control {
-    width: 45px;
-    height: 80px;
+    width: 60px;
+    height: 100px;
     flex-shrink: 0;
+    /* width: 45px;
+    height: 80px; */
+    padding: 0;
     color: #000;
     text-align: center;
     font-family: Campton;
@@ -1483,36 +1635,94 @@ select {
     font-weight: 400;
     line-height: normal;
     letter-spacing: -1.8px;
+    background: transparent;
 }
 
 .treatment-card {
     /* width: 687px; */
-    /* height: 90px; */
-    padding: 16px;
-    flex-shrink: 0;
+    height: 90px;
+    padding: 32px;
     border-radius: 3px;
     background: #f6f6f6;
     background-color: #f6f6f6;
+    /* box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important; */
 }
+
+.treatment-card-report {
+    /* width: 687px; */
+    height: auto !important;
+    padding: 15px 5px !important;
+    border-radius: 3px;
+    background: #f6f6f6;
+    background-color: #f6f6f6;
+    /* box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important; */
+}
+.report-text {
+    margin-top: 0px !important;
+}
+.report-img{
+    padding: 3px 10px;
+    float: left;
+    width: 75px;
+    background-color: #fff;
+    height: 75px;
+    text-align: center;
+    vertical-align: middle !important;
+    border-radius: 5px;
+}
+.report-img img{
+    width: 100%;
+}
+.treatment-card-report .trmt-card-footer{
+    padding-right:0px !important;
+}
+.treatment-card-report .dashboard-card-title{
+    margin-bottom:5px !important;
+} 
+.report-text span {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 3px;
+}
+.view-more-reports {
+    margin: 20px 10px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid #CFCFCF !important;
+}
+.view-more-reports .view-more-content h5:last-child {
+    font-size: 11px !important;
+    margin-top: 5px !important;
+    font-family: "Camptonlight" !important;
+}
+.head-report{
+    padding: 0px !important;
+}
+.hide-reports{
+    background-color: #f55c5c !important;
+    color: #fff !important;
+}
+
 
 .pending {
     width: 130px;
     height: 25px;
     /* width: 94px;
     height: 19px; */
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f3771d;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.1px;
     padding: 5px 35px;
     text-transform: capitalize;
+}
+.favorites-bt{
+    cursor: pointer;
 }
 
 .order-details .card-header p {
@@ -1540,7 +1750,6 @@ select {
     border-color: #d9d9d9;
     width: 165px;
     height: 47px;
-    flex-shrink: 0;
 }
 
 .card-details label,
@@ -1592,13 +1801,14 @@ select {
     font-family: "CamptonBook";
     font-weight: 400;
     letter-spacing: -0.56px;
+    margin-top: 5px !important;
 }
 
 /* Mpluss06 */
 .card-img-div {
-    height: 80px;
-    width: 80px;
-    background: lightgrey;
+    height: 52px;
+    width: 52px;
+    background: #fff;
     border-radius: 5px;
 }
 
@@ -1637,7 +1847,8 @@ select {
 
 .dashboard-card-title {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 3rem;
     font-weight: 700;
     font-family: "Campton";
 }
@@ -1656,6 +1867,7 @@ select {
 
 .view-detail-btn {
     color: #000;
+    cursor: pointer;
 }
 
 .fw-100 {
@@ -1711,8 +1923,20 @@ select {
     font-family: "CamptonBook" !important;
 }
 
+.fs-20 {
+    font-size: 20px !important;
+}
+
 .fs-18 {
     font-size: 18px !important;
+}
+
+.fs-13 {
+    font-size: 13px !important;
+}
+
+.fs-14 {
+    font-size: 14px !important;
 }
 
 .tab-div .nav-link.active {
@@ -1720,6 +1944,8 @@ select {
     border-bottom: 4px solid #4cdb06;
     color: #000002;
     font-weight: 700;
+    font-family: "CamptonBold";
+    min-width: 100px;
 }
 
 .tab-div .nav-link {
@@ -1757,9 +1983,16 @@ select {
     width: 195px;
     height: 35px;
     border-radius: 3px;
-    border: 1px solid #EDEDED;
-    background: #FFF;
+    border: 1px solid #ededed;
+    background: #fff;
     padding: 6px 14px;
+
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    /* text-align: left; */
 }
 
 .filter-div input::placeholder {
@@ -1782,19 +2015,21 @@ select option {
 
 .form-div .form-label {
     color: #979797;
-    font-family: "CamptonThin";
+    font-family: "CamptonLight";
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
 }
 
-
 .request-modal .form-select,
 .request-modal .form-control {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
 }
 
+#UserCancellationReq .form-select,
+#UserChangeInformationModel .form-select,
+#UserChangeInformationModel .form-control,
 .request-modal .form-control,
 .request-modal .form-select,
 .payment-div .form-control,
@@ -1814,7 +2049,14 @@ select option {
     color: #979797;
 } */
 .form-div .form-select:focus {
+    /* border: 2px solid #d6d6d6; */
     border: 2px solid #d6d6d6;
+    box-shadow: none;
+}
+
+.form-select.is-valid,
+.was-validated .form-select:valid {
+    border-color: #d6d6d6;
 }
 
 .trmt-card-footer.footer-btns {
@@ -1825,14 +2067,16 @@ select option {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
-    gap: 5px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0px;
+    gap: 8px;
     color: #000;
-    font-family: "Campton";
+    text-align: center;
+    font-family: Campton;
+    font-size: 10px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    margin-right: 1rem;
 }
 
 .trmt-card-footer.footer-btns a i {
@@ -1939,7 +2183,6 @@ select option {
     color: #000;
     font-family: "Campton";
     font-size: 20px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.8px;
@@ -1947,10 +2190,10 @@ select option {
 }
 
 .section-heading {
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    font-family: "Campton" !important;
-    margin-bottom: 20px !important;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Campton";
+    margin-bottom: 20px;
 }
 
 .multiple-upload-images .preview-img .prev-img-div .clear-btn {
@@ -1993,7 +2236,6 @@ select option {
     font-weight: 700;
     color: #000;
     font-size: 16px;
-
 }
 
 .section-btns {
@@ -2005,27 +2247,27 @@ select option {
 .section-btns a {
     height: unset;
     padding: 10px 15px;
-    font-size: 15px;
+    font-size: 16px;
     text-align: center;
     border-radius: 5px;
     width: 49%;
 }
 
-.dashboard-card-title span.active {
-    width: 130px;
-    height: 24px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    background: #4cdb06;
+.dashboard-card-title span.active,
+.veh-status {
+    width: 94px !important;
+    height: 19px !important;
     color: #000;
     text-align: center;
     font-family: Campton;
     font-size: 10px;
-
-    font-weight: 700;
+    font-weight: 500 !important;
     line-height: normal;
-    letter-spacing: 0.1px;
-    padding: 5px 35px;
+    letter-spacing: -0.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
 }
 
 .treatment-card .btn-active {
@@ -2045,7 +2287,7 @@ select option {
 .dashboard-card-title span.in-progress {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f4d100;
     color: #000;
@@ -2062,7 +2304,7 @@ select option {
 .trmt-card-footer span.in-progress {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f3771d;
     color: #fff;
@@ -2079,7 +2321,7 @@ select option {
 .trmt-card-footer .active {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #4cdb06;
     color: #000;
@@ -2096,7 +2338,7 @@ select option {
 .trmt-card-body .active {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #4cdb06;
     color: #fff;
@@ -2113,7 +2355,7 @@ select option {
 .trmt-card-footer .cancel {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #ff0000;
     color: #fff;
@@ -2130,7 +2372,7 @@ select option {
 .trmt-card-body .cancel {
     width: 150px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #ff0000;
     color: #fff;
@@ -2163,7 +2405,7 @@ span.popup-msg.active {
 .dashboard-card-title span.cancel {
     width: 130px;
     height: 24px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #ff0000;
     color: #fff;
@@ -2179,7 +2421,7 @@ span.popup-msg.active {
 
 .section-heading span.active {
     width: 130px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #4cdb06;
     color: #000;
@@ -2196,7 +2438,7 @@ span.popup-msg.active {
 
 .section-heading span.in-progress {
     width: 130px;
-    flex-shrink: 0;
+
     border-radius: 2px;
     background: #f4d100;
     color: #000;
@@ -2214,7 +2456,9 @@ span.popup-msg.active {
 .order-completed-btn {
     background: #e0e0e0;
     text-decoration: none;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
+    height: 35px;
+    font-size: 14px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -2366,17 +2610,15 @@ span.popup-msg.active {
 .hide-eye-div .mdi {
     position: absolute;
     top: 42px;
-    right: -16px;
+    right: 16px;
     cursor: pointer;
 }
 
 .up-abs {
     position: absolute;
     top: 42px;
-    right: 10px;
+    right: 26px;
 }
-
-
 
 /* Mpluss06 */
 
@@ -2388,7 +2630,7 @@ span.popup-msg.active {
 }
 
 .medical-pckg p {
-    color: #FFF;
+    color: #fff;
     font-family: Campton;
     font-size: 39px;
 
@@ -2399,7 +2641,7 @@ span.popup-msg.active {
 }
 
 .medical-pckg .text-green {
-    color: #4CDB06;
+    color: #4cdb06;
     font-family: Campton;
     font-size: 39px;
 
@@ -2409,7 +2651,7 @@ span.popup-msg.active {
 }
 
 .medical-pckg .fnpp {
-    color: #FFF;
+    color: #fff;
     font-family: CamptonBook;
     font-size: 39px;
 
@@ -2418,14 +2660,15 @@ span.popup-msg.active {
     letter-spacing: -1.56px;
 }
 
-.medical-pckg .bookButton {
+.medical-pckg .bookButton,
+.reservations-nav .bookButton {
     width: 234px;
     height: 47px;
-    flex-shrink: 0;
-    border-radius: 70px;
-    border: 1px solid #4CDB06;
 
-    color: #FFF;
+    border-radius: 70px;
+    border: 1px solid #4cdb06;
+
+    color: #fff;
     font-family: CamptonBook;
     font-size: 15px;
 
@@ -2434,6 +2677,17 @@ span.popup-msg.active {
     letter-spacing: -0.6px;
 
     cursor: pointer;
+}
+
+.reservations-nav .bookButton {
+    font-family: "Campton";
+    border-radius: 70px;
+    border: 1px solid #000;
+}
+
+.reservations-nav .active {
+    background: #4cdb06;
+    border: 1px solid #4cdb06;
 }
 
 .section6 {
@@ -2548,12 +2802,22 @@ span.popup-msg.active {
     margin: 0;
     font: inherit;
     background-color: #d9d9d9;
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     border: 0.15em solid #d9d9d9;
     border-radius: 3px;
     display: grid;
     place-content: center;
+}
+
+.paymentSection label {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -1.12px;
 }
 
 .greenCheck input[type="checkbox"],
@@ -2572,8 +2836,8 @@ span.popup-msg.active {
     margin: 0;
     font: inherit;
     background-color: #d9d9d9;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border: 0.15em solid #d9d9d9;
     border-radius: 3px;
     display: grid;
@@ -2592,7 +2856,7 @@ span.popup-msg.active {
     /* color: currentColor; */
     width: 32px;
     height: 32px;
-    border: 0.15em solid #d9d9d9;
+    border: 0.23em solid #d9d9d9;
     border-radius: 3px;
     /* transform: translateY(-0.075em); */
     display: grid;
@@ -2615,8 +2879,8 @@ span.popup-msg.active {
 .discount-sctn [type="radio"]::before,
 .mdFoodsPurchaseFoodModal1 input[type="checkbox"]::before {
     content: "";
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 3px;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
@@ -2642,12 +2906,32 @@ span.popup-msg.active {
     transform: scale(1);
 }
 
-.card-details input {
+.card-details .form-control:focus {
+    border: 1px solid #4cdb06 !important;
+    background-color: transparent;
+}
+
+.card-details .form-control {
     width: 100%;
     border-radius: 5px;
-    border: 1.5px solid #4cdb06;
+    /* width: 464px; */
+    height: 49px;
+    width: 101.5%;
+    flex-shrink: 0;
+    border: 1px solid #4cdb06;
     background-color: transparent;
-    padding: 8px;
+    /* padding: 8px; */
+    color: #000 !important;
+    font-family: "Campton" !important;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+.card-details .form-control:focus {
+    border: 1px solid #4cdb06 !important;
+    background-color: transparent;
 }
 
 #wallet,
@@ -2658,24 +2942,41 @@ span.popup-msg.active {
 .inviteBtn {
     font-size: 14px;
     font-weight: 600;
-    font-family: CamptonBook;
+    font-family: CamptonBold;
     line-height: 16px;
     letter-spacing: -0.04em;
-    width: 149px;
-    height: 35px;
+    width: 165px;
+    height: 46px;
     border-radius: 70px;
     /* background-color: #fff; */
     border: 1.5px solid #4cdb06;
     transition: 0.15s all;
 }
 
+span.camptonBook.fw-bold {
+    font-size: 3.2rem !important;
+}
+
+.mt-3 .card-h3 {
+    margin-bottom: 50px !important;
+    margin-top: 15px;
+}
+
+.mdCard img {
+    margin-top: 50px;
+}
+
 .mdCard {
-    background: linear-gradient(109.88deg, #4cdb06 1.33%, rgba(76, 219, 6, 0.4) 98.07%);
-    border-radius: 25px;
+    width: 490px;
+    height: 297px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    background: linear-gradient(110deg, #4cdb06 1.33%, rgba(76, 219, 6, 0.4) 98.07%);
     display: flex;
-    padding: 2.5rem;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: start;
+    padding: 0px 35px;
+
 }
 
 /* #wallet .wallet-box{
@@ -2683,28 +2984,37 @@ span.popup-msg.active {
 } */
 
 .creditCardContainer {
+    width: 490px;
+    height: 297px;
+    border-radius: 24px;
     background: linear-gradient(180deg, #0a0a0a 0%, #383838 100%);
+
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 2.5rem;
-    border-radius: 25px;
-    gap: 4rem;
+    /* gap: 4rem; */
 }
 
 .cardNumber {
-    font-size: 1.25rem;
-    font-family: CamptonBook;
-    font-weight: 500;
     color: #fff;
+    font-family: Campton;
+    font-size: 30px;
+
+    font-weight: 500;
+    line-height: normal;
     margin-bottom: 8px;
 }
 
 .creditCardContainer .validity,
 .creditCardContainer .cardholder {
+    color: #fff;
+    font-family: Campton;
+    font-size: 20px;
+
+    font-weight: 500;
+    line-height: normal;
     margin-bottom: 0;
-    color: white;
-    font-family: CamptonBook;
-    font-size: 14px;
 }
 
 .creditCardContainer .visa {
@@ -2977,7 +3287,6 @@ span.popup-msg.active {
     color: #b8b8b8;
     font-family: Campton;
     font-size: 12px;
-
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.48px;
@@ -3016,7 +3325,6 @@ span.popup-msg.active {
 .appTime button {
     width: 54px;
     height: 30px;
-    flex-shrink: 0;
 
     border-radius: 5px;
     border: 1px solid #d6d6d6;
@@ -3052,7 +3360,7 @@ span.popup-msg.active {
 .live-screen {
     width: 992px;
     height: 506px;
-    flex-shrink: 0;
+
     border-radius: 5px;
     background: #d9d9d9;
 }
@@ -3071,7 +3379,7 @@ span.popup-msg.active {
 .customer-cam {
     width: 216px;
     height: 174px;
-    flex-shrink: 0;
+
     border-radius: 5px;
     background: #a8a2a2;
 
@@ -3179,6 +3487,7 @@ span.popup-msg.active {
     /* 123.256% */
     letter-spacing: -1.72px;
     text-align: left;
+    inline-size: max-content;
 }
 
 .text-green-h1b {
@@ -3211,7 +3520,7 @@ span.popup-msg.active {
 }
 
 .text-black {
-    color: #000;
+    color: #000 !important;
 }
 
 .text-black:hover {
@@ -3220,13 +3529,13 @@ span.popup-msg.active {
 
 .p-abs {
     position: absolute;
-    right: -75px;
+    right: -175px;
     top: 0;
 }
 
 .tab-content .form.text-start {
-    padding: 0 63px;
-    /* padding: 0 57px; */
+    /* padding: 0 63px; */
+    padding: 0 57px;
 }
 
 /* .tab-content select {
@@ -3243,9 +3552,8 @@ span.popup-msg.active {
 
 .footer .card-text {
     color: #fff;
-    font-family: CamptonBook;
+    font-family: "Campton";
     font-size: 18px;
-
     font-weight: 500;
     line-height: 49px;
     letter-spacing: -0.72px;
@@ -3253,7 +3561,8 @@ span.popup-msg.active {
 }
 
 .footer .card-text span {
-    font-weight: 700;
+    /* font-weight: 700; */
+    font-family: "CamptonBold";
 }
 
 .footer .contact-no {
@@ -3285,12 +3594,11 @@ span.popup-msg.active {
 }
 
 .mext {
-    color: #878787;
+    color: #fff;
     text-align: right;
-    font-family: CamptonLight;
+    font-family: "CamptonThin";
     font-size: 11px;
-
-    font-weight: 300;
+    font-weight: 100;
     line-height: normal;
     letter-spacing: -0.44px;
 }
@@ -3300,7 +3608,6 @@ span.popup-msg.active {
     color: #878787;
     font-family: CamptonBook;
     font-size: 12px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.48px;
@@ -3326,7 +3633,7 @@ span.popup-msg.active {
     color: #fff;
     font-family: CamptonBook;
     font-size: 16px;
-
+    margin: 12px 0px;
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -3435,7 +3742,7 @@ label.tc-text,
 .multiple-checks .form-check-label {
     color: #000;
     font-family: "Campton";
-    font-size: 18px;
+    font-size: 16px;
 
     font-weight: 500;
     line-height: normal;
@@ -3445,12 +3752,21 @@ label.tc-text,
 .trmt-card-body .dashboard-card-title {
     color: #000;
     font-family: Campton;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.52px;
+}
+
+/* .trmt-card-body .dashboard-card-title {
+    color: #000;
+    font-family: Campton;
     font-size: 16px;
 
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
-}
+} */
 
 .trmt-card-body h5:nth-child(2) {
     color: #000;
@@ -3520,12 +3836,24 @@ label.tc-text,
     font-size: 20px !important;
 }
 
-.package-results-div .packageResult-title {
-    font-size: 18px;
-    color: #4CDB06;
+.strikePrice {
+    color: #000;
+    font-family: Campton;
+    font-size: 17px;
+    font-style: normal;
     font-weight: 600;
-    font-family: 'Campton';
-    line-height: 1;
+    line-height: normal;
+    letter-spacing: -0.68px;
+}
+
+.package-results-div .packageResult-title {
+    color: #4CDB06;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.72px;
 }
 
 .package-results-div .packageResult-title span {
@@ -3540,7 +3868,7 @@ label.tc-text,
 
 .package-results-div .stars i {
     font-size: 18px;
-    color: #4CDB06;
+    color: #4cdb06;
 }
 
 .packageResult-price {
@@ -3574,11 +3902,14 @@ label.tc-text,
 }
 
 .package-results-details .brdr-right:nth-child(1) {
-    width: 30%;
+    /* width: 30%; */
+    width: 239px;
+    ;
 }
 
 .package-results-details .brdr-right:nth-child(2) {
-    width: 25%;
+    /* width: 25%; */
+    width: 150px;
 }
 
 .details .package-results-details .brdr-right:nth-child(1) {
@@ -3614,7 +3945,7 @@ label.tc-text,
     border-radius: 5px;
     background: #000;
     font-size: 16px;
-    color: #FFF;
+    color: #fff;
     text-align: center;
     font-weight: 700;
     letter-spacing: -0.64px;
@@ -3650,8 +3981,9 @@ label.tc-text,
 .reviews-button .page-item.active .page-link {
     color: #000;
     background-color: #0d6efd00;
-    border: 1px solid #4CDB06 !important;
+    border: 1px solid #4cdb06 !important;
     font-weight: 900;
+    font-family: "CamptonExtraBold";
 }
 
 .reviews-button .page-item .page-link:focus {
@@ -3700,12 +4032,18 @@ label.tc-text,
     width: 400.5px;
 }
 
+/* .bod-bot-5 {
+    border-bottom: 0.5px solid #4cdb06;
+    width: 100%;
+    padding-bottom: 2rem;
+    margin: 0 0 32px 0;
+}
+ */
 .bod-bot-5 {
-    border-bottom: 0.5px solid #4CDB06;
-    width: 400.5px;
-    margin-left: 2rem;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
+    border-bottom: 0.5px solid #A1E97E;
+    width: 100%;
+    padding-bottom: 12px;
+    margin: 0 0 12px 0;
 }
 
 #resendotp {
@@ -3713,7 +4051,6 @@ label.tc-text,
     text-align: center;
     font-family: Campton;
     font-size: 12px;
-
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.48px;
@@ -3724,6 +4061,868 @@ label.tc-text,
     width: 18px;
     height: 18px;
     border-radius: 3px;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     margin-right: 8px;
+}
+
+.footer ul li a {
+    color: #878787;
+    font-family: "Campton";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.get-started-btn {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    width: 149px;
+    height: 35px;
+    border-radius: 70px;
+    background: #4cdb06;
+}
+
+.get-started-btn:hover {
+    color: #000;
+}
+
+.other-services h6 span,
+.pkgCard h5 {
+    color: #000;
+    font-family: "Campton";
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+/* .add-new-btn {
+    color: #4CDB06;
+    font-family: "Campton";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    width: 242px;
+    height: 36px;
+    border-radius: 3px;
+    background: #000;
+} */
+
+.packageFilter-heading {
+    color: #000;
+    font-family: Campton;
+    font-size: 20px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+/*  ============================================================================================================= 
+                                            SERVICE PROVIDER
+    ============================================================================================================= */
+
+/* #otpDiv .form-control {
+    padding: 0.375rem 0.5rem;
+} */
+
+.service-provider-account .navbar,
+.service-provider-account .footer {
+    display: none;
+}
+
+.service-provider-account .mdi-eye-off::before,
+.service-provider-account .mdi-eye::before {
+    font-size: 19px;
+}
+
+.service-provider-account .error {
+    color: #f31d1d !important;
+    font-size: 14px !important;
+}
+
+.service-provider-account input[type="file"] {
+    color: #979797 !important;
+    line-height: 2 !important;
+}
+
+.service-provider-account .g-5,
+.service-provider-account .gx-5 {
+    --bs-gutter-x: 4rem;
+}
+
+.service-provider-account .form-control,
+.service-provider-account .form-select {
+    background-color: #f6f6f6;
+}
+
+.service-provider-account select:required:invalid {
+    color: gray;
+}
+
+.service-provider-account option[value=""][disabled] {
+    display: none;
+}
+
+.service-provider-account .nav-tabs .nav-item.show .nav-link,
+.service-provider-account .nav-tabs .nav-link.active {
+    background-color: #f6f6f6;
+}
+
+.choices__inner {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    background-color: #fff;
+    padding: 0.25rem 3.6rem 0.1rem 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 0.8125rem;
+    min-height: 37.5px;
+    overflow: hidden;
+}
+
+.choices__input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.9rem;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    font-size: 0.8125rem;
+    border-radius: 0.25rem;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.other-services .treatment-card:last-child {
+    margin-bottom: 100px !important;
+}
+
+.form-control:focus {
+    border-color: #d6d6d6 !important;
+}
+
+.form-control.is-valid:focus,
+.was-validated .form-control:valid:focus {
+    box-shadow: none;
+}
+
+.transport-img,
+.tour-img {
+    width: 58px;
+    height: 42px;
+    border-radius: 3px;
+}
+
+.hotel-img {
+    width: 52px;
+    height: 52px;
+    border-radius: 3px;
+}
+
+.pkgImg {
+    width: 109px;
+    height: 109px;
+    border-radius: 3px;
+}
+
+.pkgCard {
+    min-height: 143px;
+    background-color: #f6f6f6;
+}
+
+.md-gray {
+    color: #828282 !important;
+}
+
+.pkgMsg a {
+    color: #828282;
+    font-family: CamptonBook;
+    font-size: 14px;
+
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    text-decoration-line: underline;
+}
+
+#UserChangeInformationModel .form-control {
+    color: #000;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+#UserCancellationReq .form-select,
+#UserChangeInformationModel .form-select {
+    color: #979797;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+#UserCancellationReq .order-completed-btn,
+#UserChangeInformationModel .order-completed-btn {
+    width: 405px;
+    height: 57px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background: #f31d1d;
+    color: #fff;
+    font-family: Campton;
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
+#UserCancellationReq .modal-dialog,
+#AccommodationView .modal-dialog,
+#TransportationView .modal-dialog,
+#ReviewModal .modal-dialog,
+#TourView .modal-dialog,
+#UserChangeInformationModel .modal-dialog {
+    max-width: 704px;
+}
+
+/* #yourCartModal .modal-content {
+    max-width: 366px;
+    height: 265px;
+} */
+
+#yourCartModal .modal-dialog {
+    border-radius: 5px;
+}
+
+#UserCancellationReq .modal-content,
+#AccommodationView .modal-content,
+#TransportationView .modal-content,
+#ReviewModal .modal-content,
+#TourView .modal-content,
+#UserChangeInformationModel .modal-content {
+    border-radius: 10px;
+    background: #fff;
+}
+
+.verNo {
+    color: #9e9e9e !important;
+    font-family: Campton !important;
+    font-size: 13px !important;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.52px;
+}
+
+.user-details-body {
+    border-bottom: 1px solid #c5c5c5;
+    padding-bottom: 28px;
+}
+
+.view-menu-div {
+    border-top: 1px solid #c5c5c5;
+    padding-top: 28px;
+    /* margin-bottom: 32px; */
+}
+
+.user-details-body span {
+    color: #000002;
+    text-align: center;
+    font-family: CamptonBold;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.92px;
+}
+
+.user-details-body ul li {
+    color: #000;
+    font-family: Campton;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    margin-bottom: 8px;
+}
+
+.user-details-body ul li a {
+    color: #4cdb06;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    text-decoration-line: underline;
+    margin-left: 8px;
+}
+
+#AccommodationView .modal-content {
+    background: url("../img/Accombg.png") no-repeat center center/ contain;
+    /* background-color: red; */
+    height: 707px;
+}
+
+#TransportationView .modal-content {
+    background: url("../img/TransporBg.png") no-repeat center center/ contain;
+    height: 707px;
+}
+
+#TourView .modal-content {
+    background: url("../img/Accombg.png") no-repeat center center/ contain;
+    height: 707px;
+}
+
+#ReviewModal .modal-content {
+    background: url("../img/reviewBg.png") no-repeat center center/ contain;
+    height: 707px;
+}
+
+/* #yourCartModal .modal-content {
+    background: url("../img/your-cart-bg.png") no-repeat center center/ contain;
+    height: 231px;
+} */
+.textarea-btn {
+    width: 87px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #d9d9d9;
+    color: #787878;
+    font-family: Campton;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.52px;
+}
+
+.textarea-btn:hover {
+    color: #787878;
+}
+
+.acdm-btns .add-btn {
+    width: 207px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+.user-payment-date .user-percentage {
+    display: flex;
+    align-items: center;
+    color: #000;
+    gap: 4px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+.user-payment-date .user-percentage span {
+    color: #000;
+    font-size: 16px;
+    letter-spacing: -0.64px;
+}
+
+.paymt-green-text {
+    color: #4cdb06;
+    font-family: Campton;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.payment-paid-div .payment-pay-btn {
+    width: 244px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 0px 70px 70px 0px;
+    background: #4cdb06;
+
+    color: #000;
+    font-family: Campton;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+}
+
+#recaptcha-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.patient-details-div label {
+    position: absolute;
+    top: -11px;
+    right: 20px;
+    background: #f6f6f6;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #9f9e9e;
+    font-family: "CamptonBook";
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.patient-details-div .form-control {
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    background: transparent;
+    color: #000;
+    font-family: Campton !important;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+.coinsMD {
+    color: #000;
+    font-family: CamptonBold;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.64px;
+}
+
+.andInv {
+    font-family: Campton;
+    font-size: 47px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 111.2%;
+    letter-spacing: -1.88px;
+}
+
+.inviteBtn2 {
+    width: 234px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 70px;
+    border: 1px solid #4cdb06;
+    color: #000;
+    font-family: Campton;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+}
+
+.reviewsStar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reviewsStar .fa.filled {
+    font-size: 18px;
+    color: #4cdb06;
+}
+
+.reviewsStar .fa {
+    font-size: 18px;
+    color: #b9b9b9;
+}
+
+.purchase-details-card {
+    /* width: 1066px; */
+    height: 91px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #fff;
+    border: none;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 32px;
+}
+
+.purchase-details-card input[type="checkbox"] {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.purchase-details-card input[type="checkbox"]::before {
+    width: 24px;
+    height: 24px;
+}
+
+hr:not([size]) {
+    height: 0px !important;
+}
+
+.mdLtd {
+    margin: 35px 0px;
+}
+
+.mt-150 {
+    margin-top: 150px !important;
+}
+
+.md-img {
+    height: 109px;
+    width: 109px;
+    border-radius: 3px;
+    object-fit: contain;
+    padding: 5px;
+    background: #fff;
+}
+
+.md-img-sm {
+    width: 41px;
+    height: 41px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    object-fit: contain;
+    padding: 5px;
+    background: #fff;
+}
+
+.md-img-2 {
+    height: 52px;
+    width: 52px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    object-fit: contain;
+    padding: 3px;
+    background: #fff;
+}
+
+.review-sub-btn {
+    width: 312px;
+    height: 36px;
+    border-radius: 5px;
+    background: #4CDB06;
+    font-family: "Campton";
+}
+
+.write-rev-btn {
+    color: #FFF !important;
+    text-align: center;
+    font-family: Campton;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.56px;
+    width: 173px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #F3771D;
+}
+
+.md-span {
+    /* font-weight: 700; */
+    font-family: "CamptonBold";
+}
+
+.md-main {
+    color: #4CDB06;
+    font-family: CamptonBook;
+    font-size: 22px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.pill-calender {
+    position: absolute;
+    top: 27px;
+    left: 6px;
+}
+
+/*  */
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cont-btn {
+    width: 404px;
+    height: 47px;
+    flex-shrink: 0;
+    border-radius: 25px;
+    background: #4CDB06;
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+    transition: 0.15s all;
+}
+
+.cont-btn:hover {
+    background: #47cc05;
+    color: #000002;
+}
+
+.mb-8 {
+    margin-bottom: 80px;
+}
+
+.mb-6 {
+    margin-bottom: 60px;
+}
+
+.next-step {
+    font-size: 31px !important;
+}
+
+.me-8 {
+    margin-right: 6rem !important;
+}
+
+.mb-4-input {
+    margin-bottom: 1.9rem !important;
+}
+
+.card-details {
+    width: 45% !important;
+}
+
+.purchase-details-card input[type="checkbox"] {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0;
+}
+
+.purchase-details-card input[type="checkbox"]::before {
+    width: 26px !important;
+    height: 26px !important;
+}
+
+.purchaseBtn-new {
+    height: 49px !important;
+    padding: 0px !important;
+    border-radius: 5px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 49px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+    width: 50%;
+}
+
+.purchase-details-card>.card-body {
+    padding-right: 2rem !important;
+}
+
+.paymentsPage>.searchBar>.container>.packageResult {
+    padding: 1.25rem 2.25rem !important;
+}
+
+.f-s30 {
+    font-size: 53px !important;
+    margin-top: 25px !important;
+    margin-bottom: 20px;
+    letter-spacing: -0.04em;
+}
+
+.twenty,
+.thirty,
+.fifty,
+.hundred {
+    font-size: 19px !important;
+}
+
+.lh-base span.smallFont {
+    font-size: 15px !important;
+}
+
+.mb30 {
+    margin-bottom: 30px !important;
+}
+
+.fnt20 {
+    font-size: 20px !important;
+}
+
+.details-abs {
+    position: absolute;
+    right: 18px;
+    bottom: 16px;
+}
+
+.strikePrice {
+    position: relative;
+}
+
+.strikePrice:before {
+    position: absolute;
+    content: "";
+    color: #f31d1d;
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid #f31d1d;
+    border-color: inherit;
+
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    cursor: pointer !important;
+}
+
+.t_price_sm {
+    color: #4CDB06;
+    font-family: 'CamptonSemiBold' !important;
+    font-size: 12px;
+    letter-spacing: normal !important;
+}
+
+.sms-input .form-control:focus {
+    /* border-color: #4cdb06 !important; */
+    border-radius: 5px;
+    border: 2px solid #4CDB06 !important;
+
+}
+
+/* .sms-input .form-control:valid {
+    border-color: #4cdb06 !important;
+} */
+
+.creditCardContainer p.validity {
+    letter-spacing: 5px !important;
+    margin-top: 13px !important;
+}
+
+.mrg-68 {
+    margin-left: 68px;
+}
+
+.remove-fav {
+    font-size: 12px !important;
+}
+
+.remove-cardb {
+    padding: 20px 20px !important;
+}
+
+.card-h1-fav {
+    font-size: 20px !important;
+}
+
+.invite-content .camptonBook {
+    font-size: 2.5rem !important;
+}
+
+.invite-content .camptonBold {
+    font-size: 3.4rem !important;
+}
+
+.back-treat {
+    color: #000002;
+    text-align: center;
+    font-family: Campton;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.no-data-vendor {
+    height: 250px;
+    font-family: "CamptonBook";
+    color: #979797;
+    font-weight: 400;
+    letter-spacing: -0.56px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #F6F6F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    background: #F6F6F6;
+}
+
+.no-data-vendor img {
+    width: 100px;
+    height: auto;
+}
+
+.other-services .card-body .section-heading {
+    margin-bottom: 20px !important;
+    margin-top: 25px !important;
+}
+
+.reservations-box {
+    min-height: 449px !important;
+}
+
+#go_to_packages,
+#go_to_home {
+    cursor: pointer;
+}
+.wd100{
+    width: 100% !important;
+}
+.purchaseBtn-new-user {
+    height: 49px !important;
+    padding: 0px !important;
+    border-radius: 5px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: Campton;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 49px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+    width: 48%;
+}
+
+.pkgCard i {
+    font-family: 'CamptonBook';
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    text-align: left;
 }

@@ -1,10 +1,23 @@
 @extends('front.layout.layout2')
 @section('content')
 <style>
+    .list-div select {
+        width: 195px;
+        height: 35px;
+        border-radius: 3px;
+        border: 1px solid #EDEDED;
+        background: #FFF;
+        padding: 6px 14px;
+        font-size: 14px;
+
+    }
+
+
+
     .reports-div {
-        border-bottom: 1px solid #A5A5A5;
-        padding-bottom: 15px;
-        margin-bottom: 20px;
+        border-bottom: 2px solid #d5d5d5;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
     }
 
     .form-group input.form-control {
@@ -18,7 +31,7 @@
         margin-top: 15px;
     }
 
-    .form-div input.form-control,
+    /* .form-div input.form-control,
     .form-div select {
 
         padding: 8px 10px;
@@ -29,25 +42,73 @@
 
         font-family: CamptonBook;
         font-size: 14px;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.56px;
+    } */
+    .form-control::placeholder {
+        font-family: "Campton";
     }
-</style>
-<style>
+
+    .form-select,
+    .form-control {
+        color: #000;
+        font-family: CamptonBook !important;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
+
+    .form-group .prev-img-div img {
+        height: 150px;
+        width: auto;
+        object-fit: contain;
+        margin-top: 15px;
+        border-radius: 3px;
+    }
+
+    .prev-img-div h5 {
+        color: #979797;
+        font-family: CamptonBook;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.64px;
+    }
+
     .error-message {
         color: red;
         margin-top: 5px;
     }
+
+    .no-data {
+        height: 150px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        border: 1px solid #F6F6F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        background: #F6F6F6;
+    }
 </style>
+
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+    <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4">
                     <div class="form-div">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-4">
@@ -62,16 +123,16 @@
 
                             <form method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
                                 @csrf
-                            
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Report Title</label>
+
+                                <div class="form-group mb-4">
+                                    <label class="form-label mb-3">Report Title</label>
                                     <input type="text" name="report_title" class="form-control" placeholder="Write Here Please" />
                                     <div class="error-message" id="reportTitleError"></div>
                                 </div>
-                            
-                                <div class="form-group d-flex flex-column mb-5">
-                                    <label class="form-label">Patient</label>
-                                    <select name="customer_package_purchage_id" id="patientSelect">
+
+                                <div class="form-group d-flex flex-column mb-4">
+                                    <label class="form-label mb-3">Patient</label>
+                                    <select name="customer_package_purchage_id" class="form-select" id="patientSelect">
                                         <option value="">Choose Patient</option>
                                         @if (!empty($patient_list))
                                         @foreach ($patient_list as $patient)
@@ -82,25 +143,26 @@
                                     </select>
                                     <div class="error-message" id="patientError"></div>
                                 </div>
-                            
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Upload Report File</label>
-                                    <div class="form-group">
+
+                                <div class="form-group mb-5">
+                                    <label class="form-label mb-3">Upload Report File</label>
+                                    <div class="form-group my-3">
                                         <input type="file" name="report_path" class="form-control text-dark" id="fileInput" onchange="previewFile()">
                                     </div>
-                                    <div class="prev-img-div" style="position: relative;">
+                                    <div class="prev-img-div d-flex align-items-end gap-3" style="position: relative;">
                                         <img id="previewImage" src="front/assets/img/default-img.png" alt="image" style="max-width: 100%; max-height: 200px;">
                                         <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
                                         <div id="previewPDF" style="display: none;">
                                             <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;">
                                             <span id="pdfFileName"></span>
                                         </div>
+                                        <h5>*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
                                     </div>
                                     <div class="error-message" id="reportPathError"></div>
                                 </div>
-                            
+
                                 <div class="section-btns mb-5">
-                                    <button type="submit" class="black-plate bg-black text-white fw-700 w-100">Upload Reports</a>
+                                    <button type="submit" class="btn save-btn-black">Upload Reports</a>
                                 </div>
 
                             </form>
@@ -118,12 +180,12 @@
                             <!-- FILTER -->
                             <div class="filter-div">
                                 <div class="search-div">
-                                    <input type="text" class="form-control" placeholder="Search" id="liveSearchInput" />
+                                    <input type="text" placeholder="Search" id="liveSearchInput" />
                                 </div>
-                                
+
                                 <div class="list-div">
-                                    <select name="" id="" class="form-select">
-                                        <option value="">List for Date</option>
+                                    <select name="" id="">
+                                        <option value="">List for date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
@@ -133,7 +195,7 @@
                             <div id="resultContainer"></div>
 
                             <!-- Reports-->
-                        
+
 
 
                         </div>
@@ -160,7 +222,7 @@
         var file = fileInput.files[0];
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             if (file.type.startsWith('image/')) {
                 previewImage.src = reader.result;
                 previewImage.style.display = 'block';
@@ -207,11 +269,11 @@
     }
 </script>
 <script>
-    function printDocument(reportPath){
+    function printDocument(reportPath) {
         if (reportPath) {
             var printWindow = window.open(reportPath, '_blank');
             if (printWindow) {
-                printWindow.onload = function(){
+                printWindow.onload = function() {
                     printWindow.print();
                 };
             } else {
@@ -227,91 +289,90 @@
 </script>
 
 <script>
-   
     //$(document).ready(function () {
-        // Function to validate the form
-        function validateForm() {
-            var isValid = true;
+    // Function to validate the form
+    function validateForm() {
+        var isValid = true;
 
-            // Validate Report Title
-            var reportTitle = $('input[name="report_title"]').val().trim();
-            if (reportTitle === '') {
-                isValid = false;
-                $('#reportTitleError').text('Report Title is required.');
-            } else {
-                $('#reportTitleError').text('');
-            }
-
-            // Validate Patient selection
-            var selectedPatient = $('#patientSelect').val();
-            if (selectedPatient === '') {
-                isValid = false;
-                $('#patientError').text('Please choose a patient.');
-            } else {
-                $('#patientError').text('');
-            }
-
-            // Validate Report File
-            var reportPath = $('input[name="report_path"]').val();
-            if (reportPath === '') {
-                isValid = false;
-                $('#reportPathError').text('Please upload a report file.');
-            } else {
-                $('#reportPathError').text('');
-            }
-
-            return isValid;
+        // Validate Report Title
+        var reportTitle = $('input[name="report_title"]').val().trim();
+        if (reportTitle === '') {
+            isValid = false;
+            $('#reportTitleError').text('Report Title is required.');
+        } else {
+            $('#reportTitleError').text('');
         }
 
-        // Submit form with validation
-        $('#reportForm').submit(function (event) {
-            if (!validateForm()) {
-                event.preventDefault();
-            }
-        });
+        // Validate Patient selection
+        var selectedPatient = $('#patientSelect').val();
+        if (selectedPatient === '') {
+            isValid = false;
+            $('#patientError').text('Please choose a patient.');
+        } else {
+            $('#patientError').text('');
+        }
+
+        // Validate Report File
+        var reportPath = $('input[name="report_path"]').val();
+        if (reportPath === '') {
+            isValid = false;
+            $('#reportPathError').text('Please upload a report file.');
+        } else {
+            $('#reportPathError').text('');
+        }
+
+        return isValid;
+    }
+
+    // Submit form with validation
+    $('#reportForm').submit(function(event) {
+        if (!validateForm()) {
+            event.preventDefault();
+        }
+    });
     //});
 </script>
 
 <script>
     //$(document).ready(function(){
-       
+
+    performSearch();
+
+    // Bind the function to the input event on the search box
+    $('#liveSearchInput').on('input', function() {
         performSearch();
+    });
 
-        // Bind the function to the input event on the search box
-        $('#liveSearchInput').on('input', function() {
-            performSearch();
-        });
+    function performSearch() {
 
-        function performSearch(){
-     
-            let query = $('#liveSearchInput').val();
-            var base_url = $("#base_url").val();
+        let query = $('#liveSearchInput').val();
+        var base_url = $("#base_url").val();
 
-            $.ajax({
-                url: base_url + "/provider-reports-list",
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                data: {
-                    query: query
-                },
-                success: function(html) {
-                    // Check if the HTML content is not empty
-                    if (html.trim() !== "") {
-                        // Display the results in #resultContainer
-                        $('#resultContainer').html(html);
-                    } else {
-                        // Show "No report found" message when HTML is empty
-                        $('#resultContainer').html("<p>No report found</p>");
-                    }
-                },
-                error: function(error) {
-                    console.log(error);
+        $.ajax({
+            url: base_url + "/provider-reports-list",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                query: query
+            },
+            success: function(html) {
+                // Check if the HTML content is not empty
+                if (html.trim() !== "") {
+                    // Display the results in #resultContainer
+                    $('#resultContainer').html(html);
+                } else {
+                    // Show "No report found" message when HTML is empty
+                    $('#resultContainer').html("<p>No Reports Found</p>").addClass('no-data');
                 }
-            });
-        }
-   // });
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+    // });
 </script>
 
 

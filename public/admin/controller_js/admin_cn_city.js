@@ -33,48 +33,75 @@
     });
 
 
-
-
-
 $(function (){
     var table = $("#example").DataTable({
-        bFilter: false,
-        ordering: false,
-        processing: false,
+        processing: true,
         serverSide: true,
-        paging: true,
-        searching: true,
+        searchable: true,
+        deferRender: true,
+        pagingType: 'numbers',
         destroy: true,
         clear: true,
-        ajax: base_url + "/admin/city-data-table",
-        method:'get',
-        columns: [
+          ajax: {
+              url: base_url + "/admin/city-data-table",
+              data: function (d) {
+                  d.status = $('#status').val();
+              },
+          },
+          columns: [
             {
                 data: "DT_RowIndex",
                 name: "DT_RowIndex",
+                orderable: false,
             },
 
             {
                 data: "city_name",
                 name: "city_name",
+                orderable: false,
             },
 
             {
                 data: "country_name",
                 name: "country_name",
+                orderable: false,
+            },
+
+            {
+                data: "status",
+                name: "status",
+                orderable: false,
+                searchable: false,
             },
           
             {
                 data: "action",
                 name: "action",
+                orderable: false,
+                searchable: false,
             },
-        ],
-    });
+            
+         ],
+      });
+  
+      $("#status").change(function (){
+          table.draw();
+      });
+  });
 
-    function reload_table() {
-        table.DataTable().ajax.reload(null, false);
-    }
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

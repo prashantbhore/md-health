@@ -15,10 +15,11 @@ use App\Models\ToursDetails;
 use App\Models\TransportationDetails;
 use App\Models\ProductCategory;
 use App\Models\ProductSubCategory;
+use Storage;
 
 class PackageControllers extends BaseController
 {
-  //code by mplus01
+    //code by mplus01
     public function treatment_category_list()
     {
         $treatment_category_list = ProductCategory::where('status', 'active')
@@ -45,7 +46,7 @@ class PackageControllers extends BaseController
         }
     }
 
-      //code by mplus01
+    //code by mplus01
     public function treatment_list(Request $request)
     {
         // return $request;
@@ -81,7 +82,7 @@ class PackageControllers extends BaseController
         }
     }
 
-  //code by mplus01
+    //code by mplus01
     //add_packages
     public function add_packages(Request $request)
     {
@@ -104,158 +105,181 @@ class PackageControllers extends BaseController
             ->first();
 
         // if (empty($package_exist_or_not)) {
-            if (!empty($request->button_type)) {
-                if ($request->button_type == 'active') {
-                    $package_input = [];
-                    $package_input['package_name'] = $request->package_name;
-                    $package_input['treatment_category_id'] = $request->treatment_category_id;
-                    $package_input['treatment_id'] = $request->treatment_id;
-                    $package_input['other_services'] = $request->other_services;
-                    $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
-                    $package_input['treatment_price'] = $request->treatment_price;
-                    $package_input['hotel_id'] = $request->hotel_id;
-                    $package_input['hotel_in_time'] = $request->hotel_in_time;
-                    $package_input['hotel_out_time'] = $request->hotel_out_time;
-                    $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
-                    $package_input['vehicle_id'] = $request->vehicle_id;
-                    $package_input['vehicle_in_time'] = $request->vehicle_in_time;
-                    $package_input['vehicle_out_time'] = $request->vehicle_out_time;
-                    $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
-                    $package_input['tour_id'] = $request->tour_id;
-                    $package_input['tour_in_time'] = $request->tour_in_time;
-                    $package_input['tour_price'] = $request->tour_price;
-                    $package_input['tour_out_time'] = $request->tour_out_time;
-                    // $package_input['tour_price'] = $request->tour_price;
-                    $package_input['visa_details'] = $request->visa_details;
-                    $package_input['visa_service_price'] = $request->visa_service_price;
-                    $package_input['translation_price'] = $request->translation_price;
-                    $package_input['ambulance_service_price'] = $request->ambulance_service_price;
-                    $package_input['ticket_price'] = $request->ticket_price;
-                    $package_input['package_discount'] = $request->package_discount;
-                    $package_input['package_price'] = $request->package_price;
-                    $package_input['sale_price'] = $request->sale_price;
-                    $package_input['platform_type'] = $request->platform_type;
-                    $package_input['created_by'] = Auth::user()->id;
-                    $AddPackages = Packages::create($package_input);
-                    $Packages = Packages::select('id')->get();
-                    if (!empty($Packages)) {
-                        foreach ($Packages as $key => $value) {
-
-                            $length = strlen($value->id);
-
-                            if ($length == 1) {
-                                $package_unique_id = '#MD00000' . $value->id;
-                            } elseif ($length == 2) {
-                                $package_unique_id = '#MD0000' . $value->id;
-                            } elseif ($length == 3) {
-                                $package_unique_id = '#MD000' . $value->id;
-                            } elseif ($length == 4) {
-                                $package_unique_id = '#MD00' . $value->id;
-                            } elseif ($length == 5) {
-                                $package_unique_id = '#MD0' . $value->id;
-                            } else {
-                                $package_unique_id = '#MD' . $value->id;
-                            }
-
-                            $update_unique_id = Packages::where('id', $value->id)->update(['package_unique_no' => $package_unique_id]);
-                        }
-                    }
-
-                    if (!empty($AddPackages)) {
-                        // if (($request->platform_type=='web')) {
-                        //     return redirect('/medical-packages')->with('success','Package created successfully in active packages.');
-                        // }
-                        return response()->json([
-                            'status' => 200,
-                            'message' => 'Package created successfully in active packages.',
-                        ]);
+        if (!empty($request->button_type)) {
+            if ($request->button_type == 'active') {
+                $package_input = [];
+                $package_input['package_name'] = $request->package_name;
+                $package_input['treatment_category_id'] = $request->treatment_category_id;
+                $package_input['treatment_id'] = $request->treatment_id;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
+                $package_input['other_services'] = implode(', ', $other_services_array);
+                $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
+                $package_input['treatment_price'] = $request->treatment_price;
+                $package_input['hotel_id'] = $request->hotel_id;
+                $package_input['hotel_in_time'] = $request->hotel_in_time;
+                $package_input['hotel_out_time'] = $request->hotel_out_time;
+                $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
+                $package_input['vehicle_id'] = $request->vehicle_id;
+                $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['vehicle_out_time'] = $request->vehicle_out_time;
+                $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
+                $package_input['tour_id'] = $request->tour_id;
+                $package_input['tour_in_time'] = $request->tour_in_time;
+                $package_input['tour_price'] = $request->tour_price;
+                $package_input['tour_out_time'] = $request->tour_out_time;
+                // $package_input['tour_price'] = $request->tour_price;
+                $package_input['visa_details'] = $request->visa_details;
+                $package_input['visa_service_price'] = $request->visa_service_price;
+                $package_input['translation_price'] = $request->translation_price;
+                $package_input['ambulance_service_price'] = $request->ambulance_service_price;
+                $package_input['ticket_price'] = $request->ticket_price;
+                $package_input['package_discount'] = $request->package_discount;
+                $package_input['package_price'] = $request->package_price;
+                $package_input['sale_price'] = $request->sale_price;
+                $package_input['platform_type'] = $request->platform_type;
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
                     } else {
-                        // if (($request->platform_type=='web')) {
-                        //     return redirect('/medical-packages')->with('error','Package not created in active packages.');
-                        // }
-                        return response()->json([
-                            'status' => 404,
-                            'message' => 'Package not created in active packages.',
-                        ]);
-                    }
-                } else {
-                    $package_input = [];
-                    $package_input['package_name'] = $request->package_name;
-                    $package_input['treatment_category_id'] = $request->treatment_category_id;
-                    $package_input['treatment_id'] = $request->treatment_id;
-                    $package_input['other_services'] = $request->other_services;
-                    $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
-                    $package_input['treatment_price'] = $request->treatment_price;
-                    $package_input['hotel_id'] = $request->hotel_id;
-                    $package_input['hotel_in_time'] = $request->hotel_in_time;
-                    $package_input['hotel_out_time'] = $request->hotel_out_time;
-                    $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
-                    $package_input['vehicle_id'] = $request->vehicle_id;
-                    $package_input['vehicle_in_time'] = $request->vehicle_in_time;
-                    $package_input['tour_id'] = $request->tour_id;
-                    $package_input['tour_in_time'] = $request->tour_in_time;
-                    $package_input['tour_price'] = $request->tour_price;
-                    $package_input['vehicle_out_time'] = $request->vehicle_out_time;
-                    $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
-                    $package_input['visa_details'] = $request->visa_details;
-                    $package_input['visa_service_price'] = $request->visa_service_price;
-                    $package_input['ambulance_service_price'] = $request->ambulance_service_price;
-                    $package_input['ticket_price'] = $request->ticket_price;
-                    $package_input['package_discount'] = $request->package_discount;
-                    $package_input['package_discount'] = $request->package_discount;
-                    $package_input['package_price'] = $request->package_price;
-                    $package_input['sale_price'] = $request->sale_price;
-                    $package_input['platform_type'] = $request->platform_type;
-                    $package_input['status'] = $request->button_type;
-                    $package_input['created_by'] = Auth::user()->id;
-                    $AddPackages = Packages::create($package_input);
-                    $Packages = Packages::select('id')->get();
-                    if (!empty($Packages)) {
-                        foreach ($Packages as $key => $value) {
-
-                            $length = strlen($value->id);
-
-                            if ($length == 1) {
-                                $package_unique_id = '#MD00000' . $value->id;
-                            } elseif ($length == 2) {
-                                $package_unique_id = '#MD0000' . $value->id;
-                            } elseif ($length == 3) {
-                                $package_unique_id = '#MD000' . $value->id;
-                            } elseif ($length == 4) {
-                                $package_unique_id = '#MD00' . $value->id;
-                            } elseif ($length == 5) {
-                                $package_unique_id = '#MD0' . $value->id;
-                            } else {
-                                $package_unique_id = '#MD' . $value->id;
-                            }
-
-                            $update_unique_id = Packages::where('id', $value->id)->update(['package_unique_no' => $package_unique_id]);
-                        }
-                    }
-                    if (!empty($AddPackages)) {
-                        // if (($request->platform_type=='web')) {
-                        //     return redirect('/medical-packages')->with('success','Package created successfully in de-activate packages.');
-                        // }
-                        return response()->json([
-                            'status' => 200,
-                            'message' => 'Package created successfully in de-activate packages.',
-                        ]);
-                    } else {
-                        // if (($request->platform_type=='web')) {
-                        //     return redirect('/medical-packages')->with('error','Package not created in de-activate packages.');
-                        // }
-                        return response()->json([
-                            'status' => 404,
-                            'message' => 'Package not created in de-activate packages.',
-                        ]);
+                        $package_input['featured_product'] = 'no';
                     }
                 }
+                $package_input['created_by'] = Auth::user()->id;
+                $AddPackages = Packages::create($package_input);
+                $Packages = Packages::select('id')->get();
+                if (!empty($Packages)) {
+                    foreach ($Packages as $key => $value) {
+
+                        $length = strlen($value->id);
+
+                        if ($length == 1) {
+                            $package_unique_id = 'MDT-0' . $value->id;
+                        } elseif ($length == 2) {
+                            $package_unique_id = 'MDT-0' . $value->id;
+                        } elseif ($length == 3) {
+                            $package_unique_id = 'MDT-0' . $value->id;
+                        } elseif ($length == 4) {
+                            $package_unique_id = 'MDT-0' . $value->id;
+                        } elseif ($length == 5) {
+                            $package_unique_id = 'MDT-0' . $value->id;
+                        } else {
+                            $package_unique_id = 'MDT-0' . $value->id;
+                        }
+
+                        $update_unique_id = Packages::where('id', $value->id)->update(['package_unique_no' => $package_unique_id]);
+                    }
+                }
+
+                if (!empty($AddPackages)) {
+                    // if (($request->platform_type=='web')) {
+                    //     return redirect('/medical-packages')->with('success','Package created successfully in active packages.');
+                    // }
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Package created successfully in active packages.',
+                    ]);
+                } else {
+                    // if (($request->platform_type=='web')) {
+                    //     return redirect('/medical-packages')->with('error','Package not created in active packages.');
+                    // }
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Package not created in active packages.',
+                    ]);
+                }
             } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'please click button type either active or inactive',
-                ]);
+                $package_input = [];
+                $package_input['package_name'] = $request->package_name;
+                $package_input['treatment_category_id'] = $request->treatment_category_id;
+                $package_input['treatment_id'] = $request->treatment_id;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
+                $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
+                $package_input['treatment_price'] = $request->treatment_price;
+                $package_input['hotel_id'] = $request->hotel_id;
+                $package_input['hotel_in_time'] = $request->hotel_in_time;
+                $package_input['hotel_out_time'] = $request->hotel_out_time;
+                $package_input['hotel_acommodition_price'] = $request->hotel_acommodition_price;
+                $package_input['vehicle_id'] = $request->vehicle_id;
+                $package_input['vehicle_in_time'] = $request->vehicle_in_time;
+                $package_input['tour_id'] = $request->tour_id;
+                $package_input['tour_in_time'] = $request->tour_in_time;
+                $package_input['tour_price'] = $request->tour_price;
+                $package_input['vehicle_out_time'] = $request->vehicle_out_time;
+                $package_input['transportation_acommodition_price'] = $request->transportation_acommodition_price;
+                $package_input['visa_details'] = $request->visa_details;
+                $package_input['visa_service_price'] = $request->visa_service_price;
+                $package_input['ambulance_service_price'] = $request->ambulance_service_price;
+                $package_input['ticket_price'] = $request->ticket_price;
+                $package_input['package_discount'] = $request->package_discount;
+                $package_input['package_discount'] = $request->package_discount;
+                $package_input['package_price'] = $request->package_price;
+                $package_input['sale_price'] = $request->sale_price;
+                $package_input['platform_type'] = $request->platform_type;
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
+                    }
+                }
+                $package_input['status'] = $request->button_type;
+                $package_input['created_by'] = Auth::user()->id;
+                $AddPackages = Packages::create($package_input);
+                $Packages = Packages::select('id')->get();
+                if (!empty($Packages)) {
+                    foreach ($Packages as $key => $value) {
+
+                        $length = strlen($value->id);
+
+                        if ($length == 1) {
+                            $package_unique_id = '#MD00000' . $value->id;
+                        } elseif ($length == 2) {
+                            $package_unique_id = '#MD0000' . $value->id;
+                        } elseif ($length == 3) {
+                            $package_unique_id = '#MD000' . $value->id;
+                        } elseif ($length == 4) {
+                            $package_unique_id = '#MD00' . $value->id;
+                        } elseif ($length == 5) {
+                            $package_unique_id = '#MD0' . $value->id;
+                        } else {
+                            $package_unique_id = '#MD' . $value->id;
+                        }
+
+                        $update_unique_id = Packages::where('id', $value->id)->update(['package_unique_no' => $package_unique_id]);
+                    }
+                }
+                if (!empty($AddPackages)) {
+                    // if (($request->platform_type=='web')) {
+                    //     return redirect('/medical-packages')->with('success','Package created successfully in de-activate packages.');
+                    // }
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Package created successfully in de-activate packages.',
+                    ]);
+                } else {
+                    // if (($request->platform_type=='web')) {
+                    //     return redirect('/medical-packages')->with('error','Package not created in de-activate packages.');
+                    // }
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'Package not created in de-activate packages.',
+                    ]);
+                }
             }
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'please click button type either active or inactive',
+            ]);
+        }
         // } else {
         //     // if (($request->platform_type == 'web')) {
         //     //     return redirect('/medical-packages')->with('error', 'package name already exist');
@@ -267,7 +291,7 @@ class PackageControllers extends BaseController
         // }
     }
 
-      //code by mplus01
+    //code by mplus01
     public function packages_active_list()
     {
         $packages_active_list = Packages::where('md_packages.status', 'active')
@@ -276,9 +300,18 @@ class PackageControllers extends BaseController
                 'md_packages.package_unique_no',
                 'md_packages.package_name',
                 'md_packages.status',
+                'md_medical_provider_logo.company_logo_image_path',
+                'md_medical_provider_logo.company_logo_image_name'
             )
-            ->where('created_by', Auth::user()->id)
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
             ->get();
+            // $packages_active_list= [];
+
+            foreach($packages_active_list as $key=>$val){
+                $packages_active_list[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)? url('/').Storage::url($val->company_logo_image_path):'';
+            }
 
 
         if (!empty($packages_active_list)) {
@@ -295,18 +328,27 @@ class PackageControllers extends BaseController
         }
     }
 
-      //code by mplus01
+    //code by mplus01
     public function packages_deactive_list()
     {
         $packages_deactive_list = Packages::where('md_packages.status', 'inactive')
-            ->select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.status',
-            )
-            ->where('created_by', Auth::user()->id)
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+            'md_medical_provider_logo.company_logo_image_path',
+            'md_medical_provider_logo.company_logo_image_name'
+        )
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
             ->get();
+            // $packages_deactive_list= [];
+            foreach($packages_deactive_list as $key=>$val){
+                $packages_deactive_list[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)? url('/').Storage::url($val->company_logo_image_path):'';
+            }
+
 
         if (!empty($packages_deactive_list)) {
             return response()->json([
@@ -322,7 +364,7 @@ class PackageControllers extends BaseController
         }
     }
 
-      //code by mplus01
+    //code by mplus01
     public function packages_view_active_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -363,6 +405,7 @@ class PackageControllers extends BaseController
                 'md_packages.package_discount',
                 'md_packages.package_price',
                 'md_packages.sale_price',
+                'md_packages.featured_product',
                 'md_packages.platform_type',
                 'md_packages.status',
                 'md_add_new_acommodition.hotel_name',
@@ -392,7 +435,7 @@ class PackageControllers extends BaseController
         }
     }
 
-      //code by mplus01
+    //code by mplus01
     public function packages_view_deactive_list(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -433,6 +476,7 @@ class PackageControllers extends BaseController
                 'md_packages.sale_price',
                 'md_packages.platform_type',
                 'md_packages.status',
+                'md_packages.featured_product',
                 'md_add_new_acommodition.hotel_name',
                 'md_add_transportation_details.vehicle_model_id',
             )
@@ -455,7 +499,7 @@ class PackageControllers extends BaseController
         }
     }
 
-  //code by mplus01
+    //code by mplus01
     public function edit_packages(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -475,7 +519,12 @@ class PackageControllers extends BaseController
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
-                $package_input['other_services'] = $request->other_services;
+                // $package_input['other_services'] = $request->other_services;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
                 $package_input['hotel_id'] = $request->hotel_id;
@@ -497,6 +546,13 @@ class PackageControllers extends BaseController
                 $package_input['package_discount'] = $request->package_discount;
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
+                    }
+                }
                 $package_input['status'] = 'active';
                 $package_input['platform_type'] = $request->platform_type;
                 $package_input['created_by'] = Auth::user()->id;
@@ -517,7 +573,12 @@ class PackageControllers extends BaseController
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
-                $package_input['other_services'] = $request->other_services;
+                // $package_input['other_services'] = $request->other_services;
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
                 $package_input['hotel_id'] = $request->hotel_id;
@@ -540,6 +601,13 @@ class PackageControllers extends BaseController
                 $package_input['package_price'] = $request->package_price;
                 $package_input['sale_price'] = $request->sale_price;
                 $package_input['platform_type'] = $request->platform_type;
+                if (!empty($request->featured_product)) {
+                    if ($request->featured_product == 'on') {
+                        $package_input['featured_product'] = 'yes';
+                    } else {
+                        $package_input['featured_product'] = 'no';
+                    }
+                }
                 $package_input['status'] = 'inactive';
                 $package_input['created_by'] = Auth::user()->id;
                 $edit_packages = Packages::where('id', $request->id)->update($package_input);
@@ -569,7 +637,7 @@ class PackageControllers extends BaseController
         // }
     }
 
-      //code by mplus01
+    //code by mplus01
     public function activate_to_deactivate_packages(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -598,7 +666,7 @@ class PackageControllers extends BaseController
         }
     }
 
-  //code by mplus01
+    //code by mplus01
     public function deactivate_to_activate_packages(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -627,7 +695,7 @@ class PackageControllers extends BaseController
         }
     }
 
-  //code by mplus01
+    //code by mplus01
     public function get_acommodition_price(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -656,7 +724,7 @@ class PackageControllers extends BaseController
         }
     }
 
-      //code by mplus01
+    //code by mplus01
     public function get_transportation_price(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -685,8 +753,9 @@ class PackageControllers extends BaseController
         }
     }
 
-     //code by mplus01
-    public function get_tour_price(Request $request){
+    //code by mplus01
+    public function get_tour_price(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'id' => 'required',
         ]);
@@ -724,15 +793,27 @@ class PackageControllers extends BaseController
         }
 
         $packages_active_list_search = Packages::where('md_packages.status', 'active')
-            ->select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.status',
-            )
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+            'md_medical_provider_logo.company_logo_image_path',
+            'md_medical_provider_logo.company_logo_image_name'
+        )
             ->where('md_packages.package_name', 'like', '%' . $request->package_name . '%')
-            ->where('created_by', Auth::user()->id)
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
             ->get();
+            // return $packages_active_list_search;
+
+            foreach($packages_active_list_search as $key=>$val)
+            {
+                $packages_active_list_search[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)?url('/').Storage::url($val->company_logo_image_path):'';
+            }
+           
+           
 
         if (!empty($packages_active_list_search)) {
             return response()->json([
@@ -760,15 +841,25 @@ class PackageControllers extends BaseController
         }
 
         $packages_inactive_list_search = Packages::where('md_packages.status', 'inactive')
-            ->select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.status',
-            )
+        ->select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.status',
+            'md_medical_provider_logo.company_logo_image_path',
+            'md_medical_provider_logo.company_logo_image_name'
+        )
             ->where('md_packages.package_name', 'like', '%' . $request->package_name . '%')
-            ->where('created_by', Auth::user()->id)
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_packages.created_by')
+            ->where('md_packages.created_by', Auth::user()->id)
+            ->orderBy('md_packages.id','desc')
+
             ->get();
+
+            foreach($packages_inactive_list_search as $key=>$val)
+            {
+                $packages_inactive_list_search[$key]['company_logo_image_path']=!empty($val->company_logo_image_path)?url('/').Storage::url($val->company_logo_image_path):'';
+            }
 
         if (!empty($packages_inactive_list_search)) {
             return response()->json([

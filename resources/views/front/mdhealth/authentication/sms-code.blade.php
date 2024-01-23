@@ -5,19 +5,15 @@
             display: none;
         }
 
-        .error {
-            color: red !important;
-            font-size: 14px !important;
-        }
     </style>
     <div class="container py-100px df-center sign-in-form">
-        <div class="card" >
+        <div class="card" style="min-height: 650px;background: #f6f6f6;">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="pt-3">
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
-                    <h2 class="mb-0">SMS Code</h2>
+                    <h2 class="my-0">SMS Code</h2>
                     <p>Enter the 6 digit code sent to your mobile phone</p>
                     <form action="{{ url('otp-verify') }}" method="post" id="otpForm">
                         @csrf
@@ -46,7 +42,7 @@
                         <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
                     </form>
 
-                    <h6 class="mb-0 d-flex align-items-center gap-1">
+                    <h6 class="mb-0 d-flex align-items-center gap-1 df-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
                             <g clip-path="url(#clip0_0_28401)">
@@ -62,7 +58,7 @@
                         </svg>
                         <span class="text-danger">32 sec</span>
                     </h6>
-                    <div>
+                    <div class="df-center">
                         <a href="#" class="text-secondary">Resend Code In</a>
                     </div>
 

@@ -141,12 +141,10 @@
                 success: function(response) {
                     if (response.status == 200) {
                         $('#countsofpack').text(response.active_product_count);
-                        // console.log('Active tab API response:', response.packages_active_list.length);
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
-                    // Handle errors
                 }
             });
         }
@@ -367,6 +365,30 @@
         // Detach the package element and append it to the target tab
         $(targetTabId + ' .tab-content').append(packageElement.detach());
     }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var toastMessage = sessionStorage.getItem('toastMessage');
+    var toastType = sessionStorage.getItem('toastType');
+
+    if (toastMessage && toastType) {
+        toastr.options = {
+            "positionClass": "toast-bottom-right",
+            "timeOut": "5000",
+        };
+
+        if (toastType === 'success') {
+            toastr.success(toastMessage);
+        } else {
+            toastr.error(toastMessage);
+        }
+
+        // Clear the stored notification details
+        sessionStorage.removeItem('toastMessage');
+        sessionStorage.removeItem('toastType');
+    }
+});
+
 </script>
 
 {{-- <script>

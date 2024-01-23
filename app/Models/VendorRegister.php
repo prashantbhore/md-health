@@ -16,6 +16,7 @@ class VendorRegister extends Authenticatable
     protected $guard = 'md_health_medical_vendor_registers';
     protected $table = 'md_vendor_register';
     protected $fillable = [
+        
              'vendor_unique_no',
              'company_name',
              'country_id',
@@ -23,6 +24,13 @@ class VendorRegister extends Authenticatable
              'roll_id',
              'email',
              'mobile_no',
+             'membership_type',
+             'vendor_type',
+             'vendor_status',
+             'approved_by',
+             'approved_date',
+             'rejected_by',
+             'rejected_date',
              'tax_no',
              'company_address',
              'password',
@@ -51,6 +59,11 @@ class VendorRegister extends Authenticatable
     {
         return $this->belongsTo(VendorLogo::class, 'id','vendor_id')
             ->where('status', 'active');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
     }
 
 

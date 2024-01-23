@@ -1,12 +1,27 @@
 @extends('front.layout.layout2')
 @section('content')
+<style>
+    .pending {
+        width: 94px;
+        height: 19px;
+        flex-shrink: 0;
+        padding: unset;
+        color: #000;
+        text-align: center;
+        font-family: Campton;
+        font-size: 10px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.4px;
+    }
+</style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-        <div class="row">
-            <div class="col-md-3">
+        <div class="d-flex gap-3">
+            <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
-            <div class="col-md-9">
+            <div class="w-761">
                 <div class="card mb-4" style="min-height: 245px;">
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>Sale</span>
@@ -15,11 +30,11 @@
                     <div class="card-body">
                         <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
                             <p class="my-0">Sales (Daily)</p>
-                            <h3 class="my-0">{{ $daily_sales_amount }} ₺</h3>
+                            <h3 class="my-0">{{ $daily_sales_amount }} <span class="lira">₺</span></h3>
                         </div>
                         <div class="black-plate bg-black text-green d-flex align-items-center justify-content-between mb-3">
                             <p class="my-0">Sales (Monthly)</p>
-                            <h3 class="my-0">{{ $monthly_sales_amount }} ₺</h3>
+                            <h3 class="my-0">{{ $monthly_sales_amount }} <span class="lira">₺</span></h3>
                         </div>
                     </div>
                 </div>
@@ -49,13 +64,14 @@
                                     <input type="text" placeholder="Search" id="liveSearchInput">
                                 </div>
 
-                                <div class="list-div">
-                                    <select name="" id="" class="form-select">
-                                        <option value="">List for Date</option>
+                                {{-- <div class="list-div">
+                                    <select name="" id="" class="form-select filter-list" >
+                                        <option value="">List for date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
-                                </div>
+                                </div> --}}
+
                             </div>
 
                             <!-- Tab panes -->
@@ -70,179 +86,169 @@
                                     @foreach ($active_sales as $activeSale)
 
                                     {{-- {{dd($activeSale)}} --}}
-                                    <div class="treatment-card df-start w-100 mb-3">
+                                    <div class="card shadow-none mb-4" style="border-radius: 3px;background: #F6F6F6;min-height:75px">
 
-                                        <div class="row card-row align-items-center">
-                                            @php
+                                    </div>
+                                    <div class="row card-row align-items-center">
+                                        @php
 
-                                            $id = Session::get('MDMedicalProvider*%');
-                                            $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            ->where('medical_provider_id', $id)
-                                            ->first();
-                                            // $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            // ->where('medical_provider_id', Auth::user()->id)
-                                            // ->first();
-                                            @endphp
+                                        $id = Auth::guard('md_health_medical_providers_registers')->user()->id;
+                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                        ->where('medical_provider_id', $id)
+                                        ->first();
+                                        // $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                        // ->where('medical_provider_id', Auth::user()->id)
+                                        // ->first();
+                                        @endphp
 
-                                            <div class="col-md-2 df-center px-0">
-                                                <img style="width:auto;height:75px;" src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}" alt="">
+                                        <div class="col-md-2 df-center px-0">
+                                            <img style="width:auto;height:75px;" src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}" alt="">
+                                        </div>
+
+                                        <div class="col-md-6 justify-content-start ps-0">
+                                            <div class="trmt-card-body">
+                                                <h5 class="dashboard-card-title">Treatment No:
+                                                    {{ !empty($activeSale['order_id']) ? $activeSale['order_id'] : '' }}
+                                                    <span class="{{ !empty($activeSale['purchase_type']) ? ($activeSale['purchase_type'] == 'pending' ? 'pending' : 'in-progress') : '' }}">
+                                                        {{ !empty($activeSale['purchase_type']) ? ucfirst($activeSale['purchase_type']) : '' }}
+                                                    </span>
+                                                </h5>
+                                                <h5 class="mb-0 fw-500">
+                                                    {{ !empty($activeSale['customer']['full_name']) ? $activeSale['customer']['full_name'] : '' }}
+                                                </h5>
                                             </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                            <div class="trmt-card-footer">
+                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong>
+                                                    <span class="">
+                                                        {{ !empty($activeSale['package']['sale_price']) ? $activeSale['package']['sale_price'] : '' }}
+                                                        <span class="lira">₺</span></span>
+                                                </h6>
+                                                <a href="{{ url('treatment-order-details/' . (!empty($activeSale['id']) ? Crypt::encrypt($activeSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
+                                                        Details</strong></a>
 
-                                            <div class="col-md-6 justify-content-start ps-0">
-                                                <div class="trmt-card-body">
-                                                    <h5 class="dashboard-card-title">Treatment No:
-                                                        {{ !empty($activeSale['order_id']) ? $activeSale['order_id'] : '' }}
-                                                        <span class="{{ !empty($activeSale['purchase_type']) ? ($activeSale['purchase_type'] == 'pending' ? 'pending' : 'in-progress') : '' }}">
-                                                            {{ !empty($activeSale['purchase_type']) ? ucfirst($activeSale['purchase_type']) : '' }}
-                                                        </span>
-                                                    </h5>
-                                                    <h5 class="mb-0 fw-500">
-                                                        {{ !empty($activeSale['customer']['full_name']) ? $activeSale['customer']['full_name'] : '' }}
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                                <div class="trmt-card-footer">
-                                                    <h6 class="dbrd-order-total"><strong>Total Price:</strong>
-                                                        <span class="">
-                                                            {{ !empty($activeSale['package']['sale_price']) ? $activeSale['package']['sale_price'] : '' }}
-                                                            ₺</span>
-                                                    </h6>
-                                                    <a href="{{ url('treatment-order-details/' . (!empty($activeSale['id']) ? Crypt::encrypt($activeSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
-                                                            Details</strong></a>
-
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
-                                    @else
-                                    @include('front.includes.no-data-found')
-                                    @endif
-
-
-
-
                                 </div>
-
-                                <div class="tab-pane fade" id="sale-inprogress" role="tabpanel" aria-labelledby="sale-inprogress-tab">
-                                    @if (!empty($completed_sales))
-                                    @foreach ($completed_sales as $completedSale)
-                                    <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row align-items-center">
-
-                                            @php
-                                            $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            ->where('medical_provider_id', Auth::user()->id)
-                                            ->first();
-                                            @endphp
-
-                                            <div class="col-md-2 df-center px-0">
-                                                <img style="width:auto;height:75px;" src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}" alt="">
-                                            </div>
-
-                                            <div class="col-md-6 justify-content-start ps-0">
-                                                <div class="trmt-card-body">
-                                                    <h5 class="dashboard-card-title">Treatment
-                                                        No:{{ !empty($completedSale['order_id']) ? $completedSale['order_id'] : '' }}<span class="active">{{ !empty($completedSale['purchase_type']) ? ucfirst($completedSale['purchase_type']) : '' }}</span>
-                                                    </h5>
-                                                    <h5 class="mb-0 fw-500">
-                                                        {{ !empty($completedSale['customer']['full_name']) ? $completedSale['customer']['full_name'] : '' }}
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                                <div class="trmt-card-footer">
-                                                    <h6 class="dbrd-order-total"><strong>Total Price:</strong>
-                                                        <span class="">
-                                                            {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
-                                                            ₺</span>
-                                                    </h6>
-
-                                                    <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ? Crypt::encrypt($completedSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
-                                                            Details</strong></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    @else
-                                    @include('front.includes.no-data-found')
-                                    @endif
+                                @endforeach
+                                @else
+                                @include('front.includes.no-data-found')
+                                @endif
 
 
-                                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                <div class="tab-pane fade" id="sale-cancelled" role="tabpanel" aria-labelledby="sale-cancelled-tab">
-
-                                    @if (!empty($cancelled_sales))
-                                    @foreach ($cancelled_sales as $completedSale)
-                                    <div class="treatment-card df-start w-100 mb-3">
-                                        <div class="row card-row align-items-center">
-                                            @php
-                                            $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
-                                            ->where('medical_provider_id', Auth::user()->id)
-                                            ->first();
-                                            @endphp
-
-                                            <div class="col-md-2 df-center px-0">
-                                                <img style="width:auto;height:75px;" src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}" alt="">
-                                            </div>
-
-                                            <div class="col-md-6 justify-content-start ps-0">
-                                                <div class="trmt-card-body">
-                                                    <h5 class="dashboard-card-title">Treatment
-                                                        No:{{ !empty($completedSale['order_id']) ? $completedSale['order_id'] : '' }}<span class="cancel">{{ !empty($completedSale['purchase_type']) ? ucfirst($completedSale['purchase_type']) : '' }}</span>
-                                                    </h5>
-                                                    <h5 class="mb-0 fw-500">
-                                                        {{ !empty($completedSale['customer']['full_name']) ? $completedSale['customer']['full_name'] : '' }}
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
-                                                <div class="trmt-card-footer">
-                                                    <h6 class="dbrd-order-total"><strong>Total Price:</strong>
-                                                        <span class=""> {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
-                                                            ₺</span>
-
-                                                    </h6>
-
-                                                    <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ? Crypt::encrypt($completedSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
-                                                            Details</strong></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    @else
-                                    @include('front.includes.no-data-found')
-                                    @endif
-                                </div>
 
 
                             </div>
+
+                            <div class="tab-pane fade" id="sale-inprogress" role="tabpanel" aria-labelledby="sale-inprogress-tab">
+                                @if (!empty($completed_sales))
+                                @foreach ($completed_sales as $completedSale)
+                                <div class="treatment-card df-start w-100 mb-3">
+                                    <div class="row card-row align-items-center">
+
+                                        @php
+                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                        ->where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)
+                                        ->first();
+                                        @endphp
+
+                                        <div class="col-md-2 df-center px-0">
+                                            <img style="width:auto;height:75px;" src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}" alt="">
+                                        </div>
+
+                                        <div class="col-md-6 justify-content-start ps-0">
+                                            <div class="trmt-card-body">
+                                                <h5 class="dashboard-card-title">Treatment
+                                                    No:{{ !empty($completedSale['order_id']) ? $completedSale['order_id'] : '' }}<span class="active">{{ !empty($completedSale['purchase_type']) ? ucfirst($completedSale['purchase_type']) : '' }}</span>
+                                                </h5>
+                                                <h5 class="mb-0 fw-500">
+                                                    {{ !empty($completedSale['customer']['full_name']) ? $completedSale['customer']['full_name'] : '' }}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                            <div class="trmt-card-footer">
+                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong>
+                                                    <span class="">
+                                                        {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
+                                                        <span class="lira">₺</span></span>
+                                                </h6>
+
+                                                <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ? Crypt::encrypt($completedSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
+                                                        Details</strong></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                                @else
+                                @include('front.includes.no-data-found')
+                                @endif
+
+
+                            </div>
+
+
+
+
+                            <div class="tab-pane fade" id="sale-cancelled" role="tabpanel" aria-labelledby="sale-cancelled-tab">
+
+                                @if (!empty($cancelled_sales))
+                                @foreach ($cancelled_sales as $completedSale)
+                                <div class="treatment-card df-start w-100 mb-3">
+                                    <div class="row card-row align-items-center">
+                                        @php
+                                        if(!empty(Auth::guard('md_health_medical_providers_registers')->user()->id)){
+                                        $provider_logo = \App\Models\MedicalProviderLogo::where('status', 'active')
+                                        ->where('medical_provider_id', Auth::guard('md_health_medical_providers_registers')->user()->id)
+                                        ->first();
+                                        }
+                                        @endphp
+
+                                        <div class="col-md-2 df-center px-0">
+                                            <img style="width:auto;height:75px;" src="{{ !empty($provider_logo->company_logo_image_path) ? url('/') . Storage::url($provider_logo->company_logo_image_path) : asset('front/assets/img/default-img.png') }}" alt="">
+                                        </div>
+
+                                        <div class="col-md-6 justify-content-start ps-0">
+                                            <div class="trmt-card-body">
+                                                <h5 class="dashboard-card-title">Treatment
+                                                    No:{{ !empty($completedSale['order_id']) ? $completedSale['order_id'] : '' }}<span class="cancel">{{ !empty($completedSale['purchase_type']) ? ucfirst($completedSale['purchase_type']) : '' }}</span>
+                                                </h5>
+                                                <h5 class="mb-0 fw-500">
+                                                    {{ !empty($completedSale['customer']['full_name']) ? $completedSale['customer']['full_name'] : '' }}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex flex-column justify-content-between align-items-end text-end">
+                                            <div class="trmt-card-footer">
+                                                <h6 class="dbrd-order-total"><strong>Total Price:</strong>
+                                                    <span class=""> {{ !empty($completedSale['package']['sale_price']) ? $completedSale['package']['sale_price'] : '' }}
+                                                        <span class="lira">₺</span></span>
+
+                                                </h6>
+
+                                                <a href="{{ url('treatment-order-details/' . (!empty($completedSale['id']) ? Crypt::encrypt($completedSale['id']) : '')) }}" class="mt-auto view-detail-btn"><strong>View
+                                                        Details</strong></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                                @else
+                                @include('front.includes.no-data-found')
+                                @endif
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
 @section('script')
@@ -280,6 +286,12 @@
                 }
             });
         });
+    });
+</script>
+<script>
+    const element = document.querySelector('.filter-list');
+    const choices = new Choices(element, {
+        // searchEnabled: true,
     });
 </script>
 @endsection

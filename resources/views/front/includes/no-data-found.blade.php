@@ -1,6 +1,6 @@
 <style>
     .no-data {
-        height: 150px;
+        height: 362px;
         font-family: "CamptonBook";
         color: #979797;
         font-weight: 400;
@@ -14,6 +14,13 @@
         margin-bottom: 16px;
         background: #F6F6F6;
     }
+
+    .no-data img {
+        width: 150px;
+        height: auto;
+    }
 </style>
 
-<div class="no-data">No Data Found !</div>
+<div class="no-data">
+    <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">
+</div>

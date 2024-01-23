@@ -54,9 +54,36 @@ class AddSystemUserRole extends BaseController
             ]);
         }
 
+        $mobile_no = CommonUserLoginTable::where('mobile_no', $request->mobile_no)->first();
+        if ($mobile_no) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Phone number already exist.',
+            ]);
+        }
+
+
+        $email_exist_register = MedicalProviderRegistrater::where('email', $request->email)->first();
+        if ($email_exist_register) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Email already exist.',
+            ]);
+        }
+
+        $mobile_no_register = MedicalProviderRegistrater::where('mobile_no', $request->mobile_no)->first();
+        if ($mobile_no_register) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Phone number already exist.',
+            ]);
+        }
+
+
+
         $userData = [
             'email' => $request->email,
-            'mobile_no' => $request->phone,
+            'mobile_no' => $request->mobile_no,
             'user_type' => 'medicalprovider',
             'password' => Hash::make($request->password),
             // 'created_by' =>Auth::guard('md_health_medical_providers_registers')->user()->id,
@@ -75,6 +102,7 @@ class AddSystemUserRole extends BaseController
             'company_name' => $request->name,
             'roll_id' => $request->roll_id,
             'email' => $request->email,
+            'mobile_no' => $request->mobile_no,
             'password' => Hash::make($request->password),
             'previllages' => $request->previlages,
             'modified_ip_address' => $request->ip(),
@@ -156,6 +184,7 @@ class AddSystemUserRole extends BaseController
             $userData = [
                 'email' => $request->email,
                 'name' => $request->name,
+                'mobile_no' => $request->mobile_no,
                 // 'user_type' => 'medicalprovider',
                 // 'password' => Hash::make($request->password']),
                 'created_by' => Auth::user()->id,
@@ -174,7 +203,10 @@ class AddSystemUserRole extends BaseController
             $role = MedicalProviderRegistrater::find($userId);
 
             if ($role) {
-                $role->update(['previllages' => $privileges]);
+                $role->update([
+                    'roll_id'=> $roleId ,
+                    'previllages' => $privileges
+            ]);
             }
 
             return response()->json([
@@ -263,6 +295,7 @@ class AddSystemUserRole extends BaseController
                 'provider_unique_no',
                 'previllages',
                 'email',
+                'mobile_no',
                 'roll_id'
             )
             ->where('status', 'active')
@@ -280,6 +313,8 @@ class AddSystemUserRole extends BaseController
                 'email' => $sytem_user_list->email,
                 'previlages' => $sytem_user_list->previllages,
                 'roll_id' => $sytem_user_list->role->id,
+                'mobile_no' => $sytem_user_list->mobile_no,
+
                 'role_name' => $sytem_user_list->company_name,
             ];
             // dd($selected_data);

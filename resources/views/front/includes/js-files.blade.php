@@ -16,6 +16,8 @@
 </script>
 <!-- DATE-PICKER JS -->
 <script src="{{ URL::asset('front/assets/js/bootstrap-datepicker.min.js') }}"></script>
+
+<script src="{{ URL::asset('front/assets/js/waves.min.js') }}"></script>
 <!-- GLightbox -->
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 
@@ -30,6 +32,7 @@
 {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> --}}
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" /> --}}
 {{-- <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
 {{-- <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"> --}}
@@ -52,7 +55,6 @@
 
 
 
-<script src="{{ URL::asset('admin\js\validations\common\common.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/datepicker-js@latest/datepicker.min.js"></script>
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -65,6 +67,13 @@
     referrerpolicy="origin"></script>
 
 
+<!-- <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script> -->
+<script>
+    // $('.navbar-collapse').css({'': ''});
+    // $('.navbar-collapse').removeAttr("flex-basis")
+    document.getElementsByClassName("navbar-collapse").removeAttribute("flex-basis")
+    console.log("Hello")
+</script>
 
 <script>
     // PASSWORD HIDE/SHOW
@@ -79,9 +88,9 @@
     });
 </script>
 <script>
-    $(document).ready(function() {
-        $('select').niceSelect();
-    });
+    // $(document).ready(function() {
+    //     $('select').niceSelect();
+    // });
 
     $('.ui.dropdown')
         .dropdown();
@@ -98,7 +107,7 @@
 
 <script>
     var titleElement = document.getElementById("example_filter");
-    var titleChildren = titleElement.getElementsByTagName("label");
+   // var titleChildren = titleElement.getElementsByTagName("label");
 
     // Do something with children.
     // In your example code, you'll only have one element returned

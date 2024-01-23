@@ -141,6 +141,7 @@
                             <table id="example" class="table">
                                 <thead>
                                     <tr>
+                                        <th>Sr.No.</th>
                                         <th scope="col">ID</th>
                                         <th>Categories</th>
                                         <th>Sub Categories</th>

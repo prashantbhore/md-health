@@ -2,8 +2,8 @@
 <section class="main-content">
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
-            <div class="page-title">Medical Service Provider ID #273929</div>
-            <a href="{{URL::asset('admin/service-provider')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Service Provider </a>
+            <div class="page-title">Vendors ID #273929 <small> Reg Date : 26 Jan 2023 11:45am </small></div>
+            <a href="{{URL::asset('admin/service-provider')}}" class="page-title"> <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn" /> Back Vendors</a>
         </div>
         <div class="row top-cards">
             <div class="col-md-6">
@@ -11,45 +11,54 @@
                 <div class="card card-details mb-3" style="min-height: 380px;">
                     <div class="card-body">
                         <p class="card-title mb-3">Service Provider Details</p>
+                        <div class="card-active df-end"> Active </div>
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">Hospital Name</label>
+                            <div class="col-md-12 mb-3">
+                                <label for="firstName">Company Name</label>
                                 <p>{{ !empty($medical_provider->company_name) ? ucfirst($medical_provider->company_name) : '' }}</p>
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="lastName">TAX No</label>
+                                <label for="lastName">TAX Number</label>
                                 <p>{{ !empty($medical_provider->tax_no) ?$medical_provider->tax_no: '' }}</p>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="contactNo">Contact Number</label>
-                                <p>{{ !empty($medical_provider->mobile_no) ?$medical_provider->mobile_no: '' }}</p>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="email">E-mail</label>
+                                <label for="email">Company Email</label>
                                 <p>{{ !empty($medical_provider->email) ?$medical_provider->email: '' }}</p>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="address">Address</label>
+                                <label for="lastName"> Authorized Person Full Name</label>
+                                <p>Manish Kumar </p>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="contactNo">Authorized Person Mobile Contact</label>
+                                <p>{{ !empty($medical_provider->mobile_no) ?$medical_provider->mobile_no: '' }}</p>
+                            </div>
+
+                         
+
+                            <div class="col-md-12 mb-3">
+                                <label for="address">Company Address</label>
                                 <p class="d-flex flex-column gap-3">
                                     <span>{{ !empty($medical_provider->company_address) ?ucfirst($medical_provider->company_address): '' }}</span>
                                     <span>{{ !empty($medical_provider->city->city_name) ?ucfirst($medical_provider->city->city_name): '' }}</span>
                                 </p>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            {{-- <div class="col-md-6 mb-3">
                                 <label for="address">Invoice Address</label>
                                 <p class="d-flex flex-column gap-3">
                                     <span>{{ !empty($medical_provider->company_address) ?ucfirst($medical_provider->company_address): '' }}</span>
                                     <span>{{ !empty($medical_provider->city->city_name) ?ucfirst($medical_provider->city->city_name): '' }}</span>
                                 </p>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6 mb-3">
                                 <div class="row">
                                     <div class="col-md-6 d-flex flex-column">
-                                        <label for="logo" class="mb-2">Logo</label>
+                                        <label for="logo" class="mb-2">Company Logo</label>
                                         <div>
                                             <img src="{{!empty($medical_provider_logo->company_logo_image_path)?url('/').Storage::url($medical_provider_logo->company_logo_image_path):''}}" alt="" style="height: 75px;" />
 
@@ -70,7 +79,7 @@
 
                                     </div>
                                     <div class="col-md-6 d-flex flex-column">
-                                        <label for="license" class="mb-2">License</label>
+                                        <label for="license" class="mb-2">Company License</label>
                                         <div>
                                             <img src="{{!empty($medical_provider_license->company_licence_image_path)?url('/').Storage::url($medical_provider_license->company_licence_image_path):''}}" alt="" style="height: 75px;" />
 
@@ -176,17 +185,26 @@
 
                                 <div class="col-md-12 mb-3">
                                     <div class="d-flex flex-wrap justify-content-between">
-                                        <button type="submit" class="btn md-btn save-btn">Save Changes</button>
+                                        <button type="submit" class="btn md-btn deactivate-btn">Save Changes</button>
                             </form>
 
 
+                            
+                            {{-- <div class="col-md-12 mb-3">
+                                <div class="d-flex flex-wrap justify-content-between"> --}}
+                                    <button type="submit" class="btn md-btn save-btn">Approve Vendor</button>
+                                    <button type="submit" class="btn md-btn delete-btn">Reject Vendor</button>
+                                {{-- </div>
+                            </div> --}}
 
+
+{{-- 
                             <button type="button" data-id="{{ !empty($medical_provider->id) ? $medical_provider->id : '' }}" class="btn md-btn deactivate-btn">
                                 {{ $medical_provider->status == 'active' ? 'Deactivate Vendors' : 'Activate Vendors' }}
                             </button>
 
 
-                            <button type="button" data-id="{{ !empty($medical_provider->id) ? $medical_provider->id : '' }}" class="btn md-btn delete-btn"> {{ $medical_provider->status == 'delete' ? 'Deleted' : 'Delete Vendor' }}</button>
+                            <button type="button" data-id="{{ !empty($medical_provider->id) ? $medical_provider->id : '' }}" class="btn md-btn delete-btn"> {{ $medical_provider->status == 'delete' ? 'Deleted' : 'Delete Vendor' }}</button> --}}
 
                         </div>
                     </div>

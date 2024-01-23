@@ -63,8 +63,19 @@ class PaymentController extends Controller
             $total_business_amount=$responseData['total_business_amount'];  
         }
 
-        
-       
+
+
+        $apiUrl = url('api/md-provider-bank-account-list');
+        $method = 'GET';
+        $body=null;
+
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+        $medical_provider_bank_details= '';
+        if ( $responseData[ 'status' ] == '200' ){
+            $medical_provider_bank_details=$responseData['data'];
+        }
+
 
 
         $apiUrl = url('api/md-provider-transaction-list');
@@ -78,7 +89,7 @@ class PaymentController extends Controller
             $payment_list=$responseData['payment_list'];
         }
 
-        return view('front.mdhealth.medical-provider.payment-information',compact('total_pending_amount','total_completed_amount','total_business_amount','payment_list'));
+        return view('front.mdhealth.medical-provider.payment-information',compact('total_pending_amount','total_completed_amount','total_business_amount','payment_list','medical_provider_bank_details'));
     }
 
 
@@ -96,10 +107,12 @@ class PaymentController extends Controller
 
         $bank_name= $request->bank_name;
 
-       
+         $id=$request->id;
 
+        
        $body=['account_number' =>  $account_number,
                 'bank_name' =>  $bank_name,
+                'id'=>$id,
             ];
 
        $method = 'POST';
@@ -111,6 +124,34 @@ class PaymentController extends Controller
       
       return redirect('payment-information')->with( 'success', 'Account Deatils Saved Successfully');
        
+    }
+
+
+    public function peymentsearch(Request $request){
+
+       
+        $token = Session::get('login_token');
+
+        $apiUrl = url('api/md-provider-transaction-search');
+
+
+
+        $search_query = $request['query'];
+
+      
+        
+       $body=['search_query' => $search_query ];
+
+       $method = 'POST';
+
+
+        $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
+
+
+        dd($responseData);
+
+
+      
     }
 
 
