@@ -255,10 +255,10 @@ class CustomerPackageController extends Controller {
                         break;
                     }
                     // echo( $three_json_response );
-                    die;
+                    // die;
                     $three_json_response = json_decode( $three_json_response, true );
                     if ( $three_json_response[ 'status' ] == 'success' ) {
-                        print_r( $threedsInitialize );
+                        print_r( $threedsInitialize->getHtmlContent() );
 
                     } else {
                         return redirect()->back()->with( 'error', $three_json_response[ 'errorMessage' ] );
@@ -321,7 +321,7 @@ class CustomerPackageController extends Controller {
         // echo $three_json_response[ 'threeDSHtmlContent' ];
         // echo '<pre>';
         // print_r( $three_json_response );
-        die;
+        // die;
         if ( !empty( $three_json_response ) ) {
             if ( $three_json_response[ 'status' ] == 'success' ) {
 
@@ -332,7 +332,7 @@ class CustomerPackageController extends Controller {
                 // if ( !empty( $repsonse_data ) ) {
                 //     if ( $repsonse_data[ 'status' ] == '200' ) {
                 // print_r( $three_json_response );
-                die;
+                // die;
                 // if ( !empty( $customer_purchase_details->customer_id ) ) {
                 //     $user = CustomerRegistration::where( 'id', $customer_purchase_details->customer_id );
                 //     $credentials = [
