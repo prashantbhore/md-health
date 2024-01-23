@@ -169,8 +169,10 @@
                                         <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                     </button>
                                     @elseif($user == false)
+                                    
                                     <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
                                         Package</button>
+
                                     <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
                                         <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                     </button>

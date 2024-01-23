@@ -47,7 +47,8 @@ $next_membership = MembershipSettings::where('vendor_type', 'medical_service_pro
     ->first();
 
 if ($next_membership) {
-    $next_membership_amount = max(0, $next_membership->membership_amount - $provider_amount);
+    //$next_membership_amount = max(0, $next_membership->membership_amount - $provider_amount);
+    $next_membership_amount = $next_membership->membership_amount;
 }
 } else {
 $next_membership = null;
