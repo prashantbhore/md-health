@@ -26,11 +26,12 @@ class CustomerPackageController extends Controller {
     }
 
     public function sandbox() {
-        // require_once( 'config.php' );
+
+        require_once '/opt/lampp/htdocs/MD-Health-AdminPanel/vendor/iyzipay-php-2.0.54/IyzipayBootstrap.php';
         // $sandbox_base_url = 'https://sandbox-api.iyzipay.com';
         $apiKey = 'sandbox-BOhpAyMe4ewgstkrnmQbhLnrI7kMlTfD';
         $secretKey = 'sandbox-5F4PXtaQLl8nxj4m2r8HRcQ9xT3NCe2S';
-        $options = new Options();
+        $options = new \Iyzipay\Options();
         $options->setApiKey( $apiKey );
         $options->setSecretKey( $secretKey );
         $options->setBaseUrl( 'https://sandbox-api.iyzipay.com' );
@@ -133,6 +134,7 @@ class CustomerPackageController extends Controller {
 
     public function generateAuthorizationString( $apiKey, $secretKey, $requestData ) {
         $requestString = $this->generateRequestString( $requestData );
+        $requestString = $this->generateRequestString_one( $requestData );
 
         $iyziRndValue = $randomNumber = mt_rand( 100000000, 999999999 );
         $_SERVER[ 'HTTP_X_IYZI_RND' ] = $iyziRndValue;
@@ -148,6 +150,33 @@ class CustomerPackageController extends Controller {
         return $authorization;
     }
 
+    function generateRequestString_one( $obj ) {
+        $isArray = is_array( $obj );
+
+        $requestString = '[';
+
+        foreach ( $obj as $key => $val ) {
+            // echo $isArray;
+            if ( $isArray == 1 ) {
+                // echo $key;
+                $requestString .= $key . '=';
+            }
+
+            if ( is_array( $val ) || is_object( $val ) ) {
+                $requestString .= $this->generateRequestString( $val );
+            } else {
+                $requestString .= $val;
+            }
+
+            $requestString .= $isArray == 0 ? ', ' : ',';
+        }
+
+        $requestString = substr( $requestString, 0, ( $isArray == 0? -2 : -1 ) );
+        $requestString .= ']';
+        echo $requestString;
+        return $requestString;
+    }
+
     public function generateRequestString( $requestData ) {
         $jsonString = json_encode( $requestData );
 
@@ -156,7 +185,7 @@ class CustomerPackageController extends Controller {
         $jsonString = str_replace( ':', '=', $jsonString );
         $jsonString = str_replace( '{', '[', $jsonString );
         $jsonString = str_replace( '}', ']', $jsonString );
-        echo $jsonString;
+        // echo $jsonString;
         return $jsonString;
     }
 
@@ -165,7 +194,8 @@ class CustomerPackageController extends Controller {
     public function test( Request $request ) {
         // echo phpinfo();
         // die;
-        dd( phpinfo() );
+        // dd( phpinfo() );
+        return view( 'front.mdhealth.test' );
         $token = null;
         $sandbox_base_url = 'https://sandbox-api.iyzipay.com';
         $live_base_url = 'https://api.iyzipay.com';
@@ -174,7 +204,7 @@ class CustomerPackageController extends Controller {
 
         $url0 = $sandbox_base_url . '/payment/iyzipos/installment';
         $url1 = $sandbox_base_url . '/payment/bin/check';
-        $url2 = $sandbox_base_url . '/payment/iyzipos/checkoutform/initialize/auth/ecom';
+        $url2 = $sandbox_base_url . '/payment/bkm/initialize';
 
         $method = 'POST';
 
@@ -183,94 +213,72 @@ class CustomerPackageController extends Controller {
             'binNumber' => '535805',
         ];
         $body1 = [ 'locale' => 'en', 'binNumber' => '535843' ];
-        // $body2 = [
-        //     'locale' => 'en',
-        //     'conversationId' => '123456789', // Replace with your unique conversation ID
-        //     'price' => '10.01',
-        //     'paidPrice' => '10.01',
-        //     'currency' => 'TRY',
-        //     'installment' => 1,
-        //     'paymentChannel' => 'WEB',
-        //     'basketId' => 'B67832',
-        //     'paymentGroup' => 'PRODUCT',
-        //     'paymentCard' => [
-        //         'cardHolderName' => 'Mehmet Test',
-        //         'cardNumber' => '5526080000000006',
-        //         'expireYear' => '2028',
-        //         'expireMonth' => '11',
-        //         'cvc' => '245',
-        //         'registerCard' => 0,
-        // ],
-        //     'buyer' => [
-        //         'id' => 'BY789',
-        //         'name' => 'John',
-        //         'surname' => 'Doe',
-        //         'identityNumber' => '11111111111',
-        //         'email' => 'test@testtt.com',
-        //         'gsmNumber' => '+905393623333',
-        //         'registrationDate' => '2013-04-21 15:12:09',
-        //         'lastLoginDate' => '2015-10-05 12:43:35',
-        //         'registrationAddress' => 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
-        //         'city' => 'Istanbul',
-        //         'country' => 'Turkey',
-        //         'zipCode' => '34732',
-        //         'ip' => '85.34.78.112',
-        // ],
-        //     'shippingAddress' => [
-        //         'address' => 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
-        //         'zipCode' => '34742',
-        //         'contactName' => 'Jane Doe',
-        //         'city' => 'Istanbul',
-        //         'country' => 'Turkey',
-        // ],
-        //     'billingAddress' => [
-        //         'address' => 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
-        //         'zipCode' => '34742',
-        //         'contactName' => 'Jane Doe',
-        //         'city' => 'Istanbul',
-        //         'country' => 'Turkey',
-        // ],
-        //     'basketItems' => [
-        //         [
-        //             'id' => 'BI101',
-        //             'price' => '10.01',
-        //             'name' => 'Binocular',
-        //             'category1' => 'Collectibles',
-        //             'category2' => 'Accessories',
-        //             'itemType' => 'PHYSICAL',
-        // ],
-        // ],
-        // ];
-        // $body2 = [
-        //     'price' =>'1000',
-        //     'paidPrice'=>'1100',
-        //     'currency'=>'TRY',
-        //     'installment'=>'2',
-        //     'cardNumber'=>'1234123412341234',
-        //     'expireYear'=>'25',
-        //     'expireMonth'=>'02',
-        //     'cvc'=>'123',
-        //     'cardHolderName'=>'Test',
-        //     'id'=>'21',
-        //     'name'=>'Test',
-        //     'surname'=>'SurTest',
-        //     'identityNumber'=>'454jjjss',
-        //     'city'=>'Antaliya',
-        //     'country'=>'Turkey',
-        //     'email'=>'email@test.com',
-        //     'ip'=>$_SERVER[ 'REMOTE_ADDR' ],
-        //     'registrationAddress'=>'test Address',
-        //     'contactName'=>'test name',
-        //     'city'=>'Antaliya',
-        //     'country'=>'Turkey',
-        //     'address'=>'test Address',
-        //     'contactName'=>'test name',
-        //     'city'=>'Antaliya',
-        //     'country'=>'Turkey',
-        //     'address'=>'test Address'
-        // ];
 
-        $authorization = $this->generateAuthorizationString( $apiKey, $secretKey, $body1 );
+        $body2 = [
+            'locale' => 'tr',
+            'conversationId' => '123456789',
+            'price' => '1.0',
+            'basketId' => 'B67832',
+            'paymentGroup' => 'PRODUCT',
+            'buyer' => [
+                'id' => 'BY789',
+                'name' => 'John',
+                'surname' => 'Doe',
+                'identityNumber' => '74300864791',
+                'email' => 'email@email.com',
+                'gsmNumber' => '+905350000000',
+                'registrationDate' => '2013-04-21 15:12:09',
+                'lastLoginDate' => '2015-10-05 12:43:35',
+                'registrationAddress' => 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
+                'city' => 'Istanbul',
+                'country' => 'Turkey',
+                'zipCode' => '34732',
+                'ip' => '85.34.78.112'
+            ],
+            'shippingAddress' => [
+                'address' => 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
+                'zipCode' => '34742',
+                'contactName' => 'Jane Doe',
+                'city' => 'Istanbul',
+                'country' => 'Turkey'
+            ],
+            'billingAddress' => [
+                'address' => 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1',
+                'zipCode' => '34742',
+                'contactName' => 'Jane Doe',
+                'city' => 'Istanbul',
+                'country' => 'Turkey'
+            ],
+            'basketItems' => [
+                [
+                    'id' => 'BI101',
+                    'price' => '0.3',
+                    'name' => 'Binocular',
+                    'category1' => 'Collectibles',
+                    'category2' => 'Accessories',
+                    'itemType' => 'PHYSICAL'
+                ],
+                [
+                    'id' => 'BI102',
+                    'price' => '0.5',
+                    'name' => 'Game code',
+                    'category1' => 'Game',
+                    'category2' => 'Online Game Items',
+                    'itemType' => 'VIRTUAL'
+                ],
+                [
+                    'id' => 'BI103',
+                    'price' => '0.2',
+                    'name' => 'Usb',
+                    'category1' => 'Electronics',
+                    'category2' => 'Usb / Cable',
+                    'itemType' => 'PHYSICAL'
+                ]
+            ],
+            'callbackUrl' => 'https://www.merchant.com/callback'
+        ];
+
+        $authorization = $this->generateAuthorizationString( $apiKey, $secretKey, $body2 );
 
         $headers = [
             'Authorization' => $authorization,
@@ -282,7 +290,7 @@ class CustomerPackageController extends Controller {
 
         $responseData = $response = $apiRequest-> {
             $method}
-            ( $url1, $body1 ?? null );
+            ( $url2, $body2 ?? null );
             // dd( $response->json() );
             try {
                 if ( empty( $response->json() ) ) {

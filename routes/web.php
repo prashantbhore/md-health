@@ -119,7 +119,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('customer-details', 'admin/customers/customer-details');
 
     //Admin MANAGE VENDORS
-   
+
     Route::view('vendor-details', 'admin/vendors/vendor-details');
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
 
@@ -261,8 +261,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('payment-requests', 'admin/payments/payment-requests');
 
     //Admin REVIEWS
-  
-   
+
+
 
 
     Route::controller(reviewController::class)->group(function (){
@@ -530,6 +530,7 @@ Route::any('health-pack-details', [CustomerPackageController::class, 'packages_v
 
 Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
 
+Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 Route::any('test', [CustomerPackageController::class, 'test']);
 
 Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function () {
@@ -554,7 +555,6 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
-    Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
