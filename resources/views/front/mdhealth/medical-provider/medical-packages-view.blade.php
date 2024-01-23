@@ -578,7 +578,7 @@
         function updateCheckedValues() {
             const checkedValues = $('.form-check-input:checked').map(function() {
                 return $(this).val();
-            }).get().join(', ');
+            }).get().join(',');
             $('#checkedValues').text(checkedValues);
             $('#other_services').val(checkedValues);
         }
