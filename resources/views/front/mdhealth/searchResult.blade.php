@@ -279,7 +279,7 @@
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
 
-                                         @if($package_list['favourite_check']=='yes')     
+                                        @if($package_list['favourite_check']=='yes')
                                         <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
@@ -290,12 +290,12 @@
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
                                         @endif
-                                        
+
                                         @elseif($user == false)
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
-                                            
-                                        @if($package_list['favourite_check']=='yes')     
+
+                                        @if($package_list['favourite_check']=='yes')
                                         <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
@@ -734,24 +734,24 @@
                         );
                     },
                     success: function(response) {
-                        
+
                         $('#fav-btn' + packageId).attr('disabled', false);
                         $('#other').html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
-                            
-                            
-                            
+
+
+
                         $('#fav-btn_' + packageId).css('background-color', '');
-                        
+
                         console.log('Success:', response);
-                        
+
                         toastr.success(response.message, 'Success', {
                             positionClass: 'toast-bottom-right',
-                            backgroundcolor: '#006400', 
+                            backgroundcolor: '#006400',
                         });
-                    
+
                     },
-                    
+
                     error: function(xhr, status, error) {
                         $('#fav-btn' + packageId).attr('disabled', false);
                         $('#other').html(
