@@ -82,6 +82,7 @@ Route::get('clear', function () {
 // =================================================================================================
 // Super Admin Routes Start From Here By Mplus03
 
+
 Route::get('common-delete', [BaseController::class, 'delete']);
 
 Route::post('change-status', [BaseController::class, 'status'])->name('change-status');
@@ -170,11 +171,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
         Route::post('delete-vendor','delete_vendor')->name('delete.vendor');
 
+        Route::get('vendor-delete-logo','delete_logo');
 
-      
-
-
-
+        Route::get('vendor-delete-license', 'delete_license');
     });
 
 
@@ -201,7 +200,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE Country
 
-    Route::controller(countryController::class)->group(function () {
+    Route::controller(countryController::class)->group(function (){
         Route::get('add-country', 'index');
         Route::post('/add-country', 'store')->name('add-country');
         Route::get('/country-data-table', 'data_table');
@@ -214,7 +213,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function () {
+    Route::controller(CityController::class)->group(function (){
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table', 'data_table');
@@ -412,7 +411,9 @@ Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
 Route::post('get-product', [MdShoppingController::class, 'get_product']);
 Route::get('featured-product', [MdShoppingController::class, 'featured_product']);
 Route::get('product/{id}', [MdShoppingController::class, 'product_view']);
+
 Route::get('view-products/{id}', [MdShoppingController::class, 'view_all_products']);
+
 Route::get('cart', [MdShoppingController::class, 'cart']);
 Route::get('view-products', [MdShoppingController::class, 'catgorywisefilter']);
 
