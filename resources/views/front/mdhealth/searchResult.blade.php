@@ -47,10 +47,10 @@
     .treatmentForModal2 .form-control,
     .treatmentForModal2 .form-select {
         border: 2px solid #d6d6d6;
-    border-radius: 5px;
-    padding: 10px 16px;
-    height: 48px;
-    font-size: 16px;
+        border-radius: 5px;
+        padding: 10px 16px;
+        height: 48px;
+        font-size: 16px;
     }
 </style>
 <div class="content-wrapper bg-f6">
@@ -194,7 +194,6 @@
                             <div class="d-flex gap-2 align-items-center">
                                 <img src="{{ 'front/assets/img/Location.svg' }}" alt="">
                                 <p class="mb-0 card-p1 fst-italic">{{ $packages[$key]['city_name'] }}</p>
-
                             </div>
                             <div class="d-flex align-items-center gap-1">
                                 <img src="{{ 'front/assets/img/Diaganose.svg' }}" alt="">
@@ -245,7 +244,6 @@
 
                                 <!-- <div class="d-flex gap-1 align-items-baseline mb-1">
                                                                                                                                                                                                                                                                                                                                     <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
-                                                                                                                                                                                                                                                                                                                                    <p class="mb-0 camptonBook smallFont boldRed">Ambulance</p>
                                                                                                                                                                                                                                                                                                                                 </div> -->
                                 @endforeach
                                 @endif
@@ -281,21 +279,21 @@
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
 
-                                        @if($package_list['favourite_check']=='yes') 
-                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
-                                                <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                            </button>
+                                        @if($package_list['favourite_check']=='yes')
+                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
+                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                        </button>
                                         @endif
 
                                         @if($package_list['favourite_check'] == 'no')
-                                            <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}" style="background-color: gray;">
-                                                <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                            </button>
-                                       @endif
+                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id']}}" style="background-color: gray;">
+                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                        </button>
+                                        @endif
                                         @elseif($user == false)
                                         <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                             Package</button>
-                                        @if($package_list['favourite_check']=='yes')     
+                                        @if($package_list['favourite_check']=='yes')
                                         <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
                                             <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                         </button>
@@ -316,7 +314,7 @@
                                     <input type="hidden" name="id" value="{{ $package_list['id'] }}">
                                     <a href="javascript:void(0)" id="submit_btn_{{ $package_list['id'] }}" class="view_btn card-h1 fs-13 text-decoration-underline text-black details-abs" style="font-family: Campton !important">View All Details</a>
                                 </form>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -344,18 +342,18 @@
                         <!-- </button> -->
                         <div class="modal-content p-4">
 
-                        <div>
-                <div class="text-end">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
-                    </button>
-                </div>
+                            <div>
+                                <div class="text-end">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
+                                    </button>
+                                </div>
 
-                <div class="text-center" style="margin-top: -8px;">
-                    <h4 class="modal-title modal-h1 mb-2" id="exampleModalLabel">Change Patient Information</h4>
-                    <p class="mb-4 card-p2">Fill the patient detail.</p>
-                </div>
-            </div>
+                                <div class="text-center" style="margin-top: -8px;">
+                                    <h4 class="modal-title modal-h1 mb-2" id="exampleModalLabel">Change Patient Information</h4>
+                                    <p class="mb-4 card-p2">Fill the patient detail.</p>
+                                </div>
+                            </div>
                             <!-- <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/modalClose.png' }}" alt="">
                             <p class="modal-h1 mt-4 text-center">Change Patient Information</p>
                             <p class="card-p1 text-center">Fill the patient detail.</p> -->
@@ -383,8 +381,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="patient_contact_no" class="form-label fw-bold">*Patient
-                                            Contact
-                                            Number</label>
+                                            Contact Number</label>
                                         <input type="tel" name="patient_contact_no" class="form-control  " id="patient_contact_no" placeholder="Contact Number">
                                     </div>
 
@@ -416,7 +413,7 @@
                                         information from <span class="card-h1">panel</span> <span class="camptonBold text-green">></span> <span class="card-h1">packages</span></p>
                                     <div class="col-12 df-center">
                                         <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4 df-center">
-                                            <span class="fw-bold">Step 2: </span> <span class="camptonBook">Payment Page</span>
+                                            <span class="fw-bold">Step 2: </span> <span class="camptonBook ms-1">Payment Page</span>
                                         </a>
                                     </div>
                                 </form>
@@ -544,7 +541,7 @@
 
         </div>
         <div class="modal fade request-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" style="width:704px">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="width:704px">
                 <div class="modal-content p-3">
                     <div>
                         <div class="text-end">
