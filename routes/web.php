@@ -125,11 +125,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('customer-details', 'admin/customers/customer-details');
 
     //Admin MANAGE VENDORS
-   
-   
-  
-    
-    
+
+
+
+
+
 
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
 
@@ -347,7 +347,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     });
 
-   
+
 
 
 
@@ -590,7 +590,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
 
 
-    
+
 
 
 });
@@ -620,7 +620,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
 
 
     Route::controller(VendorSalesController::class)->group(function (){
-        
+
         Route::get('vendor-sales','index');
 
     });
@@ -701,11 +701,11 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
     });
 
-   
+
     Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
     Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
     Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
-    
+
     // Route::view('', '');
 
 

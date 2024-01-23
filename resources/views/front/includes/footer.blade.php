@@ -68,7 +68,7 @@
                      @2023. All rights reserved.
                  </div>
                  <ul class="bottom-links d-flex gap-5 mb-0">
-                     <li><a href="javascript:;">Enlignment Text</a></li>
+                     <li><a href="javascript:;">Enlightenment Text</a></li>
                      <li><a href="javascript:;">Information Society Services</a></li>
                      <li><a href="javascript:;">Privacy Policy</a></li>
                      <li><a href="javascript:;">Legal Information</a></li>

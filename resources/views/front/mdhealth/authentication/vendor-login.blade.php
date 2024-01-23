@@ -121,7 +121,7 @@
                                                 <input type="password" class="form-control w-407p5" name="password"
                                                     id="password" placeholder="Minimum 8 characters" />
                                                 <span toggle="#password"
-                                                    class="mdi mdi-eye field-icon toggle-password"></span>
+                                                    class="mdi mdi-eye-off field-icon toggle-password"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -239,7 +239,7 @@
                         </div>
                         <div id="errorMessage" class="text-danger d-none"></div>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-md btn-text w-75 my-3 text-center" type="button" onclick="verify()"
+                            <button class="btn btn-md btn-text w-75 my-3 text-center" id="verifyBtn" type="button" onclick="verify()"
                                 style="height: 47px;">Sign In</button>
                         </div>
                     </form>

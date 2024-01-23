@@ -17,7 +17,7 @@
             </div>
             <div class="w-761">
                 <div class="card mb-4">
-                    <h5 class="card-header mb-3">Your Profile</h5>
+                    <h5 class="card-header mb-2">Your Profile</h5>
                     <div class="card-body">
                         <form action="{{ url('update-customer-profile') }}" class="user-profile-form" method="post" id="updatecustpro">
                             <div class="row gx-5 gy-4">
@@ -63,8 +63,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="E-mail" class="form-label">E-mail</label>
-                                    <input type="text" class="form-control" placeholder="E-mail" name="email" value="{{ !empty($customer_list) ? ($customer_list->email ? $customer_list->email : '') : '' }}">
+                                    <label for="E-mail" class="form-label">E-Mail</label>
+                                    <input type="text" class="form-control" placeholder="E-Mail" name="email" value="{{ !empty($customer_list) ? ($customer_list->email ? $customer_list->email : '') : '' }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="Phone" class="form-label">Phone</label>
@@ -116,7 +116,7 @@
 
                                 <div class="col-md-12 mb-4">
                                     <label for="Address" class="form-label">Address</label>
-                                    <textarea name="address" id="" cols="" rows="3" class="form-control" placeholder="Address"> {{ !empty($customer_list) ? ($customer_list->address ? $customer_list->address : '') : '' }}</textarea>
+                                    <textarea name="address" id="" cols=""  class="form-control" placeholder="Address"> {{ !empty($customer_list) ? ($customer_list->address ? $customer_list->address : '') : '' }}</textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn btn-md w-100 rounded btn-text submit" type="submit" style="height: 48px;">Save Changes</button>
