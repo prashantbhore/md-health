@@ -856,10 +856,18 @@ class CustomerPackageController extends Controller {
                         foreach ( $packages_view->providerGallery as $val ) {
                             $provider_gallery[] = !empty( $val->provider_image_path ) ? url( Storage::url( $val->provider_image_path ) ) : '';
                         }
-
+                        if (!empty(Auth::guard( 'md_customer_registration' )->user()->id)) {
+                            $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
+                                ->select('package_id')
+                                ->where('package_id', $packages_view->id)
+                                ->where('customer_id', Auth::guard( 'md_customer_registration' )->user()->id)
+                                ->first();
+                        }
+            
+            
                         $packageDetails = [
-                            'id' => !empty( $packages_view->id ) ? $packages_view->id : '',
-                            'package_unique_no' => !empty( $packages_view->package_unique_no ) ? $packages_view->package_unique_no : '',
+                            "id" => !empty($packages_view->id) ? $packages_view->id : '',
+                            "favourite_check" => !empty($CustomerFavouritePackages->package_id) ? 'yes' : 'no',
                             'city_id' => !empty( $packages_view->provider->city->id ) ? $packages_view->provider->city->id : '',
                             'review_stars' => !empty( $packages_view->review->start ) ? $packages_view->review->start : '',
                             'total_reviews' => !empty( $packages_view->review_count ) ? $packages_view->review_count : '',

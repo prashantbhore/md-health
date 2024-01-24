@@ -26,7 +26,7 @@ use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\food\UpdateFoodProfileController;
 use App\Http\Controllers\api\vendor\VendorDashboardController;
 use App\Http\Controllers\api\food\FoodPackageController;
-
+use App\Http\Controllers\InvitationApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -289,7 +289,7 @@ Route::middleware('auth:sanctum')->group(function ()
     //customer-upload-documents
     Route::post('md-customer-upload-documents', [CustomerPackageController::class, 'customer_upload_documents']);
     
-    Route::get('md-customer-documents-list', [CustomerPackageController::class, 'customer_documents_list']);
+    Route::post('md-customer-documents-list', [CustomerPackageController::class, 'customer_documents_list']);
 
     //customer-remove-documents
     Route::post('md-customer-remove-documents', [CustomerPackageController::class, 'customer_remove_documents']);
@@ -453,8 +453,10 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::get('md-provider-daily-monthly-summary', [SalesController::class, 'salesSummary']);
 
 
+    //referal-link
+    Route::get('/send-invitation-link', [InvitationApiController::class, 'send_invitation_link']);
 
-   
+    Route::post('/send-invitation', [InvitationApiController::class, 'sendInvitation']);
 
    
 

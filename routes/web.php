@@ -174,6 +174,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::get('vendor-delete-logo','delete_logo');
 
         Route::get('vendor-delete-license', 'delete_license');
+
+        Route::get('vendor-delete-gallery', 'delete_gallery');
+
+        Route::post('verification-status-chnage', 'verification_status');
     });
 
 
