@@ -101,6 +101,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::view('sign-in', 'admin/authentication/sign-in');
 
+    // MEMBERSHIPS
+    Route::view('manage-memberships', 'admin/memberships/manage-memberships');
+
     //Admin DASHBOARD
     Route::view('dashboard', 'admin/dashboard/dashboard');
 
