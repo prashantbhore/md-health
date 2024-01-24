@@ -77,7 +77,7 @@
                                 <form action="{{ url('api/md-edit-transportation-details') }}" method="post"
                             enctype="multipart/form-data" id="add_acommodition">
                             @else --}}
-                            <form action="{{ url('md-add-transportation-details') }}" method="post" enctype="multipart/form-data" id="add_acommodition">
+                            <form action="{{ url('md-add-transportation-details') }}" method="post" enctype="multipart/form-data" id="add_acommodition" class="from-prevent-multiple-submits">
                                 {{-- @endif --}}
                                 @csrf
                                 <input type="hidden" name="transportation_id" value="{{ !empty($transportation_details['id']) ? $transportation_details['id'] : '' }}">
@@ -185,8 +185,8 @@
                                 </div>
 
                                 <div class="section-btns mb-4 d-flex gap-3">
-                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold">Save Vehicle</button>
-                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold">Deactive Vehicle</button>
+                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold from-prevent-multiple-submits">Save Vehicle</button>
+                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold from-prevent-multiple-submits">Deactive Vehicle</button>
                                 </div>
 
                             </form>
@@ -209,6 +209,17 @@
     $(".mpOtherServicesLi").addClass("activeClass");
     $(".mpOtherServices").addClass("md-active");
 </script>
+<script>
+    (function() {
+        $('.from-prevent-multiple-submits').on('submit', function() {
+            $('.from-prevent-multiple-submits').attr('disabled', 'true');
+            setTimeout(function() {
+                $('.from-prevent-multiple-submits').attr('disabled', false);
+            }, 3000);
+        })
+    })();
+</script>
+
 <script>
     $(document).ready(function() {
         function updateCheckedValues() {
