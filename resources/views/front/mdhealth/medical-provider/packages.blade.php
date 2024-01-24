@@ -72,7 +72,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
-                                <p class="my-0">Active Packages</p>
+                                <p class="my-0" id="packname">Active Packages</p>
                                 <h3 class="my-0" id="countsofpack">0</h3>
                             </div>
                             <a href="{{ url('medical-packages-view') }}"
@@ -80,7 +80,7 @@
                                 <p class="my-0">Add New Packages</p>
                                 <h3 class="my-0">+</h3>
                             </a>
-                            <div
+                            <div id="compaign"
                                 class="green-plate bg-green text-green d-flex align-items-center justify-content-between mb-3">
                                 <p class="my-0">Create Campaign</p>
                             </div>
@@ -224,6 +224,8 @@
                     success: function(response) {
                         if (response.status == 200) {
                             $('#countsofpack').text(response.packages_active_list.length);
+                            $('#packname').text("Active Packages");
+                            $('#compaign').removeClass("d-none");
                             // console.log('Active tab API response:', response.packages_active_list.length);
                         }
                     },
@@ -246,6 +248,8 @@
                     success: function(response) {
                         if (response.status == 200) {
                             $('#countsofpack').text(response.packages_deactive_list.length);
+                            $('#packname').text("Deactive Packages");
+                            $('#compaign').addClass("d-none");
                             // console.log('Deactive tab API response:', response.packages_deactive_list.length);
                         }
                     },
