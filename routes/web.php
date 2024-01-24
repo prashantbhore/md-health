@@ -35,6 +35,7 @@ use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\admin\review\reviewController;
 use App\Http\Controllers\admin\vendor\ManageVendorController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
+use App\Http\Controllers\Front\Customer\WalletController;
 use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
@@ -682,6 +683,17 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 
+
+    //Mplus03 Customer wallet
+    
+
+    Route::controller(WalletController::class)->group(function (){
+
+        Route::get('user-wallet','index');
+        Route::get('user-invite','user_invite');
+        Route::post('send-invitation-link','send_invitation_link')->name('send.invitation.link');
+    });
+
 });
 
 
@@ -746,8 +758,10 @@ Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 
-Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
-Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');
+
+
+
+
 Route::view('user-message', 'front/mdhealth/user-panel/user-message');
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
 Route::view('user-live-appoinment', 'front/mdhealth/user-panel/live-consultation-appoinment');
