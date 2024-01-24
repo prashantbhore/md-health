@@ -88,7 +88,6 @@
                     </div>
 
                     <!-- RECENT TRETMENTS -->
-
                     <div class="card">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                             Details
@@ -114,16 +113,16 @@
                                         <input type="text" name="searchpackage" id="searchpackage"
                                             placeholder="Search" />
                                     </div>
-                                    {{--
-                                <div class="list-div">
+                           
+                                <!-- <div class="list-div">
                                     <select name="" id="">
                                         <option value="">List for date</option>
                                         <option value="">List for Stars</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
-                                </div>
-                                --}}
+                                </div> -->
+                               
                                 </div>
 
                                 <!-- Tab panes -->
