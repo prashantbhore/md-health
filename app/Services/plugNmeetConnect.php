@@ -67,7 +67,7 @@ use Mynaparrot\Plugnmeet\Responses\IsRoomActiveResponse;
 use Mynaparrot\Plugnmeet\Responses\RecordingDownloadTokenResponse;
 use Mynaparrot\Plugnmeet\Responses\RecordingInfoResponse;
 
-require "vendor/autoload.php";
+// require "vendor/autoload.php";
 
 /**
  *
