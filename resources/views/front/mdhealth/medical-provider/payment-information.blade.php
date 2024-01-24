@@ -173,6 +173,8 @@
 
 
                             @endforeach
+                            @else
+                            @include('front.includes.no-data-found')
                             @endif
 
                         </div>
@@ -234,7 +236,6 @@
     </script>
     <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <!-- Include jQuery Validation Plugin -->
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script>
@@ -242,8 +243,9 @@
             $("#paymentinfo").validate({
                 rules: {
                     account_number: {
-                        minlength: 24,
-                        maxlength: 34,
+                        required: true,
+                        minlength: 26,
+                        // maxlength: 34,
                     },
                     bank_name: {
                         required: true,
@@ -251,8 +253,9 @@
                 },
                 messages: {
                     account_number: {
+                        required: "Please enter IBAN number",
                         minlength: "Please enter at least 24 digits",
-                        maxlength: "Please enter at most 34 digits",
+                        // maxlength: "Please enter at most 34 digits",
                     },
                     bank_name: {
                         required: "Please enter bank name",

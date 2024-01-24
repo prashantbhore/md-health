@@ -200,7 +200,7 @@
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
-                                    <div id="accommodationDiv">
+                                    <div id="accomoditionDiv">
                                         <div class="form-group d-flex flex-column mb-3 section-heading-div">
                                             <h6 class="section-heading">Accommodation Details</h6>
                                             <label class="form-label my-3">Hotel Name</label>
@@ -448,7 +448,7 @@
                                                 <input type="text" class="form-control" name="ambulance_service_price"
                                                     id="ambulance_service_price"
                                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
-                                                    value="{{ !empty($packages_active_list['ambulance_service_price']) ? $packages_active_list['ambulance_service_price'] : '' }}"
+                                                    value="{{ !empty($packages_active_list['ambulance_service_price']) ? $packages_active_list['ambulance_service_price'] : '0' }}"
                                                     placeholder="Price">
                                                 <span class="input-icon">₺</span>
                                             </div>
@@ -715,6 +715,7 @@
                     console.log(response);
                     // Clear existing options
                     $('#treatment_id').empty();
+                    $('#treatment_id').append('<option value="" >Choose Treatment</option>');
 
                     if (response.status === 200) {
                         // Add new options based on the response
