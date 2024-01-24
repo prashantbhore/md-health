@@ -8,6 +8,9 @@ use App\Services\ApiService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Crypt;
+use Auth;
+use App\Models\CustomerPurchaseDetails;
+use App\Models\MembershipSettings;
 
 
 class SalesController extends Controller
@@ -62,10 +65,40 @@ class SalesController extends Controller
         $daily_sales_amount= $responseData['daily_sales'];
         $monthly_sales_amount= $responseData['monthly_sales'];
 
+
+
+        
+        //Membership Logic starts
+        $provider_id = null;
+        
+        if (!empty(Auth::guard('md_health_medical_providers_registers')->user()->id)){
+            $provider_id = Auth::guard('md_health_medical_providers_registers')->user()->id;
+        }
+    
+        $provider_amount = 0;
+    
+        if ($provider_id != null) {
+            $provider_amount = CustomerPurchaseDetails::where('status', 'active')
+                ->where('provider_id', $provider_id)
+                ->sum('paid_amount');
+        }
+    
+            $membership = MembershipSettings::where('vendor_type', 'medical_service_provider')
+            ->where(function ($query) use ($provider_amount) {
+                $query->where('membership_type', 'silver') 
+                    ->orWhere(function ($subquery) use ($provider_amount) {
+                        $subquery->where('membership_amount', '<=', $provider_amount)
+                            ->orWhereNull('membership_amount'); 
+                    });
+            })
+            ->orderBy('membership_amount', 'desc') 
+            ->first();
+    //Membership Logic Ends 
+
        // dd($completed_sales);
 
         // dd($active_sales);
-        return view('front.mdhealth.medical-provider.sales',compact('active_sales','completed_sales','cancelled_sales','daily_sales_amount','monthly_sales_amount'));
+        return view('front.mdhealth.medical-provider.sales',compact('active_sales','completed_sales','cancelled_sales','daily_sales_amount','monthly_sales_amount','membership'));
     }
 
 
