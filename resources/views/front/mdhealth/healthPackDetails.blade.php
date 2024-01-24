@@ -57,7 +57,7 @@
     {{-- {{ dd($packageDetails) }} --}}
 
     @php
-    // dd($packageDetailsuse);
+    // dd($packageDetails);
     if (!function_exists('get_twenty_percent')) {
     function get_twenty_percent($number)
     {
@@ -162,19 +162,51 @@
                                         booking.</p>
                                 </div>
                                 <div class="d-flex gap-2 mb-2">
+
                                     @if ($isCustomer == true && $user == true)
-                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
-                                        Package</button>
-                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
-                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                    </button>
+                                        <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}"
+                                            data-bs-toggle="modal">Purchase
+                                            Package</button>
+
+                                        @if ($packageDetails['favourite_check'] == 'yes')
+                                            <button class="favouriteBtn"
+                                                id="fav-btn_{{ $packageDetails['id'] }}">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
+                                                    alt="">
+                                            </button>
+                                        @endif
+
+                                        @if ($packageDetails['favourite_check'] == 'no')
+                                            <button class="favouriteBtn"
+                                                id="fav-btn_{{ $packageDetails['id'] }}"
+                                                style="background-color: gray;">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
+                                                    alt="">
+                                            </button>
+                                        @endif
                                     @elseif($user == false)
-                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
-                                        Package</button>
-                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
-                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                    </button>
+                                        <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}"
+                                            data-bs-toggle="modal">Purchase
+                                            Package</button>
+
+                                        @if ($packageDetails['favourite_check'] == 'yes')
+                                            <button class="favouriteBtn"
+                                                id="fav-btn_{{ $packageDetails['id'] }}">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
+                                                    alt="">
+                                            </button>
+                                        @endif
+
+                                        @if ($packageDetails['favourite_check'] == 'no')
+                                            <button class="favouriteBtn"
+                                                id="fav-btn_{{ $packageDetails['id'] }}"
+                                                style="background-color: gray;">
+                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
+                                                    alt="">
+                                            </button>
+                                        @endif
                                     @endif
+
                                 </div>
                             </div>
                         </div>
@@ -566,6 +598,10 @@
                         $('#other').html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
                         console.log('Success:', response);
+                        toastr.success(response.message, 'Success', {
+                            positionClass: 'toast-bottom-right',
+                            backgroundcolor: '#006400',
+                        });
 
                     },
                     error: function(xhr, status, error) {

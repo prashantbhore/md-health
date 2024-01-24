@@ -436,7 +436,7 @@
                                                         @endif
                                                     </select>
                                                 </div>
-                                                
+
                                                 <div class="example-div">
                                                     <h6 class="card-h1 d-inline-block mb-2">Vehicle: <span class="card-h3 camptonBook">{{ !empty($patient_details['vehical']['vehicle_model_id']) ? $patient_details['vehical']['vehicle_model_id'] : '' }}</span></h6>
                                                     <div class="for-icon-text d-flex align-items-center gap-4">

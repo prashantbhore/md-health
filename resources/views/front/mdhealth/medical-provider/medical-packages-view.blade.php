@@ -34,7 +34,7 @@
         .form-select,
         .form-control {
             color: #000;
-            font-family: CamptonBook !important;
+            font-family: CamptonBook;
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
@@ -57,6 +57,19 @@
             line-height: normal;
             letter-spacing: -0.64px;
         }
+        .multiple-checks .form-check-label {
+            font-size: 18px;
+        }
+
+        select,
+        .form-control::placeholder {
+            color: #878787 !important;
+            font-family: "CamptonLight" !important;
+            font-weight: 600 !important;
+        }
+        select option { color: #000;font-family: "CamptonBook" !important;
+           }
+       
     </style>
 
     <div class="content-wrapper">
@@ -73,7 +86,7 @@
                             <a href="{{ url('medical-packages') }}"
                                 class="d-flex align-items-center gap-1 text-decoration-none text-dark">
                                 <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                                <p class="mb-0 card-h1">Back Dashboard</p>
+                                <p class="mb-0 card-h1">Back</p>
                             </a>
                         </h5>
                         <div class="card-body">
@@ -92,9 +105,9 @@
 
                                     <div class="form-group d-flex flex-column mb-4">
                                         <label class="form-label mb-3">*Treatments Category</label>
-                                        <select id="treatment_category_id" name="treatment_category_id" class="form-select"
+                                        <select id="treatment_category_id" name="treatment_category_id" class="form-select" placeholder="Treatment Category"
                                             onchange="categoryselect(this.value)">
-                                            <option value="" selected disabled>Choose</option>
+                                            <option value="" disabled selected>Treatment Category</option>
                                             @if (!empty($treatment_categories))
                                                 @foreach ($treatment_categories as $treatment_category)
                                                     @php
@@ -109,7 +122,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group d-flex flex-column mb-4">
+                                    <div class="form-group d-flex flex-column mb-5">
                                         <label class="form-label mb-3">*Treatments</label>
                                         <select id="treatment_id" class="form-select" name="treatment_id">
                                             <option value="">Treatments</option>
@@ -205,7 +218,7 @@
                                             <h6 class="section-heading">Accommodation Details</h6>
                                             <label class="form-label my-3">Hotel Name</label>
                                             <select name="hotel_id" id="hotel_id">
-                                                <option value="" selected disabled>Choose</option>
+                                                <option value="" selected disabled>Choose Hotel</option>
 
 
                                                 @if (!empty($hotel_details))
@@ -277,7 +290,7 @@
                                             <a>Total Accommodation Price
                                                 <span id="accommodation_price_span"
                                                     class="ms-2">{{ !empty($packages_active_list['hotel_acommodition_price']) ? $packages_active_list['hotel_acommodition_price'] : '0' }}
-                                                    <span class="lira">₺</span></span>
+                                                    </span> <span class="lira ms-1">₺</span>
                                             </a>
                                             <input type="hidden" name="hotel_acommodition_price"
                                                 id="hotel_acommodition_price"
@@ -330,7 +343,7 @@
                                         <div class="section-btns mb-5">
                                             <a>Total Transportation Price <span id="transportation_acommodition_span"
                                                     class="ms-2">{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '0' }}
-                                                    <span class="lira">₺</span></span></a>
+                                                    </span><span class="lira ms-1">₺</span></a>
                                             <input type="hidden" name="transportation_acommodition_price"
                                                 id="transportation_acommodition_price"
                                                 value="{{ !empty($packages_active_list['transportation_acommodition_price']) ? $packages_active_list['transportation_acommodition_price'] : '0' }}">
@@ -384,7 +397,7 @@
                                             <a>Total Tour Price
                                                 <span id="tour_price_span"
                                                     class="ms-2">{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '0' }}
-                                                    <span class="lira"><span class="lira">₺</span></span></span></a>
+                                                    </span><span class="lira ms-1">₺</span></a>
                                             <input type="hidden" name="tour_price" id="tour_price"
                                                 value="{{ !empty($packages_active_list['tour_price']) ? $packages_active_list['tour_price'] : '' }}">
                                         </div>
@@ -513,7 +526,7 @@
                                     <input type="hidden" name="platform_type" value="web">
                                     <div class="section-btns mb-3 d-flex gap-3">
                                         <button type="submit" name="button_type" value="active"
-                                            class="btn save-btn-black text-black bg-green w-50 from-prevent-multiple-submits">Save
+                                            class="btn save-btn-black text-black bg-green w-50 from-prevent-multiple-submits camptonBold">Save
                                             Changes</button>
                                         <button type="submit" name="button_type" value="inactive"
                                             class="btn save-btn-black w-50 from-prevent-multiple-submits">Deactivate
@@ -823,7 +836,7 @@
                 if (!isNaN(hotelDetailsInput) && !isNaN(hotelInTime)) {
                     var totalPrice = hotelDetailsInput * hotelInTime;
                     $('#transportation_acommodition_price').val(totalPrice.toFixed(2));
-                    $('#transportation_acommodition_span').text(totalPrice.toFixed(2) + ' ₺');
+                    $('#transportation_acommodition_span').text(totalPrice.toFixed(2));
                 }
             }
 
@@ -879,7 +892,7 @@
                 if (!isNaN(hotelDetailsInput) && !isNaN(hotelInTime)) {
                     var totalPrice = hotelDetailsInput * hotelInTime;
                     $('#hotel_acommodition_price').val(totalPrice.toFixed(2));
-                    $('#accommodation_price_span').text(totalPrice.toFixed(2) + ' ₺');
+                    $('#accommodation_price_span').text(totalPrice.toFixed(2));
                 }
             }
 
@@ -931,7 +944,7 @@
                 if (!isNaN(hotelDetailsInput) && !isNaN(hotelInTime)) {
                     var totalPrice = hotelDetailsInput * hotelInTime;
                     $('#tour_price').val(totalPrice.toFixed(2));
-                    $('#tour_price_span').text(totalPrice.toFixed(2) + ' ₺');
+                    $('#tour_price_span').text(totalPrice.toFixed(2));
                 }
             }
 
