@@ -852,10 +852,10 @@ class CustomerPackageController extends Controller {
 
                     if ( !empty( $packages_view ) ) {
 
-                        $provider_gallery = [];
-                        foreach ( $packages_view->providerGallery as $val ) {
-                            $provider_gallery[] = !empty( $val->provider_image_path ) ? url( Storage::url( $val->provider_image_path ) ) : '';
-                        }
+                            $provider_gallery = [];
+                            foreach ( $packages_view->providerGallery as $val ) {
+                                $provider_gallery[] = !empty( $val->provider_image_path ) ? url( Storage::url( $val->provider_image_path ) ) : '';
+                            }
                         if (!empty(Auth::guard( 'md_customer_registration' )->user()->id)) {
                             $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
                                 ->select('package_id')

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Mail\InvitationMail;
@@ -11,14 +12,15 @@ class InvitationApiController extends Controller
 {
     public function sendInvitation(Request $request)
     {
+
         $validatedData = $request->validate([
             'requested_email' => 'required|email',
-            'customer_email' => 'required|email',
+            // 'customer_email' => 'required|email',
             'invitation_link' => 'required|url',
         ]);
 
         $requestedEmail = $validatedData['requested_email'];
-        $customerEmail = $validatedData['customer_email'];
+        $customerEmail = 'mplussoftesting@gmail.com';
         $invitationLink = $validatedData['invitation_link'];
 
         if (Mail::to($requestedEmail)->send(new InvitationMail($invitationLink))) {
@@ -32,9 +34,9 @@ class InvitationApiController extends Controller
 
     public function send_invitation_link()
     {
-       $code=CustomerRegistration::where('status','active')
-        ->where('id',Auth::user()->id)
-        ->first();
+        $code = CustomerRegistration::where('status', 'active')
+            ->where('id', Auth::user()->id)
+            ->first();
 
         $invitationLink = 'https://projects.m-staging.in/md-health-testing/';
 
