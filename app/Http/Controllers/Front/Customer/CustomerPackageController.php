@@ -732,6 +732,7 @@ class CustomerPackageController extends Controller
             'md_tours.tour_name'
         )
             ->where('md_packages.status', 'active')
+            ->where('md_medical_provider_register.vendor_status', 'approved')
             // ->where( 'md_product_category.status', 'active' )
             // ->where( 'md_product_sub_category.status', 'active' )
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')

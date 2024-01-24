@@ -12,6 +12,9 @@ class MDCoins extends Model
     protected $fillable = [
         'customer_id',
         'coins',
+        'invitation_count',
+        'total_invitation_count',
+        'wallet_status',
         'status',
         'created_ip_address',
         'modified_ip_address',
