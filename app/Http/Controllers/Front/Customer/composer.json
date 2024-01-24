@@ -1,0 +1,5 @@
+{
+    "require": {
+        "mynaparrot/plugnmeet-sdk": "^1.4"
+    }
+}

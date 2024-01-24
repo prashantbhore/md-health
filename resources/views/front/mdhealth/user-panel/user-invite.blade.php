@@ -84,7 +84,9 @@
                         <p class="fsb-2 fst-italic text-danger fw-600 mb-5">*You can invite up to 10 friends monthly.</p>
                         
                         <h6 class="section-heading">Your Invite URL</h6>
-                        <p class="fsb-2 fst-italic fw-600 mb-5">https://mdhealt.io/invite/refferral?=MD383hd83d</p>
+                        {{-- <p class="fsb-2 fst-italic fw-600 mb-5">https://mdhealt.io/invite/refferral?=MD383hd83d</p> --}}
+
+                        <p class="fsb-2 fst-italic fw-600 mb-5">{{!empty($invitation_link)?$invitation_link:''}}</p>
 
                         <h6 class="section-heading">Share With</h6>
                         <div class="share-with-div d-flex gap-5">
@@ -112,30 +114,40 @@
 
                     <div class="card-body invite-form-div mb-4">
                         <h6 class="section-heading">Invite Friends</h6>
+                        
 
-                        <form action="">
+                        <form id="myForm" action="{{route('send.invitation.link')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="invitation_link" value="{{!empty($invitation_link)?$invitation_link:''}}">
+
 
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" placeholder="E-Mail">
+                                <input type="text" name="requested_email[]" class="form-control" placeholder="E-Mail">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" placeholder="E-Mail">
+                                <input type="text" name="requested_email[]" class="form-control" placeholder="E-Mail">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" placeholder="E-Mail">
+                                <input type="text" name="requested_email[]" class="form-control" placeholder="E-Mail">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" placeholder="E-Mail">
+                                <input type="text" name="requested_email[]" class="form-control" placeholder="E-Mail">
                             </div>
+                           
+
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" placeholder="E-Mail">
+                                <input type="text" name="requested_email[]" class="form-control" placeholder="E-Mail">
                             </div>
 
-                            <div class="section-btns ">
-                                <a href="javascript:void(0);" class="black-plate bg-black text-white fw-700 w-100">Send Invite Request</a>
+                            <div class="section-btns">
+                                <button type="submit" id="submitButton" class="black-plate bg-black text-white fw-700 w-100">Send Invite Request</button>
                             </div>
 
                         </form>
+
+                         {{-- <div class="section-btns ">
+                                <a href="javascript:void(0);" class="black-plate bg-black text-white fw-700 w-100">Send Invite Request</a>
+                            </div> --}}
 
                         
                     </div>
@@ -148,5 +160,16 @@
     <script>
         $(".upWalletLi").addClass("activeClass");
         $(".upWallet").addClass("md-active");
+    </script>
+     <script>
+        $(document).ready(function () {
+           
+            $("#myForm").submit(function () {
+               
+                $("#submitButton").prop("disabled", true);
+
+                return true;
+            });
+        });
     </script>
     @endsection

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fad7ae5743a31f9c739127ac42722cca",
+    "content-hash": "5e0fab6eb6076246f0b0a906f3d62c83",
     "packages": [
         {
             "name": "brian2694/laravel-toastr",
@@ -3440,6 +3440,54 @@
                 }
             ],
             "time": "2023-10-27T15:32:31+00:00"
+        },
+        {
+            "name": "mynaparrot/plugnmeet-sdk",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mynaparrot/plugNmeet-sdk-php.git",
+                "reference": "b6947a65e266111dfd9185360476600921c33a7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mynaparrot/plugNmeet-sdk-php/zipball/b6947a65e266111dfd9185360476600921c33a7f",
+                "reference": "b6947a65e266111dfd9185360476600921c33a7f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "firebase/php-jwt": "^6.0",
+                "php": "^7.4|^8.0",
+                "ramsey/uuid": "^4.2"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^3.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mynaparrot\\Plugnmeet\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jibon Costa",
+                    "email": "jibon@mynaparrot.com"
+                }
+            ],
+            "description": "plugNmeet PHP SDK",
+            "support": {
+                "issues": "https://github.com/mynaparrot/plugNmeet-sdk-php/issues",
+                "source": "https://github.com/mynaparrot/plugNmeet-sdk-php/tree/v1.0.6"
+            },
+            "time": "2022-09-17T08:49:08+00:00"
         },
         {
             "name": "nesbot/carbon",
