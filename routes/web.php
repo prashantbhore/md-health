@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ads_and_promo\AdsPromoController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
 use App\Http\Controllers\Front\Customer\CustomerPackageController;
+use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
 use App\Http\Controllers\Front\MedicalProvider\PackageController;
@@ -682,7 +683,19 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 
+    
 });
+
+Route::group(['middleware' => 'prevent-back-history'], function () {
+   
+    Route::middleware(['IsCustomer', 'IsMedicalProvider'])->group(function () {
+        Route::controller(CustomerInteractionController::class, function () {
+        });
+        // Route::get('live-cam', 'live_cam');
+    });
+});
+
+Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
 
 
 
@@ -787,7 +800,7 @@ Route::view('md-food-purchase-details', 'front/mdhealth/md-food/md-food-purchase
 // Medical Provider Panel
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 
-Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');
+// Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');
 
 // USER PANEL
 #Orders
