@@ -222,7 +222,8 @@
                                             <input type="file" id="provider_image_path" class="form-control"
                                                 name="provider_image_path[]" multiple="">
                                         </div>
-                                        <div class="preview-img gallery">
+                                        <div class="preview-img gallery d-flex flex-column">
+                                           
 
                                             @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
                                                 @php
@@ -230,17 +231,19 @@
                                                 @endphp
 
                                                 @if ($fileExtension === 'mp4')
+                                                <a href="{{URL::asset('admin/assets/img/servicesGallery/512/1.mp4')}}" class="glightbox">
                                                     <div class="prev-img-div video-card"
                                                         id="img_div_{{ $ProviderImagesVideo->id }}">
-                                                        <video class="video-div" controls>
+                                                        <video class="video-div " controls>
                                                             <source
                                                                 src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                 Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                     ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                     : '' }}"
-                                                                type="video/mp4">
+                                                                type="video/mp4" >
                                                             Your browser does not support the video tag.
                                                         </video>
+                                                    </a>
                                                         <a href="javascript:void(0);"
                                                             onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})"
                                                             class="clear-btn">
@@ -275,7 +278,8 @@
 
                                     <div class="section-btns mb-4">
                                         <button type="submit" id="medproacc"
-                                            class="btn save-btn-black from-prevent-multiple-submits">Save
+                                            class="btn save-btn-black from-prevent-multiple-submits"
+                                            onclick="disableButtonAndCallback()">Save
                                             Changes</button>
                                     </div>
 
@@ -347,6 +351,9 @@
         (function() {
             $('.from-prevent-multiple-submits').on('submit', function() {
                 $('.from-prevent-multiple-submits').attr('disabled', 'true');
+                setTimeout(function() {
+                    $('.from-prevent-multiple-submits').attr('disabled', false);
+                }, 3000);
             })
         })();
     </script>
