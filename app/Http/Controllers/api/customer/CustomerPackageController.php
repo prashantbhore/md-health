@@ -143,6 +143,7 @@ class CustomerPackageController extends BaseController
                 'md_master_cities.city_name'
             )
                 ->where('md_packages.status', 'active')
+                ->where('md_medical_provider_register.vendor_status', 'approved')
                 // ->where('md_product_category.status', 'active')
                 // ->where('md_product_sub_category.status', 'active')
                 // ->where('md_packages.purchase_status', 'not_purchased')
@@ -224,6 +225,7 @@ class CustomerPackageController extends BaseController
                 'md_tours.tour_name'
             )
                 ->where('md_packages.status', 'active')
+                ->where('md_medical_provider_register.vendor_status', 'approved')
                 // ->where('md_product_category.status', 'active')
                 // ->where('md_product_sub_category.status', 'active')
                 ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
@@ -1641,6 +1643,8 @@ class CustomerPackageController extends BaseController
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
                 $purchase_details['package_total_price'] = $request->sale_price;
+                $purchase_details['other_services'] = !empty($request->other_services) ? implode(',',$request->other_services) : '';
+                $purchase_details['type'] = !empty($request->type) ? $request->type : '';
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
                 $pending_amount = $request->sale_price - $request->paid_amount;
@@ -1859,6 +1863,8 @@ class CustomerPackageController extends BaseController
                 $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
                 $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
+                $purchase_details['other_services'] = !empty($request->other_services) ? implode(',', $request->other_services) : '';
+                $purchase_details['type'] = !empty($request->type) ? $request->type : '';
                 // $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
                 // $purchase_details['package_total_price'] = $request->sale_price;
                 // // $purchase_details['payment_percentage'] = $request->package_percentage_price;
@@ -2694,7 +2700,7 @@ class CustomerPackageController extends BaseController
                 // 'md_packages.package_unique_no',
                 'md_packages.package_name',
                 'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
+                'md_customer_purchase_details.other_services',
                 'md_customer_purchase_details.paid_amount',
                 'md_customer_purchase_details.pending_payment',
                 'md_packages.hotel_id',
@@ -3457,10 +3463,11 @@ class CustomerPackageController extends BaseController
             ->select(
                 'md_customer_favourite_packages.id',
                 'md_packages.treatment_period_in_days',
-                'md_product_category.product_category_name',
+                'md_product_category.product_category_name as treatment_name',
                 'md_master_cities.city_name',
                 'md_packages.package_name',
-                'md_packages.sale_price'
+                'md_packages.sale_price',
+                'md_packages.id as package_id',
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')

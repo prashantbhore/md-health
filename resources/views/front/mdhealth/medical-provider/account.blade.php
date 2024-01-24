@@ -184,12 +184,90 @@
                                 <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
                                             Storage::exists($MedicalProviderLicense['company_licence_image_path'])
                                                 ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
-                                                : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
-                                <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
+                                                : URL::asset('front/assets/img/default-img.png') }}"
+                                                {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
+                                            <input type="hidden" name="old_image" id="old_image"
+                                                value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="multiple-upload-images">
+                                        <h6 class="section-heading">Product Pictures</h6>
+                                        <div class="form-group">
+                                            <input type="file" id="provider_image_path" class="form-control"
+                                                name="provider_image_path[]" multiple="">
+                                        </div>
+                                        <div class="preview-img gallery d-flex flex-column">
+                                           
+
+                                            @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
+                                                @php
+                                                    $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
+                                                @endphp
+
+                                                @if ($fileExtension === 'mp4')
+                                                <a href="{{URL::asset('admin/assets/img/servicesGallery/512/1.mp4')}}" class="glightbox">
+                                                    <div class="prev-img-div video-card"
+                                                        id="img_div_{{ $ProviderImagesVideo->id }}">
+                                                        <video class="video-div " controls>
+                                                            <source
+                                                                src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                                Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                                    ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                                    : '' }}"
+                                                                type="video/mp4" >
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                    </a>
+                                                        <a href="javascript:void(0);"
+                                                            onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})"
+                                                            class="clear-btn">
+                                                            <div>X</div>
+                                                        </a>
+                                                    </div>
+                                                @else
+                                                    <div class="prev-img-div"
+                                                        id="img_div_{{ $ProviderImagesVideo->id }}">
+                                                        <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                        Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                            ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                            : '' }}"
+                                                            class="glightbox">
+                                                            <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                            Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                                ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                                : '' }}"
+                                                                alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="clear-btn"
+                                                            onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
+                                                            <div>X</div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="section-btns mb-4">
+                                        <button type="submit" id="medproacc"
+                                            class="btn save-btn-black from-prevent-multiple-submits"
+                                            onclick="disableButtonAndCallback()">Save
+                                            Changes</button>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="form-label fst-italic fsb-2">*Please make sure the photo/video meets
+                                            the MDhealth policy.</label>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
 
-                        <div class="multiple-upload-images">
+                        {{-- <div class="multiple-upload-images">
                             <h6 class="section-heading">Product Pictures</h6>
                             <div class="form-group">
                                 <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
@@ -234,9 +312,9 @@
 
                             </div>
 
-                        </div>
+                        </div> --}}
 
-                        <div class="section-btns mb-4">
+                        {{-- <div class="section-btns mb-4">
                             <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits">Save
                                 Changes</button>
                         </div>
@@ -248,7 +326,7 @@
 
                         </form>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -303,15 +381,18 @@
 <!-- CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-<!-- JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script>
-    (function() {
-        $('.from-prevent-multiple-submits').on('submit', function() {
-            $('.from-prevent-multiple-submits').attr('disabled', 'true');
-        })
-    })();
-</script>
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        (function() {
+            $('.from-prevent-multiple-submits').on('submit', function() {
+                $('.from-prevent-multiple-submits').attr('disabled', 'true');
+                setTimeout(function() {
+                    $('.from-prevent-multiple-submits').attr('disabled', false);
+                }, 3000);
+            })
+        })();
+    </script>
 
 <script>
     function deleteClientLogo(client_logo_id) {

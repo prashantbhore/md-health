@@ -61,14 +61,14 @@
 
                         {{-- {{dd($medical_provider_bank_details)}} --}}
 
-                        <form method="POST" action="{{ route('store.vendor.bank.details') }}">
+                        <form method="POST" action="{{ route('store.vendor.bank.details') }}" id="paymentinfo">
                             @csrf
                             <input type="hidden" name="id" value="{{!empty($medical_provider_bank_details['id'])?$medical_provider_bank_details['id']:''}}">
                             <div class="card-body">
                                 <div class="form-group mb-4">
                                     <label class="form-label mb-3">Your Company IBAN</label>
                                     <div class="input-icon-div">
-                                        <input type="text" name="account_number" class="form-control" value="{{!empty($medical_provider_bank_details['account_number'])?$medical_provider_bank_details['account_number']:''}}">
+                                        <input type="text" name="account_number" class="form-control tr-prefix-input" value="{{!empty($medical_provider_bank_details['account_number'])?$medical_provider_bank_details['account_number']:''}}">
                                     </div>
                                 </div>
 
@@ -187,6 +187,7 @@
         $(".mpPaymentLi").addClass("activeClass");
         $(".mpPayment").addClass("md-active");
     </script>
+
     <script>
         $(document).ready(function() {
             $('#liveSearchInput').on('input', function() {
@@ -217,6 +218,46 @@
                         console.log(error);
                     }
                 });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var trPrefixInput = document.querySelector('.tr-prefix-input');
+    
+            trPrefixInput.addEventListener('input', function() {
+                if (!trPrefixInput.value.startsWith('TR')) {
+                    trPrefixInput.value = 'TR' + trPrefixInput.value;
+                }
+            });
+        });
+    </script>
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include jQuery Validation Plugin -->
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#paymentinfo").validate({
+                rules: {
+                    account_number: {
+                        minlength: 24,
+                        maxlength: 34,
+                    },
+                    bank_name: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    account_number: {
+                        minlength: "Please enter at least 24 digits",
+                        maxlength: "Please enter at most 34 digits",
+                    },
+                    bank_name: {
+                        required: "Please enter bank name",
+                    }
+                }
             });
         });
     </script>

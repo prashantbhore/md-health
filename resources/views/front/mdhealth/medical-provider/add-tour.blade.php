@@ -90,7 +90,7 @@
                     <div class="card-body">
                         <div class="form-div">
 
-                            <form action="{{ url('md-add-tour') }}" method="post" enctype="multipart/form-data" id="add_acommodition">
+                            <form action="{{ url('md-add-tour') }}" method="post" enctype="multipart/form-data" id="add_acommodition" class="from-prevent-multiple-submits">
 
                                 @csrf
                                 <input type="hidden" name="tour_id" value="{{ !empty($tour_details['id']) ? $tour_details['id'] : '' }}">
@@ -191,8 +191,8 @@
                                 </div>
 
                                 <div class="section-btns mb-4 d-flex gap-3">
-                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold">Save Tour</button>
-                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold">Deactive Tour</button>
+                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold from-prevent-multiple-submits">Save Tour</button>
+                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold from-prevent-multiple-submits">Deactive Tour</button>
                                 </div>
 
                             </form>
@@ -233,6 +233,17 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+<script>
+    (function() {
+        $('.from-prevent-multiple-submits').on('submit', function() {
+            $('.from-prevent-multiple-submits').attr('disabled', 'true');
+            setTimeout(function() {
+                $('.from-prevent-multiple-submits').attr('disabled', false);
+            }, 3000);
+        })
+    })();
+</script>
+
 <script>
     $(document).ready(function() {
         $('#add_acommodition').validate({

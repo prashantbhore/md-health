@@ -21,7 +21,7 @@ class PaymentController extends BaseController{
     public function add_provider_account(Request $request){
        
         $validator = Validator::make($request->all(), [
-            'account_number' => 'required|string|min:10|max:34',
+            'account_number' => 'required|string|min:24|max:34',
             'bank_name' => 'required|string|min:2|max:50',
         ], [
             'account_number.required' => 'The account number is required.',

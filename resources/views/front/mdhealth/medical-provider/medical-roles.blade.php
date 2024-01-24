@@ -121,7 +121,7 @@
                                 <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
                             </h5>
                             <div class="card-body">
-                                <form action="{{ url('roles-add') }}" method="post" id="rolesprivilages">
+                                <form action="{{ url('roles-add') }}" method="post" id="rolesprivilages" class="from-prevent-multiple-submits">
                                     @csrf
                                     <input type="hidden" name="id"
                                         value="{{ !empty($system_users['id']) ? $system_users['id'] : '' }}">
@@ -260,7 +260,7 @@
                                         value="{{ !empty($system_users['previlages']) ? $system_users['previlages'] : '' }}">
 
                                     <div class="section-btns mb-5">
-                                        <button class="btn save-btn-black" onclick="return confirmSubmit();">Save
+                                        <button class="btn save-btn-black from-prevent-multiple-submits" onclick="return confirmSubmit();">Save
                                             Personnel</button>
                                     </div>
                                 </form>
@@ -314,6 +314,17 @@
         $(".mpRolesLi").addClass("activeClass");
         $(".mpRoles").addClass("md-active");
     </script>
+    <script>
+        (function() {
+            $('.from-prevent-multiple-submits').on('submit', function() {
+                $('.from-prevent-multiple-submits').attr('disabled', 'true');
+                setTimeout(function() {
+                    $('.from-prevent-multiple-submits').attr('disabled', false);
+                }, 3000);
+            })
+        })();
+    </script>
+
 
     <script>
         $(document).ready(function() {
