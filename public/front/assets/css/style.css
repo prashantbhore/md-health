@@ -458,6 +458,7 @@
 }
 
 .search-bar .form-select,
+#patient-package-details .form-select,
 #UserCancellationReq .form-select,
 #UserChangeInformationModel .form-select {
     background-image: url("../img/SelectArrowDown.png");
@@ -1440,6 +1441,7 @@ select {
 }
 
 .form-control::placeholder,
+#patient-package-details .form-select,
 .request-modal .form-check-label,
 .epic-span {
     color: #979797;
@@ -2046,6 +2048,7 @@ select option {
 }
 
 #UserCancellationReq .form-select,
+#patient-package-details .form-select,
 #UserChangeInformationModel .form-select,
 #UserChangeInformationModel .form-control,
 .request-modal .form-control,
