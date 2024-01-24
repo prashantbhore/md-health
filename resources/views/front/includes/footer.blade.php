@@ -34,7 +34,7 @@
                          </li>
                          <li><a href="javascript:;"><img src="{{ 'front/assets/img/twitter.png' }}" alt=""></a>
                          </li>
-                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/instagram.png' }}" alt=""></a></li>
+                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/Instagram.png' }}" alt=""></a></li>
                          <li><a href="javascript:;"><img src="{{ 'front/assets/img/linkedin.png' }}" alt=""></a>
                          </li>
                      </ul>

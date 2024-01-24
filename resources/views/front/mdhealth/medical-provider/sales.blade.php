@@ -25,7 +25,7 @@
                 <div class="card mb-4" style="min-height: 245px;">
 
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
-                        <span>Sale</span>
+                        <span>Sales</span>
                         @if(!empty($membership))
                             @if($membership->membership_type == 'silver')
                                 <img src="{{ asset('front/assets/img/silver-md.png') }}" alt="">

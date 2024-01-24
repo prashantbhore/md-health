@@ -44,6 +44,12 @@
         flex-shrink: 0;
 
     }
+
+    .form-control::placeholder {
+            color: #878787 !important;
+            font-family: "CamptonLight" !important;
+            font-weight: 600 !important;
+        }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
