@@ -798,6 +798,7 @@ class CustomerPackageController extends Controller {
                         ->select( 'md_master_cities.*' )
                         ->distinct()
                         ->get();
+                        $cities_for_other = Cities::where( 'status', 'active' )->where( 'country_id', 1 )->get();
 
                         $treatment_name = $request->treatment_name ?? 'Select Treatment';
                         // $city_name = $packages[ 0 ][ 'city_name' ] ?? 'Select City' ?? $request->city_name;
@@ -806,12 +807,13 @@ class CustomerPackageController extends Controller {
 
                         $counties = Country::where( 'status', 'active' )->get();
 
-                        return view( 'front.mdhealth.searchResult', compact( 'packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date' ) );
+                        return view( 'front.mdhealth.searchResult', compact( 'packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date' ,'cities_for_other') );
 
                     } else {
                         $counties = Country::all();
                         $city_name = !empty( $request->city_name ) ? $request->city_name : 'Select City';
                         $treatment_name = !empty( $request->treatment_name ) ? $request->treatment_name : 'Select Treatment';
+                        $cities_for_other = Cities::where( 'status', 'active' )->where( 'country_id', 1 )->get();
                         // dd( $request->treatment_name );
                         $date = $request->daterange ?? '';
                         $treatment_plans = ProductCategory::where( 'md_packages.status', 'active' )
@@ -828,7 +830,7 @@ class CustomerPackageController extends Controller {
                         ->distinct()
                         ->get();
                         // dd( $treatment_name, $city_name );
-                        return view( 'front.mdhealth.searchResult', compact( 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date' ) );
+                        return view( 'front.mdhealth.searchResult', compact( 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date' ,'cities_for_other') );
 
                     }
 
