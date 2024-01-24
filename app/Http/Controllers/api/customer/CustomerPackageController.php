@@ -143,7 +143,7 @@ class CustomerPackageController extends BaseController
                 'md_master_cities.city_name'
             )
                 ->where('md_packages.status', 'active')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
+                // ->where('md_medical_provider_register.vendor_status', 'approved')
                 // ->where('md_product_category.status', 'active')
                 // ->where('md_product_sub_category.status', 'active')
                 // ->where('md_packages.purchase_status', 'not_purchased')
@@ -1643,8 +1643,8 @@ class CustomerPackageController extends BaseController
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
                 $purchase_details['package_total_price'] = $request->sale_price;
-                $purchase_details['other_services'] = !empty($request->other_services) ? implode(',',$request->other_services) : '';
-                $purchase_details['type'] = !empty($request->type) ? $request->type : '';
+                $purchase_details['other_services'] = !empty($request->other_services) ? implode(',', $request->other_services) : '';
+                // $purchase_details['type'] = !empty($request->type) ? $request->type : '';
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
                 $pending_amount = $request->sale_price - $request->paid_amount;
@@ -1863,7 +1863,15 @@ class CustomerPackageController extends BaseController
                 $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
                 $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
-                $purchase_details['other_services'] = !empty($request->other_services) ? implode(',', $request->other_services) : '';
+                //   if (!empty($request->other_services) && is_array($request->other_services)) 
+                //   {
+                //       return $request->other_services;
+                //         $purchase_details['other_services'] = implode(',', $request->other_services);
+                //     } else {
+                //     // Handle the case where $request->other_services is not an array
+                //         $purchase_details['other_services'] = 'not_working';
+                //     }
+                $purchase_details['other_services'] = !empty($request->other_services) ? str_replace('[', '', str_replace(']', '', str_replace('"', '', $request->other_services))) : '';
                 $purchase_details['type'] = !empty($request->type) ? $request->type : '';
                 // $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
                 // $purchase_details['package_total_price'] = $request->sale_price;
@@ -2004,7 +2012,7 @@ class CustomerPackageController extends BaseController
                 'md_packages.package_name',
                 'md_packages.treatment_period_in_days',
                 'md_customer_purchase_details.treatment_start_date',
-
+                'md_customer_purchase_details.type',
                 // 'md_packages.other_services',
                 // 'md_packages.package_price',
                 // 'md_packages.sale_price',
@@ -2033,6 +2041,7 @@ class CustomerPackageController extends BaseController
             $customer_purchase_package_active_list[$key]['city_name'] = !empty($val->city_name) ? $val->city_name : '';
             $customer_purchase_package_active_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
             $customer_purchase_package_active_list[$key]['treatment_name'] = !empty($val->product_category_name) ? $val->product_category_name : '';
+            $customer_purchase_package_active_list[$key]['type'] = !empty($val->type) ? $val->type : '';
             $treatment_start_date = !empty($val->treatment_start_date) ? (string)$val->treatment_start_date : '';
             if (!empty($treatment_start_date)) {
                 $treatmentStartTimestamp = strtotime($treatment_start_date);
@@ -2447,57 +2456,109 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $PatientInformation = PatientInformation::where('md_other_patient_information.status', 'active')
-            ->select(
-                'md_other_patient_information.id as patient_id',
-                'md_other_patient_information.patient_unique_id',
-                'md_other_patient_information.customer_id',
-                'md_other_patient_information.package_id',
-                'md_other_patient_information.patient_first_name',
-                'md_other_patient_information.patient_last_name',
-                'md_other_patient_information.patient_full_name',
-                'md_other_patient_information.patient_relation',
-                'md_other_patient_information.birth_date',
-                'md_other_patient_information.patient_email',
-                'md_other_patient_information.patient_contact_no',
-                'md_other_patient_information.patient_city_id',
-                'md_master_country.country_name',
-                'md_master_cities.city_name'
-            )
-            ->where('md_other_patient_information.package_id', $request->id)
-            ->where('md_other_patient_information.purchase_id', $request->purchase_id)
-            ->leftjoin('md_master_cities', 'md_other_patient_information.patient_city_id', '=', 'md_master_cities.id')
-            ->leftjoin('md_master_country', 'md_other_patient_information.patient_country_id', '=', 'md_master_country.id')
-            // ->where('customer_id', Auth::user()->id)
-            ->first();
+        if ($request->type == 'myself') {
+            $PatientInformation = CustomerPurchaseDetails::where('md_customer_purchase_details.status', 'active')
+                ->select(
+                    'md_customer_registration.id as patient_id',
+                    'md_customer_registration.first_name as patient_first_name',
+                    'md_customer_registration.last_name as patient_last_name',
+                    'md_customer_registration.email as patient_email',
+                    'md_customer_registration.phone as patient_contact_no',
+                    // 'md_customer_registration.date_of_birth as birth_date',
+                    // 'md_customer_registration.address',
+                    'md_master_country.country_name',
+                    'md_master_cities.city_name',
+                    'md_customer_purchase_details.package_id',
+                    // 'md_customer_registration.city_id',
+                )
+                ->where('md_customer_purchase_details.customer_id', auth::user()->id)
+                ->where('md_customer_purchase_details.type', 'myself')
+                ->leftjoin('md_customer_registration', 'md_customer_registration.id', 'md_customer_purchase_details.customer_id')
+                ->leftjoin('md_master_cities', 'md_customer_registration.city_id', '=', 'md_master_cities.id')
+                ->leftjoin('md_master_country', 'md_customer_registration.country_id', '=', 'md_master_country.id')
+                ->first();
 
-        if (!empty($PatientInformation)) {
-            $PatientInformationList = [];
-            $PatientInformationList['patient_id'] = !empty($PatientInformation->id) ? $PatientInformation->id : 0;
-            $PatientInformationList['patient_unique_id'] = !empty($PatientInformation->patient_unique_id) ? $PatientInformation->patient_unique_id : '';
-            $PatientInformationList['package_id'] = !empty($PatientInformation->package_id) ? $PatientInformation->package_id : 0;
-            $PatientInformationList['patient_first_name'] = !empty($PatientInformation->patient_first_name) ? $PatientInformation->patient_first_name : '';
-            $PatientInformationList['patient_last_name'] = !empty($PatientInformation->patient_last_name) ? $PatientInformation->patient_last_name : '';
-            $PatientInformationList['birth_date'] = !empty($PatientInformation->birth_date) ? $PatientInformation->birth_date : '';
-            $PatientInformationList['patient_full_name'] = !empty($PatientInformation->patient_full_name) ? $PatientInformation->patient_full_name : '';
-            $PatientInformationList['patient_relation'] = !empty($PatientInformation->patient_relation) ? $PatientInformation->patient_relation : '';
-            $PatientInformationList['patient_email'] = !empty($PatientInformation->patient_email) ? $PatientInformation->patient_email : '';
-            $PatientInformationList['patient_contact_no'] = !empty($PatientInformation->patient_contact_no) ? $PatientInformation->patient_contact_no : '';
-            $PatientInformationList['country_name'] = !empty($PatientInformation->country_name) ? $PatientInformation->country_name : '';
-            $PatientInformationList['city_name'] = !empty($PatientInformation->city_name) ? $PatientInformation->city_name : '';
-        }
+            if (!empty($PatientInformation)) {
+                $PatientInformationList = [];
+                $PatientInformationList['patient_id'] = !empty($PatientInformation->id) ? $PatientInformation->id : 0;
+                $PatientInformationList['patient_unique_id'] = !empty($PatientInformation->patient_unique_id) ? $PatientInformation->patient_unique_id : '';
+                $PatientInformationList['package_id'] = !empty($PatientInformation->package_id) ? $PatientInformation->package_id : 0;
+                $PatientInformationList['patient_first_name'] = !empty($PatientInformation->first_name) ? $PatientInformation->first_name : '';
+                $PatientInformationList['patient_last_name'] = !empty($PatientInformation->last_name) ? $PatientInformation->last_name : '';
+                // $PatientInformationList['birth_date'] = !empty($PatientInformation->date_of_birth) ? (string)$PatientInformation->date_of_birth : '1990-01-01';
+                $PatientInformationList['birth_date'] = '1990-01-01';
+                $PatientInformationList['patient_full_name'] = !empty($PatientInformation->patient_full_name) ? $PatientInformation->patient_full_name : '';
+                $PatientInformationList['patient_relation'] = !empty($PatientInformation->patient_relation) ? $PatientInformation->patient_relation : '';
+                $PatientInformationList['patient_email'] = !empty($PatientInformation->email) ? $PatientInformation->email : '';
+                $PatientInformationList['patient_contact_no'] = !empty($PatientInformation->phone) ? $PatientInformation->phone : '';
+                $PatientInformationList['country_name'] = !empty($PatientInformation->country_name) ? $PatientInformation->country_name : '';
+                $PatientInformationList['city_name'] = !empty($PatientInformation->city_name) ? $PatientInformation->city_name : '';
+            }
 
-        if (!empty($PatientInformation)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Here is your Patient Information list.',
-                'PatientInformation' => $PatientInformation,
-            ]);
+            if (!empty($PatientInformation)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Here is your Patient Information list.',
+                    'PatientInformation' => $PatientInformation,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong. Patient Information list .',
+                ]);
+            }
         } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong. Patient Information list .',
-            ]);
+            $PatientInformation = PatientInformation::where('md_other_patient_information.status', 'active')
+                ->select(
+                    'md_other_patient_information.id as patient_id',
+                    'md_other_patient_information.patient_unique_id',
+                    'md_other_patient_information.customer_id',
+                    'md_other_patient_information.package_id',
+                    'md_other_patient_information.patient_first_name',
+                    'md_other_patient_information.patient_last_name',
+                    'md_other_patient_information.patient_full_name',
+                    'md_other_patient_information.patient_relation',
+                    'md_other_patient_information.birth_date',
+                    'md_other_patient_information.patient_email',
+                    'md_other_patient_information.patient_contact_no',
+                    'md_other_patient_information.patient_city_id',
+                    'md_master_country.country_name',
+                    'md_master_cities.city_name'
+                )
+                ->where('md_other_patient_information.package_id', $request->id)
+                ->where('md_other_patient_information.purchase_id', $request->purchase_id)
+                ->leftjoin('md_master_cities', 'md_other_patient_information.patient_city_id', '=', 'md_master_cities.id')
+                ->leftjoin('md_master_country', 'md_other_patient_information.patient_country_id', '=', 'md_master_country.id')
+                ->first();
+
+            if (!empty($PatientInformation)) {
+                $PatientInformationList = [];
+                $PatientInformationList['patient_id'] = !empty($PatientInformation->id) ? $PatientInformation->id : 0;
+                $PatientInformationList['patient_unique_id'] = !empty($PatientInformation->patient_unique_id) ? $PatientInformation->patient_unique_id : '';
+                $PatientInformationList['package_id'] = !empty($PatientInformation->package_id) ? $PatientInformation->package_id : 0;
+                $PatientInformationList['patient_first_name'] = !empty($PatientInformation->patient_first_name) ? $PatientInformation->patient_first_name : '';
+                $PatientInformationList['patient_last_name'] = !empty($PatientInformation->patient_last_name) ? $PatientInformation->patient_last_name : '';
+                $PatientInformationList['birth_date'] = !empty($PatientInformation->birth_date) ? $PatientInformation->birth_date : '';
+                $PatientInformationList['patient_full_name'] = !empty($PatientInformation->patient_full_name) ? $PatientInformation->patient_full_name : '';
+                $PatientInformationList['patient_relation'] = !empty($PatientInformation->patient_relation) ? $PatientInformation->patient_relation : '';
+                $PatientInformationList['patient_email'] = !empty($PatientInformation->patient_email) ? $PatientInformation->patient_email : '';
+                $PatientInformationList['patient_contact_no'] = !empty($PatientInformation->patient_contact_no) ? $PatientInformation->patient_contact_no : '';
+                $PatientInformationList['country_name'] = !empty($PatientInformation->country_name) ? $PatientInformation->country_name : '';
+                $PatientInformationList['city_name'] = !empty($PatientInformation->city_name) ? $PatientInformation->city_name : '';
+            }
+
+            if (!empty($PatientInformation)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Here is your Patient Information list.',
+                    'PatientInformation' => $PatientInformation,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong. Patient Information list .',
+                ]);
+            }
         }
     }
 
@@ -2703,8 +2764,8 @@ class CustomerPackageController extends BaseController
                 'md_customer_purchase_details.other_services',
                 'md_customer_purchase_details.paid_amount',
                 'md_customer_purchase_details.pending_payment',
-                'md_packages.hotel_id',
-                'md_packages.vehicle_id',
+                // 'md_packages.hotel_id',
+                // 'md_packages.vehicle_id',
                 'md_product_category.product_category_name as treatment_name',
                 // 'md_product_sub_category.product_sub_category_name',
                 'md_master_cities.city_name',
@@ -2772,7 +2833,7 @@ class CustomerPackageController extends BaseController
         $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
         $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
-        $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
+        // $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
         $customer_purchase_package_active_list['case_no'] = !empty($customer_purchase_package_active_list->case_no) ? $customer_purchase_package_active_list->case_no : 0;
         $customer_purchase_package_active_list['case_manager'] = !empty($customer_purchase_package_active_list->case_manager) ? $customer_purchase_package_active_list->case_manager : '';
         $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? $customer_purchase_package_active_list->other_services : '';
@@ -2786,14 +2847,15 @@ class CustomerPackageController extends BaseController
 
         $customer_purchase_package_active_list['patient_id'] = !empty($PatientInformation->patient_id) ? $PatientInformation->patient_id : 0;
 
-        $otherServicesArray = explode(', ', $customer_purchase_package_active_list['other_services']);
+        $otherServicesArray = explode(',', $customer_purchase_package_active_list['other_services']);
+        // return $otherServicesArray;
         // Check if "Accomodition" exists in the array
-        $accommodationExists = in_array('Accomodition', $otherServicesArray);
+        $accommodationExists = in_array('Accommodation', $otherServicesArray);
         // return $accommodationExists;
         // Check if "Transportation" exists in the array
         $transportationExists = in_array('Transportation', $otherServicesArray);
 
-        $tourExists = in_array('Tour', $otherServicesArray);
+        $tourExists = in_array('Tour Details', $otherServicesArray);
 
         $TranslationExists = in_array('Translation', $otherServicesArray);
 
@@ -2801,7 +2863,7 @@ class CustomerPackageController extends BaseController
 
         $TicketServicesExists = in_array('Ticket Services', $otherServicesArray);
 
-        $AmbulanceServicesExists = in_array('Ambulance Services', $otherServicesArray);
+        $AmbulanceServicesExists = in_array('Ambulance Service', $otherServicesArray);
 
         $services = [];
         if (!empty($accommodationExists)) {
@@ -2809,6 +2871,14 @@ class CustomerPackageController extends BaseController
                 'id' => 1,
                 'title' => 'Acommodition',
                 'status' => 'active', // Replace with actual price format
+                'view_status' => 'yes',
+            ];
+        } else {
+            $accommodation = [
+                'id' => 1,
+                'title' => 'Acommodition',
+                'status' => 'inactive', // Replace with actual price format
+                'view_status' => 'yes',
             ];
         }
 
@@ -2817,7 +2887,14 @@ class CustomerPackageController extends BaseController
                 'id' => 2,
                 'title' => 'Transportation',
                 'status' => 'active', // Replace with actual price format
-
+                'view_status' => 'yes',
+            ];
+        } else {
+            $transportation = [
+                'id' => 2,
+                'title' => 'Transportation',
+                'status' => 'inactive', // Replace with actual price format
+                'view_status' => 'yes',
             ];
         }
 
@@ -2826,7 +2903,14 @@ class CustomerPackageController extends BaseController
                 'id' => 3,
                 'title' => 'Translation',
                 'status' => 'active', // Replace with actual price format
-
+                'view_status' => 'no',
+            ];
+        } else {
+            $Translation = [
+                'id' => 3,
+                'title' => 'Translation',
+                'status' => 'inactive', // Replace with actual price format
+                'view_status' => 'no',
             ];
         }
 
@@ -2835,7 +2919,14 @@ class CustomerPackageController extends BaseController
                 'id' => 4,
                 'title' => 'Tour',
                 'status' => 'active', // Replace with actual price format
-
+                'view_status' => 'yes',
+            ];
+        } else {
+            $tour = [
+                'id' => 4,
+                'title' => 'Tour',
+                'status' => 'active', // Replace with actual price format
+                'view_status' => 'yes',
             ];
         }
 
@@ -2844,7 +2935,14 @@ class CustomerPackageController extends BaseController
                 'id' => 5,
                 'title' => 'Visa Services',
                 'status' => 'active', // Replace with actual price format
-
+                'view_status' => 'no',
+            ];
+        } else {
+            $VisaServices = [
+                'id' => 5,
+                'title' => 'Visa Services',
+                'status' => 'inactive', // Replace with actual price format
+                'view_status' => 'no',
             ];
         }
 
@@ -2854,7 +2952,14 @@ class CustomerPackageController extends BaseController
                 'id' => 6,
                 'title' => 'Ticket Services',
                 'status' => 'active', // Replace with actual price format
-
+                'view_status' => 'no',
+            ];
+        } else {
+            $TicketServices = [
+                'id' => 6,
+                'title' => 'Ticket Services',
+                'status' => 'inactive', // Replace with actual price format
+                'view_status' => 'no',
             ];
         }
 
@@ -2864,7 +2969,14 @@ class CustomerPackageController extends BaseController
                 'id' => 7,
                 'title' => 'Ambulance Services',
                 'status' => 'active', // Replace with actual price format
-
+                'view_status' => 'no',
+            ];
+        } else {
+            $AmbulanceServices = [
+                'id' => 7,
+                'title' => 'Ambulance Services',
+                'status' => 'inactive', // Replace with actual price format
+                'view_status' => 'no',
             ];
         }
 
