@@ -267,7 +267,7 @@
                             </div>
                         </div>
 
-                        <div class="multiple-upload-images">
+                        {{-- <div class="multiple-upload-images">
                             <h6 class="section-heading">Product Pictures</h6>
                             <div class="form-group">
                                 <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
@@ -312,9 +312,9 @@
 
                             </div>
 
-                        </div>
+                        </div> --}}
 
-                        <div class="section-btns mb-4">
+                        {{-- <div class="section-btns mb-4">
                             <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits">Save
                                 Changes</button>
                         </div>
@@ -326,7 +326,7 @@
 
                         </form>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
