@@ -458,6 +458,7 @@
 }
 
 .search-bar .form-select,
+#patient-package-details .form-select,
 #UserCancellationReq .form-select,
 #UserChangeInformationModel .form-select {
     background-image: url("../img/SelectArrowDown.png");
@@ -1330,6 +1331,7 @@ select {
 .camLight {
     font-family: "CamptonLight" !important;
 }
+
 .camThin {
     font-family: "CamptonThin" !important;
 }
@@ -1439,6 +1441,7 @@ select {
 }
 
 .form-control::placeholder,
+#patient-package-details .form-select,
 .request-modal .form-check-label,
 .epic-span {
     color: #979797;
@@ -1657,10 +1660,12 @@ select {
     background-color: #f6f6f6;
     /* box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important; */
 }
+
 .report-text {
     margin-top: 0px !important;
 }
-.report-img{
+
+.report-img {
     padding: 3px 10px;
     float: left;
     width: 75px;
@@ -1670,34 +1675,42 @@ select {
     vertical-align: middle !important;
     border-radius: 5px;
 }
-.report-img img{
+
+.report-img img {
     width: 100%;
 }
-.treatment-card-report .trmt-card-footer{
-    padding-right:0px !important;
+
+.treatment-card-report .trmt-card-footer {
+    padding-right: 0px !important;
 }
-.treatment-card-report .dashboard-card-title{
-    margin-bottom:5px !important;
-} 
+
+.treatment-card-report .dashboard-card-title {
+    margin-bottom: 5px !important;
+}
+
 .report-text span {
     font-size: 14px;
     margin-top: 5px;
     margin-left: 3px;
 }
+
 .view-more-reports {
     margin: 20px 10px !important;
     padding-top: 20px !important;
     border-top: 1px solid #CFCFCF !important;
 }
+
 .view-more-reports .view-more-content h5:last-child {
     font-size: 11px !important;
     margin-top: 5px !important;
     font-family: "Camptonlight" !important;
 }
-.head-report{
+
+.head-report {
     padding: 0px !important;
 }
-.hide-reports{
+
+.hide-reports {
     background-color: #f55c5c !important;
     color: #fff !important;
 }
@@ -1721,7 +1734,8 @@ select {
     padding: 5px 35px;
     text-transform: capitalize;
 }
-.favorites-bt{
+
+.favorites-bt {
     cursor: pointer;
 }
 
@@ -1758,6 +1772,8 @@ select {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.64px;
+    font-family: "CamptonBook";
+    margin-bottom: 0.3rem;
 }
 
 .card-details p,
@@ -1939,6 +1955,10 @@ select {
     font-size: 14px !important;
 }
 
+.fs-15 {
+    font-size: 15px !important;
+}
+
 .tab-div .nav-link.active {
     border: unset;
     border-bottom: 4px solid #4cdb06;
@@ -2028,6 +2048,7 @@ select option {
 }
 
 #UserCancellationReq .form-select,
+#patient-package-details .form-select,
 #UserChangeInformationModel .form-select,
 #UserChangeInformationModel .form-control,
 .request-modal .form-control,
@@ -4899,9 +4920,11 @@ input[type="radio"] {
 #go_to_home {
     cursor: pointer;
 }
-.wd100{
+
+.wd100 {
     width: 100% !important;
 }
+
 .purchaseBtn-new-user {
     height: 49px !important;
     padding: 0px !important;

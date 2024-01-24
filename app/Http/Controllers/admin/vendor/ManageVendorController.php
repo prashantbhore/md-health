@@ -16,6 +16,8 @@ use App\Models\VendorLogo;
 use App\Models\MDFoodLogos;
 use App\Models\MDFoodLicense;
 use App\Models\VendorLicense;
+use App\Models\VendorProductGallery;
+use App\Models\FoodImageVideos;
 
 use DataTables;
 use Crypt;
@@ -843,7 +845,14 @@ public function vendor_view(Request $request){
      $vendor_license=MedicalProviderLicense::where('status','active')->where('medical_provider_id',$id)->first();
 
      $gallary=ProviderImagesVideos::where('status','active')->where('provider_id',$id)->get();
-     
+
+    
+
+
+    //  dd($gallary);
+
+
+
     }
 
 
@@ -870,8 +879,7 @@ public function vendor_view(Request $request){
         $vendor=VendorRegister::with(['city'])
         ->where('id',$id)
         ->first();
-  
-        //dd($medical_provider);
+
   
         $vendor_logo=MedicalProviderLogo::where('status','active')->where('medical_provider_id',$id)->first();
   
@@ -892,9 +900,7 @@ public function vendor_view(Request $request){
 
 
 public function store(Request $request){
-   // dd($request->all());
-      
-    //if($)
+
     $input['company_overview'] =!empty($request->overview)?$request->overview:'';
     $provider=MedicalProviderRegistrater::find($request->id)->update($input);
 
@@ -903,6 +909,7 @@ public function store(Request $request){
    }else{
     return redirect()->back()->with('fail', 'Vendor Not Updated Successfully!');
    }
+
 
 }
 
@@ -1075,6 +1082,72 @@ public function delete_license(Request $request){
     return response()->json(['message' => $request->flash, 'status' => 'true']);
 
 }
+
+
+
+
+
+public function delete_gallery(Request $request){
+
+  
+
+  
+
+    $id = !empty($request->id) ? $request->id : '';
+
+
+
+    if($request->vendor_type=='medical_service_provider'){
+
+        $old_data =ProviderImagesVideos::where('id', $id)->first();
+
+        $new_data = ProviderImagesVideos::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+    }
+
+    if($request->vendor_type=='shop_vendoer'){
+        
+        $old_data =VendorProductGallery::where('id', $id)->first();
+
+        $new_data = VendorProductGallery::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+    }
+
+
+    
+    if($request->vendor_type=='food_vendoer'){
+        
+        $old_data =FoodImageVideos::where('id', $id)->first();
+
+        $new_data = FoodImageVideos::where('id', $id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+    }
+
+    return response()->json(['message' => $request->flash, 'status' => 'true']);
+
+}
+
+
+
+
+public function verification_status(Request $request){
+
+    $input['verified'] =!empty($request->status)?$request->status:'';
+
+    $provider=MedicalProviderRegistrater::find($request->id)->update($input);
+
+     if($provider){
+       return response()->json(['message' => 'Verification Status Changed to '.$request->status, 'status' => 'true']);
+     }
+
+}
+
   
   
 

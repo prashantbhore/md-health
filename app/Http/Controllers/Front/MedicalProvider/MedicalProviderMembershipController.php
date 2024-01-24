@@ -26,44 +26,43 @@ class MedicalProviderMembershipController extends Controller
               ->sum('paid_amount');
       }
   
-    // Fetch the current membership
-$membership = MembershipSettings::where('vendor_type', 'medical_service_provider')
-->where(function ($query) use ($provider_amount) {
-    $query->where('membership_type', 'silver') // Ensure Silver membership is always included
-        ->orWhere(function ($subquery) use ($provider_amount) {
-            $subquery->where('membership_amount', '<=', $provider_amount)
-                ->orWhereNull('membership_amount'); // Include cases where membership_amount is null
-        });
-})
-->orderBy('membership_amount', 'desc') // Order by descending to get the highest membership first
-->first();
+        $membership = MembershipSettings::where('vendor_type', 'medical_service_provider')
+        ->where(function ($query) use ($provider_amount) {
+            $query->where('membership_type', 'silver') 
+                ->orWhere(function ($subquery) use ($provider_amount) {
+                    $subquery->where('membership_amount', '<=', $provider_amount)
+                        ->orWhereNull('membership_amount'); 
+                });
+        })
+        ->orderBy('membership_amount', 'desc') 
+        ->first();
 
-// Fetch the next achievable membership
-$next_membership_amount = 0;
-if (!empty($membership) && $membership->membership_type != 'platinum') {
-$next_membership = MembershipSettings::where('vendor_type', 'medical_service_provider')
-    ->where('membership_amount', '>', $membership->membership_amount)
-    ->orderBy('membership_amount')
-    ->first();
+        $next_membership_amount = 0;
+        if (!empty($membership) && $membership->membership_type != 'platinum') {
+        $next_membership = MembershipSettings::where('vendor_type', 'medical_service_provider')
+            ->where('membership_amount', '>', $membership->membership_amount)
+            ->orderBy('membership_amount')
+            ->first();
 
-if ($next_membership) {
-    $next_membership_amount = max(0, $next_membership->membership_amount - $provider_amount);
-}
-} else {
-$next_membership = null;
-}
+        if ($next_membership) {
+            $next_membership_amount = $next_membership->membership_amount;
+        }
+        } else {
+        $next_membership = null;
+        }
 
-// Set progress percentage to 100% if the current membership is platinum
-$progress_percentage = ($membership && $membership->membership_type == 'platinum') ? 100 : ($provider_amount / ($next_membership ? $next_membership->membership_amount : 1)) * 100;
-$progress_percentage = min(100, $progress_percentage); // Ensure it does not exceed 100%
 
-    return view('front.mdhealth.medical-provider.membership', compact(
-    'provider_amount',
-    'membership',
-    'next_membership_amount',
-    'progress_percentage',
-    ));
-}
+        $progress_percentage = ($membership && $membership->membership_type == 'platinum') ? 100 : ($provider_amount / ($next_membership ? $next_membership->membership_amount : 1)) * 100;
+        $progress_percentage = min(100, $progress_percentage); 
+
+            return view('front.mdhealth.medical-provider.membership', compact(
+            'provider_amount',
+            'membership',
+            'next_membership_amount',
+            'progress_percentage',
+            ));
+
+    }
   
 
 

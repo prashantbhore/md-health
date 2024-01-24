@@ -583,11 +583,10 @@
 
         $('.purchaseBtn').click(function(e) {
             e.preventDefault();
-            // alert('hi');
+         
 
             var id = this.id;
-            // alert(id);
-            // $('.treatmentForModal_'+id).modal('hide');
+            
             if (user == '1') {
                 $('#treatmentForModal_' + id).modal('show');
             } else {

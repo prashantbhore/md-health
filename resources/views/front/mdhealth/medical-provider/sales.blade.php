@@ -14,7 +14,6 @@
         line-height: normal;
         letter-spacing: -0.4px;
     }
-   
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -24,20 +23,37 @@
             </div>
             <div class="w-761">
                 <div class="card mb-4" style="min-height: 245px;">
+
                     <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                         <span>Sale</span>
-                        <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
+                        @if(!empty($membership))
+                            @if($membership->membership_type == 'silver')
+                                <img src="{{ asset('front/assets/img/silver-md.png') }}" alt="">
+                            
+                            @elseif($membership->membership_type == 'gold')
+                                <img src="{{ asset('front/assets/img/gold-md.png') }}" alt="">
+                                
+                            @elseif($membership->membership_type == 'platinum')
+                                <img src="{{ asset('front/assets/img/platinum-md.png') }}" alt="">
+                                
+                            @else
+                                <p>Unknown Membership Type: {{ $membership->membership_type }}</p>
+                            @endif
+                       @endif
                     </h5>
+
                     <div class="card-body">
                         <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
                             <p class="my-0">Sales (Daily)</p>
                             <h3 class="my-0">{{ $daily_sales_amount }} <span class="lira">₺</span></h3>
                         </div>
+                        
                         <div class="black-plate bg-black text-green d-flex align-items-center justify-content-between mb-3">
                             <p class="my-0">Sales (Monthly)</p>
                             <h3 class="my-0">{{ $monthly_sales_amount }} <span class="lira">₺</span></h3>
                         </div>
                     </div>
+
                 </div>
 
                 <!-- ALL SALES -->

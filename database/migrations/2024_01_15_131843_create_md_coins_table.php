@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('customer_id')->nullable();
             $table->string('coins')->nullable();
+            $table->unsignedInteger('invitation_count')->default(0);
+            $table->unsignedInteger('total_invitation_count')->default(0);
+            $table->enum('wallet_status', ['your_network', 'pending_invite', 'invites_left'])->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();

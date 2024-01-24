@@ -20,6 +20,8 @@ class CustomerPurchaseDetails extends Model {
         'hotel_id',
         'vehicle_id',
         'tour_id',
+        'other_services',
+        'type',
         'package_treatment_price',
         'package_hotel_price',
         'package_transportation_price',
