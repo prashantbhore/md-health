@@ -2464,7 +2464,7 @@ class CustomerPackageController extends BaseController
                     'md_customer_registration.last_name as patient_last_name',
                     'md_customer_registration.email as patient_email',
                     'md_customer_registration.phone as patient_contact_no',
-                    // 'md_customer_registration.date_of_birth as birth_date',
+                    'md_customer_registration.date_of_birth as birth_date',
                     // 'md_customer_registration.address',
                     'md_master_country.country_name',
                     'md_master_cities.city_name',
@@ -2478,6 +2478,8 @@ class CustomerPackageController extends BaseController
                 ->leftjoin('md_master_country', 'md_customer_registration.country_id', '=', 'md_master_country.id')
                 ->first();
 
+            // return $PatientInformation;
+
             if (!empty($PatientInformation)) {
                 $PatientInformationList = [];
                 $PatientInformationList['patient_id'] = !empty($PatientInformation->id) ? $PatientInformation->id : 0;
@@ -2485,8 +2487,8 @@ class CustomerPackageController extends BaseController
                 $PatientInformationList['package_id'] = !empty($PatientInformation->package_id) ? $PatientInformation->package_id : 0;
                 $PatientInformationList['patient_first_name'] = !empty($PatientInformation->first_name) ? $PatientInformation->first_name : '';
                 $PatientInformationList['patient_last_name'] = !empty($PatientInformation->last_name) ? $PatientInformation->last_name : '';
-                // $PatientInformationList['birth_date'] = !empty($PatientInformation->date_of_birth) ? (string)$PatientInformation->date_of_birth : '1990-01-01';
-                $PatientInformationList['birth_date'] = '1990-01-01';
+                $PatientInformationList['birth_date'] =  !empty($PatientInformation->birth_date) ? $PatientInformation->birth_date : '01-01-1990';
+                // $PatientInformationList['birth_date'] ='1990-01-01';
                 $PatientInformationList['patient_full_name'] = !empty($PatientInformation->patient_full_name) ? $PatientInformation->patient_full_name : '';
                 $PatientInformationList['patient_relation'] = !empty($PatientInformation->patient_relation) ? $PatientInformation->patient_relation : '';
                 $PatientInformationList['patient_email'] = !empty($PatientInformation->email) ? $PatientInformation->email : '';
