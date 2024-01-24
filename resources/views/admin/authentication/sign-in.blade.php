@@ -1,6 +1,19 @@
 @extends('admin.layout.layout2')
 @section("content")
-
+<style>
+    .btn-outline-secondary {
+        border: 1px solid #D6D6D6;
+    }
+  
+    .btn-outline-secondary:focus {
+       
+        box-shadow: none;
+    }
+    .btn-outline-secondary:hover {
+        /* background-color: #fff; */
+        border: 1px solid #D6D6D6;
+    }
+</style>
 <section>
     <div class="container df-center" style="height: 100vh;">
         <div class="card signInCard">

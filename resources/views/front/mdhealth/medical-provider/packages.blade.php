@@ -72,7 +72,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="white-plate bg-white d-flex align-items-center justify-content-between mb-3">
-                                <p class="my-0">Active Packages</p>
+                                <p class="my-0" id="packname">Active Packages</p>
                                 <h3 class="my-0" id="countsofpack">0</h3>
                             </div>
                             <a href="{{ url('medical-packages-view') }}"
@@ -80,7 +80,7 @@
                                 <p class="my-0">Add New Packages</p>
                                 <h3 class="my-0">+</h3>
                             </a>
-                            <div
+                            <div id="compaign"
                                 class="green-plate bg-green text-green d-flex align-items-center justify-content-between mb-3">
                                 <p class="my-0">Create Campaign</p>
                             </div>
@@ -88,7 +88,6 @@
                     </div>
 
                     <!-- RECENT TRETMENTS -->
-
                     <div class="card">
                         <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                             Details
@@ -114,16 +113,16 @@
                                         <input type="text" name="searchpackage" id="searchpackage"
                                             placeholder="Search" />
                                     </div>
-                                    {{--
-                                <div class="list-div">
+                           
+                                <!-- <div class="list-div">
                                     <select name="" id="">
                                         <option value="">List for date</option>
                                         <option value="">List for Stars</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
-                                </div>
-                                --}}
+                                </div> -->
+                               
                                 </div>
 
                                 <!-- Tab panes -->
@@ -224,6 +223,8 @@
                     success: function(response) {
                         if (response.status == 200) {
                             $('#countsofpack').text(response.packages_active_list.length);
+                            $('#packname').text("Active Packages");
+                            $('#compaign').removeClass("d-none");
                             // console.log('Active tab API response:', response.packages_active_list.length);
                         }
                     },
@@ -246,6 +247,8 @@
                     success: function(response) {
                         if (response.status == 200) {
                             $('#countsofpack').text(response.packages_deactive_list.length);
+                            $('#packname').text("Deactive Packages");
+                            $('#compaign').addClass("d-none");
                             // console.log('Deactive tab API response:', response.packages_deactive_list.length);
                         }
                     },

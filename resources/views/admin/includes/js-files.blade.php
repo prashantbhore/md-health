@@ -64,15 +64,15 @@
 </script>
 
 <script>
-  var titleElement = document.getElementById("example_filter");
+ // var titleElement = document.getElementById("example_filter");
  // var titleChildren = titleElement.getElementsByTagName("label");
 
   // Do something with children.
   // In your example code, you'll only have one element returned
-  console.log(titleChildren[0].innerHTML);
+ // console.log(titleChildren[0].innerHTML);
 
   // To change the text, simply access the innerHTML property
-  titleChildren[0].innerHTML = " ";
+ // titleChildren[0].innerHTML = " ";
 </script>
 
 <script type="text/javascript">

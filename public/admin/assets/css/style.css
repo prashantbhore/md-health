@@ -8,9 +8,18 @@
     src: url("../fonts/campton/CamptonBold.otf");
 }
 
+@font-face {
+    font-family: "CamptonLight";
+    src: url("../fonts/campton/CamptonLight.otf");
+}
+
 .body {
     scroll-behavior: smooth;
     font-family: "Campton", sans-serif;
+}
+
+.camLight {
+    font-family: "CamptonLight" !important;
 }
 
 .footer {
@@ -112,6 +121,10 @@ table,
     background: #F55C5C !important;
 }
 
+.bg-md-red {
+    background: #F31D1D !important;
+}
+
 .bg-green {
     background: #4cdb06 !important;
 }
@@ -209,13 +222,14 @@ table,
     /* Microsoft Edge */
     color: #979797;
 }
+
 /* 
 .form-select {
     background-image: none;
 } */
 
-.form-control{
-    appearance:auto !important;
+.form-control {
+    appearance: auto !important;
     -webkit-appearance: auto !important;
 }
 
@@ -385,7 +399,7 @@ table td {
 
 .sidebar-menu {
     width: 205px;
-    height: 83vh;
+    height: 85vh;
     border-right: 1px solid #fff;
     bottom: 0;
     /* margin-top: 0; */
@@ -469,7 +483,7 @@ table td {
     transition: 0.15s all;
     color: #000;
     font-size: 14px;
-    
+
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -608,7 +622,7 @@ table td {
 .pkg-card,
 .patient-details {
     color: #000;
-    
+
     line-height: normal;
 }
 
@@ -644,7 +658,7 @@ table td {
 .pkg-card h3 {
     text-align: right;
     font-size: 24px;
-    
+
     font-weight: 600;
     letter-spacing: -1.04px;
     margin-bottom: 0;
@@ -1453,7 +1467,7 @@ div.dataTables_wrapper div.dataTables_filter input {
     display: none;
 }
 
-.dataTables_filter{
+.dataTables_filter {
     position: absolute;
     top: -51px;
     right: 211px;
@@ -1467,25 +1481,31 @@ form.admin-form label {
     display: inline-block;
     font-size: 14px;
 }
-.top-cards > .promo > .card{
+
+.top-cards>.promo>.card {
     min-height: 567px !important;
 }
-.scroll-300{
-    overflow-y: scroll; 
-    height:300px;
+
+.scroll-300 {
+    overflow-y: scroll;
+    height: 300px;
 }
-.scroll-600{
-    overflow-y: scroll; 
-    height:675px;
+
+.scroll-600 {
+    overflow-y: scroll;
+    height: 675px;
 }
-.page-title small{
+
+.page-title small {
     margin-left: 15px;
 }
-.clear-fix{
+
+.clear-fix {
     clear: both;
     margin: 0px 0px 20px 0px;
 }
-.card-active{
+
+.card-active {
     background-color: #4CDB06;
     position: absolute;
     top: 0px;
@@ -1497,7 +1517,8 @@ form.admin-form label {
     line-height: 20px;
     height: 20px;
 }
-.card-deactive{
+
+.card-deactive {
     background-color: #F55C5C;
     position: absolute;
     top: 0px;
@@ -1520,4 +1541,59 @@ form.admin-form label {
     letter-spacing: -0.6px;
     text-align: center;
     border-radius: 5px;
+}
+
+.d-justify {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.border-bottom-1 {
+    border-bottom: 1px solid #000000
+}
+
+.amount-view {
+    color: #000;
+    text-align: right;
+    font-family: CamptonBold;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.company-name {
+    color: #000;
+    font-family: "Campton";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.c-names .d-justify:not(:last-child) {
+    border-bottom: 1px solid #DBDBDB
+}
+
+.lira {
+    font-family: sans-serif !important;
+}
+
+.md-select-sm {
+    border: 1px solid #EDEDED;
+
+    font-family: Campton;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.04em;
+    text-align: left;
+
+}
+
+.md-select-sm:focus-visible {
+    outline: none;
 }

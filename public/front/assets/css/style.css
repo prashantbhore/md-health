@@ -458,6 +458,7 @@
 }
 
 .search-bar .form-select,
+#patient-package-details .form-select,
 #UserCancellationReq .form-select,
 #UserChangeInformationModel .form-select {
     background-image: url("../img/SelectArrowDown.png");
@@ -1440,6 +1441,7 @@ select {
 }
 
 .form-control::placeholder,
+#patient-package-details .form-select,
 .request-modal .form-check-label,
 .epic-span {
     color: #979797;
@@ -2033,7 +2035,7 @@ select option {
 
 .form-div .form-label {
     color: #979797;
-    font-family: "CamptonLight";
+    font-family: "CamptonThin";
     font-size: 16px;
     font-weight: 600;
     line-height: normal;
@@ -2046,6 +2048,7 @@ select option {
 }
 
 #UserCancellationReq .form-select,
+#patient-package-details .form-select,
 #UserChangeInformationModel .form-select,
 #UserChangeInformationModel .form-control,
 .request-modal .form-control,
@@ -4896,7 +4899,7 @@ input[type="radio"] {
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    background: #F6F6F6;
+    /* background: #F6F6F6; */
 }
 
 .no-data-vendor img {
