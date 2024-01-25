@@ -279,7 +279,7 @@
                             <div class="section-btns mb-4">
                                 <button type="submit" id="medproacc"
                                     class="btn save-btn-black from-prevent-multiple-submits"
-                                    onclick="disableButtonAndCallback()">Save
+                                    F>Save
                                     Changes</button>
                             </div>
 
