@@ -5011,3 +5011,7 @@ input[type="radio"] {
     background-position: bottom 16px right 12px;
 
 }
+
+.preview-img img {
+    height: 100px;
+}

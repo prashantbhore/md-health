@@ -234,7 +234,6 @@
             </div>
             <!-- CREDIT CARD DETAILS END-->
 
-
             <!-- BANK TRANSFER -->
             <div id="bank" class="bank-transfer-details">
                 <form action="php">
@@ -285,7 +284,6 @@
                 </form>
             </div>
             <!-- BANK TRANSFER END -->
-
 
             <!-- WALLET DETAILS -->
             <div id="wallet">

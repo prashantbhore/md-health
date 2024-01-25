@@ -132,7 +132,7 @@
                                     <label class="form-label mb-3">Vehicle Picture</label>
                                     <div class="form-group mb-3">
                                         <input type="file" name="vehicle_image_path" id="vehicle_image_path" placeholder="Vehicle Picture" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
-                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
+                                        <img src="{{asset('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
 
                                     </div>
                                     <div class="prev-img-div">

@@ -162,7 +162,7 @@
                                     <label class="form-label mb-3">Hotel Picture</label>
                                     <div class="form-group mb-3 ">
                                         <input type="file"  name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
-                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
+                                        <img src="{{asset('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="{{ !empty($hotel_details['hotel_image_path']) ? $hotel_details['hotel_image_path'] : 'front/assets/img/uploadHere.png' }}" alt="image" id="pic" />
