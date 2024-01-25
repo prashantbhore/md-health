@@ -1235,28 +1235,28 @@ class CustomerPackageController extends BaseController
             'percentage' => '20%',
             'minimum_discount' => 'Min.Requirement',
             'title' => 'twenty_percent',
-            'price' => (string)number_format($twenty_percent, 0, '', ''), // Replace with actual price format
+            'price' => (string) number_format($twenty_percent, 0, '', ''), // Replace with actual price format
         ];
         $thirty_percent = [
             'id' => 2,
             'percentage' => '30%',
             'minimum_discount' => 'Get 5% Discount',
             'title' => 'thirty_percent',
-            'price' => (string)number_format($purchase_details['thirty_percent'], 0, '', ''), // Replace with actual price format
+            'price' => (string) number_format($purchase_details['thirty_percent'], 0, '', ''), // Replace with actual price format
         ];
         $fifty_percent = [
             'id' => 3,
             'percentage' => '50%',
             'minimum_discount' => 'Get 8% Discount',
             'title' => 'fifty_percent',
-            'price' => (string)number_format($purchase_details['fifty_percent'], 0, '', ''), // Replace with actual price format
+            'price' => (string) number_format($purchase_details['fifty_percent'], 0, '', ''), // Replace with actual price format
         ];
         $hundred_percent = [
             'id' => 4,
             'percentage' => '100%',
             'minimum_discount' => 'Get 10% Discount',
             'title' => 'hundred_percent',
-            'price' => (string)number_format($purchase_details['hundred_percent'], 0, '', ''), // Replace with actual price format
+            'price' => (string) number_format($purchase_details['hundred_percent'], 0, '', ''), // Replace with actual price format
 
         ];
         $discount[] = $twenty_percent;
@@ -1881,10 +1881,10 @@ class CustomerPackageController extends BaseController
                 // $pending_amount = $request->sale_price - $request->paid_amount;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
 
-                $purchase_details['package_total_price'] = (float)$request->sale_price;
+                $purchase_details['package_total_price'] = (float) $request->sale_price;
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
-                $purchase_details['paid_amount'] = (float)$request->paid_amount;
-                $pending_amount = (float)$request->sale_price - (float)$request->paid_amount;
+                $purchase_details['paid_amount'] = (float) $request->paid_amount;
+                $pending_amount = (float) $request->sale_price - (float) $request->paid_amount;
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
                 if (!empty($request->percentage)) {
@@ -2043,7 +2043,7 @@ class CustomerPackageController extends BaseController
             $customer_purchase_package_active_list[$key]['company_name'] = !empty($val->company_name) ? $val->company_name : '';
             $customer_purchase_package_active_list[$key]['treatment_name'] = !empty($val->product_category_name) ? $val->product_category_name : '';
             $customer_purchase_package_active_list[$key]['type'] = !empty($val->type) ? $val->type : '';
-            $treatment_start_date = !empty($val->treatment_start_date) ? (string)$val->treatment_start_date : '';
+            $treatment_start_date = !empty($val->treatment_start_date) ? (string) $val->treatment_start_date : '';
             if (!empty($treatment_start_date)) {
                 $treatmentStartTimestamp = strtotime($treatment_start_date);
 
@@ -2488,7 +2488,7 @@ class CustomerPackageController extends BaseController
                 $PatientInformationList['package_id'] = !empty($PatientInformation->package_id) ? $PatientInformation->package_id : 0;
                 $PatientInformationList['patient_first_name'] = !empty($PatientInformation->first_name) ? $PatientInformation->first_name : '';
                 $PatientInformationList['patient_last_name'] = !empty($PatientInformation->last_name) ? $PatientInformation->last_name : '';
-                $PatientInformationList['birth_date'] =  !empty($PatientInformation->birth_date) ? $PatientInformation->birth_date : '01-01-1990';
+                $PatientInformationList['birth_date'] = !empty($PatientInformation->birth_date) ? $PatientInformation->birth_date : '01-01-1990';
                 // $PatientInformationList['birth_date'] ='1990-01-01';
                 $PatientInformationList['patient_full_name'] = !empty($PatientInformation->patient_full_name) ? $PatientInformation->patient_full_name : '';
                 $PatientInformationList['patient_relation'] = !empty($PatientInformation->patient_relation) ? $PatientInformation->patient_relation : '';
@@ -2790,15 +2790,15 @@ class CustomerPackageController extends BaseController
             ->first();
 
         // foreach ($customer_purchase_package_active_list as $key => $val) {
-        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string)$customer_purchase_package_active_list->purchase_id : '';
+        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string) $customer_purchase_package_active_list->purchase_id : '';
         $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
-        $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? (string)$customer_purchase_package_active_list->created_at : '';
+        $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? (string) $customer_purchase_package_active_list->created_at : '';
         // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
         $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
         $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
         $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
         $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
-        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ?  $customer_purchase_package_active_list->company_logo_image_path : '';
+        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? $customer_purchase_package_active_list->company_logo_image_path : '';
         // $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
         // $treatmentStartTimestamp = strtotime($treatment_start_date);
 
@@ -2812,7 +2812,7 @@ class CustomerPackageController extends BaseController
         // $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
 
         // $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
-        $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
+        $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string) $customer_purchase_package_active_list->treatment_start_date : '';
 
         if (!empty($treatment_start_date)) {
             // Treatment start date is provided
@@ -3889,6 +3889,65 @@ class CustomerPackageController extends BaseController
             ->orderBy('md_customer_favourite_packages.id', 'desc')
             ->get();
 
+        $vendorsdata = CustomerFavouritePackages::where('md_customer_favourite_packages.status', 'active')
+            ->select(
+                'md_medical_provider_register.company_name as vendors_name',
+                'md_medical_provider_register.id as vendors_id',
+            )
+            ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
+            ->orderBy('md_customer_favourite_packages.id', 'desc')
+            ->get();
+        // Filter unique records based on vendors_id
+        $uniqueVendorsData = $vendorsdata->unique('vendors_id');
+
+        // Convert the filtered collection back to an array
+        $vendorsdata = $uniqueVendorsData->values()->all();
+
+
+        if (!empty($CustomerFavouritePackages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your Favourite list.',
+                'data' => $CustomerFavouritePackages,
+                'vendorsdata' => $vendorsdata,
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
+
+
+    public function customer_favourite_list(Request $request)
+    {
+        $CustomerFavouritePackages = CustomerFavouritePackages::where('md_customer_favourite_packages.status', 'active')
+            ->select(
+                'md_customer_favourite_packages.id',
+                'md_packages.treatment_period_in_days',
+                'md_product_category.product_category_name as treatment_name',
+                'md_master_cities.city_name',
+                'md_packages.package_name',
+                'md_packages.package_price',
+                'md_packages.id as package_id',
+            )
+            ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
+            ->orderBy('md_customer_favourite_packages.id', 'desc')
+            ->get();
+
+      
+
         if (!empty($CustomerFavouritePackages)) {
             return response()->json([
                 'status' => 200,
@@ -3935,13 +3994,13 @@ class CustomerPackageController extends BaseController
     public function md_health_bank_lists()
     {
         $bank_list = MDhelathBankDetails::where('status', 'active')->select('bank_name')->get();
-    
-           
+
+
         if (!empty($bank_list)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Bank List Found',
-                'bank_list' =>  $bank_list,
+                'bank_list' => $bank_list,
 
             ]);
         } else {
