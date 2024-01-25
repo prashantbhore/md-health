@@ -239,7 +239,7 @@
             <div id="bank" class="bank-transfer-details">
                 <form action="php">
                     <div class="row gy-4">
-                        <div class="col-md-12 mb-4">
+                        <div class="col-md-12 mb-3">
                             <label for="Bank Informations" class="form-label mb-3" style="font-size: 29px;">Bank Informations</label>
                             <select name="bank-informations" id="bank-informations" class="form-select">
                                 <option value="Bank A">Halk Bank</option>
@@ -256,25 +256,24 @@
                             <label for="Receiver Name" class="form-label mb-0">Receiver Name</label>
                             <p class="mb-0 card-h1">MDhealth Saglik ve Turizm A.S.</p>
                         </div>
-                   
+
                         <div class="col-md-12">
                             <label for="IBAN" class="form-label mb-0">IBAN</label>
                             <p class="mb-0 card-h1">TR00 0000 0000 0000 0000 0000 00</p>
                             <h6 class="copy-iban card-h3 text-green">
-                                <span class="mdi mdi-content-copy"></span> Copy IBAN
+                                <span class="align-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                        <path d="M3.25 7.75C3.25 5.629 3.25 4.56775 3.90925 3.90925C4.56775 3.25 5.629 3.25 7.75 3.25H10C12.121 3.25 13.1823 3.25 13.8408 3.90925C14.5 4.56775 14.5 5.629 14.5 7.75V11.5C14.5 13.621 14.5 14.6823 13.8408 15.3408C13.1823 16 12.121 16 10 16H7.75C5.629 16 4.56775 16 3.90925 15.3408C3.25 14.6823 3.25 13.621 3.25 11.5V7.75Z" stroke="#4CDB06" stroke-width="1.875" />
+                                        <path d="M3.25 13.75C2.65326 13.75 2.08097 13.5129 1.65901 13.091C1.23705 12.669 1 12.0967 1 11.5V7C1 4.17175 1 2.75725 1.879 1.879C2.75725 1 4.17175 1 7 1H10C10.5967 1 11.169 1.23705 11.591 1.65901C12.0129 2.08097 12.25 2.65326 12.25 3.25" stroke="#4CDB06" stroke-width="1.875" />
+                                    </svg></span> Copy IBAN
                             </h6>
                         </div>
-                        <div class="col-md-12 mb-4">
+                        <div class="col-md-12 mb-3">
                             <label for="Description" class="form-label mb-0">Description</label>
                             <p class="mb-0 card-h1">Please write "<span class="text-green">MD736</span>"" in the description section.</p>
                         </div>
-                        <div class="col-md-12 ">
+                        <div class="col-md-12">
                             <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
-                            <select name="bank-informations" id="bank-informations" class="form-select">
-                                <option value="TID3872XG9"> TID3872XGT</option>
-                                <option value="XVQ3872XG9">XVQ3872XG9</option>
-                                <option value="TID3872XG9">TID3872XG9</option>
-                            </select>
+                            <input type="text" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
                         </div>
                         <div class="col-md-12">
                             <p class="mb-0 text-red card-p1">This is not available in your country!</p>

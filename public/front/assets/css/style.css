@@ -4954,7 +4954,7 @@ input[type="radio"] {
 
 .bank-transfer-details .form-label {
     color: #4CDB06;
-    font-family: Campton;
+    font-family: CamptonBold;
     font-size: 19px;
     text-transform: uppercase;
     font-weight: 700;
@@ -4962,7 +4962,8 @@ input[type="radio"] {
     letter-spacing: -1.16px;
 }
 
-.bank-transfer-details .form-select {
+.bank-transfer-details .form-select,
+.bank-transfer-details .form-control {
     width: 365px;
     height: 55px;
     flex-shrink: 0;
@@ -4978,7 +4979,8 @@ input[type="radio"] {
     letter-spacing: -0.64px;
 }
 
-.bank-transfer-details::placeholder {
+.bank-transfer-details::placeholder,
+.bank-transfer-details .form-control {
     color: #989898;
     font-family: Campton;
     font-size: 16px;
