@@ -843,8 +843,7 @@
             $('#vehicle_id').on('change', function() {
                 var selectedvehicleid = $(this).val();
                 // alert(selectedvehicleid);
-                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
-                'content');
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 const bearer_token = '{{ Session::get('login_token') }}';
 
                 if (selectedvehicleid) {
@@ -898,8 +897,7 @@
 
             $('#hotel_id').on('change', function() {
                 var selectedHotelId = $(this).val();
-                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
-                'content');
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 const bearer_token = '{{ Session::get('login_token') }}';
 
                 if (selectedHotelId) {
@@ -950,8 +948,7 @@
 
             $('#tour_id').on('change', function() {
                 var selectedtourid = $(this).val();
-                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute(
-                'content');
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 const bearer_token = '{{ Session::get('login_token') }}';
 
                 if (selectedtourid) {
