@@ -1239,17 +1239,23 @@
             ...options
         });
     </script>
-    <script>
-        let checkedVal;
-        $('input[type=radio]').click(function() {
-            checkedVal = $('input[name="paymentMethod"]:checked').val();
-            if (checkedVal === "card") {
-                $("#card").css('display', 'block');
-                $("#wallet").css('display', 'none');
-            } else if (checkedVal === "wallet") {
-                $("#card").css('display', 'none');
-                $("#wallet").css('display', 'block');
-            }
-        });
-    </script>
+<script>
+    let checkedVal;
+    $('input[type=radio]').click(function() {
+        checkedVal = $('input[name="paymentMethod"]:checked').val();
+        if (checkedVal === "card") {
+            $("#card").css('display', 'block');
+            $("#wallet").css('display', 'none');
+            $("#bank").css('display', 'none');
+        } else if (checkedVal === "wallet") {
+            $("#card").css('display', 'none');
+            $("#bank").css('display', 'none');
+            $("#wallet").css('display', 'block');
+        } else if (checkedVal == "bank") {
+            $("#card").css('display', 'none');
+            $("#wallet").css('display', 'none');
+            $("#bank").css('display', 'block');
+        }
+    });
+</script>
 @endsection
