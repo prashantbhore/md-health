@@ -50,9 +50,35 @@
 
     .multiple-upload-images .preview-img .prev-img-div img {
         height: 100px;
-        width: 140px;
-        object-fit: contain;
-        margin-top: 15px;
+        width: 133px;
+        object-fit: cover;
+        margin-top: 16px;
+        border-radius: 10px;
+        opacity: 0.9;
+        transition: 0.15s all;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div video {
+        width: 133px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: 0.15s all;
+        margin-top: 20px;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div video:hover {
+        width: 133px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+        opacity: 1;
+        transition: 0.15s all;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div img:hover {
+        opacity: 1;
     }
 
     .form-group .prev-img-div img {
@@ -65,10 +91,33 @@
 
     .prev-img-div img {
         height: 150px;
-        width: auto;
+        width: 133px;
         object-fit: contain;
-        margin-top: 15px;
+        margin-top: 8px;
         border-radius: 3px;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div .clear-btn {
+        position: absolute;
+        top: 10px;
+        right: -5px;
+        background: #d34f4fe3;
+        /* padding: 0px 5px; */
+        border-radius: 100%;
+        color: #fff;
+        text-decoration: none;
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.15s all;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div .clear-btn:hover {
+        background: #db2828;
     }
 </style>
 
@@ -194,7 +243,7 @@
                             <div class="form-group">
                                 <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
                             </div>
-                            <div class="preview-img gallery d-flex flex-wrap gap-3 ">
+                            <div class="preview-img gallery d-flex flex-wrap align-items-center gap-3 ">
 
                                 @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
                                 @php
@@ -205,9 +254,9 @@
                                 <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
                                     <a href="{{ !empty($ProviderImagesVideo->provider_image_path) 
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                        : '' }}" class="glightbox" >
+                                                                        : '' }}" class="glightbox">
 
-                                        <video width="320" height="240" controls autoplay>
+                                        <video poster="{{asset('front/assets/img/poster.png')}}" autoplay>
                                             <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                     Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
@@ -216,7 +265,8 @@
                                         </video>
                                     </a>
                                     <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
-                                        <div>X</div>
+                                        <div><span class="mdi mdi-close-thick"></span>
+                                        </div>
                                     </a>
                                 </div>
                                 <!-- <a href="{{ URL::asset($ProviderImagesVideo->provider_image_path) }}"
@@ -238,17 +288,17 @@
                                 @else
 
                                 <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
-                                <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                    <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                     Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                        : '' }}" class="glightbox" >
-                                    <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                                        : '' }}" class="glightbox">
+                                        <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                     Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                         : '' }}" alt="image" />
-                                </a>
+                                    </a>
 
-                                <!-- <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                    <!-- <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                             Storage::exists($ProviderImagesVideo->provider_image_path)
                                                 ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                 : '' }}"
@@ -259,9 +309,10 @@
                                                     : '' }}"
                                                     alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
                                             </a> -->
-                                <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
-                                    <div>X</div>
-                                </a>
+                                    <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
+                                        <div><span class="mdi mdi-close-thick"></span>
+                                        </div>
+                                    </a>
                                 </div>
                                 @endif
                                 @endforeach
@@ -298,7 +349,7 @@
 
                                 @if ($fileExtension === 'mp4')
                                 <div class="prev-img-div video-card" id="img_div_{{ $ProviderImagesVideo->id }}">
-                <video class="video-div" controls>
+                <video poster="{{asset('front/assets/img/poster.png')}}" class="video-div" controls>
                     <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                 Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                     ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
@@ -306,7 +357,8 @@
                     Your browser does not support the video tag.
                 </video>
                 <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
-                    <div>X</div>
+                    <div><span class="mdi mdi-close-thick"></span>
+                    </div>
                 </a>
             </div>
             @else
@@ -321,7 +373,8 @@
                                                                 : '' }}" alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
                 </a>
                 <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
-                    <div>X</div>
+                    <div><span class="mdi mdi-close-thick"></span>
+                    </div>
                 </a>
             </div>
             @endif
