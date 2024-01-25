@@ -23,6 +23,8 @@ use App\Models\VendorRegister;
 use App\Models\MDFoodRegisters;
 use App\Models\MDFoodLogos;
 use App\Models\MDFoodLicense;
+use App\Models\MDCoins;
+use App\Models\CoinStatus;
 
 class RegistrationController extends BaseController
 {
@@ -145,7 +147,6 @@ class RegistrationController extends BaseController
 
                 $update_unique_id = CustomerRegistration::where('id', $value->id)->update(['customer_unique_no' => $customer_unique_id]);
                 $common_data_registrationid = CommonUserLoginTable::where('id', $lastInsertedId)->update(['user_id' => $value->id, 'status' => 'active']);
-
             }
         }
 
@@ -175,6 +176,35 @@ class RegistrationController extends BaseController
             $customer_logs['status'] = 'active';
             $customer_logs['type'] = 'signup';
             CustomerLogs::create($customer_logs);
+
+            $customer = CustomerRegistration::where('status', 'active')
+                ->where('customer_unique_no', $request->unique_code)
+                ->first();
+
+            if ($customer) {
+                // Fetch the current MDCoins record
+                $mdCoins = MDCoins::where('status', 'active')
+                    ->where('customer_id', $customer->id)
+                    ->first();
+
+                // Increment 'coins' by 5 and 'invitation_count' by 1
+                if ($mdCoins) {
+                    $mdCoins->increment('coins', 5);
+                    $mdCoins->increment('invitation_count', 1);
+                }
+
+
+                $coin_status_id = $request->coin_status_id;
+
+                if ($coin_status_id) {
+                    $coin_status = [
+                        'customer_id' => $customer->id ?? null,
+                        'wallet_status' => 'your_network'
+                    ];
+
+                    CoinStatus::where('id', $coin_status_id)->update($coin_status);
+                }
+            }
 
             return response()->json([
                 'status' => 200,
@@ -271,7 +301,7 @@ class RegistrationController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-       
+
         $email_exist = MedicalProviderRegistrater::where('status', 'active')
             ->where('email', $request->email)
             ->first();
@@ -280,7 +310,7 @@ class RegistrationController extends BaseController
             ->first();
 
         if (!empty($email_exist || $email_exist_common)) {
-           
+
             return response()->json([
                 'status' => 404,
                 'message' => 'email id already exist.',
@@ -301,7 +331,7 @@ class RegistrationController extends BaseController
             }
         }
         // dd($request);
-       
+
         $commonData = [];
         $commonData['email'] = $request->email;
         $commonData['mobile_no'] = $request->phone;
@@ -360,10 +390,9 @@ class RegistrationController extends BaseController
 
                 $update_unique_id = MedicalProviderRegistrater::where('id', $value->id)->update(['provider_unique_no' => $provider_unique_id]);
                 $common_data_registrationid = CommonUserLoginTable::where('id', $lastInsertedId)->update(['user_id' => $value->id, 'status' => 'active']);
-
             }
         }
-       
+
         $md_provider_input_image_logo = [];
         $md_provider_input_image_logo['medical_provider_id'] = !empty($md_provider_registration->id) ? $md_provider_registration->id : '';
         if ($request->has('company_logo_image_path')) {
@@ -463,7 +492,6 @@ class RegistrationController extends BaseController
                 'status' => 404,
                 'message' => 'email id already exist.',
             ]);
-
         } else {
             $phone_exist = VendorRegister::where('status', 'active')
                 ->where('mobile_no', $request->phone)
@@ -526,7 +554,6 @@ class RegistrationController extends BaseController
 
                 $update_unique_id = VendorRegister::where('id', $value->id)->update(['vendor_unique_no' => $provider_unique_id]);
                 $common_data_registrationid = CommonUserLoginTable::where('id', $lastInsertedId)->update(['user_id' => $value->id, 'status' => 'active']);
-
             }
         }
 
@@ -598,12 +625,11 @@ class RegistrationController extends BaseController
                 ]);
             }
         }
-
     }
 
     public function food_registration(Request $request)
     {
-       
+
         $validator = Validator::make($request->all(), [
             'company_name' => 'required',
             'city_id' => 'required',
@@ -643,14 +669,14 @@ class RegistrationController extends BaseController
                 ->first();
 
             if (!empty($phone_exist || $phone_exist_common)) {
-               
+
                 return response()->json([
                     'status' => 404,
                     'message' => 'mobile number already exist.',
                 ]);
             }
         }
-       
+
         $commonData = [];
         $commonData['email'] = $request->email;
         $commonData['mobile_no'] = $request->phone;
@@ -692,35 +718,35 @@ class RegistrationController extends BaseController
                 } else {
                     $provider_unique_id = 'MDF-0' . $value->id;
                 }
-              
+
                 $update_unique_id = MDFoodRegisters::where('id', $value->id)->update(['food_unique_no' => $provider_unique_id]);
             }
         }
 
         $md_provider_input_image_logo = [];
-         $md_provider_input_image_logo[ 'food_id' ] = !empty( $md_provider_registration->id )?$md_provider_registration->id:'';
+        $md_provider_input_image_logo['food_id'] = !empty($md_provider_registration->id) ? $md_provider_registration->id : '';
 
-       
-        if ( $request->has( 'company_logo_image_path' ) ) {
-            if ( $request->file( 'company_logo_image_path' ) ) {
-                $md_provider_input_image_logo[ 'company_logo_image_path' ] = $this->verifyAndUpload( $request, 'company_logo_image_path', 'company/company_logo' );
-                $original_name = $request->file( 'company_logo_image_path' )->getClientOriginalName();
-                $md_provider_input_image_logo[ 'company_logo_image_name' ] = $original_name;
+
+        if ($request->has('company_logo_image_path')) {
+            if ($request->file('company_logo_image_path')) {
+                $md_provider_input_image_logo['company_logo_image_path'] = $this->verifyAndUpload($request, 'company_logo_image_path', 'company/company_logo');
+                $original_name = $request->file('company_logo_image_path')->getClientOriginalName();
+                $md_provider_input_image_logo['company_logo_image_name'] = $original_name;
             }
         }
-        MDFoodLogos::create( $md_provider_input_image_logo );
+        MDFoodLogos::create($md_provider_input_image_logo);
 
         $md_provider_input_image_license = [];
-        $md_provider_input_image_license[ 'food_id' ] = !empty( $md_provider_registration->id )?$md_provider_registration->id:'';
+        $md_provider_input_image_license['food_id'] = !empty($md_provider_registration->id) ? $md_provider_registration->id : '';
 
-        if ( $request->has( 'company_licence_image_path' ) ) {
-            if ( $request->file( 'company_licence_image_path' ) ) {
-                $md_provider_input_image_license[ 'company_licence_image_path' ] = $this->verifyAndUpload( $request, 'company_licence_image_path', 'company/licence' );
-                $original_name = $request->file( 'company_licence_image_path' )->getClientOriginalName();
-                $md_provider_input_image_license[ 'company_licence_image_name' ] = $original_name;
+        if ($request->has('company_licence_image_path')) {
+            if ($request->file('company_licence_image_path')) {
+                $md_provider_input_image_license['company_licence_image_path'] = $this->verifyAndUpload($request, 'company_licence_image_path', 'company/licence');
+                $original_name = $request->file('company_licence_image_path')->getClientOriginalName();
+                $md_provider_input_image_license['company_licence_image_name'] = $original_name;
             }
         }
-        MDFoodLicense::create( $md_provider_input_image_license );
+        MDFoodLicense::create($md_provider_input_image_license);
 
         if (
             Auth::guard('md_health_food_registers')->attempt([
@@ -767,5 +793,4 @@ class RegistrationController extends BaseController
             ]);
         }
     }
-
 }
