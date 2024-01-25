@@ -6,6 +6,22 @@
         // dd($my_active_packages_list);
         $patient_information_list = !empty($patient_information_list[0]) ? $patient_information_list[0] : '';
 
+        if (!function_exists('extractNumericRange')) {
+                function extractNumericRange($inputString)
+                {
+                    // Use regular expression to match the numeric range
+                    preg_match('/\b\d+-\d+\b/', $inputString, $matches);
+
+                    // Check if a match is found
+                    if (!empty($matches)) {
+                        return $matches[0];
+                    }
+
+                    // Return null if no match is found
+                    return null;
+                }
+            }
+
     @endphp
 @endsection
 @extends('front.layout.layout2')
@@ -147,13 +163,13 @@
                                                         </div>
                                                         <div class="df-column">
                                                             <h5 class="mb-0 card-h4">
-                                                                <!-- {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }} -->
-                                                                Memorial Hospital
+                                                                 {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }} 
+                                                                {{-- Memorial Hospital --}}
                                                             </h5>
 
                                                             <h6 class="card-h1">
-                                                                <!-- {{ !empty($active_package['package_name']) ? $active_package['package_name'] : '' }} -->
-                                                                Heart Valve Replacement Surgery
+                                                                 {{ !empty($active_package['package_name']) ? $active_package['package_name'] : '' }} 
+                                                                {{-- Heart Valve Replacement Surgery --}}
                                                             </h6>
 
                                                             <div class="d-flex align-items-center gap-5 mb-3">
@@ -173,7 +189,7 @@
                                                                             d="M4.83372 1.41667V0H9.08372V1.41667H4.83372ZM5.54206 9.73958L4.76289 8.18125C4.70386 8.05139 4.61532 7.95388 4.49727 7.88871C4.37921 7.82354 4.25525 7.79119 4.12539 7.79167H0.619141C0.796224 6.19792 1.48685 4.85492 2.69102 3.76267C3.89518 2.67042 5.31775 2.12453 6.95872 2.125C7.69067 2.125 8.3931 2.24306 9.06602 2.47917C9.73893 2.71528 10.3705 3.05764 10.9608 3.50625L11.9525 2.51458L12.9441 3.50625L11.9525 4.49792C12.3303 4.99375 12.6313 5.51626 12.8556 6.06546C13.0799 6.61465 13.2275 7.19006 13.2983 7.79167H10.2348L9.01289 5.34792C8.88303 5.07639 8.67053 4.94062 8.37539 4.94062C8.08025 4.94062 7.86775 5.07639 7.73789 5.34792L5.54206 9.73958ZM6.95872 14.875C5.31775 14.875 3.89518 14.3289 2.69102 13.2366C1.48685 12.1444 0.796224 10.8016 0.619141 9.20833H3.68268L4.90456 11.6521C5.03442 11.9236 5.24692 12.0594 5.54206 12.0594C5.8372 12.0594 6.0497 11.9236 6.17956 11.6521L8.37539 7.26042L9.15456 8.81875C9.21358 8.94861 9.30213 9.04612 9.42018 9.11129C9.53824 9.17646 9.6622 9.20881 9.79206 9.20833H13.2983C13.1212 10.8021 12.4306 12.1448 11.2264 13.2366C10.0223 14.3284 8.5997 14.8745 6.95872 14.875Z"
                                                                             fill="#111111" />
                                                                     </svg>
-                                                                    <i>{{ !empty($active_package['treatment_period_in_days']) ? 'Treatment Period ' . $active_package['treatment_period_in_days'] . ' days' : '' }}</i>
+                                                                    <i>{{ !empty($active_package['treatment_period_in_days']) ? 'Treatment Period ' . extractNumericRange($active_package['treatment_period_in_days']) . ' days' : '' }}</i>
                                                                 </p>
                                                             </div>
                                                             @if (!empty($active_package['treatment_start_date']))

@@ -89,7 +89,7 @@
                     <div class="d-flex justify-content-between mb-4">
                         <p class="mb-0 t_price">Select Your Payment Plan</p>
                         <p class="mb-0 t_price fnt20">Total Price <span class="total_price" style="color: #000;">34.560,00
-                               <span class="lira">₺</span> </span></p>
+                                <span class="lira">₺</span> </span></p>
                     </div>
                     <div class="discounts d-flex flex-column gap-3">
                         <div class="d-flex align-items-center gap-2">
@@ -191,21 +191,21 @@
                                     </h5>
                                 </div>
                                 <div class="d-flex gap-3 mb-4-input">
-                                    <div class="w-50"><input type="text" id="input4" name="input4" class="form-control "
-                                        placeholder="00/00">
+                                    <div class="w-50"><input type="text" id="input4" name="input4"
+                                            class="form-control " placeholder="00/00">
                                         <h5 id="verifyinput4" class="mt-0" style="color: red;">
-                                        Please Enter Expiry Date
-                                    </h5>
-                                </div>
-                                <div class="w-50">
-                                    <input type="password" id="input3" name="input3" class="form-control"
-                                        placeholder="CVV">
+                                            Please Enter Expiry Date
+                                        </h5>
+                                    </div>
+                                    <div class="w-50">
+                                        <input type="password" id="input3" name="input3" class="form-control"
+                                            placeholder="CVV">
                                         <h5 id="verifyinput3" class="mt-0" style="color: red;">
-                                        Please Enter CVV
-                                    </h5>
+                                            Please Enter CVV
+                                        </h5>
+                                    </div>
                                 </div>
-                                </div>
-                               
+
                                 <!-- <a href="{{ url('payment-status') }}"> -->
                                 <!-- <a href="{{ url('payment-status') }}" -->
                                 <a href="javascript:void(0)" style="color: #fff; height: unset; padding: 12px 2rem;"
@@ -269,8 +269,8 @@
 
         <!-- SECTION 3 -->
         <div class="bg-f6 scanQr">
-        <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
-    </div>
+            <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
+        </div>
     </div>
 @endsection
 @section('script')
@@ -305,6 +305,7 @@
             var packageId = "{{ $id }}";
             var patientId = "{{ $patient_id }}";
             var formData = new FormData();
+            var checkedTitles = [];
             formData.append('package_id', packageId);
             getData();
 
@@ -420,6 +421,8 @@
             });
 
             $('.purchaseBtn').click(function(event) {
+
+                
                 // makePurchase();
                 $('card_name').val($('#input1').val());
                 $('card_number').val($('#input2').val());
@@ -451,7 +454,8 @@
                     'card_cvv': cardCvv || '',
                     'card_name': cardName || '',
                     'pending_amount': pendingAmount,
-                    'percentage': percentage
+                    'percentage': percentage,
+                    'other_services': checkedTitles,
                 };
 
                 // Add additional data to the form
@@ -497,6 +501,9 @@
                 }
 
                 // If all validations pass, submit the form
+                // for (var pair of formData.entries()) {
+                //     console.log(pair[0]+ ', ' + pair[1]); 
+                // }
                 $("#procced_to_pay_form").submit();
                 // Submit the form
             })
@@ -542,47 +549,6 @@
                 form.submit();
             })
 
-            ////////////////////////////////////////////////////////////////////////////////
-
-            // $('#procced_to_pay_form').validate({
-            //     rules: {
-            //         input1: {
-            //             required: true,
-            //         },
-            //         input2: {
-            //             required: true,
-            //         },
-            //         input3: {
-            //             required: true,
-            //         },
-            //         input4: {
-            //             required: true,
-            //         },
-
-            //     },
-            //     messages: {
-            //         input1: {
-            //             required: "Please enter card holder name",
-            //         },
-            //         input2: {
-            //             required: "Please enter card number",
-            //         },
-            //         input3: {
-            //             required: "Please enter cvv",
-            //         },
-            //         input4: {
-            //             required: "Please enter card expiry date",
-            //         }
-
-            //     },
-            //     errorClass: 'error',
-            //     submitHandler: function(form) {
-            //         form.submit();
-            //     }
-            // });
-
-            ////////////////////////////////////////////////////////////////////////////////
-
             function getData() {
 
                 // alert(token);
@@ -626,6 +592,8 @@
                         $('.treatment_price').append(treatmentPriceHtml);
 
                         otherServices.forEach(function(service) {
+
+                            checkedTitles.push(service.title);
 
                             if (service.title == 'Accommodation') {
                                 otherServicesHtml += '<div class="card purchase-details-card">'
@@ -803,6 +771,8 @@
                     formData.append('percentage', '100%');
                 }
 
+
+
                 $.ajax({
                     url: baseUrl + '/api/md-customer-purchase-package',
                     type: 'POST',
@@ -864,8 +834,30 @@
                     if ($(this).is(':checked')) {
                         totalPrice += parseFloat(numberToDiscount(parseInt(purchaseDetails
                             .package_discount), otherServices[index].price));
+                        // alert($(this).val());
+                        
                     }
                 });
+
+                $(document).on('click', '.form-check-input', function() {
+                    // Array to store checked service titles
+                    checkedTitles = [];
+                    // Loop through all checkboxes
+                    $('.form-check-input').each(function() {
+                        // Check if the current checkbox is checked
+                        if ($(this).prop('checked')) {
+                            // Find the corresponding service title and add it to the array
+                            var title = $(this).siblings('.d-flex').find('.card-h4').text();
+                            checkedTitles.push(title);
+                        }
+                    });
+
+                    // Output the checked service titles (for demonstration)
+                    // console.log(checkedTitles);
+                    // Now you can do whatever you want with the checkedTitles array
+                });
+
+                
                 // alert(totalPrice);
                 totaltoShowPrice = totalPrice;
                 proxyPrice = totalPrice;

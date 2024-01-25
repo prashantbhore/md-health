@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Front\Customer;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Session;
-
+use Auth;
+// use plugNmeetConnect;
 require __DIR__ . "/plugNmeetConnect.php";
 
 class CustomerInteractionController extends Controller
 {
-    public function live_cam()
+    public function live_cam(Request $request)
     {
+
         $config = new \stdClass();
         $config->plugnmeet_server_url = "https://meet.examonline.com.tr"; // host.docker.internal
         $config->plugnmeet_api_key = "APIyrBpGtazKGI";
@@ -19,15 +22,19 @@ class CustomerInteractionController extends Controller
 
         $connect = new \plugNmeetConnect($config);
         // dd(Session::all());
-        $user = Session::get("user");
-        if(empty($user)){
-            return redirect()->back()->with('error','User Session Not Found');
-        }
-        if (!empty($user->provider_unique_id)) {
-            $userId = str_replace('#','',$user->provider_unique_id);
-        } else {
-
-            $userId = $user->id;
+        if($request->requestType === 'api'){
+            $user =  Auth::user()->id;
+        }else{
+            $user = Session::get("user");
+            if(empty($user)){
+                return redirect()->back()->with('error','User Session Not Found');
+            }
+            if (!empty($user->provider_unique_id)) {
+                $userId = str_replace('#','',$user->provider_unique_id);
+            } else {
+    
+                $userId = $user->id;
+            }
         }
         $roomId = "room01"; // must be unique. You can also use $connect->getUUID();
         $max_participants = 0; // value 0 means no limit (unlimited)
@@ -146,7 +153,15 @@ class CustomerInteractionController extends Controller
         // echo"<pre>";print_r($output);die;
         $url = trim(strip_tags($output['url']));
         // echo $output['url'];die;
-        return view('front/mdhealth/medical-provider/live-consultation-appoinment',compact('url'));
-        // return Redirect::away($output['url']);
+        if ($request->requestType === 'api') {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your video call url.',
+                'url' => $url
+            ]);
+        } else {
+            return view('front/mdhealth/medical-provider/live-consultation-appoinment',compact('url'));
+        }
+       
     }
 }

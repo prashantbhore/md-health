@@ -1,4 +1,5 @@
 @php
+
      $previllages= App\Models\MedicalProviderRegistrater::where('status','active')
        ->select('previllages')
         ->where('roll_id','!=',null)

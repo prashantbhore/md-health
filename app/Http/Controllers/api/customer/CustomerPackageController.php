@@ -1643,7 +1643,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
                 $purchase_details['package_total_price'] = $request->sale_price;
-                $purchase_details['other_services'] = !empty($request->other_services) ? implode(',', $request->other_services) : '';
+                $purchase_details['other_services'] = !empty($request->other_services) ? str_replace('[', '', str_replace(']', '', str_replace('"', '', $request->other_services))) : '';
                 // $purchase_details['type'] = !empty($request->type) ? $request->type : '';
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;

@@ -70,6 +70,6 @@ class Kernel extends HttpKernel
         'IsCustomer' => \App\Http\Middleware\IsCustomer::class,
         'IsVendor' => \App\Http\Middleware\isVendor::class,
         'isFoodVendor' => \App\Http\Middleware\isFoodVendor::class,
-
+        'CheckRequestType' => \App\Http\Middleware\CheckRequestType::class,
     ];
 }
