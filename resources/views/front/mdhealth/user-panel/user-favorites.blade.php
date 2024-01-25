@@ -18,6 +18,25 @@
                         <h5 class="card-header">
                             <span>My Favorites</span>
                         </h5>
+                        <div class="filter-div">
+                            <div class="search-div">
+                                <select name="" id="">
+                                    <option value="">List for date</option>
+                                    <option value="">List for Stars</option>
+                                    <option value="">List for Price</option>
+                                    <option value="">List for Distance</option>
+                                </select>
+                            </div>
+                            {{-- <div class="search-div">
+                                <input type="text" name="searchpackage" id="searchpackage"
+                                    placeholder="Search" />
+                            </div> --}}
+                   
+                         {{-- <div class="list-div">
+                            
+                        </div>  --}}
+                       
+                        </div>
                         <div class="card-body">
                             @if (!empty($fav_list))
                                 @foreach ($fav_list as $fav)
