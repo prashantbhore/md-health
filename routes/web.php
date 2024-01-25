@@ -731,7 +731,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
     });
 });
 
-Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
+Route::middleware(['CheckRequestType'])->group(function () {
+    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
+});
 
 
 

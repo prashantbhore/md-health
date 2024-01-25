@@ -104,7 +104,7 @@ class ApiService
                 // dd( jso n_decode( $response->getContent(), true ) );
 
                 try {
-                    if (empty($response->getContent())) {
+                    if (empty(json_decode($response->getContent(), true))) {
     
                         throw new \Exception($response->getContent());
                     } else {

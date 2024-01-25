@@ -99,7 +99,7 @@
             $payment_time_and_date = '';
         }
 
-        // dd($my_details,$treatment_information);
+        // dd($my_details,$treatment_information,$data);
 
     @endphp
 @endsection

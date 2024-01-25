@@ -1,4 +1,11 @@
 @extends('front.layout.layout2')
+@section('php')
+    @php
+        $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
+        $user = Session::has('MDCustomer*%') ? Session::get('MDCustomer*%') : '';
+
+    @endphp
+@endsection
 @section('content')
     <style>
         .person-message-div .treatment-card {
@@ -53,7 +60,11 @@
         <div class="container py-100px for-cards">
             <div class="d-flex gap-3">
                 <div class="w-292">
-                    @include('front.includes.sidebar')
+                    @if ($user != '')
+                        @include('front.includes.sidebar-user')
+                    @elseif($medical != '')
+                        @include('front.includes.sidebar')
+                    @endif
                 </div>
                 <div class="w-761">
                     <div class="card mb-4">

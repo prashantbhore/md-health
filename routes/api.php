@@ -9,6 +9,7 @@ use App\Http\Controllers\api\AppConfigController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
+use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\customer\CustomerShopController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
@@ -45,7 +46,10 @@ Route::get('unauthorized-user', function () {
 // dynamic app url
 Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']);
 
-
+//Mplus02
+Route::middleware(['CheckRequestType'])->group(function () {
+    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
+});
 
 
 // get country list

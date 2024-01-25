@@ -48,10 +48,15 @@ class CustomerPackageController extends Controller {
             'card_number' => 'required',
             'cvv' => 'required',
             'validity' => 'required',
+            'other_services' => 'required',
         ] );
         if ( $validator->fails() ) {
             return $this->sendError( 'Validation Error.', $validator->errors() );
         }
+        $controller_request->other_services = explode(',',$controller_request->other_services);
+        // dd(str_replace('[', '', str_replace(']', '', str_replace('"', '', $controller_request->other_services))));
+        // dd();
+        // dd( implode(',', $controller_request->other_services) );
         $conversation_id = mt_rand( 100000000, 999999999 );
         Session::put( 'payment_request', $controller_request->all() );
         $body = $controller_request->all();
@@ -240,6 +245,7 @@ class CustomerPackageController extends Controller {
 
             $repsonse_data = $this->apiService->getData( Session::get( 'login_token' ), url( '/api/md-customer-purchase-package' ), $plainArray, 'POST' );
             Session::forget( 'payment_request' );
+            // dd($repsonse_da  ta);
             if ( !empty( $repsonse_data ) ) {
                 if ( $repsonse_data[ 'status' ] == '200' ) {
 
