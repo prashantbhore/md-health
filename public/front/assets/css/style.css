@@ -671,7 +671,7 @@
 
     font-family: Campton;
     font-size: 16px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.64px;
@@ -2046,6 +2046,7 @@ select option {
 .request-modal .form-control {
     background-color: #f6f6f6;
 }
+
 
 #UserCancellationReq .form-select,
 #patient-package-details .form-select,
@@ -3861,7 +3862,7 @@ label.tc-text,
     color: #000;
     font-family: Campton;
     font-size: 17px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.68px;
@@ -3871,7 +3872,7 @@ label.tc-text,
     color: #4CDB06;
     font-family: CamptonBook;
     font-size: 18px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.72px;
@@ -4341,7 +4342,7 @@ label.tc-text,
     color: #9e9e9e !important;
     font-family: Campton !important;
     font-size: 13px !important;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.52px;
@@ -4363,7 +4364,7 @@ label.tc-text,
     text-align: center;
     font-family: CamptonBold;
     font-size: 8px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.92px;
@@ -4373,7 +4374,7 @@ label.tc-text,
     color: #000;
     font-family: Campton;
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.56px;
@@ -4383,7 +4384,7 @@ label.tc-text,
 .user-details-body ul li a {
     color: #4cdb06;
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.56px;
@@ -4463,7 +4464,7 @@ label.tc-text,
     color: #4cdb06;
     font-family: Campton;
     font-size: 12px;
-    font-style: normal;
+
     font-weight: 600;
     line-height: normal;
     letter-spacing: -0.48px;
@@ -4514,7 +4515,7 @@ label.tc-text,
     color: #000;
     font-family: Campton !important;
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.56px;
@@ -4524,7 +4525,7 @@ label.tc-text,
     color: #000;
     font-family: CamptonBold;
     font-size: 50px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -1.64px;
@@ -4533,7 +4534,7 @@ label.tc-text,
 .andInv {
     font-family: Campton;
     font-size: 47px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: 111.2%;
     letter-spacing: -1.88px;
@@ -4548,7 +4549,7 @@ label.tc-text,
     color: #000;
     font-family: Campton;
     font-size: 15px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.6px;
@@ -4646,7 +4647,7 @@ hr:not([size]) {
     text-align: center;
     font-family: Campton;
     font-size: 14px;
-    font-style: normal;
+
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.56px;
@@ -4666,7 +4667,7 @@ hr:not([size]) {
     color: #4CDB06;
     font-family: CamptonBook;
     font-size: 22px;
-    font-style: normal;
+
     line-height: normal;
     letter-spacing: -0.88px;
 }
@@ -4700,7 +4701,7 @@ hr:not([size]) {
     text-align: center;
     font-family: Campton;
     font-size: 15px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.6px;
@@ -4880,7 +4881,7 @@ input[type="radio"] {
     text-align: center;
     font-family: Campton;
     font-size: 22px;
-    font-style: normal;
+
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.88px;
@@ -4948,4 +4949,69 @@ input[type="radio"] {
     line-height: 16px;
     letter-spacing: -0.04em;
     text-align: left;
+}
+
+
+.bank-transfer-details .form-label {
+    color: #4CDB06;
+    font-family: CamptonBold;
+    font-size: 19px;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.16px;
+}
+
+.bank-transfer-details .form-select,
+.bank-transfer-details .form-control {
+    width: 365px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #989898;
+    /* color: #000; */
+    color: #989898;
+    font-family: CamptonBook;
+    font-size: 16px;
+    background: #f6f6f6;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.bank-transfer-details::placeholder,
+.bank-transfer-details .form-control {
+    color: #989898;
+    font-family: Campton;
+    font-size: 16px;
+    color: #989898;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.bank-transfer-details .submit-btn {
+    width: 226px;
+    height: 49px;
+    flex-shrink: 0;
+    background: #4CDB06;
+    color: #FFFCFC;
+    font-family: Campton;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1.12px;
+}
+
+.bank-transfer-details .form-select {
+    background-image: url("../img/select-arrow-gray.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: bottom 16px right 12px;
+
+}
+
+.preview-img img {
+    height: 100px;
 }
