@@ -39,30 +39,39 @@
                 <div class="card">
                     <h5 class="card-header p-4 pb-0 page-title bg-white border-0">Manage Memberships</h5>
                     <div class="card-body p-4 pt-0">
-                        <form action="#">
+                        <form action="{{route('store.membership')}}" method="post">
+                            @csrf
                             <!-- 1. SILVER MEMBER -->
                             <div class="mb-5">
+                                
+                                <div class="mb-3">
+                                    <select name="vendor_type" id="vendor_type" class="form-select">
+                                        <option value="medical_service_provider">Medical Service Provider</option>
+                                        <option value="shop_vendor">Shop Vendor</option>
+                                        <option value="food_vendor">Food Vendor</option>
+                                        <option value="home_service">Home Service</option>
+                                    </select>
+                                </div>
+
                                 <div class="mb-3">
                                     <img src="{{asset('admin/assets/img/silver-member.png')}}" alt="">
                                 </div>
+                              
                                 <div class="mb-3">
-                                    <select name="" id="" class="form-select">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
+                                    <input type="text" name="membership_name" value="SilverMember"  class="form-control" placeholder="SilverMember" disabled="disabled" >
                                 </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="">
-                                </div>
-                                <!-- AMOUNT -->
+
+                                <input type="hidden" name="membership_name[]" value="silver">
+
+                               
                                 <div class="mb-3 position-relative">
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="silver_amount" id="silver_amount" value="0" class="form-control" placeholder="Silver Amount">
                                     <span class="inputIcon">₺</span>
                                 </div>
-                                <!-- PERCENTAGE -->
+
+                                
                                 <div class="mb-3 position-relative">
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="silver_percentage" id="silver_percentage" value="0" class="form-control" placeholder="">
                                     <span class="inputIcon">%</span>
                                 </div>
                             </div>
@@ -73,22 +82,21 @@
                                 <div class="mb-3">
                                     <img src="{{asset('admin/assets/img/gold-member.png')}}" alt="">
                                 </div>
+                                
+
                                 <div class="mb-3">
-                                    <select name="" id="" class="form-select">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
+                                    <input type="text" name="membership_name" value="GoldMember" class="form-control" placeholder="" disabled="disabled">
                                 </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="">
-                                </div>
+
+                                <input type="hidden" name="membership_name[]" value="gold">
+
+
                                 <div class="mb-3 position-relative">
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="gold_amount" id="gold_amount" value="0" class="form-control" placeholder="">
                                     <span class="inputIcon">₺</span>
                                 </div>
                                 <div class="mb-3 position-relative">
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="gold_percentage" id="gold_percentage" value="0" class="form-control" placeholder="">
                                     <span class="inputIcon">%</span>
                                 </div>
                             </div>
@@ -99,33 +107,29 @@
                                 <div class="mb-3">
                                     <img src="{{asset('admin/assets/img/platinum-member.png')}}" alt="">
                                 </div>
-                                <!-- SELECT -->
+                       
+
                                 <div class="mb-3">
-                                    <select name="" id="" class="form-select">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
+                                    <input type="text" name="membership_name" value="PlatinumMember" class="form-control" placeholder="" disabled="disabled">
                                 </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="">
-                                </div>
+
+                                <input type="hidden" name="membership_name[]" value="platinum">
                                 <!-- AMOUNT -->
                                 <div class="mb-3 position-relative">
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="platinum_amount" id="platinum_amount" value="0" class="form-control" placeholder="">
                                     <span class="inputIcon">₺</span>
                                 </div>
                                 <!-- PERCENTAGE -->
                                 <div class="mb-3 position-relative">
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="platinum_percentage" id="platinum_percentage" value="0" class="form-control" placeholder="">
                                     <span class="inputIcon">%</span>
                                 </div>
                             </div>
                             <!-- PLATINUM MEMBER END -->
 
                             <div class="d-flex align-items-center justify-content-end gap-3 mb-3">
-                                <button type="submit" class="btn submit-btn bg-green df-center">Save Changes</button>
-                                <button type="submit" class="btn submit-btn bg-md-red camLight df-center text-white">Discard Changes</button>
+                                <button type="submit" name="save" value="save"  class="btn submit-btn bg-green df-center">Save Changes</button>
+                                <button type="submit" name="discard" value="discard" class="btn submit-btn bg-md-red camLight df-center text-white">Discard Changes</button>
                             </div>
                         </form>
                     </div>
@@ -214,5 +218,113 @@
 
 
     })
+</script>
+{{-- <script>
+
+    function performAjaxCall(selectedValue){
+        $.ajax({
+            type: "post",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: { vendor_type: selectedValue },
+            url: base_url + "/admin/memberships/list-memberships",
+            beforeSend: function () {
+                actionDiv
+                    .html(
+                        "<i class='fa fa-spin fa-spinner' style='color: #000000 !important;'></i>"
+                    )
+                    .show();
+            },
+            success: function (data) {
+                var oTable = $("#example").dataTable();
+                oTable.fnDraw(false);
+                success_toast("Success", data.message);
+            },
+            error: function (data) {
+                console.log("Error:", data);
+            },
+        });
+
+
+
+    }
+
+   
+    performAjaxCall($('#vendor_type').val());
+
+    $('#vendor_type').change(function(){
+
+        var selectedValue = $(this).val();
+        performAjaxCall(selectedValue);
+    });
+</script> --}}
+
+<script>
+    $(document).ready(function() {
+
+     function performAjaxCall(selectedValue) {
+    $.ajax({
+        type: "post",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: { vendor_type: selectedValue },
+        url: base_url + "/admin/memberships/list-memberships",
+        beforeSend: function () {
+            // You can add any code to run before the AJAX request is sent
+        },
+        success: function (data) {
+            // Check if data.membershipLits is not found or is empty
+            if (!data.membershipLits || data.membershipLits.length === 0) {
+                // Set all values to zero
+                $("#silver_amount").val(0);
+                $("#silver_percentage").val(0);
+
+                $("#gold_amount").val(0);
+                $("#gold_percentage").val(0);
+
+                $("#platinum_amount").val(0);
+                $("#platinum_percentage").val(0);
+            } else {
+                // Loop through the array of membership types
+                data.membershipLits.forEach(function (membership) {
+                    // Get membership type and set values accordingly
+                    var membershipType = membership.membership_type.toLowerCase(); // Convert to lowercase for consistency
+
+                    $("#" + membershipType + "_amount").val(membership.membership_amount || 0);
+                    $("#" + membershipType + "_percentage").val(membership.commission_percent || 0);
+                });
+            }
+
+            console.log("Success", data.message);
+        },
+        error: function (data) {
+            console.log("Error:", data);
+
+            // In case of an error, set all values to zero
+            $("#silver_amount").val(0);
+            $("#silver_percentage").val(0);
+
+            $("#gold_amount").val(0);
+            $("#gold_percentage").val(0);
+
+            $("#platinum_amount").val(0);
+            $("#platinum_percentage").val(0);
+        },
+    });
+}
+
+
+
+      
+        performAjaxCall($('#vendor_type').val());
+
+ 
+        $('#vendor_type').change(function () {
+            var selectedValue = $(this).val();
+            performAjaxCall(selectedValue);
+        });
+    });
 </script>
 @endsection

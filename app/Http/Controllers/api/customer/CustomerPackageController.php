@@ -1888,7 +1888,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['payment_percentage'] = $request->percentage;
                 if (!empty($request->percentage)) {
                     if ($request->percentage == '100%') {
-                        $purchase_details['purchase_type'] = 'completed';
+                        $purchase_details['purchase_type'] = 'pending';
                     } else {
                         $purchase_details['purchase_type'] = 'pending';
                     }
