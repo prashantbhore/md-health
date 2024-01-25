@@ -1644,7 +1644,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
                 $purchase_details['package_total_price'] = $request->sale_price;
-                $purchase_details['other_services'] = !empty($request->other_services) ? implode(',', $request->other_services) : '';
+                $purchase_details['other_services'] = !empty($request->other_services) ? str_replace('[', '', str_replace(']', '', str_replace('"', '', $request->other_services))) : '';
                 // $purchase_details['type'] = !empty($request->type) ? $request->type : '';
                 // $purchase_details['payment_percentage'] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
@@ -1889,7 +1889,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['payment_percentage'] = $request->percentage;
                 if (!empty($request->percentage)) {
                     if ($request->percentage == '100%') {
-                        $purchase_details['purchase_type'] = 'completed';
+                        $purchase_details['purchase_type'] = 'pending';
                     } else {
                         $purchase_details['purchase_type'] = 'pending';
                     }
@@ -2473,7 +2473,7 @@ class CustomerPackageController extends BaseController
                     // 'md_customer_registration.city_id',
                 )
                 ->where('md_customer_purchase_details.customer_id', auth::user()->id)
-                ->where('md_customer_purchase_details.type', 'myself')
+                // ->where('md_customer_purchase_details.type', 'myself')
                 ->leftjoin('md_customer_registration', 'md_customer_registration.id', 'md_customer_purchase_details.customer_id')
                 ->leftjoin('md_master_cities', 'md_customer_registration.city_id', '=', 'md_master_cities.id')
                 ->leftjoin('md_master_country', 'md_customer_registration.country_id', '=', 'md_master_country.id')
@@ -2838,7 +2838,7 @@ class CustomerPackageController extends BaseController
         $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
         $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
         // $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
-        $customer_purchase_package_active_list['case_no'] = !empty($customer_purchase_package_active_list->case_no) ? $customer_purchase_package_active_list->case_no : 0;
+        $customer_purchase_package_active_list['case_no'] = !empty($customer_purchase_package_active_list->case_no) ? $customer_purchase_package_active_list->case_no : '-';
         $customer_purchase_package_active_list['case_manager'] = !empty($customer_purchase_package_active_list->case_manager) ? $customer_purchase_package_active_list->case_manager : '';
         $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? $customer_purchase_package_active_list->other_services : '';
         $customer_purchase_package_active_list['hotel_id'] = !empty($customer_purchase_package_active_list->hotel_id) ? $customer_purchase_package_active_list->hotel_id : 0;
@@ -3472,8 +3472,8 @@ class CustomerPackageController extends BaseController
         return response()->json([
             'status' => 200,
             'message' => 'Here is your hotel list.',
-            'hotel_list' => [$accommodation], // Wrap $accommodation in an array
-            'other_services' => $other_services,
+            'hotel_list' => $accommodation, // Wrap $accommodation in an array
+            'other_services' => $other_services['other_services']
         ]);
     }
 
@@ -3551,38 +3551,30 @@ class CustomerPackageController extends BaseController
             ->where('md_add_transportation_details.id', $request->id)
             ->first();
 
-        $transportationList = [];
-
-        if (!empty($transportationDetails)) {
-            $transportation = [
-                'id' => $transportationDetails->id,
-                'status' => $transportationDetails->status,
-                'brand_name' => $transportationDetails->brand_name,
-                'vehicle_model_id' => $transportationDetails->vehicle_model_id,
-                'vehicle_per_day_price' => $transportationDetails->vehicle_per_day_price,
-                'other_services' => !empty($transportationDetails->other_services) ? explode(',', $transportationDetails->other_services) : [],
-                'vehicle_level_name' => $transportationDetails->vehicle_level_name,
-            ];
-
-            $transportationList[] = $transportation;
-            $other_services = [
-                'other_services' => !empty($transportationDetails->other_services) ? explode(',', $transportationDetails->other_services) : [],
-            ];
-        }
-
-        if (!empty($transportationList)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Transportation Details list found.',
-                'transportation_list' => $transportationList,
-                'other_services' => $other_services,
-            ]);
-        } else {
+        if (empty($transportationDetails)) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Transportation Details list is empty.',
+                'message' => 'Transportation Details not found.',
             ]);
         }
+
+        $transportation = [
+            'id' => $transportationDetails->id,
+            'status' => $transportationDetails->status,
+            'brand_name' => $transportationDetails->brand_name,
+            'vehicle_model_id' => $transportationDetails->vehicle_model_id,
+            'vehicle_per_day_price' => $transportationDetails->vehicle_per_day_price,
+            'vehicle_level_name' => $transportationDetails->vehicle_level_name,
+        ];
+
+        $other_services = !empty($transportationDetails->other_services) ? explode(',', $transportationDetails->other_services) : [];
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Transportation Details found.',
+            'transportation_details' => $transportation,
+            'other_services' => $other_services,
+        ]);
     }
 
 
@@ -3630,6 +3622,71 @@ class CustomerPackageController extends BaseController
     //     }
     // }
 
+    // public function customer_tour_details_view(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'id' => 'required',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return $this->sendError('Validation Error.', $validator->errors());
+    //     }
+
+    //     $tourDetails = ToursDetails::where('status', '=', 'active')
+    //         ->select(
+    //             'id',
+    //             'tour_name',
+    //             'tour_description',
+    //             'tour_days',
+    //             'tour_image_path',
+    //             'tour_image_name',
+    //             'tour_price',
+    //             'tour_other_services',
+    //             'platform_type',
+    //             'status',
+    //             'created_by'
+    //         )
+    //         ->where('id', $request->id)
+    //         ->first();
+
+    //     $tourList = [];
+
+    //     if (!empty($tourDetails)) {
+    //         $tour = [
+    //             'id' => $tourDetails->id,
+    //             'tour_name' => !empty($tourDetails->tour_name) ? $tourDetails->tour_name : '',
+    //             'tour_description' => !empty($tourDetails->tour_description) ? $tourDetails->tour_description : '',
+    //             'tour_days' => !empty($tourDetails->tour_days) ? $tourDetails->tour_days : '',
+    //             'tour_image_path' => url('/') . Storage::url($tourDetails->tour_image_path),
+    //             'tour_price' => !empty($tourDetails->tour_price) ? $tourDetails->tour_price : '',
+    //             'tour_other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : '',
+    //             'platform_type' => $tourDetails->platform_type,
+    //             'status' => $tourDetails->status,
+    //             'created_by' => $tourDetails->created_by,
+    //         ];
+
+    //         $other_services = [
+    //             'other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : [],
+    //         ];
+
+    //         $tourList[] = $tour;
+    //     }
+
+    //     if (!empty($tourList)) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'message' => 'Tour Details found.',
+    //             'tour_list' => $tourList,
+    //             'other_services' => $other_services
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'Something went wrong. Details not found.',
+    //         ]);
+    //     }
+    // }
+
     public function customer_tour_details_view(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -3657,42 +3714,35 @@ class CustomerPackageController extends BaseController
             ->where('id', $request->id)
             ->first();
 
-        $tourList = [];
-
-        if (!empty($tourDetails)) {
-            $tour = [
-                'id' => $tourDetails->id,
-                'tour_name' => !empty($tourDetails->tour_name) ? $tourDetails->tour_name : '',
-                'tour_description' => !empty($tourDetails->tour_description) ? $tourDetails->tour_description : '',
-                'tour_days' => !empty($tourDetails->tour_days) ? $tourDetails->tour_days : '',
-                'tour_image_path' => url('/') . Storage::url($tourDetails->tour_image_path),
-                'tour_price' => !empty($tourDetails->tour_price) ? $tourDetails->tour_price : '',
-                'tour_other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : '',
-                'platform_type' => $tourDetails->platform_type,
-                'status' => $tourDetails->status,
-                'created_by' => $tourDetails->created_by,
-            ];
-
-            $other_services = [
-                'other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : [],
-            ];
-
-            $tourList[] = $tour;
-        }
-
-        if (!empty($tourList)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Tour Details found.',
-                'tour_list' => $tourList,
-                'other_services' => $other_services
-            ]);
-        } else {
+        if (empty($tourDetails)) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Something went wrong. Details not found.',
+                'message' => 'Tour Details not found.',
             ]);
         }
+
+        $tour = [
+            'id' => $tourDetails->id,
+            'tour_name' => !empty($tourDetails->tour_name) ? $tourDetails->tour_name : '',
+            'tour_description' => !empty($tourDetails->tour_description) ? $tourDetails->tour_description : '',
+            'tour_days' => !empty($tourDetails->tour_days) ? $tourDetails->tour_days : '',
+            'tour_image_path' => url('/') . Storage::url($tourDetails->tour_image_path),
+            'tour_price' => !empty($tourDetails->tour_price) ? $tourDetails->tour_price : '',
+            'tour_other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : [],
+
+
+        ];
+
+        $other_services = [
+            'other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : [],
+        ];
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Tour Details found.',
+            'tour_details' => $tour,
+            'other_services' => $other_services['other_services'],
+        ]);
     }
 
 
