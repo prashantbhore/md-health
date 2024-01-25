@@ -82,6 +82,14 @@ Route::post('md-food-login', [LoginControllers::class, 'food_login']);
 Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_registration']);
 
 Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
+
+
+
+// get country list
+Route::get('md-helath-bank-list', [CustomerPackageController::class, 'md_health_bank_lists']);
+
+
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () 
 {
