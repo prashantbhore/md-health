@@ -237,13 +237,14 @@
             <!-- BANK TRANSFER -->
             <div id="bank" class="bank-transfer-details">
                 <form action="php">
+
                     <div class="row gy-4">
                         <div class="col-md-12 mb-3">
                             <label for="Bank Informations" class="form-label mb-3" style="font-size: 29px;">Bank Informations</label>
                             <select name="bank-informations" id="bank-informations" class="form-select">
-                                <option value="Bank A">Halk Bank</option>
+                                {{-- <option value="Bank A">Halk Bank</option>
                                 <option value="Bank B">Deniz Bank</option>
-                                <option value="Bank C">AK Bank</option>
+                                <option value="Bank C">AK Bank</option> --}}
                             </select>
                         </div>
 
@@ -355,6 +356,7 @@
         var formData = new FormData();
         formData.append('package_id', packageId);
         getData();
+        getBankList();
 
         ///////////////////////////////////////////////////////////////////////////////
 
@@ -868,6 +870,92 @@
                 },
             });
         }
+
+
+
+    function getBankList(){
+        $.ajax({
+            url: baseUrl + '/api/md-helath-bank-list',
+            type: 'GET',
+            processData: false,
+            contentType: false,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+               console.log('Success:', response.bank_list);
+                $('#bank-informations').empty();
+
+                for (var i = 0; i < response.bank_list.length; i++) {
+                    var bankName = response.bank_list[i].bank_name;
+                    if (bankName) {
+                        $('#bank-informations').append('<option value="' + bankName + '">' + bankName + '</option>');
+                    }
+                }
+
+                calcOtherServices();
+                updateDiscountedPrice();
+            },
+
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+
+
+
+
+       
+        function getBankData(selectedBank){
+            $.ajax({
+                url: baseUrl + '/api/get-bank-data',
+                type: 'GET',
+                data: {
+                    bank_name: selectedBank
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) {
+                    console.log('Bank Data for ' + selectedBank + ':', response);
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching bank data:', error);
+                }
+            });
+        }
+
+       
+        $(document).on('change', '#bank-informations', function(){
+            var selectedBank = $(this).val();
+            getBankData(selectedBank);
+        });
+
+       
+        $(document).on('click', 'input[name="paymentMethod"][value="bank"]', function(){
+            var selectedBank = $('#bank-informations').val();
+            if (selectedBank) {
+                getBankData(selectedBank);
+            }
+        });
+
+    
+        $(document).ready(function(){
+            getBankList(); 
+            var initialSelectedBank = $('#bank-informations').val();
+            if (initialSelectedBank) {
+                getBankData(initialSelectedBank);
+            }
+        });
+
+
+
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 

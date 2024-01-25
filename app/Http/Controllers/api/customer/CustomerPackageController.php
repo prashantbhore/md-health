@@ -25,6 +25,7 @@ use App\Models\CustomerCancelledReason;
 use App\Models\CustomerFavouritePackages;
 use App\Models\MedicalProviderLogo;
 use App\Models\MedicalProviderLicense;
+use App\Models\MDhelathBankDetails;
 
 
 
@@ -3877,4 +3878,35 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
+
+
+
+
+    public function md_health_bank_lists()
+    {
+        $bank_list = MDhelathBankDetails::where('status', 'active')->select('bank_name')->get();
+    
+           
+        if (!empty($bank_list)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Bank List Found',
+                'bank_list' =>  $bank_list,
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Bank List Not Found',
+            ]);
+        }
+    }
+
+
+
+
+
+
+
+
 }
