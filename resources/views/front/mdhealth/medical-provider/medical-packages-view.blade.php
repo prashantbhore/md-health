@@ -52,7 +52,7 @@
             justify-content: center;
             padding: 0;
             color: #000;
-            font-family: CamptonBold;
+            font-family: CamptonExtraBold;
             font-size: 16px;
             line-height: normal;
             letter-spacing: -0.64px;
@@ -514,7 +514,7 @@
                                             <label class="section-heading" for="featureproducts">Featured Request</label>
                                         </div>
                                         <div class="form-check">
-                                            <label class="form-check-label" for="featureproducts">I confirm that all
+                                            <label class="form-check-label" style="line-height: 1.65;" for="featureproducts">I confirm that all
                                                 details are correct and meets the <a href="#"
                                                     class="text-green fw-700 text-decoration-underline camptonBold">Terms &
                                                     Conditions.</a></label>
