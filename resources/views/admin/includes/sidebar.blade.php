@@ -83,9 +83,16 @@
                     Featured List
                 </a>
             </li>
+            
             <li class="manageRequestLi">
                 <a href="{{URL::asset('admin/manage-request')}}" class="nav-link link-dark manageRequest">
                     Manage Request
+                </a>
+            </li>
+
+            <li class="membershipsLi">
+                <a href="{{URL::asset('admin/manage-memberships')}}" class="nav-link link-dark memberships">
+                    Memberships
                 </a>
             </li>
 
@@ -100,11 +107,7 @@
                     Manage Admins
                 </a>
             </li>
-            <li class="membershipsLi">
-                <a href="{{URL::asset('admin/manage-memberships')}}" class="nav-link link-dark memberships">
-                    Memberships
-                </a>
-            </li>
+            
 
         </ul>
     </div>
