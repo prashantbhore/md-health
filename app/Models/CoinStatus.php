@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MDCoins extends Model
+class CoinStatus extends Model
 {
     use HasFactory;
-    protected $table = 'md_coins';
+    protected $table = 'md_coins_status';
     protected $fillable = [
         'customer_id',
-        'coins',
-        'invitation_count',
-        'total_invitation_count',
+        'wallet_status',
         'status',
         'created_ip_address',
         'modified_ip_address',
