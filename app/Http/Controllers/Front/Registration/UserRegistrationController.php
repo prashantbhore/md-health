@@ -317,11 +317,11 @@ class UserRegistrationController extends Controller {
 
         if ( !empty( $customer_update ) ) {
             // dd( $customer_update );
-            Auth::logout();
-            Session::flush();
-            return redirect( '/sign-in-web' )->with( 'success', 'Profile details updated successfully.' );
+            // Auth::logout();
+            // Session::flush();
+            return redirect( '/my-profile' )->with( 'success', 'Profile details updated successfully.' );
         } else {
-            return redirect( '/user-profile' )->with( 'error', 'Something went wrong. Details not updated.' );
+            return redirect( '/my-profile' )->with( 'error', 'Something went wrong. Details not updated.' );
         }
         // }
     }

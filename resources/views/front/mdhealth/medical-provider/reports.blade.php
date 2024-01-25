@@ -101,6 +101,28 @@
         background: #F6F6F6;
     }
 </style>
+<style>
+.no-data {
+    height: 362px;
+    font-family: "CamptonBook";
+    color: #979797;
+    font-weight: 400;
+    letter-spacing: -0.56px;
+    font-size: 16px;
+    border-radius: 3px;
+    /* border: 1px solid #F6F6F6; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    /* background: #F6F6F6; */
+}
+
+.no-data img {
+    width: 150px;
+    height: auto;
+}
+</style>
 
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
@@ -183,13 +205,13 @@
                                     <input type="text" placeholder="Search" id="liveSearchInput" />
                                 </div>
 
-                                <div class="list-div">
+                                {{-- <div class="list-div">
                                     <select name="" id="">
                                         <option value="">List for date</option>
                                         <option value="">List for Price</option>
                                         <option value="">List for Distance</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div id="resultContainer"></div>
@@ -364,7 +386,9 @@
                     $('#resultContainer').html(html);
                 } else {
                     // Show "No report found" message when HTML is empty
-                    $('#resultContainer').html("<p>No Reports Found</p>").addClass('no-data');
+                    $('#resultContainer').html('<div class="no-data">\
+    <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+</div>');
                 }
             },
             error: function(error) {

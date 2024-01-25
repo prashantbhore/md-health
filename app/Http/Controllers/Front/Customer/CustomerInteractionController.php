@@ -20,6 +20,9 @@ class CustomerInteractionController extends Controller
         $connect = new \plugNmeetConnect($config);
         // dd(Session::all());
         $user = Session::get("user");
+        if(empty($user)){
+            return redirect()->back()->with('error','User Session Not Found');
+        }
         if (!empty($user->provider_unique_id)) {
             $userId = str_replace('#','',$user->provider_unique_id);
         } else {
