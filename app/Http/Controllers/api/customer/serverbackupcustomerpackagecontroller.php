@@ -2810,6 +2810,7 @@ class CustomerPackageController extends BaseController
                 'md_customer_favourite_packages.id',
                 'md_packages.treatment_period_in_days',
                 'md_product_category.product_category_name',
+                'md_medical_provider_register.company_name as vendors_name',
                 'md_master_cities.city_name'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
