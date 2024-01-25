@@ -47,10 +47,10 @@
     .treatmentForModal2 .form-control,
     .treatmentForModal2 .form-select {
         border: 2px solid #d6d6d6;
-    border-radius: 5px;
-    padding: 10px 16px;
-    height: 48px;
-    font-size: 16px;
+        border-radius: 5px;
+        padding: 10px 16px;
+        height: 48px;
+        font-size: 16px;
     }
 </style>
 <div class="content-wrapper bg-f6">
@@ -164,47 +164,35 @@
                                 <div class="d-flex gap-2 mb-2">
 
                                     @if ($isCustomer == true && $user == true)
-                                        <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}"
-                                            data-bs-toggle="modal">Purchase
-                                            Package</button>
+                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}" data-bs-toggle="modal">Purchase
+                                        Package</button>
 
-                                        @if ($packageDetails['favourite_check'] == 'yes')
-                                            <button class="favouriteBtn"
-                                                id="fav-btn_{{ $packageDetails['id'] }}">
-                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
-                                                    alt="">
-                                            </button>
-                                        @endif
+                                    @if ($packageDetails['favourite_check'] == 'yes')
+                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
+                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                    </button>
+                                    @endif
 
-                                        @if ($packageDetails['favourite_check'] == 'no')
-                                            <button class="favouriteBtn"
-                                                id="fav-btn_{{ $packageDetails['id'] }}"
-                                                style="background-color: gray;">
-                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
-                                                    alt="">
-                                            </button>
-                                        @endif
+                                    @if ($packageDetails['favourite_check'] == 'no')
+                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}" style="background-color: gray;">
+                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                    </button>
+                                    @endif
                                     @elseif($user == false)
-                                        <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}"
-                                            data-bs-toggle="modal">Purchase
-                                            Package</button>
+                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}" data-bs-toggle="modal">Purchase
+                                        Package</button>
 
-                                        @if ($packageDetails['favourite_check'] == 'yes')
-                                            <button class="favouriteBtn"
-                                                id="fav-btn_{{ $packageDetails['id'] }}">
-                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
-                                                    alt="">
-                                            </button>
-                                        @endif
+                                    @if ($packageDetails['favourite_check'] == 'yes')
+                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
+                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                    </button>
+                                    @endif
 
-                                        @if ($packageDetails['favourite_check'] == 'no')
-                                            <button class="favouriteBtn"
-                                                id="fav-btn_{{ $packageDetails['id'] }}"
-                                                style="background-color: gray;">
-                                                <img src="{{ 'front/assets/img/white-heart.svg' }}"
-                                                    alt="">
-                                            </button>
-                                        @endif
+                                    @if ($packageDetails['favourite_check'] == 'no')
+                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}" style="background-color: gray;">
+                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                    </button>
+                                    @endif
                                     @endif
 
                                 </div>
@@ -234,18 +222,18 @@
             <div class="modal fade treatmentForModal2" id="treatmentForModal2_{{ $packageDetails['id'] }}" tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered position-relative" style="width:704px">
                     <div class="modal-content p-3">
-                    <div>
-                <div class="text-end">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
-                    </button>
-                </div>
+                        <div>
+                            <div class="text-end">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
+                                </button>
+                            </div>
 
-                <div class="text-center" style="margin-top: -8px;">
-                    <h4 class="modal-title  modal-h1 mb-2" id="exampleModalLabel">Change Patient Information</h4>
-                    <p class="mb-4 card-p2">Fill the form & get your desired treatment plan</p>
-                </div>
-            </div>
+                            <div class="text-center" style="margin-top: -8px;">
+                                <h4 class="modal-title  modal-h1 mb-2" id="exampleModalLabel">Change Patient Information</h4>
+                                <p class="mb-4 card-p2">Fill the form & get your desired treatment plan</p>
+                            </div>
+                        </div>
                         <!-- <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/modalClose.png' }}" alt="">
                         <p class="modal-h1 mt-4 text-center">Change Patient Information</p>
                         <p class="card-p1 text-center">Fill the patient detail.</p> -->
@@ -428,17 +416,37 @@
                         </ul>
                     </div>
                 </div>
+                <!-- GALLERY -->
                 <div class="tab-pane fade" id="menu2">
-                    @if (!empty($provider_gallery))
-                    <div class="gallery">
-                        @foreach ($provider_gallery as $image)
-                        <a href="{{ $image }}" class="glightbox">
-                            <img src="{{ $image }}" alt="image" />
-                        </a>
-                        @endforeach
-                    </div>
-                    @endif
+                @if (!empty($provider_gallery))
+    <div class="gallery">
+        @foreach ($provider_gallery as $image)
+            @php
+                $fileExtension = pathinfo($image, PATHINFO_EXTENSION);
+                // dd($fileExtension);
+            @endphp
+
+            @if ($fileExtension === 'mp4')
+                <a href="{{ $image }}" class="glightbox">
+                    <!-- <img src="{{ $image }}" alt="image" /> -->
+                    <video width="320" height="240" controls autoplay>
+                        <source src="{{ $image }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </a>
+            @else
+                <a href="{{ $image }}" class="glightbox">
+                    <img src="{{ $image }}" alt="image" />
+                </a>
+            @endif
+        @endforeach
+    </div>
+@endif
+
+
                 </div>
+                <!-- GALLERY END -->
+
             </div>
         </div>
     </div>
@@ -619,10 +627,10 @@
 
         $('.purchaseBtn').click(function(e) {
             e.preventDefault();
-         
+
 
             var id = this.id;
-            
+
             if (user == '1') {
                 $('#treatmentForModal_' + id).modal('show');
             } else {

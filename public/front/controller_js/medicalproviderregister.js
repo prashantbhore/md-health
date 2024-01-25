@@ -573,9 +573,9 @@ $(document).ready(function () {
 });
 
 // Upload Icon faded away
-$("#company_logo_image_path").on("click", function () {
-    $("#up-abs1").fadeOut(2000);
-});
-$("#company_licence_image_path").on("click", function () {
-    $("#up-abs2").fadeOut(2000);
-});
+// $("#company_logo_image_path").on("click", function () {
+//     $("#up-abs1").fadeOut(2000);
+// });
+// $("#company_licence_image_path").on("click", function () {
+//     $("#up-abs2").fadeOut(2000);
+// });
