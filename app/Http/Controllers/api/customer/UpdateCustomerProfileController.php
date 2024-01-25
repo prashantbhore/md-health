@@ -33,8 +33,8 @@ class UpdateCustomerProfileController extends BaseController {
             'md_customer_registration.address',
             'md_customer_registration.password',
         )
-        ->join( 'md_master_country', 'md_customer_registration.country_id', 'md_master_country.id' )
-        ->join( 'md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id' )
+        ->leftjoin('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
+        ->leftjoin('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
         ->where( 'md_customer_registration.id', Auth::user()->id )
         ->first();
 

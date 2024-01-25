@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_coins', function (Blueprint $table) {
+        Schema::create('md_health_account_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id')->nullable();
-            $table->string('coins')->nullable();
-            $table->unsignedInteger('invitation_count')->default(0);
-            $table->unsignedInteger('total_invitation_count')->default(0);
+            $table->longText('bank_name')->nullable();
+            $table->longText('account_holder_name')->nullable();
+            $table->longText('account_number')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('md_coins');
+        Schema::dropIfExists('md_health_account_details');
     }
 };

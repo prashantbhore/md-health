@@ -21,7 +21,6 @@
                     return null;
                 }
             }
-
     @endphp
 @endsection
 @extends('front.layout.layout2')
@@ -154,6 +153,7 @@
                                         aria-labelledby="user-tab">
                                         @if (!empty($my_active_packages_list))
                                             @foreach ($my_active_packages_list as $key => $active_package)
+                                           
                                                 <div class="card shadow-none mb-3 pkgCard">
                                                     <div class="card-body d-flex gap-3 w-100 p-3">
                                                         <div class="df-center">
@@ -163,13 +163,13 @@
                                                         </div>
                                                         <div class="df-column">
                                                             <h5 class="mb-0 card-h4">
-                                                                 {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }} 
-                                                                {{-- Memorial Hospital --}}
+                                                                {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }} 
+                                                               
                                                             </h5>
 
                                                             <h6 class="card-h1">
                                                                  {{ !empty($active_package['package_name']) ? $active_package['package_name'] : '' }} 
-                                                                {{-- Heart Valve Replacement Surgery --}}
+                                                                
                                                             </h6>
 
                                                             <div class="d-flex align-items-center gap-5 mb-3">

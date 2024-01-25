@@ -302,10 +302,10 @@
             var discounts;
             var percentValue = 20;
             var otherServices;
+            var checkedTitles=[];
             var packageId = "{{ $id }}";
             var patientId = "{{ $patient_id }}";
             var formData = new FormData();
-            var checkedTitles = [];
             formData.append('package_id', packageId);
             getData();
 
@@ -421,8 +421,6 @@
             });
 
             $('.purchaseBtn').click(function(event) {
-
-                
                 // makePurchase();
                 $('card_name').val($('#input1').val());
                 $('card_number').val($('#input2').val());
@@ -455,7 +453,7 @@
                     'card_name': cardName || '',
                     'pending_amount': pendingAmount,
                     'percentage': percentage,
-                    'other_services': checkedTitles,
+                    'other_services':checkedTitles,
                 };
 
                 // Add additional data to the form
@@ -501,9 +499,6 @@
                 }
 
                 // If all validations pass, submit the form
-                // for (var pair of formData.entries()) {
-                //     console.log(pair[0]+ ', ' + pair[1]); 
-                // }
                 $("#procced_to_pay_form").submit();
                 // Submit the form
             })
@@ -547,7 +542,46 @@
 
                 // Submit the form
                 form.submit();
-            })
+            });
+
+            $(document).ready(function() {
+                checkedTitles = []; // Array to store initially checked service titles
+
+                // Loop through all checkboxes initially
+                $('.form-check-input').each(function() {
+                    // Check if the current checkbox is checked
+                    if ($(this).prop('checked')) {
+                        // Find the corresponding service title and add it to the array
+                        var title = $(this).siblings('.d-flex').find('.card-h4').text();
+                        checkedTitles.push(title);
+                    }
+                });
+
+                // Output the initially checked service titles (for demonstration)
+                console.log(checkedTitles);
+
+                // Attach click event listener to checkboxes
+                $(document).on('click', '.form-check-input', function() {
+                    // Reset the array before re-populating it
+                    checkedTitles = [];
+
+                    // Loop through all checkboxes again
+                    $('.form-check-input').each(function() {
+                        // Check if the current checkbox is checked
+                        if ($(this).prop('checked')) {
+                            // Find the corresponding service title and add it to the array
+                            var title = $(this).siblings('.d-flex').find('.card-h4').text();
+                            checkedTitles.push(title);
+                        }
+                    });
+
+                    // Output the updated checked service titles (for demonstration)
+                    console.log(checkedTitles);
+                    // Now you can do whatever you want with the checkedTitles array
+                });
+            });
+
+            ////////////////////////////////////////////////////////////////////////////////
 
             function getData() {
 
@@ -592,9 +626,7 @@
                         $('.treatment_price').append(treatmentPriceHtml);
 
                         otherServices.forEach(function(service) {
-
-                            checkedTitles.push(service.title);
-
+                            checkedTitles.push(service.title)
                             if (service.title == 'Accommodation') {
                                 otherServicesHtml += '<div class="card purchase-details-card">'
                                 otherServicesHtml +=
@@ -771,8 +803,6 @@
                     formData.append('percentage', '100%');
                 }
 
-
-
                 $.ajax({
                     url: baseUrl + '/api/md-customer-purchase-package',
                     type: 'POST',
@@ -790,6 +820,88 @@
                     },
                 });
             }
+
+            ///////////////////////////////////Mplus03/////////////////////////////////////////////////
+
+             function getBankList(){
+        $.ajax({
+            url: baseUrl + '/api/md-helath-bank-list',
+            type: 'GET',
+            processData: false,
+            contentType: false,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+               console.log('Success:', response.bank_list);
+                $('#bank-informations').empty();
+
+                for (var i = 0; i < response.bank_list.length; i++) {
+                    var bankName = response.bank_list[i].bank_name;
+                    if (bankName) {
+                        $('#bank-informations').append('<option value="' + bankName + '">' + bankName + '</option>');
+                    }
+                }
+
+                calcOtherServices();
+                updateDiscountedPrice();
+            },
+
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+
+
+
+
+       
+        function getBankData(selectedBank){
+            $.ajax({
+                url: baseUrl + '/api/get-bank-data',
+                type: 'GET',
+                data: {
+                    bank_name: selectedBank
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) {
+                    console.log('Bank Data for ' + selectedBank + ':', response);
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching bank data:', error);
+                }
+            });
+        }
+
+       
+        $(document).on('change', '#bank-informations', function(){
+            var selectedBank = $(this).val();
+            getBankData(selectedBank);
+        });
+
+       
+        $(document).on('click', 'input[name="paymentMethod"][value="bank"]', function(){
+            var selectedBank = $('#bank-informations').val();
+            if (selectedBank) {
+                getBankData(selectedBank);
+            }
+        });
+
+    
+        $(document).ready(function(){
+            getBankList(); 
+            var initialSelectedBank = $('#bank-informations').val();
+            if (initialSelectedBank) {
+                getBankData(initialSelectedBank);
+            }
+        });
 
             ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -834,30 +946,8 @@
                     if ($(this).is(':checked')) {
                         totalPrice += parseFloat(numberToDiscount(parseInt(purchaseDetails
                             .package_discount), otherServices[index].price));
-                        // alert($(this).val());
-                        
                     }
                 });
-
-                $(document).on('click', '.form-check-input', function() {
-                    // Array to store checked service titles
-                    checkedTitles = [];
-                    // Loop through all checkboxes
-                    $('.form-check-input').each(function() {
-                        // Check if the current checkbox is checked
-                        if ($(this).prop('checked')) {
-                            // Find the corresponding service title and add it to the array
-                            var title = $(this).siblings('.d-flex').find('.card-h4').text();
-                            checkedTitles.push(title);
-                        }
-                    });
-
-                    // Output the checked service titles (for demonstration)
-                    // console.log(checkedTitles);
-                    // Now you can do whatever you want with the checkedTitles array
-                });
-
-                
                 // alert(totalPrice);
                 totaltoShowPrice = totalPrice;
                 proxyPrice = totalPrice;

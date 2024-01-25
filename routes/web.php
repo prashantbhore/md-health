@@ -26,7 +26,7 @@ use App\Http\Controllers\admin\customer\CustomerController;
 use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
 use App\Http\Controllers\admin\master\countryController;
-use App\Http\Controllers\admin\medical_tourism\MedicalTourismController;
+use App\Http\Controllers\admin\membership\AdminMembershipController;
 use App\Http\Controllers\admin\product\MDfoodController;
 use App\Http\Controllers\admin\product\MDhealthController;
 use App\Http\Controllers\admin\product\MDHomeServiceController;
@@ -103,8 +103,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::view('sign-in', 'admin/authentication/sign-in');
 
-    // MEMBERSHIPS
-    Route::view('manage-memberships', 'admin/memberships/manage-memberships');
+    
+
+
+    
 
     //Admin DASHBOARD
     Route::view('dashboard', 'admin/dashboard/dashboard');
@@ -355,6 +357,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
     });
+
+
+
+    // MEMBERSHIPS
+ 
+
+
+    Route::controller(AdminMembershipController::class)->group(function () {
+      
+        Route::get('manage-memberships','index');
+
+        Route::post('memberships/list-memberships','list_membership');
+
+
+        Route::post('store-memberships','store_membership')->name('store.membership'); 
+
+
+
+    });
+
 
 
 

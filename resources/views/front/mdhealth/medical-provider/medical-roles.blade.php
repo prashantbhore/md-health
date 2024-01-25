@@ -107,6 +107,28 @@
             left: 0;
         }
     </style>
+    <style>
+    .no-data {
+        height: 362px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        /* border: 1px solid #F6F6F6; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        /* background: #F6F6F6; */
+    }
+
+    .no-data img {
+        width: 150px;
+        height: auto;
+    }
+</style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
             <div class="d-flex gap-3">
@@ -121,9 +143,10 @@
                                 <img src="{{ asset('front/assets/img/GoldMember.svg') }}" alt="">
                             </h5>
                             <div class="card-body">
-                                <form action="{{ url('roles-add') }}" method="post" id="rolesprivilages" class="from-prevent-multiple-submits">
+                                <form action="{{ url('roles-add') }}" method="post" id="rolesprivilages"
+                                    class="from-prevent-multiple-submits">
                                     @csrf
-                                    <input type="hidden" name="id"
+                                    <input type="hidden" name="id" id="id"
                                         value="{{ !empty($system_users['id']) ? $system_users['id'] : '' }}">
                                     <div class="form-group mb-4">
                                         <label class="form-label mb-3">E-Mail Address</label>
@@ -260,8 +283,9 @@
                                         value="{{ !empty($system_users['previlages']) ? $system_users['previlages'] : '' }}">
 
                                     <div class="section-btns mb-5">
-                                        <button class="btn save-btn-black from-prevent-multiple-submits" onclick="return confirmSubmit();">Save
-                                            Personnel</button>
+                                        <button class="btn save-btn-black from-prevent-multiple-submits"
+                                            onclick="return confirmSubmit();">{{ !empty($system_users['id']) ? "Update Personnel" : "Save Personnel" }}
+                                            </button>
                                     </div>
                                 </form>
                                 <div class="white-plate d-flex align-items-center mb-3 border-0 bg-f6">
@@ -269,7 +293,13 @@
                                 </div>
 
                                 <div class="roles-history-list">
-                                    {!! !empty($html) ? $html : '' !!}
+                                    @if (!empty($html))
+                                        {!! $html !!}
+                                    @else
+                                        <div class="no-data">
+                                            <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">
+                                        </div>
+                                    @endif
 
                                     {{-- <div class="roles-card df-start w-100 mb-3">
                                         <h6 class="mb-0">your-personnel@mail.com | Super Admin</h6>
@@ -339,16 +369,20 @@
             updateCheckedValues();
         });
     </script>
-   <script>
-    function confirmSubmit() {
-        var confirmation = window.confirm('Are you sure you want to save this record?');
-        if (confirmation) {
-            return true;
-        } else {
-            return false;
+    <script>
+        function confirmSubmit() {
+            var id = $('#id').val();
+            // alert(!id);
+            if(id){
+            var confirmation = window.confirm('Are you sure you want to update this record?');
+            if (confirmation) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
-</script>
+        }
+    </script>
 
     <script>
         function delete_role(id) {

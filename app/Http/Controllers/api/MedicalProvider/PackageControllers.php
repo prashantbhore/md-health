@@ -35,7 +35,7 @@ class PackageControllers extends BaseController
         if (!empty($treatment_category_list)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'treatment details found.',
+                'message' => 'Treatment details found.',
                 'packages_active_list' => $treatment_category_list,
             ]);
         } else {
@@ -71,7 +71,7 @@ class PackageControllers extends BaseController
         if (!empty($treatment_category_list)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'treatment details found.',
+                'message' => 'Treatment details found.',
                 'packages_active_list' => $treatment_category_list,
             ]);
         } else {
@@ -277,7 +277,7 @@ class PackageControllers extends BaseController
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'please click button type either active or inactive',
+                'message' => 'Please click button type either active or inactive',
             ]);
         }
         // } else {
@@ -317,7 +317,7 @@ class PackageControllers extends BaseController
         if (!empty($packages_active_list)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'active package details found.',
+                'message' => 'Active package details found.',
                 'packages_active_list' => $packages_active_list,
             ]);
         } else {
@@ -353,7 +353,7 @@ class PackageControllers extends BaseController
         if (!empty($packages_deactive_list)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'de-activate package details found.',
+                'message' => 'De-activate package details found.',
                 'packages_deactive_list' => $packages_deactive_list,
             ]);
         } else {
@@ -424,7 +424,7 @@ class PackageControllers extends BaseController
         if (!empty($packages_active_list)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'view active package details found.',
+                'message' => 'View active package details found.',
                 'packages_active_list' => $packages_active_list,
             ]);
         } else {
@@ -488,7 +488,7 @@ class PackageControllers extends BaseController
         if (!empty($packages_deactive_list)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'view de-activate package details found.',
+                'message' => 'View de-activate package details found.',
                 'packages_deactive_list' => $packages_deactive_list,
             ]);
         } else {
@@ -656,7 +656,7 @@ class PackageControllers extends BaseController
         if (!empty($activate_to_deactive_packages)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'package is added in deactive list.',
+                'message' => 'Package is added in deactive list.',
             ]);
         } else {
             return response()->json([
@@ -685,7 +685,7 @@ class PackageControllers extends BaseController
         if (!empty($activate_to_deactive_packages)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'package is added in active list.',
+                'message' => 'Package is added in active list.',
             ]);
         } else {
             return response()->json([
@@ -818,7 +818,7 @@ class PackageControllers extends BaseController
         if (!empty($packages_active_list_search)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'package list found.',
+                'message' => 'Package list found.',
                 'packages_active_list' => $packages_active_list_search,
             ]);
         } else {

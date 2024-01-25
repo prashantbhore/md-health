@@ -176,7 +176,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="btn btn-md w-100 rounded btn-text" id="passchange"
+                                        <button class="btn btn-md w-100 rounded btn-text submit" type="submit" id="passchange"
                                             style="height: 48px;">Change Password</button>
                                     </div>
                                 </div>
@@ -222,8 +222,8 @@
                     newPassword: {
                         required: true,
                         minlength: 8,
-                        notEqualTo: "#oldPassword",
-                        equalTo: "#confirmPassword",
+                        // notEqualTo: "#oldPassword",
+                        // equalTo: "#confirmPassword",
                     },
                     confirmPassword: {
                         required: true,
@@ -239,8 +239,8 @@
                     newPassword: {
                         required: "* Please enter a new password.",
                         minlength: "* Password must contain at least 8 characters.",
-                        notEqualTo: "* New password and old password should not match.",
-                        equalTo: "* New password and confirm password should match.",
+                        // notEqualTo: "* New password and old password should not match.",
+                        // equalTo: "* New password and confirm password should match.",
                     },
                     confirmPassword: {
                         required: "* Please confirm the new password.",
@@ -249,12 +249,9 @@
                     },
                 },
                 submitHandler: function(form) {
-                    $("#passchange").prop("disabled", true);
                     form.submit();
                 },
-                focusin: function(element) {
-                    this.resetForm();
-                },
+
             });
         });
 

@@ -595,7 +595,7 @@
                                                                     fill="#111111" />
                                                             </svg>
                                                         @endif
-                                                        Ambulance
+                                                        Ambulance Services
 
                                                     </li>
                                                 </ul>
