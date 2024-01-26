@@ -324,8 +324,7 @@
             <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
         </div>
     </div>
-@endsection
-@section('script')
+    @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
