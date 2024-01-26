@@ -272,31 +272,35 @@
                         <div class="col-md-12 mb-3">
                             <label for="Bank Informations" class="form-label mb-3" style="font-size: 29px;">Bank Informations</label>
                             <select name="bank-informations" id="bank-informations" class="form-select">
-                                <option value="Bank A">Halk Bank</option>
-                                <option value="Bank B">Deniz Bank</option>
-                                <option value="Bank C">AK Bank</option>
+                                <option value="">Select Bank</option>
                             </select>
                         </div>
 
                         <div class="col-md-12">
                             <label for="Bank Name" class="form-label mb-0">Bank Name</label>
-                            <p class="mb-0 card-h1">Garanti BBVA</p>
+                            <p class="mb-0 card-h1" id="receiver-bank_name"></p>
                         </div>
+
                         <div class="col-md-12">
                             <label for="Receiver Name" class="form-label mb-0">Receiver Name</label>
-                            <p class="mb-0 card-h1">MDhealth Saglik ve Turizm A.S.</p>
+                            <p class="mb-0 card-h1" id="receiver-name"></p>
                         </div>
 
                         <div class="col-md-12">
                             <label for="IBAN" class="form-label mb-0">IBAN</label>
-                            <p class="mb-0 card-h1">TR00 0000 0000 0000 0000 0000 00</p>
-                            <h6 class="copy-iban card-h3 text-green">
-                                <span class="align-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                            <p class="mb-0 card-h1" id="receiver-account">TR00 0000 0000 0000 0000 0000 00</p>
+                            <h6 class="copy-iban card-h3 text-green" id="copy-iban-btn">
+                                <span class="align-bottom">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                         <path d="M3.25 7.75C3.25 5.629 3.25 4.56775 3.90925 3.90925C4.56775 3.25 5.629 3.25 7.75 3.25H10C12.121 3.25 13.1823 3.25 13.8408 3.90925C14.5 4.56775 14.5 5.629 14.5 7.75V11.5C14.5 13.621 14.5 14.6823 13.8408 15.3408C13.1823 16 12.121 16 10 16H7.75C5.629 16 4.56775 16 3.90925 15.3408C3.25 14.6823 3.25 13.621 3.25 11.5V7.75Z" stroke="#4CDB06" stroke-width="1.875" />
                                         <path d="M3.25 13.75C2.65326 13.75 2.08097 13.5129 1.65901 13.091C1.23705 12.669 1 12.0967 1 11.5V7C1 4.17175 1 2.75725 1.879 1.879C2.75725 1 4.17175 1 7 1H10C10.5967 1 11.169 1.23705 11.591 1.65901C12.0129 2.08097 12.25 2.65326 12.25 3.25" stroke="#4CDB06" stroke-width="1.875" />
-                                    </svg></span> Copy IBAN
+                                    </svg>
+                                </span>
+                                <a href="javascript:void(0);" onclick="copyIBAN()">Copy IBAN</a>
                             </h6>
                         </div>
+                        
+
                         <div class="col-md-12 mb-3">
                             <label for="Description" class="form-label mb-0">Description</label>
                             <p class="mb-0 card-h1">Please write "<span class="text-green">MD736</span>"" in the description section.</p>
@@ -874,7 +878,7 @@
 
             ///////////////////////////////////Mplus03/////////////////////////////////////////////////
 
-             function getBankList(){
+    function getBankList(){
         $.ajax({
             url: baseUrl + '/api/md-helath-bank-list',
             type: 'GET',
@@ -907,12 +911,10 @@
 
 
 
-
-
-       
-        function getBankData(selectedBank){
+function getBankData(selectedBank){
+           
             $.ajax({
-                url: baseUrl + '/api/get-bank-data',
+                url: baseUrl + '/api/md-helath-bank-details',
                 type: 'GET',
                 data: {
                     bank_name: selectedBank
@@ -922,11 +924,20 @@
                     'X-CSRF-TOKEN': csrfToken
                 },
                 success: function(response) {
-                    console.log('Bank Data for ' + selectedBank + ':', response);
+                   
+                    if (response.message === "Bank Details Found") {
 
+                            $("#receiver-bank_name").text(response.bank_details.bank_name);
+                            $("#receiver-name").text(response.bank_details.account_holder_name);
+                            $("#receiver-account").text(response.bank_details.account_number);
+                        
+                       
+                    } else {
+                        console.error("Error: Bank details not found");
+                    }
                 },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching bank data:', error);
+                error: function(error) {
+                    console.error("Error fetching bank details:", error);
                 }
             });
         }
@@ -946,13 +957,49 @@
         });
 
     
-        $(document).ready(function(){
+        // $(document).ready(function(){
             getBankList(); 
             var initialSelectedBank = $('#bank-informations').val();
             if (initialSelectedBank) {
                 getBankData(initialSelectedBank);
             }
-        });
+       // });
+
+
+ //Copy Account Number       
+
+ function copyIBAN() {
+    // Get the account number element
+    var accountNumberElement = document.getElementById("receiver-account");
+
+    // Create a range to select the text
+    var range = document.createRange();
+    range.selectNode(accountNumberElement);
+
+    // Create a selection
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    // Execute the copy command using the Clipboard API
+    try {
+        document.execCommand("copy");
+        // Optionally, provide some feedback to the user
+        alert("IBAN copied to clipboard!");
+    } catch (err) {
+        console.error("Unable to copy to clipboard:", err);
+    } finally {
+        // Deselect the text
+        selection.removeAllRanges();
+    }
+}
+
+//Copy Account Number Js Ends
+
+
+
+
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////
 

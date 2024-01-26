@@ -89,8 +89,10 @@ Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
 
 
 
-// get country list
+// get Bank list
 Route::get('md-helath-bank-list', [CustomerPackageController::class, 'md_health_bank_lists']);
+
+Route::get('md-helath-bank-details', [CustomerPackageController::class, 'md_health_bank_details']);
 
 
 
