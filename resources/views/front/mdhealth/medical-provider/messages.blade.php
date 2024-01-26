@@ -1,10 +1,9 @@
 @extends('front.layout.layout2')
-@section('php')
-    @php
-        $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
-        $user = Session::has('MDCustomer*%') ? Session::get('MDCustomer*%') : '';
-    @endphp
-@endsection
+@php
+    // dd(Session::all());
+    $user = Session::has('MDCustomer*%') ? Session::get('MDCustomer*%') : '';
+    $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
+@endphp
 @section('content')
     <style>
         .message-head a {
@@ -112,6 +111,7 @@
             </div>
         </div>
     </div>
+    @include('front.includes.initialize-firebase-messaging')
 @endsection
 @section('script')
     <script>

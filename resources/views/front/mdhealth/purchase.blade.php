@@ -15,266 +15,236 @@
 @endsection
 @extends('front.layout.layout2')
 @section('content')
-    <style>
-        .package_name {
-            color: #000;
-            font-family: Campton;
-            font-size: 20px;
+<style>
+    .package_name {
+        color: #000;
+        font-family: Campton;
+        font-size: 20px;
 
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: -0.8px;
-        }
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.8px;
+    }
 
-        .city_name {
-            color: #000;
-            font-family: CamptonBook;
-            font-size: 14px;
+    .city_name {
+        color: #000;
+        font-family: CamptonBook;
+        font-size: 14px;
 
-            font-weight: 400;
-            line-height: normal;
-            letter-spacing: -0.56px;
-        }
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.56px;
+    }
 
-        .t_price {
-            color: #4CDB06;
-            font-family: Campton;
-            font-size: 18px;
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: -0.72px;
-        }
+    .t_price {
+        color: #4CDB06;
+        font-family: Campton;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.72px;
+    }
 
-        .t_price_sm {
-            color: #4CDB06;
-            font-family: Campton;
-            font-size: 12px;
-            letter-spacing: -0.48px;
-        }
+    .t_price_sm {
+        color: #4CDB06;
+        font-family: Campton;
+        font-size: 12px;
+        letter-spacing: -0.48px;
+    }
 
-        .error {
-            color: red;
-        }
-    </style>
-    <div class="content-wrapper paymentsPage bg-f6">
+    .error {
+        color: red;
+    }
+</style>
+<div class="content-wrapper paymentsPage bg-f6">
 
-        <!-- SECTION 1 -->
-        <div class="searchBar backBtn bg-f6">
-            <div class="container pt-4">
-                <p class="fs-1 camptonBold text-center lh-1 f-s30"> Purchase Details</p>
-                <p id="delete_all_items" class="fs-6 camptonSemiBold text-center deleteAll mb-4">Delete All Items</p>
-                <div class="packageResult rounded mb-3">
-                    <div class="flex-grow-1">
-                        <div class="d-flex gap-2 justify-content-between align-items-center">
-                            <p class="mb-0  lh-base package_name">Heart Valve Replacement Surgery</p>
-                            <p class="mb-0 t_price">Treatment Price</p>
+    <!-- SECTION 1 -->
+    <div class="searchBar backBtn bg-f6">
+        <div class="container pt-4">
+            <p class="fs-1 camptonBold text-center lh-1 f-s30"> Purchase Details</p>
+            <p id="delete_all_items" class="fs-6 camptonSemiBold text-center deleteAll mb-4">Delete All Items</p>
+            <div class="packageResult rounded mb-3">
+                <div class="flex-grow-1">
+                    <div class="d-flex gap-2 justify-content-between align-items-center">
+                        <p class="mb-0  lh-base package_name">Heart Valve Replacement Surgery</p>
+                        <p class="mb-0 t_price">Treatment Price</p>
+                    </div>
+                    <div class="d-flex gap-5 justify-content-between">
+                        <div class="d-flex gap-2 align-items-center">
+                            <img src="{{ url('front/assets/img/Location.svg') }}" alt="">
+                            <p class="mb-0 lctn city_name">Besiktas/Istanbul</p>
                         </div>
-                        <div class="d-flex gap-5 justify-content-between">
-                            <div class="d-flex gap-2 align-items-center">
-                                <img src="{{ url('front/assets/img/Location.svg') }}" alt="">
-                                <p class="mb-0 lctn city_name">Besiktas/Istanbul</p>
-                            </div>
-                            <p class="mb-0 fs-5 camptonBold lh-base treatment_price">
-                            </p>
+                        <p class="mb-0 fs-5 camptonBold lh-base treatment_price">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <img src="{{ url('front/assets/img/order.png') }}" alt="">
+            </div>
+            <div class="other_services_items">
+            </div>
+            <div class="greenBorder pt-3 mb-4 mb30"></div>
+            <div class="mb-4 discount-sctn">
+                <div class="d-flex justify-content-between mb-4">
+                    <p class="mb-0 t_price">Select Your Payment Plan</p>
+                    <p class="mb-0 t_price fnt20">Total Price <span class="total_price" style="color: #000;">34.560,00
+                            <span class="lira">₺</span> </span></p>
+                </div>
+                <div class="discounts d-flex flex-column gap-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                            <input type="radio" value="20" name="discount" checked />
+                        </label>
+                        <div class="d-flex align-items-baseline gap-2">
+                            <p class="mb-0 fs-5 camptonSemiBold lh-base twenty"></p>
+                            <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min. Requirement</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
+                            <input type="radio" value="30" name="discount" />
+                        </label>
+                        <div class="d-flex align-items-baseline gap-2 ">
+                            <p class="mb-0 fs-5 camptonSemiBold lh-base thirty"></p>
+                            <p class="vSmallFont text-green camptonSemiBold mb-0 min_discount_thirty"></p>
+                        </div>
+                    </div>
+                    {{-- (5.679,0 ₺) --}}
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
+                            <input type="radio" value="50" name="discount" />
+                        </label>
+                        <div class="d-flex align-items-baseline gap-2 ">
+                            <p class="mb-0 fs-5 camptonSemiBold lh-base fifty"></p>
+                            <p class="t_price_sm mb-0 min_discount_fifty">Min. Requirement</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
+                            <input type="radio" value="100" name="discount" />
+                        </label>
+                        <div class="d-flex align-items-baseline gap-2 ">
+                            <p class="mb-0 fs-5 camptonSemiBold lh-base hundred"></p>
+                            <p class="t_price_sm mb-0 min_discount_hundred">Min. Requirement</p>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <img src="{{ url('front/assets/img/order.png') }}" alt="">
-                </div>
-                <div class="other_services_items">
-                </div>
-                <div class="greenBorder pt-3 mb-4 mb30"></div>
-                <div class="mb-4 discount-sctn">
-                    <div class="d-flex justify-content-between mb-4">
-                        <p class="mb-0 t_price">Select Your Payment Plan</p>
-                        <p class="mb-0 t_price fnt20">Total Price <span class="total_price" style="color: #000;">34.560,00
-                                <span class="lira">₺</span> </span></p>
+            </div>
+            <div class="d-flex flex-column align-items-center mb-6">
+                {{-- {{ dd(url('front/assets/img/ArrowsDown.png')) }} --}}
+                <img src="{{ url('front/assets/img/ArrowsDown.png') }}" alt="" class="mb-3">
+                <p class="mb-2 fs-3 camptonBold lh-base next-step">Next Step</p>
+                <p class="underline smallFont fw-normal camptonBook"><u>Payment</u></p>
+            </div>
+            <!-- PAYMENT SECTION -->
+            <div class="paymentSection mb-6">
+                <div class="row">
+                    <div class="col-3">
+                        <label class="smallFont d-flex align-items-center gap-2">
+                            <input type="radio" value="card" name="paymentMethod" checked />
+                            Credit or Debit Card
+                        </label>
                     </div>
-                    <div class="discounts d-flex flex-column gap-3">
-                        <div class="d-flex align-items-center gap-2">
-                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
-                                <input type="radio" value="20" name="discount" checked />
-                            </label>
-                            <div class="d-flex align-items-baseline gap-2">
-                                <p class="mb-0 fs-5 camptonSemiBold lh-base twenty"></p>
-                                <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min. Requirement</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
-                                <input type="radio" value="30" name="discount" />
-                            </label>
-                            <div class="d-flex align-items-baseline gap-2 ">
-                                <p class="mb-0 fs-5 camptonSemiBold lh-base thirty"></p>
-                                <p class="vSmallFont text-green camptonSemiBold mb-0 min_discount_thirty"></p>
-                            </div>
-                        </div>
-                        {{-- (5.679,0 ₺) --}}
-                        <div class="d-flex align-items-center gap-2">
-                            <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
-                                <input type="radio" value="50" name="discount" />
-                            </label>
-                            <div class="d-flex align-items-baseline gap-2 ">
-                                <p class="mb-0 fs-5 camptonSemiBold lh-base fifty"></p>
-                                <p class="t_price_sm mb-0 min_discount_fifty">Min. Requirement</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
-                                <input type="radio" value="100" name="discount" />
-                            </label>
-                            <div class="d-flex align-items-baseline gap-2 ">
-                                <p class="mb-0 fs-5 camptonSemiBold lh-base hundred"></p>
-                                <p class="t_price_sm mb-0 min_discount_hundred">Min. Requirement</p>
-                            </div>
-                        </div>
+                    <div class="col-2">
+                        <label class="smallFont d-flex align-items-center gap-2">
+                            <input type="radio" value="bank" name="paymentMethod" />
+                            Bank Transfer
+                        </label>
+                    </div>
+                    <div class="col-2 mrg-68">
+                        <label class="smallFont d-flex align-items-center gap-2">
+                            <input type="radio" value="wallet" name="paymentMethod" />
+                            My Wallet
+                        </label>
                     </div>
                 </div>
-                <div class="d-flex flex-column align-items-center mb-6">
-                    {{-- {{ dd(url('front/assets/img/ArrowsDown.png')) }} --}}
-                    <img src="{{ url('front/assets/img/ArrowsDown.png') }}" alt="" class="mb-3">
-                    <p class="mb-2 fs-3 camptonBold lh-base next-step">Next Step</p>
-                    <p class="underline smallFont fw-normal camptonBook"><u>Payment</u></p>
-                </div>
-                <div class="paymentSection mb-6">
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="smallFont d-flex align-items-center gap-2">
-                                <input type="radio" value="card" name="paymentMethod" checked />
-                                Credit or Debit Card
-                            </label>
-                        </div>
-                        <div class="col-2">
-                            <label class="smallFont d-flex align-items-center gap-2">
-                                <input type="radio" value="bank" name="paymentMethod" />
-                                Bank Transfer
-                            </label>
-                        </div>
-                        <div class="col-2 mrg-68">
-                            <label class="smallFont d-flex align-items-center gap-2">
-                                <input type="radio" value="wallet" name="paymentMethod" />
-                                My Wallet
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div id="card">
-                    <div class="row">
-                        <div class="col-5 card-details me-8">
-                            <form id="purchase_by_mdcoins" action="{{ url('/purchase-by-mdcoins') }}" method="POST">
-                                @csrf
-                            </form>
-                            <form id="procced_to_pay_form" action="{{ url('/sandbox') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
-                                <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
-                                <input type="hidden" name="payment_percent" id="payment_percent" value="">
-                                <input type="hidden" name="total_paying_price" id="total_paying_price" value="">
-                                <input type="hidden" name="card_name" id="card_name" value="">
-                                <input type="hidden" name="card_number" id="card_number" value="">
-                                <input type="hidden" name="cvv" id="cvv" value="">
-                                <input type="hidden" name="validity" id="validity" value="">
+            </div>
 
-                                <div class="mb-4-input">
-                                    <input type="text" name="input1" class="form-control" id="input1"
-                                        placeholder="Card Holder Name">
-                                    <h5 id="verifyinput1" class="mt-4" style="color: red;">
-                                        Please Enter Card Holder Name
+            <!-- CREDIT CARD DETAILS -->
+            <div id="card">
+                <div class="row">
+                    <div class="col-5 card-details me-8">
+                        <form id="purchase_by_mdcoins" action="{{ url('/purchase-by-mdcoins') }}" method="POST">
+                            @csrf
+                        </form>
+                        <form id="procced_to_pay_form" action="{{ url('/sandbox') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                            <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
+                            <input type="hidden" name="payment_percent" id="payment_percent" value="">
+                            <input type="hidden" name="total_paying_price" id="total_paying_price" value="">
+                            <input type="hidden" name="card_name" id="card_name" value="">
+                            <input type="hidden" name="card_number" id="card_number" value="">
+                            <input type="hidden" name="cvv" id="cvv" value="">
+                            <input type="hidden" name="validity" id="validity" value="">
+
+                            <div class="mb-4-input">
+                                <input type="text" name="input1" class="form-control" id="input1" placeholder="Card Holder Name">
+                                <h5 id="verifyinput1" class="mt-4" style="color: red;">
+                                    Please Enter Card Holder Name
+                                </h5>
+                            </div>
+                            <div class="mb-4-input">
+                                <input type="text" onkeypress="return /[0-9 ]/i.test(event.key)" name="input2" class="form-control" id="input2" placeholder="Card Number">
+                                <h5 id="verifyinput2" class="mt-4" style="color: red;">
+                                    Please Enter Card Number
+                                </h5>
+                            </div>
+                            <div class="d-flex gap-3 mb-4-input">
+                                <div class="w-50"><input type="text" id="input4" name="input4" class="form-control " placeholder="00/00">
+                                    <h5 id="verifyinput4" class="mt-0" style="color: red;">
+                                        Please Enter Expiry Date
                                     </h5>
                                 </div>
-                                <div class="mb-4-input">
-                                    <input type="text" onkeypress="return /[0-9 ]/i.test(event.key)" name="input2"
-                                        class="form-control" id="input2" placeholder="Card Number">
-                                    <h5 id="verifyinput2" class="mt-4" style="color: red;">
-                                        Please Enter Card Number
+                                <div class="w-50">
+                                    <input type="password" id="input3" name="input3" class="form-control" placeholder="CVV">
+                                    <h5 id="verifyinput3" class="mt-0" style="color: red;">
+                                        Please Enter CVV
                                     </h5>
                                 </div>
-                                <div class="d-flex gap-3 mb-4-input">
-                                    <div class="w-50"><input type="text" id="input4" name="input4"
-                                            class="form-control " placeholder="00/00">
-                                        <h5 id="verifyinput4" class="mt-0" style="color: red;">
-                                            Please Enter Expiry Date
-                                        </h5>
-                                    </div>
-                                    <div class="w-50">
-                                        <input type="password" id="input3" name="input3" class="form-control"
-                                            placeholder="CVV">
-                                        <h5 id="verifyinput3" class="mt-0" style="color: red;">
-                                            Please Enter CVV
-                                        </h5>
-                                    </div>
-                                </div>
+                            </div>
 
-                                <!-- <a href="{{ url('payment-status') }}"> -->
-                                <!-- <a href="{{ url('payment-status') }}" -->
-                                <a href="javascript:void(0)" style="color: #fff; height: unset; padding: 12px 2rem;"
-                                    class="btn purchaseBtn purchaseBtn-new" style="color: #fff;">Proceed Payment</a>
-                                <!-- </a> -->
-                            </form>
-                        </div>
-                        <div class="col-5">
-                            <div class="creditCardContainer">
-                                <div>
-                                    <img src="{{ url('front/assets/img/MDHealth_light.svg') }}" alt="">
-                                </div>
-                                <div>
-                                    <p class="cardNumber">1234 1234 1234 1234</p>
-                                    <div class="d-flex justify-content-between align-self-end">
-                                        <div>
-                                            <p class="cardholder">John Smith</p>
-                                            <p class="validity">02/24</p>
-                                        </div>
-                                        <div>
-                                            <img class="visa" src="" alt="">
-                                        </div>
+                            <!-- <a href="{{ url('payment-status') }}"> -->
+                            <!-- <a href="{{ url('payment-status') }}" -->
+                            <a href="javascript:void(0)" style="color: #fff; height: unset; padding: 12px 2rem;" class="btn purchaseBtn purchaseBtn-new" style="color: #fff;">Proceed Payment</a>
+                            <!-- </a> -->
+                        </form>
+                    </div>
+                    <div class="col-5">
+                        <div class="creditCardContainer">
+                            <div>
+                                <img src="{{ url('front/assets/img/MDHealth_light.svg') }}" alt="">
+                            </div>
+                            <div>
+                                <p class="cardNumber">1234 1234 1234 1234</p>
+                                <div class="d-flex justify-content-between align-self-end">
+                                    <div>
+                                        <p class="cardholder">John Smith</p>
+                                        <p class="validity">02/24</p>
+                                    </div>
+                                    <div>
+                                        <img class="visa" src="" alt="">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- CREDIT CARD DETAILS END-->
 
-                <div id="wallet">
-                    <div class="row">
-                        <div class="col-6 text-end px-5 align-self-end mt-4">
-                            <p class="mb-0 camptonBook fs-5 fw-bold lh-sm">invite your friends</p>
-                            <p class="mb-0 camptonBold fs-3">and <span class="text-green"><u>earn</u></span> MD<span
-                                    class="camptonBook fw-bold">coin</span>.</p>
-                            <div class="d-flex align-items-center justify-content-end mt-2">
-                                <a href="{{ url('#') }}" type="button"
-                                    class="btn btn-sm inviteBtn df-center mt-3 mb-5">Invite Friends</a>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <p class="camptonBold vSmallFont text-center">1 MD<span
-                                    class="camptonBook vSmallFont">coin</span> = 1 Turkish Lira</p>
-                            <div class="blackBrdr px-5">
-                                <div class="mdCard">
-                                    <div class="mt-3">
-                                        <p class="mb-0 camptonBook fw-bold lh-1">Available <span
-                                                class="camptonBold">MD</span>coin</p>
-                                        <p class="mb-0 camptonBold fs-3">500</p>
-                                        <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" id="purchase_by_coins"
-                                            style="border-color: #000;">Use My MD<span class="camptonBook">coin</span></a>
-                                    </div>
-                                    <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="" style="width: 200px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BANK TRANSFER -->
+            <!-- BANK TRANSFER -->
             <div id="bank" class="bank-transfer-details">
                 <form action="php">
+
                     <div class="row gy-4">
                         <div class="col-md-12 mb-3">
                             <label for="Bank Informations" class="form-label mb-3" style="font-size: 29px;">Bank Informations</label>
                             <select name="bank-informations" id="bank-informations" class="form-select">
-                                <option value="Bank A">Halk Bank</option>
+                                {{-- <option value="Bank A">Halk Bank</option>
                                 <option value="Bank B">Deniz Bank</option>
-                                <option value="Bank C">AK Bank</option>
+                                <option value="Bank C">AK Bank</option> --}}
                             </select>
                         </div>
 
@@ -316,14 +286,42 @@
             </div>
             <!-- BANK TRANSFER END -->
 
+            <!-- WALLET DETAILS -->
+            <div id="wallet">
+                <div class="row">
+                    <div class="col-6 text-end px-5 align-self-end mt-4">
+                        <p class="mb-0 camptonBook fs-5 fw-bold lh-sm">invite your friends</p>
+                        <p class="mb-0 camptonBold fs-3">and <span class="text-green"><u>earn</u></span> MD<span class="camptonBook fw-bold">coin</span>.</p>
+                        <div class="d-flex align-items-center justify-content-end mt-2">
+                            <a href="{{ url('#') }}" type="button" class="btn btn-sm inviteBtn df-center mt-3 mb-5">Invite Friends</a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="camptonBold vSmallFont text-center">1 MD<span class="camptonBook vSmallFont">coin</span> = 1 Turkish Lira</p>
+                        <div class="blackBrdr px-5">
+                            <div class="mdCard">
+                                <div class="mt-3">
+                                    <p class="mb-0 camptonBook fw-bold lh-1">Available <span class="camptonBold">MD</span>coin</p>
+                                    <p class="mb-0 camptonBold fs-3">500</p>
+                                    <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" id="purchase_by_coins" style="border-color: #000;">Use My MD<span class="camptonBook">coin</span></a>
+                                </div>
+                                <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="" style="width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <!-- WALLET DETAILS END -->
 
-        <!-- SECTION 3 -->
-        <div class="bg-f6 scanQr">
-            <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
         </div>
     </div>
+
+    <!-- SECTION 3 -->
+    <div class="bg-f6 scanQr">
+        <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
+    </div>
+</div>
+@endsection
     @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
