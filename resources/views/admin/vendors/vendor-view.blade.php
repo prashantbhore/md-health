@@ -64,9 +64,11 @@
                                 <p>{{ !empty($vendor->email) ?$vendor->email: '' }}</p>
                             </div>
 
+                            
+
                             <div class="col-md-6 mb-3">
                                 <label for="lastName"> Authorized Person Full Name</label>
-                                <p>Manish Kumar </p>
+                                <p>{{ !empty($vendor->authorisation_full_name) ?$vendor->authorisation_full_name: '' }}</p>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -102,7 +104,9 @@
                                         </div>
                                         @if(!empty($vendor_logo->company_logo_image_path))
 
-                                        <a class="medical-provier-logo-delete" href="javascript:void(0)" data-id="{{!empty($vendor_logo->id)?$vendor_logo->id:''}}" data-table="md_medical_provider_logo" data-flash="Logo Deleted Succesfully">
+                                      
+
+                                        <a class="vendor-logo-delete" href="javascript:void(0)" data-id="{{!empty($vendor_logo->id)?$vendor_logo->id:''}}" data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" data-flash="Logo Deleted Succesfully">
                                             <span class="deleteImg">Delete Logo</span>
                                         </a>
                                         @endif
@@ -124,7 +128,7 @@
 
                                         @if(!empty($vendor_license->company_licence_image_path))
 
-                                        <a class="medical-provier-license-delete" href="javascript:void(0)" data-id="{{!empty($vendor_license->id)?$vendor_license->id:''}}" data-table="md_medical_provider_license" data-flash="License Deleted Succesfully">
+                                        <a class="vendor-license-delete" href="javascript:void(0)" data-id="{{!empty($vendor_license->id)?$vendor_license->id:''}}" data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" data-flash="License Deleted Succesfully">
                                             <span class="deleteImg">Delete License</span>
                                         </a>
                                         @endif
@@ -143,7 +147,7 @@
 
                                 <label for="verified">Verified</label>
                                 <div class="form-check mt-2 d-flex align-items-center gap-2">
-                                    <input class="form-check-input verifiedcheckbox" type="checkbox" value="" id="flexCheckDefault" data-id="{{!empty($vendor->id)?$vendor->id:''}}" {{(!empty($vendor->verified) && $vendor->verified == 'yes') ? 'checked' : ''}} />
+                                    <input class="form-check-input verifiedcheckbox" type="checkbox" value="" id="flexCheckDefault" data-id="{{!empty($vendor->id)?$vendor->id:''}}"   data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" {{(!empty($vendor->verified) && $vendor->verified == 'yes') ? 'checked' : ''}} />
                                     <img src="{{ URL::asset('admin/assets/img/verifiedBy.png') }}" alt="" />
                                 </div>
 
@@ -170,20 +174,46 @@
 
 
                                     @if(!empty($gallary))
+
+                                  
+
+
                                     @foreach ($gallary as $gallary_data)
+                                       
+                                    @if($vendor->vendor_type=='medical_service_provider')
+                                        <div class="d-flex flex-column">
+                                            <a href="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" class="glightbox">
+                                                <img src="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" alt="" class="uploadedImg" />
+                                            </a>
+                                            <a class="vendor-gallary-delete" href="javascript:void(0)" data-id="{{!empty($gallary_data->id)?$gallary_data->id:''}}" data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" data-flash="Image Deleted Succesfully">
+                                                <span class="deleteImg">Delete Logo</span>
+                                            </a>
+                                        </div>
+                                    @endif    
 
+                                    @if($vendor->vendor_type=='food_vendor')
+                                        <div class="d-flex flex-column">
+                                            <a href="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" class="glightbox">
+                                                <img src="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" alt="" class="uploadedImg" />
+                                            </a>
+                                            <a class="medical-provier-gallary-delete" href="javascript:void(0)" data-id="{{!empty($gallary_data->id)?$gallary_data->id:''}}" data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" data-flash="Image Deleted Succesfully">
+                                                <span class="deleteImg">Delete Logo</span>
+                                            </a>
+                                        </div>
+                                     @endif  
 
-
-                                    @if(in_array(strtolower($gallary_data->provider_file_type), ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp']))
-                                    <div class="d-flex flex-column">
-                                        <a href="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" class="glightbox">
-                                            <img src="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" alt="" class="uploadedImg" />
-                                        </a>
-                                        <a class="medical-provier-gallary-delete" href="javascript:void(0)" data-id="{{!empty($gallary_data->id)?$gallary_data->id:''}}" data-table="medical_provider_account_multiple_images_videos" data-flash="Image Deleted Succesfully">
-                                            <span class="deleteImg">Delete Logo</span>
-                                        </a>
-                                    </div>
-                                    @endif
+                                     @if($vendor->vendor_type=='shop_vendor')
+                                        <div class="d-flex flex-column">
+                                            <a href="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" class="glightbox">
+                                                <img src="{{ !empty($gallary_data->provider_image_path) ? url('/').Storage::url($gallary_data->provider_image_path) : '' }}" alt="" class="uploadedImg" />
+                                            </a>
+                                            <a class="medical-provier-gallary-delete" href="javascript:void(0)" data-id="{{!empty($gallary_data->id)?$gallary_data->id:''}}" data-vendor_type="{{!empty($vendor->vendor_type)?$vendor->vendor_type:''}}" data-flash="Image Deleted Succesfully">
+                                                <span class="deleteImg">Delete Logo</span>
+                                            </a>
+                                        </div>
+                                     @endif  
+                                
+                                
 
 
                                     @if(in_array(strtolower($gallary_data->provider_file_type), ['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm']))
@@ -216,7 +246,7 @@
                                 <input type="hidden" name="id" value="{{ !empty($vendor->id) ? $vendor->id: '' }}">
                                 <div class="col-md-12 my-3">
                                     <label for="overview" class="mb-2">Overview</label>
-                                    <textarea name="overview" id="" cols="30" rows="10" class="form-control overviewText">{{ !empty($vendor->company_overview) ? ucfirst($vendor->company_overview) : '' }}
+                                    <textarea name="overview" id="" cols="30" rows="10" class="form-control overviewText">{!! !empty($vendor->company_overview) ? ucfirst(strip_tags($vendor->company_overview)) : '' !!}
                                     </textarea>
                                 </div>
 
@@ -300,13 +330,7 @@
                               
 
 
-{{-- 
-                            <button type="button" data-id="{{ !empty($vendor->id) ? $vendor->id : '' }}" class="btn md-btn deactivate-btn">
-                                {{ $vendor->status == 'active' ? 'Deactivate Vendors' : 'Activate Vendors' }}
-                            </button>
 
-
-                            <button type="button" data-id="{{ !empty($vendor->id) ? $vendor->id : '' }}" class="btn md-btn delete-btn"> {{ $vendor->status == 'delete' ? 'Deleted' : 'Delete Vendor' }}</button> --}}
                           
                             @if($vendor->vendor_status)
                             @if($vendor->vendor_status=='pending')  
@@ -399,18 +423,17 @@
                         @if(!empty($vendor->providerPackages))
                         @foreach ($vendor->providerPackages as $package)
 
-                          {{-- {{dd($package->package_price)}} --}}
-
+                          
                           @php
                           $product_count = App\Models\CustomerPurchaseDetails::where('package_id', $package->id ?? null)->count();
                           @endphp
                       
 
-                        {{-- {{dd($product_count)}} --}}
+                       
                       
                             
                        
-                        <div class="card shadow-none mb-3">
+                        <div class="card shadow-none mb-3 medical_provider_all_product" data-product-type="all" id="medical_provider_all_product">
                             <div class="card-body d-flex w-full justify-content-between" style="background: #f6f6f6;">
                                 <div class="card-ls">
                                     <h6 class="mb-1">{{!empty($package->package_name)?$package->package_name:''}}</h6>
@@ -418,52 +441,38 @@
                                     <p class="mt-auto">Platform: <span class="ms-1 md-fw-bold">MD</span>health</p>
                                 </div>
                                 <div class="card-rs df-end">
-                                    {{-- <div class="mb-3">
-                                        <a href="{{URL::asset('admin/delete-package')}}" class="text-decoration-none mb-3">
+
+
+                                    <div class="mb-3 product-card" id="product_".{{!empty($package->id)?$package->id:''}} data-product-id="{{!empty($package->id)?$package->id:'' }}">
+                                        <a href="javascript:void(0);" class="text-decoration-none mb-3 delete-product" data-product-id="{{!empty($package->id)?$package->id:''}}">
                                             <span class="deleteCard">Delete Product</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />
                                                 <path d="M15.282 16H13.544L11.707 13.426L9.87 16H8.132L10.695 12.304L8.176 8.52H10.002L11.707 11.105L13.401 8.52H15.227L12.708 12.304L15.282 16Z" fill="black" />
                                             </svg>
                                         </a>
-                                    </div> --}}
-
-
-                                    <div class="mb-3 product-card" id="product_".{{!empty($package->id)?$package->id:''}} data-product-id="{{!empty($package->id)?$package->id:'' }}">
-                                        <a href="javascript:void(0);" class="text-decoration-none mb-3 delete-product" data-product-id="{{!empty($package->id)?$package->id:''}}">
-                                            <span class="deleteCard">Delete Package</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />
-                                                <path d="M15.282 16H13.544L11.707 13.426L9.87 16H8.132L10.695 12.304L8.176 8.52H10.002L11.707 11.105L13.401 8.52H15.227L12.708 12.304L15.282 16Z" fill="black" />
-                                            </svg>
-                                        </a>
                                     </div>
-
-
-                                
-
 
                                     <h6> {{!empty($package->package_price)?$package->package_price:''}} ₺</h6>
                                     <a href="{{URL::asset('admin/products-on-sale')}}" class="completed text-decoration-none">On Sale</a>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-                        @endif
-                        
-                        @endif
 
 
-                        {{-- <div class="card shadow-none mb-3">
+                        @if($package->status=='active')               
+                        <div class="card shadow-none mb-3 medical_provider_active_product" data-product-type="active" id="medical_provider_active_product">
                             <div class="card-body d-flex w-full justify-content-between" style="background: #f6f6f6;">
                                 <div class="card-ls">
-                                    <h6 class="mb-1">Braun Shaver</h6>
-                                    <h6>Sales Quantity: <span class="fw-light">49</span></h6>
+                                    <h6 class="mb-1">{{!empty($package->package_name)?$package->package_name:''}}</h6>
+                                    <h6>Sales Quantity: <span class="fw-light">{{$product_count}}</span></h6>
                                     <p class="mt-auto">Platform: <span class="ms-1 md-fw-bold">MD</span>health</p>
                                 </div>
                                 <div class="card-rs df-end">
-                                    <div class="mb-3">
-                                        <a href="{{URL::asset('admin/sales-details')}}" class="text-decoration-none mb-3">
+
+
+                                    <div class="mb-3 product-card" id="product_".{{!empty($package->id)?$package->id:''}} data-product-id="{{!empty($package->id)?$package->id:'' }}">
+                                        <a href="javascript:void(0);" class="text-decoration-none mb-3 delete-product" data-product-id="{{!empty($package->id)?$package->id:''}}">
                                             <span class="deleteCard">Delete Product</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />
@@ -471,11 +480,54 @@
                                             </svg>
                                         </a>
                                     </div>
-                                    <h6>2.999,00 ₺</h6>
-                                    <div class="deleted">Not Sale</div>
+
+                                    <h6> {{!empty($package->package_price)?$package->package_price:''}} ₺</h6>
+                                    <a href="{{URL::asset('admin/products-on-sale')}}" class="completed text-decoration-none">On Sale</a>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
+                        @endif
+
+
+
+                        @if($package->status=='inactive')               
+                        <div class="card shadow-none mb-3 medical_provider_inactive_product" data-product-type="inactive" id="medical_provider_inactive_product">
+                            <div class="card-body d-flex w-full justify-content-between" style="background: #f6f6f6;">
+                                <div class="card-ls">
+                                    <h6 class="mb-1">{{!empty($package->package_name)?$package->package_name:''}}</h6>
+                                    <h6>Sales Quantity: <span class="fw-light">{{$product_count}}</span></h6>
+                                    <p class="mt-auto">Platform: <span class="ms-1 md-fw-bold">MD</span>health</p>
+                                </div>
+                                <div class="card-rs df-end">
+
+
+                                    <div class="mb-3 product-card" id="product_".{{!empty($package->id)?$package->id:''}} data-product-id="{{!empty($package->id)?$package->id:'' }}">
+                                        <a href="javascript:void(0);" class="text-decoration-none mb-3 delete-product" data-product-id="{{!empty($package->id)?$package->id:''}}">
+                                            <span class="deleteCard">Delete Product</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.4" d="M12 2C17.515 2 22 6.486 22 12C22 17.514 17.515 22 12 22C6.486 22 2 17.514 2 12C2 6.486 6.486 2 12 2Z" fill="#F55C5C" />
+                                                <path d="M15.282 16H13.544L11.707 13.426L9.87 16H8.132L10.695 12.304L8.176 8.52H10.002L11.707 11.105L13.401 8.52H15.227L12.708 12.304L15.282 16Z" fill="black" />
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                    <h6> {{!empty($package->package_price)?$package->package_price:''}} ₺</h6>
+                                    <a href="{{URL::asset('admin/products-on-sale')}}" class="completed text-decoration-none">On Sale</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+
+
+
+
+                        @endforeach
+                        @endif
+                        
+                        @endif
+
+
 
 
                     </div>
@@ -487,9 +539,73 @@
     </div>
 </section>
 @endsection @section('script')
-<script src="{{url('admin\controller_js\admin_cn_medical_tourism.js')}}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+         var statusFilter = document.querySelector(".form-select");
+         var allProductsContainers = document.querySelectorAll('[data-product-type="all"]');
+         var activeProductsContainers = document.querySelectorAll('[data-product-type="active"]');
+         var inactiveProductsContainers = document.querySelectorAll('[data-product-type="inactive"]');
+         
+         activeProductsContainers.forEach(function (container) {
+            container.style.display = "none";
+        });
+
+        inactiveProductsContainers.forEach(function (container) {
+            container.style.display = "none";
+        });
+
+      
+        allProductsContainers.forEach(function (container) {
+            container.style.display = "block";
+        });
+
+        
+        statusFilter.addEventListener("change", function (){
+
+            var selectedStatus = statusFilter.value;
+
+            
+            allProductsContainers.forEach(function (container) {
+                container.style.display = "none";
+            });
+
+            activeProductsContainers.forEach(function (container) {
+                container.style.display = "none";
+            });
+
+            inactiveProductsContainers.forEach(function (container) {
+                container.style.display = "none";
+            });
+
+         
+            if (selectedStatus === "active") {
+               
+                activeProductsContainers.forEach(function (container) {
+                    container.style.display = "block";
+                });
+            } else if (selectedStatus === "inactive") {
+               
+                inactiveProductsContainers.forEach(function (container) {
+                    container.style.display = "block";
+                });
+            } else {
+               
+                allProductsContainers.forEach(function (container) {
+                    container.style.display = "block";
+                });
+            }
+        });
+    });
+</script>
+
+
+
+<script src="{{url('admin\controller_js\admin_cn_manage_vendors.js')}}"></script>
 <script>
     $(".medicalTourismLi").addClass("activeClass");
     $(".medicalTourism").addClass("md-active");
 </script>
+
+
+
 @endsection

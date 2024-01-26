@@ -273,7 +273,6 @@ public function vendor_product_list(Request $request)
         if ($proudct_data){
         
             foreach ($proudct_data as $val){
-                // Use firstOrNew to ensure a default empty object if no image is found
                 $product_image = VendorProductGallery::where('vendor_product_id', $val->id)
                     ->select('vendor_product_image_path')
                     ->firstOrNew();

@@ -23,10 +23,37 @@
         line-height: normal;
         letter-spacing: -0.52px;
     }
+
+    .in-progress {
+        border-radius: 2px;
+        background: #F3771D;
+        color: #FFF;
+        text-align: center;
+        font-family: Campton;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.4px;
+    }
+
+    .in-progress,
+    .active {
+        width: 94px !important;
+        height: 19px !important;
+        flex-shrink: 0;
+
+    }
+
+    .form-control::placeholder {
+            color: #878787 !important;
+            font-family: "CamptonLight" !important;
+            font-weight: 600 !important;
+        }
 </style>
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-    <div class="d-flex gap-3">
+        <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
@@ -40,14 +67,14 @@
 
                         {{-- {{dd($medical_provider_bank_details)}} --}}
 
-                        <form method="POST" action="{{ route('store.vendor.bank.details') }}">
+                        <form method="POST" action="{{ route('store.vendor.bank.details') }}" id="paymentinfo">
                             @csrf
                             <input type="hidden" name="id" value="{{!empty($medical_provider_bank_details['id'])?$medical_provider_bank_details['id']:''}}">
                             <div class="card-body">
                                 <div class="form-group mb-4">
                                     <label class="form-label mb-3">Your Company IBAN</label>
                                     <div class="input-icon-div">
-                                        <input type="text" name="account_number" class="form-control" value="{{!empty($medical_provider_bank_details['account_number'])?$medical_provider_bank_details['account_number']:''}}">
+                                        <input type="text" name="account_number" class="form-control tr-prefix-input" value="{{!empty($medical_provider_bank_details['account_number'])?$medical_provider_bank_details['account_number']:''}}">
                                     </div>
                                 </div>
 
@@ -118,11 +145,11 @@
                             @foreach ($payment_list as $payment)
 
 
-                            <div class="card shadow-none mb-4 pkgCard">
-                                <div class="card-body d-flex align-items-center gap-3 w-100 p-4">
-                                       <div class="df-center">
-                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" class="md-img-sm">
-                               </div>
+                            <div class="card shadow-none mb-3 pkgCard" style="min-height: 75px;">
+                                <div class="card-body d-flex align-items-center gap-3 w-100 p-3">
+                                    <div class="df-center">
+                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" class="md-img-sm p-0">
+                                    </div>
                                     <div class="df-coloumn">
                                         <div class="trmt-card-body">
                                             <h5 class="mb-0 fs-13">Payment ID: #{{!empty($payment['payment_id'])?$payment['payment_id']:''}}</h5>
@@ -132,7 +159,7 @@
                                     @if($payment['payment_status']=='pending')
                                     <div class="d-flex align-items-center gap-3 mb-3 ms-auto">
                                         <div class="trmt-card-footer">
-                                            <span class="in-progress">Pending</span>
+                                            <span class="in-progress df-center">Pending</span>
                                         </div>
                                     </div>
                                     @endif
@@ -141,7 +168,7 @@
                                     @if($payment['payment_status']=='completed')
                                     <div class="d-flex align-items-center gap-3 mb-3 ms-auto">
                                         <div class="trmt-card-footer">
-                                            <span class="active">Completed</span>
+                                            <span class="in-progress bg-green text-black     df-center">Completed</span>
                                         </div>
                                     </div>
                                     @endif
@@ -149,54 +176,98 @@
                                 </div>
                             </div>
 
-                            
+
 
                             @endforeach
+                            @else
+                            @include('front.includes.no-data-found')
                             @endif
-               
+
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-</div>
-</div>
-@endsection
-@section('script')
-<script>
-    $(".mpPaymentLi").addClass("activeClass");
-    $(".mpPayment").addClass("md-active");
-</script>
-<script>
-    $(document).ready(function() {
-        $('#liveSearchInput').on('input', function(){
+    @endsection
+    @section('script')
+    <script>
+        $(".mpPaymentLi").addClass("activeClass");
+        $(".mpPayment").addClass("md-active");
+    </script>
 
-            let query = $(this).val();
+    <script>
+        $(document).ready(function() {
+            $('#liveSearchInput').on('input', function() {
 
-            var base_url = $("#base_url").val();
+                let query = $(this).val();
 
-            $.ajax({
-                url: base_url + "/medical-provider-payment-search",
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                data: {
-                    query: query
-                },
-                success: function(html) {
-                    // Update only if the search box is not empty
-                    if (query.trim() !== "") {
-                        $('#searchResultsContainer').html(html);
-                    } else {
-                        // Clear the results when the search box is empty
-                        $('#searchResultsContainer').html("");
+                var base_url = $("#base_url").val();
+
+                $.ajax({
+                    url: base_url + "/medical-provider-payment-search",
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        query: query
+                    },
+                    success: function(html) {
+                        // Update only if the search box is not empty
+                        if (query.trim() !== "") {
+                            $('#searchResultsContainer').html(html);
+                        } else {
+                            // Clear the results when the search box is empty
+                            $('#searchResultsContainer').html("");
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
-                },
-                error: function(error) {
-                    console.log(error);
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var trPrefixInput = document.querySelector('.tr-prefix-input');
+    
+            trPrefixInput.addEventListener('input', function() {
+                if (!trPrefixInput.value.startsWith('TR')) {
+                    trPrefixInput.value = 'TR' + trPrefixInput.value;
                 }
             });
         });
-    });
-</script>
-@endsection
+    </script>
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include jQuery Validation Plugin -->
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#paymentinfo").validate({
+                rules: {
+                    account_number: {
+                        required: true,
+                        minlength: 26,
+                        // maxlength: 34,
+                    },
+                    bank_name: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    account_number: {
+                        required: "Please enter IBAN number",
+                        minlength: "Please enter at least 24 digits",
+                        // maxlength: "Please enter at most 34 digits",
+                    },
+                    bank_name: {
+                        required: "Please enter bank name",
+                    }
+                }
+            });
+        });
+    </script>
+    @endsection

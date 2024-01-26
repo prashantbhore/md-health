@@ -46,7 +46,7 @@
                     Manage Cities
                 </a>
             </li>
-           
+
             <li class="mlmLi">
                 <a href="{{URL::asset('admin/multi-level-marketing')}}" class="nav-link link-dark mlm">
                     MLM
@@ -58,7 +58,7 @@
                 </a>
             </li>
             <li class="productsNcategoriesLi">
-                <a href="{{URL::asset('admin/products-and-categories')}}" class="nav-link link-dark productsNcategories"> 
+                <a href="{{URL::asset('admin/products-and-categories')}}" class="nav-link link-dark productsNcategories">
                     Manage Products & Catagories
                 </a>
             </li>
@@ -72,7 +72,7 @@
                     Reviews
                 </a>
             </li>
-         
+
             <li class="adsLi">
                 <a href="{{URL::asset('admin/ads-promo')}}" class="nav-link link-dark ads">
                     Ads & Promo
@@ -83,9 +83,16 @@
                     Featured List
                 </a>
             </li>
+            
             <li class="manageRequestLi">
                 <a href="{{URL::asset('admin/manage-request')}}" class="nav-link link-dark manageRequest">
                     Manage Request
+                </a>
+            </li>
+
+            <li class="membershipsLi">
+                <a href="{{URL::asset('admin/manage-memberships')}}" class="nav-link link-dark memberships">
+                    Memberships
                 </a>
             </li>
 
@@ -101,6 +108,7 @@
                 </a>
             </li>
             
+
         </ul>
     </div>
 </main>

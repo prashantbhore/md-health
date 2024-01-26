@@ -22,7 +22,7 @@ class MdShoppingController extends Controller
 
     public function mdshop_home()
     {
-        $token = null;
+        $token = Session::get( 'login_token' )?Session::get( 'login_token' ):null;
         $apiUrl1 = url('/api/product-category');
         $body = null;
         $method = 'GET';
@@ -38,7 +38,7 @@ class MdShoppingController extends Controller
     {
         // dd($request);
         $decryptedID = Crypt::decrypt($request->id);
-        $token = null;
+        $token = Session::get( 'login_token' )?Session::get( 'login_token' ):null;
         $apiUrl1 = url('/api/product-category');
         $body = null;
         $method = 'GET';
@@ -92,7 +92,7 @@ class MdShoppingController extends Controller
     public function featured_product(Request $request)
     {
         // dd($request);
-        $token = null;
+        $token = Session::get( 'login_token' )?Session::get( 'login_token' ):null;
         $apiUrl1 = url('/api/featured-product');
         $body = null;
         $method = 'get';
@@ -130,7 +130,7 @@ class MdShoppingController extends Controller
     public function get_product(Request $request)
     {
         // dd($request);
-        $token = null;
+        $token = Session::get( 'login_token' )?Session::get( 'login_token' ):null;
         $apiUrl1 = url('/api/filter-product-list');
         $body = ['subcategory_id' => $request->subcategory_id];
         $method = 'POST';
@@ -168,8 +168,9 @@ class MdShoppingController extends Controller
     }
     public function view_all_products(Request $request)
     {
-        // dd($request);
-        $token = null;
+
+     
+        $token = Session::get( 'login_token' )?Session::get( 'login_token' ):null;
         $apiUrl1 = url('/api/product-category');
         $body = null;
         $method = 'GET';
@@ -179,13 +180,17 @@ class MdShoppingController extends Controller
         $product_categories = $responseData['product_category'];
 
         $decryptedID = Crypt::decrypt($request->id);
+
+       
+
+        
         $token = null;
         $apiUrl1 = url('/api/vendor-product-lists');
         $body = ['id' => $decryptedID];
         $method = 'POST';
 
         $responseData = $this->apiService->getData($token, $apiUrl1, $body, $method);
-        // dd($responseData);
+        dd($responseData);
         $filtered_products = $responseData['vendor_products'];
         $product_data = $responseData['product_data'];
         $vendor = $responseData['vendor'];
@@ -222,7 +227,7 @@ class MdShoppingController extends Controller
     public function cart(Request $request)
     {
         // dd($request);
-        $token = null;
+        $token = Session::get( 'login_token' )?Session::get( 'login_token' ):null;
         $apiUrl1 = url('/api/product-category');
         $body = null;
         $method = 'GET';
@@ -275,7 +280,7 @@ class MdShoppingController extends Controller
     public function catgorywisefilter(Request $request)
     {
         // dd($request);
-        $token = null;
+        $token = Session::get( 'login_token' )?Session::get( 'login_token' ):null;
         $apiUrl1 = url('/api/product-category');
         $body = null;
         $method = 'GET';

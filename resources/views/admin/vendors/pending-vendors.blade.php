@@ -143,9 +143,9 @@
     $(".manageVendors").addClass("md-active");
 </script>
 <script>
-    $(document).ready(function(){
-           $('#pending_vendor_list').DataTable();
-       });
+    // $(document).ready(function(){
+    //        $('#pending_vendor_list').DataTable();
+    // });
 </script>
 <script>
     $(document).ready(function(){

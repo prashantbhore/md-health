@@ -51,8 +51,8 @@ return [
             'database' => env('DB_DATABASE', 'your_database_name'),
             'username' => env('DB_USERNAME', 'your_database_user'),
             'password' => env('DB_PASSWORD', 'your_database_password'),
-            'unix_socket' => env('DB_SOCKET', '/Applications/MAMP/tmp/mysql/mysql.sock'),
-            
+            'unix_socket' => env('DB_SOCKET', '/opt/lampp/var/mysql/mysql.sock'),
+
             // 'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             // 'host' => env('DB_HOST', '127.0.0.1'),

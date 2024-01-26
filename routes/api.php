@@ -9,6 +9,7 @@ use App\Http\Controllers\api\AppConfigController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
+use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\customer\CustomerShopController;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
@@ -26,7 +27,7 @@ use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\food\UpdateFoodProfileController;
 use App\Http\Controllers\api\vendor\VendorDashboardController;
 use App\Http\Controllers\api\food\FoodPackageController;
-
+use App\Http\Controllers\InvitationApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,7 +46,10 @@ Route::get('unauthorized-user', function () {
 // dynamic app url
 Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']);
 
-
+//Mplus02
+Route::middleware(['CheckRequestType'])->group(function () {
+    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
+});
 
 
 // get country list
@@ -53,7 +57,7 @@ Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
 
 // get treatment list
-Route::get('md-treatment-list', [CommonController::class, 'get_treatment_list']);
+Route::get('md-treatment-list-all', [CommonController::class, 'get_treatment_list']);
 
 // get city list
 Route::post('md-city-list', [CommonController::class, 'get_cities_list']);
@@ -82,6 +86,14 @@ Route::post('md-food-login', [LoginControllers::class, 'food_login']);
 Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_registration']);
 
 Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
+
+
+
+// get country list
+Route::get('md-helath-bank-list', [CustomerPackageController::class, 'md_health_bank_lists']);
+
+
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () 
 {
@@ -289,7 +301,7 @@ Route::middleware('auth:sanctum')->group(function ()
     //customer-upload-documents
     Route::post('md-customer-upload-documents', [CustomerPackageController::class, 'customer_upload_documents']);
     
-    Route::get('md-customer-documents-list', [CustomerPackageController::class, 'customer_documents_list']);
+    Route::post('md-customer-documents-list', [CustomerPackageController::class, 'customer_documents_list']);
 
     //customer-remove-documents
     Route::post('md-customer-remove-documents', [CustomerPackageController::class, 'customer_remove_documents']);
@@ -453,8 +465,10 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::get('md-provider-daily-monthly-summary', [SalesController::class, 'salesSummary']);
 
 
+    //referal-link
+    Route::get('/send-invitation-link', [InvitationApiController::class, 'send_invitation_link']);
 
-   
+    Route::post('/send-invitation', [InvitationApiController::class, 'sendInvitation']);
 
    
 

@@ -34,7 +34,7 @@
                          </li>
                          <li><a href="javascript:;"><img src="{{ 'front/assets/img/twitter.png' }}" alt=""></a>
                          </li>
-                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/instagram.png' }}" alt=""></a></li>
+                         <li><a href="javascript:;"><img src="{{ 'front/assets/img/Instagram.png' }}" alt=""></a></li>
                          <li><a href="javascript:;"><img src="{{ 'front/assets/img/linkedin.png' }}" alt=""></a>
                          </li>
                      </ul>
@@ -68,7 +68,7 @@
                      @2023. All rights reserved.
                  </div>
                  <ul class="bottom-links d-flex gap-5 mb-0">
-                     <li><a href="javascript:;">Enlignment Text</a></li>
+                     <li><a href="javascript:;">Enlightenment Text</a></li>
                      <li><a href="javascript:;">Information Society Services</a></li>
                      <li><a href="javascript:;">Privacy Policy</a></li>
                      <li><a href="javascript:;">Legal Information</a></li>

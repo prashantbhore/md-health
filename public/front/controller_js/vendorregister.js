@@ -2,6 +2,7 @@
 function countdownTimer(duration) {
     // alert('vfvjh');
     $('#resendotp').hide();
+    $('#verifyBtn').prop('disabled', false);
     let timer = duration,
         minutes, seconds;
     const timerDisplay = $('#timer');
@@ -18,6 +19,7 @@ function countdownTimer(duration) {
             timer = duration;
             clearInterval(timerInterval);
             $('#resendotp').show();
+            $('#verifyBtn').attr('disabled',true);
             timerDisplay.text("Timer completed!");
         }
     }, 1000);

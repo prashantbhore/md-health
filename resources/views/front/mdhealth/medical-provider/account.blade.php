@@ -2,7 +2,7 @@
 @section('content')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<link rel="stylesheet" href="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.css') }}">
 <style>
     .form-control::placeholder {
         font-family: "Campton";
@@ -50,9 +50,35 @@
 
     .multiple-upload-images .preview-img .prev-img-div img {
         height: 100px;
-        width: 140px;
-        object-fit: contain;
-        margin-top: 15px;
+        width: 133px;
+        object-fit: cover;
+        margin-top: 16px;
+        border-radius: 10px;
+        opacity: 0.9;
+        transition: 0.15s all;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div video {
+        width: 133px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: 0.15s all;
+        margin-top: 20px;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div video:hover {
+        width: 133px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+        opacity: 1;
+        transition: 0.15s all;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div img:hover {
+        opacity: 1;
     }
 
     .form-group .prev-img-div img {
@@ -65,10 +91,33 @@
 
     .prev-img-div img {
         height: 150px;
-        width: auto;
+        width: 133px;
         object-fit: contain;
-        margin-top: 15px;
+        margin-top: 8px;
         border-radius: 3px;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div .clear-btn {
+        position: absolute;
+        top: 10px;
+        right: -5px;
+        background: #d34f4fe3;
+        /* padding: 0px 5px; */
+        border-radius: 100%;
+        color: #fff;
+        text-decoration: none;
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.15s all;
+    }
+
+    .multiple-upload-images .preview-img .prev-img-div .clear-btn:hover {
+        background: #db2828;
     }
 </style>
 
@@ -85,7 +134,7 @@
                     </h5>
                     <div class="card-body">
                         <div class="form-div">
-                            <form action="{{ url('md-update-medical-profile') }}" method="post" enctype="multipart/form-data" id="accountmedpro">
+                            <form action="{{ url('md-update-medical-profile') }}" method="post" enctype="multipart/form-data" id="accountmedpro" class="from-prevent-multiple-submits">
                                 @csrf
                                 <div class="form-group mb-4">
                                     <label class="form-label mb-3">Company Name</label>
@@ -166,9 +215,9 @@
                             </div>
                             <div class="prev-img-div">
                                 <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
-                                                Storage::exists($MedicalProviderLogo['company_logo_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}" {{-- 
+                                            Storage::exists($MedicalProviderLogo['company_logo_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}" {{-- 
                                             src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic1">
                                 <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
                             </div>
@@ -182,14 +231,111 @@
                             </div>
                             <div class="prev-img-div">
                                 <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
-                                                Storage::exists($MedicalProviderLicense['company_licence_image_path'])
-                                                    ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
-                                                    : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
+                                            Storage::exists($MedicalProviderLicense['company_licence_image_path'])
+                                                ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
+                                                : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
                                 <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
                             </div>
                         </div>
 
                         <div class="multiple-upload-images">
+                            <h6 class="section-heading">Product Pictures</h6>
+                            <div class="form-group">
+                                <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
+                            </div>
+                            <div class="preview-img gallery d-flex flex-wrap align-items-center gap-3 ">
+
+                                @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
+                                @php
+                                $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if ($fileExtension === 'mp4')
+                                <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
+                                    <a href="{{ !empty($ProviderImagesVideo->provider_image_path) 
+                                                                        ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                                        : '' }}" class="glightbox">
+
+                                        <video poster="{{asset('front/assets/img/poster.png')}}" autoplay>
+                                            <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                                    Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                                        ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                                        : '' }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </a>
+                                    <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
+                                        <div><span class="mdi mdi-close-thick"></span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- <a href="{{ URL::asset($ProviderImagesVideo->provider_image_path) }}"
+                                                        class="glightbox">
+                                                        <div class="prev-img-div video-card"
+                                                            id="img_div_{{ $ProviderImagesVideo->id }}">
+                                                            <video class="video-div " controls>
+                                                                <source
+                                                                    src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                                    Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                                        ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                                        : '' }}"
+                                                                    type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                    </a> -->
+
+                                <!-- </div> -->
+                                @else
+
+                                <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
+                                    <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                                    Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                                        ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                                        : '' }}" class="glightbox">
+                                        <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                                    Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                                        ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                                        : '' }}" alt="image" />
+                                    </a>
+
+                                    <!-- <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                            Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                : '' }}"
+                                                class="glightbox">
+                                                <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                Storage::exists($ProviderImagesVideo->provider_image_path)
+                                                    ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
+                                                    : '' }}"
+                                                    alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
+                                            </a> -->
+                                    <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
+                                        <div><span class="mdi mdi-close-thick"></span>
+                                        </div>
+                                    </a>
+                                </div>
+                                @endif
+                                @endforeach
+
+                            </div>
+
+                        </div>
+
+                        <div class="section-btns mb-4">
+                            <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits" onclick="disableButtonAndCallback()">Save
+                                Changes</button>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label fst-italic fsb-2">*Please make sure the photo/video meets
+                                the MDhealth policy.</label>
+                        </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                {{-- <div class="multiple-upload-images">
                             <h6 class="section-heading">Product Pictures</h6>
                             <div class="form-group">
                                 <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
@@ -203,41 +349,43 @@
 
                                 @if ($fileExtension === 'mp4')
                                 <div class="prev-img-div video-card" id="img_div_{{ $ProviderImagesVideo->id }}">
-                                    <video class="video-div" controls>
-                                        <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                <video poster="{{asset('front/assets/img/poster.png')}}" class="video-div" controls>
+                    <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                 Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                     ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                     : '' }}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
-                                        <div>X</div>
-                                    </a>
-                                </div>
-                                @else
-                                <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
-                                    <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                    Your browser does not support the video tag.
+                </video>
+                <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
+                    <div><span class="mdi mdi-close-thick"></span>
+                    </div>
+                </a>
+            </div>
+            @else
+            <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
+                <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                         Storage::exists($ProviderImagesVideo->provider_image_path)
                                                             ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                             : '' }}" class="glightbox">
-                                        <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                    <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                             Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                 ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                 : '' }}" alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
-                                    </a>
-                                    <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
-                                        <div>X</div>
-                                    </a>
-                                </div>
-                                @endif
-                                @endforeach
+                </a>
+                <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
+                    <div><span class="mdi mdi-close-thick"></span>
+                    </div>
+                </a>
+            </div>
+            @endif
+            @endforeach
 
-                            </div>
+        </div>
 
-                        </div>
+    </div> --}}
 
-                        <div class="section-btns mb-4">
-                            <button type="submit" class="btn save-btn-black">Save
+    {{-- <div class="section-btns mb-4">
+                            <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits">Save
                                 Changes</button>
                         </div>
 
@@ -248,10 +396,10 @@
 
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </div> --}}
+</div>
+</div>
+</div>
 </div>
 </div>
 @endsection
@@ -270,13 +418,14 @@
     });
 </script> --}}
 
-<script src="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.js')}}"></script>
+<script src="{{ URL::asset('admin/commonarea/plugins/summernote/summernote.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('.summernote-1').summernote({
             height: 200,
         }).on('summernote.keyup', function() {
-            var text = $(".summernote-1").summernote("code").replace(/&nbsp;|<\/?[^>]+(>|$)/g, "").trim();
+            var text = $(".summernote-1").summernote("code").replace(/&nbsp;|<\/?[^>]+(>|$)/g, "")
+                .trim();
             //alert(text);
             if (text.length == 0) {
                 $('.section_1_description-error').show();
@@ -304,7 +453,16 @@
 
 <!-- JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+<script>
+    (function() {
+        $('.from-prevent-multiple-submits').on('submit', function() {
+            $('.from-prevent-multiple-submits').attr('disabled', 'true');
+            setTimeout(function() {
+                $('.from-prevent-multiple-submits').attr('disabled', false);
+            }, 3000);
+        })
+    })();
+</script>
 
 <script>
     function deleteClientLogo(client_logo_id) {
@@ -344,6 +502,7 @@
                 });
             }
         }
+    }
 </script>
 <script>
     function success_toast(title = '', message = '') {
@@ -419,7 +578,7 @@
             return value.trim().length !== 0;
         }, "Spaces are not allowed");
     });
-    }
+    // }
 
     function fail_toast(title = '', message = '') {
         $.toast({
@@ -444,13 +603,11 @@
                 company_name: {
                     required: true,
                     minlength: 2,
-                    // Adding a custom rule for disallowing spaces
                     nowhitespace: true
                 },
                 company_address: {
                     required: true,
                     minlength: 2,
-                    // Adding a custom rule for disallowing spaces
                     nowhitespace: true
                 },
                 country_id: "required",
@@ -485,7 +642,4 @@
         }, "Spaces are not allowed");
     });
 </script>
-
-
-
 @endsection

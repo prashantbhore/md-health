@@ -6,8 +6,14 @@
             display: none;
         }
 
+        body,
+        .form-control,
+        .form-control:focus {
+        background: #f6f6f6;
+    }
+
         #recaptcha-container {
-            bottom: 330px;
+            bottom: 350px;
         }
 
         .mdi-eye-off::before,
@@ -21,13 +27,13 @@
         }
     </style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
-        <div class="card sign-in-card">
+        <div class="card sign-in-card" style="background: #f6f6f6;">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="pt-3">
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
-                    <h2 class="mb-0">Sign In to MD<span>health</span></h2>
+                    <h2 class="my-0">Sign In to MD<span>health</span></h2>
                     <p>The device is not yours? Use private or incognito mode to log in.</p>
 
                     <div class="w-100 df-center">
@@ -50,7 +56,7 @@
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
                                     placeholder="Password">
-                                <span toggle="#password" class="mdi mdi-eye field-icon toggle-password "></span>
+                                <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password "></span>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -80,14 +86,17 @@
 
 
     <div class="container py-100px df-center sign-in-form d-none" id="otpDiv">
-        <div class="card">
+        <div class="card" style="min-height: 650px;background: #f6f6f6;">
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="pt-3">
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
-                    <h2 class="mb-0">SMS Code</h2>
+
+                    <h2 class="my-0">SMS Code</h2>
+
                     <p>Enter the 6 digit code sent to your mobile phone</p>
+
                     {{-- <form action="{{ url('otp-verify') }}" method="post" id="otpForm"> --}}
                     {{-- <input type="text" id="verification" class="form-control" placeholder="Verification code">
                             <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
@@ -96,7 +105,7 @@
                         {{-- <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                         <div class="alert alert-success" id="successOtpAuthot" style="display: none;"></div>
                         <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
-                        <div class="w-100 df-center mb-3 sms-input gap-3">
+                        <div class="w-100 df-center mb-5 sms-input gap-3">
                             <input type="hidden" name="email" value="{{ session('email') }}">
                             <input type="hidden" name="password" value="{{ session('password') }}">
                             <input type="hidden" name="login_type"
@@ -123,9 +132,9 @@
                         </div>
                         <div id="errorMessage" class="text-danger d-none"></div>
                 </div>
-                <div class="d-flex align-items-center justify-content-center mt-3">
-                    <button class="btn cont-btn w-75 mb-4 df-center" id="verifyBtn" type="button" onclick="verify()"
-                        style="height: 47px;">Sign
+                <div class="d-flex align-items-center justify-content-center mt-auto">
+                    <button class="btn cont-btn mb-5 df-center" id="verifyBtn" type="button" onclick="verify()"
+                        style="height: 49px;width:475px">Sign
                         In</button>
                 </div>
                 </form>

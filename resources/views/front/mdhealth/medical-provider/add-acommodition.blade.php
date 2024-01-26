@@ -112,7 +112,7 @@
                     <div class="card-body">
                         <div class="form-div">
 
-                            <form action="{{ url('md-add-new-acommodition') }}" method="post" enctype="multipart/form-data" id="add_acommodition">
+                            <form action="{{ url('md-add-new-acommodition') }}" method="post" enctype="multipart/form-data" id="add_acommodition" class="from-prevent-multiple-submits">
                                 @csrf
 
                                 <input type="hidden" name="hotel_id" value="{{ !empty($hotel_details['id']) ? $hotel_details['id'] : '' }}">
@@ -161,8 +161,8 @@
                                 <div class="form-group mb-5 position-relative" >
                                     <label class="form-label mb-3">Hotel Picture</label>
                                     <div class="form-group mb-3 ">
-                                        <input type="file" name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
-                                        <img src="{{('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
+                                        <input type="file"  name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
+                                        <img src="{{asset('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
                                     </div>
                                     <div class="prev-img-div">
                                         <img src="{{ !empty($hotel_details['hotel_image_path']) ? $hotel_details['hotel_image_path'] : 'front/assets/img/uploadHere.png' }}" alt="image" id="pic" />
@@ -246,8 +246,8 @@
                                 </div>
 
                                 <div class="section-btns mb-4 d-flex gap-3">
-                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold">Save Accommodation</button>
-                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold">Deactive Accommodation</button>
+                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold from-prevent-multiple-submits">Save Accommodation</button>
+                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold from-prevent-multiple-submits">Deactive Accommodation</button>
                                 </div>
 
                             </form>
@@ -271,6 +271,17 @@
     $(".mpOtherServicesLi").addClass("activeClass");
     $(".mpOtherServices").addClass("md-active");
 </script>
+<script>
+    (function() {
+        $('.from-prevent-multiple-submits').on('submit', function() {
+            $('.from-prevent-multiple-submits').attr('disabled', 'true');
+            setTimeout(function() {
+                $('.from-prevent-multiple-submits').attr('disabled', false);
+            }, 3000);
+        })
+    })();
+</script>
+
 <script>
     $(document).ready(function() {
         function updateCheckedValues() {

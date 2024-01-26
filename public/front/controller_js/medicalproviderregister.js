@@ -1,6 +1,7 @@
 //  alert('hfyuf');
 function countdownTimer(duration) {
     $('#resendotp').hide();
+    $('#otp-btn').prop('disabled', false);
     let timer = duration,
         minutes, seconds;
     const timerDisplay = $('#timer');
@@ -17,6 +18,7 @@ function countdownTimer(duration) {
             timer = duration;
             clearInterval(timerInterval);
             $('#resendotp').show();
+            $('#otp-btn').attr('disabled',true);
             timerDisplay.text("Timer completed!");
         }
     }, 1000);
@@ -95,7 +97,7 @@ $(document).on("click", "#medproreg", function () {
                 // $("#medproreg").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
             },
             success: function (response) {
-                $("#medproreg").attr("disabled", false);
+                // $("#medproreg").attr("disabled", false);
                 console.log(response);
                 if (response !== undefined) {
                     if (response.email_exist !== undefined) {
@@ -335,9 +337,7 @@ $(document).ready(function () {
         },
         "Passwords do not match."
     );
-    $.validator.addMethod(
-        "spaceValidation",
-        function (value, element) {
+    $.validator.addMethod("spaceValidation",function (value, element) {
             return value.trim().length !== 0;
         },
         "Field should not contain only spaces."
@@ -573,9 +573,9 @@ $(document).ready(function () {
 });
 
 // Upload Icon faded away
-$("#company_logo_image_path").on("click", function () {
-    $("#up-abs1").fadeOut(2000);
-});
-$("#company_licence_image_path").on("click", function () {
-    $("#up-abs2").fadeOut(2000);
-});
+// $("#company_logo_image_path").on("click", function () {
+//     $("#up-abs1").fadeOut(2000);
+// });
+// $("#company_licence_image_path").on("click", function () {
+//     $("#up-abs2").fadeOut(2000);
+// });

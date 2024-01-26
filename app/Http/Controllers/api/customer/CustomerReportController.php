@@ -20,7 +20,7 @@ class CustomerReportController extends BaseController
     
     public function customer_all_reports_list()
     {
-        $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
+        $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase.customer', 'provider', 'provider_logo'])
             ->where('custome_id', Auth::user()->id)
             ->where('status', 'active')
             ->get();
@@ -29,35 +29,42 @@ class CustomerReportController extends BaseController
     
         foreach ($provider_report_list as $report) {
             $customerPurchasePackage = $report->customerPackagePurchase;
-            $providerData = $report->provider;
-            $providerLogo = $report->provider_logo;
-            $customerData = $customerPurchasePackage->customer;
     
-            $providerId = $providerData->id;
+            // Check if $customerPurchasePackage is not null
+            if ($customerPurchasePackage) {
+                $providerData = $report->provider;
+                $providerLogo = $report->provider_logo;
+                $customerData = $customerPurchasePackage->customer;
     
-            if (!isset($formatted_data[$providerId])) {
-                $formatted_data[$providerId] = [
-                    'provider_data' => [
-                        'company_name' => $providerData->company_name,
-                        'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
-                    ],
-                    'customer_data' => [
-                        'name' => $customerData->first_name . ' ' . $customerData->last_name,
-                    ],
-                    'report_count' => 0, 
-                    'reports' => [],
-                ];
+                // Check if $customerData is not null
+                if ($customerData) {
+                    $providerId = $providerData->id;
+    
+                    if (!isset($formatted_data[$providerId])) {
+                        $formatted_data[$providerId] = [
+                            'provider_data' => [
+                                'company_name' => $providerData->company_name,
+                                'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
+                            ],
+                            'customer_data' => [
+                                'name' => $customerData->first_name . ' ' . $customerData->last_name,
+                            ],
+                            'report_count' => 0,
+                            'reports' => [],
+                        ];
+                    }
+    
+                    $formatted_data[$providerId]['reports'][] = [
+                        'id' => $report->id,
+                        'report_title' => $report->report_title,
+                        'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
+                        'report_name' => $report->report_name,
+                        'created_at' => $report->created_at,
+                    ];
+    
+                    $formatted_data[$providerId]['report_count']++;
+                }
             }
-    
-            $formatted_data[$providerId]['reports'][] = [
-                'id' => $report->id,
-                'report_title' => $report->report_title,
-                'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
-                'report_name' => $report->report_name,
-                'created_at' => $report->created_at,
-            ];
-    
-            $formatted_data[$providerId]['report_count']++;
         }
     
         if (!empty($formatted_data)) {
@@ -73,6 +80,7 @@ class CustomerReportController extends BaseController
             ]);
         }
     }
+    
 
 
    public function customer_reports_search(Request $request)

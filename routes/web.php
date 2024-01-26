@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ads_and_promo\AdsPromoController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
 use App\Http\Controllers\Front\Customer\CustomerPackageController;
+use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
 use App\Http\Controllers\Front\MedicalProvider\PackageController;
@@ -25,7 +26,7 @@ use App\Http\Controllers\admin\customer\CustomerController;
 use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
 use App\Http\Controllers\admin\master\countryController;
-use App\Http\Controllers\admin\medical_tourism\MedicalTourismController;
+use App\Http\Controllers\admin\membership\AdminMembershipController;
 use App\Http\Controllers\admin\product\MDfoodController;
 use App\Http\Controllers\admin\product\MDhealthController;
 use App\Http\Controllers\admin\product\MDHomeServiceController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\admin\review\reviewController;
 use App\Http\Controllers\admin\vendor\ManageVendorController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
+use App\Http\Controllers\Front\Customer\WalletController;
 use App\Http\Controllers\Front\MedicalProvider\SalesController;
 use App\Http\Controllers\Front\MedicalProvider\UpdateProfileController;
 use App\Http\Controllers\Front\Vendor\VendorProductController;
@@ -82,6 +84,7 @@ Route::get('clear', function () {
 // =================================================================================================
 // Super Admin Routes Start From Here By Mplus03
 
+
 Route::get('common-delete', [BaseController::class, 'delete']);
 
 Route::post('change-status', [BaseController::class, 'status'])->name('change-status');
@@ -99,6 +102,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     });
 
     Route::view('sign-in', 'admin/authentication/sign-in');
+
+    
+
+
+    
 
     //Admin DASHBOARD
     Route::view('dashboard', 'admin/dashboard/dashboard');
@@ -124,11 +132,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('customer-details', 'admin/customers/customer-details');
 
     //Admin MANAGE VENDORS
-   
-   
-  
-    
-    
+
+
+
+
+
 
     Route::view('products-on-sale', 'admin/vendors/products-on-sale');
 
@@ -170,11 +178,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
         Route::post('delete-vendor','delete_vendor')->name('delete.vendor');
 
+        Route::get('vendor-delete-logo','delete_logo');
 
-      
+        Route::get('vendor-delete-license', 'delete_license');
 
+        Route::get('vendor-delete-gallery', 'delete_gallery');
 
-
+        Route::post('verification-status-chnage', 'verification_status');
     });
 
 
@@ -201,7 +211,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE Country
 
-    Route::controller(countryController::class)->group(function () {
+    Route::controller(countryController::class)->group(function (){
         Route::get('add-country', 'index');
         Route::post('/add-country', 'store')->name('add-country');
         Route::get('/country-data-table', 'data_table');
@@ -214,7 +224,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function () {
+    Route::controller(CityController::class)->group(function (){
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table', 'data_table');
@@ -348,7 +358,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     });
 
-   
+
+
+    // MEMBERSHIPS
+ 
+
+
+    Route::controller(AdminMembershipController::class)->group(function () {
+      
+        Route::get('manage-memberships','index');
+
+        Route::post('memberships/list-memberships','list_membership');
+
+
+        Route::post('store-memberships','store_membership')->name('store.membership'); 
+
+
+
+    });
+
+
+
 
 
 
@@ -412,7 +442,9 @@ Route::get('mdShop', [MdShoppingController::class, 'mdshop_home']);
 Route::post('get-product', [MdShoppingController::class, 'get_product']);
 Route::get('featured-product', [MdShoppingController::class, 'featured_product']);
 Route::get('product/{id}', [MdShoppingController::class, 'product_view']);
+
 Route::get('view-products/{id}', [MdShoppingController::class, 'view_all_products']);
+
 Route::get('cart', [MdShoppingController::class, 'cart']);
 Route::get('view-products', [MdShoppingController::class, 'catgorywisefilter']);
 
@@ -589,7 +621,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     });
 
 
-    
+
 
 
 });
@@ -619,7 +651,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
 
 
     Route::controller(VendorSalesController::class)->group(function (){
-        
+
         Route::get('vendor-sales','index');
 
     });
@@ -677,6 +709,30 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 
+
+    //Mplus03 Customer wallet
+    
+
+    Route::controller(WalletController::class)->group(function (){
+
+        Route::get('user-wallet','index');
+        Route::get('user-invite','user_invite');
+        Route::post('send-invitation-link','send_invitation_link')->name('send.invitation.link');
+    });
+
+});
+
+Route::group(['middleware' => 'prevent-back-history'], function () {
+   
+    Route::middleware(['IsCustomer', 'IsMedicalProvider'])->group(function () {
+        Route::controller(CustomerInteractionController::class, function () {
+        });
+        // Route::get('live-cam', 'live_cam');
+    });
+});
+
+Route::middleware(['CheckRequestType'])->group(function () {
+    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
 });
 
 
@@ -700,11 +756,11 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
     });
 
-   
+
     Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
     Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
     Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
-    
+
     // Route::view('', '');
 
 
@@ -741,8 +797,10 @@ Route::view('user-reservation', 'front/mdhealth/user-panel/user-reservation');
 
 Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-successfull');
 
-Route::view('user-wallet', 'front/mdhealth/user-panel/user-wallet');
-Route::view('user-invite', 'front/mdhealth/user-panel/user-invite');
+
+
+
+
 Route::view('user-message', 'front/mdhealth/user-panel/user-message');
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
 Route::view('user-live-appoinment', 'front/mdhealth/user-panel/live-consultation-appoinment');
@@ -782,14 +840,11 @@ Route::view('md-food-purchase-details', 'front/mdhealth/md-food/md-food-purchase
 // Medical Provider Panel
 Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 
-Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');
+// Route::view('live-cam', 'front/mdhealth/medical-provider/live-cam');
 
 // USER PANEL
 #Orders
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
-
-
-
 
 Route::view('welcome', 'welcome');
 

@@ -49,26 +49,25 @@ class Packages extends Model
 
     public function provider()
     {
-        return $this->belongsTo(MedicalProviderRegistrater::class,'created_by');
+        return $this->belongsTo(MedicalProviderRegistrater::class, 'created_by');
     }
 
     public function provider_logo()
     {
-       return $this->belongsTo(MedicalProviderLogo::class, 'created_by','medical_provider_id')
-                ->where('status','active');
+        return $this->belongsTo(MedicalProviderLogo::class, 'created_by', 'medical_provider_id')
+            ->where('status', 'active');
     }
 
 
     public function product_category()
     {
-       return $this->belongsTo(ProductCategory::class,'treatment_id');
-            
+        return $this->belongsTo(ProductCategory::class, 'treatment_category_id');
     }
 
     public function providerGallery()
     {
         return $this->hasMany(ProviderImagesVideos::class, 'provider_id', 'created_by')
-                    ->where('status', 'active');
+            ->where('status', 'active');
     }
 
     public function city()
@@ -78,18 +77,13 @@ class Packages extends Model
 
     public function salesDetails()
     {
-        return $this->hasMany(CustomerPurchaseDetails::class, 'package_id')->where('status','active');
+        return $this->hasMany(CustomerPurchaseDetails::class, 'package_id')->where('status', 'active');
     }
 
-    
+
 
     public function salesCount()
     {
         return $this->salesDetails()->count();
     }
-
-
-    
-
-
 }

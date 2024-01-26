@@ -43,12 +43,21 @@
     .scanQr {
         height: 60vh;
     }
+
+    .treatmentForModal2 .form-control,
+    .treatmentForModal2 .form-select {
+        border: 2px solid #d6d6d6;
+        border-radius: 5px;
+        padding: 10px 16px;
+        height: 48px;
+        font-size: 16px;
+    }
 </style>
 <div class="content-wrapper bg-f6">
     {{-- {{ dd($packageDetails) }} --}}
 
     @php
-    // dd($packageDetailsuse);
+    // dd($packageDetails);
     if (!function_exists('get_twenty_percent')) {
     function get_twenty_percent($number)
     {
@@ -153,19 +162,39 @@
                                         booking.</p>
                                 </div>
                                 <div class="d-flex gap-2 mb-2">
+
                                     @if ($isCustomer == true && $user == true)
-                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
+                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}" data-bs-toggle="modal">Purchase
                                         Package</button>
-                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
-                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                    </button>
-                                    @elseif($user == false)
-                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}">Purchase
-                                        Package</button>
+
+                                    @if ($packageDetails['favourite_check'] == 'yes')
                                     <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
                                         <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
                                     </button>
                                     @endif
+
+                                    @if ($packageDetails['favourite_check'] == 'no')
+                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}" style="background-color: gray;">
+                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                    </button>
+                                    @endif
+                                    @elseif($user == false)
+                                    <button class="btn purchaseBtn" id="{{ $packageDetails['id'] }}" data-bs-toggle="modal">Purchase
+                                        Package</button>
+
+                                    @if ($packageDetails['favourite_check'] == 'yes')
+                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}">
+                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                    </button>
+                                    @endif
+
+                                    @if ($packageDetails['favourite_check'] == 'no')
+                                    <button class="favouriteBtn" id="fav-btn_{{ $packageDetails['id'] }}" style="background-color: gray;">
+                                        <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
+                                    </button>
+                                    @endif
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -191,13 +220,23 @@
             </div>
 
             <div class="modal fade treatmentForModal2" id="treatmentForModal2_{{ $packageDetails['id'] }}" tabindex="-1" aria-labelledby="treatmentForModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered position-relative">
-                    <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close"> -->
-                    <!-- </button> -->
-                    <div class="modal-content">
-                        <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/modalClose.png' }}" alt="">
-                        <p class="camptonBold fs-4 fw-bold text-center mt-4">Change Patient Information</p>
-                        <p class="camptonBook text-center">Fill the patient detail.</p>
+                <div class="modal-dialog modal-dialog-centered position-relative" style="width:704px">
+                    <div class="modal-content p-3">
+                        <div>
+                            <div class="text-end">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <!-- <img src="{{ 'front/assets/img/modalClose.png' }}" alt=""> -->
+                                </button>
+                            </div>
+
+                            <div class="text-center" style="margin-top: -8px;">
+                                <h4 class="modal-title  modal-h1 mb-2" id="exampleModalLabel">Change Patient Information</h4>
+                                <p class="mb-4 card-p2">Fill the form & get your desired treatment plan</p>
+                            </div>
+                        </div>
+                        <!-- <img class="closeModal" data-bs-dismiss="modal" src="{{ 'front/assets/img/modalClose.png' }}" alt="">
+                        <p class="modal-h1 mt-4 text-center">Change Patient Information</p>
+                        <p class="card-p1 text-center">Fill the patient detail.</p> -->
                         <div class="modal-body">
                             <form id="other_form" class="row g-4">
                                 @csrf
@@ -207,27 +246,27 @@
                                 <div class="col-md-4">
                                     <label for="patient_full_name" class="form-label fw-bold">*Patient Full
                                         Name</label>
-                                    <input type="text" name="patient_full_name" class="form-control  h-75" id="patient_full_name" placeholder="Full Name">
+                                    <input type="text" name="patient_full_name" class="form-control  " id="patient_full_name" placeholder="Full Name">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="patient_relation" class="form-label fw-bold">*Relationship To
                                         You</label>
-                                    <input type="text" name="patient_relation" class="form-control h-75" id="patient_relation" placeholder="Relationship To You">
+                                    <input type="text" name="patient_relation" class="form-control " id="patient_relation" placeholder="Relationship To You">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="patient_email" class="form-label fw-bold">*Patient E-mail</label>
-                                    <input type="email" name="patient_email" class="form-control  h-75" id="patient_email" placeholder="Email">
+                                    <input type="email" name="patient_email" class="form-control  " id="patient_email" placeholder="Email">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="patient_contact_no" class="form-label fw-bold">*Patient Contact
                                         Number</label>
-                                    <input type="tel" name="patient_contact_no" class="form-control  h-75" id="patient_contact_no" placeholder="Contact Number">
+                                    <input type="tel" name="patient_contact_no" class="form-control  " id="patient_contact_no" placeholder="Contact Number">
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="patient_country_id" class="form-label fw-bold">*Patient
                                         Country</label>
-                                    <select name="patient_country_id" id="patient_country_id" class="form-select h-75">
+                                    <select name="patient_country_id" id="patient_country_id" class="form-select ">
                                         <option value="" selected>Country</option>
                                         @foreach ($counties as $country)
                                         <option value="{{ $country->id }}">{{ $country->country_name }}</option>
@@ -237,7 +276,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="patient_city_id" class="form-label fw-bold">*Patient City</label>
-                                    <select name="patient_city_id" id="patient_city_id" class="form-select h-75">
+                                    <select name="patient_city_id" id="patient_city_id" class="form-select ">
                                         <option value="" selected>City</option>
                                         @foreach ($cities as $city)
                                         <option value="{{ $country->id }}">{{ $city->city_name }}</option>
@@ -247,8 +286,8 @@
                                 <p class="mt-5 mb-0 camptonBook">*You can also change the patient information from
                                     <span class="camptonBold">panel</span> <span class="camptonBold text-green">></span> <span class="camptonBold">packages</span>
                                 </p>
-                                <div class="col-12 text-center ">
-                                    <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                <div class="col-12 df-center">
+                                    <a href="javascript:void(0)" id="other" class="btn purchaseBtn my-4 df-center">
                                         <span class="fw-bold">Step 2:</span> <span class="camptonBook">Payment
                                             Page</span>
                                     </a>
@@ -281,7 +320,7 @@
                         <div class="overview mt-4">
                             <div class="row">
                                 <div class="col-12 ps-0">
-                                    <p>{{ !empty($packageDetails['overview']) ? $packageDetails['overview'] : '' }}</p>
+                                    <p>{{ !empty($packageDetails['overview']) ? strip_tags($packageDetails['overview']) : '' }}</p>
                                 </div>
                                 {{-- <div class="col-4 pe-0">
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
@@ -377,17 +416,37 @@
                         </ul>
                     </div>
                 </div>
+                <!-- GALLERY -->
                 <div class="tab-pane fade" id="menu2">
-                    @if (!empty($provider_gallery))
-                    <div class="gallery">
-                        @foreach ($provider_gallery as $image)
-                        <a href="{{ $image }}" class="glightbox">
-                            <img src="{{ $image }}" alt="image" />
-                        </a>
-                        @endforeach
-                    </div>
-                    @endif
+                @if (!empty($provider_gallery))
+    <div class="gallery">
+        @foreach ($provider_gallery as $image)
+            @php
+                $fileExtension = pathinfo($image, PATHINFO_EXTENSION);
+                // dd($fileExtension);
+            @endphp
+
+            @if ($fileExtension === 'mp4')
+                <a href="{{ $image }}" class="glightbox">
+                    <!-- <img src="{{ $image }}" alt="image" /> -->
+                    <video width="320" height="240" controls autoplay>
+                        <source src="{{ $image }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </a>
+            @else
+                <a href="{{ $image }}" class="glightbox">
+                    <img src="{{ $image }}" alt="image" />
+                </a>
+            @endif
+        @endforeach
+    </div>
+@endif
+
+
                 </div>
+                <!-- GALLERY END -->
+
             </div>
         </div>
     </div>
@@ -547,6 +606,10 @@
                         $('#other').html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
                         console.log('Success:', response);
+                        toastr.success(response.message, 'Success', {
+                            positionClass: 'toast-bottom-right',
+                            backgroundcolor: '#006400',
+                        });
 
                     },
                     error: function(xhr, status, error) {
@@ -564,11 +627,10 @@
 
         $('.purchaseBtn').click(function(e) {
             e.preventDefault();
-            // alert('hi');
+
 
             var id = this.id;
-            // alert(id);
-            // $('.treatmentForModal_'+id).modal('hide');
+
             if (user == '1') {
                 $('#treatmentForModal_' + id).modal('show');
             } else {

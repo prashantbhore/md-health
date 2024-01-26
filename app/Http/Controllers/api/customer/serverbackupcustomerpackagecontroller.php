@@ -2810,12 +2810,14 @@ class CustomerPackageController extends BaseController
                 'md_customer_favourite_packages.id',
                 'md_packages.treatment_period_in_days',
                 'md_product_category.product_category_name',
+                // 'md_medical_provider_register.company_name as vendors_name',
                 'md_master_cities.city_name'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            // ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
             ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
             ->get();
 

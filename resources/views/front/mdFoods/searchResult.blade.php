@@ -398,7 +398,7 @@
                             <label for="floatingSelect">Subscription Type</label>
                         </div>
                         <p class="fs-6 camptonBold text-green text-end">Price: <span style="color: #000;">2.820,00 ₺</span></p>
-                        <a type="submit" class="btn purchaseBtn my-4 d-flex justify-content-center align-items-center " data-bs-toggle="modal" data-bs-target="#foodForModal2" data-bs-dismiss="modal">
+                        <a type="submit" class="btn purchaseBtn my-4 df-center" data-bs-toggle="modal" data-bs-target="#foodForModal2" data-bs-dismiss="modal">
                             <span class="fw-bold">Step 2:</span> <span class="camptonBook">Who is this meal for?</span> 
                         </a>
                     </form>
@@ -461,7 +461,7 @@
                                 <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
                             </div>
                             <div class="col-12 text-center ">
-                                <a href="{{url('purchase-food-pack')}}" type="submit" class="btn purchaseBtn my-4" style="padding: 10px 6rem">
+                                <a href="{{url('purchase-food-pack')}}" type="submit" class="btn purchaseBtn my-4 df-center">
                                     <span class="fw-bold">Go</span> <span class="camptonBook">Payment Page</span> 
                                 </a>
                             </div>

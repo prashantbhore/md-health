@@ -89,7 +89,7 @@
                     <div class="d-flex justify-content-between mb-4">
                         <p class="mb-0 t_price">Select Your Payment Plan</p>
                         <p class="mb-0 t_price fnt20">Total Price <span class="total_price" style="color: #000;">34.560,00
-                               <span class="lira">₺</span> </span></p>
+                                <span class="lira">₺</span> </span></p>
                     </div>
                     <div class="discounts d-flex flex-column gap-3">
                         <div class="d-flex align-items-center gap-2">
@@ -191,21 +191,21 @@
                                     </h5>
                                 </div>
                                 <div class="d-flex gap-3 mb-4-input">
-                                    <div class="w-50"><input type="text" id="input4" name="input4" class="form-control "
-                                        placeholder="00/00">
+                                    <div class="w-50"><input type="text" id="input4" name="input4"
+                                            class="form-control " placeholder="00/00">
                                         <h5 id="verifyinput4" class="mt-0" style="color: red;">
-                                        Please Enter Expiry Date
-                                    </h5>
-                                </div>
-                                <div class="w-50">
-                                    <input type="password" id="input3" name="input3" class="form-control"
-                                        placeholder="CVV">
+                                            Please Enter Expiry Date
+                                        </h5>
+                                    </div>
+                                    <div class="w-50">
+                                        <input type="password" id="input3" name="input3" class="form-control"
+                                            placeholder="CVV">
                                         <h5 id="verifyinput3" class="mt-0" style="color: red;">
-                                        Please Enter CVV
-                                    </h5>
+                                            Please Enter CVV
+                                        </h5>
+                                    </div>
                                 </div>
-                                </div>
-                               
+
                                 <!-- <a href="{{ url('payment-status') }}"> -->
                                 <!-- <a href="{{ url('payment-status') }}" -->
                                 <a href="javascript:void(0)" style="color: #fff; height: unset; padding: 12px 2rem;"
@@ -264,16 +264,67 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- BANK TRANSFER -->
+            <div id="bank" class="bank-transfer-details">
+                <form action="php">
+                    <div class="row gy-4">
+                        <div class="col-md-12 mb-3">
+                            <label for="Bank Informations" class="form-label mb-3" style="font-size: 29px;">Bank Informations</label>
+                            <select name="bank-informations" id="bank-informations" class="form-select">
+                                <option value="Bank A">Halk Bank</option>
+                                <option value="Bank B">Deniz Bank</option>
+                                <option value="Bank C">AK Bank</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Bank Name" class="form-label mb-0">Bank Name</label>
+                            <p class="mb-0 card-h1">Garanti BBVA</p>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="Receiver Name" class="form-label mb-0">Receiver Name</label>
+                            <p class="mb-0 card-h1">MDhealth Saglik ve Turizm A.S.</p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="IBAN" class="form-label mb-0">IBAN</label>
+                            <p class="mb-0 card-h1">TR00 0000 0000 0000 0000 0000 00</p>
+                            <h6 class="copy-iban card-h3 text-green">
+                                <span class="align-bottom"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                        <path d="M3.25 7.75C3.25 5.629 3.25 4.56775 3.90925 3.90925C4.56775 3.25 5.629 3.25 7.75 3.25H10C12.121 3.25 13.1823 3.25 13.8408 3.90925C14.5 4.56775 14.5 5.629 14.5 7.75V11.5C14.5 13.621 14.5 14.6823 13.8408 15.3408C13.1823 16 12.121 16 10 16H7.75C5.629 16 4.56775 16 3.90925 15.3408C3.25 14.6823 3.25 13.621 3.25 11.5V7.75Z" stroke="#4CDB06" stroke-width="1.875" />
+                                        <path d="M3.25 13.75C2.65326 13.75 2.08097 13.5129 1.65901 13.091C1.23705 12.669 1 12.0967 1 11.5V7C1 4.17175 1 2.75725 1.879 1.879C2.75725 1 4.17175 1 7 1H10C10.5967 1 11.169 1.23705 11.591 1.65901C12.0129 2.08097 12.25 2.65326 12.25 3.25" stroke="#4CDB06" stroke-width="1.875" />
+                                    </svg></span> Copy IBAN
+                            </h6>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="Description" class="form-label mb-0">Description</label>
+                            <p class="mb-0 card-h1">Please write "<span class="text-green">MD736</span>"" in the description section.</p>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
+                            <input type="text" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
+                        </div>
+                        <div class="col-md-12">
+                            <p class="mb-0 text-red card-p1">This is not available in your country!</p>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn submit-btn">Completed Payment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- BANK TRANSFER END -->
+
             </div>
         </div>
 
         <!-- SECTION 3 -->
         <div class="bg-f6 scanQr">
-        <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
+            <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
+        </div>
     </div>
-    </div>
-@endsection
-@section('script')
+    @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
@@ -302,6 +353,7 @@
             var discounts;
             var percentValue = 20;
             var otherServices;
+            var checkedTitles=[];
             var packageId = "{{ $id }}";
             var patientId = "{{ $patient_id }}";
             var formData = new FormData();
@@ -451,7 +503,8 @@
                     'card_cvv': cardCvv || '',
                     'card_name': cardName || '',
                     'pending_amount': pendingAmount,
-                    'percentage': percentage
+                    'percentage': percentage,
+                    'other_services':checkedTitles,
                 };
 
                 // Add additional data to the form
@@ -540,46 +593,44 @@
 
                 // Submit the form
                 form.submit();
-            })
+            });
 
-            ////////////////////////////////////////////////////////////////////////////////
+            $(document).ready(function() {
+                checkedTitles = []; // Array to store initially checked service titles
 
-            // $('#procced_to_pay_form').validate({
-            //     rules: {
-            //         input1: {
-            //             required: true,
-            //         },
-            //         input2: {
-            //             required: true,
-            //         },
-            //         input3: {
-            //             required: true,
-            //         },
-            //         input4: {
-            //             required: true,
-            //         },
+                // Loop through all checkboxes initially
+                $('.form-check-input').each(function() {
+                    // Check if the current checkbox is checked
+                    if ($(this).prop('checked')) {
+                        // Find the corresponding service title and add it to the array
+                        var title = $(this).siblings('.d-flex').find('.card-h4').text();
+                        checkedTitles.push(title);
+                    }
+                });
 
-            //     },
-            //     messages: {
-            //         input1: {
-            //             required: "Please enter card holder name",
-            //         },
-            //         input2: {
-            //             required: "Please enter card number",
-            //         },
-            //         input3: {
-            //             required: "Please enter cvv",
-            //         },
-            //         input4: {
-            //             required: "Please enter card expiry date",
-            //         }
+                // Output the initially checked service titles (for demonstration)
+                console.log(checkedTitles);
 
-            //     },
-            //     errorClass: 'error',
-            //     submitHandler: function(form) {
-            //         form.submit();
-            //     }
-            // });
+                // Attach click event listener to checkboxes
+                $(document).on('click', '.form-check-input', function() {
+                    // Reset the array before re-populating it
+                    checkedTitles = [];
+
+                    // Loop through all checkboxes again
+                    $('.form-check-input').each(function() {
+                        // Check if the current checkbox is checked
+                        if ($(this).prop('checked')) {
+                            // Find the corresponding service title and add it to the array
+                            var title = $(this).siblings('.d-flex').find('.card-h4').text();
+                            checkedTitles.push(title);
+                        }
+                    });
+
+                    // Output the updated checked service titles (for demonstration)
+                    console.log(checkedTitles);
+                    // Now you can do whatever you want with the checkedTitles array
+                });
+            });
 
             ////////////////////////////////////////////////////////////////////////////////
 
@@ -626,7 +677,7 @@
                         $('.treatment_price').append(treatmentPriceHtml);
 
                         otherServices.forEach(function(service) {
-
+                            checkedTitles.push(service.title)
                             if (service.title == 'Accommodation') {
                                 otherServicesHtml += '<div class="card purchase-details-card">'
                                 otherServicesHtml +=
@@ -820,6 +871,88 @@
                     },
                 });
             }
+
+            ///////////////////////////////////Mplus03/////////////////////////////////////////////////
+
+             function getBankList(){
+        $.ajax({
+            url: baseUrl + '/api/md-helath-bank-list',
+            type: 'GET',
+            processData: false,
+            contentType: false,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+               console.log('Success:', response.bank_list);
+                $('#bank-informations').empty();
+
+                for (var i = 0; i < response.bank_list.length; i++) {
+                    var bankName = response.bank_list[i].bank_name;
+                    if (bankName) {
+                        $('#bank-informations').append('<option value="' + bankName + '">' + bankName + '</option>');
+                    }
+                }
+
+                calcOtherServices();
+                updateDiscountedPrice();
+            },
+
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+
+
+
+
+       
+        function getBankData(selectedBank){
+            $.ajax({
+                url: baseUrl + '/api/get-bank-data',
+                type: 'GET',
+                data: {
+                    bank_name: selectedBank
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) {
+                    console.log('Bank Data for ' + selectedBank + ':', response);
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching bank data:', error);
+                }
+            });
+        }
+
+       
+        $(document).on('change', '#bank-informations', function(){
+            var selectedBank = $(this).val();
+            getBankData(selectedBank);
+        });
+
+       
+        $(document).on('click', 'input[name="paymentMethod"][value="bank"]', function(){
+            var selectedBank = $('#bank-informations').val();
+            if (selectedBank) {
+                getBankData(selectedBank);
+            }
+        });
+
+    
+        $(document).ready(function(){
+            getBankList(); 
+            var initialSelectedBank = $('#bank-informations').val();
+            if (initialSelectedBank) {
+                getBankData(initialSelectedBank);
+            }
+        });
 
             ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1157,17 +1290,23 @@
             ...options
         });
     </script>
-    <script>
-        let checkedVal;
-        $('input[type=radio]').click(function() {
-            checkedVal = $('input[name="paymentMethod"]:checked').val();
-            if (checkedVal === "card") {
-                $("#card").css('display', 'block');
-                $("#wallet").css('display', 'none');
-            } else if (checkedVal === "wallet") {
-                $("#card").css('display', 'none');
-                $("#wallet").css('display', 'block');
-            }
-        });
-    </script>
+<script>
+    let checkedVal;
+    $('input[type=radio]').click(function() {
+        checkedVal = $('input[name="paymentMethod"]:checked').val();
+        if (checkedVal === "card") {
+            $("#card").css('display', 'block');
+            $("#wallet").css('display', 'none');
+            $("#bank").css('display', 'none');
+        } else if (checkedVal === "wallet") {
+            $("#card").css('display', 'none');
+            $("#bank").css('display', 'none');
+            $("#wallet").css('display', 'block');
+        } else if (checkedVal == "bank") {
+            $("#card").css('display', 'none');
+            $("#wallet").css('display', 'none');
+            $("#bank").css('display', 'block');
+        }
+    });
+</script>
 @endsection

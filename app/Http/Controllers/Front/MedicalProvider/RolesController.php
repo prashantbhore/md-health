@@ -43,7 +43,7 @@ class RolesController extends Controller
 
         }
         if ($html == '') {
-            $html = "<div class='no-data'>No Data Available</div>";
+            $html = '<div class="no-data"><img src="'. asset('front/assets/img/No-Data-Found-1.svg')  .'" alt="" class=""></div>';
         }
 
 
@@ -95,8 +95,11 @@ class RolesController extends Controller
         $html = '';
 
         foreach ($system_userslist as $system_user) {
+            if($system_user['id']==$decryptedId){
+                continue;
+            }
             $html .= '<div class="roles-card df-start w-100 mb-3" id="div_' . $system_user['id'] . '">';
-            $html .= '<h6 class="mb-0">' . (!empty($system_user['email']) ? $system_user['email'] : '') . '| ' . (!empty($system_user['role_name']) ? $system_user['role_name'] : '') . '</h6>';
+            $html .= '<h6 class="mb-0">' . (!empty($system_user['email']) ? $system_user['email'] : '') . ' | ' . (!empty($system_user['role_name']) ? $system_user['role_name'] : '') . '</h6>';
             $html .= ' <div class="roles-card-footer">';
             $html .= '<a href="' . url( 'edit-role/' . Crypt::encrypt( $system_user[ 'id' ] ) ) . '" class="mt-auto view-detail-btn">';
             $html .= '<svg width="19" height="19" viewBox="0 0 19 19" fill="none"xmlns="http://www.w3.org/2000/svg">';
@@ -110,7 +113,7 @@ class RolesController extends Controller
 
         }
         if ($html == '') {
-            $html = "<div class='no-data'>No Data Available</div>";
+            $html = '<div class="no-data"><img src="'. asset('front/assets/img/No-Data-Found-1.svg')  .'" alt="" class=""></div>';
         }
 
 

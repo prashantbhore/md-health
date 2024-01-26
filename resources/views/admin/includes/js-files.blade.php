@@ -16,7 +16,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
-<script src="{{ URL::asset('admin_panel/js/jquery.toast.min.js')}}"></script>
+<script src="{{ URL::asset('admin/js/jquery.toast.min.js')}}"></script>
 {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script> --}}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -43,7 +43,7 @@
 
 <script src="{{ URL::asset('admin/js/jquery.toast.min.js')}}"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
@@ -64,15 +64,15 @@
 </script>
 
 <script>
-  var titleElement = document.getElementById("example_filter");
-  var titleChildren = titleElement.getElementsByTagName("label");
+ // var titleElement = document.getElementById("example_filter");
+ // var titleChildren = titleElement.getElementsByTagName("label");
 
   // Do something with children.
   // In your example code, you'll only have one element returned
-  console.log(titleChildren[0].innerHTML);
+ // console.log(titleChildren[0].innerHTML);
 
   // To change the text, simply access the innerHTML property
-  titleChildren[0].innerHTML = " ";
+ // titleChildren[0].innerHTML = " ";
 </script>
 
 <script type="text/javascript">

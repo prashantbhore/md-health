@@ -24,6 +24,8 @@ return new class extends Migration
             $table->bigInteger('vehicle_id')->nullable();
             $table->bigInteger('tour_id')->nullable();
             $table->bigInteger('provider_id')->nullable();
+            $table->longText('other_services')->nullable();
+            $table->enum('type', ['myself', 'other'])->nullable();
             $table->string('package_treatment_price')->nullable();
             $table->string('package_hotel_price')->nullable();
             $table->string('package_transportation_price')->nullable();
