@@ -1136,11 +1136,22 @@ class CustomerPackageController extends Controller {
                     } else {
                         $fav_list = [];
                     }
+                    if ( !empty( $data ) ) {
+                        if ( $data[ 'status' ] == '200' ) {
+                            // dd($data[ 'vendorsdata' ]);
+                            $vendorsdata = !empty( $data[ 'vendorsdata' ] ) ? $data[ 'vendorsdata' ] : [];
+                        } else {
+                            $vendorsdata = [];
+                        }
+                    } else {
+                        $vendorsdata = [];
+                    }
                 } else {
                     $fav_list = [];
+                    $vendorsdata = [];
                 }
 
-                return view( 'front.mdhealth.user-panel.user-favorites', compact( 'fav_list' ) );
+                return view( 'front.mdhealth.user-panel.user-favorites', compact( 'fav_list','vendorsdata' ) );
             }
 
             //Mplus02
