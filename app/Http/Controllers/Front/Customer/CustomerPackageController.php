@@ -470,7 +470,10 @@ class CustomerPackageController extends Controller {
             'status' => 'active',
         ] ) ) {
             $customer = Auth::guard( 'md_customer_registration' )->user();
-            return redirect( '/' );
+            // dd('hii');
+            Session::put('MDCustomer*%');
+            return redirect()->intended('/my-packages-list')->with('MDCustomer*%',$customer);
+            // return redirect( '/my-packages-list ' );
         } else {
             echo 'no';
             die;

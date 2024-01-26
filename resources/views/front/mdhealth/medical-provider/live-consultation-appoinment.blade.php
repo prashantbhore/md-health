@@ -3,7 +3,7 @@
     @php
         $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
         $user = Session::has('MDCustomer*%') ? Session::get('MDCustomer*%') : '';
-
+        
     @endphp
 @endsection
 @section('content')
