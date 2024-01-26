@@ -78,22 +78,25 @@
                                             sed do eiusmod tempor incididunt...</p>
                                         <p class="mb-0 card-p1 text-end">Monday 13:42</p>
                                     </div>
-                                    <div class="person-message-div mb-4">
-                                        <div class="treatment-card df-start w-100 mb-1">
-                                            <div class="d-flex align-items-center justify-content-evenly gap-4">
-                                                <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
-                                                <div class="trmt-card-body pe-4">
-                                                    <h5 class="mb-0 text-end card-p1">Lorem ipsum dolor sit amet,
-                                                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                        consequat.</h5>
+                                    <div id="messages-container">
+                                        {{-- <div class="person-message-div mb-4">
+                                            <div class="treatment-card df-start w-100 mb-1">
+                                                <div class="d-flex align-items-center justify-content-evenly gap-4">
+                                                    <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
+                                                    <div class="trmt-card-body pe-4">
+                                                        <h5 class="mb-0 text-end card-p1">Lorem ipsum dolor sit amet,
+                                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                                            nostrud
+                                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                            consequat.</h5>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="day-time">
-                                            <p class="mb-0 card-p1">Monday 14:32</p>
-                                        </div>
+                                            <div class="day-time">
+                                                <p class="mb-0 card-p1">Monday 14:32</p>
+                                            </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -123,7 +126,7 @@
                                     <div class="write-message">
                                         <textarea class="form-control" id="productstext" rows="3" placeholder="Your message here" data-gramm="false"
                                             wt-ignore-input="true"></textarea>
-                                        <button class="border-0 bg-white send-msg-btn">
+                                        <button id="sendMessageButton" class="border-0 bg-white send-msg-btn">
                                             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -196,6 +199,7 @@
             </div>
         </div>
     </div>
+    @include('front.includes.initialize-firebase-messaging')
 @endsection
 @section('script')
     <script>

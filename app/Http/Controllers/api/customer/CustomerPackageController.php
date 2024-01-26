@@ -3963,30 +3963,30 @@ class CustomerPackageController extends BaseController
     //     }
     // }
 
-    public function customer_favourite_list_count()
-    {
-        $count = CustomerFavouritePackages::where('status', 'active')
-            ->where('customer_id', Auth::user()->id)
-            ->count();
+    // public function customer_favourite_list_count()
+    // {
+    //     $count = CustomerFavouritePackages::where('status', 'active')
+    //         ->where('customer_id', Auth::user()->id)
+    //         ->count();
 
-        $countData = [
-            'mdhealthcount' => $count,
-        ];
+    //     $countData = [
+    //         'mdhealthcount' => $count,
+    //     ];
 
-        if (!empty($count)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Here is your Favourite list count.',
-                'count' => $countData,
+    //     if (!empty($count)) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'message' => 'Here is your Favourite list count.',
+    //             'count' => $countData,
 
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Something went wrong.',
-            ]);
-        }
-    }
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'Something went wrong.',
+    //         ]);
+    //     }
+    // }
 
 
 
