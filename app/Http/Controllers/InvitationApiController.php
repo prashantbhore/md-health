@@ -61,20 +61,35 @@ class InvitationApiController extends Controller
         // Check if the customer has reached the invitation limit for the month
         $invitation_count = MDCoins::where('status', 'active')
             ->where('customer_id', Auth::user()->id)
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->sum('invitation_count');
+            ->select('invitation_count')->first()->invitation_count;
 
-        if ($invitation_count >= 10) {
+        if ($invitation_count >= 10){
             return response()->json(['error' => 'You have reached the invitation limit for this month'], 404);
         }
 
         // Create a new coin status
         $coinStatus = CoinStatus::create([
             'customer_id' => Auth::user()->id,
-            'wallet_status' => 'pending_invite'
+            'wallet_status' => 'pending_invite',
+            'invited_email' => $requestedEmail
         ]);
 
-        $invitationLink = $validatedData['invitation_link'] . '?coin_status_id=' . $coinStatus->id;
+           // Decrement invite_count by 1
+                $invitation = MDCoins::where('status', 'active')
+                ->where('customer_id', Auth::user()->id)
+                ->first();
+
+
+
+            if ($invitation && $invitation->invitation_count > 0){
+                // Decrement the invite_count by 1
+                $invitation->decrement('invitation_count');
+            } 
+
+       
+       
+
+        $invitationLink = $validatedData['invitation_link'] . '&coin_status_id=' . $coinStatus->id;
 
         // Send invitation email
         if (Mail::to($requestedEmail)->send(new InvitationMail($invitationLink))) {
@@ -94,7 +109,12 @@ class InvitationApiController extends Controller
             ->where('id', Auth::user()->id)
             ->first();
 
-        $invitationLink = 'https://projects.m-staging.in/md-health-testing/user-account?referral_code=' . $code->customer_unique_no;
+        // $invitationLink = 'https://projects.m-staging.in/md-health-testing/user-account?referral_code=' . $code->customer_unique_no;
+        
+        $invitationLink = url('/user-account') . '?referral_code=' . urlencode($code->customer_unique_no);
+
+
+
 
         return response()->json(['invitation_link' => $invitationLink], 200);
     }
