@@ -161,6 +161,8 @@
                 </div>
             </div>
 
+            
+
             <!-- CREDIT CARD DETAILS -->
             <div id="card">
                 <div class="row">
@@ -273,11 +275,14 @@
 
                         <div class="col-md-12 mb-3">
                             <label for="Description" class="form-label mb-0">Description</label>
-                            <p class="mb-0 card-h1">Please write "<span class="text-green">MD736</span>"" in the description section.</p>
+                            <p class="mb-0 card-h1">Please write "<span class="text-green" id="receiver-package_id">MD736</span>"" in the description section.</p>
                         </div>
+                        <form action="php" method="POST">
+                            <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                            <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
                         <div class="col-md-12">
                             <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
-                            <input type="text" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
+                            <input type="text" name="payment_transaction_id" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
                         </div>
                         <div class="col-md-12">
                             <p class="mb-0 text-red card-p1">This is not available in your country!</p>
@@ -285,6 +290,7 @@
                         <div class="col-md-12">
                             <button type="submit" class="btn submit-btn">Completed Payment</button>
                         </div>
+                        </form>
                     </div>
                 </form>
             </div>
@@ -910,24 +916,28 @@
 
 
 function getBankData(selectedBank){
+    var packageId = $("#package_id").val();
+       
            
             $.ajax({
                 url: baseUrl + '/api/md-helath-bank-details',
                 type: 'GET',
                 data: {
-                    bank_name: selectedBank
+                    bank_name: selectedBank,
+                    package_id: packageId 
                 },
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'X-CSRF-TOKEN': csrfToken
                 },
                 success: function(response) {
-                   
+                     console.log('Success:', response.package_details.package_unique_no);
                     if (response.message === "Bank Details Found") {
 
                             $("#receiver-bank_name").text(response.bank_details.bank_name);
                             $("#receiver-name").text(response.bank_details.account_holder_name);
                             $("#receiver-account").text(response.bank_details.account_number);
+                            $("#receiver-package_id").text(response.package_details.package_unique_no);
                         
                        
                     } else {

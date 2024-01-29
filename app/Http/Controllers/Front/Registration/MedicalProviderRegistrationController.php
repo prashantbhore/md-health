@@ -24,11 +24,19 @@ class MedicalProviderRegistrationController extends Controller
     {
         $this->apiService = $apiService;
     }
-    public function index()
+    public function index(Request $request)
     {
+       
+        $referralCode = $request->query('referral_code');
+        
+    
+        $coinStatusId = $request->query('coin_status_id');
+
+     
+
         $countries = Country::get();
         $cities = Cities::get();
-        return view('front/mdhealth/authentication/user-account', compact('countries', 'cities'));
+        return view('front/mdhealth/authentication/user-account', compact('countries', 'cities','referralCode','coinStatusId'));
     }
 
     public function get_cities_list( Request $request ) {
