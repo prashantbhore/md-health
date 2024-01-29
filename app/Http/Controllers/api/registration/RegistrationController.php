@@ -170,12 +170,25 @@ class RegistrationController extends BaseController
                 'message' => 'Unauthorised.',
             ]);
         }
-        if (!empty($customer_registration)) {
+        if (!empty($customer_registration)) 
+        {
             $customer_logs = [];
             $customer_logs['customer_id'] = !empty($customer_registration->id) ? $customer_registration->id : '';
             $customer_logs['status'] = 'active';
             $customer_logs['type'] = 'signup';
             CustomerLogs::create($customer_logs);
+
+            $md_coin_available = MDCoins::where('status', 'active')
+                        ->where('customer_id', $customer_registration->id)
+                        ->first();
+
+             if (empty($md_coin_available)) {
+                        $coins = [];
+                        $coins['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                        $coins['coins'] = 0;
+                        $coins['invitation_count'] = 0;
+                        MDCoins::create($coins);
+                    }
 
             if(!empty($request->unique_code) && $request->unique_code){
             $customer = CustomerRegistration::where('status', 'active')
