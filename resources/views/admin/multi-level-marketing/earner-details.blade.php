@@ -10,16 +10,18 @@
                 <div class="card">
                     <div class="card-body">
                         <label for="totalEarnings">Total Earnings</label>
-                        <h4 class="mb-0">1.980,00 ₺</h4>
+                        {{-- <h4 class="mb-0">1.980,00 ₺</h4> --}}
+                        <h4 class="mb-0">{{$joining_coin_integer}}</h4>
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="id" value="{{!empty($id)?$id:''}}">
             <div class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Top Earners Monthly</div>
                         <div class="table-responsive" style="overflow-x: hidden">
-                            <table class="table">
+                            <table class="table" id="example">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -33,7 +35,8 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
+
+                                    {{-- <tr>
                                         <td>#MD7384</td>
                                         <td>Ali Danish</th>
                                         <td>47</td>
@@ -160,7 +163,7 @@
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
 
 
                                 </tbody>
@@ -176,6 +179,8 @@
 </section>
 @endsection
 @section('script')
+
+<script src="{{url('admin\controller_js\admin_cn_earner_details.js')}}"></script>
 <script>
     $(".mlmLi").addClass("activeClass");
     $(".mlm").addClass("md-active");

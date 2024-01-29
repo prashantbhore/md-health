@@ -1156,7 +1156,7 @@ class CustomerPackageController extends Controller
         return redirect()->back()->with('error', $errorString);
     }
 
-    //Mplus02
+    //Mplus04
 
     public function user_favorites()
     {
@@ -1165,6 +1165,7 @@ class CustomerPackageController extends Controller
 
         if (!empty($token)) {
             $data = $this->apiService->getData($token, url('/api/md-customer-favourite-list'), [], 'GET');
+            //  dd($data);
             if (!empty($data)) {
                 if ($data['status'] == '200') {
                     $fav_list = !empty($data['data']) ? $data['data'] : [];
@@ -1174,25 +1175,99 @@ class CustomerPackageController extends Controller
             } else {
                 $fav_list = [];
             }
-            if (!empty($data)) {
-                if ($data['status'] == '200') {
-                    // dd($data[ 'vendorsdata' ]);
-                    $vendorsdata = !empty($data['vendorsdata']) ? $data['vendorsdata'] : [];
-                } else {
-                    $vendorsdata = [];
-                }
-            } else {
-                $vendorsdata = [];
-            }
+           
         } else {
             $fav_list = [];
-            $vendorsdata = [];
+          
         }
 
-        return view('front.mdhealth.user-panel.user-favorites', compact('fav_list', 'vendorsdata'));
-    }
+        $html = '';
+        foreach ($fav_list as $fav) {
+            $html .= '<div class="card shadow-none mb-3" style="border-radius: 3px;background: #EDEDED;" id="alldiv">
+                        <div class="card-body remove-cardb d-flex justify-content-between">
+                            <div>
+                                <h5 class="card-h1 card-h1-fav mb-0">' . $fav['package_name'] . '<img
+                                        src="' . asset('front/assets/img/verifiedBy.png') . '" alt=""
+                                        class="ms-3" /></h5>
+                                <p class="mb-0 d-inline-block card-p1"><img
+                                        src="' . asset('front/assets/img/Location.svg') . '" alt="" />
+                                    ' . $fav['city_name'] . '</p>
+                                <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
+                                    '. "Treatment period " . $fav["treatment_period_in_days"] . " days" .'</p>
+                            </div>
+                            <div onclick="removeFromFavourite(' . $fav['id'] . ');"
+                                class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
+                                <div>
+                                    <img id="img_' . $fav['id'] . '"
+                                        class="fav-btn" src="' . asset('front/assets/img/Favourite.svg') . '"
+                                        alt="" />
+                                </div>
+                                <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
+                                    Remove Favorite
+                                </p>
+                            </div>
+                        </div>
+                    </div>';
+        }
+        
+        return view('front.mdhealth.user-panel.user-favorites', compact('html'));
+    }        
 
-    //Mplus02
+    public function md_customer_favourite_list_web(Request $request)
+    {
+        $user_id = Session::get('MDCustomer*%');
+        $token = Session::get('login_token');
+
+        if (!empty($token)) {
+            $data = $this->apiService->getData($token, url('/api/md-customer-favourite-list-web'), ['module_type'=>$request->module_type], 'POST');
+            // dd($data);
+            if (!empty($data)) {
+                if ($data['status'] == '200') {
+                    $fav_list = !empty($data['data']) ? $data['data'] : [];
+                } else {
+                    $fav_list = [];
+                }
+            } else {
+                $fav_list = [];
+            }
+           
+        } else {
+            $fav_list = [];
+          
+        }
+
+        $html = '';
+        foreach ($fav_list as $fav) {
+            $html .= '<div class="card shadow-none mb-3" style="border-radius: 3px;background: #EDEDED;" id="alldiv">
+            <div class="card-body remove-cardb d-flex justify-content-between">
+                <div>
+                    <h5 class="card-h1 card-h1-fav mb-0">' . $fav['package_name'] . '<img
+                            src="' . asset('front/assets/img/verifiedBy.png') . '" alt=""
+                            class="ms-3" /></h5>
+                    <p class="mb-0 d-inline-block card-p1"><img
+                            src="' . asset('front/assets/img/Location.svg') . '" alt="" />
+                        ' . $fav['city_name'] . '</p>
+                    <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
+                        '. "Treatment period " . $fav["treatment_period_in_days"] . " days" .'</p>
+                </div>
+                <div onclick="removeFromFavourite(' . $fav['id'] . ');"
+                    class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
+                    <div>
+                        <img id="img_' . $fav['id'] . '"
+                            class="fav-btn" src="' . asset('front/assets/img/Favourite.svg') . '"
+                            alt="" />
+                    </div>
+                    <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
+                        Remove Favorite
+                    </p>
+                </div>
+            </div>
+        </div>';
+        }
+        
+        return $html;
+    }        
+    //Mplus04
 
     public function purchase_by_mdcoins(Request $request)
     {
@@ -1538,30 +1613,30 @@ class CustomerPackageController extends Controller
     }
 
     ///Mplus03
-    public function md_customer_favourite_list_web(Request $request)
-    {
+    // public function md_customer_favourite_list_web(Request $request)
+    // {
 
-        $user_id = Session::get('MDCustomer*%');
-        $token = Session::get('login_token');
-        dd($request->vendor_id);
+    //     $user_id = Session::get('MDCustomer*%');
+    //     $token = Session::get('login_token');
+    //     dd($request->vendor_id);
 
-        if (!empty($token)) {
-            $data2 = $this->apiService->getData($token, url('/api/md-customer-favourite-list-web'), [], 'POST');
-            // dd($data2);
-            if (!empty($data2)) {
-                if ($data2['status'] == '200') {
-                    $vendorsdata = !empty($data2['data']) ? $data2['data'] : [];
-                } else {
-                    $vendorsdata = [];
-                }
-            } else {
-                $vendorsdata = [];
-            }
-        } else {
-            $vendorsdata = [];
-        }
+    //     if (!empty($token)) {
+    //         $data2 = $this->apiService->getData($token, url('/api/md-customer-favourite-list-web'), [], 'POST');
+    //         // dd($data2);
+    //         if (!empty($data2)) {
+    //             if ($data2['status'] == '200') {
+    //                 $vendorsdata = !empty($data2['data']) ? $data2['data'] : [];
+    //             } else {
+    //                 $vendorsdata = [];
+    //             }
+    //         } else {
+    //             $vendorsdata = [];
+    //         }
+    //     } else {
+    //         $vendorsdata = [];
+    //     }
 
-        // return view('front.mdhealth.user-panel.user-favorites', compact('fav_list', 'vendorsdata'));
-    }
+    //     // return view('front.mdhealth.user-panel.user-favorites', compact('fav_list', 'vendorsdata'));
+    // }
 
 }

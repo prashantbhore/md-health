@@ -336,6 +336,72 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to validate input fields
+        function validateInputFields() {
+            var isValid = true;
+            // Validate Card Holder Name
+            var cardHolderName = $('#input1').val().trim();
+            if (cardHolderName === '') {
+                $('#input1').css('border-color', 'red');
+                $('#verifyinput1').show();
+                isValid = false;
+            } else {
+                $('#input1').css('border-color', '#ced4da'); // Default border color
+                $('#verifyinput1').hide();
+            }
+            // Validate Card Number
+            var cardNumber = $('#input2').val().trim();
+            if (cardNumber === '') {
+                $('#input2').css('border-color', 'red');
+                $('#verifyinput2').show();
+                isValid = false;
+            } else {
+                $('#input2').css('border-color', '#ced4da'); // Default border color
+                $('#verifyinput2').hide();
+            }
+            // Validate Expiry Date
+            var expiryDate = $('#input4').val().trim();
+            if (expiryDate === '') {
+                $('#input4').css('border-color', 'red');
+                $('#verifyinput4').show();
+                isValid = false;
+            } else {
+                $('#input4').css('border-color', '#ced4da'); // Default border color
+                $('#verifyinput4').hide();
+            }
+            // Validate CVV
+            var cvv = $('#input3').val().trim();
+            if (cvv === '') {
+                $('#input3').css('border-color', 'red');
+                $('#verifyinput3').show();
+                isValid = false;
+            } else {
+                $('#input3').css('border-color', '#ced4da'); // Default border color
+                $('#verifyinput3').hide();
+            }
+            return isValid;
+        }
+
+        // Proceed Payment button click event
+        $('.purchaseBtn').click(function() {
+            if (validateInputFields()) {
+                // Proceed with the payment
+                $('#procced_to_pay_form').submit();
+            }
+        });
+
+        // Focusout event to change border color to gray when focus is lost
+        $('input[type="text"], input[type="password"]').focusout(function() {
+            $(this).css('border-color', '#ced4da');
+        });
+    });
+</script>
+
+
+
     <script>
         $(document).ready(function() {
 
