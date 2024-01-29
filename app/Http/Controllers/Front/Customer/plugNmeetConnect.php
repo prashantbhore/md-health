@@ -84,6 +84,7 @@ class plugNmeetConnect
      */
     public function __construct($config)
     {
+       
         $this->plugnmeet = new PlugNmeet(
             $config->plugnmeet_server_url,
             $config->plugnmeet_api_key,
@@ -175,6 +176,7 @@ class plugNmeetConnect
                 $features->setRoomDuration($roomFeatures['room_duration']);
             }
         }
+        // echo "hi";die;
         if (isset($roomFeatures['enable_analytics'])) {
             $features->setEnableAnalytics($roomFeatures['enable_analytics']);
         }
@@ -371,7 +373,7 @@ class plugNmeetConnect
             $roomCreateParams->setEmptyTimeout($empty_timeout);
         }
         $roomCreateParams->setRoomMetadata($metadata);
-
+        
         return $this->plugnmeet->createRoom($roomCreateParams);
     }
 

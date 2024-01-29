@@ -34,8 +34,10 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            // \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\HandleInertiaRequests::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ],
 
         'api' => [
@@ -70,6 +72,6 @@ class Kernel extends HttpKernel
         'IsCustomer' => \App\Http\Middleware\IsCustomer::class,
         'IsVendor' => \App\Http\Middleware\isVendor::class,
         'isFoodVendor' => \App\Http\Middleware\isFoodVendor::class,
-
+        'CheckRequestType' => \App\Http\Middleware\CheckRequestType::class,
     ];
 }

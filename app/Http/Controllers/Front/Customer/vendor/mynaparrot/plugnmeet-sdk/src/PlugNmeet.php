@@ -95,6 +95,7 @@ class PlugNmeet
         $this->serverUrl = $serverUrl;
         $this->apiKey = $apiKey;
         $this->apiSecret = $apiSecret;
+        // dd('hi PlugNmeet');
     }
 
     /**

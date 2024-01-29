@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FirebasePushController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\registration\RegistrationController;
@@ -48,10 +49,13 @@ Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']
 
 //Mplus02
 Route::middleware(['CheckRequestType'])->group(function () {
-    Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
+    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
 });
 
-
+Route::middleware(['CheckRequestType'])->group(function () {
+    Route::post('setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
+    Route::post('send/notification',[FirebasePushController::class,'notification'])->name('firebase.send');
+});
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
@@ -87,12 +91,10 @@ Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_re
 
 Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
 
-
-
-// get country list
+// get Bank list
 Route::get('md-helath-bank-list', [CustomerPackageController::class, 'md_health_bank_lists']);
 
-
+Route::get('md-helath-bank-details', [CustomerPackageController::class, 'md_health_bank_details']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {

@@ -18,9 +18,36 @@
                         <h5 class="card-header">
                             <span>My Favorites</span>
                         </h5>
+                        <div class="filter-div">
+                            <div class="search-div">
+                                <select name="filter_id" id="filter_id">
+                                    <option value="">All</option>
+                                    @if (!empty($vendorsdata))
+                                    @foreach ($vendorsdata as $vendor)
+                                    <option value="{{$vendor['vendors_id']}}">{{$vendor['vendors_name']}}</option>
+                                    @endforeach
+                                    @else
+                                        @include('front.includes.no-data-found')
+                                    @endif
+                                    {{-- <option value="">List for Stars</option>
+                                    <option value="">List for Price</option>
+                                    <option value="">List for Distance</option> --}}
+                                </select>
+                            </div>
+                            {{-- <div class="search-div">
+                                <input type="text" name="searchpackage" id="searchpackage"
+                                    placeholder="Search" />
+                            </div> --}}
+                   
+                         {{-- <div class="list-div">
+                            
+                        </div>  --}}
+                       
+                        </div>
                         <div class="card-body">
                             @if (!empty($fav_list))
                                 @foreach ($fav_list as $fav)
+                                {{-- {{dd($fav)}} --}}
                                     <div class="card shadow-none mb-3" style="border-radius: 3px;background: #EDEDED;">
                                         <div class="card-body remove-cardb d-flex justify-content-between">
                                             <div>

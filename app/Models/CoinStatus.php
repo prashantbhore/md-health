@@ -11,6 +11,7 @@ class CoinStatus extends Model
     protected $table = 'md_coins_status';
     protected $fillable = [
         'customer_id',
+        'invited_email',
         'wallet_status',
         'status',
         'created_ip_address',

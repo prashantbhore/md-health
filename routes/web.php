@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FirebasePushController;
 use App\Http\Controllers\Front\FoodProvider\FoodsController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\RolesController;
@@ -677,6 +678,7 @@ Route::any('health-search-result', [CustomerPackageController::class, 'customer_
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
 
+
 // Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
 Route::any('test', [CustomerPackageController::class, 'test']);
 Route::post('complete_3ds', [CustomerPackageController::class, 'complete_3ds']);
@@ -731,7 +733,17 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
     });
 });
 
-Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
+// Mplus02
+Route::middleware(['CheckRequestType'])->group(function () {
+    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
+});
+Route::middleware(['CheckRequestType'])->group(function () {
+    
+    Route::any('/setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
+    Route::post('send/notification',[FirebasePushController::class,'notification'])->name('firebase.send');
+    Route::post('update-last-messages',[FirebasePushController::class,'update_last_messages']);
+    
+});
 
 
 

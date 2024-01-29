@@ -190,17 +190,17 @@ class LoginControllers extends BaseController
                     $customer_logs['type'] = 'login';
                     CustomerLogs::create($customer_logs);
 
-                    $md_coin_available = MDCoins::where('status', 'active')
-                        ->where('customer_id', $customer->id)
-                        ->first();
+                    // $md_coin_available = MDCoins::where('status', 'active')
+                    //     ->where('customer_id', $customer->id)
+                    //     ->first();
 
-                    if (empty($md_coin_available)) {
-                        $coins = [];
-                        $coins['customer_id'] = !empty($customer->id) ? $customer->id : '';
-                        $coins['coins'] = 0;
-                        $coins['invitation_count'] = 0;
-                        MDCoins::create($coins);
-                    }
+                    // if (empty($md_coin_available)) {
+                    //     $coins = [];
+                    //     $coins['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    //     $coins['coins'] = 0;
+                    //     $coins['invitation_count'] = 0;
+                    //     MDCoins::create($coins);
+                    // }
 
                     return response()->json([
                         'status' => 200,
@@ -367,17 +367,17 @@ class LoginControllers extends BaseController
                     $customer_logs['type'] = 'login';
                     CustomerLogs::create($customer_logs);
 
-                    $md_coin_available = MDCoins::where('status', 'active')
-                        ->where('customer_id', $customer->id)
-                        ->first();
+                    // $md_coin_available = MDCoins::where('status', 'active')
+                    //     ->where('customer_id', $customer->id)
+                    //     ->first();
 
-                    if (empty($md_coin_available)) {
-                        $coins = [];
-                        $coins['customer_id'] = !empty($customer->id) ? $customer->id : '';
-                        $coins['coins'] = 0;
-                        $coins['invitation_count'] = 0;
-                        MDCoins::create($coins);
-                    }
+                    // if (empty($md_coin_available)) {
+                    //     $coins = [];
+                    //     $coins['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                    //     $coins['coins'] = 0;
+                    //     $coins['invitation_count'] = 0;
+                    //     MDCoins::create($coins);
+                    // }
 
                     return response()->json([
                         'status' => 200,

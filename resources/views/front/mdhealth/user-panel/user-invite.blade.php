@@ -69,15 +69,15 @@
                     <div class="card-body mb-4">
                         <div class="wallat-view mb-4">
                             <div class="wallet-circle-div wallet-network">
-                                <p class="fsb-1 circle mb-1">12</p>
+                                <p class="fsb-1 circle mb-1">{{!empty($your_network_count)?$your_network_count:0}}</p>
                                 <p class="mb-0 fsb-2 fw-800">Your Network</p>
                             </div>
                             <div class="wallet-circle-div wallet-pending">
-                                <p class="fsb-1 circle mb-1">28</span>
+                                <p class="fsb-1 circle mb-1">{{!empty($pending_invite_count)?$pending_invite_count:0}}</span>
                                 <p class="mb-0 fsb-2 fw-800">Pending Invite</p>
                             </div>
                             <div class="wallet-circle-div wallet-left">
-                                <p class="fsb-1 circle mb-1">2</p>
+                                <p class="fsb-1 circle mb-1">{{!empty($left_invite_count->invitation_count)?$left_invite_count->invitation_count:0}}</p>
                                 <p class="mb-0 fsb-2 fw-800">Invites Left</p>
                             </div>
                         </div>
