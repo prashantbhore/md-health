@@ -311,7 +311,6 @@ class CustomerPackageController extends Controller
 
     }
 
-
     public function complete_3ds(Request $request)
     {
 
@@ -1534,6 +1533,33 @@ class CustomerPackageController extends Controller
         }
         return $htmlResult;
 
+    }
+
+    ///Mplus03
+    public function md_customer_favourite_list_web(Request $request)
+    {
+
+        $user_id = Session::get('MDCustomer*%');
+        $token = Session::get('login_token');
+        dd($request->vendor_id);
+
+        if (!empty($token)) {
+            $data2 = $this->apiService->getData($token, url('/api/md-customer-favourite-list-web'), [], 'POST');
+            // dd($data2);
+            if (!empty($data2)) {
+                if ($data2['status'] == '200') {
+                    $vendorsdata = !empty($data2['data']) ? $data2['data'] : [];
+                } else {
+                    $vendorsdata = [];
+                }
+            } else {
+                $vendorsdata = [];
+            }
+        } else {
+            $vendorsdata = [];
+        }
+
+        // return view('front.mdhealth.user-panel.user-favorites', compact('fav_list', 'vendorsdata'));
     }
 
 }

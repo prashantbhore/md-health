@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerPurchaseDetails;
+use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderLogo;
+use App\Models\MedicalProviderRegistrater;
 use App\Models\Messages;
+use App\Models\Packages;
 use Auth;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Messaging\CloudMessage;
@@ -82,33 +86,88 @@ class FirebasePushController extends Controller
         $messages->last_read_message = $request->last_read_message;
     }
 
-    public function get_conversations(Request $request){
+    public function get_conversations(Request $request)
+    {
         $user = Auth::guard('md_customer_registration')->user();
+        if (!empty($user)) {
+            
+            $sender_type = 'customer';
+            $messages = Messages::where('sender_id', $user->id)
+            ->where('sender_type', $sender_type)
+            ->distinct('conversation_id')->get();
+            
+            // dd($messages);
+        } else {
+            // dd($user);
+            $user = Auth::guard('md_health_medical_providers_registers')->user();
+            $sender_type = 'medicalprovider';
+            if (!empty($user)) {
+                $messages = Messages::where('sender_id', $user->id)
+                    ->where('sender_type', $sender_type)
+                    ->distinct('conversation_id')->get();
 
-        $messages = Messages::where('sender_id',$user->id)
-        ->where('sender_type',$request->sender_type)
-        ->distinct('conversation_id');
+            }
+        }
 
         $conversations = [];
-        foreach($messages as $message){
+        foreach ($messages as $message) {
 
-            if($request->sender_type == 'customer'){
+            if ($sender_type == 'customer') {
                 $conversation_id = $message->conversation_id;
-                $provider_id = explode('_',$conversation_id)[2];
-                $logo = MedicalProviderLogo::where('medical_provider_id',$provider_id)->first();
+                $provider_id = explode('_', $conversation_id)[2];
+                $package_id = CustomerPurchaseDetails::where('customer_id', $user->id)
+                    ->where('conversation_id', explode('_', $conversation_id)[1])
+                    ->first()
+                    ->package_id;
+                $package_name = Packages::where('id', $package_id)->first()->package_name;
+                // dd($package_name);
+                $provider_name = MedicalProviderRegistrater::where('id', $provider_id)->first();
+                // dd($provider_name);
+                $logo = MedicalProviderLogo::where('medical_provider_id', $provider_id)->first();
                 $latest_message = false;
-                if(!empty($message->last_read_message) || !empty($message->latest_message)){
+                $is_latest_new = false;
+                if (!empty($message->last_read_message) || !empty($message->latest_message)) {
 
-                    if($message->last_read_message != $message->latest_message){
-                        $latest_message =  $message->latest_message;
+                    if ($message->last_read_message != $message->latest_message) {
+                        $latest_message = $message->latest_message;
+                        $is_latest_new = true;
+                    }
+                }
+                $conversations[] = [
+                    'written_by' => $package_name,
+                    'converstion_id' => $conversation_id,
+                    'logo' => $logo->company_logo_image_path,
+                    'latest_message' => $latest_message,
+                    'is_latest_message' => $is_latest_new,
+                ];
+
+                return view('front.mdhealth.user-panel.user-message', compact('conversations'));
+
+            } else if ($sender_type == 'medicalprovider') {
+                $conversation_id = $message->conversation_id;
+                $user_id = explode('_', $conversation_id)[0];
+                $user_name = CustomerRegistration::where('id',$user_id)->first()->full_name;
+                // $logo = MedicalProviderLogo::where('medical_provider_id',$provider_id)->first();
+                $latest_message = false;
+                $is_latest_new = false;
+                if (!empty($message->last_read_message) || !empty($message->latest_message)) {
+
+                    if ($message->last_read_message != $message->latest_message) {
+                        $latest_message = $message->latest_message;
+                        $is_latest_new = true;
                     }
                 }
                 $conversations[] = [
                     'converstion_id' => $conversation_id,
-                    'logo' => $logo,
+                    'written_by' => $user_name,
+                    // 'logo' => $logo,
                     'latest_message' => $latest_message,
+                    'is_latest_message' => $is_latest_new,
                 ];
+
+                return view('front.mdhealth.medical-provider.messages', compact('conversations'));
             }
+
         }
     }
 
