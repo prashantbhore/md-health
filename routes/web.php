@@ -104,10 +104,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::view('sign-in', 'admin/authentication/sign-in');
 
-    
 
 
-    
+
+
 
     //Admin DASHBOARD
     Route::view('dashboard', 'admin/dashboard/dashboard');
@@ -150,36 +150,36 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('rejected-vendor-details', 'admin/vendors/rejected-vendor-details');
 
 
-    Route::controller(ManageVendorController::class)->group(function (){
-       // Route::get('vendors','index');
+    Route::controller(ManageVendorController::class)->group(function () {
+        // Route::get('vendors','index');
 
         Route::get('pending-vendors', 'pending_vendors');
 
-        Route::get('pending-vendors-data-table','pending_vendor_data_table');
+        Route::get('pending-vendors-data-table', 'pending_vendor_data_table');
 
 
         Route::get('approved-vendors', 'approved_vendors');
 
-        Route::get('approved-vendors-data-table','approved_vendor_data_table');
+        Route::get('approved-vendors-data-table', 'approved_vendor_data_table');
 
-        Route::get('rejected-vendors','rejected_vendors');
+        Route::get('rejected-vendors', 'rejected_vendors');
 
-        Route::get('rejected-vendors-data-table','rejected_vendor_data_table');
+        Route::get('rejected-vendors-data-table', 'rejected_vendor_data_table');
 
-        Route::get('vendor-delete','vendor_delete');
+        Route::get('vendor-delete', 'vendor_delete');
 
-        Route::get('view-vendor-details/{id}/{vendor_type}','vendor_view')->name('view.vendor.details');
+        Route::get('view-vendor-details/{id}/{vendor_type}', 'vendor_view')->name('view.vendor.details');
 
 
         Route::post('vendor-store', 'store')->name('vendor.store');
 
         Route::post('approve-vendor', 'approve_vendor')->name('approve.vendor');
 
-        Route::post('reject-vendor','reject_vendor')->name('reject.vendor');
+        Route::post('reject-vendor', 'reject_vendor')->name('reject.vendor');
 
-        Route::post('delete-vendor','delete_vendor')->name('delete.vendor');
+        Route::post('delete-vendor', 'delete_vendor')->name('delete.vendor');
 
-        Route::get('vendor-delete-logo','delete_logo');
+        Route::get('vendor-delete-logo', 'delete_logo');
 
         Route::get('vendor-delete-license', 'delete_license');
 
@@ -212,7 +212,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE Country
 
-    Route::controller(countryController::class)->group(function (){
+    Route::controller(countryController::class)->group(function () {
         Route::get('add-country', 'index');
         Route::post('/add-country', 'store')->name('add-country');
         Route::get('/country-data-table', 'data_table');
@@ -225,7 +225,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE CITIES
 
-    Route::controller(CityController::class)->group(function (){
+    Route::controller(CityController::class)->group(function () {
         Route::get('/add-cities', 'index');
         Route::post('/add-cities', 'store')->name('add-city');
         Route::get('/city-data-table', 'data_table');
@@ -315,8 +315,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
         Route::post('package-status-chnage', 'status');
         Route::post('package-delete', 'package_delete');
         Route::post('package-store', 'store')->name('package.store');
-
-     });
+    });
 
     Route::view('product-mdshop', 'admin/products-and-categories/products/mdshop');
 
@@ -349,33 +348,28 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     //Admin ADS & PROMO
 
     Route::controller(AdsPromoController::class)->group(function () {
-        Route::get('ads-promo','index')->name('filter.ads');
-        Route::post('ads-store-promo','store')->name('store.ads');
+        Route::get('ads-promo', 'index')->name('filter.ads');
+        Route::post('ads-store-promo', 'store')->name('store.ads');
 
-        Route::get('ads-edit/{id}','edit');
+        Route::get('ads-edit/{id}', 'edit');
 
-        Route::get('ads-delete/{id}','delete')->name('ads.delete');
-
-
+        Route::get('ads-delete/{id}', 'delete')->name('ads.delete');
     });
 
 
 
     // MEMBERSHIPS
- 
+
 
 
     Route::controller(AdminMembershipController::class)->group(function () {
-      
-        Route::get('manage-memberships','index');
 
-        Route::post('memberships/list-memberships','list_membership');
+        Route::get('manage-memberships', 'index');
 
-
-        Route::post('store-memberships','store_membership')->name('store.membership'); 
+        Route::post('memberships/list-memberships', 'list_membership');
 
 
-
+        Route::post('store-memberships', 'store_membership')->name('store.membership');
     });
 
 
@@ -516,7 +510,7 @@ Route::controller(MedicalProviderRegistrationController::class)->group(function 
     Route::post('/md-register-medical-provider', 'md_register_medical_provider');
     Route::get('/logout', 'logout');
 });
-Route::controller(UserRegistrationController::class)->group(function (){
+Route::controller(UserRegistrationController::class)->group(function () {
     // Route::get('user-account', 'index');
     Route::post('/md-customer-register', 'customer_register');
     // Route::get('/logout','logout');
@@ -574,10 +568,9 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
         Route::get('/edit-package/{id}', 'edit_package');
         Route::post('/md-packages-active-list-search', 'md_packages_active_list_search');
         Route::post('/md-packages-inactive-list-search', 'md_packages_inactive_list_search');
-
     });
     // Mplus04
-    Route::controller(RolesController::class)->group(function(){
+    Route::controller(RolesController::class)->group(function () {
         Route::get('/medical-roles', 'index');
         Route::post('/roles-add', 'roles_add');
         Route::get('/edit-role/{id}', 'edit_role');
@@ -588,7 +581,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
     Route::controller(PaymentController::class)->group(function () {
         Route::get('payment-information', 'index');
         Route::post('store-vendor-bank-details', 'storeBankDetails')->name('store.vendor.bank.details');
-        Route::post('medical-provider-payment-search','peymentsearch');
+        Route::post('medical-provider-payment-search', 'peymentsearch');
     });
 
     Route::controller(MedicalProviderReports::class)->group(function () {
@@ -617,18 +610,13 @@ Route::group(['middleware' => ['prevent-back-history', 'IsMedicalProvider']], fu
 
     //Medical Provider Membership
 
-    Route::controller(MedicalProviderMembershipController::class)->group(function (){
-         Route::get('membership','index');
+    Route::controller(MedicalProviderMembershipController::class)->group(function () {
+        Route::get('membership', 'index');
     });
-
-
-
-
-
 });
 
 
-Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function (){
+Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function () {
 
     Route::controller(VendorProductController::class)->group(function () {
         Route::get('/vendor-dashboard', 'vendor_dashboard');
@@ -642,19 +630,17 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
         Route::post('vendor-inactive-product-search', 'inactive_vendor_search_products');
     });
 
-    Route::controller(UpdateVendorProfileController::class)->group(function (){
+    Route::controller(UpdateVendorProfileController::class)->group(function () {
         Route::get('vendor-account', 'update_vendor_profile_list');
         Route::post('md-update-vendor-profile', 'update_vendor_profile');
         Route::post('md-delete-vendor-images-videos', 'delete_vendor_images_videos');
-
     });
 
 
 
-    Route::controller(VendorSalesController::class)->group(function (){
+    Route::controller(VendorSalesController::class)->group(function () {
 
-        Route::get('vendor-sales','index');
-
+        Route::get('vendor-sales', 'index');
     });
 
     // Route::view('vendor-sales', 'front/mdhealth/vendor/vendor_sales');
@@ -702,31 +688,29 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
 
 
     //Mplus02
-    Route::post('purchase-by-mdcoins',[CustomerPackageController::class,'purchase_by_mdcoins']);
+    Route::post('purchase-by-mdcoins', [CustomerPackageController::class, 'purchase_by_mdcoins']);
     Route::any('myself_as_patient/{id}', [CustomerPackageController::class, 'myself_as_patient'])->name('myself_as_patient');
     Route::post('user-credit-card-pay', [CustomerPackageController::class, 'complete_pending_payment']);
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
-    Route::any('my-packages-list', [CustomerPackageController::class,'my_packages']);
+    Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
-    Route::get('user-favorites', [CustomerPackageController::class, 'user_favorites']);
-    Route::post('/md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
+    Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 
 
     //Mplus03 Customer wallet
-    
 
-    Route::controller(WalletController::class)->group(function (){
 
-        Route::get('user-wallet','index');
-        Route::get('user-invite','user_invite');
-        Route::post('send-invitation-link','send_invitation_link')->name('send.invitation.link');
+    Route::controller(WalletController::class)->group(function () {
+
+        Route::get('user-wallet', 'index');
+        Route::get('user-invite', 'user_invite');
+        Route::post('send-invitation-link', 'send_invitation_link')->name('send.invitation.link');
     });
-
 });
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
-   
+
     Route::middleware(['IsCustomer', 'IsMedicalProvider'])->group(function () {
         Route::controller(CustomerInteractionController::class, function () {
         });
@@ -736,14 +720,13 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 // Mplus02
 Route::middleware(['CheckRequestType'])->group(function () {
-    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
+    Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
 });
 Route::middleware(['CheckRequestType'])->group(function () {
-    
+
     Route::any('/setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
-    Route::post('send/notification',[FirebasePushController::class,'notification'])->name('firebase.send');
-    Route::post('update-last-messages',[FirebasePushController::class,'update_last_messages']);
-    
+    Route::post('send/notification', [FirebasePushController::class, 'notification'])->name('firebase.send');
+    Route::post('update-last-messages', [FirebasePushController::class, 'update_last_messages']);
 });
 
 
@@ -759,7 +742,7 @@ Route::post('create-food-provider-account', [FoodProviderController::class, 'foo
 
 Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], function () {
 
-    Route::controller(FoodsController::class)->group(function (){
+    Route::controller(FoodsController::class)->group(function () {
         Route::get('food-provider-foods', 'index');
         Route::get('food-provider-foods-view', 'add_food');
         // Route::post('md-update-vendor-profile', 'update_vendor_profile');
@@ -781,9 +764,6 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
     Route::post('update-food-provider-account', [UpdateFoodProviderAccount::class, 'update_food_profile']);
 
     Route::post('md-delete-food-provider-images-videos', [UpdateFoodProviderAccount::class, 'delete_food_provider_images_videos']);
-
-
-
 });
 
 //Food Vendor Route Ends By Mplus03
@@ -796,7 +776,7 @@ Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase
 
 // MEDICAL PROVIDER
 
-Route::any('medical-messages', [FirebasePushController::class,'get_conversations'])->name('medical-messages');
+Route::any('medical-messages', [FirebasePushController::class, 'get_conversations'])->name('medical-messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
@@ -812,7 +792,7 @@ Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-
 
 
 
-Route::any('user-message', [FirebasePushController::class,'get_conversations']);
+Route::any('user-message', [FirebasePushController::class, 'get_conversations']);
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
 Route::view('user-live-appoinment', 'front/mdhealth/user-panel/live-consultation-appoinment');
 
@@ -858,4 +838,3 @@ Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 
 Route::view('welcome', 'welcome');
-
