@@ -184,9 +184,9 @@ class RegistrationController extends BaseController
 
              if (empty($md_coin_available)) {
                         $coins = [];
-                        $coins['customer_id'] = !empty($customer->id) ? $customer->id : '';
+                        $coins['customer_id'] = !empty($customer_registration->id) ? $customer_registration->id : '';
                         $coins['coins'] = 0;
-                        $coins['invitation_count'] = 0;
+                        $coins['invitation_count'] = 10;
                         MDCoins::create($coins);
                     }
 
@@ -204,7 +204,7 @@ class RegistrationController extends BaseController
                 // Increment 'coins' by 5 and 'invitation_count' by 1
                 if ($mdCoins) {
                     $mdCoins->increment('coins', 5);
-                    $mdCoins->increment('invitation_count', 1);
+                    // $mdCoins->increment('invitation_count', 1);
                 }
 
 

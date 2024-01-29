@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api\customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\MedicalProviderRegistrater;
+// use App\Models\MedicalProviderRegistrater;
 use Illuminate\Http\Request;
 use App\Http\Controllers\api\BaseController as BaseController;
 use Validator;
@@ -389,617 +389,6 @@ class CustomerPackageController extends BaseController
         }
     }
 
-
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-        
-        
-        if($request->type=='full_package')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Accomodition, Transportation, Tour, Translation, Visa Services, Ticket Services, Ambulance Services')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is your full package list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your full package list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your full package list is empty.',
-                ]);
-            }
-        }
-        
-        
-         if($request->type=='Accomodition')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Accomodition')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is your hotel list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your hotel list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your hotel list is empty.',
-                ]);
-            }
-        }
-        
-        
-        
-        if($request->type=='Transportation')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Transportation')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is Transportation list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your Transportation list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your Transportation list is empty.',
-                ]);
-            }
-        }
-        
-        
-         if($request->type=='Tour')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Tour')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is Tour list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your Tour list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your Tour list is empty.',
-                ]);
-            }
-        }
-        
-        
-        if($request->type=='Translation')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Translation')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is Translation list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your Translation list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your Translation list is empty.',
-                ]);
-            }
-        }
-        
-        
-         if($request->type=='Visa Services')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Visa Services')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is Visa Services list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your Visa Services list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your Visa Services list is empty.',
-                ]);
-            }
-        }
-        
-        
-        if($request->type=='Ticket Services')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Ticket Services')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is Ticket Services list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your Ticket Services list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your Ticket Services list is empty.',
-                ]);
-            }
-        }
-        
-        
-          if($request->type=='Ambulance Services')
-        {
-            $packages = Packages::select(
-                'md_packages.id',
-                'md_packages.package_unique_no',
-                'md_packages.package_name',
-                'md_packages.treatment_period_in_days',
-                'md_packages.other_services',
-                'md_packages.package_price',
-                'md_packages.sale_price',
-                'md_product_category.product_category_name',
-                'md_product_sub_category.product_sub_category_name',
-                'md_master_cities.city_name'
-            )
-                ->where('md_packages.status', 'active')
-                ->where('md_packages.other_services', 'Ambulance Services')
-                ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-            if (!empty($request->treatment_name)) {
-                $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-            }
-            if (!empty($request->city_name)) {
-                $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-            }
-            $packages = $packages->get();
-            // return $packages;
-
-            $data = [];
-            $data['package_list'] = [];
-            if (!empty($packages)) {
-                foreach ($packages as $key => $value) {
-                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
-                }
-            }
-
-            if (!empty($data)) {
-                if (!empty($packages)) {
-                    return response()->json([
-                        'status' => 200,
-                        'message' => 'Here is Ambulance Services list.',
-                        'data' => $data
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 404,
-                        'message' => 'your Ambulance Services list is empty.',
-                        'data' => $data
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your Ambulance Services list is empty.',
-                ]);
-            }
-        }
-        
-
-            
- 
-    }
     public function packages_view_on_search_result(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -3279,6 +2668,44 @@ class CustomerPackageController extends BaseController
     }
 
 
+    // public function update_patient_information(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'id' => 'required',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return $this->sendError('Validation Error.', $validator->errors());
+    //     }
+
+    //     $patient_information = [];
+    //     $patient_information['patient_full_name'] = $request->patient_full_name;
+    //     $patient_information['patient_first_name'] = $request->patient_first_name;
+    //     $patient_information['patient_last_name'] = $request->patient_last_name;
+    //     $patient_information['patient_relation'] = $request->patient_relation;
+    //     $patient_information['patient_email'] = $request->patient_email;
+    //     $patient_information['patient_contact_no'] = $request->patient_contact_no;
+    //     $patient_information['patient_country_id'] = $request->patient_country_id;
+    //     $patient_information['patient_city_id'] = $request->patient_city_id;
+    //     $patient_information['address'] = $request->address;
+    //     $patient_information['birth_date'] = $request->birth_date;
+    //     $patient_information['created_by'] = Auth::user()->id;
+
+    //     $PatientInformation = PatientInformation::where('id', $request->patient_id)->update($patient_information);
+
+    //     if (!empty($PatientInformation)) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'message' => 'Patient Information updated successfully.',
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'Something went wrong. Details not updated.',
+    //         ]);
+    //     }
+    // }
+
     public function update_patient_information(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -3289,7 +2716,30 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        $purchaseId = $request->purchase_id;
+
+     
+    $purchase = CustomerPurchaseDetails::find($purchaseId);
+        if (!$purchase) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Purchase not found.',
+            ]);
+        }
+
+        $treatmentStartDate = $purchase->treatment_start_date;
+        $today = now()->toDateString();
+
+        if ($treatmentStartDate && $treatmentStartDate <= $today) {
+            return response()->json([
+                'status' => 403,
+                'message' => 'Treatment has already started for this purchase. Patient information cannot be updated.',
+            ]);
+        }
+
+        // If treatment start date has not passed, proceed with updating patient information
         $patient_information = [];
+        // populate $patient_information array as before
         $patient_information['patient_full_name'] = $request->patient_full_name;
         $patient_information['patient_first_name'] = $request->patient_first_name;
         $patient_information['patient_last_name'] = $request->patient_last_name;
@@ -3301,10 +2751,9 @@ class CustomerPackageController extends BaseController
         $patient_information['address'] = $request->address;
         $patient_information['birth_date'] = $request->birth_date;
         $patient_information['created_by'] = Auth::user()->id;
+        $patientInformationUpdate = PatientInformation::where('id', $request->patient_id)->update($patient_information);
 
-        $PatientInformation = PatientInformation::where('id', $request->patient_id)->update($patient_information);
-
-        if (!empty($PatientInformation)) {
+        if ($patientInformationUpdate) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Patient Information updated successfully.',
@@ -3316,6 +2765,7 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
+
 
 
     // public function customer_package_details(Request $request)

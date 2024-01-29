@@ -485,6 +485,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/send-invitation', [InvitationApiController::class, 'sendInvitation']);
 
+    Route::get('/md-customer-coins', [InvitationApiController::class, 'md_customer_coins']);
+
+    Route::get('/md-customer-coins-count', [InvitationApiController::class, 'customer_coins_count']);
 
 
 

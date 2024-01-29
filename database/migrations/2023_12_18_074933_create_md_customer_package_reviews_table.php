@@ -16,12 +16,12 @@ return new class extends Migration
             $table->bigInteger('purchase_id')->nullable();
             $table->bigInteger('package_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
-            $table->string('treatment_reviews')->nullable();
-            $table->string('acommodation_reviews')->nullable();
-            $table->string('transporatation_reviews')->nullable();
-            $table->string('behaviour_reviews')->nullable();
-            $table->string('provider_reviews')->nullable();
-            $table->string('extra_notes')->nullable();
+            $table->bigInteger('cleanliness')->nullable();
+            $table->bigInteger('comfort')->nullable();
+            $table->bigInteger('food_quality')->nullable();
+            $table->bigInteger('behaviour_reviews')->nullable();
+            $table->bigInteger('recommended')->nullable();
+            $table->string('review_feedback')->nullable();
             $table->string('created_ip_address')->nullable();
             $table->string('modified_ip_address')->nullable();
             $table->enum('platform_type', ['android', 'ios', 'web'])->nullable();
