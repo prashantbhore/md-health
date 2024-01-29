@@ -1124,6 +1124,8 @@ class CustomerPackageController extends Controller {
             public function user_favorites() {
                 $user_id = Session::get( 'MDCustomer*%' );
                 $token = Session::get( 'login_token' );
+                // dd($user_id);
+
 
                 if ( !empty( $token ) ) {
                     $data = $this->apiService->getData( $token, url( '/api/md-customer-favourite-list' ), [], 'GET' );
@@ -1136,25 +1138,73 @@ class CustomerPackageController extends Controller {
                     } else {
                         $fav_list = [];
                     }
-                    if ( !empty( $data ) ) {
-                        if ( $data[ 'status' ] == '200' ) {
-                            // dd($data[ 'vendorsdata' ]);
-                            $vendorsdata = !empty( $data[ 'vendorsdata' ] ) ? $data[ 'vendorsdata' ] : [];
-                        } else {
-                            $vendorsdata = [];
-                        }
-                    } else {
-                        $vendorsdata = [];
-                    }
+                    // if ( !empty( $data ) ) {
+                    //     if ( $data[ 'status' ] == '200' ) {
+                    //         // dd($data[ 'vendorsdata' ]);
+                    //         $vendorsdata = !empty( $data[ 'vendorsdata' ] ) ? $data[ 'vendorsdata' ] : [];
+                    //     } else {
+                    //         $vendorsdata = [];
+                    //     }
+                    // } else {
+                    //     $vendorsdata = [];
+                    // }
                 } else {
                     $fav_list = [];
-                    $vendorsdata = [];
+                    // $vendorsdata = [];
                 }
+                $fav_list1 = [];
+                $fav_list2 = [];
+                $fav_list3 = [];
+                $fav_list4 = [];
 
-                return view( 'front.mdhealth.user-panel.user-favorites', compact( 'fav_list','vendorsdata' ) );
+                // if ( !empty( $token ) ) {
+                //     $data2 = $this->apiService->getData( $token, url( '/api/md-customer-favourite-vendor-names' ), [], 'GET' );
+                //     // dd($data2);
+                //     if ( !empty( $data2 ) ) {
+                //         if ( $data2[ 'status' ] == '200' ) {
+                //             $vendorsdata = !empty( $data2[ 'data' ] ) ? $data2[ 'data' ] : [];
+                //         } else {
+                //             $vendorsdata = [];
+                //         }
+                //     } else {
+                //         $vendorsdata = [];
+                //     }
+                // } else {
+                //     $vendorsdata = [];
+                // }
+
+                return view( 'front.mdhealth.user-panel.user-favorites', compact( 'fav_list','fav_list1','fav_list2','fav_list3','fav_list4' ) );
             }
 
             //Mplus02
+            //mplus04
+            // public function md_customer_favourite_list_web(Request $request){
+
+            //     $user_id = Session::get( 'MDCustomer*%' );
+            //     $token = Session::get( 'login_token' );
+            //     dd($request->vendor_id);
+
+            //     if ( !empty( $token ) ) {
+            //         $data2 = $this->apiService->getData( $token, url( '/api/md-customer-favourite-list-web' ), [], 'POST' );
+            //         // dd($data2);
+            //         if ( !empty( $data2 ) ) {
+            //             if ( $data2[ 'status' ] == '200' ) {
+            //                 $vendorsdata = !empty( $data2[ 'data' ] ) ? $data2[ 'data' ] : [];
+            //             } else {
+            //                 $vendorsdata = [];
+            //             }
+            //         } else {
+            //             $vendorsdata = [];
+            //         }
+            //     } else {
+            //         $vendorsdata = [];
+            //     }
+
+            //     return view( 'front.mdhealth.user-panel.user-favorites', compact( 'fav_list' ) );
+
+            // }
+            //mplus04
+
 
             public function purchase_by_mdcoins( Request $request ) {
                 // dd( Crypt::encrypt( '100000000' ) );
