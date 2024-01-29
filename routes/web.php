@@ -28,6 +28,7 @@ use App\Http\Controllers\admin\login\LoginController;
 use App\Http\Controllers\admin\master\BrandController;
 use App\Http\Controllers\admin\master\countryController;
 use App\Http\Controllers\admin\membership\AdminMembershipController;
+use App\Http\Controllers\admin\mlm\AdminMlmController;
 use App\Http\Controllers\admin\product\MDfoodController;
 use App\Http\Controllers\admin\product\MDhealthController;
 use App\Http\Controllers\admin\product\MDHomeServiceController;
@@ -250,8 +251,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
 
     //Admin  MLM
-    Route::view('multi-level-marketing', 'admin/multi-level-marketing/multi-level-marketing');
+   // Route::view('multi-level-marketing', 'admin/multi-level-marketing/multi-level-marketing');
     Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
+
+    Route::controller(AdminMlmController::class)->group(function (){
+        Route::get('multi-level-marketing', 'index');
+       
+    });
+
 
     //Admin BRANDS
 
