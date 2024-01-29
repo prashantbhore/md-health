@@ -847,4 +847,7 @@ Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 #Orders
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 
+
+Route::view('user-notifications', 'front/mdhealth/user-panel/user-notifications');
+
 Route::view('welcome', 'welcome');
