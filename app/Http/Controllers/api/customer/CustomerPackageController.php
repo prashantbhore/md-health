@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\MedicalProviderRegistrater;
 
 
+
 class CustomerPackageController extends BaseController
 {
     use MediaTrait;
@@ -4026,6 +4027,7 @@ class CustomerPackageController extends BaseController
         }
     }
 
+
     public function customer_favourite_list_web(Request $request)
     {
         //                 $query = CustomerFavouritePackages::select(
@@ -4078,7 +4080,7 @@ class CustomerPackageController extends BaseController
             return response()->json([
                 'status' => 200,
                 'message' => 'Here is your Favourite list.',
-                'data' => $result,
+                'data' => $CustomerFavouritePackages,
 
             ]);
         } else {
@@ -4127,7 +4129,6 @@ class CustomerPackageController extends BaseController
     //     }
     // }
 
-
     public function customer_favourite_list_count()
     {
         $count = CustomerFavouritePackages::where('status', 'active')
@@ -4153,9 +4154,11 @@ class CustomerPackageController extends BaseController
         }
     }
 
+
     public function customer_favourite_vendor_names()
     {
         $result = MedicalProviderRegistrater::leftjoin('md_packages', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_customer_favourite_packages', 'md_customer_favourite_packages.package_id', '=', 'md_packages.id')
             ->groupBy('md_medical_provider_register.company_name')
             ->pluck('md_medical_provider_register.company_name');
 
@@ -4165,7 +4168,6 @@ class CustomerPackageController extends BaseController
                 'status' => 200,
                 'message' => 'Here is your Favourite list vendors names.',
                 'data' => $result,
-
             ]);
         } else {
             return response()->json([
@@ -4175,6 +4177,8 @@ class CustomerPackageController extends BaseController
         }
     }
 
+    public function md_health_bank_lists()
+    {
         $bank_list = MDhelathBankDetails::where('status', 'active')->select('bank_name')->get();
 
 
@@ -4184,7 +4188,11 @@ class CustomerPackageController extends BaseController
                 'message' => 'Bank List Found',
                 'bank_list' => $bank_list,
             ]);
+        } else {
+            return response()->json([
+                'status' => 404,
                 'message' => 'Bank List Not Found',
+            ]);
         }
     }
 
@@ -4195,6 +4203,8 @@ class CustomerPackageController extends BaseController
     $package_id=$request['package_id'];
 
     $bank_details = MDhelathBankDetails::where('bank_name', $bank_name)->first();
+
+    $package_details = Packages::where('id',$package_id)->first();
 
     if (!empty($bank_details)){
         return response()->json([
@@ -4211,6 +4221,4 @@ class CustomerPackageController extends BaseController
         ]);
     }
   }
-
-
 }
