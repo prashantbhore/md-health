@@ -252,12 +252,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MLM
    // Route::view('multi-level-marketing', 'admin/multi-level-marketing/multi-level-marketing');
-    Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
+   // Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
 
     Route::controller(AdminMlmController::class)->group(function (){
         Route::get('multi-level-marketing','index');
         Route::get('/top-earner-data-table','data_table');
         Route::post('/delete-earner','delete_earner');
+
+        Route::get('/earner-details/{id}','earner_details');
+
+        Route::get('/earner-details-data-table','earner_data_table');
 
 
     });
@@ -849,6 +853,6 @@ Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 
 
-Route::view('user-notifications', 'front/mdhealth/user-panel/user-notifications');
+Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
 
 Route::view('welcome', 'welcome');

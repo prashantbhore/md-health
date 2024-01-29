@@ -28,6 +28,12 @@ class MDCoins extends Model
     }
 
 
+    public function earner()
+    {
+        return $this->belongsTo(CustomerRegistration::class, 'reffered_customer_id');
+    }
+
+
 
 
 }

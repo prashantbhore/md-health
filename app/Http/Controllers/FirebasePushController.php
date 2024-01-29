@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerNotifications;
 use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
 use App\Models\MedicalProviderLogo;
@@ -43,7 +44,45 @@ class FirebasePushController extends Controller
 
     public function notification(Request $request)
     {
-        // dd($request);
+        // dd($request->sender_type);
+        $sender_type = $request->sender_type;
+        $convrsation_id = $request->conversation_id;
+        $create_new_notification = new CustomerNotifications();
+        $create_new_notification->convrsation_id = $request->conversation_id;
+        if ($sender_type == 'medicalprovider') {
+            $sender_type = 'customer';
+            $customer_id = explode('_', $convrsation_id)[0];
+            $create_new_notification->customer_id = $customer_id;
+            $create_new_notification->package_id = CustomerPurchaseDetails::where('customer_id', $customer_id)
+                ->where('conversation_id', explode('_', $convrsation_id)[1])
+                ->first()
+                ->package_id;
+            $create_new_notification->purchase_id = CustomerPurchaseDetails::where('customer_id', $customer_id)
+                ->where('conversation_id', explode('_', $convrsation_id)[1])
+                ->first()
+                ->id;
+
+            $create_new_notification->notification_description = $request->body;
+            $create_new_notification->notification_for = $sender_type;
+
+        } elseif ($sender_type == 'customer') {
+            $sender_type = 'medicalprovider';
+            $customer_id = explode('_', $convrsation_id)[0];
+            $create_new_notification->provider_id = explode('_', $convrsation_id)[2];
+            $create_new_notification->package_id = CustomerPurchaseDetails::where('customer_id', $customer_id)
+                ->where('conversation_id', explode('_', $convrsation_id)[1])
+                ->first()
+                ->package_id;
+            $create_new_notification->purchase_id = CustomerPurchaseDetails::where('customer_id', $customer_id)
+                ->where('conversation_id', explode('_', $convrsation_id)[1])
+                ->first()
+                ->purchase_id;
+            $create_new_notification->notification_description = $request->body;
+            $create_new_notification->notification_for = $sender_type;
+        }
+
+        $create_new_notification->save();
+
         $user = Auth::guard('md_customer_registration')->user();
         if (empty($user)) {
             $user = Auth::guard('md_health_medical_providers_registers')->user();
@@ -61,6 +100,14 @@ class FirebasePushController extends Controller
                 'body' => $body,
             ],
         ]);
+
+        if ($sender_type == 'customer') {
+            // getting provider_id
+            $user_id = explode('_', $conversation_id)[0];
+        } else if ($sender_type == 'medicalprovider') {
+            //getting customer_id
+            $user_id = explode('_', $conversation_id)[2];
+        }
 
         $get_messages = Messages::where('conversation_id', $conversation_id)->where('sender_id', $user_id)->first();
 
@@ -143,7 +190,7 @@ class FirebasePushController extends Controller
                     if ($message->last_read_message != $message->latest_message) {
                         $latest_message = $message->latest_message;
                         $is_latest_new = true;
-                    }else{
+                    } else {
                         $latest_message = $message->last_read_message;
                     }
                 }
@@ -169,7 +216,7 @@ class FirebasePushController extends Controller
                     if ($message->last_read_message != $message->latest_message) {
                         $latest_message = $message->latest_message;
                         $is_latest_new = true;
-                    }else{
+                    } else {
                         $latest_message = $message->last_read_message;
                     }
                 }
@@ -185,6 +232,43 @@ class FirebasePushController extends Controller
             }
 
         }
+    }
+
+    public function get_notifications_list()
+    {
+        $user = Auth::guard('md_customer_registration')->user();
+        $user_type = 'customer';
+        if (empty($user)) {
+            $user = Auth::guard('md_health_medical_providers_registers')->user();
+            $user_type = 'medicalprovider';
+            $user_id = $user->id;
+            $notifications = CustomerNotifications::where('notification_for', $user_type)
+                ->where('provider_id', $user_id)
+                ->where('status', 'active')->get();
+        } else {
+
+            $user_id = $user->id;
+            $notifications = CustomerNotifications::where('notification_for', $user_type)
+                ->where('customer_id', $user_id)
+                ->where('status', 'active')->get();
+        }
+        // dd($notifications);
+        // $data = [];
+        // foreach($notifications as $notification)
+        // {
+        //     $data['convrsation_id'] = $notification->convrsation_id;
+        //     $data['package_id'] = $notification->package_id;
+        //     $data['notification_description'] = $notification->notification_description;
+        //     $data['notification_for'] = $notification->notification_for;
+        //     $data['purchase_id'] = !empty($notification->purchase_id)?$notification->purchase_id:'';
+        //     $data['customer_id'] = !empty($notification->customer_id)?$notification->customer_id:'';
+        //     $data['provider_id'] = !empty($notification->provider_id) ? $notification->provider_id: '';
+            
+        // }die;
+        // dd($data);
+
+        return view('front/mdhealth/user-panel/user-notifications',compact('notifications'));
+
     }
 
 }

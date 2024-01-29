@@ -17,6 +17,8 @@ return new class extends Migration
             $table->bigInteger('convrsation_id')->nullable();
             $table->bigInteger('package_id')->nullable();
             $table->bigInteger('purchase_id')->nullable();
+            $table->string('notification_for')->nullable();
+            $table->string('provider_id')->nullable();
             $table->longText('notification_description')->nullable();
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();
