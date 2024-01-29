@@ -105,6 +105,9 @@
                                     {{-- action="{{ url('/md-customer-register') }}" method="post" --}}
                                     <input type="hidden" name="platform_type" value="web" />
                                     <input type="hidden" name="user_type" value="customer" />
+
+                                    <input type="hidden" name="unique_code" value="{{$referralCode}}" />
+                                    <input type="hidden" name="coin_status_id" value="{{$coinStatusId }}" />
                                     <div class="row gy-3">
                                         <div class="col-md-6">
                                             <label for="firstName" class="form-label">*First Name</label>

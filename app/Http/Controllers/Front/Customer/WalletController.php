@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ApiService;
 use Illuminate\Support\Facades\Session;
+use App\Models\MDCoins;
+use App\Models\CoinStatus;
+use Auth;
 
 class WalletController extends Controller
 {
@@ -16,20 +19,14 @@ class WalletController extends Controller
 
     public function index(){
 
-        // $token = Session::get( 'login_token' );
+     
 
-        // $apiUrl = url('api/send-invitation-link');
-        // $method = 'GET';
-        // $body = null;
-
-        // $data= $this->apiService->getData( $token, $apiUrl, $body, $method);
-
-
-        // $invitation_link=$data['invitation_link'];
+        $total_coins =MDCoins::where('customer_id', Auth::guard('md_customer_registration')->user()->id)
+        ->where('status', 'active')->select('coins')->first();
 
        
 
-       return view('front.mdhealth.user-panel.user-wallet');
+       return view('front.mdhealth.user-panel.user-wallet',compact('total_coins'));
     }
 
 
@@ -47,7 +44,29 @@ class WalletController extends Controller
 
         $invitation_link=$data['invitation_link'];
 
-      return view('front.mdhealth.user-panel.user-invite',compact('invitation_link'));
+        //dd(Auth::guard('md_customer_registration')->user()->id);
+
+        $your_network_count = CoinStatus::where('customer_id', Auth::guard('md_customer_registration')->user()->id)
+        ->where('wallet_status', 'your_network')
+        ->count();
+
+       
+
+        $pending_invite_count = CoinStatus::where('customer_id', Auth::guard('md_customer_registration')->user()->id)
+        ->where('wallet_status', 'pending_invite')
+        ->count();
+
+
+        $left_invite_count =MDCoins::where('customer_id', Auth::guard('md_customer_registration')->user()->id)
+        ->where('status', 'active')->select('invitation_count')->first();
+
+       // dd($left_invite_count->invitation_count);
+
+
+       
+
+
+      return view('front.mdhealth.user-panel.user-invite',compact('invitation_link','your_network_count','pending_invite_count','left_invite_count'));
     }
 
 

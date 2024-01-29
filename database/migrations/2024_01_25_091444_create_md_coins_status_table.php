@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_coins_status', function (Blueprint $table) {
+        Schema::create('md_coins_status', function (Blueprint $table){
             $table->id();
             $table->bigInteger('customer_id')->nullable();
+            $table->string('invited_email')->nullable();
             $table->enum('wallet_status', ['your_netowrk', 'pending_invite', 'invites_left'])->default('pending_invite');
             $table->enum('status', ['active', 'delete', 'inactive'])->default('active');
             $table->string('created_ip_address')->nullable();

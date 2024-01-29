@@ -177,6 +177,7 @@ class RegistrationController extends BaseController
             $customer_logs['type'] = 'signup';
             CustomerLogs::create($customer_logs);
 
+            if(!empty($request->unique_code) && $request->unique_code){
             $customer = CustomerRegistration::where('status', 'active')
                 ->where('customer_unique_no', $request->unique_code)
                 ->first();
@@ -205,6 +206,7 @@ class RegistrationController extends BaseController
                     CoinStatus::where('id', $coin_status_id)->update($coin_status);
                 }
             }
+        }
 
             return response()->json([
                 'status' => 200,

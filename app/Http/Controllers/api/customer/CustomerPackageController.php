@@ -3963,30 +3963,30 @@ class CustomerPackageController extends BaseController
     //     }
     // }
 
-    // public function customer_favourite_list_count()
-    // {
-    //     $count = CustomerFavouritePackages::where('status', 'active')
-    //         ->where('customer_id', Auth::user()->id)
-    //         ->count();
+    public function customer_favourite_list_count()
+    {
+        $count = CustomerFavouritePackages::where('status', 'active')
+            ->where('customer_id', Auth::user()->id)
+            ->count();
 
-    //     $countData = [
-    //         'mdhealthcount' => $count,
-    //     ];
+        $countData = [
+            'mdhealthcount' => $count,
+        ];
 
-    //     if (!empty($count)) {
-    //         return response()->json([
-    //             'status' => 200,
-    //             'message' => 'Here is your Favourite list count.',
-    //             'count' => $countData,
+        if (!empty($count)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your Favourite list count.',
+                'count' => $countData,
 
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'status' => 404,
-    //             'message' => 'Something went wrong.',
-    //         ]);
-    //     }
-    // }
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
 
 
 
@@ -4011,6 +4011,32 @@ class CustomerPackageController extends BaseController
         }
     }
 
+
+
+  public function  md_health_bank_details(Request $request){
+
+    $bank_name=trim($request['bank_name']);
+    $package_id=$request['package_id'];
+
+    $bank_details = MDhelathBankDetails::where('bank_name', $bank_name)->first();
+
+    $package_details = Packages::where('id',$package_id)->first();
+
+    if (!empty($bank_details)){
+        return response()->json([
+            'status' => 200,
+            'message' => 'Bank Details Found',
+            'bank_details' => $bank_details,
+            'package_details' => $package_details,
+
+        ]);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Bank Details Not Found',
+        ]);
+    }
+  }
 
 
 

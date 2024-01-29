@@ -23,7 +23,7 @@
                             <div class="mt-3">
                             <p class="mb-0 card-h3 camptonBook lh-1"><span class="camptonBold">1 MD</span> Coin <span class="camptonBold">= 1 Turkish Lira</span></p>    
                             <p class="mb-0 card-h4 camptonBook lh-1">Available <span class="camptonBold">MD</span>coin</p>
-                                <p class="mb-0 coinsMD">500</p>
+                                <p class="mb-0 coinsMD">{{!empty($total_coins->coins) ? $total_coins->coins : 0}}</p>
                                 <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" style="border-color: #000;" data-bs-toggle="modal" data-bs-target="#UseMyMDCoin">Use My MD<span class="camptonBook">coin</span></a>
                             </div>
                             <img src="front/assets/img/mdcoin.png" alt="" style="width: 200px;" />

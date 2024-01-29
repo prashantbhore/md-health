@@ -311,8 +311,10 @@ class CustomerPackageController extends Controller
 
     }
 
+
     public function complete_3ds(Request $request)
     {
+
         // dd( $request->all() );
         // dd( Session::get( 'payment_request' ) );
         //ezzzzzz
