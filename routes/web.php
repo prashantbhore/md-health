@@ -708,8 +708,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::get('view-my-active-packages/{id}/{purchase_id}', [CustomerPackageController::class, 'view_my_active_packages'])->name('view-my-active-packages');
     Route::any('my-packages-list', [CustomerPackageController::class,'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
-    Route::get('user-favorites', [CustomerPackageController::class, 'user_favorites']);
-    Route::post('/md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
+    Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 
 
@@ -796,7 +795,7 @@ Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase
 
 // MEDICAL PROVIDER
 
-Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
+Route::any('medical-messages', [FirebasePushController::class,'get_conversations'])->name('medical-messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
@@ -812,7 +811,7 @@ Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-
 
 
 
-Route::view('user-message', 'front/mdhealth/user-panel/user-message');
+Route::any('user-message', [FirebasePushController::class,'get_conversations']);
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
 Route::view('user-live-appoinment', 'front/mdhealth/user-panel/live-consultation-appoinment');
 
