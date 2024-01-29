@@ -83,7 +83,7 @@
     });
 
     onMessage(messaging, (payload) => {
-        alert(payload.notification.title + " " + payload.notification.body);
+        // alert(payload.notification.title + " " + payload.notification.body);
         console.log('Message received. ', payload);
         // ...
     });
@@ -136,6 +136,17 @@
         const currentTime = `${hours}:${minutes}`;
 
         try {
+
+            const data = {
+                sender_id: "{{ $sender_id }}",
+                sender_type: "{{ $sender_type }}",
+                text: text,
+                timestamp: timestampInSeconds,
+                day_of_week: currentDayOfWeek,
+                current_time: currentTime,
+                conversation_id: "{{ $conversation_id }}"
+            };
+
             const docRef = await addDoc(collection(db, "messages"), {
                 sender_id: "{{ $sender_id }}",
                 sender_type: "{{ $sender_type }}",
@@ -147,6 +158,7 @@
             });
             console.log("Document written with ID: ", docRef.id);
             textarea.value = '';
+            sendRequestToShowNotifications(data);
         } catch (error) {
             console.error("Error adding document: ", error);
         }
@@ -166,6 +178,7 @@
         messagesArray.forEach((data) => {
             console.log(data);
             updateUIWithMessage(data);
+            sendLastMessages(data);
         });
 
 
@@ -208,7 +221,7 @@
                     messagesArray.push(data);
                     updateUIWithMessage(data);
                     // newMessage = data.text;
-                    sendRequestToShowNotifications(data);
+
                     sendLastMessages(data);
                 });
 
@@ -222,13 +235,14 @@
 
     setInterval(fetchDataFromFirestore, 6000);
 
-    function sendLastMessages(data) {
+    async function sendLastMessages(data) {
         // alert("sendLastMessages");
         if (data.sender_id != "{{ $sender_id }}") {
             const conversation_id = "{{ $conversation_id }}";
             const senderId = "{{ $sender_type }}";
             const senderType = "{{ $sender_type }}";
             const lastReadMessage = data.text;
+            // alert(lastReadMessage);
             navigator.sendBeacon(
                 `/update-last-messages?sender_id=${senderId}&conversation_id=${conversation_id}&sender_type=${senderType}&last_read_message=${lastReadMessage}`
             );
@@ -237,14 +251,14 @@
 
     function sendRequestToShowNotifications(data) {
         // alert("sendRequestToShowNotifications");
-        if (data.sender_id != "{{ $sender_id }}") {
+        // if (data.sender_id != "{{ $sender_id }}") {
             const senderId = "New Message From" + `${data.sender_id}`;
             const senderType = "{{ $sender_type }}";
             const conversation_id = "{{ $conversation_id }}";
             navigator.sendBeacon(
                 `/send/notification?title=${senderId}&conversation_id=${conversation_id}&body=${data.text}&sender_type=${senderType}`
             );
-        }
+        // }
     }
 
 

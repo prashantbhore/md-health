@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerNotifications extends Model
 {
     use HasFactory;
-    protected $table = 'md_coins_status';
+    protected $table = 'md_customer_notifications';
     protected $fillable = [
         'customer_id',
         'convrsation_id',
         'package_id',
         'purchase_id',
+        'notification_for',
+        'provider_id',
         'notification_description',
         'status',
         'created_ip_address',
