@@ -240,7 +240,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE CITIES
 
-    Route::controller(AdminController::class)->group(function () {
+    Route::controller(AdminController::class)->group(function (){
         Route::get('add-admins', 'index');
         Route::post('admin-store', 'store')->name('admin.store');
         Route::get('/admin-data-table', 'data_table');
@@ -255,8 +255,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
 
     Route::controller(AdminMlmController::class)->group(function (){
-        Route::get('multi-level-marketing', 'index');
-       
+        Route::get('multi-level-marketing','index');
+        Route::get('/top-earner-data-table','data_table');
+        Route::post('/delete-earner','delete_earner');
+
+
     });
 
 
