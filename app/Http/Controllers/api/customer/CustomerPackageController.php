@@ -2668,6 +2668,44 @@ class CustomerPackageController extends BaseController
     }
 
 
+    // public function update_patient_information(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'id' => 'required',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return $this->sendError('Validation Error.', $validator->errors());
+    //     }
+
+    //     $patient_information = [];
+    //     $patient_information['patient_full_name'] = $request->patient_full_name;
+    //     $patient_information['patient_first_name'] = $request->patient_first_name;
+    //     $patient_information['patient_last_name'] = $request->patient_last_name;
+    //     $patient_information['patient_relation'] = $request->patient_relation;
+    //     $patient_information['patient_email'] = $request->patient_email;
+    //     $patient_information['patient_contact_no'] = $request->patient_contact_no;
+    //     $patient_information['patient_country_id'] = $request->patient_country_id;
+    //     $patient_information['patient_city_id'] = $request->patient_city_id;
+    //     $patient_information['address'] = $request->address;
+    //     $patient_information['birth_date'] = $request->birth_date;
+    //     $patient_information['created_by'] = Auth::user()->id;
+
+    //     $PatientInformation = PatientInformation::where('id', $request->patient_id)->update($patient_information);
+
+    //     if (!empty($PatientInformation)) {
+    //         return response()->json([
+    //             'status' => 200,
+    //             'message' => 'Patient Information updated successfully.',
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 404,
+    //             'message' => 'Something went wrong. Details not updated.',
+    //         ]);
+    //     }
+    // }
+
     public function update_patient_information(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -2678,7 +2716,30 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        $purchaseId = $request->purchase_id;
+
+     
+    $purchase = CustomerPurchaseDetails::find($purchaseId);
+        if (!$purchase) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Purchase not found.',
+            ]);
+        }
+
+        $treatmentStartDate = $purchase->treatment_start_date;
+        $today = now()->toDateString();
+
+        if ($treatmentStartDate && $treatmentStartDate <= $today) {
+            return response()->json([
+                'status' => 403,
+                'message' => 'Treatment has already started for this purchase. Patient information cannot be updated.',
+            ]);
+        }
+
+        // If treatment start date has not passed, proceed with updating patient information
         $patient_information = [];
+        // populate $patient_information array as before
         $patient_information['patient_full_name'] = $request->patient_full_name;
         $patient_information['patient_first_name'] = $request->patient_first_name;
         $patient_information['patient_last_name'] = $request->patient_last_name;
@@ -2690,10 +2751,9 @@ class CustomerPackageController extends BaseController
         $patient_information['address'] = $request->address;
         $patient_information['birth_date'] = $request->birth_date;
         $patient_information['created_by'] = Auth::user()->id;
+        $patientInformationUpdate = PatientInformation::where('id', $request->patient_id)->update($patient_information);
 
-        $PatientInformation = PatientInformation::where('id', $request->patient_id)->update($patient_information);
-
-        if (!empty($PatientInformation)) {
+        if ($patientInformationUpdate) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Patient Information updated successfully.',
@@ -2705,6 +2765,7 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
+
 
 
     // public function customer_package_details(Request $request)
