@@ -240,7 +240,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MANAGE CITIES
 
-    Route::controller(AdminController::class)->group(function () {
+    Route::controller(AdminController::class)->group(function (){
         Route::get('add-admins', 'index');
         Route::post('admin-store', 'store')->name('admin.store');
         Route::get('/admin-data-table', 'data_table');
@@ -252,11 +252,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin  MLM
    // Route::view('multi-level-marketing', 'admin/multi-level-marketing/multi-level-marketing');
-    Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
+   // Route::view('earner-details', 'admin/multi-level-marketing/earner-details');
 
     Route::controller(AdminMlmController::class)->group(function (){
-        Route::get('multi-level-marketing', 'index');
-       
+        Route::get('multi-level-marketing','index');
+        Route::get('/top-earner-data-table','data_table');
+        Route::post('/delete-earner','delete_earner');
+
+        Route::get('/earner-details/{id}','earner_details');
+
+        Route::get('/earner-details-data-table','earner_data_table');
+
+
     });
 
 
@@ -702,6 +709,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
+    Route::any('md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 
 
@@ -843,5 +851,8 @@ Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 // USER PANEL
 #Orders
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
+
+
+Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
 
 Route::view('welcome', 'welcome');

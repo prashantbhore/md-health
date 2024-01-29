@@ -28,11 +28,11 @@
                             <span>Dashboard</span>
                             @if (!empty($membership))
                                 @if ($membership->membership_type == 'silver')
-                                    <img src="{{ asset('front/assets/img/silver-md.png') }}" alt="">
+                                    <img src="{{ asset('front/assets/img/silver-md.png') }}" alt="" height="24px">
                                 @elseif($membership->membership_type == 'gold')
-                                    <img src="{{ asset('front/assets/img/gold-md.png') }}" alt="">
+                                    <img src="{{ asset('front/assets/img/gold-dashboard.png') }}" alt="" height="24px">
                                 @elseif($membership->membership_type == 'platinum')
-                                    <img src="{{ asset('front/assets/img/platinum-md.png') }}" alt="">
+                                    <img src="{{ asset('front/assets/img/platinum-md.png') }}" alt="" height="24px">
                                 @else
                                     <p>Unknown Membership Type: {{ $membership->membership_type }}</p>
                                 @endif
