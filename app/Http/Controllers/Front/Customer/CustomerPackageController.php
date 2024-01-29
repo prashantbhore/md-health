@@ -153,6 +153,7 @@ class CustomerPackageController extends Controller
             break;
 
         }
+        // dd($json_response);
         $json_response = json_decode($json_response, true);
         // dd( $request, $json_response );
         if ($json_response['status'] == 'success') {
@@ -249,7 +250,23 @@ class CustomerPackageController extends Controller
 
             $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), $plainArray, 'POST');
             Session::forget('payment_request');
-            // dd($repsonse_da  ta);
+            //Make a new conversation_id for the newly purchased package
+            $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
+            if ($customer_purchase_details->count() > 0) {
+
+                $messages = new Messages();
+                $messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
+                $messages->sender_id = $customer_purchase_details->customer_id;
+                $messages->sender_type = 'customer';
+                $messages->save();
+
+                $vendor_messages = new Messages();
+                $vendor_messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
+                $vendor_messages->sender_id = $customer_purchase_details->provider_id;
+                $vendor_messages->sender_type = 'medicalprovider';
+                $vendor_messages->save();
+            }
+            // dd($repsonse_data);
             if (!empty($repsonse_data)) {
                 if ($repsonse_data['status'] == '200') {
 
@@ -268,23 +285,6 @@ class CustomerPackageController extends Controller
                     // die;
                     $three_json_response = json_decode($three_json_response, true);
                     if ($three_json_response['status'] == 'success') {
-
-                        //Make a new conversation_id for the newly purchased package
-                        $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
-                        if ($customer_purchase_details->count() > 0) {
-
-                            $messages = new Messages();
-                            $messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
-                            $messages->sender_id = $customer_purchase_details->customer_id;
-                            $messages->sender_type = 'customer';
-                            $messages->save();
-
-                            $vendor_messages = new Messages();
-                            $vendor_messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
-                            $vendor_messages->sender_id = $customer_purchase_details->provider_id;
-                            $vendor_messages->sender_type = 'medicalprovider';
-                            $vendor_messages->save();
-                        }
 
                         print_r($threedsInitialize->getHtmlContent());
 
