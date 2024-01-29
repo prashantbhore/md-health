@@ -29,7 +29,7 @@ use App\Models\MedicalProviderLicense;
 use App\Models\MDhelathBankDetails;
 use Illuminate\Support\Facades\DB;
 use App\Models\MedicalProviderRegistrater;
-
+use Carbon\Carbon;
 
 
 class CustomerPackageController extends BaseController
@@ -1753,6 +1753,9 @@ class CustomerPackageController extends BaseController
                 $pending_amount = $request->sale_price - $request->paid_amount;
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
+                $purchase_details['bank_name'] = $request->bank_name;
+                $purchase_details['receiver_name'] = $request->receiver_name;
+                $purchase_details['iban'] = $request->iban;
                 $purchase_details['purchase_type'] = 'pending';
                 $purchase_details['created_by'] = Auth::user()->id;
 
@@ -1989,6 +1992,9 @@ class CustomerPackageController extends BaseController
                 $pending_amount = (float) $request->sale_price - (float) $request->paid_amount;
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
+                $purchase_details['bank_name'] = $request->bank_name;
+                $purchase_details['receiver_name'] = $request->receiver_name;
+                $purchase_details['iban'] = $request->iban;
                 if (!empty($request->percentage)) {
                     if ($request->percentage == '100%') {
                         $purchase_details['purchase_type'] = 'pending';
@@ -2727,15 +2733,23 @@ class CustomerPackageController extends BaseController
             ]);
         }
 
-        $treatmentStartDate = $purchase->treatment_start_date;
-        $today = now()->toDateString();
+      try {
+    $treatmentStartDate = Carbon::createFromFormat('d M Y', $purchase->treatment_start_date);
+} catch (\Exception $e) {
+    return response()->json([
+        'status' => 500,
+        'message' => 'Error parsing treatment start date: ' . $e->getMessage(),
+    ]);
+}
+       
+        $today = Carbon::today();
 
-        if ($treatmentStartDate && $treatmentStartDate <= $today) {
-            return response()->json([
-                'status' => 403,
-                'message' => 'Treatment has already started for this purchase. Patient information cannot be updated.',
-            ]);
-        }
+        if ($treatmentStartDate && $treatmentStartDate->lte($today)) {
+        return response()->json([
+            'status' => 403,
+            'message' => 'Treatment has already started for this purchase. Patient information cannot be updated.',
+        ]);
+         }
 
         // If treatment start date has not passed, proceed with updating patient information
         $patient_information = [];
@@ -2765,8 +2779,6 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
-
-
 
     // public function customer_package_details(Request $request)
     // {

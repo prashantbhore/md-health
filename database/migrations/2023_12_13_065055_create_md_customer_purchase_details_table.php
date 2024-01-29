@@ -34,6 +34,9 @@ return new class extends Migration
             $table->string('payment_percentage')->nullable();
             $table->string('paid_amount')->nullable();
             $table->string('pending_payment')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('receiver_name')->nullable();
+            $table->string('iban')->nullable();
             $table->enum('purchase_type', ['pending','in_progress','active', 'completed', 'cancelled'])->nullable();
             $table->enum('purchase_status', ['purchased', 'not_purchased'])->default('not_purchased');
             $table->enum('payment_method', ['card', 'bank', 'md_coin'])->nullable();
