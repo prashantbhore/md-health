@@ -25,7 +25,11 @@ class FirebasePushController extends Controller
     public function setToken(Request $request)
     {
         $token = $request->fcm_token;
-        Auth::guard('md_customer_registration')->user()->update([
+        $user = Auth::guard('md_customer_registration')->user();
+        if (empty($user)) {
+            $user = Auth::guard('md_health_medical_providers_registers')->user();
+        }
+        $user->update([
             'fcm_token' => $token,
         ]);
         // $request->user()->update([
@@ -39,13 +43,17 @@ class FirebasePushController extends Controller
 
     public function notification(Request $request)
     {
+        // dd($request);
         $user = Auth::guard('md_customer_registration')->user();
+        if (empty($user)) {
+            $user = Auth::guard('md_health_medical_providers_registers')->user();
+        }
         $user_id = $user->id;
         $conversation_id = $request->conversation_id;
         $FcmToken = $user->fcm_token;
         $title = $request->title;
         $body = $request->body;
-
+        // dd($FcmToken);
         $message = CloudMessage::fromArray([
             'token' => $FcmToken,
             'notification' => [
@@ -55,6 +63,7 @@ class FirebasePushController extends Controller
         ]);
 
         $get_messages = Messages::where('conversation_id', $conversation_id)->where('sender_id', $user_id)->first();
+
         if ($get_messages->count() > 0) {
             $get_messages->latest_message = $body;
             $get_messages->save();
@@ -66,6 +75,11 @@ class FirebasePushController extends Controller
 
     public function update_last_messages(Request $request)
     {
+        $user = Auth::guard('md_customer_registration')->user();
+        if (empty($user)) {
+            $user = Auth::guard('md_health_medical_providers_registers')->user();
+        }
+        $user_id = $user->id;
 
         $validator = Validator::make($request->all(),
             [
@@ -78,24 +92,22 @@ class FirebasePushController extends Controller
             return redirect()->back()->with('error', 'conversation not found');
         }
 
-        $messages = Messages::where('conversation_id', $request->conversation_id)
-            ->where('sender_type', $request->sender_type)
-            ->where('sender_id', $request->sender_id)
-            ->first();
+        $messages = Messages::where('conversation_id', $request->conversation_id)->where('sender_id', $user_id)->first();
 
         $messages->last_read_message = $request->last_read_message;
+        $messages->save();
     }
 
     public function get_conversations(Request $request)
     {
         $user = Auth::guard('md_customer_registration')->user();
         if (!empty($user)) {
-            
+
             $sender_type = 'customer';
             $messages = Messages::where('sender_id', $user->id)
-            ->where('sender_type', $sender_type)
-            ->distinct('conversation_id')->get();
-            
+                ->where('sender_type', $sender_type)
+                ->distinct('conversation_id')->get();
+
             // dd($messages);
         } else {
             // dd($user);
@@ -131,6 +143,8 @@ class FirebasePushController extends Controller
                     if ($message->last_read_message != $message->latest_message) {
                         $latest_message = $message->latest_message;
                         $is_latest_new = true;
+                    }else{
+                        $latest_message = $message->last_read_message;
                     }
                 }
                 $conversations[] = [
@@ -146,7 +160,7 @@ class FirebasePushController extends Controller
             } else if ($sender_type == 'medicalprovider') {
                 $conversation_id = $message->conversation_id;
                 $user_id = explode('_', $conversation_id)[0];
-                $user_name = CustomerRegistration::where('id',$user_id)->first()->full_name;
+                $user_name = CustomerRegistration::where('id', $user_id)->first()->full_name;
                 // $logo = MedicalProviderLogo::where('medical_provider_id',$provider_id)->first();
                 $latest_message = false;
                 $is_latest_new = false;
@@ -155,6 +169,8 @@ class FirebasePushController extends Controller
                     if ($message->last_read_message != $message->latest_message) {
                         $latest_message = $message->latest_message;
                         $is_latest_new = true;
+                    }else{
+                        $latest_message = $message->last_read_message;
                     }
                 }
                 $conversations[] = [

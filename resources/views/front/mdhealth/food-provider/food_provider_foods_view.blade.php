@@ -98,8 +98,8 @@
                         </h5>
                         <div class="card-body">
                             <div class="form-div">
-                                <form enctype="multipart/form-data" id="foodaddform">
-                                    <input type="text" name="id" id="id" >
+                                <form enctype="multipart/form-data" id="foodaddform" method="POST">
+                                    <input type="text" name="package_id" id="package_id">
                                     <div class="form-group mb-3">
                                         <label class="form-label">*Food Name</label>
                                         <input type="text" class="form-control" id="package_name" name="package_name"
@@ -109,20 +109,22 @@
                                     <div class="form-group d-flex flex-column mb-3">
                                         <label class="form-label">*Food Type</label>
                                         <select name="food_type_id" id="food_type_id">
-                                            <option value="">Vegan</option>
-                                            <option value="">Vegan 2</option>
-                                            <option value="">Vegan 3</option>
-                                            <option value="">Vegan 4</option>
+                                            <option value="">Choose Food Type</option>
+                                            <option value="1">Vegan 1</option>
+                                            <option value="2">Vegan 2</option>
+                                            <option value="3">Vegan 3</option>
+                                            <option value="4">Vegan 4</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group d-flex flex-column mb-3">
                                         <label class="form-label">*Calories</label>
                                         <select name="calories" id="calories">
-                                            <option value="">Max 1500 kCal Daily</option>
-                                            <option value="">Max 2000 kCal Daily</option>
-                                            <option value="">Max 2500 kCal Daily</option>
-                                            <option value="">Max 3000 kCal Daily</option>
+                                            <option value="">Choose Calories</option>
+                                            <option value="1">Max 1500 kcal Daily</option>
+                                            <option value="2">Max 2000 kcal Daily</option>
+                                            <option value="3">Max 2500 kcal Daily</option>
+                                            <option value="4">Max 3000 kcal Daily</option>
                                         </select>
                                     </div>
 
@@ -156,10 +158,11 @@
 
                                     <div class="form-group mb-4">
                                         <h6 class="section-heading">Product Description</h6>
-                                        <textarea class="form-control" id="food_description" name="food_description" rows="20" placeholder="Product Description"></textarea>
+                                        <textarea class="form-control" id="food_description" name="food_description" rows="20"
+                                            placeholder="Product Description"></textarea>
                                     </div>
 
-                                    <div class="section-btns pt-3 mb-4" >
+                                    <div class="section-btns pt-3 mb-4">
                                         <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100"
                                             data-bs-toggle="modal" data-bs-target="#AddMenuModal">Add Menu</a>
                                     </div>
@@ -167,67 +170,77 @@
 
 
                                     <!-- Modal for Add Menu -->
-<!-- Modal -->
-<div class="modal fade add-menu-modal" id="AddMenuModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="">Add Menu</h5>
-            <h5 class="modal-title2" id="">Add New Menu for Meal Package</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-        </div>
-        <div class="modal-body form-div">
-            <div class="form-group d-flex flex-column mb-3">
-                <label class="form-label">Day</label>
-                <select name="days" id="days">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                </select>
-            </div>
-            <div class="form-group d-flex flex-column mb-3">
-                <label class="form-label">Calories</label>
-                <select name="calories" id="calories">
-                    <option value="">Max 1500 kcal Daily</option>
-                    <option value="">Max 2000 kcal Daily</option>
-                    <option value="">Max 2500 kcal Daily</option>
-                    <option value="">Max 3000 kcal Daily</option>
-                </select>
-            </div>
-            <div class="form-group d-flex flex-column mb-3">
-                <label class="form-label">Meal</label>
-                <select name="meal_type" id="meal_type">
-                    <option value="">Breakfast</option>
-                    <option value="">Lunch </option>
-                    <option value="">Dinner</option>
-                </select>
-            </div>
-            <div class="modal-upload-img mb-3">
-                <label class="form-label">Food Picture</label>
-                <div class="small-12 large-4 columns">
-                    <div class="imageWrapper">
-                        <img class="image" src="{{ asset('front/assets/img/default.jpg') }}">
-                    </div>
-                    <button class="file-upload"> <input type="file" name="menu_image_path" id="menu_image_path" class="file-input"></button>
-                </div>
-            </div>
-            <div class="form-group mb-4">
-                <label class="form-label">Menu</label>
-                <textarea class="form-control" id="menu" name="menu" rows="3" placeholder="Description"></textarea>
-            </div>
-            <div class="section-btns pt-3 mb-4" onclick="saveMenu();">
-                <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700 w-100">Save Menu</a>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- Modal for Add Menu -->
+                                    <!-- Modal -->
+                                    <div class="modal fade add-menu-modal" id="AddMenuModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="">Add Menu</h5>
+                                                    <h5 class="modal-title2" id="">Add New Menu for Meal Package
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">X</button>
+                                                </div>
+                                                <div class="modal-body form-div">
+                                                    <div class="form-group d-flex flex-column mb-3">
+                                                        <label class="form-label">Day</label>
+                                                        <select name="days" id="days">
+                                                            <option value="">Choose Day</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group d-flex flex-column mb-3">
+                                                        <label class="form-label">Calories</label>
+                                                        <select name="caloriesm" id="caloriesm">
+                                                            <option value="">Choose Calories</option>
+                                                            <option value="1">Max 1500 kcal Daily</option>
+                                                            <option value="2">Max 2000 kcal Daily</option>
+                                                            <option value="3">Max 2500 kcal Daily</option>
+                                                            <option value="4">Max 3000 kcal Daily</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group d-flex flex-column mb-3">
+                                                        <label class="form-label">Meal</label>
+                                                        <select name="meal_type" id="meal_type">
+                                                            <option value="">Choose Meal Type</option>
+                                                            <option value="Breakfast">Breakfast</option>
+                                                            <option value="Lunch">Lunch </option>
+                                                            <option value="Dinner">Dinner</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="modal-upload-img mb-3">
+                                                        <label class="form-label">Food Picture</label>
+                                                        <div class="small-12 large-4 columns">
+                                                            <div class="imageWrapper">
+                                                                <img class="image"
+                                                                    src="{{ asset('front/assets/img/default.jpg') }}">
+                                                            </div>
+                                                            <button class="file-upload"> <input type="file"
+                                                                    name="menu_image_path" id="menu_image_path"
+                                                                    class="file-input"></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label class="form-label">Menu</label>
+                                                        <textarea class="form-control" id="menu" name="menu" rows="3" placeholder="Description"></textarea>
+                                                    </div>
+                                                    <div class="section-btns pt-3 mb-4" onclick="saveMenu();">
+                                                        <a href="javascript:void(0);"
+                                                            class="green-plate bg-green text-dark fw-700 w-100">Save
+                                                            Menu</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal for Add Menu -->
 
 
 
@@ -235,7 +248,7 @@ aria-hidden="true">
 
                                     <div class="menu-list-div mb-4">
                                         <h6 class="section-heading">Menu's</h6>
-                                        <div class="row"  id="menuList">
+                                        <div class="row" id="menuList">
                                             <div class="col-md-3 mb-5">
                                                 <div class="menu-div">
                                                     <label class="form-menu-label fw-600 mb-2 fsb-1">Day 1 - Menu</label>
@@ -298,7 +311,7 @@ aria-hidden="true">
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
 
@@ -306,7 +319,8 @@ aria-hidden="true">
                                         <h6 class="section-heading">Breakfast Price</h6>
                                         <label class="form-label">Breakfast Price (VAT Included Price)</label>
                                         <div class="input-icon-div p-relative">
-                                            <input type="text" class="form-control" id="breakfast_price" name="breakfast_price" placeholder="Breakfast Price">
+                                            <input type="text" class="form-control" id="breakfast_price"
+                                                name="breakfast_price" placeholder="Breakfast Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -315,7 +329,8 @@ aria-hidden="true">
                                         <h6 class="section-heading">Lunch Price</h6>
                                         <label class="form-label">Lunch Price (VAT Included Price)</label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" id="lunch_price" name="lunch_price" placeholder="Lunch Price">
+                                            <input type="text" class="form-control" id="lunch_price"
+                                                name="lunch_price" placeholder="Lunch Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -324,7 +339,8 @@ aria-hidden="true">
                                         <h6 class="section-heading">Dinner Price</h6>
                                         <label class="form-label">Dinner Price (VAT Included Price) </label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" id="dinner_price" name="dinner_price" placeholder="Dinner Price">
+                                            <input type="text" class="form-control" id="dinner_price"
+                                                name="dinner_price" placeholder="Dinner Price">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -333,7 +349,8 @@ aria-hidden="true">
                                         <h6 class="section-heading">Total Price</h6>
                                         <label class="form-label">Discount </label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" id="package_price" name="package_price" placeholder="0">
+                                            <input type="text" class="form-control" id="package_price"
+                                                name="package_price" placeholder="0">
                                             <span class="input-icon">₺</span>
                                         </div>
                                     </div>
@@ -341,7 +358,8 @@ aria-hidden="true">
                                     <div class="form-group d-flex flex-column mb-4">
                                         <label class="form-label">Sale Price</label>
                                         <div class="input-icon-div mb-3">
-                                            <input type="text" class="form-control" id="sales_price" name="sales_price"
+                                            <input type="text" class="form-control" id="sales_price"
+                                                name="sales_price"
                                                 placeholder="Calculated Automatically for Daily, Weekly, Monthly">
                                             <span class="input-icon">₺</span>
                                         </div>
@@ -349,9 +367,11 @@ aria-hidden="true">
 
                                     <div class="form-group d-flex flex-column mb-4">
                                         <h6 class="section-heading d-flex justify-content-between">Featured Request
-                                            <span>%</span></h6>
+                                            <span>%</span>
+                                        </h6>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="featureproducts" name="featureproducts">
+                                            <input type="checkbox" class="form-check-input" id="featureproducts"
+                                                name="featureproducts">
                                             <label class="form-check-label fw-700 text-secondary"
                                                 for="featureproducts">Featured this product</label>
                                             <p class="text-muted fw-400"><i>*You pay 3% more commission on this
@@ -360,10 +380,13 @@ aria-hidden="true">
                                     </div>
 
                                     <div class="section-btns mb-3">
-                                        <a href="javascript:void(0);"
-                                            class="green-plate bg-green text-dark fw-700" onclick="activateProduct()">Product Active</a>
+                                        <a href="javascript:void(0);" class="green-plate bg-green text-dark fw-700"
+                                            onclick="activateProduct()">Product Active</a>
                                         <a href="javascript:void(0);"
                                             class="black-plate bg-black text-white fw-700">Cancel</a>
+                                        {{-- <button   onclick="activateProduct()" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold from-prevent-multiple-submits">Save Food</button>
+                                            <button   onclick="activateProduct()" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold from-prevent-multiple-submits">Deactive Food</button> --}}
+
                                     </div>
 
                                 </form>
@@ -403,102 +426,122 @@ aria-hidden="true">
         });
     </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Your existing scripts... -->
+    <!-- Your existing scripts... -->
 
-<script>
-    // Function to handle "Add Menu" button click
-    function addMenu() {
-        // Your logic to show the "Add Menu" modal
-        alert('11');
-        $('#AddMenuModal').modal('show');
-    }
+    <script>
+        // Function to handle "Add Menu" button click
+        function addMenu() {
+            $('#AddMenuModal').modal('show');
+        }
 
-    // Function to handle "Save Menu" button click in the Add Menu modal
-    function saveMenu() {
-    try {
-        alert('Before API Call'); // Debugging alert
+        // Function to handle "Save Menu" button click in the Add Menu modal
+        function saveMenu() {
+            try {
+                var form = document.getElementById("foodaddform");
+                var formData = new FormData(form);
+                var package_id = $('#package_id').val();
+                if (package_id) {
+                    formData.append('package_id', package_id);
+                }
+                var base_url = $('#base_url').val();
+                const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                const bearer_token = '{{ Session::get('login_token') }}';
 
-        // var button = $(this).val();
-        var form = document.getElementById("foodaddform");
-        var formData = new FormData(form);
-        var base_url = $('#base_url').val();
-        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const bearer_token = '{{ Session::get('login_token') }}';
-        // formData.append('button_type', button);
+                $.ajax({
+                    url: base_url + '/api/md-add-food-packages',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + bearer_token,
+                        'X-CSRF-TOKEN': token,
+                    },
+                    success: function(response) {
+                        console.log(response.id);
+                        if (!package_id) {
+                            $('#package_id').val(response.id);
+                }
+                        
+                    },
+                    error: function(error) {
+                        console.error('Upload error:', error);
+                    }
+                });
 
-        alert('Before AJAX Call'); // Debugging alert
+                // var returnedMenuId = yourApiCallToAddMenuAndGetId();
+                $('#AddMenuModal').modal('hide');
 
-        $.ajax({
-            url: base_url + '/api/md-add-food-packages',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            headers: {
-                'Authorization': 'Bearer ' + bearer_token,
-                'X-CSRF-TOKEN': token,
-            },
-            success: function(response) {
-                console.log(response.id);
-                alert('API Call Success'); // Debugging alert
-$('#id').val(response.id);
-                // Continue with your success logic
-            },
-            error: function(error) {
-                console.error('Upload error:', error);
-                alert('API Call Error'); // Debugging alert
+                // Add the menu to the menu list in the main form
+                // addMenuToList(returnedMenuId);
+            } catch (error) {
+                console.error("Error in saveMenu:", error);
             }
-        });
+        }
 
-        // Make sure this part is reachable
-        alert('After AJAX Call'); // Debugging alert
+        // Function to add the menu to the menu list
+        function addMenuToList(menuId) {
+            alert('33');
+            // Your logic to fetch menu details based on the menuId
+            var menuDetails = getMenuDetailsById(menuId);
 
-        // Continue with your logic
-        
-        // var returnedMenuId = yourApiCallToAddMenuAndGetId();
-        // Close the modal
-        $('#AddMenuModal').modal('hide');
+            // Create HTML for the new menu item
+            var newMenuItem = '<div class="col-md-3 mb-5">' +
+                '<div class="menu-div">' +
+                // Include details of the menu here based on menuDetails
+                '</div>' +
+                '</div>';
 
-        // Add the menu to the menu list in the main form
-        // addMenuToList(returnedMenuId);
-    } catch (error) {
-        console.error("Error in saveMenu:", error);
-    }
-}
+            // Append the new menu item to the menu list
+            $('#menuList').append(newMenuItem);
+        }
 
-    // Function to add the menu to the menu list
-    function addMenuToList(menuId) {
-        alert('33');
-        // Your logic to fetch menu details based on the menuId
-        var menuDetails = getMenuDetailsById(menuId);
+        // Function to handle "Product Active" button click
+        function activateProduct() {
+            var form = document.getElementById("foodaddform");
 
-        // Create HTML for the new menu item
-        var newMenuItem = '<div class="col-md-3 mb-5">' +
-            '<div class="menu-div">' +
-            // Include details of the menu here based on menuDetails
-            '</div>' +
-            '</div>';
+            var formData = new FormData(form);
+            formData.append('button_type', 'active');
+            console.log(formData);
+            var base_url = $('#base_url').val();
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const bearer_token = '{{ Session::get('login_token') }}';
 
-        // Append the new menu item to the menu list
-        $('#menuList').append(newMenuItem);
-    }
+            $.ajax({
+                url: base_url + '/api/md-add-food-packages-with-price',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'Authorization': 'Bearer ' + bearer_token,
+                    'X-CSRF-TOKEN': token,
+                },
+                success: function(response) {
+                    console.log(response);
+                    toastr.options = {
+                        "positionClass": "toast-bottom-right",
+                        "timeOut": "5000",
+                    };
+                    if (response.status == 200) {
+                        toastr.success(response.message);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(error) {
+                    console.error('Upload error:', error);
+                }
+            });
+            // var menuIds = getMenuIdsFromList();
 
-    // Function to handle "Product Active" button click
-    function activateProduct() {
-        alert('44');
-        // Your logic to submit prices data including menu IDs
-        // You can collect menu IDs from the menu list and submit them as needed
-        var menuIds = getMenuIdsFromList();
+            // yourApiCallToSubmitPricesData(menuIds);
+        }
 
-        // Make API call to submit prices data including menu IDs
-        yourApiCallToSubmitPricesData(menuIds);
-    }
-
-    // Additional functions as needed...
-
-</script>
+        // Additional functions as needed...
+    </script>
 
     {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 
