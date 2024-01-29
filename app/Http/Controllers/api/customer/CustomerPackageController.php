@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api\customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\MedicalProviderRegistrater;
+// use App\Models\MedicalProviderRegistrater;
 use Illuminate\Http\Request;
 use App\Http\Controllers\api\BaseController as BaseController;
 use Validator;
