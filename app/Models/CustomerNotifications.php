@@ -5,29 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MDCoins extends Model
+class CustomerNotifications extends Model
 {
     use HasFactory;
-    protected $table = 'md_coins';
+    protected $table = 'md_coins_status';
     protected $fillable = [
         'customer_id',
-        'coins',
-        'invitation_count',
-        'total_invitation_count',
+        'convrsation_id',
+        'package_id',
+        'purchase_id',
+        'notification_description',
         'status',
         'created_ip_address',
         'modified_ip_address',
         'created_by',
         'modified_by',
     ];
-
-
-    public function customer()
-    {
-        return $this->belongsTo(CustomerRegistration::class, 'customer_id');
-    }
-
-
-
-
 }

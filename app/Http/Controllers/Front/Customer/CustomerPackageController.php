@@ -1043,10 +1043,12 @@ class CustomerPackageController extends Controller
             }
 
             if (!empty($data['vehicle_id'])) {
-                $transportation_view = $this->apiService->getData($token, url('/api/md-customer-transporatation-details-view'), ['vehicle_id' => $data['vehicle_id']], 'POST');
-                $other_service = explode(',', $transportation_view['data']['other_services']);
-                $data['transportation_view'] = !empty($transportation_view['data']) ? $transportation_view['data'] : [];
-                $data['transportation_view']['other_services'] = $other_service;
+                if (!empty($transportation_view['data']['other_services'])) {
+                    $transportation_view = $this->apiService->getData($token, url('/api/md-customer-transporatation-details-view'), ['vehicle_id' => $data['vehicle_id']], 'POST');
+                    $other_service = explode(',', $transportation_view['data']['other_services']);
+                    $data['transportation_view'] = !empty($transportation_view['data']) ? $transportation_view['data'] : [];
+                    $data['transportation_view']['other_services'] = $other_service;
+                }
             }
         } else {
             $data = [];

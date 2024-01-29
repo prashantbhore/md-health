@@ -33,26 +33,9 @@
         object-fit: contain;
         margin-top: 16px;
         border-radius: 10px;
-        border-radius: 10px;
     }
 
-    .multiple-upload-images .preview-img .prev-img-div .clear-btn {
-        position: absolute;
-        top: 8px;
-        right: -3px;
-        background: #d34f4f;
-        /* padding: 0px 5px; */
-        border-radius: 100%;
-        color: #fff;
-        text-decoration: none;
-        font-size: 10px;
-        width: 14px;
-        height: 16px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+
 </style>
 
 <div class="content-wrapper">
