@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FirebasePushController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\registration\RegistrationController;
@@ -51,7 +52,11 @@ Route::middleware(['CheckRequestType'])->group(function () {
     Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
 });
 
-
+Route::middleware(['CheckRequestType'])->group(function () {
+    
+    Route::post('setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
+    Route::post('send/notification',[FirebasePushController::class,'notification'])->name('firebase.send');
+});
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 

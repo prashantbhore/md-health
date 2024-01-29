@@ -59,22 +59,33 @@
                                         <img src="{{asset('front/assets/img/backPage.png')}}" alt=""> <span class="card-h1">Back Messages</span>
                                     </a>
                                 </h5>
-                                <div class="self-msg-div mb-4">
-                                    <p class="bg-light card-p1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</p>
-                                    <p class="mb-0 card-p1 text-end">Monday 13:42</p>
-                                </div>
-                                <div class="person-message-div mb-4">
-                                    <div class="treatment-card df-start w-100 mb-1">
-                                        <div class="d-flex align-items-center justify-content-evenly gap-4">
-                                            <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
-                                            <div class="trmt-card-body pe-4">
-                                                <h5 class="mb-0 text-end card-p1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+                                <div id="messages-container" style="max-height: 400px; overflow-y: auto;">
+                                    {{-- <div class="self-msg-div mb-4">
+                                        <p class="bg-light card-p1">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                            elit,
+                                            sed do eiusmod tempor incididunt...</p>
+                                        <p class="mb-0 card-p1 text-end">Monday 13:42</p>
+                                    </div> --}}
+                                {{-- </div>
+                                <div id="messages-other-container"> --}}
+                                    {{-- <div class="person-message-div mb-4">
+                                        <div class="treatment-card df-start w-100 mb-1">
+                                            <div class="d-flex align-items-center justify-content-evenly gap-4">
+                                                <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
+                                                <div class="trmt-card-body pe-4">
+                                                    <h5 class="mb-0 text-end card-p1">Lorem ipsum dolor sit amet,
+                                                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                                        nostrud
+                                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                        consequat.</h5>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="day-time">
-                                        <p class="mb-0 card-p1">Monday 14:32</p>
-                                    </div>
+                                        <div class="day-time">
+                                            <p class="mb-0 card-p1">Monday 14:32</p>
+                                        </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -95,7 +106,7 @@
                                 </div>
                                 <div class="write-message">
                                     <textarea class="form-control" id="productstext" rows="3" placeholder="Your message here" data-gramm="false" wt-ignore-input="true"></textarea>
-                                    <button class="border-0 bg-white send-msg-btn">
+                                    <button class="border-0 bg-white send-msg-btn" id="sendMessageButton">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M5.41634 12.9998L4.762 7.10967C4.57459 5.424 6.31009 4.18575 7.843 4.91267L20.7823 11.0422C22.4344 11.8243 22.4344 14.1752 20.7823 14.9573L7.843 21.0868C6.31009 21.8127 4.57459 20.5755 4.762 18.8898L5.41634 12.9998ZM5.41634 12.9998H12.9997" stroke="#878787" stroke-width="1.45833" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
@@ -162,6 +173,7 @@
         </div>
     </div>
 </div>
+@include('front.includes.initialize-firebase-messaging')
 @endsection
 @section('script')
 <script>

@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    @include('front.includes.initialize-firebase-messaging')
+    {{-- @include('front.includes.initialize-firebase-messaging') --}}
 @endsection
 @section('script')
     <script>
