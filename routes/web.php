@@ -795,7 +795,7 @@ Route::any('purchase-package/{id}', [CustomerPackageController::class, 'purchase
 
 // MEDICAL PROVIDER
 
-Route::view('medical-messages', 'front/mdhealth/medical-provider/messages');
+Route::any('medical-messages', [FirebasePushController::class,'get_conversations'])->name('medical-messages');
 Route::view('add-new-message', 'front/mdhealth/medical-provider/add-new-message');
 Route::view('person-message', 'front/mdhealth/medical-provider/person-message');
 Route::view('live-consultation-appoinment', 'front/mdhealth/medical-provider/live-consultation-appoinment');
@@ -811,7 +811,7 @@ Route::view('user-payment-successfull', 'front/mdhealth/user-panel/user-payment-
 
 
 
-Route::view('user-message', 'front/mdhealth/user-panel/user-message');
+Route::any('user-message', [FirebasePushController::class,'get_conversations']);
 Route::view('user-person-message', 'front/mdhealth/user-panel/user-person-message');
 Route::view('user-live-appoinment', 'front/mdhealth/user-panel/live-consultation-appoinment');
 
