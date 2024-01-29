@@ -307,8 +307,14 @@ Route::middleware('auth:sanctum')->group(function () {
     //customer-remove-documents
     Route::post('md-customer-remove-documents', [CustomerPackageController::class, 'customer_remove_documents']);
 
+    Route::get('md-customer-favourite-vendor-names', [CustomerPackageController::class, 'customer_favourite_vendor_names']);
 
+      //customer-favourite-list
+      Route::post('md-customer-favourite-list-web', [CustomerPackageController::class, 'customer_favourite_list_web']);
 
+      //customer-package-filter
+    Route::post('md-customer-package-filters', [CustomerPackageController::class, 'customer_package_filters']);
+    
     //customer-pay-now
     Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_pay_now']);
 

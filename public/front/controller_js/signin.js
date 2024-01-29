@@ -48,7 +48,7 @@ $(document).ready(function () {
         },
         messages: {
             number: {
-                required: "Please enter your Phone Number with country code",
+                required: "Please enter your phone number with country code",
                 // email: "Please enter a valid email address"
             },
             password: {
