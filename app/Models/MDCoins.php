@@ -20,4 +20,14 @@ class MDCoins extends Model
         'created_by',
         'modified_by',
     ];
+
+
+    public function customer()
+    {
+        return $this->belongsTo(CustomerRegistration::class, 'customer_id');
+    }
+
+
+
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FirebasePushController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\registration\RegistrationController;
@@ -51,7 +52,10 @@ Route::middleware(['CheckRequestType'])->group(function () {
     Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
 });
 
-
+Route::middleware(['CheckRequestType'])->group(function () {
+    Route::post('setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
+    Route::post('send/notification',[FirebasePushController::class,'notification'])->name('firebase.send');
+});
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
@@ -87,18 +91,13 @@ Route::post('md-vendor-registration', [RegistrationController::class, 'vendor_re
 
 Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
 
-
-
 // get Bank list
 Route::get('md-helath-bank-list', [CustomerPackageController::class, 'md_health_bank_lists']);
 
 Route::get('md-helath-bank-details', [CustomerPackageController::class, 'md_health_bank_details']);
 
-
-
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-Route::middleware('auth:sanctum')->group(function () 
-{
+Route::middleware('auth:sanctum')->group(function () {
     //customers
     Route::post('md-customer-logout', [LoginControllers::class, 'customer_logout']);
 
@@ -118,7 +117,7 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-update-customer-password', [UpdateCustomerProfileController::class, 'update_customer_password']);
 
     //medical-provider
-//update-medical-profile-list
+    //update-medical-profile-list
     Route::get('md-update-medical-profile-list', [UpdateMedicalProfileController::class, 'update_medical_profile_list']);
 
     //update-medical-profile
@@ -156,7 +155,7 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-delete-hotel', [AddNewAcommoditionController::class, 'delete_hotel']);
 
     //Transportation
-//master-brands
+    //master-brands
     Route::get('md-master-brands', [TransportationController::class, 'master_brands']);
 
     //comfort-levels-master
@@ -178,7 +177,7 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-delete-transportation', [TransportationController::class, 'delete_transportation']);
 
     //Tour
-//add-tour
+    //add-tour
     Route::post('md-add-tour', [ToursController::class, 'add_tour']);
 
     //tour-list
@@ -194,7 +193,7 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-delete-tour', [ToursController::class, 'delete_tour']);
 
     //packages
-//treatment-category-list
+    //treatment-category-list
     Route::get('md-treatment-category-list', [PackageControllers::class, 'treatment_category_list']);
 
     //treatment-list
@@ -223,7 +222,7 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('md-packages-view-list', [PackageControllers::class, 'packages_view_active_list']);
 
     //packages-view-deactive-list
-// Route::post('md-packages-view-deactive-list', [PackageControllers::class, 'packages_view_deactive_list']);
+    // Route::post('md-packages-view-deactive-list', [PackageControllers::class, 'packages_view_deactive_list']);
 
     //edit-packages
     Route::post('md-edit-packages', [PackageControllers::class, 'edit_packages']);
@@ -302,14 +301,20 @@ Route::middleware('auth:sanctum')->group(function ()
 
     //customer-upload-documents
     Route::post('md-customer-upload-documents', [CustomerPackageController::class, 'customer_upload_documents']);
-    
+
     Route::post('md-customer-documents-list', [CustomerPackageController::class, 'customer_documents_list']);
 
     //customer-remove-documents
     Route::post('md-customer-remove-documents', [CustomerPackageController::class, 'customer_remove_documents']);
 
+    Route::get('md-customer-favourite-vendor-names', [CustomerPackageController::class, 'customer_favourite_vendor_names']);
 
+      //customer-favourite-list
+      Route::post('md-customer-favourite-list-web', [CustomerPackageController::class, 'customer_favourite_list_web']);
 
+      //customer-package-filter
+    Route::post('md-customer-package-filters', [CustomerPackageController::class, 'customer_package_filters']);
+    
     //customer-pay-now
     Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_pay_now']);
 
@@ -331,15 +336,23 @@ Route::middleware('auth:sanctum')->group(function ()
     //customer-favourite-list
     Route::get('md-customer-favourite-list', [CustomerPackageController::class, 'customer_favourite_list']);
 
+    //customer-favourite-list
+    Route::post('md-customer-favourite-list-web', [CustomerPackageController::class, 'customer_favourite_list_web']);
+
+    //customer-package-filter
+    Route::post('md-customer-package-filters', [CustomerPackageController::class, 'customer_package_filters']);
+
+
     //customer-favourite-list-count
     Route::get('md-customer-favourite-list-count', [CustomerPackageController::class, 'customer_favourite_list_count']);
 
     //remove-from-favourite
     Route::post('md-remove-from-favourite', [CustomerPackageController::class, 'remove_from_favourite']);
 
+    //
+    Route::get('md-customer-favourite-vendor-names', [CustomerPackageController::class, 'customer_favourite_vendor_names']);
 
-    Route::controller(VendorProductController::class)->group(function () 
-    {
+    Route::controller(VendorProductController::class)->group(function () {
         Route::post('add-vendor-product', 'addProduct');
         Route::get('active-product-count', 'active_product_count');
         Route::get('inactive-product-count', 'deactive_product_count');
@@ -472,7 +485,10 @@ Route::middleware('auth:sanctum')->group(function ()
 
     Route::post('/send-invitation', [InvitationApiController::class, 'sendInvitation']);
 
-   
+    Route::get('/md-customer-coins', [InvitationApiController::class, 'md_customer_coins']);
+
+    Route::get('/md-customer-coins-count', [InvitationApiController::class, 'customer_coins_count']);
+
 
 
 
@@ -484,7 +500,7 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('order-view', 'salesView');
         Route::post('search-sales-active', 'searchSalesActive');
         Route::post('search-sales-completed', 'searchSalesCompleted');
-        Route::post('search-sales-cancelled', 'searchSalesCancelled');     
+        Route::post('search-sales-cancelled', 'searchSalesCancelled');
     });
 
 
@@ -519,21 +535,15 @@ Route::middleware('auth:sanctum')->group(function ()
         Route::post('md-food-view', 'food_view');
         Route::post('md-food-update', 'food_update');
     });
-
-
-
-    
-
-
 });
- //Vendor Prodcut
- Route::controller(VendorProductController::class)->group(function () {
+//Vendor Prodcut
+Route::controller(VendorProductController::class)->group(function () {
     Route::get('product-category', 'vendor_product_category');
     Route::post('product-sub-category', 'vendor_product_sub_category');
 });
-  //customer MD Shop
+//customer MD Shop
 
-  Route::controller(CustomerShopController::class)->group(function () {
+Route::controller(CustomerShopController::class)->group(function () {
     Route::get('featured-product', 'featured_product_list');
     Route::post('customer-product-view', 'product_view');
     Route::post('vendor-product-lists', 'vendor_product_list');
@@ -547,5 +557,3 @@ Route::middleware('auth:sanctum')->group(function ()
     Route::post('/unfollow-vendor', 'unfollowVendor');
     Route::post('/favorites/add', 'addToFavorites');
 });
-
-

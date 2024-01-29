@@ -1,8 +1,22 @@
 @extends('front.layout.layout2')
 @section('php')
     @php
+    // dd(Session::all());
         $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
         $user = Session::has('MDCustomer*%') ? Session::get('MDCustomer*%') : '';
+        if (Session::has('user')) {
+            $user = Session::get('user');
+            if (Session::has('MDMedicalProvider*%')) {
+                $sender_type = 'medicalprovider';
+            } elseif (Session::has('MDCustomer*%')) {
+                $sender_type = 'customer';
+            }
+            $sender_id = $user->id;
+            $conversation_id = Session::get('conversation_id');
+            // dd($user);
+        } else {
+            return redirect('/')->with('error', 'user session not found');
+        }
     @endphp
 @endsection
 @section('content')
@@ -44,6 +58,7 @@
             padding: 10px 25px;
             border-radius: 3px;
         }
+
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -58,7 +73,7 @@
                 <div class="w-761">
                     <div class="card mb-4">
                         <div class="card-body d-flex" style="min-height:650px">
-                            <div class="message-div d-flex justify-content-between flex-column w-100 ">
+                            <div class="message-div d-flex justify-content-between flex-column w-100 container">
                                 <div class="message-header">
                                     <h5
                                         class="d-flex align-items-center justify-content-between bg-light fw-700 p-3 mb-3 fsb-1">
@@ -73,29 +88,13 @@
                                                 class="card-h1">Back Messages</span>
                                         </a>
                                     </h5>
-                                    <div class="self-msg-div mb-4">
-                                        <p class="bg-light card-p1">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                            sed do eiusmod tempor incididunt...</p>
-                                        <p class="mb-0 card-p1 text-end">Monday 13:42</p>
-                                    </div>
-                                    <div id="messages-container">
-                                        {{-- <div class="person-message-div mb-4">
-                                            <div class="treatment-card df-start w-100 mb-1">
-                                                <div class="d-flex align-items-center justify-content-evenly gap-4">
-                                                    <img src="{{ asset('front/assets/img/Memorial.svg') }}" alt="">
-                                                    <div class="trmt-card-body pe-4">
-                                                        <h5 class="mb-0 text-end card-p1">Lorem ipsum dolor sit amet,
-                                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                            nostrud
-                                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                            consequat.</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="day-time">
-                                                <p class="mb-0 card-p1">Monday 14:32</p>
-                                            </div>
+
+                                    <div id="messages-container" style="max-height: 400px; overflow-y: auto;">
+                                        {{-- <div class="self-msg-div mb-4">
+                                            <p class="bg-light card-p1">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit,
+                                                sed do eiusmod tempor incididunt...</p>
+                                            <p class="mb-0 card-p1 text-end">Monday 13:42</p>
                                         </div> --}}
                                     </div>
                                 </div>
