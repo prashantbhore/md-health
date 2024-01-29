@@ -1,6 +1,7 @@
 @extends('front.layout.layout2')
 @section('php')
     @php
+    // dd(Session::all());
         $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
         $user = Session::has('MDCustomer*%') ? Session::get('MDCustomer*%') : '';
         if (Session::has('user')) {
@@ -11,7 +12,7 @@
                 $sender_type = 'customer';
             }
             $sender_id = $user->id;
-            $conversation_id = '41';
+            $conversation_id = Session::get('conversation_id');
             // dd($user);
         } else {
             return redirect('/')->with('error', 'user session not found');

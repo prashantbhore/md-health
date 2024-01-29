@@ -7,7 +7,7 @@
             $sender_type = 'customer';
         }
         $sender_id = $user->id;
-        $conversation_id = '41';
+        $conversation_id = Session::get('conversation_id');
     } else {
         return redirect('/')->with('error', 'user session not found');
     }
@@ -31,6 +31,11 @@
         query,
         where
     } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js'
+    import {
+        getMessaging,
+        getToken,
+        onMessage,
+    } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-messaging.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCi9vOusfNsRY2NgWUk8fDOjri9L8dALY8",
@@ -50,6 +55,59 @@
     let lastMessageTimestamp = 0;
     const textarea = document.getElementById('productstext');
     const sendButton = document.getElementById('sendMessageButton');
+
+    ///////////////////////////////////////push notifications////////////////////////////////
+
+    // Get registration token. Initially this makes a network call, once retrieved
+    // subsequent calls to getToken will return from cache.
+    const messaging = getMessaging();
+    const user_id = "{{ $sender_id }}";
+    getToken(messaging, {
+        vapidKey: 'BALWd3VwOcsTfiTfPPcVcVCUkMRVhGB88TVOhmIg2A9gNJzA6NJ_kltn9NxNSildp_8tARwffCERCxIbCWYCPyM'
+    }).then((currentToken) => {
+        if (currentToken) {
+
+            console.log(currentToken);
+            //  /api/
+            navigator.sendBeacon(
+                `/setToken?fcm_token=${currentToken}&user_id=${user_id}`
+            );
+        } else {
+            // Show permission request UI
+            console.log('No registration token available. Request permission to generate one.');
+            // ...
+        }
+    }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+    });
+
+    onMessage(messaging, (payload) => {
+        alert(payload.notification.title + " " + payload.notification.body);
+        console.log('Message received. ', payload);
+        // ...
+    });
+
+    // Send notification using Firebase Cloud Messaging
+
+
+    // Construct notification payload
+    // onBackgroundMessage((payload) => {
+    //     console.log(
+    //         '[firebase-messaging-sw.js] Received background message ',
+    //         payload
+    //     );
+    //     // Customize notification here
+    //     const notificationTitle = 'Background Message Title';
+    //     const notificationOptions = {
+    //         body: 'Background Message body.',
+    //         icon: '/firebase-logo.png'
+    //     };
+
+    //     self.registration.showNotification(notificationTitle, notificationOptions);
+    // });
+
+    ///////////////////////////////////////push notifications////////////////////////////////
 
     sendButton.addEventListener('click', sendMessage);
 
@@ -118,16 +176,17 @@
 
     const fetchDataFromFirestore = async () => {
         try {
-            const querySnapshot = await getDocs(collection(db, 'messages'), where('conversation_id', '==',
-                '{{ $conversation_id }}'));
+            const querySnapshot = await getDocs(query(collection(db, 'messages'), where('conversation_id', '==',
+                '{{ $conversation_id }}')));
+
             let newDoc = [];
             let messageData = [];
             querySnapshot.forEach((doc, index) => {
-
+                // console.log(doc.data().text);
                 messageData.push(doc.data());
                 newDoc = querySnapshot.docs.map(doc => doc.id);
             });
-
+            // console.log(newDoc.length, documentIds.length);
             if (newDoc.length === documentIds.length) {
 
             } else {
@@ -150,6 +209,7 @@
                     updateUIWithMessage(data);
                     // newMessage = data.text;
                     sendRequestToShowNotifications(data);
+                    sendLastMessages(data);
                 });
 
             }
@@ -163,23 +223,26 @@
     setInterval(fetchDataFromFirestore, 6000);
 
     function sendLastMessages(data) {
+        // alert("sendLastMessages");
         if (data.sender_id != "{{ $sender_id }}") {
             const conversation_id = "{{ $conversation_id }}";
             const senderId = "{{ $sender_type }}";
             const senderType = "{{ $sender_type }}";
+            const lastReadMessage = data.text;
             navigator.sendBeacon(
-                `/update-last-messages?sender_id=${senderId}&conversation_id=${conversation_id}&sender_type=${senderType}`
+                `/update-last-messages?sender_id=${senderId}&conversation_id=${conversation_id}&sender_type=${senderType}&last_read_message=${lastReadMessage}`
             );
         }
     }
 
     function sendRequestToShowNotifications(data) {
-
+        // alert("sendRequestToShowNotifications");
         if (data.sender_id != "{{ $sender_id }}") {
             const senderId = "New Message From" + `${data.sender_id}`;
             const senderType = "{{ $sender_type }}";
+            const conversation_id = "{{ $conversation_id }}";
             navigator.sendBeacon(
-                `/send/notification?title=${senderId}&body=${data.text}&sender_type=${senderType}`
+                `/send/notification?title=${senderId}&conversation_id=${conversation_id}&body=${data.text}&sender_type=${senderType}`
             );
         }
     }
