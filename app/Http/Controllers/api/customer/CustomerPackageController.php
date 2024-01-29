@@ -26,7 +26,8 @@ use App\Models\CustomerFavouritePackages;
 use App\Models\MedicalProviderLogo;
 use App\Models\MedicalProviderLicense;
 use App\Models\MDhelathBankDetails;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\MedicalProviderRegistrater;
 
 
 class CustomerPackageController extends BaseController
@@ -282,6 +283,107 @@ class CustomerPackageController extends BaseController
                     'message' => 'your package list is empty.',
                 ]);
             }
+        }
+    }
+
+
+    public function customer_package_filters(Request $request)
+    {
+
+        $packages = Packages::select(
+            'md_packages.id',
+            'md_packages.package_unique_no',
+            'md_packages.package_name',
+            'md_packages.treatment_period_in_days',
+            'md_packages.other_services',
+            'md_packages.package_price',
+            'md_packages.sale_price',
+            'md_product_category.product_category_name',
+            'md_product_sub_category.product_sub_category_name',
+            'md_master_cities.city_name'
+        )
+            ->where('md_packages.status', 'active')
+            // ->where('md_medical_provider_register.vendor_status', 'approved')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
+
+        if (!empty($request->sale_price)) {
+            switch ($request->sale_price) {
+                case '0-10000':
+                    $packages->whereBetween('md_packages.sale_price', [0, 10000]);
+                    break;
+                case '10000-20000':
+                    $packages->whereBetween('md_packages.sale_price', [10000, 20000]);
+                    break;
+                case '20000-50000':
+                    $packages->whereBetween('md_packages.sale_price', [20000, 50000]);
+                    break;
+                case '50000-70000':
+                    $packages->whereBetween('md_packages.sale_price', [50000, 70000]);
+                    break;
+                case '70000-90000':
+                    $packages->whereBetween('md_packages.sale_price', [70000, 90000]);
+                    break;
+                case '100000-above':
+                    $packages->where('md_packages.sale_price', '>=', 100000);
+                    break;
+            }
+        }
+
+        if (!empty($request->type)) {
+            $packages->where('md_packages.other_services', $request->type);
+        }
+
+        if (!empty($request->treatment_name)) {
+            $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
+        }
+        if (!empty($request->city_name)) {
+            $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
+        }
+
+        $packages = $packages->get();
+
+
+
+
+        $data = [];
+        $data['package_list'] = [];
+        if (!empty($packages)) {
+            foreach ($packages as $key => $value) {
+                $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
+                $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
+                $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
+                $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
+                $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
+                $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
+                $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
+                $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
+                $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
+                $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+            }
+        }
+
+        if (!empty($data)) {
+            if (!empty($packages)) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Here is your  package list.',
+                    'data' => $data
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'your  package list is empty.',
+                    'data' => $data
+                ]);
+            }
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'your  package list is empty.',
+            ]);
         }
     }
 
@@ -3924,6 +4026,68 @@ class CustomerPackageController extends BaseController
         }
     }
 
+    public function customer_favourite_list_web(Request $request)
+    {
+        //                 $query = CustomerFavouritePackages::select(
+        //                 'md_customer_favourite_packages.id',
+        //                 'md_packages.treatment_period_in_days',
+        //                 'md_product_category.product_category_name as treatment_name',
+        //                 'md_master_cities.city_name',
+        //                 'md_packages.package_name',
+        //                 'md_packages.package_price',
+        //                 'md_packages.id as package_id',
+        //                 'md_medical_provider_register.company_name'
+        //             )
+        //             ->leftJoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
+        //             ->leftJoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+        //             ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+        //             ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+        //             ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
+        //             ->where('md_customer_favourite_packages.status', 'active')
+        //             ->orderBy('md_customer_favourite_packages.id', 'desc');
+
+        //          if (isset($request->company_name)) {
+        //             //  return 'asdasd';
+        //     $query->where('md_medical_provider_register.company_name', 'LIKE', '%' . $request->company_name . '%');
+        // }
+
+        // $result = $query->get();
+
+        if ($request->module_type == 'md_health') {
+            $CustomerFavouritePackages = CustomerFavouritePackages::where('md_customer_favourite_packages.status', 'active')
+                ->select(
+                    'md_customer_favourite_packages.id',
+                    'md_packages.treatment_period_in_days',
+                    'md_product_category.product_category_name as treatment_name',
+                    'md_master_cities.city_name',
+                    'md_packages.package_name',
+                    'md_packages.package_price',
+                    'md_packages.id as package_id',
+                )
+                ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
+                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+                ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
+                ->orderBy('md_customer_favourite_packages.id', 'desc')
+                ->get();
+        }
+
+
+        if (!empty($CustomerFavouritePackages)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your Favourite list.',
+                'data' => $result,
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
 
 
     // public function customer_favourite_list(Request $request)
@@ -3963,6 +4127,7 @@ class CustomerPackageController extends BaseController
     //     }
     // }
 
+
     public function customer_favourite_list_count()
     {
         $count = CustomerFavouritePackages::where('status', 'active')
@@ -3988,11 +4153,28 @@ class CustomerPackageController extends BaseController
         }
     }
 
-
-
-
-    public function md_health_bank_lists()
+    public function customer_favourite_vendor_names()
     {
+        $result = MedicalProviderRegistrater::leftjoin('md_packages', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->groupBy('md_medical_provider_register.company_name')
+            ->pluck('md_medical_provider_register.company_name');
+
+
+        if (!empty($result)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your Favourite list vendors names.',
+                'data' => $result,
+
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+    }
+
         $bank_list = MDhelathBankDetails::where('status', 'active')->select('bank_name')->get();
 
 
@@ -4001,16 +4183,10 @@ class CustomerPackageController extends BaseController
                 'status' => 200,
                 'message' => 'Bank List Found',
                 'bank_list' => $bank_list,
-
             ]);
-        } else {
-            return response()->json([
-                'status' => 404,
                 'message' => 'Bank List Not Found',
-            ]);
         }
     }
-
 
 
   public function  md_health_bank_details(Request $request){
@@ -4019,8 +4195,6 @@ class CustomerPackageController extends BaseController
     $package_id=$request['package_id'];
 
     $bank_details = MDhelathBankDetails::where('bank_name', $bank_name)->first();
-
-    $package_details = Packages::where('id',$package_id)->first();
 
     if (!empty($bank_details)){
         return response()->json([
@@ -4037,11 +4211,6 @@ class CustomerPackageController extends BaseController
         ]);
     }
   }
-
-
-
-
-
 
 
 }
