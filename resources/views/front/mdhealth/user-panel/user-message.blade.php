@@ -8,6 +8,7 @@
             $sender_type = 'customer';
         }
         $sender_id = $user->id;
+        dd($conversations);
     @endphp
 @endsection
 @section('content')

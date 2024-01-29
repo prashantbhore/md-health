@@ -1,6 +1,7 @@
 @extends('front.layout.layout2')
 @php
     // dd(Session::all());
+    // dd($conversations);
     $user = Session::has('MDCustomer*%') ? Session::get('MDCustomer*%') : '';
     $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
 @endphp
