@@ -139,6 +139,9 @@
                                         <img src="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : 'front/assets/img/uploadHere.png' }}" alt="image" id="pic">
                                         <input type="hidden" name="old_image" id="old_image" value="{{ !empty($transportation_details['vehicle_image_path']) ? $transportation_details['vehicle_image_path'] : '' }}">
                                     </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label fst-italic fsb-2">*Please make sure the photo have white background.</label>
+                                    </div>
                                 </div>
 
                                 <div class="form-group mb-4 section-heading-div">

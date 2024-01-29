@@ -702,6 +702,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('my-packages-list', [CustomerPackageController::class, 'my_packages']);
     Route::any('purchase-package/{id}/{patient_id}', [CustomerPackageController::class, 'purchase_package'])->name('purchase-package');
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
+    Route::any('md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
 
 
