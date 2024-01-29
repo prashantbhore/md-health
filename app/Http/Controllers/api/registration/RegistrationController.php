@@ -126,8 +126,8 @@ class RegistrationController extends BaseController
         }
 
         $CustomerRegistration = CustomerRegistration::select('id')->get();
-        if (!empty($CustomerRegistration)) {
-            foreach ($CustomerRegistration as $key => $value) {
+        if (!empty($CustomerRegistration)){
+            foreach ($CustomerRegistration as $key => $value){
 
                 $length = strlen($value->id);
 
@@ -178,6 +178,8 @@ class RegistrationController extends BaseController
             $customer_logs['type'] = 'signup';
             CustomerLogs::create($customer_logs);
 
+
+
             $md_coin_available = MDCoins::where('status', 'active')
                         ->where('customer_id', $customer_registration->id)
                         ->first();
@@ -191,11 +193,13 @@ class RegistrationController extends BaseController
                     }
 
             if(!empty($request->unique_code) && $request->unique_code){
+
             $customer = CustomerRegistration::where('status', 'active')
                 ->where('customer_unique_no', $request->unique_code)
                 ->first();
 
-            if ($customer) {
+    
+            if ($customer){
                 // Fetch the current MDCoins record
                 $mdCoins = MDCoins::where('status', 'active')
                     ->where('customer_id', $customer->id)
@@ -213,7 +217,8 @@ class RegistrationController extends BaseController
                 if ($coin_status_id) {
                     $coin_status = [
                         'customer_id' => $customer->id ?? null,
-                        'wallet_status' => 'your_network'
+                        'wallet_status' => 'your_network',
+                        'reffered_customer_id' =>$customer_registration->id??null
                     ];
 
                     CoinStatus::where('id', $coin_status_id)->update($coin_status);
