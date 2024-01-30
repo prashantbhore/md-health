@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ads_and_promo\AdsPromoController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
 use App\Http\Controllers\Front\Customer\CustomerPackageController;
+use App\Http\Controllers\Front\Customer\RequestYourTreatmentController;
 use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
@@ -712,6 +713,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
+    //Mpluso3
+    Route::any('bank-payment', [CustomerPackageController::class,'bank_payment']);
 
 
     //Mplus03 Customer wallet
@@ -857,3 +860,7 @@ Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
 
 Route::view('welcome', 'welcome');
+
+//Mplus02
+// Route::post('/broadcasting/auth', 'BroadcastController@authenticate');
+Route::post('/request-your-treatment', [RequestYourTreatmentController::class,'request_your_treatment']);

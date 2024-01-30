@@ -167,9 +167,11 @@ class FirebasePushController extends Controller
                     ->where('sender_type', $sender_type)
                     ->distinct('conversation_id')->get();
 
+            }else{
+                $messages =[];
             }
         }
-
+        
         $conversations = [];
         foreach ($messages as $message) {
 

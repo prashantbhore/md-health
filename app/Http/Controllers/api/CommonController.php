@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Models\Cities;
-
+use App\Models\MakeRequest;
 use App\Models\ProductCategory;
 use Validator;
 use Auth;
+use App\Traits\MediaTrait;
+
 use App\Http\Controllers\api\BaseController as BaseController;
 
 class CommonController extends BaseController {
     //
     // country List
-
+    use MediaTrait;
     public function get_country_list() {
         $countries = Country::where( 'status', 'active' )->select( 'id', 'country_name' )->orderBy( 'country_name' )->get();
 
@@ -140,5 +142,59 @@ class CommonController extends BaseController {
                 'message' => 'Treatment list is empty.',
             ]);
         }
+    }
+
+
+    public  function make_request_form(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'country' => 'required',
+            'contact_no' => 'required',
+            'treatment_name' => 'required',
+            'details' => 'required',
+            'previous_treatment' => 'required',
+            'why_do_you_need_treatment' => 'required',
+            'travel_visa' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $customer_input = [];
+        $customer_input['first_name'] = $request->first_name;
+        $customer_input['last_name'] = $request->last_name;
+        $customer_input['email'] = $request->email;
+        $customer_input['contact_no'] = $request->contact_no;
+        $customer_input['country'] = $request->country;
+        $customer_input['treatment_name'] = $request->treatment_name;
+        $customer_input['details'] = $request->details;
+        $customer_input['why_do_you_need_treatment'] = $request->why_do_you_need_treatment;
+        $customer_input['travel_visa'] = $request->travel_visa;
+
+        if ($request->has('treatment_image_path')) {
+            if ($request->file('treatment_image_path')) {
+                $md_provider_input['treatment_image_path'] = $this->verifyAndUpload($request, 'treatment_image_path', 'makereequest/images');
+                $original_name = $request->file('treatment_image_path')->getClientOriginalName();
+                $md_provider_input['treatment_image_name'] = $original_name;
+            }
+        }
+        $MakeRequest = MakeRequest::create($customer_input);
+
+        if (!empty($MakeRequest)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Form submitted successfully.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong.',
+            ]);
+        }
+
     }
 }

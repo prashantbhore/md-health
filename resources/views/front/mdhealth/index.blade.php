@@ -472,23 +472,23 @@ $is_logged_in = false;
                 </div>
             </div>
             <div class="modal-body">
-                <form class="row g-3">
+                <form id="request_your_treatment" method="POST" action="{{ url('request-your-treatment') }}" class="row g-3" enctype="multipart/form-data">
                     <div class="col-md-4 mb-3">
                         <label for="inputEmail4" class="form-label fw-bold">*First Name</label>
-                        <input type="email" class="form-control  " id="inputEmail4" placeholder="First Name">
+                        <input type="text" class="form-control "name="first_name" id="inputAddress443" placeholder="First Name">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="inputPassword4" class="form-label fw-bold">*Last Name</label>
-                        <input type="text" class="form-control " id="inputPassword4" placeholder="Last Name">
+                        <input type="text" class="form-control "name="last_name" id="inputPassword4" placeholder="Last Name">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="inputAddress" class="form-label fw-bold">*Email</label>
-                        <input type="email" class="form-control  " id="inputAddress" placeholder="Optional">
+                        <input type="email" class="form-control  " name="email"id="inputAddress" placeholder="Optional">
                     </div>
 
                     <div class="col-md-4 mb-3">
                         <label for="inputState" class="form-label fw-bold">*Country</label>
-                        <select id="inputState" class="form-select ">
+                        <select id="inputState" name="country" class="form-select ">
                             <option selected disabled>Choose</option>
                             <option>Turkey</option>
                             <option>India</option>
@@ -498,7 +498,7 @@ $is_logged_in = false;
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="inputAddress33" class="form-label fw-bold">*Contact Mobile</label>
-                        <input type="tel" class="form-control " id="inputAddress33" placeholder="+ Contact Mobile">
+                        <input type="tel" class="form-control "name="contact_no" id="inputAddress33" placeholder="+ Contact Mobile">
                         {{-- <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio1" value="option1">
@@ -512,42 +512,42 @@ $is_logged_in = false;
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="inputAddress443" class="form-label fw-bold">*Treatment Name</label>
-                        <input type="text" class="form-control " id="inputAddress443" placeholder="Treatment Name">
+                        <input type="text" class="form-control "name="treatment_name" id="inputAddress443" placeholder="Treatment Name">
                     </div>
 
                     <div class="col-md-12 mb-3">
                         <label for="inputAddress5" class="form-label fw-bold">*Details</label>
                         <!-- <input type="text" class="form-control "  id="inputAddress5" placeholder="Please Write your treatment requirement in detail"> -->
-                        <textarea name="" id="" cols="" style="height: 66px;" class="form-control" id="inputAddress5" placeholder="Please write your treatment requirement in detail"></textarea>
+                        <textarea name="details" id="" cols="" style="height: 66px;" class="form-control" id="inputAddress5" placeholder="Please write your treatment requirement in detail"></textarea>
                     </div>
                     <div class="col-md-6 mb-3 position-relative">
                         <label for="inputAddress5" class="form-label fw-bold">*Previous Treatment</label>
                         <!-- <input type="text" class="form-control " id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details"> -->
                         <div class="form-control position-relative" style="height:101px">
-                            <textarea name="" id="" class="form-control border-0 p-0" id="pre-treat" style="resize:none;" placeholder="Have you done / received any releted treatment before"></textarea>
+                            <textarea name="previous_treatment"  class="form-control border-0 p-0" id="pre-treat" style="resize:none;" placeholder="Have you done / received any releted treatment before"></textarea>
                             <span class="epic-span">If Yes, please write the detail</span>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="formFile" class="form-label fw-bold">Upload Your Treatment Documents</label>
-                        <input type="file" id="formFile">
+                        <input type="file" name="treatment_image_name" id="formFile">
                         <img src="{{ 'front/assets/img/uploadFile.png' }}" alt="" class="pe-2">
                         <span class="Campton fst-italic fs-14 align-top">*Optional</span>
                     </div>
                     <div class="col-md-6 mb-4">
                         <label for="inputAddress5" class="form-label fw-bold">*When do you need the
                             treatment?</label>
-                        <input type="text" class="form-control " id="inputAddress5" placeholder="Write in week or month">
+                        <input type="text" class="form-control " name="why_do_you_need_treatment" id="inputAddress5" placeholder="Write in week or month">
                     </div>
                     <div class="col-md-6 mb-4">
                         <label for="inputAddress5" class="form-label fw-bold">*Do you need travel visa?</label>
                         <div class="mt-2">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <input class="form-check-input" name="travel_visa" type="checkbox" id="inlineCheckbox1" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <input class="form-check-input" name="travel_visa" type="checkbox" id="inlineCheckbox2" value="no">
                                 <label class="form-check-label" for="inlineCheckbox2">No</label>
                             </div>
                         </div>
@@ -567,7 +567,84 @@ $is_logged_in = false;
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
 <script>
+
+    $(document).ready(function() {
+        $('#request_your_treatment').validate({
+            rules: {
+                first_name: {
+                    required: true
+                },
+                last_name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                country: {
+                    required: true
+                },
+                contact_no: {
+                    required: true
+                },
+                treatment_name: {
+                    required: true
+                },
+                details: {
+                    required: true
+                },
+                previous_treatment: {
+                    required: true
+                },
+                why_do_you_need_treatment: {
+                    required: true
+                },
+                travel_visa: {
+                    required: true
+                }
+            },
+            messages: {
+                first_name: {
+                    required: "Please enter your first name"
+                },
+                last_name: {
+                    required: "Please enter your last name"
+                },
+                email: {
+                    required: "Please enter your email address",
+                    email: "Please enter a valid email address"
+                },
+                country: {
+                    required: "Please select your country"
+                },
+                contact_no: {
+                    required: "Please enter your contact mobile number"
+                },
+                treatment_name: {
+                    required: "Please enter the treatment name"
+                },
+                details: {
+                    required: "Please provide details about your treatment requirement"
+                },
+                why_do_you_need_treatment: {
+                    required: "Please specify when you need the treatment"
+                },
+                travel_visa: {
+                    required: "Please indicate if you need a travel visa"
+                },
+                previous_treatment:{
+                    required: "Please specify if have a previous treatment"
+                }
+            },
+            submitHandler: function(form) {
+                form.submit(); // Submit the form when it's valid
+            }
+        });
+    });
+
     $(function() {
         $('input[name="daterange"]').daterangepicker({
             opens: 'left',
