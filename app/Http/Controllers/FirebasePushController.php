@@ -185,9 +185,10 @@ class FirebasePushController extends Controller
                 $provider_id = explode('_', $conversation_id)[2];
                 $package_id = CustomerPurchaseDetails::where('customer_id', $user->id)
                     ->where('conversation_id', explode('_', $conversation_id)[1])
-                    ->first()
-                    ->package_id;
+                    ->first();
+                $package_id = !empty($package_id->package_id)?$package_id->package_id:'';
                 $package_name = Packages::where('id', $package_id)->first()->package_name;
+                $package_name = !empty($package_name->package_name)?$package_name->package_name:'';
                 // dd($package_name);
                 $provider_name = MedicalProviderRegistrater::where('id', $provider_id)->first();
                 // dd($provider_name);
@@ -246,7 +247,10 @@ class FirebasePushController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => 'Here is your chats.',
-                'conversations' => $conversations
+                'conversations' => $conversations,
+                'user_id' => $userId,
+                'provider_id' => $provider_id,
+                'conversation_id' => $conversation_id,
             ]);
         }
 
@@ -293,6 +297,41 @@ class FirebasePushController extends Controller
 
         return view('front/mdhealth/user-panel/user-notifications', compact('notifications'));
 
+    }
+
+    public function upload_media_for_messaging(Request $request){
+        if ($request->requestType === 'api') {
+            // dd('hi');
+            $userId = Auth::user()->id;
+           
+        } else {
+            $user = Auth::guard('md_customer_registration')->user();
+            $user_type = 'customer';
+            if (empty($user)) {
+                $user = Auth::guard('md_health_medical_providers_registers')->user();
+                $user_type = 'medicalprovider';
+            }
+            dd($user);
+            $user_id = $user->id;
+        }
+
+        if ($request->hasFile('media')) {
+            // Get the file name with extension
+            $fileNameWithExt = $request->file('media')->getClientOriginalName();
+
+            // Get just the file name
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+
+            // Get just the extension
+            $extension = $request->file('media')->getClientOriginalExtension();
+
+            // File name to store
+            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
+
+            // Upload image
+            $path = $request->file('media')->storeAs('public/media', $fileNameToStore);
+
+        }
     }
 
 }

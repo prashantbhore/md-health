@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AppConfigController;
+use App\Http\Controllers\FirebasePushController;
 use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
 use App\Http\Controllers\api\customer\CustomerReportController;
@@ -24,7 +25,7 @@ use App\Http\Controllers\api\vendor\UpdateVendorProfileController;
 use App\Http\Controllers\api\vendor\VendorDashboardController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
-use App\Http\Controllers\FirebasePushController;
+// use App\Http\Controllers\FirebasePushController;
 use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\InvitationApiController;
 use Illuminate\Support\Facades\Route;
@@ -103,6 +104,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Mplus02
     Route::middleware(['CheckRequestType'])->group(function () {
         Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
+        Route::any('md-get-user-conversations', [FirebasePushController::class, 'get_conversations'])->name('medical-messages');
     });
 
     //update-customer-list

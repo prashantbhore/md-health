@@ -36,6 +36,12 @@
         getToken,
         onMessage,
     } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-messaging.js";
+    import {
+        getStorage,
+        ref,
+        uploadBytesResumable,
+        getDownloadURL
+    } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js';
 
     const firebaseConfig = {
         apiKey: "AIzaSyCi9vOusfNsRY2NgWUk8fDOjri9L8dALY8",
@@ -52,6 +58,7 @@
     const docId = '';
     let messagesArray = [];
     let documentIds = [];
+    // const storage = getStorage(app);
     let lastMessageTimestamp = 0;
     const textarea = document.getElementById('productstext');
     const sendButton = document.getElementById('sendMessageButton');
@@ -109,21 +116,43 @@
 
     ///////////////////////////////////////push notifications////////////////////////////////
 
-    sendButton.addEventListener('click', sendMessage);
+    sendButton.addEventListener('click', sendMessageForProcessing);
 
     textarea.addEventListener('keydown', function(event) {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
-            sendMessage();
+            sendMessageForProcessing();
         }
     });
 
-
-    async function sendMessage() {
+    async function sendMessageForProcessing() {
         const text = textarea.value.trim();
-        if (text === '') {
-            return;
+        const videoFile = document.getElementById('attachfile').files[0];
+
+        // Check if user attached a video file
+        if (videoFile) {
+            console.log(videoFile);
+            // Upload video to Cloud Storage
+            const formData = new FormData();
+            formData.append('media', videoFile);
+            const url = "{{ url('/upload-media-for-messaging') }}";
+            // Send a POST request to your server to upload the video file
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+        
+        } else {
+            // No video attached, save text message only
+            sendMessage(text, null);
         }
+    }
+
+    async function sendMessage(text, videoUrl) {
+        // const text = textarea.value.trim();
+        // if (text === '') {
+        //     return;
+        // }
 
         const timestampInSeconds = Math.floor(Date.now() / 1000);
 
@@ -135,6 +164,7 @@
         const minutes = currentDate.getMinutes().toString().padStart(2, '0');
         const currentTime = `${hours}:${minutes}`;
 
+
         try {
 
             const data = {
@@ -144,7 +174,8 @@
                 timestamp: timestampInSeconds,
                 day_of_week: currentDayOfWeek,
                 current_time: currentTime,
-                conversation_id: "{{ $conversation_id }}"
+                conversation_id: "{{ $conversation_id }}",
+                media_url: videoURL,
             };
 
             const docRef = await addDoc(collection(db, "messages"), {
@@ -252,12 +283,12 @@
     function sendRequestToShowNotifications(data) {
         // alert("sendRequestToShowNotifications");
         // if (data.sender_id != "{{ $sender_id }}") {
-            const senderId = "New Message From" + `${data.sender_id}`;
-            const senderType = "{{ $sender_type }}";
-            const conversation_id = "{{ $conversation_id }}";
-            navigator.sendBeacon(
-                `/send/notification?title=${senderId}&conversation_id=${conversation_id}&body=${data.text}&sender_type=${senderType}`
-            );
+        const senderId = "New Message From" + `${data.sender_id}`;
+        const senderType = "{{ $sender_type }}";
+        const conversation_id = "{{ $conversation_id }}";
+        navigator.sendBeacon(
+            `/send/notification?title=${senderId}&conversation_id=${conversation_id}&body=${data.text}&sender_type=${senderType}`
+        );
         // }
     }
 
