@@ -182,7 +182,7 @@
 
                                         <div class="col-md-12">
                                             <div class="tc" style="width: 330px;line-height: 2;">
-                                                <div class="form-check">
+                                                <div class="form-check"> 
                                                 <label class="form-check-label d-inline" for="UserflexCheckDefault">
                                                     I accept <a href="#" class="text-decoration-underline camptonBold">Terms and
                                                         Condition</a> & I agree to the <a href="#" class="text-decoration-underline camptonBold">User Data Consent.</a>

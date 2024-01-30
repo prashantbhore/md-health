@@ -676,6 +676,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
 //Mplus02
 Route::get('/', [CustomerPackageController::class, 'customer_home']);
 Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
+Route::any('health-search-side-result', [CustomerPackageController::class, 'customer_package_side_search_filter']);
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
 
@@ -712,6 +713,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
+    //Mpluso3
+    Route::any('bank-payment', [CustomerPackageController::class,'bank_payment']);
 
 
     //Mplus03 Customer wallet

@@ -484,26 +484,31 @@
                 <div class="packageFilter rounded mb-3">
                     <p class="card-h4">Supplier Rating</p>
                     <div>
-                        <form method="post" enctype="multipart/form-data" id="filterpackageform"
+                        <form action="{{url('health-search-side-result')}}" method="post" enctype="multipart/form-data" id="filterpackageform"
                             class="filter greenCheck">
+                            @csrf
+                            <input type="hidden" name="date" id="date" value="{{$date}}">
+                            <input type="hidden" name="city_name" id="city_name" value="{{$city_name}}">
+                            <input type="hidden" name="treatment_name" id="treatment_name" value="{{$treatment_name}}">
+                            <input type="text" name="other_services" id="other_services" >
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle1" class="card-p1">Excellent (4-5)</label><br>
+                                    <input type="checkbox" id="Excellent" name="Excellent" value="Excellent">
+                                    <label for="vehicle1" class="card-p1">Excellent (5)</label><br>
                                 </div>
                                 <p class="mb-1">(23)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle2" class="card-p1">Good (4-5)</label><br>
+                                    <input type="checkbox" id="Good" name="Good" value="Good">
+                                    <label for="vehicle2" class="card-p1">Good (3-4)</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
-                                    <input type="checkbox" id="" name="" value="">
-                                    <label for="vehicle3" class="card-p1">Normal (4-5)</label>
+                                    <input type="checkbox" id="Normal" name="Normal" value="Normal">
+                                    <label for="vehicle3" class="card-p1">Normal (1-2)</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
@@ -516,35 +521,35 @@
 
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="All_treatments" name="All_treatments" value="All_treatments">
                                 <label for="vehicle1" class="card-p1">All treatments</label><br>
                             </div>
                             <p class="mb-1">(23)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="Transporting" name="Transporting" value="Transporting">
                                 <label for="vehicle2" class="card-p1">Transporting</label><br>
                             </div>
                             <p class="mb-1">(14)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="" name="" value="">
-                                <label for="vehicle3" class="card-p1">Accomodation</label>
+                                <input type="checkbox" id="Accommodation" name="Accommodation" value="Accommodation">
+                                <label for="vehicle3" class="card-p1">Accommodation</label>
                             </div>
                             <p class="mb-1">(8)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="Translate" name="Translate" value="Translate">
                                 <label for="vehicle3" class="card-p1">Translate</label>
                             </div>
                             <p class="mb-1">(8)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="Tour" name="Tour" value="Tour">
                                 <label for="vehicle3" class="card-p1">Tour</label>
                             </div>
                             <p class="mb-1">(8)</p>
@@ -558,7 +563,7 @@
 
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="0-10000" name="0-10000" value="0-10000">
                                 <label for="vehicle1">0 <span class="lira">₺</span> - 10,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
@@ -566,7 +571,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="10000-20000" name="10000-20000" value="10000-20000">
                                 <label for="vehicle1">10,000 <span class="lira">₺</span> - 20,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
@@ -574,7 +579,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="20000-50000" name="20000-50000" value="20000-50000">
                                 <label for="vehicle2">20,001 <span class="lira">₺</span> - 50,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
@@ -582,7 +587,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="50000-70000" name="50000-70000" value="50000-70000">
                                 <label for="vehicle2">50,001 <span class="lira">₺</span> - 70,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
@@ -590,7 +595,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="70000-90000" name="70000-90000" value="70000-90000">
                                 <label for="vehicle2">70,001 <span class="lira">₺</span> - 90,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
@@ -598,7 +603,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
-                                <input type="checkbox" id="" name="" value="">
+                                <input type="checkbox" id="100000-above" name="100000-above" value="100000-above">
                                 <label for="vehicle2">100,001 <span class="lira">₺</span> - Above<span
                                         class="lira">₺</span></label><br>
                             </div>
@@ -606,9 +611,11 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn purchaseBtn" data-bs-toggle="modal">Apply Filter </button>
+                <button type="submit" class="btn purchaseBtn" >Apply Filter </button>
                 </form>
             </div>
+
+
 
         </div>
         <div class="modal fade request-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -720,6 +727,8 @@
             </div>
         </div>
     </div>
+
+    
     <!-- =============================================================================================================
                                                                      MAKE REQUEST FORM
         ============================================================================================================= -->
@@ -903,7 +912,7 @@
                     email: "Please enter valid patient email",
                 },
                 patient_contact_no: {
-                    required: "Please enter patient contact no",
+                    required: "Please enter patient contact number",
                     digits: "Please enter digits only",
                 },
                 patient_country_id: {
@@ -985,4 +994,23 @@
         });
     });
 </script>
+{{-- ========================================================== --}}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        function updateCheckedValues() {
+            const checkedValues = $('input[type="checkbox"]:checked').map(function() {
+                return $(this).val().trim();
+            }).get().join(',');
+            $('#other_services').val(checkedValues);
+        }
+
+        $('input[type="checkbox"]').change(updateCheckedValues);
+        updateCheckedValues(); // Call the function initially
+    });
+</script>
+
+{{-- ======================================================================= --}}
 @endsection

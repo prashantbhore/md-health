@@ -7,6 +7,11 @@
         .mdi-eye::before {
             font-size: 19px;
         }
+        .pill-calender {
+    position: absolute;
+    top: 46px;
+    left: 27px;
+}
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -33,17 +38,19 @@
                                         <input type="text" class="form-control" placeholder="Last Name" name="last_name"
                                             value="{{ !empty($customer_list) ? ($customer_list->last_name ? $customer_list->last_name : '') : '' }}">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 position-relative">
                                         <label for="City" class="form-label">Date of Birth</label>
                                         @if (!empty($customer_list))
-                                            <input type="text" class="form-control" placeholder="Date of Birth"
+                                            <input type="text" class="form-control" style="padding-left: 2.5rem" placeholder="Date of Birth"
                                                 name="date_of_birth"
                                                 value="{{ $customer_list->date_of_birth ? $customer_list->date_of_birth : '' }}">
+                                                <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
+
                                         @else
-                                            <input type="text" class="form-control" placeholder="Date of Birth"
+                                            <input type="text" class="form-control" style="padding-left: 2.5rem" placeholder="Date of Birth"
                                                 name="date_of_birth" value="">
+                                                <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
                                         @endif
-                                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="Country" class="form-label">Gender</label>
