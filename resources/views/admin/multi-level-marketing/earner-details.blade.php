@@ -24,7 +24,7 @@
                             <table class="table" id="example">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
+                                        <th scope="col">Sr.No.</th>
                                         <th>Full Name</th>
                                         <th>Network</th>
                                         <th>City</th>

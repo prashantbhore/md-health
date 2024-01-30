@@ -39,42 +39,34 @@ class AdminMlmController extends Controller
             ->orderBy('coins', 'desc')
             ->get();
     
-        if ($request->ajax()){
-
+        if ($request->ajax()) {
             return DataTables::of($top_earners)
                 ->addIndexColumn()
                 ->addColumn('full_name', function ($row) {
-                    if (!empty($row->customer->full_name)) {
-                        return ucfirst($row->customer->full_name);
-                    }
+                    return optional($row->customer)->full_name ? ucfirst($row->customer->full_name) : '';
                 })
                 ->addColumn('network', function ($row) {
                     if (!empty($row->customer_id)) {
-                        $networkCount = CoinStatus::where('wallet_status', 'your_network')
+                        $networkCount = CoinStatus::where('wallet_status', 'your_netowrk')
                             ->where('customer_id', $row->customer_id)
                             ->count();
     
-                        return ucfirst($networkCount);
+                        return $networkCount;
                     }
+                    return '';
                 })
                 ->addColumn('city_name', function ($row) {
-                    if (!empty($row->customer->city->city_name)) {
-                        return ucfirst($row->customer->city->city_name);
-                    }
+                    return optional($row->customer->city)->city_name ? ucfirst($row->customer->city->city_name) : '';
                 })
                 ->addColumn('country_name', function ($row) {
-                    if (!empty($row->customer->country->country_name)) {
-                        return ucfirst($row->customer->country->country_name);
-                    }
+                    return optional($row->customer->country)->country_name ? ucfirst($row->customer->country->country_name) : '';
                 })
                 ->addColumn('earnings', function ($row) {
-                    if (!empty($row->coins)) {
-                        return ucfirst($row->coins);
-                    }
+                    return isset($row->coins) ? ucfirst($row->coins) : '';
                 })
                 ->addColumn('action', function ($row) {
-                    $viewUrl = url('admin/earner-details/'.Crypt::encrypt($row->customer_id));
-                    
+                    $viewUrl = url('admin/earner-details/' . Crypt::encrypt($row->customer_id));
+    
                     $actionsHtml = '<div class="text-end d-flex justify-content-end gap-2">
                                         <a href="' . $viewUrl . '">
                                             <img src="' . asset('admin/assets/img/viewEntry.png') . '" alt="">
@@ -83,13 +75,14 @@ class AdminMlmController extends Controller
                                             <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
                                         </a>
                                     </div>';
-                    
+    
                     return $actionsHtml;
                 })
-                ->rawColumns(['action', 'status'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
     }
+    
     
 
    
@@ -104,6 +97,15 @@ class AdminMlmController extends Controller
             'status' => 'delete',
             'modified_ip_address' => $_SERVER['REMOTE_ADDR']
         ]);
+
+        $md_status=CoinStatus::where('customer_id', $old_data->customer_id)->first();
+
+        $new_md_status =CoinStatus::where('id',$md_status->id)->update([
+            'status' => 'delete',
+            'modified_ip_address' => $_SERVER['REMOTE_ADDR']
+        ]);
+
+
     
         return response()->json(['message' => $request->flash, 'status' => 'true']);
     } 
@@ -131,6 +133,19 @@ class AdminMlmController extends Controller
             }
         }
 
+      
+        // dd($top_earners);    
+
+        $networkCount = CoinStatus::
+        where('wallet_status','your_netowrk')
+       ->where('customer_id', $id)
+        ->get();
+
+        //dd($networkCount);
+
+
+      
+
         return view('admin/multi-level-marketing/earner-details',compact('joining_coin_integer','id'));
     }
 
@@ -143,66 +158,56 @@ class AdminMlmController extends Controller
     {
 
         
-        $top_earners = MDCoins::where('status', 'active')->where('customer_id', $request['id'])
-            ->with(['earner.city', 'earner.country'])
+        $reffed_users_ids = CoinStatus::where('customer_id', $request['id'])
+        ->where('reffered_customer_id', '!=', null)
+        ->pluck('reffered_customer_id')
+        ->toArray();
+
+        $top_earners = MDCoins::where('status', 'active')->whereIn('customer_id',$reffed_users_ids)
+            ->with(['customer.city', 'customer.country'])
             ->orderBy('coins', 'desc')
             ->get();
-    
-        if ($request->ajax()){
 
-            return DataTables::of($top_earners)
-                ->addIndexColumn()
-                ->addColumn('full_name', function ($row) {
-                    if (!empty($row->customer->full_name)) {
-                        return ucfirst($row->customer->full_name);
-                    }
-                })
-
-                ->addColumn('network', function ($row) {
-                    if (!empty($row->reffered_customer_id)){
-                        $networkCount = CoinStatus::where('wallet_status', 'your_network')
-                            ->where('customer_id', $row->reffered_customer_id)
-                            ->count();
-                
-                        // Check if the count is numeric, if not, set to 0
-                        return is_numeric($networkCount) ? $networkCount : 0;
-                    } else {
-                        return 0;
-                    }
-                })
-                
-
-
-                ->addColumn('city_name', function ($row) {
-                    if (!empty($row->customer->city->city_name)) {
-                        return ucfirst($row->customer->city->city_name);
-                    }
-                })
-                ->addColumn('country_name', function ($row) {
-                    if (!empty($row->customer->country->country_name)) {
-                        return ucfirst($row->customer->country->country_name);
-                    }
-                })
-                ->addColumn('earnings', function ($row) {
-                    if (!empty($row->coins)) {
-                        return ucfirst($row->coins);
-                    }
-                })
-                ->addColumn('action', function ($row) {
-                    $viewUrl = url('admin/earner-details/'.Crypt::encrypt($row->customer_id));
-                    
-                    $actionsHtml = '<div class="text-end d-flex justify-content-end gap-2">
-                                  
-                                        <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_coins" data-flash="Deleted Successfully!" class="customer-coin-delete">
-                                            <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
-                                        </a>
-                                    </div>';
-                    
-                    return $actionsHtml;
-                })
-                ->rawColumns(['action', 'status'])
-                ->make(true);
-        }
+            if ($request->ajax()) {
+                return DataTables::of($top_earners)
+                    ->addIndexColumn()
+                    ->addColumn('full_name', function ($row) {
+                        return optional($row->customer)->full_name ? ucfirst($row->customer->full_name) : '';
+                    })
+                    ->addColumn('network', function ($row) {
+                        if (!empty($row->customer_id)) {
+                            $networkCount = CoinStatus::where('wallet_status', 'your_netowrk')
+                                ->where('customer_id', $row->customer_id)
+                                ->count();
+        
+                            return $networkCount;
+                        }
+                        return '';
+                    })
+                    ->addColumn('city_name', function ($row) {
+                        return optional($row->customer->city)->city_name ? ucfirst($row->customer->city->city_name) : '';
+                    })
+                    ->addColumn('country_name', function ($row) {
+                        return optional($row->customer->country)->country_name ? ucfirst($row->customer->country->country_name) : '';
+                    })
+                    ->addColumn('earnings', function ($row) {
+                        return isset($row->coins) ? ucfirst($row->coins) : '';
+                    })
+                    ->addColumn('action', function ($row) {
+                        $viewUrl = url('admin/earner-details/' . Crypt::encrypt($row->customer_id));
+        
+                        $actionsHtml = '<div class="text-end d-flex justify-content-end gap-2">
+                                     
+                                            <a href="javascript:void(0)" data-id="' . $row->id . '" data-table="md_coins" data-flash="Deleted Successfully!" class="customer-coin-delete">
+                                                <img src="' . asset('admin/assets/img/deleteEntry.png') . '" alt="">
+                                            </a>
+                                        </div>';
+        
+                        return $actionsHtml;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
     }
     
 
