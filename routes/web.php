@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ads_and_promo\AdsPromoController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
 use App\Http\Controllers\Front\Customer\CustomerPackageController;
+use App\Http\Controllers\Front\Customer\RequestYourTreatmentController;
 use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
@@ -858,3 +859,7 @@ Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
 
 Route::view('welcome', 'welcome');
+
+//Mplus02
+// Route::post('/broadcasting/auth', 'BroadcastController@authenticate');
+Route::post('/request-your-treatment', [RequestYourTreatmentController::class,'request_your_treatment']);
