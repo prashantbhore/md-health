@@ -194,7 +194,7 @@
                                 </h5>
                             </div>
                             <div class="d-flex gap-3 mb-4-input">
-                                <div class="w-50"><input type="text" id="input4" name="input4" class="form-control " placeholder="00 / 00">
+                                <div class="w-50"><input type="text" id="input4" name="input4" class="form-control " placeholder="00/00">
                                     <h5 id="verifyinput4" class="mt-0" style="color: red;">
                                         Please enter expiry date
                                     </h5>
@@ -1153,7 +1153,7 @@ function getBankData(selectedBank){
 
                 // Add a slash after the first two characters
                 if (value.length >= 2) {
-                    return month + ' / ' + value.slice(2, 4);
+                    return month + '/' + value.slice(2, 4);
                 }
 
                 return month;
@@ -1445,7 +1445,7 @@ function getBankData(selectedBank){
                     return false;
                 } else if (usernameValue.length < 1 || usernameValue.length > 6) {
                     $("#verifyinput4").show();
-                    $("#verifyinput4").html("Please enter date in 00 / 00 format");
+                    $("#verifyinput4").html("Please enter date in 00/00 format");
                     input4Error = false;
                     return false;
                 } else {
@@ -1455,7 +1455,6 @@ function getBankData(selectedBank){
 
             function formatCardNumber(cardNumber) {
                 return cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
-                // return cardNumber.replace(/(\d{4})\s*\/\s*(\d{2})/g, '$1 / $2');
             }
 
             // Example usage
