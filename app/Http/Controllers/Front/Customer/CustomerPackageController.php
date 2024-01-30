@@ -1168,7 +1168,8 @@ class CustomerPackageController extends Controller
                 }
             }
             // dd( $data );
-            $documents = $this->apiService->getData($token, url('/api/md-customer-upload-documents'), ['package_id' => $data['package_id']], 'POST');
+            $documents = $this->apiService->getData($token, url('/api/md-customer-documents-list'), ['package_id' => $data['package_id']], 'POST');
+            // dd($documents);
             $data['documents'] = !empty($documents['data']) ? $documents['data'] : [];
             if (!empty($data['hotel_id'])) {
                 $accomodation_view = $this->apiService->getData($token, url('/api/md-customer-acommodition-details-view'), ['hotel_id' => $data['hotel_id']], 'POST');

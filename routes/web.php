@@ -742,7 +742,7 @@ Route::middleware(['CheckRequestType'])->group(function () {
     Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
 });
 Route::middleware(['CheckRequestType'])->group(function () {
-
+    Route::any('/upload-media-for-messaging',[FirebasePushController::class, 'upload_media_for_messaging']);
     Route::any('/setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
     Route::post('send/notification', [FirebasePushController::class, 'notification'])->name('firebase.send');
     Route::post('update-last-messages', [FirebasePushController::class, 'update_last_messages']);
