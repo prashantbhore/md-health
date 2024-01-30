@@ -1756,6 +1756,8 @@ class CustomerPackageController extends BaseController
                 $purchase_details['bank_name'] = $request->bank_name;
                 $purchase_details['receiver_name'] = $request->receiver_name;
                 $purchase_details['iban'] = $request->iban;
+                $purchase_details['transaction_id'] = $request->transaction_id;
+
                 $purchase_details['purchase_type'] = 'pending';
                 $purchase_details['created_by'] = Auth::user()->id;
 
