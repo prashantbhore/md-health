@@ -420,7 +420,7 @@
                                             id="patient_relation" placeholder="Relationship To You">
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="patient_email" class="form-label fw-bold">*Patient
+                                        <label for="patient_email" class="form-label fw-bold">Patient
                                             E-mail</label>
                                         <input type="email" name="patient_email" class="form-control  "
                                             id="patient_email" placeholder="Email">
@@ -860,20 +860,27 @@
             }
         });
 
+        $.validator.addMethod("alphaOnly", function(value, element) {
+    return this.optional(element) || /^[a-zA-Z\s]*$/i.test(value);
+}, "Please enter only letters");
+
         $('#other_form').validate({
             rules: {
                 patient_full_name: {
                     required: true,
+                    alphaOnly: true,
                 },
                 patient_relation: {
                     required: true,
+                    alphaOnly: true,
                 },
                 patient_email: {
-                    required: true,
+                    // required: true,
                     email: true,
                 },
                 patient_contact_no: {
                     required: true,
+                    digits: true,
                 },
                 patient_country_id: {
                     required: true,
@@ -886,15 +893,18 @@
             messages: {
                 patient_full_name: {
                     required: "Please enter patient full name",
+                    alphaOnly: "Please enter only letters",
                 },
                 patient_relation: {
                     required: "Please enter patient relation",
+                    alphaOnly: "Please enter only letters",
                 },
                 patient_email: {
-                    required: "Please enter patient email",
+                    email: "Please enter valid patient email",
                 },
                 patient_contact_no: {
                     required: "Please enter patient contact no",
+                    digits: "Please enter digits only",
                 },
                 patient_country_id: {
                     required: "Please select patient country",

@@ -32,7 +32,10 @@ class RegistrationController extends BaseController
 
     public function customer_register(Request $request)
     {
-        // dd($request);
+
+        
+       
+
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -172,6 +175,9 @@ class RegistrationController extends BaseController
         }
         if (!empty($customer_registration)) 
         {
+         
+           
+
             $customer_logs = [];
             $customer_logs['customer_id'] = !empty($customer_registration->id) ? $customer_registration->id : '';
             $customer_logs['status'] = 'active';
@@ -183,20 +189,26 @@ class RegistrationController extends BaseController
             $md_coin_available = MDCoins::where('status', 'active')
                         ->where('customer_id', $customer_registration->id)
                         ->first();
+                  
 
              if (empty($md_coin_available)) {
+              
                         $coins = [];
                         $coins['customer_id'] = !empty($customer_registration->id) ? $customer_registration->id : '';
                         $coins['coins'] = 0;
                         $coins['invitation_count'] = 10;
-                        MDCoins::create($coins);
+                       MDCoins::create($coins);
                     }
 
             if(!empty($request->unique_code) && $request->unique_code){
-
+              
             $customer = CustomerRegistration::where('status', 'active')
                 ->where('customer_unique_no', $request->unique_code)
                 ->first();
+
+               
+
+
 
     
             if ($customer){
@@ -204,6 +216,7 @@ class RegistrationController extends BaseController
                 $mdCoins = MDCoins::where('status', 'active')
                     ->where('customer_id', $customer->id)
                     ->first();
+                
 
                 // Increment 'coins' by 5 and 'invitation_count' by 1
                 if ($mdCoins) {
@@ -213,15 +226,19 @@ class RegistrationController extends BaseController
 
 
                 $coin_status_id = $request->coin_status_id;
-
+                 
+                
                 if ($coin_status_id) {
+                    
                     $coin_status = [
                         'customer_id' => $customer->id ?? null,
-                        'wallet_status' => 'your_network',
+                        'wallet_status' => 'your_netowrk',
                         'reffered_customer_id' =>$customer_registration->id??null
                     ];
 
-                    CoinStatus::where('id', $coin_status_id)->update($coin_status);
+                  
+
+                  CoinStatus::where('id', $coin_status_id)->update($coin_status);
                 }
             }
         }
