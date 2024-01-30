@@ -23,7 +23,7 @@
 
         .form-control {
             border-radius: 5px;
-            border: 1px solid #D6D6D6 !important;
+            border: 1px solid #D6D6D6;
         }
     </style>
     <div class="container py-100px df-center sign-in-form" id="logDiv">
@@ -33,7 +33,7 @@
                     <div class="pt-3">
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
-                    <h2 class="my-0">Sign In to MD<span>health</span></h2>
+                    <h2 class="my-0">Sign In to MD<span>health </span></h2>
                     <p>The device is not yours? Use private or incognito mode to log in.</p>
 
                     <div class="w-100 df-center">
@@ -93,7 +93,7 @@
                         <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
                     </div>
 
-                    <h2 class="my-0">SMS Code</h2>
+                    <h2 class="my-0">SMS Code </h2>
 
                     <p>Enter the 6 digit code sent to your mobile phone</p>
 
@@ -150,6 +150,43 @@
                             document.getElementById(currentId).focus();
                         }
                     }
+
+                    var tp = document.getElementById("ot1");
+                    var tp1 = document.getElementById("ot2");
+                    var tp2 = document.getElementById("ot3");
+                    var tp3 = document.getElementById("ot4");
+                    var tp4 = document.getElementById("ot5");
+                    var tp5 = document.getElementById("ot6");
+                    tp.onchange = function (a) {
+                        if (tp.value != '') {
+                            a.target.style.border = "2px solid #4cdb06";
+                        }
+                    };
+                    tp.onchange = function (b) {
+                        if (tp1.value != '') {
+                            b.target.style.border = "2px solid #4cdb06";
+                        }
+                    };
+                    tp.onchange = function (c) {
+                        if (tp2.value != '') {
+                            c.target.style.border = "2px solid #4cdb06";
+                        }
+                    };
+                    tp.onchange = function (d) {
+                        if (tp3.value != '') {
+                            d.target.style.border = "2px solid #4cdb06";
+                        }
+                    };
+                    tp.onchange = function (e) {
+                        if (tp4.value != '') {
+                            e.target.style.border = "2px solid #4cdb06";
+                        }
+                    };
+                    tp1.onchange = function (f) {
+                        if (tp5.value != '') {
+                            f.target.style.border = "2px solid #4cdb06";
+                        }
+                    };
                 </script>
 
 

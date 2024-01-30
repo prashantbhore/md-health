@@ -317,4 +317,20 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script src={{ asset('front/controller_js/userregister.js') }}></script>
+
+<script>
+      var tp = document.getElementById("ot1");
+      var tp1 = document.getElementById("ot2");
+      tp.onchange = function (f) {
+         if (tp.value != '') {
+            f.target.style.borderBottom = "2px solid #00ff00";
+         }
+      };
+      tp1.onchange = function (g) {
+         if (tp1.value != '') {
+            g.target.style.borderBottom = "2px solid #00ff00";
+         }
+      };
+   </script>
+
 @endsection

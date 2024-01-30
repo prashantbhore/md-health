@@ -2790,9 +2790,9 @@ span.popup-msg.active {
 
 /* DatePicker Start */
 
-.datepickerContainer {
-    /* position: relative; */
-}
+/* .datepickerContainer {
+    position: relative;
+} */
 
 .daterangepicker td.active,
 .daterangepicker td.active:hover {

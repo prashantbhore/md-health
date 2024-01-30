@@ -123,6 +123,84 @@
         flex-direction: column;
         gap: 0 !important;
     }
+    .pb-100px {
+        padding-bottom: 10px;
+    }
+    .pt-150px {
+        padding-top: 15px;
+    }
+    .banner-content h1 {
+        color: #fff;
+        font-family: "CamptonBold";
+        font-size: 65px;
+        font-weight: 700;
+        line-height: 100px;
+        letter-spacing: -0.04em;
+        text-align: center;
+    }
+    .banner-content h2 {
+        font-family: "Campton";
+        color: #4cdb06;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.04em;
+    }
+    .banner-content h6 {
+        color: #ffffff;
+        font-size: 15px !important;
+        font-weight: 500;
+        line-height: 30px;
+        letter-spacing: 0.30em !important;
+        text-align: center !important;
+    }
+    .navbar-toggler {
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: #fff;
+        border: none;
+        border-radius: 0.25rem;
+        transition: box-shadow .15s ease-in-out;
+        margin-right: 10px;
+    }
+    .navbar-brand {
+        margin-left: 10px;
+    }
+    .search-bar .pe-3 {
+        padding-right: 0px !important;
+    }
+    .btn-search-pill {
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+    .search-bar .form-select {
+        margin-bottom: 5px;
+        border: 1px solid #ededed !important;
+    }
+    .packageResult, .tab-card {
+        padding: 18px 32px;
+        border-radius: 5px;
+        margin: 10px !important;
+    }
+    .package-results-details .brdr-right:nth-child(1) {
+        width: 100% !important;
+        /* width: 239px; */
+    }
+    .package-results-details .brdr-right:nth-child(2) {
+        width: 100% !important;
+        /* width: 150px; */
+    }
+    .packageResult .brdr-right, .homeServicePackage .brdr-right {
+        border-right: none !important;
+        /* padding-right: 2rem; */
+    }
+    .align-items-end {
+        align-items: start!important;
+    }
+    
+    
+
 }
 
 /* 481px — 768px: iPads, Tablets */
