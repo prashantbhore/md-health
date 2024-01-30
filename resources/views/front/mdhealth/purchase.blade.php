@@ -182,27 +182,27 @@
                             <input type="hidden" name="validity" id="validity" value="">
 
                             <div class="mb-4-input">
-                                <input type="text" name="input1" class="form-control" id="input1" placeholder="Card Holder Name">
+                                <input type="text" name="input1" class="form-control" onkeypress="return /^[A-Za-z\s]*$/.test(event.key)" id="input1" placeholder="Card Holder Name">
                                 <h5 id="verifyinput1" class="mt-4" style="color: red;">
-                                    Please Enter Card Holder Name
+                                    Please enter card holder name
                                 </h5>
                             </div>
                             <div class="mb-4-input">
                                 <input type="text" onkeypress="return /[0-9 ]/i.test(event.key)" name="input2" class="form-control" id="input2" placeholder="Card Number">
                                 <h5 id="verifyinput2" class="mt-4" style="color: red;">
-                                    Please Enter Card Number
+                                    Please enter card number
                                 </h5>
                             </div>
                             <div class="d-flex gap-3 mb-4-input">
-                                <div class="w-50"><input type="text" id="input4" name="input4" class="form-control " placeholder="00/00">
+                                <div class="w-50"><input type="text" id="input4" name="input4" class="form-control " placeholder="00 / 00">
                                     <h5 id="verifyinput4" class="mt-0" style="color: red;">
-                                        Please Enter Expiry Date
+                                        Please enter expiry date
                                     </h5>
                                 </div>
                                 <div class="w-50">
-                                    <input type="password" id="input3" name="input3" class="form-control" placeholder="CVV">
+                                    <input type="password" id="input3" name="input3" class="form-control" placeholder="CVV" onkeypress="return /[0-9 ]/i.test(event.key)">
                                     <h5 id="verifyinput3" class="mt-0" style="color: red;">
-                                        Please Enter CVV
+                                        Please enter CVV
                                     </h5>
                                 </div>
                             </div>
@@ -1091,7 +1091,7 @@ function getBankData(selectedBank){
 
                 // Add a slash after the first two characters
                 if (value.length >= 2) {
-                    return month + '/' + value.slice(2, 4);
+                    return month + ' / ' + value.slice(2, 4);
                 }
 
                 return month;
@@ -1383,7 +1383,7 @@ function getBankData(selectedBank){
                     return false;
                 } else if (usernameValue.length < 1 || usernameValue.length > 6) {
                     $("#verifyinput4").show();
-                    $("#verifyinput4").html("Please enter date in 00/00 format");
+                    $("#verifyinput4").html("Please enter date in 00 / 00 format");
                     input4Error = false;
                     return false;
                 } else {
@@ -1393,6 +1393,7 @@ function getBankData(selectedBank){
 
             function formatCardNumber(cardNumber) {
                 return cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
+                // return cardNumber.replace(/(\d{4})\s*\/\s*(\d{2})/g, '$1 / $2');
             }
 
             // Example usage

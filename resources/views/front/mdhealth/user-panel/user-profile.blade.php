@@ -43,7 +43,7 @@
                                             <input type="text" class="form-control" placeholder="Date of Birth"
                                                 name="date_of_birth" value="">
                                         @endif
-
+                                        <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="Country" class="form-label">Gender</label>
@@ -57,13 +57,13 @@
                                                 <option value="Female"
                                                     {{ $customer_list->gender == 'Female' ? 'selected' : '' }}>
                                                     Female</option>
-                                                <option value="Preffered Not To Say"
-                                                    {{ $customer_list->gender == 'Preffered Not To Say' ? 'selected' : '' }}>
-                                                    Preffered Not To Say</option>
+                                                <option value="Preferred Not To Say"
+                                                    {{ $customer_list->gender == 'Preferred Not To Say' ? 'selected' : '' }}>
+                                                    Preferred Not To Say</option>
                                             @else
                                                 <option value="Male"> Male </option>
                                                 <option value="Female">Female</option>
-                                                <option value="Preffered Not To Say">Preffered Not To Say</option>
+                                                <option value="Preferred Not To Say">Preferred Not To Say</option>
                                             @endif
 
 
