@@ -522,16 +522,22 @@ $(document).ready(function () {
         },
         "Field should not contain only spaces."
     );
+    // Add a custom validation method to accept only characters
+$.validator.addMethod("alphaOnly", function(value, element) {
+    return this.optional(element) || /^[a-zA-Z\s]*$/i.test(value);
+}, "Please enter only letters");
 
     $("#mycustomerForm").validate({
         rules: {
             first_name: {
                 required: true,
                 // spaceValidation: true,
+                alphaOnly: true,
             },
             last_name: {
                 required: true,
                 // spaceValidation: true,
+                alphaOnly: true,
             },
             city_id: {
                 required: true,
@@ -578,10 +584,12 @@ $(document).ready(function () {
             first_name: {
                 required: "Please enter the first name.",
                 // spaceValidation: "Company name should not contain only spaces.",
+                alphaOnly: "Please enter only letters",
             },
             last_name: {
                 required: "Please enter the last name.",
                 // spaceValidation: "Company name should not contain only spaces.",
+                alphaOnly: "Please enter only letters",
             },
             city_id: {
                 required: "Please select a city.",
