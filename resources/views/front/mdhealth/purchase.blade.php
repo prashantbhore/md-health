@@ -16,6 +16,9 @@
 @extends('front.layout.layout2')
 @section('content')
 <style>
+       .footer-2 {
+        display: none;
+    }
     .package_name {
         color: #000;
         font-family: Campton;
@@ -331,6 +334,7 @@
         <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
     </div>
 </div>
+@include('front.includes.footer')
 @endsection
     @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>

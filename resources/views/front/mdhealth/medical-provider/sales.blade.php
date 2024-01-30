@@ -24,7 +24,7 @@
             <div class="w-761">
                 <div class="card mb-4" style="min-height: 245px;">
 
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="card-header d-flex align-items-center justify-content-between mb-3 sales-tab">
                         <span>Sales</span>
                         @if(!empty($membership))
                             @if($membership->membership_type == 'silver')

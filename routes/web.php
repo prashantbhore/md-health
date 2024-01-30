@@ -851,8 +851,12 @@ Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 // USER PANEL
 #Orders
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
-
-
 Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
+
+// FOOTER PAGES
+Route::view('about-us','front/mdhealth/about-us');
+Route::view('privacy-policy','front/mdhealth/privacy-policy');
+Route::view('company','front/mdhealth/company');
+Route::view('enlightment-text','front/mdhealth/enlightment-text');
 
 Route::view('welcome', 'welcome');
