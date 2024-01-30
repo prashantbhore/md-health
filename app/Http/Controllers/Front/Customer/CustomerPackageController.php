@@ -1656,4 +1656,101 @@ class CustomerPackageController extends Controller
     //     // return view('front.mdhealth.user-panel.user-favorites', compact('fav_list', 'vendorsdata'));
     // }
 
+
+
+
+    public function bank_payment(Request $request)
+    {
+
+        dd($request->all());
+        // dd( $controller_request->all() );
+        $validator = Validator::make($request->all(),
+            [
+                'package_id' => 'required',
+                'sale_price' => 'required',
+                'paid_amount' => 'required',
+                'platform_type' => 'required',
+                'pending_amount' => 'required',
+                'percentage' => 'required',
+                'patient_id' => 'required',
+                'payment_percent' => 'required',
+                'total_paying_price' => 'required',
+                'transaction_id' => 'required',
+                'other_services' => 'required',
+            ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+       
+        $conversation_id = mt_rand(100000000, 999999999);
+        Session::put('payment_request', $request->all());
+        $body = $request->all();
+        $plainArray = $body instanceof \Illuminate\Support\Collection  ? $body->toArray() : $body;
+        $plainArray['conversation_id'] = strval($conversation_id);
+        
+
+
+           
+
+            $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), $plainArray, 'POST');
+            Session::forget('payment_request');
+            //Make a new conversation_id for the newly purchased package
+            $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
+            if ($customer_purchase_details->count() > 0) {
+
+                $messages = new Messages();
+                $messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
+                $messages->sender_id = $customer_purchase_details->customer_id;
+                $messages->sender_type = 'customer';
+                $messages->save();
+
+                $vendor_messages = new Messages();
+                $vendor_messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
+                $vendor_messages->sender_id = $customer_purchase_details->provider_id;
+                $vendor_messages->sender_type = 'medicalprovider';
+                $vendor_messages->save();
+            }
+            // dd($repsonse_data);
+            if (!empty($repsonse_data)){
+                if ($repsonse_data['status'] == '200'){
+
+                    $threedsInitialize = \Iyzipay\Model\ThreedsInitialize::create($request, $options);
+                    $threedsInitialize_array = (array) $threedsInitialize;
+
+                    # print result
+                    // echo '<pre>';
+                    foreach ($threedsInitialize_array as $key => $response) {
+                        // echo $key;
+                        $three_json_response = $response;
+                        // print_r( $response );
+                        break;
+                    }
+                    // echo( $three_json_response );
+                    // die;
+                    $three_json_response = json_decode($three_json_response, true);
+                    if ($three_json_response['status'] == 'success') {
+
+                        print_r($threedsInitialize->getHtmlContent());
+
+                    } else {
+                        return redirect()->back()->with('error', $three_json_response['errorMessage']);
+                    }
+
+                } else {
+
+                    return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_03');
+                    echo 'Something went wrong, payment not completed, err code: API_03';
+                }
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_02');
+                echo 'Something went wrong, payment not completed, err code: API_02';
+            }
+
+    }
+
+
+
+
+
+
 }

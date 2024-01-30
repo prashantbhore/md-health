@@ -711,6 +711,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
+    //Mpluso3
+    Route::any('bank-payment', [CustomerPackageController::class,'bank_payment']);
 
 
     //Mplus03 Customer wallet
