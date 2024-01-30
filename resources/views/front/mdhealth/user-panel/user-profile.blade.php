@@ -7,6 +7,11 @@
         .mdi-eye::before {
             font-size: 19px;
         }
+        .pill-calender {
+    position: absolute;
+    top: 46px;
+    left: 27px;
+}
     </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -33,17 +38,19 @@
                                         <input type="text" class="form-control" placeholder="Last Name" name="last_name"
                                             value="{{ !empty($customer_list) ? ($customer_list->last_name ? $customer_list->last_name : '') : '' }}">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 position-relative">
                                         <label for="City" class="form-label">Date of Birth</label>
                                         @if (!empty($customer_list))
-                                            <input type="text" class="form-control" placeholder="Date of Birth"
+                                            <input type="text" class="form-control" style="padding-left: 2.5rem" placeholder="Date of Birth"
                                                 name="date_of_birth"
                                                 value="{{ $customer_list->date_of_birth ? $customer_list->date_of_birth : '' }}">
-                                        @else
-                                            <input type="text" class="form-control" placeholder="Date of Birth"
-                                                name="date_of_birth" value="">
-                                        @endif
+                                                <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
 
+                                        @else
+                                            <input type="text" class="form-control" style="padding-left: 2.5rem" placeholder="Date of Birth"
+                                                name="date_of_birth" value="">
+                                                <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" class="mx-2 pill-calender">
+                                        @endif
                                     </div>
                                     <div class="col-md-6">
                                         <label for="Country" class="form-label">Gender</label>
@@ -57,13 +64,13 @@
                                                 <option value="Female"
                                                     {{ $customer_list->gender == 'Female' ? 'selected' : '' }}>
                                                     Female</option>
-                                                <option value="Preffered Not To Say"
-                                                    {{ $customer_list->gender == 'Preffered Not To Say' ? 'selected' : '' }}>
-                                                    Preffered Not To Say</option>
+                                                <option value="Preferred Not To Say"
+                                                    {{ $customer_list->gender == 'Preferred Not To Say' ? 'selected' : '' }}>
+                                                    Preferred Not To Say</option>
                                             @else
                                                 <option value="Male"> Male </option>
                                                 <option value="Female">Female</option>
-                                                <option value="Preffered Not To Say">Preffered Not To Say</option>
+                                                <option value="Preferred Not To Say">Preferred Not To Say</option>
                                             @endif
 
 

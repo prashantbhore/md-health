@@ -155,6 +155,7 @@ class CustomerPackageController extends BaseController
                 ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
                 ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
                 ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+
                 ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
 
             if (!empty($request->treatment_name)) {
@@ -170,6 +171,39 @@ class CustomerPackageController extends BaseController
             $data['package_list'] = [];
             if (!empty($packages)) {
                 foreach ($packages as $key => $value) {
+                    $package_reviews = CustomerReviews::where('status', 'active')
+                    ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                    ->where('package_id', $value->id)
+                        ->first();
+
+
+
+
+                    // Check if reviews exist
+                    if ($package_reviews) {
+                        // Calculate sum
+                        $sum = $package_reviews->cleanliness + $package_reviews->comfort + $package_reviews->food_quality + $package_reviews->behaviour_reviews + $package_reviews->recommended;
+
+                        // Calculate average
+                        $average = $sum / 5; // Assuming you're always summing 5 fields
+                    } else {
+                        // If no reviews exist, set average to null or any default value
+                        $average = 0;
+                    }
+
+                    $rating_label = '';
+                    if ($average == 5) {
+                        $rating_label = 'Excellent';
+                    } elseif ($average == 4) {
+                        $rating_label = 'Very Good';
+                    } elseif ($average == 3) {
+                        $rating_label = 'Good';
+                    } elseif ($average == 2) {
+                        $rating_label = 'Fair';
+                    } elseif ($average == 1) {
+                        $rating_label = 'Bad';
+                    }
+
                     $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
                     $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                     $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
@@ -180,6 +214,8 @@ class CustomerPackageController extends BaseController
                     $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
                     $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
                     $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+                    $data['package_list'][$key]['average_rating'] = $average;
+                    $data['package_list'][$key]['rating_label'] = $rating_label;
                 }
             }
 
@@ -254,6 +290,35 @@ class CustomerPackageController extends BaseController
             $data['package_list'] = [];
             if (!empty($packages)) {
                 foreach ($packages as $key => $value) {
+                    $package_reviews = CustomerReviews::where('status', 'active')
+                    ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                    ->where('package_id', $value->id)
+                        ->first();
+
+                    // Check if reviews exist
+                    if ($package_reviews) {
+                        // Calculate sum
+                        $sum = $package_reviews->cleanliness + $package_reviews->comfort + $package_reviews->food_quality + $package_reviews->behaviour_reviews + $package_reviews->recommended;
+
+                        // Calculate average
+                        $average = $sum / 5; // Assuming you're always summing 5 fields
+                    } else {
+                        // If no reviews exist, set average to null or any default value
+                        $average = 0;
+                    }
+
+                    $rating_label = '';
+                    if ($average == 5) {
+                        $rating_label = 'Excellent';
+                    } elseif ($average == 4) {
+                        $rating_label = 'Very Good';
+                    } elseif ($average == 3) {
+                        $rating_label = 'Good';
+                    } elseif ($average == 2) {
+                        $rating_label = 'Fair';
+                    } elseif ($average == 1) {
+                        $rating_label = 'Bad';
+                    }
                     $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
                     $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                     $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
@@ -269,6 +334,8 @@ class CustomerPackageController extends BaseController
                     $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
                     $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
                     $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+                    $data['package_list'][$key]['rating_label'] = $rating_label;
+                    $data['package_list'][$key]['average_rating'] = $average;
                 }
             }
 
@@ -289,9 +356,10 @@ class CustomerPackageController extends BaseController
     }
 
 
+
+
     public function customer_package_filters(Request $request)
     {
-
         $packages = Packages::select(
             'md_packages.id',
             'md_packages.package_unique_no',
@@ -304,40 +372,12 @@ class CustomerPackageController extends BaseController
             'md_product_sub_category.product_sub_category_name',
             'md_master_cities.city_name'
         )
-            ->where('md_packages.status', 'active')
-            // ->where('md_medical_provider_register.vendor_status', 'approved')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
-
-        if (!empty($request->sale_price)) {
-            switch ($request->sale_price) {
-                case '0-10000':
-                    $packages->whereBetween('md_packages.sale_price', [0, 10000]);
-                    break;
-                case '10000-20000':
-                    $packages->whereBetween('md_packages.sale_price', [10000, 20000]);
-                    break;
-                case '20000-50000':
-                    $packages->whereBetween('md_packages.sale_price', [20000, 50000]);
-                    break;
-                case '50000-70000':
-                    $packages->whereBetween('md_packages.sale_price', [50000, 70000]);
-                    break;
-                case '70000-90000':
-                    $packages->whereBetween('md_packages.sale_price', [70000, 90000]);
-                    break;
-                case '100000-above':
-                    $packages->where('md_packages.sale_price', '>=', 100000);
-                    break;
-            }
-        }
-
-        if (!empty($request->type)) {
-            $packages->where('md_packages.other_services', $request->type);
-        }
-
+        ->where('md_packages.status', 'active')
+        ->leftJoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+        ->leftJoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+        ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+        ->leftJoin('md_customer_package_reviews', 'md_customer_package_reviews.package_id', '=', 'md_packages.id')
+        ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
         if (!empty($request->treatment_name)) {
             $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
         }
@@ -345,47 +385,128 @@ class CustomerPackageController extends BaseController
             $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
         }
 
+        if (!empty($request->filter_string)) {
+            // Parse the filter string to extract rating, services, and price information
+            $filters = explode(',', $request->filter_string);
+
+            foreach ($filters as $filter) {
+                if (in_array($filter, ['Excellent', 'Very Good', 'Good', 'Fair', 'Bad'])) {
+                    $numericValue = $this->convertRatingLabelToNumericValue($filter);
+
+                    // Filter packages based on calculated average rating label
+                    $packages->where(function ($query) use ($numericValue) {
+                        $query->orWhere('md_customer_package_reviews.cleanliness', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.comfort', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.food_quality', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.behaviour_reviews', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.recommended', '>=', $numericValue);
+                    });
+                }
+                // Check if the filter contains a specific service
+                elseif (strpos($filter, 'Transportation') !== false || strpos($filter, 'Accomodition') !== false || strpos($filter, 'Tour') !== false || strpos($filter, 'Translation') !== false || strpos($filter, 'Visa Service') !== false || strpos($filter, 'Ticket Services') !== false || strpos($filter, 'Ambulance Services') !== false) {
+                    // Filter packages by the entire filter string
+                    $packages->where('md_packages.other_services', 'like', '%' . $filter . '%');
+                }
+
+                // Assume any other case is a single price point or range
+                else {
+                    if (strpos($filter, '-') !== false) {
+                        // Extract minimum and maximum prices
+                        [$minPrice, $maxPrice] = explode('-', $filter);
+
+                        // Filter packages by sale price range
+                        $packages->orWhereBetween('md_packages.sale_price', [$minPrice, $maxPrice]);
+                    } else {
+                        // Filter packages by single price point
+                        $price = (int) $filter; // Assuming the price is an integer
+                        $packages->orWhere('md_packages.sale_price', '<=', $price);
+                    }
+                }
+            }
+        }
+
         $packages = $packages->get();
 
-
-
+        // dd($packages); 
 
         $data = [];
         $data['package_list'] = [];
         if (!empty($packages)) {
             foreach ($packages as $key => $value) {
-                $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-                $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-                $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-                $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
-                $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-                $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-                $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-                $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-                $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+                $package_reviews = CustomerReviews::where('status', 'active')
+                ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                ->where('package_id', $value->id)
+                    ->first();
+
+                // Check if reviews exist
+                if ($package_reviews) {
+                    // Calculate sum
+                    $sum = $package_reviews->cleanliness + $package_reviews->comfort + $package_reviews->food_quality + $package_reviews->behaviour_reviews + $package_reviews->recommended;
+
+                    // Calculate average
+                    $average = $sum / 5; // Assuming you're always summing 5 fields
+                } else {
+                    // If no reviews exist, set average to null or any default value
+                    $average = 0;
+                }
+
+                $rating_label = '';
+                if ($average == 5) {
+                    $rating_label = 'Excellent';
+                } elseif ($average == 4) {
+                    $rating_label = 'Very Good';
+                } elseif ($average == 3) {
+                    $rating_label = 'Good';
+                } elseif ($average == 2) {
+                    $rating_label = 'Fair';
+                } elseif ($average == 1) {
+                    $rating_label = 'Bad';
+                }
+                // Populate data for packages
+                $data['package_list'][$key]['id'] = $value->id;
+                $data['package_list'][$key]['package_unique_no'] = $value->package_unique_no;
+                $data['package_list'][$key]['package_name'] = $value->package_name;
+                $data['package_list'][$key]['treatment_period_in_days'] = $value->treatment_period_in_days;
+                $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : [];
+                $data['package_list'][$key]['package_price'] = $value->package_price;
+                $data['package_list'][$key]['sale_price'] = $value->sale_price;
+                $data['package_list'][$key]['product_category_name'] = $value->product_category_name;
+                $data['package_list'][$key]['product_sub_category_name'] = $value->product_sub_category_name;
+                $data['package_list'][$key]['city_name'] = $value->city_name;
+                $data['package_list'][$key]['rating_label'] = $rating_label;
+                $data['package_list'][$key]['average_rating'] = $average;
             }
         }
 
-        if (!empty($data)) {
-            if (!empty($packages)) {
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Here is your  package list.',
-                    'data' => $data
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'your  package list is empty.',
-                    'data' => $data
-                ]);
-            }
+        if (!empty($data['package_list'])) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your package list based on the provided filters.',
+                'data' => $data
+            ]);
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'your  package list is empty.',
+                'message' => 'No packages found based on the provided filters.',
             ]);
+        }
+    }
+
+    private function convertRatingLabelToNumericValue($label)
+    {
+        switch ($label) {
+            case 'Excellent':
+                return 5;
+            case 'Very Good':
+                return 4;
+            case 'Good':
+                return 3;
+            case 'Fair':
+                return 2;
+            case 'Bad':
+                return 1;
+            default:
+                return 0; // Return 0 or handle invalid cases as per your requirement
         }
     }
 
@@ -1756,6 +1877,8 @@ class CustomerPackageController extends BaseController
                 $purchase_details['bank_name'] = $request->bank_name;
                 $purchase_details['receiver_name'] = $request->receiver_name;
                 $purchase_details['iban'] = $request->iban;
+                $purchase_details['transaction_id'] = $request->transaction_id;
+
                 $purchase_details['purchase_type'] = 'pending';
                 $purchase_details['created_by'] = Auth::user()->id;
 

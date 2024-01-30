@@ -17,29 +17,29 @@ use Storage;
 class CustomerReportController extends BaseController
 {
 
-    
+
     public function customer_all_reports_list()
     {
         $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase.customer', 'provider', 'provider_logo'])
             ->where('custome_id', Auth::user()->id)
             ->where('status', 'active')
             ->get();
-    
+
         $formatted_data = [];
-    
+
         foreach ($provider_report_list as $report) {
             $customerPurchasePackage = $report->customerPackagePurchase;
-    
+
             // Check if $customerPurchasePackage is not null
             if ($customerPurchasePackage) {
                 $providerData = $report->provider;
                 $providerLogo = $report->provider_logo;
                 $customerData = $customerPurchasePackage->customer;
-    
+
                 // Check if $customerData is not null
                 if ($customerData) {
                     $providerId = $providerData->id;
-    
+
                     if (!isset($formatted_data[$providerId])) {
                         $formatted_data[$providerId] = [
                             'provider_data' => [
@@ -53,7 +53,7 @@ class CustomerReportController extends BaseController
                             'reports' => [],
                         ];
                     }
-    
+
                     $formatted_data[$providerId]['reports'][] = [
                         'id' => $report->id,
                         'report_title' => $report->report_title,
@@ -61,12 +61,12 @@ class CustomerReportController extends BaseController
                         'report_name' => $report->report_name,
                         'created_at' => $report->created_at,
                     ];
-    
+
                     $formatted_data[$providerId]['report_count']++;
                 }
             }
         }
-    
+
         if (!empty($formatted_data)) {
             return response()->json([
                 'status' => 200,
@@ -80,107 +80,205 @@ class CustomerReportController extends BaseController
             ]);
         }
     }
-    
+
+    public function customer_all_reports_list_for_app()
+    {
+        $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase.customer', 'provider', 'provider_logo'])
+            ->where('custome_id', Auth::user()->id) // Correct the typo 'custome_id' to 'customer_id'
+            ->where('status', 'active')
+            ->get();
+
+        // return $provider_report_list;
+
+        $formatted_data = [];
+
+        foreach ($provider_report_list as $report) {
+            $customerPurchasePackage = $report->customerPackagePurchase;
+
+            // Check if $customerPurchasePackage is not null
+            if ($customerPurchasePackage) {
+                $providerData = $report->provider;
+                $customerData = $customerPurchasePackage->customer;
+
+                // Check if $customerData is not null
+                if ($customerData) {
+                    $providerId = $providerData->id;
+                    $purchase_id = $report->customer_package_purchage_id;
 
 
-   public function customer_reports_search(Request $request)
-   {
-   
-    $validator = Validator::make($request->all(),[
-        'search_query' => 'required|string',
-    ]);
+                    if (!isset($formatted_data[$providerId])) {
+                        $formatted_data[$providerId] = [
+                            'provider_id' => $providerId,
+                            'purchase_id' => $purchase_id,
+                            'company_name' => $providerData->company_name,
+                            'report_count' => 0,
+                        ];
+                    }
 
-    if ($validator->fails()) {
-        return $this->sendError('Validation Error.', $validator->errors());
-    }
-
-    $searchQuery = $request->input('search_query');
-
-  
-    $customerId = auth()->user()->id; 
-
-    
-    //$customerId=1; 
-
-    $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
-        $query->where('report_title', 'like', '%' . $searchQuery . '%')
-            ->orWhere('report_name', 'like', '%' . $searchQuery . '%');
-    })
-        ->orWhereHas('customerPackagePurchase.customer', function ($query) use ($searchQuery) {
-            $query->where('first_name', 'like', '%' . $searchQuery . '%')
-                ->orWhere('last_name', 'like', '%' . $searchQuery . '%')
-                ->orWhere('full_name', 'like', '%' . $searchQuery . '%');
-        })
-        ->orWhereHas('customerPackagePurchase.package', function ($query) use ($searchQuery) {
-            $query->where('package_name', 'like', '%' . $searchQuery . '%');
-        })
-        ->orWhereHas('provider', function ($query) use ($searchQuery) {
-            $query->where('company_name', 'like', '%' . $searchQuery . '%');
-        })
-        ->where('status', 'active')
-        ->whereHas('customerPackagePurchase.customer', function ($query) use ($customerId) {
-            $query->where('id', $customerId);
-        })
-        ->get();
-
-    $formattedResults = [];
-    
-    foreach ($searchResults as $result) {
-        $customerPurchasePackage = $result->customerPackagePurchase;
-        $providerData = $result->provider;
-        $providerLogo = $result->provider_logo;
-        $customerData = $customerPurchasePackage->customer;
-
-        $providerId = $providerData->id;
-
-        if (!isset($formattedResults[$providerId])) {
-            $formattedResults[$providerId] = [
-                'provider_data' => [
-                    'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
-                    'provider_name' => $providerData->company_name,
-                ],
-                'customer_data' => [
-                    'name' => $customerData->first_name . ' ' . $customerData->last_name,
-                ],
-                'report_count' => 0,
-                'reports' => [],
-            ];
+                    $formatted_data[$providerId]['report_count']++;
+                }
+            }
         }
 
-        $formattedResults[$providerId]['reports'][] = [
-            'id' => $result->id,
-            'report_title' => $result->report_title,
-            'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
-            'report_name' => $result->report_name,
-            'created_at' => $result->created_at,
-        ];
-
-        $formattedResults[$providerId]['report_count']++;
+        if (!empty($formatted_data)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Customer report list found.',
+                'provider_report_list' => array_values($formatted_data),
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Customer report list not found.',
+            ]);
+        }
     }
 
-    $formattedResults = array_values($formattedResults);
+    public function customer_all_reports_details_list_for_app(Request $request)
+    {
+        $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase.customer', 'provider', 'provider_logo'])
+            ->where('custome_id', Auth::user()->id) // Correct the typo 'custome_id' to 'customer_id'
+            ->where('customer_package_purchage_id', $request->purchase_id)
+            ->where('medical_provider_id', $request->provider_id)
+            ->where('status', 'active')
+            ->get();
 
-    if (!empty($formattedResults)) {
-        return response()->json([
-            'status' => 200,
-            'message' => 'Search results found.',
-            'provider_report_list' => $formattedResults,
-        ]);
-    } else {
-        return response()->json([
-            'status' => 404,
-            'message' => 'No matching reports found for the given search query.',
-        ]);
+        $formatted_data = [];
+
+        foreach ($provider_report_list as $report) {
+            $customerPurchasePackage = $report->customerPackagePurchase;
+
+            // Check if $customerPurchasePackage is not null
+            if ($customerPurchasePackage) {
+                $providerData = $report->provider;
+                $providerLogo = $report->provider_logo;
+                $customerData = $customerPurchasePackage->customer;
+
+                // Check if $customerData is not null
+                if ($customerData) {
+                    $providerId = $providerData->id;
+
+                    if (!isset($formatted_data[$providerId])) {
+                        $formatted_data[$providerId] = [
+                            'reports' => [], // Initialize reports array for each provider
+                        ];
+                    }
+
+                    $formatted_data[$providerId]['reports'][] = [
+                        'id' => $report->id,
+                        'report_title' => $report->report_title,
+                        'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
+                        'report_name' => $report->report_name,
+                        'created_at' => $report->created_at,
+                    ];
+                }
+            }
+        }
+
+        if (!empty($formatted_data)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Customer report list found.',
+                'provider_report_list' => array_values($formatted_data),
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. Customer report list not found.',
+            ]);
+        }
     }
-}
-    
 
 
 
-    
-    
+    public function customer_reports_search(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'search_query' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $searchQuery = $request->input('search_query');
 
 
+        $customerId = auth()->user()->id;
 
-   
+
+        //$customerId=1; 
+
+        $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
+            $query->where('report_title', 'like', '%' . $searchQuery . '%')
+                ->orWhere('report_name', 'like', '%' . $searchQuery . '%');
+        })
+            ->orWhereHas('customerPackagePurchase.customer', function ($query) use ($searchQuery) {
+                $query->where('first_name', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('last_name', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('full_name', 'like', '%' . $searchQuery . '%');
+            })
+            ->orWhereHas('customerPackagePurchase.package', function ($query) use ($searchQuery) {
+                $query->where('package_name', 'like', '%' . $searchQuery . '%');
+            })
+            ->orWhereHas('provider', function ($query) use ($searchQuery) {
+                $query->where('company_name', 'like', '%' . $searchQuery . '%');
+            })
+            ->where('status', 'active')
+            ->whereHas('customerPackagePurchase.customer', function ($query) use ($customerId) {
+                $query->where('id', $customerId);
+            })
+            ->get();
+
+        $formattedResults = [];
+
+        foreach ($searchResults as $result) {
+            $customerPurchasePackage = $result->customerPackagePurchase;
+            $providerData = $result->provider;
+            $providerLogo = $result->provider_logo;
+            $customerData = $customerPurchasePackage->customer;
+
+            $providerId = $providerData->id;
+
+            if (!isset($formattedResults[$providerId])) {
+                $formattedResults[$providerId] = [
+                    'provider_data' => [
+                        'logo_path' => isset($providerLogo) ? url(Storage::url($providerLogo->company_logo_image_path)) : null,
+                        'provider_name' => $providerData->company_name,
+                    ],
+                    'customer_data' => [
+                        'name' => $customerData->first_name . ' ' . $customerData->last_name,
+                    ],
+                    'report_count' => 0,
+                    'reports' => [],
+                ];
+            }
+
+            $formattedResults[$providerId]['reports'][] = [
+                'id' => $result->id,
+                'report_title' => $result->report_title,
+                'report_path' => isset($report->report_path) ? url(Storage::url($report->report_path)) : null,
+                'report_name' => $result->report_name,
+                'created_at' => $result->created_at,
+            ];
+
+            $formattedResults[$providerId]['report_count']++;
+        }
+
+        $formattedResults = array_values($formattedResults);
+
+        if (!empty($formattedResults)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Search results found.',
+                'provider_report_list' => $formattedResults,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No matching reports found for the given search query.',
+            ]);
+        }
+    }
 }

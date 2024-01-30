@@ -878,6 +878,122 @@ class CustomerPackageController extends Controller
 
     //Mplus02
 
+     //Mplus04
+
+     public function customer_package_side_search_filter(Request $request)
+     {
+         $packages = Packages::select(
+             'md_packages.id',
+             'md_packages.package_unique_no',
+             'md_packages.package_name',
+             'md_packages.treatment_period_in_days',
+             'md_packages.other_services',
+             'md_packages.package_price',
+             'md_packages.sale_price',
+             'md_product_category.product_category_name',
+             'md_product_sub_category.product_sub_category_name',
+             'md_master_cities.city_name',
+             'md_add_new_acommodition.hotel_stars',
+             'md_add_transportation_details.vehicle_model_id',
+             'md_master_brand.brand_name',
+             'md_master_vehicle_comfort_levels.vehicle_level_name',
+             'md_tours.tour_name'
+         )
+             ->where('md_packages.status', 'active')
+             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', '=', 'md_packages.hotel_id')
+             ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
+             ->leftjoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
+             ->leftjoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id')
+             ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id');
+ 
+         if (!empty($request->treatment_name)) {
+             $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
+         }
+         if (!empty($request->city_name)) {
+             $packages = $packages->orWhere('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
+         }
+         $packages = $packages->get();
+         $data = [];
+         $data['package_list'] = [];
+         if (!empty($packages)) {
+             foreach ($packages as $key => $value) {
+ 
+                 if (!empty(Auth::guard('md_customer_registration')->user()->id)) {
+                     $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
+                         ->select('package_id')
+                         ->where('customer_id', Auth::guard('md_customer_registration')->user()->id)
+                         ->first();
+                 }
+                 $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
+                 $data['package_list'][$key]['favourite_check'] = !empty($CustomerFavouritePackages->package_id) ? 'yes' : 'no';
+                 $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
+                 $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
+                 $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
+                 $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
+                 $data['package_list'][$key]['hotel_stars'] = !empty($value->hotel_stars) ? $value->hotel_stars : '';
+                 $data['package_list'][$key]['vehicle_model_id'] = !empty($value->vehicle_model_id) ? $value->vehicle_model_id : '';
+                 $data['package_list'][$key]['brand_name'] = !empty($value->brand_name) ? $value->brand_name : '';
+                 $data['package_list'][$key]['vehicle_level_name'] = !empty($value->vehicle_level_name) ? $value->vehicle_level_name : '';
+                 $data['package_list'][$key]['tour_name'] = !empty($value->tour_name) ? $value->tour_name : '';
+                 $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
+                 $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
+                 $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
+                 $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
+                 $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+             }
+         }
+ 
+         $packages = $data['package_list'];
+         if (!empty($packages)) {
+             $treatment_plans = ProductCategory::where('md_packages.status', 'active')
+                 ->join('md_packages', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                 ->where('md_product_category.status', 'active')
+                 ->select('md_product_category.*')
+                 ->distinct()
+                 ->get();
+             $cities = Packages::where('md_packages.status', 'active')
+                 ->join('md_medical_provider_register', 'md_packages.created_by', '=', 'md_medical_provider_register.id')
+                 ->where('md_master_cities.status', 'active')
+                 ->join('md_master_cities', 'md_master_cities.id', '=', 'md_medical_provider_register.city_id')
+                 ->select('md_master_cities.*')
+                 ->distinct()
+                 ->get();
+             $cities_for_other = Cities::where('status', 'active')->where('country_id', 1)->get();
+             $treatment_name = $request->treatment_name ?? 'Select Treatment';
+             $date = $request->daterange ?? '';
+             $city_name = $request->city_name ?? 'Select City';
+             $counties = Country::where('status', 'active')->get();
+             return view('front.mdhealth.searchResult', compact('packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date', 'cities_for_other'));
+ 
+         } else {
+             $counties = Country::all();
+             $city_name = !empty($request->city_name) ? $request->city_name : 'Select City';
+             $treatment_name = !empty($request->treatment_name) ? $request->treatment_name : 'Select Treatment';
+             $cities_for_other = Cities::where('status', 'active')->where('country_id', 1)->get();
+             $date = $request->daterange ?? '';
+             $treatment_plans = ProductCategory::where('md_packages.status', 'active')
+                 ->join('md_packages', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                 ->where('md_product_category.status', 'active')
+                 ->select('md_product_category.*')
+                 ->distinct()
+                 ->get();
+             $cities = Packages::where('md_packages.status', 'active')
+                 ->join('md_medical_provider_register', 'md_packages.created_by', '=', 'md_medical_provider_register.id')
+                 ->where('md_master_cities.status', 'active')
+                 ->join('md_master_cities', 'md_master_cities.id', '=', 'md_medical_provider_register.city_id')
+                 ->select('md_master_cities.*')
+                 ->distinct()
+                 ->get();
+             return view('front.mdhealth.searchResult', compact('cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date', 'cities_for_other'));
+         }
+     }
+ 
+     //Mplus04
+
     public function packages_view_on_search_result(Request $request)
     {
         // dd( $request->all() );
@@ -1655,5 +1771,102 @@ class CustomerPackageController extends Controller
 
     //     // return view('front.mdhealth.user-panel.user-favorites', compact('fav_list', 'vendorsdata'));
     // }
+
+
+
+
+    public function bank_payment(Request $request)
+    {
+
+        dd($request->all());
+        // dd( $controller_request->all() );
+        $validator = Validator::make($request->all(),
+            [
+                'package_id' => 'required',
+                'sale_price' => 'required',
+                'paid_amount' => 'required',
+                'platform_type' => 'required',
+                'pending_amount' => 'required',
+                'percentage' => 'required',
+                'patient_id' => 'required',
+                'payment_percent' => 'required',
+                'total_paying_price' => 'required',
+                'transaction_id' => 'required',
+                'other_services' => 'required',
+            ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+       
+        $conversation_id = mt_rand(100000000, 999999999);
+        Session::put('payment_request', $request->all());
+        $body = $request->all();
+        $plainArray = $body instanceof \Illuminate\Support\Collection  ? $body->toArray() : $body;
+        $plainArray['conversation_id'] = strval($conversation_id);
+        
+
+
+           
+
+            $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), $plainArray, 'POST');
+            Session::forget('payment_request');
+            //Make a new conversation_id for the newly purchased package
+            $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
+            if ($customer_purchase_details->count() > 0) {
+
+                $messages = new Messages();
+                $messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
+                $messages->sender_id = $customer_purchase_details->customer_id;
+                $messages->sender_type = 'customer';
+                $messages->save();
+
+                $vendor_messages = new Messages();
+                $vendor_messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
+                $vendor_messages->sender_id = $customer_purchase_details->provider_id;
+                $vendor_messages->sender_type = 'medicalprovider';
+                $vendor_messages->save();
+            }
+            // dd($repsonse_data);
+            if (!empty($repsonse_data)){
+                if ($repsonse_data['status'] == '200'){
+
+                    $threedsInitialize = \Iyzipay\Model\ThreedsInitialize::create($request, $options);
+                    $threedsInitialize_array = (array) $threedsInitialize;
+
+                    # print result
+                    // echo '<pre>';
+                    foreach ($threedsInitialize_array as $key => $response) {
+                        // echo $key;
+                        $three_json_response = $response;
+                        // print_r( $response );
+                        break;
+                    }
+                    // echo( $three_json_response );
+                    // die;
+                    $three_json_response = json_decode($three_json_response, true);
+                    if ($three_json_response['status'] == 'success') {
+
+                        print_r($threedsInitialize->getHtmlContent());
+
+                    } else {
+                        return redirect()->back()->with('error', $three_json_response['errorMessage']);
+                    }
+
+                } else {
+
+                    return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_03');
+                    echo 'Something went wrong, payment not completed, err code: API_03';
+                }
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_02');
+                echo 'Something went wrong, payment not completed, err code: API_02';
+            }
+
+    }
+
+
+
+
+
 
 }

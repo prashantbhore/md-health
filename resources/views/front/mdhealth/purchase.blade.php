@@ -185,27 +185,27 @@
                             <input type="hidden" name="validity" id="validity" value="">
 
                             <div class="mb-4-input">
-                                <input type="text" name="input1" class="form-control" id="input1" placeholder="Card Holder Name">
+                                <input type="text" name="input1" class="form-control" onkeypress="return /^[A-Za-z\s]*$/.test(event.key)" id="input1" placeholder="Card Holder Name">
                                 <h5 id="verifyinput1" class="mt-4" style="color: red;">
-                                    Please Enter Card Holder Name
+                                    Please enter card holder name
                                 </h5>
                             </div>
                             <div class="mb-4-input">
                                 <input type="text" onkeypress="return /[0-9 ]/i.test(event.key)" name="input2" class="form-control" id="input2" placeholder="Card Number">
                                 <h5 id="verifyinput2" class="mt-4" style="color: red;">
-                                    Please Enter Card Number
+                                    Please enter card number
                                 </h5>
                             </div>
                             <div class="d-flex gap-3 mb-4-input">
                                 <div class="w-50"><input type="text" id="input4" name="input4" class="form-control " placeholder="00/00">
                                     <h5 id="verifyinput4" class="mt-0" style="color: red;">
-                                        Please Enter Expiry Date
+                                        Please enter expiry date
                                     </h5>
                                 </div>
                                 <div class="w-50">
-                                    <input type="password" id="input3" name="input3" class="form-control" placeholder="CVV">
+                                    <input type="password" id="input3" name="input3" class="form-control" placeholder="CVV" onkeypress="return /[0-9 ]/i.test(event.key)">
                                     <h5 id="verifyinput3" class="mt-0" style="color: red;">
-                                        Please Enter CVV
+                                        Please enter CVV
                                     </h5>
                                 </div>
                             </div>
@@ -238,10 +238,19 @@
                 </div>
             </div>
             <!-- CREDIT CARD DETAILS END-->
-
+            
             <!-- BANK TRANSFER -->
+            {{-- Mplus03 --}}
             <div id="bank" class="bank-transfer-details">
-                <form action="php">
+                <form action="{{url('bank-payment')}}" method="post" id="bank_transfer_form">
+                     @csrf
+                    <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                    <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
+
+                    <input type="hidden" name="bank_name" id="bank_name" value="">
+                    <input type="hidden" name=" receiver_name" id="receiver_name" value="">
+                    <input type="hidden" name="iban" id="iban" value="">
+                   
 
                     <div class="row gy-4">
                         <div class="col-md-12 mb-3">
@@ -285,7 +294,7 @@
                             <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
                         <div class="col-md-12">
                             <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
-                            <input type="text" name="payment_transaction_id" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
+                            <input type="text" name="transaction_id" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
                         </div>
                         <div class="col-md-12">
                             <p class="mb-0 text-red card-p1">This is not available in your country!</p>
@@ -986,9 +995,10 @@
 
 
 function getBankData(selectedBank){
-    var packageId = $("#package_id").val();
+
        
-           
+
+    var packageId = $("#package_id").val();
             $.ajax({
                 url: baseUrl + '/api/md-helath-bank-details',
                 type: 'GET',
@@ -1003,6 +1013,56 @@ function getBankData(selectedBank){
                 success: function(response) {
                      console.log('Success:', response.package_details.package_unique_no);
                     if (response.message === "Bank Details Found") {
+
+                        var form = $('#bank_transfer_form');
+
+                        // Additional data
+                        var pendingAmount = proxyPrice - totalPrice;
+
+                        if (isTwentySelected){
+                            var percentage = '20';
+                        } else if (isThirtySelected){
+                            var percentage = '30';
+                        } else if (isFiftySelected){
+                            var percentage = '50';
+                        } else if (isHundredSelected){
+                            var percentage = '100';
+                        }
+                        // $('#card_number').val(cardNo);
+
+                        var additionalData = {
+                            'package_id': packageId,
+                            'patient_id': patientId,
+                            'sale_price': proxyPrice,
+                            'paid_amount': totalPrice,
+                            'platform_type': 'web',
+                            'pending_amount': pendingAmount,
+                            'percentage': percentage,
+                            'other_services':checkedTitles
+                            
+                        };
+
+                        // Add additional data to the form
+                        $.each(additionalData, function(name, value) {
+                            form.append($('<input>').attr({
+                                type: 'hidden',
+                                name: name,
+                                value: value
+                            }));
+                        });
+                                                
+
+                            $("#bank_name").val(response.bank_details.bank_name);
+                            $("#receiver_name").val(response.bank_details.account_holder_name);
+                            $("#iban").val(response.bank_details.account_number);
+
+                            $("#bank_transfer_payment_percent").val(percentage.toString()); 
+                            $("#bank_transfer_total_paying_price").val(proxyPrice.toString());
+
+                         
+
+                   
+                            
 
                             $("#receiver-bank_name").text(response.bank_details.bank_name);
                             $("#receiver-name").text(response.bank_details.account_holder_name);
@@ -1028,8 +1088,10 @@ function getBankData(selectedBank){
 
        
         $(document).on('click', 'input[name="paymentMethod"][value="bank"]', function(){
+           
             var selectedBank = $('#bank-informations').val();
-            if (selectedBank) {
+          
+            if (selectedBank){
                 getBankData(selectedBank);
             }
         });
@@ -1407,7 +1469,7 @@ function getBankData(selectedBank){
 
 
             ////////////////////////////////////////////////////////////////////////////////////////////
-
+            alert(percentage);
         });
     </script>
     <script type="text/javascript">

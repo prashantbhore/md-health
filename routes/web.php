@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ads_and_promo\AdsPromoController;
 use App\Http\Controllers\admin\product\ProductMDhealthPackageController;
 use App\Http\Controllers\Front\Login\CommonLoginController;
 use App\Http\Controllers\Front\Customer\CustomerPackageController;
+use App\Http\Controllers\Front\Customer\RequestYourTreatmentController;
 use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\Front\Login\MedicalProviderLogin;
 use App\Http\Controllers\Front\MedicalProvider\OtherServicesController;
@@ -675,6 +676,7 @@ Route::group(['middleware' => ['prevent-back-history', 'IsVendor']], function ()
 //Mplus02
 Route::get('/', [CustomerPackageController::class, 'customer_home']);
 Route::any('health-search-result', [CustomerPackageController::class, 'customer_package_search_filter']);
+Route::any('health-search-side-result', [CustomerPackageController::class, 'customer_package_side_search_filter']);
 Route::any('health-pack-details', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
 
@@ -711,6 +713,8 @@ Route::group(['middleware' => ['prevent-back-history', 'IsCustomer']], function 
     Route::any('user-favorites', [CustomerPackageController::class, 'user_favorites']);
     Route::any('md-customer-favourite-list-web', [CustomerPackageController::class, 'md_customer_favourite_list_web']);
     Route::any('sandbox', [CustomerPackageController::class, 'sandbox']);
+    //Mpluso3
+    Route::any('bank-payment', [CustomerPackageController::class,'bank_payment']);
 
 
     //Mplus03 Customer wallet
@@ -860,3 +864,7 @@ Route::view('company','front/mdhealth/company');
 Route::view('enlightment-text','front/mdhealth/enlightment-text');
 
 Route::view('welcome', 'welcome');
+
+//Mplus02
+// Route::post('/broadcasting/auth', 'BroadcastController@authenticate');
+Route::post('/request-your-treatment', [RequestYourTreatmentController::class,'request_your_treatment']);
