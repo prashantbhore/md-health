@@ -472,10 +472,10 @@ $is_logged_in = false;
                 </div>
             </div>
             <div class="modal-body">
-                <form class="row g-3">
+                <form id="request_your_treatment" class="row g-3">
                     <div class="col-md-4 mb-3">
                         <label for="inputEmail4" class="form-label fw-bold">*First Name</label>
-                        <input type="email" class="form-control  " id="inputEmail4" placeholder="First Name">
+                        <input type="email" class="form-control  " id="first_name" placeholder="First Name">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="inputPassword4" class="form-label fw-bold">*Last Name</label>
