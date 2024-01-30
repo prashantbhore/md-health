@@ -1,5 +1,6 @@
 @include('front.includes.head-files')
 @include('front.includes.navbar')
+@include('front.includes.js-notification')  
 
 
 @yield('content')

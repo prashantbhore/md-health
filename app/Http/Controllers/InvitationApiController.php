@@ -172,21 +172,22 @@ class InvitationApiController extends Controller
             ->count();
 
         $left_invite_count = MDCoins::where('customer_id', Auth::user()->id)
-            ->where('status', 'active')->select('invitation_count')->first();
+            ->where('status', 'active')
+            ->select('invitation_count')
+            ->first();
 
-        if (empty($your_network_count)) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Here is your coin counts.',
-                'your_network_count' => $your_network_count,
-                'pending_invite_count' => $pending_invite_count,
-                'left_invite_count' => $left_invite_count,
-            ]);
+        if ($left_invite_count) {
+            $left_invite_count = $left_invite_count->invitation_count; // Extract invitation count value
         } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'something went wrong.',
-            ]);
+            $left_invite_count = 0; // Set default value if no left invite count found
         }
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Here is your coin counts.',
+            'your_network_count' => $your_network_count,
+            'pending_invite_count' => $pending_invite_count,
+            'left_invite_count' => $left_invite_count,
+        ]);
     }
 }

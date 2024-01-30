@@ -13,6 +13,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Laravel\Firebase\Facades\Firebase;
+use App\Events\NewMessage;
 use Validator;
 
 class FirebasePushController extends Controller
@@ -115,7 +116,8 @@ class FirebasePushController extends Controller
             $get_messages->latest_message = $body;
             $get_messages->save();
         }
-
+        
+        event(new NewMessage($message));
         $this->notification->send($message);
 
     }
