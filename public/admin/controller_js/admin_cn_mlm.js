@@ -86,7 +86,7 @@ $(function (){
 
     var base_url = $("#base_url").val();
     
-    if (confirm("Do you really want to delete license?")) {
+    if (confirm("Do you really want to delete?")){
         $.ajax({
             type: "post",
             headers: {

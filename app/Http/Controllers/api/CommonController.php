@@ -33,6 +33,37 @@ class CommonController extends BaseController {
         }
     }
 
+    public function get_country_code_list(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'country_id' => 'required', // Ensure that the country_id exists in the countries table
+        ]);
+    
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+    
+        // Retrieve the country details including the country code
+        $country = Country::find($request->country_id);
+    
+        if ($country) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Country code found.',
+                'data' => [
+                    'country_id' => $country->id,
+                    'country_name' => $country->country_name,
+                    'country_code' => $country->country_code,
+                ],
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Country not found.',
+            ]);
+        }
+    }
+
     // cities list
 
     public function get_cities_list( Request $request ) {
