@@ -1107,6 +1107,19 @@ select {
     letter-spacing: -0.07em;
     transition: 0.15s all;
 }
+.filterbtnpack {
+    height: 45px;
+    padding: 0 2rem;
+    border-radius: 3px;
+    background-color: #4cdb06;
+    border-color: #4cdb06;
+    font-family: "Campton";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: -0.07em;
+    transition: 0.15s all;
+}
 
 .deleteAll {
     color: #f31d1d;
