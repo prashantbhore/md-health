@@ -856,3 +856,6 @@ Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
 
 Route::view('welcome', 'welcome');
+
+//Mplus02
+// Route::post('/broadcasting/auth', 'BroadcastController@authenticate');

@@ -60,33 +60,33 @@
 
     // Get registration token. Initially this makes a network call, once retrieved
     // subsequent calls to getToken will return from cache.
-    const messaging = getMessaging();
+    // const messaging = getMessaging();
     const user_id = "{{ $sender_id }}";
-    getToken(messaging, {
-        vapidKey: 'BALWd3VwOcsTfiTfPPcVcVCUkMRVhGB88TVOhmIg2A9gNJzA6NJ_kltn9NxNSildp_8tARwffCERCxIbCWYCPyM'
-    }).then((currentToken) => {
-        if (currentToken) {
+    // getToken(messaging, {
+    //     vapidKey: 'BALWd3VwOcsTfiTfPPcVcVCUkMRVhGB88TVOhmIg2A9gNJzA6NJ_kltn9NxNSildp_8tARwffCERCxIbCWYCPyM'
+    // }).then((currentToken) => {
+    //     if (currentToken) {
 
-            console.log(currentToken);
-            //  /api/
-            navigator.sendBeacon(
-                `/setToken?fcm_token=${currentToken}&user_id=${user_id}`
-            );
-        } else {
-            // Show permission request UI
-            console.log('No registration token available. Request permission to generate one.');
-            // ...
-        }
-    }).catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-        // ...
-    });
+    //         console.log(currentToken);
+    //         //  /api/
+    //         navigator.sendBeacon(
+    //             `/setToken?fcm_token=${currentToken}&user_id=${user_id}`
+    //         );
+    //     } else {
+    //         // Show permission request UI
+    //         console.log('No registration token available. Request permission to generate one.');
+    //         // ...
+    //     }
+    // }).catch((err) => {
+    //     console.log('An error occurred while retrieving token. ', err);
+    //     // ...
+    // });
 
-    onMessage(messaging, (payload) => {
-        // alert(payload.notification.title + " " + payload.notification.body);
-        console.log('Message received. ', payload);
-        // ...
-    });
+    // onMessage(messaging, (payload) => {
+    //     // alert(payload.notification.title + " " + payload.notification.body);
+    //     console.log('Message received. ', payload);
+    //     // ...
+    // });
 
     // Send notification using Firebase Cloud Messaging
 

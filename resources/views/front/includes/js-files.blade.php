@@ -1,11 +1,11 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-{{-- <script src="{{ URL::asset('front/assets/js/jquery-3.7.1.min.js') }}"></script> --}}
+<script type="module" src="{{ URL::asset('front/assets/js/bootstrap.mjs') }}"></script>
 <script src="{{ URL::asset('admin/assets/js/nice-select.min.js') }}"></script>
 {{-- <script src="{{ URL::asset('front/assets/js/jquery.validate.min.js') }}"></script> --}}
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-
+{{-- <script src="{{ asset('resources/js/bootstrap.js') }}"></script> --}}
 <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -17,6 +17,7 @@
 <!-- DATE-PICKER JS -->
 <script src="{{ URL::asset('front/assets/js/bootstrap-datepicker.min.js') }}"></script>
 
+{{-- <script src="{{ URL::asset('resources/js/bootstrap.js') }}"></script> --}}
 <script src="{{ URL::asset('front/assets/js/waves.min.js') }}"></script>
 <!-- GLightbox -->
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>

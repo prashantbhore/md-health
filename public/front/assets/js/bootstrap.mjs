@@ -14,20 +14,21 @@
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
- 
-import Echo from 'laravel-echo'
+/* <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.js"></script> */
+// const Echo = require('laravel-echo');
+// const Pusher =  require("pusher-js");
 
-    window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: '0ec35c6ba255b31f9283',
-        cluster: 'ap2',
-        forceTLS: true
-    });
+    // window.Echo = new Echo({
+    //     broadcaster: 'pusher',
+    //     key: '0ec35c6ba255b31f9283',
+    //     cluster: 'ap2',
+    //     forceTLS: true
+    // });
 
-    var channel = Echo.channel('my-channel');
-    channel.listen('.my-event', function(data) {
-        alert(JSON.stringify(data));
-    });
+    // var channel = Echo.channel('my-channel');
+    // channel.listen('.my-event', function(data) {
+    //     alert(JSON.stringify(data));
+    // });
 // window.Pusher = Pusher;
  
 // window.Echo = new Echo({
