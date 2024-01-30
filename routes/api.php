@@ -396,6 +396,11 @@ Route::middleware('auth:sanctum')->group(function () {
     //Customer All Reports List
     Route::get('md-customer-all-reports-list', [CustomerReportController::class, 'customer_all_reports_list']);
 
+    Route::get('md-customer-all-reports-list-for-app', [CustomerReportController::class, 'customer_all_reports_list_for_app']);
+
+    Route::post('md-customer-all-reports-list-details-for-app', [CustomerReportController::class, 'customer_all_reports_details_list_for_app']);
+
+
 
     //active treatment list
     Route::get('md-provider-active-treatment-list', [SalesController::class, 'active_treatment_list']);
@@ -488,6 +493,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/md-customer-coins', [InvitationApiController::class, 'md_customer_coins']);
 
     Route::get('/md-customer-coins-count', [InvitationApiController::class, 'customer_coins_count']);
+
+    Route::post('/md-make-request-form', [CommonController::class, 'make_request_form']);
+
 
 
 
