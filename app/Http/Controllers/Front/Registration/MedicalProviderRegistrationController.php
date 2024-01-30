@@ -28,10 +28,13 @@ class MedicalProviderRegistrationController extends Controller
     {
        
         $referralCode = $request->query('referral_code');
+
+       
         
     
         $coinStatusId = $request->query('coin_status_id');
 
+       
      
 
         $countries = Country::get();
@@ -79,7 +82,9 @@ class MedicalProviderRegistrationController extends Controller
         return view('front/mdhealth/authentication/vendor-login', compact('countries', 'cities'));
     }
 
-    public function md_register_medical_provider( request $request ) {
+    public function md_register_medical_provider( request $request ){
+
+        
 
         // $email_exist = MedicalProviderRegistrater::where( 'status', 'active' )
         //     ->where( 'email', $request->email )
