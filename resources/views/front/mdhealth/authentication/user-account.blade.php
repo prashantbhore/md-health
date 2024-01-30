@@ -129,7 +129,7 @@
                                                 <option value="" selected disabled>Choose</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Prefer not to say">Prefer not to say</option>
+                                                <option value="Preferred not to say">Preferred not to say</option>
                                             </select>
                                         </div>
                                         <div class="col-md-12">
@@ -182,11 +182,14 @@
 
                                         <div class="col-md-12">
                                             <div class="tc" style="width: 330px;line-height: 2;">
-                                                <input class="form-check-input d-inline-block me-2" type="checkbox" value="" id="UserflexCheckDefault" />
+                                                <div class="form-check">
                                                 <label class="form-check-label d-inline" for="UserflexCheckDefault">
                                                     I accept <a href="#" class="text-decoration-underline camptonBold">Terms and
                                                         Condition</a> & I agree to the <a href="#" class="text-decoration-underline camptonBold">User Data Consent.</a>
                                                 </label>
+                                                <input class="form-check-input d-inline-block me-2" type="checkbox" value="" id="UserflexCheckDefault" name="UserflexCheckDefault"
+                                                />
+                                                </div>
                                             </div>
                                         </div>
                                         {{-- <div id="recaptcha-container" class="df-center"></div> --}}
