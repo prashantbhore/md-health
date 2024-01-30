@@ -23,7 +23,8 @@ class CustomerInteractionController extends Controller
         $connect = new \plugNmeetConnect($config);
         // dd(Session::all());
         if($request->requestType === 'api'){
-            $user =  Auth::user()->id;
+            // dd('hi');
+            $userId =  Auth::user()->id;
         }else{
             $user = Session::get("user");
             if(empty($user)){

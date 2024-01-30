@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
 use App\Models\CustomerNotifications;
 use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
@@ -13,7 +14,6 @@ use Auth;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Laravel\Firebase\Facades\Firebase;
-use App\Events\NewMessage;
 use Validator;
 
 class FirebasePushController extends Controller
@@ -116,7 +116,7 @@ class FirebasePushController extends Controller
             $get_messages->latest_message = $body;
             $get_messages->save();
         }
-        
+
         event(new NewMessage($message));
         $this->notification->send($message);
 
@@ -149,29 +149,34 @@ class FirebasePushController extends Controller
 
     public function get_conversations(Request $request)
     {
-        $user = Auth::guard('md_customer_registration')->user();
-        if (!empty($user)) {
-
-            $sender_type = 'customer';
-            $messages = Messages::where('sender_id', $user->id)
-                ->where('sender_type', $sender_type)
-                ->distinct('conversation_id')->get();
-
-            // dd($messages);
+        if ($request->requestType === 'api') {
+            // dd('hi');
+            $userId = Auth::user()->id;
+            $messages = Messages::where('sender_id', $userId)
+            ->where('sender_type', 'customer')
+            ->distinct('conversation_id')->get();
         } else {
-            // dd($user);
-            $user = Auth::guard('md_health_medical_providers_registers')->user();
-            $sender_type = 'medicalprovider';
+            $user = Auth::guard('md_customer_registration')->user();
             if (!empty($user)) {
+
+                $sender_type = 'customer';
                 $messages = Messages::where('sender_id', $user->id)
                     ->where('sender_type', $sender_type)
                     ->distinct('conversation_id')->get();
+            } else {
+                // dd($user);
+                $user = Auth::guard('md_health_medical_providers_registers')->user();
+                $sender_type = 'medicalprovider';
+                if (!empty($user)) {
+                    $messages = Messages::where('sender_id', $user->id)
+                        ->where('sender_type', $sender_type)
+                        ->distinct('conversation_id')->get();
 
-            }else{
-                $messages =[];
+                } else {
+                    $messages = [];
+                }
             }
         }
-        
         $conversations = [];
         foreach ($messages as $message) {
 
@@ -206,7 +211,7 @@ class FirebasePushController extends Controller
                     'is_latest_message' => $is_latest_new,
                 ];
 
-                return view('front.mdhealth.user-panel.user-message', compact('conversations'));
+               
 
             } else if ($sender_type == 'medicalprovider') {
                 $conversation_id = $message->conversation_id;
@@ -232,10 +237,25 @@ class FirebasePushController extends Controller
                     'is_latest_message' => $is_latest_new,
                 ];
 
-                return view('front.mdhealth.medical-provider.messages', compact('conversations'));
+               
             }
 
         }
+
+        if ($request->requestType === 'api') {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Here is your chats.',
+                'conversations' => $conversations
+            ]);
+        }
+
+        if ($sender_type == 'customer') {
+            return view('front.mdhealth.user-panel.user-message', compact('conversations'));
+        } else if ($sender_type == 'medicalprovider') {
+            return view('front.mdhealth.medical-provider.messages', compact('conversations'));
+        }
+
     }
 
     public function get_notifications_list()
@@ -267,11 +287,11 @@ class FirebasePushController extends Controller
         //     $data['purchase_id'] = !empty($notification->purchase_id)?$notification->purchase_id:'';
         //     $data['customer_id'] = !empty($notification->customer_id)?$notification->customer_id:'';
         //     $data['provider_id'] = !empty($notification->provider_id) ? $notification->provider_id: '';
-            
+
         // }die;
         // dd($data);
 
-        return view('front/mdhealth/user-panel/user-notifications',compact('notifications'));
+        return view('front/mdhealth/user-panel/user-notifications', compact('notifications'));
 
     }
 

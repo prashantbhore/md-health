@@ -11,6 +11,10 @@
     <!-- Simplebar Scrollbar -->
     <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
 
+
+    <!-- MDI Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+
     <!-- RemixIcon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
@@ -23,9 +27,9 @@
     <!-- Nice Select -->
     <link rel="stylesheet" href="{{URL::asset('admin/assets/css/nice-select.css')}}">
 
-  
 
-    
+
+
 
     <!-- GLightbox -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />

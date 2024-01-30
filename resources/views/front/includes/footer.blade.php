@@ -5,7 +5,7 @@
              <div class="col-md-3">
                  <div class="card-text camptonBook"><span>MD</span>health</div>
                  <ul>
-                     <li><a href="javascript:;">About Us</a></li>
+                     <li><a href="{{('/about-us')}}">About Us</a></li>
                      <li><a href="javascript:;">Company</a></li>
                      <li><a href="javascript:;">Career</a></li>
                  </ul>

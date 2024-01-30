@@ -140,13 +140,10 @@
         </div>
     </div>
     </div>
-
-
-
 @endsection
 @section('script')
-    <script>
-        $(".upMessagesLi").addClass("activeClass");
-        $(".upMessages").addClass("md-active");
-    </script>
+<script>
+    $(".upMessagesLi").addClass("activeClass");
+    $(".upMessages").addClass("md-active");
+</script>
 @endsection
