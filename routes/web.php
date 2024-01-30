@@ -37,6 +37,7 @@ use App\Http\Controllers\admin\product\MDshopController;
 use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\admin\product\ProductController;
 use App\Http\Controllers\admin\review\reviewController;
+use App\Http\Controllers\admin\sales\AdminMdhealthSalesController;
 use App\Http\Controllers\admin\vendor\ManageVendorController;
 use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
 use App\Http\Controllers\Front\Customer\WalletController;
@@ -118,11 +119,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('sales', 'admin/sales/sales');
     Route::view('sales-details', 'admin/sales/sales-details');
     Route::view('md-profit', 'admin/sales/md-profit');
-    Route::view('md-booking-sales', 'admin/sales/md-booking-sales');
+
+    //Route::view('md-health-sales','admin/sales/md-health-sales');
+
+    Route::controller(AdminMdhealthSalesController::class)->group(function (){
+        Route::get('md-health-sales','index');
+       
+    });
+
+
+
+
+
 
     //Admin MANAGE CUSTOMERS
 
-    Route::controller(CustomerController::class)->group(function () {
+    Route::controller(CustomerController::class)->group(function (){
         Route::get('customers', 'index');
         Route::get('/customer-data-table', 'data_table');
         Route::get('admin/customer-details/{id}', 'show')->name('customer.details');
@@ -771,7 +783,9 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
 
     Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
+    
     Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
+
     Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');
 
     // Route::view('', '');
@@ -855,9 +869,13 @@ Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 // USER PANEL
 #Orders
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
-
-
 Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
+
+// FOOTER PAGES
+Route::view('about-us','front/mdhealth/about-us');
+Route::view('privacy-policy','front/mdhealth/privacy-policy');
+Route::view('company','front/mdhealth/company');
+Route::view('enlightment-text','front/mdhealth/enlightment-text');
 
 Route::view('welcome', 'welcome');
 

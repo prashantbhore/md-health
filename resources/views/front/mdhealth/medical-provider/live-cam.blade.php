@@ -18,20 +18,24 @@
                             <img src="{{asset('front/assets/img/backPage.png')}}" alt=""> <span class="card-h1">Back Messages</span>
                         </a>
                     </div>
+
                     <div class="card-body">
+
                         <div class="live-screen df-center position-relative">
                             <h2>Medical Service Provider Cam</h2>
                             <div class="customer-cam df-center">
                                 <h4>Customer Cam</h4>
-
                             </div>
                         </div>
+
                         <div class="df-center gap-4 handset">
                             <img src="{{asset('front/assets/img/mic.png')}}" alt="">
                             <img src="{{asset('front/assets/img/call.png')}}" alt="">
                             <img src="{{asset('front/assets/img/cam.png')}}" alt="">
                         </div>
+
                     </div>
+
                 </div>
             </div>
         </div>

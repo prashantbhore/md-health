@@ -11,7 +11,7 @@
 <div class="card panel-left">
     <h5 class="card-header">Service Provider Panel</h5>
     <div class="card-body">
-        <ul class="nav flex-column nav-stuff"  style="min-height: 400px;">
+        <ul class="nav flex-column nav-stuff"  style="min-height: 523px;">
             <li class="nav-item mpDashboardLi 
             {{ !empty($previllages) && strpos($previllages, 'Dashboard') == false ? 'd-none' : '' }}">
                 <a class="nav-link mpDashboard" aria-current="page" href="{{url('medical-provider-dashboard')}}">Dashboard</a>
@@ -54,7 +54,7 @@
             </li>
 
             <li class="nav-item mt-auto">
-                <a class="nav-link disabled text-black fw-bold fs-14" href="#" tabindex="-1" aria-disabled="true">Version 1.0</a>
+            <a class="nav-link disabled text-black fw-bold verNo" href="#" tabindex="-1" aria-disabled="true">MD Health - Version 1.0</a>
             </li>
 
         </ul>

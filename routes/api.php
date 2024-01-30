@@ -61,6 +61,9 @@ Route::get('md-treatment-list-all', [CommonController::class, 'get_treatment_lis
 // get city list
 Route::post('md-city-list', [CommonController::class, 'get_cities_list']);
 
+// get country_code 
+Route::post('md-country-code', [CommonController::class, 'get_country_code_list']);
+
 // customer register
 Route::post('md-customer-register', [RegistrationController::class, 'customer_register']);
 

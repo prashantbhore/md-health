@@ -1,6 +1,5 @@
 @extends('front.layout.layout2')
 @section('content')
-
     <style>
         .pending {
             width: 94px;

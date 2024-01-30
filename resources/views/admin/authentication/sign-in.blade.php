@@ -4,14 +4,41 @@
     .btn-outline-secondary {
         border: 1px solid #D6D6D6;
     }
-  
+
     .btn-outline-secondary:focus {
-       
+
         box-shadow: none;
     }
+
     .btn-outline-secondary:hover {
         /* background-color: #fff; */
         border: 1px solid #D6D6D6;
+    }
+
+    body,
+    .signInCard,
+    .form-control,
+    .form-control:focus {
+        background: #f6f6f6;
+    }
+
+    .form-control {
+        border-radius: 5px !important;
+    }
+
+    .mdi-eye-off::before,
+    .mdi-eye::before {
+        font-size: 19px;
+        z-index: 9999;
+    }
+
+
+    .hide-eye-div .mdi {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+        cursor: pointer;
+        z-index: 9;
     }
 </style>
 <section>
@@ -27,31 +54,33 @@
                         incognito mode to log in.</p>
                 </div>
 
-              
+
                 <form action="{{ url('super-admin-login') }}" method="post" id="loginForm" class="container-sm px-5">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" class="form-control" name="email" id="email" placeholder="Email" aria-describedby="email">
                     </div>
-                
-                    <div class="mb-3">
+
+                    <div class="mb-3 hide-eye-div position-relative">
                         <label for="Password" class="form-label">Password</label>
                         <div class="input-group">
                             <input type="password" name="password" class="form-control" id="Password" placeholder="Password">
-                            <button type="button" id="togglePassword" class="btn btn-outline-secondary">
+                            <!-- <button type="button" id="togglePassword" class="btn btn-outline-secondary">
                                 <i class="fa fa-eye" style="font-size:20px"></i>
-                            </button>
+                            </button> -->
+                            <span toggle="#Password" class="mdi mdi-eye-off field-icon toggle-password"></span>
+
                         </div>
                     </div>
-                
+
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="rememberMe">
                             <label class="form-check-label" for="rememberMe">Remember Me</label>
                         </div>
                     </div>
-                
+
                     <button type="submit" class="btn save-btn w-100 df-center">Continue</button>
                     <div class="text-center mt-3">
                         <a href="#" class="mt-3 backto">Back to MDhealth.co</a>
@@ -70,17 +99,28 @@
 @section('script')
 <script>
     // jQuery is assumed to be loaded in your project
-
-    $(document).ready(function () {
-        $("#togglePassword").click(function () {
-            var passwordField = $("#Password");
-            var passwordFieldType = passwordField.attr("type");
-            if (passwordFieldType === "password") {
-                passwordField.attr("type", "text");
-            } else {
-                passwordField.attr("type", "password");
-            }
-        });
+    // $(document).ready(function() {
+    //     $("#toggle-password").click(function() {
+    //         var passwordField = $("#Password");
+    //         var passwordFieldType = passwordField.attr("type");
+    //         if (passwordFieldType === "password") {
+    //             passwordField.attr("type", "text");
+    //         } else {
+    //             passwordField.attr("type", "password");
+    //         }
+    //     });
+    // });
+</script>
+<script>
+    // PASSWORD HIDE/SHOW
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("mdi-eye mdi-eye-off");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
     });
 </script>
 
