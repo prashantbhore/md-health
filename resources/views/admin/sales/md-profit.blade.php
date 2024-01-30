@@ -39,6 +39,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col mb-3 pe-0">
                 <div class="card position-relative">
                     <div class="card-body">
@@ -57,6 +58,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="col mb-3 pe-0">
                 <div class="card position-relative">
                     <div class="card-body">

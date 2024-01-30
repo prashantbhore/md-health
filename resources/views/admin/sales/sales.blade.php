@@ -3,6 +3,7 @@
     <div class="content-wrapper">
         <div class="page-title">Sales</div>
         <div class="row top-cards">
+            
             <div class="col-md-3 mb-3">
                 <a href="{{URL('admin/md-profit')}}" class="text-decoration-none text-dark">
                     <div class="card position-relative">
@@ -25,6 +26,30 @@
                     </div>
                 </a>
             </div>
+
+            <div class="col-md-3 mb-3">
+                <a href="{{URL('admin/md-health-sales')}}" class="text-decoration-none text-dark">
+                      <div class="card position-relative">
+                          <div class="card-body">
+                              <div class="d-flex align-items-center gap-2">
+                                  <div class="card-icon">
+                                      <svg width="30" height="30" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M10.422 39.54C9.666 39.54 8.838 39.486 7.938 39.378C7.038 39.306 6.228 39.18 5.508 39V22.476L0.27 24.258V19.56L5.508 17.778V14.43L0.27 16.212V11.514L5.508 9.732V0.443998H13.392V7.032L21.816 4.116V8.814L13.392 11.73V15.078L21.816 12.162V16.806L13.392 19.722V32.952C15.66 32.556 17.424 31.8 18.684 30.684C19.98 29.568 20.88 28.11 21.384 26.31C21.924 24.51 22.194 22.44 22.194 20.1H29.592C29.592 22.584 29.268 24.996 28.62 27.336C27.972 29.64 26.91 31.71 25.434 33.546C23.994 35.382 22.032 36.84 19.548 37.92C17.1 39 14.058 39.54 10.422 39.54Z" fill="#EBEBEB" />
+                                      </svg>
+                                  </div>
+                                  <div class="card-text d-flex flex-column">
+                                      <p>MDhealth Sales</p>
+                                      <h4>172K</h4>
+                                  </div>
+                                  <span class="link-open">
+                                      <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+
             <div class="col-md-3 mb-3">
                 <a href="#" class="text-decoration-none text-dark cursor-default">
                     <div class="card position-relative">
@@ -47,8 +72,9 @@
                     </div>
                 </a>
             </div>
+
             <div class="col-md-3 mb-3">
-                <a href="{{URL('admin/md-booking-sales')}}" class="text-decoration-none text-dark">
+                <a href="#" class="text-decoration-none text-dark">
                     <div class="card position-relative">
                         <div class="card-body">
                             <div class="d-flex align-items-center gap-2">
@@ -116,28 +142,7 @@
                 </a>
             </div>
 
-            <div class="col-md-3 mb-3">
-                <a href="#" class="text-decoration-none text-dark cursor-default">
-                    <div class="card position-relative">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="card-icon">
-                                    <svg width="30" height="30" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.422 39.54C9.666 39.54 8.838 39.486 7.938 39.378C7.038 39.306 6.228 39.18 5.508 39V22.476L0.27 24.258V19.56L5.508 17.778V14.43L0.27 16.212V11.514L5.508 9.732V0.443998H13.392V7.032L21.816 4.116V8.814L13.392 11.73V15.078L21.816 12.162V16.806L13.392 19.722V32.952C15.66 32.556 17.424 31.8 18.684 30.684C19.98 29.568 20.88 28.11 21.384 26.31C21.924 24.51 22.194 22.44 22.194 20.1H29.592C29.592 22.584 29.268 24.996 28.62 27.336C27.972 29.64 26.91 31.71 25.434 33.546C23.994 35.382 22.032 36.84 19.548 37.92C17.1 39 14.058 39.54 10.422 39.54Z" fill="#EBEBEB" />
-                                    </svg>
-                                </div>
-                                <div class="card-text d-flex flex-column">
-                                    <p>MDhealth Sales</p>
-                                    <h4>172K</h4>
-                                </div>
-                                <span class="link-open">
-                                    <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+     
 
 
             <!-- Orders -->
