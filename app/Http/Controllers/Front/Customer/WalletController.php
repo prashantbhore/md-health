@@ -47,8 +47,10 @@ class WalletController extends Controller
         //dd(Auth::guard('md_customer_registration')->user()->id);
 
         $your_network_count = CoinStatus::where('customer_id', Auth::guard('md_customer_registration')->user()->id)
-        ->where('wallet_status', 'your_network')
+        ->where('wallet_status','your_netowrk')
         ->count();
+
+        // dd($your_network_count);
 
        
 
