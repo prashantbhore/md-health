@@ -79,6 +79,34 @@ $(document).on("click", "#regcustuser", function () {
     }
 });
 
+
+$(document).ready(function () {
+    $("#phoneno").attr('disabled',true);
+});
+$(document).on("change", "#country_id", function () {
+    $("#phoneno").attr('disabled',false);
+});
+$(document).on("keyup", "#phoneno", function () {
+    var countrycode = $("#countrycode").val();
+    var phoneno = $("#phoneno").val();
+    var phone=countrycode+phoneno;
+    var phone = $("#number").val(phone);
+    
+});
+$(document).on("change", "#country_id", function () {
+    var countrycode = $("#countrycode").val();
+    var phoneno = $("#phoneno").val();
+    var phone=countrycode+phoneno;
+    var phone = $("#number").val(phone);
+    
+});
+// $(document).on("keyup", "#phoneno", function () {
+//         var countrycode = $("#countrycode").val();
+//         var phoneno = $("#phoneno").val();
+//         var phone=countrycode+phoneno;
+//         var phone = $("#phone").val(phone);
+        
+// });
 $(document).on("click", "#medproreg", function () {
     if ($("#myFormProvider").valid()) {
         var email = $("#email").val();
@@ -93,6 +121,7 @@ $(document).on("click", "#medproreg", function () {
         $.ajax({
             url: base_url + "/email-or-mobile-exist",
             method: "POST",
+            
             data: {
                 email: email,
                 phone: phone,
@@ -346,6 +375,38 @@ $(document).ready(function () {
             // If no country is selected, hide and reset the city select
             $('#city_id').hide().val('');
         }
+        if (selectedCountryId) {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": csrfToken,
+                },
+            });
+            $.ajax({
+                url: base_url + '/api/md-country-code', // Replace with your route to fetch cities
+                method: 'POST',
+                data: {
+                    country_id: selectedCountryId
+                },
+                success: function (response) {
+                    // console.log(response.data.country_code);
+                    $('#countrycode').empty();
+                    // $('#countrycode').append('<option value="" >Choose</option>');
+                    // Append new options based on the AJAX response
+                    $.each(response.data, function (index, city) {
+                        $('#countrycode').val(response.data.country_code);
+                    });
+
+                    // Show the city select
+                    $('#countrycode').show();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            // If no country is selected, hide and reset the city select
+            $('#countrycode').hide().val('');
+        }
     });
 });
 
@@ -417,7 +478,7 @@ $(document).ready(function () {
                 email: true,
                 spaceValidation: true,
             },
-            phone: {
+            phoneno: {
                 required: true,
                 spaceValidation: true,
             },
@@ -463,7 +524,7 @@ $(document).ready(function () {
                 email: "Please enter a valid email address.",
                 spaceValidation: "Email should not contain only spaces.",
             },
-            phone: {
+            phoneno: {
                 required: "Please enter your phone number.",
                 spaceValidation: "Phone number should not contain only spaces.",
             },
@@ -550,7 +611,7 @@ $.validator.addMethod("alphaOnly", function(value, element) {
                 email: true,
                 spaceValidation: true,
             },
-            phone: {
+            phoneno: {
                 required: true,
                 spaceValidation: true,
             },
@@ -602,7 +663,7 @@ $.validator.addMethod("alphaOnly", function(value, element) {
                 email: "Please enter a valid email address.",
                 spaceValidation: "Email should not contain only spaces.",
             },
-            phone: {
+            phoneno: {
                 required: "Please enter your phone number.",
                 spaceValidation: "Phone number should not contain only spaces.",
             },

@@ -565,7 +565,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn purchaseBtn w-100" data-bs-toggle="modal">Apply Filter </button>
+                <button type="submit" class="btn " >Apply Filter </button>
                 </form>
             </div>
 
@@ -929,9 +929,7 @@
         });
     });
 </script>
-{{-- ========================================================== --}}
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -947,5 +945,4 @@
     });
 </script>
 
-{{-- ======================================================================= --}}
 @endsection
