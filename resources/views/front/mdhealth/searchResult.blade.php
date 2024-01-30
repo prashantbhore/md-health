@@ -312,8 +312,7 @@
                                                         </button>
                                                     @endif
                                                 @elseif($user == false)
-                                                    <button class="btn purchaseBtn" id="{{ $package_list['id'] }}"
-                                                        data-bs-toggle="modal">Purchase
+                                                    <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
                                                         Package</button>
 
                                                     @if ($package_list['favourite_check'] == 'yes')
@@ -611,7 +610,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn purchaseBtn" >Apply Filter </button>
+                <button type="submit" class="btn " >Apply Filter </button>
                 </form>
             </div>
 
@@ -994,9 +993,7 @@
         });
     });
 </script>
-{{-- ========================================================== --}}
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -1012,5 +1009,4 @@
     });
 </script>
 
-{{-- ======================================================================= --}}
 @endsection

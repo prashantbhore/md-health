@@ -9,8 +9,8 @@
         body,
         .form-control,
         .form-control:focus {
-        background: #f6f6f6;
-    }
+            background: #f6f6f6;
+        }
 
         #recaptcha-container {
             bottom: 350px;
@@ -26,6 +26,11 @@
             border: 1px solid #D6D6D6 !important;
         }
     </style>
+    @php
+        $country = App\Models\Country::get();
+
+    @endphp
+
     <div class="container py-100px df-center sign-in-form" id="logDiv">
         <div class="card sign-in-card" style="background: #f6f6f6;">
             <div class="card-body">
@@ -46,12 +51,25 @@
                             {{-- @csrf --}}
                             <input type="hidden" name="platform_type" value="web">
                             <input type="hidden" name="login_type" value="login">
+
                             <div class="mb-3">
-                                <label for="number" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" name="number" id="number"
+                                <label for="phoneno" class="form-label">Phone Number</label>
+                                @if (!empty($country))
+                                    <div class="mb-3">
+                                        <select name="countrycode" id="countrycode">
+                                            <option value=""></option>
+                                            @foreach ($country as $country)
+                                                <option value="{{ $country->country_code }}">{{ $country->country_code }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                                <input type="text" class="form-control" name="phoneno" id="phoneno"
                                     placeholder="Phone Number">
-                                {{-- --}}
                             </div>
+                            <input type="hidden" class="form-control" name="number" id="number"
+                                placeholder="Phone Number">
                             <div class="mb-3 hide-eye-div">
                                 <label for="Password" class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password"
