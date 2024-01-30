@@ -11,7 +11,7 @@
         $sender_id = $user->id;
         $conversation_id = Session::get('conversation_id');
     } else {
-        return redirect('/')->with('error', 'user session not found');
+        // return redirect('/')->with('error', 'user session not found');
     }
 @endphp
 
