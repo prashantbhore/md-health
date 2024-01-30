@@ -16,6 +16,9 @@
 @extends('front.layout.layout2')
 @section('content')
 <style>
+       .footer-2 {
+        display: none;
+    }
     .package_name {
         color: #000;
         font-family: Campton;
@@ -239,13 +242,10 @@
             <!-- BANK TRANSFER -->
             {{-- Mplus03 --}}
             <div id="bank" class="bank-transfer-details">
-                <form action="{{url('bank-payment')}}" method="post">
+                <form action="{{url('bank-payment')}}" method="post" id="bank_transfer_form">
                      @csrf
                     <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
                     <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
-
-                    <input type="hidden" name="payment_percent" id="bank_transfer_payment_percent" value="">
-                    <input type="hidden" name="total_paying_price" id="bank_transfer_total_paying_price" value="">
 
                     <input type="hidden" name="bank_name" id="bank_name" value="">
                     <input type="hidden" name=" receiver_name" id="receiver_name" value="">
@@ -343,6 +343,7 @@
         <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
     </div>
 </div>
+@include('front.includes.footer')
 @endsection
     @section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -1013,16 +1014,43 @@ function getBankData(selectedBank){
                      console.log('Success:', response.package_details.package_unique_no);
                     if (response.message === "Bank Details Found") {
 
-                            if (isTwentySelected) {
-                                var percentage = '20';
-                            } else if (isThirtySelected) {
-                                var percentage = '30';
-                            } else if (isFiftySelected) {
-                                var percentage = '50';
-                            } else if (isHundredSelected) {
-                                var percentage = '100';
-                            }
-                           
+                        var form = $('#bank_transfer_form');
+
+                        // Additional data
+                        var pendingAmount = proxyPrice - totalPrice;
+
+                        if (isTwentySelected){
+                            var percentage = '20';
+                        } else if (isThirtySelected){
+                            var percentage = '30';
+                        } else if (isFiftySelected){
+                            var percentage = '50';
+                        } else if (isHundredSelected){
+                            var percentage = '100';
+                        }
+                        // $('#card_number').val(cardNo);
+
+                        var additionalData = {
+                            'package_id': packageId,
+                            'patient_id': patientId,
+                            'sale_price': proxyPrice,
+                            'paid_amount': totalPrice,
+                            'platform_type': 'web',
+                            'pending_amount': pendingAmount,
+                            'percentage': percentage,
+                            'other_services':checkedTitles
+                            
+                        };
+
+                        // Add additional data to the form
+                        $.each(additionalData, function(name, value) {
+                            form.append($('<input>').attr({
+                                type: 'hidden',
+                                name: name,
+                                value: value
+                            }));
+                        });
+                                                
 
                             $("#bank_name").val(response.bank_details.bank_name);
                             $("#receiver_name").val(response.bank_details.account_holder_name);

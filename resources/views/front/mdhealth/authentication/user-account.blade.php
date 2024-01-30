@@ -232,18 +232,21 @@
                                                 <a href="{{ url('sign-in-web') }}" class="signIn-link lh-1">Sign In</a>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-6">
-                                <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-5">
-                                    <div class="mb-2">
-                                        <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
+                                        {{-- <div id="recaptcha-container" class="df-center"></div> --}}
+                                        <span id="error" class="text-danger"></span>
+                                        <div class="col-md-12 text-center d-flex flex-column gap-3 py-100px">
+                                            <button type="button" class="btn cont-btn w-100 df-center" style="margin-bottom: 3.6rem;" id="regcustuser">Create Account</button>
+                                            <label for="" class="mt-auto">Already have an account?</label>
+                                            <a  href="{{ url('sign-in-web') }}" class="signIn-link lh-1">Sign In</a>
+                                        </div>
                                     </div>
-                                    <h5 class="text-h1 my-0">Get your reliable & affordable</h5>
-                                    <h4 class="text-green-h1b my-2">Treatment Packages</h4>
-                                    <p class="text-p1-gray my-0">We are partnered with the top health service providers and
-                                        vendors that gives you the best health experience!</p>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <div class="d-flex flex-column align-items-start justify-content-start pt-300px ps-5">
+                                <div class="mb-2">
+                                    <img src="{{ asset('front/assets/img/MDHealth.svg') }}" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -368,9 +371,25 @@
 @endsection
 
 @section('script')
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src={{ asset('front/controller_js/userregister.js') }}></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src={{ asset('front/controller_js/userregister.js') }}></script>
+
+<script>
+      var tp = document.getElementById("ot1");
+      var tp1 = document.getElementById("ot2");
+      tp.onchange = function (f) {
+         if (tp.value != '') {
+            f.target.style.borderBottom = "2px solid #00ff00";
+         }
+      };
+      tp1.onchange = function (g) {
+         if (tp1.value != '') {
+            g.target.style.borderBottom = "2px solid #00ff00";
+         }
+      };
+   </script>
+
 @endsection

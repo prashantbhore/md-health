@@ -2795,9 +2795,9 @@ span.popup-msg.active {
 
 /* DatePicker Start */
 
-.datepickerContainer {
-    /* position: relative; */
-}
+/* .datepickerContainer {
+    position: relative;
+} */
 
 .daterangepicker td.active,
 .daterangepicker td.active:hover {
@@ -4422,8 +4422,7 @@ label.tc-text,
 }
 
 #ReviewModal .modal-content,
-#ReviewModalVehicle .modal-content
- {
+#ReviewModalVehicle .modal-content {
     background: url("../img/reviewBg.png") no-repeat center center/ contain;
     height: 707px;
 }
@@ -5044,4 +5043,127 @@ input[type="radio"] {
 
 .preview-img img {
     height: 100px;
+}
+
+.notifications-list div {
+    border-bottom: 1px solid #CFCFCF;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.notifications-list div span {
+    font-size: 11px;
+    letter-spacing: -0.44px;
+}
+
+.sales-tab img {
+    height: 24px;
+}
+
+/* footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+} */
+
+.footer-pages .card {
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    margin: 32px 0;
+}
+
+.footer-pages .nav-pills .nav-link.active,
+.footer-pages .nav-pills .show>.nav-link {
+    color: #4CDB06;
+    background-color: transparent;
+    font-family: Campton;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.footer-pages .nav-link {
+    color: #000002;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.footer-pages .tab-pane {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.footer-pages .card-body {
+    padding: 3.5rem 2rem;
+}
+
+.gallery-video {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+.content-video {
+    position: relative;
+    /* width: 500px; */
+    /* margin: 0 auto; */
+    /* padding: 20px; */
+}
+
+.content-video video {
+    width: 100%;
+    display: block;
+}
+
+.content-video:before {
+    content: '';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.30);
+    border-radius: 5px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.play-icon {
+    position: absolute;
+    bottom: 34%;
+    left: 34%;
+}
+
+.play-icon img {
+    height: 39px !important;
+    width: 38px !important;
+    transition: 0.15s all;
+}
+
+.play-icon img:hover {
+    height: 40px !important;
+    width: 39px !important;
+}
+
+.person-message-div .treatment-card {
+    width: 641px !important;
+    margin: 1rem;
+    padding: 16px;
+}
+.person-message-div .day-time {
+    margin: 1rem;
+}
+.self-msg-div .card-p1 {
+    margin-right: 1rem;
 }

@@ -1,34 +1,34 @@
 <?php
 
-use App\Http\Controllers\FirebasePushController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\api\registration\RegistrationController;
-use App\Http\Controllers\api\login\LoginControllers;
-use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\AppConfigController;
-use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
-use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
+use App\Http\Controllers\api\CommonController;
 use App\Http\Controllers\api\customer\CustomerPackageController;
-use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\api\customer\CustomerReportController;
 use App\Http\Controllers\api\customer\CustomerShopController;
+use App\Http\Controllers\api\customer\UpdateCustomerProfileController;
+use App\Http\Controllers\api\food\FoodPackageController;
+use App\Http\Controllers\api\food\UpdateFoodProfileController;
+use App\Http\Controllers\api\login\LoginControllers;
 use App\Http\Controllers\api\MedicalProvider\AddNewAcommoditionController;
 use App\Http\Controllers\api\MedicalProvider\AddSystemUserRole;
-use App\Http\Controllers\api\MedicalProvider\TransportationController;
-use App\Http\Controllers\api\MedicalProvider\ToursController;
+use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
 use App\Http\Controllers\api\MedicalProvider\PackageControllers;
 use App\Http\Controllers\api\MedicalProvider\PaymentController;
 use App\Http\Controllers\api\MedicalProvider\ReportsController;
 use App\Http\Controllers\api\MedicalProvider\SalesController;
+use App\Http\Controllers\api\MedicalProvider\ToursController;
+use App\Http\Controllers\api\MedicalProvider\TransportationController;
+use App\Http\Controllers\api\MedicalProvider\UpdateMedicalProfileController;
+use App\Http\Controllers\api\registration\RegistrationController;
+use App\Http\Controllers\api\vendor\UpdateVendorProfileController;
+use App\Http\Controllers\api\vendor\VendorDashboardController;
 use App\Http\Controllers\api\vendor\VendorProductController;
 use App\Http\Controllers\api\vendor\VendorSalesController;
-use App\Http\Controllers\api\vendor\UpdateVendorProfileController;
-use App\Http\Controllers\api\MedicalProvider\MedicalProviderDashboradController;
-use App\Http\Controllers\api\food\UpdateFoodProfileController;
-use App\Http\Controllers\api\vendor\VendorDashboardController;
-use App\Http\Controllers\api\food\FoodPackageController;
+use App\Http\Controllers\FirebasePushController;
+use App\Http\Controllers\Front\Customer\CustomerInteractionController;
 use App\Http\Controllers\InvitationApiController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,7 +38,7 @@ use App\Http\Controllers\InvitationApiController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
-*/
+ */
 
 Route::get('unauthorized-user', function () {
     return response()->json(['status' => 401, 'message' => 'unauthorized user'], 401);
@@ -47,18 +47,12 @@ Route::get('unauthorized-user', function () {
 // dynamic app url
 Route::post('app-base-url', [AppConfigController::class, 'fun_app_get_base_url']);
 
-//Mplus02
-Route::middleware(['CheckRequestType'])->group(function () {
-    Route::get('live-cam',[CustomerInteractionController::class, 'live_cam']);
-});
-
 Route::middleware(['CheckRequestType'])->group(function () {
     Route::post('setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
-    Route::post('send/notification',[FirebasePushController::class,'notification'])->name('firebase.send');
+    Route::post('send/notification', [FirebasePushController::class, 'notification'])->name('firebase.send');
 });
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
-
 
 // get treatment list
 Route::get('md-treatment-list-all', [CommonController::class, 'get_treatment_list']);
@@ -106,6 +100,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('md-medical-provider-logout', [LoginControllers::class, 'medical_provider_logout']);
 
+    //Mplus02
+    Route::middleware(['CheckRequestType'])->group(function () {
+        Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
+    });
 
     //update-customer-list
     Route::get('md-update-customer-list', [UpdateCustomerProfileController::class, 'update_customer_list']);
@@ -214,7 +212,6 @@ Route::middleware('auth:sanctum')->group(function () {
     //get-tour-price
     Route::post('md-get-tour-price', [PackageControllers::class, 'get_tour_price']);
 
-
     //packages-active-list
     Route::get('md-packages-active-list', [PackageControllers::class, 'packages_active_list']);
 
@@ -312,12 +309,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('md-customer-favourite-vendor-names', [CustomerPackageController::class, 'customer_favourite_vendor_names']);
 
-      //customer-favourite-list
-      Route::post('md-customer-favourite-list-web', [CustomerPackageController::class, 'customer_favourite_list_web']);
+    //customer-favourite-list
+    Route::post('md-customer-favourite-list-web', [CustomerPackageController::class, 'customer_favourite_list_web']);
 
-      //customer-package-filter
+    //customer-package-filter
     Route::post('md-customer-package-filters', [CustomerPackageController::class, 'customer_package_filters']);
-    
+
     //customer-pay-now
     Route::post('md-customer-pay-now', [CustomerPackageController::class, 'customer_pay_now']);
 
@@ -345,7 +342,6 @@ Route::middleware('auth:sanctum')->group(function () {
     //customer-package-filter
     Route::post('md-customer-package-filters', [CustomerPackageController::class, 'customer_package_filters']);
 
-
     //customer-favourite-list-count
     Route::get('md-customer-favourite-list-count', [CustomerPackageController::class, 'customer_favourite_list_count']);
 
@@ -371,11 +367,6 @@ Route::middleware('auth:sanctum')->group(function () {
         // Route::post('/products/bulk-import','addProductsBulk');
     });
 
-
-
-
-
-
     //customer-package-view-search
     Route::post('md-packages-view-search', [CustomerPackageController::class, 'packages_view_on_search_result']);
 
@@ -391,10 +382,8 @@ Route::middleware('auth:sanctum')->group(function () {
     //Medical Provider Report Search
     Route::post('md-medical-provider-report-search', [ReportsController::class, 'provider_reports_search']);
 
-
     //Customer Report Search
     Route::post('md-customer-report-search', [CustomerReportController::class, 'customer_reports_search']);
-
 
     //Customer All Reports List
     Route::get('md-customer-all-reports-list', [CustomerReportController::class, 'customer_all_reports_list']);
@@ -403,15 +392,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('md-customer-all-reports-list-details-for-app', [CustomerReportController::class, 'customer_all_reports_details_list_for_app']);
 
-
-
     //active treatment list
     Route::get('md-provider-active-treatment-list', [SalesController::class, 'active_treatment_list']);
 
-
     //completed treatment list
     Route::get('md-provider-completed-treatment-list', [SalesController::class, 'completed_treatment_list']);
-
 
     //Cancelled treatment list
     Route::get('md-provider-cancelled-treatment-list', [SalesController::class, 'cancelled_treatment_list']);
@@ -419,13 +404,11 @@ Route::middleware('auth:sanctum')->group(function () {
     //Patient Details
     Route::post('md-provider-patient-details', [SalesController::class, 'patient_details']);
 
-
     //Patient Details
     Route::post('md-provider-treatment-date-status', [SalesController::class, 'treatement_date_status']);
 
     //Provider Case Manager Listing
     Route::get('md-provider-case-manager-list', [SalesController::class, 'case_manager_list']);
-
 
     //Provider sales treatment package details
     Route::post('md-provider-package-details', [SalesController::class, 'package_details']);
@@ -433,11 +416,8 @@ Route::middleware('auth:sanctum')->group(function () {
     //Provider sales treatment package details chnages and assign case manger
     Route::post('md-provider-assign-treatment-case-manager', [SalesController::class, 'store_package_details_changes']);
 
-
-
     //Provider sales treatment search
     Route::post('md-provider-treatment-search', [SalesController::class, 'treatment_search']);
-
 
     //Provider account details saved
     Route::post('md-provider-add-bank-account', [PaymentController::class, 'add_provider_account']);
@@ -451,19 +431,14 @@ Route::middleware('auth:sanctum')->group(function () {
     //Provider Transaction Search
     Route::post('md-provider-transaction-search', [PaymentController::class, 'search_transactions']);
 
-
     //Provider Transaction total Panding
     Route::get('md-provider-transaction-total-pending', [PaymentController::class, 'total_pending_amount']);
-
 
     //Provider Transaction total completed
     Route::get('md-provider-transaction-total-completed', [PaymentController::class, 'total_paid_amount']);
 
-
     //Provider Transaction total amount
     Route::get('md-provider-transaction-total-business-amount', [PaymentController::class, 'total_business_amount']);
-
-
 
     //Provider Add System User
     Route::post('md-provider-add-system-user', [AddSystemUserRole::class, 'add_system_user']);
@@ -479,14 +454,11 @@ Route::middleware('auth:sanctum')->group(function () {
     //Provider System User Edit
     Route::post('md-provider-system-user-edit', [AddSystemUserRole::class, 'edit_system_user']);
 
-
     //Provider System User delete
     Route::post('md-provider-system-user-delete', [AddSystemUserRole::class, 'delete_system_user']);
 
-
     //medical Provider Daily Monthly Summary
     Route::get('md-provider-daily-monthly-summary', [SalesController::class, 'salesSummary']);
-
 
     //referal-link
     Route::get('/send-invitation-link', [InvitationApiController::class, 'send_invitation_link']);
@@ -499,10 +471,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/md-make-request-form', [CommonController::class, 'make_request_form']);
 
-
-
-
-
     //Vendor Sales Controller
     Route::controller(VendorSalesController::class)->group(function () {
         Route::get('active-sales-lists', 'activeSales');
@@ -514,14 +482,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('search-sales-cancelled', 'searchSalesCancelled');
     });
 
-
     //Medical Provider Dashboard
     Route::controller(MedicalProviderDashboradController::class)->group(function () {
         Route::get('medical-provider-monthly-order-count', 'monthlyOrders');
         Route::get('medical-provider-monthly-sales-count', 'monthlySales');
         Route::get('medical-provider-package-latest-orders', 'latestOrders');
     });
-
 
     //Medical Provider Dashboard
     Route::controller(VendorDashboardController::class)->group(function () {
@@ -530,8 +496,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('md-vendor-package-latest-orders', 'latestOrders');
     });
 
-
-    //Food Provider 
+    //Food Provider
     Route::controller(FoodPackageController::class)->group(function () {
         Route::post('md-add-food-packages', 'add_food_packages');
         Route::post('md-add-food-packages-with-price', 'add_food_packages_with_price');
