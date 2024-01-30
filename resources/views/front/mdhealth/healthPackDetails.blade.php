@@ -313,14 +313,18 @@
                         <a class="nav-link card-p1" data-bs-toggle="pill" href="#menu2">Photos/Videos</a>
                     </li>
                 </ul>
-
+                {{-- {{dd($company_name)}} --}}
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active container" id="home">
                         <div class="overview mt-4">
                             <div class="row">
                                 <div class="col-12 ps-0">
-                                    <p>{{ !empty($packageDetails['overview']) ? strip_tags($packageDetails['overview']) : '' }}</p>
+                                    @php
+                                        // $company_name='vikas';
+                                    @endphp
+                                    <p style="font-family: CamptonBook !important; font-size: 15px !important;">{!! !empty($packageDetails['overview']) ? str_replace($company_name, '*************', nl2br(strip_tags($packageDetails['overview']))) : '' !!}
+                                    </p>
                                 </div>
                                 {{-- <div class="col-4 pe-0">
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">

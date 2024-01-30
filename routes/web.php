@@ -853,6 +853,6 @@ Route::view('medical-dashboard', 'front/mdhealth/medical-provider');
 Route::view('user-orders', 'front/mdhealth/user-panel/user-orders');
 
 
-Route::view('user-notifications', 'front/mdhealth/user-panel/user-notifications');
+Route::any('user-notifications', [FirebasePushController::class, 'get_notifications_list']);
 
 Route::view('welcome', 'welcome');

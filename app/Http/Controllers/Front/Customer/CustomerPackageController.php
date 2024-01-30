@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Http;
 use Session;
 use Storage;
 use Validator;
+use App\Models\MedicalProviderRegistrater;
 
 class CustomerPackageController extends Controller
 {
@@ -934,11 +935,27 @@ class CustomerPackageController extends Controller
 
                 // // Attach the cookie to the response
                 // $response->withCookie( $cookie );
+                $package_purhase_or_not=CustomerPurchaseDetails::where('status','active')
+                ->select('package_id')
+                ->where('package_id',$packages_view->id)
+                ->where('customer_id',Auth::guard('md_customer_registration')->user()->id)
+                ->first();
+                if(!empty($package_purhase_or_not)){
+                  $company_name=MedicalProviderRegistrater::where('md_medical_provider_register.status','active')
+                    ->select('md_medical_provider_register.company_name')
+                    ->leftjoin('md_packages','md_packages.created_by','md_medical_provider_register.id')
+                    ->first();
+                    if(!empty($company_name)){
+                        $company_name=$company_name->company_name;
+                    }
+                }else{
+                    $company_name='******';
+                }
 
                 $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
                 $counties = Country::all();
 
-                return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties', 'provider_gallery'));
+                return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties', 'provider_gallery','company_name'));
 
             } else {
                 return view('front.mdhealth.searchResult');
