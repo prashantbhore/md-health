@@ -177,30 +177,30 @@ class plugNmeetConnect
             }
         }
         // echo "hi";die;
-        if (isset($roomFeatures['enable_analytics'])) {
-            $features->setEnableAnalytics($roomFeatures['enable_analytics']);
-        }
+        // if (isset($roomFeatures['enable_analytics'])) {
+        //     $features->setEnableAnalytics($roomFeatures['enable_analytics']);
+        // }
 
-        if (isset($roomMetadata['recording_features'])) {
-            $roomRecordingFeatures = $roomMetadata['recording_features'];
-            $recordingFeatures = new RecordingFeaturesParameters();
-            if (isset($roomRecordingFeatures['is_allow'])) {
-                $recordingFeatures->setIsAllow($roomRecordingFeatures['is_allow']);
-            }
-            if (isset($roomRecordingFeatures['is_allow_cloud'])) {
-                $recordingFeatures->setIsAllowCloud($roomRecordingFeatures['is_allow_cloud']);
-            }
-            if (isset($roomRecordingFeatures['is_allow_local'])) {
-                $recordingFeatures->setIsAllowLocal($roomRecordingFeatures['is_allow_local']);
-            }
-            if (isset($roomRecordingFeatures['enable_auto_cloud_recording'])) {
-                $recordingFeatures->setEnableAutoCloudRecording($roomRecordingFeatures['enable_auto_cloud_recording']);
-            }
-            if (isset($roomRecordingFeatures['only_record_admin_webcams'])) {
-                $recordingFeatures->setOnlyRecordAdminWebcams($roomRecordingFeatures['only_record_admin_webcams']);
-            }
-            $features->setRecordingFeatures($recordingFeatures);
-        }
+        // if (isset($roomMetadata['recording_features'])) {
+        //     $roomRecordingFeatures = $roomMetadata['recording_features'];
+        //     $recordingFeatures = new RecordingFeaturesParameters();
+        //     if (isset($roomRecordingFeatures['is_allow'])) {
+        //         $recordingFeatures->setIsAllow($roomRecordingFeatures['is_allow']);
+        //     }
+        //     if (isset($roomRecordingFeatures['is_allow_cloud'])) {
+        //         $recordingFeatures->setIsAllowCloud($roomRecordingFeatures['is_allow_cloud']);
+        //     }
+        //     if (isset($roomRecordingFeatures['is_allow_local'])) {
+        //         $recordingFeatures->setIsAllowLocal($roomRecordingFeatures['is_allow_local']);
+        //     }
+        //     if (isset($roomRecordingFeatures['enable_auto_cloud_recording'])) {
+        //         $recordingFeatures->setEnableAutoCloudRecording($roomRecordingFeatures['enable_auto_cloud_recording']);
+        //     }
+        //     if (isset($roomRecordingFeatures['only_record_admin_webcams'])) {
+        //         $recordingFeatures->setOnlyRecordAdminWebcams($roomRecordingFeatures['only_record_admin_webcams']);
+        //     }
+        //     $features->setRecordingFeatures($recordingFeatures);
+        // }
 
         if (isset($roomMetadata['chat_features'])) {
             $roomChatFeatures = $roomMetadata['chat_features'];
@@ -281,35 +281,35 @@ class plugNmeetConnect
             $features->setDisplayExternalLinkFeatures($displayExternalLinkFeatures);
         }
 
-        if (isset($roomMetadata['ingress_features'])) {
-            $roomIngressFeatures = $roomMetadata['ingress_features'];
-            $ingressFeatures = new IngressFeaturesParameters();
-            if (isset($roomIngressFeatures['is_allow'])) {
-                $ingressFeatures->setIsAllow($roomIngressFeatures['is_allow']);
-            }
-            $features->setIngressFeatures($ingressFeatures);
-        }
+        // if (isset($roomMetadata['ingress_features'])) {
+        //     $roomIngressFeatures = $roomMetadata['ingress_features'];
+        //     $ingressFeatures = new IngressFeaturesParameters();
+        //     if (isset($roomIngressFeatures['is_allow'])) {
+        //         $ingressFeatures->setIsAllow($roomIngressFeatures['is_allow']);
+        //     }
+        //     $features->setIngressFeatures($ingressFeatures);
+        // }
 
-        if (isset($roomMetadata['speech_to_text_translation_features'])) {
-            $roomSpeechToTextTranslationFeatures = $roomMetadata['speech_to_text_translation_features'];
-            $speechToTextTranslationFeatures = new SpeechToTextTranslationFeaturesParameters();
-            if (isset($roomSpeechToTextTranslationFeatures['is_allow'])) {
-                $speechToTextTranslationFeatures->setIsAllow($roomSpeechToTextTranslationFeatures['is_allow']);
-            }
-            if (isset($roomSpeechToTextTranslationFeatures['is_allow_translation'])) {
-                $speechToTextTranslationFeatures->setIsAllowTranslation($roomSpeechToTextTranslationFeatures['is_allow_translation']);
-            }
-            $features->setSpeechToTextTranslationFeatures($speechToTextTranslationFeatures);
-        }
+        // if (isset($roomMetadata['speech_to_text_translation_features'])) {
+        //     $roomSpeechToTextTranslationFeatures = $roomMetadata['speech_to_text_translation_features'];
+        //     $speechToTextTranslationFeatures = new SpeechToTextTranslationFeaturesParameters();
+        //     if (isset($roomSpeechToTextTranslationFeatures['is_allow'])) {
+        //         $speechToTextTranslationFeatures->setIsAllow($roomSpeechToTextTranslationFeatures['is_allow']);
+        //     }
+        //     if (isset($roomSpeechToTextTranslationFeatures['is_allow_translation'])) {
+        //         $speechToTextTranslationFeatures->setIsAllowTranslation($roomSpeechToTextTranslationFeatures['is_allow_translation']);
+        //     }
+        //     $features->setSpeechToTextTranslationFeatures($speechToTextTranslationFeatures);
+        // }
 
-        if (isset($roomMetadata['end_to_end_encryption_features'])) {
-            $roomEndToEndEncryptionFeatures = $roomMetadata['end_to_end_encryption_features'];
-            $endToEndEncryptionFeatures = new EndToEndEncryptionFeaturesParameters();
-            if (isset($roomEndToEndEncryptionFeatures['is_enabled'])) {
-                $endToEndEncryptionFeatures->setIsEnable($roomEndToEndEncryptionFeatures['is_enabled']);
-            }
-            $features->setEndToEndEncryptionFeatures($endToEndEncryptionFeatures);
-        }
+        // if (isset($roomMetadata['end_to_end_encryption_features'])) {
+        //     $roomEndToEndEncryptionFeatures = $roomMetadata['end_to_end_encryption_features'];
+        //     $endToEndEncryptionFeatures = new EndToEndEncryptionFeaturesParameters();
+        //     if (isset($roomEndToEndEncryptionFeatures['is_enabled'])) {
+        //         $endToEndEncryptionFeatures->setIsEnable($roomEndToEndEncryptionFeatures['is_enabled']);
+        //     }
+        //     $features->setEndToEndEncryptionFeatures($endToEndEncryptionFeatures);
+        // }
 
         $metadata = new RoomMetadataParameters();
         $metadata->setRoomTitle($roomTitle);
