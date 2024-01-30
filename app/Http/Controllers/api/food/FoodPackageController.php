@@ -73,7 +73,7 @@ class FoodPackageController extends BaseController
                     $food_menus = [];
                     $food_menus['package_id'] = $FoodPackages->id;
                     $food_menus['days'] = $request->days;
-                    $food_menus['calories'] = $request->calories;
+                    $food_menus['calories'] = $request->caloriesm;
                     $food_menus['meal_type'] = $request->meal_type;
 
                     if ($request->file('menu_image_path')) {
@@ -106,7 +106,7 @@ class FoodPackageController extends BaseController
                 $food_menus['package_id'] = $request->id;
 
                 $food_menus['days'] = $request->days;
-                $food_menus['calories'] = $request->calories;
+                $food_menus['calories'] = $request->caloriesm;
                 $food_menus['meal_type'] = $request->meal_type;
 
                 if ($request->file('menu_image_path')) {
@@ -186,7 +186,7 @@ class FoodPackageController extends BaseController
                     $food_menus = [];
                     $food_menus['package_id'] = $FoodPackages->id;
                     $food_menus['days'] = $request->days;
-                    $food_menus['calories'] = $request->calories;
+                    $food_menus['calories'] = $request->caloriesm;
                     $food_menus['meal_type'] = $request->meal_type;
 
                     if ($request->file('menu_image_path')) {
@@ -217,7 +217,7 @@ class FoodPackageController extends BaseController
                 $food_menus['package_id'] = $request->package_id;
 
                 $food_menus['days'] = $request->days;
-                $food_menus['calories'] = $request->calories;
+                $food_menus['calories'] = $request->caloriesm;
                 $food_menus['meal_type'] = $request->meal_type;
 
                 if ($request->file('menu_image_path')) {
@@ -252,6 +252,7 @@ class FoodPackageController extends BaseController
 
     public function add_food_packages_with_price(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'package_id' => 'required',
             'button_type' => 'required',

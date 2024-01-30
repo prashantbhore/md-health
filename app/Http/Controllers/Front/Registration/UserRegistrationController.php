@@ -16,11 +16,12 @@ use Session;
 use DB;
 
 class UserRegistrationController extends Controller {
-    public function __construct( ApiService $apiService ) {
+    public function __construct( ApiService $apiService ){
         $this->apiService = $apiService;
     }
 
     public function customer_register( request $request ) {
+          
         // dd( $request );
         // $email_exist = CustomerRegistration::where( 'status', 'active' )
         // ->where( 'email', $request->email )
@@ -124,11 +125,22 @@ class UserRegistrationController extends Controller {
         //     }
         //     $update_unique_id = CustomerRegistration::where( 'id', $value->id )->update( [ 'customer_unique_no' => $customer_unique_id ] );
         //     $common_data_registrationid = CommonUserLoginTable::where( 'id', $lastInsertedId )->update( [ 'user_id' => $value->id, 'status'=>'active' ] );
+
+        // $referralCode = $request->query('referral_code');
+        // $coinStatusId = $request->query('coin_status_id');
+
+        
+         
+
         $token = null;
-        $apiUrl = url( '/api/md-customer-register' );
+        $apiUrl = url( '/api/md-customer-register');
 
         $method = 'POST';
         $body = $request->all();
+
+
+       
+
 
         $responseData = $this->apiService->getData( $token, $apiUrl, $body, $method );
         Session::put( 'login_token', $responseData[ 'data' ][ 'access_token' ] );
@@ -136,11 +148,11 @@ class UserRegistrationController extends Controller {
         $user_data = array(
             'email' => $request->get( 'email' ),
             'phone' => $request->get( 'phone' ),
-            'password' => $request->get( 'password' )
+            'password' => $request->get( 'password'),
         );
         $email = $request->email;
         $password = $request->password;
-        if ( Auth::guard( 'md_customer_registration' )->attempt( $user_data ) ) {
+        if ( Auth::guard( 'md_customer_registration' )->attempt( $user_data )){
             if (
                 Auth::guard( 'md_customer_registration' )->attempt( [
                     'email' => $request->email,

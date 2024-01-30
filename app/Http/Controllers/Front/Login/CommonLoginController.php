@@ -245,7 +245,7 @@ class CommonLoginController extends Controller
                             Session::put('user', $user);
                             return response()->json([
                                 'status' => 200,
-                                'message' => 'Login successfully.',
+                                'message' => 'Signed In successfully.',
                                 'url' => '/medical-provider-dashboard',
                             ]);
                         } else {
@@ -336,7 +336,7 @@ class CommonLoginController extends Controller
                             // dd(Session::all());
                             return response()->json([
                                 'status' => 200,
-                                'message' => 'Login successfully.',
+                                'message' => 'Signed In successfully.',
                                 // 'url' => '/user-profile',
                                 'url' => '/my-profile'
                             ]);
@@ -431,7 +431,7 @@ class CommonLoginController extends Controller
                             // dd(Session::all());
                             return response()->json([
                                 'status' => 200,
-                                'message' => 'Login successfully.',
+                                'message' => 'Signed In successfully.',
                                 // 'url' => '/user-profile',
                                 'url' => '/vendor-dashboard'
                             ]);
@@ -526,7 +526,7 @@ class CommonLoginController extends Controller
                             // dd(Session::all());
                             return response()->json([
                                 'status' => 200,
-                                'message' => 'Login successfully.',
+                                'message' => 'Signed In successfully.',
                                 // 'url' => '/user-profile',
                                 'url' => '/food-provider-panel-dashboard'
                             ]);

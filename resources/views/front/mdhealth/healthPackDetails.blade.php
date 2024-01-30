@@ -1,6 +1,9 @@
 @extends('front.layout.layout2')
 @section('content')
 <style>
+       .footer-2 {
+        display: none;
+    }
     .greenCheck input[type="checkbox"],
     .greenCheck input[type="checkbox"]::before {
         border-radius: 50% !important;
@@ -313,14 +316,18 @@
                         <a class="nav-link card-p1" data-bs-toggle="pill" href="#menu2">Photos/Videos</a>
                     </li>
                 </ul>
-
+                {{-- {{dd($company_name)}} --}}
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active container" id="home">
                         <div class="overview mt-4">
                             <div class="row">
                                 <div class="col-12 ps-0">
-                                    <p>{{ !empty($packageDetails['overview']) ? strip_tags($packageDetails['overview']) : '' }}</p>
+                                    @php
+                                    // $company_name='vikas';
+                                    @endphp
+                                    <p style="font-family: CamptonBook !important; font-size: 15px !important;">{!! !empty($packageDetails['overview']) ? str_replace($company_name, '*************', nl2br(strip_tags($packageDetails['overview']))) : '' !!}
+                                    </p>
                                 </div>
                                 {{-- <div class="col-4 pe-0">
                                         <img src="{{ 'front/assets/img/Overview.png' }}" alt="Image">
@@ -418,30 +425,33 @@
                 </div>
                 <!-- GALLERY -->
                 <div class="tab-pane fade" id="menu2">
-                @if (!empty($provider_gallery))
-    <div class="gallery">
-        @foreach ($provider_gallery as $image)
-            @php
-                $fileExtension = pathinfo($image, PATHINFO_EXTENSION);
-                // dd($fileExtension);
-            @endphp
+                    @if (!empty($provider_gallery))
+                    <div class="gallery">
+                        @foreach ($provider_gallery as $image)
+                        @php
+                        $fileExtension = pathinfo($image, PATHINFO_EXTENSION);
+                        // dd($fileExtension);
+                        @endphp
 
-            @if ($fileExtension === 'mp4')
-                <a href="{{ $image }}" class="glightbox">
-                    <!-- <img src="{{ $image }}" alt="image" /> -->
-                    <video width="320" height="240" controls autoplay>
-                        <source src="{{ $image }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </a>
-            @else
-                <a href="{{ $image }}" class="glightbox">
-                    <img src="{{ $image }}" alt="image" />
-                </a>
-            @endif
-        @endforeach
-    </div>
-@endif
+                        @if ($fileExtension === 'mp4')
+                        <a href="{{ $image }}" class="glightbox content-video">
+                            <!-- <img src="{{ $image }}" alt="image" /> -->
+                            <video width="190" height="150" class="gallery-video">
+                                <source src="{{ $image }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <span class="play-icon">
+                                <img src="{{asset('front/assets/img/play.png')}}" alt="">
+                            </span>
+                        </a>
+                        @else
+                        <a href="{{ $image }}" class="glightbox">
+                            <img src="{{ $image }}" alt="image" />
+                        </a>
+                        @endif
+                        @endforeach
+                    </div>
+                    @endif
 
 
                 </div>
@@ -476,6 +486,8 @@
         </div>
     </div>
 </div>
+@include('front.includes.footer')
+
 @endsection
 @section('script')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>

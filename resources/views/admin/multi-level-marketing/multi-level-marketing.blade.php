@@ -7,11 +7,12 @@
                 <div class="d-flex gap-2">
                     <div class="invites df-center flex-column gap-1">
                         <p class="mb-0 px-5">Joining MDhealth by invatition</p>
-                        <h6 class="mb-0">967</h6>
+                        <h6 class="mb-0">{{$joining_count}}</h6>
                     </div>
                     <div class="earnings df-center flex-column gap-4">
                         <p class="mb-0 px-5">Total Earnings</p>
-                        <h6 class="mb-0 ">86.928,00 ₺</h6>
+                        {{-- <h6 class="mb-0 ">86.928,00 ₺</h6> --}}
+                        <h6 class="mb-0 ">{{$joining_coin_integer}}</h6>
                     </div>
                 </div>
             </div>
@@ -20,10 +21,10 @@
                     <div class="card-body">
                         <div class="card-title">Top Earners Monthly</div>
                         <div class="table-responsive" style="overflow-x: hidden">
-                            <table class="table">
+                            <table id="example" class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
+                                        <th scope="col">Sr.No.</th>
                                         <th>Full Name</th>
                                         <th>Network</th>
                                         <th>City</th>
@@ -34,7 +35,9 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
+
+
+                                    {{-- <tr>
                                         <td>#MD7384</td>
                                         <td>Ali Danish</th>
                                         <td>47</td>
@@ -161,7 +164,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/deleteEntry.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
+
 
 
                                 </tbody>
@@ -177,6 +181,7 @@
 </section>
 @endsection
 @section('script')
+<script src="{{url('admin\controller_js\admin_cn_mlm.js')}}"></script>
 <script>
     $(".mlmLi").addClass("activeClass");
     $(".mlm").addClass("md-active");

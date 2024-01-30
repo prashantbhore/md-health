@@ -105,6 +105,9 @@
                                     {{-- action="{{ url('/md-customer-register') }}" method="post" --}}
                                     <input type="hidden" name="platform_type" value="web" />
                                     <input type="hidden" name="user_type" value="customer" />
+
+                                    <input type="hidden" name="unique_code" value="{{$referralCode}}" />
+                                    <input type="hidden" name="coin_status_id" value="{{$coinStatusId }}" />
                                     <div class="row gy-3">
                                         <div class="col-md-6">
                                             <label for="firstName" class="form-label">*First Name</label>
@@ -126,7 +129,7 @@
                                                 <option value="" selected disabled>Choose</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Prefer not to say">Prefer not to say</option>
+                                                <option value="Preferred not to say">Preferred not to say</option>
                                             </select>
                                         </div>
                                         <div class="col-md-12">
@@ -179,11 +182,14 @@
 
                                         <div class="col-md-12">
                                             <div class="tc" style="width: 330px;line-height: 2;">
-                                                <input class="form-check-input d-inline-block me-2" type="checkbox" value="" id="UserflexCheckDefault" />
+                                                <div class="form-check"> 
                                                 <label class="form-check-label d-inline" for="UserflexCheckDefault">
                                                     I accept <a href="#" class="text-decoration-underline camptonBold">Terms and
                                                         Condition</a> & I agree to the <a href="#" class="text-decoration-underline camptonBold">User Data Consent.</a>
                                                 </label>
+                                                <input class="form-check-input d-inline-block me-2" type="checkbox" value="" id="UserflexCheckDefault" name="UserflexCheckDefault"
+                                                />
+                                                </div>
                                             </div>
                                         </div>
                                         {{-- <div id="recaptcha-container" class="df-center"></div> --}}
@@ -191,7 +197,7 @@
                                         <div class="col-md-12 text-center d-flex flex-column gap-3 py-100px">
                                             <button type="button" class="btn cont-btn w-100 df-center" style="margin-bottom: 3.6rem;" id="regcustuser">Create Account</button>
                                             <label for="" class="mt-auto">Already have an account?</label>
-                                            <a href="{{ url('sign-in-web') }}" class="signIn-link lh-1">Sign In</a>
+                                            <a  href="{{ url('sign-in-web') }}" class="signIn-link lh-1">Sign In</a>
                                         </div>
                                     </div>
                                 </form>

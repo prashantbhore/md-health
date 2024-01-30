@@ -134,6 +134,7 @@
 }
 
 /* UTILITY CLASSES */
+
 .error {
     color: #F31D1D !important;
     font-family: "Campton";
@@ -425,13 +426,13 @@
     color: #000;
     font-family: CamptonBook;
     font-size: 16px;
-
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.64px;
 }
 
 .request-modal .btn-close,
+#cancelRequest .btn-close,
 .treatmentForModal2 .btn-close,
 #UserCancellationReq .btn-close,
 #UserChangeInformationModel .btn-close {
@@ -442,6 +443,7 @@
 #AccommodationView .btn-close,
 #TourView .btn-close,
 #ReviewModal .btn-close,
+#ReviewModalVehicle .btn-close,
 #TransportationView .btn-close {
     background: url("../img/closeModal.png") no-repeat center center/cover;
     opacity: 1;
@@ -451,6 +453,8 @@
 #AccommodationView .modal-header .btn-close,
 #TransportationView .modal-header .btn-close,
 #ReviewModal .modal-header .btn-close,
+#ReviewModalVehicle .modal-header .btn-close,
+#cancelRequest .modal-header .btn-close,
 #TourView .modal-header .btn-close,
 #UserChangeInformationModel .modal-header .btn-close {
     top: 20px;
@@ -2049,6 +2053,7 @@ select option {
 
 
 #UserCancellationReq .form-select,
+#cancelRequest .form-control,
 #patient-package-details .form-select,
 #UserChangeInformationModel .form-select,
 #UserChangeInformationModel .form-control,
@@ -3555,6 +3560,12 @@ span.camptonBook.fw-bold {
     top: 0;
 }
 
+.pbs-16 {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+}
+
 .tab-content .form.text-start {
     /* padding: 0 63px; */
     padding: 0 57px;
@@ -4304,16 +4315,17 @@ label.tc-text,
     color: #fff;
     font-family: Campton;
     font-size: 16px;
-
     font-weight: 500;
     line-height: normal;
     letter-spacing: -1.12px;
 }
 
+#cancelRequest .modal-dialog,
 #UserCancellationReq .modal-dialog,
 #AccommodationView .modal-dialog,
 #TransportationView .modal-dialog,
 #ReviewModal .modal-dialog,
+#ReviewModalVehicle .modal-dialog,
 #TourView .modal-dialog,
 #UserChangeInformationModel .modal-dialog {
     max-width: 704px;
@@ -4332,6 +4344,7 @@ label.tc-text,
 #AccommodationView .modal-content,
 #TransportationView .modal-content,
 #ReviewModal .modal-content,
+#ReviewModalVehicle .modal-content,
 #TourView .modal-content,
 #UserChangeInformationModel .modal-content {
     border-radius: 10px;
@@ -4408,9 +4421,25 @@ label.tc-text,
     height: 707px;
 }
 
-#ReviewModal .modal-content {
+#ReviewModal .modal-content,
+#ReviewModalVehicle .modal-content {
     background: url("../img/reviewBg.png") no-repeat center center/ contain;
     height: 707px;
+}
+
+#cancelRequest .modal-content {
+    background: url("../img/Cancel_Request_bg.png") no-repeat center center/ contain;
+    height: 657px;
+}
+
+
+#cancelRequest form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    margin-top: 115px;
+    padding: 1.5rem;
 }
 
 /* #yourCartModal .modal-content {
@@ -5014,4 +5043,127 @@ input[type="radio"] {
 
 .preview-img img {
     height: 100px;
+}
+
+.notifications-list div {
+    border-bottom: 1px solid #CFCFCF;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.notifications-list div span {
+    font-size: 11px;
+    letter-spacing: -0.44px;
+}
+
+.sales-tab img {
+    height: 24px;
+}
+
+/* footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+} */
+
+.footer-pages .card {
+    border-radius: 5px;
+    background: #FFF;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    margin: 32px 0;
+}
+
+.footer-pages .nav-pills .nav-link.active,
+.footer-pages .nav-pills .show>.nav-link {
+    color: #4CDB06;
+    background-color: transparent;
+    font-family: Campton;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.footer-pages .nav-link {
+    color: #000002;
+    font-family: CamptonBook;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+}
+
+.footer-pages .tab-pane {
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+}
+
+.footer-pages .card-body {
+    padding: 3.5rem 2rem;
+}
+
+.gallery-video {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+.content-video {
+    position: relative;
+    /* width: 500px; */
+    /* margin: 0 auto; */
+    /* padding: 20px; */
+}
+
+.content-video video {
+    width: 100%;
+    display: block;
+}
+
+.content-video:before {
+    content: '';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.30);
+    border-radius: 5px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.play-icon {
+    position: absolute;
+    bottom: 34%;
+    left: 34%;
+}
+
+.play-icon img {
+    height: 39px !important;
+    width: 38px !important;
+    transition: 0.15s all;
+}
+
+.play-icon img:hover {
+    height: 40px !important;
+    width: 39px !important;
+}
+
+.person-message-div .treatment-card {
+    width: 641px !important;
+    margin: 1rem;
+    padding: 16px;
+}
+.person-message-div .day-time {
+    margin: 1rem;
+}
+.self-msg-div .card-p1 {
+    margin-right: 1rem;
 }

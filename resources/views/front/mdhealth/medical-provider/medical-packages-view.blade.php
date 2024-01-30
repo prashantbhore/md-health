@@ -693,19 +693,25 @@
     </script>
 
 
-    <script>
-        $(document).ready(function() {
-            function updateCheckedValues() {
-                const checkedValues = $('.form-check-input:checked').map(function() {
-                    return $(this).val();
-                }).get().join(',');
-                $('#checkedValues').text(checkedValues);
-                $('#other_services').val(checkedValues);
-            }
-            $('.form-check-input').change(updateCheckedValues);
-            updateCheckedValues();
-        });
-    </script>
+<script>
+    $(document).ready(function() {
+        function updateCheckedValues() {
+            const checkedValues = $('.form-check-input:checked').map(function() {
+                let value = $(this).val().trim();
+                if (value === "on") {
+                    return ''; // Don't include "on" in the final value
+                } else {
+                    return value;
+                }
+            }).get().join(',');
+            $('#checkedValues').text(checkedValues);
+            $('#other_services').val(checkedValues);
+        }
+        $('.form-check-input').change(updateCheckedValues);
+        updateCheckedValues();
+    });
+</script>
+
 
     <script>
         function categoryselect(value) {

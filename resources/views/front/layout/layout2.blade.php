@@ -1,5 +1,7 @@
 @include('front.includes.head-files')
 @include('front.includes.navbar2')
+@include('front.includes.js-notification')
+{{-- @include('resources.js.bootstrap.js') --}}
 
 @yield('content')
 
