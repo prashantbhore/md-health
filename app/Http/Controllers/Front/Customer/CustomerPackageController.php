@@ -882,84 +882,41 @@ class CustomerPackageController extends Controller
 
      public function customer_package_side_search_filter(Request $request)
      {
-        //  $packages = Packages::select(
-        //      'md_packages.id',
-        //      'md_packages.package_unique_no',
-        //      'md_packages.package_name',
-        //      'md_packages.treatment_period_in_days',
-        //      'md_packages.other_services',
-        //      'md_packages.package_price',
-        //      'md_packages.sale_price',
-        //      'md_product_category.product_category_name',
-        //      'md_product_sub_category.product_sub_category_name',
-        //      'md_master_cities.city_name',
-        //      'md_add_new_acommodition.hotel_stars',
-        //      'md_add_transportation_details.vehicle_model_id',
-        //      'md_master_brand.brand_name',
-        //      'md_master_vehicle_comfort_levels.vehicle_level_name',
-        //      'md_tours.tour_name'
-        //  )
-        //      ->where('md_packages.status', 'active')
-        //      ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-        //      ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-        //      ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-        //      ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-        //      ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', '=', 'md_packages.hotel_id')
-        //      ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
-        //      ->leftjoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
-        //      ->leftjoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id')
-        //      ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id');
+         $packages = Packages::select(
+             'md_packages.id',
+             'md_packages.package_unique_no',
+             'md_packages.package_name',
+             'md_packages.treatment_period_in_days',
+             'md_packages.other_services',
+             'md_packages.package_price',
+             'md_packages.sale_price',
+             'md_product_category.product_category_name',
+             'md_product_sub_category.product_sub_category_name',
+             'md_master_cities.city_name',
+             'md_add_new_acommodition.hotel_stars',
+             'md_add_transportation_details.vehicle_model_id',
+             'md_master_brand.brand_name',
+             'md_master_vehicle_comfort_levels.vehicle_level_name',
+             'md_tours.tour_name'
+         )
+             ->where('md_packages.status', 'active')
+             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', '=', 'md_packages.hotel_id')
+             ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
+             ->leftjoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
+             ->leftjoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id')
+             ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id');
  
-        //  if (!empty($request->treatment_name)) {
-        //      $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-        //  }
-        //  if (!empty($request->city_name)) {
-        //      $packages = $packages->orWhere('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-        //  }
-        //  $packages = $packages->get();
-        $packages = Packages::select(
-            'md_packages.id',
-            'md_packages.package_unique_no',
-            'md_packages.package_name',
-            'md_packages.treatment_period_in_days',
-            'md_packages.other_services',
-            'md_packages.package_price',
-            'md_packages.sale_price',
-            'md_product_category.product_category_name',
-            'md_product_sub_category.product_sub_category_name',
-            'md_master_cities.city_name',
-            'md_add_new_acommodition.hotel_stars',
-            'md_add_transportation_details.vehicle_model_id',
-            'md_master_brand.brand_name',
-            'md_master_vehicle_comfort_levels.vehicle_level_name',
-            'md_tours.tour_name'
-        )
-            ->where('md_packages.status', 'active')
-            ->leftJoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftJoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-            ->leftJoin('md_add_new_acommodition', 'md_add_new_acommodition.id', '=', 'md_packages.hotel_id')
-            ->leftJoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
-            ->leftJoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
-            ->leftJoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', '=', 'md_add_transportation_details.comfort_level_id')
-            ->leftJoin('md_tours', 'md_tours.id', '=', 'md_packages.tour_id');
-        
-        if (!empty($request->treatment_name)) {
-            $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
-        }
-        if (!empty($request->city_name)) {
-            $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
-        }
-        if (!empty($request->other_services)) {
-            $otherServices = explode(',', $request->other_services);
-            foreach ($otherServices as $service) {
-                $packages = $packages->where('md_packages.other_services', 'like', '%' . $service . '%');
-            }
-        }
-        
-        $packages = $packages->get();
-        
+         if (!empty($request->treatment_name)) {
+             $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
+         }
+         if (!empty($request->city_name)) {
+             $packages = $packages->orWhere('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
+         }
+         $packages = $packages->get();
          $data = [];
          $data['package_list'] = [];
          if (!empty($packages)) {
@@ -1108,7 +1065,7 @@ class CustomerPackageController extends Controller
                     ->leftjoin('md_packages','md_packages.created_by','md_medical_provider_register.id')
                     ->first();
                     if(!empty($company_name)){
-                        $packageDetails['company_name'] = $company_name->company_name;
+                        $packageDetails['company_name']=$company_name->company_name;
                     }
                 }else{
                     $company_name='******';

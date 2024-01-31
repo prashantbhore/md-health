@@ -73,15 +73,15 @@
                                 </h5>
 
                                 <div class="treatment-card df-start w-100 mb-3">
-                                    <div class="row card-row align-items-center">
-                                        <div class="col-md-1">
+                                    <div class="d-flex w-100 gap-3">
+                                        <div class="df-center">
                                             <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="">
                                         </div>
 
-                                        <div class="col-md-6 justify-content-start">
+                                        <div class="">
                                             <div class="trmt-card-body">
-                                                <h5 class="card-h1 mb-0">With: Acibadem Hospital</h5>
-                                                <h5 class="mb-0 fw-500">
+                                                <h5 class="card-h1 mb-2">With: Acibadem Hospital</h5>
+                                                <h5 class="my-0 fw-500">
                                                     <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M4.21458 1.41667V0H8.46458V1.41667H4.21458ZM4.92292 9.73958L4.14375 8.18125C4.08472 8.05139 3.99618 7.95388 3.87812 7.88871C3.76007 7.82354 3.63611 7.79119 3.50625 7.79167H0C0.177083 6.19792 0.867708 4.85492 2.07187 3.76267C3.27604 2.67042 4.69861 2.12453 6.33958 2.125C7.07153 2.125 7.77396 2.24306 8.44687 2.47917C9.11979 2.71528 9.75139 3.05764 10.3417 3.50625L11.3333 2.51458L12.325 3.50625L11.3333 4.49792C11.7111 4.99375 12.0122 5.51626 12.2365 6.06546C12.4608 6.61465 12.6083 7.19006 12.6792 7.79167H9.61562L8.39375 5.34792C8.26389 5.07639 8.05139 4.94062 7.75625 4.94062C7.46111 4.94062 7.24861 5.07639 7.11875 5.34792L4.92292 9.73958ZM6.33958 14.875C4.69861 14.875 3.27604 14.3289 2.07187 13.2366C0.867708 12.1444 0.177083 10.8016 0 9.20833H3.06354L4.28542 11.6521C4.41528 11.9236 4.62778 12.0594 4.92292 12.0594C5.21806 12.0594 5.43055 11.9236 5.56042 11.6521L7.75625 7.26042L8.53542 8.81875C8.59444 8.94861 8.68299 9.04612 8.80104 9.11129C8.9191 9.17646 9.04306 9.20881 9.17292 9.20833H12.6792C12.5021 10.8021 11.8115 12.1448 10.6073 13.2366C9.40312 14.3284 7.98056 14.8745 6.33958 14.875Z" fill="#111111" />
                                                     </svg>
@@ -89,7 +89,7 @@
                                                 </h5>
                                             </div>
                                         </div>
-                                        <div class="col-md-5 d-flex flex-column justify-content-between align-items-end text-end">
+                                        <div class="ms-auto flex-column">
                                             <div class="trmt-card-footer d-flex flex-column gap-1">
                                                 <a href="{{url('live-cam')}}" class="text-decoration-none active">
                                                     <span>Go Live</span>

@@ -666,7 +666,7 @@
                                 <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Please Write your treatment requirement in detail">
                             </div>
                             <div class="col-md-6">
-                                <label for="inputAddress5" class="form-label fw-bold">*Previes Treatment</label>
+                                <label for="inputAddress5" class="form-label fw-bold">*Previous Treatment</label>
                                 <input type="text" class="form-control h-75" id="inputAddress5" placeholder="Have you done/received any related treatment before If Yes,Please write the details">
                             </div>
                             <div class="col-md-6">
