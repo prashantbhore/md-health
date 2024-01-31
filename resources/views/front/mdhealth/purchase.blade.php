@@ -15,403 +15,423 @@
 @endsection
 @extends('front.layout.layout2')
 @section('content')
-<style>
-       .footer-2 {
-        display: none;
-    }
-    .package_name {
-        color: #000;
-        font-family: Campton;
-        font-size: 20px;
+    <style>
+        .footer-2 {
+            display: none;
+        }
 
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: -0.8px;
-    }
+        .package_name {
+            color: #000;
+            font-family: Campton;
+            font-size: 20px;
 
-    .city_name {
-        color: #000;
-        font-family: CamptonBook;
-        font-size: 14px;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: -0.8px;
+        }
 
-        font-weight: 400;
-        line-height: normal;
-        letter-spacing: -0.56px;
-    }
+        .city_name {
+            color: #000;
+            font-family: CamptonBook;
+            font-size: 14px;
 
-    .t_price {
-        color: #4CDB06;
-        font-family: Campton;
-        font-size: 18px;
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: -0.72px;
-    }
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: -0.56px;
+        }
 
-    .t_price_sm {
-        color: #4CDB06;
-        font-family: Campton;
-        font-size: 12px;
-        letter-spacing: -0.48px;
-    }
+        .t_price {
+            color: #4CDB06;
+            font-family: Campton;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: -0.72px;
+        }
 
-    .error {
-        color: red;
-    }
-</style>
-<div class="content-wrapper paymentsPage bg-f6">
+        .t_price_sm {
+            color: #4CDB06;
+            font-family: Campton;
+            font-size: 12px;
+            letter-spacing: -0.48px;
+        }
 
-    <!-- SECTION 1 -->
-    <div class="searchBar backBtn bg-f6">
-        <div class="container pt-4">
-            <p class="fs-1 camptonBold text-center lh-1 f-s30"> Purchase Details</p>
-            <p id="delete_all_items" class="fs-6 camptonSemiBold text-center deleteAll mb-4">Delete All Items</p>
-            <div class="packageResult rounded mb-3">
-                <div class="flex-grow-1">
-                    <div class="d-flex gap-2 justify-content-between align-items-center">
-                        <p class="mb-0  lh-base package_name">Heart Valve Replacement Surgery</p>
-                        <p class="mb-0 t_price">Treatment Price</p>
-                    </div>
-                    <div class="d-flex gap-5 justify-content-between">
-                        <div class="d-flex gap-2 align-items-center">
-                            <img src="{{ url('front/assets/img/Location.svg') }}" alt="">
-                            <p class="mb-0 lctn city_name">Besiktas/Istanbul</p>
+        .error {
+            color: red;
+        }
+    </style>
+    <div class="content-wrapper paymentsPage bg-f6">
+
+        <!-- SECTION 1 -->
+        <div class="searchBar backBtn bg-f6">
+            <div class="container pt-4">
+                <p class="fs-1 camptonBold text-center lh-1 f-s30"> Purchase Details</p>
+                <p id="delete_all_items" class="fs-6 camptonSemiBold text-center deleteAll mb-4">Delete All Items</p>
+                <div class="packageResult rounded mb-3">
+                    <div class="flex-grow-1">
+                        <div class="d-flex gap-2 justify-content-between align-items-center">
+                            <p class="mb-0  lh-base package_name">Heart Valve Replacement Surgery</p>
+                            <p class="mb-0 t_price">Treatment Price</p>
                         </div>
-                        <p class="mb-0 fs-5 camptonBold lh-base treatment_price">
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center mb-3">
-                <img src="{{ url('front/assets/img/order.png') }}" alt="">
-            </div>
-            <div class="other_services_items">
-            </div>
-            <div class="greenBorder pt-3 mb-4 mb30"></div>
-            <div class="mb-4 discount-sctn">
-                <div class="d-flex justify-content-between mb-4">
-                    <p class="mb-0 t_price">Select Your Payment Plan</p>
-                    <p class="mb-0 t_price fnt20">Total Price <span class="total_price" style="color: #000;">34.560,00
-                            <span class="lira">₺</span> </span></p>
-                </div>
-                <div class="discounts d-flex flex-column gap-3">
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="smallFont camptonBold d-flex align-items-center gap-1">
-                            <input type="radio" value="20" name="discount" checked />
-                        </label>
-                        <div class="d-flex align-items-baseline gap-2">
-                            <p class="mb-0 fs-5 camptonSemiBold lh-base twenty"></p>
-                            <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min. Requirement</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
-                            <input type="radio" value="30" name="discount" />
-                        </label>
-                        <div class="d-flex align-items-baseline gap-2 ">
-                            <p class="mb-0 fs-5 camptonSemiBold lh-base thirty"></p>
-                            <p class="vSmallFont text-green camptonSemiBold mb-0 min_discount_thirty"></p>
-                        </div>
-                    </div>
-                    {{-- (5.679,0 ₺) --}}
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
-                            <input type="radio" value="50" name="discount" />
-                        </label>
-                        <div class="d-flex align-items-baseline gap-2 ">
-                            <p class="mb-0 fs-5 camptonSemiBold lh-base fifty"></p>
-                            <p class="t_price_sm mb-0 min_discount_fifty">Min. Requirement</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
-                            <input type="radio" value="100" name="discount" />
-                        </label>
-                        <div class="d-flex align-items-baseline gap-2 ">
-                            <p class="mb-0 fs-5 camptonSemiBold lh-base hundred"></p>
-                            <p class="t_price_sm mb-0 min_discount_hundred">Min. Requirement</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex flex-column align-items-center mb-6">
-                {{-- {{ dd(url('front/assets/img/ArrowsDown.png')) }} --}}
-                <img src="{{ url('front/assets/img/ArrowsDown.png') }}" alt="" class="mb-3">
-                <p class="mb-2 fs-3 camptonBold lh-base next-step">Next Step</p>
-                <p class="underline smallFont fw-normal camptonBook"><u>Payment</u></p>
-            </div>
-            <!-- PAYMENT SECTION -->
-            <div class="paymentSection mb-6">
-                <div class="row">
-                    <div class="col-3">
-                        <label class="smallFont d-flex align-items-center gap-2">
-                            <input type="radio" value="card" name="paymentMethod" checked />
-                            Credit or Debit Card
-                        </label>
-                    </div>
-                    <div class="col-2">
-                        <label class="smallFont d-flex align-items-center gap-2">
-                            <input type="radio" value="bank" name="paymentMethod" />
-                            Bank Transfer
-                        </label>
-                    </div>
-                    <div class="col-2 mrg-68">
-                        <label class="smallFont d-flex align-items-center gap-2">
-                            <input type="radio" value="wallet" name="paymentMethod" />
-                            My Wallet
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <!-- CREDIT CARD DETAILS -->
-            <div id="card">
-                <div class="row">
-                    <div class="col-5 card-details me-8">
-                        <form id="purchase_by_mdcoins" action="{{ url('/purchase-by-mdcoins') }}" method="POST">
-                            @csrf
-                        </form>
-                        <form id="procced_to_pay_form" action="{{ url('/sandbox') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
-                            <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
-                            <input type="hidden" name="payment_percent" id="payment_percent" value="">
-                            <input type="hidden" name="total_paying_price" id="total_paying_price" value="">
-                            <input type="hidden" name="card_name" id="card_name" value="">
-                            <input type="hidden" name="card_number" id="card_number" value="">
-                            <input type="hidden" name="cvv" id="cvv" value="">
-                            <input type="hidden" name="validity" id="validity" value="">
-
-                            <div class="mb-4-input">
-                                <input type="text" name="input1" class="form-control" onkeypress="return /^[A-Za-z\s]*$/.test(event.key)" id="input1" placeholder="Card Holder Name">
-                                <h5 id="verifyinput1" class="mt-4" style="color: red;">
-                                    Please enter card holder name
-                                </h5>
+                        <div class="d-flex gap-5 justify-content-between">
+                            <div class="d-flex gap-2 align-items-center">
+                                <img src="{{ url('front/assets/img/Location.svg') }}" alt="">
+                                <p class="mb-0 lctn city_name">Besiktas/Istanbul</p>
                             </div>
-                            <div class="mb-4-input">
-                                <input type="text" onkeypress="return /[0-9 ]/i.test(event.key)" name="input2" class="form-control" id="input2" placeholder="Card Number">
-                                <h5 id="verifyinput2" class="mt-4" style="color: red;">
-                                    Please enter card number
-                                </h5>
+                            <p class="mb-0 fs-5 camptonBold lh-base treatment_price">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="{{ url('front/assets/img/order.png') }}" alt="">
+                </div>
+                <div class="other_services_items">
+                </div>
+                <div class="greenBorder pt-3 mb-4 mb30"></div>
+                <div class="mb-4 discount-sctn">
+                    <div class="d-flex justify-content-between mb-4">
+                        <p class="mb-0 t_price">Select Your Payment Plan</p>
+                        <p class="mb-0 t_price fnt20">Total Price <span class="total_price" style="color: #000;">34.560,00
+                                <span class="lira">₺</span> </span></p>
+                    </div>
+                    <div class="discounts d-flex flex-column gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="smallFont camptonBold d-flex align-items-center gap-1">
+                                <input type="radio" value="20" name="discount" checked />
+                            </label>
+                            <div class="d-flex align-items-baseline gap-2">
+                                <p class="mb-0 fs-5 camptonSemiBold lh-base twenty"></p>
+                                <p class="vSmallFont boldRed mb-0 min_discount_twenty">Min. Requirement</p>
                             </div>
-                            <div class="d-flex gap-3 mb-4-input">
-                                <div class="w-50"><input type="text" id="input4" name="input4" class="form-control " placeholder="00/00">
-                                    <h5 id="verifyinput4" class="mt-0" style="color: red;">
-                                        Please enter expiry date
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
+                                <input type="radio" value="30" name="discount" />
+                            </label>
+                            <div class="d-flex align-items-baseline gap-2 ">
+                                <p class="mb-0 fs-5 camptonSemiBold lh-base thirty"></p>
+                                <p class="vSmallFont text-green camptonSemiBold mb-0 min_discount_thirty"></p>
+                            </div>
+                        </div>
+                        {{-- (5.679,0 ₺) --}}
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
+                                <input type="radio" value="50" name="discount" />
+                            </label>
+                            <div class="d-flex align-items-baseline gap-2 ">
+                                <p class="mb-0 fs-5 camptonSemiBold lh-base fifty"></p>
+                                <p class="t_price_sm mb-0 min_discount_fifty">Min. Requirement</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="smallFont camptonSemiBold d-flex align-items-center gap-1">
+                                <input type="radio" value="100" name="discount" />
+                            </label>
+                            <div class="d-flex align-items-baseline gap-2 ">
+                                <p class="mb-0 fs-5 camptonSemiBold lh-base hundred"></p>
+                                <p class="t_price_sm mb-0 min_discount_hundred">Min. Requirement</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column align-items-center mb-6">
+                    {{-- {{ dd(url('front/assets/img/ArrowsDown.png')) }} --}}
+                    <img src="{{ url('front/assets/img/ArrowsDown.png') }}" alt="" class="mb-3">
+                    <p class="mb-2 fs-3 camptonBold lh-base next-step">Next Step</p>
+                    <p class="underline smallFont fw-normal camptonBook"><u>Payment</u></p>
+                </div>
+                <!-- PAYMENT SECTION -->
+                <div class="paymentSection mb-6">
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="smallFont d-flex align-items-center gap-2">
+                                <input type="radio" value="card" name="paymentMethod" checked />
+                                Credit or Debit Card
+                            </label>
+                        </div>
+                        <div class="col-2">
+                            <label class="smallFont d-flex align-items-center gap-2">
+                                <input type="radio" value="bank" name="paymentMethod" />
+                                Bank Transfer
+                            </label>
+                        </div>
+                        <div class="col-2 mrg-68">
+                            <label class="smallFont d-flex align-items-center gap-2">
+                                <input type="radio" value="wallet" name="paymentMethod" />
+                                My Wallet
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- CREDIT CARD DETAILS -->
+                <div id="card">
+                    <div class="row">
+                        <div class="col-5 card-details me-8">
+                            <form id="purchase_by_mdcoins" action="{{ url('/purchase-by-mdcoins') }}" method="POST">
+                                @csrf
+                            </form>
+                            <form id="procced_to_pay_form" action="{{ url('/sandbox') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                                <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
+                                <input type="hidden" name="payment_percent" id="payment_percent" value="">
+                                <input type="hidden" name="total_paying_price" id="total_paying_price" value="">
+                                <input type="hidden" name="card_name" id="card_name" value="">
+                                <input type="hidden" name="card_number" id="card_number" value="">
+                                <input type="hidden" name="cvv" id="cvv" value="">
+                                <input type="hidden" name="validity" id="validity" value="">
+
+                                <div class="mb-4-input">
+                                    <input type="text" name="input1" class="form-control"
+                                        onkeypress="return /^[A-Za-z\s]*$/.test(event.key)" id="input1"
+                                        placeholder="Card Holder Name">
+                                    <h5 id="verifyinput1" class="mt-4" style="color: red;">
+                                        Please enter card holder name
                                     </h5>
                                 </div>
-                                <div class="w-50">
-                                    <input type="password" id="input3" name="input3" class="form-control" placeholder="CVV" onkeypress="return /[0-9 ]/i.test(event.key)">
-                                    <h5 id="verifyinput3" class="mt-0" style="color: red;">
-                                        Please enter CVV
+                                <div class="mb-4-input">
+                                    <input type="text" onkeypress="return /[0-9 ]/i.test(event.key)" name="input2"
+                                        class="form-control" id="input2" placeholder="Card Number">
+                                    <h5 id="verifyinput2" class="mt-4" style="color: red;">
+                                        Please enter card number
                                     </h5>
                                 </div>
-                            </div>
-
-                            <!-- <a href="{{ url('payment-status') }}"> -->
-                            <!-- <a href="{{ url('payment-status') }}" -->
-                            <a href="javascript:void(0)" style="color: #fff; height: unset; padding: 12px 2rem;" class="btn purchaseBtn purchaseBtn-new" style="color: #fff;">Proceed Payment</a>
-                            <!-- </a> -->
-                        </form>
-                    </div>
-                    <div class="col-5">
-                        <div class="creditCardContainer">
-                            <div>
-                                <img src="{{ url('front/assets/img/MDHealth_light.svg') }}" alt="">
-                            </div>
-                            <div>
-                                <p class="cardNumber">1234 1234 1234 1234</p>
-                                <div class="d-flex justify-content-between align-self-end">
-                                    <div>
-                                        <p class="cardholder">John Smith</p>
-                                        <p class="validity">02/24</p>
+                                <div class="d-flex gap-3 mb-4-input">
+                                    <div class="w-50"><input type="text" id="input4" name="input4"
+                                            class="form-control " placeholder="00/00">
+                                        <h5 id="verifyinput4" class="mt-0" style="color: red;">
+                                            Please enter expiry date
+                                        </h5>
                                     </div>
-                                    <div>
-                                        <img class="visa" src="" alt="">
+                                    <div class="w-50">
+                                        <input type="password" id="input3" name="input3" class="form-control"
+                                            placeholder="CVV" onkeypress="return /[0-9 ]/i.test(event.key)">
+                                        <h5 id="verifyinput3" class="mt-0" style="color: red;">
+                                            Please enter CVV
+                                        </h5>
+                                    </div>
+                                </div>
+
+                                <!-- <a href="{{ url('payment-status') }}"> -->
+                                <!-- <a href="{{ url('payment-status') }}" -->
+                                <a href="javascript:void(0)" style="color: #fff; height: unset; padding: 12px 2rem;"
+                                    class="btn purchaseBtn purchaseBtn-new" style="color: #fff;">Proceed Payment</a>
+                                <!-- </a> -->
+                            </form>
+                        </div>
+                        <div class="col-5">
+                            <div class="creditCardContainer">
+                                <div>
+                                    <img src="{{ url('front/assets/img/MDHealth_light.svg') }}" alt="">
+                                </div>
+                                <div>
+                                    <p class="cardNumber">1234 1234 1234 1234</p>
+                                    <div class="d-flex justify-content-between align-self-end">
+                                        <div>
+                                            <p class="cardholder">John Smith</p>
+                                            <p class="validity">02/24</p>
+                                        </div>
+                                        <div>
+                                            <img class="visa" src="" alt="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- CREDIT CARD DETAILS END-->
-            
-            <!-- BANK TRANSFER -->
-            {{-- Mplus03 --}}
-            <div id="bank" class="bank-transfer-details">
-                <form action="{{url('bank-payment')}}" method="post" id="bank_transfer_form">
-                     @csrf
-                    <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
-                    <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
+                <!-- CREDIT CARD DETAILS END-->
 
-                    <input type="hidden" name="bank_name" id="bank_name" value="">
-                    <input type="hidden" name=" receiver_name" id="receiver_name" value="">
-                    <input type="hidden" name="iban" id="iban" value="">
-                   
+                <!-- BANK TRANSFER -->
+                {{-- Mplus03 --}}
+                <div id="bank" class="bank-transfer-details">
+                    <form action="{{ url('bank-payment') }}" method="post" id="bank_transfer_form">
+                        @csrf
+                        <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                        <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
 
-                    <div class="row gy-4">
-                        <div class="col-md-12 mb-3">
-                            <label for="Bank Informations" class="form-label mb-3" style="font-size: 29px;">Bank Informations</label>
-                            <select name="bank-informations" id="bank-informations" class="form-select">
-                                <option value="">Select Bank</option>
-                            </select>
-                        </div>
+                        <input type="hidden" name="bank_name" id="bank_name" value="">
+                        <input type="hidden" name=" receiver_name" id="receiver_name" value="">
+                        <input type="hidden" name="iban" id="iban" value="">
 
-                        <div class="col-md-12">
-                            <label for="Bank Name" class="form-label mb-0">Bank Name</label>
-                            <p class="mb-0 card-h1" id="receiver-bank_name"></p>
-                        </div>
 
-                        <div class="col-md-12">
-                            <label for="Receiver Name" class="form-label mb-0">Receiver Name</label>
-                            <p class="mb-0 card-h1" id="receiver-name"></p>
-                        </div>
+                        <div class="row gy-4">
+                            <div class="col-md-12 mb-3">
+                                <label for="Bank Informations" class="form-label mb-3" style="font-size: 29px;">Bank
+                                    Informations</label>
+                                <select name="bank-informations" id="bank-informations" class="form-select">
+                                    <option value="">Select Bank</option>
+                                </select>
+                            </div>
 
-                        <div class="col-md-12">
-                            <label for="IBAN" class="form-label mb-0">IBAN</label>
-                            <p class="mb-0 card-h1" id="receiver-account">TR00 0000 0000 0000 0000 0000 00</p>
-                            <h6 class="copy-iban card-h3 text-green" id="copy-iban-btn">
-                                <span class="align-bottom">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                        <path d="M3.25 7.75C3.25 5.629 3.25 4.56775 3.90925 3.90925C4.56775 3.25 5.629 3.25 7.75 3.25H10C12.121 3.25 13.1823 3.25 13.8408 3.90925C14.5 4.56775 14.5 5.629 14.5 7.75V11.5C14.5 13.621 14.5 14.6823 13.8408 15.3408C13.1823 16 12.121 16 10 16H7.75C5.629 16 4.56775 16 3.90925 15.3408C3.25 14.6823 3.25 13.621 3.25 11.5V7.75Z" stroke="#4CDB06" stroke-width="1.875" />
-                                        <path d="M3.25 13.75C2.65326 13.75 2.08097 13.5129 1.65901 13.091C1.23705 12.669 1 12.0967 1 11.5V7C1 4.17175 1 2.75725 1.879 1.879C2.75725 1 4.17175 1 7 1H10C10.5967 1 11.169 1.23705 11.591 1.65901C12.0129 2.08097 12.25 2.65326 12.25 3.25" stroke="#4CDB06" stroke-width="1.875" />
-                                    </svg>
-                                </span>
-                                <a href="javascript:void(0);" onclick="copyIBAN()">Copy IBAN</a>
-                            </h6>
-                        </div>
-                        
+                            <div class="col-md-12">
+                                <label for="Bank Name" class="form-label mb-0">Bank Name</label>
+                                <p class="mb-0 card-h1" id="receiver-bank_name"></p>
+                            </div>
 
-                        <div class="col-md-12 mb-3">
-                            <label for="Description" class="form-label mb-0">Description</label>
-                            <p class="mb-0 card-h1">Please write "<span class="text-green" id="receiver-package_id">MD736</span>"" in the description section.</p>
-                        </div>
-                        <form action="php" method="POST">
-                            <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
-                            <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
-                        <div class="col-md-12">
-                            <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
-                            <input type="text" name="transaction_id" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
-                        </div>
-                        <div class="col-md-12">
-                            <p class="mb-0 text-red card-p1">This is not available in your country!</p>
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn submit-btn">Completed Payment</button>
-                        </div>
-                        </form>
-                    </div>
-                </form>
-            </div>
-            <!-- BANK TRANSFER END -->
+                            <div class="col-md-12">
+                                <label for="Receiver Name" class="form-label mb-0">Receiver Name</label>
+                                <p class="mb-0 card-h1" id="receiver-name"></p>
+                            </div>
 
-            <!-- WALLET DETAILS -->
-            <div id="wallet">
-                <div class="row">
-                    <div class="col-6 text-end px-5 align-self-end mt-4">
-                        <p class="mb-0 camptonBook fs-5 fw-bold lh-sm">invite your friends</p>
-                        <p class="mb-0 camptonBold fs-3">and <span class="text-green"><u>earn</u></span> MD<span class="camptonBook fw-bold">coin</span>.</p>
-                        <div class="d-flex align-items-center justify-content-end mt-2">
-                            <a href="{{ url('#') }}" type="button" class="btn btn-sm inviteBtn df-center mt-3 mb-5">Invite Friends</a>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="camptonBold vSmallFont text-center">1 MD<span class="camptonBook vSmallFont">coin</span> = 1 Turkish Lira</p>
-                        <div class="blackBrdr px-5">
-                            <div class="mdCard">
-                                <div class="mt-3">
-                                    <p class="mb-0 camptonBook fw-bold lh-1">Available <span class="camptonBold">MD</span>coin</p>
-                                    <p class="mb-0 camptonBold fs-3">500</p>
-                                    <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" id="purchase_by_coins" style="border-color: #000;">Use My MD<span class="camptonBook">coin</span></a>
+                            <div class="col-md-12">
+                                <label for="IBAN" class="form-label mb-0">IBAN</label>
+                                <p class="mb-0 card-h1" id="receiver-account">TR00 0000 0000 0000 0000 0000 00</p>
+                                <h6 class="copy-iban card-h3 text-green" id="copy-iban-btn">
+                                    <span class="align-bottom">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17"
+                                            viewBox="0 0 16 17" fill="none">
+                                            <path
+                                                d="M3.25 7.75C3.25 5.629 3.25 4.56775 3.90925 3.90925C4.56775 3.25 5.629 3.25 7.75 3.25H10C12.121 3.25 13.1823 3.25 13.8408 3.90925C14.5 4.56775 14.5 5.629 14.5 7.75V11.5C14.5 13.621 14.5 14.6823 13.8408 15.3408C13.1823 16 12.121 16 10 16H7.75C5.629 16 4.56775 16 3.90925 15.3408C3.25 14.6823 3.25 13.621 3.25 11.5V7.75Z"
+                                                stroke="#4CDB06" stroke-width="1.875" />
+                                            <path
+                                                d="M3.25 13.75C2.65326 13.75 2.08097 13.5129 1.65901 13.091C1.23705 12.669 1 12.0967 1 11.5V7C1 4.17175 1 2.75725 1.879 1.879C2.75725 1 4.17175 1 7 1H10C10.5967 1 11.169 1.23705 11.591 1.65901C12.0129 2.08097 12.25 2.65326 12.25 3.25"
+                                                stroke="#4CDB06" stroke-width="1.875" />
+                                        </svg>
+                                    </span>
+                                    <a href="javascript:void(0);" onclick="copyIBAN()">Copy IBAN</a>
+                                </h6>
+                            </div>
+
+
+                            <div class="col-md-12 mb-3">
+                                <label for="Description" class="form-label mb-0">Description</label>
+                                <p class="mb-0 card-h1">Please write "<span class="text-green"
+                                        id="receiver-package_id">MD736</span>"" in the description section.</p>
+                            </div>
+                            <form action="php" method="POST">
+                                <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
+                                <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
+                                <div class="col-md-12">
+                                    <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
+                                    <input type="text" name="transaction_id"
+                                        class="form-control text-black camptonBook" placeholder="Payment transaction ID">
                                 </div>
-                                <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="" style="width: 200px;">
+                                <div class="col-md-12">
+                                    <p class="mb-0 text-red card-p1">This is not available in your country!</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn submit-btn">Completed Payment</button>
+                                </div>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+                <!-- BANK TRANSFER END -->
+
+                <!-- WALLET DETAILS -->
+                <div id="wallet">
+                    <div class="row">
+                        <div class="col-6 text-end px-5 align-self-end mt-4">
+                            <p class="mb-0 camptonBook fs-5 fw-bold lh-sm">invite your friends</p>
+                            <p class="mb-0 camptonBold fs-3">and <span class="text-green"><u>earn</u></span> MD<span
+                                    class="camptonBook fw-bold">coin</span>.</p>
+                            <div class="d-flex align-items-center justify-content-end mt-2">
+                                <a href="{{ url('#') }}" type="button"
+                                    class="btn btn-sm inviteBtn df-center mt-3 mb-5">Invite Friends</a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <p class="camptonBold vSmallFont text-center">1 MD<span
+                                    class="camptonBook vSmallFont">coin</span> = 1 Turkish Lira</p>
+                            <div class="blackBrdr px-5">
+                                <div class="mdCard">
+                                    <div class="mt-3">
+                                        <p class="mb-0 camptonBook fw-bold lh-1">Available <span
+                                                class="camptonBold">MD</span>coin</p>
+                                        <p class="mb-0 camptonBold fs-3">500</p>
+                                        <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" id="purchase_by_coins"
+                                            style="border-color: #000;">Use My MD<span class="camptonBook">coin</span></a>
+                                    </div>
+                                    <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="" style="width: 200px;">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- WALLET DETAILS END -->
+                <!-- WALLET DETAILS END -->
 
+            </div>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="bg-f6 scanQr">
+            <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
         </div>
     </div>
-
-    <!-- SECTION 3 -->
-    <div class="bg-f6 scanQr">
-        <img src="{{ url('front/assets/img/appScreenFooter.png') }}" alt="">
-    </div>
-</div>
-@include('front.includes.footer')
+    @include('front.includes.footer')
 @endsection
-    @section('script')
+@section('script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Function to validate input fields
-        function validateInputFields() {
-            var isValid = true;
-            // Validate Card Holder Name
-            var cardHolderName = $('#input1').val().trim();
-            if (cardHolderName === '') {
-                $('#input1').css('border-color', 'red');
-                $('#verifyinput1').show();
-                isValid = false;
-            } else {
-                $('#input1').css('border-color', '#ced4da'); // Default border color
-                $('#verifyinput1').hide();
+    <script>
+        $(document).ready(function() {
+            // Function to validate input fields
+            function validateInputFields() {
+                var isValid = true;
+                // Validate Card Holder Name
+                var cardHolderName = $('#input1').val().trim();
+                if (cardHolderName === '') {
+                    $('#input1').css('border-color', 'red');
+                    $('#verifyinput1').show();
+                    isValid = false;
+                } else {
+                    $('#input1').css('border-color', '#ced4da'); // Default border color
+                    $('#verifyinput1').hide();
+                }
+                // Validate Card Number
+                var cardNumber = $('#input2').val().trim();
+                if (cardNumber === '') {
+                    $('#input2').css('border-color', 'red');
+                    $('#verifyinput2').show();
+                    isValid = false;
+                } else {
+                    $('#input2').css('border-color', '#ced4da'); // Default border color
+                    $('#verifyinput2').hide();
+                }
+                // Validate Expiry Date
+                var expiryDate = $('#input4').val().trim();
+                if (expiryDate === '') {
+                    $('#input4').css('border-color', 'red');
+                    $('#verifyinput4').show();
+                    isValid = false;
+                } else {
+                    $('#input4').css('border-color', '#ced4da'); // Default border color
+                    $('#verifyinput4').hide();
+                }
+                // Validate CVV
+                var cvv = $('#input3').val().trim();
+                if (cvv === '') {
+                    $('#input3').css('border-color', 'red');
+                    $('#verifyinput3').show();
+                    isValid = false;
+                } else {
+                    $('#input3').css('border-color', '#ced4da'); // Default border color
+                    $('#verifyinput3').hide();
+                }
+                return isValid;
             }
-            // Validate Card Number
-            var cardNumber = $('#input2').val().trim();
-            if (cardNumber === '') {
-                $('#input2').css('border-color', 'red');
-                $('#verifyinput2').show();
-                isValid = false;
-            } else {
-                $('#input2').css('border-color', '#ced4da'); // Default border color
-                $('#verifyinput2').hide();
-            }
-            // Validate Expiry Date
-            var expiryDate = $('#input4').val().trim();
-            if (expiryDate === '') {
-                $('#input4').css('border-color', 'red');
-                $('#verifyinput4').show();
-                isValid = false;
-            } else {
-                $('#input4').css('border-color', '#ced4da'); // Default border color
-                $('#verifyinput4').hide();
-            }
-            // Validate CVV
-            var cvv = $('#input3').val().trim();
-            if (cvv === '') {
-                $('#input3').css('border-color', 'red');
-                $('#verifyinput3').show();
-                isValid = false;
-            } else {
-                $('#input3').css('border-color', '#ced4da'); // Default border color
-                $('#verifyinput3').hide();
-            }
-            return isValid;
-        }
 
-        // Proceed Payment button click event
-        $('.purchaseBtn').click(function() {
-            if (validateInputFields()) {
-                // Proceed with the payment
-                $('#procced_to_pay_form').submit();
-            }
-        });
+            // Proceed Payment button click event
+            $('.purchaseBtn').click(function() {
+                if (validateInputFields()) {
+                    // Proceed with the payment
+                    $('#procced_to_pay_form').submit();
+                }
+            });
 
-        // Focusout event to change border color to gray when focus is lost
-        $('input[type="text"], input[type="password"]').focusout(function() {
-            $(this).css('border-color', '#ced4da');
+            // Focusout event to change border color to gray when focus is lost
+            $('input[type="text"], input[type="password"]').focusout(function() {
+                $(this).css('border-color', '#ced4da');
+            });
         });
-    });
-</script>
+    </script>
 
 
 
@@ -440,7 +460,7 @@
             var discounts;
             var percentValue = 20;
             var otherServices;
-            var checkedTitles=[];
+            var checkedTitles = [];
             var packageId = "{{ $id }}";
             var patientId = "{{ $patient_id }}";
             var formData = new FormData();
@@ -591,7 +611,7 @@
                     'card_name': cardName || '',
                     'pending_amount': pendingAmount,
                     'percentage': percentage,
-                    'other_services':checkedTitles,
+                    'other_services': checkedTitles,
                 };
 
                 // Add additional data to the form
@@ -961,180 +981,181 @@
 
             ///////////////////////////////////Mplus03/////////////////////////////////////////////////
 
-    function getBankList(){
-        $.ajax({
-            url: baseUrl + '/api/md-helath-bank-list',
-            type: 'GET',
-            processData: false,
-            contentType: false,
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(response) {
-               console.log('Success:', response.bank_list);
-                $('#bank-informations').empty();
+            function getBankList() {
+                $.ajax({
+                    url: baseUrl + '/api/md-helath-bank-list',
+                    type: 'GET',
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        console.log('Success:', response.bank_list);
+                        $('#bank-informations').empty();
 
-                for (var i = 0; i < response.bank_list.length; i++) {
-                    var bankName = response.bank_list[i].bank_name;
-                    if (bankName) {
-                        $('#bank-informations').append('<option value="' + bankName + '">' + bankName + '</option>');
-                    }
-                }
-
-                calcOtherServices();
-                updateDiscountedPrice();
-            },
-
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-    }
-
-
-
-function getBankData(selectedBank){
-
-       
-
-    var packageId = $("#package_id").val();
-            $.ajax({
-                url: baseUrl + '/api/md-helath-bank-details',
-                type: 'GET',
-                data: {
-                    bank_name: selectedBank,
-                    package_id: packageId 
-                },
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(response) {
-                     console.log('Success:', response.package_details.package_unique_no);
-                    if (response.message === "Bank Details Found") {
-
-                        var form = $('#bank_transfer_form');
-
-                        // Additional data
-                        var pendingAmount = proxyPrice - totalPrice;
-
-                        if (isTwentySelected){
-                            var percentage = '20';
-                        } else if (isThirtySelected){
-                            var percentage = '30';
-                        } else if (isFiftySelected){
-                            var percentage = '50';
-                        } else if (isHundredSelected){
-                            var percentage = '100';
+                        for (var i = 0; i < response.bank_list.length; i++) {
+                            var bankName = response.bank_list[i].bank_name;
+                            if (bankName) {
+                                $('#bank-informations').append('<option value="' + bankName + '">' +
+                                    bankName + '</option>');
+                            }
                         }
-                        // $('#card_number').val(cardNo);
 
-                        var additionalData = {
-                            'package_id': packageId,
-                            'patient_id': patientId,
-                            'sale_price': proxyPrice,
-                            'paid_amount': totalPrice,
-                            'platform_type': 'web',
-                            'pending_amount': pendingAmount,
-                            'percentage': percentage,
-                            'other_services':checkedTitles
-                            
-                        };
+                        calcOtherServices();
+                        updateDiscountedPrice();
+                    },
 
-                        // Add additional data to the form
-                        $.each(additionalData, function(name, value) {
-                            form.append($('<input>').attr({
-                                type: 'hidden',
-                                name: name,
-                                value: value
-                            }));
-                        });
-                                                
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+
+
+            function getBankData(selectedBank) {
+
+
+
+                var packageId = $("#package_id").val();
+                $.ajax({
+                    url: baseUrl + '/api/md-helath-bank-details',
+                    type: 'GET',
+                    data: {
+                        bank_name: selectedBank,
+                        package_id: packageId
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        console.log('Success:', response.package_details.package_unique_no);
+                        if (response.message === "Bank Details Found") {
+
+                            var form = $('#bank_transfer_form');
+
+                            // Additional data
+                            var pendingAmount = proxyPrice - totalPrice;
+
+                            if (isTwentySelected) {
+                                var percentage = '20';
+                            } else if (isThirtySelected) {
+                                var percentage = '30';
+                            } else if (isFiftySelected) {
+                                var percentage = '50';
+                            } else if (isHundredSelected) {
+                                var percentage = '100';
+                            }
+                            // $('#card_number').val(cardNo);
+
+                            var additionalData = {
+                                'package_id': packageId,
+                                'patient_id': patientId,
+                                'sale_price': proxyPrice,
+                                'paid_amount': totalPrice,
+                                'platform_type': 'web',
+                                'pending_amount': pendingAmount,
+                                'percentage': percentage,
+                                'other_services': checkedTitles
+
+                            };
+
+                            // Add additional data to the form
+                            $.each(additionalData, function(name, value) {
+                                form.append($('<input>').attr({
+                                    type: 'hidden',
+                                    name: name,
+                                    value: value
+                                }));
+                            });
+
 
                             $("#bank_name").val(response.bank_details.bank_name);
                             $("#receiver_name").val(response.bank_details.account_holder_name);
                             $("#iban").val(response.bank_details.account_number);
 
-                            $("#bank_transfer_payment_percent").val(percentage.toString()); 
+                            $("#bank_transfer_payment_percent").val(percentage.toString());
                             $("#bank_transfer_total_paying_price").val(proxyPrice.toString());
 
-                         
 
-                   
-                            
+
+
+
 
                             $("#receiver-bank_name").text(response.bank_details.bank_name);
                             $("#receiver-name").text(response.bank_details.account_holder_name);
                             $("#receiver-account").text(response.bank_details.account_number);
                             $("#receiver-package_id").text(response.package_details.package_unique_no);
-                        
-                       
-                    } else {
-                        console.error("Error: Bank details not found");
+
+
+                        } else {
+                            console.error("Error: Bank details not found");
+                        }
+                    },
+                    error: function(error) {
+                        console.error("Error fetching bank details:", error);
                     }
-                },
-                error: function(error) {
-                    console.error("Error fetching bank details:", error);
+                });
+            }
+
+
+            $(document).on('change', '#bank-informations', function() {
+                var selectedBank = $(this).val();
+                getBankData(selectedBank);
+            });
+
+
+            $(document).on('click', 'input[name="paymentMethod"][value="bank"]', function() {
+
+                var selectedBank = $('#bank-informations').val();
+
+                if (selectedBank) {
+                    getBankData(selectedBank);
                 }
             });
-        }
 
-       
-        $(document).on('change', '#bank-informations', function(){
-            var selectedBank = $(this).val();
-            getBankData(selectedBank);
-        });
 
-       
-        $(document).on('click', 'input[name="paymentMethod"][value="bank"]', function(){
-           
-            var selectedBank = $('#bank-informations').val();
-          
-            if (selectedBank){
-                getBankData(selectedBank);
-            }
-        });
-
-    
-        // $(document).ready(function(){
-            getBankList(); 
+            // $(document).ready(function(){
+            getBankList();
             var initialSelectedBank = $('#bank-informations').val();
             if (initialSelectedBank) {
                 getBankData(initialSelectedBank);
             }
-       // });
+            // });
 
 
- //Copy Account Number       
+            //Copy Account Number       
 
- function copyIBAN() {
-    // Get the account number element
-    var accountNumberElement = document.getElementById("receiver-account");
+            function copyIBAN() {
+                // Get the account number element
+                var accountNumberElement = document.getElementById("receiver-account");
 
-    // Create a range to select the text
-    var range = document.createRange();
-    range.selectNode(accountNumberElement);
+                // Create a range to select the text
+                var range = document.createRange();
+                range.selectNode(accountNumberElement);
 
-    // Create a selection
-    var selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
+                // Create a selection
+                var selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
 
-    // Execute the copy command using the Clipboard API
-    try {
-        document.execCommand("copy");
-        // Optionally, provide some feedback to the user
-        alert("IBAN copied to clipboard!");
-    } catch (err) {
-        console.error("Unable to copy to clipboard:", err);
-    } finally {
-        // Deselect the text
-        selection.removeAllRanges();
-    }
-}
+                // Execute the copy command using the Clipboard API
+                try {
+                    document.execCommand("copy");
+                    // Optionally, provide some feedback to the user
+                    alert("IBAN copied to clipboard!");
+                } catch (err) {
+                    console.error("Unable to copy to clipboard:", err);
+                } finally {
+                    // Deselect the text
+                    selection.removeAllRanges();
+                }
+            }
 
-//Copy Account Number Js Ends
+            //Copy Account Number Js Ends
 
 
 
@@ -1477,23 +1498,23 @@ function getBankData(selectedBank){
             ...options
         });
     </script>
-<script>
-    let checkedVal;
-    $('input[type=radio]').click(function() {
-        checkedVal = $('input[name="paymentMethod"]:checked').val();
-        if (checkedVal === "card") {
-            $("#card").css('display', 'block');
-            $("#wallet").css('display', 'none');
-            $("#bank").css('display', 'none');
-        } else if (checkedVal === "wallet") {
-            $("#card").css('display', 'none');
-            $("#bank").css('display', 'none');
-            $("#wallet").css('display', 'block');
-        } else if (checkedVal == "bank") {
-            $("#card").css('display', 'none');
-            $("#wallet").css('display', 'none');
-            $("#bank").css('display', 'block');
-        }
-    });
-</script>
+    <script>
+        let checkedVal;
+        $('input[type=radio]').click(function() {
+            checkedVal = $('input[name="paymentMethod"]:checked').val();
+            if (checkedVal === "card") {
+                $("#card").css('display', 'block');
+                $("#wallet").css('display', 'none');
+                $("#bank").css('display', 'none');
+            } else if (checkedVal === "wallet") {
+                $("#card").css('display', 'none');
+                $("#bank").css('display', 'none');
+                $("#wallet").css('display', 'block');
+            } else if (checkedVal == "bank") {
+                $("#card").css('display', 'none');
+                $("#wallet").css('display', 'none');
+                $("#bank").css('display', 'block');
+            }
+        });
+    </script>
 @endsection
