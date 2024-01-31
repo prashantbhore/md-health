@@ -116,7 +116,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('dashboard', 'admin/dashboard/dashboard');
 
     //Admin SALES
+
     Route::view('sales', 'admin/sales/sales');
+
+    Route::controller(AdminSalesController::class)->group(function (){
+        Route::get('md-health-sales','index');
+       
+    });
+
     Route::view('sales-details', 'admin/sales/sales-details');
     Route::view('md-profit', 'admin/sales/md-profit');
 
