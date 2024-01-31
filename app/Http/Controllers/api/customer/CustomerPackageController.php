@@ -12,6 +12,7 @@ use Str;
 use Auth;
 use Storage;
 use App\Models\AddNewAcommodition;
+use App\Models\Messages;
 use App\Models\Packages;
 use App\Models\ToursDetails;
 use App\Models\TransportationDetails;
