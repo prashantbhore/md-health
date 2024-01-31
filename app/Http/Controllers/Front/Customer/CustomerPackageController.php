@@ -1799,18 +1799,21 @@ class CustomerPackageController extends Controller
             return $this->sendError('Validation Error.', $validator->errors());
         }
        
+        $request->other_services = explode(',', $request->other_services);
         $conversation_id = mt_rand(100000000, 999999999);
-        Session::put('payment_request', $request->all());
         $body = $request->all();
         $plainArray = $body instanceof \Illuminate\Support\Collection  ? $body->toArray() : $body;
         $plainArray['conversation_id'] = strval($conversation_id);
+
+
+
         
 
 
            
 
             $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), $plainArray, 'POST');
-            Session::forget('payment_request');
+            
             //Make a new conversation_id for the newly purchased package
             $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
             if ($customer_purchase_details->count() > 0) {
