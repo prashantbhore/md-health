@@ -1,7 +1,7 @@
 <div class="card panel-left">
     <h5 class="card-header">User Panel</h5>
     <div class="card-body">
-        <ul class="nav flex-column nav-stuff" style="min-height: 523px;">
+        <ul class="nav flex-column nav-stuff" style="min-height: 520px;">
             <li class="nav-item upProfileLi">
                 <a class="nav-link upProfile" aria-current="page" href="{{ url('my-profile') }}">Profile</a>
             </li>
