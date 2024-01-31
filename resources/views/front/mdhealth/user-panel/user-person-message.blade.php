@@ -24,6 +24,18 @@
         box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.25);
         position: relative;
         padding: 15px 50px 15px 15px;
+        height: 73px;
+        resize: none;
+    }
+
+    .write-message textarea::placeholder {
+        color: #8D8D8D;
+        font-family: CamptonBook;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.56px;
     }
 
     .write-message .send-msg-btn {
@@ -37,11 +49,14 @@
     .self-msg-div p:first-child {
         padding: 10px 20px;
         border-radius: 3px;
+        width: 671px;
     }
 
     .treatment-card {
         height: unset;
+        width: 671px;
     }
+
     body ::-webkit-scrollbar-track {
         background-color: unset;
     }
@@ -66,11 +81,11 @@
                                         <img src="{{ asset('front/assets/img/backPage.png') }}" alt=""> <span class="card-h1">Back Messages</span>
                                     </a>
                                 </h5>
-                                <div id="messages-container" class="message-scroll" style="height: 300px;">
+                                <div id="messages-container" class="message-scroll">
                                 </div>
                             </div>
 
-                            <div class="footer-message-div">
+                            <div class="footer-message-div mx-3">
                                 <div class="input-file-div d-flex align-items-center justify-content-end gap-2 mb-3">
                                     <a data-bs-toggle="modal" data-bs-target="#LiveRequestModal" class="go-live df-center gap-1 text-decoration-none text-light" style="height: 33px;width:265px;cursor:pointer">
                                         <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -3373,7 +3373,7 @@ span.camptonBook.fw-bold {
 
     color: #fff;
     text-align: right;
-    font-family: Campton;
+    font-family: CamptonBook;
     font-size: 14px;
 
     font-weight: 500;
@@ -5207,7 +5207,7 @@ input[type="radio"] {
 }
 
 .person-message-div .day-time {
-    margin: 1rem;
+    margin-top: 0.25rem;
 }
 
 /* .self-msg-div .card-p1 {
@@ -5239,7 +5239,7 @@ input[type="radio"] {
 
 .message-scroll {
     overflow-y: scroll;
-    height: 400px;
+    height: 367px;
     padding: 16px;
 }
 
