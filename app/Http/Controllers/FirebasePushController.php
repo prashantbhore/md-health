@@ -10,6 +10,7 @@ use App\Models\MedicalProviderLogo;
 use App\Models\MedicalProviderRegistrater;
 use App\Models\Messages;
 use App\Models\Packages;
+use App\Models\UserMessageAttachment;
 use Auth;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Messaging\CloudMessage;
@@ -151,7 +152,14 @@ class FirebasePushController extends Controller
     {
         if ($request->requestType === 'api') {
             // dd('hi');
-            $userId = Auth::user()->id;
+            $user_id = Auth::user();
+            if(empty($user_id)){
+                return  response()->json([
+                    'status' => 404,
+                    'message' => 'Here is your chats.',
+                ],404);
+            }
+            $userId = $user_id->id;
             $messages = Messages::where('sender_id', $userId)
             ->where('sender_type', 'customer')
             ->distinct('conversation_id')->get();
@@ -187,7 +195,7 @@ class FirebasePushController extends Controller
                     ->where('conversation_id', explode('_', $conversation_id)[1])
                     ->first();
                 $package_id = !empty($package_id->package_id)?$package_id->package_id:'';
-                $package_name = Packages::where('id', $package_id)->first()->package_name;
+                $package_name = Packages::where('id', $package_id)->first();
                 $package_name = !empty($package_name->package_name)?$package_name->package_name:'';
                 // dd($package_name);
                 $provider_name = MedicalProviderRegistrater::where('id', $provider_id)->first();
@@ -302,36 +310,74 @@ class FirebasePushController extends Controller
     public function upload_media_for_messaging(Request $request){
         if ($request->requestType === 'api') {
             // dd('hi');
-            $userId = Auth::user()->id;
+            $user_id = Auth::user();
+            if(empty($user_id)){
+                return  response()->json([
+                    'status' => 404,
+                    'message' => 'Here is your chats.',
+                ],404);
+            }
+            $user_id = $user_id->id;
+            $user_type = 'customer';
            
         } else {
             $user = Auth::guard('md_customer_registration')->user();
+
             $user_type = 'customer';
             if (empty($user)) {
                 $user = Auth::guard('md_health_medical_providers_registers')->user();
                 $user_type = 'medicalprovider';
             }
-            dd($user);
+            // dd($user);
             $user_id = $user->id;
+            // dd($user_id);s
         }
 
+        // dd($request);
+        
         if ($request->hasFile('media')) {
             // Get the file name with extension
             $fileNameWithExt = $request->file('media')->getClientOriginalName();
-
+            
             // Get just the file name
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-
+            
             // Get just the extension
             $extension = $request->file('media')->getClientOriginalExtension();
-
+            
             // File name to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
-
+            
             // Upload image
             $path = $request->file('media')->storeAs('public/media', $fileNameToStore);
-
+            
         }
+        
+        $user_message_attachment = new UserMessageAttachment();
+        $user_message_attachment->user_id = $user_id;
+        $user_message_attachment->user_type = $user_type;
+        $user_message_attachment->conversation_id =$request->conversation_id;
+        $user_message_attachment->attachment_name = $fileNameToStore;
+        $user_message_attachment->attachment_path = $path;
+        $user_message_attachment->save();
+
+        if ($request->requestType === 'api') {
+            return response()->json([
+                'status' => '200',
+                'message'=> 'attachment saved successfully',
+                'path' => !empty($user_message_attachment->attachment_path)?$user_message_attachment->attachment_path:'',
+                'attachment_id' => !empty($user_message_attachment->id)?$user_message_attachment->id:'',
+            ]);
+        }else{
+            return response()->json([
+                'status' => '200',
+                'message'=> 'attachment saved successfully',
+                'path' => !empty($user_message_attachment->attachment_path)?$user_message_attachment->attachment_path:'',
+                'attachment_id' => !empty($user_message_attachment->id)?$user_message_attachment->id:'',
+            ]);
+            // return redirect('')->with('success','');
+        }
+        
     }
 
 }

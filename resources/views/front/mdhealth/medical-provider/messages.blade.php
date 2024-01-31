@@ -8,13 +8,15 @@
         $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
 
         if (!function_exists('set_conversation_id')) {
-            function set_conversation_id($inputString)
+            function set_conversation_id($inputString, $latestMessage)
             {
                 if (Session::has('conversation_id')) {
                     Session::forget('conversation_id');
                 }
                 Session::put('conversation_id', $inputString);
-                return url('person-message');
+                $encryptedMessage = encrypt($latestMessage);
+                // Append latest message as query parameter to the URL
+                return url('person-message') . '?latest_message=' . urlencode($encryptedMessage);
             }
         }
 
@@ -78,7 +80,8 @@
                                     <div class="message-body">
                                         @if (!empty($conversations))
                                             @foreach ($conversations as $conversation)
-                                                <a href="{{ set_conversation_id($conversation['converstion_id']) }}">
+                                            <a
+                                            href="{{ set_conversation_id(!empty($conversation['converstion_id']) ? $conversation['converstion_id'] : '', !empty($conversation['latest_message']) ? $conversation['latest_message'] : '') }}">
                                                     @if ($conversation['is_latest_message'] == 1)
                                                         <div
                                                             class="treatment-card d-flex align-items-center gap-3 w-100 mb-3 position-relative active-new-msg">
