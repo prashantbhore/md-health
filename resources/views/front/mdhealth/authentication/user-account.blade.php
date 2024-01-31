@@ -223,7 +223,7 @@
                                                 </div>
                                             </div>
                                             {{-- <div id="recaptcha-container" class="df-center"></div> --}}
-                                            <span id="error" class="text-danger"></span>
+                                            {{-- <span id="error" class="text-danger"></span>
                                             <div class="col-md-12 text-center d-flex flex-column gap-3 py-100px">
                                                 <button type="button" class="btn cont-btn w-100 df-center"
                                                     style="margin-bottom: 3.6rem;" id="regcustuser">Create
@@ -231,7 +231,7 @@
                                                 <label for="" class="mt-auto">Already have an account?</label>
                                                 <a href="{{ url('sign-in-web') }}" class="signIn-link lh-1">Sign In</a>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         {{-- <div id="recaptcha-container" class="df-center"></div> --}}
                                         <span id="error" class="text-danger"></span>
                                         <div class="col-md-12 text-center d-flex flex-column gap-3 py-100px">
