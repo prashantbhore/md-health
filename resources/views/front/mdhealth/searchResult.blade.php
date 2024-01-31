@@ -444,7 +444,7 @@
                             <input type="hidden" name="date" id="date" value="{{$date}}">
                             <input type="hidden" name="city_name" id="city_name" value="{{$city_name}}">
                             <input type="hidden" name="treatment_name" id="treatment_name" value="{{$treatment_name}}">
-                            <input type="text" name="other_services" id="other_services" >
+                            <input type="hidden" name="other_services" id="other_services" >
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="Excellent" name="Excellent" value="Excellent">
@@ -454,15 +454,29 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
-                                    <input type="checkbox" id="Good" name="Good" value="Good">
-                                    <label for="vehicle2" class="card-p1">Good (3-4)</label><br>
+                                    <input type="checkbox" id="Very Good" name="Very Good" value="Very Good">
+                                    <label for="vehicle2" class="card-p1">Very Good (4)</label><br>
                                 </div>
                                 <p class="mb-1">(14)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
-                                    <input type="checkbox" id="Normal" name="Normal" value="Normal">
-                                    <label for="vehicle3" class="card-p1">Normal (1-2)</label>
+                                    <input type="checkbox" id="Good" name="Good" value="Good">
+                                    <label for="vehicle3" class="card-p1">Good (3)</label>
+                                </div>
+                                <p class="mb-1">(8)</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex gap-2 align-items-center mb-2">
+                                    <input type="checkbox" id="Fair" name="Fair" value="Fair">
+                                    <label for="vehicle3" class="card-p1">Fair (2)</label>
+                                </div>
+                                <p class="mb-1">(8)</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex gap-2 align-items-center mb-2">
+                                    <input type="checkbox" id="Bad" name="Bad" value="Bad">
+                                    <label for="vehicle3" class="card-p1">Bad ()</label>
                                 </div>
                                 <p class="mb-1">(8)</p>
                             </div>
@@ -482,22 +496,22 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="Transporting" name="Transporting" value="Transporting">
-                                <label for="vehicle2" class="card-p1">Transporting</label><br>
+                                <input type="checkbox" id="Transportation" name="Transportation" value="Transportation">
+                                <label for="vehicle2" class="card-p1">Transportation</label><br>
                             </div>
                             <p class="mb-1">(14)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="Accommodation" name="Accommodation" value="Accommodation">
+                                <input type="checkbox" id="Accomodition" name="Accomodition" value="Accomodition">
                                 <label for="vehicle3" class="card-p1">Accommodation</label>
                             </div>
                             <p class="mb-1">(8)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
-                                <input type="checkbox" id="Translate" name="Translate" value="Translate">
-                                <label for="vehicle3" class="card-p1">Translate</label>
+                                <input type="checkbox" id="Translation" name="Translation" value="Translation">
+                                <label for="vehicle3" class="card-p1">Translation</label>
                             </div>
                             <p class="mb-1">(8)</p>
                         </div>
@@ -505,6 +519,27 @@
                             <div class="d-flex gap-1 align-items-center mb-2">
                                 <input type="checkbox" id="Tour" name="Tour" value="Tour">
                                 <label for="vehicle3" class="card-p1">Tour</label>
+                            </div>
+                            <p class="mb-1">(8)</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex gap-1 align-items-center mb-2">
+                                <input type="checkbox" id="Visa Service" name="Visa Service" value="Visa Service">
+                                <label for="vehicle3" class="card-p1">Visa Service</label>
+                            </div>
+                            <p class="mb-1">(8)</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex gap-1 align-items-center mb-2">
+                                <input type="checkbox" id="Ticket Services" name="Ticket Services" value="Ticket Services">
+                                <label for="vehicle3" class="card-p1">Ticket Services</label>
+                            </div>
+                            <p class="mb-1">(8)</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex gap-1 align-items-center mb-2">
+                                <input type="checkbox" id="Ambulance Services" name="Ambulance Services" value="Ambulance Services">
+                                <label for="vehicle3" class="card-p1">Ambulance Services</label>
                             </div>
                             <p class="mb-1">(8)</p>
                         </div>
@@ -565,7 +600,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn " >Apply Filter </button>
+                <button type="submit" class="btn filterbtnpack w-100" >Apply Filter </button>
                 </form>
             </div>
 
