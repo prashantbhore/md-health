@@ -366,8 +366,8 @@
                                     <div class="d-flex gap-3 w-100">
                                         <div class="df-center">
                                             @if (!empty($data['company_logo_image_path']))
-                                                <img src="{{ asset($data['company_logo_image_path']) }}" alt=""
-                                                    style="height: 109px;width:109px;border-radius:3px">
+                                                <img src="{{ asset($data['company_logo_image_path']) }}" alt="" class="pkgImg" style="object-fit:contain;"
+                                                    >
                                             @endif
                                             <!-- <img src="{{ asset('front/assets/img/packageImg.png') }}" alt="" class="pkgImg"> -->
 
@@ -759,7 +759,7 @@
                                                             <label for="cloud-upload-file" class="cloud-upload-file">
                                                                 <!-- <i class="fa fa-cloud-upload text-green"></i> -->
                                                                 <img src="{{ asset('front/assets/img/uploadFile.png') }}"
-                                                                    alt="">
+                                                                    alt="" class="cp">
                                                                 <input type="file" name="customer_document_image_path"
                                                                     id="cloud-upload-file" hidden multiple>
                                                                 <span class="fsb-2 fw-600">*Upload PDF, Jpeg or PNG, MP4,
@@ -777,7 +777,7 @@
                                                                 @if (!empty($document['customer_document_image_path']))
                                                                     <a href="{{ $document['customer_document_image_path'] }}"
                                                                         class="glightbox">
-                                                                        <img src="{{ asset('/front/assets/img/pdf.png') }}"
+                                                                        <img src="{{ !empty($document['customer_document_image_path'])?$document['customer_document_image_path']:asset('/front/assets/img/pdf.png') }}"
                                                                             alt="image" />
                                                                         <span class="clear-btn"
                                                                             id="{{ $document['id'] }}">X</span>

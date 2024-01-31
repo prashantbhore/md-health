@@ -1008,7 +1008,7 @@ class CustomerPackageController extends Controller
         $id = $request->id;
 
         $packages_view = Packages::with(['provider', 'providerGallery', 'provider.city'])->where('id', $id)->first();
-
+// dd($packages_view);
         if (!empty($packages_view)) {
 
             $provider_gallery = [];
@@ -1038,6 +1038,7 @@ class CustomerPackageController extends Controller
                 'treatment_period_in_days' => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
                 'treatment_price' => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
                 'package_price' => !empty($packages_view->package_price) ? $packages_view->package_price : '',
+                'company_name' => !empty($packages_view->provider->company_name) ? $packages_view->provider->company_name : '',
 
                 'sale_price' => !empty($packages_view->sale_price) ? $packages_view->sale_price : '',
                 'city_name' => !empty($packages_view->provider->city->city_name) ? $packages_view->provider->city->city_name : '',
@@ -1051,6 +1052,8 @@ class CustomerPackageController extends Controller
 
                 // // Attach the cookie to the response
                 // $response->withCookie( $cookie );
+                if(!empty(Auth::guard('md_customer_registration')->user()->id))
+                {
                 $package_purhase_or_not=CustomerPurchaseDetails::where('status','active')
                 ->select('package_id')
                 ->where('package_id',$packages_view->id)
@@ -1062,16 +1065,18 @@ class CustomerPackageController extends Controller
                     ->leftjoin('md_packages','md_packages.created_by','md_medical_provider_register.id')
                     ->first();
                     if(!empty($company_name)){
-                        $company_name=$company_name->company_name;
+                        $packageDetails['company_name']=$company_name->company_name;
                     }
                 }else{
                     $company_name='******';
                 }
+            }
+                // dd($packageDetails);
 
                 $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
                 $counties = Country::all();
 
-                return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties', 'provider_gallery','company_name'));
+                return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties', 'provider_gallery'));
 
             } else {
                 return view('front.mdhealth.searchResult');

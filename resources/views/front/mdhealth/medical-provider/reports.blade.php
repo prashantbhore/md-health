@@ -172,7 +172,7 @@
                                         <input type="file" name="report_path" class="form-control text-dark" id="fileInput" onchange="previewFile()">
                                     </div>
                                     <div class="prev-img-div d-flex align-items-end gap-3" style="position: relative;">
-                                        <img id="previewImage" src="front/assets/img/default-img.png" alt="image" style="max-width: 100%; max-height: 200px;">
+                                        <img id="previewImage" src="front/assets/img/uploadHere.png" alt="image" class="cp up-image">
                                         <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
                                         <div id="previewPDF" style="display: none;">
                                             <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;">
