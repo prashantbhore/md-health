@@ -285,6 +285,7 @@ class CustomerPackageController extends BaseController {
             $data['package_list'] = [];
             if (!empty($packages)) {
                 foreach ($packages as $key => $value) {
+                    
                     $package_reviews = CustomerReviews::where('status', 'active')
                     ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
                     ->where('package_id', $value->id)
@@ -4188,9 +4189,9 @@ class CustomerPackageController extends BaseController {
                 'md_packages.id as package_id',
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id','md_product_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', 'md_master_cities.id')
             ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
             ->orderBy('md_customer_favourite_packages.id', 'desc')
             ->get();
