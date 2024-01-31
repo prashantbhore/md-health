@@ -25,6 +25,7 @@ use Session;
 use Storage;
 use Validator;
 use App\Models\MedicalProviderRegistrater;
+use App\Models\CustomerReviews;
 
 class CustomerPackageController extends Controller
 {
@@ -916,11 +917,83 @@ class CustomerPackageController extends Controller
          if (!empty($request->city_name)) {
              $packages = $packages->orWhere('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
          }
+         if (!empty($request->other_services)) {
+            // return 'asdasd';
+            // Parse the filter string to extract rating, services, and price information
+            $filters = explode(',', $request->other_services);
+            foreach ($filters as $filter) {
+                if (in_array($filter, ['Excellent', 'Very Good', 'Good', 'Fair', 'Bad'])) {
+                    $numericValue = $this->convertRatingLabelToNumericValue($filter);
+
+                    // Filter packages based on calculated average rating label
+                    $packages->where(function ($query) use ($numericValue) {
+                        $query->orWhere('md_customer_package_reviews.cleanliness', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.comfort', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.food_quality', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.behaviour_reviews', '>=', $numericValue)
+                            ->orWhere('md_customer_package_reviews.recommended', '>=', $numericValue);
+                    });
+                }
+                // Check if the filter contains a specific service
+                elseif (strpos($filter, 'Transportation') !== false || strpos($filter, 'Accomodition') !== false || strpos($filter, 'Tour') !== false || strpos($filter, 'Translation') !== false || strpos($filter, 'Visa Service') !== false || strpos($filter, 'Ticket Services') !== false || strpos($filter, 'Ambulance Services') !== false) {
+                    // Filter packages by the entire filter string
+                    $packages->where('md_packages.other_services',$filter);
+                }
+
+                // Assume any other case is a single price point or range
+                else {
+                    if (strpos($filter, '-') !== false) {
+                        // Extract minimum and maximum prices
+                        [$minPrice, $maxPrice] = explode('-', $filter);
+                        // return $maxPrice;
+
+                        // Filter packages by sale price range
+                        $packages->orWhereBetween('md_packages.sale_price', [$minPrice, $maxPrice]);
+                    } else {
+                        // Filter packages by single price point
+                        $price = (int) $filter; // Assuming the price is an integer
+                        $packages->orWhere('md_packages.sale_price', '<=', $price);
+                    }
+                }
+            }
+        }
+
          $packages = $packages->get();
+        //  return $packages ;
          $data = [];
          $data['package_list'] = [];
          if (!empty($packages)) {
              foreach ($packages as $key => $value) {
+                $package_reviews = CustomerReviews::where('status', 'active')
+                ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                ->where('package_id', $value->id)
+                    ->first();
+
+                // Check if reviews exist
+                if ($package_reviews) {
+                    // Calculate sum
+                    $sum = $package_reviews->cleanliness + $package_reviews->comfort + $package_reviews->food_quality + $package_reviews->behaviour_reviews + $package_reviews->recommended;
+
+                    // Calculate average
+                    $average = $sum / 5; // Assuming you're always summing 5 fields
+                } else {
+                    // If no reviews exist, set average to null or any default value
+                    $average = 0;
+                }
+
+                $rating_label = '';
+                if ($average == 5) {
+                    $rating_label = 'Excellent';
+                } elseif ($average == 4) {
+                    $rating_label = 'Very Good';
+                } elseif ($average == 3) {
+                    $rating_label = 'Good';
+                } elseif ($average == 2) {
+                    $rating_label = 'Fair';
+                } elseif ($average == 1) {
+                    $rating_label = 'Bad';
+                }
+                
  
                  if (!empty(Auth::guard('md_customer_registration')->user()->id)) {
                      $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
@@ -944,6 +1017,8 @@ class CustomerPackageController extends Controller
                  $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
                  $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
                  $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+                 $data['package_list'][$key]['rating_label'] = $rating_label;
+                 $data['package_list'][$key]['average_rating'] = $average;
              }
          }
  
@@ -991,6 +1066,25 @@ class CustomerPackageController extends Controller
              return view('front.mdhealth.searchResult', compact('cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date', 'cities_for_other'));
          }
      }
+
+     private function convertRatingLabelToNumericValue($label)
+    {
+        switch ($label) {
+            case 'Excellent':
+                return 5;
+            case 'Very Good':
+                return 4;
+            case 'Good':
+                return 3;
+            case 'Fair':
+                return 2;
+            case 'Bad':
+                return 1;
+            default:
+                return 0; // Return 0 or handle invalid cases as per your requirement
+        }
+    }
+
  
      //Mplus04
 
@@ -1168,7 +1262,8 @@ class CustomerPackageController extends Controller
                 }
             }
             // dd( $data );
-            $documents = $this->apiService->getData($token, url('/api/md-customer-upload-documents'), ['package_id' => $data['package_id']], 'POST');
+            $documents = $this->apiService->getData($token, url('/api/md-customer-documents-list'), ['package_id' => $data['package_id']], 'POST');
+            // dd($documents);
             $data['documents'] = !empty($documents['data']) ? $documents['data'] : [];
             if (!empty($data['hotel_id'])) {
                 $accomodation_view = $this->apiService->getData($token, url('/api/md-customer-acommodition-details-view'), ['hotel_id' => $data['hotel_id']], 'POST');
@@ -1798,18 +1893,21 @@ class CustomerPackageController extends Controller
             return $this->sendError('Validation Error.', $validator->errors());
         }
        
+        $request->other_services = explode(',', $request->other_services);
         $conversation_id = mt_rand(100000000, 999999999);
-        Session::put('payment_request', $request->all());
         $body = $request->all();
         $plainArray = $body instanceof \Illuminate\Support\Collection  ? $body->toArray() : $body;
         $plainArray['conversation_id'] = strval($conversation_id);
+
+
+
         
 
 
            
 
             $repsonse_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), $plainArray, 'POST');
-            Session::forget('payment_request');
+            
             //Make a new conversation_id for the newly purchased package
             $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
             if ($customer_purchase_details->count() > 0) {

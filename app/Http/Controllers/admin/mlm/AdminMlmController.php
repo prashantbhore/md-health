@@ -31,7 +31,6 @@ class AdminMlmController extends Controller
     }
 
 
-
     public function data_table(Request $request)
     {
         $top_earners = MDCoins::where('status', 'active')
@@ -47,7 +46,7 @@ class AdminMlmController extends Controller
                 })
                 ->addColumn('network', function ($row) {
                     if (!empty($row->customer_id)) {
-                        $networkCount = CoinStatus::where('wallet_status', 'your_netowrk')
+                        $networkCount = CoinStatus::where('wallet_status', 'your_network')
                             ->where('customer_id', $row->customer_id)
                             ->count();
     
@@ -56,10 +55,10 @@ class AdminMlmController extends Controller
                     return '';
                 })
                 ->addColumn('city_name', function ($row) {
-                    return optional($row->customer->city)->city_name ? ucfirst($row->customer->city->city_name) : '';
+                    return optional(optional($row->customer)->city)->city_name ? ucfirst(optional($row->customer)->city->city_name) : '';
                 })
                 ->addColumn('country_name', function ($row) {
-                    return optional($row->customer->country)->country_name ? ucfirst($row->customer->country->country_name) : '';
+                    return optional(optional($row->customer)->country)->country_name ? ucfirst(optional($row->customer)->country->country_name) : '';
                 })
                 ->addColumn('earnings', function ($row) {
                     return isset($row->coins) ? ucfirst($row->coins) : '';

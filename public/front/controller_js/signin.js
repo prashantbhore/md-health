@@ -34,6 +34,26 @@ function countdownTimer(duration) {
 // let timerDuration = 32;
 
 // countdownTimer(timerDuration);
+$(document).ready(function () {
+    $("#phoneno").attr('disabled',true);
+});
+$(document).on("change", "#countrycode", function () {
+    $("#phoneno").attr('disabled',false);
+});
+$(document).on("keyup", "#phoneno", function () {
+    var countrycode = $("#countrycode").val();
+    var phoneno = $("#phoneno").val();
+    var phone=countrycode+phoneno;
+    var phone = $("#number").val(phone);
+    
+});
+$(document).on("change", "#countrycode", function () {
+    var countrycode = $("#countrycode").val();
+    var phoneno = $("#phoneno").val();
+    var phone=countrycode+phoneno;
+    var phone = $("#number").val(phone);
+    
+});
 
 $(document).ready(function () {
     $('#loginForm').validate({
@@ -119,6 +139,9 @@ $(document).on('click', '#signup', function () {
                 $('#signup').attr('disabled', true);
                 $('#signup').html(
                     '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+                    setTimeout(function() {
+                        $('#signup').removeAttr('disabled').html('Sign Up');
+                    }, 1000); 
             },
             success: function (response) {
                 $('#signup').attr('enable', true);
