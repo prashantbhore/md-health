@@ -301,6 +301,7 @@
                             use Stevebauman\Location\Facades\Location;
                             $location = Location::get();
                         @endphp
+                        
 
                         {{-- <div class="col-md-12">
                             <p class="mb-0 text-red card-p1">This is not available in your country!</p>
