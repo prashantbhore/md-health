@@ -108,6 +108,9 @@ Route::middleware('auth:sanctum')->group(function () {
     //check-password-exist
     Route::post('md-check-password-exist', [UpdateCustomerProfileController::class, 'check_password_exist']);
 
+    //check-number-exist
+    Route::post('md-check-number-exist', [UpdateCustomerProfileController::class, 'check_number_exist']);
+
     //update-customer-profile
     Route::post('md-update-customer-profile', [UpdateCustomerProfileController::class, 'update_customer_profile']);
 
