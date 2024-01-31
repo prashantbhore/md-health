@@ -211,7 +211,7 @@
                                                     <span>{{ !empty($patient_details['customer']['address']) ? $patient_details['customer']['address'] : '' }}</span>
                                                     <span>{{ !empty($patient_details['customer']['city']['city_name']) ? $patient_details['customer']['city']['city_name'] : '' }}
                                                         /
-                                                        {{ !empty($patient_details['customer']['city']['city_name']) ? $patient_details['customer']['country']['country_name'] : '' }}</span>
+                                                        {{ !empty($patient_details['customer']['country']['country_name']) ? $patient_details['customer']['country']['country_name'] : '' }}</span>
                                                 </p>
                                             </div>
                                             <div class="col-md-6">
@@ -220,7 +220,7 @@
                                                     <span>{{ !empty($patient_details['customer']['address']) ? $patient_details['customer']['address'] : '' }}</span>
                                                     <span>{{ !empty($patient_details['customer']['city']['city_name']) ? $patient_details['customer']['city']['city_name'] : '' }}
                                                         /
-                                                        {{ !empty($patient_details['customer']['city']['city_name']) ? $patient_details['customer']['country']['country_name'] : '' }}</span>
+                                                        {{ !empty($patient_details['customer']['country']['country_name']) ? $patient_details['customer']['country']['country_name'] : '' }}</span>
                                                 </p>
                                             </div>
 

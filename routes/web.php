@@ -51,6 +51,7 @@ use App\Http\Controllers\Front\Vendor\UpdateVendorProfileController;
 use App\Http\Controllers\Front\FoodProvider\UpdateFoodProviderAccount;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderMembershipController;
 use App\Http\Controllers\Front\Vendor\VendorSalesController;
+use App\Http\Controllers\admin\sales\AdminSalesController;
 use App\Models\MedicalProviderLogo;
 
 /*
@@ -117,20 +118,24 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     //Admin SALES
 
-    Route::view('sales', 'admin/sales/sales');
+   // Route::view('sales', 'admin/sales/sales');
 
     Route::controller(AdminSalesController::class)->group(function (){
-        Route::get('md-health-sales','index');
+        Route::get('sales','index');
        
     });
 
-    Route::view('sales-details', 'admin/sales/sales-details');
+  
+
     Route::view('md-profit', 'admin/sales/md-profit');
 
     //Route::view('md-health-sales','admin/sales/md-health-sales');
 
     Route::controller(AdminMdhealthSalesController::class)->group(function (){
         Route::get('md-health-sales','index');
+        Route::get('md-health-sales-data-table','data_table');
+
+        Route::get('sales-details/{id}','sales_view');
        
     });
 
