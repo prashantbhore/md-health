@@ -1107,6 +1107,7 @@ select {
     letter-spacing: -0.07em;
     transition: 0.15s all;
 }
+
 .filterbtnpack {
     height: 45px;
     padding: 0 2rem;
@@ -5174,9 +5175,18 @@ input[type="radio"] {
     margin: 1rem;
     padding: 16px;
 }
+
 .person-message-div .day-time {
     margin: 1rem;
 }
+
 .self-msg-div .card-p1 {
     margin-right: 1rem;
+}
+
+#countrycode {
+    width: 50px;
+    border: 2px solid #d6d6d6;
+    border-right: 0;
+    font-family: 'Campton';
 }

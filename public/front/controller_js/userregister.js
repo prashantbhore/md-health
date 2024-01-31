@@ -80,14 +80,14 @@ $(document).on("change", "#country_id", function () {
     $("#phoneno").attr('readonly',false);
 });
 $(document).on("keyup", "#phoneno", function () {
-    var countrycode = $("#countrycode").val();
+    var countrycode = $("#countrycode").text();
     var phoneno = $("#phoneno").val();
     var phone=countrycode+phoneno;
     var phone = $("#phone").val(phone);
     
 });
 $(document).on("change", "#country_id", function () {
-    var countrycode = $("#countrycode").val();
+    var countrycode = $("#countrycode").text();
     var phoneno = $("#phoneno").val();
     var phone=countrycode+phoneno;
     var phone = $("#phone").val(phone);
@@ -386,7 +386,7 @@ $(document).ready(function () {
                     // $('#countrycode').append('<option value="" >Choose</option>');
                     // Append new options based on the AJAX response
                     $.each(response.data, function (index, city) {
-                        $('#countrycode').val(response.data.country_code);
+                        $('#countrycode').text(response.data.country_code);
                     });
 
                     // Show the city select
