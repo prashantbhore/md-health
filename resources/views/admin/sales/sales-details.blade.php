@@ -152,17 +152,32 @@
                             <div class="col-md-12 mb-3">
                                 <div class="w-full d-flex align-items-center gap-3">
                                     <div class="w-50">
+                                        
                                         <label for="status" class="d-block">Status</label>
                                         <select name="status" id="status" class="w-full">
-                                            <option value="pending" @if ($patient_details->purchase_status == 'pending') selected @endif>Pending</option>
-                                            <option value="completed" @if ($patient_details->purchase_status == 'completed') selected @endif>Completed</option>
-                                            <option value="inProgress" @if ($patient_details->purchase_status == 'inProgress') selected @endif>In Progress</option>
+                                            <option value="pending" @if ($patient_details->purchase_type == 'pending') selected @endif>Pending</option>
+                                            <option value="completed" @if ($patient_details->purchase_type == 'completed') selected @endif>Completed</option>
+                                            <option value="inProgress" @if ($patient_details->purchase_type == 'in_progress') selected @endif>In Progress</option>
                                         </select>
                                         
                                     </div>
+                                    @if ($patient_details->purchase_type == 'pending')
                                     <div class="pending w-25">
                                         Pending
                                     </div>
+                                    @endif
+
+                                    @if ($patient_details->purchase_type == 'completed')
+                                    <div class="completed w-25">
+                                        Completed
+                                    </div>
+                                    @endif
+
+                                    @if ($patient_details->purchase_type == 'in_progress')
+                                        <div class="complete w-25" style="background-color: yellow;">
+                                            In Progress
+                                        </div>
+                                    @endif
 
                                 </div>
                             </div>

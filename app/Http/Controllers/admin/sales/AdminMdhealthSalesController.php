@@ -154,7 +154,7 @@ class AdminMdhealthSalesController extends Controller
 
       }
 
-      dd($patient_details);
+      //dd($patient_details);
 
       //dd($latest_payment);
 
