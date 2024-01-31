@@ -104,6 +104,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Mplus02
     Route::middleware(['CheckRequestType'])->group(function () {
         Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
+        Route::any('/setToken', [FirebasePushController::class, 'setToken'])->name('firebase_token');
         Route::any('md-get-user-conversations', [FirebasePushController::class, 'get_conversations'])->name('medical-messages');
     });
 
