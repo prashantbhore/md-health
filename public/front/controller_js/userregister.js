@@ -81,10 +81,10 @@ $(document).on("click", "#regcustuser", function () {
 
 
 $(document).ready(function () {
-    $("#phoneno").attr('disabled',true);
+    $("#phoneno").attr('readonly',true);
 });
 $(document).on("change", "#country_id", function () {
-    $("#phoneno").attr('disabled',false);
+    $("#phoneno").attr('readonly',false);
 });
 $(document).on("keyup", "#phoneno", function () {
     var countrycode = $("#countrycode").val();
