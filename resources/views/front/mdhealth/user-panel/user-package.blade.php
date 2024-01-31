@@ -164,7 +164,6 @@
                                                         <div class="df-column">
                                                             <h5 class="mb-0 card-h4">
                                                                 {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }} 
-                                                               
                                                             </h5>
 
                                                             <h6 class="card-h1">

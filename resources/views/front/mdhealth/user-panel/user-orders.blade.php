@@ -42,7 +42,7 @@
 
                                             <div class="col-md-5 text-end">
                                                 <div class="card-p1 mb-2"><span class="fw-700">Total Price:</span> 1.517,71 ₺</div>
-                                                <a href="#" class="card-p1"><b>View Details</b></a>
+                                                <a href="#" class="card-p1 text-decoration-underline text-black"><b>View Details</b></a>
                                             </div>
                                         </div>
                                         <div class="row bg-light p-3">
@@ -57,7 +57,7 @@
 
                                             <div class="col-md-5 text-end">
                                                 <div class="card-p1 mb-2"><span class="fw-700">Total Price:</span> 1.517,71 ₺</div>
-                                                <a href="#" class="card-p1"><b>View Details</b></a>
+                                                <a href="#" class="card-p1 text-decoration-underline text-black"><b>View Details</b></a>
                                             </div>
                                         </div>
                                     </div>

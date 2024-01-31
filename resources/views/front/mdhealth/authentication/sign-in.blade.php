@@ -25,6 +25,18 @@
         border-radius: 5px;
         border: 1px solid #D6D6D6 !important;
     }
+
+    #countrycode {
+        border: 1px solid #D6D6D6 !important;
+        max-width: 70px;
+        background-color: #f6f6f6;
+        font-family: Campton;
+    }
+
+    .input-group .form-control {
+        background-color: #f6f6f6;
+        background: #f6f6f6;
+    }
 </style>
 @php
 $country = App\Models\Country::get();
@@ -52,41 +64,43 @@ $country = App\Models\Country::get();
                         <input type="hidden" name="platform_type" value="web">
                         <input type="hidden" name="login_type" value="login">
 
+                        <!-- PHONE NO. -->
                         <div class="mb-3">
                             <label for="phoneno" class="form-label">Phone Number</label>
-                            
-                            @if (!empty($country))
-                            <div class="mb-3">
-                                <select  class="form-select" name="countrycode" id="countrycode">
+                            <div class="input-group">
+                                @if (!empty($country))
+                                <select class="form-select" name="countrycode" id="countrycode">
                                     <option value=""></option>
                                     @foreach ($country as $country)
                                     <option value="{{ $country->country_code }}">{{ $country->country_code }}
                                     </option>
                                     @endforeach
                                 </select>
+                                <input type="text" class="form-control w-auto" name="phoneno" id="phoneno" placeholder="Phone Number">
                             </div>
                             @endif
-                            <input type="text" class="form-control" name="phoneno" id="phoneno" placeholder="Phone Number">
                         </div>
 
-                     
-
                         <input type="hidden" class="form-control" name="number" id="number" placeholder="Phone Number">
+
                         <div class="mb-3 hide-eye-div">
                             <label for="Password" class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                             <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password "></span>
                         </div>
+
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Remember Me
                             </label>
                         </div>
+
                         {{-- <input type="hidden" id="number" class="form-control" placeholder="+91 ********"> --}}
 
                         <span id="error" class="text-danger"></span>
                         <span id="success" class="text-success"></span>
+
                         <div class="pt-100px">
                             <button class="btn cont-btn w-100 mb-4 df-center" type="button" id="signup">Continue</button>
                         </div>
