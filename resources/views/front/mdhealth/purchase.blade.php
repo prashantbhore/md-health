@@ -307,7 +307,7 @@
                     </div>
                 </form>
             </div>
-            <!-- BANK TRANSFER END -->
+            {{-- <!-- BANK TRANSFER END -->
 
 
                             <div class="col-md-12">
@@ -353,7 +353,7 @@
                         </div>
                     </form>
                 </div>
-                <!-- BANK TRANSFER END -->
+                <!-- BANK TRANSFER END --> --}}
 
                 <!-- WALLET DETAILS -->
                 <div id="wallet">
