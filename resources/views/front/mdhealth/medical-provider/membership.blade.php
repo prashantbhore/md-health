@@ -48,20 +48,20 @@
 
 
                         <div class="w-100">
-                        <div class="d-flex align-items-center gap-3">
-                            <h5 class="card-h3 mb-1">{{$provider_amount}} ₺</h5>
+                        <div class="d-flex align-items-center gap-3 membership">
+                            <h5 class="card-h3 mb-1">{{$provider_amount}} <span class="lira">₺</span></h5>
                             @if(!empty($membership))
                                 @if($membership->membership_type == 'silver')
-                                    <h5><img src="{{ asset('front/assets/img/silver-md.png') }}" alt=""></h5>
+                                    <h5 class="my-0"><img src="{{ asset('front/assets/img/silver-md.png') }}" alt=""></h5>
                                 @elseif($membership->membership_type == 'gold')
-                                    <h5><img src="{{ asset('front/assets/img/gold-md.png') }}" alt=""></h5>
+                                    <h5 class="my-0"><img src="{{ asset('front/assets/img/gold-md.png') }}" alt=""></h5>
                                 @elseif($membership->membership_type == 'platinum')
-                                    <h5><img src="{{ asset('front/assets/img/platinum-md.png') }}" alt=""></h5>
+                                    <h5 class="my-0"><img src="{{ asset('front/assets/img/platinum-md.png') }}" alt=""></h5>
                                 @endif
                             @endif
                             {{-- Display the remaining amount needed for the next membership --}}
                             <h5 class="card-h3 mb-1 ms-auto">
-                                {{$next_membership_amount}} ₺
+                                {{$next_membership_amount}} <span class="lira">₺</span>
                             </h5>
                         </div>
 

@@ -36,26 +36,27 @@
         appId: "1:537186381446:web:777955e71e5e61c8d62b07"
     };
 
-    const medical ="{{ $medical }}";
+    const medical = "{{ $medical }}";
     const user = "{{ $user }}";
 
-    if(medical != '' || user != ''){
+    if (medical != '' || user != '') {
 
         const app = initializeApp(firebaseConfig);
-    
+
         const messaging = getMessaging();
         const user_id = "{{ $sender_id }}";
-        if(user_id){
+        if (user_id) {
 
             getToken(messaging, {
                 vapidKey: 'BALWd3VwOcsTfiTfPPcVcVCUkMRVhGB88TVOhmIg2A9gNJzA6NJ_kltn9NxNSildp_8tARwffCERCxIbCWYCPyM'
             }).then((currentToken) => {
                 if (currentToken) {
-        
+
                     console.log(currentToken);
                     //  /api/
+                    const baseUrl = "{{ url('/') }}";
                     navigator.sendBeacon(
-                        `/setToken?fcm_token=${currentToken}&user_id=${user_id}`
+                        baseUrl + `/setToken?fcm_token=${currentToken}&user_id=${user_id}`
                     );
                 } else {
                     // Show permission request UI
@@ -67,14 +68,11 @@
                 // ...
             });
         }
-    
+
         onMessage(messaging, (payload) => {
             // alert(payload.notification.title + " " + payload.notification.body);
             console.log('Message received. ', payload);
             // ...
         });
     }
-
-
- 
 </script>

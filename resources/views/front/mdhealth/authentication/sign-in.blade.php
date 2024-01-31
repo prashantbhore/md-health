@@ -21,87 +21,100 @@
         font-size: 19px;
     }
 
-        .form-control {
-            border-radius: 5px;
-            border: 1px solid #D6D6D6 !important;
-        }
-        
-    </style>
-    @php
-        $country = App\Models\Country::get();
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #D6D6D6 !important;
+    }
 
-    @endphp
+    #countrycode {
+        border: 1px solid #D6D6D6 !important;
+        max-width: 70px;
+        background-color: #f6f6f6;
+        font-family: Campton;
+    }
 
-    <div class="container py-100px df-center sign-in-form" id="logDiv">
-        <div class="card sign-in-card" style="background: #f6f6f6;">
-            <div class="card-body">
-                <div class="d-flex flex-column align-items-center gap-4">
-                    <div class="pt-3">
-                        <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
-                    </div>
-                    <h2 class="my-0">Sign In to MD<span>health</span></h2>
-                    <p>The device is not yours? Use private or incognito mode to log in.</p>
+    .input-group .form-control {
+        background-color: #f6f6f6;
+        background: #f6f6f6;
+    }
+</style>
+@php
+$country = App\Models\Country::get();
 
-                    <div class="w-100 df-center">
-                        {{-- <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
+@endphp
+
+<div class="container py-100px df-center sign-in-form" id="logDiv">
+    <div class="card sign-in-card" style="background: #f6f6f6;">
+        <div class="card-body">
+            <div class="d-flex flex-column align-items-center gap-4">
+                <div class="pt-3">
+                    <img src="{{ asset('front/assets/img/otpLogo.png') }}" alt="">
+                </div>
+                <h2 class="my-0">Sign In to MD<span>health</span></h2>
+                <p>The device is not yours? Use private or incognito mode to log in.</p>
+
+                <div class="w-100 df-center">
+                    {{-- <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
                         <div class="alert alert-success" id="successAuth" style="display: none;"></div> --}}
-                        {{-- <span class="alert alert-danger" id="error" ></span> --}}
+                    {{-- <span class="alert alert-danger" id="error" ></span> --}}
 
-                        <form id="loginForm">
-                            {{-- action="{{ url('user-login') }}" method="post" --}}
-                            {{-- @csrf --}}
-                            <input type="hidden" name="platform_type" value="web">
-                            <input type="hidden" name="login_type" value="login">
+                    <form id="loginForm">
+                        {{-- action="{{ url('user-login') }}" method="post" --}}
+                        {{-- @csrf --}}
+                        <input type="hidden" name="platform_type" value="web">
+                        <input type="hidden" name="login_type" value="login">
 
-                            <div class="mb-3">
-                                <label for="phoneno" class="form-label">Phone Number</label>
+                        <!-- PHONE NO. -->
+                        <div class="mb-3">
+                            <label for="phoneno" class="form-label">Phone Number</label>
+                            <div class="input-group">
                                 @if (!empty($country))
-                                    <div class="mb-3">
-                                        <select name="countrycode" id="countrycode">
-                                            <option value=""></option>
-                                            @foreach ($country as $country)
-                                                <option value="{{ $country->country_code }}">{{ $country->country_code }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-                                <input type="text" class="form-control" name="phoneno" id="phoneno"
-                                    placeholder="Phone Number">
+                                <select class="form-select" name="countrycode" id="countrycode">
+                                    <option value=""></option>
+                                    @foreach ($country as $country)
+                                    <option value="{{ $country->country_code }}">{{ $country->country_code }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                <input type="text" class="form-control w-auto" name="phoneno" id="phoneno" placeholder="Phone Number">
                             </div>
-                            <input type="hidden" class="form-control" name="number" id="number"
-                                placeholder="Phone Number">
-                            <div class="mb-3 hide-eye-div">
-                                <label for="Password" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                    placeholder="Password">
-                                <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password "></span>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Remember Me
-                                </label>
-                            </div>
-                            {{-- <input type="hidden" id="number" class="form-control" placeholder="+91 ********"> --}}
+                            @endif
+                        </div>
 
-                            <span id="error" class="text-danger"></span>
-                            <span id="success" class="text-success"></span>
-                            <div class="pt-100px">
-                                <button class="btn cont-btn w-100 mb-4 df-center" type="button"
-                                    id="signup">Continue</button>
-                            </div>
-                            <div class="text-center">
-                                <a href="{{ url('/') }}" class="btn-text text-black text-decoration-underline">Back to
-                                    MDhealth.co</a>
-                            </div>
-                            {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
-                        </form>
-                    </div>
+                        <input type="hidden" class="form-control" name="number" id="number" placeholder="Phone Number">
+
+                        <div class="mb-3 hide-eye-div">
+                            <label for="Password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                            <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password "></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Remember Me
+                            </label>
+                        </div>
+
+                        {{-- <input type="hidden" id="number" class="form-control" placeholder="+91 ********"> --}}
+
+                        <span id="error" class="text-danger"></span>
+                        <span id="success" class="text-success"></span>
+
+                        <div class="pt-100px">
+                            <button class="btn cont-btn w-100 mb-4 df-center" type="button" id="signup">Continue</button>
+                        </div>
+                        <div class="text-center">
+                            <a href="{{ url('/') }}" class="btn-text text-black text-decoration-underline">Back to
+                                MDhealth.co</a>
+                        </div>
+                        {{-- <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button> --}}
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 

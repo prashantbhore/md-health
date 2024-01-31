@@ -8,13 +8,15 @@
         $medical = Session::has('MDMedicalProvider*%') ? Session::get('MDMedicalProvider*%') : '';
 
         if (!function_exists('set_conversation_id')) {
-            function set_conversation_id($inputString)
+            function set_conversation_id($inputString, $latestMessage)
             {
                 if (Session::has('conversation_id')) {
                     Session::forget('conversation_id');
                 }
                 Session::put('conversation_id', $inputString);
-                return url('person-message');
+                $encryptedMessage = encrypt($latestMessage);
+                // Append latest message as query parameter to the URL
+                return url('person-message') . '?latest_message=' . urlencode($encryptedMessage);
             }
         }
 
@@ -34,13 +36,9 @@
             width: 285px;
         }
 
-
-
         .trmt-card-body {
             position: relative;
         }
-
-
 
         .no-msg-div a:last-child {
             /* padding: 13px 20px; */
@@ -67,7 +65,7 @@
                     @endif
                 </div>
                 <div class="w-761">
-                    <div class="card mb-4">
+                    <div class="card panel-right mb-4">
                         <div class="form-div">
                             <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                                 <span>Message</span>
@@ -78,7 +76,8 @@
                                     <div class="message-body">
                                         @if (!empty($conversations))
                                             @foreach ($conversations as $conversation)
-                                                <a href="{{ set_conversation_id($conversation['converstion_id']) }}">
+                                            <a
+                                            href="{{ set_conversation_id(!empty($conversation['converstion_id']) ? $conversation['converstion_id'] : '', !empty($conversation['latest_message']) ? $conversation['latest_message'] : '') }}">
                                                     @if ($conversation['is_latest_message'] == 1)
                                                         <div
                                                             class="treatment-card d-flex align-items-center gap-3 w-100 mb-3 position-relative active-new-msg">
@@ -120,9 +119,11 @@
                                 </div>
 
                                 <div class="no-msg-div d-flex align-items-center flex-column justify-content-around"
-                                    style="height: 150px;">
+                                    >
                                     @if (empty($conversations))
-                                        <p class="mb-0">You don't have any message</p>
+                                        <!-- <p class="mb-0">You don't have any message</p> -->
+                                        @include('front.includes.no-data-found')
+
                                     @endif
                                     <a href="{{ url('live-consultation-appoinment') }}" class="go-live df-center gap-1">
                                         <svg width="18" height="14" viewBox="0 0 18 14" fill="none"

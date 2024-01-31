@@ -156,6 +156,10 @@
                             <div>
                                 <p class="packageResult-title mb-3">Package Price</p>
                                 <div class="my-2">
+                                    <strikethrough class="mb-2 strike strikePrice">
+                                        {{ !empty($packageDetails['package_price']) ? $packageDetails['package_price'] : '' }}
+                                        <span class="lira">₺</span>
+                                    </strikethrough>
                                     <p class="mb-2 card-h4">
                                         {{ !empty($packageDetails['sale_price']) ? $packageDetails['sale_price'] : '' }}
                                         <span class="lira">₺</span>
@@ -323,10 +327,11 @@
                         <div class="overview mt-4">
                             <div class="row">
                                 <div class="col-12 ps-0">
+                                    {{-- {{dd($packageDetails['company_name'])}} --}}
                                     @php
                                     // $company_name='vikas';
                                     @endphp
-                                    <p style="font-family: CamptonBook !important; font-size: 15px !important;">{!! !empty($packageDetails['overview']) ? str_replace($company_name, '*************', nl2br(strip_tags($packageDetails['overview']))) : '' !!}
+                                    <p style="font-family: CamptonBook !important; font-size: 15px !important;">{!! !empty($packageDetails['overview']) ? str_replace($packageDetails['company_name'], '*************', nl2br(strip_tags($packageDetails['overview']))) : '' !!}
                                     </p>
                                 </div>
                                 {{-- <div class="col-4 pe-0">
