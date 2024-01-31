@@ -3047,10 +3047,10 @@ class CustomerPackageController extends BaseController
         }
 
         $customer_purchase_package_active_list = CustomerPurchaseDetails::where('md_customer_purchase_details.status', 'active')
-            ->where(function ($query) {
-                $query->where('md_customer_purchase_details.purchase_type', 'in_progress')
-                    ->orWhere('md_customer_purchase_details.purchase_type', 'pending');
-            })
+        ->where(function ($query) {
+            $query->where('md_customer_purchase_details.purchase_type', 'in_progress')
+            ->orWhere('md_customer_purchase_details.purchase_type', 'pending');
+        })
             ->select(
                 'md_customer_purchase_details.id as purchase_id',
                 // 'md_customer_purchase_details.status',
@@ -3073,7 +3073,7 @@ class CustomerPackageController extends BaseController
                 'md_master_cities.city_name',
                 'md_medical_provider_register.company_name',
                 'md_medical_provider_logo.company_logo_image_path',
-                'md_medical_provider_system_users.name as case_manager',
+                'md_customer_purchase_details.case_manager_id',
                 'md_customer_purchase_details.case_no',
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
@@ -3082,234 +3082,245 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_medical_provider_system_users', 'md_customer_purchase_details.case_manager_id', '=', 'md_medical_provider_system_users.id')
+            // ->leftjoin('md_medical_provider_system_users', 'md_customer_purchase_details.case_manager_id', '=', 'md_medical_provider_register.id')
             ->where('md_customer_purchase_details.package_id', $request->package_id)
             ->where('md_customer_purchase_details.id', $request->purchase_id)
             ->first();
 
         // foreach ($customer_purchase_package_active_list as $key => $val) {
-        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string) $customer_purchase_package_active_list->purchase_id : '';
-        $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
-        $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? (string) $customer_purchase_package_active_list->created_at : '';
-        // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
-        $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
-        $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
-        $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
-        $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
-        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? $customer_purchase_package_active_list->company_logo_image_path : '';
-        // $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
-        // $treatmentStartTimestamp = strtotime($treatment_start_date);
+        if (!empty($customer_purchase_package_active_list)) {
+            $case_manager = MedicalProviderRegistrater::where('status', 'active')
+            ->select('company_name as case_manager')
+            ->where('id', $customer_purchase_package_active_list->case_manager_id)
+                ->first();
 
-        // // Get today's date as a UNIX timestamp
-        // $todayTimestamp = time();
+            $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string) $customer_purchase_package_active_list->purchase_id : '';
+            $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
+            $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? (string) $customer_purchase_package_active_list->created_at : '';
+            // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
+            $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
+            $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
+            $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
+            $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
+            $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? $customer_purchase_package_active_list->company_logo_image_path : '';
+            // $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
+            // $treatmentStartTimestamp = strtotime($treatment_start_date);
 
-        // // Calculate the difference in seconds between the treatment start date and today's date
-        // $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+            // // Get today's date as a UNIX timestamp
+            // $todayTimestamp = time();
 
-        // // Convert the time difference to days
-        // $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+            // // Calculate the difference in seconds between the treatment start date and today's date
+            // $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
 
-        // $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
-        $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string) $customer_purchase_package_active_list->treatment_start_date : '';
+            // // Convert the time difference to days
+            // $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
 
-        if (!empty($treatment_start_date)) {
-            // Treatment start date is provided
-            $treatmentStartTimestamp = strtotime($treatment_start_date);
+            // $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
+            $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string) $customer_purchase_package_active_list->treatment_start_date : '';
 
-            // Get today's date as a UNIX timestamp
-            $todayTimestamp = time();
+            if (!empty($treatment_start_date)) {
+                // Treatment start date is provided
+                $treatmentStartTimestamp = strtotime($treatment_start_date);
 
-            // Calculate the difference in seconds between the treatment start date and today's date
-            $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+                // Get today's date as a UNIX timestamp
+                $todayTimestamp = time();
 
-            // Convert the time difference to days
-            $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+                // Calculate the difference in seconds between the treatment start date and today's date
+                $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
 
-            $customer_purchase_package_active_list['treatment_start_date'] = 'Time left to treatment: ' . $daysRemaining . ' days';
-        } else {
-            // Treatment start date is not provided
-            $customer_purchase_package_active_list['treatment_start_date'] = 'Treatment start date not available';
-        }
+                // Convert the time difference to days
+                $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+                $customer_purchase_package_active_list['treatment_start_date'] = 'Time left to treatment: ' . $daysRemaining . ' days';
+            } else {
+                // Treatment start date is not provided
+                $customer_purchase_package_active_list['treatment_start_date'] = 'Treatment start date not available';
+            }
 
 
-        $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
-        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
-        $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
-        // $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
-        $customer_purchase_package_active_list['case_no'] = !empty($customer_purchase_package_active_list->case_no) ? $customer_purchase_package_active_list->case_no : '-';
-        $customer_purchase_package_active_list['case_manager'] = !empty($customer_purchase_package_active_list->case_manager) ? $customer_purchase_package_active_list->case_manager : '';
-        $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? $customer_purchase_package_active_list->other_services : '';
-        $customer_purchase_package_active_list['hotel_id'] = !empty($customer_purchase_package_active_list->hotel_id) ? $customer_purchase_package_active_list->hotel_id : 0;
-        $customer_purchase_package_active_list['vehicle_id'] = !empty($customer_purchase_package_active_list->vehicle_id) ? $customer_purchase_package_active_list->vehicle_id : 0;
-        $customer_purchase_package_active_list['tour_id'] = !empty($customer_purchase_package_active_list->tour_id) ? $customer_purchase_package_active_list->tour_id : 0;
-        // $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? $customer_purchase_package_active_list->created_at : '';
-        // }
+            $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
+            $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
+            $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
+            // $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
+            $customer_purchase_package_active_list['case_no'] = !empty($customer_purchase_package_active_list->case_no) ? (string)$customer_purchase_package_active_list->case_no : '-';
+            $customer_purchase_package_active_list['case_manager'] = !empty($case_manager->case_manager) ? (string)$case_manager->case_manager : '';
+            $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? $customer_purchase_package_active_list->other_services : '';
+            $customer_purchase_package_active_list['hotel_id'] = !empty($customer_purchase_package_active_list->hotel_id) ? $customer_purchase_package_active_list->hotel_id : 0;
+            $customer_purchase_package_active_list['vehicle_id'] = !empty($customer_purchase_package_active_list->vehicle_id) ? $customer_purchase_package_active_list->vehicle_id : 0;
+            $customer_purchase_package_active_list['tour_id'] = !empty($customer_purchase_package_active_list->tour_id) ? $customer_purchase_package_active_list->tour_id : 0;
+            // $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? $customer_purchase_package_active_list->created_at : '';
+            // }
 
-        $PatientInformation = PatientInformation::where('status', 'active')
+            $PatientInformation = PatientInformation::where('status', 'active')
             ->select('id as patient_id')
             ->where('purchase_id', $request->purchase_id)
-            ->first();
+                ->first();
 
-        $customer_purchase_package_active_list['patient_id'] = !empty($PatientInformation->patient_id) ? $PatientInformation->patient_id : 0;
+            $customer_purchase_package_active_list['patient_id'] = !empty($PatientInformation->patient_id) ? $PatientInformation->patient_id : 0;
 
-        $otherServicesArray = explode(',', $customer_purchase_package_active_list['other_services']);
-        // return $otherServicesArray;
-        // Check if "Accomodition" exists in the array
-        $accommodationExists = in_array('Accommodation', $otherServicesArray);
-        // return $accommodationExists;
-        // Check if "Transportation" exists in the array
-        $transportationExists = in_array('Transportation', $otherServicesArray);
+            $otherServicesArray = explode(',', $customer_purchase_package_active_list['other_services']);
+            // return $otherServicesArray;
+            // Check if "Accomodition" exists in the array
+            $accommodationExists = in_array('Accommodation', $otherServicesArray);
+            // return $accommodationExists;
+            // Check if "Transportation" exists in the array
+            $transportationExists = in_array('Transportation', $otherServicesArray);
 
-        $tourExists = in_array('Tour Details', $otherServicesArray);
+            $tourExists = in_array('Tour Details', $otherServicesArray);
 
-        $TranslationExists = in_array('Translation', $otherServicesArray);
+            $TranslationExists = in_array('Translation', $otherServicesArray);
+            // return $TranslationExists;
+            $VisaServicesExists = in_array('Visa Details', $otherServicesArray);
 
-        $VisaServicesExists = in_array('Visa Details', $otherServicesArray);
+            $TicketServicesExists = in_array('Ticket Service', $otherServicesArray);
 
-        $TicketServicesExists = in_array('Ticket Service', $otherServicesArray);
+            $AmbulanceServicesExists = in_array('Ambulance Service', $otherServicesArray);
 
-        $AmbulanceServicesExists = in_array('Ambulance Service', $otherServicesArray);
+            $services = [];
+            if (!empty($accommodationExists)) {
+                $accommodation = [
+                    'id' => !empty($customer_purchase_package_active_list['hotel_id']) ? $customer_purchase_package_active_list['hotel_id'] : 0,
+                    'title' => 'Acommodition',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            } else {
+                $accommodation = [
+                    'id' => 1,
+                    'title' => 'Acommodition',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            }
 
-        $services = [];
-        if (!empty($accommodationExists)) {
-            $accommodation = [
-                'id' => !empty($customer_purchase_package_active_list['hotel_id']) ? $customer_purchase_package_active_list['hotel_id'] : 0,
-                'title' => 'Acommodition',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        } else {
-            $accommodation = [
-                'id' => 1,
-                'title' => 'Acommodition',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
+            if (!empty($transportationExists)) {
+                $transportation = [
+                    'id' => !empty($customer_purchase_package_active_list['vehicle_id']) ? $customer_purchase_package_active_list['vehicle_id'] : 0,
+                    'title' => 'Transportation',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            } else {
+                $transportation = [
+                    'id' => 2,
+                    'title' => 'Transportation',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            }
+
+            if (!empty($TranslationExists)) {
+                // return 'sadds';
+                $Translation = [
+                    'id' => 3,
+                    'title' => 'Translation',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $Translation = [
+                    'id' => 3,
+                    'title' => 'Translation',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+            // return $Translation;
+
+            if (!empty($tourExists)) {
+                $tour = [
+                    'id' => !empty($customer_purchase_package_active_list['tour_id']) ? $customer_purchase_package_active_list['tour_id'] : 0,
+                    'title' => 'Tour',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            } else {
+                $tour = [
+                    'id' => $customer_purchase_package_active_list['tour_id'],
+                    'title' => 'Tour',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            }
+
+            if (!empty($VisaServicesExists)) {
+                $VisaServices = [
+                    'id' => 5,
+                    'title' => 'Visa Services',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $VisaServices = [
+                    'id' => 5,
+                    'title' => 'Visa Services',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+
+            if (!empty($TicketServicesExists)) {
+                $TicketServices = [
+                    'id' => 6,
+                    'title' => 'Ticket Services',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $TicketServices = [
+                    'id' => 6,
+                    'title' => 'Ticket Services',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+
+            if (!empty($AmbulanceServicesExists)) {
+                $AmbulanceServices = [
+                    'id' => 7,
+                    'title' => 'Ambulance Services',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $AmbulanceServices = [
+                    'id' => 7,
+                    'title' => 'Ambulance Services',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+            /////// Ali has made this change do not remove while resolving confilct //////
+            if (isset($accommodation)) {
+                $services[] = $accommodation;
+            }
+            if (isset($transportation)) {
+                $services[] = $transportation;
+            }
+            if (isset($tour)) {
+                $services[] = $tour;
+            }
+            if (isset($Translation)) {
+                $services[] = $Translation;
+            }
+
+            if (isset($VisaServices)) {
+                $services[] = $VisaServices;
+            }
+
+            if (isset($TicketServices)) {
+                $services[] = $TicketServices;
+            }
+            if (isset($AmbulanceServices)) {
+                $services[] = $AmbulanceServices;
+            }
+            /////// Ali has made this change do not remove while resolving confilct //////
         }
 
-        if (!empty($transportationExists)) {
-            $transportation = [
-                'id' => !empty($customer_purchase_package_active_list['vehicle_id']) ? $customer_purchase_package_active_list['vehicle_id'] : 0,
-                'title' => 'Transportation',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        } else {
-            $transportation = [
-                'id' => 2,
-                'title' => 'Transportation',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        }
-
-        if (!empty($TranslationExists)) {
-            $Translation = [
-                'id' => 3,
-                'title' => 'Translation',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $Translation = [
-                'id' => 3,
-                'title' => 'Translation',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-        if (!empty($tourExists)) {
-            $tour = [
-                'id' => !empty($customer_purchase_package_active_list['tour_id']) ? $customer_purchase_package_active_list['tour_id'] : 0,
-                'title' => 'Tour',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        } else {
-            $tour = [
-                'id' => $customer_purchase_package_active_list['tour_id'],
-                'title' => 'Tour',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        }
-
-        if (!empty($VisaServicesExists)) {
-            $VisaServices = [
-                'id' => 5,
-                'title' => 'Visa Services',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $VisaServices = [
-                'id' => 5,
-                'title' => 'Visa Services',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-
-        if (!empty($TicketServicesExists)) {
-            $TicketServices = [
-                'id' => 6,
-                'title' => 'Ticket Services',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $TicketServices = [
-                'id' => 6,
-                'title' => 'Ticket Services',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-
-        if (!empty($AmbulanceServicesExists)) {
-            $AmbulanceServices = [
-                'id' => 7,
-                'title' => 'Ambulance Services',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $AmbulanceServices = [
-                'id' => 7,
-                'title' => 'Ambulance Services',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-        /////// Ali has made this change do not remove while resolving confilct //////
-        if (isset($accommodation)) {
-            $services[] = $accommodation;
-        }
-        if (isset($transportation)) {
-            $services[] = $transportation;
-        }
-        if (isset($tour)) {
-            $services[] = $tour;
-        }
-        if (isset($Translation)) {
-            $services[] = $Translation;
-        }
-
-        if (isset($VisaServices)) {
-            $services[] = $VisaServices;
-        }
-
-        if (isset($TicketServices)) {
-            $services[] = $TicketServices;
-        }
-        if (isset($AmbulanceServices)) {
-            $services[] = $AmbulanceServices;
-        }
-        /////// Ali has made this change do not remove while resolving confilct //////
 
 
         if (!empty($customer_purchase_package_active_list)) {
@@ -3326,6 +3337,7 @@ class CustomerPackageController extends BaseController
             ]);
         }
     }
+
 
 
     public function customer_upload_documents(Request $request)
