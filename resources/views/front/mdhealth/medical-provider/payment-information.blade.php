@@ -241,9 +241,10 @@
         });
     </script>
     <!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Include jQuery Validation Plugin -->
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+    
     <script>
         $(document).ready(function () {
             $("#paymentinfo").validate({
@@ -251,7 +252,7 @@
                     account_number: {
                         required: true,
                         minlength: 26,
-                        // maxlength: 34,
+                        maxlength: 26,
                     },
                     bank_name: {
                         required: true,
@@ -261,7 +262,7 @@
                     account_number: {
                         required: "Please enter IBAN number",
                         minlength: "Please enter at least 24 digits",
-                        // maxlength: "Please enter at most 34 digits",
+                        maxlength: "Please enter at most 24 digits",
                     },
                     bank_name: {
                         required: "Please enter bank name",
