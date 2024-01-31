@@ -369,6 +369,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     Route::view('bank-accounts', 'admin/payments/bank-accounts');
     Route::view('payment-requests', 'admin/payments/payment-requests');
 
+
     //Admin REVIEWS
 
 

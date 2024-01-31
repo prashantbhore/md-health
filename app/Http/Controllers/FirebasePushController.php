@@ -26,27 +26,44 @@ class FirebasePushController extends Controller
     }
 
     public function setToken(Request $request)
-    {
-        $token = $request->fcm_token;
-        $user = Auth::guard('md_customer_registration')->user();
-        if (empty($user)) {
-            $user = Auth::guard('md_health_medical_providers_registers')->user();
-        }
-        $user->update([
-            'fcm_token' => $token,
-        ]);
-        // $request->user()->update([
-        //     'fcm_token' => $token,
-        // ]);
+    {   
+        if ($request->requestType === 'api') {
+            $token = $request->fcm_token;
+            $user = Auth::user();
+            $user->update([
+                'fcm_token' => $token,
+            ]);
+            return response()->json([
+                'message' => 'Successfully Updated FCM Token',
+            ]);
+        }else{
 
-        return response()->json([
-            'message' => 'Successfully Updated FCM Token',
-        ]);
+            $token = $request->fcm_token;
+            $user = Auth::guard('md_customer_registration')->user();
+            if (empty($user)) {
+                $user = Auth::guard('md_health_medical_providers_registers')->user();
+            }
+            $user->update([
+                'fcm_token' => $token,
+            ]);
+            // $request->user()->update([
+            //     'fcm_token' => $token,
+            // ]);
+    
+            return response()->json([
+                'message' => 'Successfully Updated FCM Token',
+            ]);
+        }
     }
 
     public function notification(Request $request)
     {
         // dd($request->sender_type);
+        // if ($request->requestType === 'api') {
+            
+        // }else{
+
+        // }
         $sender_type = $request->sender_type;
         $convrsation_id = $request->conversation_id;
         $create_new_notification = new CustomerNotifications();

@@ -859,6 +859,7 @@ select {
 .pt-135px {
     padding-top: 135px;
 }
+
 .py-135px {
     padding-top: 135px;
 }
@@ -882,6 +883,7 @@ select {
 .mb-100px {
     margin-bottom: 100px;
 }
+
 .form-check-input:focus {
     box-shadow: none;
 }
@@ -1499,6 +1501,7 @@ select {
     padding-top: 135px;
     margin-bottom: 100px;
 }
+
 .panel-left.card,
 .for-cards .card {
     border: 0;
@@ -1718,9 +1721,9 @@ select {
     padding-right: 0px !important;
 }
 
-.treatment-card-report .dashboard-card-title {
+/* .treatment-card-report .dashboard-card-title {
     margin-bottom: 5px !important;
-}
+} */
 
 .report-text span {
     font-size: 14px;
@@ -1735,9 +1738,15 @@ select {
 }
 
 .view-more-reports .view-more-content h5:last-child {
-    font-size: 11px !important;
-    margin-top: 5px !important;
-    font-family: "Camptonlight" !important;
+    /* font-size: 11px !important; */
+    /* margin-top: 5px !important; */
+    /* font-family: "Camptonlight" !important; */
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
 }
 
 .head-report {
@@ -1991,6 +2000,10 @@ select {
 
 .fs-15 {
     font-size: 15px !important;
+}
+
+.fs-11 {
+    font-size: 11px !important;
 }
 
 .tab-div .nav-link.active {
@@ -3360,7 +3373,7 @@ span.camptonBook.fw-bold {
 
     color: #fff;
     text-align: right;
-    font-family: Campton;
+    font-family: CamptonBook;
     font-size: 14px;
 
     font-weight: 500;
@@ -5188,18 +5201,18 @@ input[type="radio"] {
 
 
 .person-message-div .treatment-card {
-    width: 641px !important;
-    margin: 1rem;
+    /* width: 641px !important; */
+    /* margin: 1rem; */
     padding: 16px;
 }
 
 .person-message-div .day-time {
-    margin: 1rem;
+    margin-top: 0.25rem;
 }
 
-.self-msg-div .card-p1 {
+/* .self-msg-div .card-p1 {
     margin-right: 1rem;
-}
+} */
 
 #countrycode {
     width: 50px;
@@ -5221,4 +5234,37 @@ input[type="radio"] {
     border-color: #cecdcd;
     outline: 0;
     box-shadow: none;
+}
+
+
+.message-scroll {
+    overflow-y: scroll;
+    height: 367px;
+    padding: 16px;
+}
+
+.message-scroll {
+    overflow: hidden auto !important;
+    overflow: auto;
+}
+
+.message-scroll::-webkit-scrollbar {
+    visibility: hidden;
+    -webkit-appearance: none;
+    width: 6px;
+    height: 6px;
+    /* background-color: rgba(0, 0, 0, 0); */
+}
+
+.message-scroll::-webkit-scrollbar-thumb {
+    visibility: hidden;
+    border-radius: 3px;
+    /* background-color: rgba(159, 166, 188, 0.55); */
+}
+
+.message-scroll:hover::-webkit-scrollbar,
+.message-scroll:hover::-webkit-scrollbar-thumb,
+.message-scroll:focus::-webkit-scrollbar,
+.message-scroll:focus::-webkit-scrollbar-thumb {
+    visibility: visible;
 }
