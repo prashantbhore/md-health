@@ -859,6 +859,9 @@ select {
 .pt-135px {
     padding-top: 135px;
 }
+.py-135px {
+    padding-top: 135px;
+}
 
 .pt-115px {
     padding-top: 115px;
@@ -876,6 +879,9 @@ select {
     padding-top: 300px;
 }
 
+.mb-100px {
+    margin-bottom: 100px;
+}
 .form-check-input:focus {
     box-shadow: none;
 }
@@ -1489,6 +1495,10 @@ select {
     height: 1em;
 }
 
+.for-cards {
+    padding-top: 135px;
+    margin-bottom: 100px;
+}
 .panel-left.card,
 .for-cards .card {
     border: 0;
@@ -5205,4 +5215,10 @@ input[type="radio"] {
     flex-shrink: 0;
     border-radius: 5px;
     object-fit: cover;
+}
+
+.form-select:focus {
+    border-color: #cecdcd;
+    outline: 0;
+    box-shadow: none;
 }

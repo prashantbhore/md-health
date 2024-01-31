@@ -242,7 +242,7 @@
     }
 </style>
 <div class="content-wrapper">
-    <div class="container py-100px for-cards">
+    <div class="container py-135px for-cards">
         <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar-user')
@@ -1057,7 +1057,6 @@
             <!-- RESERVATIONS TAB CONTENT END -->
         </div>
     </div>
-</div>
 </div>
 
 {{-- Model Boxes --}} {{-- Hote Model box 1 --}}
