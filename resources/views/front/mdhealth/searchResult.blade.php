@@ -212,6 +212,7 @@
                                     <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
                                     @if ($package_list['other_services'][$index] == 'Ambulance Services')
                                     <p class="mb-2 card-p1">
+                                        {{-- {{dd($packages)}} --}}
                                         {{ $package_list['other_services'][$index] }}
                                     </p>
                                     @elseif($package_list['other_services'][$index] == 'Accomodition')
