@@ -135,6 +135,10 @@
 
 /* UTILITY CLASSES */
 
+.cp {
+    cursor: pointer;
+}
+
 .error {
     color: #F31D1D !important;
     font-family: "Campton";
@@ -444,6 +448,7 @@
 #TourView .btn-close,
 #ReviewModal .btn-close,
 #ReviewModalVehicle .btn-close,
+#ReviewModalFlight .btn-close,
 #TransportationView .btn-close {
     background: url("../img/closeModal.png") no-repeat center center/cover;
     opacity: 1;
@@ -454,6 +459,7 @@
 #TransportationView .modal-header .btn-close,
 #ReviewModal .modal-header .btn-close,
 #ReviewModalVehicle .modal-header .btn-close,
+#ReviewModalFlight .modal-header .btn-close,
 #cancelRequest .modal-header .btn-close,
 #TourView .modal-header .btn-close,
 #UserChangeInformationModel .modal-header .btn-close {
@@ -914,7 +920,7 @@ select {
 }
 
 .text-gray {
-    color: #828282;
+    color: #828282 !important;
 }
 
 .text-red {
@@ -2068,6 +2074,7 @@ select option {
 
 #UserCancellationReq .form-select,
 #cancelRequest .form-control,
+.multiple-upload-images .form-control,
 #patient-package-details .form-select,
 #UserChangeInformationModel .form-select,
 #UserChangeInformationModel .form-control,
@@ -4340,6 +4347,7 @@ label.tc-text,
 #TransportationView .modal-dialog,
 #ReviewModal .modal-dialog,
 #ReviewModalVehicle .modal-dialog,
+#ReviewModalFlight .modal-dialog,
 #TourView .modal-dialog,
 #UserChangeInformationModel .modal-dialog {
     max-width: 704px;
@@ -4359,6 +4367,7 @@ label.tc-text,
 #TransportationView .modal-content,
 #ReviewModal .modal-content,
 #ReviewModalVehicle .modal-content,
+#ReviewModalFlight .modal-content,
 #TourView .modal-content,
 #UserChangeInformationModel .modal-content {
     border-radius: 10px;
@@ -4436,6 +4445,7 @@ label.tc-text,
 }
 
 #ReviewModal .modal-content,
+#ReviewModalFlight .modal-content,
 #ReviewModalVehicle .modal-content {
     background: url("../img/reviewBg.png") no-repeat center center/ contain;
     height: 707px;
@@ -5070,7 +5080,8 @@ input[type="radio"] {
     letter-spacing: -0.44px;
 }
 
-.sales-tab img {
+.sales-tab img,
+.membership img {
     height: 24px;
 }
 
@@ -5165,10 +5176,6 @@ input[type="radio"] {
     transition: 0.15s all;
 }
 
-.play-icon img:hover {
-    height: 40px !important;
-    width: 39px !important;
-}
 
 .person-message-div .treatment-card {
     width: 641px !important;
@@ -5189,4 +5196,13 @@ input[type="radio"] {
     border: 2px solid #d6d6d6;
     border-right: 0;
     font-family: 'Campton';
+}
+
+.up-image,
+#previewImage {
+    width: 142px;
+    height: 128px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    object-fit: cover;
 }
