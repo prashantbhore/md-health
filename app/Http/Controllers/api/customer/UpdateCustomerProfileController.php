@@ -126,6 +126,35 @@ class UpdateCustomerProfileController extends BaseController {
         }
     }
 
+
+    public function check_number_exist(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'mobile_no' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $mobile_no=CustomerRegistration::where('status','active')
+        ->where('phone',$request->mobile_no)
+        ->first();
+
+        if (!empty($mobile_no)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'mobile number exist.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Something went wrong. mobile number not exist.',
+            ]);
+        }
+    }
+
+
     //update_customer_password
 
     public function update_customer_password( Request $request ) {
