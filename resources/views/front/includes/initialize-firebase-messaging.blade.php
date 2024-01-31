@@ -11,6 +11,16 @@
     } else {
         return redirect('/')->with('error', 'user session not found');
     }
+    if(request()->has('latest_message'))
+    {
+        $encrypted_message = request()->get('latest_message');
+        $decrypted_message = decrypt($encrypted_message);
+        // dd($decrypted_message);
+    }else{
+        $decrypted_message = '';
+    }
+   
+
 @endphp
 
 <script type="module">
@@ -135,20 +145,28 @@
             // Upload video to Cloud Storage
             const formData = new FormData();
             formData.append('media', videoFile);
+            formData.append('conversation_id', "{{ $conversation_id }}");
             const url = "{{ url('/upload-media-for-messaging') }}";
             // Send a POST request to your server to upload the video file
             const response = await fetch(url, {
                 method: 'POST',
                 body: formData
             });
-        
+
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log(responseData);
+                sendMessage(text, responseData.path, responseData.attachment_id);
+            }
+
         } else {
             // No video attached, save text message only
-            sendMessage(text, null);
+            // alert('hi');
+            sendMessage(text, null,null);
         }
     }
 
-    async function sendMessage(text, videoUrl) {
+    async function sendMessage(text, videoUrl, attachmentId) {
         // const text = textarea.value.trim();
         // if (text === '') {
         //     return;
@@ -175,18 +193,12 @@
                 day_of_week: currentDayOfWeek,
                 current_time: currentTime,
                 conversation_id: "{{ $conversation_id }}",
-                media_url: videoURL,
+                media_url: videoUrl??'',
+                attachment_id: attachmentId??'',
+                env: 'development',
             };
 
-            const docRef = await addDoc(collection(db, "messages"), {
-                sender_id: "{{ $sender_id }}",
-                sender_type: "{{ $sender_type }}",
-                text: text,
-                timestamp: timestampInSeconds,
-                day_of_week: currentDayOfWeek,
-                current_time: currentTime,
-                conversation_id: "{{ $conversation_id }}"
-            });
+            const docRef = await addDoc(collection(db, "messages"), data);
             console.log("Document written with ID: ", docRef.id);
             textarea.value = '';
             sendRequestToShowNotifications(data);
@@ -197,8 +209,11 @@
 
     try {
 
-        const querySnapshot = await getDocs(query(collection(db, 'messages'), where('conversation_id', '==',
-            '{{ $conversation_id }}')));
+        const querySnapshot = await getDocs(query(
+            collection(db, 'messages'),
+            where('conversation_id', '==', '{{ $conversation_id }}'),
+            where('env', '==', 'development')
+        ));
         querySnapshot.forEach((doc) => {
             const messageData = doc.data();
             documentIds = querySnapshot.docs.map(doc => doc.id);
@@ -209,19 +224,33 @@
         messagesArray.forEach((data) => {
             console.log(data);
             updateUIWithMessage(data);
-            sendLastMessages(data);
         });
-
-
+        const lastElement = messagesArray[messagesArray.length - 1];
+        const lastMessageData = {
+                    sender_id: lastElement.sender_id,
+                    sender_type: "{{ $sender_type }}",
+                    text: "{{ $decrypted_message }}",
+                    // timestamp: timestampInSeconds,
+                    // day_of_week: currentDayOfWeek,
+                    // current_time: currentTime,
+                    conversation_id: "{{ $conversation_id }}",
+                    env: 'development',
+                };
+        sendLastMessages(lastMessageData);
+        
     } catch (error) {
         console.error('Error fetching data from Firestore:', error);
     }
 
 
+
     const fetchDataFromFirestore = async () => {
         try {
-            const querySnapshot = await getDocs(query(collection(db, 'messages'), where('conversation_id', '==',
-                '{{ $conversation_id }}')));
+            const querySnapshot = await getDocs(query(
+                collection(db, 'messages'),
+                where('conversation_id', '==', '{{ $conversation_id }}'),
+                where('env', '==', 'development')
+            ));
 
             let newDoc = [];
             let messageData = [];
@@ -268,9 +297,11 @@
 
     async function sendLastMessages(data) {
         // alert("sendLastMessages");
+        // alert("{{ $sender_id }}");
         if (data.sender_id != "{{ $sender_id }}") {
+            // alert("sendLastMessages");
             const conversation_id = "{{ $conversation_id }}";
-            const senderId = "{{ $sender_type }}";
+            const senderId = "{{ $sender_id }}";
             const senderType = "{{ $sender_type }}";
             const lastReadMessage = data.text;
             // alert(lastReadMessage);

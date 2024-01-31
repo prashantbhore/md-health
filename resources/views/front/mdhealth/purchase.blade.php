@@ -289,20 +289,27 @@
                             <label for="Description" class="form-label mb-0">Description</label>
                             <p class="mb-0 card-h1">Please write "<span class="text-green" id="receiver-package_id">MD736</span>"" in the description section.</p>
                         </div>
-                        <form action="php" method="POST">
+                       
                             <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
                             <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
                         <div class="col-md-12">
                             <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
                             <input type="text" name="transaction_id" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
                         </div>
-                        <div class="col-md-12">
+
+                        @php
+                            use Stevebauman\Location\Facades\Location;
+                            $location = Location::get();
+                        @endphp
+                        
+
+                        {{-- <div class="col-md-12">
                             <p class="mb-0 text-red card-p1">This is not available in your country!</p>
-                        </div>
+                        </div> --}}
                         <div class="col-md-12">
                             <button type="submit" class="btn submit-btn">Completed Payment</button>
                         </div>
-                        </form>
+                   
                     </div>
                 </form>
             </div>
