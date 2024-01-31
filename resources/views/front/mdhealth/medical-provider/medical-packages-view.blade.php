@@ -197,7 +197,7 @@
                                         <h6 class="section-heading">Treatment Period in Days</h6>
                                         <input type="text" class="form-control" name="treatment_period_in_days"
                                             id="treatment_period_in_days"
-                                            value="{{ !empty($packages_active_list['treatment_period_in_days']) ? $packages_active_list['treatment_period_in_days'] : '0' }}"
+                                            value="{{ !empty($packages_active_list['treatment_period_in_days']) ? $packages_active_list['treatment_period_in_days'] : '' }}"
                                             aria-describedby="foodname" placeholder="1-3 Days">
                                     </div>
 
@@ -467,20 +467,43 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @php
+                                  
+                                     
 
+                                        // if($packages_active_list['package_discount']=='0'){
+                                        //     $disc='0';
+                                        // }else{
+
+                                        //     $disc=$packages_active_list['package_discount'];
+                                        // }
+                                        
+                                        $disc = '0';
+                                        if(empty($packages_active_list)){
+                                            $disc='';
+                                        }
+                                        if(!empty($packages_active_list['package_discount'])){
+                                            $disc=$packages_active_list['package_discount'];
+                                        }
+
+                                      
+                                        
+                                    @endphp
                                     <div class="form-group mb-4 section-heading-div">
                                         <h6 class="section-heading">Package Price</h6>
-                                        <label class="form-label my-3">Discount </label>
+                                        <label class="form-label my-3" for="package_discount">Discount </label>
                                         <div class="input-icon-div">
                                             <input type="text" class="form-control" name="package_discount"
                                                 id="package_discount" maxlength="3"
-                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
-                                                value="{{ !empty($packages_active_list['package_discount']) ? $packages_active_list['package_discount'] : '' }}"
+                                                value="{{$disc}}"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '');"
                                                 placeholder="0">
                                             <span class="input-icon">%</span>
+                                            
                                         </div>
+                                        
                                     </div>
-
+{{-- {{dd(intval($packages_active_list['package_discount']))}} --}}
                                     <div class="form-group d-flex flex-column mb-4">
                                         <label class="form-label mb-3">*Price (VAT Included)</label>
                                         <div class="input-icon-div">
@@ -693,7 +716,7 @@
     </script>
 
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         function updateCheckedValues() {
             const checkedValues = $('.form-check-input:checked').map(function() {
@@ -710,7 +733,21 @@
         $('.form-check-input').change(updateCheckedValues);
         updateCheckedValues();
     });
+</script> --}}
+<script>
+    $(document).ready(function() {
+        function updateCheckedValues() {
+            const checkedValues = $('.form-check-input:checked').map(function() {
+                return $(this).val();
+            }).get().join(', ');
+            $('#checkedValues').text(checkedValues);
+            $('#other_services').val(checkedValues);
+        }
+        $('.form-check-input').change(updateCheckedValues);
+        updateCheckedValues();
+    });
 </script>
+
 
 
     <script>

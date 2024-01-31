@@ -12,6 +12,7 @@ use Str;
 use Auth;
 use Storage;
 use App\Models\AddNewAcommodition;
+use App\Models\Messages;
 use App\Models\Packages;
 use App\Models\ToursDetails;
 use App\Models\TransportationDetails;
@@ -31,24 +32,22 @@ use Illuminate\Support\Facades\DB;
 use App\Models\MedicalProviderRegistrater;
 use Carbon\Carbon;
 
-
 class CustomerPackageController extends BaseController
 {
     use MediaTrait;
 
-
-    // public function customer_package_search_filter(Request $request)
+    // public function customer_package_search_filter( Request $request )
     // {
-    //     // $validator = Validator::make($request->all(), [
+    //     // $validator = Validator::make( $request->all(), [
     //     //     'treatment_name' => 'required',
     //     //     // 'city_name' => 'required',
-    //     // ]);
+    //     // ] );
 
-    //     // if ($validator->fails()) {
-    //     //     return $this->sendError('Validation Error.', $validator->errors());
+    //     // if ( $validator->fails() ) {
+    //     //     return $this->sendError( 'Validation Error.', $validator->errors() );
     //     // }
 
-    //     // if (!empty($request->treatment_name)) {
+    //     // if ( !empty( $request->treatment_name ) ) {
     //     $packages = Packages::select(
     //         'md_packages.id',
     //         'md_packages.package_unique_no',
@@ -60,65 +59,65 @@ class CustomerPackageController extends BaseController
     //         'md_product_category.product_category_name',
     //         'md_product_sub_category.product_sub_category_name',
     //         'md_master_cities.city_name'
-    //     )
-    //         ->where('md_packages.status', 'active')
-    //         ->where('md_product_category.status', 'active')
-    //         ->where('md_product_sub_category.status', 'active')
-    //         ->join('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-    //         ->join('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-    //         ->join('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-    //         ->join('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
+    // )
+    //         ->where( 'md_packages.status', 'active' )
+    //         ->where( 'md_product_category.status', 'active' )
+    //         ->where( 'md_product_sub_category.status', 'active' )
+    //         ->join( 'md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id' )
+    //         ->join( 'md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id' )
+    //         ->join( 'md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by' )
+    //         ->join( 'md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id' );
 
-    //     if (!empty($request->treatment_name)) {
-    //         $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
+    //     if ( !empty( $request->treatment_name ) ) {
+    //         $packages = $packages->where( 'md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%' );
     //     }
-    //     if (!empty($request->city_name)) {
-    //         $packages = $packages->where('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
+    //     if ( !empty( $request->city_name ) ) {
+    //         $packages = $packages->where( 'md_master_cities.city_name', 'like', '%' . $request->city_name . '%' );
     //     }
     //     $packages = $packages->get();
 
     //     $data = [];
-    //     $data['package_list'] = [];
-    //     if (!empty($packages)) {
-    //         foreach ($packages as $key => $value) {
-    //             $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
-    //             $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
-    //             $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
-    //             $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-    //             $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',',$value->other_services) : '';
-    //             $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
-    //             $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
-    //             $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
-    //             $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
-    //             $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+    //     $data[ 'package_list' ] = [];
+    //     if ( !empty( $packages ) ) {
+    //         foreach ( $packages as $key => $value ) {
+    //             $data[ 'package_list' ][ $key ][ 'id' ] = !empty( $value->id ) ? $value->id : '';
+    //             $data[ 'package_list' ][ $key ][ 'package_unique_no' ] = !empty( $value->package_unique_no ) ? $value->package_unique_no : '';
+    //             $data[ 'package_list' ][ $key ][ 'package_name' ] = !empty( $value->package_name ) ? $value->package_name : '';
+    //             $data[ 'package_list' ][ $key ][ 'treatment_period_in_days' ] = !empty( $value->treatment_period_in_days ) ? $value->treatment_period_in_days : '';
+    //             $data[ 'package_list' ][ $key ][ 'other_services' ] = !empty( $value->other_services ) ? explode( ',', $value->other_services ) : '';
+    //             $data[ 'package_list' ][ $key ][ 'package_price' ] = !empty( $value->package_price ) ? $value->package_price : '';
+    //             $data[ 'package_list' ][ $key ][ 'sale_price' ] = !empty( $value->sale_price ) ? $value->sale_price : '';
+    //             $data[ 'package_list' ][ $key ][ 'product_category_name' ] = !empty( $value->product_category_name ) ? $value->product_category_name : '';
+    //             $data[ 'package_list' ][ $key ][ 'product_sub_category_name' ] = !empty( $value->product_sub_category_name ) ? $value->product_sub_category_name : '';
+    //             $data[ 'package_list' ][ $key ][ 'city_name' ] = !empty( $value->city_name ) ? $value->city_name : '';
     //         }
     //     }
 
-    //     if (!empty($data)) {
-    //         if (!empty($packages)) {
-    //             return response()->json([
+    //     if ( !empty( $data ) ) {
+    //         if ( !empty( $packages ) ) {
+    //             return response()->json( [
     //                 'status' => 200,
     //                 'message' => 'Here is your package list.',
     //                 'data' => $data
-    //             ]);
+    // ] );
     //         } else {
-    //             return response()->json([
+    //             return response()->json( [
     //                 'status' => 404,
     //                 'message' => 'your package list is empty.',
     //                 'data' => $data
-    //             ]);
+    // ] );
     //         }
     //     } else {
-    //         return response()->json([
+    //         return response()->json( [
     //             'status' => 404,
     //             'message' => 'your package list is empty.',
-    //         ]);
+    // ] );
     //     }
     //     // } else {
-    //     //     return response()->json([
+    //     //     return response()->json( [
     //     //         'status' => 404,
     //     //         'message' => 'Something went wrong. Please select treatment name.',
-    //     //     ]);
+    //     // ] );
     //     // }
     // }
 
@@ -147,11 +146,11 @@ class CustomerPackageController extends BaseController
                 'md_master_cities.city_name'
             )
                 ->where('md_packages.status', 'active')
-                // ->where('md_medical_provider_register.vendor_status', 'approved')
-                // ->where('md_product_category.status', 'active')
-                // ->where('md_product_sub_category.status', 'active')
-                // ->where('md_packages.purchase_status', 'not_purchased')
-                // ->leftjoin('md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id')
+                // ->where( 'md_medical_provider_register.vendor_status', 'approved' )
+                // ->where( 'md_product_category.status', 'active' )
+                // ->where( 'md_product_sub_category.status', 'active' )
+                // ->where( 'md_packages.purchase_status', 'not_purchased' )
+                // ->leftjoin( 'md_customer_purchase_details', 'md_customer_purchase_details.package_id', '=', 'md_packages.id' )
                 ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
                 ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
                 ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
@@ -172,12 +171,9 @@ class CustomerPackageController extends BaseController
             if (!empty($packages)) {
                 foreach ($packages as $key => $value) {
                     $package_reviews = CustomerReviews::where('status', 'active')
-                    ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
-                    ->where('package_id', $value->id)
+                        ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                        ->where('package_id', $value->id)
                         ->first();
-
-
-
 
                     // Check if reviews exist
                     if ($package_reviews) {
@@ -185,7 +181,8 @@ class CustomerPackageController extends BaseController
                         $sum = $package_reviews->cleanliness + $package_reviews->comfort + $package_reviews->food_quality + $package_reviews->behaviour_reviews + $package_reviews->recommended;
 
                         // Calculate average
-                        $average = $sum / 5; // Assuming you're always summing 5 fields
+                        $average = $sum / 5;
+                        // Assuming you're always summing 5 fields
                     } else {
                         // If no reviews exist, set average to null or any default value
                         $average = 0;
@@ -208,7 +205,7 @@ class CustomerPackageController extends BaseController
                     $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                     $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
                     $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
-                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
+                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(', ', $value->other_services) : '';
                     $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
                     $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
                     $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
@@ -268,14 +265,14 @@ class CustomerPackageController extends BaseController
                 ->where('md_medical_provider_register.vendor_status', 'approved')
                 // ->where('md_product_category.status', 'active')
                 // ->where('md_product_sub_category.status', 'active')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
+                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
 
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-                ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', '=', 'md_packages.hotel_id')
-                ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
-                ->leftjoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
+                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
+                ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', ' = ', 'md_packages.hotel_id')
+                ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', ' = ', 'md_packages.vehicle_id')
+                ->leftjoin('md_master_brand', 'md_master_brand.id', ' = ', 'md_add_transportation_details.vehicle_brand_id')
                 ->leftjoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id')
                 ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id');
 
@@ -290,9 +287,10 @@ class CustomerPackageController extends BaseController
             $data['package_list'] = [];
             if (!empty($packages)) {
                 foreach ($packages as $key => $value) {
+
                     $package_reviews = CustomerReviews::where('status', 'active')
-                    ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
-                    ->where('package_id', $value->id)
+                        ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                        ->where('package_id', $value->id)
                         ->first();
 
                     // Check if reviews exist
@@ -339,7 +337,6 @@ class CustomerPackageController extends BaseController
                 }
             }
 
-
             if (!empty($data)) {
                 if (!empty($packages)) {
                     return redirect('/health-search-result')->with('success', 'Here is your package details!');
@@ -355,9 +352,6 @@ class CustomerPackageController extends BaseController
         }
     }
 
-
-
-
     public function customer_package_filters(Request $request)
     {
         $packages = Packages::select(
@@ -372,12 +366,12 @@ class CustomerPackageController extends BaseController
             'md_product_sub_category.product_sub_category_name',
             'md_master_cities.city_name'
         )
-        ->where('md_packages.status', 'active')
-        ->leftJoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-        ->leftJoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-        ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-        ->leftJoin('md_customer_package_reviews', 'md_customer_package_reviews.package_id', '=', 'md_packages.id')
-        ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
+            ->where('md_packages.status', 'active')
+            ->leftJoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+            ->leftJoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+            ->leftJoin('md_customer_package_reviews', 'md_customer_package_reviews.package_id', '=', 'md_packages.id')
+            ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id');
         if (!empty($request->treatment_name)) {
             $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
         }
@@ -394,13 +388,15 @@ class CustomerPackageController extends BaseController
                     $numericValue = $this->convertRatingLabelToNumericValue($filter);
 
                     // Filter packages based on calculated average rating label
-                    $packages->where(function ($query) use ($numericValue) {
-                        $query->orWhere('md_customer_package_reviews.cleanliness', '>=', $numericValue)
-                            ->orWhere('md_customer_package_reviews.comfort', '>=', $numericValue)
-                            ->orWhere('md_customer_package_reviews.food_quality', '>=', $numericValue)
-                            ->orWhere('md_customer_package_reviews.behaviour_reviews', '>=', $numericValue)
-                            ->orWhere('md_customer_package_reviews.recommended', '>=', $numericValue);
-                    });
+                    $packages->where(
+                        function ($query) use ($numericValue) {
+                            $query->orWhere('md_customer_package_reviews.cleanliness', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.comfort', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.food_quality', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.behaviour_reviews', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.recommended', '>=', $numericValue);
+                        }
+                    );
                 }
                 // Check if the filter contains a specific service
                 elseif (strpos($filter, 'Transportation') !== false || strpos($filter, 'Accomodition') !== false || strpos($filter, 'Tour') !== false || strpos($filter, 'Translation') !== false || strpos($filter, 'Visa Service') !== false || strpos($filter, 'Ticket Services') !== false || strpos($filter, 'Ambulance Services') !== false) {
@@ -418,7 +414,8 @@ class CustomerPackageController extends BaseController
                         $packages->orWhereBetween('md_packages.sale_price', [$minPrice, $maxPrice]);
                     } else {
                         // Filter packages by single price point
-                        $price = (int) $filter; // Assuming the price is an integer
+                        $price = (int) $filter;
+                        // Assuming the price is an integer
                         $packages->orWhere('md_packages.sale_price', '<=', $price);
                     }
                 }
@@ -427,15 +424,15 @@ class CustomerPackageController extends BaseController
 
         $packages = $packages->get();
 
-        // dd($packages); 
+        // dd( $packages );
 
         $data = [];
         $data['package_list'] = [];
         if (!empty($packages)) {
             foreach ($packages as $key => $value) {
                 $package_reviews = CustomerReviews::where('status', 'active')
-                ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
-                ->where('package_id', $value->id)
+                    ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                    ->where('package_id', $value->id)
                     ->first();
 
                 // Check if reviews exist
@@ -444,7 +441,8 @@ class CustomerPackageController extends BaseController
                     $sum = $package_reviews->cleanliness + $package_reviews->comfort + $package_reviews->food_quality + $package_reviews->behaviour_reviews + $package_reviews->recommended;
 
                     // Calculate average
-                    $average = $sum / 5; // Assuming you're always summing 5 fields
+                    $average = $sum / 5;
+                    // Assuming you're always summing 5 fields
                 } else {
                     // If no reviews exist, set average to null or any default value
                     $average = 0;
@@ -467,7 +465,7 @@ class CustomerPackageController extends BaseController
                 $data['package_list'][$key]['package_unique_no'] = $value->package_unique_no;
                 $data['package_list'][$key]['package_name'] = $value->package_name;
                 $data['package_list'][$key]['treatment_period_in_days'] = $value->treatment_period_in_days;
-                $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : [];
+                $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(', ', $value->other_services) : [];
                 $data['package_list'][$key]['package_price'] = $value->package_price;
                 $data['package_list'][$key]['sale_price'] = $value->sale_price;
                 $data['package_list'][$key]['product_category_name'] = $value->product_category_name;
@@ -554,7 +552,7 @@ class CustomerPackageController extends BaseController
                 "package_name" => !empty($packages_view->package_name) ? $packages_view->package_name : '',
                 "treatment_category_id" => !empty($packages_view->treatment_category_id) ? $packages_view->treatment_category_id : '',
                 "treatment_id" => !empty($packages_view->treatment_id) ? $packages_view->treatment_id : '',
-                "other_services" => !empty($packages_view->other_services) ? explode(',', $packages_view->other_services) : '',
+                "other_services" => !empty($packages_view->other_services) ? explode(', ', $packages_view->other_services) : '',
                 "treatment_period_in_days" => !empty($packages_view->treatment_period_in_days) ? $packages_view->treatment_period_in_days : '',
                 "treatment_price" => !empty($packages_view->treatment_price) ? $packages_view->treatment_price : '',
                 "package_price" => !empty($packages_view->package_price) ? $packages_view->package_price : '',
@@ -616,11 +614,11 @@ class CustomerPackageController extends BaseController
                 'md_master_vehicle_comfort_levels.vehicle_level_name',
                 'md_tours.tour_name'
             )
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
             ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
-            ->leftjoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
+            ->leftjoin('md_master_brand', 'md_master_brand.id', ' = ', 'md_add_transportation_details.vehicle_brand_id')
             ->leftjoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id')
             ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id')
             ->first();
@@ -630,7 +628,7 @@ class CustomerPackageController extends BaseController
             $purchase_details['package_name'] = !empty($purchase_details->package_name) ? $purchase_details->package_name : '';
             $purchase_details['city_name'] = !empty($purchase_details->city_name) ? $purchase_details->city_name : '';
             $purchase_details['treatment_price'] = !empty($purchase_details->treatment_price) ? $purchase_details->treatment_price : '';
-            // $purchase_details['other_services'] = !empty($purchase_details->other_services) ? explode(',',$purchase_details->other_services) : [];
+            // $purchase_details['other_services'] = !empty($purchase_details->other_services) ? explode(', ',$purchase_details->other_services) : [];
             // $purchase_details['hotel_name'] = !empty($purchase_details->hotel_name) ? $purchase_details->hotel_name : '';
             // $purchase_details['hotel_acommodition_price'] = !empty($purchase_details->hotel_acommodition_price) ? $purchase_details->hotel_acommodition_price : '';
 
@@ -666,7 +664,7 @@ class CustomerPackageController extends BaseController
             //         'id' => 2,
             //         'title' => 'Transportation',
             //         'price' => $purchase_details->transportation_acommodition_price,
-            //         'vehicle_model_name' => $purchase_details->brand_name . ',' . $purchase_details->vehicle_model_id,
+            //         'vehicle_model_name' => $purchase_details->brand_name . ', ' . $purchase_details->vehicle_model_id,
             //         'comfort_level_name' => $purchase_details->vehicle_level_name // Replace with actual price format
             //         // Replace with actual price format
             //     ];
@@ -723,7 +721,7 @@ class CustomerPackageController extends BaseController
                     'id' => 2,
                     'title' => 'Transportation',
                     'price' => $purchase_details->transportation_acommodition_price,
-                    'vehicle_model_name' => $purchase_details->brand_name . ',' . $purchase_details->vehicle_model_id,
+                    'vehicle_model_name' => $purchase_details->brand_name . ', ' . $purchase_details->vehicle_model_id,
                     'comfort_level_name' => $purchase_details->vehicle_level_name // Replace with actual price format
                 ];
 
@@ -1143,8 +1141,8 @@ class CustomerPackageController extends BaseController
     //     $purchase_details = Packages::where('md_packages.status', 'active')
     //         ->where('md_packages.id', $request->package_id)
     //         ->select('md_packages.id', 'md_packages.package_name', 'md_packages.treatment_period_in_days', 'md_master_cities.city_name', 'md_packages.treatment_price', 'md_add_new_acommodition.hotel_name', 'md_packages.hotel_acommodition_price', 'md_add_transportation_details.vehicle_model_id', 'md_packages.transportation_acommodition_price', 'md_packages.tour_price', 'md_packages.visa_service_price', 'md_medical_provider_register.authorisation_full_name', 'md_medical_provider_register.id as provider_id', 'md_packages.sale_price', 'md_packages.package_price', 'md_packages.package_discount')
-    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
     //         ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
     //         ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
     //         ->first();
@@ -1313,8 +1311,8 @@ class CustomerPackageController extends BaseController
                 'md_packages.ambulance_service_price',
                 'md_packages.ticket_price'
             )
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
             ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
             ->first();
@@ -1528,12 +1526,12 @@ class CustomerPackageController extends BaseController
     //             'md_product_category.product_category_name',
     //             'md_product_sub_category.product_sub_category_name as treatment_name'
     //         )
-    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
     //         ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
     //         ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
-    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-    //         ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+    //         ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
     //         ->first();
 
     //     $purchase_details_data = [];
@@ -1593,12 +1591,12 @@ class CustomerPackageController extends BaseController
                 'md_product_category.product_category_name as treatment_name',
                 // 'md_product_sub_category.product_sub_category_name',
             )
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
             ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', 'md_packages.hotel_id')
             ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', 'md_packages.vehicle_id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
             ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id')
             ->first();
 
@@ -1687,7 +1685,7 @@ class CustomerPackageController extends BaseController
             $list = $request->other_services;
             // print_r($list);
             if (!empty($list)) {
-                $list_array = explode(',', $list);
+                $list_array = explode(', ', $list);
             }
 
             if (!empty($list_array) && in_array('accommodation', $list_array)) {
@@ -1814,14 +1812,14 @@ class CustomerPackageController extends BaseController
                         //     'payment_status' => 'pending'
                         // ];
 
-                        // $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->id)
-                        //     ->update($payment_details_completed);
-                        // if (!empty($CustomerPayamentDetails)) {
-                        //     return response()->json([
+                        // $CustomerPayamentDetails = CustomerPaymentDetails::where( 'order_id', $request->id )
+                        //     ->update( $payment_details_completed );
+                        // if ( !empty( $CustomerPayamentDetails ) ) {
+                        //     return response()->json( [
                         //         'status' => 200,
                         //         'message' => 'success.',
                         //         // 'payment_details' => $payment_details,
-                        //     ]);
+                        // ] );
                         // } else {
                         return response()->json([
                             'status' => 404,
@@ -1858,18 +1856,18 @@ class CustomerPackageController extends BaseController
                 $purchase_details['package_treatment_price'] = !empty($packages->treatment_price) ? $packages->treatment_price : 0;
                 $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price) ? $packages->hotel_acommodition_price : 0;
                 $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price) ? $packages->hotel_acommodition_price : 0;
-                // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
-                // $purchase_details['package_total_price'] = $request->package_total_price;
-                // $purchase_details['transaction_id'] = $request->transaction_id;
-                // $purchase_details['payment_method'] = $request->payment_method;
+                // $purchase_details[ 'package_payment_plan' ] = $request->package_percentage_price;
+                // $purchase_details[ 'package_total_price' ] = $request->package_total_price;
+                // $purchase_details[ 'transaction_id' ] = $request->transaction_id;
+                // $purchase_details[ 'payment_method' ] = $request->payment_method;
                 $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
                 $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
                 $purchase_details['package_total_price'] = $request->sale_price;
                 $purchase_details['other_services'] = !empty($request->other_services) ? str_replace('[', '', str_replace(']', '', str_replace('"', '', $request->other_services))) : '';
-                // $purchase_details['type'] = !empty($request->type) ? $request->type : '';
-                // $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                // $purchase_details[ 'type' ] = !empty( $request->type ) ? $request->type : '';
+                // $purchase_details[ 'payment_percentage' ] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = $request->paid_amount;
                 $pending_amount = $request->sale_price - $request->paid_amount;
                 $purchase_details['pending_payment'] = $pending_amount;
@@ -1883,7 +1881,7 @@ class CustomerPackageController extends BaseController
                 $purchase_details['created_by'] = Auth::user()->id;
 
                 //////////////////////////////////
-                // dd($request->all());
+                // dd( $request->all() );
                 $purchase_details['conversation_id'] = !empty($request->conversation_id) ? $request->conversation_id : '';
                 //////////////////////////////////
 
@@ -1910,7 +1908,7 @@ class CustomerPackageController extends BaseController
                     }
                 }
 
-                // ... (existing code)
+                // ... ( existing code )
                 if (!empty($update_unique_id)) {
                     $payment_details_pending = [];
                     $payment_details_pending['order_id'] = !empty($purchase_details_data->id) ? $purchase_details_data->id : 0;
@@ -1923,17 +1921,18 @@ class CustomerPackageController extends BaseController
                     $payment_details_pending['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
                     $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->payment_percentage : '';
                     $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount) ? $purchase_details_data->paid_amount : 0;
-                    // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
+                    // $payment_details_pending[ 'pending_payment' ] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
 
                     // Calculate remaining amount after 'pending' payment
                     // $remaining_amount = $request->package_total_price - $request->pending_amount;
                     $payment_details_pending['pending_payment'] = $pending_amount;
 
-                    $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
+                    $payment_details_completed = $payment_details_pending;
+                    // Copy the array for completed entry
                     // return $payment_details_completed;
                     // Update 'completed' entry with remaining amount and status
-                    // $payment_details_completed['paid_amount'] = $remaining_amount;
+                    // $payment_details_completed[ 'paid_amount' ] = $remaining_amount;
                     $payment_details_completed['pending_payment'] = $request->pending_amount;
                     // No pending amount for completed
                     $payment_details_completed['payment_status'] = 'pending';
@@ -2037,14 +2036,14 @@ class CustomerPackageController extends BaseController
                         //     'payment_status' => 'pending'
                         // ];
 
-                        // $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->id)
-                        //     ->update($payment_details_completed);
-                        // if (!empty($CustomerPayamentDetails)) {
-                        //     return response()->json([
+                        // $CustomerPayamentDetails = CustomerPaymentDetails::where( 'order_id', $request->id )
+                        //     ->update( $payment_details_completed );
+                        // if ( !empty( $CustomerPayamentDetails ) ) {
+                        //     return response()->json( [
                         //         'status' => 200,
                         //         'message' => 'success.',
                         //         // 'payment_details' => $payment_details,
-                        //     ]);
+                        // ] );
                         // } else {
                         return response()->json([
                             'status' => 404,
@@ -2056,7 +2055,7 @@ class CustomerPackageController extends BaseController
             } else {
 
                 $purchase_details = [];
-
+                $conversation_id = mt_rand(100000000, 999999999);
                 $purchase_details['customer_id'] = Auth::user()->id;
                 $purchase_details['package_id'] = $request->package_id;
                 $packages = Packages::where('status', 'active')
@@ -2079,44 +2078,43 @@ class CustomerPackageController extends BaseController
                     ->where('id', $request->package_id)
                     ->first();
 
-
-
-                // $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
+                // $purchase_details_data = CustomerPurchaseDetails::create( $purchase_details );
                 $purchase_details['package_treatment_price'] = !empty($packages->treatment_price) ? $packages->treatment_price : 0;
                 $purchase_details['package_hotel_price'] = !empty($packages->hotel_acommodition_price) ? $packages->hotel_acommodition_price : '';
                 $purchase_details['package_transportation_price'] = !empty($packages->transportation_acommodition_price) ? $packages->hotel_acommodition_price : 0;
-                // $purchase_details['package_payment_plan'] = $request->package_percentage_price;
-                // $purchase_details['package_total_price'] = $request->package_total_price;
-                // $purchase_details['transaction_id'] = $request->transaction_id;
-                // $purchase_details['payment_method'] = $request->payment_method;
+                // $purchase_details[ 'package_payment_plan' ] = $request->package_percentage_price;
+                // $purchase_details[ 'package_total_price' ] = $request->package_total_price;
+                // $purchase_details[ 'transaction_id' ] = $request->transaction_id;
+                // $purchase_details[ 'payment_method' ] = $request->payment_method;
                 $purchase_details['hotel_id'] = !empty($packages->hotel_id) ? $packages->hotel_id : 0;
                 $purchase_details['vehicle_id'] = !empty($packages->vehicle_id) ? $packages->vehicle_id : 0;
                 $purchase_details['tour_id'] = !empty($packages->tour_id) ? $packages->tour_id : 0;
-                //   if (!empty($request->other_services) && is_array($request->other_services)) 
-                //   {
+                //   if ( !empty( $request->other_services ) && is_array( $request->other_services ) )
+                // {
                 //       return $request->other_services;
-                //         $purchase_details['other_services'] = implode(',', $request->other_services);
+                //         $purchase_details[ 'other_services' ] = implode( ',', $request->other_services );
                 //     } else {
                 //     // Handle the case where $request->other_services is not an array
-                //         $purchase_details['other_services'] = 'not_working';
+                //         $purchase_details[ 'other_services' ] = 'not_working';
                 //     }
                 $purchase_details['other_services'] = !empty($request->other_services) ? str_replace('[', '', str_replace(']', '', str_replace('"', '', $request->other_services))) : '';
                 $purchase_details['type'] = !empty($request->type) ? $request->type : '';
-                // $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
-                // $purchase_details['package_total_price'] = $request->sale_price;
-                // // $purchase_details['payment_percentage'] = $request->package_percentage_price;
-                // $purchase_details['paid_amount'] = $request->paid_amount;
+                // $purchase_details[ 'provider_id' ] = !empty( $packages->created_by ) ? $packages->created_by : 0;
+                // $purchase_details[ 'package_total_price' ] = $request->sale_price;
+                // // $purchase_details[ 'payment_percentage' ] = $request->package_percentage_price;
+                // $purchase_details[ 'paid_amount' ] = $request->paid_amount;
                 // $pending_amount = $request->sale_price - $request->paid_amount;
                 $purchase_details['provider_id'] = !empty($packages->created_by) ? $packages->created_by : '';
 
                 $purchase_details['package_total_price'] = (float) $request->sale_price;
-                // $purchase_details['payment_percentage'] = $request->package_percentage_price;
+                // $purchase_details[ 'payment_percentage' ] = $request->package_percentage_price;
                 $purchase_details['paid_amount'] = (float) $request->paid_amount;
                 $pending_amount = (float) $request->sale_price - (float) $request->paid_amount;
                 $purchase_details['pending_payment'] = $pending_amount;
                 $purchase_details['payment_percentage'] = $request->percentage;
                 $purchase_details['bank_name'] = $request->bank_name;
                 $purchase_details['receiver_name'] = $request->receiver_name;
+                $purchase_details['conversation_id'] = $conversation_id;
                 $purchase_details['iban'] = $request->iban;
                 if (!empty($request->percentage)) {
                     if ($request->percentage == '100%') {
@@ -2130,7 +2128,21 @@ class CustomerPackageController extends BaseController
 
                 $purchase_details_data = CustomerPurchaseDetails::create($purchase_details);
 
+                $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
+                if ($customer_purchase_details->count() > 0) {
 
+                    $messages = new Messages();
+                    $messages->conversation_id = $customer_purchase_details->customer_id . '_' . $conversation_id . '_' . $customer_purchase_details->provider_id;
+                    $messages->sender_id = $customer_purchase_details->customer_id;
+                    $messages->sender_type = 'customer';
+                    $messages->save();
+
+                    $vendor_messages = new Messages();
+                    $vendor_messages->conversation_id = $customer_purchase_details->customer_id . '_' . $conversation_id . '_' . $customer_purchase_details->provider_id;
+                    $vendor_messages->sender_id = $customer_purchase_details->provider_id;
+                    $vendor_messages->sender_type = 'medicalprovider';
+                    $vendor_messages->save();
+                }
 
                 $CustomerPurchaseDetails = CustomerPurchaseDetails::select('id')->get();
                 if (!empty($CustomerPurchaseDetails)) {
@@ -2153,7 +2165,7 @@ class CustomerPackageController extends BaseController
                     }
                 }
 
-                // ... (existing code)
+                // ... ( existing code )
                 if (!empty($update_unique_id)) {
                     $payment_details_pending = [];
                     $payment_details_pending['order_id'] = !empty($purchase_details_data->id) ? $purchase_details_data->id : 0;
@@ -2166,17 +2178,18 @@ class CustomerPackageController extends BaseController
                     $payment_details_pending['provider_id'] = !empty($packages->created_by) ? $packages->created_by : 0;
                     $payment_details_pending['payment_percentage'] = !empty($purchase_details_data->payment_percentage) ? $packages->payment_percentage : 0;
                     $payment_details_pending['paid_amount'] = !empty($purchase_details_data->paid_amount) ? $purchase_details_data->paid_amount : 0;
-                    // $payment_details_pending['pending_payment'] = $purchase_details_data->pending_payment;
+                    // $payment_details_pending[ 'pending_payment' ] = $purchase_details_data->pending_payment;
                     $payment_details_pending['payment_status'] = 'completed';
 
                     // Calculate remaining amount after 'pending' payment
                     // $remaining_amount = $request->package_total_price - $request->pending_amount;
                     $payment_details_pending['pending_payment'] = $pending_amount;
 
-                    $payment_details_completed = $payment_details_pending; // Copy the array for completed entry
+                    $payment_details_completed = $payment_details_pending;
+                    // Copy the array for completed entry
 
                     // Update 'completed' entry with remaining amount and status
-                    // $payment_details_completed['paid_amount'] = $remaining_amount;
+                    // $payment_details_completed[ 'paid_amount' ] = $remaining_amount;
                     $payment_details_completed['pending_payment'] = $pending_amount;
                     // No pending amount for completed
                     $payment_details_completed['payment_status'] = 'pending';
@@ -2255,12 +2268,12 @@ class CustomerPackageController extends BaseController
                 'md_medical_provider_logo.company_logo_image_path'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', 'md_packages.created_by')
+            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', ' = ', 'md_medical_provider_register.id')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', 'md_master_cities.id')
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', 'md_medical_provider_register.id')
             ->orderBy('md_customer_purchase_details.id', 'desc')
             ->where('md_customer_purchase_details.customer_id', Auth::user()->id)
             ->get();
@@ -2333,12 +2346,12 @@ class CustomerPackageController extends BaseController
                 'md_medical_provider_logo.company_logo_image_path'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', ' = ', 'md_medical_provider_register.id')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', ' = ', 'md_medical_provider_register.id')
             ->where('md_customer_purchase_details.customer_id', Auth::user()->id);
         if (!empty($request->treatment_name)) {
             $customer_purchase_package_active_list = $customer_purchase_package_active_list->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
@@ -2392,12 +2405,12 @@ class CustomerPackageController extends BaseController
                 'md_medical_provider_logo.company_logo_image_path'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', 'md_packages.created_by')
+            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', ' = ', 'md_medical_provider_register.id')
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', 'md_medical_provider_register.id')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', 'md_product_sub_category.id')
             ->orderBy('md_customer_purchase_details.id', 'desc')
             ->where('md_customer_purchase_details.customer_id', Auth::user()->id)
             ->get();
@@ -2446,12 +2459,12 @@ class CustomerPackageController extends BaseController
                 'md_medical_provider_logo.company_logo_image_path'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', ' = ', 'md_medical_provider_register.id')
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', ' = ', 'md_medical_provider_register.id')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
             ->where('md_customer_purchase_details.customer_id', Auth::user()->id);
         if (!empty($request->treatment_name)) {
             $customer_purchase_package_completed_list = $customer_purchase_package_completed_list->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
@@ -2506,12 +2519,12 @@ class CustomerPackageController extends BaseController
                 'md_medical_provider_logo.company_logo_image_path'
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', 'md_packages.created_by')
+            // ->leftjoin('md_medical_provider_license', 'md_medical_provider_license.medical_provider_id', ' = ', 'md_medical_provider_register.id')
+            ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', 'md_medical_provider_register.id')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', 'md_product_sub_category.id')
             ->where('md_customer_purchase_details.customer_id', Auth::user()->id)
             ->get();
 
@@ -2706,8 +2719,8 @@ class CustomerPackageController extends BaseController
                 ->where('md_customer_purchase_details.customer_id', auth::user()->id)
                 // ->where('md_customer_purchase_details.type', 'myself')
                 ->leftjoin('md_customer_registration', 'md_customer_registration.id', 'md_customer_purchase_details.customer_id')
-                ->leftjoin('md_master_cities', 'md_customer_registration.city_id', '=', 'md_master_cities.id')
-                ->leftjoin('md_master_country', 'md_customer_registration.country_id', '=', 'md_master_country.id')
+                ->leftjoin('md_master_cities', 'md_customer_registration.city_id', 'md_master_cities.id')
+                ->leftjoin('md_master_country', 'md_customer_registration.country_id', 'md_master_country.id')
                 ->first();
 
             // return $PatientInformation;
@@ -2761,8 +2774,8 @@ class CustomerPackageController extends BaseController
                 )
                 ->where('md_other_patient_information.package_id', $request->id)
                 ->where('md_other_patient_information.purchase_id', $request->purchase_id)
-                ->leftjoin('md_master_cities', 'md_other_patient_information.patient_city_id', '=', 'md_master_cities.id')
-                ->leftjoin('md_master_country', 'md_other_patient_information.patient_country_id', '=', 'md_master_country.id')
+                ->leftjoin('md_master_cities', 'md_other_patient_information.patient_city_id', 'md_master_cities.id')
+                ->leftjoin('md_master_country', 'md_other_patient_information.patient_country_id', 'md_master_country.id')
                 ->first();
 
             if (!empty($PatientInformation)) {
@@ -2847,8 +2860,8 @@ class CustomerPackageController extends BaseController
 
         $purchaseId = $request->purchase_id;
 
-     
-    $purchase = CustomerPurchaseDetails::find($purchaseId);
+
+        $purchase = CustomerPurchaseDetails::find($purchaseId);
         if (!$purchase) {
             return response()->json([
                 'status' => 404,
@@ -2856,23 +2869,23 @@ class CustomerPackageController extends BaseController
             ]);
         }
 
-      try {
-    $treatmentStartDate = Carbon::createFromFormat('d M Y', $purchase->treatment_start_date);
-} catch (\Exception $e) {
-    return response()->json([
-        'status' => 500,
-        'message' => 'Error parsing treatment start date: ' . $e->getMessage(),
-    ]);
-}
-       
+        try {
+            $treatmentStartDate = Carbon::createFromFormat('d M Y', $purchase->treatment_start_date);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Error parsing treatment start date: ' . $e->getMessage(),
+            ]);
+        }
+
         $today = Carbon::today();
 
         if ($treatmentStartDate && $treatmentStartDate->lte($today)) {
-        return response()->json([
-            'status' => 403,
-            'message' => 'Treatment has already started for this purchase. Patient information cannot be updated.',
-        ]);
-         }
+            return response()->json([
+                'status' => 403,
+                'message' => 'Treatment has already started for this purchase. Patient information cannot be updated.',
+            ]);
+        }
 
         // If treatment start date has not passed, proceed with updating patient information
         $patient_information = [];
@@ -2943,12 +2956,12 @@ class CustomerPackageController extends BaseController
     //             'md_medical_provider_system_users.name as case_manager'
     //         )
     //         ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
-    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-    //         ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-    //         ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-    //         ->leftjoin('md_medical_provider_system_users', 'md_customer_purchase_details.case_manager_id', '=', 'md_medical_provider_system_users.id')
+    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+    //         ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
+    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
+    //         ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', ' = ', 'md_medical_provider_register.id')
+    //         ->leftjoin('md_medical_provider_system_users', 'md_customer_purchase_details.case_manager_id', ' = ', 'md_medical_provider_system_users.id')
     //         ->where('md_customer_purchase_details.package_id', $request->package_id)
     //         ->where('md_customer_purchase_details.id', $request->purchase_id)
     //         ->first();
@@ -2956,7 +2969,7 @@ class CustomerPackageController extends BaseController
     //     // foreach ($customer_purchase_package_active_list as $key => $val) {
     //     $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string)$customer_purchase_package_active_list->purchase_id : '';
     //     $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
-    //     // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
+    //     // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(', ',$customer_purchase_package_active_list->other_services) : '';
     //     $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
     //     $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
     //     $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
@@ -3073,7 +3086,7 @@ class CustomerPackageController extends BaseController
                 'md_master_cities.city_name',
                 'md_medical_provider_register.company_name',
                 'md_medical_provider_logo.company_logo_image_path',
-                'md_medical_provider_system_users.name as case_manager',
+                'md_customer_purchase_details.case_manager_id',
                 'md_customer_purchase_details.case_no',
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_purchase_details.package_id')
@@ -3082,234 +3095,245 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
             ->leftjoin('md_medical_provider_logo', 'md_medical_provider_logo.medical_provider_id', '=', 'md_medical_provider_register.id')
-            ->leftjoin('md_medical_provider_system_users', 'md_customer_purchase_details.case_manager_id', '=', 'md_medical_provider_system_users.id')
+            // ->leftjoin('md_medical_provider_system_users', 'md_customer_purchase_details.case_manager_id', '=', 'md_medical_provider_register.id')
             ->where('md_customer_purchase_details.package_id', $request->package_id)
             ->where('md_customer_purchase_details.id', $request->purchase_id)
             ->first();
 
         // foreach ($customer_purchase_package_active_list as $key => $val) {
-        $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string) $customer_purchase_package_active_list->purchase_id : '';
-        $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
-        $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? (string) $customer_purchase_package_active_list->created_at : '';
-        // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
-        $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
-        $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
-        $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
-        $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
-        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? $customer_purchase_package_active_list->company_logo_image_path : '';
-        // $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
-        // $treatmentStartTimestamp = strtotime($treatment_start_date);
+        if (!empty($customer_purchase_package_active_list)) {
+            $case_manager = MedicalProviderRegistrater::where('status', 'active')
+                ->select('company_name as case_manager')
+                ->where('id', $customer_purchase_package_active_list->case_manager_id)
+                ->first();
 
-        // // Get today's date as a UNIX timestamp
-        // $todayTimestamp = time();
+            $customer_purchase_package_active_list['purchase_id'] = !empty($customer_purchase_package_active_list->purchase_id) ? (string) $customer_purchase_package_active_list->purchase_id : '';
+            $customer_purchase_package_active_list['package_unique_no'] = !empty($customer_purchase_package_active_list->package_unique_no) ? $customer_purchase_package_active_list->package_unique_no : '';
+            $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? (string) $customer_purchase_package_active_list->created_at : '';
+            // $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? explode(',',$customer_purchase_package_active_list->other_services) : '';
+            $customer_purchase_package_active_list['package_name'] = !empty($customer_purchase_package_active_list->package_name) ? $customer_purchase_package_active_list->package_name : '';
+            $customer_purchase_package_active_list['city_name'] = !empty($customer_purchase_package_active_list->city_name) ? $customer_purchase_package_active_list->city_name : '';
+            $customer_purchase_package_active_list['company_name'] = !empty($customer_purchase_package_active_list->company_name) ? $customer_purchase_package_active_list->company_name : '';
+            $customer_purchase_package_active_list['treatment_name'] = !empty($customer_purchase_package_active_list->treatment_name) ? $customer_purchase_package_active_list->treatment_name : '';
+            $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? $customer_purchase_package_active_list->company_logo_image_path : '';
+            // $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string)$customer_purchase_package_active_list->treatment_start_date : '';
+            // $treatmentStartTimestamp = strtotime($treatment_start_date);
 
-        // // Calculate the difference in seconds between the treatment start date and today's date
-        // $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+            // // Get today's date as a UNIX timestamp
+            // $todayTimestamp = time();
 
-        // // Convert the time difference to days
-        // $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+            // // Calculate the difference in seconds between the treatment start date and today's date
+            // $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
 
-        // $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
-        $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string) $customer_purchase_package_active_list->treatment_start_date : '';
+            // // Convert the time difference to days
+            // $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
 
-        if (!empty($treatment_start_date)) {
-            // Treatment start date is provided
-            $treatmentStartTimestamp = strtotime($treatment_start_date);
+            // $customer_purchase_package_active_list['treatment_start_date'] = !empty($daysRemaining) ? 'Time left to treatment: ' . $daysRemaining . ' days' : '';
+            $treatment_start_date = !empty($customer_purchase_package_active_list->treatment_start_date) ? (string) $customer_purchase_package_active_list->treatment_start_date : '';
 
-            // Get today's date as a UNIX timestamp
-            $todayTimestamp = time();
+            if (!empty($treatment_start_date)) {
+                // Treatment start date is provided
+                $treatmentStartTimestamp = strtotime($treatment_start_date);
 
-            // Calculate the difference in seconds between the treatment start date and today's date
-            $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
+                // Get today's date as a UNIX timestamp
+                $todayTimestamp = time();
 
-            // Convert the time difference to days
-            $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+                // Calculate the difference in seconds between the treatment start date and today's date
+                $timeDifference = $treatmentStartTimestamp - $todayTimestamp;
 
-            $customer_purchase_package_active_list['treatment_start_date'] = 'Time left to treatment: ' . $daysRemaining . ' days';
-        } else {
-            // Treatment start date is not provided
-            $customer_purchase_package_active_list['treatment_start_date'] = 'Treatment start date not available';
+                // Convert the time difference to days
+                $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+                $customer_purchase_package_active_list['treatment_start_date'] = 'Time left to treatment: ' . $daysRemaining . ' days';
+            } else {
+                // Treatment start date is not provided
+                $customer_purchase_package_active_list['treatment_start_date'] = 'Treatment start date not available';
+            }
+
+
+            $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
+            $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
+            $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
+            // $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
+            $customer_purchase_package_active_list['case_no'] = !empty($customer_purchase_package_active_list->case_no) ? (string)$customer_purchase_package_active_list->case_no : '-';
+            $customer_purchase_package_active_list['case_manager'] = !empty($case_manager->case_manager) ? (string)$case_manager->case_manager : '';
+            $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? $customer_purchase_package_active_list->other_services : '';
+            $customer_purchase_package_active_list['hotel_id'] = !empty($customer_purchase_package_active_list->hotel_id) ? $customer_purchase_package_active_list->hotel_id : 0;
+            $customer_purchase_package_active_list['vehicle_id'] = !empty($customer_purchase_package_active_list->vehicle_id) ? $customer_purchase_package_active_list->vehicle_id : 0;
+            $customer_purchase_package_active_list['tour_id'] = !empty($customer_purchase_package_active_list->tour_id) ? $customer_purchase_package_active_list->tour_id : 0;
+            // $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? $customer_purchase_package_active_list->created_at : '';
+            // }
+
+            $PatientInformation = PatientInformation::where('status', 'active')
+                ->select('id as patient_id')
+                ->where('purchase_id', $request->purchase_id)
+                ->first();
+
+            $customer_purchase_package_active_list['patient_id'] = !empty($PatientInformation->patient_id) ? $PatientInformation->patient_id : 0;
+
+            $otherServicesArray = explode(',', $customer_purchase_package_active_list['other_services']);
+            // return $otherServicesArray;
+            // Check if "Accomodition" exists in the array
+            $accommodationExists = in_array('Accommodation', $otherServicesArray);
+            // return $accommodationExists;
+            // Check if "Transportation" exists in the array
+            $transportationExists = in_array('Transportation', $otherServicesArray);
+
+            $tourExists = in_array('Tour Details', $otherServicesArray);
+
+            $TranslationExists = in_array('Translation', $otherServicesArray);
+            // return $TranslationExists;
+            $VisaServicesExists = in_array('Visa Details', $otherServicesArray);
+
+            $TicketServicesExists = in_array('Ticket Service', $otherServicesArray);
+
+            $AmbulanceServicesExists = in_array('Ambulance Service', $otherServicesArray);
+
+            $services = [];
+            if (!empty($accommodationExists)) {
+                $accommodation = [
+                    'id' => !empty($customer_purchase_package_active_list['hotel_id']) ? $customer_purchase_package_active_list['hotel_id'] : 0,
+                    'title' => 'Acommodition',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            } else {
+                $accommodation = [
+                    'id' => 1,
+                    'title' => 'Acommodition',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            }
+
+            if (!empty($transportationExists)) {
+                $transportation = [
+                    'id' => !empty($customer_purchase_package_active_list['vehicle_id']) ? $customer_purchase_package_active_list['vehicle_id'] : 0,
+                    'title' => 'Transportation',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            } else {
+                $transportation = [
+                    'id' => 2,
+                    'title' => 'Transportation',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            }
+
+            if (!empty($TranslationExists)) {
+                // return 'sadds';
+                $Translation = [
+                    'id' => 3,
+                    'title' => 'Translation',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $Translation = [
+                    'id' => 3,
+                    'title' => 'Translation',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+            // return $Translation;
+
+            if (!empty($tourExists)) {
+                $tour = [
+                    'id' => !empty($customer_purchase_package_active_list['tour_id']) ? $customer_purchase_package_active_list['tour_id'] : 0,
+                    'title' => 'Tour',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            } else {
+                $tour = [
+                    'id' => $customer_purchase_package_active_list['tour_id'],
+                    'title' => 'Tour',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'yes',
+                ];
+            }
+
+            if (!empty($VisaServicesExists)) {
+                $VisaServices = [
+                    'id' => 5,
+                    'title' => 'Visa Services',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $VisaServices = [
+                    'id' => 5,
+                    'title' => 'Visa Services',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+
+            if (!empty($TicketServicesExists)) {
+                $TicketServices = [
+                    'id' => 6,
+                    'title' => 'Ticket Services',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $TicketServices = [
+                    'id' => 6,
+                    'title' => 'Ticket Services',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+
+            if (!empty($AmbulanceServicesExists)) {
+                $AmbulanceServices = [
+                    'id' => 7,
+                    'title' => 'Ambulance Services',
+                    'status' => 'active', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            } else {
+                $AmbulanceServices = [
+                    'id' => 7,
+                    'title' => 'Ambulance Services',
+                    'status' => 'inactive', // Replace with actual price format
+                    'view_status' => 'no',
+                ];
+            }
+
+            /////// Ali has made this change do not remove while resolving confilct //////
+            if (isset($accommodation)) {
+                $services[] = $accommodation;
+            }
+            if (isset($transportation)) {
+                $services[] = $transportation;
+            }
+            if (isset($tour)) {
+                $services[] = $tour;
+            }
+            if (isset($Translation)) {
+                $services[] = $Translation;
+            }
+
+            if (isset($VisaServices)) {
+                $services[] = $VisaServices;
+            }
+
+            if (isset($TicketServices)) {
+                $services[] = $TicketServices;
+            }
+            if (isset($AmbulanceServices)) {
+                $services[] = $AmbulanceServices;
+            }
+            /////// Ali has made this change do not remove while resolving confilct //////
         }
 
-
-        $customer_purchase_package_active_list['treatment_period_in_days'] = !empty($customer_purchase_package_active_list->treatment_period_in_days) ? $customer_purchase_package_active_list->treatment_period_in_days : '';
-        $customer_purchase_package_active_list['company_logo_image_path'] = !empty($customer_purchase_package_active_list->company_logo_image_path) ? url('/') . Storage::url($customer_purchase_package_active_list->company_logo_image_path) : '';
-        $customer_purchase_package_active_list['package_payment_plan'] = !empty($customer_purchase_package_active_list->package_payment_plan) ? $customer_purchase_package_active_list->package_payment_plan : '';
-        // $customer_purchase_package_active_list['package_total_price'] = !empty($customer_purchase_package_active_list->package_total_price) ? $customer_purchase_package_active_list->package_total_price : '';
-        $customer_purchase_package_active_list['case_no'] = !empty($customer_purchase_package_active_list->case_no) ? $customer_purchase_package_active_list->case_no : '-';
-        $customer_purchase_package_active_list['case_manager'] = !empty($customer_purchase_package_active_list->case_manager) ? $customer_purchase_package_active_list->case_manager : '';
-        $customer_purchase_package_active_list['other_services'] = !empty($customer_purchase_package_active_list->other_services) ? $customer_purchase_package_active_list->other_services : '';
-        $customer_purchase_package_active_list['hotel_id'] = !empty($customer_purchase_package_active_list->hotel_id) ? $customer_purchase_package_active_list->hotel_id : 0;
-        $customer_purchase_package_active_list['vehicle_id'] = !empty($customer_purchase_package_active_list->vehicle_id) ? $customer_purchase_package_active_list->vehicle_id : 0;
-        $customer_purchase_package_active_list['tour_id'] = !empty($customer_purchase_package_active_list->tour_id) ? $customer_purchase_package_active_list->tour_id : 0;
-        // $customer_purchase_package_active_list['created_at'] = !empty($customer_purchase_package_active_list->created_at) ? $customer_purchase_package_active_list->created_at : '';
-        // }
-
-        $PatientInformation = PatientInformation::where('status', 'active')
-            ->select('id as patient_id')
-            ->where('purchase_id', $request->purchase_id)
-            ->first();
-
-        $customer_purchase_package_active_list['patient_id'] = !empty($PatientInformation->patient_id) ? $PatientInformation->patient_id : 0;
-
-        $otherServicesArray = explode(',', $customer_purchase_package_active_list['other_services']);
-        // return $otherServicesArray;
-        // Check if "Accomodition" exists in the array
-        $accommodationExists = in_array('Accommodation', $otherServicesArray);
-        // return $accommodationExists;
-        // Check if "Transportation" exists in the array
-        $transportationExists = in_array('Transportation', $otherServicesArray);
-
-        $tourExists = in_array('Tour Details', $otherServicesArray);
-
-        $TranslationExists = in_array('Translation', $otherServicesArray);
-
-        $VisaServicesExists = in_array('Visa Details', $otherServicesArray);
-
-        $TicketServicesExists = in_array('Ticket Service', $otherServicesArray);
-
-        $AmbulanceServicesExists = in_array('Ambulance Service', $otherServicesArray);
-
-        $services = [];
-        if (!empty($accommodationExists)) {
-            $accommodation = [
-                'id' => !empty($customer_purchase_package_active_list['hotel_id']) ? $customer_purchase_package_active_list['hotel_id'] : 0,
-                'title' => 'Acommodition',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        } else {
-            $accommodation = [
-                'id' => 1,
-                'title' => 'Acommodition',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        }
-
-        if (!empty($transportationExists)) {
-            $transportation = [
-                'id' => !empty($customer_purchase_package_active_list['vehicle_id']) ? $customer_purchase_package_active_list['vehicle_id'] : 0,
-                'title' => 'Transportation',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        } else {
-            $transportation = [
-                'id' => 2,
-                'title' => 'Transportation',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        }
-
-        if (!empty($TranslationExists)) {
-            $Translation = [
-                'id' => 3,
-                'title' => 'Translation',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $Translation = [
-                'id' => 3,
-                'title' => 'Translation',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-        if (!empty($tourExists)) {
-            $tour = [
-                'id' => !empty($customer_purchase_package_active_list['tour_id']) ? $customer_purchase_package_active_list['tour_id'] : 0,
-                'title' => 'Tour',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        } else {
-            $tour = [
-                'id' => $customer_purchase_package_active_list['tour_id'],
-                'title' => 'Tour',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'yes',
-            ];
-        }
-
-        if (!empty($VisaServicesExists)) {
-            $VisaServices = [
-                'id' => 5,
-                'title' => 'Visa Services',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $VisaServices = [
-                'id' => 5,
-                'title' => 'Visa Services',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-
-        if (!empty($TicketServicesExists)) {
-            $TicketServices = [
-                'id' => 6,
-                'title' => 'Ticket Services',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $TicketServices = [
-                'id' => 6,
-                'title' => 'Ticket Services',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-
-        if (!empty($AmbulanceServicesExists)) {
-            $AmbulanceServices = [
-                'id' => 7,
-                'title' => 'Ambulance Services',
-                'status' => 'active', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        } else {
-            $AmbulanceServices = [
-                'id' => 7,
-                'title' => 'Ambulance Services',
-                'status' => 'inactive', // Replace with actual price format
-                'view_status' => 'no',
-            ];
-        }
-
-        /////// Ali has made this change do not remove while resolving confilct //////
-        if (isset($accommodation)) {
-            $services[] = $accommodation;
-        }
-        if (isset($transportation)) {
-            $services[] = $transportation;
-        }
-        if (isset($tour)) {
-            $services[] = $tour;
-        }
-        if (isset($Translation)) {
-            $services[] = $Translation;
-        }
-
-        if (isset($VisaServices)) {
-            $services[] = $VisaServices;
-        }
-
-        if (isset($TicketServices)) {
-            $services[] = $TicketServices;
-        }
-        if (isset($AmbulanceServices)) {
-            $services[] = $AmbulanceServices;
-        }
-        /////// Ali has made this change do not remove while resolving confilct //////
 
 
         if (!empty($customer_purchase_package_active_list)) {
@@ -3517,10 +3541,10 @@ class CustomerPackageController extends BaseController
     //         ->where('md_packages.status', 'active')
     //         // ->where('md_product_category.status', 'active')
     //         // ->where('md_product_sub_category.status', 'active')
-    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-    //         ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+    //         ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
+    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
     //         ->where('md_packages.id', $request->package_id)
     //         ->first();
 
@@ -3591,11 +3615,11 @@ class CustomerPackageController extends BaseController
             ->where('md_packages.status', 'active')
             // ->where('md_product_category.status', 'active')
             // ->where('md_product_sub_category.status', 'active')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_master_country', 'md_medical_provider_register.country_id', '=', 'md_master_country.id')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+            ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', ' = ', 'md_product_sub_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+            ->leftjoin('md_master_country', 'md_medical_provider_register.country_id', ' = ', 'md_master_country.id')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
             ->where('md_packages.id', $request->package_id)
             ->first();
 
@@ -3647,7 +3671,7 @@ class CustomerPackageController extends BaseController
     //         $acommodation['hotel_name'] = !empty($AddNewAcommodition->hotel_name) ? $AddNewAcommodition->hotel_name : '';
     //         $acommodation['hotel_address'] = !empty($AddNewAcommodition->hotel_address) ? $AddNewAcommodition->hotel_address : '';
     //         $acommodation['hotel_image_path'] = !empty($AddNewAcommodition->hotel_image_path) ? url('/') . Storage::url($AddNewAcommodition->hotel_image_path) : '';
-    //         $acommodation['hotel_other_services'] = !empty($AddNewAcommodition->hotel_other_services) ? explode(',', $AddNewAcommodition->hotel_other_services) : '';
+    //         $acommodation['hotel_other_services'] = !empty($AddNewAcommodition->hotel_other_services) ? explode(', ', $AddNewAcommodition->hotel_other_services) : '';
     //     }
 
     //     if (!empty($acommodation)) {
@@ -3697,11 +3721,11 @@ class CustomerPackageController extends BaseController
     //         'hotel_name' => $addNewAccommodation->hotel_name,
     //         'hotel_address' => $addNewAccommodation->hotel_address,
     //         'hotel_image_path' => !empty($addNewAccommodation->hotel_image_path) ? url('/') . Storage::url($addNewAccommodation->hotel_image_path) : '',
-    //         'hotel_other_services' => !empty($addNewAccommodation->hotel_other_services) ? explode(',', $addNewAccommodation->hotel_other_services) : [],
+    //         'hotel_other_services' => !empty($addNewAccommodation->hotel_other_services) ? explode(', ', $addNewAccommodation->hotel_other_services) : [],
     //     ];
 
     //     $other_services=[
-    //         'other_services'=>!empty($addNewAccommodation->hotel_other_services) ? explode(',', $addNewAccommodation->hotel_other_services) : [],
+    //         'other_services'=>!empty($addNewAccommodation->hotel_other_services) ? explode(', ', $addNewAccommodation->hotel_other_services) : [],
     //         ]
 
     //     $accommodationList[] = $accommodation;
@@ -3760,11 +3784,11 @@ class CustomerPackageController extends BaseController
             'hotel_name' => $addNewAccommodation->hotel_name,
             'hotel_address' => $addNewAccommodation->hotel_address,
             'hotel_image_path' => !empty($addNewAccommodation->hotel_image_path) ? url('/') . Storage::url($addNewAccommodation->hotel_image_path) : '',
-            'hotel_other_services' => !empty($addNewAccommodation->hotel_other_services) ? explode(',', $addNewAccommodation->hotel_other_services) : [],
+            'hotel_other_services' => !empty($addNewAccommodation->hotel_other_services) ? explode(', ', $addNewAccommodation->hotel_other_services) : [],
         ];
 
         $other_services = [
-            'other_services' => !empty($addNewAccommodation->hotel_other_services) ? explode(',', $addNewAccommodation->hotel_other_services) : [],
+            'other_services' => !empty($addNewAccommodation->hotel_other_services) ? explode(', ', $addNewAccommodation->hotel_other_services) : [],
         ];
 
         return response()->json([
@@ -3787,7 +3811,7 @@ class CustomerPackageController extends BaseController
     //         return $this->sendError('Validation Error.', $validator->errors());
     //     }
 
-    //     $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', '=', 'active')
+    //     $TransportationDetails = TransportationDetails::where('md_add_transportation_details.status', ' = ', 'active')
     //         ->select(
     //             'md_add_transportation_details.id',
     //             'md_add_transportation_details.status',
@@ -3830,7 +3854,7 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $transportationDetails = TransportationDetails::where('md_add_transportation_details.status', '=', 'active')
+        $transportationDetails = TransportationDetails::where('md_add_transportation_details.status', ' = ', 'active')
             ->select(
                 'md_add_transportation_details.id',
                 'md_add_transportation_details.status',
@@ -3865,7 +3889,7 @@ class CustomerPackageController extends BaseController
             'vehicle_level_name' => $transportationDetails->vehicle_level_name,
         ];
 
-        $other_services = !empty($transportationDetails->other_services) ? explode(',', $transportationDetails->other_services) : [];
+        $other_services = !empty($transportationDetails->other_services) ? explode(', ', $transportationDetails->other_services) : [];
 
         return response()->json([
             'status' => 200,
@@ -3878,7 +3902,7 @@ class CustomerPackageController extends BaseController
 
     // public function customer_tour_details_view(Request $request)
     // {
-    //     $ToursDetails = ToursDetails::where('status', '=', 'active')
+    //     $ToursDetails = ToursDetails::where('status', ' = ', 'active')
     //         ->select(
     //             'id',
     //             'tour_name',
@@ -3902,7 +3926,7 @@ class CustomerPackageController extends BaseController
     //         $ToursDetails['tour_days'] = !empty($ToursDetails->tour_days) ? $ToursDetails->tour_days : '';
     //         $ToursDetails['tour_image_path'] = url('/') . Storage::url($ToursDetails->tour_image_path);
     //         $ToursDetails['tour_price'] = !empty($ToursDetails->tour_price) ? $ToursDetails->tour_price : '';
-    //         $ToursDetails['tour_other_services'] = !empty($ToursDetails->tour_other_services) ? explode(',', $ToursDetails->tour_other_services) : '';
+    //         $ToursDetails['tour_other_services'] = !empty($ToursDetails->tour_other_services) ? explode(', ', $ToursDetails->tour_other_services) : '';
     //         // }
     //     }
 
@@ -3930,7 +3954,7 @@ class CustomerPackageController extends BaseController
     //         return $this->sendError('Validation Error.', $validator->errors());
     //     }
 
-    //     $tourDetails = ToursDetails::where('status', '=', 'active')
+    //     $tourDetails = ToursDetails::where('status', ' = ', 'active')
     //         ->select(
     //             'id',
     //             'tour_name',
@@ -3957,14 +3981,14 @@ class CustomerPackageController extends BaseController
     //             'tour_days' => !empty($tourDetails->tour_days) ? $tourDetails->tour_days : '',
     //             'tour_image_path' => url('/') . Storage::url($tourDetails->tour_image_path),
     //             'tour_price' => !empty($tourDetails->tour_price) ? $tourDetails->tour_price : '',
-    //             'tour_other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : '',
+    //             'tour_other_services' => !empty($tourDetails->tour_other_services) ? explode(', ', $tourDetails->tour_other_services) : '',
     //             'platform_type' => $tourDetails->platform_type,
     //             'status' => $tourDetails->status,
     //             'created_by' => $tourDetails->created_by,
     //         ];
 
     //         $other_services = [
-    //             'other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : [],
+    //             'other_services' => !empty($tourDetails->tour_other_services) ? explode(', ', $tourDetails->tour_other_services) : [],
     //         ];
 
     //         $tourList[] = $tour;
@@ -3995,7 +4019,7 @@ class CustomerPackageController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $tourDetails = ToursDetails::where('status', '=', 'active')
+        $tourDetails = ToursDetails::where('status', ' = ', 'active')
             ->select(
                 'id',
                 'tour_name',
@@ -4026,13 +4050,13 @@ class CustomerPackageController extends BaseController
             'tour_days' => !empty($tourDetails->tour_days) ? $tourDetails->tour_days : '',
             'tour_image_path' => url('/') . Storage::url($tourDetails->tour_image_path),
             'tour_price' => !empty($tourDetails->tour_price) ? $tourDetails->tour_price : '',
-            'tour_other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : [],
+            'tour_other_services' => !empty($tourDetails->tour_other_services) ? explode(', ', $tourDetails->tour_other_services) : [],
 
 
         ];
 
         $other_services = [
-            'other_services' => !empty($tourDetails->tour_other_services) ? explode(',', $tourDetails->tour_other_services) : [],
+            'other_services' => !empty($tourDetails->tour_other_services) ? explode(', ', $tourDetails->tour_other_services) : [],
         ];
 
         return response()->json([
@@ -4180,9 +4204,9 @@ class CustomerPackageController extends BaseController
                 'md_packages.id as package_id',
             )
             ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', 'md_product_category.id')
+            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', 'md_packages.created_by')
+            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', 'md_master_cities.id')
             ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
             ->orderBy('md_customer_favourite_packages.id', 'desc')
             ->get();
@@ -4193,9 +4217,9 @@ class CustomerPackageController extends BaseController
         //         'md_medical_provider_register.id as vendors_id',
         //     )
         //     ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-        //     ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-        //     ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-        //     ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+        //     ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+        //     ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+        //     ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
         //     ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
         //     ->orderBy('md_customer_favourite_packages.id', 'desc')
         //     ->get();
@@ -4236,9 +4260,9 @@ class CustomerPackageController extends BaseController
         //                 'md_medical_provider_register.company_name'
         //             )
         //             ->leftJoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-        //             ->leftJoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-        //             ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-        //             ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+        //             ->leftJoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+        //             ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+        //             ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
         //             ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
         //             ->where('md_customer_favourite_packages.status', 'active')
         //             ->orderBy('md_customer_favourite_packages.id', 'desc');
@@ -4262,31 +4286,31 @@ class CustomerPackageController extends BaseController
                     'md_packages.id as package_id',
                 )
                 ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
                 ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
                 ->orderBy('md_customer_favourite_packages.id', 'desc')
                 ->get();
         }
         if ($request->module_type == 'All') {
             $CustomerFavouritePackages = CustomerFavouritePackages::where('md_customer_favourite_packages.status', 'active')
-            ->select(
-                'md_customer_favourite_packages.id',
-                'md_packages.treatment_period_in_days',
-                'md_product_category.product_category_name as treatment_name',
-                'md_master_cities.city_name',
-                'md_packages.package_name',
-                'md_packages.package_price',
-                'md_packages.id as package_id',
-            )
-            ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-            ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-            ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-            ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
-            ->orderBy('md_customer_favourite_packages.id', 'desc')
-            ->get();
+                ->select(
+                    'md_customer_favourite_packages.id',
+                    'md_packages.treatment_period_in_days',
+                    'md_product_category.product_category_name as treatment_name',
+                    'md_master_cities.city_name',
+                    'md_packages.package_name',
+                    'md_packages.package_price',
+                    'md_packages.id as package_id',
+                )
+                ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
+                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
+                ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
+                ->orderBy('md_customer_favourite_packages.id', 'desc')
+                ->get();
         }
 
 
@@ -4319,14 +4343,14 @@ class CustomerPackageController extends BaseController
     //             'md_packages.id as package_id',
     //         )
     //         ->leftjoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+    //         ->leftjoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+    //         ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+    //         ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
     //         ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
     //         ->orderBy('md_customer_favourite_packages.id', 'desc')
     //         ->get();
 
-      
+
 
     //     if (!empty($CustomerFavouritePackages)) {
     //         return response()->json([
@@ -4371,8 +4395,8 @@ class CustomerPackageController extends BaseController
 
     public function customer_favourite_vendor_names()
     {
-        $result = MedicalProviderRegistrater::leftjoin('md_packages', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-            ->leftjoin('md_customer_favourite_packages', 'md_customer_favourite_packages.package_id', '=', 'md_packages.id')
+        $result = MedicalProviderRegistrater::leftjoin('md_packages', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+            ->leftjoin('md_customer_favourite_packages', 'md_customer_favourite_packages.package_id', ' = ', 'md_packages.id')
             ->groupBy('md_medical_provider_register.company_name')
             ->pluck('md_medical_provider_register.company_name');
 
@@ -4411,98 +4435,98 @@ class CustomerPackageController extends BaseController
     }
 
 
-  public function  md_health_bank_details(Request $request){
+    public function  md_health_bank_details(Request $request)
+    {
 
-    $bank_name=trim($request['bank_name']);
-    $package_id=$request['package_id'];
+        $bank_name = trim($request['bank_name']);
+        $package_id = $request['package_id'];
 
-    $bank_details = MDhelathBankDetails::where('bank_name', $bank_name)->first();
+        $bank_details = MDhelathBankDetails::where('bank_name', $bank_name)->first();
 
-    $package_details = Packages::where('id',$package_id)->first();
+        $package_details = Packages::where('id', $package_id)->first();
 
-    if (!empty($bank_details)){
-        return response()->json([
-            'status' => 200,
-            'message' => 'Bank Details Found',
-            'bank_details' => $bank_details,
-            'package_details' => $package_details,
+        if (!empty($bank_details)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Bank Details Found',
+                'bank_details' => $bank_details,
+                'package_details' => $package_details,
 
-        ]);
-    } else {
-        return response()->json([
-            'status' => 404,
-            'message' => 'Bank Details Not Found',
-        ]);
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Bank Details Not Found',
+            ]);
+        }
     }
-  }
 
 
 
-//   public function customer_favourite_vendor_names()
-//   {
-//            $result =MedicalProviderRegistrater::leftjoin('md_packages', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-//           ->leftjoin('md_customer_favourite_packages', 'md_customer_favourite_packages.package_id', '=', 'md_packages.id')
-//           ->groupBy('md_medical_provider_register.company_name')
-//           ->pluck('md_medical_provider_register.company_name');
-      
-      
-//        if (!empty($result)) {
-//           return response()->json([
-//               'status' => 200,
-//               'message' => 'Here is your Favourite list vendors names.',
-//               'data' => $result,
-
-//           ]);
-//       } else {
-//           return response()->json([
-//               'status' => 404,
-//               'message' => 'Something went wrong.',
-//           ]);
-//       }
-//   }
+    //   public function customer_favourite_vendor_names()
+    //   {
+    //            $result =MedicalProviderRegistrater::leftjoin('md_packages', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+    //           ->leftjoin('md_customer_favourite_packages', 'md_customer_favourite_packages.package_id', ' = ', 'md_packages.id')
+    //           ->groupBy('md_medical_provider_register.company_name')
+    //           ->pluck('md_medical_provider_register.company_name');
 
 
-//   public function customer_favourite_list_web(Request $request)
-//   {
-//               $query = CustomerFavouritePackages::select(
-//               'md_customer_favourite_packages.id',
-//               'md_packages.treatment_period_in_days',
-//               'md_product_category.product_category_name as treatment_name',
-//               'md_master_cities.city_name',
-//               'md_packages.package_name',
-//               'md_packages.package_price',
-//               'md_packages.id as package_id',
-//               'md_medical_provider_register.company_name'
-//           )
-//           ->leftJoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
-//           ->leftJoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
-//           ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
-//           ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
-//           ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
-//           ->where('md_customer_favourite_packages.status', 'active')
-//           ->orderBy('md_customer_favourite_packages.id', 'desc');
-          
-//        if (isset($request->company_name)) {
-//           //  return 'asdasd';
-//   $query->where('md_medical_provider_register.company_name', 'LIKE', '%' . $request->company_name . '%');
-// }
+    //        if (!empty($result)) {
+    //           return response()->json([
+    //               'status' => 200,
+    //               'message' => 'Here is your Favourite list vendors names.',
+    //               'data' => $result,
 
-// $result = $query->get();
+    //           ]);
+    //       } else {
+    //           return response()->json([
+    //               'status' => 404,
+    //               'message' => 'Something went wrong.',
+    //           ]);
+    //       }
+    //   }
 
-//       if (!empty($result)) {
-//           return response()->json([
-//               'status' => 200,
-//               'message' => 'Here is your Favourite list.',
-//               'data' => $result,
 
-//           ]);
-//       } else {
-//           return response()->json([
-//               'status' => 404,
-//               'message' => 'Something went wrong.',
-//           ]);
-//       }
-//   }
+    //   public function customer_favourite_list_web(Request $request)
+    //   {
+    //               $query = CustomerFavouritePackages::select(
+    //               'md_customer_favourite_packages.id',
+    //               'md_packages.treatment_period_in_days',
+    //               'md_product_category.product_category_name as treatment_name',
+    //               'md_master_cities.city_name',
+    //               'md_packages.package_name',
+    //               'md_packages.package_price',
+    //               'md_packages.id as package_id',
+    //               'md_medical_provider_register.company_name'
+    //           )
+    //           ->leftJoin('md_packages', 'md_packages.id', 'md_customer_favourite_packages.package_id')
+    //           ->leftJoin('md_product_category', 'md_packages.treatment_category_id', ' = ', 'md_product_category.id')
+    //           ->leftJoin('md_medical_provider_register', 'md_medical_provider_register.id', ' = ', 'md_packages.created_by')
+    //           ->leftJoin('md_master_cities', 'md_medical_provider_register.city_id', ' = ', 'md_master_cities.id')
+    //           ->where('md_customer_favourite_packages.customer_id', Auth::user()->id)
+    //           ->where('md_customer_favourite_packages.status', 'active')
+    //           ->orderBy('md_customer_favourite_packages.id', 'desc');
 
+    //        if (isset($request->company_name)) {
+    //           //  return 'asdasd';
+    //   $query->where('md_medical_provider_register.company_name', 'LIKE', '%' . $request->company_name . '%');
+    // }
+
+    // $result = $query->get();
+
+    //       if (!empty($result)) {
+    //           return response()->json([
+    //               'status' => 200,
+    //               'message' => 'Here is your Favourite list.',
+    //               'data' => $result,
+
+    //           ]);
+    //       } else {
+    //           return response()->json([
+    //               'status' => 404,
+    //               'message' => 'Something went wrong.',
+    // ] );
+    //       }
+    //   }
 
 }

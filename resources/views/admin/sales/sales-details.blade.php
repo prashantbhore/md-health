@@ -2,7 +2,7 @@
 <section class="main-content">
     <div class="container2 pb-5">
         <div class="d-flex align-items-center justify-content-between">
-            <div class="page-title">#MD8739</div>
+            <div class="page-title">{{!empty($patient_details->order_id)?$patient_details->order_id:''}}</div>
             <a href="{{URL::asset('admin/sales')}}" class="page-title">
                 <img src="{{URL::asset('admin/assets/img/ArrowLeftCircle.png')}}" alt="" class="back-btn"> Back Sales
             </a>
@@ -11,14 +11,16 @@
             <div class="col-md-6">
                 <div class="card pkg-card mb-3">
                     <div class="card-body d-flex gap-2">
-                        <img src="{{URL::asset('admin/assets/img/packageImg.png')}}" alt="">
+                        <img src="{{!empty($logo->company_logo_image_path)?url('/').Storage.url($logo->company_logo_image_path):URL::asset('admin/assets/img/packageImg.png')}}" alt="">
                         <div class="d-flex flex-column gap-1">
-                            <h4>Hearth Valve Replacement Surgery</h4>
-                            <p>Memorial Hospital Istanbul</p>
+                            <h4>{{!empty($patient_details->package->package_name)?$patient_details->package->package_name:''}}</h4>
+                            <p>{{!empty($patient_details->package->provider->company_name)?$patient_details->package->provider->company_name:''}} 
+                                {{!empty($patient_details->package->provider->city->city_name)?$patient_details->package->provider->city->city_name:''}}
+                            </p>
                         </div>
                         <div class="d-flex flex-column gap-1 ms-auto">
                             <p>Package Price</p>
-                            <h3>34.498,39 ₺</h3>
+                            <h3>{{!empty($patient_details->package_total_price)?$patient_details->package_total_price:''}} ₺</h3>
                         </div>
                     </div>
                 </div>
@@ -30,38 +32,42 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First Name</label>
-                                <p>Ali</p>
+                                <p>{{!empty($patient_details->customer->first_name)?$patient_details->customer->first_name:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Last Name</label>
-                                <p>Danish</p>
+                                <p>{{!empty($patient_details->customer->last_name)?$patient_details->customer->last_name:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="contactNo">Contact Number</label>
-                                <p>+44 4444 44 44</p>
+                                <p>{{!empty($patient_details->customer->phone)?$patient_details->customer->phone:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email">E-mail</label>
-                                <p>ali.danish@mdhealth.io</p>
+                                <p>{{!empty($patient_details->customer->email)?$patient_details->customer->email:''}}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="address">Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </span>
-                                    <span>City / Country</span>
+                                    <span>{{!empty($patient_details->customer->address)?$patient_details->customer->address:''}}</span>
+                                    <span>{{!empty($patient_details->customer->city->city_name)?$patient_details->customer->city->city_name:''}} /
+                                        {{!empty($patient_details->customer->country->country_name)?$patient_details->customer->country->country_name:''}}</span>
                                 </p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="address">Invoice Address</label>
                                 <p class="d-flex flex-column gap-3">
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </span>
-                                    <span>City / Country</span>
+                                    <span>{{!empty($patient_details->customer->address)?$patient_details->customer->address:''}}</span>
+                                    <span>{{!empty($patient_details->customer->city->city_name)?$patient_details->customer->city->city_name:''}} /
+                                        {{!empty($patient_details->customer->country->country_name)?$patient_details->customer->country->country_name:''}}</span>
                                 </p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h4>Payment History</h4>
-                                <h6>First Payment - 20% - 4.985,90 ₺</h6>
-                                <h3>Payment Date: 12/02/2023</h3>
+                                <h6>First Payment - 20% - {{ !empty($latest_payment->paid_amount) ? number_format($latest_payment->paid_amount, 2) : '' }}₺</h6>
+                                {{-- <h3>Payment Date: 12/02/2023</h3> --}}
+                                <h3>Payment Date: {{ !empty($latest_payment->created_at) ? $latest_payment->created_at->format('d/m/Y') : '' }}</h3>
+
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h4>Payment Info</h4>
@@ -69,7 +75,7 @@
                                 <h3>3D Secure - 20% Payment</h3>
                             </div>
                             <div class="col-md-6">
-                                <div class="btn-label df-center">Remaining: 27.837,85 ₺</div>
+                                <div class="btn-label df-center">Remaining:  {{ !empty($latest_payment->pending_payment) ? number_format($latest_payment->pending_payment, 2) : '' }} ₺</div>
                             </div>
 
                         </div>
@@ -84,20 +90,20 @@
                         <p class="card-title mb-3">Package Details</p>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label for="planDate">Planned Surgery Date</label>
-                                <p>12 Dec 2023</p>
+                                <label for="planDate">Treatment Start Date</label>
+                                <p>{{ !empty($patient_details->treatment_start_date) ? $patient_details->treatment_start_date->format('d/m/Y') : '' }}</p>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="contact">Hospital Concact Phone</label>
-                                <p>+90 212 222 22 22</p>
+                                <p>{{!empty($patient_details->package->provider->company_name) ? $patient_details->package->provider->company_name : '' }}</p>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="period">Treatment Periods</label>
-                                <p>5-7 Days</p>
+                                <p>{{!empty($patient_details->package->treatment_period_in_days) ? $patient_details->package->treatment_period_in_days: '' }} Days</p>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="address">Hospital Address</label>
-                                <p>Lorem Ipsum Dolor, Sit Amet No:50 Besiktas / Istanbul</p>
+                                <p>{{!empty($patient_details->package->provider->company_address) ? $patient_details->package->provider->company_address: '' }}</p>
                             </div>
 
                             <div class="clearfix"></div>
@@ -130,32 +136,48 @@
                                 <p class="card-title mb-3">Package Details</p>
                                 <div class="col-md-12 mb-3">
                                     <label for="caseNo">Case No</label>
-                                    <p>#384</p>
+                                    <p>{{!empty($patient_details->case_no) ? $patient_details->case_no : '' }}</p>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="caseManager">Case Manager</label>
-                                    <p>Mehmet Coskun</p>
+                                    <p>{{!empty($patient_details->case_manager->company_name) ? $patient_details->case_manager->company_name: '' }}</p>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="caseManagerNo">Case Manager Contact</label>
-                                    <p>+90 555 555 55 55</p>
-                                    <p>mehmet.coskun@memorial.com.tr</p>
+                                    <p>{{!empty($patient_details->case_manager->mobile_no) ? $patient_details->case_manager->mobile_no: '' }}</p>
+                                    <p>{{!empty($patient_details->case_manager->email) ? $patient_details->case_manager->email: '' }}</p>
                                 </div>
 
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div class="w-full d-flex align-items-center gap-3">
                                     <div class="w-50">
+                                        
                                         <label for="status" class="d-block">Status</label>
                                         <select name="status" id="status" class="w-full">
-                                            <option value="pending">Pending</option>
-                                            <option value="completed">Completed</option>
-                                            <option value="inProgress">In Progress</option>
+                                            <option value="pending" @if ($patient_details->purchase_type == 'pending') selected @endif>Pending</option>
+                                            <option value="completed" @if ($patient_details->purchase_type == 'completed') selected @endif>Completed</option>
+                                            <option value="inProgress" @if ($patient_details->purchase_type == 'in_progress') selected @endif>In Progress</option>
                                         </select>
+                                        
                                     </div>
+                                    @if ($patient_details->purchase_type == 'pending')
                                     <div class="pending w-25">
                                         Pending
                                     </div>
+                                    @endif
+
+                                    @if ($patient_details->purchase_type == 'completed')
+                                    <div class="completed w-25">
+                                        Completed
+                                    </div>
+                                    @endif
+
+                                    @if ($patient_details->purchase_type == 'in_progress')
+                                        <div class="complete w-25" style="background-color: yellow;">
+                                            In Progress
+                                        </div>
+                                    @endif
 
                                 </div>
                             </div>

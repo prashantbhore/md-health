@@ -36,13 +36,9 @@
             width: 285px;
         }
 
-
-
         .trmt-card-body {
             position: relative;
         }
-
-
 
         .no-msg-div a:last-child {
             /* padding: 13px 20px; */
@@ -69,7 +65,7 @@
                     @endif
                 </div>
                 <div class="w-761">
-                    <div class="card mb-4">
+                    <div class="card panel-right mb-4">
                         <div class="form-div">
                             <h5 class="card-header d-flex align-items-center justify-content-between mb-3">
                                 <span>Message</span>
@@ -123,9 +119,11 @@
                                 </div>
 
                                 <div class="no-msg-div d-flex align-items-center flex-column justify-content-around"
-                                    style="height: 150px;">
+                                    >
                                     @if (empty($conversations))
-                                        <p class="mb-0">You don't have any message</p>
+                                        <!-- <p class="mb-0">You don't have any message</p> -->
+                                        @include('front.includes.no-data-found')
+
                                     @endif
                                     <a href="{{ url('live-consultation-appoinment') }}" class="go-live df-center gap-1">
                                         <svg width="18" height="14" viewBox="0 0 18 14" fill="none"

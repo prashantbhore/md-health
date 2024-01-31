@@ -101,7 +101,7 @@
         }
     </style>
     <div class="content-wrapper">
-        <div class="container py-100px for-cards">
+        <div class="container py-135px for-cards">
             <div class="d-flex gap-3">
                 <div class="w-292">
                     @include('front.includes.sidebar-user')
@@ -164,7 +164,6 @@
                                                         <div class="df-column">
                                                             <h5 class="mb-0 card-h4">
                                                                 {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }} 
-                                                               
                                                             </h5>
 
                                                             <h6 class="card-h1">

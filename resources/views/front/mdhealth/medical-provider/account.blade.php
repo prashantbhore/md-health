@@ -19,9 +19,9 @@
         letter-spacing: -0.64px;
     }
 
-    #pic2 {
+    /* #pic2 {
         height: 150px;
-    }
+    } */
 
     .video-div {
         height: 100px;
@@ -48,9 +48,10 @@
         flex-wrap: wrap;
     }
 
-    .multiple-upload-images .preview-img .prev-img-div img {
+    .multiple-upload-images .preview-img .prev-img-div img,
+    .prev-img-div img {
         height: 100px;
-        width: 133px;
+        width: 128px;
         object-fit: cover;
         margin-top: 16px;
         border-radius: 10px;
@@ -89,13 +90,7 @@
         border-radius: 3px;
     }
 
-    .prev-img-div img {
-        height: 150px;
-        width: 133px;
-        object-fit: contain;
-        margin-top: 8px;
-        border-radius: 3px;
-    }
+
 
     .multiple-upload-images .preview-img .prev-img-div .clear-btn {
         position: absolute;
@@ -118,6 +113,16 @@
 
     .multiple-upload-images .preview-img .prev-img-div .clear-btn:hover {
         background: #db2828;
+    }
+
+    .content-video:before {
+
+        top: 21px;
+
+    }
+
+    .play-icon {
+        bottom: 23%;
     }
 </style>
 
@@ -184,92 +189,83 @@
                                     <input type="text" name="email" value="{{ $medical_provider_list->email }}" class="form-control" id="email" aria-describedby="foodname" placeholder="Company Full Address">
                                 </div>
 
-
-
                                 <div class="form-group mb-4">
                                     <label class="form-label mb-3">Authorized Person Mobile Contact</label>
                                     <input type="text" name="mobile_no" value="{{ $medical_provider_list->mobile_no }}" class="form-control" id="foodname" aria-describedby="foodname" placeholder="+90">
                                 </div>
 
-                                {{-- <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Company Overview</label>
-                                    <textarea class="form-control" name="company_overview" value="" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
+                                <div class="form-group mb-4">
+                                    <label class="form-label">Company Overview</label>
+                                    <textarea class="form-control summernote summernote-1" name="company_overview" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
+                                </div>
 
-
-                        </div> --}}
-
-
-                        <div class="form-group mb-4">
-                            <label class="form-label mb-3">Company Overview</label>
-                            <textarea class="form-control summernote summernote-1" name="company_overview" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
-                        </div>
-
-
-
-
-
-                        <div class="multiple-upload-images">
-                            <h6 class="section-heading">Company Logo</h6>
-                            <div class="form-group my-3">
-                                <input type="file" id="company_logo_image_path" class="form-control" name="company_logo_image_path" oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
-                            </div>
-                            <div class="prev-img-div">
-                                <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
+                                <div class="multiple-upload-images">
+                                <label class="form-label">Company Logo</label>
+                                    <div class="form-group mb-3">
+                                        <input type="file" id="company_logo_image_path" class="form-control" name="company_logo_image_path" oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
+                                    </div>
+                                    <div class="prev-img-div">
+                                        <img src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) &&
                                             Storage::exists($MedicalProviderLogo['company_logo_image_path'])
                                                 ? url('/') . Storage::url($MedicalProviderLogo['company_logo_image_path'])
                                                 : URL::asset('front/assets/img/default-img.png') }}" {{-- 
                                             src="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic1">
-                                <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
-                            </div>
+                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLogo['company_logo_image_path']) ? $MedicalProviderLogo['company_logo_image_path'] : '' }}">
+                                    </div>
 
-                        </div>
-                        {{-- {{dd($MedicalProviderLogo)}} --}}
-                        <div class="multiple-upload-images">
-                            <h6 class="section-heading">Company License</h6>
-                            <div class="form-group my-3">
-                                <input type="file" id="company_licence_image_path" class="form-control" name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
-                            </div>
-                            <div class="prev-img-div">
-                                <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
+                                </div>
+                                {{-- {{dd($MedicalProviderLogo)}} --}}
+                                <div class="multiple-upload-images">
+                                    <label class="form-label">Company License</label>
+                                    <div class="form-group mb-3">
+                                        <input type="file" id="company_licence_image_path" class="form-control" name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
+                                    </div>
+                                    <div class="prev-img-div">
+                                        <img src="{{ !empty($MedicalProviderLicense['company_licence_image_path']) &&
                                             Storage::exists($MedicalProviderLicense['company_licence_image_path'])
                                                 ? url('/') . Storage::url($MedicalProviderLicense['company_licence_image_path'])
                                                 : URL::asset('front/assets/img/default-img.png') }}" {{-- mpany_licence_image_path'] : 'front/assets/img/default-img.png' }}" --}} alt="image" id="pic2">
-                                <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
-                            </div>
-                        </div>
+                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($MedicalProviderLicense['company_licence_image_path']) ? $MedicalProviderLicense['company_licence_image_path'] : '' }}">
+                                    </div>
+                                </div>
 
-                        <div class="multiple-upload-images">
-                            <h6 class="section-heading">Product Pictures</h6>
-                            <div class="form-group">
-                                <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
-                            </div>
-                            <div class="preview-img gallery d-flex flex-wrap align-items-center gap-3 ">
+                                <div class="multiple-upload-images">
+                                    <label class="form-label">Product Pictures</label>
 
-                                @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
-                                @php
-                                $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
-                                @endphp
+                                    <div class="form-group mb-3">
+                                        <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
+                                        <!-- <label id="provider_image_path" for="provider_image_path" name="provider_image_path[]" class="form-control d-block cp text-gray">Upload Product Pictures</label> -->
+                                    </div>
+                                    <div class="preview-img gallery d-flex flex-wrap align-items-center gap-3 ">
 
-                                @if ($fileExtension === 'mp4')
-                                <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
-                                    <a href="{{ !empty($ProviderImagesVideo->provider_image_path) 
+                                        @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
+                                        @php
+                                        $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        @if ($fileExtension === 'mp4')
+                                        <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
+                                            <a href="{{ !empty($ProviderImagesVideo->provider_image_path) 
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                        : '' }}" class="glightbox">
+                                                                        : '' }}" class="glightbox content-video">
 
-                                        <video poster="{{asset('front/assets/img/poster.png')}}" autoplay>
-                                            <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                <video>
+                                                    <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                     Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                         : '' }}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </a>
-                                    <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
-                                        <div><span class="mdi mdi-close-thick"></span>
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                                <span class="play-icon">
+                                                    <img src="{{asset('front/assets/img/play.png')}}" alt="">
+                                                </span>
+                                            </a>
+                                            <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
+                                                <div><span class="mdi mdi-close-thick"></span>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
-                                <!-- <a href="{{ URL::asset($ProviderImagesVideo->provider_image_path) }}"
+                                        <!-- <a href="{{ URL::asset($ProviderImagesVideo->provider_image_path) }}"
                                                         class="glightbox">
                                                         <div class="prev-img-div video-card"
                                                             id="img_div_{{ $ProviderImagesVideo->id }}">
@@ -284,21 +280,21 @@
                                                             </video>
                                                     </a> -->
 
-                                <!-- </div> -->
-                                @else
+                                        <!-- </div> -->
+                                        @else
 
-                                <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
-                                    <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                        <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
+                                            <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                     Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                         : '' }}" class="glightbox">
-                                        <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                                <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                                                     Storage::exists($ProviderImagesVideo->provider_image_path)
                                                                         ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                                         : '' }}" alt="image" />
-                                    </a>
+                                            </a>
 
-                                    <!-- <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
+                                            <!-- <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
                                             Storage::exists($ProviderImagesVideo->provider_image_path)
                                                 ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
                                                 : '' }}"
@@ -309,98 +305,34 @@
                                                     : '' }}"
                                                     alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
                                             </a> -->
-                                    <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
-                                        <div><span class="mdi mdi-close-thick"></span>
+                                            <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
+                                                <div><span class="mdi mdi-close-thick"></span>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
+                                        @endif
+                                        @endforeach
+
+                                    </div>
+
                                 </div>
-                                @endif
-                                @endforeach
 
-                            </div>
+                                <div class="section-btns mb-4">
+                                    <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits" onclick="disableButtonAndCallback()">Save
+                                        Changes</button>
+                                </div>
 
+                                <div class="form-group mb-3">
+                                    <label class="form-label fst-italic fsb-2">*Please make sure the photo/video meets
+                                        the MDhealth policy.</label>
+                                </div>
+                            </form>
                         </div>
-
-                        <div class="section-btns mb-4">
-                            <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits" onclick="disableButtonAndCallback()">Save
-                                Changes</button>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label class="form-label fst-italic fsb-2">*Please make sure the photo/video meets
-                                the MDhealth policy.</label>
-                        </div>
-
-                        </form>
                     </div>
                 </div>
-
-                {{-- <div class="multiple-upload-images">
-                            <h6 class="section-heading">Product Pictures</h6>
-                            <div class="form-group">
-                                <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
-                            </div>
-                            <div class="preview-img gallery">
-
-                                @foreach ($ProviderImagesVideos as $ProviderImagesVideo)
-                                @php
-                                $fileExtension = pathinfo($ProviderImagesVideo->provider_image_path, PATHINFO_EXTENSION);
-                                @endphp
-
-                                @if ($fileExtension === 'mp4')
-                                <div class="prev-img-div video-card" id="img_div_{{ $ProviderImagesVideo->id }}">
-                <video poster="{{asset('front/assets/img/poster.png')}}" class="video-div" controls>
-                    <source src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
-                                                                Storage::exists($ProviderImagesVideo->provider_image_path)
-                                                                    ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                    : '' }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <a href="javascript:void(0);" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})" class="clear-btn">
-                    <div><span class="mdi mdi-close-thick"></span>
-                    </div>
-                </a>
             </div>
-            @else
-            <div class="prev-img-div" id="img_div_{{ $ProviderImagesVideo->id }}">
-                <a href="{{ !empty($ProviderImagesVideo->provider_image_path) &&
-                                                        Storage::exists($ProviderImagesVideo->provider_image_path)
-                                                            ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                            : '' }}" class="glightbox">
-                    <img src="{{ !empty($ProviderImagesVideo->provider_image_path) &&
-                                                            Storage::exists($ProviderImagesVideo->provider_image_path)
-                                                                ? url('/') . Storage::url($ProviderImagesVideo->provider_image_path)
-                                                                : '' }}" alt="{{ !empty($ProviderImagesVideo->provider_image_name) ? $ProviderImagesVideo->provider_image_name : '' }}" />
-                </a>
-                <a href="javascript:void(0);" class="clear-btn" onclick="deleteClientLogo({{ $ProviderImagesVideo->id }})">
-                    <div><span class="mdi mdi-close-thick"></span>
-                    </div>
-                </a>
-            </div>
-            @endif
-            @endforeach
-
         </div>
-
-    </div> --}}
-
-    {{-- <div class="section-btns mb-4">
-                            <button type="submit" id="medproacc" class="btn save-btn-black from-prevent-multiple-submits">Save
-                                Changes</button>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label class="form-label fst-italic fsb-2">*Please make sure the photo/video meets
-                                the MDhealth policy.</label>
-                        </div>
-
-                        </form>
-                    </div>
-                </div> --}}
-</div>
-</div>
-</div>
-</div>
+    </div>
 </div>
 @endsection
 

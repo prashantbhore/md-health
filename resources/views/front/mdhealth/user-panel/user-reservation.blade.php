@@ -242,7 +242,7 @@
     }
 </style>
 <div class="content-wrapper">
-    <div class="container py-100px for-cards">
+    <div class="container py-135px for-cards">
         <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar-user')
@@ -895,162 +895,154 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <div class="view-menu-div2 mt-4">
-                                                    <div class="d-flex mb-4" style="gap: 4rem;">
-                                                        <div class="">
-                                                            <p class="m-0 user-res-p4" style="color: #4cdb06;">PNR No</p>
-                                                            <p class="m-0 user-res-p9">TK38473</p>
-                                                        </div>
-                                                        <div class="">
-                                                            <p class="m-0 user-res-p4" style="color: #4cdb06;">Seat</p>
-                                                            <p class="m-0 user-res-p9">9 F</p>
-                                                        </div>
-                                                        <div class="">
-                                                            <p class="m-0 user-res-p4" style="color: #4cdb06;">
-                                                                Ticket Price
-                                                            </p>
-                                                            <p class="m-0 user-res-p9">2.100,00 <span class="lira">₺</span></p>
-                                                        </div>
-                                                    </div>
-                                                    <p class="user-res-p4 mb-3" style="color: #4cdb06;">Flight Info</p>
-                                                    <div class="d-flex gap-2 m-0">
-                                                        <p class="user-res-p5"><span style="color: #4cdb06;">Departure Time: </span> 12 December 2023 - 16:30</p>
-                                                        <p class="user-res-p5"><span style="color: #f31d1d;">Departure Airport: </span> Stockholm Airport (ARN)</p>
-                                                    </div>
-                                                    <div class="">
-                                                        <p class="m-0 user-res-p4" style="color: #4cdb06;">Airport Address</p>
-                                                        <p class="user-res-p7">190 45 Stockholm-Arlanda, Sweden</p>
-                                                    </div>
-                                                    {{--
+                                                <!-- DETAILS -->
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="view-menu-div2 mt-4">
+                                                            <div class="d-flex mb-4" style="gap: 4rem;">
+                                                                <div class="">
+                                                                    <p class="m-0 user-res-p4" style="color: #4cdb06;">PNR No</p>
+                                                                    <p class="m-0 user-res-p9">TK38473</p>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="m-0 user-res-p4" style="color: #4cdb06;">Seat</p>
+                                                                    <p class="m-0 user-res-p9">9 F</p>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="m-0 user-res-p4" style="color: #4cdb06;">
+                                                                        Ticket Price
+                                                                    </p>
+                                                                    <p class="m-0 user-res-p9">2.100,00 <span class="lira">₺</span></p>
+                                                                </div>
+                                                            </div>
+                                                            <p class="user-res-p4 mb-3" style="color: #4cdb06;">Flight Info</p>
+                                                            <div class="d-flex gap-4 m-0">
+                                                                <p class="user-res-p5"><span style="color: #4cdb06;">Departure Time: </span> 12 December 2023 - 16:30</p>
+                                                                <p class="user-res-p5"><span style="color: #f31d1d;">Departure Airport: </span> Stockholm Airport (ARN)</p>
+                                                            </div>
+                                                            <div class="mb-4">
+                                                                <p class="m-0 user-res-p4" style="color: #4cdb06;">Airport Address</p>
+                                                                <p class="user-res-p7">190 45 Stockholm-Arlanda, Sweden</p>
+                                                            </div>
+                                                            {{--
                                                                 <p class="">
                                                                     --}}
-                                                    <img src="{{ 'front/assets/img/user/Group 26.png' }}" alt="" style="width: 100%;" />
-                                                    {{--
+                                                            <img src="{{ 'front/assets/img/user/Group 26.png' }}" alt="" style="width: 100%;" />
+                                                            {{--
                                                                 </p>
                                                                 --}}
-                                                    <div class="text-end mt-4">
-                                                        <button class="user-res-btn2" data-bs-toggle="modal" data-bs-target="#FlightModelBox1">Cancellation Request</button>
+                                                            <div class="text-end mt-4">
+                                                                <button class="user-res-btn2" data-bs-toggle="modal" data-bs-target="#cancelRequest">Cancellation Request</button>
+                                                                <!-- <button class="user-res-btn2" data-bs-toggle="modal" data-bs-target="#FlightModelBox1">Cancellation Request</button> -->
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!-- ACTIVE FLIGHTS END -->
+                                            <!-- ACTIVE FLIGHTS END -->
 
-                                    <!-- COMPLETED FLIGHTS -->
-                                    <div class="tab-pane fade" id="userflight2" role="tabpanel" aria-labelledby="sale-userflight-tab2">
-                                        <div class="row mb-4">
-                                            <!-- {{--
-                                                        <div class="col">
-                                                            --}}
-                                                             {{--
-                                                            <div class="row">
-                                                                --}} -->
-                                            <div class="col text-center">
-                                                <!-- {{-- <img src="{{ 'front/assets/img/user/image_39.png' }}" alt="" /> --}} -->
-                                                <p class="user-res-p6 m-0" style="font-weight: 400;">
-                                                    Stockholm Airport
-                                                </p>
-                                                <p class="m-0 user-res-p1">ARN</p>
-                                                <p class="m-0">
-                                                    <img src="{{ 'front/assets/img/mdBookings/Group 5.png' }}" alt="" />
-                                                </p>
-                                                <p class="m-0 user-res-p1">IST</p>
-                                                <p class="m-0 user-res-p6" style="font-weight: 400;">
-                                                    Istanbul Airport
-                                                </p>
-                                            </div>
-
-                                            <div class="col-6 d-flex flex-column justify-content-between">
-                                                <!-- {{--
-                                                                    <div class="d-flex flex-column justify-content-between">
-                                                                        --}} -->
-                                                <div class="d-flex flex-column align-items-start gap-2 m-0">
-                                                    <!-- {{--
-                                                                            <h6 class="m-0 user-res-p1">Garenta Rental</h6>
-                                                                            --}} -->
-                                                    <p class="user-res-p1">
-                                                        <span class="">
-                                                            <img src="{{ 'front/assets/img/mdBookings/fligthTo.png' }}" alt="" />
-                                                        </span>
-                                                        <span class="">Stockholm </span>
-                                                        <span class="" style="color: #4cdb06;">to </span>
-                                                        <span>Istanbul</span>
-                                                    </p>
-                                                    <p class="user-res-p5">
-                                                        <span>
-                                                            <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" />
-                                                        </span>
-                                                        <span class="m-0">12 Dec 2023 - 16:30</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col d-flex flex-column justify-content-between align-items-end">
-                                                <p class="m-0 text-end">
-                                                    <img src="{{ 'front/assets/img/mdBookings/airlinesLogo.png' }}" alt="" />
-                                                </p>
-                                                <div class="">
-                                                    <button class="user-reservation-btn2" data-bs-toggle="modal" data-bs-target="#UserFlightView">Write Review</button>
-                                                </div>
-                                            </div>
-                                            <!-- {{--
-                                                                </div>
-                                                                --}} {{--
+                                            <!-- COMPLETED FLIGHTS -->
+                                            <div class="tab-pane fade" id="userflight2" role="tabpanel" aria-labelledby="sale-userflight-tab2">
+                                                <div class="card shadow-none mb-4 pkgCard">
+                                                    <div class="card-body d-flex gap-3 w-100 p-3">
+                                                        <!-- Flex Item 1 -->
+                                                        <div class="text-center">
+                                                            <p class="user-res-p6 m-0" style="font-weight: 400;">
+                                                                Stockholm Airport
+                                                            </p>
+                                                            <p class="m-0 user-res-p1">ARN</p>
+                                                            <p class="m-0">
+                                                                <img src="{{ 'front/assets/img/mdBookings/Group 5.png' }}" alt="" />
+                                                            </p>
+                                                            <p class="m-0 user-res-p1">IST</p>
+                                                            <p class="m-0 user-res-p6" style="font-weight: 400;">
+                                                                Istanbul Airport
+                                                            </p>
+                                                        </div>
+                                                        <!-- Flex Item 2 -->
+                                                        <div class="d-flex flex-column  ms-5">
+                                                            <p class="user-res-p1 mb-2">
+                                                                <span class="">
+                                                                    <img src="{{ 'front/assets/img/mdBookings/fligthTo.png' }}" alt="" />
+                                                                </span>
+                                                                <span class="">Stockholm </span>
+                                                                <span class="" style="color: #4cdb06;">to </span>
+                                                                <span>Istanbul</span>
+                                                            </p>
+                                                            <p class="user-res-p5">
+                                                                <span>
+                                                                    <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" />
+                                                                </span>
+                                                                <span class="m-0">12 Dec 2023 - 16:30</span>
+                                                            </p>
+                                                            <div class="">
+                                                                <!-- <button class="user-reservation-btn1 menu-detail-btn2">Ticket Details</button> -->
                                                             </div>
-                                                            --}} -->
-                                        </div>
-                                    </div>
-                                    <!-- COMPLETED FLIGHTS END -->
+                                                        </div>
+                                                        <!-- Flex Item 3 -->
+                                                        <div class="ms-auto mt-auto">
+                                                            <!-- <img src="{{ 'front/assets/img/mdBookings/airlinesLogo.png' }}" alt="" /> -->
+                                                            <button class="user-reservation-btn2" data-bs-toggle="modal" data-bs-target="#ReviewModalFlight">Write Review</button>
 
-                                    <!-- CANCELLED FLIGHTS -->
-                                    <div class="tab-pane fade" id="userflight33" role="tabpanel" aria-labelledby="sale-userflight-tab3">
-                                        <div class="row mb-4">
-                                            <div class="col text-center">
-                                                <p class="user-res-p6 m-0" style="font-weight: 400;">
-                                                    Stockholm Airport
-                                                </p>
-                                                <p class="m-0 user-res-p1">ARN</p>
-                                                <p class="m-0">
-                                                    <img src="{{ 'front/assets/img/mdBookings/Group 5.png' }}" alt="" />
-                                                </p>
-                                                <p class="m-0 user-res-p1">IST</p>
-                                                <p class="m-0 user-res-p6" style="font-weight: 400;">
-                                                    Istanbul Airport
-                                                </p>
-                                            </div>
-                                            <div class="col-9 d-flex flex-column justify-content-between">
-                                                <!-- {{--
-                                                                <div class="d-flex flex-column justify-content-between">
-                                                                    --}} -->
-                                                <div class="d-flex flex-column align-items-start m-0">
-                                                    <!-- {{--
-                                                                        <h6 class="m-0 user-res-p1">Garenta Rental</h6>
-                                                                        --}} -->
-                                                    <p class="user-res-p1 m-0 mb-2">
-                                                        <span class="">
-                                                            <img src="{{ 'front/assets/img/mdBookings/fligthTo.png' }}" alt="" />
-                                                        </span>
-                                                        <span class="">Stockholm </span>
-                                                        <span class="" style="color: #4cdb06;">to </span>
-                                                        <span>Istanbul</span>
-                                                    </p>
-                                                    <p class="user-res-p5 m-0">
-                                                        <span>
-                                                            <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" />
-                                                        </span>
-                                                        <span class="m-0">12 Dec 2023 - 16:30</span>
-                                                    </p>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
                                                 </div>
-                                                <p class=""><span class="user-res-p3">Status:&nbsp;&nbsp;</span><span class="user-res-p11">Cancelled</span></p>
                                             </div>
+                                            <!-- COMPLETED FLIGHTS END -->
+
+                                            <!-- CANCELLED FLIGHTS -->
+                                            <div class="tab-pane fade" id="userflight33" role="tabpanel" aria-labelledby="sale-userflight-tab3">
+                                                <div class="card shadow-none mb-4 pkgCard">
+                                                    <div class="card-body d-flex gap-3 w-100 p-3">
+                                                        <!-- Flex Item 1 -->
+                                                        <div class="text-center">
+                                                            <p class="user-res-p6 m-0" style="font-weight: 400;">
+                                                                Stockholm Airport
+                                                            </p>
+                                                            <p class="m-0 user-res-p1">ARN</p>
+                                                            <p class="m-0">
+                                                                <img src="{{ 'front/assets/img/mdBookings/Group 5.png' }}" alt="" />
+                                                            </p>
+                                                            <p class="m-0 user-res-p1">IST</p>
+                                                            <p class="m-0 user-res-p6" style="font-weight: 400;">
+                                                                Istanbul Airport
+                                                            </p>
+                                                        </div>
+                                                        <!-- Flex Item 2 -->
+                                                        <div class="d-flex flex-column  ms-5">
+                                                            <p class="user-res-p1 mb-2">
+                                                                <span class="">
+                                                                    <img src="{{ 'front/assets/img/mdBookings/fligthTo.png' }}" alt="" />
+                                                                </span>
+                                                                <span class="">Stockholm </span>
+                                                                <span class="" style="color: #4cdb06;">to </span>
+                                                                <span>Istanbul</span>
+                                                            </p>
+                                                            <p class="user-res-p5">
+                                                                <span>
+                                                                    <img src="{{ 'front/assets/img/mdBookings/Calendar.png' }}" alt="" />
+                                                                </span>
+                                                                <span class="m-0">12 Dec 2023 - 16:30</span>
+                                                            </p>
+                                                            <div class="mt-auto">
+                                                                <div class="card-h3">Status: <span class="text-red">Cancelled</span></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- CANCELLED FLIGHTS END -->
                                         </div>
                                     </div>
-                                    <!-- CANCELLED FLIGHTS END -->
+
+
+
                                 </div>
                                 <!-- FLIGHTS TAB CONTENT END -->
                             </div>
@@ -1065,7 +1057,6 @@
             <!-- RESERVATIONS TAB CONTENT END -->
         </div>
     </div>
-</div>
 </div>
 
 {{-- Model Boxes --}} {{-- Hote Model box 1 --}}
@@ -1300,6 +1291,142 @@
                     </div>
                     <div class="mb-4">
                         <h6 class="card-h1 mb-2">Vehicle Quality</h6>
+                        <div class="reviewsStar">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="card-h1 mb-2">Behavior / Professionalism</h6>
+                        <div class="reviewsStar">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="card-h1 mb-1">Do you recommend this vehicle?</h6>
+                        <div class="d-flex" style="gap: 9px;">
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">1</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">2</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">3</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">4</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">5</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">6</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">7</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">8</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">9</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                            <div class="p-0 m-0">
+                                <p class="mb-0 campton">10</p>
+                                <p class="mb-0">
+                                    <img src="{{ 'front/assets/img/user/Ellipse 153.png' }}" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <p class=""><span class="user-res-p10">Extra Notes</span><span class="user-res-p3 fst-italix"> *Optional</span></p>
+                        <div class="form-floating" style="width: 312px;">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;"></textarea>
+                            <label for="floatingTextarea2" class="user-res-p8 camptonBook">Please share you feedback & experience.</label>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn review-sub-btn" data-bs-toggle="modal" data-bs-target="#hotelcompletedmodel2" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END -->
+<!-- REVIEW MODAL FLIGHT -->
+<div class="modal fade" id="ReviewModalFlight" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header border-0 p-5 pb-0">
+                <h5 class="modal-title modal-h1 text-start camptonExtraBold" id="">Write Review</h5>
+                <button type="button" class="btn-close p-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-5">
+                <div class="acommodition-content">
+                    <div class="mb-4">
+                        <h6 class="card-h1 mb-2">Cleanliness</h6>
+                        <div class="reviewsStar">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="card-h1 mb-2">Comfort</h6>
+                        <div class="reviewsStar">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        {{--
+                                        <h6 class="fsb-2 fw-500">Min 2022 Model</h6>
+                                        --}}
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="card-h1 mb-2">Flight Quality</h6>
                         <div class="reviewsStar">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>

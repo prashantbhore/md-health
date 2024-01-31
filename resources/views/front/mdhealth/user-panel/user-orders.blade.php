@@ -1,13 +1,13 @@
 @extends('front.layout.layout2')
 @section("content")
 <div class="content-wrapper">
-    <div class="container py-100px for-cards">
+    <div class="container py-135px for-cards">
     <div class="d-flex gap-3">
             <div class="w-292">
             @include('front.includes.sidebar-user')
             </div>
             <div class="w-761">
-                <div class="card panel-right mb-4">
+                <div class="card panel-right">
                     <h5 class="card-header mb-3">
                         <span>Orders</span>
                     </h5>
@@ -42,7 +42,7 @@
 
                                             <div class="col-md-5 text-end">
                                                 <div class="card-p1 mb-2"><span class="fw-700">Total Price:</span> 1.517,71 ₺</div>
-                                                <a href="#" class="card-p1"><b>View Details</b></a>
+                                                <a href="#" class="card-p1 text-decoration-underline text-black"><b>View Details</b></a>
                                             </div>
                                         </div>
                                         <div class="row bg-light p-3">
@@ -57,7 +57,7 @@
 
                                             <div class="col-md-5 text-end">
                                                 <div class="card-p1 mb-2"><span class="fw-700">Total Price:</span> 1.517,71 ₺</div>
-                                                <a href="#" class="card-p1"><b>View Details</b></a>
+                                                <a href="#" class="card-p1 text-decoration-underline text-black"><b>View Details</b></a>
                                             </div>
                                         </div>
                                     </div>

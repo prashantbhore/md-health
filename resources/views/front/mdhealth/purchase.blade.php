@@ -307,7 +307,7 @@
                     </div>
                 </form>
             </div>
-            <!-- BANK TRANSFER END -->
+            {{-- <!-- BANK TRANSFER END -->
 
 
                             <div class="col-md-12">
@@ -353,7 +353,7 @@
                         </div>
                     </form>
                 </div>
-                <!-- BANK TRANSFER END -->
+                <!-- BANK TRANSFER END --> --}}
 
                 <!-- WALLET DETAILS -->
                 <div id="wallet">
@@ -368,19 +368,17 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <p class="camptonBold vSmallFont text-center">1 MD<span
-                                    class="camptonBook vSmallFont">coin</span> = 1 Turkish Lira</p>
+                            <p class="card-h3 text-center">1 MD<span class="camptonBook vSmallFont">coin</span> = 1 Turkish Lira</p>
                             <div class="blackBrdr px-5">
-                                <div class="mdCard">
-                                    <div class="mt-3">
-                                        <p class="mb-0 camptonBook fw-bold lh-1">Available <span
-                                                class="camptonBold">MD</span>coin</p>
-                                        <p class="mb-0 camptonBold fs-3">500</p>
-                                        <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" id="purchase_by_coins"
-                                            style="border-color: #000;">Use My MD<span class="camptonBook">coin</span></a>
-                                    </div>
-                                    <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="" style="width: 200px;">
-                                </div>
+                            <div class="mdCard">
+                            <div class="mt-5">
+                            <!-- <p class="mb-0 card-h3 camptonBook lh-1"><span class="camptonBold">1 MD</span> Coin <span class="camptonBold">= 1 Turkish Lira</span></p>     -->
+                            <p class="mb-0 card-h4 camptonBook lh-1">Available <span class="camptonBold">MD</span>coin</p>
+                            <p class="mb-0 coinsMD"></p>
+                            <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" style="border-color: #000;" data-bs-toggle="modal" data-bs-target="#UseMyMDCoin">Use My MD<span class="camptonBook">coin</span></a>
+                            </div>
+                            <img src="{{asset('front/assets/img/mdcoin.png')}}" alt="" style="width: 200px;" />
+                        </div>
                             </div>
                         </div>
                     </div>

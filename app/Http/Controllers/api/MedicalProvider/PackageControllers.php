@@ -111,12 +111,12 @@ class PackageControllers extends BaseController
                 $package_input['package_name'] = $request->package_name;
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
-                // $other_services = $request->other_services;
-                // $other_services_array = explode(',', $other_services);
-                // $other_services_array = array_filter($other_services_array, function ($service) {
-                //     return trim($service) !== 'on';
-                // });
-                // $package_input['other_services'] = implode(', ', $other_services_array);
+                $other_services = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
+                $package_input['other_services'] = implode(', ', $other_services_array);
                 $package_input['other_services'] = $request->other_services;
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
@@ -198,10 +198,11 @@ class PackageControllers extends BaseController
                 $package_input['treatment_category_id'] = $request->treatment_category_id;
                 $package_input['treatment_id'] = $request->treatment_id;
                 $other_services = $request->other_services;
-                // $other_services_array = explode(',', $other_services);
-                // $other_services_array = array_filter($other_services_array, function ($service) {
-                //     return trim($service) !== 'on';
-                // });
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
+                $package_input['other_services'] = implode(', ', $other_services_array);
                 $package_input['other_services'] = $request->other_services;
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
@@ -523,11 +524,12 @@ class PackageControllers extends BaseController
                 $package_input['treatment_id'] = $request->treatment_id;
                 // $package_input['other_services'] = $request->other_services;
                 $other_services = $request->other_services;
-                // $other_services_array = explode(',', $other_services);
-                // $other_services_array = array_filter($other_services_array, function ($service) {
-                //     return trim($service) !== 'on';
-                // });
-                $package_input['other_services'] = $request->other_services;
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
+                $package_input['other_services'] = implode(', ', $other_services_array);
+                // $package_input['other_services'] = $request->other_services;
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;
                 $package_input['hotel_id'] = $request->hotel_id;
@@ -578,10 +580,10 @@ class PackageControllers extends BaseController
                 $package_input['treatment_id'] = $request->treatment_id;
                 // $package_input['other_services'] = $request->other_services;
                 $other_services = $request->other_services;
-                // $other_services_array = explode(',', $other_services);
-                // $other_services_array = array_filter($other_services_array, function ($service) {
-                //     return trim($service) !== 'on';
-                // });
+                $other_services_array = explode(',', $other_services);
+                $other_services_array = array_filter($other_services_array, function ($service) {
+                    return trim($service) !== 'on';
+                });
                 $package_input['other_services'] = $request->other_services;
                 $package_input['treatment_period_in_days'] = $request->treatment_period_in_days;
                 $package_input['treatment_price'] = $request->treatment_price;

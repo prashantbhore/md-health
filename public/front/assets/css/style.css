@@ -135,6 +135,10 @@
 
 /* UTILITY CLASSES */
 
+.cp {
+    cursor: pointer;
+}
+
 .error {
     color: #F31D1D !important;
     font-family: "Campton";
@@ -444,6 +448,7 @@
 #TourView .btn-close,
 #ReviewModal .btn-close,
 #ReviewModalVehicle .btn-close,
+#ReviewModalFlight .btn-close,
 #TransportationView .btn-close {
     background: url("../img/closeModal.png") no-repeat center center/cover;
     opacity: 1;
@@ -454,6 +459,7 @@
 #TransportationView .modal-header .btn-close,
 #ReviewModal .modal-header .btn-close,
 #ReviewModalVehicle .modal-header .btn-close,
+#ReviewModalFlight .modal-header .btn-close,
 #cancelRequest .modal-header .btn-close,
 #TourView .modal-header .btn-close,
 #UserChangeInformationModel .modal-header .btn-close {
@@ -854,6 +860,10 @@ select {
     padding-top: 135px;
 }
 
+.py-135px {
+    padding-top: 135px;
+}
+
 .pt-115px {
     padding-top: 115px;
 }
@@ -868,6 +878,10 @@ select {
 
 .pt-300px {
     padding-top: 300px;
+}
+
+.mb-100px {
+    margin-bottom: 100px;
 }
 
 .form-check-input:focus {
@@ -914,7 +928,7 @@ select {
 }
 
 .text-gray {
-    color: #828282;
+    color: #828282 !important;
 }
 
 .text-red {
@@ -1483,6 +1497,11 @@ select {
     height: 1em;
 }
 
+.for-cards {
+    padding-top: 135px;
+    margin-bottom: 100px;
+}
+
 .panel-left.card,
 .for-cards .card {
     border: 0;
@@ -1702,9 +1721,9 @@ select {
     padding-right: 0px !important;
 }
 
-.treatment-card-report .dashboard-card-title {
+/* .treatment-card-report .dashboard-card-title {
     margin-bottom: 5px !important;
-}
+} */
 
 .report-text span {
     font-size: 14px;
@@ -1719,9 +1738,15 @@ select {
 }
 
 .view-more-reports .view-more-content h5:last-child {
-    font-size: 11px !important;
-    margin-top: 5px !important;
-    font-family: "Camptonlight" !important;
+    /* font-size: 11px !important; */
+    /* margin-top: 5px !important; */
+    /* font-family: "Camptonlight" !important; */
+    color: #000;
+    font-family: CamptonBook;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
 }
 
 .head-report {
@@ -1977,6 +2002,10 @@ select {
     font-size: 15px !important;
 }
 
+.fs-11 {
+    font-size: 11px !important;
+}
+
 .tab-div .nav-link.active {
     border: unset;
     border-bottom: 4px solid #4cdb06;
@@ -2068,6 +2097,7 @@ select option {
 
 #UserCancellationReq .form-select,
 #cancelRequest .form-control,
+.multiple-upload-images .form-control,
 #patient-package-details .form-select,
 #UserChangeInformationModel .form-select,
 #UserChangeInformationModel .form-control,
@@ -3343,7 +3373,7 @@ span.camptonBook.fw-bold {
 
     color: #fff;
     text-align: right;
-    font-family: Campton;
+    font-family: CamptonBook;
     font-size: 14px;
 
     font-weight: 500;
@@ -4340,6 +4370,7 @@ label.tc-text,
 #TransportationView .modal-dialog,
 #ReviewModal .modal-dialog,
 #ReviewModalVehicle .modal-dialog,
+#ReviewModalFlight .modal-dialog,
 #TourView .modal-dialog,
 #UserChangeInformationModel .modal-dialog {
     max-width: 704px;
@@ -4359,6 +4390,7 @@ label.tc-text,
 #TransportationView .modal-content,
 #ReviewModal .modal-content,
 #ReviewModalVehicle .modal-content,
+#ReviewModalFlight .modal-content,
 #TourView .modal-content,
 #UserChangeInformationModel .modal-content {
     border-radius: 10px;
@@ -4436,6 +4468,7 @@ label.tc-text,
 }
 
 #ReviewModal .modal-content,
+#ReviewModalFlight .modal-content,
 #ReviewModalVehicle .modal-content {
     background: url("../img/reviewBg.png") no-repeat center center/ contain;
     height: 707px;
@@ -5070,7 +5103,8 @@ input[type="radio"] {
     letter-spacing: -0.44px;
 }
 
-.sales-tab img {
+.sales-tab img,
+.membership img {
     height: 24px;
 }
 
@@ -5165,28 +5199,72 @@ input[type="radio"] {
     transition: 0.15s all;
 }
 
-.play-icon img:hover {
-    height: 40px !important;
-    width: 39px !important;
-}
 
 .person-message-div .treatment-card {
-    width: 641px !important;
-    margin: 1rem;
+    /* width: 641px !important; */
+    /* margin: 1rem; */
     padding: 16px;
 }
 
 .person-message-div .day-time {
-    margin: 1rem;
+    margin-top: 0.25rem;
 }
 
-.self-msg-div .card-p1 {
+/* .self-msg-div .card-p1 {
     margin-right: 1rem;
-}
+} */
 
 #countrycode {
     width: 50px;
     border: 2px solid #d6d6d6;
     border-right: 0;
     font-family: 'Campton';
+}
+
+.up-image,
+#previewImage {
+    width: 142px;
+    height: 128px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.form-select:focus {
+    border-color: #cecdcd;
+    outline: 0;
+    box-shadow: none;
+}
+
+
+.message-scroll {
+    overflow-y: scroll;
+    height: 367px;
+    padding: 16px;
+}
+
+.message-scroll {
+    overflow: hidden auto !important;
+    overflow: auto;
+}
+
+.message-scroll::-webkit-scrollbar {
+    visibility: hidden;
+    -webkit-appearance: none;
+    width: 6px;
+    height: 6px;
+    /* background-color: rgba(0, 0, 0, 0); */
+}
+
+.message-scroll::-webkit-scrollbar-thumb {
+    visibility: hidden;
+    border-radius: 3px;
+    /* background-color: rgba(159, 166, 188, 0.55); */
+}
+
+.message-scroll:hover::-webkit-scrollbar,
+.message-scroll:hover::-webkit-scrollbar-thumb,
+.message-scroll:focus::-webkit-scrollbar,
+.message-scroll:focus::-webkit-scrollbar-thumb {
+    visibility: visible;
 }
