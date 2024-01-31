@@ -173,11 +173,11 @@
                                         </div>
 
                                         {{-- <div class="row"> --}}
-
+                                        <!-- 
                                         <div class="col-md-3">
-                                            <!-- <label for="countrycode" class="form-label">&nbsp;</label> -->
-                                            <!-- <input type="text" class="form-control " readonly name="countrycode" id="countrycode" /> -->
-                                        </div>
+                                            <label for="countrycode" class="form-label">&nbsp;</label>
+                                            <input type="text" class="form-control " readonly name="countrycode" id="countrycode" />
+                                        </div> -->
 
                                         <div class="col-md-12 position-relative">
                                             <label for="phoneno" class="form-label">*Phone</label>
@@ -357,6 +357,10 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script src={{ asset('front/controller_js/userregister.js') }}></script>
 

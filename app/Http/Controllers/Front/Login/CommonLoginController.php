@@ -141,7 +141,7 @@ class CommonLoginController extends Controller
     }
     public function email_or_mobile_exist(Request $request)
     {
-        // dd($request);
+        dd($request);
         if ($request->email) {
             $email_exist = CommonUserLoginTable::where('email', $request->email)
                 ->where('status', 'active')->first();
