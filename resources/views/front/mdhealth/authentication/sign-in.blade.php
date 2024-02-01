@@ -31,6 +31,7 @@
         max-width: 70px;
         background-color: #f6f6f6;
         font-family: Campton;
+        padding-right: 0;
     }
 
     .input-group .form-control {

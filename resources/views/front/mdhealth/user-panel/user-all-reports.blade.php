@@ -148,7 +148,7 @@
 
                                             $formattedDate = date('d/m/Y', $timestamp);
                                             @endphp
-                                            <h5 class="my-0">Upload Time: {{!empty($formattedDate)?$formattedDate:''}}</h5>
+                                            <h5 class="my-0">Upload Date: {{!empty($formattedDate)?$formattedDate:''}}</h5>
                                         </div>
                                     </div>
 
