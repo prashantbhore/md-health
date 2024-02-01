@@ -204,6 +204,12 @@ function verify(e) {
     }
     // $("#login_otp_btn").attr("disabled", true);
     // $("#login_otp_btn").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...');
+    $('#login_otp_btn').attr('disabled', true);
+    $('#login_otp_btn').html(
+        '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+        setTimeout(function() {
+            $('#login_otp_btn').removeAttr('disabled').html('Sign Up');
+        }, 2000);
     coderesult
         .confirm(code)
         .then(function (result) {
@@ -474,6 +480,9 @@ $(document).ready(function () {
             phoneno: {
                 required: true,
                 spaceValidation: true,
+                minlength: 10,
+                maxlength: 10,
+                digits: true
             },
             tax_no: {
                 required: true,
@@ -520,6 +529,9 @@ $(document).ready(function () {
             phoneno: {
                 required: "Please enter your phone number.",
                 spaceValidation: "Phone number should not contain only spaces.",
+                minlength: "Phone number must be 10 digits.",
+                maxlength: "Phone number must be 10 digits.",
+                digits: "Phone number must contain digits only."
             },
             tax_no: {
                 required: "Please enter the tax number.",
@@ -607,6 +619,9 @@ $.validator.addMethod("alphaOnly", function(value, element) {
             phoneno: {
                 required: true,
                 spaceValidation: true,
+                minlength: 10,
+                maxlength: 10,
+                digits: true
             },
             date_of_birth: {
                 required: true,
@@ -659,6 +674,9 @@ $.validator.addMethod("alphaOnly", function(value, element) {
             phoneno: {
                 required: "Please enter your phone number.",
                 spaceValidation: "Phone number should not contain only spaces.",
+                minlength: "Phone number must be 10 digits.",
+                maxlength: "Phone number must be 10 digits.",
+                digits: "Phone number must contain digits only."
             },
             date_of_birth: {
                 required: "Please enter the Date of Birth.",
