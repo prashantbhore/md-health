@@ -1,149 +1,170 @@
 @extends('front.layout.layout2')
 @section('content')
-<style>
-    /* body {
-                        font-family: 'Campton';
-                    } */
-    .stars-div .fa {
-        font-size: 20px;
-    }
+    <style>
+        /* body {
+                                font-family: 'Campton';
+                            } */
+        .stars-div .fa {
+            font-size: 20px;
+        }
 
-    .stars-div .fa-star {
-        color: #4CDB06;
-    }
+        .stars-div .fa-star {
+            color: #4CDB06;
+        }
 
-    .stars-div .fa-star-o {
-        color: #B9B9B9;
-    }
+        .stars-div .fa-star-o {
+            color: #B9B9B9;
+        }
 
-    .form-group input.form-control {
-        color: #000 !important;
-    }
-
-
-    .form-group .prev-img-div img {
-    height: 128px;
-    width: 142px;
-    object-fit: contain;
-    margin-top: 15px;
-    border-radius: 3px;
-}
+        .form-group input.form-control {
+            color: #000 !important;
+        }
 
 
-    .multiple-checkbox-div .multiple-checks {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
+        .form-group .prev-img-div img {
+            height: 128px;
+            width: 142px;
+            object-fit: contain;
+            margin-top: 15px;
+            border-radius: 3px;
+        }
 
-    .multiple-checkbox-div .multiple-checks .form-check {
-        min-width: 200px;
-    }
 
-    .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
-        margin-right: 3px;
-    }
+        .multiple-checkbox-div .multiple-checks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    .multiple-checks .form-check-label {
-        color: #000;
-        font-family: Campton;
-        font-weight: 500;
-        line-height: normal;
-        letter-spacing: -0.48px;
-    }
+        .multiple-checkbox-div .multiple-checks .form-check {
+            min-width: 200px;
+        }
 
-    .form-control,
-    .form-select {
-        color: #000;
-        font-family: "Campton" !important;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        letter-spacing: -0.64px;
-    }
-    .up-abs {
-    top: 47px;
-    right: 16px;
-}
+        .multiple-checkbox-div .multiple-checks .form-check .form-check-label svg {
+            margin-right: 3px;
+        }
 
-.form-control::placeholder {
-    font-family: "CamptonBook";
-    font-weight: 600;
-}
-</style>
-<div class="content-wrapper">
-    <div class="container py-100px for-cards">
-    <div class="d-flex gap-3">
-            <div class="w-292">
-                @include('front.includes.sidebar')
-            </div>
-            <div class="w-761">
-                <div class="card mb-4">
-                    <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
-                        <span>Add Tour</span>
-                        <a href="{{ url('medical-other-services') }}" class="d-flex align-items-center gap-1 text-decoration-none">
-                            <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
-                            <p class="mb-0 card-h1">Back</p>
-                        </a>
-                    </h5>
-                    <div class="card-body">
-                        <div class="form-div">
+        .multiple-checks .form-check-label {
+            color: #000;
+            font-family: Campton;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: -0.48px;
+        }
 
-                            <form action="{{ url('md-add-tour') }}" method="post" enctype="multipart/form-data" id="add_acommodition" class="from-prevent-multiple-submits">
+        .form-control,
+        .form-select {
+            color: #000;
+            font-family: "Campton" !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: -0.64px;
+        }
 
-                                @csrf
-                                <input type="hidden" name="tour_id" value="{{ !empty($tour_details['id']) ? $tour_details['id'] : '' }}">
+        .up-abs {
+            top: 47px;
+            right: 16px;
+        }
 
-                                <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Tour Name</label>
-                                    <input type="text" class="form-control" id="tour_name" name="tour_name" value="{{ !empty($tour_details['tour_name']) ? $tour_details['tour_name'] : '' }}" aria-describedby="foodname" placeholder="Please Write Here">
-                                </div>
+        .form-control::placeholder {
+            font-family: "CamptonBook";
+            font-weight: 600;
+        }
+    </style>
+    <div class="content-wrapper">
+        <div class="container py-100px for-cards">
+            <div class="d-flex gap-3">
+                <div class="w-292">
+                    @include('front.includes.sidebar')
+                </div>
+                <div class="w-761">
+                    <div class="card mb-4">
+                        <h5 class="card-header d-flex align-items-center justify-content-between mb-5">
+                            <span>Add Tour</span>
+                            <a href="{{ url('medical-other-services') }}"
+                                class="d-flex align-items-center gap-1 text-decoration-none">
+                                <img src="{{ asset('front/assets/img/backPage.png') }}" alt="">
+                                <p class="mb-0 card-h1">Back</p>
+                            </a>
+                        </h5>
+                        <div class="card-body">
+                            <div class="form-div">
 
-                                <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Tour Description</label>
-                                    <textarea class="form-control" id="tour_description" name="tour_description" rows="5" style="height: 150px;" placeholder="Your message here" data-gramm="false" wt-ignore-input="true">{{ !empty($tour_details['tour_description']) ? $tour_details['tour_description'] : '' }}</textarea>
-                                </div>
+                                <form action="{{ url('md-add-tour') }}" method="post" enctype="multipart/form-data"
+                                    id="add_acommodition" class="from-prevent-multiple-submits">
 
-                                <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Number of Days</label>
-                                    <input type="text" class="form-control" id="tour_days" name="tour_days" value="{{ !empty($tour_details['tour_days']) ? $tour_details['tour_days'] : '' }}" aria-describedby="foodname" placeholder="Please Write Here">
-                                </div>
+                                    @csrf
+                                    <input type="hidden" name="tour_id"
+                                        value="{{ !empty($tour_details['id']) ? $tour_details['id'] : '' }}">
 
-                                <div class="form-group mb-5 position-relative">
-                                    <label class="form-label mb-3">Tour Picture</label>
-                                    <div class="form-group mb-3">
-                                        <input type="file" name="tour_image_path" id="tour_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
-                                        <img src="{{asset('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
-
+                                    <div class="form-group mb-4">
+                                        <label class="form-label mb-3">Tour Name</label>
+                                        <input type="text" class="form-control" id="tour_name" name="tour_name"
+                                            value="{{ !empty($tour_details['tour_name']) ? $tour_details['tour_name'] : '' }}"
+                                            aria-describedby="foodname" placeholder="Please Write Here">
                                     </div>
-                                    <div class="prev-img-div">
-                                        <img src="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : 'front/assets/img/uploadHere.png' }}" alt="image" id="pic" />
-                                        <input type="hidden" name="old_image" id="old_image" value="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : '' }}">
-                                    </div>
-                                </div>
 
-                                <div class="form-group mb-4 section-heading-div">
-                                    <label class="form-label mb-3">Tour Price</label>
-                                    <div class="input-icon-div">
-                                        <input type="text" class="form-control" name="tour_price" id="tour_price" value="{{ !empty($tour_details['tour_price']) ? $tour_details['tour_price'] : '' }}" placeholder="0">
-                                        <span class="input-icon">₺</span>
+                                    <div class="form-group mb-4">
+                                        <label class="form-label mb-3">Tour Description</label>
+                                        <textarea class="form-control" id="tour_description" name="tour_description" rows="5" style="height: 150px;"
+                                            placeholder="Your message here" data-gramm="false" wt-ignore-input="true">{{ !empty($tour_details['tour_description']) ? $tour_details['tour_description'] : '' }}</textarea>
                                     </div>
-                                </div>
 
-                                <div class="multiple-checkbox-div mb-5">
-                                    <div class="form-group d-flex flex-column">
-                                        <label class="form-label mb-4">Other Services</label>
-                                        <div class="multiple-checks">
-                                            <div class="form-check">
-                                                <input type="checkbox" value="Breakfast & Dinner" class="form-check-input" id="fordinner" {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Breakfast & Dinner') !== false ? 'checked' : '' }}>
-                                                <label class="form-check-label fw-500 fsb-1" for="fordinner">
-                                                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M1 0.5C1 0.367392 0.947322 0.240215 0.853553 0.146447C0.759785 0.0526784 0.632608 0 0.5 0C0.367392 0 0.240215 0.0526784 0.146447 0.146447C0.0526786 0.240215 5.21142e-08 0.367392 5.21142e-08 0.5V3.5C-0.000117575 4.07633 0.198892 4.63499 0.563347 5.08145C0.927802 5.52791 1.43532 5.83473 2 5.95V13.5C2 13.6326 2.05268 13.7598 2.14645 13.8536C2.24021 13.9473 2.36739 14 2.5 14C2.63261 14 2.75979 13.9473 2.85355 13.8536C2.94732 13.7598 3 13.6326 3 13.5V5.95C3.56468 5.83473 4.0722 5.52791 4.43665 5.08145C4.80111 4.63499 5.00012 4.07633 5 3.5V0.5C5 0.367392 4.94732 0.240215 4.85355 0.146447C4.75979 0.0526784 4.63261 0 4.5 0C4.36739 0 4.24021 0.0526784 4.14645 0.146447C4.05268 0.240215 4 0.367392 4 0.5V3.5C4.00016 3.81033 3.90407 4.11306 3.72497 4.36649C3.54587 4.61992 3.29258 4.81156 3 4.915V0.5C3 0.367392 2.94732 0.240215 2.85355 0.146447C2.75979 0.0526784 2.63261 0 2.5 0C2.36739 0 2.24021 0.0526784 2.14645 0.146447C2.05268 0.240215 2 0.367392 2 0.5V4.915C1.70742 4.81156 1.45413 4.61992 1.27503 4.36649C1.09593 4.11306 0.999837 3.81033 1 3.5V0.5ZM8 13.5V7H6.5C6.36739 7 6.24021 6.94732 6.14645 6.85355C6.05268 6.75979 6 6.63261 6 6.5V2.5C6 1.837 6.326 1.217 6.771 0.771C7.217 0.326 7.837 0 8.5 0C8.63261 0 8.75979 0.0526784 8.85355 0.146447C8.94732 0.240215 9 0.367392 9 0.5V13.5C9 13.6326 8.94732 13.7598 8.85355 13.8536C8.75979 13.9473 8.63261 14 8.5 14C8.36739 14 8.24021 13.9473 8.14645 13.8536C8.05268 13.7598 8 13.6326 8 13.5Z" fill="#111111" />
-                                                    </svg>
-                                                    Breakfast & Dinner</label>
-                                            </div>
-                                            {{-- <div class="form-check">
+                                    <div class="form-group mb-4">
+                                        <label class="form-label mb-3">Number of Days</label>
+                                        <input type="text" class="form-control" id="tour_days" name="tour_days"
+                                            value="{{ !empty($tour_details['tour_days']) ? $tour_details['tour_days'] : '' }}"
+                                            aria-describedby="foodname" placeholder="Please Write Here">
+                                    </div>
+
+                                    <div class="form-group mb-5 position-relative">
+                                        <label class="form-label mb-3">Tour Picture</label>
+                                        <div class="form-group mb-3">
+                                            <input type="file" name="tour_image_path" id="tour_image_path"
+                                                class="form-control text-dark"
+                                                oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
+                                            <img src="{{ asset('front/assets/img/uploadType.png') }}" alt=""
+                                                id="up-abs1" class="up-abs" />
+
+                                        </div>
+                                        <div class="prev-img-div">
+                                            <img src="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : 'front/assets/img/uploadHere.png' }}"
+                                                alt="image" id="pic" />
+                                            <input type="hidden" name="old_image" id="old_image"
+                                                value="{{ !empty($tour_details['tour_image_path']) ? $tour_details['tour_image_path'] : '' }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4 section-heading-div">
+                                        <label class="form-label mb-3">Tour Price</label>
+                                        <div class="input-icon-div">
+                                            <input type="text" class="form-control" name="tour_price" id="tour_price"
+                                                value="{{ !empty($tour_details['tour_price']) ? $tour_details['tour_price'] : '' }}"
+                                                placeholder="0">
+                                            <span class="input-icon">₺</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="multiple-checkbox-div mb-5">
+                                        <div class="form-group d-flex flex-column">
+                                            <label class="form-label mb-4">Other Services</label>
+                                            <div class="multiple-checks">
+                                                <div class="form-check">
+                                                    <input type="checkbox" value="Breakfast & Dinner"
+                                                        class="form-check-input" id="fordinner"
+                                                        {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Breakfast & Dinner') !== false ? 'checked' : '' }}>
+                                                    <label class="form-check-label fw-500 fsb-1" for="fordinner">
+                                                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M1 0.5C1 0.367392 0.947322 0.240215 0.853553 0.146447C0.759785 0.0526784 0.632608 0 0.5 0C0.367392 0 0.240215 0.0526784 0.146447 0.146447C0.0526786 0.240215 5.21142e-08 0.367392 5.21142e-08 0.5V3.5C-0.000117575 4.07633 0.198892 4.63499 0.563347 5.08145C0.927802 5.52791 1.43532 5.83473 2 5.95V13.5C2 13.6326 2.05268 13.7598 2.14645 13.8536C2.24021 13.9473 2.36739 14 2.5 14C2.63261 14 2.75979 13.9473 2.85355 13.8536C2.94732 13.7598 3 13.6326 3 13.5V5.95C3.56468 5.83473 4.0722 5.52791 4.43665 5.08145C4.80111 4.63499 5.00012 4.07633 5 3.5V0.5C5 0.367392 4.94732 0.240215 4.85355 0.146447C4.75979 0.0526784 4.63261 0 4.5 0C4.36739 0 4.24021 0.0526784 4.14645 0.146447C4.05268 0.240215 4 0.367392 4 0.5V3.5C4.00016 3.81033 3.90407 4.11306 3.72497 4.36649C3.54587 4.61992 3.29258 4.81156 3 4.915V0.5C3 0.367392 2.94732 0.240215 2.85355 0.146447C2.75979 0.0526784 2.63261 0 2.5 0C2.36739 0 2.24021 0.0526784 2.14645 0.146447C2.05268 0.240215 2 0.367392 2 0.5V4.915C1.70742 4.81156 1.45413 4.61992 1.27503 4.36649C1.09593 4.11306 0.999837 3.81033 1 3.5V0.5ZM8 13.5V7H6.5C6.36739 7 6.24021 6.94732 6.14645 6.85355C6.05268 6.75979 6 6.63261 6 6.5V2.5C6 1.837 6.326 1.217 6.771 0.771C7.217 0.326 7.837 0 8.5 0C8.63261 0 8.75979 0.0526784 8.85355 0.146447C8.94732 0.240215 9 0.367392 9 0.5V13.5C9 13.6326 8.94732 13.7598 8.85355 13.8536C8.75979 13.9473 8.63261 14 8.5 14C8.36739 14 8.24021 13.9473 8.14645 13.8536C8.05268 13.7598 8 13.6326 8 13.5Z"
+                                                                fill="#111111" />
+                                                        </svg>
+                                                        Breakfast & Dinner</label>
+                                                </div>
+                                                {{-- <div class="form-check">
                                                 <input type="checkbox" value="Sauna & Spa" class="form-check-input" id="forspa" {{ !empty($tour_details['tour_other_services']) && strpos($tour_details['tour_other_services'], 'Sauna & Spa') !== false ? 'checked' : '' }}>
                                                 <label class="form-check-label fw-500 fsb-1" for="forspa">
                                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -182,72 +203,90 @@
                                                     </svg>
                                                     Fitness Center</label>
                                             </div> --}}
+                                            </div>
                                         </div>
+                                        {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
+                                        <input type="hidden" name="tour_other_services" id="tour_other_services"
+                                            value="{{ !empty($tour_details['tour_other_services']) ? $tour_details['tour_other_services'] : '' }}">
+                                        {{-- <input type="hidden" name="button_type" id="button_type" value="active"> --}}
+                                        <input type="hidden" name="platform_type" id="platform_type" value="web">
                                     </div>
-                                    {{-- <p>Checked Values: <span id="checkedValues"></span></p> --}}
-                                    <input type="hidden" name="tour_other_services" id="tour_other_services" value="{{ !empty($tour_details['tour_other_services']) ? $tour_details['tour_other_services'] : '' }}">
-                                    {{-- <input type="hidden" name="button_type" id="button_type" value="active"> --}}
-                                    <input type="hidden" name="platform_type" id="platform_type" value="web">
-                                </div>
 
-                                <div class="section-btns mb-4 d-flex gap-3">
-                                    <button type="submit" name="button_type" value="active" class="btn save-btn-black text-black bg-green w-50 camptonBold from-prevent-multiple-submits">Save Tour</button>
-                                    <button type="submit" name="button_type" value="inactive" class="btn save-btn-black w-50 camptonBold from-prevent-multiple-submits">Deactive Tour</button>
-                                </div>
+                                    <div class="section-btns mb-4 d-flex gap-3">
+                                        <button type="submit" name="button_type" value="active"
+                                            class="btn save-btn-black text-black bg-green w-50 camptonBold from-prevent-multiple-submits">Save
+                                            Tour</button>
+                                        <button type="submit" name="button_type" value="inactive"
+                                            class="btn save-btn-black w-50 camptonBold from-prevent-multiple-submits">Deactive
+                                            Tour</button>
+                                    </div>
 
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 @section('script')
-<!-- jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- jQuery Validation Plugin -->
+    <!-- jQuery Validation Plugin -->
 
 
-<script>
-    $(".mpOtherServicesLi").addClass("activeClass");
-    $(".mpOtherServices").addClass("md-active");
-</script>
+    <script>
+        $(".mpOtherServicesLi").addClass("activeClass");
+        $(".mpOtherServices").addClass("md-active");
+    </script>
+    <script>
+        $(document).ready(function() {
+            function updateCheckedValues() {
+                const checkedValues = $('.form-check-input:checked').map(function() {
+                    return $(this).val();
+                }).get().join(', ');
+                $('#checkedValues').text(checkedValues);
+                $('#tour_other_services').val(checkedValues);
+            }
+            $('.form-check-input').change(updateCheckedValues);
+            updateCheckedValues();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="link-to-jquery-validation-plugin.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+    <script>
+        (function() {
+            $('.from-prevent-multiple-submits').on('submit', function() {
+                $('.from-prevent-multiple-submits').attr('disabled', 'true');
+                setTimeout(function() {
+                    $('.from-prevent-multiple-submits').attr('disabled', false);
+                }, 3000);
+            })
+        })();
+    </script>
+
 <script>
     $(document).ready(function() {
-        function updateCheckedValues() {
-            const checkedValues = $('.form-check-input:checked').map(function() {
-                return $(this).val();
-            }).get().join(', ');
-            $('#checkedValues').text(checkedValues);
-            $('#tour_other_services').val(checkedValues);
-        }
-        $('.form-check-input').change(updateCheckedValues);
-        updateCheckedValues();
-    });
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="link-to-jquery-validation-plugin.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
-<script>
-    (function() {
-        $('.from-prevent-multiple-submits').on('submit', function() {
-            $('.from-prevent-multiple-submits').attr('disabled', 'true');
-            setTimeout(function() {
-                $('.from-prevent-multiple-submits').attr('disabled', false);
-            }, 3000);
-        })
-    })();
-</script>
-
-<script>
-    $(document).ready(function() {
+        $.validator.addMethod("imageType", function(value, element) {
+            if (value === '') {
+                return true;
+            }
+            var extension = value.split('.').pop().toLowerCase();
+            return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
+        }, "Please select a valid image file (JPEG, JPG, PNG)");
+    
+        $('#tour_image_path').on('change', function() {
+            // Trigger validation only when a new image is selected
+            $('#add_acommodition').validate().element('#tour_image_path');
+        });
+    
         $('#add_acommodition').validate({
-            // Rules for validation
             rules: {
                 tour_name: {
                     required: true
@@ -261,20 +300,15 @@
                 },
                 tour_image_path: {
                     required: function(element) {
-                        // Check if an old image exists
-                        var oldImage = $("#old_image").val();
-
-                        // Require new image if no old image exists
-                        return oldImage === '';
-                    }
+                        return $('#old_image').val() === '' || $(element).val() !== '';
+                    },
+                    imageType: true 
                 },
                 tour_price: {
                     required: true,
                     number: true
                 },
-                // Add rules for other fields as needed
             },
-            // Messages for validation errors
             messages: {
                 tour_name: {
                     required: "Please enter tour name"
@@ -287,20 +321,21 @@
                     number: "Please enter a valid number"
                 },
                 tour_image_path: {
-                    required: "Please upload an image"
+                    required: "Please upload tour image",
+                    imageType: "Please select a valid image file (JPEG, JPG, PNG)"
                 },
                 tour_price: {
                     required: "Please enter tour price",
                     number: "Please enter a valid number"
                 },
-                // Add messages for other fields as needed
             },
-            // Handle submission and other settings as needed
             submitHandler: function(form) {
-                // If form is valid, you can submit the form here
                 form.submit();
             }
         });
     });
-</script>
+    </script>
+    
+    
+    
 @endsection

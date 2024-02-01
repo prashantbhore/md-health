@@ -101,7 +101,8 @@ class MedicalProviderReports extends Controller
 
         $resultHtml = '';
         if (!empty($provider_report_list)) {
-            foreach ($provider_report_list as $report){
+            foreach ($provider_report_list as $key=>$report){
+                $reportId=$key;
                 $resultHtml .= '<div class="card shadow-none" style="border-radius: 3px; background: #f6f6f6;">';
                 $resultHtml .= '<div class="card-body d-flex gap-3">';
                 $resultHtml .= '<div>';
@@ -121,7 +122,7 @@ class MedicalProviderReports extends Controller
                         $resultHtml .= '<div class="accordion" id="accordionExample">';
                         $resultHtml .= '<div class="accordion-item">';
                         $resultHtml .= '<h2 class="accordion-header" id="headingOne"></h2>';
-                        $resultHtml .= '<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
+                        $resultHtml .= '<div id="collapseOne'.$reportId.'" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
                         $resultHtml .= '<div class="accordion-body p-0">';
                         $resultHtml .= '<div class="card shadow-none" style="background-color:#F6F6F6;border-top: 1px solid #CFCFCF;border-radius: 0 0 3px 3px">';
                         $resultHtml .= '<div class="card-body d-flex gap-3">';

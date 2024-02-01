@@ -102,7 +102,7 @@ Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
 // get Bank list
 Route::get('md-helath-bank-list', [CustomerPackageController::class, 'md_health_bank_lists']);
 
-Route::get('md-helath-bank-details', [CustomerPackageController::class, 'md_health_bank_details']);
+Route::post('md-helath-bank-details', [CustomerPackageController::class, 'md_health_bank_details']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {

@@ -170,7 +170,7 @@
                                 <h6 class="section-heading">Add New Reports</h6>
                             </div>
 
-                            <form method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
+                            <form id="uploadForm" method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
                                 @csrf
 
                                 <div class="form-group mb-4">
@@ -202,7 +202,7 @@
                                         <img id="previewImage" src="front/assets/img/uploadHere.png" alt="image" class="cp up-image">
                                         <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
                                         <div id="previewPDF" style="display: none;">
-                                            <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;">
+                                            <img src="front/assets/img/pdf2.svg" alt="pdf-icon" style="width: 50px; height: 50px;">
                                             <span id="pdfFileName"></span>
                                         </div>
                                         <h5>*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
@@ -211,7 +211,7 @@
                                 </div>
 
                                 <div class="section-btns mb-5">
-                                    <button type="submit" class="btn save-btn-black">Upload Reports</a>
+                                    <button type="button" class="btn save-btn-black" id="uploadBtn" onclick="disableButton()">Upload Reports</button>
                                 </div>
 
                             </form>
@@ -425,6 +425,16 @@
         });
     }
     // });
+</script>
+
+<script>
+    function disableButton(){
+        document.getElementById("uploadBtn").disabled = true;
+        document.getElementById("uploadBtn").innerHTML = "Uploading...";
+        setTimeout(function() {
+            document.getElementById("uploadForm").submit();
+        }, 100);
+    }
 </script>
 
 
