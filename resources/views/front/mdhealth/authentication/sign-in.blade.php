@@ -31,6 +31,7 @@
         max-width: 70px;
         background-color: #f6f6f6;
         font-family: Campton;
+        padding-right: 0;
     }
 
     .input-group .form-control {
@@ -70,7 +71,7 @@ $country = App\Models\Country::get();
                             <div class="input-group">
                                 @if (!empty($country))
                                 <select class="form-select" name="countrycode" id="countrycode">
-                                    <option value=""></option>
+                                    <option value="+90">+90</option>
                                     @foreach ($country as $country)
                                     <option value="{{ $country->country_code }}">{{ $country->country_code }}
                                     </option>

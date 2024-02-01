@@ -38,7 +38,7 @@
                 <div class="w-761">
                     <div class="card panel-right mb-4">
                         <h5 class="card-header">
-                            <span>My Favorites</span>
+                            <span>My Favourites</span>
                         </h5>
                         <div class="filter-div">
                             <div class="search-div " style="margin-right: 30px">

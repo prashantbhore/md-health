@@ -1326,13 +1326,13 @@ class CustomerPackageController extends Controller
                         <div class="card-body remove-cardb d-flex justify-content-between">
                             <div>
                                 <h5 class="card-h1 card-h1-fav mb-0">' . $fav['package_name'] . '<img
-                                        src="' . asset('front/assets/img/verifiedBy.png') . '" alt=""
+                                        src="' . asset('front/assets/img/verifiedBy.svg') . '" alt=""
                                         class="ms-3" /></h5>
                                 <p class="mb-0 d-inline-block card-p1"><img
                                         src="' . asset('front/assets/img/Location.svg') . '" alt="" />
                                     ' . $fav['city_name'] . '</p>
-                                <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                                    '. "Treatment period " . $fav["treatment_period_in_days"] . " days" .'</p>
+                                <p class="mb-0 d-inline-block card-p1 fst-italic ms-5">
+                                    '. "Treatment Period " . $fav["treatment_period_in_days"] . " days" .'</p>
                             </div>
                             <div onclick="removeFromFavourite(' . $fav['id'] . ');"
                                 class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1342,7 +1342,7 @@ class CustomerPackageController extends Controller
                                         alt="" />
                                 </div>
                                 <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
-                                    Remove Favorite
+                                    Remove Favourite
                                 </p>
                             </div>
                         </div>
@@ -1386,8 +1386,8 @@ class CustomerPackageController extends Controller
                     <p class="mb-0 d-inline-block card-p1"><img
                             src="' . asset('front/assets/img/Location.svg') . '" alt="" />
                         ' . $fav['city_name'] . '</p>
-                    <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                        '. "Treatment period " . $fav["treatment_period_in_days"] . " days" .'</p>
+                    <p class="mb-0 d-inline-block card-p1 fst-italic ms-5">
+                        '. "Treatment Period " . $fav["treatment_period_in_days"] . " days" .'</p>
                 </div>
                 <div onclick="removeFromFavourite(' . $fav['id'] . ');"
                     class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1397,7 +1397,7 @@ class CustomerPackageController extends Controller
                             alt="" />
                     </div>
                     <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
-                        Remove Favorite
+                        Remove Favourite
                     </p>
                 </div>
             </div>

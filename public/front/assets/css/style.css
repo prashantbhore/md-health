@@ -5268,3 +5268,20 @@ input[type="radio"] {
 .message-scroll:focus::-webkit-scrollbar-thumb {
     visibility: visible;
 }
+
+#navbarNavDropdown .dropdown-item {
+    font-family: CamptonBook;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    text-align: left;
+    padding: 0.35rem 1.5rem;
+}
+
+#navbarNavDropdown .dropdown-menu {
+    border: none;
+    border-radius: 3px;
+    width: 184px;
+    box-shadow: 0px 0px 14px 0px #00000040;
+
+}

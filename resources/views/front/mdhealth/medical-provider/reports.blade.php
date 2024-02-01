@@ -48,7 +48,8 @@
         letter-spacing: -0.56px;
     } */
     .form-control::placeholder {
-        font-family: "Campton";
+        font-family: CamptonLight;
+        font-weight: 600;
     }
 
     .form-select,
@@ -102,31 +103,57 @@
     }
 </style>
 <style>
-.no-data {
-    height: 362px;
-    font-family: "CamptonBook";
-    color: #979797;
-    font-weight: 400;
-    letter-spacing: -0.56px;
-    font-size: 16px;
-    border-radius: 3px;
-    /* border: 1px solid #F6F6F6; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    /* background: #F6F6F6; */
-}
+    .no-data {
+        height: 362px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        /* border: 1px solid #F6F6F6; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        /* background: #F6F6F6; */
+    }
 
-.no-data img {
-    width: 150px;
-    height: auto;
-}
+    .no-data img {
+        width: 150px;
+        height: auto;
+    }
+
+    .view-more-view {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* gap: 1rem; */
+        text-decoration: none;
+        color: #000;
+        font-family: Campton;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.4px;
+    }
+
+    input[type="file"] {
+        color: #979797 !important;
+        line-height: 2 !important;
+    }
+
+    select:required:invalid {
+        color: gray;
+        font-family: CamptonLight !important;
+    }
 </style>
 
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-    <div class="d-flex gap-3">
+        <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
@@ -154,8 +181,8 @@
 
                                 <div class="form-group d-flex flex-column mb-4">
                                     <label class="form-label mb-3">Patient</label>
-                                    <select name="customer_package_purchage_id" class="form-select" id="patientSelect">
-                                        <option value="">Choose Patient</option>
+                                    <select required name="customer_package_purchage_id" class="form-select" id="patientSelect">
+                                        <option value="">Choose</option>
                                         @if (!empty($patient_list))
                                         @foreach ($patient_list as $patient)
                                         <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
@@ -387,7 +414,8 @@
                 } else {
                     // Show "No report found" message when HTML is empty
                     $('#resultContainer').html('<div class="no-data">\
-    <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+    <img src="{{ asset('
+                        front / assets / img / No - Data - Found - 1. svg ') }}" alt="" class="">\
 </div>');
                 }
             },

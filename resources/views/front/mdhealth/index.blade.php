@@ -177,7 +177,7 @@ $is_logged_in = false;
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                        <div class="treatment-price ms-md-auto"><span class="lira">₺</span> 18.829,91</div>
                         <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
@@ -202,7 +202,7 @@ $is_logged_in = false;
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                        <div class="treatment-price ms-md-auto"><span class="lira">₺</span> 18.829,91</div>
                         <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
@@ -227,7 +227,7 @@ $is_logged_in = false;
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                        <div class="treatment-price ms-md-auto"><span class="lira">₺</span> 18.829,91</div>
                         <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
@@ -252,7 +252,7 @@ $is_logged_in = false;
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                        <div class="treatment-price ms-md-auto"><span class="lira">₺</span> 18.829,91</div>
                         <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
@@ -277,7 +277,7 @@ $is_logged_in = false;
                             <h6 class="mb-0">Treatment Name</h6>
                             <p class="mb-0">Treatment Category</p>
                         </div>
-                        <div class="treatment-price ms-md-auto">₺ 18.829,91</div>
+                        <div class="treatment-price ms-md-auto"><span class="lira">₺</span> 18.829,91</div>
                         <img class="position-absolute arrow" src="{{ 'front/assets/img/round-arrow.svg' }}" alt="">
                     </div>
                 </div>
