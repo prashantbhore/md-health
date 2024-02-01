@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FirebasePushController;
+use App\Http\Controllers\GetCityController;
 use App\Http\Controllers\Front\FoodProvider\FoodsController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\RolesController;
@@ -121,11 +122,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
    // Route::view('sales', 'admin/sales/sales');
 
     Route::controller(AdminSalesController::class)->group(function (){
+
+        Route::get('md-health-sales','index');
+
+
         Route::get('sales','index');
-       
+
+
     });
 
-  
+
 
     Route::view('md-profit', 'admin/sales/md-profit');
 
@@ -133,10 +139,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::controller(AdminMdhealthSalesController::class)->group(function (){
         Route::get('md-health-sales','index');
+
+
+
         Route::get('md-health-sales-data-table','data_table');
 
         Route::get('sales-details/{id}','sales_view');
-       
+
+
     });
 
 
@@ -366,11 +376,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     //Admin PAYMENTS
     Route::view('payments', 'admin/payments/payments');
     Route::view('completed-payments', 'admin/payments/completed-payments');
-   
+
     Route::view('payment-requests', 'admin/payments/payment-requests');
 
 
-    
+
     Route::controller(AdminMDAccountController::class)->group(function () {
         Route::get('bank-accounts','index');
     });
@@ -575,6 +585,7 @@ Route::controller(CommonLoginController::class)->group(function () {
     Route::post('/number-to-mobile', 'number_to_mobile');
     Route::post('/number-password-exist', 'number_password_exist');
     Route::post('/email-or-mobile-exist', 'email_or_mobile_exist');
+    Route::post('/email-exist', 'email_exist');
 });
 //     Route::post('/otp-verify','otp_verify_for_register');
 //     Route::post('/email-to-mobile','email_to_mobile');
@@ -773,6 +784,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 Route::middleware(['CheckRequestType'])->group(function () {
     Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
 });
+
+Route::get('get_cities_of_country/{countryId}', [GetCityController::class, 'get_cities_of_country'])->name('get_cities_of_country');
+
+
 Route::middleware(['CheckRequestType'])->group(function () {
     Route::any('/upload-media-for-messaging',[FirebasePushController::class, 'upload_media_for_messaging']);
     Route::any('/setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
@@ -803,7 +818,7 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
 
     Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
-    
+
     Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
 
     Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Traits\MediaTrait;
 use Crypt;
 use Auth;
+use Storage;
 
 //Code By Mplus03
 class MedicalProviderReports extends Controller
@@ -81,6 +82,8 @@ class MedicalProviderReports extends Controller
             $responseData = $this->apiService->getData($token, $apiUrl, $body, $method);
         }
 
+       
+
 
         if($request['query']){
             $query=$request['query'];
@@ -91,6 +94,7 @@ class MedicalProviderReports extends Controller
         }
 
 
+         
 
         $provider_report_list =  '';
         if(!empty($responseData)){
@@ -101,18 +105,20 @@ class MedicalProviderReports extends Controller
 
         $resultHtml = '';
         if (!empty($provider_report_list)) {
-            foreach ($provider_report_list as $report){
+            foreach ($provider_report_list as $key=>$report){
+                $reportId=$key;
                 $resultHtml .= '<div class="card shadow-none" style="border-radius: 3px; background: #f6f6f6;">';
                 $resultHtml .= '<div class="card-body d-flex gap-3">';
                 $resultHtml .= '<div>';
-                $resultHtml .= '<img src="' . asset('front/assets/img/msg2.png') . '" alt="" />';
+                $resultHtml .= '<img src="' . (!empty($responseData['logo']['company_logo_image_path']) ? url('/').Storage::url($responseData['logo']['company_logo_image_path']) : asset('front/assets/img/msg2.png')) . '" alt="" height="52px" width="52px" />';
+
                 $resultHtml .= '</div>';
                 $resultHtml .= '<div>';
-                $resultHtml .= '<h5 class="card-h1">Treatment No: #' . (!empty($report['customer_purchased_package']['order_id']) ? $report['customer_purchased_package']['order_id'] : '') . '<span class="pending ms-3">  ' . (!empty($report['report_count']) ? $report['report_count'] : '') . ' Documents</span></h5>';
+                $resultHtml .= '<h5 class="card-h1">Treatment No:' . (!empty($report['customer_purchased_package']['order_id']) ? $report['customer_purchased_package']['order_id'] : '') . '<span class="pending ms-3">  ' . (!empty($report['report_count']) ? $report['report_count'] : '') . ' Documents</span></h5>';
                 $resultHtml .= '<p class="mb-0 pkg-name">' . (!empty($report['customer_data']['name']) ? $report['customer_data']['name'] : '') . '</p>';
                 $resultHtml .= '</div>';
                 $resultHtml .= '<div class="ms-auto d-flex flex-column justify-content-end align-items-end">';
-                $resultHtml .= '<a href="#" class="text-black mt-auto card-h3" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">View Details</a>';
+                $resultHtml .= '<a href="#" class="text-black mt-auto card-h3" data-bs-toggle="collapse" data-bs-target="#collapseOne'.$reportId.'" aria-expanded="true" aria-controls="collapseOne'.$reportId.'">View Details</a>';
                 $resultHtml .= '</div>';
                 $resultHtml .= '</div>';
     
@@ -121,7 +127,7 @@ class MedicalProviderReports extends Controller
                         $resultHtml .= '<div class="accordion" id="accordionExample">';
                         $resultHtml .= '<div class="accordion-item">';
                         $resultHtml .= '<h2 class="accordion-header" id="headingOne"></h2>';
-                        $resultHtml .= '<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
+                        $resultHtml .= '<div id="collapseOne'.$reportId.'" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
                         $resultHtml .= '<div class="accordion-body p-0">';
                         $resultHtml .= '<div class="card shadow-none" style="background-color:#F6F6F6;border-top: 1px solid #CFCFCF;border-radius: 0 0 3px 3px">';
                         $resultHtml .= '<div class="card-body d-flex gap-3">';
@@ -146,14 +152,14 @@ class MedicalProviderReports extends Controller
                         $resultHtml .= '<div class="card-p1 fw-md-bold">' . (!empty($formattedDate) ? $formattedDate : '') . '</div>';
                         $resultHtml .= '</div>';
                         $resultHtml .= '<div class="d-flex gap-3 ms-auto">';
-                        $resultHtml .= '<a href="' . (!empty($report_data['report_path']) ? $report_data['report_path'] : '') . '" class="view-more-view" >';
+                        $resultHtml .= '<a href="' . (!empty($report_data['report_path']) ? $report_data['report_path']: '') . '" class="view-more-view" >';
                         $resultHtml .= '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">';
                         $resultHtml .= '<path d="M2.91699 7.00016C2.91699 7.00016 4.40158 4.0835 7.00033 4.0835C9.59849 4.0835 11.0837 7.00016 11.0837 7.00016C11.0837 7.00016 9.59849 9.91683 7.00033 9.91683C4.40158 9.91683 2.91699 7.00016 2.91699 7.00016Z" stroke="#111111" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>';
                         $resultHtml .= '<path d="M12.25 9.91667V11.0833C12.25 11.3928 12.1271 11.6895 11.9083 11.9083C11.6895 12.1271 11.3928 12.25 11.0833 12.25H2.91667C2.60725 12.25 2.3105 12.1271 2.09171 11.9083C1.87292 11.6895 1.75 11.3928 1.75 11.0833V9.91667M12.25 4.08333V2.91667C12.25 2.60725 12.1271 2.3105 11.9083 2.09171C11.6895 1.87292 11.3928 1.75 11.0833 1.75H2.91667C2.60725 1.75 2.3105 1.87292 2.09171 2.09171C1.87292 2.3105 1.75 2.60725 1.75 2.91667V4.08333M7 7.58333C7.15471 7.58333 7.30308 7.52187 7.41248 7.41248C7.52187 7.30308 7.58333 7.15471 7.58333 7C7.58333 6.84529 7.52187 6.69692 7.41248 6.58752C7.30308 6.47812 7.15471 6.41667 7 6.41667C6.84529 6.41667 6.69692 6.47812 6.58752 6.58752C6.47812 6.69692 6.41667 6.84529 6.41667 7C6.41667 7.15471 6.47812 7.30308 6.58752 7.41248C6.69692 7.52187 6.84529 7.58333 7 7.58333Z" stroke="#111111" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>';
                         $resultHtml .= '</svg>';
                         $resultHtml .= 'View';
                         $resultHtml .= '</a>';
-                        $resultHtml .= '<a href="#" class="view-more-view" onclick="printDocument(\'' . (!empty($report_data['report_path']) ? $report_data['report_path'] : '') . '\')">';
+                        $resultHtml .= '<a href="#" class="view-more-view" onclick="printDocument(\'' . (!empty($report_data['report_path']) ? $report_data['report_path']: '') . '\')">';
                         $resultHtml .= '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">';
                         $resultHtml .= '<path d="M4.08366 5.83317C3.96829 5.83317 3.8555 5.86738 3.75958 5.93148C3.66365 5.99558 3.58888 6.08668 3.54473 6.19327C3.50058 6.29986 3.48903 6.41715 3.51153 6.53031C3.53404 6.64346 3.5896 6.7474 3.67118 6.82898C3.75276 6.91056 3.8567 6.96612 3.96986 6.98863C4.08301 7.01114 4.2003 6.99958 4.30689 6.95543C4.41348 6.91128 4.50459 6.83652 4.56868 6.74059C4.63278 6.64466 4.66699 6.53188 4.66699 6.4165C4.66699 6.26179 4.60553 6.11342 4.49614 6.00402C4.38674 5.89463 4.66699 5.78517 5.6334 5.83263 5.83366 5.83317Z" stroke="#111111" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>';
 

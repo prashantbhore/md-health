@@ -12,6 +12,7 @@ use Auth;
 use App\Models\MedicalProviderReports;
 use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
+use App\Models\MedicalProviderLogo;
 use Storage;
 
 class ReportsController extends BaseController
@@ -124,10 +125,13 @@ class ReportsController extends BaseController
 
 public function provider_all_reports_list()
 {
+   
     $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
         ->where('medical_provider_id', Auth::user()->id)
         ->where('status', 'active')
         ->get();
+
+      $logo=MedicalProviderLogo::where('medical_provider_id',Auth::user()->id)->where('status','active')->first();
 
     $formatted_data = [];
 
@@ -189,6 +193,7 @@ public function provider_all_reports_list()
             'status' => 200,
             'message' => 'Provider report list found.',
             'provider_report_list' => $formatted_data,
+            'logo'=>$logo,
         ]);
     } else{
         return response()->json([
@@ -213,6 +218,8 @@ public function provider_all_reports_list()
 
 
     $searchQuery = $request->input('search_query');
+
+    $logo=MedicalProviderLogo::where('medical_provider_id',Auth::user()->id)->where('status','active')->first();
 
 
     $searchResults = MedicalProviderReports::where(function ($query) use ($searchQuery) {
@@ -297,6 +304,7 @@ public function provider_all_reports_list()
             'status' => 200,
             'message' => 'Search results found.',
             'provider_report_list' => $formattedResults,
+            'logo'=>$logo,
         ]);
     } else {
         return response()->json([

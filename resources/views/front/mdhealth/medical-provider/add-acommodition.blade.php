@@ -304,14 +304,20 @@
 
 
     $(document).ready(function() {
-    var old_image = $('#old_image').val();
-    // Add custom method to validate image file types
-    $.validator.addMethod("imageType", function(value, element) {
-        // Get the file extension
-        var extension = value.split('.').pop().toLowerCase();
-        // Check if the extension is one of the allowed image types
-        return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
-    }, "Please select a valid image file (JPEG, JPG, PNG)");
+        $.validator.addMethod("imageType", function(value, element) {
+            if (value === '') {
+                return true;
+            }
+            var extension = value.split('.').pop().toLowerCase();
+            return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
+        }, "Please select a valid image file (JPEG, JPG, PNG)");
+    
+        $('#hotel_image_path').on('change', function() {
+            // Trigger validation only when a new image is selected
+            $('#add_acommodition').validate().element('#hotel_image_path');
+        });
+    
+
 
     // Validate the form with id "add_acommodition"
     $("#add_acommodition").validate({
@@ -336,13 +342,9 @@
             },
             hotel_image_path: {
                 required: function(element) {
-                    // Check if an old image exists
-                    var oldImage = $("#old_image").val();
-
-                    // Require new image if no old image exists
-                    return oldImage === '';
-                },
-                imageType: true
+                        return $('#old_image').val() === '' || $(element).val() !== '';
+                    },
+                    imageType: true 
             },
             // Add rules for other fields as needed
         },
@@ -366,7 +368,8 @@
                 // number: "Please enter a valid number"
             },
             hotel_image_path: {
-                required: "Please select a hotel picture"
+                required: "Please upload hotel image",
+                    imageType: "Please select a valid image file (JPEG, JPG, PNG)"
             }
             // Add custom messages for other fields as needed
         },

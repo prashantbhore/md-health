@@ -48,7 +48,8 @@
         letter-spacing: -0.56px;
     } */
     .form-control::placeholder {
-        font-family: "Campton";
+        font-family: CamptonLight;
+        font-weight: 600;
     }
 
     .form-select,
@@ -71,13 +72,13 @@
     }
 
     .prev-img-div h5 {
+        font-family: 'CamptonLight';
         color: #979797;
-        font-family: CamptonBook;
         font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        letter-spacing: -0.64px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: -0.04em;
+        margin-left: 1.5rem;
     }
 
     .error-message {
@@ -102,31 +103,86 @@
     }
 </style>
 <style>
-.no-data {
-    height: 362px;
-    font-family: "CamptonBook";
-    color: #979797;
-    font-weight: 400;
-    letter-spacing: -0.56px;
-    font-size: 16px;
-    border-radius: 3px;
-    /* border: 1px solid #F6F6F6; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    /* background: #F6F6F6; */
-}
+    .no-data {
+        height: 362px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        /* border: 1px solid #F6F6F6; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        /* background: #F6F6F6; */
+    }
 
-.no-data img {
-    width: 150px;
-    height: auto;
-}
+    .no-data img {
+        width: 150px;
+        height: auto;
+    }
+
+    .view-more-view {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* gap: 1rem; */
+        text-decoration: none;
+        color: #000;
+        font-family: Campton;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.4px;
+    }
+
+    input[type="file"] {
+        color: #979797 !important;
+        line-height: 2 !important;
+    }
+
+    select:required:invalid {
+        color: gray;
+        font-family: CamptonLight !important;
+    }
+
+    #previewPDF {
+        width: 100%;
+        background: #fbfbfb;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 3px;
+    }
+
+    #previewPDF img {
+        height: 40px;
+        margin-top: 0px;
+    }
+
+    #previewPDF span {
+        font-family: 'CamptonBook';
+        letter-spacing: -0.04em;
+    }
+
+    .ri-close-line:before {
+        content: "\eb99";
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 50%;
+        padding: 2px;
+        color: #db2828;
+    }
 </style>
 
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-    <div class="d-flex gap-3">
+        <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
@@ -143,7 +199,7 @@
                                 <h6 class="section-heading">Add New Reports</h6>
                             </div>
 
-                            <form method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
+                            <form id="uploadForm" method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
                                 @csrf
 
                                 <div class="form-group mb-4">
@@ -154,8 +210,8 @@
 
                                 <div class="form-group d-flex flex-column mb-4">
                                     <label class="form-label mb-3">Patient</label>
-                                    <select name="customer_package_purchage_id" class="form-select" id="patientSelect">
-                                        <option value="">Choose Patient</option>
+                                    <select required name="customer_package_purchage_id" class="form-select" id="patientSelect">
+                                        <option value="">Choose</option>
                                         @if (!empty($patient_list))
                                         @foreach ($patient_list as $patient)
                                         <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
@@ -167,24 +223,28 @@
                                 </div>
 
                                 <div class="form-group mb-5">
-                                    <label class="form-label mb-3">Upload Report File</label>
-                                    <div class="form-group my-3">
-                                        <input type="file" name="report_path" class="form-control text-dark" id="fileInput" onchange="previewFile()">
-                                    </div>
-                                    <div class="prev-img-div d-flex align-items-end gap-3" style="position: relative;">
-                                        <img id="previewImage" src="front/assets/img/uploadHere.png" alt="image" class="cp up-image">
-                                        <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
-                                        <div id="previewPDF" style="display: none;">
-                                            <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;">
-                                            <span id="pdfFileName"></span>
+                                    <label class="form-label d-block mb-3">Upload Report File</label>
+                                    <div class="d-flex">
+
+                                        <label for="fileInput">
+                                            <input type="file" name="report_path" class="form-control text-dark d-none" id="fileInput" onchange="previewFile()">
+                                            <img id="previewImage" src="{{asset('front/assets/img/uploadHere.png')}}" alt="image" class="cp up-image">
+                                        </label>
+                                        <div class="prev-img-div d-flex align-items-end gap-3 w-100" style="position: relative;">
+                                            <!-- <img id="previewImage" src="{{asset('front/assets/img/uploadHere.png')}}" alt="image" class="cp up-image"> -->
+                                            <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;"><i class="ri-close-line"></i></button>
+                                            <div id="previewPDF" style="display: none;">
+                                                <img src="{{asset('front/assets/img/pdf2.svg')}}" alt="pdf-icon">
+                                                <span id="pdfFileName"></span>
+                                            </div>
+                                            <h5 id="valText">*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
                                         </div>
-                                        <h5>*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
                                     </div>
                                     <div class="error-message" id="reportPathError"></div>
                                 </div>
 
                                 <div class="section-btns mb-5">
-                                    <button type="submit" class="btn save-btn-black">Upload Reports</a>
+                                    <button type="button" class="btn save-btn-black" id="uploadBtn" onclick="disableButton()">Upload Reports</button>
                                 </div>
 
                             </form>
@@ -240,6 +300,7 @@
         var removePreviewBtn = document.getElementById('removePreviewBtn');
         var previewPDF = document.getElementById('previewPDF');
         var pdfFileName = document.getElementById('pdfFileName');
+        var valText = document.getElementById('valText')
 
         var file = fileInput.files[0];
         var reader = new FileReader();
@@ -250,11 +311,13 @@
                 previewImage.style.display = 'block';
                 removePreviewBtn.style.display = 'block';
                 previewPDF.style.display = 'none';
+                valText.style.display = 'none';
             } else if (file.type === 'application/pdf') {
-                previewPDF.style.display = 'block';
+                previewPDF.style.display = 'flex';
                 pdfFileName.textContent = file.name;
                 previewImage.style.display = 'none';
-                removePreviewBtn.style.display = 'block';
+                removePreviewBtn.style.display = 'flex';
+                valText.style.display = 'none';
             } else {
                 // Ignore other file types (optional)
                 previewImage.src = 'front/assets/img/default-img.png';
@@ -313,7 +376,7 @@
 <script>
     //$(document).ready(function () {
     // Function to validate the form
-    function validateForm() {
+    function validateForm(){
         var isValid = true;
 
         // Validate Report Title
@@ -365,8 +428,7 @@
         performSearch();
     });
 
-    function performSearch() {
-
+    function performSearch(){
         let query = $('#liveSearchInput').val();
         var base_url = $("#base_url").val();
 
@@ -387,8 +449,8 @@
                 } else {
                     // Show "No report found" message when HTML is empty
                     $('#resultContainer').html('<div class="no-data">\
-    <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
-</div>');
+                     <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+                </div>');
                 }
             },
             error: function(error) {
@@ -397,6 +459,16 @@
         });
     }
     // });
+</script>
+
+<script>
+    function disableButton() {
+        document.getElementById("uploadBtn").disabled = true;
+        document.getElementById("uploadBtn").innerHTML = "Uploading...";
+        setTimeout(function() {
+            document.getElementById("uploadForm").submit();
+        }, 100);
+    }
 </script>
 
 
