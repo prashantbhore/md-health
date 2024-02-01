@@ -1170,17 +1170,25 @@ class CustomerPackageController extends Controller {
                         // dd( $documents );
                         $data[ 'documents' ] = !empty( $documents[ 'data' ] ) ? $documents[ 'data' ] : [];
                         if ( !empty( $data[ 'hotel_id' ] ) ) {
-                            $accomodation_view = $this->apiService->getData( $token, url( '/api/md-customer-acommodition-details-view' ), [ 'hotel_id' => $data[ 'hotel_id' ] ], 'POST' );
+                            $accomodation_view = $this->apiService->getData( $token, url( '/api/md-customer-acommodition-details-view' ), [ 'id' => $data[ 'hotel_id' ] ], 'POST' );
+                            // dd( $accomodation_view );
                             $data[ 'accomodation_view' ] = !empty( $accomodation_view[ 'hotel_list' ] ) ? $accomodation_view[ 'hotel_list' ] : [];
+                            $data[ 'accomodation_view' ][ 'other_services' ] = !empty( $accomodation_view[ 'other_services' ] )?$accomodation_view[ 'other_services' ]:[];
                         }
 
                         if ( !empty( $data[ 'vehicle_id' ] ) ) {
-                            if ( !empty( $transportation_view[ 'data' ][ 'other_services' ] ) ) {
-                                $transportation_view = $this->apiService->getData( $token, url( '/api/md-customer-transporatation-details-view' ), [ 'vehicle_id' => $data[ 'vehicle_id' ] ], 'POST' );
-                                $other_service = explode( ',', $transportation_view[ 'data' ][ 'other_services' ] );
-                                $data[ 'transportation_view' ] = !empty( $transportation_view[ 'data' ] ) ? $transportation_view[ 'data' ] : [];
-                                $data[ 'transportation_view' ][ 'other_services' ] = $other_service;
-                            }
+                            // if ( !empty( $transportation_view[ 'data' ][ 'other_services' ] ) ) {
+                            $transportation_view = $this->apiService->getData( $token, url( '/api/md-customer-transporatation-details-view' ), [ 'id' => $data[ 'vehicle_id' ] ], 'POST' );
+                            // $other_service = explode( ',', $transportation_view[ 'other_services' ] );
+                            $data[ 'transportation_view' ] = !empty( $transportation_view[ 'transportation_details' ] ) ? $transportation_view[ 'transportation_details' ] : [];
+                            $data[ 'transportation_view' ][ 'other_services' ] = !empty( $transportation_view[ 'other_services' ] )? $transportation_view[ 'other_services' ]:[];
+                            // }
+                        }
+
+                        if ( !empty( $data[ 'tour_id' ] ) ) {
+                            $tour_view = $this->apiService->getData( $token, url( '/api/md-customer-tour-details-view' ), [ 'id' => $data[ 'tour_id' ] ], 'POST' );
+                            $data[ 'tour_view' ] = !empty( $tour_view[ 'tour_details' ] ) ? $tour_view[ 'tour_details' ] : [];
+                            $data[ 'tour_view' ][ 'other_services' ] = !empty( $tour_view[ 'other_services' ] )? $tour_view[ 'other_services' ]:[];
                         }
                     } else {
                         $data = [];
