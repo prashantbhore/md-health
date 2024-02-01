@@ -174,6 +174,12 @@ function verify(e) {
     var code5 = $("#ot5").val();
     var code6 = $("#ot6").val();
     var code = code1 + code2 + code3 + code4 + code5 + code6;
+    $('#otp-btn').attr('disabled', true);
+    $('#otp-btn').html(
+        '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+        setTimeout(function() {
+            $('#otp-btn').removeAttr('disabled').html('Sign Up');
+        }, 2000);
     if (!isValidCode(code)) {
         showErrorMessage('Please enter the correct code.');
         return;

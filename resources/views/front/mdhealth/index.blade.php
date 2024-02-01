@@ -316,8 +316,6 @@
     </div>
 
 
-
-
     <!-- SECTION 4 -->
     <div class="bg-green df-center" style="height: 155px;">
         <div class="py-5 text-center">
@@ -367,7 +365,6 @@
     <!-- <img class="position-absolute" src="{{ 'front/assets/img/flight.png' }}" alt=""> -->
     </div>
     {{-- Make Payment Model box --}}
-
 
     <!-- SECTION 7: Testimonials -->
     <div class="bg-f6">
@@ -473,6 +470,7 @@
     <div class="bg-f6 scanQr">
         <img src="{{ 'front/assets/img/appScreenFooter.png' }}" alt="">
     </div>
+    
     <!-- Modals -->
     <!-- MAKE REQUEST MODAL -->
     <div class="modal fade request-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
