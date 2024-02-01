@@ -200,6 +200,25 @@ class CommonLoginController extends Controller
 
 
 
+    ///////////////////////////////////////
+    // {
+    //     if ($request->ajax()) {
+    //         $advertisement_sequence = Products::where('user_type', '=', $request->user_type)
+    //             ->where('advertisement_sequence', '=', $request->advertisement_sequence)
+    //             ->where('status', '!=', 'delete')
+    //             ->select('advertisement_sequence');
+    //         if (!empty($request->txtpkey)) {
+    //             $advertisement_sequence = $advertisement_sequence->where('id', '!=', Crypt::decrypt($request->txtpkey));
+    //         }
+    //         $advertisement_sequence = $advertisement_sequence->first();
+
+    //         return !empty($advertisement_sequence) ? 'false' : 'true';
+    //     } else {
+    //         return 'No direct scripts are allowed';
+    //     }
+
+
+
 
 
 
