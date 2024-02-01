@@ -449,8 +449,8 @@
                 } else {
                     // Show "No report found" message when HTML is empty
                     $('#resultContainer').html('<div class="no-data">\
-    <img src="{{ asset('front / assets / img / No - Data - Found - 1. svg ') }}" alt="" class="">\
-</div>');
+                     <img src="{{ asset('front / assets / img / No - Data - Found - 1. svg ') }}" alt="" class="">\
+                </div>');
                 }
             },
             error: function(error) {
