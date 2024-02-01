@@ -428,8 +428,7 @@
         performSearch();
     });
 
-    function performSearch() {
-
+    function performSearch(){
         let query = $('#liveSearchInput').val();
         var base_url = $("#base_url").val();
 
@@ -450,8 +449,7 @@
                 } else {
                     // Show "No report found" message when HTML is empty
                     $('#resultContainer').html('<div class="no-data">\
-    <img src="{{ asset('
-                        front / assets / img / No - Data - Found - 1. svg ') }}" alt="" class="">\
+    <img src="{{ asset('front / assets / img / No - Data - Found - 1. svg ') }}" alt="" class="">\
 </div>');
                 }
             },
