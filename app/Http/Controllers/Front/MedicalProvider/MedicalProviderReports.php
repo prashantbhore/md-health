@@ -101,18 +101,19 @@ class MedicalProviderReports extends Controller
 
         $resultHtml = '';
         if (!empty($provider_report_list)) {
-            foreach ($provider_report_list as $report){
+            foreach ($provider_report_list as $key=>$report){
+                $reportId=$key;
                 $resultHtml .= '<div class="card shadow-none" style="border-radius: 3px; background: #f6f6f6;">';
                 $resultHtml .= '<div class="card-body d-flex gap-3">';
                 $resultHtml .= '<div>';
                 $resultHtml .= '<img src="' . asset('front/assets/img/msg2.png') . '" alt="" />';
                 $resultHtml .= '</div>';
                 $resultHtml .= '<div>';
-                $resultHtml .= '<h5 class="card-h1">Treatment No: #' . (!empty($report['customer_purchased_package']['order_id']) ? $report['customer_purchased_package']['order_id'] : '') . '<span class="pending ms-3">  ' . (!empty($report['report_count']) ? $report['report_count'] : '') . ' Documents</span></h5>';
+                $resultHtml .= '<h5 class="card-h1">Treatment No:' . (!empty($report['customer_purchased_package']['order_id']) ? $report['customer_purchased_package']['order_id'] : '') . '<span class="pending ms-3">  ' . (!empty($report['report_count']) ? $report['report_count'] : '') . ' Documents</span></h5>';
                 $resultHtml .= '<p class="mb-0 pkg-name">' . (!empty($report['customer_data']['name']) ? $report['customer_data']['name'] : '') . '</p>';
                 $resultHtml .= '</div>';
                 $resultHtml .= '<div class="ms-auto d-flex flex-column justify-content-end align-items-end">';
-                $resultHtml .= '<a href="#" class="text-black mt-auto card-h3" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">View Details</a>';
+                $resultHtml .= '<a href="#" class="text-black mt-auto card-h3" data-bs-toggle="collapse" data-bs-target="#collapseOne'.$reportId.'" aria-expanded="true" aria-controls="collapseOne'.$reportId.'">View Details</a>';
                 $resultHtml .= '</div>';
                 $resultHtml .= '</div>';
     
@@ -121,7 +122,7 @@ class MedicalProviderReports extends Controller
                         $resultHtml .= '<div class="accordion" id="accordionExample">';
                         $resultHtml .= '<div class="accordion-item">';
                         $resultHtml .= '<h2 class="accordion-header" id="headingOne"></h2>';
-                        $resultHtml .= '<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
+                        $resultHtml .= '<div id="collapseOne'.$reportId.'" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">';
                         $resultHtml .= '<div class="accordion-body p-0">';
                         $resultHtml .= '<div class="card shadow-none" style="background-color:#F6F6F6;border-top: 1px solid #CFCFCF;border-radius: 0 0 3px 3px">';
                         $resultHtml .= '<div class="card-body d-flex gap-3">';
