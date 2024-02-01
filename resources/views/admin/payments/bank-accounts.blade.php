@@ -89,6 +89,12 @@
                             <label for="brand" class="form-label">*Bank Name</label>
                             <input type="text" class="form-control" placeholder="Bank Name">
                         </div>
+
+                        <div class="mb-3">
+                            <label for="brand" class="form-label">*Account Holder Name</label>
+                            <input type="text" class="form-control" placeholder="Bank Name">
+                        </div>
+
                         <div class="mb-3">
                             <label for="brand" class="form-label">*IBAN</label>
                             <input type="text" class="form-control" placeholder="TR">
