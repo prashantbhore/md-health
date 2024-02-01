@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('md_medical_provider_reports', function (Blueprint $table) {
             $table->id();
-            $table->string('report_title')->nullable();
+            $table->longText('report_title')->nullable();
             $table->bigInteger('customer_package_purchage_id')->nullable();
             $table->bigInteger('custome_id')->nullable();
             $table->bigInteger('package_id')->nullable();

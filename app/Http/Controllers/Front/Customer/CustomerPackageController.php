@@ -1297,23 +1297,29 @@ class CustomerPackageController extends Controller
 
     //Mplus02
 
-    public function view_my_active_packages($id, $purchase_id)
-    {
-        $user_id = Session::get('MDCustomer*%');
-        $token = Session::get('login_token');
+    public function view_my_active_packages( $id, $purchase_id ) {
+        $user_id = Session::get( 'MDCustomer*%' );
+        $token = Session::get( 'login_token' );
 
-        if (!empty($token) && !empty($id) && !empty($purchase_id)) {
-            $data = $this->apiService->getData($token, url('/api/md-customer-package-details'), ['package_id' => $id, 'purchase_id' => $purchase_id], 'POST');
+        if ( !empty( $token ) && !empty( $id ) && !empty( $purchase_id ) ) {
+            $data = $this->apiService->getData( $token, url( '/api/md-customer-package-details' ), [ 'package_id' => $id, 'purchase_id' => $purchase_id ], 'POST' );
 
-            if (!empty($data['status'])) {
+            if ( !empty( $data[ 'status' ] ) ) {
 
-                if ($data['status'] == '200') {
-                    $other_service = explode(',', $data['customer_purchase_package_list']['other_services']);
-                    $data = $data['customer_purchase_package_list'];
-                    $data['other_services'] = $other_service;
+                if ( $data[ 'status' ] == '200' ) {
+                    $other_service = explode( ',', $data[ 'customer_purchase_package_list' ][ 'other_services' ] );
+                    $data = $data[ 'customer_purchase_package_list' ];
+                    $data[ 'other_services' ] = $other_service;
                 }
 
-                if (!empty($user_id)) {
+                if ( !empty( $user_id ) ) {
+
+                    $patient_info = PatientInformation::where( 'customer_id', $user_id )->where( 'package_id', $data[ 'package_id' ] )->where( 'purchase_id', $data[ 'purchase_id' ] )->first();
+                    // dd( $user_id, $data[ 'package_id' ], $data[ 'purchase_id' ] );
+                    // dd( $patient_info );
+                    if ( !empty( $patient_info->id ) ) {
+                        // dd( $patient_info->id, $id );
+                        $response = $this->apiService->getData( $token, url( '/api/md-customer-my-details' ), [ 'patient_id' => $patient_info->id, 'package_id' => $id ], 'POST' );
 
                     $patient_info = PatientInformation::where('customer_id', $user_id)->where('package_id', $data['package_id'])->where('purchase_id', $data['purchase_id'])->first();
                     // dd( $user_id, $data[ 'package_id' ], $data[ 'purchase_id' ] );
@@ -1325,10 +1331,10 @@ class CustomerPackageController extends Controller
                     // dd( $token );
                     // dd( $token );
                     // dd( $patient_info );
-                    if (!empty($response['status'])) {
-                        if ($response['status'] == '200') {
-                            $my_details = !empty($response['PatientInformation']) ? $response['PatientInformation'] : [];
-                            $treatment_information = !empty($response['treatment_information']) ? $response['treatment_information'] : [];
+                    if ( !empty( $response[ 'status' ] ) ) {
+                        if ( $response[ 'status' ] == '200' ) {
+                            $my_details = !empty( $response[ 'PatientInformation' ] ) ? $response[ 'PatientInformation' ] : [];
+                            $treatment_information = !empty( $response[ 'treatment_information' ] ) ? $response[ 'treatment_information' ] : [];
                         }
                     } else {
                         $my_details = '';
@@ -1337,21 +1343,29 @@ class CustomerPackageController extends Controller
                 }
             }
             // dd( $data );
-            $documents = $this->apiService->getData($token, url('/api/md-customer-documents-list'), ['package_id' => $data['package_id']], 'POST');
-            // dd($documents);
-            $data['documents'] = !empty($documents['data']) ? $documents['data'] : [];
-            if (!empty($data['hotel_id'])) {
-                $accomodation_view = $this->apiService->getData($token, url('/api/md-customer-acommodition-details-view'), ['hotel_id' => $data['hotel_id']], 'POST');
-                $data['accomodation_view'] = !empty($accomodation_view['hotel_list']) ? $accomodation_view['hotel_list'] : [];
+            $documents = $this->apiService->getData( $token, url( '/api/md-customer-documents-list' ), [ 'package_id' => $data[ 'package_id' ] ], 'POST' );
+            // dd( $documents );
+            $data[ 'documents' ] = !empty( $documents[ 'data' ] ) ? $documents[ 'data' ] : [];
+            if ( !empty( $data[ 'hotel_id' ] ) ) {
+                $accomodation_view = $this->apiService->getData( $token, url( '/api/md-customer-acommodition-details-view' ), [ 'id' => $data[ 'hotel_id' ] ], 'POST' );
+                // dd( $accomodation_view );
+                $data[ 'accomodation_view' ] = !empty( $accomodation_view[ 'hotel_list' ] ) ? $accomodation_view[ 'hotel_list' ] : [];
+                $data[ 'accomodation_view' ][ 'other_services' ] = !empty( $accomodation_view[ 'other_services' ] )?$accomodation_view[ 'other_services' ]:[];
             }
 
-            if (!empty($data['vehicle_id'])) {
-                if (!empty($transportation_view['data']['other_services'])) {
-                    $transportation_view = $this->apiService->getData($token, url('/api/md-customer-transporatation-details-view'), ['vehicle_id' => $data['vehicle_id']], 'POST');
-                    $other_service = explode(',', $transportation_view['data']['other_services']);
-                    $data['transportation_view'] = !empty($transportation_view['data']) ? $transportation_view['data'] : [];
-                    $data['transportation_view']['other_services'] = $other_service;
-                }
+            if ( !empty( $data[ 'vehicle_id' ] ) ) {
+                // if ( !empty( $transportation_view[ 'data' ][ 'other_services' ] ) ) {
+                $transportation_view = $this->apiService->getData( $token, url( '/api/md-customer-transporatation-details-view' ), [ 'id' => $data[ 'vehicle_id' ] ], 'POST' );
+                // $other_service = explode( ',', $transportation_view[ 'other_services' ] );
+                $data[ 'transportation_view' ] = !empty( $transportation_view[ 'transportation_details' ] ) ? $transportation_view[ 'transportation_details' ] : [];
+                $data[ 'transportation_view' ][ 'other_services' ] = !empty( $transportation_view[ 'other_services' ] )? $transportation_view[ 'other_services' ]:[];
+                // }
+            }
+
+            if ( !empty( $data[ 'tour_id' ] ) ) {
+                $tour_view = $this->apiService->getData( $token, url( '/api/md-customer-tour-details-view' ), [ 'id' => $data[ 'tour_id' ] ], 'POST' );
+                $data[ 'tour_view' ] = !empty( $tour_view[ 'tour_details' ] ) ? $tour_view[ 'tour_details' ] : [];
+                $data[ 'tour_view' ][ 'other_services' ] = !empty( $tour_view[ 'other_services' ] )? $tour_view[ 'other_services' ]:[];
             }
         } else {
             $data = [];
@@ -1359,7 +1373,8 @@ class CustomerPackageController extends Controller
             $treatment_information = [];
         }
         // dd( $my_details );
-        return view('front.mdhealth.user-panel.user-package-view', compact('data', 'my_details', 'treatment_information'));
+        return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data', 'my_details', 'treatment_information' ) );
+
     }
 
     //Mplus02
@@ -1504,13 +1519,13 @@ class CustomerPackageController extends Controller
                         <div class="card-body remove-cardb d-flex justify-content-between">
                             <div>
                                 <h5 class="card-h1 card-h1-fav mb-0">' . $fav['package_name'] . '<img
-                                        src="' . asset('front/assets/img/verifiedBy.png') . '" alt=""
+                                        src="' . asset('front/assets/img/verifiedBy.svg') . '" alt=""
                                         class="ms-3" /></h5>
                                 <p class="mb-0 d-inline-block card-p1"><img
                                         src="' . asset('front/assets/img/Location.svg') . '" alt="" />
                                     ' . $fav['city_name'] . '</p>
-                                <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                                    ' . "Treatment period " . $fav["treatment_period_in_days"] . " days" . '</p>
+                                <p class="mb-0 d-inline-block card-p1 fst-italic ms-5">
+                                    '. "Treatment Period " . $fav["treatment_period_in_days"] . " days" .'</p>
                             </div>
                             <div onclick="removeFromFavourite(' . $fav['id'] . ');"
                                 class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1520,7 +1535,7 @@ class CustomerPackageController extends Controller
                                         alt="" />
                                 </div>
                                 <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
-                                    Remove Favorite
+                                    Remove Favourite
                                 </p>
                             </div>
                         </div>
@@ -1562,8 +1577,8 @@ class CustomerPackageController extends Controller
                     <p class="mb-0 d-inline-block card-p1"><img
                             src="' . asset('front/assets/img/Location.svg') . '" alt="" />
                         ' . $fav['city_name'] . '</p>
-                    <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                        ' . "Treatment period " . $fav["treatment_period_in_days"] . " days" . '</p>
+                    <p class="mb-0 d-inline-block card-p1 fst-italic ms-5">
+                        '. "Treatment Period " . $fav["treatment_period_in_days"] . " days" .'</p>
                 </div>
                 <div onclick="removeFromFavourite(' . $fav['id'] . ');"
                     class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1573,7 +1588,7 @@ class CustomerPackageController extends Controller
                             alt="" />
                     </div>
                     <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
-                        Remove Favorite
+                        Remove Favourite
                     </p>
                 </div>
             </div>

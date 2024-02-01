@@ -148,15 +148,30 @@
                         </div>
                         <div class="col-md-12 mb-5">
                             <div class="d-flex flex-wrap gap-3 appTime">
-                                <button class="btn">09:30</button>
+                                <button class="btn">09:00</button>
                                 <button class="btn btn-selected">09:30</button>
-                                <button class="btn btn-selected">09:30</button>
-                                <button class="btn btn-selected">09:30</button>
-                                <button class="btn">09:30</button>
-                                <button class="btn">09:30</button>
-                                <button class="btn">09:30</button>
-                                <button class="btn">09:30</button>
-                                <button class="btn btn-selected">09:30</button>
+                                <button class="btn btn-selected">10:00</button>
+                                <button class="btn btn-selected">10:30</button>
+                                <button class="btn">11:00</button>
+                                <button class="btn">11:30</button>
+                                <button class="btn">12:00</button>
+                                <button class="btn">12:30</button>
+                                <button class="btn btn-selected">13:00</button>
+                                <button class="btn">13:30</button>
+                                <button class="btn">14:00</button>
+                                <button class="btn">14:30</button>
+                                <button class="btn">15:00</button>
+                                <button class="btn">15:30</button>
+                                <button class="btn">16:00</button>
+                                <button class="btn">16:30</button>
+                                <button class="btn">17:00</button>
+                                <button class="btn">17:30</button>
+                                <button class="btn">18:00</button>
+                                <button class="btn">18:30</button>
+                                <button class="btn">19:00</button>
+                                <button class="btn">19:30</button>
+                                <button class="btn">20:00</button>
+                                <button class="btn">20:30</button>
                             </div>
                         </div>
 
@@ -175,6 +190,11 @@
 @endsection
 @section('script')
 <script>
+    $(document).ready(function(){
+        $('.btn').click(function(){
+            alert($(this).text());
+        });
+    });
     $(".upMessagesLi").addClass("activeClass");
     $(".upMessages").addClass("md-active");
 </script>

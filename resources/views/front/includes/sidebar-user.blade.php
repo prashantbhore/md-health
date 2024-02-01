@@ -24,7 +24,7 @@
                 <a class="nav-link upReports" href="{{ url('user-all-reports') }}">My Reports</a>
             </li>
             <li class="nav-item upFavLi">
-                <a class="nav-link upFav" href="{{ url('user-favorites') }}">Favorites</a>
+                <a class="nav-link upFav" href="{{ url('user-favorites') }}">Favourites</a>
             </li>
 
             <li class="nav-item mt-auto">

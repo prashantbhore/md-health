@@ -48,7 +48,8 @@
         letter-spacing: -0.56px;
     } */
     .form-control::placeholder {
-        font-family: "Campton";
+        font-family: CamptonLight;
+        font-weight: 600;
     }
 
     .form-select,
@@ -102,31 +103,57 @@
     }
 </style>
 <style>
-.no-data {
-    height: 362px;
-    font-family: "CamptonBook";
-    color: #979797;
-    font-weight: 400;
-    letter-spacing: -0.56px;
-    font-size: 16px;
-    border-radius: 3px;
-    /* border: 1px solid #F6F6F6; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    /* background: #F6F6F6; */
-}
+    .no-data {
+        height: 362px;
+        font-family: "CamptonBook";
+        color: #979797;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        font-size: 16px;
+        border-radius: 3px;
+        /* border: 1px solid #F6F6F6; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        /* background: #F6F6F6; */
+    }
 
-.no-data img {
-    width: 150px;
-    height: auto;
-}
+    .no-data img {
+        width: 150px;
+        height: auto;
+    }
+
+    .view-more-view {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* gap: 1rem; */
+        text-decoration: none;
+        color: #000;
+        font-family: Campton;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.4px;
+    }
+
+    input[type="file"] {
+        color: #979797 !important;
+        line-height: 2 !important;
+    }
+
+    select:required:invalid {
+        color: gray;
+        font-family: CamptonLight !important;
+    }
 </style>
 
 <div class="content-wrapper">
     <div class="container py-100px for-cards">
-    <div class="d-flex gap-3">
+        <div class="d-flex gap-3">
             <div class="w-292">
                 @include('front.includes.sidebar')
             </div>
@@ -143,7 +170,7 @@
                                 <h6 class="section-heading">Add New Reports</h6>
                             </div>
 
-                            <form method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
+                            <form id="uploadForm" method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
                                 @csrf
 
                                 <div class="form-group mb-4">
@@ -154,8 +181,8 @@
 
                                 <div class="form-group d-flex flex-column mb-4">
                                     <label class="form-label mb-3">Patient</label>
-                                    <select name="customer_package_purchage_id" class="form-select" id="patientSelect">
-                                        <option value="">Choose Patient</option>
+                                    <select required name="customer_package_purchage_id" class="form-select" id="patientSelect">
+                                        <option value="">Choose</option>
                                         @if (!empty($patient_list))
                                         @foreach ($patient_list as $patient)
                                         <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
@@ -175,7 +202,7 @@
                                         <img id="previewImage" src="front/assets/img/uploadHere.png" alt="image" class="cp up-image">
                                         <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
                                         <div id="previewPDF" style="display: none;">
-                                            <img src="path/to/pdf-icon.png" alt="pdf-icon" style="width: 50px; height: 50px;">
+                                            <img src="front/assets/img/pdf2.svg" alt="pdf-icon" style="width: 50px; height: 50px;">
                                             <span id="pdfFileName"></span>
                                         </div>
                                         <h5>*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
@@ -184,7 +211,7 @@
                                 </div>
 
                                 <div class="section-btns mb-5">
-                                    <button type="submit" class="btn save-btn-black">Upload Reports</a>
+                                    <button type="button" class="btn save-btn-black" id="uploadBtn" onclick="disableButton()">Upload Reports</button>
                                 </div>
 
                             </form>
@@ -387,7 +414,8 @@
                 } else {
                     // Show "No report found" message when HTML is empty
                     $('#resultContainer').html('<div class="no-data">\
-    <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+    <img src="{{ asset('
+                        front / assets / img / No - Data - Found - 1. svg ') }}" alt="" class="">\
 </div>');
                 }
             },
@@ -397,6 +425,16 @@
         });
     }
     // });
+</script>
+
+<script>
+    function disableButton(){
+        document.getElementById("uploadBtn").disabled = true;
+        document.getElementById("uploadBtn").innerHTML = "Uploading...";
+        setTimeout(function() {
+            document.getElementById("uploadForm").submit();
+        }, 100);
+    }
 </script>
 
 
