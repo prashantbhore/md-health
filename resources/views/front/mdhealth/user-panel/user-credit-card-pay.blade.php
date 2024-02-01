@@ -269,8 +269,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="text-end">
-                                                        <img class="visa" src=""
-                                                            alt="">
+                                                        <img class="visa" src="" alt="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -473,7 +472,7 @@
 
                 ///////////////////////////////////////////////////////////////////////////////
 
-               
+
 
                 $('#procced_to_pay_form input').on('input', function() {
 
@@ -554,7 +553,7 @@
                     var additionalData = {
                         'package_id': packageId,
                         'patient_id': patientId,
-                        'purchase_id':"{{ $data['purchase_id'] }}",
+                        'purchase_id': "{{ $data['purchase_id'] }}",
                         // 'sale_price': proxyPrice,
                         'paid_amount': "{{ $data['pending_payment'] }}",
                         'platform_type': 'web',
@@ -563,7 +562,7 @@
                         'card_cvv': cardCvv || '',
                         'card_name': cardName || '',
                         'pending_amount': "{{ $data['pending_payment'] }}",
-                        'total_paying_price':"{{ $data['pending_payment'] }}",
+                        'total_paying_price': "{{ $data['pending_payment'] }}",
                         'percentage': "{{ $data['package_percentage_price'] }}",
                         // 'other_services': checkedTitles,
                     };
@@ -636,11 +635,17 @@
                     var additionalData = {
                         'package_id': packageId,
                         'patient_id': patientId,
-                        'sale_price': proxyPrice,
-                        'paid_amount': totalPrice,
+                        'purchase_id': "{{ $data['purchase_id'] }}",
+                        // 'sale_price': proxyPrice,
+                        'paid_amount': "{{ $data['pending_payment'] }}",
                         'platform_type': 'web',
-                        'pending_amount': pendingAmount,
-                        'percentage': percentage
+                        'card_no': cardNo || '',
+                        'card_expiry_date': cardExpiryDate || '',
+                        'card_cvv': cardCvv || '',
+                        'card_name': cardName || '',
+                        'pending_amount': "{{ $data['pending_payment'] }}",
+                        'total_paying_price': "{{ $data['pending_payment'] }}",
+                        'percentage': "{{ $data['package_percentage_price'] }}",
                     };
 
                     // Add additional data to the form
@@ -656,11 +661,11 @@
                     form.submit();
                 });
 
-                
+
 
                 ////////////////////////////////////////////////////////////////////////////////
 
-               
+
 
                 ///////////////////////////////////Mplus03/////////////////////////////////////////////////
 

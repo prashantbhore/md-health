@@ -1702,10 +1702,7 @@ class CustomerPackageController extends Controller
                                     $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->purchase_id)
                                         ->update($payment_details_pending);
                                     if (!empty($CustomerPayamentDetails)) {
-                                        return response()->json([
-                                            'status' => 200,
-                                            'message' => 'payment completed.',
-                                        ]);
+                                        return view('front.mdhealth.user-panel.user-payment-successfull');
                                     } else {
                                         return response()->json([
                                             'status' => 404,
