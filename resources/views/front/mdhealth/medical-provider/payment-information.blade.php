@@ -148,7 +148,7 @@
                             <div class="card shadow-none mb-3 pkgCard" style="min-height: 75px;">
                                 <div class="card-body d-flex align-items-center gap-3 w-100 p-3">
                                     <div class="df-center">
-                                        <img src="{{asset('front/assets/img/Memorial.svg')}}" alt="" class="md-img-sm p-0">
+                                        <img src="{{!empty($medical_provider_bank_details['company_logo_image_path'])?$medical_provider_bank_details['company_logo_image_path']:asset('front/assets/img/Memorial.svg')}}" alt="" class="md-img-sm p-0">
                                     </div>
                                     <div class="df-coloumn">
                                         <div class="trmt-card-body">

@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class AdminMDAccountController extends Controller
 {
-    //
+     public function index(){
+        return view('admin.payments.bank-accounts');
+     }
 }

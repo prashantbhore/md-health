@@ -765,10 +765,10 @@
                     },
                     patient_email: {
                         // required: "Please enter patient email",
+                        email: "Please enter valid patient email",
                     },
                     patient_contact_no: {
-                        // required: "Please enter patient contact number",
-                        email: "Please enter valid patient email",
+                        required: "Please enter patient contact number",
                     },
                     patient_country_id: {
                         required: "Please select patient country",
