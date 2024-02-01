@@ -1011,7 +1011,7 @@
 
             ///////////////////////////////////Mplus03/////////////////////////////////////////////////
 
-            function getBankList() {
+            function getBankList(){
                 $.ajax({
                     url: baseUrl + '/api/md-helath-bank-list',
                     type: 'GET',
@@ -1052,7 +1052,7 @@
                 var packageId = $("#package_id").val();
                 $.ajax({
                     url: baseUrl + '/api/md-helath-bank-details',
-                    type: 'GET',
+                    type: 'POST',
                     data: {
                         bank_name: selectedBank,
                         package_id: packageId

@@ -3,7 +3,7 @@
         // $my_active_packages_list;
         // $my_completed_packages_list;
         // $my_cancelled_packages_list;
-        // dd($my_active_packages_list);
+         //dd($my_active_packages_list);
         $patient_information_list = !empty($patient_information_list[0]) ? $patient_information_list[0] : '';
 
         if (!function_exists('extractNumericRange')) {
@@ -101,7 +101,7 @@
         }
     </style>
     <div class="content-wrapper">
-        <div class="container py-100px for-cards">
+        <div class="container py-135px for-cards">
             <div class="d-flex gap-3">
                 <div class="w-292">
                     @include('front.includes.sidebar-user')
@@ -375,7 +375,7 @@
                                 value="{{ !empty($patient_information_list['package_buy_for']) ? $patient_information_list['package_buy_for'] : '' }}">
                             <input type="hidden" name="package_id" id="package_id"
                                 value="{{ !empty($patient_information_list['package_id']) ? $patient_information_list['package_id'] : '' }}">
-                            <input type="hidden" name="id" id="patiant_id"
+                            <input type="hidden" name="patient_id" id="patiant_id"
                                 value="{{ !empty($patient_information_list['package_id']) ? $patient_information_list['package_id'] : '' }}">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -657,17 +657,18 @@
 
 @endsection
 @section('script')
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
-   
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+       
     <script>
         $(document).ready(function() {
             // alert('hi');
             var baseUrl = $('#base_url').val();
             var token = "{{ Session::get('login_token') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var purchaseId;
 
             $(".upPackageLi").addClass("activeClass");
             $(".upPackage").addClass("md-active");
@@ -677,10 +678,11 @@
                 let id = this.id;
                 let rawId = this.id.split('-')[1];
                 let packageId = rawId.split('?')[0];
-                let purchaseId = rawId.split('?')[1];
+                purchaseId = rawId.split('?')[1];
                 let formData = new FormData();
                 formData.append("id", packageId);
                 formData.append("purchase_id", purchaseId);
+                formData.append("patient_id", $('#patiant_id').val());
                 // alert(packageId + " " + purchaseId);
                 e.preventDefault();
                 let clickedId = id;
@@ -709,7 +711,7 @@
                         console.log(PatientInformation);
                         $('#package_buy_for').val(PatientInformation.package_buy_for);
                         $('#package_id').val(PatientInformation.package_id);
-                        $('#patiant_id').val(PatientInformation.id);
+                        $('#patiant_id').val(PatientInformation.patient_id);
                         $('#patient_full_name').val(PatientInformation.patient_full_name);
                         $('#patient_relation').val(PatientInformation.patient_relation);
                         $('#patient_email').val(PatientInformation.patient_email);
@@ -780,6 +782,8 @@
                     // form.preventDefault();
                     var formData = new FormData(form);
                     formData.append('platform_type', 'web');
+                    formData.append("patient_id", $('#patiant_id').val());
+                    formData.append("purchase_id",purchaseId);
 
                     $.ajax({
                         type: 'POST',

@@ -52,7 +52,7 @@ use App\Http\Controllers\Front\FoodProvider\UpdateFoodProviderAccount;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderMembershipController;
 use App\Http\Controllers\Front\Vendor\VendorSalesController;
 use App\Http\Controllers\admin\sales\AdminSalesController;
-use App\Models\MedicalProviderLogo;
+use App\Http\Controllers\admin\md_account\AdminMDAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -366,8 +366,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
     //Admin PAYMENTS
     Route::view('payments', 'admin/payments/payments');
     Route::view('completed-payments', 'admin/payments/completed-payments');
-    Route::view('bank-accounts', 'admin/payments/bank-accounts');
+   
     Route::view('payment-requests', 'admin/payments/payment-requests');
+
+
+    
+    Route::controller(AdminMDAccountController::class)->group(function () {
+        Route::get('bank-accounts','index');
+    });
+
+
 
     //Admin REVIEWS
 

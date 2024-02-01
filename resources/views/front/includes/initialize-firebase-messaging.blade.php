@@ -330,9 +330,9 @@
 
             const messageOtherDiv = document.createElement('div');
             messageOtherDiv.classList.add('self-msg-div', 'mb-4');
-            messageOtherDiv.innerHTML = `<p class = "bg-light card-p1 text-end" >${messageData.text}</p>`;
+            messageOtherDiv.innerHTML = `<p class = "bg-light card-p1 mb-1">${messageData.text}</p>`;
             messageOtherDiv.innerHTML +=
-                `<p class = "mb-0 card-p1 text-end" >${messageData.day_of_week + " " + messageData.current_time}</p>`;
+                `<p class = "mb-0 card-p1 fs-11 text-end">${messageData.day_of_week + " " + messageData.current_time}</p>`;
             const otherContainer = document.getElementById('messages-container');
             otherContainer.appendChild(messageOtherDiv);
             otherContainer.scrollTop = otherContainer.scrollHeight;
@@ -342,7 +342,7 @@
             messageDiv.classList.add('person-message-div', 'mb-4');
 
             const messageCard = document.createElement('div');
-            messageCard.classList.add('treatment-card', 'df-start', 'w-100', 'mb-1');
+            messageCard.classList.add('treatment-card', 'df-start', 'mb-1');
 
             const cardBody = document.createElement('div');
             cardBody.classList.add('d-flex', 'align-items-center', 'justify-content-evenly', 'gap-4');
@@ -350,6 +350,7 @@
             const image = document.createElement('img');
             image.src = '{{ asset('front/assets/img/Memorial.svg') }}';
             image.alt = '';
+            image.style.height = '35px';
 
             const messageText = document.createElement('div');
             messageText.classList.add('trmt-card-body', 'pe-4');
@@ -361,7 +362,7 @@
 
             const dayTime = document.createElement('div');
             dayTime.classList.add('day-time');
-            dayTime.innerHTML = `<p class="mb-0 card-p1">${messageData.day_of_week+" "+messageData.current_time}</p>`;
+            dayTime.innerHTML = `<p class="mb-0 card-p1 fs-11">${messageData.day_of_week+" "+messageData.current_time}</p>`;
 
             messageDiv.appendChild(messageCard);
             messageDiv.appendChild(dayTime);

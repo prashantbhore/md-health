@@ -140,28 +140,44 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="caseManager">Case Manager</label>
-                                    <p>Mehmet Coskun</p>
+                                    <p>{{!empty($patient_details->case_manager->company_name) ? $patient_details->case_manager->company_name: '' }}</p>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="caseManagerNo">Case Manager Contact</label>
-                                    <p>+90 555 555 55 55</p>
-                                    <p>mehmet.coskun@memorial.com.tr</p>
+                                    <p>{{!empty($patient_details->case_manager->mobile_no) ? $patient_details->case_manager->mobile_no: '' }}</p>
+                                    <p>{{!empty($patient_details->case_manager->email) ? $patient_details->case_manager->email: '' }}</p>
                                 </div>
 
                             </div>
                             <div class="col-md-12 mb-3">
                                 <div class="w-full d-flex align-items-center gap-3">
                                     <div class="w-50">
+                                        
                                         <label for="status" class="d-block">Status</label>
                                         <select name="status" id="status" class="w-full">
-                                            <option value="pending">Pending</option>
-                                            <option value="completed">Completed</option>
-                                            <option value="inProgress">In Progress</option>
+                                            <option value="pending" @if ($patient_details->purchase_type == 'pending') selected @endif>Pending</option>
+                                            <option value="completed" @if ($patient_details->purchase_type == 'completed') selected @endif>Completed</option>
+                                            <option value="inProgress" @if ($patient_details->purchase_type == 'in_progress') selected @endif>In Progress</option>
                                         </select>
+                                        
                                     </div>
+                                    @if ($patient_details->purchase_type == 'pending')
                                     <div class="pending w-25">
                                         Pending
                                     </div>
+                                    @endif
+
+                                    @if ($patient_details->purchase_type == 'completed')
+                                    <div class="completed w-25">
+                                        Completed
+                                    </div>
+                                    @endif
+
+                                    @if ($patient_details->purchase_type == 'in_progress')
+                                        <div class="complete w-25" style="background-color: yellow;">
+                                            In Progress
+                                        </div>
+                                    @endif
 
                                 </div>
                             </div>

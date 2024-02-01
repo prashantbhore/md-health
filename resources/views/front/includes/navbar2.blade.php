@@ -12,8 +12,11 @@ $name = 'MDHealth';
 @endsection
 
 <style>
+    body {
+        background-color: #f6f6f6;
+        background: #f6f6f6;
+    }
 
-  
     .dropdown-toggle::after {
         display: none;
 
