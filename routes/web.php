@@ -585,6 +585,7 @@ Route::controller(CommonLoginController::class)->group(function () {
     Route::post('/number-to-mobile', 'number_to_mobile');
     Route::post('/number-password-exist', 'number_password_exist');
     Route::post('/email-or-mobile-exist', 'email_or_mobile_exist');
+    Route::post('/email-exist', 'email_exist');
 });
 //     Route::post('/otp-verify','otp_verify_for_register');
 //     Route::post('/email-to-mobile','email_to_mobile');

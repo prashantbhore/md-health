@@ -171,6 +171,33 @@ class CommonLoginController extends Controller
         }
     }
 
+    // public function email_exist(Request $request)
+    // {
+    //     dd($request);
+    //     if ($request->email) {
+    //         $email_exist = CommonUserLoginTable::where('email', $request->email)
+    //             ->where('status', 'active')->first();
+    //     }
+
+    //     // if ($request->phone) {
+    //     //     $phone_exist = CommonUserLoginTable::where('mobile_no', $request->phone)
+    //     //         ->where('status', 'active')
+    //     //         ->first();
+    //     // }
+
+    //     // if ($request->mobile_no) {
+    //     //     $mobile_no_exist = CommonUserLoginTable::where('mobile_no', $request->mobile_no)
+    //     //         ->where('status', 'active')
+    //     //         ->first();
+    //     // }
+
+
+    //     if (!empty($email_exist)) {
+    //         return response()->json(['email_exist' => $email_exist]);
+    //     }
+        
+    // }
+
 
 
 
