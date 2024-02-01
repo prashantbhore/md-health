@@ -125,6 +125,7 @@ class ReportsController extends BaseController
 
 public function provider_all_reports_list()
 {
+   
     $provider_report_list = MedicalProviderReports::with(['customerPackagePurchase', 'customer', 'provider', 'provider_logo'])
         ->where('medical_provider_id', Auth::user()->id)
         ->where('status', 'active')

@@ -615,6 +615,20 @@ $.validator.addMethod("alphaOnly", function(value, element) {
                 required: true,
                 email: true,
                 spaceValidation: true,
+                // remote: {
+                //     url: base_url + "/email-exist",
+                //     headers: {
+                //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                //             "content"
+                //         ),
+                //     },
+                //     type: "post",
+                //     data: {
+                //         email: function() {
+                //             return $("#email").val();
+                //         },
+                //     },
+                // },
             },
             phoneno: {
                 required: true,
