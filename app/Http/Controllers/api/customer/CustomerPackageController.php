@@ -399,32 +399,61 @@ class CustomerPackageController extends BaseController
                     );
                 }
                 // Check if the filter contains a specific service
-                elseif (strpos($filter, 'Transportation') !== false || strpos($filter, 'Accomodition') !== false || strpos($filter, 'Tour') !== false || strpos($filter, 'Translation') !== false || strpos($filter, 'Visa Service') !== false || strpos($filter, 'Ticket Services') !== false || strpos($filter, 'Ambulance Services') !== false) {
+                if (strpos($filter, 'Transportation') !== false || strpos($filter, 'Accomodition') !== false || strpos($filter, 'Tour') !== false || strpos($filter, 'Translation') !== false || strpos($filter, 'Visa Service') !== false || strpos($filter, 'Ticket Services') !== false || strpos($filter, 'Ambulance Services') !== false) {
                     // Filter packages by the entire filter string
                     $packages->where('md_packages.other_services', 'like', '%' . $filter . '%');
                 }
 
+                // if (
+                //     strpos($filter, 'Transportation') !== false ||
+                //     strpos($filter, 'Accomodition') !== false ||
+                //     strpos($filter, 'Tour') !== false ||
+                //     strpos($filter, 'Translation') !== false ||
+                //     strpos($filter, 'Visa Service') !== false ||
+                //     strpos($filter, 'Ticket Services') !== false ||
+                //     strpos($filter, 'Ambulance Services') !== false
+                // ) {
+                //     // Separate condition for each service
+                //     if (strpos($filter, 'Accomodition') !== false) {
+                //         $packages->orWhere('md_packages.other_services', 'like', '%Accommodation%');
+                //     }
+                //     if (strpos($filter, 'Visa Service') !== false) {
+                //         $packages->orWhere('md_packages.other_services', 'like', '%Visa Services%');
+                //     }
+                //     if (strpos($filter, 'Transportation') !== false) {
+                //         $packages->orWhere('md_packages.other_services', 'like', '%Transportation%');
+                //     }
+                //     if (strpos($filter, 'Tour') !== false) {
+                //         $packages->orWhere('md_packages.other_services', 'like', '%Tour%');
+                //     }
+                //     if (strpos($filter, 'Translation') !== false) {
+                //         $packages->orWhere('md_packages.other_services', 'like', '%Translation%');
+                //     }
+                //     // Add conditions for other services similarly if needed
+                // }
+
+
                 // Assume any other case is a single price point or range
-                else {
+               
                     if (strpos($filter, '-') !== false) {
                         // Extract minimum and maximum prices
                         [$minPrice, $maxPrice] = explode('-', $filter);
 
                         // Filter packages by sale price range
-                        $packages->orWhereBetween('md_packages.sale_price', [$minPrice, $maxPrice]);
-                    } else {
-                        // Filter packages by single price point
-                        $price = (int) $filter;
-                        // Assuming the price is an integer
-                        $packages->orWhere('md_packages.sale_price', '<=', $price);
+                        $packages->whereBetween('md_packages.sale_price', [$minPrice, $maxPrice]);
                     }
-                }
+                    //  else {
+                    //     // Filter packages by single price point
+                    //     $price = (int) $filter;
+                    //     // Assuming the price is an integer
+                    //     $packages->orWhere('md_packages.sale_price', '<=', $price);
+                    // }
+              
             }
         }
 
         $packages = $packages->get();
-
-        // dd( $packages );
+// return $packages;
 
         $data = [];
         $data['package_list'] = [];
