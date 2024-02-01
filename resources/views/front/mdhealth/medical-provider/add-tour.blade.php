@@ -271,73 +271,71 @@
         })();
     </script>
 
-    <script>
-        $(document).ready(function() {
-            var old_image = $('#old_image').val();
-            // Add custom method to validate image file types
-            $.validator.addMethod("imageType", function(value, element) {
-                // Get the file extension
-                var extension = value.split('.').pop().toLowerCase();
-                // Check if the extension is one of the allowed image types
-                return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
-            }, "Please select a valid image file (JPEG, JPG, PNG)");
-
-            $('#add_acommodition').validate({
-                // Rules for validation
-                rules: {
-                    tour_name: {
-                        required: true
-                    },
-                    tour_description: {
-                        required: true
-                    },
-                    tour_days: {
-                        required: true,
-                        number: true
-                    },
-                    tour_image_path: {
-                        required: function(element) {
-                            // Check if an old image exists
-                            var oldImage = $("#old_image").val();
-
-                            // Require new image if no old image exists
-                            return oldImage === '';
-                        },
-                        imageType: true
-                    },
-                    tour_price: {
-                        required: true,
-                        number: true
-                    },
-                    // Add rules for other fields as needed
-                },
-                // Messages for validation errors
-                messages: {
-                    tour_name: {
-                        required: "Please enter tour name"
-                    },
-                    tour_description: {
-                        required: "Please enter tour description"
-                    },
-                    tour_days: {
-                        required: "Please enter number of days",
-                        number: "Please enter a valid number"
-                    },
-                    tour_image_path: {
-                        required: "Please upload an image"
-                    },
-                    tour_price: {
-                        required: "Please enter tour price",
-                        number: "Please enter a valid number"
-                    },
-                    // Add messages for other fields as needed
-                },
-                // Handle submission and other settings as needed
-                submitHandler: function(form) {
-                    // If form is valid, you can submit the form here
-                    form.submit();
-                }
-            });
+<script>
+    $(document).ready(function() {
+        $.validator.addMethod("imageType", function(value, element) {
+            if (value === '') {
+                return true;
+            }
+            var extension = value.split('.').pop().toLowerCase();
+            return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
+        }, "Please select a valid image file (JPEG, JPG, PNG)");
+    
+        $('#tour_image_path').on('change', function() {
+            // Trigger validation only when a new image is selected
+            $('#add_acommodition').validate().element('#tour_image_path');
         });
+    
+        $('#add_acommodition').validate({
+            rules: {
+                tour_name: {
+                    required: true
+                },
+                tour_description: {
+                    required: true
+                },
+                tour_days: {
+                    required: true,
+                    number: true
+                },
+                tour_image_path: {
+                    required: function(element) {
+                        return $('#old_image').val() === '' || $(element).val() !== '';
+                    },
+                    imageType: true 
+                },
+                tour_price: {
+                    required: true,
+                    number: true
+                },
+            },
+            messages: {
+                tour_name: {
+                    required: "Please enter tour name"
+                },
+                tour_description: {
+                    required: "Please enter tour description"
+                },
+                tour_days: {
+                    required: "Please enter number of days",
+                    number: "Please enter a valid number"
+                },
+                tour_image_path: {
+                    required: "Please upload tour image",
+                    imageType: "Please select a valid image file (JPEG, JPG, PNG)"
+                },
+                tour_price: {
+                    required: "Please enter tour price",
+                    number: "Please enter a valid number"
+                },
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
     </script>
+    
+    
+    
 @endsection

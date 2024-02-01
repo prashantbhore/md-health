@@ -280,14 +280,21 @@
 
     <script>
         $(document).ready(function() {
-            var old_image = $('#old_image').val();
-            // Add custom method to validate image file types
+            
+
             $.validator.addMethod("imageType", function(value, element) {
-                // Get the file extension
-                var extension = value.split('.').pop().toLowerCase();
-                // Check if the extension is one of the allowed image types
-                return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
-            }, "Please select a valid image file (JPEG, JPG, PNG)");
+            if (value === '') {
+                return true;
+            }
+            var extension = value.split('.').pop().toLowerCase();
+            return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
+        }, "Please select a valid image file (JPEG, JPG, PNG)");
+    
+        $('#vehicle_image_path').on('change', function() {
+            // Trigger validation only when a new image is selected
+            $('#add_acommodition').validate().element('#vehicle_image_path');
+        });
+    
 
             $('#add_acommodition').validate({
                 rules: {
@@ -306,13 +313,9 @@
                     },
                     vehicle_image_path: {
                         required: function(element) {
-                            // Check if an old image exists
-                            var oldImage = $("#old_image").val();
-
-                            // Require new image if no old image exists
-                            return oldImage === '';
-                        },
-                        imageType: true
+                        return $('#old_image').val() === '' || $(element).val() !== '';
+                    },
+                    imageType: true 
                     },
                     // Add rules for other fields if needed
                 },
@@ -331,7 +334,8 @@
                         number: "Please enter a valid number"
                     },
                     vehicle_image_path: {
-                        required: "Please select a vehicle picture"
+                        required: "Please upload vehicle image",
+                    imageType: "Please select a valid image file (JPEG, JPG, PNG)"
                     }
                     // Add custom error messages for other fields if needed
                 },
