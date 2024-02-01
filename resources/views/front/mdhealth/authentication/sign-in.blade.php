@@ -38,6 +38,13 @@
         background-color: #f6f6f6;
         background: #f6f6f6;
     }
+
+    #phoneno-error,
+    #password-error{
+        position: absolute;
+        bottom: -22px;
+        right: 0;
+    }
 </style>
 @php
 $country = App\Models\Country::get();
@@ -66,9 +73,9 @@ $country = App\Models\Country::get();
                         <input type="hidden" name="login_type" value="login">
 
                         <!-- PHONE NO. -->
-                        <div class="mb-3">
+                        <div class="mb-3 ">
                             <label for="phoneno" class="form-label">Phone Number</label>
-                            <div class="input-group">
+                            <div class="input-group position-relative">
                                 @if (!empty($country))
                                 <select class="form-select" name="countrycode" id="countrycode">
                                     <option value="+90">+90</option>
@@ -84,7 +91,7 @@ $country = App\Models\Country::get();
 
                         <input type="hidden" class="form-control" name="number" id="number" placeholder="Phone Number">
 
-                        <div class="mb-3 hide-eye-div">
+                        <div class="mb-3 hide-eye-div position-relative">
                             <label for="Password" class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                             <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password "></span>

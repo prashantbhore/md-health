@@ -128,6 +128,15 @@
         width: 150px;
         height: auto;
     }
+    .mdi-eye-off::before,
+    .mdi-eye::before {
+        font-size: 19px;
+    }
+
+    .hide-eye-div .mdi {
+    top: 48px;
+}
+
 </style>
     <div class="content-wrapper">
         <div class="container py-100px for-cards">
@@ -161,11 +170,15 @@
                                             value="{{ !empty($system_users['mobile_no']) ? $system_users['mobile_no'] : '' }}">
                                     </div>
 
-                                    <div class="form-group mb-4 {{ !empty($system_users['id']) ? ' d-none' : '' }}">
-                                        <label class="form-label mb-3">Enter Password</label>
-                                        <input type="text" class="form-control" name="password" id="password"
+                                    <div class="form-group position-relative mb-4 {{ !empty($system_users['id']) ? ' d-none' : '' }}">
+                                        <div class="hide-eye-div">
+                                            <label class="form-label mb-3">Enter Password</label>
+                                            <input type="password" class="form-control" name="password" id="password"
                                             placeholder="**********"
                                             value="{{ !empty($system_users['password']) ? $system_users['password'] : '' }}">
+                                            <span toggle="#password" class="mdi mdi-eye-off field-icon toggle-password"></span>
+                                        </div>
+
                                     </div>
 
                                     <div class="form-group mb-4">
