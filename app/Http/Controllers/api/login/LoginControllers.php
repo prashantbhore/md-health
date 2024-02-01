@@ -151,6 +151,13 @@ class LoginControllers extends BaseController
             'platform_type' => 'required',
             'password' => 'required'
         ]);
+        
+        if (strlen($request->password) <= 8) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Password must be at least 8 characters long.',
+            ]);
+        }
 
         $validation_message = '';
 
@@ -224,7 +231,7 @@ class LoginControllers extends BaseController
 
                     return response()->json([
                         'status' => 404,
-                        'message' => 'Unauthorised.',
+                        'message' => 'Credentials not match.',
                     ]);
                 }
             } else {
@@ -279,7 +286,7 @@ class LoginControllers extends BaseController
 
                     return response()->json([
                         'status' => 404,
-                        'message' => 'Unauthorised.',
+                        'message' => 'Credentials not match.',
                     ]);
                 }
             }
@@ -337,7 +344,7 @@ class LoginControllers extends BaseController
 
                     return response()->json([
                         'status' => 404,
-                        'message' => 'Unauthorised.',
+                        'message' => 'Credentials not match.',
                     ]);
                 }
             } else {
@@ -401,7 +408,7 @@ class LoginControllers extends BaseController
 
                     return response()->json([
                         'status' => 404,
-                        'message' => 'Unauthorised.',
+                        'message' => 'Credentials not match.',
                     ]);
                 }
             }

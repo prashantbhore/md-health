@@ -2554,6 +2554,7 @@ class CustomerPackageController extends BaseController
             ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', 'md_master_cities.id')
             ->leftjoin('md_product_category', 'md_packages.treatment_category_id', 'md_product_category.id')
             ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', 'md_product_sub_category.id')
+            ->orderBy('md_customer_purchase_details.id', 'desc')
             ->where('md_customer_purchase_details.customer_id', Auth::user()->id)
             ->get();
 
@@ -3502,6 +3503,7 @@ class CustomerPackageController extends BaseController
         $CustomerDocuments = CustomerDocuments::where('status', 'active')
             ->select('id', 'customer_document_image_path', 'customer_document_image_name', 'package_id')
             ->where('package_id', $request->package_id)
+            ->orderBy('id','desc')
             ->where('customer_id', Auth::user()->id)
             ->get();
 

@@ -218,9 +218,17 @@ class UpdateCustomerProfileController extends BaseController
             'new_password' => 'required',
             'retype_new_password' => 'required',
         ]);
+        
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        if (strlen($request->new_password) <= 8) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Password must be at least 8 characters long.',
+            ]);
         }
 
         if ($request->new_password == $request->retype_new_password) {
@@ -254,7 +262,7 @@ class UpdateCustomerProfileController extends BaseController
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Something went wrong. new password and re-type password does not matched.',
+                'message' => 'Password is not match.',
             ]);
         }
     }
