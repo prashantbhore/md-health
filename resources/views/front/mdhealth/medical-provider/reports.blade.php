@@ -72,13 +72,13 @@
     }
 
     .prev-img-div h5 {
+        font-family: 'CamptonLight';
         color: #979797;
-        font-family: CamptonBook;
         font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        letter-spacing: -0.64px;
+        font-weight: 600;
+        line-height: 19px;
+        letter-spacing: -0.04em;
+        margin-left: 1.5rem;
     }
 
     .error-message {
@@ -149,6 +149,35 @@
         color: gray;
         font-family: CamptonLight !important;
     }
+
+    #previewPDF {
+        width: 100%;
+        background: #fbfbfb;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 3px;
+    }
+
+    #previewPDF img {
+        height: 40px;
+        margin-top: 0px;
+    }
+
+    #previewPDF span {
+        font-family: 'CamptonBook';
+        letter-spacing: -0.04em;
+    }
+
+    .ri-close-line:before {
+        content: "\eb99";
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 50%;
+        padding: 2px;
+        color: #db2828;
+    }
 </style>
 
 <div class="content-wrapper">
@@ -194,18 +223,22 @@
                                 </div>
 
                                 <div class="form-group mb-5">
-                                    <label class="form-label mb-3">Upload Report File</label>
-                                    <div class="form-group my-3">
-                                        <input type="file" name="report_path" class="form-control text-dark" id="fileInput" onchange="previewFile()">
-                                    </div>
-                                    <div class="prev-img-div d-flex align-items-end gap-3" style="position: relative;">
-                                        <img id="previewImage" src="front/assets/img/uploadHere.png" alt="image" class="cp up-image">
-                                        <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;">&times;</button>
-                                        <div id="previewPDF" style="display: none;">
-                                            <img src="front/assets/img/pdf2.svg" alt="pdf-icon" style="width: 50px; height: 50px;">
-                                            <span id="pdfFileName"></span>
+                                    <label class="form-label d-block mb-3">Upload Report File</label>
+                                    <div class="d-flex">
+
+                                        <label for="fileInput">
+                                            <input type="file" name="report_path" class="form-control text-dark d-none" id="fileInput" onchange="previewFile()">
+                                            <img id="previewImage" src="{{asset('front/assets/img/uploadHere.png')}}" alt="image" class="cp up-image">
+                                        </label>
+                                        <div class="prev-img-div d-flex align-items-end gap-3 w-100" style="position: relative;">
+                                            <!-- <img id="previewImage" src="{{asset('front/assets/img/uploadHere.png')}}" alt="image" class="cp up-image"> -->
+                                            <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;"><i class="ri-close-line"></i></button>
+                                            <div id="previewPDF" style="display: none;">
+                                                <img src="{{asset('front/assets/img/pdf2.svg')}}" alt="pdf-icon">
+                                                <span id="pdfFileName"></span>
+                                            </div>
+                                            <h5 id="valText">*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
                                         </div>
-                                        <h5>*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
                                     </div>
                                     <div class="error-message" id="reportPathError"></div>
                                 </div>
@@ -267,6 +300,7 @@
         var removePreviewBtn = document.getElementById('removePreviewBtn');
         var previewPDF = document.getElementById('previewPDF');
         var pdfFileName = document.getElementById('pdfFileName');
+        var valText = document.getElementById('valText')
 
         var file = fileInput.files[0];
         var reader = new FileReader();
@@ -277,11 +311,13 @@
                 previewImage.style.display = 'block';
                 removePreviewBtn.style.display = 'block';
                 previewPDF.style.display = 'none';
+                valText.style.display = 'none';
             } else if (file.type === 'application/pdf') {
-                previewPDF.style.display = 'block';
+                previewPDF.style.display = 'flex';
                 pdfFileName.textContent = file.name;
                 previewImage.style.display = 'none';
-                removePreviewBtn.style.display = 'block';
+                removePreviewBtn.style.display = 'flex';
+                valText.style.display = 'none';
             } else {
                 // Ignore other file types (optional)
                 previewImage.src = 'front/assets/img/default-img.png';
@@ -428,7 +464,7 @@
 </script>
 
 <script>
-    function disableButton(){
+    function disableButton() {
         document.getElementById("uploadBtn").disabled = true;
         document.getElementById("uploadBtn").innerHTML = "Uploading...";
         setTimeout(function() {
