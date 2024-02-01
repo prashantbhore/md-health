@@ -199,42 +199,41 @@
                                 <h6 class="section-heading">Add New Reports</h6>
                             </div>
 
-                            <form id="uploadForm" method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data" id="reportForm">
+                            <form id="reportForm" method="POST" action="{{ route('add.report') }}" enctype="multipart/form-data">
                                 @csrf
-
+                            
                                 <div class="form-group mb-4">
                                     <label class="form-label mb-3">Report Title</label>
                                     <input type="text" name="report_title" class="form-control" placeholder="Write Here Please" />
                                     <div class="error-message" id="reportTitleError"></div>
                                 </div>
-
+                            
                                 <div class="form-group d-flex flex-column mb-4">
                                     <label class="form-label mb-3">Patient</label>
-                                    <select required name="customer_package_purchage_id" class="form-select" id="patientSelect">
+                                    <select name="customer_package_purchage_id" class="form-select" id="patientSelect">
                                         <option value="">Choose</option>
                                         @if (!empty($patient_list))
-                                        @foreach ($patient_list as $patient)
-                                        <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
-                                            {{ !empty($patient['name']) ? $patient['name'] : '' }}
-                                        </option>
-                                        @endforeach @endif
+                                            @foreach ($patient_list as $patient)
+                                                <option value="{{ !empty($patient['id']) ? $patient['id'] : '' }}">
+                                                    {{ !empty($patient['name']) ? $patient['name'] : '' }}
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                     <div class="error-message" id="patientError"></div>
                                 </div>
-
+                            
                                 <div class="form-group mb-5">
                                     <label class="form-label d-block mb-3">Upload Report File</label>
                                     <div class="d-flex">
-
                                         <label for="fileInput">
                                             <input type="file" name="report_path" class="form-control text-dark d-none" id="fileInput" onchange="previewFile()">
-                                            <img id="previewImage" src="{{asset('front/assets/img/uploadHere.png')}}" alt="image" class="cp up-image">
+                                            <img id="previewImage" src="{{ asset('front/assets/img/uploadHere.png') }}" alt="image" class="cp up-image">
                                         </label>
                                         <div class="prev-img-div d-flex align-items-end gap-3 w-100" style="position: relative;">
-                                            <!-- <img id="previewImage" src="{{asset('front/assets/img/uploadHere.png')}}" alt="image" class="cp up-image"> -->
                                             <button type="button" onclick="removePreview()" id="removePreviewBtn" style="position: absolute; top: 5px; right: 5px; background-color: transparent; border: none; color: red; cursor: pointer; display: none;"><i class="ri-close-line"></i></button>
                                             <div id="previewPDF" style="display: none;">
-                                                <img src="{{asset('front/assets/img/pdf2.svg')}}" alt="pdf-icon">
+                                                <img src="{{ asset('front/assets/img/pdf2.svg') }}" alt="pdf-icon">
                                                 <span id="pdfFileName"></span>
                                             </div>
                                             <h5 id="valText">*Document formats you can upload: PDF, PNG, JPEG, TIFF</h5>
@@ -242,12 +241,12 @@
                                     </div>
                                     <div class="error-message" id="reportPathError"></div>
                                 </div>
-
+                            
                                 <div class="section-btns mb-5">
-                                    <button type="button" class="btn save-btn-black" id="uploadBtn" onclick="disableButton()">Upload Reports</button>
+                                    <button type="submit" class="btn save-btn-black" id="uploadBtn">Upload Reports</button>
                                 </div>
-
                             </form>
+                            
 
                         </div>
                     </div>
@@ -383,7 +382,7 @@
         var reportTitle = $('input[name="report_title"]').val().trim();
         if (reportTitle === '') {
             isValid = false;
-            $('#reportTitleError').text('Report Title is required.');
+            $('#reportTitleError').text('Report Title field is not filled.');
         } else {
             $('#reportTitleError').text('');
         }
@@ -410,7 +409,7 @@
     }
 
     // Submit form with validation
-    $('#reportForm').submit(function(event) {
+    $('#reportForm').submit(function(event){
         if (!validateForm()) {
             event.preventDefault();
         }
@@ -461,15 +460,15 @@
     // });
 </script>
 
-<script>
-    function disableButton() {
-        document.getElementById("uploadBtn").disabled = true;
-        document.getElementById("uploadBtn").innerHTML = "Uploading...";
-        setTimeout(function() {
-            document.getElementById("uploadForm").submit();
-        }, 100);
-    }
-</script>
+// <script>
+//     function disableButton() {
+//         document.getElementById("uploadBtn").disabled = true;
+//         document.getElementById("uploadBtn").innerHTML = "Uploading...";
+//         setTimeout(function() {
+//             document.getElementById("uploadForm").submit();
+//         }, 100);
+//     }
+// </script>
 
 
 @endsection
