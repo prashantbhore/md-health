@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\MediaTrait;
+use Illuminate\Support\Facades\Session;
 use Str;
 use Storage;
 
@@ -34,6 +35,7 @@ class UpdateProfileController extends Controller
             ->select(
                 'company_name',
                 'city_id',
+                'country_id',
                 'email',
                 'mobile_no',
                 'tax_no',
@@ -53,6 +55,7 @@ class UpdateProfileController extends Controller
 
             $medical_provider_list['company_name'] = ($medical_provider_list->company_name);
             $medical_provider_list['city_id'] = ($medical_provider_list->city_id);
+            $medical_provider_list['country_id'] = ($medical_provider_list->country_id);
             $medical_provider_list['email'] = ($medical_provider_list->email);
             $medical_provider_list['mobile_no'] = ($medical_provider_list->mobile_no);
             $medical_provider_list['tax_no'] = ($medical_provider_list->tax_no);
@@ -144,8 +147,12 @@ class UpdateProfileController extends Controller
         $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::guard('md_health_medical_providers_registers')->user()->id)->update($medical_provider_input);
         $medical_provider_update = MedicalProviderRegistrater::where('id', Auth::guard('md_health_medical_providers_registers')->user()->id)->first();
         // return Auth::guard('md_health_medical_providers_registers')->user()->id;
-        // dd($medical_provider_update);
+        // dd(Session::get('user')->company_name);
         if (!empty($medical_provider_update)) {
+            Session::get('user')->company_name=$request->company_name;
+        }
+        if (!empty($medical_provider_update)) {
+
             $md_provider_input_image_logo = [];
             $md_provider_input_image_logo['medical_provider_id'] = !empty($medical_provider_update->id) ? $medical_provider_update->id : '';
 
@@ -242,7 +249,7 @@ class UpdateProfileController extends Controller
         if (!empty($delete_ProviderImagesVideos)) {
             return response()->json([
                 'status' => 200,
-                'message' => 'data deleted successfully.'
+                'message' => 'Product picture deleted successfully.'
             ]);
         } else {
             return response()->json([

@@ -161,7 +161,7 @@
                                 <div class="form-group mb-5 position-relative" >
                                     <label class="form-label mb-3">Hotel Picture</label>
                                     <div class="form-group mb-3 ">
-                                        <input type="file"  name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" />
+                                        <input type="file"  name="hotel_image_path" id="hotel_image_path" class="form-control text-dark" oninput="pic.src=window.URL.createObjectURL(this.files[0])" accept="image/*"/>
                                         <img src="{{asset('front/assets/img/uploadType.png')}}" alt="" id="up-abs1" class="up-abs" />
                                     </div>
                                     <div class="prev-img-div">
@@ -181,7 +181,9 @@
                                 <div class="form-group mb-4 section-heading-div">
                                     <label class="form-label mb-3">Distance From Hospital</label>
                                     <div class="input-icon-div">
-                                        <input type="text" class="form-control" name="distance_from_hospital" id="distance_from_hospital" placeholder="0" value="{{ !empty($hotel_details['distance_from_hospital']) ? $hotel_details['distance_from_hospital'] : '' }}">
+                                        <input type="text" class="form-control"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '');"
+                                         name="distance_from_hospital" id="distance_from_hospital" placeholder="0" value="{{ !empty($hotel_details['distance_from_hospital']) ? $hotel_details['distance_from_hospital'] : '' }}">
                                         <span class="input-icon">KM</span>
                                     </div>
                                 </div>
@@ -266,6 +268,11 @@
 
 <!-- Include jQuery Validation Plugin -->
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+
 
 <script>
     $(".mpOtherServicesLi").addClass("activeClass");
@@ -297,69 +304,78 @@
 
 
     $(document).ready(function() {
-        var old_image = $('#old_image').val();
-        // Validate the form with id "add_acommodition"
-        $("#add_acommodition").validate({
-            rules: {
-                hotel_name: {
-                    required: true
-                },
-                hotel_address: {
-                    required: true
-                },
-                hotel_per_night_price: {
-                    required: true,
-                    number: true
-                },
-                distance_from_hospital: {
-                    required: true,
-                    // number: true
-                },
-                hotel_stars: {
-                    required: true,
-                    // number: true
-                },
-                hotel_image_path: {
-                    required: function(element) {
-                        // Check if an old image exists
-                        var oldImage = $("#old_image").val();
+    var old_image = $('#old_image').val();
+    // Add custom method to validate image file types
+    $.validator.addMethod("imageType", function(value, element) {
+        // Get the file extension
+        var extension = value.split('.').pop().toLowerCase();
+        // Check if the extension is one of the allowed image types
+        return ['jpg', 'jpeg', 'png'].indexOf(extension) !== -1;
+    }, "Please select a valid image file (JPEG, JPG, PNG)");
 
-                        // Require new image if no old image exists
-                        return oldImage === '';
-                    }
-                }
-                // Add rules for other fields as needed
+    // Validate the form with id "add_acommodition"
+    $("#add_acommodition").validate({
+        rules: {
+            hotel_name: {
+                required: true
             },
-            messages: {
-                hotel_name: {
-                    required: "Please enter the hotel name"
-                },
-                hotel_address: {
-                    required: "Please enter the hotel address"
-                },
-                hotel_per_night_price: {
-                    required: "Please enter the price",
-                    number: "Please enter a valid number"
-                },
-                distance_from_hospital: {
-                    required: "Please enter the distance",
-                    // number: "Please enter a valid number"
-                },
-                hotel_stars: {
-                    required: "Please select stars",
-                    // number: "Please enter a valid number"
-                },
-                hotel_image_path: {
-                    required: "Please select a hotel picture"
-                }
-                // Add custom messages for other fields as needed
+            hotel_address: {
+                required: true
             },
-            submitHandler: function(form) {
-                // If the form is valid, you can submit it here
-                form.submit();
+            hotel_per_night_price: {
+                required: true,
+                number: true
+            },
+            distance_from_hospital: {
+                required: true,
+                number: true
+            },
+            hotel_stars: {
+                required: true,
+                // number: true
+            },
+            hotel_image_path: {
+                required: function(element) {
+                    // Check if an old image exists
+                    var oldImage = $("#old_image").val();
+
+                    // Require new image if no old image exists
+                    return oldImage === '';
+                },
+                imageType: true
+            },
+            // Add rules for other fields as needed
+        },
+        messages: {
+            hotel_name: {
+                required: "Please enter the hotel name"
+            },
+            hotel_address: {
+                required: "Please enter the hotel address"
+            },
+            hotel_per_night_price: {
+                required: "Please enter the price",
+                number: "Please enter a valid number"
+            },
+            distance_from_hospital: {
+                required: "Please enter the distance",
+                number: "Please enter a valid number"
+            },
+            hotel_stars: {
+                required: "Please select stars",
+                // number: "Please enter a valid number"
+            },
+            hotel_image_path: {
+                required: "Please select a hotel picture"
             }
-        });
+            // Add custom messages for other fields as needed
+        },
+        submitHandler: function(form) {
+            // If the form is valid, you can submit it here
+            form.submit();
+        }
     });
+});
 </script>
 
 

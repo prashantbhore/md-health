@@ -70,7 +70,7 @@ $country = App\Models\Country::get();
                             <div class="input-group">
                                 @if (!empty($country))
                                 <select class="form-select" name="countrycode" id="countrycode">
-                                    <option value=""></option>
+                                    <option value="+90">+90</option>
                                     @foreach ($country as $country)
                                     <option value="{{ $country->country_code }}">{{ $country->country_code }}
                                     </option>

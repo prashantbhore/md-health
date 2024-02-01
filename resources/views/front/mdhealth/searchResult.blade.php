@@ -804,15 +804,16 @@
                         'X-CSRF-TOKEN': csrfToken
                     },
                     beforeSend: function() {
-                        $('#fav-btn' + packageId).attr('disabled', true);
-                        $('#fav-btn' + packageId).html(
+                        $('#fav-btn_' + packageId).attr('disabled', true);
+                        $('#fav-btn_' + packageId).html(
                             '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
                         );
                     },
                     success: function(response) {
 
-                        $('#fav-btn' + packageId).attr('disabled', false);
-                        $('#other').html(
+                        $('#fav-btn_' + packageId).attr('disabled', false);
+                        
+                        $('#fav-btn_' + packageId).html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
 
 
@@ -829,7 +830,7 @@
                     },
 
                     error: function(xhr, status, error) {
-                        $('#fav-btn' + packageId).attr('disabled', false);
+                        $('#fav-btn_' + packageId).attr('disabled', false);
                         $('#other').html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
                         alert('Error:', error);

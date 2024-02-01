@@ -71,7 +71,7 @@ class AddNewAcommoditionController extends BaseController {
                 // }
                 return response()->json( [
                     'status' => 200,
-                    'message' => 'Hotel Acommodition created successfully.',
+                    'message' => 'Hotel Accommodation created successfully.',
                     'AddNewAcommodition' => $AddNewAcommodition,
                 ] );
             } else {
@@ -80,7 +80,7 @@ class AddNewAcommoditionController extends BaseController {
                 // }
                 return response()->json( [
                     'status' => 404,
-                    'message' => 'Acommodition not created.',
+                    'message' => 'Accommodation not created.',
                 ] );
             }
         } else {
@@ -118,13 +118,13 @@ class AddNewAcommoditionController extends BaseController {
             if ( !empty( $AddNewAcommodition ) ) {
                 return response()->json( [
                     'status' => 200,
-                    'message' => 'Hotel Acommodition created successfully.',
+                    'message' => 'Hotel Accommodation created successfully.',
                     'AddNewAcommodition' => $AddNewAcommodition,
                 ] );
             } else {
                 return response()->json( [
                     'status' => 404,
-                    'message' => 'Acommodition not created.',
+                    'message' => 'Accommodation not created.',
                 ] );
             }
         }

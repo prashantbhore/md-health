@@ -35,10 +35,10 @@ function countdownTimer(duration) {
 
 // countdownTimer(timerDuration);
 $(document).ready(function () {
-    $("#phoneno").attr('disabled',true);
+    // $("#phoneno").attr('disabled',true);
 });
 $(document).on("change", "#countrycode", function () {
-    $("#phoneno").attr('disabled',false);
+    // $("#phoneno").attr('disabled',false);
 });
 $(document).on("keyup", "#phoneno", function () {
     var countrycode = $("#countrycode").val();
