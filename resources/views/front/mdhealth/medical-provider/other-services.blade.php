@@ -53,7 +53,7 @@
                             <div class="treatment-card df-start w-100 mb-5" id="div_{{ $hotel_detail['id'] }}">
                                 <div class="row card-row align-items-center w-100">
                                     <div class="col-md-1 df-center">
-                                        <img src="{{ $hotel_detail['hotel_image_path'] }}" alt="" class="tour-img">
+                                        <img src="{{ !empty($hotel_detail['hotel_image_path'])?$hotel_detail['hotel_image_path']:asset('front/assets/img/default-img.png') }}" alt="" class="tour-img">
                                     </div>
                                     <div class="col-md-8 justify-content-start">
                                         <div class="trmt-card-body">
@@ -102,7 +102,7 @@
                             <div class="treatment-card df-start w-100 mb-4" id="divt_{{ $vehicle_detail['id'] }}">
                                 <div class="row card-row align-items-center w-100">
                                     <div class="col-md-1 df-center">
-                                        <img src="{{ url( '/' ) . Storage::url($vehicle_detail['vehicle_image_path']) }}" alt="image" class="transport-img">
+                                        <img src="{{ !empty($vehicle_detail['vehicle_image_path'])?url( '/' ) . Storage::url($vehicle_detail['vehicle_image_path']):asset('front/assets/img/default-img.png') }}" alt="image" class="transport-img">
                                     </div>
                                     <div class="col-md-8 justify-content-start">
                                         <div class="trmt-card-body">
@@ -154,7 +154,7 @@
                             <div class="treatment-card df-start w-100 mb-4" id="divtr_{{ $tour_detail['id'] }}">
                                 <div class="row card-row align-items-center w-100">
                                     <div class="col-md-1 df-center">
-                                        <img src="{{ !empty($tour_detail['tour_image_path']) ? $tour_detail['tour_image_path'] : 'front/assets/img/Memorial.svg' }}" alt="" class="tour-img">
+                                        <img src="{{ !empty($tour_detail['tour_image_path']) ? $tour_detail['tour_image_path'] : asset('front/assets/img/default-img.png') }}" alt="" class="tour-img">
                                     </div>
                                     <div class="col-md-8 justify-content-start">
                                         <div class="trmt-card-body">

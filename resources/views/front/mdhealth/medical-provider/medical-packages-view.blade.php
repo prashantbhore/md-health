@@ -1084,6 +1084,10 @@
                 .on('input', function() {
                     updatePackagePrice();
                 });
+            $('.form-check-input')
+                .on('change', function() {
+                    updatePackagePrice();
+                });
         });
     </script>
 @endsection

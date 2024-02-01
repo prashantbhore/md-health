@@ -11,6 +11,7 @@ use App\Models\CustomerPaymentDetails;
 use App\Models\CustomerPurchaseDetails;
 use App\Models\CustomerRegistration;
 use App\Models\MDCoins;
+use App\Models\MedicalProviderRegistrater;
 use App\Models\Messages;
 use App\Models\Packages;
 use App\Models\PatientInformation;
@@ -24,7 +25,6 @@ use Illuminate\Support\Facades\Http;
 use Session;
 use Storage;
 use Validator;
-use App\Models\MedicalProviderRegistrater;
 
 class CustomerPackageController extends Controller {
     use MediaTrait;
@@ -1203,7 +1203,7 @@ class CustomerPackageController extends Controller {
                         'sale_price' => 'required',
                         'pending_payment' => 'required',
                     ] );
-                    $customer_id =  Auth::guard( 'md_customer_registration' )->user();
+                    $customer_id = Auth::guard( 'md_customer_registration' )->user();
                     if ( !empty( $customer_id ) ) {
                         $customer_id = $customer_id->id;
                     } else {
@@ -1338,7 +1338,7 @@ class CustomerPackageController extends Controller {
                                         src="' . asset( 'front/assets/img/Location.svg' ) . '" alt="" />
                                     ' . $fav[ 'city_name' ] . '</p>
                                 <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                                    '. 'Treatment period ' . $fav[ 'treatment_period_in_days' ] . ' days' .'</p>
+                                    ' . 'Treatment period ' . $fav[ 'treatment_period_in_days' ] . ' days' . '</p>
                             </div>
                             <div onclick="removeFromFavourite(' . $fav[ 'id' ] . ');"
                                 class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1363,7 +1363,7 @@ class CustomerPackageController extends Controller {
                     $token = Session::get( 'login_token' );
 
                     if ( !empty( $token ) ) {
-                        $data = $this->apiService->getData( $token, url( '/api/md-customer-favourite-list-web' ), [ 'module_type'=>$request->module_type ], 'POST' );
+                        $data = $this->apiService->getData( $token, url( '/api/md-customer-favourite-list-web' ), [ 'module_type' => $request->module_type ], 'POST' );
                         // dd( $data );
                         if ( !empty( $data ) ) {
                             if ( $data[ 'status' ] == '200' ) {
@@ -1392,7 +1392,7 @@ class CustomerPackageController extends Controller {
                             src="' . asset( 'front/assets/img/Location.svg' ) . '" alt="" />
                         ' . $fav[ 'city_name' ] . '</p>
                     <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
-                        '. 'Treatment period ' . $fav[ 'treatment_period_in_days' ] . ' days' .'</p>
+                        ' . 'Treatment period ' . $fav[ 'treatment_period_in_days' ] . ' days' . '</p>
                 </div>
                 <div onclick="removeFromFavourite(' . $fav[ 'id' ] . ');"
                     class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1804,7 +1804,7 @@ class CustomerPackageController extends Controller {
 
                                     $conversation_id = mt_rand( 100000000, 999999999 );
                                     $body = $request->all();
-                                    $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
+                                    $plainArray = $body instanceof \Illuminate\Support\Collection  ? $body->toArray() : $body;
                                     $plainArray[ 'conversation_id' ] = strval( $conversation_id );
 
                                     $response_data = $this->apiService->getData( Session::get( 'login_token' ), url( '/api/md-customer-purchase-package' ), $plainArray, 'POST' );

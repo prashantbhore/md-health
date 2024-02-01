@@ -63,7 +63,7 @@
                     Your Wallet
                         <a href="{{url('user-wallet')}}" class="fw-800 d-flex align-items-center gap-1 text-decoration-none text-dark mt-3">
                             <img src="{{asset('front/assets/img/backPage.png')}}" alt="">
-                            <p class="mb-0">Back Wallet</p>
+                            <p class="card-h1 mb-0">Back Wallet</p>
                         </a>
                     </h5>
                     <div class="card-body mb-4">
@@ -140,13 +140,13 @@
                             </div>
 
                             <div class="section-btns">
-                                <button type="submit" id="submitButton" class="black-plate bg-black text-white fw-700 w-100">Send Invite Request</button>
+                                <button type="submit" id="submitButton" class="btn save-btn-black">Send Invite Request</button>
                             </div>
 
                         </form>
 
                          {{-- <div class="section-btns ">
-                                <a href="javascript:void(0);" class="black-plate bg-black text-white fw-700 w-100">Send Invite Request</a>
+                                <a href="javascript:void(0);" class="btn save-btn-black">Send Invite Request</a>
                             </div> --}}
 
                         

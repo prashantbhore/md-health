@@ -72,20 +72,24 @@ class ReportsController extends BaseController
 
 
 
-    public function patient_package_purchage_list()
-    {
-        $patientList = CustomerPurchaseDetails::where('provider_id',Auth::user()->id)->with(['customer', 'package'])->where('status', 'active')->get();
+  public function patient_package_purchage_list()
+{
+    $patientList = CustomerPurchaseDetails::where('provider_id', Auth::user()->id)
+        ->with(['customer', 'package'])
+        ->where('status', 'active')
+        ->get();
 
-        if (!empty($patientList)) {
-            $formattedList = [];
+    if (!empty($patientList)) {
+        $formattedList = [];
 
-            foreach ($patientList as $purchase) {
+        foreach ($patientList as $purchase) {
+            // Check if customer and package exist before accessing their properties
+            if ($purchase->customer && $purchase->package) {
                 $customerPurchaseId = $purchase->id;
                 $customerId = $purchase->customer->id;
                 $packageId = $purchase->package->id;
                 $patientName = $purchase->customer->full_name;
                 $packageName = $purchase->package->package_name;
-
 
                 $id = implode(',', [$customerPurchaseId, $customerId, $packageId]);
                 $name = $patientName . ' - ' . $packageName;
@@ -95,7 +99,9 @@ class ReportsController extends BaseController
                     'name' => $name,
                 ];
             }
+        }
 
+        if (!empty($formattedList)) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Patient package Purchase list found.',
@@ -104,10 +110,17 @@ class ReportsController extends BaseController
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'Something went wrong. Patient package Purchase list not found.',
+                'message' => 'No valid customer or package found in the Patient package Purchase list.',
             ]);
         }
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Something went wrong. Patient package Purchase list not found.',
+        ]);
     }
+}
+
 
 public function provider_all_reports_list()
 {

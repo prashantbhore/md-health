@@ -157,9 +157,10 @@
                             </select>
                         </div>
                         <div class="table-responsive" style="overflow-x: hidden">
-                            <table class="table">
+                            <table class="table" id="example">
                                 <thead>
                                     <tr>
+                                        <th scope="col">Sr.No.</th>
                                         <th scope="col">ID</th>
                                         <th scope="col">Created</th>
                                         <th scope="col">Customer</th>
@@ -171,7 +172,8 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
+                                    {{-- <tr>
+                                        <td>1</td>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Ali Danish</td>
@@ -187,8 +189,10 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+
+                                    {{-- <tr>
+                                        <td>2</td>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Melissa Pod</td>
@@ -204,8 +208,9 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Ali Danish</td>
@@ -221,8 +226,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Melissa Pod</td>
@@ -238,8 +243,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Ali Danish</td>
@@ -256,8 +261,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Melissa Pod</td>
@@ -273,8 +278,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Ali Danish</td>
@@ -290,8 +295,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Melissa Pod</td>
@@ -307,8 +312,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Ali Danish</td>
@@ -324,8 +329,8 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> --}}
+                                    {{-- <tr>
                                         <th scope="row">#MD8739</th>
                                         <td>8 Min Ago</td>
                                         <td>Melissa Pod</td>
@@ -341,10 +346,10 @@
                                                 <img src="{{URL::asset('admin/assets/img/re-direct.png')}}" alt="">
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
+                            {{-- <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                                     <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -353,7 +358,7 @@
                                     <li class="page-item"><a class="page-link" href="#">5</a></li>
                                     <li class="page-item"><a class="page-link" href="#">6</a></li>
                                 </ul>
-                            </nav>
+                            </nav> --}}
 
                         </div>
                     </div>
@@ -365,6 +370,7 @@
 </section>
 @endsection
 @section('script')
+<script src={{Url('/admin\controller_js\admin_cn_md_health_sales.js')}}></script>
 <script>
     $(".salesLi").addClass("activeClass");
     $(".sales").addClass("md-active");

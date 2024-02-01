@@ -311,6 +311,11 @@
                 </div>
                 {{-- <!-- BANK TRANSFER END -->
 
+                    </div>
+                </form>
+            </div>
+            {{-- <!-- BANK TRANSFER END -->
+
 
                             <div class="col-md-12">
                                 <label for="IBAN" class="form-label mb-0">IBAN</label>
@@ -1065,7 +1070,7 @@
                 var packageId = $("#package_id").val();
                 $.ajax({
                     url: baseUrl + '/api/md-helath-bank-details',
-                    type: 'GET',
+                    type: 'POST',
                     data: {
                         bank_name: selectedBank,
                         package_id: packageId

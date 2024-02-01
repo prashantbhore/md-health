@@ -14,7 +14,7 @@
 }
     </style>
     <div class="content-wrapper">
-        <div class="container py-100px for-cards">
+        <div class="container  for-cards">
             <div class="d-flex gap-3">
                 <div class="w-292">
                     @include('front.includes.sidebar-user')
@@ -203,7 +203,56 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                var cityid = "{{ $customer_list->city_id }}";
+                var base_url = $("#base_url").val();
+                var csrfToken = $('meta[name="csrf-token"]').attr("content");
+            
+                // Function to populate city dropdown
+                function populateCityDropdown(selectedCountryId) {
+                    $.ajax({
+                        url: base_url + '/md-city-list', // Replace with your route to fetch cities
+                        method: 'POST',
+                        data: {
+                            country_id: selectedCountryId
+                        },
+                        success: function (response) {
+                            $('#city_id').empty();
+                            $('#city_id').append('<option value="">Choose</option>');
+                            $.each(response.data, function (index, city) {
+                                var selected = city.id == cityid ? 'selected' : ''; // Check if city ID matches the selected city ID
+                                $('#city_id').append('<option value="' + city.id + '" ' + selected + '>' + city.city_name + '</option>');
+                            });
+                            $('#city_id').show();
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            
+                // Trigger the change event on country dropdown when the page loads
+                var selectedCountryId = $('#country_id').val();
+                if (selectedCountryId) {
+                    populateCityDropdown(selectedCountryId);
+                }
+            
+                // Change event handler for country dropdown
+                $('#country_id').change(function () {
+                    var selectedCountryId = $(this).val();
+                    if (selectedCountryId) {
+                        populateCityDropdown(selectedCountryId);
+                    }
+                });
+            });
+            </script>
+            
 
     <script>
         $(document).ready(function() {

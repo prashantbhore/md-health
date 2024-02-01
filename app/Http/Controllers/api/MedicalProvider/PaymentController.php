@@ -79,15 +79,17 @@ class PaymentController extends BaseController{
     {
        // return Auth::user()->id;
 
-        $MedicalProviderAccountDetails= MedicalProviderAccountDetails::where('status','active')
-        ->select('id',
-            'medical_provider_id',
-            'account_number',
-            'bank_name')
+        $MedicalProviderAccountDetails= MedicalProviderAccountDetails::where('md_medical_provider_account_details.status','active')
+        ->select('md_medical_provider_account_details.id',
+            'md_medical_provider_account_details.medical_provider_id',
+            'md_medical_provider_account_details.account_number',
+            'md_medical_provider_account_details.bank_name',
+            'md_medical_provider_register.company_logo_image_path')
         ->where('medical_provider_id', Auth::user()->id)
+        ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id','md_medical_provider_account_details.medical_provider_id')
         ->first();
 
-      
+        $MedicalProviderAccountDetails['company_logo_image_path']=!empty($MedicalProviderAccountDetails->company_logo_image_path) ? url(Storage::url($MedicalProviderAccountDetails->company_logo_image_path)) : '';
 
 
         if (!empty($MedicalProviderAccountDetails)) {

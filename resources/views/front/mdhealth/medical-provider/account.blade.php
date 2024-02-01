@@ -195,13 +195,13 @@
                                 </div>
 
                                 <div class="form-group mb-4">
-                                    <label class="form-label mb-3">Company Overview</label>
+                                    <label class="form-label">Company Overview</label>
                                     <textarea class="form-control summernote summernote-1" name="company_overview" id="company_overview" rows="4" style="height: 150px;" placeholder="Company Overview" data-gramm="false" wt-ignore-input="true">{{ $medical_provider_list->company_overview }}</textarea>
                                 </div>
 
                                 <div class="multiple-upload-images">
-                                    <h6 class="section-heading">Company Logo</h6>
-                                    <div class="form-group my-3">
+                                <label class="form-label">Company Logo</label>
+                                    <div class="form-group mb-3">
                                         <input type="file" id="company_logo_image_path" class="form-control" name="company_logo_image_path" oninput="pic1.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
@@ -216,8 +216,8 @@
                                 </div>
                                 {{-- {{dd($MedicalProviderLogo)}} --}}
                                 <div class="multiple-upload-images">
-                                    <h6 class="section-heading">Company License</h6>
-                                    <div class="form-group my-3">
+                                    <label class="form-label">Company License</label>
+                                    <div class="form-group mb-3">
                                         <input type="file" id="company_licence_image_path" class="form-control" name="company_licence_image_path" oninput="pic2.src=window.URL.createObjectURL(this.files[0])">
                                     </div>
                                     <div class="prev-img-div">
@@ -230,7 +230,8 @@
                                 </div>
 
                                 <div class="multiple-upload-images">
-                                    <h6 class="section-heading">Product Pictures</h6>
+                                    <label class="form-label">Product Pictures</label>
+
                                     <div class="form-group mb-3">
                                         <input type="file" id="provider_image_path" class="form-control" name="provider_image_path[]" multiple="">
                                         <!-- <label id="provider_image_path" for="provider_image_path" name="provider_image_path[]" class="form-control d-block cp text-gray">Upload Product Pictures</label> -->

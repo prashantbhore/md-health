@@ -39,7 +39,7 @@
                                   </div>
                                   <div class="card-text d-flex flex-column">
                                       <p>MDhealth Sales</p>
-                                      <h4>172K</h4>
+                                      <h4>{{$md_health_sales}}</h4>
                                   </div>
                                   <span class="link-open">
                                       <img src="{{URL::asset('admin/assets/img/link-open.png')}}" alt="">

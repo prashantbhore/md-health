@@ -52,6 +52,9 @@ Route::middleware(['CheckRequestType'])->group(function () {
     Route::post('setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
     Route::post('send/notification', [FirebasePushController::class, 'notification'])->name('firebase.send');
 });
+
+Route::get('md-notification-list', [CommonController::class, 'notification_list']);
+
 // get country list
 Route::get('md-country-list', [CommonController::class, 'get_country_list']);
 
@@ -73,6 +76,13 @@ Route::post('md-otp-verify-for-register', [RegistrationController::class, 'otp_v
 //md-customer-login
 Route::post('md-customer-login', [LoginControllers::class, 'customer_login']);
 
+//check-number-exist
+Route::post('md-check-number-exist', [UpdateCustomerProfileController::class, 'check_number_exist']);
+
+
+//check-forgot-password
+Route::post('md-forgot-password', [UpdateCustomerProfileController::class, 'forgot_password']);
+
 // register-medical-provider
 Route::post('md-register-medical-provider', [RegistrationController::class, 'md_register_medical_provider']);
 
@@ -92,7 +102,7 @@ Route::post('md-vendor-login', [LoginControllers::class, 'vendor_login']);
 // get Bank list
 Route::get('md-helath-bank-list', [CustomerPackageController::class, 'md_health_bank_lists']);
 
-Route::get('md-helath-bank-details', [CustomerPackageController::class, 'md_health_bank_details']);
+Route::post('md-helath-bank-details', [CustomerPackageController::class, 'md_health_bank_details']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
@@ -104,6 +114,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Mplus02
     Route::middleware(['CheckRequestType'])->group(function () {
         Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
+        Route::any('/setToken', [FirebasePushController::class, 'setToken'])->name('firebase_token');
         Route::any('md-get-user-conversations', [FirebasePushController::class, 'get_conversations'])->name('medical-messages');
     });
 
@@ -113,8 +124,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //check-password-exist
     Route::post('md-check-password-exist', [UpdateCustomerProfileController::class, 'check_password_exist']);
 
-    //check-number-exist
-    Route::post('md-check-number-exist', [UpdateCustomerProfileController::class, 'check_number_exist']);
+
 
     //update-customer-profile
     Route::post('md-update-customer-profile', [UpdateCustomerProfileController::class, 'update_customer_profile']);
