@@ -376,7 +376,7 @@
 <script>
     //$(document).ready(function () {
     // Function to validate the form
-    function validateForm() {
+    function validateForm(){
         var isValid = true;
 
         // Validate Report Title
@@ -449,8 +449,8 @@
                 } else {
                     // Show "No report found" message when HTML is empty
                     $('#resultContainer').html('<div class="no-data">\
-    <img src="{{ asset('front / assets / img / No - Data - Found - 1. svg ') }}" alt="" class="">\
-</div>');
+                     <img src="{{ asset('front/assets/img/No-Data-Found-1.svg') }}" alt="" class="">\
+                </div>');
                 }
             },
             error: function(error) {
