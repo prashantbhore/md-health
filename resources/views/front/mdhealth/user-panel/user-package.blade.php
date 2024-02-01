@@ -3,24 +3,24 @@
         // $my_active_packages_list;
         // $my_completed_packages_list;
         // $my_cancelled_packages_list;
-         //dd($my_active_packages_list);
+        //dd($my_active_packages_list);
         $patient_information_list = !empty($patient_information_list[0]) ? $patient_information_list[0] : '';
 
         if (!function_exists('extractNumericRange')) {
-                function extractNumericRange($inputString)
-                {
-                    // Use regular expression to match the numeric range
-                    preg_match('/\b\d+-\d+\b/', $inputString, $matches);
+            function extractNumericRange($inputString)
+            {
+                // Use regular expression to match the numeric range
+                preg_match('/\b\d+-\d+\b/', $inputString, $matches);
 
-                    // Check if a match is found
-                    if (!empty($matches)) {
-                        return $matches[0];
-                    }
-
-                    // Return null if no match is found
-                    return null;
+                // Check if a match is found
+                if (!empty($matches)) {
+                    return $matches[0];
                 }
+
+                // Return null if no match is found
+                return null;
             }
+        }
     @endphp
 @endsection
 @extends('front.layout.layout2')
@@ -101,7 +101,7 @@
         }
     </style>
     <div class="content-wrapper">
-        <div class="container py-135px for-cards">
+        <div class="container py-100px for-cards">
             <div class="d-flex gap-3">
                 <div class="w-292">
                     @include('front.includes.sidebar-user')
@@ -153,7 +153,6 @@
                                         aria-labelledby="user-tab">
                                         @if (!empty($my_active_packages_list))
                                             @foreach ($my_active_packages_list as $key => $active_package)
-                                           
                                                 <div class="card shadow-none mb-3 pkgCard">
                                                     <div class="card-body d-flex gap-3 w-100 p-3">
                                                         <div class="df-center">
@@ -163,12 +162,12 @@
                                                         </div>
                                                         <div class="df-column">
                                                             <h5 class="mb-0 card-h4">
-                                                                {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }} 
+                                                                {{ !empty($active_package['company_name']) ? $active_package['company_name'] : '' }}
                                                             </h5>
 
                                                             <h6 class="card-h1">
-                                                                 {{ !empty($active_package['package_name']) ? $active_package['package_name'] : '' }} 
-                                                                
+                                                                {{ !empty($active_package['package_name']) ? $active_package['package_name'] : '' }}
+
                                                             </h6>
 
                                                             <div class="d-flex align-items-center gap-5 mb-3">
@@ -657,11 +656,11 @@
 
 @endsection
 @section('script')
-   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
-       
+
     <script>
         $(document).ready(function() {
             // alert('hi');
@@ -716,9 +715,37 @@
                         $('#patient_relation').val(PatientInformation.patient_relation);
                         $('#patient_email').val(PatientInformation.patient_email);
                         $('#patient_contact_no').val(PatientInformation.patient_contact_no);
-                        $('#patient_country_id').val(PatientInformation.patient_country_id);
-                        $('#patient_city_id').val(PatientInformation.patient_city_id);
+                        // $('#patient_country_id').val(PatientInformation.patient_country_id);
+                        // $('#patient_city_id').val(PatientInformation.patient_city_id);
+                        var cityList = $('#patient_city_id');
+                        var countryList = $('#patient_country_id');
+                        var countryId = PatientInformation.patient_country_id;
 
+                        countryList.find('option[value="' + PatientInformation
+                            .patient_country_id + '"]').prop('selected', true);
+                        $.ajax({
+                            url: baseUrl + '/get_cities_of_country/' + countryId,
+                            type: 'GET',
+                            success: function(response) {
+                                // Request successful, update cities dropdown
+                                $('#patient_city_id')
+                            .empty(); // Clear existing options
+                                $.each(response.cities, function(index, city) {
+                                    $('#patient_city_id').append(
+                                        '<option value="' + city.id +
+                                        '">' + city.city_name +
+                                        '</option>');
+                                });
+                                cityList.find('option[value="' + PatientInformation
+                                    .patient_city_id + '"]').prop('selected',
+                                    true);
+                            },
+                            error: function(xhr, status, error) {
+                                $('#patient_city_id').empty();
+                                alert('no cities found');
+                                console.error('Error fetching cities:', error);
+                            }
+                        });
                         $('#UserChangeInformationModel').modal('show');
                     },
                     error: function(xhr, status, error) {
@@ -738,9 +765,9 @@
                     patient_full_name: {
                         required: true,
                     },
-                    patient_relation: {
-                        required: true,
-                    },
+                    // patient_relation: {
+                    //     required: true,
+                    // },
                     patient_email: {
                         // required: true,
                         email: true,
@@ -760,15 +787,15 @@
                     patient_full_name: {
                         required: "Please enter patient full name",
                     },
-                    patient_relation: {
-                        required: "Please enter patient relation",
-                    },
+                    // patient_relation: {
+                    //     required: "Please enter patient relation",
+                    // },
                     patient_email: {
                         // required: "Please enter patient email",
-                        email: "Please enter valid patient email",
                     },
                     patient_contact_no: {
-                        required: "Please enter patient contact number",
+                        // required: "Please enter patient contact number",
+                        email: "Please enter valid patient email",
                     },
                     patient_country_id: {
                         required: "Please select patient country",
@@ -783,7 +810,7 @@
                     var formData = new FormData(form);
                     formData.append('platform_type', 'web');
                     formData.append("patient_id", $('#patiant_id').val());
-                    formData.append("purchase_id",purchaseId);
+                    formData.append("purchase_id", purchaseId);
 
                     $.ajax({
                         type: 'POST',
@@ -955,6 +982,30 @@
 
             $('.user-review-from-submit').click(function() {
 
+            });
+
+            $('#patient_country_id').change(function() {
+                var countryId = $(this).val();
+                if (countryId) {
+                    // Make AJAX request
+                    $.ajax({
+                        url: baseUrl + '/get_cities_of_country/' + countryId,
+                        type: 'GET',
+                        success: function(response) {
+                            // Request successful, update cities dropdown
+                            $('#patient_city_id').empty(); // Clear existing options
+                            $.each(response.cities, function(index, city) {
+                                $('#patient_city_id').append('<option value="' + city
+                                    .id + '">' + city.city_name + '</option>');
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            $('#patient_city_id').empty();
+                            alert('no cities found');
+                            console.error('Error fetching cities:', error);
+                        }
+                    });
+                }
             });
         });
     </script>
