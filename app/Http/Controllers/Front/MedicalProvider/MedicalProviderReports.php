@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Traits\MediaTrait;
 use Crypt;
 use Auth;
+use Storage;
 
 //Code By Mplus03
 class MedicalProviderReports extends Controller
@@ -91,6 +92,8 @@ class MedicalProviderReports extends Controller
         }
 
 
+          
+
 
         $provider_report_list =  '';
         if(!empty($responseData)){
@@ -106,7 +109,8 @@ class MedicalProviderReports extends Controller
                 $resultHtml .= '<div class="card shadow-none" style="border-radius: 3px; background: #f6f6f6;">';
                 $resultHtml .= '<div class="card-body d-flex gap-3">';
                 $resultHtml .= '<div>';
-                $resultHtml .= '<img src="' . asset('front/assets/img/msg2.png') . '" alt="" />';
+                $resultHtml .= '<img src="' . (!empty($responseData['logo']['company_logo_image_path']) ? url('/').Storage::url($responseData['logo']['company_logo_image_path']) : asset('front/assets/img/msg2.png')) . '" alt="" height="52px" width="52px" />';
+
                 $resultHtml .= '</div>';
                 $resultHtml .= '<div>';
                 $resultHtml .= '<h5 class="card-h1 mb-2">Treatment No: #' . (!empty($report['customer_purchased_package']['order_id']) ? $report['customer_purchased_package']['order_id'] : '') . '<span class="pending ms-3">  ' . (!empty($report['report_count']) ? $report['report_count'] : '') . ' Documents</span></h5>';

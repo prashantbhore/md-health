@@ -257,37 +257,6 @@
                                                                                                                                                                                                                                                                                                                                     <img style="width: 11px;" src="{{ 'front/assets/img/Varlik.svg' }}" alt="">
                                                                                                                                                                                                                                                                                                                                 </div> -->
                                             @endforeach
-                                    <div class="d-flex gap-2 mb-2">
-
-                                        @if ($isCustomer == true && $user == true)
-                                        <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase Package</button>
-{{-- {{dd($package_list['favourite_check'])}} --}}
-                                        @if ($package_list['favourite_check'] == 'yes')
-                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
-                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                        </button>
-                                        @endif
-
-                                        @if ($package_list['favourite_check'] == 'no')
-                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}" style="background-color: gray;">
-                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                        </button>
-                                        @endif
-                                        @elseif($user == false)
-                                        <button class="btn purchaseBtn" id="{{ $package_list['id'] }}" data-bs-toggle="modal">Purchase
-                                            Package</button>
-
-                                        @if ($package_list['favourite_check'] == 'yes')
-                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}">
-                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                        </button>
-                                        @endif
-
-                                        @if ($package_list['favourite_check'] == 'no')
-                                        <button class="favouriteBtn" id="fav-btn_{{ $package_list['id'] }}" style="background-color: gray;">
-                                            <img src="{{ 'front/assets/img/white-heart.svg' }}" alt="">
-                                        </button>
-                                        @endif
                                         @endif
                                     </div>
                                     <div class="brdr-right">
@@ -504,7 +473,8 @@
                                     </div>
                                 </form>
                                 @if (!empty($package_list['id']))
-                                <input type="hidden" value="{{ url('purchase-package/' . $package_list['id']) }}" id="hidden_url">
+                                    <input type="hidden"
+                                        value="{{ url('purchase-package/' . $package_list['id']) }}" id="hidden_url">
                                 @endif
                             </div>
                         </div>
@@ -913,16 +883,15 @@
                         'X-CSRF-TOKEN': csrfToken
                     },
                     beforeSend: function() {
-                        $('#fav-btn_' + packageId).attr('disabled', true);
-                        $('#fav-btn_' + packageId).html(
+                        $('#fav-btn' + packageId).attr('disabled', true);
+                        $('#fav-btn' + packageId).html(
                             '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
                         );
                     },
                     success: function(response) {
 
-                        $('#fav-btn_' + packageId).attr('disabled', false);
-
-                        $('#fav-btn_' + packageId).html(
+                        $('#fav-btn' + packageId).attr('disabled', false);
+                        $('#other').html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
 
 
@@ -939,7 +908,7 @@
                     },
 
                     error: function(xhr, status, error) {
-                        $('#fav-btn_' + packageId).attr('disabled', false);
+                        $('#fav-btn' + packageId).attr('disabled', false);
                         $('#other').html(
                             '<img src="front/assets/img/white-heart.svg" alt="">');
                         alert('Error:', error);
