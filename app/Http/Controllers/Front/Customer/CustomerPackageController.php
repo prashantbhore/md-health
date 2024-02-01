@@ -1321,6 +1321,12 @@ class CustomerPackageController extends Controller
                         // dd( $patient_info->id, $id );
                         $response = $this->apiService->getData( $token, url( '/api/md-customer-my-details' ), [ 'patient_id' => $patient_info->id, 'package_id' => $id ], 'POST' );
 
+                    $patient_info = PatientInformation::where('customer_id', $user_id)->where('package_id', $data['package_id'])->where('purchase_id', $data['purchase_id'])->first();
+                    // dd( $user_id, $data[ 'package_id' ], $data[ 'purchase_id' ] );
+                    // dd( $patient_info );
+                    if (!empty($patient_info->id)) {
+                        // dd($patient_info->id,$id);
+                        $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $id], 'POST');
                     }
                     // dd( $token );
                     // dd( $token );

@@ -58,21 +58,27 @@ $(document).on("change", "#countrycode", function () {
 $(document).ready(function () {
     $('#loginForm').validate({
         rules: {
-            number: {
+            phoneno: {
                 required: true,
-                // email: true
+                minlength: 10,
+                maxlength: 10,
+                digits: true
             },
             password: {
-                required: true
+                required: true,
+                minlength: 8
             }
         },
         messages: {
-            number: {
-                required: "Please enter your phone number with country code",
-                // email: "Please enter a valid email address"
+            phoneno: {
+                required: "Please enter your phone number.",
+                minlength: "Phone number must be 10 digits.",
+                maxlength: "Phone number must be 10 digits.",
+                digits: "Phone number must contain digits only."
             },
             password: {
-                required: "Please enter your password"
+                required: "Please enter your password",
+                minlength: "Password must be at least 8 characters long"
             }
         },
         submitHandler: function (form) {
@@ -141,7 +147,7 @@ $(document).on('click', '#signup', function () {
                     '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
                     setTimeout(function() {
                         $('#signup').removeAttr('disabled').html('Sign Up');
-                    }, 1000); 
+                    }, 2000); 
             },
             success: function (response) {
                 $('#signup').attr('enable', true);
@@ -223,8 +229,12 @@ function verify(e) {
     var code5 = $("#ot5").val();
     var code6 = $("#ot6").val();
     var code = code1 + code2 + code3 + code4 + code5 + code6;
-    // $('#verifyBtn').attr('disabled', true);
-    // $('#verifyBtn').html('<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+    $('#verifyBtn').attr('disabled', true);
+                $('#verifyBtn').html(
+                    '<i class="fa fa-spinner" aria-hidden="true"></i> Please Wait...');
+                    setTimeout(function() {
+                        $('#verifyBtn').removeAttr('disabled').html('Sign Up');
+                    }, 2000);
     if (!isValidCode(code)) {
         showErrorMessage('Please enter the correct code.');
         // $('#signup').attr('enable', true);
@@ -279,17 +289,18 @@ function verify(e) {
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.error('tggg', error);
+                        showErrorMessage('Something went wrong. Please try again.');
                     }
                 });
 
-            } else {
-                // e.preventDefault();
-                // Display an error message for unsuccessful code verification
-                showErrorMessage('Code verification failed. Please try again.');
-                // e.preventDefault();
-                return;
-            }
+            } 
+            // else {
+            //     // e.preventDefault();
+            //     // Display an error message for unsuccessful code verification
+            //     showErrorMessage('Code verification failed. Please try again.');
+            //     // e.preventDefault();
+            //     return;
+            // }
 
         })
         .catch(function (error) {
