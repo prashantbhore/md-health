@@ -707,6 +707,25 @@ class CustomerPackageController extends Controller {
 
                 //Mplus02
 
+    public function customer_package_search_filter(Request $request)
+    {
+        // return dd( $request );
+        // $packages = Packages::select(
+        //     'md_packages.id',
+        //     'md_packages.package_unique_no',
+        //     'md_packages.package_name',
+        //     'md_packages.treatment_period_in_days',
+        //     'md_packages.other_services',
+        //     'md_packages.package_price',
+        //     'md_packages.sale_price',
+        //     'md_product_category.product_category_name',
+        //     'md_product_sub_category.product_sub_category_name',
+        //     'md_master_cities.city_name'
+        // )
+        //     ->leftjoin( 'md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id' )
+        //     ->leftjoin( 'md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id' )
+        //     ->leftjoin( 'md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by' )
+        //     ->leftjoin( 'md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id' );
                 public function customer_package_search_filter( Request $request ) {
                     // return 'asd ';
                     // return dd( $request );
@@ -817,6 +836,17 @@ class CustomerPackageController extends Controller {
                         }
                     }
 
+        // dd( $data[ 'package_list' ] );
+        // print_r( $request );
+        $packages = $data['package_list'];
+        
+        if (!empty($packages)) {
+            $treatment_plans = ProductCategory::where('md_packages.status', 'active')
+                ->join('md_packages', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                ->where('md_product_category.status', 'active')
+                ->select('md_product_category.*')
+                ->distinct()
+                ->get();
                     // dd( $data[ 'package_list' ] );
                     // print_r( $request );
                     $packages = $data[ 'package_list' ];
@@ -844,6 +874,121 @@ class CustomerPackageController extends Controller {
 
                         $counties = Country::where( 'status', 'active' )->get();
 
+            return view('front.mdhealth.searchResult', compact('packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date', 'cities_for_other'));
+        } else {
+            $packages = Packages::select(
+                'md_packages.id',
+                'md_packages.package_unique_no',
+                'md_packages.package_name',
+                'md_packages.treatment_period_in_days',
+                'md_packages.other_services',
+                'md_packages.package_price',
+                'md_packages.sale_price',
+                'md_product_category.product_category_name',
+                'md_product_sub_category.product_sub_category_name',
+                'md_master_cities.city_name',
+                'md_add_new_acommodition.hotel_stars',
+                'md_add_transportation_details.vehicle_model_id',
+                'md_master_brand.brand_name',
+                'md_master_vehicle_comfort_levels.vehicle_level_name',
+                'md_tours.tour_name'
+            )
+                ->where('md_packages.status', 'active')
+                // ->where('md_medical_provider_register.vendor_status', 'approved')
+                // ->where('md_product_category.status', 'active')
+                // ->where('md_product_sub_category.status', 'active')
+                ->leftjoin('md_product_category', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                ->leftjoin('md_product_sub_category', 'md_packages.treatment_id', '=', 'md_product_sub_category.id')
+                ->leftjoin('md_medical_provider_register', 'md_medical_provider_register.id', '=', 'md_packages.created_by')
+
+                ->leftjoin('md_master_cities', 'md_medical_provider_register.city_id', '=', 'md_master_cities.id')
+                ->leftjoin('md_add_new_acommodition', 'md_add_new_acommodition.id', '=', 'md_packages.hotel_id')
+                ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
+                ->leftjoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
+                ->leftjoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id')
+                ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id');
+
+          
+            $packages = $packages->get();
+            // return  $packages;
+            $data = [];
+            $data['package_list'] = [];
+            if (!empty($packages)) {
+                foreach ($packages as $key => $value) {
+
+                    $package_reviews = CustomerReviews::where('status', 'active')
+                        ->select('cleanliness', 'comfort', 'food_quality', 'behaviour_reviews', 'recommended')
+                        ->where('package_id', $value->id)
+                        ->first();
+
+                    // Check if reviews exist
+                    if ($package_reviews) {
+                        // Calculate sum
+                        $sum = $package_reviews->cleanliness + $package_reviews->comfort + $package_reviews->food_quality + $package_reviews->behaviour_reviews + $package_reviews->recommended;
+
+                        // Calculate average
+                        $average = $sum / 5; // Assuming you're always summing 5 fields
+                    } else {
+                        // If no reviews exist, set average to null or any default value
+                        $average = 0;
+                    }
+
+                    $rating_label = '';
+                    if ($average == 5) {
+                        $rating_label = 'Excellent';
+                    } elseif ($average == 4) {
+                        $rating_label = 'Very Good';
+                    } elseif ($average == 3) {
+                        $rating_label = 'Good';
+                    } elseif ($average == 2) {
+                        $rating_label = 'Fair';
+                    } elseif ($average == 1) {
+                        $rating_label = 'Bad';
+                    }
+                    $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
+                    $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
+                    $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
+                    $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
+                    $data['package_list'][$key]['other_services'] = !empty($value->other_services) ? explode(',', $value->other_services) : '';
+                    $data['package_list'][$key]['hotel_stars'] = !empty($value->hotel_stars) ? $value->hotel_stars : '';
+                    $data['package_list'][$key]['vehicle_model_id'] = !empty($value->vehicle_model_id) ? $value->vehicle_model_id : '';
+                    $data['package_list'][$key]['brand_name'] = !empty($value->brand_name) ? $value->brand_name : '';
+                    $data['package_list'][$key]['vehicle_level_name'] = !empty($value->vehicle_level_name) ? $value->vehicle_level_name : '';
+                    $data['package_list'][$key]['tour_name'] = !empty($value->tour_name) ? $value->tour_name : '';
+                    $data['package_list'][$key]['package_price'] = !empty($value->package_price) ? $value->package_price : '';
+                    $data['package_list'][$key]['sale_price'] = !empty($value->sale_price) ? $value->sale_price : '';
+                    $data['package_list'][$key]['product_category_name'] = !empty($value->product_category_name) ? $value->product_category_name : '';
+                    $data['package_list'][$key]['product_sub_category_name'] = !empty($value->product_sub_category_name) ? $value->product_sub_category_name : '';
+                    $data['package_list'][$key]['city_name'] = !empty($value->city_name) ? $value->city_name : '';
+                    $data['package_list'][$key]['rating_label'] = $rating_label;
+                    $data['package_list'][$key]['average_rating'] = $average;
+                }
+            }
+
+            $packages = $data['package_list'];
+            // return 'asdasd';
+            $counties = Country::all();
+            $city_name = !empty($request->city_name) ? $request->city_name : 'Select City';
+            $treatment_name = !empty($request->treatment_name) ? $request->treatment_name : 'Select Treatment';
+            $cities_for_other = Cities::where('status', 'active')->where('country_id', 1)->get();
+            // dd( $request->treatment_name );
+            $date = $request->daterange ?? '';
+            $treatment_plans = ProductCategory::where('md_packages.status', 'active')
+                ->join('md_packages', 'md_packages.treatment_category_id', '=', 'md_product_category.id')
+                ->where('md_product_category.status', 'active')
+                ->select('md_product_category.*')
+                ->distinct()
+                ->get();
+            $cities = Packages::where('md_packages.status', 'active')
+                ->join('md_medical_provider_register', 'md_packages.created_by', '=', 'md_medical_provider_register.id')
+                ->where('md_master_cities.status', 'active')
+                ->join('md_master_cities', 'md_master_cities.id', '=', 'md_medical_provider_register.city_id')
+                ->select('md_master_cities.*')
+                ->distinct()
+                ->get();
+            return view('front.mdhealth.searchResult', compact('packages','cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date', 'cities_for_other'));
+        }
+    }
                         return view( 'front.mdhealth.searchResult', compact( 'packages', 'cities', 'treatment_plans', 'city_name', 'treatment_name', 'counties', 'date', 'cities_for_other' ) );
 
                     } else {
@@ -906,6 +1051,99 @@ class CustomerPackageController extends Controller {
                     ->leftjoin( 'md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id' )
                     ->leftjoin( 'md_tours', 'md_tours.id', 'md_packages.tour_id' );
 
+        if (!empty($request->treatment_name)) {
+            $packages = $packages->where('md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%');
+        }
+        if (!empty($request->city_name)) {
+            $packages = $packages->orWhere('md_master_cities.city_name', 'like', '%' . $request->city_name . '%');
+        }
+        if (!empty($request->other_services)) {
+            // dd($request->other_services);
+            // return 'asdasd';
+            // Parse the filter string to extract rating, services, and price information
+            $filters = explode(',', $request->other_services);
+// dd($filters);
+            foreach ($filters as $filter) {
+                if (in_array($filter, ['Excellent', 'Very Good', 'Good', 'Fair', 'Bad'])) {
+                    $numericValue = $this->convertRatingLabelToNumericValue($filter);
+
+                    // Filter packages based on calculated average rating label
+                    $packages->where(
+                        function ($query) use ($numericValue) {
+                            $query->orWhere('md_customer_package_reviews.cleanliness', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.comfort', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.food_quality', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.behaviour_reviews', '>=', $numericValue)
+                                ->orWhere('md_customer_package_reviews.recommended', '>=', $numericValue);
+                        }
+                    );
+                }
+                // Check if the filter contains a specific service
+                // if (strpos($filter, 'Transportation') !== false || strpos($filter, 'Accomodition') !== false || strpos($filter, 'Tour') !== false || strpos($filter, 'Translation') !== false || strpos($filter, 'Visa Service') !== false || strpos($filter, 'Ticket Services') !== false || strpos($filter, 'Ambulance Services') !== false) {
+                //     // return 'asd';
+                //     // Filter packages by the entire filter string
+                //     $packages->where('md_packages.other_services', 'like', '%' . $filter . '%');
+                // }
+
+                if (
+                    strpos($filter, 'Transportation') !== false ||
+                    strpos($filter, 'Accomodition') !== false ||
+                    strpos($filter, 'Tour') !== false ||
+                    strpos($filter, 'Translation') !== false ||
+                    strpos($filter, 'Visa Service') !== false ||
+                    strpos($filter, 'Ticket Services') !== false ||
+                    strpos($filter, 'Ambulance Services') !== false
+                ) {
+                    // Separate condition for each service
+                    if (strpos($filter, 'Accomodition') !== false) {
+                        $packages->orWhere('md_packages.other_services', 'like', '%Accommodation%');
+                    }
+                    if (strpos($filter, 'Visa Service') !== false) {
+                        $packages->orWhere('md_packages.other_services', 'like', '%Visa Services%');
+                    }
+                    if (strpos($filter, 'Transportation') !== false) {
+                        $packages->orWhere('md_packages.other_services', 'like', '%Transportation%');
+                    }
+                    if (strpos($filter, 'Tour') !== false) {
+                        $packages->orWhere('md_packages.other_services', 'like', '%Tour%');
+                    }
+                    if (strpos($filter, 'Translation') !== false) {
+                        $packages->orWhere('md_packages.other_services', 'like', '%Translation%');
+                    }
+                    if (strpos($filter, 'Ambulance Services') !== false) {
+                        $packages->orWhere('md_packages.other_services', 'like', '%Ambulance Services%');
+                    }
+                    if (strpos($filter, 'Ticket Services') !== false) {
+                        $packages->orWhere('md_packages.other_services', 'like', '%Ticket Services%');
+                    }
+                    // Add conditions for other services similarly if needed
+                }
+
+
+                // Assume any other case is a single price point or range
+               
+                    if (strpos($filter, '-') !== false) {
+                        // Extract minimum and maximum prices
+                        [$minPrice, $maxPrice] = explode('-', $filter);
+
+                        // Filter packages by sale price range
+                        $packages->whereBetween('md_packages.sale_price', [$minPrice, $maxPrice]);
+                    }
+                    //  else {
+                    //     // Filter packages by single price point
+                    //     $price = (int) $filter;
+                    //     // Assuming the price is an integer
+                    //     $packages->orWhere('md_packages.sale_price', '<=', $price);
+                    // }
+              
+            }
+        }
+        $packages = $packages->get();
+        // return  $packages;
+        $data = [];
+        $data['package_list'] = [];
+        if (!empty($packages)) {
+            foreach ($packages as $key => $value) {
                     if ( !empty( $request->treatment_name ) ) {
                         $packages = $packages->where( 'md_product_category.product_category_name', 'like', '%' . $request->treatment_name . '%' );
                     }

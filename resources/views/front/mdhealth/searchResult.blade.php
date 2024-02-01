@@ -504,8 +504,7 @@
                                     </div>
                                 </form>
                                 @if (!empty($package_list['id']))
-                                    <input type="hidden"
-                                        value="{{ url('purchase-package/' . $package_list['id']) }}" id="hidden_url">
+                                <input type="hidden" value="{{ url('purchase-package/' . $package_list['id']) }}" id="hidden_url">
                                 @endif
                             </div>
                         </div>
