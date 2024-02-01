@@ -279,35 +279,37 @@
                                 <p class="mb-0 card-h1" id="receiver-name"></p>
                             </div>
 
-                        <div class="col-md-12 mb-3">
-                            <label for="Description" class="form-label mb-0">Description</label>
-                            <p class="mb-0 card-h1">Please write "<span class="text-green" id="receiver-package_id">MD736</span>"" in the description section.</p>
-                        </div>
-                       
+                            <div class="col-md-12 mb-3">
+                                <label for="Description" class="form-label mb-0">Description</label>
+                                <p class="mb-0 card-h1">Please write "<span class="text-green"
+                                        id="receiver-package_id">MD736</span>"" in the description section.</p>
+                            </div>
+
                             <input type="hidden" name="package_id" id="package_id" value="{{ $id }}">
                             <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient_id }}">
-                        <div class="col-md-12">
-                            <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
-                            <input type="text" name="transaction_id" class="form-control text-black camptonBook" placeholder="Payment transaction ID">
-                        </div>
+                            <div class="col-md-12">
+                                <label for="Payment transaction ID" class="form-label">Payment transaction ID</label>
+                                <input type="text" name="transaction_id" class="form-control text-black camptonBook"
+                                    placeholder="Payment transaction ID">
+                            </div>
 
-                        @php
-                            use Stevebauman\Location\Facades\Location;
-                            $location = Location::get();
-                        @endphp
-                        
+                            @php
+                                use Stevebauman\Location\Facades\Location;
+                                $location = Location::get();
+                            @endphp
 
-                        {{-- <div class="col-md-12">
+
+                            {{-- <div class="col-md-12">
                             <p class="mb-0 text-red card-p1">This is not available in your country!</p>
                         </div> --}}
-                        <div class="col-md-12">
-                            <button type="submit" class="btn submit-btn">Completed Payment</button>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn submit-btn">Completed Payment</button>
+                            </div>
+
                         </div>
-                   
-                    </div>
-                </form>
-            </div>
-            <!-- BANK TRANSFER END -->
+                    </form>
+                </div>
+                {{-- <!-- BANK TRANSFER END -->
 
 
                             <div class="col-md-12">
@@ -353,7 +355,7 @@
                         </div>
                     </form>
                 </div>
-                <!-- BANK TRANSFER END -->
+                <!-- BANK TRANSFER END --> --}}
 
                 <!-- WALLET DETAILS -->
                 <div id="wallet">
@@ -368,18 +370,22 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <p class="camptonBold vSmallFont text-center">1 MD<span
-                                    class="camptonBook vSmallFont">coin</span> = 1 Turkish Lira</p>
+                            <p class="card-h3 text-center">1 MD<span class="camptonBook vSmallFont">coin</span> = 1
+                                Turkish Lira</p>
                             <div class="blackBrdr px-5">
                                 <div class="mdCard">
-                                    <div class="mt-3">
-                                        <p class="mb-0 camptonBook fw-bold lh-1">Available <span
+                                    <div class="mt-5">
+                                        <!-- <p class="mb-0 card-h3 camptonBook lh-1"><span class="camptonBold">1 MD</span> Coin <span class="camptonBold">= 1 Turkish Lira</span></p>     -->
+                                        <p class="mb-0 card-h4 camptonBook lh-1">Available <span
                                                 class="camptonBold">MD</span>coin</p>
-                                        <p class="mb-0 camptonBold fs-3">500</p>
+                                        <p class="mb-0 coinsMD"></p>
                                         <a class="btn btn-sm inviteBtn df-center mt-3 camptonBold" id="purchase_by_coins"
-                                            style="border-color: #000;">Use My MD<span class="camptonBook">coin</span></a>
+                                            style="border-color: #000;" data-bs-toggle="modal"
+                                            data-bs-target="#UseMyMDCoin">Use My MD<span
+                                                class="camptonBook">coin</span></a>
                                     </div>
-                                    <img src="{{ 'front/assets/img/mdcoin.png' }}" alt="" style="width: 200px;">
+                                    <img src="{{ asset('front/assets/img/mdcoin.png') }}" alt=""
+                                        style="width: 200px;" />
                                 </div>
                             </div>
                         </div>
@@ -797,7 +803,8 @@
                         otherServices = response.other_services;
                         discounts = response.discounts;
                         var treatmentPriceHtml = numberToDiscount(
-                                parseInt(purchaseDetails.package_discount),
+                                parseInt(purchaseDetails.package_discount == '' ? 0 : purchaseDetails
+                                    .package_discount),
                                 purchaseDetails
                                 .treatment_price) +
                             ' ₺<span class="smallFont treatment_price_discount"> (' + purchaseDetails
@@ -807,6 +814,7 @@
 
                         otherServices.forEach(function(service) {
                             totalPrice += parseFloat(numberToDiscount(parseInt(purchaseDetails
+                                .package_discount == '' ? 0 : purchaseDetails
                                 .package_discount), service.price));
                         });
                         // alert(totalPrice);
@@ -853,7 +861,8 @@
                                     ' Price</h5>'
                                 otherServicesHtml += '<h5 class="card-h4 mt-0">' +
                                     numberToDiscount(
-                                        parseInt(purchaseDetails.package_discount), service
+                                        parseInt(purchaseDetails.package_discount == '' ? 0 :
+                                            purchaseDetails.package_discount), service
                                         .price) +
                                     '<span class="lira"> ₺</span> <span class="card-h1">*(' +
                                     service
@@ -906,8 +915,10 @@
                                     ' Price</h5>'
                                 otherServicesHtml += '<h5 class="card-h4 mt-0">' +
                                     numberToDiscount(
-                                        parseInt(purchaseDetails.package_discount), service
-                                        .price) +
+                                        parseFloat(purchaseDetails.package_discount == '' ? 0 :
+                                            purchaseDetails.package_discount), parseFloat(
+                                            service
+                                            .price)) +
                                     '<span class="lira"> ₺</span> <span class="card-h1">*(' +
                                     service
                                     .price + ' <span class="lira">₺</span>) </span></h5>'
@@ -1159,7 +1170,7 @@
             // });
 
 
-            //Copy Account Number       
+            //Copy Account Number
 
             function copyIBAN() {
                 // Get the account number element
@@ -1217,17 +1228,25 @@
             }
 
             function numberToPercent(percent, number) {
+                console.log(percent);
+                number = number * (percent / 100);
                 console.log("///////////number//////////", number);
-                return number * (percent / 100);
+                return number;
             };
 
             function numberToDiscount(percent, number) {
+                console.log(percent);
+                if (percent <= 0) {
+                    return number;
+                }
+                number -= number * (percent / 100);
                 console.log("///////////number//////////", number);
-                return number -= number * (percent / 100);
+                return number;
             };
 
             function calcOtherServices() {
-                treatmentPrice = numberToDiscount(parseInt(purchaseDetails.package_discount), purchaseDetails
+                treatmentPrice = numberToDiscount(parseInt(purchaseDetails.package_discount == '' ? 0 :
+                        purchaseDetails.package_discount), purchaseDetails
                     .treatment_price);
 
                 totalPrice = parseFloat(treatmentPrice);
@@ -1236,6 +1255,7 @@
                 $('.other_services_items input[type="checkbox"]').each(function(index) {
                     if ($(this).is(':checked')) {
                         totalPrice += parseFloat(numberToDiscount(parseInt(purchaseDetails
+                            .package_discount == '' ? 0 : purchaseDetails
                             .package_discount), otherServices[index].price));
                     }
                 });
@@ -1292,7 +1312,7 @@
 
 
                 var treatmentPriceHtml = numberToDiscount(
-                        parseInt(purchaseDetails.package_discount),
+                        parseInt(purchaseDetails.package_discount == '' ? 0 : purchaseDetails.package_discount),
                         purchaseDetails
                         .treatment_price) +
                     ' ₺ <span class="smallFont treatment_price_discount"> (' + purchaseDetails.treatment_price +

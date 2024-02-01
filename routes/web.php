@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FirebasePushController;
+use App\Http\Controllers\GetCityController;
 use App\Http\Controllers\Front\FoodProvider\FoodsController;
 use App\Http\Controllers\Front\MedicalProvider\MedicalProviderReports;
 use App\Http\Controllers\Front\MedicalProvider\RolesController;
@@ -121,7 +122,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::controller(AdminSalesController::class)->group(function (){
         Route::get('md-health-sales','index');
-       
+
     });
 
     Route::view('sales-details', 'admin/sales/sales-details');
@@ -131,7 +132,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['prevent-back-history', 'sup
 
     Route::controller(AdminMdhealthSalesController::class)->group(function (){
         Route::get('md-health-sales','index');
-       
+
     });
 
 
@@ -760,6 +761,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 Route::middleware(['CheckRequestType'])->group(function () {
     Route::get('live-cam', [CustomerInteractionController::class, 'live_cam']);
 });
+
+Route::get('get_cities_of_country/{countryId}', [GetCityController::class, 'get_cities_of_country'])->name('get_cities_of_country');
+
+
 Route::middleware(['CheckRequestType'])->group(function () {
     Route::any('/upload-media-for-messaging',[FirebasePushController::class, 'upload_media_for_messaging']);
     Route::any('/setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token');
@@ -790,7 +795,7 @@ Route::group(['middleware' => ['prevent-back-history', 'isFoodVendor']], functio
 
 
     Route::view('food-provider-panel-dashboard', 'front/mdhealth/food-provider/food_provider_panel_dashboard');
-    
+
     Route::view('food-provider-sales', 'front/mdhealth/food-provider/food_provider_sales');
 
     Route::view('food-provider-view', 'front/mdhealth/food-provider/food_provider_view');

@@ -60,28 +60,31 @@
         }
 
         $avialable_services = false;
-        $accomodation = $transportation = $tour = $visa = $translate = $ambulance = false;
+        $accomodation = $transportation = $tour = $visa = $translate = $ambulance = $ticketservice = false;
         if (!empty($data['other_services'])) {
             $avialable_services = true;
             foreach ($data['other_services'] as $service) {
                 switch (str_replace(' ', '', strtolower($service))) {
-                    case 'accomodition':
+                    case 'accommodation':
                         $accomodation = true;
                         break;
                     case 'transportation':
                         $transportation = true;
                         break;
-                    case 'tour':
+                    case 'tourdetails':
                         $tour = true;
                         break;
-                    case 'visaservices':
+                    case 'visadetails':
                         $visa = true;
                         break;
                     case 'translation':
                         $translate = true;
                         break;
-                    case 'ambulanceservices':
+                    case 'ambulanceservice':
                         $ambulance = true;
+                        break;
+                    case 'ticketservice':
+                        $ticketservice = true;
                         break;
                 }
             }
@@ -99,7 +102,7 @@
             $payment_time_and_date = '';
         }
 
-        // dd($my_details,$treatment_information,$data);
+        //dd($my_details,$treatment_information,$data);
 
     @endphp
 @endsection
@@ -401,7 +404,7 @@
                                                           <i>{{ !empty($data['treatment_period_in_days']) ?'Treatment Period '.$data['treatment_period_in_days'].' Days' : '' }}</i>
                                                     </p>
                                                 </div>
-                                                <h6 class="card-p2 fw-bold">Time left to treatment: 12 days</h6>
+                                                <h6 class="card-p2 fw-bold">Time left to treatment:  {{ !empty($data['treatment_start_date']) ? $data['treatment_start_date'] : '' }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -415,7 +418,7 @@
                                                     <p class="card-h1">Package Other Details </p>
                                                     <span>
                                                         <h5 class="card-h4 d-inline-block camptonBold">Your Case No <p
-                                                                class="text-green mb-0 d-inline-block">#MD829</p>
+                                                                class="text-green mb-0 d-inline-block">{{ !empty($data['case_no']) ? $data['case_no'] : '' }}</p>
                                                         </h5>
 
                                                     </span>
@@ -597,6 +600,32 @@
                                                         @endif
                                                         Ambulance Services
 
+                                                    </li>
+                                                    <li class="fsb-2 ">
+                                                        @if ($ticketservice == 1)
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15"
+                                                                height="15" viewBox="0 0 10 10" fill="none">
+                                                                <g clip-path="url(#clip0_0_22025)">
+                                                                    <path
+                                                                        d="M8.54102 0.585938L3.95898 6.62695L1.25 3.91992L0 5.16992L4.16602 9.33594L10 1.83594L8.54102 0.585938Z"
+                                                                        fill="#4CDB06" />
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0_0_22025">
+                                                                        <rect width="10" height="10"
+                                                                            fill="white" />
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        @else
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="17"
+                                                                height="17" viewBox="0 0 13 13" fill="none">
+                                                                <path
+                                                                    d="M6.50065 1.08337C9.47982 1.08337 11.9173 3.52087 11.9173 6.50004C11.9173 9.47921 9.47982 11.9167 6.50065 11.9167C3.52148 11.9167 1.08398 9.47921 1.08398 6.50004C1.08398 3.52087 3.52148 1.08337 6.50065 1.08337ZM6.50065 2.16671C5.47148 2.16671 4.55065 2.49171 3.84648 3.08754L9.91315 9.15421C10.4548 8.39587 10.834 7.47504 10.834 6.50004C10.834 4.11671 8.88398 2.16671 6.50065 2.16671ZM9.15482 9.91254L3.08815 3.84587C2.49232 4.55004 2.16732 5.47087 2.16732 6.50004C2.16732 8.88337 4.11732 10.8334 6.50065 10.8334C7.52982 10.8334 8.45065 10.5084 9.15482 9.91254Z"
+                                                                    fill="#111111" />
+                                                            </svg>
+                                                        @endif
+                                                        Ticket Service
                                                     </li>
                                                 </ul>
 
