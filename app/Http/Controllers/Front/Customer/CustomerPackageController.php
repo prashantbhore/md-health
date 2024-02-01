@@ -1059,7 +1059,7 @@ class CustomerPackageController extends Controller
                 ) {
                     // Separate condition for each service
                     if (strpos($filter, 'Accomodition') !== false) {
-                        $packages->orWhere('md_packages.other_services', 'like', '%Accommodation%');
+                        $packages->orWhere('md_packages.other_services', 'like', '%Accomodition%');
                     }
                     if (strpos($filter, 'Visa Service') !== false) {
                         $packages->orWhere('md_packages.other_services', 'like', '%Visa Services%');
