@@ -171,6 +171,52 @@ class CommonLoginController extends Controller
         }
     }
 
+    // public function email_exist(Request $request)
+    // {
+    //     dd($request);
+    //     if ($request->email) {
+    //         $email_exist = CommonUserLoginTable::where('email', $request->email)
+    //             ->where('status', 'active')->first();
+    //     }
+
+    //     // if ($request->phone) {
+    //     //     $phone_exist = CommonUserLoginTable::where('mobile_no', $request->phone)
+    //     //         ->where('status', 'active')
+    //     //         ->first();
+    //     // }
+
+    //     // if ($request->mobile_no) {
+    //     //     $mobile_no_exist = CommonUserLoginTable::where('mobile_no', $request->mobile_no)
+    //     //         ->where('status', 'active')
+    //     //         ->first();
+    //     // }
+
+
+    //     if (!empty($email_exist)) {
+    //         return response()->json(['email_exist' => $email_exist]);
+    //     }
+        
+    // }
+
+
+
+    ///////////////////////////////////////
+    // {
+    //     if ($request->ajax()) {
+    //         $advertisement_sequence = Products::where('user_type', '=', $request->user_type)
+    //             ->where('advertisement_sequence', '=', $request->advertisement_sequence)
+    //             ->where('status', '!=', 'delete')
+    //             ->select('advertisement_sequence');
+    //         if (!empty($request->txtpkey)) {
+    //             $advertisement_sequence = $advertisement_sequence->where('id', '!=', Crypt::decrypt($request->txtpkey));
+    //         }
+    //         $advertisement_sequence = $advertisement_sequence->first();
+
+    //         return !empty($advertisement_sequence) ? 'false' : 'true';
+    //     } else {
+    //         return 'No direct scripts are allowed';
+    //     }
+
 
 
 

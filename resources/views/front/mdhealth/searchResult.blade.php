@@ -297,7 +297,7 @@
                                                 @if ($isCustomer == true && $user == true)
                                                     <button class="btn purchaseBtn" id="{{ $package_list['id'] }}"
                                                         data-bs-toggle="modal">Purchase Package</button>
-                                                    {{-- {{dd($package_list['favourite_check'])}} --}}
+                                                    {{-- {{dd($package_list)}} --}}
                                                     @if ($package_list['favourite_check'] == 'yes')
                                                         <button class="favouriteBtn"
                                                             id="fav-btn_{{ $package_list['id'] }}">
@@ -502,35 +502,35 @@
                                     <input type="checkbox" id="Excellent" name="Excellent" value="Excellent">
                                     <label for="vehicle1" class="card-p1">Excellent (5)</label><br>
                                 </div>
-                                <p class="mb-1">(23)</p>
+                                <p class="mb-1">(0)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="Very Good" name="Very Good" value="Very Good">
                                     <label for="vehicle2" class="card-p1">Very Good (4)</label><br>
                                 </div>
-                                <p class="mb-1">(14)</p>
+                                <p class="mb-1">(0)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="Good" name="Good" value="Good">
                                     <label for="vehicle3" class="card-p1">Good (3)</label>
                                 </div>
-                                <p class="mb-1">(8)</p>
+                                <p class="mb-1">(0)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="Fair" name="Fair" value="Fair">
                                     <label for="vehicle3" class="card-p1">Fair (2)</label>
                                 </div>
-                                <p class="mb-1">(8)</p>
+                                <p class="mb-1">(0)</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex gap-2 align-items-center mb-2">
                                     <input type="checkbox" id="Bad" name="Bad" value="Bad">
                                     <label for="vehicle3" class="card-p1">Bad ()</label>
                                 </div>
-                                <p class="mb-1">(8)</p>
+                                <p class="mb-1">(0)</p>
                             </div>
 
                     </div>
@@ -545,7 +545,7 @@
                                     value="All_treatments">
                                 <label for="vehicle1" class="card-p1">All treatments</label><br>
                             </div>
-                            <p class="mb-1">(23)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
@@ -553,35 +553,35 @@
                                     value="Transportation">
                                 <label for="vehicle2" class="card-p1">Transportation</label><br>
                             </div>
-                            <p class="mb-1">(14)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
                                 <input type="checkbox" id="Accomodition" name="Accomodition" value="Accomodition">
                                 <label for="vehicle3" class="card-p1">Accommodation</label>
                             </div>
-                            <p class="mb-1">(8)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
                                 <input type="checkbox" id="Translation" name="Translation" value="Translation">
                                 <label for="vehicle3" class="card-p1">Translation</label>
                             </div>
-                            <p class="mb-1">(8)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
                                 <input type="checkbox" id="Tour" name="Tour" value="Tour">
                                 <label for="vehicle3" class="card-p1">Tour</label>
                             </div>
-                            <p class="mb-1">(8)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
                                 <input type="checkbox" id="Visa Service" name="Visa Service" value="Visa Service">
                                 <label for="vehicle3" class="card-p1">Visa Service</label>
                             </div>
-                            <p class="mb-1">(8)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
@@ -589,7 +589,7 @@
                                     value="Ticket Services">
                                 <label for="vehicle3" class="card-p1">Ticket Services</label>
                             </div>
-                            <p class="mb-1">(8)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center mb-2">
@@ -597,7 +597,7 @@
                                     value="Ambulance Services">
                                 <label for="vehicle3" class="card-p1">Ambulance Services</label>
                             </div>
-                            <p class="mb-1">(8)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
 
                     </div>
@@ -612,7 +612,7 @@
                                 <label for="vehicle1">0 <span class="lira">₺</span> - 10,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
-                            <p class="mb-1">(23)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
@@ -620,7 +620,7 @@
                                 <label for="vehicle1">10,000 <span class="lira">₺</span> - 20,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
-                            <p class="mb-1">(23)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
@@ -628,7 +628,7 @@
                                 <label for="vehicle2">20,001 <span class="lira">₺</span> - 50,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
-                            <p class="mb-1">(14)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
@@ -636,7 +636,7 @@
                                 <label for="vehicle2">50,001 <span class="lira">₺</span> - 70,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
-                            <p class="mb-1">(14)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
@@ -644,7 +644,7 @@
                                 <label for="vehicle2">70,001 <span class="lira">₺</span> - 90,000 <span
                                         class="lira">₺</span></label><br>
                             </div>
-                            <p class="mb-1">(14)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex gap-1 align-items-center">
@@ -652,7 +652,7 @@
                                 <label for="vehicle2">100,001 <span class="lira">₺</span> - Above<span
                                         class="lira">₺</span></label><br>
                             </div>
-                            <p class="mb-1">(14)</p>
+                            <p class="mb-1">(0)</p>
                         </div>
                     </div>
                 </div>

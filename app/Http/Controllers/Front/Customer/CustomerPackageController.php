@@ -27,6 +27,7 @@ use Validator;
 use App\Models\MedicalProviderRegistrater;
 use App\Models\CustomerReviews;
 
+
 class CustomerPackageController extends Controller
 {
     use MediaTrait;
@@ -36,11 +37,10 @@ class CustomerPackageController extends Controller
         $this->apiService = $apiService;
     }
 
-    public function sandbox(Request $controller_request)
+   public function sandbox(Request $controller_request)
     {
         // dd( $controller_request->all() );
-        $validator = Validator::make(
-            $controller_request->all(),
+        $validator = Validator::make($controller_request->all(),
             [
                 'package_id' => 'required',
                 // 'sale_price' => 'required',
@@ -56,8 +56,7 @@ class CustomerPackageController extends Controller
                 'cvv' => 'required',
                 'validity' => 'required',
                 // 'other_services' => 'required',
-            ]
-        );
+            ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
@@ -99,14 +98,14 @@ class CustomerPackageController extends Controller
         $card_number = $credit_card_number;
         $cvv = $controller_request->cvv;
         $validity = $controller_request->validity;
-        if (!empty($controller_request->payment_percent)) {
+        if(!empty($controller_request->payment_percent)){
 
             if ($controller_request->payment_percent != '100') {
                 $installment = 2;
             } else {
                 $installment = 1;
             }
-        } else if (!empty($controller_request->purchase_id)) {
+        }else if(!empty($controller_request->purchase_id)){
             $installment = 1;
         }
         if (!str_contains($validity, '/')) {
@@ -157,6 +156,7 @@ class CustomerPackageController extends Controller
             $json_response = $response;
             // print_r( $response );
             break;
+
         }
         // dd($json_response);
         $json_response = json_decode($json_response, true);
@@ -259,18 +259,18 @@ class CustomerPackageController extends Controller
             // dd($repsonse_data);
             if (!empty($repsonse_data)) {
                 if ($repsonse_data['status'] == '200') {
-
-                    if (empty($controller_request->purchase_id)) {
-
+                    
+                    if(empty($controller_request->purchase_id)){
+        
                         $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
                         if ($customer_purchase_details->count() > 0) {
-
+            
                             $messages = new Messages();
                             $messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
                             $messages->sender_id = $customer_purchase_details->customer_id;
                             $messages->sender_type = 'customer';
                             $messages->save();
-
+            
                             $vendor_messages = new Messages();
                             $vendor_messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
                             $vendor_messages->sender_id = $customer_purchase_details->provider_id;
@@ -278,7 +278,7 @@ class CustomerPackageController extends Controller
                             $vendor_messages->save();
                         }
                     }
-
+                    
                     $threedsInitialize = \Iyzipay\Model\ThreedsInitialize::create($request, $options);
                     $threedsInitialize_array = (array) $threedsInitialize;
 
@@ -296,9 +296,11 @@ class CustomerPackageController extends Controller
                     if ($three_json_response['status'] == 'success') {
 
                         print_r($threedsInitialize->getHtmlContent());
+
                     } else {
                         return redirect()->back()->with('error', $three_json_response['errorMessage']);
                     }
+
                 } else {
                     // dd($repsonse_data);
 
@@ -448,6 +450,7 @@ class CustomerPackageController extends Controller
                 // Attempt to log in the user
 
                 echo 'Something went wrong, payment not completed, err code: API_01';
+
             }
         } else {
             return redirect()->back()->with('error', 'Something went wrong, payment not completed, err code: API_00');
@@ -629,7 +632,9 @@ class CustomerPackageController extends Controller
 
         $apiRequest = Http::withHeaders($headers);
 
-        $responseData = $response = $apiRequest->{$method}($url1, $body1 ?? null);
+        $responseData = $response = $apiRequest->{
+            $method}
+        ($url1, $body1 ?? null);
         // dd( $response->json() );
         try {
             if (empty($response->json())) {
@@ -655,7 +660,9 @@ class CustomerPackageController extends Controller
 
         $apiRequest = Http::withHeaders($headers);
 
-        $responseData = $response = $apiRequest->{$method}($url1, $body1 ?? null);
+        $responseData = $response = $apiRequest->{
+            $method}
+        ($url1, $body1 ?? null);
         // dd( $response->json() );
         try {
             if (empty($response->json())) {
@@ -682,7 +689,9 @@ class CustomerPackageController extends Controller
 
         $apiRequest = Http::withHeaders($headers);
 
-        $responseData2 = $response = $apiRequest->{$method}($url2, $body2 ?? null);
+        $responseData2 = $response = $apiRequest->{
+            $method}
+        ($url2, $body2 ?? null);
         // dd( $response->json() );
         try {
             if (empty($response->json())) {
@@ -918,7 +927,14 @@ class CustomerPackageController extends Controller
                     } elseif ($average == 1) {
                         $rating_label = 'Bad';
                     }
+                    if (!empty(Auth::guard('md_customer_registration')->user()->id)) {
+                        $CustomerFavouritePackages = CustomerFavouritePackages::where('status', 'active')
+                            ->select('package_id')
+                            ->where('customer_id', Auth::guard('md_customer_registration')->user()->id)
+                            ->first();
+                    }
                     $data['package_list'][$key]['id'] = !empty($value->id) ? $value->id : '';
+                    $data['package_list'][$key]['favourite_check'] = !empty($CustomerFavouritePackages->package_id) ? 'yes' : 'no';
                     $data['package_list'][$key]['package_unique_no'] = !empty($value->package_unique_no) ? $value->package_unique_no : '';
                     $data['package_list'][$key]['package_name'] = !empty($value->package_name) ? $value->package_name : '';
                     $data['package_list'][$key]['treatment_period_in_days'] = !empty($value->treatment_period_in_days) ? $value->treatment_period_in_days : '';
@@ -965,9 +981,9 @@ class CustomerPackageController extends Controller
 
     //Mplus02
 
-    //Mplus04
+     //Mplus04
 
-    public function customer_package_side_search_filter(Request $request)
+     public function customer_package_side_search_filter(Request $request)
     {
         $packages = Packages::select(
             'md_packages.id',
@@ -995,6 +1011,7 @@ class CustomerPackageController extends Controller
             ->leftjoin('md_add_transportation_details', 'md_add_transportation_details.id', '=', 'md_packages.vehicle_id')
             ->leftjoin('md_master_brand', 'md_master_brand.id', '=', 'md_add_transportation_details.vehicle_brand_id')
             ->leftjoin('md_master_vehicle_comfort_levels', 'md_master_vehicle_comfort_levels.id', 'md_add_transportation_details.comfort_level_id')
+            ->leftjoin('md_customer_package_reviews', 'md_customer_package_reviews.package_id', 'md_packages.id')
             ->leftjoin('md_tours', 'md_tours.id', 'md_packages.tour_id');
 
         if (!empty($request->treatment_name)) {
@@ -1042,7 +1059,7 @@ class CustomerPackageController extends Controller
                 ) {
                     // Separate condition for each service
                     if (strpos($filter, 'Accomodition') !== false) {
-                        $packages->orWhere('md_packages.other_services', 'like', '%Accommodation%');
+                        $packages->orWhere('md_packages.other_services', 'like', '%Accomodition%');
                     }
                     if (strpos($filter, 'Visa Service') !== false) {
                         $packages->orWhere('md_packages.other_services', 'like', '%Visa Services%');
@@ -1160,7 +1177,25 @@ class CustomerPackageController extends Controller
         }
     }
 
-    //Mplus04
+    private function convertRatingLabelToNumericValue($label)
+    {
+        switch ($label) {
+            case 'Excellent':
+                return 5;
+            case 'Very Good':
+                return 4;
+            case 'Good':
+                return 3;
+            case 'Fair':
+                return 2;
+            case 'Bad':
+                return 1;
+            default:
+                return 0; // Return 0 or handle invalid cases as per your requirement
+        }
+    }
+ 
+     //Mplus04
 
     public function packages_view_on_search_result(Request $request)
     {
@@ -1176,7 +1211,7 @@ class CustomerPackageController extends Controller
         $id = $request->id;
 
         $packages_view = Packages::with(['provider', 'providerGallery', 'provider.city'])->where('id', $id)->first();
-        // dd($packages_view);
+// dd($packages_view);
         if (!empty($packages_view)) {
 
             $provider_gallery = [];
@@ -1220,33 +1255,37 @@ class CustomerPackageController extends Controller
 
                 // // Attach the cookie to the response
                 // $response->withCookie( $cookie );
-                if (!empty(Auth::guard('md_customer_registration')->user()->id)) {
-                    $package_purhase_or_not = CustomerPurchaseDetails::where('status', 'active')
-                        ->select('package_id')
-                        ->where('package_id', $packages_view->id)
-                        ->where('customer_id', Auth::guard('md_customer_registration')->user()->id)
-                        ->first();
-                    if (!empty($package_purhase_or_not)) {
-                        $company_name = MedicalProviderRegistrater::where('md_medical_provider_register.status', 'active')
-                            ->select('md_medical_provider_register.company_name')
-                            ->leftjoin('md_packages', 'md_packages.created_by', 'md_medical_provider_register.id')
-                            ->first();
-                        if (!empty($company_name)) {
-                            $packageDetails['company_name'] = $company_name->company_name;
-                        }
-                    } else {
-                        $company_name = '******';
+                if(!empty(Auth::guard('md_customer_registration')->user()->id))
+                {
+                $package_purhase_or_not=CustomerPurchaseDetails::where('status','active')
+                ->select('package_id')
+                ->where('package_id',$packages_view->id)
+                ->where('customer_id',Auth::guard('md_customer_registration')->user()->id)
+                ->first();
+                if(!empty($package_purhase_or_not)){
+                  $company_name=MedicalProviderRegistrater::where('md_medical_provider_register.status','active')
+                    ->select('md_medical_provider_register.company_name')
+                    ->leftjoin('md_packages','md_packages.created_by','md_medical_provider_register.id')
+                    ->first();
+                    if(!empty($company_name)){
+                        $packageDetails['company_name']=$company_name->company_name;
                     }
+                }else{
+                    $company_name='******';
                 }
+            }
                 // dd($packageDetails);
 
                 $cities = Cities::where('status', 'active')->where('country_id', 1)->get();
                 $counties = Country::all();
 
                 return view('front.mdhealth.healthPackDetails', compact('packageDetails', 'cities', 'counties', 'provider_gallery'));
+
             } else {
                 return view('front.mdhealth.searchResult');
+
             }
+
         } else {
             return view('front.mdhealth.searchResult');
         }
@@ -1297,29 +1336,23 @@ class CustomerPackageController extends Controller
 
     //Mplus02
 
-    public function view_my_active_packages( $id, $purchase_id ) {
-        $user_id = Session::get( 'MDCustomer*%' );
-        $token = Session::get( 'login_token' );
+    public function view_my_active_packages($id, $purchase_id)
+    {
+        $user_id = Session::get('MDCustomer*%');
+        $token = Session::get('login_token');
 
-        if ( !empty( $token ) && !empty( $id ) && !empty( $purchase_id ) ) {
-            $data = $this->apiService->getData( $token, url( '/api/md-customer-package-details' ), [ 'package_id' => $id, 'purchase_id' => $purchase_id ], 'POST' );
+        if (!empty($token) && !empty($id) && !empty($purchase_id)) {
+            $data = $this->apiService->getData($token, url('/api/md-customer-package-details'), ['package_id' => $id, 'purchase_id' => $purchase_id], 'POST');
 
-            if ( !empty( $data[ 'status' ] ) ) {
+            if (!empty($data['status'])) {
 
-                if ( $data[ 'status' ] == '200' ) {
-                    $other_service = explode( ',', $data[ 'customer_purchase_package_list' ][ 'other_services' ] );
-                    $data = $data[ 'customer_purchase_package_list' ];
-                    $data[ 'other_services' ] = $other_service;
+                if ($data['status'] == '200') {
+                    $other_service = explode(',', $data['customer_purchase_package_list']['other_services']);
+                    $data = $data['customer_purchase_package_list'];
+                    $data['other_services'] = $other_service;
                 }
 
-                if ( !empty( $user_id ) ) {
-
-                    $patient_info = PatientInformation::where( 'customer_id', $user_id )->where( 'package_id', $data[ 'package_id' ] )->where( 'purchase_id', $data[ 'purchase_id' ] )->first();
-                    // dd( $user_id, $data[ 'package_id' ], $data[ 'purchase_id' ] );
-                    // dd( $patient_info );
-                    if ( !empty( $patient_info->id ) ) {
-                        // dd( $patient_info->id, $id );
-                        $response = $this->apiService->getData( $token, url( '/api/md-customer-my-details' ), [ 'patient_id' => $patient_info->id, 'package_id' => $id ], 'POST' );
+                if (!empty($user_id)) {
 
                     $patient_info = PatientInformation::where('customer_id', $user_id)->where('package_id', $data['package_id'])->where('purchase_id', $data['purchase_id'])->first();
                     // dd( $user_id, $data[ 'package_id' ], $data[ 'purchase_id' ] );
@@ -1327,14 +1360,15 @@ class CustomerPackageController extends Controller
                     if (!empty($patient_info->id)) {
                         // dd($patient_info->id,$id);
                         $response = $this->apiService->getData($token, url('/api/md-customer-my-details'), ['patient_id' => $patient_info->id, 'package_id' => $id], 'POST');
+
                     }
                     // dd( $token );
                     // dd( $token );
                     // dd( $patient_info );
-                    if ( !empty( $response[ 'status' ] ) ) {
-                        if ( $response[ 'status' ] == '200' ) {
-                            $my_details = !empty( $response[ 'PatientInformation' ] ) ? $response[ 'PatientInformation' ] : [];
-                            $treatment_information = !empty( $response[ 'treatment_information' ] ) ? $response[ 'treatment_information' ] : [];
+                    if (!empty($response['status'])) {
+                        if ($response['status'] == '200') {
+                            $my_details = !empty($response['PatientInformation']) ? $response['PatientInformation'] : [];
+                            $treatment_information = !empty($response['treatment_information']) ? $response['treatment_information'] : [];
                         }
                     } else {
                         $my_details = '';
@@ -1343,37 +1377,39 @@ class CustomerPackageController extends Controller
                 }
             }
             // dd( $data );
-            $documents = $this->apiService->getData( $token, url( '/api/md-customer-documents-list' ), [ 'package_id' => $data[ 'package_id' ] ], 'POST' );
-            // dd( $documents );
-            $data[ 'documents' ] = !empty( $documents[ 'data' ] ) ? $documents[ 'data' ] : [];
-            if ( !empty( $data[ 'hotel_id' ] ) ) {
-                $accomodation_view = $this->apiService->getData( $token, url( '/api/md-customer-acommodition-details-view' ), [ 'id' => $data[ 'hotel_id' ] ], 'POST' );
-                // dd( $accomodation_view );
-                $data[ 'accomodation_view' ] = !empty( $accomodation_view[ 'hotel_list' ] ) ? $accomodation_view[ 'hotel_list' ] : [];
-                $data[ 'accomodation_view' ][ 'other_services' ] = !empty( $accomodation_view[ 'other_services' ] )?$accomodation_view[ 'other_services' ]:[];
+            $documents = $this->apiService->getData($token, url('/api/md-customer-documents-list'), ['package_id' => $data['package_id']], 'POST');
+            // dd($documents);
+            // dd($token);
+            $data['documents'] = !empty($documents['data']) ? $documents['data'] : [];
+            if (!empty($data['hotel_id'])) {
+                $accomodation_view = $this->apiService->getData($token, url('/api/md-customer-acommodition-details-view'), ['id' => $data['hotel_id']], 'POST');
+                // dd($accomodation_view);
+                $data['accomodation_view'] = !empty($accomodation_view['hotel_list']) ? $accomodation_view['hotel_list'] : [];
+                $data['accomodation_view']['other_services'] = !empty($accomodation_view['other_services'])?$accomodation_view['other_services']:[];
             }
 
-            if ( !empty( $data[ 'vehicle_id' ] ) ) {
-                // if ( !empty( $transportation_view[ 'data' ][ 'other_services' ] ) ) {
-                $transportation_view = $this->apiService->getData( $token, url( '/api/md-customer-transporatation-details-view' ), [ 'id' => $data[ 'vehicle_id' ] ], 'POST' );
-                // $other_service = explode( ',', $transportation_view[ 'other_services' ] );
-                $data[ 'transportation_view' ] = !empty( $transportation_view[ 'transportation_details' ] ) ? $transportation_view[ 'transportation_details' ] : [];
-                $data[ 'transportation_view' ][ 'other_services' ] = !empty( $transportation_view[ 'other_services' ] )? $transportation_view[ 'other_services' ]:[];
+            if (!empty($data['vehicle_id'])) {
+                // if (!empty($transportation_view['data']['other_services'])) {
+                $transportation_view = $this->apiService->getData($token, url('/api/md-customer-transporatation-details-view'), ['id' => $data['vehicle_id']], 'POST');
+                // $other_service = explode(',', $transportation_view['other_services']);
+                $data['transportation_view'] = !empty($transportation_view['transportation_details']) ? $transportation_view['transportation_details'] : [];
+                $data['transportation_view']['other_services'] = !empty( $transportation_view['other_services'])? $transportation_view['other_services']:[];
                 // }
             }
-
-            if ( !empty( $data[ 'tour_id' ] ) ) {
-                $tour_view = $this->apiService->getData( $token, url( '/api/md-customer-tour-details-view' ), [ 'id' => $data[ 'tour_id' ] ], 'POST' );
-                $data[ 'tour_view' ] = !empty( $tour_view[ 'tour_details' ] ) ? $tour_view[ 'tour_details' ] : [];
-                $data[ 'tour_view' ][ 'other_services' ] = !empty( $tour_view[ 'other_services' ] )? $tour_view[ 'other_services' ]:[];
+            
+            if (!empty($data['tour_id'])) {
+                $tour_view = $this->apiService->getData($token, url('/api/md-customer-tour-details-view'), ['id' => $data['tour_id']], 'POST');
+                $data['tour_view'] = !empty($tour_view['tour_details']) ? $tour_view['tour_details'] : [];
+                $data['tour_view']['other_services'] = !empty( $tour_view['other_services'])? $tour_view['other_services']:[];
             }
+            // dd($data);
         } else {
             $data = [];
             $my_details = [];
             $treatment_information = [];
         }
         // dd( $my_details );
-        return view( 'front.mdhealth.user-panel.user-package-view', compact( 'data', 'my_details', 'treatment_information' ) );
+        return view('front.mdhealth.user-panel.user-package-view', compact('data', 'my_details', 'treatment_information'));
 
     }
 
@@ -1390,19 +1426,19 @@ class CustomerPackageController extends Controller
             'pending_payment' => 'required',
         ]);
         $customer_id =  Auth::guard('md_customer_registration')->user();
-        if (!empty($customer_id)) {
+        if(!empty($customer_id)){
             $customer_id = $customer_id->id;
-        } else {
-            return redirect()->back()->with('error', 'User not Found');
+        }else{
+            return redirect()->back()->with('error','User not Found');
         }
         $patient_id = PatientInformation::where('purchase_id', $request->purchase_id)
-            ->where('package_id', $request->package_id)
-            ->where('customer_id', $customer_id)
-            ->first();
-        if (!empty($patient_id)) {
+        ->where('package_id',$request->package_id)
+        ->where('customer_id',$customer_id)
+        ->first();
+        if(!empty($patient_id)){
             $patient_id = $patient_id->id;
-        } else {
-            return redirect()->back()->with('error', 'Patient not Found');
+        }else{
+            return redirect()->back()->with('error','Patient not Found');
         }
         $data = array(
             'package_id' => $request->package_id,
@@ -1509,8 +1545,10 @@ class CustomerPackageController extends Controller
             } else {
                 $fav_list = [];
             }
+           
         } else {
             $fav_list = [];
+          
         }
 
         $html = '';
@@ -1519,13 +1557,13 @@ class CustomerPackageController extends Controller
                         <div class="card-body remove-cardb d-flex justify-content-between">
                             <div>
                                 <h5 class="card-h1 card-h1-fav mb-0">' . $fav['package_name'] . '<img
-                                        src="' . asset('front/assets/img/verifiedBy.svg') . '" alt=""
+                                        src="' . asset('front/assets/img/verifiedBy.png') . '" alt=""
                                         class="ms-3" /></h5>
                                 <p class="mb-0 d-inline-block card-p1"><img
                                         src="' . asset('front/assets/img/Location.svg') . '" alt="" />
                                     ' . $fav['city_name'] . '</p>
-                                <p class="mb-0 d-inline-block card-p1 fst-italic ms-5">
-                                    '. "Treatment Period " . $fav["treatment_period_in_days"] . " days" .'</p>
+                                <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
+                                    '. "Treatment period " . $fav["treatment_period_in_days"] . " days" .'</p>
                             </div>
                             <div onclick="removeFromFavourite(' . $fav['id'] . ');"
                                 class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1535,15 +1573,15 @@ class CustomerPackageController extends Controller
                                         alt="" />
                                 </div>
                                 <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
-                                    Remove Favourite
+                                    Remove Favorite
                                 </p>
                             </div>
                         </div>
                     </div>';
         }
-
+        
         return view('front.mdhealth.user-panel.user-favorites', compact('html'));
-    }
+    }        
 
     public function md_customer_favourite_list_web(Request $request)
     {
@@ -1551,7 +1589,7 @@ class CustomerPackageController extends Controller
         $token = Session::get('login_token');
 
         if (!empty($token)) {
-            $data = $this->apiService->getData($token, url('/api/md-customer-favourite-list-web'), ['module_type' => $request->module_type], 'POST');
+            $data = $this->apiService->getData($token, url('/api/md-customer-favourite-list-web'), ['module_type'=>$request->module_type], 'POST');
             // dd($data);
             if (!empty($data)) {
                 if ($data['status'] == '200') {
@@ -1562,8 +1600,10 @@ class CustomerPackageController extends Controller
             } else {
                 $fav_list = [];
             }
+           
         } else {
             $fav_list = [];
+          
         }
 
         $html = '';
@@ -1577,8 +1617,8 @@ class CustomerPackageController extends Controller
                     <p class="mb-0 d-inline-block card-p1"><img
                             src="' . asset('front/assets/img/Location.svg') . '" alt="" />
                         ' . $fav['city_name'] . '</p>
-                    <p class="mb-0 d-inline-block card-p1 fst-italic ms-5">
-                        '. "Treatment Period " . $fav["treatment_period_in_days"] . " days" .'</p>
+                    <p class="mb-0 d-inline-block card-p1 fst-italic ms-4">
+                        '. "Treatment period " . $fav["treatment_period_in_days"] . " days" .'</p>
                 </div>
                 <div onclick="removeFromFavourite(' . $fav['id'] . ');"
                     class="d-flex align-items-center justify-content-center favorites-bt flex-column gap-2 ">
@@ -1588,15 +1628,15 @@ class CustomerPackageController extends Controller
                             alt="" />
                     </div>
                     <p id="p_' . $fav['id'] . '" class="mb-0 d-inline-block card-p1 fst-italic fav-btn remove-fav">
-                        Remove Favourite
+                        Remove Favorite
                     </p>
                 </div>
             </div>
         </div>';
         }
-
+        
         return $html;
-    }
+    }        
     //Mplus04
 
     public function purchase_by_mdcoins(Request $request)
@@ -1662,10 +1702,7 @@ class CustomerPackageController extends Controller
                                     $CustomerPayamentDetails = CustomerPaymentDetails::where('order_id', $request->purchase_id)
                                         ->update($payment_details_pending);
                                     if (!empty($CustomerPayamentDetails)) {
-                                        return response()->json([
-                                            'status' => 200,
-                                            'message' => 'payment completed.',
-                                        ]);
+                                        return view('front.mdhealth.user-panel.user-payment-successfull');
                                     } else {
                                         return response()->json([
                                             'status' => 404,
@@ -1678,6 +1715,7 @@ class CustomerPackageController extends Controller
                                         'status' => 404,
                                         'message' => 'Something went wrong .payment not completed.',
                                     ]);
+
                                 }
                             }
                         } else {
@@ -1797,12 +1835,15 @@ class CustomerPackageController extends Controller
                                 return redirect()->back()->withErrors('Something went wrong Payment Not Completed')->withInput();
                             }
                         }
+
                     } else {
                         return $this->sendError('Not Enough Coins');
                     }
+
                 } else {
                     return redirect()->back()->withErrors('Coins Tampered Payment Not Completed')->withInput();
                 }
+
             } else {
                 return $this->sendError('Couldn\'t get your Coins');
             }
@@ -1932,8 +1973,10 @@ class CustomerPackageController extends Controller
                 $htmlResult .= '</div>';
                 $htmlResult .= '</div>';
             }
+
         }
         return $htmlResult;
+
     }
 
     ///Mplus03
@@ -1977,27 +2020,27 @@ class CustomerPackageController extends Controller
             'pending_amount' => 'required',
             'percentage' => 'required',
             'patient_id' => 'required',
-            // 'payment_percent' => 'required',
-            // 'total_paying_price' => 'required',
-            // 'transaction_id' => 'required',
+           // 'payment_percent' => 'required',
+           // 'total_paying_price' => 'required',
+           // 'transaction_id' => 'required',
             'other_services' => 'required',
         ]);
-
+    
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $request->other_services = explode(',', $request->other_services);
-
+     
         $conversation_id = mt_rand(100000000, 999999999);
         $body = $request->all();
         $plainArray = $body instanceof \Illuminate\Support\Collection ? $body->toArray() : $body;
         $plainArray['conversation_id'] = strval($conversation_id);
-
+    
         $response_data = $this->apiService->getData(Session::get('login_token'), url('/api/md-customer-purchase-package'), $plainArray, 'POST');
-
-        // dd($response_data);
-
+    
+       // dd($response_data);
+        
         $customer_purchase_details = CustomerPurchaseDetails::where('conversation_id', $conversation_id)->first();
         if ($customer_purchase_details->count() > 0) {
             $messages = new Messages();
@@ -2005,18 +2048,22 @@ class CustomerPackageController extends Controller
             $messages->sender_id = $customer_purchase_details->customer_id;
             $messages->sender_type = 'customer';
             $messages->save();
-
+    
             $vendor_messages = new Messages();
             $vendor_messages->conversation_id = $customer_purchase_details->customer_id . "_" . $conversation_id . "_" . $customer_purchase_details->provider_id;
             $vendor_messages->sender_id = $customer_purchase_details->provider_id;
             $vendor_messages->sender_type = 'medicalprovider';
             $vendor_messages->save();
         }
-
-        if ($response_data['status'] == '200') {
+    
+        if ($response_data['status']=='200') {
             return view('front.mdhealth.user-panel.user-payment-successfull');
         } else {
             return redirect()->back()->withErrors('Something went wrong Payment Not Completed')->withInput();
         }
     }
+    
+
+
+
 }

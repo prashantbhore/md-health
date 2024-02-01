@@ -32,10 +32,6 @@ class RegistrationController extends BaseController
 
     public function customer_register(Request $request)
     {
-
-        
-       
-
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -51,6 +47,13 @@ class RegistrationController extends BaseController
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        if (strlen($request->password) <= 8) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Password must be at least 8 characters long.',
+            ]);
         }
 
         $appkey = !empty($request->api_key) ? $request->api_key : '-';
